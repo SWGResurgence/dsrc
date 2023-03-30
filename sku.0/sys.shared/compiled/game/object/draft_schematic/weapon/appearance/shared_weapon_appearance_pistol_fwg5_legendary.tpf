@@ -3,8 +3,8 @@
 @class draft_schematic_object_template 2
 
 attributes = [
-	[name = "crafting" "appearanceBonusLow", experiment = "crafting" "appearanceBonusLow", value = 0..42],
-	[name = "crafting" "appearanceBonusHigh", experiment = "crafting" "appearanceBonusHigh", value = 0..20],
+	[name = "crafting" "appearanceBonusLow", experiment = "crafting" "appearanceBonusLow", value = 0..155],
+	[name = "crafting" "appearanceBonusHigh", experiment = "crafting" "appearanceBonusHigh", value = 0..100],
 	[name = "crafting" "maxDamage", experiment = "" "", value = 0..0],
 	[name = "crafting" "minDamage", experiment = "" "", value = 0..0],
 	[name = "crafting" "woundChance", experiment = "" "", value = 1..1],
@@ -15,7 +15,7 @@ attributes = [
 	[name = "crafting" "damageType", experiment = "" "", value = 1..1],
 	[name = "crafting" "elementalType", experiment = "" "", value = -1..-1],
 	[name = "crafting" "elementalValue", experiment = "" "", value = -1..-1],
-	[name = "crafting" "complexity", experiment = "" "", value = 40..40],
+	[name = "crafting" "complexity", experiment = "" "", value = 20..20],
 	[name = "crafting" "xp", experiment = "" "", value = 120..120]]
 
 slots = [

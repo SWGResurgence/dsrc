@@ -13,45 +13,52 @@ public class volleytarget extends script.base_script
     public volleytarget()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] me = new obj_id[]
-        {
-            self
-        };
+                {
+                        self
+                };
         playClientEffectObj(me, "appearance/pt_special_attack_volley_fire.prt", self, "", new transform(), combat.ID_VOLLEY_FIRE_PARTICLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.combat.volleytarget");
         return SCRIPT_CONTINUE;
     }
+
     public void notifyVolleyTargetDone() throws InterruptedException
     {
         obj_id self = getSelf();
         Vector groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
         utils.removeScriptVar(self, combat.VAR_VOLLEY_GROUPS);
-        for (Object group : groups) {
+        for (Object group : groups)
+        {
             notifyVolleyTargetDone((obj_id) group);
         }
     }
+
     public void notifyVolleyTargetDone(obj_id group) throws InterruptedException
     {
         dictionary parms = new dictionary();
         parms.put("objTarget", getSelf());
         messageTo(group, "volleyTargetDone", parms, 0, false);
     }
+
     public int handlePlayerDeath(obj_id self, dictionary params) throws InterruptedException
     {
         stopClientEffectObjByLabel(new obj_id[]
-        {
-            self
-        }, self, combat.ID_VOLLEY_FIRE_PARTICLE);
+                {
+                        self
+                }, self, combat.ID_VOLLEY_FIRE_PARTICLE);
         notifyVolleyTargetDone();
         detachScript(self, "systems.combat.volleytarget");
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isPlayer(self))
@@ -59,13 +66,14 @@ public class volleytarget extends script.base_script
             return SCRIPT_CONTINUE;
         }
         stopClientEffectObjByLabel(new obj_id[]
-        {
-            self
-        }, self, combat.ID_VOLLEY_FIRE_PARTICLE);
+                {
+                        self
+                }, self, combat.ID_VOLLEY_FIRE_PARTICLE);
         notifyVolleyTargetDone();
         detachScript(self, "systems.combat.volleytarget");
         return SCRIPT_CONTINUE;
     }
+
     public int msgMarkedByGroup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id group = params.getObjId("objGroup");
@@ -86,6 +94,7 @@ public class volleytarget extends script.base_script
         utils.setBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS, groups);
         return SCRIPT_CONTINUE;
     }
+
     public int msgUnmarkedByGroup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id group = params.getObjId("objGroup");
@@ -109,7 +118,7 @@ public class volleytarget extends script.base_script
             stopClientEffectObjByLabel(self, self, combat.ID_VOLLEY_FIRE_PARTICLE);
             detachScript(self, "systems.combat.volleytarget");
         }
-        else 
+        else
         {
             utils.setBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS, groups);
         }

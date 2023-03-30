@@ -10,16 +10,33 @@ public class heroic_token extends script.base_script
     public heroic_token()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
-        int menuStoreToken = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "heroic_token_store"));
-        if (getCount(self) > 1)
+        if (hasTokenBoxInInventory(player))
         {
-            mi.addSubMenu(menuStoreToken, menu_info_types.SERVER_MENU1, new string_id("spam", "heroic_token_store_all"));
+            int pid = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Store Single Token"));
+            if (getCount(self) > 1)
+            {
+                mi.addSubMenu(pid, menu_info_types.SERVER_MENU1, new string_id("Store Multiple Tokens"));
+            }
         }
         return SCRIPT_CONTINUE;
     }
+
+    public boolean hasTokenBoxInInventory(obj_id player) throws InterruptedException
+    {
+        obj_id[] contents = utils.getContents(player, true);
+        for (obj_id indi : contents)
+        {
+            if (hasScript(indi, "item.heroic_token_box"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -41,6 +58,7 @@ public class heroic_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findAndUpdateTokenBox(obj_id self, obj_id player, int amount) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -51,20 +69,29 @@ public class heroic_token extends script.base_script
             sendSystemMessage(player, new string_id("set_bonus", "heroic_token_token_error"));
             return;
         }
-        for (obj_id inventoryItem : inventoryContents) {
-            if (!isIdValid(inventoryItem)) {
+        for (obj_id inventoryItem : inventoryContents)
+        {
+            if (!isIdValid(inventoryItem))
+            {
                 continue;
             }
             String itemName = getStaticItemName(inventoryItem);
-            if (itemName != null && !itemName.equals("") && itemName.equals("item_heroic_token_box_01_01")) {
-                if (hasObjVar(inventoryItem, "item.set.tokens_held")) {
+            if (itemName != null && !itemName.equals("") && itemName.equals("item_heroic_token_box_01_01"))
+            {
+                if (hasObjVar(inventoryItem, "item.set.tokens_held"))
+                {
                     updateTokenBox(myId, inventoryItem, self, player, amount);
                     break;
-                } else {
+                }
+                else
+                {
                     trial.initializeBox(self);
-                    if (hasObjVar(inventoryItem, "item.set.tokens_held")) {
+                    if (hasObjVar(inventoryItem, "item.set.tokens_held"))
+                    {
                         updateTokenBox(myId, inventoryItem, self, player, amount);
-                    } else {
+                    }
+                    else
+                    {
                         sendSystemMessage(player, new string_id("spam", "heroic_token_box_error"));
                     }
                 }
@@ -72,6 +99,7 @@ public class heroic_token extends script.base_script
         }
         return;
     }
+
     public int findMyId(obj_id self) throws InterruptedException
     {
         int failId = -1;
@@ -85,6 +113,7 @@ public class heroic_token extends script.base_script
         }
         return failId;
     }
+
     public void updateTokenBox(int myId, obj_id tokenBox, obj_id self, obj_id player, int amount) throws InterruptedException
     {
         int[] currentHeroicTokens = getIntArrayObjVar(tokenBox, "item.set.tokens_held");
@@ -92,7 +121,7 @@ public class heroic_token extends script.base_script
         {
             updateTokenCount(currentHeroicTokens, myId, self, tokenBox, player, amount);
         }
-        else 
+        else
         {
             trial.verifyBox(self);
             currentHeroicTokens = getIntArrayObjVar(tokenBox, "item.set.tokens_held");
@@ -100,13 +129,14 @@ public class heroic_token extends script.base_script
             {
                 updateTokenCount(currentHeroicTokens, myId, self, tokenBox, player, amount);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("spam", "heroic_token_box_error"));
             }
         }
         return;
     }
+
     public void updateTokenCount(int[] currentHeroicTokens, int myId, obj_id self, obj_id tokenBox, obj_id player, int amount) throws InterruptedException
     {
         currentHeroicTokens[myId] += amount;
@@ -114,6 +144,7 @@ public class heroic_token extends script.base_script
         decrementTokenCount(self, player, amount);
         return;
     }
+
     public void decrementTokenCount(obj_id self, obj_id player, int amount) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -124,7 +155,7 @@ public class heroic_token extends script.base_script
         {
             setCount(self, getCount(self) - amount);
         }
-        else 
+        else
         {
             destroyObject(self);
         }

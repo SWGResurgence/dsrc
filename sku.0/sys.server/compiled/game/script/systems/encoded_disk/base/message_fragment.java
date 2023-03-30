@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class message_fragment extends script.base_script
 {
-    public message_fragment()
-    {
-    }
     public static final string_id SID_SYS_MESSAGE_ASSEMBLED = new string_id("encoded_disk/message_fragment", "sys_message_assembled");
     public static final string_id SID_SYS_NOT_ALL_PARTS = new string_id("encoded_disk/message_fragment", "sys_not_all_parts");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("encoded_disk/message_fragment", "sys_not_in_inv");
@@ -21,6 +18,10 @@ public class message_fragment extends script.base_script
     public static final String VAR_INDEX = "messageTableIndex";
     public static final String VAR_PART_NUMBER = "partNumber";
     public static final String ASSEMBLED_MESSAGE = "object/tangible/encoded_disk/message_assembled_base.iff";
+    public message_fragment()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int[] weights = dataTableGetIntColumn(MESSAGE_TABLE, "PARTS");
@@ -80,6 +81,7 @@ public class message_fragment extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!dataTableOpen(MESSAGE_TABLE))
@@ -96,11 +98,13 @@ public class message_fragment extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -109,6 +113,7 @@ public class message_fragment extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -131,6 +136,7 @@ public class message_fragment extends script.base_script
         String title = localize(titleID) + " [" + partNumber + "/" + parts + "]";
         createDialog(self, player, text, title);
     }
+
     public int createDialog(obj_id self, obj_id player, String text, String title) throws InterruptedException
     {
         if (player == null)
@@ -146,6 +152,7 @@ public class message_fragment extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -157,13 +164,14 @@ public class message_fragment extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            assembleMessage(self, player);
-            return SCRIPT_CONTINUE;
+                assembleMessage(self, player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void assembleMessage(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -186,22 +194,26 @@ public class message_fragment extends script.base_script
         {
             return;
         }
-        obj_id foundparts[] = 
-        {
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        };
+        obj_id[] foundparts =
+                {
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                };
         foundparts[partNumber - 1] = self;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, VAR_INDEX)) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, VAR_INDEX))
+            {
                 int idx = getIntObjVar(content, VAR_INDEX);
-                if (idx == index) {
+                if (idx == index)
+                {
                     int partNum = getIntObjVar(content, VAR_PART_NUMBER);
-                    if (foundparts[partNum - 1] == null) {
+                    if (foundparts[partNum - 1] == null)
+                    {
                         foundparts[partNum - 1] = content;
                     }
                 }
@@ -220,7 +232,7 @@ public class message_fragment extends script.base_script
         {
             sendSystemMessage(player, SID_SYS_MESSAGE_ASSEMBLED);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_SYS_INVENTROY_FULL);
             return;

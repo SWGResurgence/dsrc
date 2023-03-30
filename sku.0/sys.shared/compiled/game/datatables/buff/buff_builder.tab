@@ -33,10 +33,15 @@ kinetic	resistances	expertise_innate_protection_kinetic	5	1	450
 energy	resistances	expertise_innate_protection_energy	5	1	450	
 elemental	resistances	elemental_resistance	5	1	450	
 amazing_success_chance	trade	crafting_critical_success_bonus	5	4	2	harvest_faire  
-crafting_ground_assembly	trade	crafting_ground_assembly	10	2	25	harvest_faire  
+creature_harvesting	trade	creature_harvesting	2	4	5	harvest_faire  
+crafting_ground_assembly	trade	crafting_ground_assembly	5	2	1	harvest_faire  
 crafting_ground_experimentation	trade	crafting_ground_experimentation	7	2	1	harvest_faire  
 crafting_space_assembly	trade	crafting_space_assembly	10	2	25	harvest_faire  
 crafting_space_experimentation	trade	crafting_space_experimentation	7	2	1	harvest_faire  
+hand_sampling	trade	expertise_resource_sampling_incre	20	2	1	harvest_faire  
+dna_harvesting	trade	expertise_bm_dna_harvesting_1	8	5	2	harvest_faire  
 factory_speed	trade	factory_speed	5	2	2	harvest_faire  
+focused_enzyme_manipulation	trade	bm_incubator_dps_armor	10	4	2	harvest_faire  
+incubation_time_reduction	trade	incubation_time_reduction	5	2	2	harvest_faire  
 mutation_chance	trade	bm_mutation_chance_increase	2	5	5	harvest_faire  
 reverse_engineering_chance	trade	expertise_reverse_engineering_bonus	5	2	2	harvest_faire  

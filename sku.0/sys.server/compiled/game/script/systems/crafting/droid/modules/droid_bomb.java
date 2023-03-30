@@ -7,10 +7,12 @@ import script.library.*;
 
 public class droid_bomb extends script.base_script
 {
+    public static final String STF_FILE = "pet/droid_modules";
+
     public droid_bomb()
     {
     }
-    public static final String STF_FILE = "pet/droid_modules";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -34,6 +36,7 @@ public class droid_bomb extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_MENU5)
@@ -66,6 +69,7 @@ public class droid_bomb extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDetonationCountdown(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -87,17 +91,19 @@ public class droid_bomb extends script.base_script
             params.put("count", count);
             messageTo(self, "msgDetonationCountdown", params, 2.5f, false);
         }
-        else 
+        else
         {
             detonateDroid(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDetonationWarmup(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "module_data.detonation_warmup");
         return SCRIPT_CONTINUE;
     }
+
     public void detonateDroid(obj_id droid) throws InterruptedException
     {
         if (!isIdValid(droid))
@@ -130,7 +136,7 @@ public class droid_bomb extends script.base_script
         }
         float min_dam = pet_lib.DETONATION_DROID_MIN_DAMAGE * bomb_level;
         float max_dam = pet_lib.DETONATION_DROID_MAX_DAMAGE * bomb_level;
-        int radius = 20 + (int)(0.3f * bomb_level);
+        int radius = 20 + (int) (0.3f * bomb_level);
         obj_id pet_control = callable.getCallableCD(droid);
         if (!isIdValid(pet_control))
         {
@@ -143,7 +149,8 @@ public class droid_bomb extends script.base_script
         if (targets != null)
         {
             prose_package pp = new prose_package();
-            for (obj_id target : targets) {
+            for (obj_id target : targets)
+            {
                 int[] hit_loc =
                         {
                                 HIT_LOCATION_HEAD,
@@ -154,7 +161,8 @@ public class droid_bomb extends script.base_script
                                 HIT_LOCATION_R_LEG,
                                 HIT_LOCATION_L_LEG
                         };
-                if (isPlayer(target)) {
+                if (isPlayer(target))
+                {
                     float level = getLevel(target);
                     float mult = level / 90.0f;
                     min_dam *= mult;
@@ -189,16 +197,20 @@ public class droid_bomb extends script.base_script
                 pp.target.set(target);
                 pp.digitInteger = final_damage;
                 combat.sendCombatSpamMessageProse(master, pp);
-                if (isPlayer(target)) {
+                if (isPlayer(target))
+                {
                     pvpAttackPerformed(master, target);
                     pp.stringId = new string_id(STF_FILE, "hit_by_detonation");
                     pp.actor.set(target);
                     pp.target.set((String) null);
                     pp.digitInteger = final_damage;
                     combat.sendCombatSpamMessageProse(target, pp);
-                } else {
+                }
+                else
+                {
                     xp.updateCombatXpList(target, master, xp.PERMISSIONS_ONLY, final_damage);
-                    if (!ai_lib.isInCombat(target)) {
+                    if (!ai_lib.isInCombat(target))
+                    {
                         dictionary d = new dictionary();
                         d.put("attacker", master);
                         messageTo(target, "handleDefenderCombatAction", d, 0.0f, true);

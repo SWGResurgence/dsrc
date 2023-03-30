@@ -7,10 +7,12 @@ import script.library.utils;
 
 public class motionsensor extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public motionsensor()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "armed"))
@@ -19,6 +21,7 @@ public class motionsensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -38,13 +41,13 @@ public class motionsensor extends script.base_script
         {
             attribs[free++] = "@spam:power_drained";
         }
-        else 
+        else
         {
             if (power < 60)
             {
                 attribs[free++] = floatFormat.format(power) + " secs left";
             }
-            else 
+            else
             {
                 attribs[free++] = floatFormat.format(power / 60) + " mins left";
             }
@@ -58,6 +61,7 @@ public class motionsensor extends script.base_script
         free = utils.addClassRequirementAttributes(player, self, names, attribs, free, "trap.trigger.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -70,6 +74,7 @@ public class motionsensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.testItemClassRequirements(player, self, false, "") || !utils.testItemLevelRequirements(player, self, false, ""))
@@ -88,6 +93,7 @@ public class motionsensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOG("stealth", "Entered sensor volume (" + breacher + ")...");
@@ -111,6 +117,7 @@ public class motionsensor extends script.base_script
         stealth.tripMotionSensor(self, breacher, filter != null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "armed"))
@@ -120,12 +127,14 @@ public class motionsensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgBatteryDead(obj_id self, dictionary params) throws InterruptedException
     {
         stealth.playSelfDestruct(self);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDeploy(obj_id self, dictionary params) throws InterruptedException
     {
         createTriggerVolume(stealth.SENSOR_PROXIMITY_VOLUME, stealth.SENSOR_RANGE, true);

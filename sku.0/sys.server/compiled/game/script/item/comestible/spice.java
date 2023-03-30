@@ -7,12 +7,13 @@ import script.library.utils;
 
 public class spice extends script.base_script
 {
-    public spice()
-    {
-    }
     public static final string_id SID_SYS_ALREADY_SPICED = new string_id("spice/spice", "sys_already_spiced");
     public static final String EXAM_ATTRIB_MOD = "attribmods";
     public static final String EXAM_NONE = "@consumable:none";
+    public spice()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "spice");
@@ -24,6 +25,7 @@ public class spice extends script.base_script
         detachScript(self, "item.comestible.spice");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -38,6 +40,7 @@ public class spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -46,13 +49,14 @@ public class spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void eatSpice(obj_id self, obj_id player) throws InterruptedException
     {
         int dur = getIntObjVar(self, "spice.duration");
         int[] mods = getIntArrayObjVar(self, "spice.mods");
         if (dur == 0)
         {
-            dur = (int)getFloatObjVar(self, "spice.duration");
+            dur = (int) getFloatObjVar(self, "spice.duration");
         }
         if (hasAttribModifier(player, "spice"))
         {
@@ -77,7 +81,7 @@ public class spice extends script.base_script
                     newMod = new attrib_mod("spice." + name + ".up", i, buffValue, dur, 0, 0, true, true, true);
                     buffIcon = true;
                 }
-                else 
+                else
                 {
                     newMod = new attrib_mod(null, i, buffValue, dur, 0, 0, true, false, false);
                 }
@@ -104,6 +108,7 @@ public class spice extends script.base_script
         utils.setScriptVar(player, "spice.downTimeReduction", downTimeReduction);
         destroyObject(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int dur = getIntObjVar(self, "spice.duration");
@@ -118,7 +123,7 @@ public class spice extends script.base_script
         {
             attribs[idx] = EXAM_NONE;
         }
-        else 
+        else
         {
             int numMods = 0;
             int modNum = idx + 1;
@@ -150,7 +155,7 @@ public class spice extends script.base_script
             {
                 attribs[idx] = EXAM_NONE;
             }
-            else 
+            else
             {
                 attribs[idx] = Integer.toString(numMods);
             }

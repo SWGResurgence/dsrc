@@ -10,6 +10,7 @@ public class gcw_entertainer_faction_quest extends script.base_script
     public gcw_entertainer_faction_quest()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -19,6 +20,7 @@ public class gcw_entertainer_faction_quest extends script.base_script
         setObjVar(self, "faction_recruit_quest", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int readyToTalk(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -42,7 +44,7 @@ public class gcw_entertainer_faction_quest extends script.base_script
         {
             particle = "appearance/pt_rebel_symbol.prt";
         }
-        else 
+        else
         {
             cleanup(self);
             return SCRIPT_CONTINUE;
@@ -52,6 +54,7 @@ public class gcw_entertainer_faction_quest extends script.base_script
         playClientEffectObj(particleList, particle, self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int lostInterest(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self) || params == null)
@@ -66,6 +69,7 @@ public class gcw_entertainer_faction_quest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int convinced(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = utils.getObjIdScriptVar(self, "spawnedBy");
@@ -74,12 +78,14 @@ public class gcw_entertainer_faction_quest extends script.base_script
         LOG("mikkel", "sent message to spawn a fighting npc");
         return SCRIPT_CONTINUE;
     }
+
     public int notConvinced(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("mikkel", "notConvinced, calling cleanup");
         cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id self) throws InterruptedException
     {
         if (isValidId(self) && exists(self))

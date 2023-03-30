@@ -1,0 +1,9 @@
+@base object/tangible/component/base/shared_base_component.iff
+
+@class tangible_object_template 7
+@class object_template 8
+
+objectName = "reverse_engineering/modifier_bits_n"  "assault_acr_modifier_bit"
+detailedDescription = "reverse_engineering/modifier_bits_d" "assault_acr_modifier_bit"
+
+appearanceFilename = "appearance/eqp_comp_jewelry_setting.apt"

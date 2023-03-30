@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class skillmod_click_item extends script.base_script
 {
-    public skillmod_click_item()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "skillmod";
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
@@ -24,6 +21,11 @@ public class skillmod_click_item extends script.base_script
     public static final string_id CANT_APPLY_SKILLMOD = new string_id("base_player", "cant_use_item");
     public static final string_id SID_ITEM_NOT_OWNER = new string_id("base_player", "item_not_owner");
     public static final String OWNER_OID = "owner";
+
+    public skillmod_click_item()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("skillmod_click_item.OnObjectMenuRequest: Init.");
@@ -36,7 +38,7 @@ public class skillmod_click_item extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -44,6 +46,7 @@ public class skillmod_click_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("skillmod_click_item.OnObjectMenuSelect: Init.");
@@ -122,7 +125,7 @@ public class skillmod_click_item extends script.base_script
                 java.util.Enumeration keys = dict.keys();
                 while (keys.hasMoreElements())
                 {
-                    skillModName = (String)keys.nextElement();
+                    skillModName = (String) keys.nextElement();
                     skillModValue = dict.getInt(skillModName);
                 }
             }
@@ -186,6 +189,7 @@ public class skillmod_click_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

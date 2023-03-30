@@ -9,6 +9,7 @@ public class npc_inventory_controller extends script.base_script
     public npc_inventory_controller()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && isPlayer(transferer))
@@ -20,6 +21,7 @@ public class npc_inventory_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && isGod(transferer) && hasObjVar(transferer, "exploitTesting"))

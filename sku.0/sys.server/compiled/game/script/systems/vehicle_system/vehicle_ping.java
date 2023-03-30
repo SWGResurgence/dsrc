@@ -9,9 +9,6 @@ import script.obj_id;
 
 public class vehicle_ping extends script.base_script
 {
-    public vehicle_ping()
-    {
-    }
     public static final String VCDPING_VCD_SCRIPT_NAME = "systems.vehicle_system.vcd_ping_response";
     public static final String VCDPING_SEND_MESSAGE_NUMBER = "vcdping.sendMsgNumber";
     public static final String VCDPING_LAST_ACK_MESSAGE_NUMBER = "vcdping.lastAckNumber";
@@ -25,6 +22,10 @@ public class vehicle_ping extends script.base_script
     public static final int VCDPING_PING_INTERVAL_STANDARD = 300;
     public static final int VCDPING_PING_INTERVAL_RETRY = 30;
     public static final boolean debug = false;
+    public vehicle_ping()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -40,6 +41,7 @@ public class vehicle_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int vehiclePingCallback(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -70,7 +72,7 @@ public class vehicle_ping extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("mounts-bug", "vehicle_ping.vehiclePingCallback(): doPingBasedKill() failed for vehicle=[" + self + "], continuing ping loop so that we can try to kill it later.");
             }
@@ -84,12 +86,12 @@ public class vehicle_ping extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("mounts-bug", "vehicle_ping.vehiclePingCallback(): doPingBasedKill() failed for vehicle=[" + self + "], continuing ping loop so that we can try to kill it later.");
             }
         }
-        else 
+        else
         {
             dictionary messageData = new dictionary();
             messageData.put(VCDPING_MESSAGE_VEHICLE_ID_NAME, self);
@@ -112,6 +114,7 @@ public class vehicle_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePositiveAcknowledgementFromVcd(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -122,9 +125,11 @@ public class vehicle_ping extends script.base_script
         final int mostRecentAckMessageNumber = getIntObjVar(self, VCDPING_LAST_ACK_MESSAGE_NUMBER);
         if (ackMessageNumber > mostRecentAckMessageNumber)
         {
-            if(self == null || self.equals(obj_id.NULL_ID) || !isIdValid(self) || !exists(self)){
+            if (self == null || self.equals(obj_id.NULL_ID) || !isIdValid(self) || !exists(self))
+            {
                 String output = "VCD Ping: ";
-                try {
+                try
+                {
                     output += "Script Exception: invalid object found (vehicle_ping).";
                     output += " Unable to update VCDPing Acknowledgement.";
                     output += " Self is " + (isIdValid(self) ? "" : "not") + " valid.";
@@ -133,8 +138,8 @@ public class vehicle_ping extends script.base_script
                     output += " Self's Template: " + getTemplateName(self);
                     output += " Self's Owner: " + getOwner(self);
                     output += " Self's Location: " + getLocation(self).toString();
-                }
-                catch(Exception e){
+                } catch (Exception e)
+                {
                     LOG("vcdping-debug", output);
                 }
                 return SCRIPT_CONTINUE;
@@ -145,7 +150,7 @@ public class vehicle_ping extends script.base_script
                 LOG("vcdping-debug", "vehicle_ping.handlePositiveAcknowledgementFromVcd(): processed newer positive VCD ack number=[" + ackMessageNumber + "]");
             }
         }
-        else 
+        else
         {
             if (debug)
             {
@@ -158,6 +163,7 @@ public class vehicle_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNegativeAcknowledgementFromVcd(obj_id self, dictionary params) throws InterruptedException
     {
         if (debug)
@@ -175,6 +181,7 @@ public class vehicle_ping extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean doPingBasedKill(obj_id vehicle, String reason) throws InterruptedException
     {
         if (debug)
@@ -205,6 +212,7 @@ public class vehicle_ping extends script.base_script
         }
         return killSuccess;
     }
+
     public void ensureVcdHasSisterScript(obj_id vehicle) throws InterruptedException
     {
         obj_id controlDevice = callable.getCallableCD(vehicle);
@@ -216,7 +224,7 @@ public class vehicle_ping extends script.base_script
             }
             attachScript(controlDevice, VCDPING_VCD_SCRIPT_NAME);
         }
-        else 
+        else
         {
             if (debug)
             {

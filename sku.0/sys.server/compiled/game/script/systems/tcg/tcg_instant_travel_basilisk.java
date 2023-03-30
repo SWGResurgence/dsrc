@@ -24,14 +24,16 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU8, new string_id("tcg", "manage_locations"));
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU9, new string_id("tcg", "travel_locations"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
+        callable.storeCallables(player);
         if (!isIdValid(player))
         {
             return SCRIPT_CONTINUE;
@@ -53,6 +55,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void markItvLocations(obj_id itv, obj_id player) throws InterruptedException
     {
         if (!isIdValid(itv) || !isIdValid(player))
@@ -69,7 +72,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             main_options[0] = "Reset " + getStringObjVar(itv, "travel_tcg.stationary_itv.name.1");
         }
-        else 
+        else
         {
             main_options[0] = "Set Location 1";
         }
@@ -77,7 +80,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             main_options[1] = "Reset " + getStringObjVar(itv, "travel_tcg.stationary_itv.name.2");
         }
-        else 
+        else
         {
             main_options[1] = "Set Location 2";
         }
@@ -108,6 +111,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         int pid = sui.listbox(itv, player, "@tcg:stationary_set_location_d", sui.OK_CANCEL, "@tcg:stationary_set_location_t", main_options, "handlePlayerNameSetLocation", true, true);
         sui.setPid(player, pid, PID_VAR);
     }
+
     public int handlePlayerNameSetLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -148,60 +152,61 @@ public class tcg_instant_travel_basilisk extends script.base_script
         switch (idx)
         {
             case 0:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 1);
-            }
-            else 
-            {
-                sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
-            }
-            break;
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 1);
+                }
+                else
+                {
+                    sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
+                }
+                break;
             case 1:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 2);
-            }
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 2);
+                }
             case 2:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 3);
-            }
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 3);
+                }
             case 3:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 4);
-            }
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 4);
+                }
             case 4:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 5);
-            }
-            else 
-            {
-                sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
-            }
-            break;
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_stationary_itv_location_set", "@tcg:title_stationary_itv_location_set", "handleSetItvLocations", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 5);
+                }
+                else
+                {
+                    sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
+                }
+                break;
             default:
-            if (sui.hasPid(player, PID_VAR))
-            {
-                int pid = sui.getPid(player, PID_VAR);
-                forceCloseSUIPage(pid);
-            }
-            break;
+                if (sui.hasPid(player, PID_VAR))
+                {
+                    int pid = sui.getPid(player, PID_VAR);
+                    forceCloseSUIPage(pid);
+                }
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetItvLocations(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -246,12 +251,13 @@ public class tcg_instant_travel_basilisk extends script.base_script
                 sendSystemMessage(player, new string_id("tcg", "valid_location_set"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public void retrieveLocationsList(obj_id itv, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(itv))
@@ -267,7 +273,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[0] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[0] = "Unmarked Location";
         }
@@ -279,7 +285,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[1] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[1] = "Unmarked Location";
         }
@@ -291,7 +297,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[2] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[2] = "Unmarked Location";
         }
@@ -303,7 +309,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[2] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[2] = "Unmarked Location";
         }
@@ -315,7 +321,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[3] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[3] = "Unmarked Location";
         }
@@ -327,7 +333,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String locString = getDisplayLocation(loc);
             main_options[4] = "Travel to: " + name + "  Planet: " + planet + " Location: " + locString;
         }
-        else 
+        else
         {
             main_options[4] = "Unmarked Location";
         }
@@ -335,6 +341,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         sui.setPid(player, pid, PID_VAR);
         return;
     }
+
     public int handleSendPlayerToLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -364,6 +371,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         sui.msgbox(self, player, "@tcg:stationary_travel_confirm_prompt", sui.OK_CANCEL, "@tcg:stationary_travel_confirm_title", sui.MSG_QUESTION, "handleConfirmStationaryTravel");
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmStationaryTravel(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -396,6 +404,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendPlayerToLocation(obj_id player, int idx) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -409,12 +418,13 @@ public class tcg_instant_travel_basilisk extends script.base_script
             String destPlanet = getStringObjVar(itv, ("travel_tcg.stationary_itv.scene." + idx));
             warpPlayer(player, destPlanet, travelLoc.x, travelLoc.y, travelLoc.z, null, 0, 0, 0, "", false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("tcg", "corrupt_itv_location_data"));
         }
         return;
     }
+
     public boolean canMarkAtLocation(obj_id player) throws InterruptedException
     {
         obj_id playerCurrentMount = getMountId(player);
@@ -439,7 +449,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             return false;
         }
-        region geoCities[] = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
+        region[] geoCities = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
         if (geoCities != null && geoCities.length > 0)
         {
             return false;
@@ -454,21 +464,20 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             return false;
         }
-        if (combat.isInCombat(player))
-        {
-            return false;
-        }
-        return true;
+        return !combat.isInCombat(player);
     }
+
     public boolean isOwner(obj_id object, obj_id player) throws InterruptedException
     {
         return getOwner(object) == player;
     }
+
     public String getDisplayLocation(location loc) throws InterruptedException
     {
         String returnString = "" + Math.round(loc.x) + ", " + Math.round(loc.y) + ", " + Math.round(loc.z);
         return returnString;
     }
+
     public boolean itvIsInRangeOfPlayer(obj_id itv, obj_id player) throws InterruptedException
     {
         if (!isIdValid(itv) || !isIdValid(player))
@@ -477,10 +486,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         }
         if (!utils.isNestedWithin(itv, player))
         {
-            if (utils.getDistance2D(itv, player) > 40)
-            {
-                return false;
-            }
+            return !(utils.getDistance2D(itv, player) > 40);
         }
         return true;
     }

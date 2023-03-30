@@ -7,16 +7,18 @@ import script.obj_id;
 
 public class advanced_turret_ai extends script.systems.combat.combat_base
 {
+    public static final int INTERVAL_MAX = 10;
+    public static final int FARTHEST_TRIGGER = INTERVAL_MAX - 1;
     public advanced_turret_ai()
     {
     }
-    public static final int INTERVAL_MAX = 10;
-    public static final int FARTHEST_TRIGGER = INTERVAL_MAX - 1;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         advanced_turret.activateTurret(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (isGod(who))
@@ -30,6 +32,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         doLogging("OnTriggerExit", "" + getName(who) + " has exited volume name " + volumeName + " which is the farthest: " + volumeName.endsWith(advanced_turret.ALERT_VOLUME_NAME + FARTHEST_TRIGGER));
@@ -37,12 +40,13 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         {
             advanced_turret.removeTarget(self, who);
         }
-        else 
+        else
         {
             advanced_turret.addTarget(self, who);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (!advanced_turret.handleTurretDamage(self, attacker, weapon, damage))
@@ -52,16 +56,19 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "playingEffect");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyTurret(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int createTriggerVolume(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -81,6 +88,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int turretShot(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && isIdValid(self) && exists(self))
@@ -94,6 +102,7 @@ public class advanced_turret_ai extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
     }

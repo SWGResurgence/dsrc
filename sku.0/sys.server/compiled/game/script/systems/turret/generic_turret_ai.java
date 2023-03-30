@@ -17,6 +17,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
     public generic_turret_ai()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         turret.activateTurret(self);
@@ -36,7 +37,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 removeObjVar(self, "objWeapon");
                 turret.createWeapon(self);
             }
-            else 
+            else
             {
                 if (!utils.isNestedWithin(wpn, self))
                 {
@@ -45,13 +46,14 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 }
             }
         }
-        else 
+        else
         {
             turret.createWeapon(self);
         }
         ai_lib.setAttackable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (getHitpoints(self) < 1)
@@ -70,7 +72,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 removeObjVar(self, "objWeapon");
                 turret.createWeapon(self);
             }
-            else 
+            else
             {
                 if (!utils.isNestedWithin(wpn, self))
                 {
@@ -79,12 +81,13 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 }
             }
         }
-        else 
+        else
         {
             turret.createWeapon(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setTurretAttributes(obj_id self) throws InterruptedException
     {
         if (hasTriggerVolume(self, turret.ALERT_VOLUME_NAME))
@@ -99,6 +102,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         setAttributeInterested(self, attrib.ALL);
         createTriggerVolume(turret.ALERT_VOLUME_NAME, turret.TURRET_RANGE, true);
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -111,6 +115,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (isIdValid(who) && !isGod(who))
@@ -119,6 +124,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && !isGod(transferer))
@@ -127,6 +133,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && !isGod(transferer))
@@ -135,6 +142,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (!isIdValid(who))
@@ -161,6 +169,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (volumeName.equals(turret.ALERT_VOLUME_NAME) && who != self)
@@ -181,6 +190,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -203,7 +213,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                     utils.setScriptVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
                 }
-                else 
+                else
                 {
                     location death = getLocation(self);
                     playClientEffectLoc(attacker, "clienteffect/lair_med_damage_smoke.cef", death, 0);
@@ -214,6 +224,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAICombat") != null)
@@ -222,13 +233,16 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
             return SCRIPT_CONTINUE;
         }
         int numAtt = attackers.length;
-        for (obj_id attacker : attackers) {
-            if (turret.canGenericTurretAttackTarget(attacker)) {
+        for (obj_id attacker : attackers)
+        {
+            if (turret.canGenericTurretAttackTarget(attacker))
+            {
                 turret.addTarget(self, attacker);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getGoodTurretTarget() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -247,8 +261,10 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         if (targets.length == 0)
         {
             targets = good_targets;
-            for (obj_id target : targets) {
-                if (isIncapacitated(target) && !isDead(target) && getDistance(self, target) <= turret.TURRET_RANGE && !pet_lib.isPet(target)) {
+            for (obj_id target : targets)
+            {
+                if (isIncapacitated(target) && !isDead(target) && getDistance(self, target) <= turret.TURRET_RANGE && !pet_lib.isPet(target))
+                {
                     pclib.coupDeGrace(target, self);
                 }
             }
@@ -262,18 +278,22 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 obj_var[] ovs = new obj_var[attackerList.size()];
                 for (int i = 0; i < attackerList.size(); i++)
                 {
-                    String scriptVarPath = xp.VAR_ATTACKER_LIST + "." + ((obj_id)attackerList.get(i)) + ".damage";
+                    String scriptVarPath = xp.VAR_ATTACKER_LIST + "." + attackerList.get(i) + ".damage";
                     ovs[i] = new obj_var((attackerList.elementAt(i)).toString(), utils.getIntScriptVar(self, scriptVarPath));
                 }
                 ovs = list.quickSort(0, ovs.length - 1, ovs);
                 if ((ovs != null) && (ovs.length > 0))
                 {
-                    for (obj_var ov : ovs) {
+                    for (obj_var ov : ovs)
+                    {
                         String ovName = ov.getName();
                         obj_id tmp = utils.stringToObjId(ovName);
-                        if (isIdValid(tmp)) {
-                            if (utils.getElementPositionInArray(targets, tmp) > -1) {
-                                if (canSee(self, tmp)) {
+                        if (isIdValid(tmp))
+                        {
+                            if (utils.getElementPositionInArray(targets, tmp) > -1)
+                            {
+                                if (canSee(self, tmp))
+                                {
                                     return tmp;
                                 }
                             }
@@ -290,6 +310,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return targets[idx];
     }
+
     public obj_id[] cullInvalidTargets(obj_id self, obj_id[] old_targets) throws InterruptedException
     {
         if (old_targets == null || old_targets.length == 0)
@@ -298,8 +319,10 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         Vector toRemove = new Vector();
         toRemove.setSize(0);
-        for (obj_id old_target : old_targets) {
-            if (!turret.canGenericTurretAttackTarget(old_target) || getDistance(self, old_target) > turret.TURRET_RANGE) {
+        for (obj_id old_target : old_targets)
+        {
+            if (!turret.canGenericTurretAttackTarget(old_target) || getDistance(self, old_target) > turret.TURRET_RANGE)
+            {
                 toRemove = utils.addElement(toRemove, old_target);
             }
         }
@@ -317,6 +340,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return old_targets;
     }
+
     public obj_id[] removeIncapacitatedTargets(obj_id self, obj_id[] targets) throws InterruptedException
     {
         if (!isIdValid(self) || (targets == null) || (targets.length == 0))
@@ -325,8 +349,10 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         Vector newTargets = new Vector();
         newTargets.setSize(0);
-        for (obj_id target : targets) {
-            if (!ai_lib.isAiDead(target) && getDistance(self, target) <= turret.TURRET_RANGE) {
+        for (obj_id target : targets)
+        {
+            if (!ai_lib.isAiDead(target) && getDistance(self, target) <= turret.TURRET_RANGE)
+            {
                 newTargets = utils.addElement(newTargets, target);
             }
         }
@@ -338,12 +364,14 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return _newTargets;
     }
+
     public void explodeTurret(obj_id turretid, obj_id killer) throws InterruptedException
     {
         obj_id[] enemies = getWhoIsTargetingMe(turretid);
         if (enemies != null)
         {
-            for (obj_id enemy : enemies) {
+            for (obj_id enemy : enemies)
+            {
                 queueClearCommandsFromGroup(enemy, (-506878646));
                 queueClearCommandsFromGroup(enemy, (-1170591580));
                 queueClearCommandsFromGroup(enemy, (391413347));
@@ -357,13 +385,14 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
             turret.deactivateTurret(turretid);
             player_structure.destroyStructure(turretid, false);
         }
-        else 
+        else
         {
             turret.deactivateTurret(turretid);
             messageTo(turretid, "handleDestroyTurret", null, 2, false);
         }
         messageTo(turretid, "handleDestroyTurret", null, 10.0f, false);
     }
+
     public float doAttack() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -402,6 +431,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return doAttack(target);
     }
+
     public float doAttack(obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -427,7 +457,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
                 target = tmptarget;
                 turret.engageTarget(self, target);
             }
-            else 
+            else
             {
                 return 1.5f;
             }
@@ -440,49 +470,49 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         messageTo(self, "reconfirmTarget", null, 5, false);
         final float DAMAGE_MODIFIER = 2.0f;
         final float HEALTH_COST_MODIFIER = 0;
-        
+
         final float ACTION_COST_MODIFIER = 0;
         final int BASE_TO_HIT_MODIFIER = 0;
         final float AMMO_COST_MODIFIER = 1.0f;
-        String[] strTimeMods = 
-        {
-            ""
-        };
-        String[] strDamageMods = 
-        {
-            ""
-        };
-        String[] strCostMods = 
-        {
-        };
-        String[] strToHitMods = 
-        {
-            ""
-        };
-        String[] strBlockMods = 
-        {
-            ""
-        };
-        String[] strEvadeMods = 
-        {
-            ""
-        };
-        String[] strCounterAttackMods = 
-        {
-            ""
-        };
+        String[] strTimeMods =
+                {
+                        ""
+                };
+        String[] strDamageMods =
+                {
+                        ""
+                };
+        String[] strCostMods =
+                {
+                };
+        String[] strToHitMods =
+                {
+                        ""
+                };
+        String[] strBlockMods =
+                {
+                        ""
+                };
+        String[] strEvadeMods =
+                {
+                        ""
+                };
+        String[] strCounterAttackMods =
+                {
+                        ""
+                };
         int intBlockMod = 1000;
         int intEvadeMod = 1000;
         int intCounterAttackMod = 1000;
         int intAttackerEndPosture = POSTURE_NONE;
         int intDefenderEndPosture = POSTURE_NONE;
         String strPlaybackAction = "fire_turret";
-        int[] intEffects = 
-        {
-        };
-        float[] fltEffectDurations = 
-        {
-        };
+        int[] intEffects =
+                {
+                };
+        float[] fltEffectDurations =
+                {
+                };
         int intChanceToApplyEffect = 0;
         obj_id objWeapon = getObjIdObjVar(self, "objWeapon");
         attacker_data cbtAttackerData = new attacker_data();
@@ -513,7 +543,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_HIT;
         }
-        else 
+        else
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_MISS;
         }
@@ -524,6 +554,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         combat.doBasicCombatSpam("shoot", cbtAttackerResults, cbtDefenderResults, cbtHitData);
         return cbtWeaponData.attackSpeed;
     }
+
     public int handleTurretAttack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!turret.isActive(self))
@@ -535,23 +566,26 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         {
             messageTo(self, "handleTurretAttack", null, delay, false);
         }
-        else 
+        else
         {
             utils.removeScriptVar(self, turret.SCRIPTVAR_ENGAGED);
             utils.removeScriptVar(self, "ai.combat.isInCombat");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "playingEffect");
         return SCRIPT_CONTINUE;
     }
+
     public int expireLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int enemyDecloaked(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -568,6 +602,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyTurret(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

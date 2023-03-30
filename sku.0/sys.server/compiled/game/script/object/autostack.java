@@ -258,6 +258,17 @@ public class autostack extends script.base_script
             return;
         }
         setCount(item, (oldStackSize - newStackSize));
+        //@Note: This is checks the old timestamp for stims, and uses it, rather than making a long long long timestamp.
+        if (getTemplateName(item).equals("object/tangible/loot/generic_usable/stim_syringe_generic.iff"))
+        {
+            String TIMESTAMP_OBJVAR ="item.temporary.time_stamp";
+            int oldTime = getIntObjVar(item, TIMESTAMP_OBJVAR);
+            if(hasObjVar(newItem, TIMESTAMP_OBJVAR))
+            {
+                removeObjVar(newItem, TIMESTAMP_OBJVAR);
+            }
+            setObjVar(newItem, TIMESTAMP_OBJVAR, oldTime);
+        }
         setCount(newItem, newStackSize);
         utils.removeScriptVar(player, "autostack.ignoreitems");
     }

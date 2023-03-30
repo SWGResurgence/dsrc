@@ -49,16 +49,17 @@ public class player_pvp extends script.base_script
     public static final string_id SID_BATTLEFIELD_QUEUE_ATTEMPT = new string_id("spam", "battlefield_queue_attempt");
     public static final string_id SID_BATTLEFIELD_QUEUE_GROUP_REMOVAL = new string_id("spam", "battlefield_queue_group_removal");
     public static final string_id SID_BATTLEFIELD_QUEUE_REJECTED = new string_id("spam", "battlefield_queue_rejected");
-    public static final String[] BATTLEFIELD_NAMES = 
-    {
-        "massassi_isle",
-        "battlefield2",
-        "battlefield3",
-        "battlefield4",
-        "battlefield5"
-    };
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String[] BATTLEFIELD_NAMES =
+            {
+                    "massassi_isle",
+                    "battlefield2",
+                    "battlefield3",
+                    "battlefield4",
+                    "battlefield5"
+            };
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+
     public void blog(obj_id controller, String text) throws InterruptedException
     {
         String battlefieldName = "none";
@@ -83,6 +84,7 @@ public class player_pvp extends script.base_script
         }
         CustomerServiceLog("battlefield_" + battlefieldName, text);
     }
+
     public obj_id getBattlefieldController(obj_id self) throws InterruptedException
     {
         obj_id controller = utils.getObjIdScriptVar(self, "battlefield.active");
@@ -109,6 +111,7 @@ public class player_pvp extends script.base_script
         }
         return controller;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isGod(self))
@@ -163,12 +166,14 @@ public class player_pvp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         cleanupOldSystemObjVar(self);
         gcw.clearCreditForKills(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         float ratio = getHealth(self) / getMaxHealth(self);
@@ -178,14 +183,17 @@ public class player_pvp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToGroup(obj_id self, obj_id groupId) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "battlefield.active"))
@@ -198,22 +206,26 @@ public class player_pvp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveLeaveGroup(obj_id self, dictionary params) throws InterruptedException
     {
         group.leaveGroup(self);
         sendSystemMessage(self, SID_BATTLEFIELD_OPPOSITE_FACTION_GROUP);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBattlefield(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         battlefieldCommandSui(self);
         return SCRIPT_CONTINUE;
     }
+
     public int displayBattlefieldSui(obj_id self, dictionary params) throws InterruptedException
     {
         battlefieldCommandSui(self);
         return SCRIPT_CONTINUE;
     }
+
     public void battlefieldCommandSui(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -245,11 +257,12 @@ public class player_pvp extends script.base_script
             getClusterWideData("pvp", "*", true, self);
             blog(null, "battlefieldCommandSui player: " + getName(self) + "(" + self + ") getClusterWideData requested.");
         }
-        else 
+        else
         {
             requestBattlefieldStatus(self);
         }
     }
+
     public void requestBattlefieldStatus(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -286,6 +299,7 @@ public class player_pvp extends script.base_script
         messageTo(bf4, "getBattlefieldStatus", params, 1.0f, false);
         sendSystemMessage(self, SID_BATTLEFIELD_REQUEST_IN_PROGRESS);
     }
+
     public int receiveBattlefieldStatus(obj_id self, dictionary params) throws InterruptedException
     {
         String status = params.getString("battlefieldStatus");
@@ -360,7 +374,7 @@ public class player_pvp extends script.base_script
             }
             if (battlefieldState == pvp.PVP_STATE_BATTLE_ENGAGED)
             {
-                int time = ((int)(pvp.BATTLEFIELD_DURATION + battlefieldTime) - getGameTime());
+                int time = ((pvp.BATTLEFIELD_DURATION + battlefieldTime) - getGameTime());
                 if (time < 0)
                 {
                     time = 0;
@@ -369,7 +383,7 @@ public class player_pvp extends script.base_script
             }
             else if (battlefieldState == pvp.PVP_STATE_BATTLE_SETUP)
             {
-                int time = ((int)(pvp.BATTLEFIELD_SETUP_WAIT_TIME + battlefieldSetupTime) - getGameTime());
+                int time = ((int) (pvp.BATTLEFIELD_SETUP_WAIT_TIME + battlefieldSetupTime) - getGameTime());
                 if (time < 0)
                 {
                     time = 0;
@@ -378,14 +392,14 @@ public class player_pvp extends script.base_script
             }
             else if (battlefieldState == pvp.PVP_STATE_INVITE_QUEUE)
             {
-                int time = ((int)(pvp.BATTLEFIELD_INVITATION_WAIT_TIME + battlefieldInvitationTime) - getGameTime());
+                int time = ((int) (pvp.BATTLEFIELD_INVITATION_WAIT_TIME + battlefieldInvitationTime) - getGameTime());
                 if (time < 0)
                 {
                     time = 0;
                 }
                 statusData[i][2] = "" + time + " seconds";
             }
-            else 
+            else
             {
                 statusData[i][2] = "";
             }
@@ -412,7 +426,7 @@ public class player_pvp extends script.base_script
                 }
                 queuePlace += utils.stringToInt(playerData[playerData.length - 2]);
             }
-            else 
+            else
             {
                 queuePlace = utils.stringToInt(playerData[playerData.length - 2]);
             }
@@ -423,19 +437,19 @@ public class player_pvp extends script.base_script
                 {
                     waitTime = 0;
                 }
-                else 
+                else
                 {
                     waitTime = getCalendarTime() - bfTime;
                 }
             }
-            else 
+            else
             {
                 int bfTime = utils.stringToInt(playerData[1]);
                 if (bfTime <= 0)
                 {
                     waitTime = 0;
                 }
-                else 
+                else
                 {
                     waitTime = getCalendarTime() - bfTime;
                 }
@@ -461,31 +475,32 @@ public class player_pvp extends script.base_script
             utils.removeScriptVar(self, "battlefield.pid");
             forceCloseSUIPage(pid);
         }
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@spam:table_title_status",
-            "@spam:table_title_time",
-            "@spam:table_title_rebels_queued",
-            "@spam:table_title_imperials_queued",
-            "@spam:table_title_rebels_accepted",
-            "@spam:table_title_imperials_accepted"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "text",
-            "integer",
-            "integer",
-            "integer",
-            "integer"
-        };
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@spam:table_title_status",
+                        "@spam:table_title_time",
+                        "@spam:table_title_rebels_queued",
+                        "@spam:table_title_imperials_queued",
+                        "@spam:table_title_rebels_accepted",
+                        "@spam:table_title_imperials_accepted"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "text",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer"
+                };
         int pid = sui.tableRowMajor(self, self, sui.OK_CANCEL, "Battlefield Status", "onBattlefieldCommandResponse", prompt, table_titles, table_types, statusData, false);
         utils.setScriptVar(self, "battlefield.pid", pid);
         utils.setScriptVar(self, "battlefield.queuedFor", bfQueuedFor);
         return SCRIPT_CONTINUE;
     }
+
     public int onBattlefieldCommandResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -553,7 +568,7 @@ public class player_pvp extends script.base_script
                     {
                         sendSystemMessage(self, SID_BATTLEFIELD_REMOVE_FROM_QUEUE);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(self, SID_BATTLEFIELD_QUEUE_GROUP_REMOVAL);
                         params.put("members", members);
@@ -572,14 +587,14 @@ public class player_pvp extends script.base_script
                     messageTo(controller, "addPlayerToQueue", params, 1.0f, false);
                     utils.setScriptVar(self, "battlefield.queuing", getGameTime());
                 }
-                else 
+                else
                 {
                     if (!groupLeader)
                     {
                         sendSystemMessage(self, SID_BATTLEFIELD_QUEUE_NOT_LEADER);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         params.put("group", group);
                         params.put("members", members);
@@ -589,13 +604,14 @@ public class player_pvp extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_BATTLEFIELD_QUEUE_ATTEMPTED_RECENTLY);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public String formatBattlefieldCountdown(int seconds) throws InterruptedException
     {
         if (seconds < 0)
@@ -622,7 +638,7 @@ public class player_pvp extends script.base_script
         {
             minutesInfo = "";
         }
-        else 
+        else
         {
             minutesInfo += " minutes ";
         }
@@ -630,12 +646,13 @@ public class player_pvp extends script.base_script
         {
             secondsInfo += " second";
         }
-        else 
+        else
         {
             secondsInfo += " seconds";
         }
         return minutesInfo + secondsInfo;
     }
+
     public void showBattlefieldScoreboard(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "battlefield.pid"))
@@ -659,30 +676,30 @@ public class player_pvp extends script.base_script
             return;
         }
         String[][] scoreData = pvp.bfStatisticsToArray(battlefieldPlayers, true);
-        int rebelCount = ((dictionary)battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_REBEL_PLAYERS);
-        int imperialCount = ((dictionary)battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS);
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@spam:table_title_faction",
-            "@spam:table_title_kills",
-            "@spam:table_title_assists",
-            "@spam:table_title_deaths",
-            "@spam:table_title_damage",
-            "@spam:table_title_healing",
-            "@spam:table_title_captures"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer"
-        };
+        int rebelCount = ((dictionary) battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_REBEL_PLAYERS);
+        int imperialCount = ((dictionary) battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS);
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@spam:table_title_faction",
+                        "@spam:table_title_kills",
+                        "@spam:table_title_assists",
+                        "@spam:table_title_deaths",
+                        "@spam:table_title_damage",
+                        "@spam:table_title_healing",
+                        "@spam:table_title_captures"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer"
+                };
         String statisticsTitle = "Battlefield Statistics";
         int battlefieldInvitationTime = utils.getIntScriptVar(controller, "battlefield.queueTime");
         int battlefieldTime = utils.getIntScriptVar(controller, "battlefield.battleTime");
@@ -701,26 +718,24 @@ public class player_pvp extends script.base_script
         }
         else if (bfState == pvp.PVP_STATE_INVITE_QUEUE)
         {
-            statisticsInfoStr += "\nInvitation Time Left: " + formatBattlefieldCountdown((int)((pvp.BATTLEFIELD_INVITATION_WAIT_TIME + battlefieldInvitationTime) - getGameTime()));
+            statisticsInfoStr += "\nInvitation Time Left: " + formatBattlefieldCountdown((int) ((pvp.BATTLEFIELD_INVITATION_WAIT_TIME + battlefieldInvitationTime) - getGameTime()));
         }
         int pid = sui.tableRowMajor(self, self, sui.OK_CANCEL, statisticsTitle, "onStatisticsMembersResponse", statisticsInfoStr, table_titles, table_types, scoreData, true);
         utils.setScriptVar(self, "battlefield.pid", pid);
     }
+
     public boolean canReceiveReward(obj_id self) throws InterruptedException
     {
-        if (!isPlayerActive(self))
-        {
-            return false;
-        }
+        //if (!isPlayerActive(self))
+        //{
+        //   return false;
+        //} @TODO: add back in or another anti-afk method.
         int damage = utils.getIntScriptVar(self, "battlefield.damage");
         int healing = utils.getIntScriptVar(self, "battlefield.healing");
         int captures = utils.getIntScriptVar(self, "battlefield.captures");
-        if (damage == 0 && healing == 0 && captures == 0)
-        {
-            return false;
-        }
-        return true;
+        return damage != 0 || healing != 0 || captures != 0;
     }
+
     public void showBattlefieldFinalScoreboard(obj_id self, String battlefieldName) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "battlefield.pid"))
@@ -744,30 +759,30 @@ public class player_pvp extends script.base_script
             return;
         }
         String[][] scoreData = pvp.bfStatisticsToArray(battlefieldPlayers, true);
-        int rebelCount = ((dictionary)battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_REBEL_PLAYERS);
-        int imperialCount = ((dictionary)battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS);
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@spam:table_title_faction",
-            "@spam:table_title_kills",
-            "@spam:table_title_assists",
-            "@spam:table_title_deaths",
-            "@spam:table_title_damage",
-            "@spam:table_title_healing",
-            "@spam:table_title_captures"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer",
-            "integer"
-        };
+        int rebelCount = ((dictionary) battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_REBEL_PLAYERS);
+        int imperialCount = ((dictionary) battlefieldPlayers.get(0)).getInt(pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS);
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@spam:table_title_faction",
+                        "@spam:table_title_kills",
+                        "@spam:table_title_assists",
+                        "@spam:table_title_deaths",
+                        "@spam:table_title_damage",
+                        "@spam:table_title_healing",
+                        "@spam:table_title_captures"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer",
+                        "integer"
+                };
         String statisticsTitle = "Battlefield Over";
         int imperialScore = utils.getIntScriptVar(controller, "battlefield.imperialScore");
         int rebelScore = utils.getIntScriptVar(controller, "battlefield.rebelScore");
@@ -789,14 +804,14 @@ public class player_pvp extends script.base_script
                 gcwCredits = gcw.BATTLEFIELD_VICTORY_POINT_VALUE;
                 tokens = 5;
             }
-            else 
+            else
             {
                 battlefieldStatus = COLOR_IMPERIALS + "Imperials Defeated!";
                 gcwCredits = gcw.BATTLEFIELD_DEFEAT_POINT_VALUE;
                 tokens = 2;
             }
         }
-        else 
+        else
         {
             if (faction == factions.FACTION_FLAG_REBEL)
             {
@@ -804,7 +819,7 @@ public class player_pvp extends script.base_script
                 gcwCredits = gcw.BATTLEFIELD_DEFEAT_POINT_VALUE;
                 tokens = 2;
             }
-            else 
+            else
             {
                 battlefieldStatus = COLOR_IMPERIALS + "Imperial Victory!";
                 gcwCredits = gcw.BATTLEFIELD_VICTORY_POINT_VALUE;
@@ -827,11 +842,11 @@ public class player_pvp extends script.base_script
                 {
                     if (faction == factions.FACTION_FLAG_REBEL)
                     {
-                        static_item.createNewItemFunction("item_battlefield_rebel_token", container);
+                        static_item.createNewItemFunction("item_battlefield_rebel_token_" + battlefieldName, container);
                     }
-                    else 
+                    else
                     {
-                        static_item.createNewItemFunction("item_battlefield_imperial_token", container);
+                        static_item.createNewItemFunction("item_battlefield_imperial_token_" + battlefieldName, container);
                     }
                 }
             }
@@ -843,7 +858,7 @@ public class player_pvp extends script.base_script
                 sendSystemMessageProse(self, pp);
             }
         }
-        else 
+        else
         {
             blog(self, "Player: " + self + " Name: " + getName(self) + " did not participate and is not getting rewards.");
         }
@@ -851,6 +866,7 @@ public class player_pvp extends script.base_script
         int pid = sui.tableRowMajor(self, self, sui.OK_CANCEL, statisticsTitle, "onStatisticsMembersResponse", statisticsInfoStr, table_titles, table_types, scoreData, true);
         utils.setScriptVar(self, "battlefield.pid", pid);
     }
+
     public int receiveBattlefieldFinale(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -861,6 +877,7 @@ public class player_pvp extends script.base_script
         showBattlefieldFinalScoreboard(self, battlefieldName);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         if (!manage_name.equals("pvp"))
@@ -886,7 +903,7 @@ public class player_pvp extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_BATTLEFIELD_NONE_FOUND);
             return SCRIPT_CONTINUE;
@@ -894,6 +911,7 @@ public class player_pvp extends script.base_script
         requestBattlefieldStatus(self);
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldTerminalCapture(obj_id self, dictionary params) throws InterruptedException
     {
         int gcwCredits = params.getInt("gcwCredits");
@@ -907,6 +925,7 @@ public class player_pvp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldQueueAcceptance(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -956,6 +975,7 @@ public class player_pvp extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldInvitation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = params.getObjId("battlefieldController");
@@ -1014,6 +1034,7 @@ public class player_pvp extends script.base_script
         messageTo(controller, "refuseBattlefieldInvitation", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldOver(obj_id self, dictionary params) throws InterruptedException
     {
         buff.removeBuff(self, "battlefield_communication_run");
@@ -1037,6 +1058,7 @@ public class player_pvp extends script.base_script
         pvp.battlefieldWarp(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int onBattlefieldInvitationAccept(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = utils.getObjIdScriptVar(self, "battlefield.invitation.controller");
@@ -1063,7 +1085,7 @@ public class player_pvp extends script.base_script
                 utils.removeScriptVarTree(self, "battlefield");
                 messageTo(controller, "refuseBattlefieldInvitation", params, 1.0f, false);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp = prose.setStringId(pp, SID_BATTLEFIELD_QUEUE_ACCEPTED);
@@ -1075,6 +1097,7 @@ public class player_pvp extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldSetupWarp(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "battlefield.invited"))
@@ -1090,6 +1113,7 @@ public class player_pvp extends script.base_script
         group.leaveGroup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onBattlefieldInvitationExpire(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "battlefield.invited") || !utils.hasScriptVar(self, "battlefield.queue"))
@@ -1117,6 +1141,7 @@ public class player_pvp extends script.base_script
         messageTo(controller, "refuseBattlefieldInvitation", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldQueueRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "battlefield.queue"))
@@ -1155,6 +1180,7 @@ public class player_pvp extends script.base_script
         utils.removeScriptVarTree(self, "battlefield");
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldRefusePlayers(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "battlefield.invitation.pid"))
@@ -1178,6 +1204,7 @@ public class player_pvp extends script.base_script
         utils.removeScriptVar(self, "battlefield.active");
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldPlayParticlePickup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id containedBy = getTopMostContainer(self);
@@ -1190,20 +1217,22 @@ public class player_pvp extends script.base_script
         setObjVar(newObject, restuss_event.EFFECT_NAME, "republic_gunship_itv_touch_and_go.prt");
         setObjVar(newObject, restuss_event.EFFECT_VISABILITY, "visibility-100");
         setObjVar(newObject, restuss_event.EFFECT_DELTA, "0");
-        obj_id[] playerList = 
-        {
-            self
-        };
+        obj_id[] playerList =
+                {
+                        self
+                };
         utils.setScriptVar(newObject, instance.PLAYER_ID_LIST, playerList);
         attachScript(newObject, "theme_park.restuss_event.restuss_clientfx_controller");
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldWarpLocation(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeBatchObjVar(self, gcw.LIST_DAILY_KILL_VALUES);
         messageTo(self, "battlefieldWarp", params, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int battlefieldWarp(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1238,12 +1267,14 @@ public class player_pvp extends script.base_script
         pvp.battlefieldWarp(self, loc);
         return SCRIPT_CONTINUE;
     }
+
     public int receiveBattlefieldAnnouncement(obj_id self, dictionary params) throws InterruptedException
     {
         string_id message = params.getStringId("announceId");
         sendSystemMessage(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (beast_lib.isBeast(attacker) || pet_lib.isPet(attacker))
@@ -1273,7 +1304,8 @@ public class player_pvp extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int combinedDamage = 0;
-        for (int i1 : damage) {
+        for (int i1 : damage)
+        {
             combinedDamage += i1;
         }
         Vector attackList = new Vector();
@@ -1292,7 +1324,7 @@ public class player_pvp extends script.base_script
             doLogging("OnCreatureDamaged", "New entry string: " + damageUpdate);
             utils.addElement(attackList, damageUpdate);
         }
-        else 
+        else
         {
             int newDamage = combinedDamage + gcw.getDamageFromAttacker(attackList, attacker);
             damageUpdate = gcw.packAttackerDamage(attacker, newDamage);
@@ -1303,6 +1335,7 @@ public class player_pvp extends script.base_script
         pvp.bfCreditForDamage(attacker, combinedDamage);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupOldSystemObjVar(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_PVP_LAST_UPDATE))
@@ -1314,9 +1347,11 @@ public class player_pvp extends script.base_script
             removeObjVar(self, VAR_PVP_LAST_KILLS);
         }
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
     }
+
     public int invalidBattlefieldPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = params.getLocation("kickOutLocation");
@@ -1330,6 +1365,7 @@ public class player_pvp extends script.base_script
         utils.warpPlayer(self, Objects.requireNonNullElse(goodLoc, loc));
         return SCRIPT_CONTINUE;
     }
+
     public int createBattlefieldWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1354,6 +1390,7 @@ public class player_pvp extends script.base_script
         messageTo(self, "destroyBattlefieldWaypoint", params, 90.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyBattlefieldWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

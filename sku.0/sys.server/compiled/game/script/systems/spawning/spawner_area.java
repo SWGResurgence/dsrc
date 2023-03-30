@@ -13,6 +13,7 @@ public class spawner_area extends script.base_script
     public spawner_area()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "registerWithController"))
@@ -29,6 +30,7 @@ public class spawner_area extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "registerWithController"))
@@ -45,6 +47,7 @@ public class spawner_area extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (!spawning.checkSpawnCount(self))
@@ -74,7 +77,8 @@ public class spawner_area extends script.base_script
                 setName(self, "MISSING VALUES: Each spawn must have an associated size (" + strFileName + ")");
             }
             int intRoll = rand(0, strSpawns.length - 1);
-            if(intRoll >= fltSizes.length) {
+            if (intRoll >= fltSizes.length)
+            {
                 intRoll = fltSizes.length - 1;
             }
             strSpawn = strSpawns[intRoll];
@@ -91,12 +95,13 @@ public class spawner_area extends script.base_script
         {
             requestLocation(self, strSpawn, locTest, rand(100, 200), fltSize, true, true);
         }
-        else 
+        else
         {
             createMob(strSpawn, null, locTest, fltRadius, self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public float getClosestSize(float fltOriginalSize) throws InterruptedException
     {
         if (fltOriginalSize <= 4.0f)
@@ -137,19 +142,26 @@ public class spawner_area extends script.base_script
         }
         return 32.0f;
     }
-    private float getRespawnTime(obj_id self){
-        try {
-            if (hasObjVar(self, "fltRespawnTime")) {
+
+    private float getRespawnTime(obj_id self)
+    {
+        try
+        {
+            if (hasObjVar(self, "fltRespawnTime"))
+            {
                 return getFloatObjVar(self, "fltRespawnTime");
-            } else {
+            }
+            else
+            {
                 return rand(getFloatObjVar(self, "fltMinSpawnTime"), getFloatObjVar(self, "fltMaxSpawnTime"));
             }
-        }
-        catch(Exception e){
+        } catch (Exception e)
+        {
             setName(self, "BAD SPAWNEGG!!  Could not get a respawn time from datatable.");
             return 0;
         }
     }
+
     public void createMob(String strId, obj_id objLocationObject, location locLocation, float fltRadius, obj_id self) throws InterruptedException
     {
         if (!spawning.checkSpawnCount(self))
@@ -172,7 +184,7 @@ public class spawner_area extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             objTemplate = create.object(strId, locLocation);
             if (!isIdValid(objTemplate))
@@ -197,18 +209,20 @@ public class spawner_area extends script.base_script
         }
         messageTo(self, "doSpawnEvent", null, fltRespawnTime, false);
     }
+
     public int OnLocationReceived(obj_id self, String strId, obj_id objLocationObject, location locLocation, float fltRadius) throws InterruptedException
     {
         if (isIdValid(objLocationObject))
         {
             createMob(strId, objLocationObject, locLocation, fltRadius, self);
         }
-        else 
+        else
         {
             messageTo(self, "doSpawnEvent", null, getRespawnTime(self), false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         int intCurrentSpawnCount = utils.getIntScriptVar(self, "intCurrentSpawnCount");
@@ -217,13 +231,14 @@ public class spawner_area extends script.base_script
         {
             utils.setScriptVar(self, "intCurrentSpawnCount", intCurrentSpawnCount);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "intCurrentSpawnCount", 0);
         }
         messageTo(self, "doSpawnEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
@@ -231,12 +246,9 @@ public class spawner_area extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "debugSpawnList"))
@@ -246,8 +258,10 @@ public class spawner_area extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id spawn : spawns) {
-                if (isIdValid(spawn) && exists(spawn)) {
+            for (obj_id spawn : spawns)
+            {
+                if (isIdValid(spawn) && exists(spawn))
+                {
                     messageTo(spawn, "selfDestruct", null, 5, false);
                 }
             }

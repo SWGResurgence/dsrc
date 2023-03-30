@@ -8,9 +8,6 @@ import script.obj_id;
 
 public class crafting_base_powerup extends script.systems.crafting.crafting_base
 {
-    public crafting_base_powerup()
-    {
-    }
     public static final String VERSION = "v1.00.00";
     public static final float MAX_BARREL_DAMAGE_BONUS = 0.35f;
     public static final float MAX_BARREL_SPEED_PENALTY = 0.25f;
@@ -24,24 +21,37 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
     public static final float MAX_SCOPE_SPEED_PENALTY = 0.3f;
     public static final float MAX_STOCK_ACTION_BONUS = 0.3f;
     public static final float MAX_STOCK_ACCURACY_PENALTY = 30.0f;
+    public crafting_base_powerup()
+    {
+    }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         float effectVal = 0.0f;
         float efficiencyVal = 0.0f;
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).equals("effect")) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).equals("effect"))
+                {
                     effectVal = itemAttribute.currentValue;
-                } else if (((itemAttribute.name).getAsciiId()).equals("efficiency")) {
+                }
+                else if (((itemAttribute.name).getAsciiId()).equals("efficiency"))
+                {
                     efficiencyVal = itemAttribute.currentValue;
-                } else {
+                }
+                else
+                {
                     setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
                 }
             }
@@ -50,7 +60,8 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
         setObjVar(prototype, powerup.VAR_POWERUP_EFFICIENCY, efficiencyVal);
         String template = getTemplateName(prototype);
         LOG("powerup", "Template = " + template);
-        switch (template) {
+        switch (template)
+        {
             case "object/tangible/powerup/weapon/ranged_barrel.iff":
             case "object/tangible/powerup/weapon/melee_inertial_fluctuator.iff":
             case "object/tangible/powerup/weapon/mine_explosive.iff":
@@ -81,6 +92,7 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
         }
         setObjVar(prototype, "converted", 1);
     }
+
     public void calculateBonusAndPenalty(obj_id weapon, float effectVal, float maxBonus, String bonusObjVarName, float efficiencyVal, float maxPenalty, String penaltyObjVarName) throws InterruptedException
     {
         float bonus = 0;
@@ -96,13 +108,13 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
             penalty -= (penalty * efficiencyRatio);
             setObjVar(weapon, powerup.VAR_POWERUP_USES_LEFT, Math.round(powerup.DEFAULT_USE_COUNT * efficiencyRatio));
         }
-        else 
+        else
         {
             setObjVar(weapon, powerup.VAR_POWERUP_USES_LEFT, powerup.DEFAULT_USE_COUNT);
         }
         if (bonusObjVarName.equals(powerup.VAR_POWERUP_ACCURACY))
         {
-            bonus = (float)Math.ceil(bonus);
+            bonus = (float) Math.ceil(bonus);
         }
         if (bonusObjVarName.equals(powerup.VAR_POWERUP_SPEED) || bonusObjVarName.equals(powerup.VAR_POWERUP_ACTION))
         {
@@ -110,7 +122,7 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
         }
         if (penaltyObjVarName.equals(powerup.VAR_POWERUP_ACCURACY))
         {
-            penalty = (float)Math.floor(penalty);
+            penalty = (float) Math.floor(penalty);
         }
         if (!penaltyObjVarName.equals(powerup.VAR_POWERUP_SPEED) && !penaltyObjVarName.equals(powerup.VAR_POWERUP_ACTION))
         {
@@ -122,6 +134,7 @@ public class crafting_base_powerup extends script.systems.crafting.crafting_base
             setObjVar(weapon, penaltyObjVarName, penalty);
         }
     }
+
     public int OnManufactureObject(obj_id self, obj_id player, obj_id newObject, draft_schematic schematic, boolean isPrototype, boolean isRealObject) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

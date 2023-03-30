@@ -10,6 +10,7 @@ public class mission_bounty_target extends script.systems.missions.base.mission_
     public mission_bounty_target()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id objHunter = getObjIdObjVar(self, "objHunter");
@@ -20,6 +21,7 @@ public class mission_bounty_target extends script.systems.missions.base.mission_
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id objHunter = getObjIdObjVar(self, "objHunter");
@@ -33,14 +35,17 @@ public class mission_bounty_target extends script.systems.missions.base.mission_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id objKiller, obj_id objCorpse) throws InterruptedException
     {
         LOG("mission", "Killed by " + objKiller);
@@ -54,6 +59,7 @@ public class mission_bounty_target extends script.systems.missions.base.mission_
         setObjVar(self, "intKilled", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id objKiller) throws InterruptedException
     {
         int intHealth = getHealth(self);
@@ -74,10 +80,12 @@ public class mission_bounty_target extends script.systems.missions.base.mission_
         setObjVar(self, "intKilled", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

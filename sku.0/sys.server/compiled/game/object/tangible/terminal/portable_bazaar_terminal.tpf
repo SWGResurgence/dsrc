@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/tangible/terminal/shared_portable_bazaar_terminal.iff"
 
-scripts = +["terminal.bazaar","planet_map.map_loc"]
+scripts = +["terminal.bazaar"]

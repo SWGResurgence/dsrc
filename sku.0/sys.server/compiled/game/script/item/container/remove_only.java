@@ -5,11 +5,12 @@ import script.string_id;
 
 public class remove_only extends script.base_script
 {
+    public static final String SCRIPT_ME = "item.container.remove_only";
+    public static final string_id SID_REMOVE_ONLY_CONTAINER = new string_id("error_message", "remove_only");
     public remove_only()
     {
     }
-    public static final String SCRIPT_ME = "item.container.remove_only";
-    public static final string_id SID_REMOVE_ONLY_CONTAINER = new string_id("error_message", "remove_only");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if ((getContainerType(self) == 0) || (isPlayer(self)))
@@ -18,6 +19,7 @@ public class remove_only extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))

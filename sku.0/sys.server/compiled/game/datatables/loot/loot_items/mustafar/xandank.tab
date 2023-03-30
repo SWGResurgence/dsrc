@@ -2,5 +2,6 @@ strItemType
 s
 item_tow_junk_creature_jaw_02_01
 object/tangible/item/som/xandank_jaw.iff
-item_mustafar_fg_feather
-item_mustafar_fg_comm_unit
+object/tangible/loot/mustafar/cube_loot/cube_loot_1o.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1x.iff
+

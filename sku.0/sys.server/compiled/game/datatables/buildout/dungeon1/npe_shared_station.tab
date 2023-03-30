@@ -43,3 +43,5 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -31	-1	object/cell/cell.iff	30	0	0	0	1	0	0	0		$|
 -32	-1	object/cell/cell.iff	31	0	0	0	1	0	0	0		$|
 -1479912272	-32	object/tangible/collection/col_dust_durni_03.iff	31	-0.260859	28.96	68.9996	0.926798	0	0.375559	0	systems.collections.consume_click	collection.aggro|4|false|collection.slotName|4|col_dust_durni_01:dust_durni_03|$|
+-2023916977	-9	object/tangible/npc/rebel_recruiter_spawner.iff	8	45	0.8	-24	0.8	0	0.6553	0		$|
+-2023916976	-9	object/tangible/npc/imperial_recruiter_spawner.iff	8	36	0.8	-45	0.7	0	0.6554	0		$|

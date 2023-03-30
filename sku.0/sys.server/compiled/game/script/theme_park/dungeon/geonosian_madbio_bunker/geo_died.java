@@ -29,7 +29,7 @@ public class geo_died extends script.base_script
         int respawnTime = dataTableGetInt(datatable, spawnNum, "respawn_time");
         if (respawnTime == 0)
         {
-            respawnTime = 30;
+            respawnTime = 90;
         }
         dictionary info = new dictionary();
         info.put("spawnNumber", spawnNum);

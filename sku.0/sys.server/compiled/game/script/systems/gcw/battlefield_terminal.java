@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class battlefield_terminal extends script.base_script
 {
-    public battlefield_terminal()
-    {
-    }
     public static final int NO_CONTROL = factions.FACTION_FLAG_UNKNOWN;
     public static final int IMPERIAL_CONTROL = factions.FACTION_FLAG_IMPERIAL;
     public static final int REBEL_CONTROL = factions.FACTION_FLAG_REBEL;
@@ -38,22 +35,29 @@ public class battlefield_terminal extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String VAR_ICON_OBJECT = "gcw.static_base.icon_object";
     public static final String SCRIPT_VAR_CAPTURING = "gcw.static_base.control_terminal.capturing";
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+    public battlefield_terminal()
+    {
+    }
+
     public void blog(obj_id controller, String text) throws InterruptedException
     {
         pvp.bfLog(controller, text);
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "registerTerminal", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "registerTerminal", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isIdValid(speaker) || !isGod(speaker))
@@ -73,11 +77,13 @@ public class battlefield_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         registerTerminalWithController(self);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getLocalBattlefieldController(obj_id self) throws InterruptedException
     {
         obj_id controller = null;
@@ -96,6 +102,7 @@ public class battlefield_terminal extends script.base_script
         utils.setScriptVar(self, "battlefield.controller", controller);
         return controller;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -103,6 +110,7 @@ public class battlefield_terminal extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id controller = getLocalBattlefieldController(self);
@@ -157,7 +165,7 @@ public class battlefield_terminal extends script.base_script
                     sendSystemMessageProse(player, pp);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, VAR_ACCESS_DELAY);
                 }
@@ -183,7 +191,7 @@ public class battlefield_terminal extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -196,7 +204,7 @@ public class battlefield_terminal extends script.base_script
                 {
                     utils.removeScriptVar(player, SCRIPT_VAR_CAPTURING);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_CONTROL_TERMINAL_ALREADY_CAPTURING);
                     return SCRIPT_CONTINUE;
@@ -210,7 +218,7 @@ public class battlefield_terminal extends script.base_script
                 {
                     utils.removeScriptVar(self, SCRIPT_VAR_CAPTURING);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_CONTROL_TERMINAL_ALREADY_CAPTURED);
                     return SCRIPT_CONTINUE;
@@ -221,6 +229,7 @@ public class battlefield_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startControlAttempt(obj_id self, obj_id player, String terminalFaction) throws InterruptedException
     {
         int gameTime = getGameTime();
@@ -257,6 +266,7 @@ public class battlefield_terminal extends script.base_script
         }
         int pid = sui.smartCountdownTimerSUI(self, player, "gcwStaticBaseControlTerminal", SID_CONTROL_TERMINAL_SUI_PROMPT, 0, captureTime, "handleControlAttemptResults", 4.0f, flags);
     }
+
     public String convertIntFactionToString(int faction) throws InterruptedException
     {
         if (faction == 1)
@@ -267,11 +277,12 @@ public class battlefield_terminal extends script.base_script
         {
             return pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public void registerTerminalWithController(obj_id self) throws InterruptedException
     {
         obj_id controller = getLocalBattlefieldController(self);
@@ -282,6 +293,7 @@ public class battlefield_terminal extends script.base_script
         }
         pvp.bfTerminalRegister(controller, self);
     }
+
     public void cleanupWaypoint(obj_id controller, obj_id terminal) throws InterruptedException
     {
         if (!isIdValid(controller) || !exists(controller))
@@ -293,6 +305,7 @@ public class battlefield_terminal extends script.base_script
         pvp.bfMessagePlayersOnBattlefield(controller, pvp.BATTLEFIELD_ACTIVE_REBEL_PLAYERS, "destroyBattlefieldWaypoint", dict);
         pvp.bfMessagePlayersOnBattlefield(controller, pvp.BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS, "destroyBattlefieldWaypoint", dict);
     }
+
     public int handleControlAttemptResults(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -369,7 +382,7 @@ public class battlefield_terminal extends script.base_script
             switch (pvp.bfGetBattlefieldType(controller))
             {
                 case pvp.BATTLEFIELD_TYPE_REINFORCEMENTS:
-                
+
                 {
                     if (capturesLeft > 1)
                     {
@@ -388,7 +401,7 @@ public class battlefield_terminal extends script.base_script
                         captured = true;
                         utils.setScriptVar(self, "battlefield.terminal_mitigation", mitigation);
                     }
-                    else 
+                    else
                     {
                         if (capturesLeft == 1)
                         {
@@ -427,7 +440,7 @@ public class battlefield_terminal extends script.base_script
                     break;
                 }
                 case pvp.BATTLEFIELD_TYPE_CAPTURE_THE_FLAG:
-                
+
                 {
                     if (!buff.hasBuff(player, "battlefield_communication_run"))
                     {
@@ -462,7 +475,7 @@ public class battlefield_terminal extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             cleanupWaypoint(controller, self);
             return SCRIPT_CONTINUE;
@@ -487,6 +500,7 @@ public class battlefield_terminal extends script.base_script
         cleanupWaypoint(controller, self);
         return SCRIPT_CONTINUE;
     }
+
     public void updateMapLabel(obj_id self) throws InterruptedException
     {
         obj_id topMost = getTopMostContainer(self);
@@ -512,8 +526,9 @@ public class battlefield_terminal extends script.base_script
         }
         String name = color + localize(new string_id("spam", terminalName));
         String sub_cat = "terminal_gcw_static_base";
-        addPlanetaryMapLocationIgnoreLocationCountLimits(self, name, (int)here.x, (int)here.z - 10, planetary_map.CAT_TERMINAL, sub_cat, MLT_STATIC, planetary_map.NO_FLAG);
+        addPlanetaryMapLocationIgnoreLocationCountLimits(self, name, (int) here.x, (int) here.z - 10, planetary_map.CAT_TERMINAL, sub_cat, MLT_STATIC, planetary_map.NO_FLAG);
     }
+
     public void terminalReset(obj_id self) throws InterruptedException
     {
         String iconTemplate = "";
@@ -537,7 +552,7 @@ public class battlefield_terminal extends script.base_script
             iconTemplate = "object/tangible/gcw/static_base/imperial_icon.iff";
             setName(self, new string_id("gcw", "battlefield_terminal_imperial"));
         }
-        else 
+        else
         {
             if (pvp.bfGetBattlefieldType(controller) != pvp.BATTLEFIELD_TYPE_CAPTURE_THE_FLAG)
             {
@@ -573,11 +588,13 @@ public class battlefield_terminal extends script.base_script
         updateMapLabel(self);
         blog(controller, "Battlefield terminal reset for faction: " + faction + " terminalName: " + terminalName);
     }
+
     public int receiveBattlefieldReset(obj_id self, dictionary params) throws InterruptedException
     {
         terminalReset(self);
         return SCRIPT_CONTINUE;
     }
+
     public void playEffectAtLoc(String effect, location loc, obj_id[] playerList) throws InterruptedException
     {
         if (loc == null)
@@ -594,6 +611,7 @@ public class battlefield_terminal extends script.base_script
         }
         attachScript(newObject, "theme_park.restuss_event.restuss_clientfx_controller");
     }
+
     public void playEffectAtLoc(String effect, location loc, Vector playerList) throws InterruptedException
     {
         if (loc == null)
@@ -610,6 +628,7 @@ public class battlefield_terminal extends script.base_script
         }
         attachScript(newObject, "theme_park.restuss_event.restuss_clientfx_controller");
     }
+
     public void blowUpBuilding(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -660,7 +679,7 @@ public class battlefield_terminal extends script.base_script
                 loc.z = row.getFloat("loc_z");
                 loc.cell = getCellId(topMost, room);
             }
-            else 
+            else
             {
                 loc = getLocation(topMost);
                 loc.x += row.getFloat("loc_x");
@@ -680,6 +699,7 @@ public class battlefield_terminal extends script.base_script
         messageTo(self, "sparkTerminal", null, 2.0f, false);
         messageTo(self, "buildingSmoke", null, 2.0f, false);
     }
+
     public int effectDelay(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -692,6 +712,7 @@ public class battlefield_terminal extends script.base_script
         playEffectAtLoc(effect, loc, playerList);
         return SCRIPT_CONTINUE;
     }
+
     public int sparkTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -710,6 +731,7 @@ public class battlefield_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int buildingSmoke(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id topMost = getTopMostContainer(self);

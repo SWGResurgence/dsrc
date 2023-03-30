@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class tcg_video_game extends script.base_script
 {
-    public tcg_video_game()
-    {
-    }
     public static final String MINIGAME_PARAM_PREFIX = "minigame_mahjong";
     public static final String MINIGAME_GAMENAME_MAHJONG = "mahjong";
     public static final String MINIGAME_VARNAME_GAME = "game";
@@ -17,13 +14,17 @@ public class tcg_video_game extends script.base_script
     public static final String MINIGAME_VARNAME_SCORE = "score";
     public static final String MINIGAME_VARNAME_PLAYER = "player";
     public static final String MINIGAME_VARNAME_DEFAULT_LAYOUT = "layout";
-    public static final String[] TCG_MAHJONG_LAYOUTS = 
+    public static final String[] TCG_MAHJONG_LAYOUTS =
+            {
+                    "classic",
+                    "tie_fighter",
+                    "death_star",
+                    "jedi_temple"
+            };
+    public tcg_video_game()
     {
-        "classic",
-        "tie_fighter",
-        "death_star",
-        "jedi_temple"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, tcg.TABLE_HIGHSCORE_SLOTS))
@@ -37,6 +38,7 @@ public class tcg_video_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -56,11 +58,13 @@ public class tcg_video_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui", "play_minigame"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -69,6 +73,7 @@ public class tcg_video_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clientMinigameResult(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary data = params.getDictionary(MINIGAME_PARAM_RESULT);
@@ -101,6 +106,7 @@ public class tcg_video_game extends script.base_script
         checkScore(self, score, gameData, layout);
         return SCRIPT_CONTINUE;
     }
+
     public boolean playGame(obj_id table, obj_id player) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -117,19 +123,22 @@ public class tcg_video_game extends script.base_script
         clientMinigameOpen(player, data);
         return true;
     }
+
     public boolean setupInitialScores(obj_id table) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
         {
             return false;
         }
-        for (String tcgMahjongLayout : TCG_MAHJONG_LAYOUTS) {
+        for (String tcgMahjongLayout : TCG_MAHJONG_LAYOUTS)
+        {
             int idx = rand(0, tcg.DEFAULT_HIGH_SCORE_MODIFIER.length - 1);
             float modifier = tcg.DEFAULT_HIGH_SCORE_MODIFIER[idx];
             setUpLayOutScores(table, tcgMahjongLayout, modifier);
         }
         return true;
     }
+
     public boolean setUpLayOutScores(obj_id table, String layout, float modifier) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -149,13 +158,14 @@ public class tcg_video_game extends script.base_script
             int randomPosition = rand(0, tcg.DEFAULT_HIGH_SCORE_LIST.length - 1);
             String name = tcg.DEFAULT_HIGH_SCORE_LIST[randomPosition];
             float score = ((tcg.EST_MAX_SCORE * modifier) / i);
-            int scoreInt = (int)score;
+            int scoreInt = (int) score;
             String timeDate = getCalendarTimeStringLocal(getCalendarTime());
             String stringData = scoreInt + "." + name + "." + layout + "." + timeDate;
             setObjVar(table, tcg.TABLE_HIGHSCORE_SLOTS + "." + layout + ".slot_" + i, stringData);
         }
         return true;
     }
+
     public boolean checkScore(obj_id table, int newScore, String gameData, String layout) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -187,7 +197,7 @@ public class tcg_video_game extends script.base_script
             {
                 newHsSlot = i;
             }
-            else 
+            else
             {
                 break;
             }
@@ -207,6 +217,7 @@ public class tcg_video_game extends script.base_script
         setObjVar(table, tcg.TABLE_HIGHSCORE_SLOTS + "." + layout + ".slot_" + newHsSlot, gameData);
         return true;
     }
+
     public String getHighScores(obj_id table, String layout) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -229,6 +240,7 @@ public class tcg_video_game extends script.base_script
         }
         return data;
     }
+
     public String verifyLayOut(obj_id self, String layout) throws InterruptedException
     {
         if (layout == null || layout.equals(""))
@@ -238,8 +250,10 @@ public class tcg_video_game extends script.base_script
         String[] removalSpaces = split(layout, ' ');
         layout = removalSpaces[0].trim();
         layout = toLower(layout);
-        for (String tcgMahjongLayout : TCG_MAHJONG_LAYOUTS) {
-            if (tcgMahjongLayout.startsWith(layout)) {
+        for (String tcgMahjongLayout : TCG_MAHJONG_LAYOUTS)
+        {
+            if (tcgMahjongLayout.startsWith(layout))
+            {
                 return tcgMahjongLayout;
             }
         }

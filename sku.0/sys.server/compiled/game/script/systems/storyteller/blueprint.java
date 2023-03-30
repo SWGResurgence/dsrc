@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class blueprint extends script.base_script
 {
-    public blueprint()
-    {
-    }
     public static final int MENU_BLUEPRINT_DEPLOY = menu_info_types.ITEM_USE;
     public static final int MENU_BLUEPRINT_OPTIONS = menu_info_types.SERVER_MENU5;
     public static final int MENU_BLUEPRINT_LOAD = menu_info_types.ITEM_OPEN;
@@ -17,33 +14,41 @@ public class blueprint extends script.base_script
     public static final int MENU_BLUEPRINT_NEW_DATA = menu_info_types.SERVER_MENU7;
     public static final int MENU_BLUEPRINT_SET_DESCRIPTION = menu_info_types.SERVER_MENU8;
     public static final String[] RESERVED_RULES_TO_IGNORE = new String[]
+            {
+                    "name_declined_number",
+                    "name_declined_syntax",
+                    "name_declined_fictionally_reserved",
+                    "name_declined_reserved"
+            };
+    public blueprint()
     {
-        "name_declined_number",
-        "name_declined_syntax",
-        "name_declined_fictionally_reserved",
-        "name_declined_reserved"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleStorytellerBlueprintInitialize", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleStorytellerBlueprintInitialize", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerBlueprintInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         initializeBlueprint(self);
         return SCRIPT_CONTINUE;
     }
+
     public void initializeBlueprint(obj_id self) throws InterruptedException
     {
         storyteller.blueprintParseConversion(self);
         setOwner(self, obj_id.NULL_ID);
         setObjVar(self, "players_can_access_container", true);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menuDeployBlueprint = mi.addRootMenu(MENU_BLUEPRINT_DEPLOY, new string_id("storyteller", "blueprint_deploy_data"));
@@ -61,6 +66,7 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -71,11 +77,6 @@ public class blueprint extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);
@@ -132,7 +133,7 @@ public class blueprint extends script.base_script
                 sendSystemMessage(player, new string_id("storyteller", "blueprint_needs_blank_blueprint"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String[] blueprintObjects = utils.getStringBatchObjVar(self, storyteller.BLUEPRINT_OBJECTS_OBJVAR);
                 if (blueprintObjects == null || blueprintObjects.length == 0)
@@ -140,7 +141,7 @@ public class blueprint extends script.base_script
                     sendSystemMessage(player, new string_id("storyteller", "blueprint_invalid_data"));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     obj_id blueprintCopy = static_item.createNewItemFunction("st_o_buildout_blueprint", player);
                     for (int i = 0; i < blueprintObjects.length; i++)
@@ -167,6 +168,7 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int confirmSaveNewBlueprintData(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -184,6 +186,7 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showBlueprintDescriptionSetSui(obj_id self, obj_id player) throws InterruptedException
     {
         String prompt = getString(new string_id("storyteller", "blueprint_description_prompt"));
@@ -203,6 +206,7 @@ public class blueprint extends script.base_script
         }
         return;
     }
+
     public int handleBlueprintDescriptionSet(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -226,14 +230,14 @@ public class blueprint extends script.base_script
             {
                 removeObjVar(self, storyteller.BLUEPRINT_DECRIPTION_OBJVAR);
             }
-            else 
+            else
             {
                 if (isNameReserved(text, RESERVED_RULES_TO_IGNORE))
                 {
                     showBlueprintDescriptionSetSui(self, player);
                     sendSystemMessage(player, new string_id("storyteller", "blueprint_description_reserved_fail"));
                 }
-                else 
+                else
                 {
                     setObjVar(self, storyteller.BLUEPRINT_DECRIPTION_OBJVAR, text);
                     sendSystemMessage(player, new string_id("storyteller", "blueprint_description_added"));
@@ -242,6 +246,7 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGroundTargetLoc(obj_id self, obj_id player, int menuItem, float x, float y, float z) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -252,11 +257,6 @@ public class blueprint extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);
@@ -279,10 +279,12 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasBlueprintData(obj_id blueprint) throws InterruptedException
     {
         return utils.hasStringBatchObjVar(blueprint, storyteller.BLUEPRINT_OBJECTS_OBJVAR);
     }
+
     public boolean createBlueprint(obj_id blueprint, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -308,6 +310,7 @@ public class blueprint extends script.base_script
         sendSystemMessage(player, new string_id("storyteller", "blueprint_saved"));
         return true;
     }
+
     public void reconstructBlueprintScene(obj_id blueprint, obj_id player, location targetLoc, float targetYaw) throws InterruptedException
     {
         String[] blueprintObjects = utils.getStringBatchObjVar(blueprint, storyteller.BLUEPRINT_OBJECTS_OBJVAR);
@@ -317,28 +320,36 @@ public class blueprint extends script.base_script
             return;
         }
         boolean creationAllowed = true;
-        for (String objectData : blueprintObjects) {
-            if (storyteller.validateBlueprintData(objectData)) {
+        for (String objectData : blueprintObjects)
+        {
+            if (storyteller.validateBlueprintData(objectData))
+            {
                 String tokenName = storyteller.getBlueprintItemName(objectData);
                 location atLoc = storyteller.getBlueprintObjectLocation(objectData, targetLoc);
                 float yaw = storyteller.getBlueprintItemYaw(objectData);
-                if (targetYaw != 0) {
+                if (targetYaw != 0)
+                {
                     atLoc = storyteller.rotateLocationXZ(targetLoc, atLoc, targetYaw);
                     yaw -= (0 - targetYaw);
                 }
-                if (!storyteller.isBlueprintTokenLoaded(objectData)) {
+                if (!storyteller.isBlueprintTokenLoaded(objectData))
+                {
                     sendSystemMessage(player, new string_id("storyteller", "blueprint_not_fully_loaded"));
                     creationAllowed = false;
                     break;
                 }
-                if (!storyteller.canDeployStorytellerToken(player, atLoc, tokenName)) {
+                if (!storyteller.canDeployStorytellerToken(player, atLoc, tokenName))
+                {
                     creationAllowed = false;
-                    if (isGod(player)) {
+                    if (isGod(player))
+                    {
                         utils.setScriptVar(player, "storyteller.godModeStopOverrideMessages", true);
                     }
                     break;
                 }
-            } else {
+            }
+            else
+            {
                 creationAllowed = false;
                 sendSystemMessage(player, new string_id("storyteller", "blueprint_invalid_data"));
                 break;
@@ -384,7 +395,7 @@ public class blueprint extends script.base_script
             }
             utils.setBatchObjVar(blueprint, storyteller.BLUEPRINT_OBJECTS_OBJVAR, blueprintObjects);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_failed_to_deploy"));
         }
@@ -394,6 +405,7 @@ public class blueprint extends script.base_script
         }
         return;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, transferer))
@@ -454,7 +466,7 @@ public class blueprint extends script.base_script
             {
                 message = new string_id("storyteller", "blueprint_token_loaded_one");
             }
-            else 
+            else
             {
                 message = new string_id("storyteller", "blueprint_token_loaded_multiple");
             }
@@ -465,6 +477,7 @@ public class blueprint extends script.base_script
         sendSystemMessageProse(transferer, pp);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -516,6 +529,7 @@ public class blueprint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getBlueprintAttributes(obj_id self) throws InterruptedException
     {
         String blueprintData = "";
@@ -530,20 +544,27 @@ public class blueprint extends script.base_script
         numTokensNeeded.setSize(0);
         Vector numTokensLoaded = new Vector();
         numTokensLoaded.setSize(0);
-        for (String objectData : storytellerObjects) {
-            if (storyteller.validateBlueprintData(objectData)) {
+        for (String objectData : storytellerObjects)
+        {
+            if (storyteller.validateBlueprintData(objectData))
+            {
                 String tokenStaticName = storyteller.getBlueprintItemName(objectData);
-                if (tokensNeeded.contains(tokenStaticName)) {
+                if (tokensNeeded.contains(tokenStaticName))
+                {
                     int position = tokensNeeded.indexOf(tokenStaticName);
                     numTokensNeeded.set(position, (Integer) numTokensNeeded.get(position) + 1);
-                    if (storyteller.isBlueprintTokenLoaded(objectData)) {
+                    if (storyteller.isBlueprintTokenLoaded(objectData))
+                    {
                         numTokensLoaded.set(position, (Integer) numTokensLoaded.get(position) + 1);
                     }
-                } else {
+                }
+                else
+                {
                     utils.addElement(tokensNeeded, tokenStaticName);
                     utils.addElement(numTokensNeeded, 1);
                     int numLoaded = 0;
-                    if (storyteller.isBlueprintTokenLoaded(objectData)) {
+                    if (storyteller.isBlueprintTokenLoaded(objectData))
+                    {
                         numLoaded = 1;
                     }
                     utils.addElement(numTokensLoaded, numLoaded);
@@ -555,13 +576,13 @@ public class blueprint extends script.base_script
             blueprintData = "\n";
             for (int j = 0; j < tokensNeeded.size(); j++)
             {
-                String tokenName = getString(new string_id("static_item_n", ((String)tokensNeeded.get(j))));
+                String tokenName = getString(new string_id("static_item_n", ((String) tokensNeeded.get(j))));
                 int needed = (Integer) numTokensNeeded.get(j);
                 int loaded = (Integer) numTokensLoaded.get(j);
-                String tokenNumTxt = "\\" + colors_hex.RED + " " + loaded + "/" + needed + " \\#.";
+                String tokenNumTxt = colors_hex.HEADER + colors_hex.RED + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 if (needed == loaded)
                 {
-                    tokenNumTxt = "\\" + colors_hex.GREEN + " " + loaded + "/" + needed + " \\#.";
+                    tokenNumTxt = colors_hex.HEADER + colors_hex.GREEN + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 }
                 blueprintData = blueprintData + tokenName + ":" + tokenNumTxt + "\n";
             }

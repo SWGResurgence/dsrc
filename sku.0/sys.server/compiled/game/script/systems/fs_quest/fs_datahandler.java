@@ -14,6 +14,7 @@ public class fs_datahandler extends script.base_script
     public fs_datahandler()
     {
     }
+
     public void tryDetachScript() throws InterruptedException
     {
         obj_id selph = getSelf();
@@ -21,7 +22,7 @@ public class fs_datahandler extends script.base_script
         Enumeration keys = dd.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)(keys.nextElement());
+            String key = (String) (keys.nextElement());
             if (key.startsWith(fs_dyn_village.SCRIPT_VAR_DATA_REQUEST))
             {
                 return;
@@ -30,16 +31,19 @@ public class fs_datahandler extends script.base_script
         detachScript(selph, fs_dyn_village.SCRIPT_FS_DATAHANDLER);
         return;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         tryDetachScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         tryDetachScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manager_name, String dataset_name, int request_id, String[] element_name_list, dictionary[] cluster_data, int lock_key) throws InterruptedException
     {
         if (!manager_name.equals(fs_dyn_village.DYNVILLAGE_CLUSTER_NAME))
@@ -53,7 +57,7 @@ public class fs_datahandler extends script.base_script
             data_mode = utils.getIntScriptVar(self, fs_dyn_village.SCRIPT_VAR_DATA_REQUEST + "." + request_id);
             utils.removeScriptVar(self, fs_dyn_village.SCRIPT_VAR_DATA_REQUEST + "." + request_id);
         }
-        else 
+        else
         {
             trace.log(fs_dyn_village.LOG_CHAN, "fs_datahandler::OnClusterWideDataResponse: -> cannot find a data_mode for request_id " + request_id + " on " + self, self, trace.TL_ERROR_LOG);
             releaseClusterWideDataLock(manager_name, lock_key);
@@ -90,7 +94,7 @@ public class fs_datahandler extends script.base_script
         switch (data_mode)
         {
             case fs_dyn_village.DATAMODE_ADD_OBJID:
-            
+
             {
                 java.util.StringTokenizer st = new java.util.StringTokenizer(str_params, "|");
                 if (st.countTokens() < 2)
@@ -120,7 +124,7 @@ public class fs_datahandler extends script.base_script
                 break;
             }
             case fs_dyn_village.DATAMODE_GET_OBJID:
-            
+
             {
                 dictionary dgo = new dictionary();
                 dgo.put("key", str_params);
@@ -129,7 +133,7 @@ public class fs_datahandler extends script.base_script
                     dgo.put("success", true);
                     dgo.put(str_params, cluster_data[0].getObjId(str_params));
                 }
-                else 
+                else
                 {
                     dgo.put("success", false);
                     obj_id nullid = obj_id.NULL_ID;
@@ -139,7 +143,7 @@ public class fs_datahandler extends script.base_script
                 break;
             }
             case fs_dyn_village.DATAMODE_ADD_INT:
-            
+
             {
                 java.util.StringTokenizer st = new java.util.StringTokenizer(str_params, "|");
                 if (st.countTokens() < 2)
@@ -161,7 +165,7 @@ public class fs_datahandler extends script.base_script
                 break;
             }
             case fs_dyn_village.DATAMODE_GET_INT:
-            
+
             {
                 dictionary dgi = new dictionary();
                 dgi.put("key", str_params);
@@ -170,7 +174,7 @@ public class fs_datahandler extends script.base_script
                     dgi.put("success", true);
                     dgi.put(str_params, cluster_data[0].getInt(str_params));
                 }
-                else 
+                else
                 {
                     dgi.put("success", false);
                     dgi.put(str_params, -1);
@@ -179,7 +183,7 @@ public class fs_datahandler extends script.base_script
                 break;
             }
             default:
-            
+
             {
                 trace.log(fs_dyn_village.LOG_CHAN, "fs_datahandler::OnClusterWideDataResponse: -> invalid data_mode value of " + data_mode + " on " + self, self, trace.TL_ERROR_LOG);
                 releaseClusterWideDataLock(manager_name, lock_key);

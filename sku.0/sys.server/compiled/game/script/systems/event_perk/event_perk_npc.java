@@ -6,9 +6,6 @@ import script.library.sui;
 
 public class event_perk_npc extends script.base_script
 {
-    public event_perk_npc()
-    {
-    }
     public static final string_id SID_AREABARKS_ENABLED = new string_id("event_perk_npc_actor", "areabarks_enabled");
     public static final string_id SID_AREABARKS_DISABLED = new string_id("event_perk_npc_actor", "areabarks_disabled");
     public static final string_id SID_OBSCENE = new string_id("event_perk_npc_actor", "obscene");
@@ -19,11 +16,16 @@ public class event_perk_npc extends script.base_script
     public static final String TBL_VENDOR_ANIMS = "datatables/event_perk/npc_actor_anims.iff";
     public static final String TBL_VENDOR_MOODS = "datatables/event_perk/npc_actor_moods.iff";
     public static final String ALERT_VOLUME_NAME = "npcActorTriggerVolume";
+    public event_perk_npc()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "event_perk.owner");
@@ -34,7 +36,7 @@ public class event_perk_npc extends script.base_script
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_VENDOR_AREABARKS_ON);
             }
-            else 
+            else
             {
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_VENDOR_AREABARKS_OFF);
             }
@@ -42,6 +44,7 @@ public class event_perk_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "event_perk.owner");
@@ -57,7 +60,7 @@ public class event_perk_npc extends script.base_script
                 clearCondition(self, CONDITION_CONVERSABLE);
                 sendSystemMessage(player, SID_AREABARKS_DISABLED);
             }
-            else 
+            else
             {
                 String[] rawAnims = dataTableGetStringColumn(TBL_VENDOR_ANIMS, 0);
                 String[] anims = new String[rawAnims.length];
@@ -77,7 +80,7 @@ public class event_perk_npc extends script.base_script
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_STUBBORN, null, new string_id("event_perk_npc_actor", "wear_no_ithorian"), null);
                 doAnimationAction(self, "wave_on_dismissing");
             }
-            else 
+            else
             {
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_CHEERFUL, null, new string_id("event_perk_npc_actor", "wear_how"), null);
                 doAnimationAction(self, "slow_down");
@@ -86,6 +89,7 @@ public class event_perk_npc extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         obj_id ownerId = getObjIdObjVar(self, "event_perk.owner");
@@ -119,20 +123,21 @@ public class event_perk_npc extends script.base_script
             {
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_HAPPY, null, new string_id("event_perk_npc_actor", "wear_yes_weapon"), null);
             }
-            else 
+            else
             {
                 chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_HAPPY, null, new string_id("event_perk_npc_actor", "wear_yes"), null);
             }
             doAnimationAction(self, "pose_proudly");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             chat._chat(self, null, chat.CHAT_SAY, chat.MOOD_CHEERFUL, null, new string_id("event_perk_npc_actor", "wear_no"), null);
             doAnimationAction(self, "slow_down");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int handleVendorAnimSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -157,6 +162,7 @@ public class event_perk_npc extends script.base_script
         sui.listbox(self, player, "@event_perk_npc_actor:actor_moods_d", sui.OK_CANCEL, "@event_perk_npc_actor:actor_moods_t", moods, "handleVendorMoodSelect", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleVendorMoodSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -175,6 +181,7 @@ public class event_perk_npc extends script.base_script
         sui.inputbox(self, player, "@event_perk_npc_actor:cust_d", sui.OK_CANCEL, "@event_perk_npc_actor:cust_t", sui.INPUT_NORMAL, null, "handleSetCustomBark", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetCustomBark(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -206,6 +213,7 @@ public class event_perk_npc extends script.base_script
         sendSystemMessage(player, SID_AREABARKS_ENABLED);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         String anim = getStringObjVar(self, "event_perk.barkAnim");

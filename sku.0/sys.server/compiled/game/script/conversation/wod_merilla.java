@@ -14,14 +14,20 @@ package script.conversation;
 // Library Includes
 // ======================================================================
 
-import script.library.*;
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class wod_merilla extends script.base_script
 {
-	public wod_merilla()
-	{
-	}
+	public wod_merilla()
+
+	{
+
+	}
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -298,7 +304,7 @@ int wod_merilla_handleBranch2 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -355,7 +361,7 @@ int wod_merilla_handleBranch3 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -422,7 +428,7 @@ int wod_merilla_handleBranch4 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -457,7 +463,7 @@ int wod_merilla_handleBranch5 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -561,7 +567,7 @@ int wod_merilla_handleBranch9 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -628,7 +634,7 @@ int wod_merilla_handleBranch10 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -685,7 +691,7 @@ int wod_merilla_handleBranch11 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -720,7 +726,7 @@ int wod_merilla_handleBranch12 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -777,7 +783,7 @@ int wod_merilla_handleBranch14 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -844,7 +850,7 @@ int wod_merilla_handleBranch15 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -879,7 +885,7 @@ int wod_merilla_handleBranch16 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -983,7 +989,7 @@ int wod_merilla_handleBranch18 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1018,7 +1024,7 @@ int wod_merilla_handleBranch19 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1075,7 +1081,7 @@ int wod_merilla_handleBranch21 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1110,7 +1116,7 @@ int wod_merilla_handleBranch22 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1145,7 +1151,7 @@ int wod_merilla_handleBranch24 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1202,7 +1208,7 @@ int wod_merilla_handleBranch27 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1259,7 +1265,7 @@ int wod_merilla_handleBranch28 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1316,7 +1322,7 @@ int wod_merilla_handleBranch29 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1385,7 +1391,7 @@ int wod_merilla_handleBranch30 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1433,7 +1439,7 @@ int wod_merilla_handleBranch31 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1468,7 +1474,7 @@ int wod_merilla_handleBranch34 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1525,7 +1531,7 @@ int wod_merilla_handleBranch37 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1582,7 +1588,7 @@ int wod_merilla_handleBranch38 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1651,7 +1657,7 @@ int wod_merilla_handleBranch39 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1728,7 +1734,7 @@ int wod_merilla_handleBranch40 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1785,7 +1791,7 @@ int wod_merilla_handleBranch42 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1842,7 +1848,7 @@ int wod_merilla_handleBranch43 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1872,7 +1878,7 @@ int wod_merilla_handleBranch44 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

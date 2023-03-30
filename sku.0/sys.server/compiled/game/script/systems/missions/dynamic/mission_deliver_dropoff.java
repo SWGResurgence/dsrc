@@ -10,6 +10,7 @@ public class mission_deliver_dropoff extends script.systems.missions.base.missio
     public mission_deliver_dropoff()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -18,11 +19,13 @@ public class mission_deliver_dropoff extends script.systems.missions.base.missio
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(self, "objMission");
@@ -48,7 +51,7 @@ public class mission_deliver_dropoff extends script.systems.missions.base.missio
             sendDeliverSuccess(getObjIdObjVar(self, "objMission"));
             messageTo(self, "destroySelf", null, 120, true);
         }
-        else 
+        else
         {
             string_id message = new string_id("mission/mission_generic", "deliver_already_dropped_off");
             chat.chat(self, speaker, message);
@@ -57,6 +60,7 @@ public class mission_deliver_dropoff extends script.systems.missions.base.missio
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

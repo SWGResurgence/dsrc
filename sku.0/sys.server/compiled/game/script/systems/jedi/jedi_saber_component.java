@@ -5,10 +5,12 @@ import script.library.*;
 
 public class jedi_saber_component extends script.base_script
 {
+    public static final String SHADER_TABLE = "datatables/appearance/alternate_lightsaber_shaders.iff";
+
     public jedi_saber_component()
     {
     }
-    public static final String SHADER_TABLE = "datatables/appearance/alternate_lightsaber_shaders.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
@@ -29,6 +31,7 @@ public class jedi_saber_component extends script.base_script
         removeObjVar(self, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_ACCURACY);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!static_item.isStaticItem(self))
@@ -56,7 +59,7 @@ public class jedi_saber_component extends script.base_script
                 }
                 jedi.initializeCrystal(self, level);
             }
-            else 
+            else
             {
                 dictionary data = new dictionary();
                 data.put("attempts", 0);
@@ -65,6 +68,7 @@ public class jedi_saber_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setCrystalLevel(obj_id self, dictionary params) throws InterruptedException
     {
         int attempts = params.getInt("attempts");
@@ -91,7 +95,7 @@ public class jedi_saber_component extends script.base_script
             }
             jedi.initializeCrystal(self, level);
         }
-        else 
+        else
         {
             attempts++;
             if (attempts < 5)
@@ -99,13 +103,14 @@ public class jedi_saber_component extends script.base_script
                 params.put("attempts", attempts);
                 messageTo(self, "setCrystalLevel", params, 0.5f, false);
             }
-            else 
+            else
             {
                 jedi.initializeCrystal(self, rand(1, 50));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isDisabled(self))
@@ -124,14 +129,17 @@ public class jedi_saber_component extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
-            if (content == self) {
+        for (obj_id content : contents)
+        {
+            if (content == self)
+            {
                 jedi.removeCrystalStats(saber, self);
                 break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id inv = getContainedBy(self);
@@ -147,11 +155,12 @@ public class jedi_saber_component extends script.base_script
         {
             name = localize(getNameStringId(self));
         }
-        name = "\\" + colors_hex.RED + "" + name + " (broken)\\#.";
+        name = colors_hex.HEADER + colors_hex.RED + "" + name + " (broken)\\#.";
         LOG("saber_test", "Setting Crystal name to: " + name);
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!jedi.isForceSensitiveLevelRequired(player, jedi.MIN_CRYSTAL_TUNE_PLAYER_LEVEL))
@@ -171,7 +180,7 @@ public class jedi_saber_component extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.SERVER_PET_OPEN, new string_id("jedi_spam", "tune_crystal"));
                 }
@@ -179,6 +188,7 @@ public class jedi_saber_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!jedi.isForceSensitiveLevelRequired(player, jedi.MIN_CRYSTAL_TUNE_PLAYER_LEVEL))
@@ -194,6 +204,7 @@ public class jedi_saber_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void verifyTune(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -204,6 +215,7 @@ public class jedi_saber_component extends script.base_script
         sui.msgboxButtonSetup(pid, sui.OK_CANCEL);
         sui.showSUIPage(pid);
     }
+
     public int handleVerifyTune(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -215,15 +227,17 @@ public class jedi_saber_component extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            tuneCrystal(player);
-            return SCRIPT_CONTINUE;
+                tuneCrystal(player);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void tuneCrystal(obj_id player) throws InterruptedException
     {
+        //@TODO: manage crystal verisoning
         obj_id self = getSelf();
         setObjVar(self, jedi.VAR_CRYSTAL_OWNER_ID, player);
         setObjVar(self, jedi.VAR_CRYSTAL_OWNER_NAME, getName(player));
@@ -232,11 +246,12 @@ public class jedi_saber_component extends script.base_script
         {
             name = localize(getNameStringId(self));
         }
-        name = "\\" + colors_hex.GREEN + "" + name + " (tuned)\\#.";
+        name = colors_hex.HEADER + colors_hex.AQUAMARINE + "" + name + " (tuned)" + colors_hex.FOOTER;
         setName(self, name);
         sendSystemMessage(player, new string_id("jedi_spam", "crystal_tune_success"));
         sendDirtyObjectMenuNotification(self);
     }
+
     public int distributedRand(int min, int max, int level) throws InterruptedException
     {
         final int levelMin = 60;
@@ -251,7 +266,7 @@ public class jedi_saber_component extends script.base_script
             min = max;
             max = temp;
         }
-        float rank = (float)(level - levelMin) / (levelMax - levelMin);
+        float rank = (float) (level - levelMin) / (levelMax - levelMin);
         float mid = min + ((max - min) * rank);
         if (mid < min)
         {
@@ -263,8 +278,8 @@ public class jedi_saber_component extends script.base_script
             min += (mid - max);
             mid = max;
         }
-        int minRand = rand(min, (int)(mid + 0.5f));
-        int maxRand = rand((int)(mid + 0.5f), max);
+        int minRand = rand(min, (int) (mid + 0.5f));
+        int maxRand = rand((int) (mid + 0.5f), max);
         int randNum = rand(minRand, maxRand);
         if (inverted)
         {
@@ -272,6 +287,7 @@ public class jedi_saber_component extends script.base_script
         }
         return randNum;
     }
+
     public float distributedRand(float min, float max, int level) throws InterruptedException
     {
         final int levelMin = 60;
@@ -285,7 +301,7 @@ public class jedi_saber_component extends script.base_script
             min = _max;
             max = _min;
         }
-        float rank = (float)(level - levelMin) / (levelMax - levelMin);
+        float rank = (float) (level - levelMin) / (levelMax - levelMin);
         float mid = min + ((max - min) * rank);
         if (mid < min)
         {
@@ -306,6 +322,7 @@ public class jedi_saber_component extends script.base_script
         }
         return randNum;
     }
+
     public void csLogCrystal(obj_id crystal, String state) throws InterruptedException
     {
         int damage = getIntObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_MIN_DMG);
@@ -320,16 +337,18 @@ public class jedi_saber_component extends script.base_script
             {
                 player = container;
             }
-            else 
+            else
             {
                 break;
             }
         }
         CustomerServiceLog("jedi_saber", "A crystal(" + crystal + " - " + getTemplateName(crystal) + ") owned by %TU was " + state + ". (Dam:" + damage + " Spd:" + speed + " Wnd:" + wound + " Frc:" + force + ")", player);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(self == null || self.equals(obj_id.NULL_ID) || !isIdValid(self) || !exists(self)){
+        if (self == null || self.equals(obj_id.NULL_ID) || !isIdValid(self) || !exists(self))
+        {
             debugServerConsoleMsg(self, "Script Exception: invalid object found (jedi_saber_component).");
             debugServerConsoleMsg(self, "Template: " + getTemplateName(self));
             return SCRIPT_CONTINUE;
@@ -371,7 +390,7 @@ public class jedi_saber_component extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             names[idx] = "crystal_owner";
             attribs[idx] = "\\#pcontrast2 " + localize(new string_id("jedi_spam", "crystal_untuned")) + "\\#.";

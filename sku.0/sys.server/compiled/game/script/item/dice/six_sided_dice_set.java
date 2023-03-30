@@ -9,12 +9,13 @@ import script.obj_id;
 
 public class six_sided_dice_set extends script.item.dice.base.base_dice
 {
-    public six_sided_dice_set()
-    {
-    }
     public static final int FACE_COUNT = 6;
     public static final int DEFAULT_DICE_COUNT = 1;
     public static final String TYPE_NAME = "six_sided_dice_set";
+    public six_sided_dice_set()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########six sided dice script initialized##############");
@@ -23,6 +24,7 @@ public class six_sided_dice_set extends script.item.dice.base.base_dice
         setObjVar(self, DICE_TYPE_NAME, TYPE_NAME);
         return super.OnInitialize(self);
     }
+
     public int roll(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########six sided dice roll()##############");
@@ -36,21 +38,25 @@ public class six_sided_dice_set extends script.item.dice.base.base_dice
             int roll = rand(1, faceCount, 0);
             rollValues[i] = roll;
         }
-        for (int rollValue : rollValues) {
+        for (int rollValue : rollValues)
+        {
             debug.debugAllMsg("DEBUG", self, "#############Roll Values: " + rollValue + "############");
         }
         setObjVar(self, VAR_ROLL_RESULT, rollValues);
         informGroupOfResults(rollValues, player, self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########six sided dice script detached##############");
         return super.OnDetach(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(!isIdValid(self) || !exists(self)){
+        if (!isIdValid(self) || !exists(self))
+        {
             debugServerConsoleMsg(self, "Exception: unable to get self for six sided dice. (six_sided_dice_set)");
             debugServerConsoleMsg(self, "My Owner: " + getOwner(self));
             debugServerConsoleMsg(self, "My Location: " + getLocation(self));
@@ -65,7 +71,7 @@ public class six_sided_dice_set extends script.item.dice.base.base_dice
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"))
         {
             names[idx] = "usemodifier";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

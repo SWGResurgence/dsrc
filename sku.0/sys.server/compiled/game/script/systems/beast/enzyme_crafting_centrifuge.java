@@ -11,6 +11,7 @@ public class enzyme_crafting_centrifuge extends script.systems.beast.enzyme_craf
     public enzyme_crafting_centrifuge()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isInValidOperatingLocation())
@@ -43,6 +44,7 @@ public class enzyme_crafting_centrifuge extends script.systems.beast.enzyme_craf
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -61,7 +63,7 @@ public class enzyme_crafting_centrifuge extends script.systems.beast.enzyme_craf
                 {
                     sendSystemMessage(player, ERROR_ON_START);
                 }
-                else 
+                else
                 {
                     pp = prose.setTO(pp, utils.formatTimeVerbose(CENTRIFUGE_RUNTIME));
                     sendSystemMessageProse(player, pp);

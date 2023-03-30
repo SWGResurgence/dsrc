@@ -8,9 +8,6 @@ import script.library.utils;
 
 public class consume_prereq_met extends script.base_script
 {
-    public consume_prereq_met()
-    {
-    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPTVAR_LIST = "collections.availableCollections";
     public static final string_id SID_CONSUME_PROMPT = new string_id("collection", "consume_item_prompt");
@@ -21,6 +18,10 @@ public class consume_prereq_met extends script.base_script
     public static final string_id SID_ALREADY_FINISHED_COLLECTION = new string_id("collection", "already_finished_collection");
     public static final string_id STR_COLLECTION_LIST_PROMPT = new string_id("collection", "collection_list_prompt");
     public static final string_id STR_COLLECTION_LIST_TITLE = new string_id("collection", "collection_list_title");
+    public consume_prereq_met()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -37,6 +38,7 @@ public class consume_prereq_met extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -61,8 +63,10 @@ public class consume_prereq_met extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             boolean hasCompletedAll = true;
-            for (String slotName : slotNames) {
-                if (hasCompletedCollectionSlotPrereq(player, slotName) && !hasCompletedCollectionSlot(player, slotName)) {
+            for (String slotName : slotNames)
+            {
+                if (hasCompletedCollectionSlotPrereq(player, slotName) && !hasCompletedCollectionSlot(player, slotName))
+                {
                     hasCompletedAll = false;
                     int pid = sui.msgbox(self, player, "@" + SID_CONSUME_PROMPT, sui.YES_NO, "@" + SID_CONSUME_TITLE, "handlerSuiAddToCollection");
                     sui.setPid(player, pid, PID_NAME);
@@ -77,6 +81,7 @@ public class consume_prereq_met extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiAddToCollection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -112,7 +117,7 @@ public class consume_prereq_met extends script.base_script
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will now be destroyed.");
                     destroyObject(collectionItem);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was NOT consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will NOT be destroyed.");
                     sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -120,14 +125,14 @@ public class consume_prereq_met extends script.base_script
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ALREADY_HAVE_SLOT);
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_ALREADY_FINISHED_COLLECTION);
         }

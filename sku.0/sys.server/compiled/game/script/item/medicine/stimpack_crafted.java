@@ -7,11 +7,12 @@ import script.*;
 
 public class stimpack_crafted extends script.base_script
 {
+    public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("healing", "item_level_too_low");
+    public static final string_id SID_STIMPACK_TOO_SOON = new string_id("healing", "channel_heal_stimpack_too_soon");
     public stimpack_crafted()
     {
     }
-    public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("healing", "item_level_too_low");
-    public static final string_id SID_STIMPACK_TOO_SOON = new string_id("healing", "channel_heal_stimpack_too_soon");
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -46,6 +47,7 @@ public class stimpack_crafted extends script.base_script
         attribs[idx] = Integer.toString(value);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -58,6 +60,7 @@ public class stimpack_crafted extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -82,7 +85,7 @@ public class stimpack_crafted extends script.base_script
                 sendSystemMessage(player, SID_ITEM_LEVEL_TOO_LOW);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 boolean worked = healing.useChannelHealItem(player, self);
             }

@@ -8,9 +8,6 @@ import script.string_id;
 
 public class combat_supply_drop_controller extends script.base_script
 {
-    public combat_supply_drop_controller()
-    {
-    }
     public static final string_id SID_ACQUIRE_HIRELING = new string_id("spam", "officer_pet_success");
     public static final string_id SID_TOO_MANY_HIRELINGS = new string_id("spam", "officer_too_many_pets");
     /*public static final String FOOD_TABLE = "datatables/loot/officer_supply_drop.iff";
@@ -19,9 +16,14 @@ public class combat_supply_drop_controller extends script.base_script
     public static final String FOOD_HIGH = "high";
     */public static final int FOOD_ITEMS = 2;
     public static final int GROUP_SIZE = 16;
+    public combat_supply_drop_controller()
+    {
+    }
+
     /*public static final int LEVEL_LOW_CAP = 45;
     public static final int LEVEL_MID_CAP = 75;
-    */public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
+    */
+    public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
         int supplyId = params.getInt("supplyId");
@@ -34,12 +36,13 @@ public class combat_supply_drop_controller extends script.base_script
         {
             messageTo(self, "dropSupplies", d, 22.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "dropReinforcements", d, 22.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int dropReinforcements(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -49,20 +52,20 @@ public class combat_supply_drop_controller extends script.base_script
         switch (supplyId)
         {
             case 13:
-            itemString = "officer_reinforcement_1";
-            break;
+                itemString = "officer_reinforcement_1";
+                break;
             case 14:
-            itemString = "officer_reinforcement_2";
-            break;
+                itemString = "officer_reinforcement_2";
+                break;
             case 15:
-            itemString = "officer_reinforcement_3";
-            break;
+                itemString = "officer_reinforcement_3";
+                break;
             case 16:
-            itemString = "officer_reinforcement_4";
-            break;
+                itemString = "officer_reinforcement_4";
+                break;
             case 17:
-            itemString = "officer_reinforcement_5";
-            break;
+                itemString = "officer_reinforcement_5";
+                break;
         }
         if (supplyId > 12 && supplyId <= 17 && (itemString != null || !itemString.equals("")))
         {
@@ -73,6 +76,7 @@ public class combat_supply_drop_controller extends script.base_script
         messageTo(self, "startTakeOffSequence", d, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int dropSupplies(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -126,13 +130,13 @@ public class combat_supply_drop_controller extends script.base_script
 					static_item.createNewItemFunction("item_off_temp_stimpack_02_05", crate);
 					static_item.createNewItemFunction("item_off_temp_stimpack_02_05", crate);
 					static_item.createNewItemFunction("item_off_temp_stimpack_02_05", crate);*/
-            static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
 			/*static_item.createNewItemFunction("item_off_temp_tactical_buff_02_01", crate);
 					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_01", crate);
 					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_01", crate);
@@ -173,14 +177,14 @@ public class combat_supply_drop_controller extends script.base_script
 					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_05", crate);
 					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_05", crate);
 					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_05", crate);*/
-            static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+                static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
             /*String foodList = "";
             if (level <= LEVEL_LOW_CAP)
             {
@@ -200,55 +204,56 @@ public class combat_supply_drop_controller extends script.base_script
                 int r = rand(0, (foodItems.length - 1));
                 static_item.createNewItemFunction(foodItems[r], crate);
             }
-            */break;
+            */
+                break;
             case 1:
-            itemString = "item_off_temp_stimpack_02_01";
-						itemString = "item_off_temp_tactical_buff_02_01";
-            break;
+                itemString = "item_off_temp_stimpack_02_01";
+                itemString = "item_off_temp_tactical_buff_02_01";
+                break;
             case 2:
-            itemString = "item_off_temp_stimpack_02_02";
-						itemString = "item_off_temp_tactical_buff_02_02";
-            break;
+                itemString = "item_off_temp_stimpack_02_02";
+                itemString = "item_off_temp_tactical_buff_02_02";
+                break;
             case 3:
-            itemString = "item_off_temp_stimpack_02_03";
-						itemString = "item_off_temp_tactical_buff_02_03";
-            break;
+                itemString = "item_off_temp_stimpack_02_03";
+                itemString = "item_off_temp_tactical_buff_02_03";
+                break;
             case 4:
-            itemString = "item_off_temp_stimpack_02_04";
-						itemString = "item_off_temp_tactical_buff_02_04";
-            break;
+                itemString = "item_off_temp_stimpack_02_04";
+                itemString = "item_off_temp_tactical_buff_02_04";
+                break;
             case 5:
-            itemString = "item_off_temp_stimpack_02_05";
-						itemString = "item_off_temp_tactical_buff_02_05";
-            break;
+                itemString = "item_off_temp_stimpack_02_05";
+                itemString = "item_off_temp_tactical_buff_02_05";
+                break;
             case 6:
-            itemString = "item_off_temp_stimpack_02_06";
-						itemString = "item_off_temp_tactical_buff_02_06";
-            break;
+                itemString = "item_off_temp_stimpack_02_06";
+                itemString = "item_off_temp_tactical_buff_02_06";
+                break;
             case 7:
-            itemString = "item_off_temp_tactical_buff_02_01";
-						itemString = "item_off_temp_stimpack_02_01";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_01";
+                itemString = "item_off_temp_stimpack_02_01";
+                break;
             case 8:
-            itemString = "item_off_temp_tactical_buff_02_02";
-						itemString = "item_off_temp_stimpack_02_02";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_02";
+                itemString = "item_off_temp_stimpack_02_02";
+                break;
             case 9:
-            itemString = "item_off_temp_tactical_buff_02_03";
-						itemString = "item_off_temp_stimpack_02_03";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_03";
+                itemString = "item_off_temp_stimpack_02_03";
+                break;
             case 10:
-            itemString = "item_off_temp_tactical_buff_02_04";
-						itemString = "item_off_temp_stimpack_02_04";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_04";
+                itemString = "item_off_temp_stimpack_02_04";
+                break;
             case 11:
-            itemString = "item_off_temp_tactical_buff_02_05";
-						itemString = "item_off_temp_stimpack_02_05";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_05";
+                itemString = "item_off_temp_stimpack_02_05";
+                break;
             case 12:
-            itemString = "item_off_temp_tactical_buff_02_06";
-						itemString = "item_off_temp_stimpack_02_06";
-            break;
+                itemString = "item_off_temp_tactical_buff_02_06";
+                itemString = "item_off_temp_stimpack_02_06";
+                break;
         }
         if (supplyId > 0 && supplyId <= 12 && (itemString != null || !itemString.equals("")))
         {
@@ -262,6 +267,7 @@ public class combat_supply_drop_controller extends script.base_script
         messageTo(self, "startTakeOffSequence", d, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startTakeOffSequence(obj_id self, dictionary params) throws InterruptedException
     {
         queueCommand(self, (-1465754503), self, "", COMMAND_PRIORITY_FRONT);
@@ -269,11 +275,13 @@ public class combat_supply_drop_controller extends script.base_script
         messageTo(self, "cleanUp", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void summonOfficerPet(obj_id owner, String itemString, location spawnPoint) throws InterruptedException
     {
         if (!pet_lib.hasMaxPets(owner, pet_lib.PET_TYPE_NPC) && !pet_lib.hasMaxStoredPetsOfType(owner, pet_lib.PET_TYPE_NPC))

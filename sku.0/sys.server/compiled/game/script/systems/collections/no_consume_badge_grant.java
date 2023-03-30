@@ -8,9 +8,6 @@ import script.library.utils;
 
 public class no_consume_badge_grant extends script.base_script
 {
-    public no_consume_badge_grant()
-    {
-    }
     public static final String PID_NAME = "collectionConsume";
     public static final String OBJVAR_BADGE_GRANTED = "badgeGrantedTo";
     public static final string_id SID_CONSUME_PROMPT = new string_id("collection", "non_consume_badge_prompt");
@@ -19,6 +16,10 @@ public class no_consume_badge_grant extends script.base_script
     public static final string_id SID_REPORT_CONSUME_ITEM_FAIL = new string_id("collection", "report_consume_item_fail");
     public static final string_id SID_ALREADY_HAVE_SLOT = new string_id("collection", "already_have_slot");
     public static final string_id SID_ALREADY_FINISHED_COLLECTION = new string_id("collection", "already_finished_collection");
+    public no_consume_badge_grant()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -32,6 +33,7 @@ public class no_consume_badge_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -53,6 +55,7 @@ public class no_consume_badge_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -80,6 +83,7 @@ public class no_consume_badge_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiAddBadge(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -117,7 +121,7 @@ public class no_consume_badge_grant extends script.base_script
                 setObjVar(collectionItem, OBJVAR_BADGE_GRANTED, player);
                 CustomerServiceLog("CollectionConsume: ", "BadgeGrantItem (" + collectionItem + ")" + " was used to grant a badge, for player " + getFirstName(player) + "(" + player + "). Item now has the objvar " + OBJVAR_BADGE_GRANTED + " with the value of the player's ID.");
             }
-            else 
+            else
             {
                 CustomerServiceLog("CollectionConsume: ", "BadgeGrantItem (" + collectionItem + ")" + " was NOT used to grant a badge, for player " + getFirstName(player) + "(" + player + ").");
                 sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -125,7 +129,7 @@ public class no_consume_badge_grant extends script.base_script
             sui.removePid(player, PID_NAME);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_ALREADY_HAVE_SLOT);
             sui.removePid(player, PID_NAME);

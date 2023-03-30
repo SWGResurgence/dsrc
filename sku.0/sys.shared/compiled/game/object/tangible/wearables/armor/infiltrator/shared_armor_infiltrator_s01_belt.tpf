@@ -9,4 +9,4 @@
 objectName = "wearables_name" "armor_infiltrator_s01_belt_n"
 detailedDescription = "wearables_detail" "armor_infiltrator_s01_belt_d"
 appearanceFilename = "appearance/neutral_infiltrator_armor_belt_m.sat"
-
+gameObjectType = GOT_armor_misc

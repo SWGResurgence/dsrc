@@ -152,13 +152,13 @@ public class citizen extends script.base_script
     public String getGenderString(obj_id player) throws InterruptedException
     {
         String genderString = "it";
-        int gender = getGender(player);
+        Gender gender = getGender(player);
         switch (gender)
         {
-            case GENDER_FEMALE:
+            case FEMALE:
             genderString = "she";
             break;
-            case GENDER_MALE:
+            case MALE:
             default:
             genderString = "he";
             break;

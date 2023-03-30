@@ -4,6 +4,8 @@ import script.dictionary;
 import script.obj_id;
 import script.string_id;
 
+import java.time.LocalTime;
+
 public class missions extends script.base_script
 {
     public missions()
@@ -24,8 +26,8 @@ public class missions extends script.base_script
     public static final int BH_STAT_MAX = 4;
     public static final int BOUNTY_FLAG_NONE = 0;
     public static final int BOUNTY_FLAG_SMUGGLER = 1;
-    public static final int DAILY_MISSION_XP_REWARD_DEFAULT = 10;
-    public static final int DAILY_MISSION_CASH_REWARD = 15;
+    public static final int DAILY_MISSION_XP_REWARD_DEFAULT = 20;
+    public static final int DAILY_MISSION_CASH_REWARD = 20;
     public static final int DAILY_MISSION_XP_SANITY = 5;
     public static final int DAILY_MISSION_XP_LOW = 9;
     public static final int DAILY_MISSION_XP_MEDIUM = 14;
@@ -99,7 +101,7 @@ public class missions extends script.base_script
         if (!hasObjVar(player, DAILY_MISSION_CLOCK_OBJVAR))
         {
             int currentTime = getCalendarTime();
-            int alarmTime = createDailyAlarmClock(player, "handleDailyMissionReset", null, 19, 0, 0);
+            int alarmTime = timedMessageToDaily(player, "storytellerEffectTokenDailyAlarm", null, LocalTime.of(19, 0, 0));
             int alarmTimeObjVar = currentTime + alarmTime;
             setObjVar(player, DAILY_MISSION_CLOCK_OBJVAR, alarmTimeObjVar);
         }
@@ -181,7 +183,7 @@ public class missions extends script.base_script
             if (countObjVar > 0)
             {
                 int currentTime = getCalendarTime();
-                int alarmTime = createDailyAlarmClock(player, "handleDailyMissionReset", null, 19, 0, 0);
+                int alarmTime = timedMessageToDaily(player, "handleDailyMissionReset", null, LocalTime.of(19, 0, 0));
                 int alarmTimeObjVar = currentTime + alarmTime;
                 setObjVar(player, DAILY_MISSION_CLOCK_OBJVAR, alarmTimeObjVar);
             }

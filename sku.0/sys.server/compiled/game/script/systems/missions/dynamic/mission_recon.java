@@ -10,6 +10,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
     public mission_recon()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -18,10 +19,12 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -32,7 +35,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
             dctParams.put("objMission", self);
             messageTo(objPlayer, "recon_Arrival", dctParams, 0, true);
         }
-        else 
+        else
         {
             if (hasObjVar(self, "intTerminal"))
             {
@@ -48,11 +51,13 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendReconIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         String strContext;
@@ -72,6 +77,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         dictionary dctParams = new dictionary();
         return SCRIPT_CONTINUE;
     }
+
     public int reconIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -84,6 +90,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int reconFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -96,6 +103,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int reconSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intFinished"))
@@ -109,6 +117,7 @@ public class mission_recon extends script.systems.missions.base.mission_dynamic_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Ending mission");

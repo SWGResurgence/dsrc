@@ -48,7 +48,7 @@ geonosian_kliknik_force_strong		grandcageroom	13.36	-20.04	-336.85	theme_park.du
 cave_gaping_spider		grandcageroom	14.09	-22	-341.49	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						
 geonosian_kliknik_force_strong		grandcageroom	23.21	-24	-333.79	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						
 cave_gaping_spider		grandcageroom	17.32	-32	-370.48	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						
-geonosian_acklay_bunker_boss	Acklay	largeendcave	95.74	-32.36	-322.15	theme_park.dungeon.geonosian_madbio_bunker.geo_died,theme_park.dungeon.geonosian_madbio_bunker.log_death			7200						
+geonosian_acklay_bunker_boss	Acklay	largeendcave	95.74	-32.36	-322.15	theme_park.dungeon.geonosian_madbio_bunker.geo_died,theme_park.dungeon.geonosian_madbio_bunker.log_death			3600						
 cave_gaping_spider		largeendcave	83.93	-31.46	-308.4	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						
 geonosian_kliknik_force_strong		largeendcave	119.64	-31.99	-330.34	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						
 cave_gaping_spider		largeendcave	67.46	-31.91	-329.33	theme_park.dungeon.geonosian_madbio_bunker.geo_died			180						

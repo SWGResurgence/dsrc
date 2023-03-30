@@ -5,12 +5,13 @@ import script.library.utils;
 
 public class snow_ball_throw extends script.base_script
 {
-    public snow_ball_throw()
-    {
-    }
     public static final string_id SID_SYS_NO_MOUNT = new string_id("spam", "snowball_not_while_mounted");
     public static final string_id SID_CANT_SEE_TARGET = new string_id("spam", "snowball_cant_see_target");
     public static final string_id SID_TARGET_SITTING = new string_id("spam", "snowball_target_sitting");
+    public snow_ball_throw()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
@@ -27,6 +28,7 @@ public class snow_ball_throw extends script.base_script
         setObjVar(self, "item.lifespan", 900);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -37,6 +39,7 @@ public class snow_ball_throw extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -72,17 +75,18 @@ public class snow_ball_throw extends script.base_script
                 sendSystemMessage(player, new string_id("spam", "not_at_self"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 throwMe(myTarget, player, self);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "must_be_in_inventory"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public void throwMe(obj_id target, obj_id player, obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "snowball_pause"))
@@ -100,7 +104,7 @@ public class snow_ball_throw extends script.base_script
             sendSystemMessage(player, SID_CANT_SEE_TARGET);
             return;
         }
-        else 
+        else
         {
             float travelDistance = getDistance(target, player);
             if (travelDistance > 30.0f)
@@ -131,6 +135,7 @@ public class snow_ball_throw extends script.base_script
             decrementCount(self);
         }
     }
+
     public int snowballDelay(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "snowball_pause"))
@@ -139,6 +144,7 @@ public class snow_ball_throw extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public attacker_results makeDummyAttackerResults(obj_id objAttacker) throws InterruptedException
     {
         attacker_results cbtAttackerResults = new attacker_results();
@@ -148,6 +154,7 @@ public class snow_ball_throw extends script.base_script
         cbtAttackerResults.endPosture = getPosture(objAttacker);
         return cbtAttackerResults;
     }
+
     public defender_results[] makeDummyDefenderResults(obj_id objDefender) throws InterruptedException
     {
         defender_results[] cbtDefenderResults = new defender_results[1];

@@ -13,6 +13,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
     public mission_bounty()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -25,7 +26,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             {
                 removeObjVar(self, "movingTarget");
             }
-            else 
+            else
             {
                 dictionary d = new dictionary();
                 d.put("moveTargetSequence", utils.getIntScriptVar(self, "moveTargetSequence"));
@@ -34,6 +35,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Arrived at location message");
@@ -43,6 +45,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         messageTo(objPlayer, "bounty_Arrival", dctParams, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = getObjIdObjVar(self, "objTarget");
@@ -64,6 +67,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         bountyIncomplete(self, newParams);
         return SCRIPT_CONTINUE;
     }
+
     public int timedOutMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = getObjIdObjVar(self, "objTarget");
@@ -85,6 +89,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         bountyTimedOut(self, newParams);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setupInvisibleWaypoint(self);
@@ -95,7 +100,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             setObjVar(self, "locSpawnLocation", locSpawnLocation);
             setupSpawn(self, locSpawnLocation);
         }
-        else 
+        else
         {
             obj_id objTarget = getObjIdObjVar(self, "objTarget");
             dictionary dctParams = new dictionary();
@@ -115,7 +120,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         {
             strEventName = "EasyBountyMissionGranted";
         }
-        else 
+        else
         {
             strEventName = "HardBountyMissionGranted";
         }
@@ -124,6 +129,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         messageTo(objPlayer, "handleHolocronEvent", dctParams, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bountyIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -141,6 +147,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bountyTimedOut(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -158,6 +165,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bountyFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -175,6 +183,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int bountySuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -187,6 +196,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);
@@ -206,6 +216,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         destroyObject(objTargetWaypoint);
         return SCRIPT_CONTINUE;
     }
+
     public int targetInWater(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -220,6 +231,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         messageTo(self, "findTarget", dctParams, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Tracking target");
@@ -251,7 +263,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                 fltDistance = fltDistance + 8000;
             }
         }
-        else 
+        else
         {
             fltDistance = rand(5000, 15000);
         }
@@ -306,7 +318,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                     dctParams.put("intTrackType", intTrackType);
                     messageTo(self, "probe_Droid_Response", dctParams, fltTrackSpeed, true);
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(self, "intTracking", 1);
                     dctParams.put("intDroidType", intDroidType);
@@ -316,7 +328,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                     messageTo(self, "probe_Droid_Response", dctParams, fltFindSpeed, true);
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "probe_Droid_Find_Fail", null, rand(0, 5), true);
                 return SCRIPT_CONTINUE;
@@ -334,7 +346,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                 dctParams.put("intTrackType", intTrackType);
                 messageTo(self, "probe_Droid_Response", dctParams, fltFindSpeed, true);
             }
-            else 
+            else
             {
                 messageTo(self, "probe_Droid_Find_Fail", null, rand(0, 5), true);
                 return SCRIPT_CONTINUE;
@@ -342,6 +354,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int probe_Droid_Find_Fail(obj_id self, dictionary params) throws InterruptedException
     {
         string_id strSpam = new string_id("mission/mission_generic", "target_not_found_" + rand(1, 6));
@@ -349,12 +362,14 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         utils.removeScriptVar(self, "intTracking");
         return SCRIPT_CONTINUE;
     }
+
     public int probe_Droid_Track_Lost(obj_id self, dictionary params) throws InterruptedException
     {
         string_id strSpam = new string_id("mission/mission_generic", "target_track_lost");
         sendSystemMessage(getMissionHolder(self), strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int probe_Droid_Response(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -399,9 +414,9 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                 {
                     tmpLocation = getLocation(topmost);
                 }
-                locSpawnLocation = (location)tmpLocation.clone();
+                locSpawnLocation = (location) tmpLocation.clone();
             }
-            else 
+            else
             {
                 canBeResolved = false;
                 dictionary dctJediInfo = requestJedi(objTarget);
@@ -425,7 +440,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("mission/mission_generic", "jedi_not_online");
                     sendSystemMessage(objPlayer, strSpam);
@@ -439,7 +454,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         {
             locSpawnLocation = getMissionStartLocation(objMissionData);
         }
-        else 
+        else
         {
             locSpawnLocation = getLocationObjVar(self, "locSpawnLocation");
         }
@@ -490,7 +505,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             {
                 sendProbotResponse = true;
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("mission/mission_generic", "target_not_on_planet");
                 sendSystemMessage(objPlayer, strSpam);
@@ -504,7 +519,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             {
                 sendProbotResponse = true;
             }
-            else 
+            else
             {
                 sendSeekerResponse = true;
             }
@@ -514,7 +529,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             findObjectAnywhere(objTarget, self);
             messageTo(self, "probe_Droid_Response", params, fltTrackSpeed, true);
         }
-        else 
+        else
         {
             CustomerServiceLog("BountyHunter", "Could not acquire target for hunter %TU", self);
             utils.removeScriptVar(self, "intTracking");
@@ -558,6 +573,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int foundObject(obj_id self, dictionary params) throws InterruptedException
     {
         String sceneId = params.getString("scene");
@@ -571,6 +587,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         sendSystemMessage(objPlayer, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int moveTarget(obj_id self, dictionary params) throws InterruptedException
     {
         int sequence = utils.getIntScriptVar(self, "moveTargetSequence");
@@ -612,19 +629,21 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
                 setObjVar(self, "intMovedOffPlanet", 1);
                 fltDelay = rand(30, 120);
             }
-            else 
+            else
             {
-                if(isValidLocation(locSpawnLocation)) {
+                if (isValidLocation(locSpawnLocation))
+                {
                     location locDestination = locations.getBountyLocation(locSpawnLocation.area);
                     setObjVar(self, "locDestination", locDestination);
                     fltDelay = rand(100, 300);
                 }
-                else{
+                else
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
         }
-        else 
+        else
         {
             location locDestination = getLocationObjVar(self, "locDestination");
             float fltDistance = 0;
@@ -636,7 +655,7 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
             if (fltDistance < 128)
             {
                 setObjVar(self, "locSpawnLocation", locDestination);
-                locSpawnLocation = (location)locDestination.clone();
+                locSpawnLocation = (location) locDestination.clone();
                 removeObjVar(self, "locDestination");
             }
             setupSpawn(self, locSpawnLocation);
@@ -650,11 +669,13 @@ public class mission_bounty extends script.systems.missions.base.mission_dynamic
         messageTo(self, "moveTarget", dctParams, fltDelay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int stopTracking(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "intTracking");
         return SCRIPT_CONTINUE;
     }
+
     public int halfwayNotification(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

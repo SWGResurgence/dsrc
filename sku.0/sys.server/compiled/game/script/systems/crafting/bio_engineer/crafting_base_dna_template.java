@@ -5,24 +5,33 @@ import script.library.*;
 
 public class crafting_base_dna_template extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+    public static final String COMPONENT_RESOURCE_AVERAGE_DICTIONARY_NAME = "itemTotalComponentResourceAverage";
+    public static final String COMPONENT_RESOURCE_QUALITY_INDEX_DICTIONARY_NAME = "componentResourceQualityIndex";
+
     public crafting_base_dna_template()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         int armorBase = 0;
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).equals("fortitude")) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).equals("fortitude"))
+                {
                     armorBase = (int) itemAttribute.currentValue;
                 }
                 setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
@@ -43,18 +52,19 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         }
         setObjVar(prototype, root + "rangedWeapon", rangedWeapon);
     }
+
     public resource_weight[] getSlotResourceWeights() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getSlotResourceWeights()! This function should have been overridden!");
         return null;
     }
+
     public resource_weight[] getAssemblyDisplayWeights() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getSlotResourceWeights()! This function should have been overridden!");
         return null;
     }
-    public static final String COMPONENT_RESOURCE_AVERAGE_DICTIONARY_NAME = "itemTotalComponentResourceAverage";
-    public static final String COMPONENT_RESOURCE_QUALITY_INDEX_DICTIONARY_NAME = "componentResourceQualityIndex";
+
     public float calcResourceQualitySkillMod(dictionary craftingValuesDictionary) throws InterruptedException
     {
         if (craftingValuesDictionary == null)
@@ -67,7 +77,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             LOG("crafting", "Java craftinglib.scriptlib::calcResourceQualitySkillMod - no resource average array!");
         }
-        else 
+        else
         {
             float averageResourceQuality = resources[craftinglib.RESOURCE_QUALITY];
             float objectQualityMultiMod = (averageResourceQuality - 500) / 200;
@@ -89,7 +99,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             LOG("crafting", "Java craftinglib.scriptlib::calcResourceQualitySkillMod - no resource average array!");
         }
-        else 
+        else
         {
             float objectQualityMultiMod = componentQuality - bio_engineer.DNA_AVG_QUALITY;
             resourceQualitySkillMod += objectQualityMultiMod * 5;
@@ -107,6 +117,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         }
         return resourceQualitySkillMod;
     }
+
     public float getAttributeResourceMod(float averagedAttributeSum) throws InterruptedException
     {
         float resourceAverageMod;
@@ -114,18 +125,20 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             resourceAverageMod = 1;
         }
-        else 
+        else
         {
             resourceAverageMod = (averagedAttributeSum - 500) / 200;
         }
         float attributeResourceMod = resourceAverageMod * 5;
         return attributeResourceMod;
     }
+
     public float computeComponentWeightedAverage(dictionary craftingValuesDictionary, resource_weight.weight[] weights) throws InterruptedException
     {
         float total = 0;
         int count = 0;
-        for (resource_weight.weight weight : weights) {
+        for (resource_weight.weight weight : weights)
+        {
             total += craftingValuesDictionary.getFloat(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[weight.resource] + "_average") * weight.weight;
             count += weight.weight;
         }
@@ -135,6 +148,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         }
         return 0;
     }
+
     public int calcSkillDesignAssemblyCheck(obj_id player, dictionary craftingValuesDictionary, String[] skills) throws InterruptedException
     {
         boolean isPlayerQA = false;
@@ -154,7 +168,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             return craftinglib.STATE_CRITICAL_FAILURE;
         }
         int successState = craftinglib.STATE_UNSET;
-        float dieRoll = rand(1, (int)craftinglib.NUMERIC_RANGE_EXPRESSION);
+        float dieRoll = rand(1, (int) craftinglib.NUMERIC_RANGE_EXPRESSION);
         float dieRollMod = 0.0f;
         float itemComplexitySkillMod = craftinglib.calcItemComplexitySkillMod(craftingValuesDictionary);
         float resourceMalleabilitySkillMod = 0;
@@ -173,7 +187,8 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         if (skills != null)
         {
             int[] mods = getEnhancedSkillStatisticModifiers(player, skills);
-            for (int mod : mods) {
+            for (int mod : mods)
+            {
                 playerSkillMod += mod;
             }
         }
@@ -203,7 +218,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         dieRollMod += craftinglib.getCraftingInspirationBonus(player, craftingValuesDictionary, dieRoll, 5.0f);
         if (utils.hasScriptVar(player, "buff.dessert_pyollian_cake.value"))
         {
-            int eff = (int)utils.getFloatScriptVar(player, "buff.dessert_pyollian_cake.value");
+            int eff = (int) utils.getFloatScriptVar(player, "buff.dessert_pyollian_cake.value");
             buff.removeBuff(player, "dessert_pyollian_cake");
             dieRollMod += (eff * deltaMod);
             if (isPlayerQA)
@@ -339,7 +354,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             successState = craftinglib.STATE_MODERATE_FAILURE;
         }
-        else 
+        else
         {
             successState = craftinglib.STATE_BIG_FAILURE;
         }
@@ -365,12 +380,13 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             debugServerConsoleMsg(null, "calcSkillDesignAssemblyCheck: success state = " + successState + " (" + craftinglib.STATE_NAMES[successState] + ")");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "calcSkillDesignAssemblyCheck: success state = " + successState);
         }
         return successState;
     }
+
     public void calcCraftingDesignStageIngredientAttribAverageValues(dictionary craftingValuesDictionary, draft_schematic.slot[] ingredientSlots, resource_weight[] slotWeights) throws InterruptedException
     {
         if (craftingValuesDictionary == null || ingredientSlots == null)
@@ -380,55 +396,74 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         dictionary componentDictionary = new dictionary();
         float[] totalResourceSum = new float[craftinglib.NUM_RESOURCE_ATTRIBS];
         float[] resourceUnits = new float[craftinglib.NUM_RESOURCE_ATTRIBS];
-        for (draft_schematic.slot ingredientSlot : ingredientSlots) {
-            if (ingredientSlot == null) {
+        for (draft_schematic.slot ingredientSlot : ingredientSlots)
+        {
+            if (ingredientSlot == null)
+            {
                 continue;
             }
-            switch (ingredientSlot.ingredientType) {
+            switch (ingredientSlot.ingredientType)
+            {
                 case draft_schematic.IT_item:
                 case draft_schematic.IT_template:
                 case draft_schematic.IT_templateGeneric:
                     debugServerConsoleMsg(null, "getting components for object " + ingredientSlot.ingredients[0].ingredient);
                     obj_var_list crafting_components = getObjVarList(getSelf(), craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (ingredientSlot.name).getAsciiId());
-                    if (crafting_components != null) {
+                    if (crafting_components != null)
+                    {
                         int componentCount = crafting_components.getNumItems();
                         debugServerConsoleMsg(null, "got components, count = " + componentCount);
                         LOG("creature_crafting", "Components found: count = " + componentCount);
-                        for (int j = 0; j < componentCount; ++j) {
+                        for (int j = 0; j < componentCount; ++j)
+                        {
                             obj_var ov = crafting_components.getObjVar(j);
-                            if (ov != null) {
+                            if (ov != null)
+                            {
                                 Object data = ov.getData();
-                                if (data instanceof Integer) {
+                                if (data instanceof Integer)
+                                {
                                     debugServerConsoleMsg(null, "setting component attrib " + ov.getName() + " = " + ov.getIntData());
                                     LOG("creature_crafting", "Setting component attrib " + ov.getName() + " = (int)" + ov.getIntData());
                                     craftingValuesDictionary.put(craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ov.getName(), ov.getIntData());
-                                } else if (data instanceof Float) {
+                                }
+                                else if (data instanceof Float)
+                                {
                                     debugServerConsoleMsg(null, "adding component attrib " + ov.getName() + " = " + ov.getFloatData());
                                     LOG("creature_crafting", "Setting component attrib " + ov.getName() + " = (float)" + ov.getFloatData());
                                     craftingValuesDictionary.addFloat(craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ov.getName(), ov.getFloatData());
-                                } else if (ov instanceof obj_var_list && (ov.getName()).equals(craftinglib.TISSUE_SKILL_MODS)) {
+                                }
+                                else if (ov instanceof obj_var_list && (ov.getName()).equals(craftinglib.TISSUE_SKILL_MODS))
+                                {
                                     obj_var_list specialObjvars = (obj_var_list) ov;
                                     int[] mod_idx = specialObjvars.getIntArrayObjVar(craftinglib.TISSUE_SKILL_INDEX);
                                     int[] mod_val = specialObjvars.getIntArrayObjVar(craftinglib.TISSUE_SKILL_VALUE);
                                     int[] dict_mod_idx = null;
                                     int[] dict_mod_val = null;
                                     dictionary specialDictionary = (dictionary) (componentDictionary.get(craftinglib.TISSUE_SKILL_MODS));
-                                    if (specialDictionary == null) {
+                                    if (specialDictionary == null)
+                                    {
                                         specialDictionary = new dictionary();
                                         dict_mod_idx = new int[6];
                                         dict_mod_val = new int[6];
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         dict_mod_idx = specialDictionary.getIntArray(craftinglib.TISSUE_SKILL_INDEX);
                                         dict_mod_val = specialDictionary.getIntArray(craftinglib.TISSUE_SKILL_VALUE);
                                     }
                                     int count = mod_idx.length;
-                                    for (int k = 0; k < count; ++k) {
-                                        for (int l = 0; l < dict_mod_idx.length; ++l) {
-                                            if (dict_mod_idx[l] == mod_idx[k]) {
+                                    for (int k = 0; k < count; ++k)
+                                    {
+                                        for (int l = 0; l < dict_mod_idx.length; ++l)
+                                        {
+                                            if (dict_mod_idx[l] == mod_idx[k])
+                                            {
                                                 dict_mod_val[l] += mod_val[k];
                                                 debugServerConsoleMsg(null, "\tadding to existing skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
                                                 break;
-                                            } else if (dict_mod_idx[l] == 0) {
+                                            }
+                                            else if (dict_mod_idx[l] == 0)
+                                            {
                                                 dict_mod_idx[l] = mod_idx[k];
                                                 dict_mod_val[l] = mod_val[k];
                                                 debugServerConsoleMsg(null, "\tadding new skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
@@ -439,67 +474,93 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                                     specialDictionary.put(craftinglib.TISSUE_SKILL_INDEX, dict_mod_idx);
                                     specialDictionary.put(craftinglib.TISSUE_SKILL_VALUE, dict_mod_val);
                                     componentDictionary.put(craftinglib.TISSUE_SKILL_MODS, specialDictionary);
-                                } else {
+                                }
+                                else
+                                {
                                     debugServerConsoleMsg(null, "component attrib " + ov.getName() + " has unknown data type");
                                     LOG("creature_crafting", "Component attrib " + ov.getName() + " has unknown data type");
                                 }
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         LOG("creature_crafting", "In Java craftinglib.scriptlib.calcCraftingDesignStageIngredientAttribAverageValues:" + " component object " + ingredientSlot.ingredients[0].ingredient + " does not have the " + craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + " objvar list attached to it");
                     }
                     obj_var_list crafting_component_resources = getObjVarList(ingredientSlot.ingredients[0].ingredient, bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME);
-                    if (crafting_component_resources != null) {
+                    if (crafting_component_resources != null)
+                    {
                         LOG("creature_crafting", "Components Resources found");
                         int slotWeightIndex = -1;
                         LOG("creature_crafting", "	Current Slot:" + (ingredientSlot.name).getAsciiId());
-                        for (int j = 0; j < slotWeights.length; j++) {
-                            if (((ingredientSlot.name).getAsciiId()).equals(slotWeights[j].attribName)) {
+                        for (int j = 0; j < slotWeights.length; j++)
+                        {
+                            if (((ingredientSlot.name).getAsciiId()).equals(slotWeights[j].attribName))
+                            {
                                 slotWeightIndex = j;
                                 break;
                             }
                         }
-                        if (slotWeightIndex != -1) {
+                        if (slotWeightIndex != -1)
+                        {
                             int attribCount = crafting_component_resources.getNumItems();
                             debugServerConsoleMsg(null, "got component resources, attrib count = " + attribCount);
                             LOG("creature_crafting", "Components Resources Attrib count:" + attribCount);
-                            for (int j = 0; j < attribCount; ++j) {
+                            for (int j = 0; j < attribCount; ++j)
+                            {
                                 obj_var ov = crafting_component_resources.getObjVar(j);
-                                if (ov != null) {
+                                if (ov != null)
+                                {
                                     int resourceAttrib = 0;
                                     Object data = ov.getData();
-                                    if (data instanceof Integer) {
+                                    if (data instanceof Integer)
+                                    {
                                         resourceAttrib = (Integer) data;
-                                    } else if (data instanceof Float) {
+                                    }
+                                    else if (data instanceof Float)
+                                    {
                                         resourceAttrib = (int) (((Float) data)).floatValue();
-                                    } else if (data instanceof int[]) {
+                                    }
+                                    else if (data instanceof int[])
+                                    {
                                         int[] armor_data = (int[]) data;
                                         int[] dict_armor_data = null;
                                         dictionary specialDictionary = (dictionary) (componentDictionary.get("dna_data"));
-                                        if (specialDictionary == null) {
+                                        if (specialDictionary == null)
+                                        {
                                             specialDictionary = new dictionary();
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             dict_armor_data = specialDictionary.getIntArray("armorData");
                                         }
-                                        if (dict_armor_data == null) {
+                                        if (dict_armor_data == null)
+                                        {
                                             dict_armor_data = new int[10];
                                         }
-                                        for (int k = 0; k < dict_armor_data.length; k++) {
+                                        for (int k = 0; k < dict_armor_data.length; k++)
+                                        {
                                             int value = armor_data[k];
-                                            if (value == -1) {
+                                            if (value == -1)
+                                            {
                                                 value = -100;
                                             }
                                             dict_armor_data[k] += value * slotWeights[slotWeightIndex].weights[1].weight;
                                         }
                                         specialDictionary.put("armorData", dict_armor_data);
                                         componentDictionary.put("dna_data", specialDictionary);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         LOG("creature_crafting", "Unknown objvar type ");
                                     }
-                                    if ((ov.getName()).startsWith("specialAttack")) {
-                                        if (bio_engineer.validateCreatureSpecialAttack(resourceAttrib)) {
+                                    if ((ov.getName()).startsWith("specialAttack"))
+                                    {
+                                        if (bio_engineer.validateCreatureSpecialAttack(resourceAttrib))
+                                        {
                                             dictionary specialDictionary = (dictionary) (componentDictionary.get("dna_data"));
-                                            if (specialDictionary == null) {
+                                            if (specialDictionary == null)
+                                            {
                                                 specialDictionary = new dictionary();
                                             }
                                             specialDictionary.put((ingredientSlot.name).getAsciiId() + "." + ov.getName(), resourceAttrib);
@@ -507,11 +568,15 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                                             componentDictionary.put("dna_data", specialDictionary);
                                             LOG("creature_crafting", "specialAttack(" + resourceAttrib + ") found: slot = " + (ingredientSlot.name).getAsciiId() + "; weight = " + slotWeights[slotWeightIndex].weights[8].weight);
                                         }
-                                    } else if ((ov.getName()).equals("rangedWeapon")) {
+                                    }
+                                    else if ((ov.getName()).equals("rangedWeapon"))
+                                    {
                                         String weapon = (String) data;
-                                        if (weapon != null && !weapon.equals("")) {
+                                        if (weapon != null && !weapon.equals(""))
+                                        {
                                             dictionary specialDictionary = (dictionary) (componentDictionary.get("dna_data"));
-                                            if (specialDictionary == null) {
+                                            if (specialDictionary == null)
+                                            {
                                                 specialDictionary = new dictionary();
                                             }
                                             specialDictionary.put((ingredientSlot.name).getAsciiId() + ".rangedWeapon", weapon);
@@ -519,47 +584,63 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                                             componentDictionary.put("dna_data", specialDictionary);
                                             LOG("creature_crafting", "rangedWeapon found: slot = " + (ingredientSlot.name).getAsciiId() + "; weight = " + slotWeights[slotWeightIndex].weights[8].weight);
                                         }
-                                    } else {
-                                        if ((ov.getName()).equals("quality")) {
+                                    }
+                                    else
+                                    {
+                                        if ((ov.getName()).equals("quality"))
+                                        {
                                             dictionary specialDictionary = (dictionary) (componentDictionary.get("dna_data"));
-                                            if (specialDictionary == null) {
+                                            if (specialDictionary == null)
+                                            {
                                                 specialDictionary = new dictionary();
                                             }
                                             specialDictionary.put((ingredientSlot.name).getAsciiId() + ".quality", resourceAttrib);
                                             componentDictionary.put("dna_data", specialDictionary);
                                         }
                                         int weightIndex = -1;
-                                        for (int x = 0; x < slotWeights[slotWeightIndex].weights.length; x++) {
-                                            if (bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[slotWeights[slotWeightIndex].weights[x].resource].equals(ov.getName())) {
+                                        for (int x = 0; x < slotWeights[slotWeightIndex].weights.length; x++)
+                                        {
+                                            if (bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[slotWeights[slotWeightIndex].weights[x].resource].equals(ov.getName()))
+                                            {
                                                 weightIndex = x;
                                                 break;
                                             }
                                         }
                                         int resourceWeight = 1;
-                                        if (weightIndex != -1) {
+                                        if (weightIndex != -1)
+                                        {
                                             resourceWeight = slotWeights[slotWeightIndex].weights[weightIndex].weight;
                                         }
                                         debugServerConsoleMsg(null, "adding component resource attrib " + ov.getName() + " = " + resourceAttrib + "; weight = " + resourceWeight);
                                         craftingValuesDictionary.addFloat(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + ov.getName() + "_sum", (resourceAttrib * resourceWeight));
                                         craftingValuesDictionary.addFloat(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + ov.getName() + "_weight", resourceWeight);
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     LOG("creature_crafting", "No attribute obj_vars found!");
                                 }
                             }
-                        } else {
+                        }
+                        else
+                        {
                             LOG("creature_crafting", "Slot weight index for slot:" + (ingredientSlot.name).getAsciiId() + ", not found.");
                         }
                     }
                     break;
                 case draft_schematic.IT_resourceType:
                 case draft_schematic.IT_resourceClass:
-                    if (ingredientSlot.ingredients.length > 1) {
+                    if (ingredientSlot.ingredients.length > 1)
+                    {
                         debugServerConsoleMsg(null, "ERROR! An amalgam/alloy was detected! Support for amalgams/alloys was ripped out!");
-                    } else {
-                        for (int j = 0; j < craftinglib.NUM_RESOURCE_ATTRIBS; ++j) {
+                    }
+                    else
+                    {
+                        for (int j = 0; j < craftinglib.NUM_RESOURCE_ATTRIBS; ++j)
+                        {
                             float resourceAttrib = craftinglib.getResourceAttribute(ingredientSlot.ingredients[0].ingredient, craftinglib.RESOURCE_OBJVAR_NAMES[j]);
-                            if (resourceAttrib != craftinglib.RESOURCE_NOT_USED) {
+                            if (resourceAttrib != craftinglib.RESOURCE_NOT_USED)
+                            {
                                 totalResourceSum[j] += resourceAttrib * ingredientSlot.ingredients[0].count;
                                 resourceUnits[j] += ingredientSlot.ingredients[0].count;
                             }
@@ -570,20 +651,20 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                     break;
             }
         }
-        dictionary specialDictionary = (dictionary)(componentDictionary.get("dna_data"));
-        int[] armor_data = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
+        dictionary specialDictionary = (dictionary) (componentDictionary.get("dna_data"));
+        int[] armor_data =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (specialDictionary != null)
         {
             int[] temp_armor_data = specialDictionary.getIntArray("armorData");
@@ -592,7 +673,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                 armor_data = temp_armor_data;
             }
         }
-        else 
+        else
         {
             specialDictionary = new dictionary();
         }
@@ -660,7 +741,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             {
                 itemTotalResourceAverage[i] = totalResourceSum[i] / resourceUnits[i];
             }
-            else 
+            else
             {
                 itemTotalResourceAverage[i] = 0;
             }
@@ -670,7 +751,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             float resourceSum = craftingValuesDictionary.getFloat(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i] + "_sum");
             float resourceWeight = craftingValuesDictionary.getFloat(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i] + "_weight");
-            float resourceAverage = (float)resourceSum / resourceWeight;
+            float resourceAverage = resourceSum / resourceWeight;
             if (resourceAverage != 0)
             {
                 craftingValuesDictionary.put(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i] + "_average", resourceAverage);
@@ -680,44 +761,59 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         craftingValuesDictionary.put(craftinglib.RESOURCE_AVERAGE_DICTIONARY_NAME, itemTotalResourceAverage);
         utils.saveDictionaryAsObjVar(getSelf(), craftinglib.COMPONENT_ATTRIBUTE_INTERNAL_OBJVAR_NAME, componentDictionary);
     }
+
     public void calcResourceMaxItemAttributes(dictionary craftingValuesDictionary, draft_schematic.attribute[] itemAttributes, resource_weight[] weights) throws InterruptedException
     {
         calcResourceMaxItemAttributes(null, craftingValuesDictionary, itemAttributes, weights);
     }
+
     public void calcResourceMaxItemAttributes(obj_id player, dictionary craftingValuesDictionary, draft_schematic.attribute[] itemAttributes, resource_weight[] weights) throws InterruptedException
     {
         int assemblySuccessState = craftingValuesDictionary.getInt("assemblySuccessState");
         float[] averageResourceValues = craftingValuesDictionary.getFloatArray(craftinglib.RESOURCE_AVERAGE_DICTIONARY_NAME);
         float itemAttributeApplicableResourceValueAverage = 0;
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null || itemAttribute.minValue == itemAttribute.maxValue) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null || itemAttribute.minValue == itemAttribute.maxValue)
+            {
                 continue;
             }
-            if ((itemAttribute.name).equals("complexity")) {
+            if ((itemAttribute.name).equals("complexity"))
+            {
                 itemAttribute.currentValue = craftingValuesDictionary.getFloat("itemCurrentComplexity");
-            } else {
+            }
+            else
+            {
                 float lowAttributeRangeValue = itemAttribute.minValue;
                 float highAttributeRangeValue = itemAttribute.maxValue;
                 float attributeValueRangeSize = highAttributeRangeValue - lowAttributeRangeValue;
                 float onePercentOfAttributeRange = attributeValueRangeSize * 0.01f;
-                for (resource_weight weight : weights) {
-                    if ((itemAttribute.name).equals(weight.attribName)) {
+                for (resource_weight weight : weights)
+                {
+                    if ((itemAttribute.name).equals(weight.attribName))
+                    {
                         debugServerConsoleMsg(null, "**** craftinglib.scriptlib attrib " + itemAttribute.name);
                         String onePercentName = (itemAttribute.name).getAsciiId() + "OnePercent";
-                        if (craftingValuesDictionary.containsKey(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId() + "_average")) {
+                        if (craftingValuesDictionary.containsKey(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId() + "_average"))
+                        {
                             itemAttributeApplicableResourceValueAverage = computeComponentWeightedAverage(craftingValuesDictionary, weight.weights) / 10.0f;
                             LOG("creature_crafting", "Calculated Attribute: " + bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId());
                             LOG("creature_crafting", "\tAdjusted Component Weighted Average: " + itemAttributeApplicableResourceValueAverage);
-                        } else {
+                        }
+                        else
+                        {
                             itemAttributeApplicableResourceValueAverage = craftinglib.computeWeightedAverage(averageResourceValues, weight.weights) / 10.0f;
                         }
-                        if (isIdValid(player)) {
+                        if (isIdValid(player))
+                        {
                             itemAttributeApplicableResourceValueAverage += craftinglib.getCraftingInspirationBonus(player, craftingValuesDictionary, itemAttributeApplicableResourceValueAverage, 1.0f);
-                            if (itemAttributeApplicableResourceValueAverage > 100.0f) {
+                            if (itemAttributeApplicableResourceValueAverage > 100.0f)
+                            {
                                 itemAttributeApplicableResourceValueAverage = 100.0f;
                             }
                         }
-                        if (itemAttributeApplicableResourceValueAverage < 1.0f) {
+                        if (itemAttributeApplicableResourceValueAverage < 1.0f)
+                        {
                             itemAttributeApplicableResourceValueAverage = 1.0f;
                         }
                         float resourceMaxRange = onePercentOfAttributeRange * itemAttributeApplicableResourceValueAverage;
@@ -732,26 +828,36 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             }
         }
     }
+
     public void calcPostAssemblyResourceSetAttribValues(dictionary craftingValuesDictionary, draft_schematic.attribute[] itemAttributes, resource_weight[] weights) throws InterruptedException
     {
         float[] averageResourceValues = craftingValuesDictionary.getFloatArray(craftinglib.RESOURCE_AVERAGE_DICTIONARY_NAME);
         float averagedAttributeSum = 0;
         debugServerConsoleMsg(null, "Setting attribs for resources:");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null || itemAttribute.minValue == itemAttribute.maxValue) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null || itemAttribute.minValue == itemAttribute.maxValue)
+            {
                 continue;
             }
-            if (!(itemAttribute.name).equals("complexity")) {
-                for (resource_weight weight : weights) {
-                    if ((itemAttribute.name).equals(weight.attribName)) {
+            if (!(itemAttribute.name).equals("complexity"))
+            {
+                for (resource_weight weight : weights)
+                {
+                    if ((itemAttribute.name).equals(weight.attribName))
+                    {
                         float onePercentOfPossibleAttribute = craftingValuesDictionary.getFloat(weight.attribName + "OnePercent");
-                        if (craftingValuesDictionary.containsKey(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId() + "_average")) {
+                        if (craftingValuesDictionary.containsKey(bio_engineer.COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId() + "_average"))
+                        {
                             averagedAttributeSum = computeComponentWeightedAverage(craftingValuesDictionary, weight.weights);
-                        } else {
+                        }
+                        else
+                        {
                             averagedAttributeSum = craftinglib.computeWeightedAverage(averageResourceValues, weight.weights);
                         }
                         float resourceContribution = averagedAttributeSum * (100.0f / 1000.0f);
-                        if (resourceContribution < 1.0f) {
+                        if (resourceContribution < 1.0f)
+                        {
                             resourceContribution = 1.0f;
                         }
                         float attributeResourceValue = onePercentOfPossibleAttribute * resourceContribution;
@@ -763,6 +869,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             }
         }
     }
+
     public int calcAssemblyPhaseAttributes(obj_id player, draft_schematic.slot[] itemIngredients, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary, String[] playerSkillMods, resource_weight[] maxResourceAttribWeights, resource_weight[] resourceAttribWeights) throws InterruptedException
     {
         debugServerConsoleMsg(null, "Beginning custom dna assembly-phase attribute resolution");
@@ -780,48 +887,75 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         int quality = 0;
         draft_schematic.attribute xpAttrib = null;
         dictionary creatureDict = new dictionary();
-        int[] dna_attributes = 
+        int[] dna_attributes =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
         {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if ((itemAttribute.name).equals("complexity")) {
+            if ((itemAttribute.name).equals("complexity"))
+            {
                 complexity = itemAttribute.currentValue;
-            } else if ((itemAttribute.name).equals("quality")) {
+            }
+            else if ((itemAttribute.name).equals("quality"))
+            {
                 quality = (int) itemAttribute.currentValue;
-            } else if ((itemAttribute.name).equals("hardiness")) {
+            }
+            else if ((itemAttribute.name).equals("hardiness"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_HARDINESS] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("fortitude")) {
+            }
+            else if ((itemAttribute.name).equals("fortitude"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_FORTITUDE] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("dexterity")) {
+            }
+            else if ((itemAttribute.name).equals("dexterity"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_DEXTERITY] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("endurance")) {
+            }
+            else if ((itemAttribute.name).equals("endurance"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_ENDURANCE] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("intellect")) {
+            }
+            else if ((itemAttribute.name).equals("intellect"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_INTELLECT] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("cleverness")) {
+            }
+            else if ((itemAttribute.name).equals("cleverness"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_CLEVERNESS] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("dependability")) {
+            }
+            else if ((itemAttribute.name).equals("dependability"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_DEPENDABILITY] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("courage")) {
+            }
+            else if ((itemAttribute.name).equals("courage"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_COURAGE] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("fierceness")) {
+            }
+            else if ((itemAttribute.name).equals("fierceness"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_FIERCENESS] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("power")) {
+            }
+            else if ((itemAttribute.name).equals("power"))
+            {
                 dna_attributes[bio_engineer.CREATURE_ATTRIB_POWER] = (int) (itemAttribute.currentValue);
-            } else if ((itemAttribute.name).equals("xp")) {
+            }
+            else if ((itemAttribute.name).equals("xp"))
+            {
                 xpAttrib = itemAttribute;
             }
         }
@@ -831,12 +965,12 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         creatureDict.put("defenseValue", bio_engineer.calcCreatureDefenseValue(dna_attributes));
         creatureDict.put("stateResist", bio_engineer.calcCreatureStateResist(dna_attributes));
         creatureDict.put("scale", bio_engineer.calcCreatureMaxScale(dna_attributes));
-        int damage[] = bio_engineer.calcCreatureDamage(dna_attributes);
+        int[] damage = bio_engineer.calcCreatureDamage(dna_attributes);
         creatureDict.put("minDamage", damage[0]);
         creatureDict.put("maxDamage", damage[1]);
         int armorBase = bio_engineer.calcCreatureArmor(dna_attributes);
-        creatureDict.put("armorRating", (int)(armorBase / 50));
-        creatureDict.put("armorEffectiveness", armorBase - (((int)(armorBase / 50)) * 50));
+        creatureDict.put("armorRating", armorBase / 50);
+        creatureDict.put("armorEffectiveness", armorBase - ((armorBase / 50) * 50));
         creatureDict.put("critChance", bio_engineer.calcCreatureCritChance(dna_attributes));
         creatureDict.put("critSave", bio_engineer.calcCreatureCritSave(dna_attributes));
         creatureDict.put("aggroBonus", bio_engineer.calcCreatureAggroBonus(dna_attributes));
@@ -852,12 +986,13 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             LOG("creature_crafting", "XP granted = " + xpAttrib.currentValue + "; level(" + level + ")");
             debugServerConsoleMsg(null, "craftinglib.scriptlib calcAssemblyPhaseAttributes complexity = " + complexity + ", slots filled = " + numSlotsFilled + ", xp = " + xpAttrib.currentValue);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "craftinglib.scriptlib calcAssemblyPhaseAttributes no xp attrib defined!");
         }
         return success;
     }
+
     public int OnManufacturingSchematicCreation(obj_id self, obj_id player, obj_id prototype, draft_schematic schematic, modifiable_int assemblyResult, modifiable_int experimentPoints) throws InterruptedException
     {
         debugServerConsoleMsg(self, "OnManufacturingSchematicCreation enter");
@@ -871,13 +1006,16 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
             obj_attributes[i] = (objectAttribs[i].name).getAsciiId();
         }
         debugServerConsoleMsg(self, "Ingredient slot info (" + slots.length + " slots):");
-        for (draft_schematic.slot slot : slots) {
+        for (draft_schematic.slot slot : slots)
+        {
             debugServerConsoleMsg(self, "\tslot " + slot.name + ", ingredient " + slot.ingredients[0].ingredient + ", amount = " + slot.ingredients[0].count);
         }
         debugServerConsoleMsg(self, "Item attribute info (" + objectAttribs.length + " attribs):");
         craftingValuesDictionary.put("craftingType", schematic.getCategory());
-        for (draft_schematic.attribute objectAttrib : objectAttribs) {
-            switch (((objectAttrib.name).getAsciiId())) {
+        for (draft_schematic.attribute objectAttrib : objectAttribs)
+        {
+            switch (((objectAttrib.name).getAsciiId()))
+            {
                 case "complexity":
                     craftingValuesDictionary.put("itemDefaultComplexity", objectAttrib.minValue);
                     craftingValuesDictionary.put("itemCurrentComplexity", objectAttrib.currentValue);
@@ -888,26 +1026,33 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                     break;
                 case "sockets":
                     int[] mods = getEnhancedSkillStatisticModifiers(player, getExperimentSkillMods());
-                    if (mods != null) {
+                    if (mods != null)
+                    {
                         int experimentModTotal = 0;
-                        for (int mod : mods) {
+                        for (int mod : mods)
+                        {
                             experimentModTotal += mod;
                         }
-                        if (experimentModTotal > craftinglib.socketThreshold) {
+                        if (experimentModTotal > craftinglib.socketThreshold)
+                        {
                             int sockets = 0;
                             int chances = 1 + (experimentModTotal - craftinglib.socketThreshold) / craftinglib.socketDelta;
-                            for (int j = 0; j < chances; ++j) {
-                                if (rand(1, 100) > craftinglib.socketChance) {
+                            for (int j = 0; j < chances; ++j)
+                            {
+                                if (rand(1, 100) > craftinglib.socketChance)
+                                {
                                     ++sockets;
                                 }
                             }
-                            if (sockets > craftinglib.maxSockets) {
+                            if (sockets > craftinglib.maxSockets)
+                            {
                                 sockets = craftinglib.maxSockets;
                             }
                             objectAttrib.minValue = sockets;
                             objectAttrib.maxValue = sockets;
                             objectAttrib.currentValue = sockets;
-                            if (sockets > 0) {
+                            if (sockets > 0)
+                            {
                                 setCondition(prototype, CONDITION_MAGIC_ITEM);
                             }
                         }
@@ -939,7 +1084,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set initial attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set initial attributes of schematic!");
         }
@@ -948,7 +1093,7 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set experimental attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set experimental attributes of schematic!");
         }
@@ -973,13 +1118,13 @@ public class crafting_base_dna_template extends script.systems.crafting.crafting
                 setSchematicCustomizations(self, customizations);
             }
         }
-        else 
+        else
         {
             if (customizations == null)
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations == null");
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations.length == 0");
             }

@@ -12,11 +12,13 @@ public class magic_painting_cell extends script.base_script
     public magic_painting_cell()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "intializePaintingCell", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -47,18 +49,18 @@ public class magic_painting_cell extends script.base_script
                             {
                                 messageTo(controller, "createPainting", null, 3, false);
                             }
-                            else 
+                            else
                             {
                                 messageTo(controller, "switchPainting", null, 3, false);
                             }
                         }
-                        else 
+                        else
                         {
                             messageTo(controller, "createPainting", null, 3, false);
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (getGameTime() - minSwitchTime > 300)
                     {
@@ -69,12 +71,12 @@ public class magic_painting_cell extends script.base_script
                             {
                                 messageTo(controller, "createPainting", null, 3, false);
                             }
-                            else 
+                            else
                             {
                                 messageTo(controller, "switchPainting", null, 3, false);
                             }
                         }
-                        else 
+                        else
                         {
                             messageTo(controller, "createPainting", null, 3, false);
                         }
@@ -84,6 +86,7 @@ public class magic_painting_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id magicPainting = obj_id.NULL_ID;
@@ -102,6 +105,7 @@ public class magic_painting_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int paintingControllerMoved(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "item.publish_gift.magic_painting_cell");
@@ -111,6 +115,7 @@ public class magic_painting_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int intializePaintingCell(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "magicPainting"))
@@ -118,7 +123,7 @@ public class magic_painting_cell extends script.base_script
             detachScript(self, "item.publish_gift.magic_painting_cell");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id controller = getObjIdObjVar(self, "magicPainting");
             if (!exists(controller) || !isIdValid(controller))

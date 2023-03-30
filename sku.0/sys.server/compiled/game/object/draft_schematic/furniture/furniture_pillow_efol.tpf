@@ -2,7 +2,7 @@
 @class draft_schematic_object_template 7
 
 itemsPerContainer = 0
-craftedObjectTemplate = "object/tangible/furniture/efol/frn_pillow_efol.iff"
+craftedObjectTemplate = "object/tangible/furniture/efol/pillow_efol.iff"
 slots = [
 	[
 	optional = false,

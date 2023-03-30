@@ -9,6 +9,7 @@ public class button_check extends script.base_script
     public button_check()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -53,6 +54,7 @@ public class button_check extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int emperorsRetreat(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -75,7 +77,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal1", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "empelevator");
             location here = getLocation(home);
@@ -102,7 +104,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal2", elevatorTerminalB);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "empelevator");
             location here = getLocation(home);
@@ -115,6 +117,7 @@ public class button_check extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int tatSmallPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -139,7 +142,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal1", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator1");
             location here = getLocation(home);
@@ -168,7 +171,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal2", elevatorTerminalB);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator1");
             location here = getLocation(home);
@@ -197,7 +200,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal3", elevatorTerminalC);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator1");
             location here = getLocation(home);
@@ -211,6 +214,7 @@ public class button_check extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int luckyDespot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -233,7 +237,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal1", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator01");
             location here = getLocation(home);
@@ -260,7 +264,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal2", elevatorTerminalB);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator01");
             location here = getLocation(home);
@@ -273,6 +277,7 @@ public class button_check extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int hospital(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -298,7 +303,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal1", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevatora");
             location here = getLocation(home);
@@ -333,7 +338,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminalA2", elevatorTerminalB2);
             }
         }
-        else 
+        else
         {
             if (exists(elevator2a))
             {
@@ -375,7 +380,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal3", elevatorTerminalC);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevatora");
             location here = getLocation(home);
@@ -389,6 +394,7 @@ public class button_check extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int guildhall(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -412,7 +418,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal1", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator");
             location here = getLocation(home);
@@ -441,7 +447,7 @@ public class button_check extends script.base_script
                 setObjVar(home, "terminal2", elevatorTerminalB);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator");
             location here = getLocation(home);

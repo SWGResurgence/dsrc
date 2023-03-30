@@ -11,6 +11,7 @@ public class props extends script.base_script
     public props()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id container = getLocation(self).cell;
@@ -39,7 +40,7 @@ public class props extends script.base_script
                         {
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             setYaw(backdropId, myYaw);
                             setObjVar(self, "paintingId", backdropId);
@@ -50,6 +51,7 @@ public class props extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id topContainer = getTopMostContainer(self);
@@ -86,6 +88,7 @@ public class props extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkLocation(obj_id cell) throws InterruptedException
     {
         if (getCellName(cell) == null)
@@ -101,13 +104,11 @@ public class props extends script.base_script
             {
                 templateName = getTemplateName(ship);
             }
-            if (isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName)))
-            {
-                return true;
-            }
+            return isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName));
         }
         return false;
     }
+
     public boolean registerSelf(obj_id cell) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -119,8 +120,9 @@ public class props extends script.base_script
             if (utils.hasScriptVar(topContainer, template))
             {
                 Vector list = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
-                for (Object o : list) {
-                    objectList.addElement(((obj_id) o));
+                for (Object o : list)
+                {
+                    objectList.addElement(o);
                 }
             }
             objectList.addElement(self);
@@ -129,6 +131,7 @@ public class props extends script.base_script
         }
         return false;
     }
+
     public boolean unregisterSelf() throws InterruptedException
     {
         obj_id topContainer = getTopMostContainer(getSelf());
@@ -139,14 +142,14 @@ public class props extends script.base_script
             Vector objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
             for (int i = 0; i < objectList.size(); i++)
             {
-                if (((obj_id)objectList.get(i)).equals(self))
+                if (objectList.get(i).equals(self))
                 {
                     objectList.removeElement(self);
                     if (objectList.size() > 0)
                     {
                         utils.setScriptVar(topContainer, template, objectList);
                     }
-                    else 
+                    else
                     {
                         utils.removeScriptVar(topContainer, template);
                     }
@@ -156,6 +159,7 @@ public class props extends script.base_script
         }
         return false;
     }
+
     public boolean checkArray(obj_id cell) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -164,14 +168,17 @@ public class props extends script.base_script
         if (isIdValid(topContainer) && utils.hasScriptVar(topContainer, item))
         {
             Vector objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, item);
-            for (Object o : objectList) {
-                if (((obj_id) o) == self) {
+            for (Object o : objectList)
+            {
+                if (o == self)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public String getTemplate() throws InterruptedException
     {
         String templateString = getTemplateName(getSelf());

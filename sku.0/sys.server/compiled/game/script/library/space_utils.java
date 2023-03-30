@@ -200,6 +200,7 @@ public class space_utils extends script.base_script
                 !chassis.equals("player_vwing") &&
                 !chassis.equals("player_naboo_n1") &&
                 !chassis.equals("player_tiedefender") &&
+                !chassis.equals("player_tiedefender_imperial_guard") &&
                 !chassis.equals("player_havoc") &&
                 !chassis.equals("player_twing");
     }
@@ -221,6 +222,7 @@ public class space_utils extends script.base_script
                 !chassis.equals("player_vwing") &&
                 !chassis.equals("player_naboo_n1") &&
                 !chassis.equals("player_tiedefender") &&
+                !chassis.equals("player_tiedefender_imperial_guard") &&
                 !chassis.equals("player_havoc") &&
                 !chassis.equals("player_twing");
     }
@@ -1207,6 +1209,7 @@ public class space_utils extends script.base_script
             case "decimator":
             case "gunship_imperial":
             case "tiedefender":
+            case "tiedefender_imperial_guard":
                 return "@skl_n:pilot_imperial_navy_master";
             case "firespray":
                 return "@space_crafting_n:all_master";

@@ -6,9 +6,6 @@ import script.library.*;
 
 public class merchant_barker extends script.base_script
 {
-    public merchant_barker()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_BARKING_ON = "module.barking_on";
     public static final String SCRIPT_VAR_RECORDING_ON = "module.recording_on";
@@ -19,12 +16,16 @@ public class merchant_barker extends script.base_script
     public static final String VAR_BARK_WAYPOINT_LOC = "module_data.bark_waypoint_loc";
     public static final String VAR_BARK_WAYPOINT_NAME = "module_data.bark_waypoint_name";
     public static final string_id SID_NO_FREE_TRIAL = new string_id("base_player", "no_free_trial_barker");
-    
+    public merchant_barker()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(pet.BARK_TRIGGER_VOLUME, pet.BARK_RANGE, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -51,6 +52,7 @@ public class merchant_barker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_MENU1 && item != menu_info_types.SERVER_MENU2 && item != menu_info_types.SERVER_MENU3 && item != menu_info_types.SERVER_MENU4)
@@ -105,7 +107,7 @@ public class merchant_barker extends script.base_script
                 setWaypointName(waypoint, name);
                 sendSystemMessage(player, new string_id(STF_FILE, "waypoint_sent"));
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "no_waypoint"));
             }
@@ -117,17 +119,12 @@ public class merchant_barker extends script.base_script
             {
                 if (item == menu_info_types.SERVER_MENU2)
                 {
-                    if (isFreeTrialAccount(player))
-                    {
-                        sendSystemMessage(player, SID_NO_FREE_TRIAL);
-                        return SCRIPT_CONTINUE;
-                    }
                     if (utils.hasScriptVar(self, SCRIPT_VAR_RECORDING_ON))
                     {
                         sendSystemMessage(player, new string_id(STF_FILE, "recording_message_off"));
                         utils.removeScriptVar(self, SCRIPT_VAR_RECORDING_ON);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id(STF_FILE, "recording_message_on"));
                         utils.setScriptVar(self, SCRIPT_VAR_RECORDING_ON, 1);
@@ -135,12 +132,7 @@ public class merchant_barker extends script.base_script
                 }
                 if (item == menu_info_types.SERVER_MENU3)
                 {
-                    if (isFreeTrialAccount(player))
-                    {
-                        sendSystemMessage(player, SID_NO_FREE_TRIAL);
-                        return SCRIPT_CONTINUE;
-                    }
-                    obj_id waypoints[] = getWaypointsInDatapad(player);
+                    obj_id[] waypoints = getWaypointsInDatapad(player);
                     if (waypoints != null && waypoints.length > 0)
                     {
                         if (utils.hasScriptVar(player, SCRIPT_VAR_WAYPOINT_SUI))
@@ -157,32 +149,27 @@ public class merchant_barker extends script.base_script
                         utils.setScriptVar(player, SCRIPT_VAR_WAYPOINT_SUI, pid);
                         utils.setScriptVar(self, SCRIPT_VAR_WAYPOINT_LIST, waypoints);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id(STF_FILE, "no_waypoints_in_datapad"));
                     }
                 }
                 if (item == menu_info_types.SERVER_MENU4)
                 {
-                    if (isFreeTrialAccount(player))
-                    {
-                        sendSystemMessage(player, SID_NO_FREE_TRIAL);
-                        return SCRIPT_CONTINUE;
-                    }
                     if (!utils.hasScriptVar(self, SCRIPT_VAR_BARKING_ON))
                     {
                         if (!hasObjVar(self, VAR_BARK_MESSAGE))
                         {
                             sendSystemMessage(player, new string_id(STF_FILE, "no_message_to_bark"));
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id(STF_FILE, "barking_on"));
                             utils.setScriptVar(self, SCRIPT_VAR_BARKING_ON, getGameTime());
                             messageTo(self, "msgMerchantBark", null, 10.0f, false);
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id(STF_FILE, "barking_off"));
                         utils.removeScriptVar(self, SCRIPT_VAR_BARKING_ON);
@@ -192,6 +179,7 @@ public class merchant_barker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id player, String message) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -222,6 +210,7 @@ public class merchant_barker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgMerchantBark(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -249,11 +238,13 @@ public class merchant_barker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgResetCanBark(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, pet.CAN_BARK, pet.TRUE);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDroidWaypointSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -277,7 +268,7 @@ public class merchant_barker extends script.base_script
             waypoints = utils.getObjIdArrayScriptVar(self, SCRIPT_VAR_WAYPOINT_LIST);
             utils.removeScriptVar(self, SCRIPT_VAR_WAYPOINT_LIST);
         }
-        else 
+        else
         {
             LOG("droid_module", "merchant_barker.msgDroidWaypointSelected -- can't find waypoint list.");
             return SCRIPT_CONTINUE;

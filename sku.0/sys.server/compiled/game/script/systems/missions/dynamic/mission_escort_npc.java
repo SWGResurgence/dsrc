@@ -9,17 +9,20 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
     public mission_escort_npc()
     {
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "intOnMissionQueue");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -28,14 +31,16 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id greeting = new string_id("mission/mission_generic", "npc_job_hello");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id("mission/mission_generic", "npc_job_request");
         npcStartConversation(speaker, self, null, greeting, response);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getMyMission(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "intPickedUp"))
@@ -63,22 +68,24 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
                 setObjVar(objMissionData, "objOwner", self);
                 return objMissionData;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             obj_id objMissionData = getObjIdObjVar(self, "mission.objEscortMission");
             return objMissionData;
         }
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("npc_job_accept_yes"))
@@ -118,7 +125,7 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
                 npcSetConversationResponses(player, responses);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id strResponse = new string_id("mission/misison_generic", "npc_job_request_no_job");
                 chat.chat(self, player, strResponse);
@@ -128,6 +135,7 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int escort_Accepted(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -139,6 +147,7 @@ public class mission_escort_npc extends script.systems.missions.base.mission_dyn
         addLocationTarget("strEscortDestination", locEscortFinish, 30);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String strName) throws InterruptedException
     {
         if (strName.equals("strEscortDestination"))

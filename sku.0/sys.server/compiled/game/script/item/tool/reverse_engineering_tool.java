@@ -12,8 +12,9 @@ public class reverse_engineering_tool extends script.base_script
     public static final String STATIC_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
     public static final String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
     public static final String SPECIAL_MOD_TABLE = "datatables/crafting/reverse_engineering_special_mods.iff";
-    public static final String MOD_BIT_TEMPLATE = "object/tangible/component/reverse_engineering/modifier_bit.iff";
+    public static final String MOD_BIT_TEMPLATE = "object/tangible/component/reverse_engineering/modifier_bits/modifier_bit.iff";
     public static final String NO_PUP = "no_pup";
+    public String TYPE_SELECTION = "";
     public static final String[] POWER_BIT_TEMPLATE = 
     {
         "object/tangible/component/reverse_engineering/power_bit_1.iff",
@@ -220,6 +221,15 @@ public class reverse_engineering_tool extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU4, lookMaSpam);
         string_id moreSpam = new string_id("spam", "reverse_engineering_create_powerup");
         mi.addRootMenu(menu_info_types.SERVER_MENU5, moreSpam);
+        //add selection for RE Attachment and PUP Type.
+        string_id swapTypeSpam = new string_id("spam", "reverse_engineering_type_swap");
+        int menu = mi.addRootMenu(menu_info_types.SERVER_MENU6, swapTypeSpam);
+        string_id swapClothingSpam = new string_id("spam", "reverse_engineering_swap_type_clothing");
+        mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, swapClothingSpam);
+        string_id swapArmorSpam = new string_id("spam", "reverse_engineering_swap_type_armor");
+        mi.addSubMenu(menu, menu_info_types.SERVER_MENU8, swapArmorSpam);
+        string_id swapWeaponSpam = new string_id("spam", "reverse_engineering_swap_type_weapon");
+        mi.addSubMenu(menu, menu_info_types.SERVER_MENU9, swapWeaponSpam);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -244,6 +254,19 @@ public class reverse_engineering_tool extends script.base_script
         if (item == menu_info_types.SERVER_MENU5)
         {
             createPowerup(self, player);
+        }
+        //add selection for RE Attachment and PUP Type
+        if (item == menu_info_types.SERVER_MENU7)
+        {
+            swapTypeClothing(self, player);
+        }
+        if (item == menu_info_types.SERVER_MENU8)
+        {
+            swapTypeArmor(self, player);
+        }
+        if (item == menu_info_types.SERVER_MENU9)
+        {
+            swapTypeWeapon(self, player);
         }
         return SCRIPT_CONTINUE;
     }
@@ -294,7 +317,7 @@ public class reverse_engineering_tool extends script.base_script
             sendSystemMessage(player, new string_id("spam", "re_tool_empty"));
             return;
         }
-        if ((stuff.length == 1 && isItemWithNPEMod(stuff[0])) || ((stuff.length == 2) && isItemWithNPEMod(stuff[0]) && isItemWithNPEMod(stuff[1])))
+        if ((stuff.length == 1 && isItemWithNPEMod(stuff[0])) || ((stuff.length == 2) && isItemWithNPEMod(stuff[0]) && isItemWithNPEMod(stuff[1])) || (stuff.length == 1 && getFinalAttachmentLevel(stuff[0]) > 1 && getFinalAttachmentLevel(stuff[0]) < 4))
         {
             generatePowerBit(self, player);
             return;
@@ -470,8 +493,8 @@ public class reverse_engineering_tool extends script.base_script
             obj_id powerup = static_item.createNewItemFunction(getGemTemplateByClass(player, ratio, 1), inventory);
             if (isIdValid(powerup))
             {
-				if(power > 117)
-					power = 117;
+                if(power > 117)
+                    power = 117;
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_power", power);
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_modifier", mod);
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_ratio", ratio);
@@ -532,24 +555,28 @@ public class reverse_engineering_tool extends script.base_script
         if (canUpgradeAttachment(player))
         {
             powerOrderResult = skillMod + (numStats * 100) + rand(1, 100);
-            if (powerOrderResult > 480)
+            if (powerOrderResult > 500)
+            {
+                powerOrderSuccessLevel = 3;
+            }
+            else if (powerOrderResult <= 500 && powerOrderResult > 360)
             {
                 powerOrderSuccessLevel = 2;
             }
-            else if (powerOrderResult > 298)
+            else if (powerOrderResult > 200)
             {
                 powerOrderSuccessLevel = 1;
             }
         }
         float quality = getFloatObjVar(self, "res_quality");
         int randomRollMin = 35;
-		int moduleBonus = 0;
-		int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
-		luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
+        int moduleBonus = 0;
+        int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
+        luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
         LOG("reverse_engineering", "generatePowerBit quality: " + quality);
         if (quality > 0)
         {
-			moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10)));
+            moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10)));
             randomRollMin += (int)(40.0f * (quality / 100.0f));
             removeObjVar(self, "res_quality");
             LOG("reverse_engineering", "generatePowerBit randomRollMin: " + randomRollMin);
@@ -569,7 +596,7 @@ public class reverse_engineering_tool extends script.base_script
             skillMod += luckMod;
             if (skillMod > randomRoll)
             {
-                finalPower = maxStat + 1;
+                finalPower = maxStat + 2;
             }
             else 
             {
@@ -745,12 +772,27 @@ public class reverse_engineering_tool extends script.base_script
         float skillMod = getEnhancedSkillStatisticModifierUncapped(player, "expertise_attachment_upgrade");
         return skillMod > 0;
     }
+    //add selection for RE Attachment and PUP Type
+    public void swapTypeClothing(obj_id self, obj_id player) throws InterruptedException
+    {
+        TYPE_SELECTION = "class_domestics_phase1_novice";
+    }
+    public void swapTypeArmor(obj_id self, obj_id player) throws InterruptedException
+    {
+        TYPE_SELECTION = "class_munitions_phase1_novice";
+    }
+    public void swapTypeWeapon(obj_id self, obj_id player) throws InterruptedException
+    {
+        TYPE_SELECTION = "class_engineering_phase1_novice";
+    }
     public String getGemTemplateByClass(obj_id player, int ratio, int type) throws InterruptedException
     {
         int classType = 0;
         for (int i = 0; i < SKILL_LIST.length; i++)
         {
-            if (hasSkill(player, SKILL_LIST[i]))
+            //if (hasSkill(player, SKILL_LIST[i]))
+            //add selection for RE Attachment and PUP Type
+            if (TYPE_SELECTION == SKILL_LIST[i])
             {
                 if (type == 1)
                 {

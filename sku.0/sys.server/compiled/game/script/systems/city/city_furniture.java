@@ -5,11 +5,8 @@ import script.library.*;
 
 public class city_furniture extends script.base_script
 {
-    public city_furniture()
-    {
-    }
     public static final string_id SID_PLACE = new string_id("city/city", "place");
-    public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
+    public static final string_id SID_MT_REMOVE = new string_id("Remove Decoration");
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public static final string_id SID_DECO_TOO_CLOSE = new string_id("city/city", "deco_too_close");
     public static final string_id SID_NO_MORE_DECOS = new string_id("city/city", "no_more_decos");
@@ -18,9 +15,25 @@ public class city_furniture extends script.base_script
     public static final string_id SID_SOUTH = new string_id("city/city", "south");
     public static final string_id SID_EAST = new string_id("city/city", "east");
     public static final string_id SID_WEST = new string_id("city/city", "west");
-    public static final string_id NO_SKILL_DECO = new string_id("city/city", "no_skill_deco");
+    public static final string_id SID_MOVE = new string_id("Movement *");
+    public static final string_id SID_MOVE_FORWARD = new string_id("Move Forward");
+    public static final string_id SID_MOVE_BACKWARD = new string_id("Move Backward");
+    public static final string_id SID_MOVE_LEFT = new string_id("Move Left");
+    public static final string_id SID_MOVE_RIGHT = new string_id("Move Right");
+    public static final string_id SID_MOVE_UP = new string_id("Move Up");
+    public static final string_id SID_MOVE_DOWN = new string_id("Move Down");
+    public static final string_id SID_MOVE_TO_ME = new string_id("Move Decoration to Self");
+    public static final string_id SID_MOVE_TO_Y = new string_id("Move Decoration to Ground");
+    public static final string_id SID_FACE_ME = new string_id("Face Decoration to Self");
+    public static final string_id SID_NAME = new string_id("Set Decoration Name");
+    public static final string_id NO_SKILL_DECO = new string_id("You do not have the skill to place this decoration.");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
+
+    public city_furniture()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("sissynoid", "Initializing City Decoration ");
@@ -34,7 +47,7 @@ public class city_furniture extends script.base_script
                 CustomerServiceLog("player_city_transfer", "City Decorations: OnInitialize: City ID is invalid for Decoration - Requesting Destruction of City Decoration(" + self + " : " + getTemplateName(self) + ")");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -60,7 +73,7 @@ public class city_furniture extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             LOG("sissynoid", "Initializing City Decoration: Not a Move-To-Inventory Decoration");
             setOwner(self, currentMayor);
@@ -68,11 +81,13 @@ public class city_furniture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         city.removeDecoration(self);
         return SCRIPT_CONTINUE;
     }
+
     public int requestDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "returnObjectToOwner"))
@@ -90,20 +105,48 @@ public class city_furniture extends script.base_script
                 city.removeDecoration(self);
             }
         }
-        else 
+        else
         {
             LOG("sissynoid", "Destroying object - not a 'return-to-owner' object/decoration");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (!isMayor)
+        if (canPlaceItem(self, player))
         {
-            return SCRIPT_CONTINUE;
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
+        }
+        if (canManipulate(self, player))
+        {
+            if (isInWorldCell(self))
+            {
+                int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVE);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU13, SID_MOVE_LEFT);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU14, SID_MOVE_RIGHT);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU19, SID_MOVE_TO_Y);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU40, SID_FACE_ME);
+                if (!utils.isNestedWithinAPlayer(player))
+                {
+                    if (canManipulate(self, player))
+                    {
+                        mi.addSubMenu(movement, menu_info_types.SERVER_MENU2, new string_id("Remove Decoration"));
+                    }
+                }
+                mi.addRootMenu(menu_info_types.SERVER_MENU18, SID_NAME);
+                int menu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_ALIGN);
+                mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_NORTH);
+                mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
+                mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
+                mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
+            }
         }
         region[] rgnTest = getRegionsWithBuildableAtPoint(getLocation(player), regions.BUILD_FALSE);
         if (rgnTest != null)
@@ -118,32 +161,41 @@ public class city_furniture extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (0 == getIntObjVar(self, "city_id"))
-        {
-            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
-        }
-        else 
-        {
-            if (getOwner(self) == player)
-            {
-                mi.addRootMenu(menu_info_types.ITEM_PICKUP, SID_MT_REMOVE);
-            }
-            else if (isMayor)
-            {
-                mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MT_REMOVE);
-            }
-            int menu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_ALIGN);
-            mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_NORTH);
-            mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
-            mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
-            mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
-        }
         return SCRIPT_CONTINUE;
     }
+
+    private boolean canManipulate(obj_id self, obj_id player) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            return true;
+        }
+        if (getOwner(self) == player)
+        {
+            return true;
+        }
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        if (city_id == 0)
+        {
+            return false;
+        }
+        if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
+        {
+            return true;
+        }
+        return city.isTheCityMayor(player, city_id);
+    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
+        location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
-        int city_id = city.checkMayorCity(player, false);
+        if (!hasObjVar(player, "city.movementRate"))
+        {
+            setObjVar(player, "city.movementRate", 1);
+        }
+        int movementRate = getIntObjVar(player, "city.movementRate");
+        int city_id = city.getCityAtLocation(loc, 0);
         if (city_id == 0)
         {
             return SCRIPT_CONTINUE;
@@ -176,25 +228,121 @@ public class city_furniture extends script.base_script
         {
             setYaw(self, -90);
         }
+        else if (item == menu_info_types.SERVER_MENU10)
+        {
+            int pid = sui.inputbox(self, player, "Please enter a three digit number to use when moving decorations.. \n\n\n This value cannot be greater than 250.,", "Decoration Movement", "handleMovementIncrement", 3, false, "1");
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+        }
+        else if (item == menu_info_types.SERVER_MENU11)
+        {
+            loc.z = loc.z + movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU12)
+        {
+            loc.z = loc.z - movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU13)
+        {
+            loc.x = loc.x - movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU14)
+        {
+            loc.x = loc.x + movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU15)
+        {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration UP more than 250 meters at a time.");
+            }
+            loc.y = loc.y + movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU16)
+        {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration DOWN more than 250 meters at a time.");
+            }
+            loc.y = loc.y -= movementRate;
+            setLocation(self, loc);
+        }
+        else if (item == menu_info_types.SERVER_MENU17)
+        {
+            location pLoc = getLocation(player);
+            setLocation(self, pLoc);
+        }
+        else if (item == menu_info_types.SERVER_MENU18)
+        {
+            int pid = sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+        }
+        else if (item == menu_info_types.SERVER_MENU18)
+        {
+            snapToGround(self);
+        }
+        else if (item == menu_info_types.SERVER_MENU40)
+        {
+            faceTo(self, player);
+        }
         return SCRIPT_CONTINUE;
     }
+
+    public int handleMovementIncrement(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int amount = utils.stringToInt(sui.getInputBoxText(params));
+        if (amount == 0)
+        {
+            broadcast(player, "Amount must be greater than or equal to 1.");
+            return SCRIPT_CONTINUE;
+        }
+        if (amount > 250)
+        {
+            broadcast(player, "Amount must be less than or equal to 250.");
+            return SCRIPT_CONTINUE;
+        }
+        setObjVar(player, "city.movementRate", amount);
+        sendSystemMessageTestingOnly(player, "Movement rate set: " + amount);
+        return SCRIPT_CONTINUE;
+    }
+
+    public void snapToGround(obj_id self)
+    {
+        location loc = getLocation(self);
+        location groundLoc = new location(loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
+        setLocation(self, groundLoc);
+    }
+
+    public void handleDecorationName(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        String name = sui.getInputBoxText(params);
+        if (name == null || name.equals(""))
+        {
+            setName(self, "");
+        }
+        setObjVar(self, "city.decorationName", name);
+        setName(self, name);
+        broadcast(player, "Decoration has been renamed to: " + name);
+    }
+
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
-        String command = null;
-        String[] templates = dataTableGetStringColumn(CITY_DECORATIONS, "TEMPLATE");
-        for (int i = 0; i < templates.length; i++)
-        {
-            if (templates[i].equals(getTemplateName(self)))
-            {
-                command = dataTableGetString(CITY_DECORATIONS, i, "COMMAND");
-                break;
-            }
-        }
-        if (command == null)
-        {
-            return;
-        }
-        if (!hasCommand(player, command))
+        if (!hasCommand(player, "grantZoningRights")) //@note this is basically a hack check to make sure players have politician to place anything.
         {
             sendSystemMessage(player, NO_SKILL_DECO);
             return;
@@ -217,26 +365,19 @@ public class city_furniture extends script.base_script
             }
         }
         String name = getTemplateName(self);
-        if (!name.contains("streetlamp"))
-        {
-            obj_id[] structures = cityGetStructureIds(city_id);
-            for (obj_id structure1 : structures) {
-                if (city.isSkillTrainer(city_id, structure1) || city.isMissionTerminal(city_id, structure1) || city.isDecoration(city_id, structure1)) {
-                    continue;
-                }
-                location oloc = getLocation(structure1);
-                float dist = utils.getDistance2D(loc, oloc);
-                if ((dist < 25) && (dist > 0)) {
-                    prose_package pp = prose.getPackage(SID_DECO_TOO_CLOSE, localize(getNameStringId(structure1)));
-                    sendSystemMessageProse(player, pp);
-                    return;
-                }
-            }
-        }
         setLocation(self, loc);
         setYaw(self, getYaw(player));
+        if (isGod(player))
+        {
+            chat.chat(player, "[GodMode] I am placing " + name + " in " + cityGetName(city_id));
+        }
+        else
+        {
+            chat.chat(player, "Oh yes, that looks nice!");
+        }
         city.addDecoration(city_id, player, self);
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player = transferer;
@@ -246,6 +387,7 @@ public class city_furniture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void removalCleanup(obj_id object, obj_id player, boolean spam) throws InterruptedException
     {
         removeObjVar(object, "city_id");
@@ -255,6 +397,7 @@ public class city_furniture extends script.base_script
             sendSystemMessage(player, SID_MT_REMOVED);
         }
     }
+
     public int setNewMayor(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Entered: Setting New Mayor");
@@ -274,6 +417,7 @@ public class city_furniture extends script.base_script
         updateOwnerAndAdmin(self, new_mayor);
         return SCRIPT_CONTINUE;
     }
+
     public void updateOwnerAndAdmin(obj_id self, obj_id new_mayor) throws InterruptedException
     {
         if (!isIdValid(new_mayor) || !isIdValid(self))
@@ -315,7 +459,7 @@ public class city_furniture extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             obj_id decorOwner = getOwner(self);
             LOG("sissynoid", "Setting Owner of | Decoration (" + self + ") | from(" + decorOwner + ") | to(" + new_mayor + ")");
@@ -323,6 +467,7 @@ public class city_furniture extends script.base_script
         }
         return;
     }
+
     public boolean moveCityDecorationToOwnerInventory(obj_id player, obj_id item) throws InterruptedException
     {
         if (!isIdValid(item) || !isIdValid(player))
@@ -395,5 +540,36 @@ public class city_furniture extends script.base_script
             moveToOfflinePlayerInventoryAndUnload(item, player);
         }
         return isValidObject;
+    }
+
+    public boolean canPlaceItem(obj_id self, obj_id player) throws InterruptedException
+    {
+        //@note: keep these in order of importance, with the most important last
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (utils.isNestedWithinAPlayer(self))
+        {
+            if (hasObjVar(self, "city_id"))
+            {
+                return false;
+            }
+            if (hasObjVar(player, "city_decorator"))
+            {
+                return true;
+            }
+            if (city.isMilitiaOfCity(player, city_id))
+            {
+                return true;
+            }
+            if (isMayor)
+            {
+                return true;
+            }
+            return isGod(player);
+        }
+        else
+        {
+            return false;
+        }
     }
 }

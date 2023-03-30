@@ -40,7 +40,7 @@ public class loveday_disillusion_mr_hate extends script.base_script
     public String loveday_disillusion_mr_hate_tokenTO_misterOrMiss(obj_id player, obj_id npc) throws InterruptedException
     {
         String title = "Mister";
-        if (getGender(player) == GENDER_FEMALE)
+        if (getGender(player) == Gender.FEMALE)
         {
             title = "Miss";
         }
@@ -59,7 +59,7 @@ public class loveday_disillusion_mr_hate extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

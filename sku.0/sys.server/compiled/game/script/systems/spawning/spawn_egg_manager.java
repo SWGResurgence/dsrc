@@ -5,20 +5,24 @@ import script.*;
 
 public class spawn_egg_manager extends script.base_script
 {
+    public static final string_id SID_MUST_BE_IN_CITY = new string_id("city/city", "must_be_in_city");
+
     public spawn_egg_manager()
     {
     }
-    public static final string_id SID_MUST_BE_IN_CITY = new string_id("city/city", "must_be_in_city");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         LOG("spawn", "Spawning stuff");
@@ -65,8 +69,7 @@ public class spawn_egg_manager extends script.base_script
             try
             {
                 tranCreation = new transform(vctI, vctJ, vctK, vctP);
-            }
-            catch(Throwable err)
+            } catch (Throwable err)
             {
                 vctJ = vector.unitY;
                 vctK = vector.unitZ;
@@ -77,7 +80,8 @@ public class spawn_egg_manager extends script.base_script
             if (!strObject[intI].equals(""))
             {
                 obj_id objTest = createObject(strObject[intI], tranCreation, null);
-                if ((isIdValid(objTest)) && (objTest.isLoaded())) {
+                if ((isIdValid(objTest)) && (objTest.isLoaded()))
+                {
                     if (!strObjVars[intI].equals(""))
                     {
                         if ((isIdValid(objTest)) && (objTest.isLoaded()))
@@ -89,14 +93,19 @@ public class spawn_egg_manager extends script.base_script
                     {
                         String[] strScriptArray = split(strScripts[intI], ',');
                         String script;
-                        for (String aStrScriptArray : strScriptArray) {
-                            if ((isIdValid(objTest)) && (objTest.isLoaded())) {
+                        for (String aStrScriptArray : strScriptArray)
+                        {
+                            if ((isIdValid(objTest)) && (objTest.isLoaded()))
+                            {
                                 script = aStrScriptArray;
-                                if (script.contains("script.")) {
+                                if (script.contains("script."))
+                                {
                                     script = script.substring(7);
                                 }
-                                if (!script.equals("")) {
-                                    if (!hasScript(objTest, script)) {
+                                if (!script.equals(""))
+                                {
+                                    if (!hasScript(objTest, script))
+                                    {
                                         attachScript(objTest, script);
                                     }
                                 }

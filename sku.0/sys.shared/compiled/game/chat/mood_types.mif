@@ -200,6 +200,7 @@ form "MOOD"
 			MOOD_TYPE (hurried)
 			MOOD_TYPE (patient)
 			MOOD_TYPE (firm)
+			MOOD_TYPE (undead)
 		}
 	}
 }

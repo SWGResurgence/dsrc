@@ -6,13 +6,14 @@ import script.library.*;
 
 public class event_perk_deed extends script.base_script
 {
-    public event_perk_deed()
-    {
-    }
     public static final String TBL_PLAYER_TYPES = "datatables/vendor/vendor_player_types.iff";
     public static final String TBL_ALLNPC_TYPES = "datatables/vendor/vendor_allnpc_types.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
     public static final String STF_FILE = "event_perk";
+    public event_perk_deed()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getStringObjVar(self, "event_perk.deedName");
@@ -38,6 +39,7 @@ public class event_perk_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         checkTimeLimit(self, player);
@@ -47,7 +49,7 @@ public class event_perk_deed extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, useEventPerk);
             if (hasObjVar(self, "event_perk.timeStamp"))
@@ -57,6 +59,7 @@ public class event_perk_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -71,7 +74,7 @@ public class event_perk_deed extends script.base_script
                 float timeStamp = getFloatObjVar(self, "event_perk.timeStamp");
                 float rightNow = getGameTime();
                 float expirationTimeMinutesFloat = ((lifeSpan + timeStamp) - rightNow) / 60;
-                int expirationTimeMinutes = (int)expirationTimeMinutesFloat;
+                int expirationTimeMinutes = (int) expirationTimeMinutesFloat;
                 prose_package showExpiration = new prose_package();
                 showExpiration = prose.getPackage(new string_id("event_perk", "show_exp_time"));
                 prose.setDI(showExpiration, expirationTimeMinutes);
@@ -80,11 +83,13 @@ public class event_perk_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         checkTimeLimit(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void useEventPerk(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -130,6 +135,7 @@ public class event_perk_deed extends script.base_script
             spawnEventPerk(self, player, here);
         }
     }
+
     public void spawnEventPerk(obj_id self, obj_id player, location here) throws InterruptedException
     {
         if (!hasObjVar(self, "event_perk.timeStamp"))
@@ -192,7 +198,7 @@ public class event_perk_deed extends script.base_script
                 destroyObject(self);
                 CustomerServiceLog("EventPerk", "(Perk Created) Type [" + type + "] Location [" + here + "] OID + [" + eventPerk + "].");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "bad_area"));
             }
@@ -231,7 +237,7 @@ public class event_perk_deed extends script.base_script
                 CustomerServiceLog("EventPerk", "(Perk Created) Type [" + type + "] Location [" + here + "] OID + [" + eventPerk + "].");
                 destroyObject(self);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "bad_area"));
             }
@@ -239,8 +245,8 @@ public class event_perk_deed extends script.base_script
         if (type.equals("honorguard"))
         {
             int headCount = 0;
-            int numPerLine = (int)floatData1;
-            int numRows = (int)floatData2;
+            int numPerLine = (int) floatData1;
+            int numRows = (int) floatData2;
             float offset = 2.0f;
             float xLoc = here.x;
             float yLoc = here.y;
@@ -248,15 +254,15 @@ public class event_perk_deed extends script.base_script
             for (int i = 0; i < numPerLine; i++)
             {
                 double xRowOffsetDbl = StrictMath.sin(Math.toRadians(heading + 90)) * (i * offset);
-                float xRowOffset = (float)xRowOffsetDbl;
+                float xRowOffset = (float) xRowOffsetDbl;
                 double zRowOffsetDbl = StrictMath.cos(Math.toRadians(heading + 90)) * (i * offset);
-                float zRowOffset = (float)zRowOffsetDbl;
+                float zRowOffset = (float) zRowOffsetDbl;
                 for (int j = 0; j < numRows; j++)
                 {
                     double xSpawnDbl = StrictMath.sin(Math.toRadians(heading)) * (j * offset) + xLoc + xRowOffset;
                     double zSpawnDbl = StrictMath.cos(Math.toRadians(heading)) * (j * offset) + zLoc + zRowOffset;
-                    float xSpawn = (float)xSpawnDbl;
-                    float zSpawn = (float)zSpawnDbl;
+                    float xSpawn = (float) xSpawnDbl;
+                    float zSpawn = (float) zSpawnDbl;
                     location spawnPoint = new location();
                     spawnPoint.x = xSpawn;
                     spawnPoint.y = yLoc;
@@ -306,6 +312,7 @@ public class event_perk_deed extends script.base_script
             createNpcActor(self, player, here);
         }
     }
+
     public void checkTimeLimit(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(self, "event_perk.timeStamp"))
@@ -322,12 +329,13 @@ public class event_perk_deed extends script.base_script
         }
         return;
     }
+
     public void createNpcActor(obj_id self, obj_id player, location here) throws InterruptedException
     {
-        String[] randomOnly = 
-        {
-            "@player_structure:random"
-        };
+        String[] randomOnly =
+                {
+                        "@player_structure:random"
+                };
         utils.setScriptVar(self, "event_perk.checkGender", 0);
         String[] rawRaceTypes = dataTableGetStringColumn(TBL_ALLNPC_TYPES, 0);
         String[] raceTypes = new String[rawRaceTypes.length];
@@ -340,11 +348,13 @@ public class event_perk_deed extends script.base_script
         sui.listbox(self, player, "@event_perk_npc_actor:race_type_d", sui.OK_CANCEL, "@event_perk_npc_actor:race_type_t", raceTypes, "handleNpcActorRaceSelect", true);
         return;
     }
+
     public int destroyYourself(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNpcActorRaceSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -370,14 +380,15 @@ public class event_perk_deed extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        String[] possibleNPCGender = 
-        {
-            "@player_structure:male",
-            "@player_structure:female"
-        };
+        String[] possibleNPCGender =
+                {
+                        "@player_structure:male",
+                        "@player_structure:female"
+                };
         sui.listbox(self, player, "@event_perk_npc_actor:gender_d", sui.OK_CANCEL, "@event_perk_npc_actor:gender_t", possibleNPCGender, "handleNpcActorGenderSelect", true);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNpcActorGenderSelect(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -395,6 +406,7 @@ public class event_perk_deed extends script.base_script
         sui.inputbox(self, player, "@event_perk_npc_actor:name_d", sui.OK_CANCEL, "@event_perk_npc_actor:name_t", sui.INPUT_NORMAL, null, "handleSetNpcActorName", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetNpcActorName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -419,6 +431,7 @@ public class event_perk_deed extends script.base_script
         messageTo(self, "buildNpcActor", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int buildNpcActor(obj_id self, dictionary params) throws InterruptedException
     {
         int deedNumber = getIntObjVar(self, "event_perk.deedNumber");
@@ -444,18 +457,18 @@ public class event_perk_deed extends script.base_script
         int genderIndex = utils.getIntScriptVar(self, "event_perk.genderIndex");
         String[] raceTypes = utils.getStringArrayScriptVar(self, "event_perk.races");
         String[] playerTypes = dataTableGetStringColumn(TBL_PLAYER_TYPES, 0);
-        String[] genderList = 
-        {
-            "male",
-            "female"
-        };
+        String[] genderList =
+                {
+                        "male",
+                        "female"
+                };
         String creatureName = "vendor";
         String templateName;
         if (raceIndex == 0)
         {
             templateName = playerTypes[rand(1, playerTypes.length - 1)] + "_" + genderList[genderIndex] + ".iff";
         }
-        else 
+        else
         {
             templateName = raceTypes[raceIndex] + "_" + genderList[genderIndex] + ".iff";
         }
@@ -472,7 +485,7 @@ public class event_perk_deed extends script.base_script
             {
                 dressup.dressNpc(vendor, "random_ithorian", true);
             }
-            else 
+            else
             {
                 dressup.dressNpc(vendor, "rich_no_jacket");
             }
@@ -488,7 +501,7 @@ public class event_perk_deed extends script.base_script
             destroyObject(self);
             CustomerServiceLog("EventPerk", "(Perk Created) Type [NPC Actor] Location [" + here + "] OID + [" + vendor + "].");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event_perk", "npc_creation_error"));
         }

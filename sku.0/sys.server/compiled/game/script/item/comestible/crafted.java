@@ -11,6 +11,7 @@ public class crafted extends script.item.comestible.comestible
     public crafted()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String food_type = getStringObjVar(self, "food_type");
@@ -67,7 +68,7 @@ public class crafted extends script.item.comestible.comestible
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 int numMods = am.length;
                 attribs[n] = Integer.toString(numMods);
@@ -76,14 +77,18 @@ public class crafted extends script.item.comestible.comestible
                 {
                     return SCRIPT_CONTINUE;
                 }
-                for (attrib_mod attrib_mod : am) {
+                for (attrib_mod attrib_mod : am)
+                {
                     int attrib = attrib_mod.getAttribute();
                     int val = Integer.MIN_VALUE;
                     int duration = (int) (attrib_mod.getDuration());
                     String sVal = "";
-                    if (val > 0) {
+                    if (val > 0)
+                    {
                         sVal = "+" + val;
-                    } else if (val < 0) {
+                    }
+                    else if (val < 0)
+                    {
                         sVal = Integer.toString(val);
                     }
                     int minutes = duration / 60;
@@ -92,7 +97,8 @@ public class crafted extends script.item.comestible.comestible
                     attribs[n] = sVal + "% for " + minutes + "m " + seconds + "s";
                     LOG("examine", n + ": " + names[n] + " -> " + attribs[n]);
                     n++;
-                    if (n > names.length) {
+                    if (n > names.length)
+                    {
                         return SCRIPT_CONTINUE;
                     }
                 }
@@ -103,7 +109,7 @@ public class crafted extends script.item.comestible.comestible
             String mod = getStringObjVar(self, "skill_mod.name");
             float amount = getFloatObjVar(self, "skill_mod.amount");
             float dur = getFloatObjVar(self, "skill_mod.dur");
-            int duration = (int)dur;
+            int duration = (int) dur;
             int minutes = duration / 60;
             int seconds = duration - (minutes * 60);
             int n = utils.getValidAttributeIndex(names);
@@ -222,7 +228,7 @@ public class crafted extends script.item.comestible.comestible
             {
                 attribs[n] = localize(new string_id("obj_attr_n", "speciespet"));
             }
-            else 
+            else
             {
                 attribs[n] = localize(new string_id("obj_attr_n", "species" + race));
             }

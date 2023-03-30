@@ -9,12 +9,13 @@ import script.obj_id;
 
 public class configurable_group_dice extends script.item.dice.base.base_dice
 {
-    public configurable_group_dice()
-    {
-    }
     public static final int DEFAULT_FACE_COUNT = 20;
     public static final int NUMBER_OF_DICE = 1;
     public static final String TYPE_NAME = "configurable_group_dice";
+    public configurable_group_dice()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########configurable dice script initialized##############");
@@ -23,6 +24,7 @@ public class configurable_group_dice extends script.item.dice.base.base_dice
         setObjVar(self, DICE_TYPE_NAME, TYPE_NAME);
         return super.OnInitialize(self);
     }
+
     public int roll(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########configurable dice roll()##############");
@@ -47,24 +49,27 @@ public class configurable_group_dice extends script.item.dice.base.base_dice
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, VAR_ROLL_RESULT, rollValues);
-        for (int rollValue : rollValues) {
+        for (int rollValue : rollValues)
+        {
             debug.debugAllMsg("DEBUG", self, "#############Roll Values: " + rollValue + "############");
         }
         if (getBooleanObjVar(self, VAR_VALUE_INITIALIZED))
         {
             informGroupOfResults(rollValues, player, self, null);
         }
-        else 
+        else
         {
             sendSystemMessage(player, CONFIGURE_MSG);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########configurable dice script detached##############");
         return super.OnDetach(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -75,7 +80,7 @@ public class configurable_group_dice extends script.item.dice.base.base_dice
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"))
         {
             names[idx] = "usemodifier";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

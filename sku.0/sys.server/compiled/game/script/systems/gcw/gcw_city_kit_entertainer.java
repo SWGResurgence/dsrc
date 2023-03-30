@@ -10,24 +10,30 @@ public class gcw_city_kit_entertainer extends script.systems.gcw.gcw_city_kit
     public gcw_city_kit_entertainer()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasConstructionQuests() throws InterruptedException
     {
         return false;
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public int getConstructionQuestsCompleted(obj_id pylon) throws InterruptedException
     {
         return 100;
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -35,9 +41,10 @@ public class gcw_city_kit_entertainer extends script.systems.gcw.gcw_city_kit
         params.put("location", loc);
         obj_id self = getSelf();
         utils.setObjVar(self, "gcw.troopCounter", 0);
-        messageTo(self, "createDemoralizedNpc", params, (float)rand(0, 30) + 60, false);
+        messageTo(self, "createDemoralizedNpc", params, (float) rand(0, 30) + 60, false);
         return null;
     }
+
     public int createDemoralizedNpc(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -51,7 +58,7 @@ public class gcw_city_kit_entertainer extends script.systems.gcw.gcw_city_kit
         }
         if (troopCounter >= 3)
         {
-            messageTo(self, "createDemoralizedNpc", params, (float)rand(0, 30) + 60, false);
+            messageTo(self, "createDemoralizedNpc", params, (float) rand(0, 30) + 60, false);
             return SCRIPT_CONTINUE;
         }
         troopCounter++;
@@ -88,9 +95,10 @@ public class gcw_city_kit_entertainer extends script.systems.gcw.gcw_city_kit
                 ai_lib.setLoiterRanges(kit, 1.0f, 3.0f);
             }
         }
-        messageTo(self, "createDemoralizedNpc", params, (float)rand(0, 30) + 60, false);
+        messageTo(self, "createDemoralizedNpc", params, (float) rand(0, 30) + 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createFightingNpc(obj_id self, dictionary params) throws InterruptedException
     {
         int faction = utils.getIntObjVar(self, "factionFlag");

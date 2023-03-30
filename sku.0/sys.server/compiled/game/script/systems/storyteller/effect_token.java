@@ -6,25 +6,30 @@ import script.library.utils;
 
 public class effect_token extends script.base_script
 {
+    public static final String EFFECT_CONTROL_SCRIPT = "systems.storyteller.effect_controller";
+
     public effect_token()
     {
     }
-    public static final String EFFECT_CONTROL_SCRIPT = "systems.storyteller.effect_controller";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerEffectTokenDailyAlarm(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -39,16 +44,12 @@ public class effect_token extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, deployEffectPrompt);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_from_inventory_only"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         obj_id effectTarget = getStorytellerEffectTarget(player);
@@ -60,7 +61,7 @@ public class effect_token extends script.base_script
                 {
                     playEffectOnTarget(self, effectTarget, player);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("storyteller", "persisted_effect_invalid_target"));
                 }
@@ -68,16 +69,12 @@ public class effect_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGroundTargetLoc(obj_id self, obj_id player, int menuItem, float x, float y, float z) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_from_inventory_only"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location playerLoc = getLocation(player);
@@ -99,13 +96,13 @@ public class effect_token extends script.base_script
                 sendSystemMessage(player, new string_id("storyteller", "persisted_effect_invalid_target"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (isIdValid(effectTarget))
                 {
                     playEffectOnTarget(self, effectTarget, player);
                 }
-                else 
+                else
                 {
                     playEffectAtLocation(self, player, newLoc);
                 }
@@ -113,6 +110,7 @@ public class effect_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getStorytellerEffectTarget(obj_id player) throws InterruptedException
     {
         obj_id target = null;
@@ -121,12 +119,13 @@ public class effect_token extends script.base_script
         {
             target = intendedTarget;
         }
-        else 
+        else
         {
             target = getLookAtTarget(player);
         }
         return target;
     }
+
     public boolean playEffectOnTarget(obj_id token, obj_id target, obj_id player) throws InterruptedException
     {
         if (isTargetMyStorytellerObject(player, target))
@@ -136,7 +135,7 @@ public class effect_token extends script.base_script
             {
                 messageTo(target, "handlePlayNewStorytellerEffect", null, 0, false);
             }
-            else 
+            else
             {
                 attachScript(target, "systems.storyteller.effect_controller");
             }
@@ -146,6 +145,7 @@ public class effect_token extends script.base_script
         }
         return true;
     }
+
     public boolean playEffectAtLocation(obj_id token, obj_id player, location here) throws InterruptedException
     {
         if (storyteller.canDeployStorytellerToken(player, here, token))
@@ -159,7 +159,7 @@ public class effect_token extends script.base_script
                 setObjVar(effectController, "storytellerid", storytellerId);
                 setObjVar(effectController, "storytellerName", storytellerName);
             }
-            else 
+            else
             {
                 setObjVar(effectController, "storytellerid", player);
                 setObjVar(effectController, "storytellerName", getName(player));
@@ -172,6 +172,7 @@ public class effect_token extends script.base_script
         }
         return false;
     }
+
     public boolean isTargetMyStorytellerObject(obj_id player, obj_id target) throws InterruptedException
     {
         if (storyteller.isAnyStorytellerItem(target))
@@ -188,6 +189,7 @@ public class effect_token extends script.base_script
         sendSystemMessage(player, new string_id("storyteller", "persisted_effect_cannot_use"));
         return false;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

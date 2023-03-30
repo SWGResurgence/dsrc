@@ -1,19 +1,7 @@
 package script.conversation;
 
+import script.library.*;
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
-import script.library.ai_lib;
-import script.library.chat;
-import script.library.content;
-import script.library.conversation;
-import script.library.groundquests;
-import script.library.utils;
 
 public class wod_sm_sage extends script.base_script
 {
@@ -183,7 +171,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -208,7 +196,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -258,7 +246,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -283,7 +271,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -333,7 +321,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -358,7 +346,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -397,7 +385,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -411,7 +399,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -449,7 +437,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -487,7 +475,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -501,7 +489,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -526,7 +514,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -551,7 +539,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -576,7 +564,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -614,7 +602,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -663,7 +651,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -711,7 +699,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_sage_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -726,7 +714,7 @@ public class wod_sm_sage extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -54,6 +54,12 @@ public class legacy_head_malakili extends script.base_script
     {
         groundquests.sendSignal(player, "legacy_head_rod_launch_e2");
     }
+    public void event_malakili_action_vendor(obj_id player, obj_id npc) throws InterruptedException
+    {
+        dictionary d = new dictionary();
+        d.put("player", player);
+        messageTo(npc, "showInventorySUI", d, 0, false);
+    }
     public int legacy_head_malakili_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
@@ -67,7 +73,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -126,7 +132,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -209,7 +215,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -269,7 +275,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -372,7 +378,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -466,7 +472,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -526,7 +532,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -674,7 +680,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -912,7 +918,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1060,7 +1066,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1208,7 +1214,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_head_malakili_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1356,7 +1362,7 @@ public class legacy_head_malakili extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -1410,6 +1416,7 @@ public class legacy_head_malakili extends script.base_script
         if (legacy_head_malakili_condition_abandoned(player, npc))
         {
             legacy_head_malakili_action_facePlayer(player, npc);
+            event_malakili_action_vendor(player, npc);
             string_id message = new string_id(c_stringFile, "s_44");
             int numberOfResponses = 0;
             boolean hasResponse = false;

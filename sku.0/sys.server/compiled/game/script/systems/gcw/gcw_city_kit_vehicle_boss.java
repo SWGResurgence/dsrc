@@ -10,15 +10,18 @@ public class gcw_city_kit_vehicle_boss extends script.systems.gcw.gcw_city_kit
     public gcw_city_kit_vehicle_boss()
     {
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Siege Vehicle Construction Site");
         utils.setScriptVar(pylon, "gcw.name", "Siege Vehicle Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_vehicle_boss");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)

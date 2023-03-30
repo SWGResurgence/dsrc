@@ -13,6 +13,7 @@ public class final_battle_theater extends script.base_script
     public final_battle_theater()
     {
     }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         setObjVar(self, "fs_quest.final_battle.player", player);
@@ -22,13 +23,18 @@ public class final_battle_theater extends script.base_script
             red_stones.setSize(0);
             Vector green_stones = new Vector();
             green_stones.setSize(0);
-            for (obj_id object : objects) {
+            for (obj_id object : objects)
+            {
                 setObjVar(object, theater.VAR_PARENT, self);
                 setObjVar(object, "questOwner", player);
-                if (hasScript(object, "systems.fs_quest.exit_quest.power_shrine")) {
-                    if (hasObjVar(object, "fs_quest.red_shrine")) {
+                if (hasScript(object, "systems.fs_quest.exit_quest.power_shrine"))
+                {
+                    if (hasObjVar(object, "fs_quest.red_shrine"))
+                    {
                         red_stones.add(object);
-                    } else {
+                    }
+                    else
+                    {
                         green_stones.add(object);
                     }
                 }
@@ -44,12 +50,14 @@ public class final_battle_theater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestGreenStonesDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("quest", "final_battle_theater.msgQuestGreenStonesDestroyed -- " + self);
         quests.createSpawner("thug_help", getLocation(self), "datatables/quest/force_sensitive/final_battle_spawn.iff", self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestRedStonesDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("quest", "final_battle_theater.msgQuestRedStonesDestroyed -- " + self);
@@ -57,6 +65,7 @@ public class final_battle_theater extends script.base_script
         quests.createSpawner("thug_help", getLocation(self), "datatables/quest/force_sensitive/final_battle_spawn.iff", self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id leader = getObjIdObjVar(self, "fs_quest.final_battle.leader");
@@ -74,9 +83,11 @@ public class final_battle_theater extends script.base_script
         {
             existingNPCs = utils.getResizeableObjIdBatchObjVar(self, "fs_quest.final_battle_npcs");
             obj_id NPC = null;
-            for (Object existingNPC : existingNPCs) {
+            for (Object existingNPC : existingNPCs)
+            {
                 NPC = (obj_id) existingNPC;
-                if ((isIdValid(NPC)) && (exists(NPC))) {
+                if ((isIdValid(NPC)) && (exists(NPC)))
+                {
                     destroyObject(NPC);
                 }
             }

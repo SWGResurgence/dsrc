@@ -11,16 +11,19 @@ public class camp_waypoint_dp extends script.base_script
     public camp_waypoint_dp()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, fs_counterstrike.OBJVAR_BORN_ON, getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         fs_counterstrike.checkPhaseItemDisable(self, 3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -48,7 +51,7 @@ public class camp_waypoint_dp extends script.base_script
             {
                 attribs[idx] = "Already Decayed";
             }
-            else 
+            else
             {
                 attribs[idx] = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(remainingLife));
             }

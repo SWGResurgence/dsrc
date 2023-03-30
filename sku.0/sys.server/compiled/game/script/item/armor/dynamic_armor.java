@@ -9,12 +9,13 @@ import script.string_id;
 
 public class dynamic_armor extends script.base_script
 {
-    public dynamic_armor()
-    {
-    }
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("base_player", "level_too_low");
     public static final string_id SID_ITEM_NOT_ENOUGH_SKILL = new string_id("base_player", "not_correct_skill");
     public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
+    public dynamic_armor()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "item.armor.new_armor"))
@@ -37,6 +38,7 @@ public class dynamic_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (combat.isInCombat(transferer))
@@ -45,7 +47,7 @@ public class dynamic_armor extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         boolean canTransfer = true;
-        if (isPlayer(destContainer) || isAPlayerAppearanceInventoryContainer(destContainer))
+        if (isPlayer(destContainer))
         {
             if (!isIdValid(transferer))
             {
@@ -89,6 +91,21 @@ public class dynamic_armor extends script.base_script
                 }
             }
         }
+        if (isAPlayerAppearanceInventoryContainer(destContainer))
+        {
+            if (isIdValid(transferer))
+            {
+                obj_id owner = getOwner(self);
+                if (destContainer == owner) {
+                    transferer = owner;
+                }
+                else if (isAPlayerAppearanceInventoryContainer(destContainer))
+                {
+                    transferer = getContainedBy(destContainer);
+                    canTransfer = true;
+                }
+            }
+        }
         if (!canTransfer)
         {
             if (isGod(transferer))
@@ -100,6 +117,7 @@ public class dynamic_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player = transferer;
@@ -109,6 +127,7 @@ public class dynamic_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -118,9 +137,11 @@ public class dynamic_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(self == null || self == obj_id.NULL_ID || !isIdValid(self) || !exists(self)){
+        if (self == null || self == obj_id.NULL_ID || !isIdValid(self) || !exists(self))
+        {
             return SCRIPT_CONTINUE;
         }
         int free = getFirstFreeIndex(names);
@@ -152,43 +173,47 @@ public class dynamic_armor extends script.base_script
             attribs[free++] = utils.packStringId(new string_id("obj_attr_n", "special"));
             if (displayProtections)
             {
-                String[][] entries = 
+                String[][] entries =
+                        {
+
+                                {
+                                        "kinetic",
+                                        "energy"
+                                },
+
+                                {
+                                        "heat",
+                                        "cold",
+                                        "acid",
+                                        "electricity"
+                                }
+                        };
+                String[] protections =
+                        {
+                                "kinetic",
+                                "energy",
+                                "heat",
+                                "cold",
+                                "acid",
+                                "electricity"
+                        };
+                String[] tooltipProtections =
+                        {
+                                "armor_eff_kinetic",
+                                "armor_eff_energy",
+                                "armor_eff_elemental_heat",
+                                "armor_eff_elemental_cold",
+                                "armor_eff_elemental_acid",
+                                "armor_eff_elemental_electrical"
+                        };
+                for (String[] entry : entries)
                 {
-                    
+                    for (String s : entry)
                     {
-                        "kinetic",
-                        "energy"
-                    },
-                    
-                    {
-                        "heat",
-                        "cold",
-                        "acid",
-                        "electricity"
-                    }
-                };
-                String[] protections = 
-                {
-                    "kinetic",
-                    "energy",
-                    "heat",
-                    "cold",
-                    "acid",
-                    "electricity"
-                };
-                String[] tooltipProtections = 
-                {
-                    "armor_eff_kinetic",
-                    "armor_eff_energy",
-                    "armor_eff_elemental_heat",
-                    "armor_eff_elemental_cold",
-                    "armor_eff_elemental_acid",
-                    "armor_eff_elemental_electrical"
-                };
-                for (String[] entry : entries) {
-                    for (String s : entry) {
-                        if (free < names.length) {
-                            if (hasObjVar(self, "armor.fake_armor." + s)) {
+                        if (free < names.length)
+                        {
+                            if (hasObjVar(self, "armor.fake_armor." + s))
+                            {
                                 int displayedProtections = getIntObjVar(self, "armor.fake_armor." + s);
                                 names[free] = (String) (armor.SPECIAL_PROTECTION_MAP.get(s));
                                 attribs[free++] = Integer.toString(displayedProtections);

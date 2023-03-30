@@ -5,9 +5,6 @@ import script.library.*;
 
 public class playback extends script.base_script
 {
-    public playback()
-    {
-    }
     public static final String MODULE_OBJVAR = "module_data.playback";
     public static final String SCRIPT_NAME = "systems.crafting.droid.modules.playback";
     public static final String STF = "pet/droid_modules";
@@ -37,6 +34,10 @@ public class playback extends script.base_script
     public static final int MENU_TYPE = menu_info_types.SERVER_MENU10;
     public static final int RECORD_TIMEOUT = 30;
     public static final int RECORD_TIME = 30;
+    public playback()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int modules = getIntObjVar(self, MODULE_OBJVAR + ".modules");
@@ -54,7 +55,7 @@ public class playback extends script.base_script
                 setObjVar(self, MODULE_OBJVAR + ".tracks", tracks);
             }
         }
-        else 
+        else
         {
             int[] tracks = new int[modules];
             for (int i = 0; i < modules; i++)
@@ -68,6 +69,7 @@ public class playback extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -98,13 +100,14 @@ public class playback extends script.base_script
             {
                 mi.addRootMenu(MENU_TYPE, SID_MENU_PLAYBACK);
             }
-            else 
+            else
             {
                 mi.addRootMenu(MENU_TYPE, SID_MENU_STOP_PLAYBACK);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -125,13 +128,14 @@ public class playback extends script.base_script
             {
                 accessPlaybackModule(self, player);
             }
-            else 
+            else
             {
                 performance.stopMusicNow(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -152,6 +156,7 @@ public class playback extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleModuleAccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -173,7 +178,7 @@ public class playback extends script.base_script
             }
             confirmDeleteTrack(self, player, idx);
         }
-        else 
+        else
         {
             if (idx < 0)
             {
@@ -197,13 +202,14 @@ public class playback extends script.base_script
             {
                 startRecording(self, player, idx);
             }
-            else 
+            else
             {
                 playTrack(self, player, tracks[idx]);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRecordTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         int recStatus = -1;
@@ -230,6 +236,7 @@ public class playback extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformerStartPerforming(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -252,6 +259,7 @@ public class playback extends script.base_script
         messageTo(self, "handleRecordFinished", newParams, RECORD_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformerStopPerforming(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -270,6 +278,7 @@ public class playback extends script.base_script
         stopListeningToMessage(player, "handlePerformerStopPerforming");
         return SCRIPT_CONTINUE;
     }
+
     public int handleRecordFinished(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -294,7 +303,7 @@ public class playback extends script.base_script
         {
             sendSystemMessage(player, SID_MSG_REC_FAIL_CORRUPTED);
         }
-        else 
+        else
         {
             tracks[idx] = recType;
             obj_id pcd = callable.getCallableCD(self);
@@ -309,6 +318,7 @@ public class playback extends script.base_script
         stopListeningToMessage(player, "handlePerformerStopPerforming");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -338,6 +348,7 @@ public class playback extends script.base_script
         utils.removeScriptVar(self, MODULE_OBJVAR + ".delete_track");
         return SCRIPT_CONTINUE;
     }
+
     public void accessPlaybackModule(obj_id self, obj_id player) throws InterruptedException
     {
         int modules = getIntObjVar(self, MODULE_OBJVAR + ".modules");
@@ -355,7 +366,7 @@ public class playback extends script.base_script
                 trackNames[i] += " " + (i + 1) + ": ";
                 trackNames[i] += LIST_BLANK_TRACK;
             }
-            else 
+            else
             {
                 trackNames[i] = LIST_TRACK;
                 trackNames[i] += " " + (i + 1) + ": ";
@@ -370,6 +381,7 @@ public class playback extends script.base_script
             showSUIPage(pid);
         }
     }
+
     public void startRecording(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         int[] tracks = getIntArrayObjVar(self, MODULE_OBJVAR + ".tracks");
@@ -394,12 +406,14 @@ public class playback extends script.base_script
         messageTo(self, "handleRecordTimeout", params, RECORD_TIMEOUT, false);
         listenToMessage(player, "handlePerformerStartPerforming");
     }
+
     public void stopRecording(obj_id self) throws InterruptedException
     {
         removeObjVar(self, MODULE_OBJVAR + ".recording");
         removeObjVar(self, MODULE_OBJVAR + ".recordStatus");
         utils.removeScriptVar(self, MODULE_OBJVAR + ".sessionID");
     }
+
     public void confirmDeleteTrack(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         int[] tracks = getIntArrayObjVar(self, MODULE_OBJVAR + ".tracks");
@@ -417,6 +431,7 @@ public class playback extends script.base_script
             utils.setScriptVar(self, MODULE_OBJVAR + ".delete_track", idx);
         }
     }
+
     public void playTrack(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         if (idx == 0)
@@ -434,6 +449,7 @@ public class playback extends script.base_script
         performance.startMusic(self, song, instrument);
         setPerformanceListenTarget(player, self);
     }
+
     public dictionary getPerformanceData(int index) throws InterruptedException
     {
         index--;
@@ -453,6 +469,7 @@ public class playback extends script.base_script
         ret.put("instrument", instrument);
         return ret;
     }
+
     public String parseTrackName(int index) throws InterruptedException
     {
         dictionary data = getPerformanceData(index);
@@ -483,7 +500,7 @@ public class playback extends script.base_script
             {
                 instrumentName = "";
             }
-            else 
+            else
             {
                 instrumentName = indefiniteArticle + " ";
             }
@@ -492,7 +509,7 @@ public class playback extends script.base_script
                 instrumentName += st.nextToken() + " ";
             }
         }
-        else 
+        else
         {
             instrumentName += " ";
         }

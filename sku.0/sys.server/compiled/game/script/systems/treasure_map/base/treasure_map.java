@@ -5,9 +5,6 @@ import script.library.*;
 
 public class treasure_map extends script.base_script
 {
-    public treasure_map()
-    {
-    }
     public static final string_id SID_USE = new string_id("treasure_map/treasure_map", "use");
     public static final string_id SID_SEARCH_AREA = new string_id("treasure_map/treasure_map", "search_area");
     public static final string_id SID_EXTRACT_TREASURE = new string_id("treasure_map/treasure_map", "extract_treasure");
@@ -37,12 +34,17 @@ public class treasure_map extends script.base_script
     public static final int EXPLOITER_RANGE = 64;
     public static final int MIN_DISTANCE_TO_MAP_OWNER = 300;
     public static final int MAX_DISTANCE_FOR_SEARCH = 16;
+    public treasure_map()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id map = self;
         messageTo(map, "getMapTreasurePlanet", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id map = self;
@@ -63,6 +65,7 @@ public class treasure_map extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -78,25 +81,26 @@ public class treasure_map extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_SEARCH_AREA);
                 setObjVar(map, "searchArea", true);
             }
         }
-        else 
+        else
         {
             if (!isValidId(getWaypoint(map, player)))
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_EXTRACT_TREASURE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) && item == -1)
@@ -141,7 +145,7 @@ public class treasure_map extends script.base_script
                 searchArea(map, player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 doDebugLogging("treasureMap", "player has no objvars or has deleted waypoint");
                 displayDialog(map, player);
@@ -150,6 +154,7 @@ public class treasure_map extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getWaypoint(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(map))
@@ -167,12 +172,15 @@ public class treasure_map extends script.base_script
         obj_id[] data = getWaypointsInDatapad(player);
         if (data != null)
         {
-            for (obj_id datum : data) {
-                if (isIdNull(datum)) {
+            for (obj_id datum : data)
+            {
+                if (isIdNull(datum))
+                {
                     continue;
                 }
                 location waypointLoc = getWaypointLocation(datum);
-                if ((waypointLoc != null) && (waypointLoc.equals(treasureLoc))) {
+                if ((waypointLoc != null) && (waypointLoc.equals(treasureLoc)))
+                {
                     doDebugLogging("treasureMap", "Waypoint found ");
                     return datum;
                 }
@@ -180,6 +188,7 @@ public class treasure_map extends script.base_script
         }
         return null;
     }
+
     public void displayDialog(obj_id map, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(map, "suiOpen"))
@@ -220,6 +229,7 @@ public class treasure_map extends script.base_script
         }
         createDialog(map, player, text, title);
     }
+
     public int createDialog(obj_id map, obj_id player, String text, String title) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -255,6 +265,7 @@ public class treasure_map extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int handleDialogInput(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id map = self;
@@ -268,19 +279,20 @@ public class treasure_map extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            boolean waypointStored = storeWaypoint(map, player);
-            if (waypointStored)
-            {
-                setObjVar(map, "searchArea", true);
-            }
-            utils.removeScriptVar(map, "suiOpen");
-            return SCRIPT_CONTINUE;
+                boolean waypointStored = storeWaypoint(map, player);
+                if (waypointStored)
+                {
+                    setObjVar(map, "searchArea", true);
+                }
+                utils.removeScriptVar(map, "suiOpen");
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            utils.removeScriptVar(map, "suiOpen");
-            return SCRIPT_CONTINUE;
+                utils.removeScriptVar(map, "suiOpen");
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean storeWaypoint(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -330,13 +342,14 @@ public class treasure_map extends script.base_script
             boolean boolSuccessWaypointCreation = createMapWaypointAtLocation(map, player, locationMapLocation);
             return true;
         }
-        else 
+        else
         {
             CustomerServiceLog("treasureMap", "a treasure map " + map + "failed to attain a valid location for player " + player + ". [ storeWaypoint() ]");
             sendSystemMessage(player, "The treasure map failed to attain a valid location.", null);
         }
         return false;
     }
+
     public void searchArea(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -366,6 +379,7 @@ public class treasure_map extends script.base_script
         params.put("player", player);
         messageTo(map, "finishSearchArea", params, 5, false);
     }
+
     public int finishSearchArea(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id map = self;
@@ -397,12 +411,13 @@ public class treasure_map extends script.base_script
             setObjVar(map, "treasureLoc", treasureLoc);
             setObjVar(map, "pinpoint", true);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_SYS_CANT_PINPOINT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void extractTreasure(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -448,11 +463,12 @@ public class treasure_map extends script.base_script
         {
             sendSystemMessage(player, SID_SYS_DIST_NEAR);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_SYS_DIST_FAR);
         }
     }
+
     public int spawnTreasure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id map = self;
@@ -535,6 +551,7 @@ public class treasure_map extends script.base_script
         destroyObject(map);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getTreasureParams(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -598,6 +615,7 @@ public class treasure_map extends script.base_script
         }
         return true;
     }
+
     public boolean setPlayerGroupLevel(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -626,27 +644,34 @@ public class treasure_map extends script.base_script
         {
             obj_id[] groupOids = getGroupMemberIds(groupId);
             int finalCount = 1;
-            for (obj_id groupOid : groupOids) {
-                if (!isValidId(groupOid) || !exists(groupOid)) {
+            for (obj_id groupOid : groupOids)
+            {
+                if (!isValidId(groupOid) || !exists(groupOid))
+                {
                     continue;
                 }
-                if (groupOid == player) {
+                if (groupOid == player)
+                {
                     continue;
                 }
                 location groupMemberLocation = getLocation(groupOid);
-                if (groupMemberLocation == null) {
+                if (groupMemberLocation == null)
+                {
                     continue;
                 }
                 String groupMemberArea = groupMemberLocation.area;
-                if (!ownerArea.equals(groupMemberArea)) {
+                if (!ownerArea.equals(groupMemberArea))
+                {
                     continue;
                 }
                 float dist = utils.getDistance2D(ownerLocation, groupMemberLocation);
-                if (dist > MIN_DISTANCE_TO_MAP_OWNER) {
+                if (dist > MIN_DISTANCE_TO_MAP_OWNER)
+                {
                     continue;
                 }
                 int groupMemberLevel = getLevel(groupOid);
-                if (groupMemberLevel > intPlayerLevel) {
+                if (groupMemberLevel > intPlayerLevel)
+                {
                     intPlayerLevel = groupMemberLevel;
                 }
                 finalCount++;
@@ -660,13 +685,14 @@ public class treasure_map extends script.base_script
                 setObjVar(map, "groupModifier", 8);
             }
         }
-        else 
+        else
         {
             removeObjVar(map, "groupModifier");
         }
         setObjVar(map, "playerLevel", intPlayerLevel);
         return true;
     }
+
     public int findAmbushNearBy(obj_id map, obj_id player, int intPlayerLevel, location ownerLocation) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -734,6 +760,7 @@ public class treasure_map extends script.base_script
         }
         return exploiterLevel;
     }
+
     public int getEnemyReCount(obj_id player, obj_id map, int intCurrentCount) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -764,7 +791,7 @@ public class treasure_map extends script.base_script
                 {
                     groupRecount = modifier + 2;
                 }
-                else 
+                else
                 {
                     groupRecount = rand(modifier, modifier + 1);
                 }
@@ -776,6 +803,7 @@ public class treasure_map extends script.base_script
         }
         return intCurrentCount;
     }
+
     public location getMapLocation(obj_id map, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -819,12 +847,13 @@ public class treasure_map extends script.base_script
             }
             setObjVar(map, "treasureLoc", treasureLoc);
         }
-        else 
+        else
         {
-            treasureLoc = (location)storedLoc.clone();
+            treasureLoc = (location) storedLoc.clone();
         }
         return treasureLoc;
     }
+
     public boolean createMapWaypointAtLocation(obj_id map, obj_id player, location locationMapLocation) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -858,6 +887,7 @@ public class treasure_map extends script.base_script
         sendSystemMessage(player, SID_SYS_STORE_WAYPOINT);
         return true;
     }
+
     public int getMobLevel(obj_id map, obj_id player, int playerLevel, int intMaxLevel, int intMinLevel, int mobLevelModifier) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -909,6 +939,7 @@ public class treasure_map extends script.base_script
         }
         return newMobLevel;
     }
+
     public int getMapTreasurePlanet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id map = self;
@@ -932,7 +963,7 @@ public class treasure_map extends script.base_script
         {
             chosenPlanet = planetList[0];
         }
-        else 
+        else
         {
             int planetIndex = rand(0, planetList.length - 1);
             chosenPlanet = planetList[planetIndex];
@@ -941,12 +972,13 @@ public class treasure_map extends script.base_script
         {
             setObjVar(map, "planet", chosenPlanet);
         }
-        else 
+        else
         {
             setObjVar(map, "planet", "tatooine");
         }
         return SCRIPT_CONTINUE;
     }
+
     public String checkForBossMobSpawn(obj_id player, int mobLevel, int groupModifier, int dataTableIdx, String loot_table) throws InterruptedException
     {
         if (!loot_table.equals(LOOT_TABLE_81_90))
@@ -967,6 +999,7 @@ public class treasure_map extends script.base_script
         }
         return dataTableGetString(TREASURE_TABLE, dataTableIdx, "boss_mob");
     }
+
     public boolean verifyVariablesNotNull(String loot_table, String type, int mobLevel, int groupModifier, int count, int datTableIdx) throws InterruptedException
     {
         if (loot_table.equals("") || loot_table.equals(""))
@@ -989,12 +1022,9 @@ public class treasure_map extends script.base_script
         {
             return false;
         }
-        if (datTableIdx < 0)
-        {
-            return false;
-        }
-        return true;
+        return datTableIdx >= 0;
     }
+
     public boolean checkState(obj_id player) throws InterruptedException
     {
         if (getState(player, STATE_COMBAT) == 1)
@@ -1014,6 +1044,7 @@ public class treasure_map extends script.base_script
         }
         return true;
     }
+
     public boolean checkScene(obj_id player, obj_id map) throws InterruptedException
     {
         String req_planet = getStringObjVar(map, "planet");
@@ -1027,6 +1058,7 @@ public class treasure_map extends script.base_script
         sendSystemMessage(player, "You need to travel to " + requiredPlanet + " before using the map.", null);
         return false;
     }
+
     public void doDebugLogging(String section, String message) throws InterruptedException
     {
         LOG(section, message);

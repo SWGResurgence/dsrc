@@ -158,7 +158,7 @@ public class tusken_expert extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -173,6 +173,7 @@ public class tusken_expert extends script.base_script
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setTriggerVolume(self);
+		setMovementPercent(self, 3.0f);
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException

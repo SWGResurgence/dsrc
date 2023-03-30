@@ -3475,7 +3475,7 @@ public class pet_lib extends script.base_script
         int maxDamage = getIntObjVar(petControlDevice, "creature_attribs.maxDamage");
         if (isIdValid(player) && exists(player))
         {
-            //setObjVar(pet, "difficultyClass", craftinglib.isTrader(player) ? 1 : 0); - TODO: Fix this later
+            setObjVar(pet, "difficultyClass", craftinglib.isTrader(player) ? 1 : 0);// - TODO: Fix this later
             dictionary droidDefaultStatsDict = dataTableGetRow(TBL_MOB_STAT_BALANCE, level - 1);
             myHealth = droidDefaultStatsDict.getInt("HP");
             toHit = droidDefaultStatsDict.getInt("ToHit") - 5;

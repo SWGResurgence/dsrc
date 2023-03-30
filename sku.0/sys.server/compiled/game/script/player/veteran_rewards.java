@@ -814,7 +814,7 @@ public class veteran_rewards extends script.base_script
         String destinationGalaxy = params.getString("destinationGalaxy");
         if ((destinationGalaxy != null) && (destinationGalaxy.length() > 0))
         {
-            freeCtsDisplayDestGalaxyChoice(self, "\\" + colors_hex.RED + "You cannot create any more characters on the selected destination galaxy " + destinationGalaxy + "." + "\\" + colors_hex.WHITE);
+            freeCtsDisplayDestGalaxyChoice(self, colors_hex.HEADER + colors_hex.RED + "You cannot create any more characters on the selected destination galaxy " + destinationGalaxy + "." + "\\" + colors_hex.WHITE);
         }
         return SCRIPT_CONTINUE;
     }
@@ -823,7 +823,7 @@ public class veteran_rewards extends script.base_script
         String destinationGalaxy = params.getString("destinationGalaxy");
         if ((destinationGalaxy != null) && (destinationGalaxy.length() > 0))
         {
-            freeCtsDisplayDestGalaxyChoice(self, "\\" + colors_hex.RED + "The selected destination galaxy " + destinationGalaxy + " is currently unavailable." + "\\" + colors_hex.WHITE);
+            freeCtsDisplayDestGalaxyChoice(self, colors_hex.HEADER + colors_hex.RED + "The selected destination galaxy " + destinationGalaxy + " is currently unavailable." + "\\" + colors_hex.WHITE);
         }
         return SCRIPT_CONTINUE;
     }
@@ -1174,7 +1174,7 @@ public class veteran_rewards extends script.base_script
         final String destinationGalaxy = params.getString("destinationGalaxy");
         if ((destinationGalaxy != null) && (destinationGalaxy.length() > 0))
         {
-            ctsDisplayDestGalaxyChoice(self, item, "\\" + colors_hex.RED + "You cannot create any more characters on the selected destination galaxy " + destinationGalaxy + "." + "\\" + colors_hex.WHITE);
+            ctsDisplayDestGalaxyChoice(self, item, colors_hex.HEADER + colors_hex.RED + "You cannot create any more characters on the selected destination galaxy " + destinationGalaxy + "." + "\\" + colors_hex.WHITE);
         }
         return SCRIPT_CONTINUE;
     }
@@ -1189,7 +1189,7 @@ public class veteran_rewards extends script.base_script
         final String destinationGalaxy = params.getString("destinationGalaxy");
         if ((destinationGalaxy != null) && (destinationGalaxy.length() > 0))
         {
-            ctsDisplayDestGalaxyChoice(self, item, "\\" + colors_hex.RED + "The selected destination galaxy " + destinationGalaxy + " is currently unavailable." + "\\" + colors_hex.WHITE);
+            ctsDisplayDestGalaxyChoice(self, item, colors_hex.HEADER + colors_hex.RED + "The selected destination galaxy " + destinationGalaxy + " is currently unavailable." + "\\" + colors_hex.WHITE);
         }
         return SCRIPT_CONTINUE;
     }

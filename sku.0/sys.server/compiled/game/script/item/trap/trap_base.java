@@ -5,9 +5,6 @@ import script.library.*;
 
 public class trap_base extends script.base_script
 {
-    public trap_base()
-    {
-    }
     public static final string_id SID_DECODE = new string_id("treasure_map/treasure_map", "decode");
     public static final string_id SID_SYS_NOT_READY = new string_id("trap/trap", "sys_not_ready");
     public static final string_id SID_SYS_MISS = new string_id("trap/trap", "sys_miss");
@@ -15,6 +12,10 @@ public class trap_base extends script.base_script
     public static final string_id SID_SYS_NO_PETS = new string_id("trap/trap", "sys_no_pets");
     public static final string_id SID_ADD_TRAP_TO_DROID = new string_id("pet/droid_modules", "add_trap_to_droid");
     public static final string_id SID_NO_TRAP_IN_SPACE = new string_id("space/space_interaction", "no_trap_in_space");
+    public trap_base()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -38,6 +39,7 @@ public class trap_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -59,6 +61,7 @@ public class trap_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -111,6 +114,7 @@ public class trap_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void trapUsed(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "droid_trap"))
@@ -123,12 +127,13 @@ public class trap_base extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setCount(self, intUses);
         }
         return;
     }
+
     public int trapDone(obj_id self, dictionary params) throws InterruptedException
     {
         trapUsed(self);
@@ -137,10 +142,12 @@ public class trap_base extends script.base_script
         utils.setScriptVar(self, "grantedXP", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int trapHit(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int trapMiss(obj_id self, dictionary params) throws InterruptedException
     {
         int misses = utils.getIntScriptVar(self, "misses");
@@ -153,6 +160,7 @@ public class trap_base extends script.base_script
         utils.setScriptVar(self, "misses", misses);
         return SCRIPT_CONTINUE;
     }
+
     public void grantTrapXP(obj_id player, obj_id target, float trapMod) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -163,32 +171,34 @@ public class trap_base extends script.base_script
         if (!hasObjVar(self, "droid_trap"))
         {
             float targetLevel = getLevel(target);
-            int pseudoDamage = (int)(StrictMath.pow(targetLevel, 1.5f) * 2.2f + 66.0f);
+            int pseudoDamage = (int) (StrictMath.pow(targetLevel, 1.5f) * 2.2f + 66.0f);
             if (pseudoDamage > 2000)
             {
                 pseudoDamage = 2000;
             }
-            pseudoDamage *= (int)trapMod;
+            pseudoDamage *= (int) trapMod;
             xp.updateCombatXpList(target, player, xp.SCOUT, pseudoDamage);
             return;
         }
-        else 
+        else
         {
             float targetLevel = getLevel(target);
-            int pseudoDamage = (int)(StrictMath.pow(targetLevel, 1.5f) * 1.0f + 66.0f);
+            int pseudoDamage = (int) (StrictMath.pow(targetLevel, 1.5f) * 1.0f + 66.0f);
             if (pseudoDamage > 1000)
             {
                 pseudoDamage = 1000;
             }
-            pseudoDamage *= (int)trapMod;
+            pseudoDamage *= (int) trapMod;
             xp.updateCombatXpList(target, player, xp.SCOUT, pseudoDamage);
             return;
         }
     }
+
     public void assignTrapEffect(obj_id player, obj_id target, int drainhealth, int drainact, int drainmind) throws InterruptedException
     {
         drainAttributes(target, drainact, drainmind);
     }
+
     public void droidTrapUsed(obj_id self) throws InterruptedException
     {
         obj_id controlDevice = callable.getCallableCD(self);
@@ -199,7 +209,7 @@ public class trap_base extends script.base_script
             removeObjVar(self, "droid_trap");
             removeObjVar(controlDevice, "droid_trap");
         }
-        else 
+        else
         {
             setObjVar(self, "droid_trap.trap_num.charges", intUses);
             setObjVar(controlDevice, "droid_trap.trap_num.charges", intUses);

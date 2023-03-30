@@ -12,6 +12,7 @@ public class resource_industrial_replicator extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 200000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
+    public static final String ROOT_SPACE_RESOURCE_CLASS = "space_resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
     public static final String OBJVAR_RESOURCE_REWARDED = "rewarded";
@@ -27,6 +28,37 @@ public class resource_industrial_replicator extends script.base_script
     public static final String SCRIPTVAR_SUB_CLASSES = "resource.subclass";
     public static final String SCRIPTVAR_TYPES = "resource.types";
     public static final String SCRIPTVAR_RESOURCECHOSEN = "resource.resoucechosen";
+    public static final String[] SPACE_RESOURCE_LOCALIZED = {
+            "@resource/resource_names:space_chemical_acid",
+            "@resource/resource_names:space_chemical_cyanomethanic",
+            "@resource/resource_names:space_chemical_petrochem",
+            "@resource/resource_names:space_chemical_sulfuric",
+            "@resource/resource_names:space_gas_methane",
+            "@resource/resource_names:space_gas_organometallic",
+            "@resource/resource_names:space_gem_crystal",
+            "@resource/resource_names:space_gem_diamond",
+            "@resource/resource_names:space_metal_carbonaceous",
+            "@resource/resource_names:space_metal_ice",
+            "@resource/resource_names:space_metal_iron",
+            "@resource/resource_names:space_metal_obsidian",
+            "@resource/resource_names:space_metal_silicaceous"
+    };
+    public static final String[] SPACE_RESOURCE_CONST = {
+            "space_chemical_acid",
+            "space_chemical_cyanomethanic",
+            "space_chemical_petrochem",
+            "space_chemical_sulfuric",
+            "space_gas_methane",
+            "space_gas_organometallic",
+            "space_gem_crystal",
+            "space_gem_diamond",
+            "space_metal_carbonaceous",
+            "space_metal_ice",
+            "space_metal_iron",
+            "space_metal_obsidian",
+            "space_metal_silicaceous"
+    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
@@ -35,6 +67,7 @@ public class resource_industrial_replicator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
@@ -51,6 +84,7 @@ public class resource_industrial_replicator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -65,9 +99,11 @@ public class resource_industrial_replicator extends script.base_script
             }
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_INUSE, 1);
             chooseResourceClass(player, ROOT_RESOURCE_CLASS, true);
+            chooseResourceClass(player, ROOT_SPACE_RESOURCE_CLASS, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVeteranHarvestDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
@@ -76,6 +112,7 @@ public class resource_industrial_replicator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceClass(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -122,11 +159,12 @@ public class resource_industrial_replicator extends script.base_script
             }
             break;
             default:
-            cleanup();
-            break;
+                cleanup();
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceType(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -170,6 +208,7 @@ public class resource_industrial_replicator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleChooseResourceTypeStats(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -202,7 +241,8 @@ public class resource_industrial_replicator extends script.base_script
                     testMsg += target_dummy.addLineBreaks(2);
                     testMsg += target_dummy.ORANGE + "@" + SID_RESOURCE_NAME + " = " + target_dummy.YELLOW + getResourceName(resourceChosen);
                     testMsg += target_dummy.addLineBreaks(1);
-                    for (resource_attribute resourceAttrib : resourceAttribs) {
+                    for (resource_attribute resourceAttrib : resourceAttribs)
+                    {
                         string_id temp = new string_id("obj_attr_n", resourceAttrib.getName());
                         testMsg += target_dummy.GREEN + "@" + temp + " = " + target_dummy.WHITE + resourceAttrib.getValue();
                         testMsg += target_dummy.addLineBreaks(1);
@@ -233,11 +273,12 @@ public class resource_industrial_replicator extends script.base_script
                 }
             }
             default:
-            cleanup();
-            break;
+                cleanup();
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCreateChosenResourceConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -284,11 +325,12 @@ public class resource_industrial_replicator extends script.base_script
                 break;
             }
             default:
-            cleanup();
-            break;
+                cleanup();
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showResourceStats(obj_id player, obj_id resource) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -316,7 +358,8 @@ public class resource_industrial_replicator extends script.base_script
             return;
         }
         attribStrings = utils.addElement(attribStrings, "@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
-        for (resource_attribute resourceAttrib : resourceAttribs) {
+        for (resource_attribute resourceAttrib : resourceAttribs)
+        {
             string_id temp = new string_id("obj_attr_n", resourceAttrib.getName());
             attribStrings = utils.addElement(attribStrings, "@" + temp + " = " + resourceAttrib.getValue());
         }
@@ -332,10 +375,12 @@ public class resource_industrial_replicator extends script.base_script
             cleanup();
         }
     }
+
     public void chooseResourceClass(obj_id player, String parentClass) throws InterruptedException
     {
         chooseResourceClass(player, parentClass, false);
     }
+
     public void chooseResourceClass(obj_id player, String parentClass, boolean topLevel) throws InterruptedException
     {
         if (!utils.hasScriptVar(getSelf(), SCRIPTVAR_INUSE))
@@ -376,8 +421,10 @@ public class resource_industrial_replicator extends script.base_script
         }
         String[] temp = new String[goodResources];
         goodResources = 0;
-        for (String resourceClass : resourceClasses) {
-            if (resourceClass != null) {
+        for (String resourceClass : resourceClasses)
+        {
+            if (resourceClass != null)
+            {
                 temp[goodResources++] = resourceClass;
             }
         }
@@ -414,6 +461,7 @@ public class resource_industrial_replicator extends script.base_script
             cleanup();
         }
     }
+
     public void chooseResourceType(obj_id player, String parentClass) throws InterruptedException
     {
         if (!utils.hasScriptVar(getSelf(), SCRIPTVAR_INUSE))
@@ -446,6 +494,7 @@ public class resource_industrial_replicator extends script.base_script
             cleanup();
         }
     }
+
     public void cleanup() throws InterruptedException
     {
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_INUSE);
@@ -454,13 +503,16 @@ public class resource_industrial_replicator extends script.base_script
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_TYPES);
         ((getSelf()).getScriptVars()).remove(SCRIPTVAR_RESOURCECHOSEN);
     }
+
     public String[] filterTopLevelResourceList(String parentClass) throws InterruptedException
     {
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
         Vector tempResourceClassTwo = null;
-        for (String tempResourceClass1 : tempResourceClass) {
-            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
+        for (String tempResourceClass1 : tempResourceClass)
+        {
+            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource"))
+            {
                 tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
             }
         }

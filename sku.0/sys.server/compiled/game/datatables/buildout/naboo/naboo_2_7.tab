@@ -638,3 +638,74 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -945626147	-1551938285	object/building/kashyyyk/frn_sordaan_armory_static.iff	1	2.48476	0.662425	-1.06308	0.488874	0	0.872354	0		$|
 -797314927	-1551938285	object/tangible/ground_spawning/area_spawner.iff	1	0.0748728	0.267105	-1.02578	0.99489	0	-0.100962	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|9.000000|fltMinSpawnTime|2|3.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|chronicle_reward_vendor|strSpawnerType|4|area|strSpawns|4|chronicles_reward_vendor|$|
 -19864356	0	object/tangible/planet_map_location/city.iff	0	1348.73	5.94832	142.789	0.938444	0	0.345432	0		$|
+-11725342494	0	object/tangible/ground_spawning/area_spawner.iff	0	1328.2192	6	38.291016	-0.33677396	0	0.94158554	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|respec_item_delivery_vendor|strSpawnerType|4|area|strSpawns|4|respec_item_delivery_vendor|$|
+-993564890	0	object/static/structure/naboo/fountain_naboo_style_1.iff	0	1272	6.000001	54	0.9358969	0	0.35227406	0		$|
+-993565018	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	0	1278	6	36	1	0	0	0		$|
+-993565044	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	0	1256	6	56	1	0	0	0		$|
+-993565304	0	object/static/structure/general/streetlamp_medium_blue_style_01.iff	0	1252.2314	6	38.13379	1	0	0	0		$|
+-993565317	0	object/static/structure/general/streetlamp_medium_blue_style_01.iff	0	1261.4604	6	30.474121	0.70710725	0	-0.70710623	0		$|
+-993565262	0	object/static/structure/custom/irish_memorial.iff	0	1259.4121	7.6220007	37.820312	0.9410756	0	0.33819622	0		$|
+-993564721	0	object/static/structure/naboo/bridge_stairs_s03.iff	0	1289.7705	6.000001	38.563965	0.42837954	0	0.9035989	0		$|
+-993564647	0	object/static/structure/naboo/bridge_stairs_s02.iff	0	1256.23	6.0000033	66.413086	0.42837954	0	0.9035989	0		$|
+-993564547	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1269.4048	6	34.135254	-0.33603027	0	0.9418512	0		$|
+-993564544	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1262	6.000001	41	-0.33603027	0	0.9418512	0		$|
+-993564570	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1255.8257	6.000002	45.873047	-0.33603027	0	0.9418512	0		$|
+-993564500	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	0	1273.4048	6.000003	31.135254	-0.33603027	0	0.9418512	0		$|
+-993564449	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	0	1251	6	60	0.9035985	0	-0.4283804	0		$|
+-993565129	0	object/static/structure/naboo/enclosed_walkway_s01.iff	0	1259	6.000001	43	0.9376466	0	0.34758994	0		$|
+-993565190	0	object/static/structure/naboo/enclosed_walkway_s01.iff	0	1265.4575	6.0002136	37.53418	0.93764657	0	0.34759015	0		$|
+-891055583	0	object/tangible/ground_spawning/area_spawner.iff	0	1277.895	6	55.25049	0.9435474	0	0.33123738	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|original_vet_reward_vendor|strSpawnerType|4|area|strSpawns|4|original_vet_reward_vendor|$|
+-891059711	0	object/tangible/ground_spawning/area_spawner.iff	0	1272.104	6	60.822266	0.9367592	0	0.34997472	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|custom_vet_reward_vendor|strSpawnerType|4|area|strSpawns|4|custom_vet_reward_vendor|$|
+-918046478	0	object/tangible/event_perk/banner_imperial_style_01.iff	0	1261.94629	6	73.3222656	0.9427547	0	0.3334871	0		$|
+-918054409	0	object/tangible/event_perk/banner_imperial_style_01.iff	0	1295.20215	6	45.71045	0.9427547	0	0.333487123	0		$|
+12991219871	0	object/static/item/item_tapestry_imperial.iff	0	-4843.816	15.461556	4166.574	0.420489	0	0.907297	0		buildout_utility.write|0|1|$|
+12991208790	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	0	-4871.3057	33.248074	4100.239	1	0	0	0		buildout_utility.write|0|1|$|
+12991220314	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	0	-4843.2524	19.074202	4166.992	0.90475124	0	-0.42594036	0		buildout_utility.write|0|1|$|
+12991209063	0	object/static/structure/naboo/nboo_imprv_flagpole_s01.iff	0	-4912.2236	33.409424	4137.719	0.5938178	0	0.804599	0		buildout_utility.write|0|1|$|
+12991216600	0	object/static/item/item_tapestry_imperial.iff	0	-4903.826	9.766364	4083.8506	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991216599	0	object/static/item/item_tapestry_imperial.iff	0	-4906.697	9.764897	4080.5127	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991214953	0	object/static/item/item_tapestry_imperial.iff	0	-4941.8027	9.652413	4080.443	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991214798	0	object/static/item/item_tapestry_imperial.iff	0	-4944.696	9.650946	4077.0378	0.93589705	0	0.35227367	0		buildout_utility.write|0|1|$|
+12991215414	0	object/static/item/item_tapestry_imperial.iff	0	-4938.8936	9.764897	4083.7551	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991215415	0	object/static/item/item_tapestry_imperial.iff	0	-4935.938	9.766364	4087.2412	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991216601	0	object/static/item/item_tapestry_imperial.iff	0	-4909.6636	9.652413	4076.9866	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991216602	0	object/static/item/item_tapestry_imperial.iff	0	-4912.5293	9.650946	4073.6006	0.9358969	0	0.35227406	0		buildout_utility.write|0|1|$|
+12991221351	0	object/static/structure/general/planter_generic_style_1.iff	0	-4932.8037	6.000001	4067.3486	0.8577088	0	0.5141358	0		buildout_utility.write|0|1|$|
+12991221350	0	object/static/structure/general/planter_generic_style_1.iff	0	-4928.243	6.000003	4073.313	0.71679956	0	-0.69727975	0		buildout_utility.write|0|1|$|
+12991221264	0	object/static/structure/general/planter_generic_style_1.iff	0	-4933.1533	6.000001	4073.1897	0.44430497	0	0.8958755	0		buildout_utility.write|0|1|$|
+12991221161	0	object/static/structure/general/planter_generic_style_1.iff	0	-4927.6577	6.000003	4068.5034	0.91696227	0	0.39897397	0		buildout_utility.write|0|1|$|
+12991218346	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	0	-4908.3403	3.660727	4038.0452	0.9089656	0	-0.4168712	0		buildout_utility.write|0|1|$|
+12991217216	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	0	-4899.858	6	4052.4573	0.90896565	0	-0.41687116	0		buildout_utility.write|0|1|$|
+12991211568	0	object/static/item/item_tech_console_sectional_c.iff	0	-4940.619	6	4082.4084	-0.3493727	0	0.9369838	0		buildout_utility.write|0|1|$|
+12991211554	0	object/static/item/item_tech_console_sectional_b.iff	0	-4943.472	6	4078.9702	-0.3493734	0	0.9369836	0		buildout_utility.write|0|1|$|
+12991211594	0	object/static/item/item_tech_console_sectional_b.iff	0	-4937.508	6	4085.7695	-0.3493734	0	0.9369836	0		buildout_utility.write|0|1|$|
+12991219409	0	object/static/item/item_tapestry_imperial.iff	0	-4858.898	15.569157	4179.312	0.42048922	0	0.9072972	0		buildout_utility.write|0|1|$|
+12991220226	0	object/static/structure/naboo/streetlamp_naboo_theed_style_1.iff	0	-4858.5366	18.830763	4180.021	0.90475154	0	-0.42593974	0		buildout_utility.write|0|1|$|
+12991229955	0	object/static/structure/general/old_safe.iff	0	-4945.2124	7.051181	4082.8423	0.90687	0	-0.42141047	0		buildout_utility.write|0|1|$|
+12991229885	0	object/static/structure/general/old_safe.iff	0	-4944.717	7.0667987	4083.4185	0.9068703	0	-0.42140985	0		buildout_utility.write|0|1|$|
+12991224619	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	-4889.3955	6	4160.3457	0.90783715	0	-0.4193229	0		buildout_utility.write|0|1|$|
+12991224320	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	-4856.7427	5.999999	4131.4727	0.90783703	0	-0.4193231	0		buildout_utility.write|0|1|$|
+12991218110	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4911.428	6	4040.6274	-0.34402	0	0.938963	0		buildout_utility.write|0|1|$|
+12991217904	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4945.2773	6.000002	4069.183	0.93896264	0	0.3440191	0		buildout_utility.write|0|1|$|
+12991217903	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4938.407	6.000002	4063.3733	0.93896264	0	0.3440191	0		buildout_utility.write|0|1|$|
+12991217902	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4931.537	6.000002	4057.5532	0.93896264	0	0.3440191	0		buildout_utility.write|0|1|$|
+12991217901	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4924.667	6.000002	4051.7432	-0.34402	0	0.938963	0		buildout_utility.write|0|1|$|
+12991217900	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4917.7974	6.000002	4045.9233	-0.34402	0	0.938963	0		buildout_utility.write|0|1|$|
+9935652623	0	object/static/structure/custom/irish_memorial.iff	0	-4875.7974	7.8942566	4144.184	0.93667215	0	0.35020745	0		buildout_utility.write|0|1|$|
+1714614	0	object/static/structure/general/planter_generic_style_2.iff	0	-4809.8887	6	4087.4326	-7.96E-04	0	1	0		buildoutObjectId|0|1714614|buildout_utility.write|0|1|$|
+1714612	0	object/static/structure/general/planter_generic_style_1.iff	0	-4822.2407	6.0000005	4099.044	0.99995	0	-0.010000001	0		buildoutObjectId|0|1714612|buildout_utility.write|0|1|$|
+12991222687	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4811.0337	6.000001	4081.699	0.9072049	0	-0.42068902	0		buildout_utility.write|0|1|$|
+12991222685	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4810.8745	6.000002	4081.932	0.42068896	0	0.90720487	0		buildout_utility.write|0|1|$|
+12991222684	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4822.5034	6.000002	4068.2017	0.9072049	0	-0.42068902	0		buildout_utility.write|0|1|$|
+12991222683	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4828.4224	6.000002	4067.9976	0.9389622	0	0.34402025	0		buildout_utility.write|0|1|$|
+12991222682	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4816.694	6.000002	4075.0693	0.9072049	0	-0.42068902	0		buildout_utility.write|0|1|$|
+12991222350	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4845.759	6	4089.7317	0.420689	0	0.907205	0		buildout_utility.write|0|1|$|
+12991221973	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4828.37	6.000001	4103.4326	-0.34402	0	0.938963	0		buildout_utility.write|0|1|$|
+12991221972	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4845.9185	6.000001	4089.4988	0.9072051	0	-0.4206886	0		buildout_utility.write|0|1|$|
+12991221971	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4840.0986	6.000001	4096.361	0.4206886	0	0.9072051	0		buildout_utility.write|0|1|$|
+12991221970	0	object/static/structure/naboo/nboo_imprv_lattice_wall_long_s01.iff	0	-4834.289	6.000001	4103.229	0.4206886	0	0.9072051	0		buildout_utility.write|0|1|$|
+12991227890	0	object/building/naboo/hotel_naboo_theed.iff	0	-5072.9565	5.0586095	4214.001	0.9078371	0	-0.41932306	0	systems.event_perk.promoter_hotel_spawner:planet_map.map_loc	buildout_utility.write|0|1|event_perk.promoter|6|12991227903|healing.canhealshock|0|1|portalProperty.crc|0|-418195845|safeLogout|0|1|$|
+12991216596	0	object/building/naboo/filler_building_naboo_theed_style_5.iff	0	-4899.604	5.999999	4071.4607	-0.345432	0	0.938444	0	structure.filler.filler	buildout_utility.write|0|1|$|
+12991207601	0	object/building/naboo/filler_building_naboo_theed_style_5.iff	0	-4948.9443	5.9999995	4089.53	-0.34543213	0	0.9384437	0	structure.filler.filler	buildout_utility.write|0|1|$|
+12991206916	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	0	-4903.3296	6	4128.647	0.9383056	0	0.3458071	0	structure.filler.filler	buildout_utility.write|0|1|$|
+12991203712	0	object/building/naboo/thm_nboo_block_bldg_32x16_style_02.iff	0	-4880.289	6.0000005	4109.1245	-0.34580693	0	0.93830603	0	structure.filler.filler	buildout_utility.write|0|1|$|

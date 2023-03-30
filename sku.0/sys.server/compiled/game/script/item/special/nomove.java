@@ -9,6 +9,7 @@ public class nomove extends script.item.special.nomove_base
     public nomove()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))
@@ -25,6 +26,7 @@ public class nomove extends script.item.special.nomove_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "noTrade"))
@@ -33,6 +35,7 @@ public class nomove extends script.item.special.nomove_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (jedi.isLightsaber(self))
@@ -49,6 +52,7 @@ public class nomove extends script.item.special.nomove_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void lightsaberLogging(obj_id self) throws InterruptedException
     {
         obj_id owner = getOwner(self);

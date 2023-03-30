@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class droid_customizer extends script.base_script
 {
-    public droid_customizer()
-    {
-    }
     public static final String SCRIPTVAR_PID = "tool.pid";
     public static final String SCRIPTVAR_PLAYER = "tool.player";
     public static final String SCRIPTVAR_TARGET = "tool.target";
@@ -31,15 +28,20 @@ public class droid_customizer extends script.base_script
     public static final string_id PROSE_FAIL = new string_id(STF, "prose_fail");
     public static final string_id PROSE_FAIL_OWNER = new string_id(STF, "prose_fail_owner");
     public static final String TBL = "datatables/item/droid_customizer/indices.iff";
-    public static final String[] CUSTOMIZATION_SKILL_MODS = 
+    public static final String[] CUSTOMIZATION_SKILL_MODS =
+            {
+                    "droid_customization"
+            };
+    public droid_customizer()
     {
-        "droid_customization"
-    };
+    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         cleanupCustomizationMenu();
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -53,6 +55,7 @@ public class droid_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -75,6 +78,7 @@ public class droid_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCustomizeDroid(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target))
@@ -113,7 +117,7 @@ public class droid_customizer extends script.base_script
         Enumeration keys = row.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)keys.nextElement();
+            String key = (String) keys.nextElement();
             if (!key.equals("TEMPLATE"))
             {
                 String var = row.getString(key);
@@ -142,6 +146,7 @@ public class droid_customizer extends script.base_script
         sendSystemMessageProse(target, ppNoCustomization);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupCustomizationMenu(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -152,6 +157,7 @@ public class droid_customizer extends script.base_script
             clearTrackingScriptVars(self);
         }
     }
+
     public void cleanupCustomizationMenu() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -164,6 +170,7 @@ public class droid_customizer extends script.base_script
             }
         }
     }
+
     public void clearTrackingScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_PID);
@@ -171,6 +178,7 @@ public class droid_customizer extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_TARGET);
         utils.removeScriptVar(self, SCRIPTVAR_OPT);
     }
+
     public int handleSelectionSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_PLAYER);
@@ -201,7 +209,8 @@ public class droid_customizer extends script.base_script
         }
         int playerCustomizationMod = 0;
         int[] mods = getSkillStatisticModifiers(player, CUSTOMIZATION_SKILL_MODS);
-        for (int mod : mods) {
+        for (int mod : mods)
+        {
             playerCustomizationMod += mod;
         }
         if (playerCustomizationMod < 32)
@@ -235,6 +244,7 @@ public class droid_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_PLAYER);
@@ -277,6 +287,7 @@ public class droid_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int customizationSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -303,6 +314,7 @@ public class droid_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int customizationFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())

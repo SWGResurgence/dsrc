@@ -9,43 +9,46 @@ import script.obj_id;
 
 public class gcw_city_kit_turret extends script.systems.gcw.gcw_city_kit
 {
+    public static final int CONSTRUCTION_HP_TURRET = 5000;
+    public static final String[] lowImperials =
+            {
+                    "gcw_city_imperial_turret_1"
+            };
+    public static final String[] normalImperials =
+            {
+                    "gcw_city_imperial_turret_2"
+            };
+    public static final String[] eliteImperials =
+            {
+                    "gcw_city_imperial_turret_3"
+            };
+    public static final String[] lowRebels =
+            {
+                    "gcw_city_rebel_turret_1"
+            };
+    public static final String[] normalRebels =
+            {
+                    "gcw_city_rebel_turret_2"
+            };
+    public static final String[] eliteRebels =
+            {
+                    "gcw_city_rebel_turret_3"
+            };
     public gcw_city_kit_turret()
     {
     }
-    public static final int CONSTRUCTION_HP_TURRET = 5000;
-    public static final String[] lowImperials = 
-    {
-        "gcw_city_imperial_turret_1"
-    };
-    public static final String[] normalImperials = 
-    {
-        "gcw_city_imperial_turret_2"
-    };
-    public static final String[] eliteImperials = 
-    {
-        "gcw_city_imperial_turret_3"
-    };
-    public static final String[] lowRebels = 
-    {
-        "gcw_city_rebel_turret_1"
-    };
-    public static final String[] normalRebels = 
-    {
-        "gcw_city_rebel_turret_2"
-    };
-    public static final String[] eliteRebels = 
-    {
-        "gcw_city_rebel_turret_3"
-    };
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Turret Construction Site");
         utils.setScriptVar(pylon, "gcw.name", "Turret Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_turret");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)
@@ -125,6 +128,7 @@ public class gcw_city_kit_turret extends script.systems.gcw.gcw_city_kit
         }
         return kit;
     }
+
     public int getConstructionHP() throws InterruptedException
     {
         return CONSTRUCTION_HP_TURRET;

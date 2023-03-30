@@ -5,7 +5,7 @@
 @class object_template 8
 
 sharedTemplate = "object/tangible/tcg/series4/shared_instant_travel_terminal_location.iff"
-scripts = ["systems.veteran_reward.instant_travel_terminal_deed", "item.special.nomove"]
+scripts = ["systems.veteran_reward.instant_travel_terminal_deed"]
 persistByDefault = true
 
 moveFlags = +[ MF_player ]

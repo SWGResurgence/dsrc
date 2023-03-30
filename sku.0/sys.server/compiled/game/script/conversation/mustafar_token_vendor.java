@@ -36,6 +36,10 @@ public class mustafar_token_vendor extends script.base_script
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_SPACE_INTERESTING);
+        String name = "Khan Horne";
+        String color_red = "\\#FF0000";
+        String color_white = "\\#FFFFFF";
+        setName(self, color_red + name + color_white);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException

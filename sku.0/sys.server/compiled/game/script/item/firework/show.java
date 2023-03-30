@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class show extends script.base_script
 {
-    public show()
-    {
-    }
     public static final string_id MNU_LAUNCH = new string_id(firework.STF, "mnu_launch");
     public static final string_id MNU_SHOW_DATA = new string_id(firework.STF, "mnu_show_data");
     public static final string_id MNU_ADD_EVENT = new string_id(firework.STF, "mnu_add_event");
@@ -19,11 +16,15 @@ public class show extends script.base_script
     public static final string_id MNU_REMOVE_EVENT = new string_id(firework.STF, "mnu_remove_event");
     public static final string_id MNU_REORDER_SHOW = new string_id(firework.STF, "mnu_reorder_show");
     public static final string_id SID_NO_FIREWORKS_IN_SPACE = new string_id("space/space_interaction", "no_fireworks_in_space");
+    public show()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int eventCount = getCount(self);
         Vector show_fx = getResizeableStringArrayObjVar(self, firework.VAR_SHOW_FX);
-        if(show_fx == null || (eventCount > 0 && show_fx.size() != eventCount))
+        if (show_fx == null || (eventCount > 0 && show_fx.size() != eventCount))
         {
             setCount(self, 0);
             removeObjVar(self, firework.VAR_SHOW_FX);
@@ -50,6 +51,7 @@ public class show extends script.base_script
         setObjVar(self, firework.VAR_SHOW_DELAY, show_delay);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -78,6 +80,7 @@ public class show extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -128,13 +131,15 @@ public class show extends script.base_script
                     fireworks.setSize(0);
                     Vector entries = new Vector();
                     entries.setSize(0);
-                    for (obj_id tmpFirework : tmpFireworks) {
-                        if (hasObjVar(tmpFirework, firework.VAR_FIREWORK_FX)) {
+                    for (obj_id tmpFirework : tmpFireworks)
+                    {
+                        if (hasObjVar(tmpFirework, firework.VAR_FIREWORK_FX))
+                        {
                             fireworks = utils.addElement(fireworks, tmpFirework);
                             entries = utils.addElement(entries, utils.getStringName(tmpFirework) + " (" + getCount(tmpFirework) + ")");
                         }
                     }
-                    if (entries != null && fireworks != null && entries.size() == fireworks.size())
+                    if (fireworks != null && entries.size() == fireworks.size())
                     {
                         String title = "Select Show Addition";
                         String prompt = "Select the firework to append to the end of the show package.";
@@ -156,6 +161,7 @@ public class show extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddEventSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] fireworks = utils.getObjIdBatchScriptVar(self, "addEvent.fireworks");
@@ -186,11 +192,13 @@ public class show extends script.base_script
         firework.addShowEvent(player, self, fireworks[idx]);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEventDataSUI(obj_id self, dictionary params) throws InterruptedException
     {
         firework.removeSUIScriptVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveEventSUI(obj_id self, dictionary params) throws InterruptedException
     {
         firework.removeSUIScriptVars(self);
@@ -213,6 +221,7 @@ public class show extends script.base_script
         firework.showRemoveEventSUI(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleReorderEventsSUI(obj_id self, dictionary params) throws InterruptedException
     {
         firework.removeSUIScriptVars(self);
@@ -242,6 +251,7 @@ public class show extends script.base_script
         firework.showReorderEventsSUI(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleModifyEventIndexSUI(obj_id self, dictionary params) throws InterruptedException
     {
         firework.removeSUIScriptVars(self);
@@ -263,6 +273,7 @@ public class show extends script.base_script
         firework.showModifyEventTimeSUI(player, self, idx);
         return SCRIPT_CONTINUE;
     }
+
     public int handleModifyEventTimeSUI(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "firework.idx"))
@@ -286,6 +297,7 @@ public class show extends script.base_script
         firework.showModifyEventIndexSUI(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void addDebugRandomEvent(obj_id show) throws InterruptedException
     {
         String[] fxs = dataTableGetStringColumn(firework.TBL_FX, "name");

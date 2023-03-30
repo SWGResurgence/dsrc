@@ -8,6 +8,7 @@ public class rebel_weapons_depot_elevators extends script.base_script
     public rebel_weapons_depot_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -26,7 +27,7 @@ public class rebel_weapons_depot_elevators extends script.base_script
             setObjVar(self, "terminal1", elevatorTerminalA);
             setObjVar(self, "terminal2", elevatorTerminalB);
         }
-        else 
+        else
         {
             LOG("elevator", "rebel_weapons_depot could not get 'elevator1' cell");
         }
@@ -45,7 +46,7 @@ public class rebel_weapons_depot_elevators extends script.base_script
             setObjVar(self, "terminal3", elevatorTerminalC);
             setObjVar(self, "terminal4", elevatorTerminalD);
         }
-        else 
+        else
         {
             LOG("elevator", "rebel_weapons_depot could not get 'elevator2' cell");
         }

@@ -1,0 +1,51 @@
+@base object/draft_schematic/base/base_draft_schematic.iff
+
+@class draft_schematic_object_template 2
+
+category = CT_misc
+itemsPerContainer = 25
+
+craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_bits/assassinate_freeshot_chance_modifier_bit.iff"
+
+slots = [
+	[
+	optional = false,
+	name = "craft_reverse_engineering_ingredients_n" "modifier_durasteel_alloy",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_durasteel_alloy", ingredient="steel_duralloy", count=75]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_hardening_compound",
+    options = [
+    	[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_hardening_compound", ingredient="fiberplast_gravitonic", count=25]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope",
+    options = [
+       	[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope", ingredient="radioactive_polymetric", count=75]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_core",
+    options = [
+       	[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_core", ingredient="radioactive_mustafar", count=50]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0]]
+
+skillCommands = ["unskilled"]
+
+manufactureScripts = [ "systems.crafting.item.specific_item.reverse_engineering.modifier_bits" ]
+
+@class intangible_object_template 0
+@class object_template 5
+
+complexity = 4
+
+sharedTemplate = "object/draft_schematic/reverse_engineering/modifier_bits/shared_assassinate_freeshot_chance_modifier_bit.iff"
+
+volume = 1

@@ -11,6 +11,7 @@ public class npc_difficulty_token extends script.base_script
     public npc_difficulty_token()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -21,16 +22,12 @@ public class npc_difficulty_token extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, eliteConversionPrompt);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_from_inventory_only"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         obj_id target = getStorytellerTokenTarget(player);
@@ -58,13 +55,14 @@ public class npc_difficulty_token extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("storyteller", "invalid_target"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getStorytellerTokenTarget(obj_id player) throws InterruptedException
     {
         obj_id target = null;
@@ -73,12 +71,13 @@ public class npc_difficulty_token extends script.base_script
         {
             target = intendedTarget;
         }
-        else 
+        else
         {
             target = getLookAtTarget(player);
         }
         return target;
     }
+
     public int getTokenDifficulty(obj_id token) throws InterruptedException
     {
         String staticName = getStaticItemName(token);
@@ -93,6 +92,7 @@ public class npc_difficulty_token extends script.base_script
         }
         return difficulty;
     }
+
     public String getTokenDifficultyString(obj_id token) throws InterruptedException
     {
         String staticName = getStaticItemName(token);
@@ -107,6 +107,7 @@ public class npc_difficulty_token extends script.base_script
         }
         return difficulty;
     }
+
     public boolean isTargetMyStorytellerObject(obj_id player, obj_id target) throws InterruptedException
     {
         if (storyteller.isAnyStorytellerItem(target))
@@ -120,7 +121,7 @@ public class npc_difficulty_token extends script.base_script
                     {
                         return true;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("storyteller", "npc_difficulty_on_npc_only"));
                         return false;

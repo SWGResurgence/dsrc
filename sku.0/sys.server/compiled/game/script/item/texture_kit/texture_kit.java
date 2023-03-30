@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class texture_kit extends script.base_script
 {
-    public texture_kit()
-    {
-    }
     public static final String STF = "texture_kit";
     public static final string_id MNU_TEXTURE = new string_id("sui", "set_texture");
     public static final String BTN_TEXTURE = "@" + STF + ":btn_texture";
@@ -18,6 +15,10 @@ public class texture_kit extends script.base_script
     public static final String CONFIRM_TITLE = "@" + STF + ":confirm_title";
     public static final String CONFIRM_PROMPT = "@" + STF + ":confirm_prompt";
     public static final String PID_NAME = "texturePid";
+    public texture_kit()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -33,11 +34,12 @@ public class texture_kit extends script.base_script
         {
             int mnuTexture = mi.addRootMenu(menu_info_types.ITEM_USE, MNU_TEXTURE);
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -60,7 +62,7 @@ public class texture_kit extends script.base_script
                     sendSystemMessage(player, message);
                     return SCRIPT_CONTINUE;
                 }
-                ranged_int_custom_var myRangedInt = (ranged_int_custom_var)myvar;
+                ranged_int_custom_var myRangedInt = (ranged_int_custom_var) myvar;
                 int minRange = myRangedInt.getMinRangeInclusive();
                 int maxRange = myRangedInt.getMaxRangeInclusive();
                 if (sui.hasPid(player, PID_NAME))
@@ -83,6 +85,7 @@ public class texture_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -99,6 +102,7 @@ public class texture_kit extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int handleTextureChange(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -154,6 +158,7 @@ public class texture_kit extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmTexture(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

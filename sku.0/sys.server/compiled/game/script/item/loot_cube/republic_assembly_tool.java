@@ -7,36 +7,37 @@ import script.library.utils;
 
 public class republic_assembly_tool extends script.base_script
 {
-    public republic_assembly_tool()
-    {
-    }
     public static final int USAGE_DELAY = 15;
     public static final String ITEM_COMBINATION_TABLE = "datatables/item/loot_cube/republic_assembly_tool.iff";
     public static final String ITEM_STF = "item_n";
     public static final boolean CONST_FLAG_DO_LOGGING = false;
-    public static final String[] BROKEN_COMPONENTS = 
+    public static final String[] BROKEN_COMPONENTS =
+            {
+                    "object/tangible/component/weapon/mustafar/tulrus_lance_core.iff",
+                    "object/tangible/component/weapon/mustafar/rifle_coil_dp23.iff",
+                    "object/tangible/component/weapon/mustafar/rifle_coil_dist.iff",
+                    "object/tangible/component/weapon/mustafar/pistol_coil_ion.iff",
+                    "object/tangible/component/weapon/mustafar/pistol_coil_dist.iff",
+                    "object/tangible/component/weapon/mustafar/obsid_lance_core.iff",
+                    "object/tangible/component/weapon/mustafar/lava_cannon_coil.iff",
+                    "object/tangible/component/weapon/mustafar/flamer_coil.iff",
+                    "object/tangible/component/weapon/mustafar/carbine_coil_sfor.iff",
+                    "object/tangible/component/weapon/mustafar/2h_tulrus_sword_core.iff",
+                    "object/tangible/component/weapon/mustafar/2h_obsid_sword_core.iff",
+                    "object/tangible/component/weapon/mustafar/1h_obsid_sword_core.iff",
+                    "object/tangible/component/weapon/mustafar/1h_bandit_sword_core.iff",
+                    "object/tangible/component/structure/mustafar/must_transthermal_padding.iff",
+                    "object/tangible/component/structure/mustafar/must_synth_creature_hide.iff",
+                    "object/tangible/component/structure/mustafar/must_soft_light_source.iff",
+                    "object/tangible/component/structure/mustafar/must_reinforced_support_beam.iff",
+                    "object/tangible/component/structure/mustafar/must_power_converter.iff",
+                    "object/tangible/component/structure/mustafar/must_micro_fiber_weave.iff",
+                    "object/tangible/component/structure/mustafar/must_adhesive_friction_surface.iff"
+            };
+    public republic_assembly_tool()
     {
-        "object/tangible/component/weapon/mustafar/tulrus_lance_core.iff",
-        "object/tangible/component/weapon/mustafar/rifle_coil_dp23.iff",
-        "object/tangible/component/weapon/mustafar/rifle_coil_dist.iff",
-        "object/tangible/component/weapon/mustafar/pistol_coil_ion.iff",
-        "object/tangible/component/weapon/mustafar/pistol_coil_dist.iff",
-        "object/tangible/component/weapon/mustafar/obsid_lance_core.iff",
-        "object/tangible/component/weapon/mustafar/lava_cannon_coil.iff",
-        "object/tangible/component/weapon/mustafar/flamer_coil.iff",
-        "object/tangible/component/weapon/mustafar/carbine_coil_sfor.iff",
-        "object/tangible/component/weapon/mustafar/2h_tulrus_sword_core.iff",
-        "object/tangible/component/weapon/mustafar/2h_obsid_sword_core.iff",
-        "object/tangible/component/weapon/mustafar/1h_obsid_sword_core.iff",
-        "object/tangible/component/weapon/mustafar/1h_bandit_sword_core.iff",
-        "object/tangible/component/structure/mustafar/must_transthermal_padding.iff",
-        "object/tangible/component/structure/mustafar/must_synth_creature_hide.iff",
-        "object/tangible/component/structure/mustafar/must_soft_light_source.iff",
-        "object/tangible/component/structure/mustafar/must_reinforced_support_beam.iff",
-        "object/tangible/component/structure/mustafar/must_power_converter.iff",
-        "object/tangible/component/structure/mustafar/must_micro_fiber_weave.iff",
-        "object/tangible/component/structure/mustafar/must_adhesive_friction_surface.iff"
-    };
+    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         debugLogging("OnReceivedItem", "entered");
@@ -44,9 +45,9 @@ public class republic_assembly_tool extends script.base_script
         double ingredientCRC = 0;
         if (utils.hasScriptVar(self, "ingredientCRC"))
         {
-            
+
         }
-        
+
         {
             ingredientCRC = utils.getDoubleScriptVar(self, "ingredientCRC");
             debugLogging("OnReceivedItem", "found a pre-existing CRC. It was: " + ingredientCRC);
@@ -56,6 +57,7 @@ public class republic_assembly_tool extends script.base_script
         utils.setScriptVar(self, "ingredientCRC", ingredientCRC);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         debugLogging("OnLostItem", "entered");
@@ -76,12 +78,13 @@ public class republic_assembly_tool extends script.base_script
         {
             utils.setScriptVar(self, "ingredientCRC", 0);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "ingredientCRC", ingredientCRC);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -92,6 +95,7 @@ public class republic_assembly_tool extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU1, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         debugLogging("OnObjectMenuSelect", "entered");
@@ -116,7 +120,7 @@ public class republic_assembly_tool extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
-            obj_id clients[] = new obj_id[1];
+            obj_id[] clients = new obj_id[1];
             clients[0] = player;
             debugLogging("OnObjectMenuSelect", "chose menu option 1");
             utils.setScriptVar(self, "useTimeStamp", getGameTime());
@@ -129,7 +133,7 @@ public class republic_assembly_tool extends script.base_script
                 sendSystemMessage(player, strSuccess);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 debugLogging("OnObjectMenuSelect", "obj_id we got back was invalid: " + newItem);
                 string_id strFailure = new string_id("item_n", "republic_assembly_tool_failure");
@@ -140,6 +144,7 @@ public class republic_assembly_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -148,6 +153,7 @@ public class republic_assembly_tool extends script.base_script
             debugServerConsoleMsg(null, "@@@@@@@@@@@@@@@@@@@@ " + message);
         }
     }
+
     public obj_id activateAssemblyTool(obj_id assemblyTool, obj_id objPlayer) throws InterruptedException
     {
         debugLogging("activateAssemblyTool", "entered");
@@ -178,12 +184,12 @@ public class republic_assembly_tool extends script.base_script
                 {
                     generatedItem = createObjectInInventoryAllowOverload(finalObject, objPlayer);
                 }
-                else 
+                else
                 {
                     generatedItem = static_item.createNewItemFunction(finalObject, objPlayer);
                 }
                 debugLogging("activateAssemblyTool", "made a new item. It was a: " + finalObject + " and had obj_id: " + generatedItem);
-                obj_id contents[] = getContents(assemblyTool);
+                obj_id[] contents = getContents(assemblyTool);
                 debugLogging("activateAssemblyTool", "Got contents of the assembly tool. There are this many things: ->: " + contents.length);
                 if (isIdValid(generatedItem))
                 {
@@ -208,18 +214,18 @@ public class republic_assembly_tool extends script.base_script
                             {
                                 setName(generatedItem, new string_id(ITEM_STF, finalName));
                             }
-                            else 
+                            else
                             {
                                 setName(generatedItem, finalName);
                             }
                         }
                     }
-                    obj_id contentsAgain[] = getContents(assemblyTool);
+                    obj_id[] contentsAgain = getContents(assemblyTool);
                     if (contentsAgain.length < 3)
                     {
                         putInOverloaded(generatedItem, assemblyTool);
                     }
-                    else 
+                    else
                     {
                         obj_id pInv = utils.getInventoryContainer(objPlayer);
                         putInOverloaded(generatedItem, pInv);
@@ -229,6 +235,7 @@ public class republic_assembly_tool extends script.base_script
         }
         return generatedItem;
     }
+
     public double[] makeItemCRCArray() throws InterruptedException
     {
         debugLogging("makeItemCRCArray", "entered");
@@ -249,11 +256,12 @@ public class republic_assembly_tool extends script.base_script
         }
         return crcs;
     }
+
     public double calcCurrentContentsCRC(obj_id assemblyTool) throws InterruptedException
     {
         debugLogging("calcCurrentContentsCRC", "entered");
         double ingredientCRC = 0;
-        obj_id contents[] = getContents(assemblyTool);
+        obj_id[] contents = getContents(assemblyTool);
         debugLogging("calcCurrentContentsCRC", "Got contents of the assembly tool. There are this many things: ->: " + contents.length);
         for (int i = 0; i < contents.length; i++)
         {
@@ -262,14 +270,18 @@ public class republic_assembly_tool extends script.base_script
         }
         return ingredientCRC;
     }
+
     public void fixBrokenComponents(obj_id item) throws InterruptedException
     {
         String template = getTemplateName(item);
         if (template.startsWith("object/tangible/component/weapon/mustafar/") || template.startsWith("object/tangible/component/structure/mustafar/"))
         {
-            for (String brokenComponent : BROKEN_COMPONENTS) {
-                if (template.equals(brokenComponent)) {
-                    if (!isCrafted(item)) {
+            for (String brokenComponent : BROKEN_COMPONENTS)
+            {
+                if (template.equals(brokenComponent))
+                {
+                    if (!isCrafted(item))
+                    {
                         attachScript(item, "item.component.serialize");
                     }
                     break;

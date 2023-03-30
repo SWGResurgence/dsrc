@@ -5,11 +5,12 @@ import script.library.*;
 
 public class barn_ranchhand extends script.base_script
 {
+    public static final boolean LOGGING_ON = false;
+    public static final String LOGGING_CATEGORY = "tcg_barn";
     public barn_ranchhand()
     {
     }
-    public static final boolean LOGGING_ON = false;
-    public static final String LOGGING_CATEGORY = "tcg_barn";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "a ranch hand");
@@ -17,6 +18,7 @@ public class barn_ranchhand extends script.base_script
         messageTo(self, "showRoamingBeastsSoon", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetRanchandName(obj_id self, dictionary params) throws InterruptedException
     {
         String ranchhandName = "a ranch hand";
@@ -34,10 +36,12 @@ public class barn_ranchhand extends script.base_script
         setObjVar(self, "noEject", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id destContainerContainer = getContainedBy(destContainer);
@@ -49,6 +53,7 @@ public class barn_ranchhand extends script.base_script
         sendSystemMessage(transferer, new string_id("tcg", "barn_ranchhand_cannot_transfer"));
         return SCRIPT_OVERRIDE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id barnCell = getObjIdObjVar(self, tcg.RANCHHAND_CELL);
@@ -59,6 +64,7 @@ public class barn_ranchhand extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBarnBeastStorage(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -74,13 +80,13 @@ public class barn_ranchhand extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_ranchhand_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -115,7 +121,7 @@ public class barn_ranchhand extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_transfer_failed_invalid"));
                         }
@@ -133,6 +139,7 @@ public class barn_ranchhand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBarnBeastReclaim(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -148,13 +155,13 @@ public class barn_ranchhand extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_ranchhand_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -199,7 +206,7 @@ public class barn_ranchhand extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_transfer_failed_invalid"));
                         }
@@ -217,6 +224,7 @@ public class barn_ranchhand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBarnBeastDisplay(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -232,13 +240,13 @@ public class barn_ranchhand extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_ranchhand_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -281,14 +289,14 @@ public class barn_ranchhand extends script.base_script
                                                 blog("barn_ranchhand = handleBarnBeastDisplay ---- Destroying beast OBJVAR ONLY: " + displayedBeast);
                                                 removeObjVar(barn, "barnStorage." + selectedBeastStorageSlot + "." + tcg.BEAST_ROAMING);
                                             }
-                                            else 
+                                            else
                                             {
                                                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " could not store a roming displayed barn beast. The beast OID was invalid in barn: " + barn + " located at: " + getLocation(barn) + ".");
                                                 message = new string_id("tcg", "barn_beast_display_storage_failed");
                                                 removeObjVar(barn, "barnStorage." + selectedBeastStorageSlot + "." + tcg.BEAST_ROAMING);
                                             }
                                         }
-                                        else 
+                                        else
                                         {
                                             obj_id beastToDisplay = tcg.barnDisplayBeast(self, selectedBeastStorageSlot, barn);
                                             if (isIdValid(beastToDisplay))
@@ -296,7 +304,7 @@ public class barn_ranchhand extends script.base_script
                                                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " has created a roaming/displayed representation of their barn beast: " + beastToDisplay + " in barn: " + barn + " located at: " + getLocation(barn) + ".");
                                                 message = new string_id("tcg", "barn_beast_display_success");
                                             }
-                                            else 
+                                            else
                                             {
                                                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " has FAILED to create a roaming/displayed representation of their barn beast slot: " + selectedBeastStorageSlot + " in barn: " + barn + " located at: " + getLocation(barn) + ".");
                                                 message = new string_id("tcg", "barn_beast_display_failed");
@@ -314,7 +322,7 @@ public class barn_ranchhand extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_display_failed_invalid"));
                         }
@@ -332,6 +340,7 @@ public class barn_ranchhand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showRoamingBeastsSoon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id barn = getTopMostContainer(self);
@@ -345,6 +354,7 @@ public class barn_ranchhand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

@@ -13,7 +13,7 @@ dengar	object/mobile/dengar.iff	scyk_s02_tier9	ace_neutral_dengar	space/taunts/a
 derek_klivian	object/mobile/derek_klivian.iff	ywing_tier10	ace_rebel_derek_klivian	space/taunts/ace_reb_generic	3	rebel
 ds1814	object/mobile/ds1814.iff	tieinterceptor_tier9	ace_imperial_ds1814	space/taunts/ace_imp_generic2	4	imperial
 guri	object/mobile/guri.iff	yt2400	ace_neutral_guri	space/taunts/ace_neutral_generic	2	neutral
-iran_ryad	object/mobile/iran_ryad.iff	tieoppressor_tier9	ace_imperial_iran_ryad	space/taunts/ace_imp_generic	3	imperial
+iran_ryad	object/mobile/iran_ryad.iff	tiedefender_imperial_guard_tier9	ace_imperial_iran_ryad	space/taunts/ace_imp_generic	3	imperial
 jan_ors	object/mobile/jan_ors.iff	bwing_tier9	ace_rebel_jan_ors	space/taunts/ace_reb_generic2	3	rebel
 keyan_farlander	object/mobile/keyan_farlander.iff	xwing_tier9	ace_rebel_keyan_farlander	space/taunts/ace_reb_generic	2	rebel
 pash_cracken	object/mobile/pash_cracken.iff	awing_tier9	ace_rebel_pash_cracken	space/taunts/ace_reb_generic2	3	rebel

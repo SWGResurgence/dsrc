@@ -555,7 +555,6 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			lifeday_badge_09	6031	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			lifeday_badge_10	21962	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			lifeday_badge_11	22701	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
-			lifeday_badge_20	22794	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 		col_loveday_09		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0			
 			loveday_badge_09	6127	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_cupid_badge_09	6126	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
@@ -568,6 +567,10 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			loveday_badge_11	22259	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_cupid_badge_11	22260	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_matchmaker_badge_11	22261	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
+		col_loveday_23		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0			
+			loveday_badge_23	22829	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
+			loveday_cupid_badge_23	22830	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
+			loveday_matchmaker_badge_23	22831	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 		purchase_title_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0			
 			imp_million_title	6312	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			reb_million_title	6313	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
@@ -1070,11 +1073,11 @@ weapon_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 		col_lightsaber_2h_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_lightsaber_2h_01_01	5730	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			col_lightsaber_2h_01_02	5731	-1	-1	kill_heroic_exar_hate_fist											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_lightsaber_2h_01_03	5732	5736	10	kill_heroic_sd_stormtrooper_grenadier											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_lightsaber_2h_01_03	5732	5736	5	kill_heroic_sd_stormtrooper_grenadier											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_lightsaber_polearm_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_lightsaber_polearm_01_01	5737	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			col_lightsaber_polearm_01_02	5738	-1	-1	kill_heroic_axkva_suin_chalo											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_lightsaber_polearm_01_03	5739	5743	10	kill_heroic_tusken_warlord											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_lightsaber_polearm_01_03	5739	5743	5	kill_heroic_tusken_warlord											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 	spy_weapon			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		spy_unarmed_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_spy_unarmed_01_01	6296	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -1323,18 +1326,6 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			col_imperial_rank_ltcol_01_01	5673	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_imperial_rank_col_01_01	5674	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_imperial_rank_gen_01_01	5675	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_syren5_imp		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_syren5_imp_false_orders_01_01	22763	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_stolen_codes_01_01	22764	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_forged_rank_insignia_01_01	22765	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_rank_insignia_01_01	22766	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_isb_datapad_01_01	22767	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_syren5_reb		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_syren5_reb_false_orders_01_01	22768	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_stolen_codes_01_01	22769	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_forged_rank_insignia_01_01	22770	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_rank_insignia_01_01	22771	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_intel_datapad_01_01	22772	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	creature_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_nyms_themepark_pirate		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_nyms_themepark_sulfur_lake_pirate_activate	15899	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
@@ -1789,9 +1780,7 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			primative_tier_2_complete	2792	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			cold_blooded_tier_2_complete	2694	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_probe_droid_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_probe_droid_counter	6222	6233	15	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_necrosis_slayer																									1							1		Necrosis Neutralizer	
-			necrosis_slayer_counter	22773	22783	20	kill_ep3_general_grievous																													N-K Necrosis	You have successfully defeated Kinesworthy and Lorn's dangerous creation.
+			hoth_probe_droid_counter	6222	6233	5	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	force_sensitive_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_jedi_npc_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_padawan_01	5515	5523	50	kill_fallen_padawan	kill_dark_jedi_sentinel	kill_light_jedi_sentinel	kill_treasure_guard_padawan	kill_ep3_rryatt_crazed_jedi													sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -1800,13 +1789,13 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			kill_jedi_elder_01	5542	5550	50	kill_treasure_guard_jedi_elite	kill_dark_jedi_master	kill_township_dark_jedi_ras	kill_treasure_guard_jedi_boss	kill_som_kenobi_dark_jedi_boss	kill_itp_vader_dark_jedi	kill_itp_vader_dark_jedi_leader											sound/music_acq_miner.snd	gray	0	0						0	0			
 	factional_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_imperial_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_01	5551	5559	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_01	5551	5559	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_imperial_boss_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_boss_01	5574	5582	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_boss_01	5574	5582	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rebel_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_01	5560	5568	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_01	5560	5568	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rebel_boss_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_boss_01	5583	5591	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_boss_01	5583	5591	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	heroic_kills			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_axkva_min_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			heroic_axkva_min_01	2793	2797	10	rewardOnUpdate	kill_heroic_axkva_axkva_min																sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -2123,22 +2112,11 @@ artifact_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			round_red_gem_style2_08	4882	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_09	4883	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_10	4884	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_round_orange		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			round_orange_gem_style1_01	22784	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_02	22785	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_03	22786	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_04	22787	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_05	22788	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_06	22789	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_07	22790	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_08	22791	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_09	22792	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_10	22793	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	hoth_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_frozen_tauntaun_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_frozen_tauntaun	6208	6214	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			hoth_frozen_tauntaun	6208	6214	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_meteorite_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_meteorite_01	6215	6221	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			hoth_meteorite_01	6215	6221	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 decor_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	decor_items			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_eng_trader		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -2493,74 +2471,74 @@ crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			beetle_specimen_reward	4920	4928	20	crafted_beetle_specimen_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_plants			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_plant_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_plant_reward	2513	2521	20	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_plant_reward	2513	2521	10	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_flower_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_flower_reward	2522	2530	20	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_flower_reward	2522	2530	10	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_mannequin			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_ig88_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_ig88_reward	2486	2494	20	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_ig88_reward	2486	2494	10	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_stormtrooper_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_stormtrooper_reward	2540	2548	20	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_stormtrooper_reward	2540	2548	10	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_jewelry			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_nightsister_necklace_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			nightsister_necklace_reward	2549	2557	20	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			nightsister_necklace_reward	2549	2557	10	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_droid_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_dancing_droid_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			dancing_droid_reward	2531	2539	20	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			dancing_droid_reward	2531	2539	10	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_chassis			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_rebel_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_rebel_reward	5118	5126	20	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_rebel_reward	5118	5126	10	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_imperial_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_imperial_reward	5127	5135	20	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_imperial_reward	5127	5135	10	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_neutral_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_neutral_reward	5136	5144	20	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_neutral_reward	5136	5144	10	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_cargo_hold_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_cargo_hold_01_reward	5145	5153	20	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_cargo_hold_01_reward	5145	5153	10	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_couch_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_couch_01_reward	5154	5162	20	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_couch_01_reward	5154	5162	10	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_chair_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_chair_01_reward	5163	5171	20	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_chair_01_reward	5163	5171	10	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk1_reward	4929	4937	20	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk1_reward	4929	4937	10	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk2_reward	4938	4946	20	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk2_reward	4938	4946	10	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk3_reward	4947	4955	20	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk3_reward	4947	4955	10	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk4_reward	4956	4964	20	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk4_reward	4956	4964	10	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk5_reward	4965	4973	20	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk5_reward	4965	4973	10	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk1_reward	4974	4982	20	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk1_reward	4974	4982	10	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk2_reward	4983	4991	20	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk2_reward	4983	4991	10	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk3_reward	4992	5000	20	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk3_reward	4992	5000	10	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk4_reward	5001	5009	20	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk4_reward	5001	5009	10	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk5_reward	5010	5018	20	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk5_reward	5010	5018	10	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk1_reward	5019	5027	20	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk1_reward	5019	5027	10	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk2_reward	5028	5036	20	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk2_reward	5028	5036	10	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk3_reward	5037	5045	20	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk3_reward	5037	5045	10	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk4_reward	5046	5054	20	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk4_reward	5046	5054	10	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk5_reward	5055	5063	20	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk5_reward	5055	5063	10	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk1_reward	5064	5072	20	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk1_reward	5064	5072	10	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk2_reward	5082	5090	20	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk2_reward	5082	5090	10	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk3_reward	5091	5099	20	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk3_reward	5091	5099	10	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk4_reward	5100	5108	20	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk4_reward	5100	5108	10	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk5_reward	5109	5117	20	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk5_reward	5109	5117	10	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_space_helper_monkey_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_01	6747	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_02	6748	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3865,7 +3843,7 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_boss_badge_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			undead_minor_bosses_killed	15340	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			undead_cornburr_killed	15341	-1	-1	kill_outbreak_afflicted_maintenance_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			undead_rancor_killed	15342	-1	-1	kill_outbreak_afflicted_rancor																	sound/music_acq_miner.snd	gray	0	0						0	0
+			undead_rancor_killed	15342	-1	-1	kill_outbreak_afflicted_rancor																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	meatlump_theme_park			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_meatlump_rank_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			meatlump_rank_01_01	5908	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -4183,6 +4161,21 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 			loveday_2011_matched_michael	22256	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			loveday_2011_matched_james	22257	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			loveday_2011_matched_steven	22258	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+	festival_of_love_2023			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+		loveday_2023_activities		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_disillusion_quest	22832	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_card_gathering	22833	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_playing_cupid	22834	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_found_kyoopid	22835	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+		loveday_2023_matchmaking		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_amy	22836	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_cristina	22837	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_cera	22838	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_edie	22839	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_logan	22840	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_michael	22841	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_james	22842	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			loveday_2023_matched_steven	22843	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	empire_day_activities			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		empire_day_recruiting_event		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			empire_day_recruitment_starter	6813	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
@@ -5095,6 +5088,9 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_destroy_wod_spider_boss_consort	22060	22065	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_queen_consort	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_wod_spider_boss_guard	22066	22071	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_queen_guard	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_wod_spider_boss_royal_guard	22072	22077	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_royal_guard	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_world_boss_elder_ancient_krayt_dragon	22766	22774	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_elder_ancient_krayt_dragon	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_world_boss_mutant_peko_peko_empress	22775	22783	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_mutant_peko_peko_empress	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_world_boss_paxvizla	22784	22792	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_paxvizla	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_destroy_multiple_loot		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_01	8811	8816	61	UIType:KillLoot	relic_data:3:0:0:0	creature_name:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_02	8817	8822	61	UIType:KillLoot	relic_data:5:0:0:0	social_group:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
@@ -5564,6 +5560,9 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_destroy_loot_wod_spider_boss_consort	22078	22083	61	UIType:KillLoot	relic_data:90:0:0:0	creature_name:wod_spider_queen_consort	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_loot_wod_spider_boss_guard	22084	22089	61	UIType:KillLoot	relic_data:90:0:0:0	creature_name:wod_spider_queen_guard	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_loot_wod_spider_boss_royal_guard	22090	22095	61	UIType:KillLoot	relic_data:90:0:0:0	creature_name:wod_spider_royal_guard	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	22793	22798	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_elder_ancient_krayt_dragon	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_loot_world_boss_mutant_peko_peko_empress	22799	22804	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_mutant_peko_peko_empress	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_loot_world_boss_paxvizla	22805	22810	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_paxvizla	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_perform		0	-1	-1	task_shared_data:0:0:1:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_perform_anchorhead_tavern	11223	11228	61	UIType:Perform	quest_data:10:0:0:0	duration:120	building_id:1213343	cell_name:livingroom1	what:dance	"waypoint:tatooine,109,52,5358,none,Anchorhead Tavern"											sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_perform_bestine_cantina	11229	11234	61	UIType:Perform	quest_data:10:0:0:0	duration:120	building_id:1028644	cell_name:cantina	what:dance	"waypoint:tatooine,-1356,12,-3692,none,Bestine Cantina"											sound/music_acq_miner.snd	gray	1	0						1	0			
@@ -6092,6 +6091,7 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_goto_rori_bark_mite_cave	14163	14168	61	UIType:Location	quest_data:40:0:0:0	"waypoint:rori,3589,90,5430,none,Giant Bark Mite Cave"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_rori_torton_cave	14169	14174	61	UIType:Location	quest_data:40:0:0:0	"waypoint:rori,-1808,92,-4537,none,Pygmy Torton Cave"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_rori_kobola_mine	14175	14180	61	UIType:Location	quest_data:40:0:0:0	"waypoint:rori,7355,79,104,none,Kobola Spice Mine"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_goto_rori_czerka_camp	22811	22816	61	UIType:Location	quest_data:100:0:0:0	"waypoint:rori,1408,108,4331,none,Czerka Camp"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_yavin4_geonosian_lab	14181	14186	61	UIType:Location	quest_data:90:0:0:0	"waypoint:yavin4,-6482,84,-414,none,Geonosian Bio Lab"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_yavin4_blue_leaf_temple	14187	14192	61	UIType:Location	quest_data:72:0:0:0	"waypoint:yavin4,-891,84,-2045,none,The Temple of the Blueleaf"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_yavin4_dark_jedi_bunker	14193	14198	61	UIType:Location	quest_data:90:0:0:0	"waypoint:yavin4,5228,66,426,none,Dark Jedi Bunker"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
@@ -6127,6 +6127,8 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_goto_mustafar_burning_plains	14337	14342	61	UIType:Location	quest_data:80:0:0:1	"waypoint:mustafar,-349,18,2341,none,The Burning Plains"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_mustafar_tulrus_grounds	14343	14348	61	UIType:Location	quest_data:80:0:0:1	"waypoint:mustafar,1139,79,134,none,Tulrus Nesting Grounds"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_mustafar_berkens_flow	14349	14354	61	UIType:Location	quest_data:85:0:0:1	"waypoint:mustafar,2353,62,1287,none,Berken's Flow"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_goto_dxun_dxun_czerka_outpost	22817	22822	61	UIType:Location	quest_data:100:0:0:0	"waypoint:dxun,3214,24,-3483,none,Czerka Outpost"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_goto_dxun_abandoned_mandalorian_outpost	22823	22828	61	UIType:Location	quest_data:100:0:0:0	"waypoint:dxun,-4576,-20,-2155,none,Abandoned Mandalorian Outpost"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_retrieve_item		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_retrieve_item_01	14355	14360	61	UIType:Loot	relic_data:9:0:0:0	template:object/tangible/quest/speeder_junk_engine.iff	message:saga_relic:test_speeder_engine	"menu:saga_relic,test_speeder_engine_menu"	count:1												sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_pvp_objective		0	-1	-1	task_shared_data:0:0:0:1																	sound/music_acq_miner.snd	gray	1	0						1	0			
@@ -6233,3 +6235,9 @@ removed_slots_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	
 	removed_slots_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 		slots_removed		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			reserved_mail_04_03	16083	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+		event_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+			col_halloween_pumpkin_smasher	22763	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
+			col_halloween_22	22764	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
+			col_title_thief	22765	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			

@@ -10,14 +10,17 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
     public mission_assasin()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -26,12 +29,14 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
         messageTo(objPlayer, "assassin_Arrival", dctParams, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("mission", "ABORT MISSION RECEIVED!");
         sendAssassinIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("mission", "Received start mission message");
@@ -52,6 +57,7 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
         dictionary dctParams = new dictionary();
         return SCRIPT_CONTINUE;
     }
+
     public int assassinIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -60,6 +66,7 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int assassinFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -72,6 +79,7 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int assassinSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intFinished"))
@@ -99,6 +107,7 @@ public class mission_assasin extends script.systems.missions.base.mission_dynami
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupLocationTargets(self);

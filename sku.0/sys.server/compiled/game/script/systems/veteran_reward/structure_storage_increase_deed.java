@@ -5,13 +5,14 @@ import script.library.*;
 
 public class structure_storage_increase_deed extends script.base_script
 {
-    public structure_storage_increase_deed()
-    {
-    }
     public static final string_id STORAGE_INCREASE = new string_id(player_structure.STF_FILE, "use_storage_increase_deed");
     public static final string_id SID_STORAGE_INCREASE_TITLE = new string_id(player_structure.STF_FILE, "sui_storage_title");
     public static final string_id SID_STORAGE_INCREASE_PROMPT = new string_id(player_structure.STF_FILE, "sui_storage_prompt");
     public static final string_id MSG_STORAGE_INCREASED = new string_id(player_structure.STF_FILE, "msg_storage_increased");
+    public structure_storage_increase_deed()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(player);
@@ -21,6 +22,7 @@ public class structure_storage_increase_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -35,6 +37,7 @@ public class structure_storage_increase_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean validateDeedUse(obj_id self, obj_id player, obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -56,7 +59,7 @@ public class structure_storage_increase_deed extends script.base_script
         String template = getTemplateName(structure);
         if (!isGameObjectTypeOf(structure, GOT_ship_fighter))
         {
-            if (!(template.contains("player_house_")) && !(template.contains("player_guildhall_")) && !(template.contains("barn_no_planet_restriction.iff")) && !(template.contains("diner_no_planet_restriction.iff")) && !(template.contains("theater_")) && !(template.contains("cantina_")) && !(template.contains("hospital_")) && !(template.contains("merchant_tent_")))
+            if (!(template.contains("player_house_")) && !(template.contains("player_")) && !(template.contains("player_guildhall_")) && !(template.contains("barn_no_planet_restriction.iff")) && !(template.contains("diner_no_planet_restriction.iff")) && !(template.contains("theater_")) && !(template.contains("cantina_")) && !(template.contains("hospital_")) && !(template.contains("merchant_tent_")))
             {
                 sendSystemMessage(player, new string_id(player_structure.STF_FILE, "storage_increase_houses_only"));
                 return false;
@@ -72,7 +75,7 @@ public class structure_storage_increase_deed extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!space_utils.isShipWithInterior(structure))
             {
@@ -87,6 +90,7 @@ public class structure_storage_increase_deed extends script.base_script
         }
         return true;
     }
+
     public int handleStorageChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -125,6 +129,7 @@ public class structure_storage_increase_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);

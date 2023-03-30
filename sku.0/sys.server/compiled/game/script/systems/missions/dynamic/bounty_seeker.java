@@ -9,11 +9,13 @@ public class bounty_seeker extends script.systems.missions.base.mission_dynamic_
     public bounty_seeker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int takeOff(obj_id self, dictionary params) throws InterruptedException
     {
         doAnimationAction(self, "sp_13");
@@ -21,6 +23,7 @@ public class bounty_seeker extends script.systems.missions.base.mission_dynamic_
         utils.sendPostureChange(self, POSTURE_SITTING);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

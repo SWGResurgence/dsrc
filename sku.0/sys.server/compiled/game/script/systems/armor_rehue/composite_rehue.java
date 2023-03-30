@@ -7,15 +7,17 @@ import script.library.utils;
 
 public class composite_rehue extends script.base_script
 {
+    public static final string_id MNU_COLOR = new string_id("sui", "set_color");
+    public static final String SCRIPTVAR_ARMOR_PID = "armor_rehue.pid";
     public composite_rehue()
     {
     }
-    public static final string_id MNU_COLOR = new string_id("sui", "set_color");
-    public static final String SCRIPTVAR_ARMOR_PID = "armor_rehue.pid";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -29,6 +31,7 @@ public class composite_rehue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -62,6 +65,7 @@ public class composite_rehue extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorize(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_ARMOR_PID);

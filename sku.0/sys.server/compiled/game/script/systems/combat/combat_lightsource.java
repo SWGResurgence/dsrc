@@ -8,12 +8,14 @@ public class combat_lightsource extends script.base_script
     public combat_lightsource()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float fltRange = getIntObjVar(self, "combat.lightRange");
         createTriggerVolume(self.toString(), fltRange, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(self.toString()))
@@ -25,6 +27,7 @@ public class combat_lightsource extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (volumeName.equals(self.toString()))
@@ -36,6 +39,7 @@ public class combat_lightsource extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

@@ -127,6 +127,7 @@ public class craftinglib extends script.base_script
     public static final int STATION_TYPE_WEAPON = 526369;
     public static final int STATION_TYPE_WEAPON_TOOL = 524321;
     public static final int STATION_TYPE_SPACE = 393216;
+    public static final int STATION_TYPE_GARAGE = 524329;
     public static final string_id RESEARCH_CENTER_MESSAGE = new string_id("city/city", "research_center_message");
     public static final string_id MANUFACTURING_CENTER_MESSAGE = new string_id("city/city", "manufacturing_center_message");
     public static float calcResourceQualitySkillMod(dictionary craftingValuesDictionary) throws InterruptedException
@@ -1144,13 +1145,13 @@ public class craftinglib extends script.base_script
         }
         float cityRollAdjust = 1.0f;
         int city_id = city.checkCity(player, false);
-        if (city_id > 0 && (city.getCityRank(city_id) == 3 || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
+        if (city_id > 0 && (city.getCityRank(city_id) == 3 || city.cityHasSpec(city_id, city.SF_SPEC_RESEARCH)))// Research, NOT manufac.
         {
             cityRollAdjust = 1.15f;
             sendSystemMessage(player, new string_id("city/city", "research_center_message"));
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "EXPERIMENT -- 15% raw random bonus for research city");
+                sendSystemMessageTestingOnly(player, "GOD MODE: [Experiment] 15% raw random bonus for research city\n");
             }
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation city adjustment = " + cityRollAdjust);
@@ -1774,6 +1775,10 @@ public class craftinglib extends script.base_script
         if (craftingType == STATION_TYPE_FOOD_AND_STRUCTURE)
         {
             return "food_station,structure_station,tcg_diner_crafting_station";
+        }
+        if (craftingType == STATION_TYPE_GARAGE)
+        {
+            return "tcg_garage_crafting_station, weapon_station";
         }
         return null;
     }

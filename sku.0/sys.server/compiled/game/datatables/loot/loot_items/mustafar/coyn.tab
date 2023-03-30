@@ -1,6 +1,6 @@
 strItemType
 s
-item_mustafar_fg_document
-item_mustafar_fg_chemical_antidote
-item_mustafar_fg_retrofit_kit
-item_mustafar_dg_medicine
+object/tangible/loot/mustafar/cube_loot/cube_loot_1b.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1k.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1t.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_2d.iff

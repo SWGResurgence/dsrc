@@ -8,9 +8,6 @@ import script.*;
 
 public class travel_ticket extends script.base_script
 {
-    public travel_ticket()
-    {
-    }
     public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
     public static final string_id SID_ON_PET_OR_VEHICLE = new string_id("travel/travel", "on_pet_or_vehicle");
     public static final string_id SID_TICKET_INVALID = new string_id("travel/travel", "ticket_invalid");
@@ -19,6 +16,10 @@ public class travel_ticket extends script.base_script
     public static final string_id SID_SUI_TICKET_DEPARTURE_POINT = new string_id("travel/travel", "sui_ticket_departure_point");
     public static final string_id SID_SUI_TICKET_ARRIVAL_POINT = new string_id("travel/travel", "sui_ticket_arrival_point");
     public static final string_id SID_SUI_TICKET_INFORMATION = new string_id("travel/travel", "sui_ticket_information");
+    public travel_ticket()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -28,6 +29,7 @@ public class travel_ticket extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -57,7 +59,7 @@ public class travel_ticket extends script.base_script
                 sendSystemMessage(player, SID_NO_SHUTTLE_NEARBY);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id starport = travel.getStarportFromTerminal(shuttle);
                 if (player_structure.isCivic(starport))
@@ -75,7 +77,7 @@ public class travel_ticket extends script.base_script
                     sendSystemMessage(player, SID_NO_SHUTTLE_FOR_LOCATION);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String starport_point = travel.getTravelPointName(starport);
                     if (!starport_point.equals(point))
@@ -94,7 +96,7 @@ public class travel_ticket extends script.base_script
             {
                 queueCommand(player, (1573732770), shuttle, self.toString(), COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", player + " ->There is no shuttle nearby for that ticket's departure location.");
                 sendSystemMessage(player, SID_NO_SHUTTLE_FOR_LOCATION);
@@ -102,6 +104,7 @@ public class travel_ticket extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

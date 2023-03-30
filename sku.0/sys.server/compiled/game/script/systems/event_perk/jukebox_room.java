@@ -6,16 +6,18 @@ import script.obj_id;
 
 public class jukebox_room extends script.base_script
 {
+    public static final String JUKBOX_SONG_OBJVAR = "storyteller.jukebox_song";
+    public static final String ROOMS_JUKEBOX_OBJVAR = "storyteller.room.myJukebox";
     public jukebox_room()
     {
     }
-    public static final String JUKBOX_SONG_OBJVAR = "storyteller.jukebox_song";
-    public static final String ROOMS_JUKEBOX_OBJVAR = "storyteller.room.myJukebox";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "stopAndCleanUp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -24,6 +26,7 @@ public class jukebox_room extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         String song = getMyJukeboxSong(self);
@@ -39,6 +42,7 @@ public class jukebox_room extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean allowedToListen(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id storyteller = getObjIdObjVar(self, "storytellerid");
@@ -51,26 +55,21 @@ public class jukebox_room extends script.base_script
             else if (utils.hasScriptVar(player, "storytellerAssistant"))
             {
                 obj_id whoAmIAssisting = utils.getObjIdScriptVar(player, "storytellerAssistant");
-                if (isIdValid(whoAmIAssisting) && storyteller == whoAmIAssisting)
-                {
-                    return true;
-                }
+                return isIdValid(whoAmIAssisting) && storyteller == whoAmIAssisting;
             }
             else if (utils.hasScriptVar(player, "storytellerid"))
             {
                 obj_id playersStoryteller = utils.getObjIdScriptVar(player, "storytellerid");
-                if (isIdValid(playersStoryteller) && storyteller == playersStoryteller)
-                {
-                    return true;
-                }
+                return isIdValid(playersStoryteller) && storyteller == playersStoryteller;
             }
-            else 
+            else
             {
                 return true;
             }
         }
         return false;
     }
+
     public String getMyJukeboxSong(obj_id room) throws InterruptedException
     {
         String song = "none";
@@ -82,19 +81,23 @@ public class jukebox_room extends script.base_script
             {
                 song = getStringObjVar(myJukebox, JUKBOX_SONG_OBJVAR);
             }
-            else 
+            else
             {
                 messageTo(room, "stopAndCleanUp", null, 1, false);
             }
         }
         return song;
     }
+
     public int prepareToPlaySelectedSong(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
-        for (obj_id item : contents) {
-            if (isPlayer(item)) {
-                if (allowedToListen(self, item)) {
+        for (obj_id item : contents)
+        {
+            if (isPlayer(item))
+            {
+                if (allowedToListen(self, item))
+                {
                     playMusic(item, "sound/music_silence.snd");
                 }
             }
@@ -102,15 +105,19 @@ public class jukebox_room extends script.base_script
         messageTo(self, "playSelectedSong", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int playSelectedSong(obj_id self, dictionary params) throws InterruptedException
     {
         String song = getMyJukeboxSong(self);
         if (!song.equals("none") && song.length() > 0)
         {
             obj_id[] contents = getContents(self);
-            for (obj_id item : contents) {
-                if (isPlayer(item)) {
-                    if (allowedToListen(self, item)) {
+            for (obj_id item : contents)
+            {
+                if (isPlayer(item))
+                {
+                    if (allowedToListen(self, item))
+                    {
                         playMusic(item, song);
                     }
                 }
@@ -118,24 +125,32 @@ public class jukebox_room extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stopSong(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
-        for (obj_id item : contents) {
-            if (isPlayer(item)) {
-                if (allowedToListen(self, item)) {
+        for (obj_id item : contents)
+        {
+            if (isPlayer(item))
+            {
+                if (allowedToListen(self, item))
+                {
                     playMusic(item, "sound/music_silence.snd");
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int stopAndCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
-        for (obj_id item : contents) {
-            if (isPlayer(item)) {
-                if (allowedToListen(self, item)) {
+        for (obj_id item : contents)
+        {
+            if (isPlayer(item))
+            {
+                if (allowedToListen(self, item))
+                {
                     playMusic(item, "sound/music_silence.snd");
                 }
             }
@@ -143,6 +158,7 @@ public class jukebox_room extends script.base_script
         detachScript(self, "systems.event_perk.jukebox_room");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, ROOMS_JUKEBOX_OBJVAR))

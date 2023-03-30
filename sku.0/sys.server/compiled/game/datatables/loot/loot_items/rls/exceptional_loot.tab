@@ -6,10 +6,10 @@ item_tow_crystal_uber_05_02	Buffs: Shard of Retaliation
 item_tow_buff_crystal_02_03	Buffs: Shard of the Serpent
 item_tow_holocron_ab_immune_02_01	Buffs: Sith Holocron
 rare_loot_chest_quality_2	Chest: Exceptional Chest
-object/tangible/veteran_reward/harvester.iff	Deed: Make A Harvester Self Powered
 item_vet_reward_resource_supply_generator	Deed: Resource Supply Generator
 item_cs_dna_mooc	DNA Storage Container
 item_pangrack_dna	DNA Storage Container
+item_gas_recycler_01_01	Gas Recycler
 item_treasure_map_bracelet_r_bh_04_02	Jewelry: BlasTech WrisTek - Wrist Assault Booster Zulu (Right)
 item_treasure_map_bracelet_r_sp_04_01	Jewelry: Corellidyne Personal Insurgency Wrist Implant -Black- (Right)
 item_treasure_map_bracelet_r_fs_04_01	Jewelry: Jedi Knight's Wristguard (Right)
@@ -17,19 +17,12 @@ item_treasure_map_bracelet_r_sm_04_01	Jewelry: Merr-Sonn Targeter Ranging Wrist 
 item_treasure_map_bracelet_r_me_04_01	Jewelry: Saldalith Manufacturing Veridicator 200a (Right)
 item_treasure_map_bracelet_r_of_04_01	Jewelry: SoroSuub Personnel Comlink Wrist-P4 (Right)
 item_treasure_map_bracelet_r_co_04_01	Jewelry: Traxes BioElectronic Targeting Assist Wrist Implant PTI-IV (Right)
-item_publish_gift_37_04_01	Misc: War Terminal
-object/tangible/painting/painting_han_wanted.iff	Painting: Wanted Poster Han Solo
-object/tangible/painting/painting_leia_wanted.iff	Painting: Wanted Poster Leia Organa
-object/tangible/painting/painting_luke_wanted.iff	Painting: Wanted Poster Luke Skywalker
+item_veteran_reward_token_box_medium_01_02	Medium Veteran Rewards Token Box
 item_power_crystal_04_21	Power Crystal: Perfect
+item_cts_sarlacc_non_functionalSarlacc	Sarlacc Trash Can
 item_schematic_ex_blaster_pistol_barrel	Schematic: Exceptional Blaster Pistol Barrel
 item_schematic_ex_blaster_rifle_barrel	Schematic: Exceptional Blaster Rifle Barrel
 item_schematic_ex_gas_cartridge	Schematic: Exceptional Gas Cartridge
 item_schematic_ex_projectile_pistol_barrel	Schematic: Exceptional Projectile Blaster Pistol Barrel
 item_schematic_ex_projectile_rifle_barrel	Schematic: Exceptional Projectile Blaster Rifle Barrel
 item_schematic_ex_reinforcement_core	Schematic: Exceptional Weapon Reinforcement Core
-item_target_dummy_blacksun	Target Dummy: Black Sun Controller
-item_target_dummy_stormtrooper	Target Dummy: Imperial Controller
-item_target_dummy_rebel_trooper	Target Dummy: Rebel Controller
-item_veteran_reward_token_box_medium_01_01	Medium Veteran Rewards Token Box
-item_veteran_reward_token_box_medium_01_02	Medium Veteran Rewards Token Box

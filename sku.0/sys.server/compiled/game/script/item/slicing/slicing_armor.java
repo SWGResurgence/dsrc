@@ -9,9 +9,6 @@ import script.string_id;
 
 public class slicing_armor extends script.base_script
 {
-    public slicing_armor()
-    {
-    }
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_REPAIR = new string_id("slicing/slicing", "repair");
     public static final string_id SID_NO_KIT = new string_id("slicing/slicing", "no_armor_kit");
@@ -37,6 +34,10 @@ public class slicing_armor extends script.base_script
     public static final float ARMOR_MIN = 0.0f;
     public static final float ARMOR_MAX = 1.0f;
     public static final String SLICE_TABLE = "datatables/smuggler/slice_armor.iff";
+    public slicing_armor()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int ourType = getGameObjectType(self);
@@ -46,6 +47,7 @@ public class slicing_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -73,7 +75,8 @@ public class slicing_armor extends script.base_script
             int slice_cost = effect.getInt("COST");
             int slice_amount = effect.getInt("AMOUNT");
             boolean asuccess = false;
-            switch (stat) {
+            switch (stat)
+            {
                 case "resilience":
                     asuccess = applyResilienceChange(self, player, slice_amount);
                     break;
@@ -99,11 +102,12 @@ public class slicing_armor extends script.base_script
                 sendDirtyAttributesNotification(self);
             }
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean applyResilienceChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_RES_MOD, slice_amount);
@@ -111,6 +115,7 @@ public class slicing_armor extends script.base_script
         setObjVar(self, "slice.resilience", slice_amount);
         return true;
     }
+
     public boolean applyDeflectChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_DEF_MOD, slice_amount);
@@ -118,6 +123,7 @@ public class slicing_armor extends script.base_script
         setObjVar(self, "slice.deflect", slice_amount);
         return true;
     }
+
     public boolean applyCritChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_CRIT_MOD, slice_amount);
@@ -125,6 +131,7 @@ public class slicing_armor extends script.base_script
         setObjVar(self, "slice.crit", slice_amount);
         return true;
     }
+
     public boolean applyArmorBreakChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_AB_MOD, slice_amount);

@@ -6,5 +6,5 @@
 
 @class object_template 0
 
-sharedTemplate = "object/mobile/shared_fx_7_medical_droid.iff"
+sharedTemplate = "object/mobile/shared_fx_7_droid.iff"
 

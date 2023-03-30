@@ -10,22 +10,22 @@ public class vehicle extends script.base_script
     public static final int MAX_STORED_VEHICLES = 3;
     public static final int MAX_STORED_VEHICLES_MUSTAFAR_EXPANSION = 6;
     public static final int MAX_VEHICLES = 1;
-    public static final int VAR_SPEED_MIN = 0;
-    public static final int VAR_SPEED_MAX = 1;
-    public static final int VAR_TURN_RATE_MIN = 2;
-    public static final int VAR_TURN_RATE_MAX = 3;
-    public static final int VAR_ACCEL_MIN = 4;
-    public static final int VAR_ACCEL_MAX = 5;
-    public static final int VAR_DECEL = 6;
-    public static final int VAR_SLOPE_MOD = 7;
-    public static final int VAR_DAMP_ROLL = 8;
-    public static final int VAR_DAMP_PITCH = 9;
-    public static final int VAR_DAMP_HEIGHT = 10;
-    public static final int VAR_GLIDE = 11;
-    public static final int VAR_BANKING = 12;
-    public static final int VAR_HOVER_HEIGHT = 13;
-    public static final int VAR_AUTO_LEVEL = 14;
-    public static final int VAR_STRAFE = 15;
+    public static final int VAR_SPEED_MIN = 0; //Minimum consistant speed for the vehicle
+    public static final int VAR_SPEED_MAX = 1; //Maximum consistant speed for the vehicle
+    public static final int VAR_TURN_RATE_MIN = 2;//Minimum turn rate for the vehicle
+    public static final int VAR_TURN_RATE_MAX = 3;//Maximum turn rate for the vehicle
+    public static final int VAR_ACCEL_MIN = 4; // Base acceleration
+    public static final int VAR_ACCEL_MAX = 5; // Maximum acceleration
+    public static final int VAR_DECEL = 6; // Time to stop from full speed
+    public static final int VAR_SLOPE_MOD = 7; // (Unused) Slope modifier
+    public static final int VAR_DAMP_ROLL = 8;// How much the vehicle rolls when turning
+    public static final int VAR_DAMP_PITCH = 9;//How much the vehicle pitches (think going down hill)
+    public static final int VAR_DAMP_HEIGHT = 10; // How much tolerance for the vehicle to try to stay at the same height
+    public static final int VAR_GLIDE = 11; // How much the vehicle will glide when in air.
+    public static final int VAR_BANKING = 12; // How much the vehicle will bank when turning
+    public static final int VAR_HOVER_HEIGHT = 13; // How high the vehicle will hover
+    public static final int VAR_AUTO_LEVEL = 14; // How much the vehicle will try to level itself
+    public static final int VAR_STRAFE = 15; // How much the vehicle will strafe
     public static final string_id SID_SYS_CANT_CALL_LOC = new string_id("pet/pet_menu", "cant_call_vehicle");
     public static final string_id SID_SYS_CANT_CALL_NUM = new string_id("pet/pet_menu", "cant_call_vehicle");
     public static final string_id SID_SYS_HAS_MAX_VEHICLE = new string_id("pet/pet_menu", "has_max_vehicle");
@@ -722,6 +722,7 @@ public class vehicle extends script.base_script
         {
             player = vehicle;
         }
+        obj_id vehicleControlDevice = callable.getCallableCD(vehicle);
         String datatable = VEHICLE_STAT_TABLE;
         String row = getTemplateName(vehicle);
         if (dataTableHasColumn(datatable, "min_speed"))
@@ -808,6 +809,25 @@ public class vehicle extends script.base_script
         {
             int strafe = dataTableGetInt(datatable, row, "strafe");
             setStrafe(vehicle, strafe != 0);
+        }
+        if (hasObjVar(vehicleControlDevice, "vehicle_mechanic"))
+        {
+            String var = "vehicle_mechanic." + getShortenTemplateName(player, vehicle) + ".";
+            setMinimumSpeed(vehicle, getFloatObjVar(vehicleControlDevice, var + "minspeed"));
+            setMaximumSpeed(vehicle, getFloatObjVar(vehicleControlDevice, var + "maxspeed"));
+            setAccelMin(vehicle, getFloatObjVar(vehicleControlDevice, var + "acceleration"));
+            setAccelMax(vehicle, getFloatObjVar(vehicleControlDevice, var + "accelerationmax"));
+            setBankingAngle(vehicle, getFloatObjVar(vehicleControlDevice, var + "turning"));
+            setTurnRateMin(vehicle, getFloatObjVar(vehicleControlDevice, var + "banking"));
+            setTurnRateMax(vehicle, getFloatObjVar(vehicleControlDevice, var + "turning_max"));
+            setDecel(vehicle, getFloatObjVar(vehicleControlDevice, var + "deceleration"));
+            setGlide(vehicle, getFloatObjVar(vehicleControlDevice, var + "glide"));
+            setAutoLevelling(vehicle, getFloatObjVar(vehicleControlDevice, var + "autolevel"));
+            setDampingHeight(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingheight"));
+            setDampingPitch(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingpitch"));
+            setDampingRoll(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingroll"));
+            setStrafe(vehicle, getBooleanObjVar(vehicleControlDevice, var + "strafe"));
+            debugConsoleMsg(player, "Your vehicle has been analyzed and tuned.");
         }
     }
     public static boolean mountPermissionCheck(obj_id vehicle, obj_id rider, boolean verbose) throws InterruptedException
@@ -1151,4 +1171,11 @@ public class vehicle extends script.base_script
         return false;
     }
 
+    public static String getShortenTemplateName(obj_id self, obj_id vehicle)
+    {
+        String template = getTemplateName(vehicle);
+        template = template.replaceAll("object/mobile/vehicle/shared_", "");
+        template = template.replaceAll(".iff", "");
+        return template;
+    }
 }

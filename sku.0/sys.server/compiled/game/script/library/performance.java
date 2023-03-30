@@ -3282,6 +3282,10 @@ public class performance extends script.base_script
     }
     public static boolean hasMaxHolo(obj_id actor) throws InterruptedException
     {
+        if (isGod(actor))
+        {
+            return false;
+        }
         if (!isIdValid(actor))
         {
             return true;
@@ -3358,7 +3362,7 @@ public class performance extends script.base_script
         }
         location myLoc = getLocation(actor);
         int species = getSpecies(actor);
-        int gender = getGender(actor);
+        Gender gender = getGender(actor);
         String template = "object/mobile/hologram/";
         String speciesString = "human";
         String genderString = "male";
@@ -3392,7 +3396,7 @@ public class performance extends script.base_script
             speciesString = "sullustan";
             break;
         }
-        if (gender == GENDER_FEMALE)
+        if (gender == Gender.FEMALE)
         {
             genderString = "female";
         }

@@ -7,17 +7,19 @@ import script.library.utils;
 
 public class beast_steroid_injector extends script.base_script
 {
-    public beast_steroid_injector()
-    {
-    }
     public static final string_id SID_BEAST_HAS_BUFF = new string_id("beast", "beast_has_buff");
     public static final string_id SID_BEAST_WRONG_FAMILY = new string_id("beast", "beast_buff_wrong_type");
     public static final string_id SID_BEAST_NO_BEAST = new string_id("beast", "beast_buff_no_beast");
     public static final string_id SID_USE_ITEM = new string_id("beast", "beast_buff_use");
+    public beast_steroid_injector()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -50,7 +52,7 @@ public class beast_steroid_injector extends script.base_script
                     attrib = attrib + spliVal[i] + "_" + spliVal[i + 1] + "_d";
                 }
             }
-            else 
+            else
             {
                 attrib = "beast_steroid_" + objvarVal + "_d";
             }
@@ -64,11 +66,13 @@ public class beast_steroid_injector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_ITEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -128,6 +132,7 @@ public class beast_steroid_injector extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean addXpBuff(obj_id injector, obj_id beast) throws InterruptedException
     {
         int buffAmount = 0;
@@ -143,7 +148,7 @@ public class beast_steroid_injector extends script.base_script
         {
             destroyObject(injector);
         }
-        else 
+        else
         {
             setObjVar(injector, "charges", chargesLeft);
         }

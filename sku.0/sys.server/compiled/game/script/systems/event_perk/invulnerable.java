@@ -8,6 +8,7 @@ public class invulnerable extends script.base_script
     public invulnerable()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -16,6 +17,7 @@ public class invulnerable extends script.base_script
         pickNameByTemplate(self);
         return SCRIPT_CONTINUE;
     }
+
     public void pickNameByTemplate(obj_id self) throws InterruptedException
     {
         String name = " ";

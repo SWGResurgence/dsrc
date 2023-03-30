@@ -7,9 +7,6 @@ import script.library.sui;
 
 public class chapter_8_quest_object extends script.base_script
 {
-    public chapter_8_quest_object()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -21,11 +18,16 @@ public class chapter_8_quest_object extends script.base_script
     public static final String ACTIVATION_SLOT_NAME = "chapter_collection_activation";
     public static final String PID_NAME = "chapter8_starter_quest_pid";
     public static final String QUEST_NAME = "chapter8_publish_gift_activation";
+    public chapter_8_quest_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, RADIAL_INSPECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -51,6 +53,7 @@ public class chapter_8_quest_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -68,31 +71,32 @@ public class chapter_8_quest_object extends script.base_script
             switch (bp)
             {
                 case sui.BP_OK:
-                groundquests.grantQuest(player, "chapter8_publish_gift_is_pilot");
-                modifyCollectionSlotValue(player, ACTIVATION_SLOT_NAME, 1);
-                destroySelf(self);
-                break;
+                    groundquests.grantQuest(player, "chapter8_publish_gift_is_pilot");
+                    modifyCollectionSlotValue(player, ACTIVATION_SLOT_NAME, 1);
+                    destroySelf(self);
+                    break;
                 case sui.BP_CANCEL:
-                sendSystemMessage(player, DECLINED_QUEST);
-                break;
+                    sendSystemMessage(player, DECLINED_QUEST);
+                    break;
             }
         }
-        else 
+        else
         {
             switch (bp)
             {
                 case sui.BP_OK:
-                groundquests.grantQuest(player, "chapter8_publish_gift_activation");
-                modifyCollectionSlotValue(player, ACTIVATION_SLOT_NAME, 1);
-                destroySelf(self);
-                break;
+                    groundquests.grantQuest(player, "chapter8_publish_gift_activation");
+                    modifyCollectionSlotValue(player, ACTIVATION_SLOT_NAME, 1);
+                    destroySelf(self);
+                    break;
                 case sui.BP_CANCEL:
-                sendSystemMessage(player, DECLINED_QUEST);
-                break;
+                    sendSystemMessage(player, DECLINED_QUEST);
+                    break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySelf(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.special.nodestroy");

@@ -312,7 +312,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -338,7 +338,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -409,7 +409,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -480,7 +480,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -552,7 +552,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -579,7 +579,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -650,7 +650,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -688,7 +688,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -737,7 +737,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -763,7 +763,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -801,7 +801,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -839,7 +839,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -854,7 +854,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -893,7 +893,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -932,7 +932,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -983,7 +983,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1014,7 +1014,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1051,7 +1051,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1161,7 +1161,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1232,7 +1232,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1287,7 +1287,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1308,7 +1308,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_1_neu_quest_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1379,7 +1379,7 @@ public class c_story1_1_neu_quest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

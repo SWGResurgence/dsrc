@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class tcg_combine_tcg_items_generic extends script.base_script
 {
-    public tcg_combine_tcg_items_generic()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "combine";
     public static final String OBJVAR_SET_NAME = "tcg.setName";
@@ -18,19 +15,26 @@ public class tcg_combine_tcg_items_generic extends script.base_script
     public static final String COMBINE = "combine";
     public static final String OBJVAR_COMBINE_ITEM = "tcg.combineItemTemplatePattern";
     public static final int NUM_COMBINE_ITEMS = 4;
+    public tcg_combine_tcg_items_generic()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
-        if (idx == -1) {
+        if (idx == -1)
+        {
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(self, COMBINE)) {
+        if (hasObjVar(self, COMBINE))
+        {
             names[idx] = "can_be_combined";
             attribs[idx] = getStringObjVar(self, COMBINE);
             idx++;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("combine: OnObjectMenuRequest - Init");
@@ -55,6 +59,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_MENU10)
@@ -79,7 +84,8 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         String templatePattern = getStringObjVar(self, OBJVAR_COMBINE_ITEM);
         blog("combine: OnObjectMenuSelect - templatePattern: " + templatePattern);
         obj_id[] allPossibleMatches = utils.getAllItemsPlayerHasByTemplateStartsWith(owner, templatePattern);
-        if(allPossibleMatches == null || allPossibleMatches.length == 0){
+        if (allPossibleMatches == null || allPossibleMatches.length == 0)
+        {
             sendSystemMessage(player, new string_id("tcg", "combination_not_enough_items"));
             return SCRIPT_CONTINUE;
         }
@@ -111,6 +117,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         blog("combine: OnObjectMenuSelect - SUCCESS");
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getListOfCombinableObjects(obj_id[] allPossibleMatches) throws InterruptedException
     {
         blog("combine: getListOfCombinableObjects - init");
@@ -120,8 +127,10 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         }
         Vector combinableObjects = new Vector();
         combinableObjects.setSize(0);
-        for (obj_id possibleMatch : allPossibleMatches) {
-            if (hasObjVar(possibleMatch, COMBINE) && (getStringObjVar(possibleMatch, COMBINE)).startsWith("true")) {
+        for (obj_id possibleMatch : allPossibleMatches)
+        {
+            if (hasObjVar(possibleMatch, COMBINE) && (getStringObjVar(possibleMatch, COMBINE)).startsWith("true"))
+            {
                 utils.addElement(combinableObjects, possibleMatch);
             }
         }
@@ -134,6 +143,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         blog("combine: getListOfCombinableObjects - List longer or equal to 4 so continuing");
         return utils.toStaticObjIdArray(combinableObjects);
     }
+
     public boolean getCorrectCombination(obj_id[] combinableObjects, obj_id owner, String setName) throws InterruptedException
     {
         blog("combine: getCorrectCombination - init");
@@ -161,27 +171,33 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         obj_id potentialItem;
         String[] templates = new String[4];
         // get our template names for this collection.
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++)
+        {
             templates[i] = tableData.getString("template_" + (i + 1));
         }
         // iterate through the entire list of the items found that may be legit
-        for(int i = 0; i < combinableObjects.length; i++){
-            if(combinableObjects[i] == null) continue;
+        for (int i = 0; i < combinableObjects.length; i++)
+        {
+            if (combinableObjects[i] == null) continue;
             // make sure we are still looking for our items - if not, break and continue with combining
             if (items[0] && items[1] && items[2] && items[3]) break;
             potentialItem = combinableObjects[i];
             CustomerServiceLog("tcg", setName + " Checking item: " + getTemplateName(potentialItem));
-            if (owner != utils.getContainingPlayer(potentialItem)) {
+            if (owner != utils.getContainingPlayer(potentialItem))
+            {
                 combinableObjects[i] = null;
                 CustomerServiceLog("tcg", setName + " Item " + getTemplateName(potentialItem) + " is not contained in the player's inventory so skipping.");
                 continue;
             }
             // iterate through the items needed to see if we have a match or not
-            for(int k = 0; k < 4; k++) {
+            for (int k = 0; k < 4; k++)
+            {
                 // don't evaluate against items already found.
-                if (!items[k]){
-                    CustomerServiceLog("tcg", setName + " Checking if item (" + getTemplateName(potentialItem) + ") is equivalent to set item #" + (k+1) + " (" + templates[k] + ")");
-                    if (getTemplateName(potentialItem).equals(templates[k])) {
+                if (!items[k])
+                {
+                    CustomerServiceLog("tcg", setName + " Checking if item (" + getTemplateName(potentialItem) + ") is equivalent to set item #" + (k + 1) + " (" + templates[k] + ")");
+                    if (getTemplateName(potentialItem).equals(templates[k]))
+                    {
                         // user has the item
                         items[k] = true;
                         utils.addElement(toBeCombinedList, potentialItem);
@@ -205,6 +221,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         }
         return false;
     }
+
     public boolean combineTheCombinableObjects(obj_id[] combinableList, obj_id owner, String setName, String tableReward) throws InterruptedException
     {
         blog("combine: combineTheCombinableObjects - init");
@@ -234,16 +251,20 @@ public class tcg_combine_tcg_items_generic extends script.base_script
             return false;
         }
         int checkSum = 0;
-        for (obj_id combinableItem : combinableList) {
-            if (!isValidId(combinableItem) || !exists(combinableItem)) {
+        for (obj_id combinableItem : combinableList)
+        {
+            if (!isValidId(combinableItem) || !exists(combinableItem))
+            {
                 CustomerServiceLog("tcg", setName + " Combination ERROR - Object (" + combinableItem + ") No longer exists for combine process. Possible attempt to exploit involving Player: " + owner + " " + getPlayerName(owner) + ".");
                 continue;
             }
-            if (owner != utils.getContainingPlayer(combinableItem)) {
+            if (owner != utils.getContainingPlayer(combinableItem))
+            {
                 CustomerServiceLog("tcg", setName + " Combination ERROR - Object (" + combinableItem + ") No longer exists in player inventory for the combine process. Possible attempt to exploit involving Player: " + owner + " " + getPlayerName(owner) + ".");
                 continue;
             }
-            if (!hasObjVar(combinableItem, COMBINE) && (getStringObjVar(combinableItem, COMBINE)).startsWith("true")) {
+            if (!hasObjVar(combinableItem, COMBINE) && (getStringObjVar(combinableItem, COMBINE)).startsWith("true"))
+            {
                 CustomerServiceLog("tcg", setName + " Combination ERROR - Object (" + combinableItem + ") No longer has objvar allowing combination process. Possible attempt to exploit involving Player: " + owner + " " + getPlayerName(owner) + ".");
                 continue;
             }
@@ -267,8 +288,10 @@ public class tcg_combine_tcg_items_generic extends script.base_script
             return false;
         }
         CustomerServiceLog("tcg", setName + " Combination Success - Reward creation success. reward Object: (" + reward + ") in player inventory: " + playerInv + " for Player: " + owner + " " + getPlayerName(owner) + ".");
-        for (obj_id item : combinableList) {
-            if (!isValidId(item) || !exists(item)) {
+        for (obj_id item : combinableList)
+        {
+            if (!isValidId(item) || !exists(item))
+            {
                 CustomerServiceLog("tcg", setName + " Combination ERROR - Combine object: " + item + " could not be found for update. This object was last owned by Player: " + owner + " " + getPlayerName(owner) + " and needed to be updated to avoid reuse in the combination process.");
                 continue;
             }
@@ -278,6 +301,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         CustomerServiceLog("tcg", setName + " Combination SUCCESS - All objects combined for Player: " + owner + " " + getPlayerName(owner) + ". reward object: " + reward + " created in player inventory, objects used in process should be updated.");
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

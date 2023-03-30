@@ -9,6 +9,7 @@ public class holopet_data_cube extends script.base_script
     public holopet_data_cube()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -37,10 +38,10 @@ public class holopet_data_cube extends script.base_script
             switch (holobeastColor)
             {
                 case beast_lib.HOLO_BEAST_TYPE3_QUALITY3:
-                rareColor = "Burnt Orange";
-                break;
+                    rareColor = "Burnt Orange";
+                    break;
                 default:
-                break;
+                    break;
             }
             if (rareColor.length() > 0)
             {

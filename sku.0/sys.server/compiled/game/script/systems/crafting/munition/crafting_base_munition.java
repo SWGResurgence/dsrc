@@ -8,34 +8,44 @@ import script.obj_id;
 
 public class crafting_base_munition extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_munition()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (((itemAttribute.name).getAsciiId()).equals("attackSpeed") || ((itemAttribute.name).getAsciiId()).equals("attackCost")) {
+            if (((itemAttribute.name).getAsciiId()).equals("attackSpeed") || ((itemAttribute.name).getAsciiId()).equals("attackCost"))
+            {
                 itemAttribute.currentValue = (itemAttribute.minValue + itemAttribute.maxValue) - itemAttribute.currentValue;
             }
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         int attackCost = 0;
         int accuracy = 0;
         base_class.range_info rangeData = new base_class.range_info();
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                switch (((itemAttribute.name).getAsciiId())) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                switch (((itemAttribute.name).getAsciiId()))
+                {
                     case "minDamage":
                         setWeaponMinDamage(prototype, (int) itemAttribute.currentValue);
                         break;
@@ -44,9 +54,12 @@ public class crafting_base_munition extends script.systems.crafting.crafting_bas
                         break;
                     case "attackSpeed":
                         float speed = itemAttribute.currentValue;
-                        if (speed >= 1000) {
+                        if (speed >= 1000)
+                        {
                             speed /= 100;
-                        } else {
+                        }
+                        else
+                        {
                             speed /= 10;
                         }
                         setWeaponAttackSpeed(prototype, speed);

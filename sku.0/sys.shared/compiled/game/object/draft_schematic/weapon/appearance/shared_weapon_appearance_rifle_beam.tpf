@@ -15,7 +15,7 @@ attributes = [
 	[name = "crafting" "damageType", experiment = "" "", value = 2..2],
 	[name = "crafting" "elementalType", experiment = "" "", value = 128..128],
 	[name = "crafting" "elementalValue", experiment = "" "", value = -1..-1],
-	[name = "crafting" "complexity", experiment = "" "", value = 40..40],
+	[name = "crafting" "complexity", experiment = "" "", value = 20..20],
 	[name = "crafting" "xp", experiment = "" "", value = 120..120]]
 
 slots = [

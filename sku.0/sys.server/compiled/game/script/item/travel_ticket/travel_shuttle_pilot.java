@@ -5,9 +5,6 @@ import script.*;
 
 public class travel_shuttle_pilot extends script.base_script
 {
-    public travel_shuttle_pilot()
-    {
-    }
     public static final string_id SID_BOARD_SHUTTLE = new string_id("travel", "board_shuttle");
     public static final string_id SID_NEXT_SHUTTLE = new string_id("travel", "next_shuttle");
     public static final string_id SID_ON_PET_OR_VEHICLE = new string_id("travel/travel", "on_pet_or_vehicle");
@@ -18,6 +15,10 @@ public class travel_shuttle_pilot extends script.base_script
     public static final string_id SID_OBTAIN_DATA_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_msg");
     public static final string_id SID_OKAY_BUTTOM = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_data");
     public static final string_id SID_CANCEL_BUTTON = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_cancel_button");
+    public travel_shuttle_pilot()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");
@@ -28,12 +29,14 @@ public class travel_shuttle_pilot extends script.base_script
         stop(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         obj_id starport = travel.getStarportFromTerminal(self);
         LOG("LOG_CHANNEL", "travel_shuttle_pilot::OnUnloadedFromMemory -- " + self + " from starport " + starport);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -42,7 +45,7 @@ public class travel_shuttle_pilot extends script.base_script
         {
             data.setServerNotify(true);
         }
-        else 
+        else
         {
             if (travel.isShuttleAvailable(starport))
             {
@@ -53,7 +56,7 @@ public class travel_shuttle_pilot extends script.base_script
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_BOARD_SHUTTLE);
                 sendSystemMessage(player, "Bypassing the shuttle timer because you are a GCW officer and your faction currently controls the planet.", "");
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, SID_NEXT_SHUTTLE);
             }
@@ -67,6 +70,7 @@ public class travel_shuttle_pilot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -102,7 +106,7 @@ public class travel_shuttle_pilot extends script.base_script
                 queueCommand(player, (1573732770), shuttle, "", COMMAND_PRIORITY_DEFAULT);
                 sendSystemMessage(player, "Bypassing the shuttle timer because you are a GCW officer and your faction currently controls the planet.", "");
             }
-            else 
+            else
             {
                 int time_stamp = travel.getShuttleTimestamp(starport);
                 int air_time = travel.getAirTime(starport);
@@ -113,7 +117,7 @@ public class travel_shuttle_pilot extends script.base_script
                     prose_package pp = prose.getPackage(strSpam, arrival_time);
                     sendSystemMessageProse(player, pp);
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", player + " ->The next shuttle is about to begin boarding.");
                     string_id strSpam = new string_id("travel/travel", "shuttle_begin_boarding");

@@ -5,9 +5,6 @@ import script.library.*;
 
 public class base_incubator extends script.base_script
 {
-    public base_incubator()
-    {
-    }
     public static final string_id SID_WHILE_DEAD = new string_id("player_structure", "while_dead");
     public static final string_id SID_TERMINAL_MANAGEMENT = new string_id("player_structure", "incubator_management");
     public static final string_id SID_TERMINAL_MANAGEMENT_POWER_REMOVE = new string_id("player_structure", "incubator_power_remove");
@@ -33,6 +30,10 @@ public class base_incubator extends script.base_script
     public static final string_id SID_ONLY_DNA_CAN_ADD = new string_id("incubator", "only_dna_can_add");
     public static final string_id SID_STATION_HAS_DNA_ALREADY = new string_id("incubator", "station_has_dna_already");
     public static final string_id SID_NO_TRIAL_ACCOUNTS = new string_id("incubator", "no_trial_accounts");
+    public base_incubator()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.isInHouseCellSpace(self))
@@ -42,6 +43,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (isPlayer(breecher))
@@ -50,17 +52,13 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id station = self;
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
             return SCRIPT_CONTINUE;
         }
         if (incubator.hasActiveUser(station) && incubator.hasActiveIncubator(player))
@@ -110,17 +108,13 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
             return SCRIPT_CONTINUE;
         }
         obj_id station = self;
@@ -154,7 +148,7 @@ public class base_incubator extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("beast", "incubator_already_active"));
                 }
-                else 
+                else
                 {
                     int pid = sui.msgbox(station, player, "@" + SID_ACTIVATE_MSG_PROMPT, sui.YES_NO, "@" + SID_ACTIVATE_MSG_TITLE, "handleActivateSui");
                 }
@@ -165,7 +159,7 @@ public class base_incubator extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("beast", "incubator_not_yours"));
                 }
-                else 
+                else
                 {
                     if (utils.hasScriptVar(player, incubator.GUI_SCRIPT_VAR) && !isGod(player))
                     {
@@ -176,12 +170,12 @@ public class base_incubator extends script.base_script
                         {
                             incubator.startSession(station, player);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, SID_SESSION_TOO_SOON);
                         }
                     }
-                    else 
+                    else
                     {
                         incubator.startSession(station, player);
                     }
@@ -203,7 +197,7 @@ public class base_incubator extends script.base_script
                 {
                     int pid = sui.msgbox(station, player, "@" + SID_CLEANSE_MSG_PROMPT, sui.YES_NO, "@" + SID_CLEANSE_MSG_TITLE, "handleCleanseSui");
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("beast", "not_active_user"));
                 }
@@ -224,6 +218,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = incubator.getIncubatorActiveUser(self);
@@ -232,6 +227,7 @@ public class base_incubator extends script.base_script
         messageTo(player, "removeIncubatorFromUser", params, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         if (isSpaceScene())
@@ -254,6 +250,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id station = self;
@@ -270,6 +267,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -419,7 +417,7 @@ public class base_incubator extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     names[idx] = incubator.ATTRIBUTE_DISPLAY_NAMES[i];
                     float bonusVal = getFloatObjVar(self, incubator.ARRAY_ATTRIBUTES[i]);
@@ -443,7 +441,7 @@ public class base_incubator extends script.base_script
             {
                 attribs[idx] = "Ready";
             }
-            else 
+            else
             {
                 attribs[idx] = utils.assembleTimeRemainToUse(timeToUse);
             }
@@ -455,6 +453,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id station = self;
@@ -480,6 +479,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id station = self;
@@ -501,6 +501,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id station = self;
@@ -517,6 +518,7 @@ public class base_incubator extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleActivateSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -542,13 +544,14 @@ public class base_incubator extends script.base_script
                 npe.commTutorialPlayer(self, player, 13.0f, incubator.SID_COMM_ACTIVATION, incubator.COMM_SFX_ACTIVATE, incubator.COMM_APPEARANCE_ACTIVATE);
                 sendSystemMessage(player, new string_id("beast", "incubator_activated"));
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("beast", "incubator_not_activated"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanseSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -565,18 +568,19 @@ public class base_incubator extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("beast", "incubator_cleansed"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("beast", "incubator_cleanse_fail"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("beast", "incubator_cleanse_fail"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHomeOwnerCleanseSui(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -587,11 +591,13 @@ public class base_incubator extends script.base_script
         incubator.incubatorTotalCleanse(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanseOldIncubator(obj_id self, dictionary params) throws InterruptedException
     {
         incubator.incubatorTotalCleanse(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerIncubatorSessionUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.isEmpty() || params == null)
@@ -744,7 +750,7 @@ public class base_incubator extends script.base_script
             hashTemplate = incubator.getIncubatorCreatureTemplate(station);
             template = incubator.convertHashTemplateToString(hashTemplate, station);
         }
-        else 
+        else
         {
             hashTemplate = getIntObjVar(station, incubator.STATION_DNA_CREATURE_TEMPLATE);
             template = incubator.convertHashTemplateToString(hashTemplate, station);
@@ -764,7 +770,7 @@ public class base_incubator extends script.base_script
         {
             sendSystemMessageTestingOnly(player, "Your stationPowerQuality is " + stationPowerQuality);
         }
-        float powerPercentToMax = (float)stationPowerQuality / incubator.MAX_POWER_QUALITY;
+        float powerPercentToMax = (float) stationPowerQuality / incubator.MAX_POWER_QUALITY;
         if (isGod(player))
         {
             sendSystemMessageTestingOnly(player, "Your powerPercentToMax is " + powerPercentToMax);
@@ -845,21 +851,21 @@ public class base_incubator extends script.base_script
         armorBonus += pointsTowardArmor;
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") armorBonus = " + armorBonus);
         String[] attributes = incubator.STAT_LIST;
-        float[] attributesUpdateAmount = 
-        {
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f,
-            0.0f
-        };
+        float[] attributesUpdateAmount =
+                {
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f
+                };
         expertiseQualityBonusPercent = 1.0f;
         if (expertiseAndStationQualityBonus > 0)
         {
@@ -919,9 +925,12 @@ public class base_incubator extends script.base_script
                     }
                 }
             }
-            for (String s : attribUpdated) {
-                for (int m = 0; m < attributes.length; ++m) {
-                    if (s.equals(attributes[m])) {
+            for (String s : attribUpdated)
+            {
+                for (int m = 0; m < attributes.length; ++m)
+                {
+                    if (s.equals(attributes[m]))
+                    {
                         attributesUpdateAmount[m] += pointsTowardAttrib;
                         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") " + attributes[m] + " increasing by " + attributesUpdateAmount[m]);
                     }
@@ -1131,17 +1140,17 @@ public class base_incubator extends script.base_script
                 {
                     incubator.giveMutationAttributeBonus(station, player, attributesUpdateAmount, attributes);
                 }
-                else 
+                else
                 {
-                    int[] skillArray = 
-                    {
-                        survivalUpdate,
-                        beastialResilienceUpdate,
-                        cunningUpdate,
-                        intelligenceUpdate,
-                        aggressionUpdate,
-                        huntersInstinctUpdate
-                    };
+                    int[] skillArray =
+                            {
+                                    survivalUpdate,
+                                    beastialResilienceUpdate,
+                                    cunningUpdate,
+                                    intelligenceUpdate,
+                                    aggressionUpdate,
+                                    huntersInstinctUpdate
+                            };
                     incubator.giveMutationSkillBonus(station, player, skillArray, newTemplate);
                     survivalUpdate = skillArray[0];
                     beastialResilienceUpdate = skillArray[1];
@@ -1151,13 +1160,13 @@ public class base_incubator extends script.base_script
                     huntersInstinctUpdate = skillArray[5];
                 }
             }
-            else 
+            else
             {
                 newTemplate = template;
                 incubator.blog("INCUBATOR", "session(" + sessionNumber + ") nonMutated::newTemplate = " + newTemplate);
             }
         }
-        else 
+        else
         {
             newTemplate = template;
             incubator.blog("INCUBATOR", "session(" + sessionNumber + ") canMutate = " + canMutate);
@@ -1194,7 +1203,7 @@ public class base_incubator extends script.base_script
             row = dataTableSearchColumnForString(newTemplate, "mutated_template_" + lastMutatedSession, incubator.DATATABLE_INCUBATOR_TEMPLATES);
             hashTemplate = dataTableGetInt(incubator.DATATABLE_INCUBATOR_TEMPLATES, row, "hash_mutated_template_" + lastMutatedSession);
         }
-        else 
+        else
         {
             row = dataTableSearchColumnForString(newTemplate, "initial_template", incubator.DATATABLE_INCUBATOR_TEMPLATES);
             hashTemplate = dataTableGetInt(incubator.DATATABLE_INCUBATOR_TEMPLATES, row, "hash_initial_template");
@@ -1273,6 +1282,7 @@ public class base_incubator extends script.base_script
         incubator.advanceSessionParticle(station);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncubatorCommitted(obj_id self, obj_id playerId, obj_id terminalId, obj_id slot1Id, obj_id slot2Id, obj_id slot3Id, obj_id slot4Id, int initialPointsSurvival, int initialPointsBeastialResilience, int initialPointsCunning, int initialPointsIntelligence, int initialPointsAggression, int initialPointsHuntersInstinct, int totalPointsSurvival, int totalPointsBeastialResilience, int totalPointsCunning, int totalPointsIntelligence, int totalPointsAggression, int totalPointsHuntersInstinct, int temperatureGauge, int nutrientGauge, int newCreatureColorIndex) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -1322,7 +1332,8 @@ public class base_incubator extends script.base_script
             sendSystemMessage(playerId, SID_CHEATER_BAD_ID);
             return SCRIPT_CONTINUE;
         }
-        if (terminalId != self) {
+        if (terminalId != self)
+        {
             sendSystemMessage(playerId, SID_CHEATER_BAD_ID);
             return SCRIPT_CONTINUE;
         }
@@ -1387,6 +1398,7 @@ public class base_incubator extends script.base_script
         messageTo(terminalId, "handlerIncubatorSessionUpdate", dict, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int refreshCurrentParticle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id station = self;

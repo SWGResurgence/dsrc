@@ -1,5 +1,6 @@
 package script.terminal;
 
+import script.library.callable;
 import script.library.create;
 import script.library.locations;
 import script.library.utils;
@@ -7,9 +8,6 @@ import script.*;
 
 public class terminal_travel_instant_one_use extends script.base_script
 {
-    public terminal_travel_instant_one_use()
-    {
-    }
     public static final string_id SID_LOCATION_NOGOOD_FOR_PICKUP = new string_id("travel", "no_pickup_location");
     public static final string_id SID_TIMEOUT = new string_id("travel", "pickup_timeout");
     public static final string_id SID_LEFT_ME = new string_id("travel", "left_pickup_zone");
@@ -21,24 +19,32 @@ public class terminal_travel_instant_one_use extends script.base_script
     public static final int SHIP_TYPE_INSTANT_XWING_TIE = 1;
     public static final int SHIP_TYPE_INSTANT_PRIVATEER = 2;
     public static final int SHIP_TYPE_INSTANT_ROYAL_SHIP = 3;
+    public terminal_travel_instant_one_use()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
         {
+            callable.storeCallables(player);
             sendSystemMessage(player, SID_CALLING_FOR_PICKUP);
             spawnPickupCraft(player, 2);
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnPickupCraft(obj_id player, int type) throws InterruptedException
     {
         debugLogging("//***// spawnPickupCraft", "////>>>> ENTERED");
@@ -93,6 +99,7 @@ public class terminal_travel_instant_one_use extends script.base_script
         messageTo(pickupCraft, "initializeInstaTravelShip", null, 1, false);
         return pickupCraft;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)

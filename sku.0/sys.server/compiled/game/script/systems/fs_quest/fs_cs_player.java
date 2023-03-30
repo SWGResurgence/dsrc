@@ -8,11 +8,12 @@ import script.string_id;
 
 public class fs_cs_player extends script.base_script
 {
+    public static final float HELP_SPAWN_TIME_MIN = 180;
+    public static final float HELP_SPAWN_TIME_MAX = 300;
     public fs_cs_player()
     {
     }
-    public static final float HELP_SPAWN_TIME_MIN = 180;
-    public static final float HELP_SPAWN_TIME_MAX = 300;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!quests.isActive("fs_cs_intro", self))
@@ -23,6 +24,7 @@ public class fs_cs_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnForceSensitiveQuestCompleted(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (questName.equals("fs_cs_kill5_guards") && succeeded)
@@ -33,8 +35,10 @@ public class fs_cs_player extends script.base_script
                 gang = getGroupMemberIds(getGroupObject(self));
                 if ((gang != null) && (gang.length > 0))
                 {
-                    for (obj_id thisGuy : gang) {
-                        if (isIdValid(thisGuy) && exists(thisGuy) && thisGuy != self && quests.isActive("fs_cs_intro", thisGuy)) {
+                    for (obj_id thisGuy : gang)
+                    {
+                        if (isIdValid(thisGuy) && exists(thisGuy) && thisGuy != self && quests.isActive("fs_cs_intro", thisGuy))
+                        {
                             sendSystemMessage(thisGuy, new string_id("fs_quest_village", "groupmate_powered_down"));
                         }
                     }
@@ -43,22 +47,26 @@ public class fs_cs_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         factions.setFactionStanding(self, "sith_shadow_nonaggro", factions.FACTION_RATING_MIN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         factions.setFactionStanding(self, "sith_shadow_nonaggro", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int msgShieldPowerup(obj_id self, dictionary params) throws InterruptedException
     {
         fs_counterstrike.resetPlayerToStart(self, null);
         sendSystemMessage(self, new string_id("fs_quest_village", "mission_time_failed"));
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         sendSystemMessage(self, new string_id("fs_quest_village", "combat_quest_failed_timeout"));
@@ -66,6 +74,7 @@ public class fs_cs_player extends script.base_script
         detachScript(self, "systems.fs_quest.fs_cs_player");
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (quests.isActive("fs_cs_escort_commander_pri", self))
@@ -81,6 +90,7 @@ public class fs_cs_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerDeath(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questGiver = null;
@@ -106,7 +116,7 @@ public class fs_cs_player extends script.base_script
                     messageTo(commander, "msgPrimaryEscortDied", null, 0.0f, false);
                 }
             }
-            else 
+            else
             {
                 trace.log(fs_dyn_village.LOG_CHAN, "fs_cs_player::handlePlayerDeath:-> Missing " + fs_counterstrike.OBJVAR_CAMP_SHIELD_KILLER + " on player " + self + ". Failing quest.", self, trace.TL_ERROR_LOG);
                 questGiver = fs_counterstrike.getCurrentQuestGiver(self, "fs_cs_escort_commander_pri");
@@ -117,6 +127,7 @@ public class fs_cs_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgCommanderDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id questGiver = null;
@@ -162,6 +173,7 @@ public class fs_cs_player extends script.base_script
         sendSystemMessage(self, new string_id("fs_quest_village", "commander_died_toxins"));
         return SCRIPT_CONTINUE;
     }
+
     public int msgCommanderFree(obj_id self, dictionary params) throws InterruptedException
     {
         boolean fail = params.getBoolean("questFailure");
@@ -169,7 +181,7 @@ public class fs_cs_player extends script.base_script
         {
             sendSystemMessage(self, new string_id("fs_quest_village", "commander_is_free"));
         }
-        else 
+        else
         {
             obj_id questGiver = null;
             if (quests.isActive("fs_cs_escort_commander_pri", self))
@@ -182,6 +194,7 @@ public class fs_cs_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void giveCrystal(obj_id player) throws InterruptedException
     {
         if (!jedi.forceCreateColorCrystal(player, 29))
@@ -189,6 +202,7 @@ public class fs_cs_player extends script.base_script
             trace.log(fs_dyn_village.LOG_CHAN, "fs_cs_player::giveCrystal: -> Failed to give player lightsaber crystal.  Crystal=null.", player, trace.TL_ERROR_LOG | trace.TL_CS_LOG);
         }
     }
+
     public int msgQuestComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (quests.isActive("fs_cs_ensure_capture", self))
@@ -220,7 +234,7 @@ public class fs_cs_player extends script.base_script
                 setObjVar(createdObject, "item.buff.value", 900);
                 setObjVar(createdObject, "item.buff.duration", 5400);
             }
-            else 
+            else
             {
                 trace.log(fs_dyn_village.LOG_CHAN, "fs_cs_player::giveCrystal: -> Failed to give player mind buff crystal.  Crystal=null.", self, trace.TL_ERROR_LOG | trace.TL_CS_LOG);
             }
@@ -234,6 +248,7 @@ public class fs_cs_player extends script.base_script
         detachScript(self, "systems.fs_quest.fs_cs_player");
         return SCRIPT_CONTINUE;
     }
+
     public int msgCommanderCaptured(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("capturedBy") || !params.containsKey("commander"))
@@ -257,7 +272,7 @@ public class fs_cs_player extends script.base_script
                 questGiver = fs_counterstrike.getCurrentQuestGiver(self, "fs_cs_escort_commander_sec");
                 quests.complete("fs_cs_escort_commander_sec", self, true);
             }
-            else 
+            else
             {
                 questGiver = fs_counterstrike.getCurrentQuestGiver(self, "fs_cs_ensure_capture");
                 quests.complete("fs_cs_ensure_capture", self, true);
@@ -294,12 +309,13 @@ public class fs_cs_player extends script.base_script
             setObjVar(self, "fs_cs.myCapturedCommander", commander);
             sendSystemMessage(self, new string_id("fs_quest_village", "fs_cs_capd_commander_via_group"));
         }
-        else 
+        else
         {
             trace.log(fs_dyn_village.LOG_CHAN, "fs_cs_player::msgCommanderCaptured: -> Unhandled condition for commander capture.", self, trace.TL_ERROR_LOG);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void givePlayerCommanderWaypoint(obj_id player) throws InterruptedException
     {
         location loc = null;
@@ -308,7 +324,7 @@ public class fs_cs_player extends script.base_script
             location locTest = getLocation(player);
             loc = new location(locTest.x, locTest.y, locTest.z + 1000);
         }
-        else 
+        else
         {
             loc = new location(5315.0f, 78.0f, -4136.0f);
         }
@@ -318,6 +334,7 @@ public class fs_cs_player extends script.base_script
         setObjVar(player, "fs_cs.returnCommanderWaypoint", waypoint);
         return;
     }
+
     public void makePlayerEscort(obj_id player, obj_id commander) throws InterruptedException
     {
         String objvarname = "quest." + "fs_cs_escort_commander_pri" + ".target";
@@ -329,7 +346,7 @@ public class fs_cs_player extends script.base_script
             location locTest = getLocation(commander);
             loc = new location(locTest.x, locTest.y, locTest.z + 1000);
         }
-        else 
+        else
         {
             loc = new location(5315.0f, 78.0f, -4136.0f);
         }

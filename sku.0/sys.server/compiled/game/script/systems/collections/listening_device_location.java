@@ -6,16 +6,18 @@ import script.string_id;
 
 public class listening_device_location extends script.base_script
 {
+    public static final float UPDATE_RADIUS = 5.0f;
+    public static final string_id SID_ENTERED_GOOD_LOCATION = new string_id("collection", "entered_good_location");
     public listening_device_location()
     {
     }
-    public static final float UPDATE_RADIUS = 5.0f;
-    public static final string_id SID_ENTERED_GOOD_LOCATION = new string_id("collection", "entered_good_location");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("listening_device_object", UPDATE_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         obj_id triggerVolumeObject = self;
@@ -41,6 +43,7 @@ public class listening_device_location extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id exitingPlayer) throws InterruptedException
     {
         if (!isIdValid(exitingPlayer) || !exists(exitingPlayer))

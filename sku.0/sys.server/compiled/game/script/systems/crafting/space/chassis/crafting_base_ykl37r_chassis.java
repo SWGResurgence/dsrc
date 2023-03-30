@@ -9,27 +9,34 @@ public class crafting_base_ykl37r_chassis extends script.systems.crafting.crafti
     public crafting_base_ykl37r_chassis()
     {
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
             setObjVar(prototype, "isShipDeed", true);
             setObjVar(prototype, "shiptype", "ykl37r");
-            if (itemAttribute == null) {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).equals("massMax")) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).equals("massMax"))
+                {
                     String OBJVAR_NAME = "ship_chassis.mass";
-                    setObjVar(prototype, OBJVAR_NAME, (float) itemAttribute.currentValue);
+                    setObjVar(prototype, OBJVAR_NAME, itemAttribute.currentValue);
                 }
-                if (((itemAttribute.name).getAsciiId()).equals("hp")) {
+                if (((itemAttribute.name).getAsciiId()).equals("hp"))
+                {
                     String OBJVAR_NAME = "ship_chassis.hp";
-                    setObjVar(prototype, OBJVAR_NAME, (float) itemAttribute.currentValue);
+                    setObjVar(prototype, OBJVAR_NAME, itemAttribute.currentValue);
                 }
             }
         }

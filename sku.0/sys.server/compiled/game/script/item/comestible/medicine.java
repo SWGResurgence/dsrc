@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class medicine extends script.base_script
 {
-    public medicine()
-    {
-    }
     public static final String SCRIPT_MEDICINE = "item.comestible.medicine";
     public static final String MSG_TARGET_NOT_PLAYER = "@error_message:target_not_player";
     public static final string_id SID_TARGET_NOT_CREATURE = new string_id("error_message", "target_not_creature");
@@ -22,6 +19,10 @@ public class medicine extends script.base_script
     public static final string_id SID_ON_MOUNT = new string_id("error_message", "survey_on_mount");
     public static final string_id SID_NO_DOCTOR_BAG = new string_id("doctor_bag", "no_doctor_bag");
     public static final string_id SID_PLACE_IN_DOCTOR_BAG = new string_id("doctor_bag", "place_in_doctor_bag");
+    public medicine()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, consumable.VAR_CONSUMABLE_BASE))
@@ -29,12 +30,12 @@ public class medicine extends script.base_script
             int charges = rand(1, 3);
             setObjVar(self, consumable.VAR_CONSUMABLE_MEDICINE, true);
             setCount(self, charges);
-            int[] stomach = 
-            {
-                0,
-                0,
-                0
-            };
+            int[] stomach =
+                    {
+                            0,
+                            0,
+                            0
+                    };
             setObjVar(self, consumable.VAR_CONSUMABLE_STOMACH_VALUES, stomach);
             String[] skill_mod = new String[1];
             if (healing.isApplyDotMedicine(self))
@@ -43,14 +44,15 @@ public class medicine extends script.base_script
             }
             setObjVar(self, consumable.VAR_SKILL_MOD_REQUIRED, skill_mod);
             int skill_req = rand(1, 25);
-            int[] skill_value = 
-            {
-                skill_req
-            };
+            int[] skill_value =
+                    {
+                            skill_req
+                    };
             setObjVar(self, consumable.VAR_SKILL_MOD_MIN, skill_value);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "OnObjectMenuRequest");
@@ -76,12 +78,13 @@ public class medicine extends script.base_script
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_PLACE_IN_DOCTOR_BAG);
             }
         }
-        else 
+        else
         {
             detachScript(self, SCRIPT_MEDICINE);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id playerCurrentMount = getMountId(player);
@@ -134,12 +137,12 @@ public class medicine extends script.base_script
                 {
                     queueCommand(player, (-1352774256), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
-                else 
+                else
                 {
                     queueCommand(player, (545771012), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
             }
-            else 
+            else
             {
                 String strParams = self.toString();
                 if (healing.isHealDamageMedicine(self))
@@ -174,7 +177,7 @@ public class medicine extends script.base_script
                 {
                     queueCommand(player, (-1352774256), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
-                else 
+                else
                 {
                     queueCommand(player, (545771012), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
@@ -219,7 +222,7 @@ public class medicine extends script.base_script
             {
                 queueCommand(player, (-1352774256), player, strParams, COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 queueCommand(player, (545771012), player, strParams, COMMAND_PRIORITY_DEFAULT);
             }
@@ -267,12 +270,12 @@ public class medicine extends script.base_script
                 {
                     queueCommand(player, (-1352774256), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
-                else 
+                else
                 {
                     queueCommand(player, (545771012), target, strParams, COMMAND_PRIORITY_DEFAULT);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TARGETTING_ERROR);
             }
@@ -280,8 +283,9 @@ public class medicine extends script.base_script
         else if (item == menu_info_types.EXAMINE)
         {
             String template = getTemplateName(self);
-            if(template == null){
-                LOG("medicine","Unable to get template name from item (" + item + ") with object id (" + self + ") and name (" + getName(self) + ") while examining.");
+            if (template == null)
+            {
+                LOG("medicine", "Unable to get template name from item (" + item + ") with object id (" + self + ") and name (" + getName(self) + ") while examining.");
                 return SCRIPT_CONTINUE;
             }
             String id = template.substring(template.lastIndexOf("/") + 1, template.lastIndexOf("."));
@@ -299,19 +303,21 @@ public class medicine extends script.base_script
                     heal_state = (heal_state.substring(0, 1)).toUpperCase() + (heal_state.substring(1)).toLowerCase();
                     dsrc = utils.addElement(dsrc, "HEAL STATE: " + heal_state);
                 }
-                else 
+                else
                 {
                     dsrc = utils.addElement(dsrc, " None");
                 }
             }
-            else 
+            else
             {
-                for (attrib_mod attrib_mod : am) {
+                for (attrib_mod attrib_mod : am)
+                {
                     int attrib = attrib_mod.getAttribute();
                     int val = attrib_mod.getValue();
                     float atk = attrib_mod.getAttack();
                     float dcy = attrib_mod.getDecay();
-                    switch ((int) (atk)) {
+                    switch ((int) (atk))
+                    {
                         case (int) healing.AM_HEAL_WOUND:
                             dsrc = utils.addElement(dsrc, "  * HEAL WOUND: " + consumable.STAT_NAME[attrib] + " " + val);
                             break;
@@ -323,7 +329,8 @@ public class medicine extends script.base_script
                             dsrc = utils.addElement(dsrc, "  * DURATION: " + (int) attrib_mod.getDuration());
                             break;
                         default:
-                            switch ((int) (dcy)) {
+                            switch ((int) (dcy))
+                            {
                                 case (int) MOD_POOL:
                                     dsrc = utils.addElement(dsrc, "  * HEAL DAMAGE: " + consumable.STAT_NAME[attrib] + " " + val);
                                     break;
@@ -346,13 +353,14 @@ public class medicine extends script.base_script
             {
                 doctor_bag.addMedicine(player, bag, self);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_DOCTOR_BAG);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         attrib_mod[] am = getAttribModArrayObjVar(self, consumable.VAR_CONSUMABLE_MODS);
@@ -439,19 +447,22 @@ public class medicine extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
-            for (attrib_mod attrib_mod : am) {
+            for (attrib_mod attrib_mod : am)
+            {
                 int attrib = attrib_mod.getAttribute();
                 int val = attrib_mod.getValue();
                 float atk = attrib_mod.getAttack();
                 float dcy = attrib_mod.getDecay();
-                switch ((int) (atk)) {
+                switch ((int) (atk))
+                {
                     case (int) healing.AM_HEAL_WOUND:
                         names[idx] = "examine_heal_wound_" + consumable.STAT_NAME[attrib];
                         attribs[idx] = Integer.toString(val);
                         idx++;
-                        if (idx >= names.length) {
+                        if (idx >= names.length)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         break;
@@ -459,32 +470,37 @@ public class medicine extends script.base_script
                         names[idx] = "examine_heal_shock";
                         attribs[idx] = Integer.toString(val);
                         idx++;
-                        if (idx >= names.length) {
+                        if (idx >= names.length)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         break;
                     case (int) healing.VAR_BUFF_MOD_ATTACK:
                         names[idx] = "examine_enhance_" + consumable.STAT_NAME[attrib];
                         int newVal = Integer.MIN_VALUE;
-                        attribs[idx] = Integer.toString(newVal) + "%";
+                        attribs[idx] = newVal + "%";
                         idx++;
-                        if (idx >= names.length) {
+                        if (idx >= names.length)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         names[idx] = "examine_duration_" + consumable.STAT_NAME[attrib];
                         attribs[idx] = Integer.toString((int) attrib_mod.getDuration());
                         idx++;
-                        if (idx >= names.length) {
+                        if (idx >= names.length)
+                        {
                             return SCRIPT_CONTINUE;
                         }
                         break;
                     default:
-                        switch ((int) (dcy)) {
+                        switch ((int) (dcy))
+                        {
                             case (int) MOD_POOL:
                                 names[idx] = "examine_heal_damage_" + consumable.STAT_NAME[attrib];
                                 attribs[idx] = Integer.toString(val);
                                 idx++;
-                                if (idx >= names.length) {
+                                if (idx >= names.length)
+                                {
                                     return SCRIPT_CONTINUE;
                                 }
                                 break;
@@ -492,7 +508,8 @@ public class medicine extends script.base_script
                                 names[idx] = "examine_antidote_" + consumable.STAT_NAME[attrib];
                                 attribs[idx] = Integer.toString(val);
                                 idx++;
-                                if (idx >= names.length) {
+                                if (idx >= names.length)
+                                {
                                     return SCRIPT_CONTINUE;
                                 }
                                 break;

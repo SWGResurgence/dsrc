@@ -12,11 +12,13 @@ public class multi_item_set_crate extends script.base_script
     public multi_item_set_crate()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("npe", "crate_use"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

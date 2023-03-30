@@ -8,11 +8,13 @@ public class content_droid_body extends script.base_script
     public content_droid_body()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setUp(obj_id self, dictionary params) throws InterruptedException
     {
         String[] needs = new String[4];

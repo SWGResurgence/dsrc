@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class mission_base extends script.base_script
 {
-    public mission_base()
-    {
-    }
     public static final String MISSION_SUCCESS_PERSISTENT_MESSAGE = "success";
     public static final String MISSION_FAILURE_PERSISTENT_MESSAGE = "failure";
     public static final String MISSION_INCOMPLETE_PERSISTENT_MESSAGE = "incomplete";
@@ -35,6 +32,10 @@ public class mission_base extends script.base_script
     public static final int INFORMANT_MEDIUM = 2;
     public static final int INFORMANT_HARD = 3;
     public static final float SPAWN_OVERLOAD_DIFFICULTY_MODIFIER = 0.50f;
+    public mission_base()
+    {
+    }
+
     public location findRandomLocation(location locCenter, int intVariance) throws InterruptedException
     {
         int intMin;
@@ -45,14 +46,17 @@ public class mission_base extends script.base_script
         locCenter.z = locCenter.x + rand(intMin, intMax);
         return locCenter;
     }
+
     public obj_id getMissionData(obj_id objMission) throws InterruptedException
     {
         return objMission;
     }
+
     public void addListener(obj_id objListener, obj_id objTarget) throws InterruptedException
     {
         return;
     }
+
     public int getMissionBondAmount(obj_id objMission) throws InterruptedException
     {
         if (hasObjVar(objMission, "intBond"))
@@ -62,14 +66,17 @@ public class mission_base extends script.base_script
         }
         return 0;
     }
+
     public void removeListener(obj_id objListener, obj_id objTarget) throws InterruptedException
     {
         return;
     }
+
     public void messageListeners(obj_id objOwner, String strMessageName, dictionary dctParams) throws InterruptedException
     {
         return;
     }
+
     public void deliverReward(obj_id objMission) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(objMission);
@@ -83,7 +90,7 @@ public class mission_base extends script.base_script
             boolGroup = true;
             strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "group_success");
         }
-        else 
+        else
         {
             strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "success");
         }
@@ -105,7 +112,7 @@ public class mission_base extends script.base_script
                 msg += " " + jediBonusReward;
                 sendSystemMessage(objPlayer, msg, null);
             }
-            else 
+            else
             {
                 sendSystemMessage(objPlayer, new string_id("mission/mission_generic", "easy_reward"));
             }
@@ -136,7 +143,7 @@ public class mission_base extends script.base_script
                     messageTo(objTarget, "updateBHKillData", dctParams, 0, true);
                 }
             }
-            else 
+            else
             {
             }
         }
@@ -157,9 +164,11 @@ public class mission_base extends script.base_script
                 intReward = intReward / originalGroupSize;
             }
             float divisor = missions.alterMissionPayoutDivisorDaily(objPlayer);
-            intReward = intReward / (int)divisor;
-            if (missions.canEarnDailyMissionXp(objPlayer) && missions.isDestroyMission(objMissionData)){
-                if (beast_lib.isBeastMaster(objPlayer) && beast_lib.hasActiveBeast(objPlayer)) {
+            intReward = intReward / (int) divisor;
+            if (missions.canEarnDailyMissionXp(objPlayer) && missions.isDestroyMission(objMissionData))
+            {
+                if (beast_lib.isBeastMaster(objPlayer) && beast_lib.hasActiveBeast(objPlayer))
+                {
                     dictionary returnDict = new dictionary();
                     returnDict.addInt("xpAmount", xp.getMissionXpAmount(objPlayer, intPlayerDifficulty) / 2);
                     beast_lib.incrementBeastExperience(beast_lib.getBeastOnPlayer(objPlayer), returnDict);
@@ -172,7 +181,7 @@ public class mission_base extends script.base_script
             sendSystemMessageProse(objPlayer, successProse);
             missions.incrementDaily(objPlayer);
         }
-        else 
+        else
         {
             int currentGroupSize = getPCGroupSize(objGroup);
             if (originalGroupSize < 0)
@@ -189,7 +198,7 @@ public class mission_base extends script.base_script
                     strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "group_expanded");
                 }
             }
-            else 
+            else
             {
                 missionDivisor = 1;
                 dctParams.put("intPlayerDifficulty", intPlayerDifficulty);
@@ -217,7 +226,7 @@ public class mission_base extends script.base_script
                     gcw._grantGcwPoints(null, objPlayer, intGCWPoints, false, gcw.GCW_POINT_TYPE_GROUND_PVE, "mission terminal");
                 }
             }
-            else 
+            else
             {
                 factions.awardFactionStanding(objPlayer, strFaction, intFactionReward);
                 if (!strMissionType.equals("deliver"))
@@ -228,7 +237,7 @@ public class mission_base extends script.base_script
                     {
                         LOG("DESIGNER_FATAL", "Group object " + objGroup + " with player " + objPlayer + " is a zero length group!!!");
                     }
-                    else 
+                    else
                     {
                         intNewReward = intFactionReward / objGroupMembers.length;
                     }
@@ -239,21 +248,30 @@ public class mission_base extends script.base_script
                         {
                             String strOwnerPlanet = locOwnerLocation.area;
                             float fltDistance = 0;
-                            for (obj_id objGroupMember : objGroupMembers) {
+                            for (obj_id objGroupMember : objGroupMembers)
+                            {
                                 location locMemberLocation = getLocation(objGroupMember);
-                                if (locMemberLocation == null) {
+                                if (locMemberLocation == null)
+                                {
                                     fltDistance = 100000;
-                                } else {
+                                }
+                                else
+                                {
                                     String strMemberPlanet = locMemberLocation.area;
-                                    if (!strMemberPlanet.equals(strOwnerPlanet)) {
+                                    if (!strMemberPlanet.equals(strOwnerPlanet))
+                                    {
                                         fltDistance = 100000;
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         fltDistance = getDistance(objPlayer, objGroupMember);
                                     }
                                 }
-                                if (fltDistance < 80 && objGroupMember != objPlayer) {
+                                if (fltDistance < 80 && objGroupMember != objPlayer)
+                                {
                                     factions.awardFactionStanding(objGroupMember, strFaction, intNewReward);
-                                    if (intGCWPoints > 0) {
+                                    if (intGCWPoints > 0)
+                                    {
                                         gcw._grantGcwPoints(null, objGroupMember, intGCWPoints, false, gcw.GCW_POINT_TYPE_GROUND_PVE, "mission terminal");
                                     }
                                 }
@@ -265,6 +283,7 @@ public class mission_base extends script.base_script
         }
         return;
     }
+
     public obj_id getValidPayTarget(obj_id player, int money) throws InterruptedException
     {
         Vector targets = group.getPCMembersInRange(player, 200);
@@ -273,35 +292,34 @@ public class mission_base extends script.base_script
         {
             return player;
         }
-        for (Object target : targets) {
-            if (!utils.isFreeTrial(((obj_id) target)) && !hasScript(((obj_id) target), "ai.pet")) {
-                return ((obj_id) target);
-            }
-            if (utils.isFreeTrial(((obj_id) target))) {
-                if (group.getSafeDifference(((obj_id) target), money) == money) {
-                    return ((obj_id) target);
-                }
-            }
-            if (!hasScript(((obj_id) target), "ai.pet")) {
-                if (group.getSafeDifference(((obj_id) target), money) > group.getSafeDifference(mostMoney, money)) {
+        for (Object target : targets)
+        {
+            if (!hasScript(((obj_id) target), "ai.pet"))
+            {
+                if (group.getSafeDifference(((obj_id) target), money) > group.getSafeDifference(mostMoney, money))
+                {
                     mostMoney = ((obj_id) target);
                 }
             }
         }
         return mostMoney;
     }
+
     public void setupBountyMissionObject(obj_id objMission) throws InterruptedException
     {
         return;
     }
+
     public void cleanupBountyMission(obj_id objMission) throws InterruptedException
     {
         return;
     }
+
     public void returnReward(obj_id objMission) throws InterruptedException
     {
         return;
     }
+
     public int getBountyDifficulty(obj_id objPlayer) throws InterruptedException
     {
         int intBountyLevel = getSkillStatisticModifier(objPlayer, "bounty_mission_level");
@@ -313,6 +331,7 @@ public class mission_base extends script.base_script
         }
         return intBountyLevel;
     }
+
     public obj_id cleanMissionObject(obj_id objMissionObject) throws InterruptedException
     {
         removeAllObjVars(objMissionObject);

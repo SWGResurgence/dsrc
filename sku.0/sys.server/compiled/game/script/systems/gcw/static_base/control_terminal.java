@@ -5,9 +5,6 @@ import script.library.*;
 
 public class control_terminal extends script.base_script
 {
-    public control_terminal()
-    {
-    }
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;
@@ -32,16 +29,22 @@ public class control_terminal extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String VAR_ICON_OBJECT = "gcw.static_base.icon_object";
     public static final String SCRIPT_VAR_CAPTURING = "gcw.static_base.control_terminal.capturing";
+    public control_terminal()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         registerTerminalWithMap(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         registerTerminalWithMap(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -49,6 +52,7 @@ public class control_terminal extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -76,7 +80,7 @@ public class control_terminal extends script.base_script
                     sendSystemMessageProse(player, pp);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, VAR_ACCESS_DELAY);
                 }
@@ -100,7 +104,7 @@ public class control_terminal extends script.base_script
                 {
                     utils.removeScriptVar(player, SCRIPT_VAR_CAPTURING);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_CONTROL_TERMINAL_ALREADY_CAPTURING);
                     return SCRIPT_CONTINUE;
@@ -114,7 +118,7 @@ public class control_terminal extends script.base_script
                 {
                     utils.removeScriptVar(self, SCRIPT_VAR_CAPTURING);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_CONTROL_TERMINAL_ALREADY_CAPTURED);
                     return SCRIPT_CONTINUE;
@@ -124,6 +128,7 @@ public class control_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startControlAttempt(obj_id self, obj_id player) throws InterruptedException
     {
         int gameTime = getGameTime();
@@ -141,23 +146,25 @@ public class control_terminal extends script.base_script
         }
         int pid = sui.smartCountdownTimerSUI(self, player, "gcwStaticBaseControlTerminal", SID_CONTROL_TERMINAL_SUI_PROMPT, 0, captureTime, "handleControlAttemptResults", 4.0f, flags);
     }
+
     public void registerTerminalWithMap(obj_id self) throws InterruptedException
     {
         int terminalFaction = pvpGetAlignedFaction(self);
         String color = "";
         if (terminalFaction == (-615855020))
         {
-            color = "\\" + colors_hex.COLOR_IMPERIALS + " ";
+            color = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS + " ";
         }
         else if (terminalFaction == (370444368))
         {
-            color = "\\" + colors_hex.COLOR_REBELS + " ";
+            color = colors_hex.HEADER + colors_hex.COLOR_REBELS + " ";
         }
         String name = color + getString(utils.unpackString(getEncodedName(self)));
         location here = getWorldLocation(self);
         String sub_cat = "terminal_gcw_static_base";
-        addPlanetaryMapLocationIgnoreLocationCountLimits(self, name, (int)here.x, (int)here.z, planetary_map.CAT_TERMINAL, sub_cat, MLT_STATIC, planetary_map.NO_FLAG);
+        addPlanetaryMapLocationIgnoreLocationCountLimits(self, name, (int) here.x, (int) here.z, planetary_map.CAT_TERMINAL, sub_cat, MLT_STATIC, planetary_map.NO_FLAG);
     }
+
     public int handleControlAttemptResults(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -253,7 +260,7 @@ public class control_terminal extends script.base_script
             pp = prose.setTU(pp, self);
             sendFactionalSystemMessagePlanet(pp, masterLoc, 200.0f, true, true);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -276,6 +283,7 @@ public class control_terminal extends script.base_script
         registerTerminalWithMap(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalInitialization(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId("master");
@@ -294,7 +302,7 @@ public class control_terminal extends script.base_script
             pvpSetAlignedFaction(self, (-615855020));
             iconTemplate = "object/tangible/gcw/static_base/imperial_icon.iff";
         }
-        else 
+        else
         {
             pvpSetAlignedFaction(self, 0);
         }
@@ -321,6 +329,7 @@ public class control_terminal extends script.base_script
         registerTerminalWithMap(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalValidationRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = params.getObjId("master");
@@ -353,6 +362,7 @@ public class control_terminal extends script.base_script
         messageTo(master, "handleControlUpdate", d, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalDestructionRequest(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

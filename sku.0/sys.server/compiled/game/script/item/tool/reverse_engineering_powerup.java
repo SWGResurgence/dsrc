@@ -12,6 +12,7 @@ public class reverse_engineering_powerup extends script.base_script
     public reverse_engineering_powerup()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -22,6 +23,7 @@ public class reverse_engineering_powerup extends script.base_script
         mi.addRootMenuOrServerNotify(menu_info_types.ITEM_USE, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -38,6 +40,7 @@ public class reverse_engineering_powerup extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)

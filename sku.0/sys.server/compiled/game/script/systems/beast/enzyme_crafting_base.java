@@ -7,9 +7,6 @@ import script.string_id;
 
 public class enzyme_crafting_base extends script.base_script
 {
-    public enzyme_crafting_base()
-    {
-    }
     public static final int ITEM_CENTRIFUGE = 0;
     public static final int ITEM_PROCESSOR = 1;
     public static final int ITEM_COMBINER = 2;
@@ -18,14 +15,14 @@ public class enzyme_crafting_base extends script.base_script
     public static final int COMBINER_RUNTIME = 60 * 60 * 3;
     public static final float SINGLE_STAGE_CAP = 4.6f;
     public static final String ENZYME_TYPE_3 = "object/tangible/loot/beast/enzyme_3.iff";
-    public static final String[] ENZYME_ELEMENT_LIST = 
-    {
-        "object/tangible/loot/beast/enzyme_3_element_1.iff",
-        "object/tangible/loot/beast/enzyme_3_element_2.iff",
-        "object/tangible/loot/beast/enzyme_3_element_3.iff",
-        "object/tangible/loot/beast/enzyme_3_element_4.iff",
-        "object/tangible/loot/beast/enzyme_3_element_5.iff"
-    };
+    public static final String[] ENZYME_ELEMENT_LIST =
+            {
+                    "object/tangible/loot/beast/enzyme_3_element_1.iff",
+                    "object/tangible/loot/beast/enzyme_3_element_2.iff",
+                    "object/tangible/loot/beast/enzyme_3_element_3.iff",
+                    "object/tangible/loot/beast/enzyme_3_element_4.iff",
+                    "object/tangible/loot/beast/enzyme_3_element_5.iff"
+            };
     public static final String CENTRIFUGE_USE = "object/tangible/component/genetic_engineering/centrifuge_use_tray.iff";
     public static final String PROCESSOR_USE = "object/tangible/component/genetic_engineering/processor_use_mold.iff";
     public static final String COMBINER_USE = "object/tangible/component/genetic_engineering/combiner_use_capsule.iff";
@@ -43,6 +40,10 @@ public class enzyme_crafting_base extends script.base_script
     public static final String PROCESS_TRAITS = "system.enzyme_traits";
     public static final string_id ERROR_ON_START = new string_id("beast", "error_on_start");
     public static final string_id NOT_BEASTMASTER = new string_id("beast", "beast_master_use_only");
+    public enzyme_crafting_base()
+    {
+    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!canBeTransfered())
@@ -51,6 +52,7 @@ public class enzyme_crafting_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isInOperation())
@@ -59,6 +61,7 @@ public class enzyme_crafting_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isInOperation() && (isIdValid(transferer) && isPlayer(transferer)))
@@ -71,6 +74,7 @@ public class enzyme_crafting_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getMachineType() throws InterruptedException
     {
         String template = utils.getTemplateFilenameNoPath(getSelf());
@@ -92,10 +96,12 @@ public class enzyme_crafting_base extends script.base_script
         }
         return -1;
     }
+
     public boolean isInOperation() throws InterruptedException
     {
         return hasObjVar(getSelf(), FINISH_TIME);
     }
+
     public void completeAnyOperations() throws InterruptedException
     {
         if (!hasObjVar(getSelf(), FINISH_TIME))
@@ -109,22 +115,27 @@ public class enzyme_crafting_base extends script.base_script
         }
         completeProcess();
     }
+
     public void terminateProcess() throws InterruptedException
     {
         removeObjVar(getSelf(), SYSTEM);
     }
+
     public boolean canBeTransfered() throws InterruptedException
     {
         return (!isInOperation() && !containsItems());
     }
+
     public boolean isInValidOperatingLocation() throws InterruptedException
     {
         return utils.isInHouseCellSpace(getSelf());
     }
+
     public boolean containsItems() throws InterruptedException
     {
         return (getContents(getSelf()) != null && getContents(getSelf()).length > 0);
     }
+
     public int getTimeToFinishInt() throws InterruptedException
     {
         int timeAtComplete = hasObjVar(getSelf(), FINISH_TIME) ? getIntObjVar(getSelf(), FINISH_TIME) : -1;
@@ -134,10 +145,12 @@ public class enzyme_crafting_base extends script.base_script
         }
         return timeAtComplete - getGameTime();
     }
+
     public String getTimeToFinishString() throws InterruptedException
     {
         return utils.formatTimeVerbose(getTimeToFinishInt());
     }
+
     public boolean isValidComponentForMachine(obj_id passedItem) throws InterruptedException
     {
         String itemToCheck = getTemplateName(passedItem);
@@ -146,56 +159,59 @@ public class enzyme_crafting_base extends script.base_script
         switch (machineType)
         {
             case ITEM_CENTRIFUGE:
-            if (itemToCheck.equals(ENZYME_TYPE_3) && !isEnzymeProcessed(passedItem))
-            {
-                isValidItem = true;
-            }
-            else if (itemToCheck.equals(CENTRIFUGE_USE))
-            {
-                isValidItem = true;
-            }
-            else if (getElementType(passedItem) > 0)
-            {
-                isValidItem = true;
-            }
-            break;
+                if (itemToCheck.equals(ENZYME_TYPE_3) && !isEnzymeProcessed(passedItem))
+                {
+                    isValidItem = true;
+                }
+                else if (itemToCheck.equals(CENTRIFUGE_USE))
+                {
+                    isValidItem = true;
+                }
+                else if (getElementType(passedItem) > 0)
+                {
+                    isValidItem = true;
+                }
+                break;
             case ITEM_PROCESSOR:
-            if (getElementType(passedItem) > 0 && !isElementProcessed(passedItem))
-            {
-                isValidItem = true;
-            }
-            else if (itemToCheck.equals(PROCESSOR_USE))
-            {
-                isValidItem = true;
-            }
-            break;
+                if (getElementType(passedItem) > 0 && !isElementProcessed(passedItem))
+                {
+                    isValidItem = true;
+                }
+                else if (itemToCheck.equals(PROCESSOR_USE))
+                {
+                    isValidItem = true;
+                }
+                break;
             case ITEM_COMBINER:
-            if (getElementType(passedItem) > 0 && isElementProcessed(passedItem))
-            {
-                isValidItem = true;
-            }
-            else if (itemToCheck.equals(COMBINER_USE))
-            {
-                isValidItem = true;
-            }
-            else if (itemToCheck.equals(ENZYME_TYPE_3))
-            {
-                isValidItem = true;
-            }
-            break;
+                if (getElementType(passedItem) > 0 && isElementProcessed(passedItem))
+                {
+                    isValidItem = true;
+                }
+                else if (itemToCheck.equals(COMBINER_USE))
+                {
+                    isValidItem = true;
+                }
+                else if (itemToCheck.equals(ENZYME_TYPE_3))
+                {
+                    isValidItem = true;
+                }
+                break;
             default:
-            break;
+                break;
         }
         return isValidItem;
     }
+
     public boolean isEnzymeProcessed(obj_id enzyme) throws InterruptedException
     {
-        return hasObjVar(enzyme, ENZYME_PROCESSED) ? getBooleanObjVar(enzyme, ENZYME_PROCESSED) : false;
+        return hasObjVar(enzyme, ENZYME_PROCESSED) && getBooleanObjVar(enzyme, ENZYME_PROCESSED);
     }
+
     public boolean isElementProcessed(obj_id element) throws InterruptedException
     {
-        return hasObjVar(element, ELEMENT_PROCESSED) ? getBooleanObjVar(element, ELEMENT_PROCESSED) : false;
+        return hasObjVar(element, ELEMENT_PROCESSED) && getBooleanObjVar(element, ELEMENT_PROCESSED);
     }
+
     public int getElementType(obj_id element) throws InterruptedException
     {
         String passedObject = getTemplateName(element);
@@ -208,6 +224,7 @@ public class enzyme_crafting_base extends script.base_script
         }
         return -1;
     }
+
     public boolean isReadyToOperate() throws InterruptedException
     {
         int machineType = getMachineType();
@@ -219,76 +236,92 @@ public class enzyme_crafting_base extends script.base_script
         switch (machineType)
         {
             case ITEM_CENTRIFUGE:
-            isReady = validateCentrifugeOperation();
-            break;
+                isReady = validateCentrifugeOperation();
+                break;
             case ITEM_PROCESSOR:
-            isReady = validateProcessorOperation();
-            break;
+                isReady = validateProcessorOperation();
+                break;
             case ITEM_COMBINER:
-            isReady = validateCombinerOperation();
-            break;
+                isReady = validateCombinerOperation();
+                break;
             default:
-            isReady = false;
-            break;
+                isReady = false;
+                break;
         }
         return isReady;
     }
+
     public boolean validateCentrifugeOperation() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
         boolean hasTray = false;
         boolean hasUnprocessedEnzyme = false;
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String objectTemplate = getTemplateName(content);
-            if (objectTemplate.equals(ENZYME_TYPE_3) && !isEnzymeProcessed(content)) {
+            if (objectTemplate.equals(ENZYME_TYPE_3) && !isEnzymeProcessed(content))
+            {
                 hasUnprocessedEnzyme = true;
             }
-            if (objectTemplate.equals(CENTRIFUGE_USE)) {
+            if (objectTemplate.equals(CENTRIFUGE_USE))
+            {
                 hasTray = true;
             }
         }
         return (hasTray && hasUnprocessedEnzyme);
     }
+
     public boolean validateProcessorOperation() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
         boolean hasCapsule = false;
         boolean hasElement = false;
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String objectTemplate = getTemplateName(content);
-            if (objectTemplate.contains("enzyme_3_element") && !isElementProcessed(content)) {
+            if (objectTemplate.contains("enzyme_3_element") && !isElementProcessed(content))
+            {
                 hasElement = true;
             }
-            if (objectTemplate.equals(PROCESSOR_USE)) {
+            if (objectTemplate.equals(PROCESSOR_USE))
+            {
                 hasCapsule = true;
             }
         }
         return (hasElement && hasCapsule);
     }
+
     public boolean validateCombinerOperation() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
         boolean hasMold = false;
         boolean hasFiveElements = false;
         int fiveElements = 11111;
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String objectTemplate = getTemplateName(content);
-            if (objectTemplate.equals(COMBINER_USE)) {
+            if (objectTemplate.equals(COMBINER_USE))
+            {
                 hasMold = true;
             }
-            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[0])) {
+            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[0]))
+            {
                 fiveElements -= 1;
             }
-            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[1])) {
+            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[1]))
+            {
                 fiveElements -= 10;
             }
-            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[2])) {
+            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[2]))
+            {
                 fiveElements -= 100;
             }
-            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[3])) {
+            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[3]))
+            {
                 fiveElements -= 1000;
             }
-            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[4])) {
+            if (objectTemplate.equals(ENZYME_ELEMENT_LIST[4]))
+            {
                 fiveElements -= 10000;
             }
         }
@@ -298,40 +331,44 @@ public class enzyme_crafting_base extends script.base_script
         }
         return (hasMold && hasFiveElements);
     }
+
     public int startProcess(obj_id player) throws InterruptedException
     {
         return startProcess(player, -1);
     }
+
     public int startProcess(obj_id player, int time) throws InterruptedException
     {
         int machineType = getMachineType();
         switch (machineType)
         {
             case ITEM_CENTRIFUGE:
-            return startCentrifuge(player, time);
+                return startCentrifuge(player, time);
             case ITEM_PROCESSOR:
-            return startProcessor(player, time);
+                return startProcessor(player, time);
             case ITEM_COMBINER:
-            return startCombiner(player, time);
+                return startCombiner(player, time);
         }
         return -1;
     }
+
     public void completeProcess() throws InterruptedException
     {
         int machineType = getMachineType();
         switch (machineType)
         {
             case ITEM_CENTRIFUGE:
-            stopCentrifuge();
-            break;
+                stopCentrifuge();
+                break;
             case ITEM_PROCESSOR:
-            stopProcessor();
-            break;
+                stopProcessor();
+                break;
             case ITEM_COMBINER:
-            stopCombiner();
-            break;
+                stopCombiner();
+                break;
         }
     }
+
     public int startCentrifuge(obj_id player, int time) throws InterruptedException
     {
         obj_id tray = getObjIdByTemplate(CENTRIFUGE_USE);
@@ -354,6 +391,7 @@ public class enzyme_crafting_base extends script.base_script
         destroyObject(tray);
         return timeAtComplete;
     }
+
     public int startProcessor(obj_id player, int time) throws InterruptedException
     {
         obj_id capsule = getObjIdByTemplate(PROCESSOR_USE);
@@ -376,6 +414,7 @@ public class enzyme_crafting_base extends script.base_script
         destroyObject(capsule);
         return timeAtComplete;
     }
+
     public int startCombiner(obj_id player, int time) throws InterruptedException
     {
         obj_id mold = getObjIdByTemplate(COMBINER_USE);
@@ -398,6 +437,7 @@ public class enzyme_crafting_base extends script.base_script
         destroyObject(mold);
         return timeAtComplete;
     }
+
     public void stopCentrifuge() throws InterruptedException
     {
         obj_id enzyme = getObjIdByTemplate(ENZYME_TYPE_3);
@@ -425,6 +465,7 @@ public class enzyme_crafting_base extends script.base_script
         hue.setColor(elementTwo, hue.INDEX_1, 5);
         removeObjVar(getSelf(), SYSTEM);
     }
+
     public void stopProcessor() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
@@ -441,6 +482,7 @@ public class enzyme_crafting_base extends script.base_script
         colorElement(element);
         removeObjVar(getSelf(), SYSTEM);
     }
+
     public void stopCombiner() throws InterruptedException
     {
         float avgElementPurity = averagePurityFromElements();
@@ -461,24 +503,29 @@ public class enzyme_crafting_base extends script.base_script
         setObjVar(enzyme, ENZYME_PROCESSED, true);
         removeObjVar(getSelf(), SYSTEM);
     }
+
     public float averagePurityFromElements() throws InterruptedException
     {
         float total = 0.0f;
-        for (String s : ENZYME_ELEMENT_LIST) {
+        for (String s : ENZYME_ELEMENT_LIST)
+        {
             obj_id element = getObjIdByTemplate(s);
             total += getFloatObjVar(element, ENZYME_PURITY);
         }
         return (total / ENZYME_ELEMENT_LIST.length);
     }
+
     public float averageMutagenFromElements() throws InterruptedException
     {
         float total = 0.0f;
-        for (String s : ENZYME_ELEMENT_LIST) {
+        for (String s : ENZYME_ELEMENT_LIST)
+        {
             obj_id element = getObjIdByTemplate(s);
             total += getFloatObjVar(element, ENZYME_MUTAGEN);
         }
         return (total / ENZYME_ELEMENT_LIST.length);
     }
+
     public void clearToolContents() throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
@@ -486,10 +533,12 @@ public class enzyme_crafting_base extends script.base_script
         {
             return;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             destroyObject(content);
         }
     }
+
     public obj_id getObjIdByTemplate(String template) throws InterruptedException
     {
         obj_id[] contents = getContents(getSelf());
@@ -497,14 +546,17 @@ public class enzyme_crafting_base extends script.base_script
         {
             return null;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String objectTemplate = getTemplateName(content);
-            if (objectTemplate.equals(template)) {
+            if (objectTemplate.equals(template))
+            {
                 return content;
             }
         }
         return null;
     }
+
     public void colorElement(obj_id element) throws InterruptedException
     {
         String template = getTemplateName(element);

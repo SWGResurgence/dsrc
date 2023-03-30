@@ -12,11 +12,12 @@ import java.util.Vector;
 
 public class terminal_frs_voting extends script.base_script
 {
+    public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
+    public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public terminal_frs_voting()
     {
     }
-    public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
-    public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("force_rank", "terminal_frs_voting.OnInitialize -- " + self);
@@ -36,6 +37,7 @@ public class terminal_frs_voting extends script.base_script
         utils.setScriptVar(enclave, force_rank.SCRIPT_VAR_VOTE_TERMINAL, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -77,6 +79,7 @@ public class terminal_frs_voting extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU6, new string_id(force_rank.STF_FILE, "recover_jedi_items"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -126,7 +129,7 @@ public class terminal_frs_voting extends script.base_script
                                 dsrc[i] += " *";
                             }
                         }
-                        else 
+                        else
                         {
                             dsrc[i] += " *";
                         }

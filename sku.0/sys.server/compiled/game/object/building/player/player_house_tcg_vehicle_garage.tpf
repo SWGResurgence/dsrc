@@ -11,3 +11,5 @@
 sharedTemplate = "object/building/player/shared_player_house_tcg_vehicle_garage.iff"
 
 objvars =+["tcg.static_item_deed"="item_tcg_loot_reward_series7_deed_vehicle_garage", "structure.capacity_override"=250, "playerStructure_noTransfer"=1]
+
+scripts = ["structure.tcg.player_tcg_garage"]

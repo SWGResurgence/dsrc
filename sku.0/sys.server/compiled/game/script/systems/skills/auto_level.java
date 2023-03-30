@@ -7,15 +7,16 @@ import script.library.utils;
 
 public class auto_level extends script.base_script
 {
-    public auto_level()
-    {
-    }
     public static final String PID_NAME = "autoLevel";
     public static final String OBJVAR_AUTO_LEVEL_TO = "autoLevelTo";
     public static final string_id SID_CONSUME_PROMPT = new string_id("spam", "consume_auto_level_prompt");
     public static final string_id SID_CONSUME_TITLE = new string_id("spam", "consume_auto_level_title");
     public static final string_id SID_CONSUME_ITEM = new string_id("spam", "consume_auto_level");
     public static final string_id SID_CONSUME_TOO_HIGH = new string_id("spam", "consume_auto_level_too_high");
+    public auto_level()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self))
@@ -24,6 +25,7 @@ public class auto_level extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -48,6 +50,7 @@ public class auto_level extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -67,6 +70,7 @@ public class auto_level extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiAutoLevel(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

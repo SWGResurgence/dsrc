@@ -7,11 +7,12 @@ import script.library.utils;
 
 public class serving_droid extends script.base_script
 {
+    public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
+    public static final string_id SCOLOR = new string_id("sui", "set_secondary_color");
     public serving_droid()
     {
     }
-    public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
-    public static final string_id SCOLOR = new string_id("sui", "set_secondary_color");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id droid = self;
@@ -23,6 +24,7 @@ public class serving_droid extends script.base_script
         int mnuSecondaryColor = mi.addRootMenu(menu_info_types.SERVER_MENU2, SCOLOR);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id droid = self;
@@ -40,6 +42,7 @@ public class serving_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrimaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = self;
@@ -55,12 +58,13 @@ public class serving_droid extends script.base_script
             custom_var myVar = getCustomVarByName(droid, hue.INDEX_1);
             if (myVar != null && myVar.isPalColor())
             {
-                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                 pcVar.setValue(idx);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSecondaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id droid = self;
@@ -76,7 +80,7 @@ public class serving_droid extends script.base_script
             custom_var myVar = getCustomVarByName(droid, hue.INDEX_2);
             if (myVar != null && myVar.isPalColor())
             {
-                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                 pcVar.setValue(idx);
             }
         }

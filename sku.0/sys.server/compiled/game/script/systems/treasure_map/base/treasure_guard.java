@@ -8,10 +8,12 @@ import script.string_id;
 
 public class treasure_guard extends script.base_script
 {
+    public static final String RARE_CHAT = "rare_elite_chat";
+
     public treasure_guard()
     {
     }
-    public static final String RARE_CHAT = "rare_elite_chat";
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (!ai_lib.isAttackable(self))
@@ -24,6 +26,7 @@ public class treasure_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpGuard", null, 1000, true);
@@ -32,6 +35,7 @@ public class treasure_guard extends script.base_script
         detachScript(self, "npc.converse.npc_converse_menu");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         CustomerServiceLog("treasureMap", "Mob: " + self + " " + getName(self) + " died at the hands of: " + killer + " at location: " + getLocation(self) + ". [ OnDeath() ]");
@@ -62,6 +66,7 @@ public class treasure_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id glowingMob = getObjIdObjVar(self, "glowing_mob");
@@ -72,11 +77,13 @@ public class treasure_guard extends script.base_script
         destroyObject(glowingMob);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpGuard(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int attackThief(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "player");
@@ -89,7 +96,7 @@ public class treasure_guard extends script.base_script
             startCombat(self, player);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id groupObj = getGroupObject(player);
             if (!isValidId(groupObj) || !exists(groupObj))
@@ -111,7 +118,7 @@ public class treasure_guard extends script.base_script
                     CustomerServiceLog("treasureMap", "TREASURE MAP ERROR: Mob: " + self + " " + getName(self) + " is attacking: " + player + " " + getName(player) + " by default. This means the function failed to have the mob attach a group member" + " [ attackThief() ]");
                 }
             }
-            else 
+            else
             {
                 startCombat(self, player);
                 CustomerServiceLog("treasureMap", "Mob: " + self + " " + getName(self) + " is attacking: " + player + " " + getName(player) + ". [ attackThief() ]");
@@ -119,6 +126,7 @@ public class treasure_guard extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int glow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] primaryKillers = getObjIdArrayObjVar(self, "scenario.primaryKillers");
@@ -157,6 +165,7 @@ public class treasure_guard extends script.base_script
         messageTo(self, "cleanUpGlowie", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int expression_fist(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id glowingMob = getObjIdObjVar(self, "glowing_mob");
@@ -167,6 +176,7 @@ public class treasure_guard extends script.base_script
         doAnimationAction(glowingMob, anims.PLAYER_POUND_FIST_PALM);
         return SCRIPT_CONTINUE;
     }
+
     public int expression_disappear(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id glowingMob = getObjIdObjVar(self, "glowing_mob");
@@ -177,6 +187,7 @@ public class treasure_guard extends script.base_script
         doAnimationAction(glowingMob, anims.PLAYER_FORCE_ILLUSION);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpGlowie(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id glowingMob = getObjIdObjVar(self, "glowing_mob");
@@ -187,6 +198,7 @@ public class treasure_guard extends script.base_script
         destroyObject(glowingMob);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getRandomGroupMember(obj_id self, obj_id player, obj_id[] members) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -206,15 +218,13 @@ public class treasure_guard extends script.base_script
         }
         return false;
     }
+
     public boolean isWookiee(obj_id playerOrMob) throws InterruptedException
     {
         int species = getSpecies(playerOrMob);
-        if (species == SPECIES_WOOKIEE)
-        {
-            return true;
-        }
-        return false;
+        return species == SPECIES_WOOKIEE;
     }
+
     public int barkAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id guard = self;
@@ -228,7 +238,7 @@ public class treasure_guard extends script.base_script
             String type = params.getString("type");
             chat.chat(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, new string_id("treasure_map/treasure_map", "bark_" + type));
         }
-        else 
+        else
         {
             chat.chat(self, chat.CHAT_SHOUT, chat.MOOD_ANGRY, new string_id("treasure_map/treasure_map", "bark_wookiee"));
         }

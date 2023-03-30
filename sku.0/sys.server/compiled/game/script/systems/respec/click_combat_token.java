@@ -10,6 +10,7 @@ public class click_combat_token extends script.base_script
     public click_combat_token()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "foundOwner"))
@@ -22,6 +23,7 @@ public class click_combat_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!hasObjVar(self, "foundOwner"))
@@ -34,6 +36,7 @@ public class click_combat_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -45,7 +48,7 @@ public class click_combat_token extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -53,6 +56,7 @@ public class click_combat_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasObjVar(player, "npcRespec.inProgress"))
@@ -91,7 +95,7 @@ public class click_combat_token extends script.base_script
                 {
                     respec.startNpcRespec(player, self, true);
                 }
-                else 
+                else
                 {
                     destroyObject(self);
                 }
@@ -99,14 +103,17 @@ public class click_combat_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean inRestrictedRegion(obj_id player) throws InterruptedException
     {
-        String[] restrictedRegions = 
+        String[] restrictedRegions =
+                {
+                        "dathomir_fs_village_unpassable"
+                };
+        for (String restrictedRegion : restrictedRegions)
         {
-            "dathomir_fs_village_unpassable"
-        };
-        for (String restrictedRegion : restrictedRegions) {
-            if (groundquests.isInNamedRegion(player, restrictedRegion)) {
+            if (groundquests.isInNamedRegion(player, restrictedRegion))
+            {
                 return true;
             }
         }

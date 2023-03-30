@@ -8,6 +8,7 @@ public class gcw_tower extends script.base_script
     public gcw_tower()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "questCallBack", 1);
@@ -23,10 +24,12 @@ public class gcw_tower extends script.base_script
         messageTo(self, "handleGCWTower", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "faction"))
@@ -39,7 +42,7 @@ public class gcw_tower extends script.base_script
             LOG("gcw_patrol_point", "faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
             if (data != null)
@@ -49,6 +52,7 @@ public class gcw_tower extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_patrol_point", "OnObjectMenuSelect");
@@ -72,7 +76,7 @@ public class gcw_tower extends script.base_script
             LOG("gcw_patrol_point", "Wrong Faction");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             LOG("gcw_patrol_point", "player is of correct faction");
             String questName = gcw.GCW_DEFEND_TOWER_REBEL;
@@ -96,27 +100,32 @@ public class gcw_tower extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyGCWTower(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         params.put("offset", 12.0f);
         gcw.playQuestIconHandler(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDestroyTower(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDestroyTower(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDestroyTower(obj_id self, obj_id killer) throws InterruptedException
     {
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 0);
@@ -125,6 +134,7 @@ public class gcw_tower extends script.base_script
         gcw.gcwInvasionCreditForDestroy(killer);
         return;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (!isIdValid(attacker) || !exists(attacker) || !isIdValid(weapon) || !exists(weapon) || damage < 1)
@@ -140,6 +150,7 @@ public class gcw_tower extends script.base_script
         LOG("gcw_vehicle", "Tower being attacked by vehicle: " + attacker + " damage: " + damage);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGCWTower(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 25.0f);
@@ -150,8 +161,10 @@ public class gcw_tower extends script.base_script
         }
         if (objects != null && objects.length > 0)
         {
-            for (obj_id object : objects) {
-                if (isIdValid(object) && isMob(object) && !isPlayer(object) && !isIdValid(getMaster(object)) && factions.isPlayerSameGcwFactionAsSchedulerObject(object, self)) {
+            for (obj_id object : objects)
+            {
+                if (isIdValid(object) && isMob(object) && !isPlayer(object) && !isIdValid(getMaster(object)) && factions.isPlayerSameGcwFactionAsSchedulerObject(object, self))
+                {
                     buff.applyBuff(object, self, "tower_defender");
                 }
             }
@@ -159,6 +172,7 @@ public class gcw_tower extends script.base_script
         messageTo(self, "handleGCWTower", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCallBack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

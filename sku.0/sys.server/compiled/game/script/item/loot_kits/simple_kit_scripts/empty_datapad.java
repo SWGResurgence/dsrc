@@ -8,16 +8,19 @@ public class empty_datapad extends script.base_script
     public empty_datapad()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "needs"))

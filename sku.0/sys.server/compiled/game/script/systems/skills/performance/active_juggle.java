@@ -10,6 +10,7 @@ public class active_juggle extends script.base_script
     public active_juggle()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         groundquests.questStartJuggle(self);
@@ -21,6 +22,7 @@ public class active_juggle extends script.base_script
         setObjVar(self, performance.VAR_PERFORM_FLOURISH_COUNT, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         groundquests.questStopPerforming(self);
@@ -30,11 +32,13 @@ public class active_juggle extends script.base_script
         removeObjVar(self, performance.VAR_PERFORM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, performance.JUGGLE_HEARTBEAT_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         if (after != POSTURE_SKILL_ANIMATING)
@@ -43,11 +47,13 @@ public class active_juggle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         performance.stopJuggling(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id actor, String emote) throws InterruptedException
     {
         int applause = 0;
@@ -81,8 +87,10 @@ public class active_juggle extends script.base_script
         if (isIdValid(group))
         {
             obj_id[] members = getGroupMemberIds(group);
-            for (obj_id member : members) {
-                if (member != actor && (hasScript(member, performance.JUGGLE_HEARTBEAT_SCRIPT) || hasScript(member, performance.MUSIC_HEARTBEAT_SCRIPT))) {
+            for (obj_id member : members)
+            {
+                if (member != actor && (hasScript(member, performance.JUGGLE_HEARTBEAT_SCRIPT) || hasScript(member, performance.MUSIC_HEARTBEAT_SCRIPT)))
+                {
                     band_members[band_size] = member;
                     ++band_size;
                 }
@@ -122,6 +130,7 @@ public class active_juggle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, performance.VAR_PERFORM_SEQUENCE))
@@ -143,7 +152,7 @@ public class active_juggle extends script.base_script
             int entXpAmt = 0;
             if (flourishNum > 0)
             {
-                entXpAmt = (int)(xpAmt * 0.5f);
+                entXpAmt = (int) (xpAmt * 0.5f);
             }
             xp.grantSocialStyleXp(self, xp.JUGGLING, xpAmt);
             ++sequence;
@@ -151,13 +160,14 @@ public class active_juggle extends script.base_script
             params.put("sequence", sequence);
             messageTo(self, "OnPulse", params, performance.PERFORMANCE_HEARTBEAT_TIME, false);
         }
-        else 
+        else
         {
             performance.performanceMessageToSelf(self, null, performance.SID_JUGGLE_TOO_TIRED);
             performance.stopJuggling(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFlourish(obj_id self, dictionary params) throws InterruptedException
     {
         int flourishIndex = params.getInt("flourishIndex");
@@ -168,18 +178,20 @@ public class active_juggle extends script.base_script
         {
             doAnimationAction(self, "mistake");
         }
-        else 
+        else
         {
             doAnimationAction(self, "skill_action_" + flourishIndex);
         }
         performance.performanceTargetedBuffFlourish(self, performance.PERFORMANCE_TYPE_JUGGLE, 1.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClearFlourish(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, performance.VAR_PERFORM_FLOURISH, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEffect(obj_id self, dictionary params) throws InterruptedException
     {
         int effectId = params.getInt("effectId");
@@ -194,266 +206,269 @@ public class active_juggle extends script.base_script
             switch (effectId)
             {
                 case performance.PERFORMANCE_EFFECT_SPOT_LIGHT:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_SPOT_LIGHT_1;
-                    effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_SPOT_LIGHT_1;
+                            effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_SPOT_LIGHT_2;
+                            effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_SPOT_LIGHT_3;
+                            effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_SPOT_LIGHT_2;
-                    effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_SPOT_LIGHT_3;
-                    effectString = performance.SID_EFFECT_PERFORM_SPOT_LIGHT;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_COLOR_LIGHTS:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_COLOR_LIGHTS_1;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_COLOR_LIGHTS_1;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_COLOR_LIGHTS_2;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_COLOR_LIGHTS_3;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_COLOR_LIGHTS_2;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_COLOR_LIGHTS_3;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_LIGHTS;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_DAZZLE:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_DAZZLE_1;
-                    effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_DAZZLE_1;
+                            effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_DAZZLE_2;
+                            effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_DAZZLE_3;
+                            effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_DAZZLE_2;
-                    effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_DAZZLE_3;
-                    effectString = performance.SID_EFFECT_PERFORM_DAZZLE;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_DISTRACT:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_DISTRACT_1;
-                    effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_DISTRACT_1;
+                            effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_DISTRACT_2;
+                            effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_DISTRACT_3;
+                            effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_DISTRACT_2;
-                    effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_DISTRACT_3;
-                    effectString = performance.SID_EFFECT_PERFORM_DISTRACT;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_SMOKE_BOMB:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_SMOKE_BOMB_1;
-                    effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_SMOKE_BOMB_1;
+                            effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_SMOKE_BOMB_2;
+                            effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_SMOKE_BOMB_3;
+                            effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_SMOKE_BOMB_2;
-                    effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_SMOKE_BOMB_3;
-                    effectString = performance.SID_EFFECT_PERFORM_SMOKE_BOMB;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_FIRE_JETS:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_FIRE_JETS_1;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_FIRE_JETS_1;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_FIRE_JETS_2;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_FIRE_JETS_3;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_FIRE_JETS_2;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_FIRE_JETS_3;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_VENTRILOQUISM:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_VENTRILOQUISM_1;
-                    effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_VENTRILOQUISM_1;
+                            effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_VENTRILOQUISM_2;
+                            effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_VENTRILOQUISM_3;
+                            effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_VENTRILOQUISM_2;
-                    effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_VENTRILOQUISM_3;
-                    effectString = performance.SID_EFFECT_PERFORM_VENTRILOQUISM;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_CENTER_STAGE:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_CENTER_STAGE;
-                    effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_CENTER_STAGE;
+                            effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_CENTER_STAGE;
+                            effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_CENTER_STAGE;
+                            effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_CENTER_STAGE;
-                    effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_CENTER_STAGE;
-                    effectString = performance.SID_EFFECT_PERFORM_CENTER_STAGE;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_COLOR_SWIRL:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_COLOR_SWIRL;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_COLOR_SWIRL;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_COLOR_SWIRL;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_COLOR_SWIRL;
+                            effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_COLOR_SWIRL;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_COLOR_SWIRL;
-                    effectString = performance.SID_EFFECT_PERFORM_COLOR_SWIRL;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_DANCE_FLOOR:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_DANCE_FLOOR;
-                    effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_DANCE_FLOOR;
+                            effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_DANCE_FLOOR;
+                            effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_DANCE_FLOOR;
+                            effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_DANCE_FLOOR;
-                    effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_DANCE_FLOOR;
-                    effectString = performance.SID_EFFECT_PERFORM_DANCE_FLOOR;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_FEATURED_SOLO:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_FEATURED_SOLO;
-                    effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_FEATURED_SOLO;
+                            effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_FEATURED_SOLO;
+                            effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_FEATURED_SOLO;
+                            effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_FEATURED_SOLO;
-                    effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_FEATURED_SOLO;
-                    effectString = performance.SID_EFFECT_PERFORM_FEATURED_SOLO;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_FIRE_JETS2:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_FIRE_JETS2;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_FIRE_JETS2;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_FIRE_JETS2;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_FIRE_JETS2;
+                            effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_FIRE_JETS2;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_FIRE_JETS2;
-                    effectString = performance.SID_EFFECT_PERFORM_FIRE_JETS_2;
-                    break;
-                }
-                break;
                 case performance.PERFORMANCE_EFFECT_LASER_SHOW:
-                switch (effectLevel)
-                {
-                    case 1:
-                    effectFilename = performance.EFFECT_LASER_SHOW;
-                    effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
+                    switch (effectLevel)
+                    {
+                        case 1:
+                            effectFilename = performance.EFFECT_LASER_SHOW;
+                            effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
+                            break;
+                        case 2:
+                            effectFilename = performance.EFFECT_LASER_SHOW;
+                            effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
+                            break;
+                        case 3:
+                            effectFilename = performance.EFFECT_LASER_SHOW;
+                            effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
+                            break;
+                    }
                     break;
-                    case 2:
-                    effectFilename = performance.EFFECT_LASER_SHOW;
-                    effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
-                    break;
-                    case 3:
-                    effectFilename = performance.EFFECT_LASER_SHOW;
-                    effectString = performance.SID_EFFECT_PERFORM_LASER_SHOW;
-                    break;
-                }
-                break;
             }
             int targetType = performance.getEffectTargetType(effectId, effectLevel);
             switch (targetType)
             {
                 case 1:
-                performance.playEffectLoc(self, getLocation(self), effectFilename, effectString);
-                break;
+                    performance.playEffectLoc(self, getLocation(self), effectFilename, effectString);
+                    break;
                 case 2:
-                obj_id target = getLookAtTarget(self);
-                if (isIdValid(target))
-                {
-                    performance.playEffectTarget(self, target, effectFilename, effectString);
-                }
-                else 
-                {
-                    performance.performanceMessageToSelf(self, null, performance.SID_EFFECT_NEED_TARGET);
-                }
-                break;
+                    obj_id target = getLookAtTarget(self);
+                    if (isIdValid(target))
+                    {
+                        performance.playEffectTarget(self, target, effectFilename, effectString);
+                    }
+                    else
+                    {
+                        performance.performanceMessageToSelf(self, null, performance.SID_EFFECT_NEED_TARGET);
+                    }
+                    break;
                 case 3:
                 default:
-                performance.playEffectTarget(self, self, effectFilename, effectString);
-                break;
+                    performance.playEffectTarget(self, self, effectFilename, effectString);
+                    break;
             }
         }
-        else 
+        else
         {
             performance.performanceMessageToSelf(self, null, performance.SID_EFFECT_TOO_TIRED);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClearEffect(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, performance.VAR_PERFORM_EFFECT, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPerformanceEnd(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, performance.JUGGLE_HEARTBEAT_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInspireMenu(obj_id self, dictionary params) throws InterruptedException
     {
         String[] list = utils.getStringArrayScriptVar(self, performance.VAR_BUFF_LIST);

@@ -7,6 +7,7 @@ public class force_melon extends script.base_script
     public force_melon()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "item.comestible.crafted"))

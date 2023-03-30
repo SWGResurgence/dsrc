@@ -6,48 +6,58 @@ import script.library.*;
 public class crafting_base extends script.base_script
 {
     public static final String VERSION = "v0.00.00";
+
     public String[] getRequiredSkills() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getRequiredSkills()! This function should have been overridden!");
         return null;
     }
+
     public String[] getAssemblySkillMods() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getAssemblySkillMods()! This function should have been overridden!");
         return null;
     }
+
     public String[] getExperimentSkillMods() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getExperimentSkillMods()! This function should have been overridden!");
         return null;
     }
+
     public resource_weight[] getResourceMaxResourceWeights() throws InterruptedException
     {
         LOG("crafting", "Called into craftin_base script getResourceMaxResourceWeights()! This function should have been overridden!");
         return null;
     }
+
     public resource_weight[] getAssemblyResourceWeights() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getAssemblyResourceWeights()! This function should have been overridden!");
         return null;
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script calcAndSetPrototypeProperties()! This function should have been overridden!");
     }
+
     public String[] getAppearances(obj_id player, draft_schematic.slot[] slots) throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getAppearances()! This function should have been overridden!");
         return null;
     }
+
     public draft_schematic.custom[] getCustomizations(obj_id player, draft_schematic.custom[] customizations) throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getCustomizations()! This function should have been overridden!");
         return null;
     }
+
     public void modifyForCustomAppearance(obj_id self, obj_id newObject) throws InterruptedException
     {
     }
+
     public boolean calcAndSetPrototypeProperty(obj_id prototype, draft_schematic.attribute itemAttribute) throws InterruptedException
     {
         if (itemAttribute == null)
@@ -63,17 +73,17 @@ public class crafting_base extends script.base_script
         }
         else if (itemAttribute.name.equals("hitPoints"))
         {
-            setMaxHitpoints(prototype, (int)itemAttribute.currentValue);
+            setMaxHitpoints(prototype, (int) itemAttribute.currentValue);
             result = true;
         }
         else if (itemAttribute.name.equals("xp"))
         {
-            utils.setScriptVar(prototype, "crafting.creator.xp", (int)(itemAttribute.currentValue + 0.5f));
+            utils.setScriptVar(prototype, "crafting.creator.xp", (int) (itemAttribute.currentValue + 0.5f));
             result = true;
         }
         else if (itemAttribute.name.equals("sockets"))
         {
-            if ((int)itemAttribute.currentValue > 0 && getGameObjectType(prototype) != GOT_misc_container_wearable)
+            if ((int) itemAttribute.currentValue > 0 && getGameObjectType(prototype) != GOT_misc_container_wearable)
             {
                 if (getGameObjectType(prototype) == GOT_cybernetic_legs || getGameObjectType(prototype) == GOT_cybernetic_arm)
                 {
@@ -87,12 +97,12 @@ public class crafting_base extends script.base_script
                 {
                     setSkillModSockets(prototype, 0);
                 }
-                else 
+                else
                 {
                     setSkillModSockets(prototype, 1);
                 }
             }
-            else 
+            else
             {
                 setSkillModSockets(prototype, 0);
             }
@@ -100,30 +110,39 @@ public class crafting_base extends script.base_script
         }
         else if ((itemAttribute.name.getTable()).equals(craftinglib.OBJVAR_SKILLMOD_BONUS))
         {
-            setSkillModBonus(prototype, itemAttribute.name.getAsciiId(), (int)itemAttribute.currentValue);
+            setSkillModBonus(prototype, itemAttribute.name.getAsciiId(), (int) itemAttribute.currentValue);
             result = true;
         }
         return result;
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         debugServerConsoleMsg(null, "*** crafting base calcAndSetPrototypeProperties enter ***");
         obj_var_list componentData = getObjVarList(getSelf(), craftinglib.COMPONENT_ATTRIBUTE_INTERNAL_OBJVAR_NAME);
         if (componentData != null)
         {
-            for (draft_schematic.attribute itemAttribute : itemAttributes) {
-                if (itemAttribute == null) {
+            for (draft_schematic.attribute itemAttribute : itemAttributes)
+            {
+                if (itemAttribute == null)
+                {
                     continue;
                 }
                 obj_var component = componentData.getObjVar((itemAttribute.name).getAsciiId());
-                if (component != null) {
-                    if (component.getData() instanceof Integer) {
+                if (component != null)
+                {
+                    if (component.getData() instanceof Integer)
+                    {
                         itemAttribute.currentValue = component.getIntData();
-                    } else if (itemAttribute.minValue != itemAttribute.maxValue) {
+                    }
+                    else if (itemAttribute.minValue != itemAttribute.maxValue)
+                    {
                         debugServerConsoleMsg(null, "updating attrib " + (itemAttribute.name).getAsciiId() + ", current value = " + itemAttribute.currentValue + " by component value " + component.getFloatData());
                         // Cekis: This may be a bug - why incremenet if a float (in this condition), but just re-assign if an int?
                         itemAttribute.currentValue += component.getFloatData();
-                    } else {
+                    }
+                    else
+                    {
                         debugServerConsoleMsg(null, "updating attrib " + (itemAttribute.name).getAsciiId() + ", current value = " + itemAttribute.currentValue + " by component value " + component.getFloatData());
                         itemAttribute.currentValue = itemAttribute.minValue + component.getFloatData();
                     }
@@ -137,7 +156,7 @@ public class crafting_base extends script.base_script
                     int[] bonuses = new int[componentBonuses.length];
                     for (int i = 0; i < componentBonuses.length; ++i)
                     {
-                        bonuses[i] = (int)(componentBonuses[i]);
+                        bonuses[i] = (int) (componentBonuses[i]);
                     }
                     setAttributeBonuses(getSelf(), bonuses);
                 }
@@ -145,25 +164,32 @@ public class crafting_base extends script.base_script
         }
         debugServerConsoleMsg(null, "*** crafting base calcAndSetPrototypeProperties exit ***");
     }
+
     public void grantExperience(obj_id player, draft_schematic.slot[] slots) throws InterruptedException
     {
         if (slots == null)
         {
             return;
         }
-        for (draft_schematic.slot slot : slots) {
-            if (slot.ingredients == null) {
+        for (draft_schematic.slot slot : slots)
+        {
+            if (slot.ingredients == null)
+            {
                 continue;
             }
-            if (slot.ingredientType == draft_schematic.IT_item || slot.ingredientType == draft_schematic.IT_template || slot.ingredientType == draft_schematic.IT_templateGeneric) {
-                for (int j = 0; j < slot.ingredients.length; ++j) {
-                    if (isIdValid(slot.ingredients[j].source) && slot.ingredients[j].source != player) {
+            if (slot.ingredientType == draft_schematic.IT_item || slot.ingredientType == draft_schematic.IT_template || slot.ingredientType == draft_schematic.IT_templateGeneric)
+            {
+                for (int j = 0; j < slot.ingredients.length; ++j)
+                {
+                    if (isIdValid(slot.ingredients[j].source) && slot.ingredients[j].source != player)
+                    {
                         grantExperiencePoints(slot.ingredients[j].source, slot.ingredients[j].xpType, slot.ingredients[j].xpAmount);
                     }
                 }
             }
         }
     }
+
     public int OnManufacturingSchematicCreation(obj_id self, obj_id player, obj_id prototype, draft_schematic schematic, modifiable_int assemblyResult, modifiable_int experimentPoints) throws InterruptedException
     {
         if (!craftinglib.validateReComponent(player, schematic))
@@ -205,8 +231,10 @@ public class crafting_base extends script.base_script
                 int myDraftSchematic = getDraftSchematicCrc(self);
                 if (myDraftSchematic != 0)
                 {
-                    for (draft_schematic.slot slot : slots) {
-                        if (slot.ingredientType == draft_schematic.IT_schematic && myDraftSchematic == getSourceDraftSchematic(slot.ingredients[0].ingredient)) {
+                    for (draft_schematic.slot slot : slots)
+                    {
+                        if (slot.ingredientType == draft_schematic.IT_schematic && myDraftSchematic == getSourceDraftSchematic(slot.ingredients[0].ingredient))
+                        {
                             refactorComplexity = getComplexity(slot.ingredients[0].ingredient);
                             break;
                         }
@@ -221,44 +249,56 @@ public class crafting_base extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("crafting", "WARNING: schematic " + self + " has invalid refactor objvar value " + refactorPercent);
             }
         }
         debugServerConsoleMsg(self, "Ingredient slot info (" + slots.length + " slots):");
-        for (draft_schematic.slot slot : slots) {
+        for (draft_schematic.slot slot : slots)
+        {
             debugServerConsoleMsg(self, "\tslot " + slot.name + ", ingredient " + slot.ingredients[0].ingredient + ", amount = " + slot.ingredients[0].count);
         }
         debugServerConsoleMsg(self, "Item attribute info (" + objectAttribs.length + " attribs):");
         craftingValuesDictionary.put("craftingType", schematic.getCategory());
-        for (draft_schematic.attribute objectAttrib : objectAttribs) {
-            if ((objectAttrib.name).equals("complexity")) {
+        for (draft_schematic.attribute objectAttrib : objectAttribs)
+        {
+            if ((objectAttrib.name).equals("complexity"))
+            {
                 float defaultComplexity = objectAttrib.minValue;
                 float currentComplexity = objectAttrib.currentValue + refactorComplexity;
                 craftingValuesDictionary.put("itemDefaultComplexity", defaultComplexity);
                 craftingValuesDictionary.put("itemCurrentComplexity", currentComplexity);
                 debugServerConsoleMsg(self, "\tdefault complexity " + defaultComplexity + ", current complexity " + currentComplexity);
-            } else if ((objectAttrib.name).equals("armorSpecialType")) {
+            }
+            else if ((objectAttrib.name).equals("armorSpecialType"))
+            {
                 craftingValuesDictionary.put("itemDefaultArmorSpecialType", objectAttrib.minValue);
                 craftingValuesDictionary.put("itemCurrentArmorSpecialType", objectAttrib.currentValue);
-            } else if ((objectAttrib.name).equals("sockets")) {
+            }
+            else if ((objectAttrib.name).equals("sockets"))
+            {
                 int[] mods = getEnhancedSkillStatisticModifiersUncapped(player, getAssemblySkillMods());
-                if (mods != null) {
+                if (mods != null)
+                {
                     int experimentModTotal = 0;
-                    for (int mod : mods) {
+                    for (int mod : mods)
+                    {
                         experimentModTotal += mod;
                     }
-                    if (experimentModTotal > craftinglib.socketThreshold) {
+                    if (experimentModTotal > craftinglib.socketThreshold)
+                    {
                         int sockets = 0;
                         int chance = experimentModTotal - 75;
-                        if (chance > rand(1, 100)) {
+                        if (chance > rand(1, 100))
+                        {
                             sockets = 3;
                         }
                         objectAttrib.minValue = sockets;
                         objectAttrib.maxValue = sockets;
                         objectAttrib.currentValue = sockets;
-                        if (sockets > 0) {
+                        if (sockets > 0)
+                        {
                             setCondition(prototype, CONDITION_MAGIC_ITEM);
                         }
                     }
@@ -290,7 +330,7 @@ public class crafting_base extends script.base_script
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set initial attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set initial attributes of schematic!");
         }
@@ -299,7 +339,7 @@ public class crafting_base extends script.base_script
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set experimental attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set experimental attributes of schematic!");
         }
@@ -324,13 +364,13 @@ public class crafting_base extends script.base_script
                 setSchematicCustomizations(self, customizations);
             }
         }
-        else 
+        else
         {
             if (customizations == null)
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations == null");
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations.length == 0");
             }
@@ -358,6 +398,7 @@ public class crafting_base extends script.base_script
         calcAndSetPrototypeProperties(prototype, objectAttribs);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCraftingExperiment(obj_id self, obj_id player, obj_id prototype, string_id[] attributeNames, int[] experimentPoints, int totalPoints, modifiable_int experimentResult, int coreLevel) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "skipCraftingExperiment"))
@@ -371,6 +412,7 @@ public class crafting_base extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int doCraftingExperiment(obj_id self, obj_id player, obj_id prototype, string_id[] attributeNames, int[] experimentPoints, int totalPoints, modifiable_int experimentResult, int coreLevel) throws InterruptedException
     {
         debugServerConsoleMsg(self, "OnCraftingExperiment enter");
@@ -415,7 +457,7 @@ public class crafting_base extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("crafting", "WARNING: schematic " + self + " has invalid refactor objvar value " + refactorPercent);
             }
@@ -437,8 +479,10 @@ public class crafting_base extends script.base_script
         craftinglib.calcSuccessPerAttributeExperimentation(craftingValuesDictionary, objExperimentPoints, objectAttribs, player, getRequiredSkills());
         craftinglib.calcExperimentalAttribs(schematic);
         experimentResult.set(craftingValuesDictionary.getInt("experimentSuccessState"));
-        for (draft_schematic.attribute objectAttrib : objectAttribs) {
-            if (objectAttrib != null && (objectAttrib.name).equals("complexity")) {
+        for (draft_schematic.attribute objectAttrib : objectAttribs)
+        {
+            if (objectAttrib != null && (objectAttrib.name).equals("complexity"))
+            {
                 ++objectAttrib.currentValue;
                 break;
             }
@@ -448,7 +492,7 @@ public class crafting_base extends script.base_script
         {
             debugServerConsoleMsg(self, "OnCraftingExperiment set initial attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnCraftingExperiment failed to set initial attributes of schematic!");
         }
@@ -457,7 +501,7 @@ public class crafting_base extends script.base_script
         {
             debugServerConsoleMsg(self, "OnCraftingExperiment set experimental attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnCraftingExperiment failed to set experimental attributes of schematic!");
         }
@@ -481,6 +525,7 @@ public class crafting_base extends script.base_script
         calcAndSetPrototypeProperties(prototype, objectAttribs);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFinalizeSchematic(obj_id self, obj_id player, obj_id prototype, draft_schematic schematic) throws InterruptedException
     {
         int myDraftSchematic = getDraftSchematicCrc(self);
@@ -506,6 +551,7 @@ public class crafting_base extends script.base_script
         removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_INTERNAL_OBJVAR_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int getInspirationBuffXpBonus(obj_id self, int category, int amt) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "buff.general_inspiration.value"))
@@ -540,6 +586,7 @@ public class crafting_base extends script.base_script
         }
         return 0;
     }
+
     public int OnManufactureObject(obj_id self, obj_id player, obj_id newObject, draft_schematic schematic, boolean isPrototype, boolean isRealObject) throws InterruptedException
     {
         /* Cekis: unused vars and a pointless loop.  Commenting out for now.
@@ -575,11 +622,11 @@ public class crafting_base extends script.base_script
             xpAmount += buffXP;
             if (!isPrototype)
             {
-                xpAmount = (int)(xpAmount * 0.1);
+                xpAmount = (int) (xpAmount * 0.1);
             }
             else if (!isRealObject)
             {
-                xpAmount = (int)(xpAmount * 1.05);
+                xpAmount = (int) (xpAmount * 1.05);
             }
             if (xpType != null)
             {
@@ -588,16 +635,16 @@ public class crafting_base extends script.base_script
             setObjVar(newObject, "crafting.creator.id", id);
             setObjVar(newObject, "crafting.creator.name", name);
             String expertiseSkill = craftinglib.getCraftingSubskill(getRequiredSkills());
-            int complexityDecrease = (int)getSkillStatisticModifier(player, "expertise_complexity_decrease_" + expertiseSkill);
+            int complexityDecrease = getSkillStatisticModifier(player, "expertise_complexity_decrease_" + expertiseSkill);
             if (complexityDecrease > 0)
             {
-                int newComplexity = (int)getComplexity(newObject) - complexityDecrease;
+                int newComplexity = (int) getComplexity(newObject) - complexityDecrease;
                 if (newComplexity > 0)
                 {
                     setComplexity(newObject, newComplexity);
                     setComplexity(getSelf(), newComplexity);
                 }
-                else 
+                else
                 {
                     setComplexity(newObject, 1);
                     setComplexity(getSelf(), 1);
@@ -611,6 +658,7 @@ public class crafting_base extends script.base_script
         weapons.validateDamage(player, newObject);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMakeCraftedItem(obj_id self, obj_id prototype, draft_schematic schematic, float qualityPercent) throws InterruptedException
     {
         draft_schematic.attribute[] objectAttribs = schematic.getAttribs();
@@ -624,7 +672,8 @@ public class crafting_base extends script.base_script
         */
         debugServerConsoleMsg(null, "OnMakeCraftedItem enter, quality = " + qualityPercent);
         dictionary craftingValuesDictionary = new dictionary();
-        for (draft_schematic.attribute objectAttrib : objectAttribs) {
+        for (draft_schematic.attribute objectAttrib : objectAttribs)
+        {
             objectAttrib.currentValue = objectAttrib.maxValue * (qualityPercent / 100.0f);
         }
         setSchematicAttributes(self, objectAttribs);
@@ -633,6 +682,7 @@ public class crafting_base extends script.base_script
         debugServerConsoleMsg(null, "OnMakeCraftedItem exit");
         return SCRIPT_CONTINUE;
     }
+
     public int OnRequestResourceWeights(obj_id self, obj_id player, String[] desiredAttribs, String[] attribs, int[] slots, int[] counts, int[] data) throws InterruptedException
     {
         int attribIndex = 0;
@@ -645,13 +695,16 @@ public class crafting_base extends script.base_script
             {
                 return SCRIPT_OVERRIDE;
             }
-            for (resource_weight weight : weights) {
-                if (attribSet.contains(weight.attribName)) {
+            for (resource_weight weight : weights)
+            {
+                if (attribSet.contains(weight.attribName))
+                {
                     attribs[attribIndex] = weight.attribName;
                     slots[attribIndex] = weight.slot;
                     counts[attribIndex++] = weight.weights.length;
                     resource_weight.weight[] resources = weight.weights;
-                    for (resource_weight.weight resource : resources) {
+                    for (resource_weight.weight resource : resources)
+                    {
                         data[dataIndex++] = resource.resource;
                         data[dataIndex++] = resource.weight;
                     }

@@ -9,20 +9,22 @@ import script.obj_id;
 
 public class chance_cube extends script.item.dice.base.base_dice
 {
-    public chance_cube()
-    {
-    }
     public static final String DICE_FACE_COLOR_RED = "red";
     public static final String DICE_FACE_COLOR_BLUE = "blue";
     public static final int DICE_FACE_COUNT = 2;
     public static final int NUMBER_OF_DICE = 1;
     public static final String TYPE_NAME = "chance_cube";
+    public chance_cube()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########chance_cube initialized##############");
         setObjVar(self, DICE_TYPE_NAME, TYPE_NAME);
         return super.OnInitialize(self);
     }
+
     public int roll(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########chance_cube roll()##############");
@@ -39,11 +41,13 @@ public class chance_cube extends script.item.dice.base.base_dice
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########chance script detached##############");
         return super.OnDetach(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -54,7 +58,7 @@ public class chance_cube extends script.item.dice.base.base_dice
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"))
         {
             names[idx] = "usemodifier";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

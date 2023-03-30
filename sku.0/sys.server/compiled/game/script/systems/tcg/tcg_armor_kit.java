@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class tcg_armor_kit extends script.base_script
 {
-    public tcg_armor_kit()
-    {
-    }
     public static final String TEXTURE_CUSTVAR_NAME = "/private/index_texture_1";
     public static final String COLOR_CUSTVAR_NAME_01 = "/private/index_color_1";
     public static final String COLOR_CUSTVAR_NAME_02 = "/private/index_color_2";
@@ -23,6 +20,10 @@ public class tcg_armor_kit extends script.base_script
     public static final String DATA_TEXTURE_COLUMN = "index_texture_1";
     public static final String DATA_COLOR_1_COLUMN = "index_color_1";
     public static final String DATA_COLOR_2_COLUMN = "index_color_2";
+    public tcg_armor_kit()
+    {
+    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -41,6 +42,7 @@ public class tcg_armor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean shouldBeInKit(obj_id item, obj_id player, obj_id armorKit) throws InterruptedException
     {
         dictionary armorKitData = getArmorKitData(armorKit, player);
@@ -55,12 +57,9 @@ public class tcg_armor_kit extends script.base_script
             return false;
         }
         String eligibleArmorAppearances = armorKitData.getString(DATA_ELIGIBLE_ARMOR_COLUMN);
-        if (checkForMatchingArmorAppearance(eligibleArmorAppearances, itemAppearanceName, player))
-        {
-            return true;
-        }
-        return false;
+        return checkForMatchingArmorAppearance(eligibleArmorAppearances, itemAppearanceName, player);
     }
+
     public dictionary getArmorKitData(obj_id armorKit, obj_id player) throws InterruptedException
     {
         if (hasObjVar(armorKit, ARMOR_KIT_TYPE_OBJVAR))
@@ -78,6 +77,7 @@ public class tcg_armor_kit extends script.base_script
         }
         return null;
     }
+
     public boolean checkForMatchingArmorAppearance(String targetArmorAppearances, String itemAppearanceName, obj_id player) throws InterruptedException
     {
         if (targetArmorAppearances != null && targetArmorAppearances.length() > 0)
@@ -85,9 +85,12 @@ public class tcg_armor_kit extends script.base_script
             String[] targetArmorList = split(targetArmorAppearances, ',');
             if (targetArmorList != null && targetArmorList.length > 0)
             {
-                for (String targetArmorAppearance : targetArmorList) {
-                    if (targetArmorAppearance != null && targetArmorAppearance.length() > 0) {
-                        if (itemAppearanceName.contains(targetArmorAppearance)) {
+                for (String targetArmorAppearance : targetArmorList)
+                {
+                    if (targetArmorAppearance != null && targetArmorAppearance.length() > 0)
+                    {
+                        if (itemAppearanceName.contains(targetArmorAppearance))
+                        {
                             return true;
                         }
                     }
@@ -96,6 +99,7 @@ public class tcg_armor_kit extends script.base_script
         }
         return false;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -112,6 +116,7 @@ public class tcg_armor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -139,14 +144,18 @@ public class tcg_armor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateArmorKit(obj_id armorKit, obj_id player) throws InterruptedException
     {
         obj_id[] armorPieces = getContents(armorKit);
         if (armorPieces != null && armorPieces.length > 0)
         {
-            for (obj_id armor : armorPieces) {
-                if (shouldBeInKit(armor, player, armorKit)) {
-                    if (hasObjVar(armor, TEXTURE_OBJVAR_NAME)) {
+            for (obj_id armor : armorPieces)
+            {
+                if (shouldBeInKit(armor, player, armorKit))
+                {
+                    if (hasObjVar(armor, TEXTURE_OBJVAR_NAME))
+                    {
                         int previousTexture = getIntObjVar(armor, TEXTURE_OBJVAR_NAME);
                         int previousColor_1 = getIntObjVar(armor, COLOR_OBJVAR_NAME_01);
                         int previousColor_2 = getIntObjVar(armor, COLOR_OBJVAR_NAME_02);
@@ -160,9 +169,12 @@ public class tcg_armor_kit extends script.base_script
                         prose.setStringId(pp, new string_id("tcg", "armor_kit_texture_reverted"));
                         prose.setTT(pp, getEncodedName(armor));
                         sendSystemMessageProse(player, pp);
-                    } else {
+                    }
+                    else
+                    {
                         dictionary armorKitData = getArmorKitData(armorKit, player);
-                        if (armorKitData == null) {
+                        if (armorKitData == null)
+                        {
                             return;
                         }
                         int kitTexture = armorKitData.getInt(DATA_TEXTURE_COLUMN);
@@ -174,10 +186,12 @@ public class tcg_armor_kit extends script.base_script
                         setObjVar(armor, TEXTURE_OBJVAR_NAME, currentTexture);
                         setObjVar(armor, COLOR_OBJVAR_NAME_02, currentColor_2);
                         setObjVar(armor, COLOR_OBJVAR_NAME_01, currentColor_1);
-                        if (kitColor_1 <= -1) {
+                        if (kitColor_1 <= -1)
+                        {
                             kitColor_1 = currentColor_1;
                         }
-                        if (kitColor_2 <= -1) {
+                        if (kitColor_2 <= -1)
+                        {
                             kitColor_2 = currentColor_2;
                         }
                         setRangedIntCustomVarValue(armor, TEXTURE_CUSTVAR_NAME, kitTexture);
@@ -193,13 +207,15 @@ public class tcg_armor_kit extends script.base_script
         }
         return;
     }
+
     public void flushArmorKit(obj_id armorKit, obj_id player) throws InterruptedException
     {
         obj_id playerInventory = utils.getInventoryContainer(player);
         obj_id[] armorPieces = getContents(armorKit);
         if (armorPieces != null && armorPieces.length > 0)
         {
-            for (obj_id armor : armorPieces) {
+            for (obj_id armor : armorPieces)
+            {
                 putIn(armor, playerInventory, player);
             }
         }

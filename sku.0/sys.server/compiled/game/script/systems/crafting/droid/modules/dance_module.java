@@ -11,12 +11,13 @@ import java.util.Vector;
 
 public class dance_module extends script.base_script
 {
-    public dance_module()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String PROMPT = "@pet/droid_modules:dance_prompt";
     public static final String TITLE = "@pet/droid_modules:dance_title";
+    public dance_module()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self) && utils.getContainingPlayer(self) == player)
@@ -25,6 +26,7 @@ public class dance_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -35,16 +37,21 @@ public class dance_module extends script.base_script
                 Vector resizAbleDroidIds = new Vector(Arrays.asList(droidIds));
                 Vector droidNames = new Vector();
                 droidNames.setSize(0);
-                for (obj_id droidId : droidIds) {
-                    if (hasObjVar(droidId, "module_data.dancing_droid")) {
+                for (obj_id droidId : droidIds)
+                {
+                    if (hasObjVar(droidId, "module_data.dancing_droid"))
+                    {
                         utils.removeElement(resizAbleDroidIds, droidId);
                         continue;
                     }
                     String droidName = getName(droidId);
                     String[] splitName = split(droidName, '/');
-                    if (splitName.length > 1) {
+                    if (splitName.length > 1)
+                    {
                         utils.addElement(droidNames, "@" + droidName);
-                    } else {
+                    }
+                    else
+                    {
                         utils.addElement(droidNames, droidName);
                     }
                 }
@@ -55,6 +62,7 @@ public class dance_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -64,6 +72,7 @@ public class dance_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onDanceDroidLoaded(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

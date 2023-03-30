@@ -11,11 +11,13 @@ public class flip_terminal_spawner extends script.base_script
     public flip_terminal_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkTerminal", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void checkDestroy(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "terminal"))
@@ -28,16 +30,19 @@ public class flip_terminal_spawner extends script.base_script
             destroyObject(terminal);
         }
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         checkDestroy(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         checkDestroy(self);
         return SCRIPT_CONTINUE;
     }
+
     public int checkTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         float imp_r = gcw.getImperialPercentileByRegion(self);
@@ -60,7 +65,7 @@ public class flip_terminal_spawner extends script.base_script
                     spawnTerminal(self, "imperial");
                 }
             }
-            else 
+            else
             {
                 spawnTerminal(self, "imperial");
             }
@@ -76,7 +81,7 @@ public class flip_terminal_spawner extends script.base_script
                     spawnTerminal(self, "rebel");
                 }
             }
-            else 
+            else
             {
                 spawnTerminal(self, "rebel");
             }
@@ -84,6 +89,7 @@ public class flip_terminal_spawner extends script.base_script
         messageTo(self, "checkTerminal", null, 3600.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnTerminal(obj_id self, String faction) throws InterruptedException
     {
         obj_id terminal = createObject("object/tangible/terminal/terminal_mission_" + faction + ".iff", getLocation(self));

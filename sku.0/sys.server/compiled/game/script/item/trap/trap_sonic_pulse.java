@@ -8,11 +8,12 @@ import script.string_id;
 
 public class trap_sonic_pulse extends script.item.trap.trap_base
 {
+    public static final int TRAP_DIFF = 45;
+    public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_sonic_pulse_effect");
     public trap_sonic_pulse()
     {
     }
-    public static final int TRAP_DIFF = 45;
-    public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_sonic_pulse_effect");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -24,6 +25,7 @@ public class trap_sonic_pulse extends script.item.trap.trap_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapHit(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -56,7 +58,7 @@ public class trap_sonic_pulse extends script.item.trap.trap_base
                 startCombat(target, player);
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isInCombat(target))
             {

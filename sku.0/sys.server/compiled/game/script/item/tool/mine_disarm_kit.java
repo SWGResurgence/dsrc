@@ -6,21 +6,22 @@ import script.library.utils;
 
 public class mine_disarm_kit extends script.base_script
 {
-    public mine_disarm_kit()
-    {
-    }
     public static final string_id SID_CANNOT_USE_YET = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_cannot_use_yet");
     public static final string_id SID_FOUND_NO_MINES = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_found_no_mines");
     public static final string_id SID_FRIENDLY_MINEFIELD = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_friendly_minefield");
     public static final string_id SID_ACCIDENTAL_DETONATE = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_accidental_detonate");
     public static final string_id SID_COULD_NOT_DISARM = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_could_not_disarm");
     public static final string_id SID_SUCCESSFUL_DISARM = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_successful_disarm");
-    public static final String[] DISARM_EFFECT = 
+    public static final String[] DISARM_EFFECT =
+            {
+                    "appearance/pt_disarm_mine_trigger.prt",
+                    "appearance/pt_disarm_mine_fail.prt",
+                    "appearance/pt_disarm_mine_success.prt"
+            };
+    public mine_disarm_kit()
     {
-        "appearance/pt_disarm_mine_trigger.prt",
-        "appearance/pt_disarm_mine_fail.prt",
-        "appearance/pt_disarm_mine_success.prt"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -34,6 +35,7 @@ public class mine_disarm_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -46,6 +48,7 @@ public class mine_disarm_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void findMine(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "clickItem.mine_disarm"))
@@ -67,8 +70,10 @@ public class mine_disarm_kit extends script.base_script
             return;
         }
         obj_id minefield = obj_id.NULL_ID;
-        for (obj_id object : objects) {
-            if (isIdValid(object) && hasScript(object, "faction_perk.minefield.advanced_minefield")) {
+        for (obj_id object : objects)
+        {
+            if (isIdValid(object) && hasScript(object, "faction_perk.minefield.advanced_minefield"))
+            {
                 minefield = object;
                 break;
             }
@@ -108,7 +113,7 @@ public class mine_disarm_kit extends script.base_script
             sendSystemMessage(player, SID_FOUND_NO_MINES);
             return;
         }
-        int chance = (int)((((float)currentMines / maxMines) * 100.0f) * 0.75);
+        int chance = (int) ((((float) currentMines / maxMines) * 100.0f) * 0.75);
         int roll = rand(1, 100);
         if (utils.hasScriptVar(player, "mine_found"))
         {
@@ -131,7 +136,7 @@ public class mine_disarm_kit extends script.base_script
             {
                 result = 1;
             }
-            else 
+            else
             {
                 result = 2;
             }
@@ -146,11 +151,12 @@ public class mine_disarm_kit extends script.base_script
             }
             messageTo(self, "handleDisarmMine", d, 2.0f, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FOUND_NO_MINES);
         }
     }
+
     public int handleDisarmMine(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -182,7 +188,7 @@ public class mine_disarm_kit extends script.base_script
             hq.getRandomMineType(structure);
             utils.removeScriptVar(player, "mine_found");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -192,7 +198,7 @@ public class mine_disarm_kit extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setCount(self, count);
         }

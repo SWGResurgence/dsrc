@@ -8,14 +8,15 @@ public class crafting_artisan_meal_ingredient extends script.systems.crafting.fo
     public crafting_artisan_meal_ingredient()
     {
     }
+
     public void fillStomach(obj_id prototype, int filling) throws InterruptedException
     {
-        int[] stomach = 
-        {
-            filling,
-            0,
-            0
-        };
+        int[] stomach =
+                {
+                        filling,
+                        0,
+                        0
+                };
         setObjVar(prototype, consumable.VAR_CONSUMABLE_STOMACH_VALUES, stomach);
     }
 }

@@ -8,10 +8,12 @@ import script.library.utils;
 
 public class lottery_droid extends script.base_script
 {
+    public static final String DATATABLE = "datatables/event_perk/lottery_setup_data.iff";
+
     public lottery_droid()
     {
     }
-    public static final String DATATABLE = "datatables/event_perk/lottery_setup_data.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))
@@ -29,14 +31,14 @@ public class lottery_droid extends script.base_script
         float terminalRegistration = 999999;
         setObjVar(self, "event_perk.terminal_registration", terminalRegistration);
         String me = getName(self);
-        String[] playerNameList = 
-        {
-            me
-        };
-        obj_id[] playerOIDList = 
-        {
-            self
-        };
+        String[] playerNameList =
+                {
+                        me
+                };
+        obj_id[] playerOIDList =
+                {
+                        self
+                };
         setObjVar(self, "event_perk.lottery.player_name_list", playerNameList);
         setObjVar(self, "event_perk.lottery.player_OID_list", playerOIDList);
         setObjVar(self, "event_perk.lottery.player_count", 1);
@@ -44,6 +46,7 @@ public class lottery_droid extends script.base_script
         setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))
@@ -55,6 +58,7 @@ public class lottery_droid extends script.base_script
         messageTo(self, "lotteryTimerPing", null, 300, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "cleaningUp"))
@@ -94,6 +98,7 @@ public class lottery_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.lottery.initialized");
@@ -158,6 +163,7 @@ public class lottery_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int selectDuration(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -181,6 +187,7 @@ public class lottery_droid extends script.base_script
         showPayoutPercentList(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int selectPayout(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -205,6 +212,7 @@ public class lottery_droid extends script.base_script
         showTicketCostSUI(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTicketCost(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -228,12 +236,14 @@ public class lottery_droid extends script.base_script
         sendSystemMessage(player, ticketCost + getString(ticketCostFeedback), null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleShowTicketCostSUIAgain(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("theGuy");
         showTicketCostSUI(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddCredits(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -262,6 +272,7 @@ public class lottery_droid extends script.base_script
         showAddCreditsConfirm(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePurchaseRegistration(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -269,8 +280,10 @@ public class lottery_droid extends script.base_script
         int totalMoney = getTotalMoney(player);
         int ticketCost = getIntObjVar(self, "event_perk.lottery.ticket_price");
         obj_id[] playerOIDList = getObjIdArrayObjVar(self, "event_perk.lottery.player_OID_list");
-        for (obj_id obj_id : playerOIDList) {
-            if (obj_id == player) {
+        for (obj_id obj_id : playerOIDList)
+        {
+            if (obj_id == player)
+            {
                 sendSystemMessage(player, new string_id("event_perk", "lottery_reg_purchase_already"));
                 return SCRIPT_CONTINUE;
             }
@@ -305,6 +318,7 @@ public class lottery_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleShowCreditsConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -326,12 +340,14 @@ public class lottery_droid extends script.base_script
         CustomerServiceLog("EventPerk", "(Lottery Droid - [" + self + "]) Player [" + player + "] has added money to the pot in the sum of [" + creditsToAdd + "] credits.");
         return SCRIPT_CONTINUE;
     }
+
     public int handleShowAddCreditsSUIAgain(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("theGuy");
         showAddCreditsToPot(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int lotteryTimerPing(obj_id self, dictionary params) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.lottery.initialized");
@@ -342,6 +358,7 @@ public class lottery_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int transferWinningsToWinner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id winner = getObjIdObjVar(self, "event_perk.lottery.winner_OID");
@@ -349,7 +366,7 @@ public class lottery_droid extends script.base_script
         float actualPayoutPercent = basePayoutPercent / 100;
         int myMoney = getTotalMoney(self);
         float jackpotFloat = myMoney * actualPayoutPercent;
-        int jackpot = (int)jackpotFloat;
+        int jackpot = (int) jackpotFloat;
         money.bankTo(self, winner, jackpot);
         string_id mailSubject = new string_id("event_perk", "lottery_mail_winner_sub");
         string_id mailBodySID = new string_id("event_perk", "lottery_mail_winner_body");
@@ -360,6 +377,7 @@ public class lottery_droid extends script.base_script
         messageTo(self, "transferTakeToOwner", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int transferTakeToOwner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "storytellerid");
@@ -373,6 +391,7 @@ public class lottery_droid extends script.base_script
         CustomerServiceLog("EventPerk", "(Lottery Droid - [" + self + "]) Owner [" + owner + "] was paid [" + myMoney + "] credits as their take of the jackpot.");
         return SCRIPT_CONTINUE;
     }
+
     public void performLotteryDrawing(obj_id self) throws InterruptedException
     {
         obj_id[] playerOIDList = getObjIdArrayObjVar(self, "event_perk.lottery.player_OID_list");
@@ -390,7 +409,7 @@ public class lottery_droid extends script.base_script
             setObjVar(self, "event_perk.lottery.game_duration", 72);
             setObjVar(self, "event_perk.lottery.game_start_time", rightNow);
         }
-        else 
+        else
         {
             int luckyWinnuh = rand(1, numberRegistered);
             setObjVar(self, "event_perk.lottery.winner_name", playerNameList[luckyWinnuh]);
@@ -402,6 +421,7 @@ public class lottery_droid extends script.base_script
         String winnerName = getStringObjVar(self, "event_perk.lottery.winner_name");
         CustomerServiceLog("EventPerk", "(Lottery Droid - [" + self + "]) The selected winner for this lottery was [" + winnerName + "]");
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.lottery.initialized");
@@ -431,6 +451,7 @@ public class lottery_droid extends script.base_script
             }
         }
     }
+
     public void initializeLottery(obj_id self, obj_id player) throws InterruptedException
     {
         int duration = getIntObjVar(self, "event_perk.lottery.game_duration");
@@ -453,6 +474,7 @@ public class lottery_droid extends script.base_script
         }
         return;
     }
+
     public void showDurationList(obj_id self, obj_id player) throws InterruptedException
     {
         int[] rawDuration = dataTableGetIntColumn(DATATABLE, 0);
@@ -464,6 +486,7 @@ public class lottery_droid extends script.base_script
         sui.listbox(self, player, "@event_perk:lottery_dur_description", sui.OK_CANCEL, "@event_perk:lottery_dur_title", duration, "selectDuration", true);
         return;
     }
+
     public void showPayoutPercentList(obj_id self, obj_id player) throws InterruptedException
     {
         int[] rawPayout = dataTableGetIntColumn(DATATABLE, 1);
@@ -475,6 +498,7 @@ public class lottery_droid extends script.base_script
         sui.listbox(self, player, "@event_perk:lottery_payout_description", sui.OK_CANCEL, "@event_perk:lottery_payout_title", payout, "selectPayout", true);
         return;
     }
+
     public int showTicketCostSUI(obj_id self, obj_id player) throws InterruptedException
     {
         string_id ticketCostDesc = new string_id("event_perk", "ticket_cost_desc");
@@ -489,6 +513,7 @@ public class lottery_droid extends script.base_script
         int pid = sui.inputbox(self, player, getString(ticketCostDesc), getString(ticketCostTitle), "handleTicketCost", 7, false, "");
         return pid;
     }
+
     public int showAddCreditsToPot(obj_id self, obj_id player) throws InterruptedException
     {
         string_id addCreditsDesc = new string_id("event_perk", "lottery_add_credits_desc");
@@ -496,6 +521,7 @@ public class lottery_droid extends script.base_script
         int pid = sui.inputbox(self, player, getString(addCreditsDesc), getString(addCreditsTitle), "handleAddCredits", 7, false, "");
         return pid;
     }
+
     public int showLotteryInfo(obj_id self, obj_id player) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.lottery.initialized");
@@ -514,7 +540,7 @@ public class lottery_droid extends script.base_script
             int numPlayers = playerList.length - 1;
             int myBankBalance = getBankBalance(self);
             float payoutFloat = myBankBalance * (payoutPercent / 100);
-            int payout = (int)payoutFloat;
+            int payout = (int) payoutFloat;
             float gameStartTime = getFloatObjVar(self, "event_perk.lottery.game_start_time");
             float rightNow = getGameTime();
             float elapsed = rightNow - gameStartTime;
@@ -547,6 +573,7 @@ public class lottery_droid extends script.base_script
         int pid = sui.msgbox(self, player, message, "fugettabotit");
         return pid;
     }
+
     public int showLotteryInstructions(obj_id self, obj_id player) throws InterruptedException
     {
         string_id messageSID = new string_id("event_perk", "lottery_setup_instructions");
@@ -554,6 +581,7 @@ public class lottery_droid extends script.base_script
         int pid = sui.msgbox(self, player, message, "fugettabotit");
         return pid;
     }
+
     public int showAddCreditsConfirm(obj_id self, obj_id player) throws InterruptedException
     {
         int creditsToAdd = getIntObjVar(self, "event_perk.lottery.creditsToAdd");
@@ -564,13 +592,16 @@ public class lottery_droid extends script.base_script
         int pid = sui.msgbox(self, player, message, sui.OK_CANCEL, title, sui.MSG_NORMAL, "handleShowCreditsConfirm");
         return pid;
     }
+
     public int showPurchaseRegistration(obj_id self, obj_id player) throws InterruptedException
     {
         int ticketPrice = getIntObjVar(self, "event_perk.lottery.ticket_price");
         int totalMoney = getTotalMoney(player);
         obj_id[] playerOIDList = getObjIdArrayObjVar(self, "event_perk.lottery.player_OID_list");
-        for (obj_id obj_id : playerOIDList) {
-            if (obj_id == player) {
+        for (obj_id obj_id : playerOIDList)
+        {
+            if (obj_id == player)
+            {
                 sendSystemMessage(player, new string_id("event_perk", "lottery_reg_purchase_already"));
                 return SCRIPT_CONTINUE;
             }
@@ -589,6 +620,7 @@ public class lottery_droid extends script.base_script
         int pid = sui.msgbox(self, player, message, sui.OK_CANCEL, title, sui.MSG_NORMAL, "handlePurchaseRegistration");
         return pid;
     }
+
     public String estimateTime(float remaining) throws InterruptedException
     {
         float hours = remaining / 3600;

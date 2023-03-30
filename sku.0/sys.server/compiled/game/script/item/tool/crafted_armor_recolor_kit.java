@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class crafted_armor_recolor_kit extends script.base_script
 {
-    public crafted_armor_recolor_kit()
-    {
-    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOGGING_CATEGORY = "armor_recolor";
     public static final String PROP_SELECTEDINDEX = "SelectedIndex";
@@ -34,11 +31,16 @@ public class crafted_armor_recolor_kit extends script.base_script
     public static final String COLOR_OBJECT = VAR_PREFIX + ".color_object";
     public static final String PREVIOUS_BUTTON_VISIBILITIY = VAR_PREFIX + ".previous_button";
     public static final String NEXT_BUTTON_VISIBILITIY = VAR_PREFIX + ".next_button";
+    public crafted_armor_recolor_kit()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 10);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest - functions");
@@ -57,6 +59,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -74,6 +77,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void beginArmorColorization(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -90,8 +94,10 @@ public class crafted_armor_recolor_kit extends script.base_script
         blog("equippedItems.length: " + equippedItems.length);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
-                if ((getTemplateName(equippedItem)).startsWith("object/tangible/wearables/armor/")) {
+            for (obj_id equippedItem : equippedItems)
+            {
+                if ((getTemplateName(equippedItem)).startsWith("object/tangible/wearables/armor/"))
+                {
                     wornItems.addElement(equippedItem);
                 }
             }
@@ -100,8 +106,10 @@ public class crafted_armor_recolor_kit extends script.base_script
         blog("invItems.length: " + invItems.length);
         if (invItems != null && invItems.length > 0)
         {
-            for (obj_id invItem : invItems) {
-                if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/")) {
+            for (obj_id invItem : invItems)
+            {
+                if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/"))
+                {
                     items.addElement(invItem);
                 }
             }
@@ -119,7 +127,8 @@ public class crafted_armor_recolor_kit extends script.base_script
         Vector armorNames = new Vector();
         if (!wornItems.isEmpty())
         {
-            for (Object wornItem : wornItems) {
+            for (Object wornItem : wornItems)
+            {
                 obj_id piece = (obj_id) wornItem;
                 armor.addElement(piece);
                 String name = getName(piece) + "  ( currently worn )";
@@ -128,7 +137,8 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         if (!items.isEmpty())
         {
-            for (Object item : items) {
+            for (Object item : items)
+            {
                 obj_id piece = (obj_id) item;
                 armor.addElement(piece);
                 String name = getName(piece);
@@ -140,11 +150,12 @@ public class crafted_armor_recolor_kit extends script.base_script
         {
             cleanup(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "cadk_armor", armor);
         }
     }
+
     public int handleArmorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -178,9 +189,11 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         Vector indexName = new Vector();
         indexName.setSize(0);
-        for (ranged_int_custom_var ri : palColors) {
+        for (ranged_int_custom_var ri : palColors)
+        {
             String customizationVar = ri.getVarName();
-            if (customizationVar.startsWith("/")) {
+            if (customizationVar.startsWith("/"))
+            {
                 customizationVar = customizationVar.substring(1);
             }
             utils.addElement(indexName, customizationVar);
@@ -199,9 +212,10 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         utils.setScriptVar(player, PREVIOUS_BUTTON_VISIBILITIY, FALSE);
         createColorSui(self, player);
-        openCustomizationWindow(player, armor[idx], ((String)indexName.get(0)), -1, -1, ((String)indexName.get(1)), -1, -1, ((String)indexName.get(2)), -1, -1, ((String)indexName.get(3)), -1, -1);
+        openCustomizationWindow(player, armor[idx], ((String) indexName.get(0)), -1, -1, ((String) indexName.get(1)), -1, -1, ((String) indexName.get(2)), -1, -1, ((String) indexName.get(3)), -1, -1);
         return SCRIPT_CONTINUE;
     }
+
     public boolean createColorSui(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -250,11 +264,13 @@ public class crafted_armor_recolor_kit extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public void cleanup(obj_id self, obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(self, "cadk_armor");
         utils.removeScriptVar(self, "cadk_piece");
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (!BLOGGING_ON)
@@ -268,11 +284,13 @@ public class crafted_armor_recolor_kit extends script.base_script
         LOG(BLOGGING_CATEGORY, msg);
         return true;
     }
+
     public int handleCommit(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleCommit - init");
         return SCRIPT_CONTINUE;
     }
+
     public int handlePaletteUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handlePaletteUpdate - init");
@@ -333,6 +351,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");

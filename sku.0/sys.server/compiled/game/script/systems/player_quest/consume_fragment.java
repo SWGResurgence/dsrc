@@ -7,10 +7,12 @@ import java.util.Vector;
 
 public class consume_fragment extends script.base_script
 {
+    public static final String PID_NAME = "chronicleFragmentReconstruct";
+
     public consume_fragment()
     {
     }
-    public static final String PID_NAME = "chronicleFragmentReconstruct";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self) && getCount(self) >= 10)
@@ -19,6 +21,7 @@ public class consume_fragment extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -34,6 +37,7 @@ public class consume_fragment extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -46,6 +50,7 @@ public class consume_fragment extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getUiConsumeMessageBox(obj_id self, obj_id player, String prompt, String title, String handler) throws InterruptedException
     {
         if (!isValidId(self) || !isValidId(player))
@@ -58,6 +63,7 @@ public class consume_fragment extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public int handlerSuiFragmentReconstruct(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -87,6 +93,7 @@ public class consume_fragment extends script.base_script
         reconstructFragment(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void reconstructFragment(obj_id player, obj_id self) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -116,7 +123,7 @@ public class consume_fragment extends script.base_script
             }
         }
         int relicMasterySkillmod = getEnhancedSkillStatisticModifierUncapped(player, pgc_quests.PGC_SKILLMOD_RELIC_MASTERY);
-        String relicName = ((String)relicReferences.get(rand(0, relicReferences.size() - 1)));
+        String relicName = ((String) relicReferences.get(rand(0, relicReferences.size() - 1)));
         int relicCount = 1;
         if (relicQualitySkillmod > 0)
         {

@@ -9,6 +9,7 @@ public class levelup_orb extends script.base_script
     public levelup_orb()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "item.special.nomove"))
@@ -17,6 +18,7 @@ public class levelup_orb extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -28,7 +30,7 @@ public class levelup_orb extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -36,6 +38,7 @@ public class levelup_orb extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -57,7 +60,7 @@ public class levelup_orb extends script.base_script
                     sendSystemMessage(player, new string_id("event_perk", "levelup_orb_toohigh"));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     raiseLevel(player);
                     destroyObject(self);
@@ -66,6 +69,7 @@ public class levelup_orb extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void raiseLevel(obj_id player) throws InterruptedException
     {
         int currentLevel = getLevel(player);

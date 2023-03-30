@@ -7,11 +7,8 @@ import script.library.utils;
 
 import java.util.Arrays;
 
-public class esb_anniv_holocron extends script.base_script {
-
-    public esb_anniv_holocron()
-    {
-    }
+public class esb_anniv_holocron extends script.base_script
+{
 
     public static final String prompt_corellia = "While relaxing and enjoying the snow of Doaba Guerfel, a drunken fool insults you in a cantina. How do you react?";
     public static final String[] options_corellia = {
@@ -86,102 +83,12 @@ public class esb_anniv_holocron extends script.base_script {
             "yavin4",
             "dxun"
     };
-
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
-        if (!isIdValid(self) || !isIdValid(player)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!utils.isNestedWithinAPlayer(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!hasCompletedCollectionPage(player, "esb_anniversary_collection")) {
-            return SCRIPT_CONTINUE;
-        }
-        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    public esb_anniv_holocron()
     {
-        if (!isIdValid(self) || !isIdValid(player)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!utils.isNestedWithinAPlayer(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        String planet = getCurrentSceneName();
-        if (hasCompletedThisPlanet(self, planet)) {
-            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has nothing more for you while you are on this planet.");
-            return SCRIPT_CONTINUE;
-        }
-        if(!Arrays.asList(allowed_planets).contains(planet)) {
-            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has no knowledge of this planet. You must continue your journey.");
-            return SCRIPT_CONTINUE;
-        }
-        if (!hasCompletedCollectionPage(player, "esb_anniversary_collection")) {
-            return SCRIPT_CONTINUE;
-        }
-        if(item == menu_info_types.ITEM_USE) {
-            if (!hasObjVar(self, "esb_holocron_pc")) {
-                setObjVar(self, "esb_holocron_pc", 10);
-            }
-            showHolocronPrompt(self, player, planet);
-        }
-        return SCRIPT_CONTINUE;
     }
 
-    public boolean hasCompletedThisPlanet(obj_id self, String planet) throws InterruptedException {
-        return hasObjVar(self, "esb_holocron_"+planet);
-    }
-
-    public void showHolocronPrompt(obj_id self, obj_id player, String planet) throws InterruptedException {
-        int pid = sui.listbox(self, player, getPlanetPrompts().getString(planet), sui.OK_CANCEL, "Holocron of Destiny", getPlanetOptions().getStringArray(planet), "handleHolocronPrompt", true, false);
-        sui.setPid(player, pid, "holocronOfDestiny");
-    }
-
-    public int handleHolocronPrompt(obj_id self, dictionary params) throws InterruptedException {
-        obj_id player = sui.getPlayerId(params);
-        int btn = sui.getIntButtonPressed(params);
-        int idx = sui.getListboxSelectedRow(params);
-        if (btn == sui.BP_OK) {
-            int tct = getIntObjVar(self, "esb_holocron_pc");
-            switch (idx) {
-                case 0:
-                    if(!hasObjVar(self, "esb_holocron_darkside_ct")) {
-                        setObjVar(self, "esb_holocron_darkside_ct", 1);
-                    } else {
-                        setObjVar(self, "esb_holocron_darkside_ct", getIntObjVar(self, "esb_holocron_darkside_ct")+1);
-                    }
-                    setObjVar(self, "esb_holocron_pc", tct-1);
-                    break;
-                case 1:
-                    if(!hasObjVar(self, "esb_holocron_neutral_ct")) {
-                        setObjVar(self, "esb_holocron_neutral_ct", 1);
-                    } else {
-                        setObjVar(self, "esb_holocron_neutral_ct", getIntObjVar(self, "esb_holocron_neutral_ct")+1);
-                    }
-                    setObjVar(self, "esb_holocron_pc", tct-1);
-                    break;
-                case 2:
-                    if(!hasObjVar(self, "esb_holocron_lightside_ct")) {
-                        setObjVar(self, "esb_holocron_lightside_ct", 1);
-                    } else {
-                        setObjVar(self, "esb_holocron_lightside_ct", getIntObjVar(self, "esb_holocron_lightside_ct")+1);
-                    }
-                    setObjVar(self, "esb_holocron_pc", tct-1);
-                    break;
-            }
-            setObjVar(self, "esb_holocron_"+getCurrentSceneName(), true);
-            if(getIntObjVar(self, "esb_holocron_pc") < 1) {
-                handleCompletedHolocron(self, player);
-            } else {
-                sendSystemMessageTestingOnly(player, "Your response to the Holocron of Destiny has been recorded.");
-            }
-        }
-        return SCRIPT_CONTINUE;
-    }
-
-    public static void handleCompletedHolocron(obj_id self, obj_id player) throws InterruptedException {
+    public static void handleCompletedHolocron(obj_id self, obj_id player) throws InterruptedException
+    {
         sendSystemMessageTestingOnly(player, "You have completed the Holocron of Destiny!");
         int[] scores = {
                 getIntObjVar(self, "esb_holocron_neutral_ct"),
@@ -189,11 +96,13 @@ public class esb_anniv_holocron extends script.base_script {
                 getIntObjVar(self, "esb_holocron_lightside_ct")
         };
         int largest = 0;
-        for (int i = 1; i < scores.length; i++) {
+        for (int i = 1; i < scores.length; i++)
+        {
             if (scores[i] > scores[largest]) largest = i;
         }
         obj_id item = obj_id.NULL_ID;
-        switch (largest) {
+        switch (largest)
+        {
             case 0:
                 item = static_item.createNewItemFunction("item_esb_boba_fett_costume", utils.getInventoryContainer(player));
                 break;
@@ -208,7 +117,8 @@ public class esb_anniv_holocron extends script.base_script {
         destroyObject(self);
     }
 
-    public static dictionary getPlanetPrompts() throws InterruptedException {
+    public static dictionary getPlanetPrompts() throws InterruptedException
+    {
         dictionary d = new dictionary();
         d.put("corellia", prompt_corellia);
         d.put("dantooine", prompt_dantooine);
@@ -223,7 +133,8 @@ public class esb_anniv_holocron extends script.base_script {
         return d;
     }
 
-    public static dictionary getPlanetOptions() throws InterruptedException {
+    public static dictionary getPlanetOptions() throws InterruptedException
+    {
         dictionary d = new dictionary();
         d.put("corellia", options_corellia);
         d.put("dantooine", options_dantooine);
@@ -236,6 +147,128 @@ public class esb_anniv_holocron extends script.base_script {
         d.put("tatooine", options_tatooine);
         d.put("yavin4", options_yavin4);
         return d;
+    }
+
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (!isIdValid(self) || !isIdValid(player))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!utils.isNestedWithinAPlayer(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!hasCompletedCollectionPage(player, "esb_anniversary_collection"))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    {
+        if (!isIdValid(self) || !isIdValid(player))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!utils.isNestedWithinAPlayer(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String planet = getCurrentSceneName();
+        if (hasCompletedThisPlanet(self, planet))
+        {
+            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has nothing more for you while you are on this planet.");
+            return SCRIPT_CONTINUE;
+        }
+        if (!Arrays.asList(allowed_planets).contains(planet))
+        {
+            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has no knowledge of this planet. You must continue your journey.");
+            return SCRIPT_CONTINUE;
+        }
+        if (!hasCompletedCollectionPage(player, "esb_anniversary_collection"))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.ITEM_USE)
+        {
+            if (!hasObjVar(self, "esb_holocron_pc"))
+            {
+                setObjVar(self, "esb_holocron_pc", 10);
+            }
+            showHolocronPrompt(self, player, planet);
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public boolean hasCompletedThisPlanet(obj_id self, String planet) throws InterruptedException
+    {
+        return hasObjVar(self, "esb_holocron_" + planet);
+    }
+
+    public void showHolocronPrompt(obj_id self, obj_id player, String planet) throws InterruptedException
+    {
+        int pid = sui.listbox(self, player, getPlanetPrompts().getString(planet), sui.OK_CANCEL, "Holocron of Destiny", getPlanetOptions().getStringArray(planet), "handleHolocronPrompt", true, false);
+        sui.setPid(player, pid, "holocronOfDestiny");
+    }
+
+    public int handleHolocronPrompt(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        int btn = sui.getIntButtonPressed(params);
+        int idx = sui.getListboxSelectedRow(params);
+        if (btn == sui.BP_OK)
+        {
+            int tct = getIntObjVar(self, "esb_holocron_pc");
+            switch (idx)
+            {
+                case 0:
+                    if (!hasObjVar(self, "esb_holocron_darkside_ct"))
+                    {
+                        setObjVar(self, "esb_holocron_darkside_ct", 1);
+                    }
+                    else
+                    {
+                        setObjVar(self, "esb_holocron_darkside_ct", getIntObjVar(self, "esb_holocron_darkside_ct") + 1);
+                    }
+                    setObjVar(self, "esb_holocron_pc", tct - 1);
+                    break;
+                case 1:
+                    if (!hasObjVar(self, "esb_holocron_neutral_ct"))
+                    {
+                        setObjVar(self, "esb_holocron_neutral_ct", 1);
+                    }
+                    else
+                    {
+                        setObjVar(self, "esb_holocron_neutral_ct", getIntObjVar(self, "esb_holocron_neutral_ct") + 1);
+                    }
+                    setObjVar(self, "esb_holocron_pc", tct - 1);
+                    break;
+                case 2:
+                    if (!hasObjVar(self, "esb_holocron_lightside_ct"))
+                    {
+                        setObjVar(self, "esb_holocron_lightside_ct", 1);
+                    }
+                    else
+                    {
+                        setObjVar(self, "esb_holocron_lightside_ct", getIntObjVar(self, "esb_holocron_lightside_ct") + 1);
+                    }
+                    setObjVar(self, "esb_holocron_pc", tct - 1);
+                    break;
+            }
+            setObjVar(self, "esb_holocron_" + getCurrentSceneName(), true);
+            if (getIntObjVar(self, "esb_holocron_pc") < 1)
+            {
+                handleCompletedHolocron(self, player);
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(player, "Your response to the Holocron of Destiny has been recorded.");
+            }
+        }
+        return SCRIPT_CONTINUE;
     }
 
 }

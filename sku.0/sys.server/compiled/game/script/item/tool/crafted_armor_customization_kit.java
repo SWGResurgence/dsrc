@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class crafted_armor_customization_kit extends script.base_script
 {
-    public crafted_armor_customization_kit()
-    {
-    }
     public static final boolean BLOGGING_ON = false;
     public static final String BLOGGING_CATEGORY = "armor_recolor";
     public static final String VAR_PREFIX = "armor_colorize";
@@ -26,6 +23,10 @@ public class crafted_armor_customization_kit extends script.base_script
     public static final String TITLE = "@tool/customizer:armor_customize_title";
     public static final String PROMPT = "@tool/customizer:armor_customize_prompt";
     public static final int OBJECT_COLOR_MAX = 4;
+    public crafted_armor_customization_kit()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest - functions");
@@ -44,6 +45,7 @@ public class crafted_armor_customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -64,6 +66,7 @@ public class crafted_armor_customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean beginArmorColorization(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -85,25 +88,44 @@ public class crafted_armor_customization_kit extends script.base_script
         blog("invItems.length: " + invItems.length);
         if (invItems != null && invItems.length > 0)
         {
-            for (obj_id invItem : invItems) {
-                if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/")) {
-                    if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/assault_trooper")) {
+            for (obj_id invItem : invItems)
+            {
+                if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/"))
+                {
+                    if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/assault_trooper"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/rebel_")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/rebel_"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/scout_")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/scout_"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/stormtrooper")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/stormtrooper"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/marine")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/marine"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_crafted_belt")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_crafted_belt"))
+                    {
                         continue;
-                    } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt")) {
+                    }
+                    else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt"))
+                    {
                         continue;
                     }
                     items.addElement(invItem);
@@ -125,11 +147,15 @@ public class crafted_armor_customization_kit extends script.base_script
         Vector armorNames = new Vector();
         if (!items.isEmpty())
         {
-            for (Object item : items) {
+            for (Object item : items)
+            {
                 obj_id piece = (obj_id) item;
-                if (!isCrafted(piece)) {
+                if (!isCrafted(piece))
+                {
                     continue;
-                } else if (static_item.isStaticItem(piece)) {
+                }
+                else if (static_item.isStaticItem(piece))
+                {
                     continue;
                 }
                 armor.addElement(piece);
@@ -169,6 +195,7 @@ public class crafted_armor_customization_kit extends script.base_script
         blog("beginArmorColorization - Error. Armor and Name lists may not have matched in value.");
         return false;
     }
+
     public int handleArmorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -239,6 +266,7 @@ public class crafted_armor_customization_kit extends script.base_script
         openCustomizationWindow(player, armor[idx], indexName[0], -1, -1, indexName[1], -1, -1, indexName[2], -1, -1, indexName[3], -1, -1);
         return SCRIPT_CONTINUE;
     }
+
     public int decrementTool(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_ID);
@@ -250,6 +278,7 @@ public class crafted_armor_customization_kit extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public int cancelTool(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_ID);
@@ -260,6 +289,7 @@ public class crafted_armor_customization_kit extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");
@@ -272,6 +302,7 @@ public class crafted_armor_customization_kit extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerVars(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -283,6 +314,7 @@ public class crafted_armor_customization_kit extends script.base_script
         utils.removeScriptVarTree(self, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (!BLOGGING_ON)

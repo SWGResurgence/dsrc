@@ -5,6 +5,6 @@
 @class object_template 8
 
 sharedTemplate = "object/tangible/deed/vehicle_deed/shared_instant_travel_terminal_snowspeeder.iff"
-scripts = ["systems.veteran_reward.instant_travel_terminal_deed", "item.special.nomove"]
+scripts = ["systems.veteran_reward.instant_travel_terminal_deed"]
 objvars = +["itv_snowspeeder" = 1]
 persistByDefault = true

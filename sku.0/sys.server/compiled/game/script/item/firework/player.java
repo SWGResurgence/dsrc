@@ -11,11 +11,13 @@ public class player extends script.base_script
     public player()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, firework.SCRIPT_PLAYER);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFireworkPrepare(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -30,7 +32,7 @@ public class player extends script.base_script
         {
             queueCommand(self, (28609318), null, "", COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             delay = 0.0f;
         }
@@ -39,6 +41,7 @@ public class player extends script.base_script
         messageTo(self, firework.HANDLER_FIREWORK_LAUNCH, params, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFireworkLaunch(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -67,6 +70,7 @@ public class player extends script.base_script
         messageTo(self, firework.HANDLER_FIREWORK_CLEANUP, params, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFireworkCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

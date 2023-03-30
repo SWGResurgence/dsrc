@@ -8,6 +8,7 @@ public class mob_spawn_tracker extends script.base_script
     public mob_spawn_tracker()
     {
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id objParent = utils.getObjIdScriptVar(self, "objParent");

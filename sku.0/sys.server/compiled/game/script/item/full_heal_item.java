@@ -14,15 +14,16 @@ public class full_heal_item extends script.base_script
     public static final string_id SID_ITEM_NOT_IN_INVENTORY = new string_id("base_player", "not_in_your_inventory");
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");
     public static final string_id SID_NO_NEED_TO_HEAL = new string_id("base_player", "no_need_to_heal");
-    public static final String[] ATTRIBUTES = 
-    {
-        "HEALTH",
-        "CONSTITUTION",
-        "ACTION",
-        "STAMINA",
-        "MIND",
-        "WILLPOWER"
-    };
+    public static final String[] ATTRIBUTES =
+            {
+                    "HEALTH",
+                    "CONSTITUTION",
+                    "ACTION",
+                    "STAMINA",
+                    "MIND",
+                    "WILLPOWER"
+            };
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -34,7 +35,7 @@ public class full_heal_item extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -42,6 +43,7 @@ public class full_heal_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -125,7 +127,7 @@ public class full_heal_item extends script.base_script
                         static_item.decrementStaticItem(self);
                     }
                 }
-                else 
+                else
                 {
                     int timeDiff = healTime - getGameTime();
                     prose_package pp = prose.getPackage(SID_NOT_YET, timeDiff);
@@ -133,7 +135,7 @@ public class full_heal_item extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ITEM_LEVEL_TOO_LOW);
             }

@@ -11,6 +11,7 @@ public class enclave_controller extends script.base_script
     public enclave_controller()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String frsConfig = getConfigSetting("GameServer", "enableFRS");
@@ -45,6 +46,7 @@ public class enclave_controller extends script.base_script
         messageTo(self, "msgEnclavePulse", null, force_rank.MAINTENANCE_PULSE, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String enclave_name, int request_id, String[] element_name_list, dictionary[] enclave_data, int lock_key) throws InterruptedException
     {
         LOG("force_rank", "enclave_controller.OnClusterWideDataResponse -- " + self);
@@ -63,7 +65,7 @@ public class enclave_controller extends script.base_script
             }
             utils.removeScriptVar(self, force_rank.SCRIPT_VAR_DATA_REQUEST + request_id);
         }
-        else 
+        else
         {
             LOG("force_rank", "enclave_controller.OnClusterWideDataResponse -- cannot find a data_mode for request_id " + request_id + " on " + self);
             releaseClusterWideDataLock(manage_name, lock_key);
@@ -81,7 +83,7 @@ public class enclave_controller extends script.base_script
             LOG("force_rank", "enclave_controller.OnClusterWideDataResponse -- replace cluster data");
             force_rank.replaceEnclaveClusterData(self, lock_key);
         }
-        else 
+        else
         {
             if (enclave_data == null || enclave_data.length < 1)
             {
@@ -100,6 +102,7 @@ public class enclave_controller extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_OVERRIDE;
     }
+
     public int PEFSynchRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("sender"))
@@ -114,6 +117,7 @@ public class enclave_controller extends script.base_script
         messageTo(sender, "PEFSynchResponse", parms, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgVictimizedJediDeath(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)
@@ -122,6 +126,7 @@ public class enclave_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int XPDeathValidateRequest(obj_id self, dictionary params) throws InterruptedException
     {
         java.util.Enumeration pKeysd = params.keys();
@@ -144,7 +149,7 @@ public class enclave_controller extends script.base_script
         int i = 0;
         while (pKeys.hasMoreElements())
         {
-            obj_id key = (obj_id)pKeys.nextElement();
+            obj_id key = (obj_id) pKeys.nextElement();
             winners[i] = key;
             contributions[i] = params.getFloat(key);
             i++;
@@ -171,12 +176,13 @@ public class enclave_controller extends script.base_script
         {
             messageTo(victim, "XPDeathValidateResponse", validatedXPDeltas, 0, false);
         }
-        else 
+        else
         {
             LOG("force_rank", "enclave_controller::XPDeathValidateRequest: -> None of the dark Jedi who participated in the death are eligible to receive XP.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgRequestExperienceDebt(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -205,6 +211,7 @@ public class enclave_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceEnclaveUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "enclave_controller.msgForceEnclaveUpdate -- " + self);
@@ -218,6 +225,7 @@ public class enclave_controller extends script.base_script
         utils.setScriptVar(self, force_rank.SCRIPT_VAR_DATA_REQUEST + request_id, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int msgEnclavePulse(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "enclave_controller.msgEnclavePulse -- " + self + "  " + getGameTime());
@@ -225,6 +233,7 @@ public class enclave_controller extends script.base_script
         force_rank.performEnclaveMaintenance(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgValidateFRSPlayerData(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -262,6 +271,7 @@ public class enclave_controller extends script.base_script
         messageTo(player, "msgValidateFRSPlayerData", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSUpdateClusterData(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "enclave_controller.msgFRSUpdateClusterData");

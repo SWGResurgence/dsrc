@@ -8,39 +8,40 @@ import java.util.Vector;
 
 public class stage_controller extends script.terminal.base.base_terminal
 {
-    public stage_controller()
-    {
-    }
-    public static final String[] PROP_TYPE = 
-    {
-        "Backdrop",
-        "Smoke",
-        "Pyrotechnics",
-        "light",
-        "Fog"
-    };
-    public static final String[] BACKDROP_NUMBER = 
-    {
-        "Turn Off",
-        "Backdrop 1",
-        "Backdrop 2",
-        "Backdrop 3",
-        "Backdrop 4",
-        "Backdrop 5",
-        "Backdrop 6",
-        "Backdrop 7",
-        "Backdrop 8",
-        "Backdrop 9",
-        "Backdrop 10"
-    };
-    public static final String[] BACKDROP_SET = 
-    {
-        "Galactic Scenes",
-        "Galactic Scenes - Wide"
-    };
+    public static final String[] PROP_TYPE =
+            {
+                    "Backdrop",
+                    "Smoke",
+                    "Pyrotechnics",
+                    "light",
+                    "Fog"
+            };
+    public static final String[] BACKDROP_NUMBER =
+            {
+                    "Turn Off",
+                    "Backdrop 1",
+                    "Backdrop 2",
+                    "Backdrop 3",
+                    "Backdrop 4",
+                    "Backdrop 5",
+                    "Backdrop 6",
+                    "Backdrop 7",
+                    "Backdrop 8",
+                    "Backdrop 9",
+                    "Backdrop 10"
+            };
+    public static final String[] BACKDROP_SET =
+            {
+                    "Galactic Scenes",
+                    "Galactic Scenes - Wide"
+            };
     public static final string_id SID_START_CONTROLLER = new string_id("spam", "activate_stage_controller");
     public static final string_id SID_NOT_IN_HOUSE = new string_id("spam", "stage_controller_not_in_house");
     public static final string_id SID_NO_PROPS = new string_id("spam", "stage_controller_no_props");
+    public stage_controller()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -53,6 +54,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         }
         return super.OnObjectMenuRequest(self, player, mi);
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE && isIdValid(player))
@@ -61,13 +63,14 @@ public class stage_controller extends script.terminal.base.base_terminal
             {
                 startController(player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NOT_IN_HOUSE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startController(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -120,6 +123,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         Arrays.sort(propListArray);
         stageMenuStart(self, player, "Select the stage machinery you wish to operate.", "Stage Controler", propListArray, "stageMenuChoice", true, "propList", "propList.propsFound");
     }
+
     public boolean checkLocation(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -139,13 +143,11 @@ public class stage_controller extends script.terminal.base.base_terminal
             {
                 templateName = getTemplateName(ship);
             }
-            if (isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName)))
-            {
-                return true;
-            }
+            return isIdValid(house) && (player_structure.isBuilding(house) || space_utils.isPobType(templateName));
         }
         return false;
     }
+
     public void stageMenuStart(obj_id self, obj_id player, String prompt, String title, String[] options, String myHandler, boolean cancel, String PIDVar, String scriptVar) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
@@ -154,6 +156,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         setWindowPid(player, pid, PIDVar);
         utils.setScriptVar(player, scriptVar, options);
     }
+
     public void stageMenu(obj_id self, obj_id player, String prompt, String title, String[] options, String myHandler, boolean cancel, String PIDVar, String scriptVar) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
@@ -163,6 +166,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         setWindowPid(player, pid, PIDVar);
         utils.setScriptVar(player, scriptVar, options);
     }
+
     public void closeOldWindow(obj_id player, String scriptVar) throws InterruptedException
     {
         if (utils.hasScriptVar(player, scriptVar))
@@ -172,6 +176,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             utils.removeScriptVarTree(player, scriptVar);
         }
     }
+
     public void setWindowPid(obj_id player, int pid, String scriptVar) throws InterruptedException
     {
         if (pid > -1)
@@ -179,6 +184,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             utils.setScriptVar(player, scriptVar, pid);
         }
     }
+
     public int stageMenuChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id container = getTopMostContainer(getSelf());
@@ -202,7 +208,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        String propMenuArray[] = utils.getStringArrayScriptVar(player, "propList.propsFound");
+        String[] propMenuArray = utils.getStringArrayScriptVar(player, "propList.propsFound");
         String propSelected = propMenuArray[idx];
         String propTemplate = toLower("entertainer_console." + propSelected);
         String methodName = "handle" + propSelected;
@@ -212,17 +218,18 @@ public class stage_controller extends script.terminal.base.base_terminal
         int n = 0;
         for (int i = 1; i < itemList.length; i++)
         {
-            if (!isIdValid(((obj_id)objectList.get(n))))
+            if (!isIdValid(((obj_id) objectList.get(n))))
             {
                 continue;
             }
-            String tempName = getEncodedName(((obj_id)objectList.get(n)));
+            String tempName = getEncodedName(((obj_id) objectList.get(n)));
             itemList[i] = tempName;
             n++;
         }
         stageMenu(self, player, "Please select the " + propSelected + " machine you wish to activate.", "Stage Controler", itemList, methodName, true, "choice", "prop.arrayList");
         return SCRIPT_CONTINUE;
     }
+
     public int handleBackdrop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id container = getTopMostContainer(self);
@@ -255,6 +262,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBackdropDesign(obj_id self, dictionary params) throws InterruptedException
     {
         int backdropNumber = 0;
@@ -274,6 +282,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         stageMenu(self, player, "Please Select the backdrop design.", "Stage Controler", BACKDROP_NUMBER, "handleAllBackdropPicture", true, "backdropChoice", "backdrop.backdropListArray");
         return SCRIPT_CONTINUE;
     }
+
     public int handleSmoke(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id container = getTopMostContainer(getSelf());
@@ -292,18 +301,20 @@ public class stage_controller extends script.terminal.base.base_terminal
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
-            for (Object o : smokeObjectList) {
-                if (isIdValid(((obj_id) o))) {
+            for (Object o : smokeObjectList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
                     boolean playEffect = playSmokeEffect(((obj_id) o));
                 }
             }
         }
-        else 
+        else
         {
             idx--;
-            if (isIdValid(((obj_id)smokeObjectList.get(idx))))
+            if (isIdValid(((obj_id) smokeObjectList.get(idx))))
             {
-                boolean playEffect = playSmokeEffect(((obj_id)smokeObjectList.get(idx)));
+                boolean playEffect = playSmokeEffect(((obj_id) smokeObjectList.get(idx)));
             }
         }
         String[] smokeItemList = new String[smokeObjectList.size() + 1];
@@ -311,17 +322,18 @@ public class stage_controller extends script.terminal.base.base_terminal
         int n = 0;
         for (int i = 1; i < smokeItemList.length; i++)
         {
-            if (!isIdValid(((obj_id)smokeObjectList.get(n))))
+            if (!isIdValid(((obj_id) smokeObjectList.get(n))))
             {
                 continue;
             }
-            String tempName = getEncodedName(((obj_id)smokeObjectList.get(n)));
+            String tempName = getEncodedName(((obj_id) smokeObjectList.get(n)));
             smokeItemList[i] = tempName;
             n++;
         }
         stageMenu(self, player, "Please Select the Smoke Machine you wish to activate.", "Stage Controler", smokeItemList, "handleSmoke", true, "smokeChoice", "smoke.smokeListArray");
         return SCRIPT_CONTINUE;
     }
+
     public int handlePyrotechnic(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -340,18 +352,20 @@ public class stage_controller extends script.terminal.base.base_terminal
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
-            for (Object o : pyroObjectList) {
-                if (isIdValid(((obj_id) o))) {
+            for (Object o : pyroObjectList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
                     boolean playEffect = playFireEffect(((obj_id) o));
                 }
             }
         }
-        else 
+        else
         {
             idx--;
-            if (isIdValid(((obj_id)pyroObjectList.get(idx))))
+            if (isIdValid(((obj_id) pyroObjectList.get(idx))))
             {
-                boolean playEffect = playFireEffect(((obj_id)pyroObjectList.get(idx)));
+                boolean playEffect = playFireEffect(((obj_id) pyroObjectList.get(idx)));
             }
         }
         String[] pyroItemList = new String[pyroObjectList.size() + 1];
@@ -359,17 +373,18 @@ public class stage_controller extends script.terminal.base.base_terminal
         int n = 0;
         for (int i = 1; i < pyroItemList.length; i++)
         {
-            if (!isIdValid(((obj_id)pyroObjectList.get(n))))
+            if (!isIdValid(((obj_id) pyroObjectList.get(n))))
             {
                 continue;
             }
-            String tempName = getEncodedName(((obj_id)pyroObjectList.get(n)));
+            String tempName = getEncodedName(((obj_id) pyroObjectList.get(n)));
             pyroItemList[i] = tempName;
             n++;
         }
         stageMenu(self, player, "Please Select the Pyrotechnic Machine you wish to activate.", "Stage Controler", pyroItemList, "handlePyrotechnic", true, "pyroChoice", "pyro.pyroListArray");
         return SCRIPT_CONTINUE;
     }
+
     public int handleFog(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -388,18 +403,20 @@ public class stage_controller extends script.terminal.base.base_terminal
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
-            for (Object o : fogObjectList) {
-                if (isIdValid(((obj_id) o))) {
+            for (Object o : fogObjectList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
                     boolean playEffect = startFogEffect(((obj_id) o));
                 }
             }
         }
-        else 
+        else
         {
             idx--;
-            if (isIdValid(((obj_id)fogObjectList.get(idx))))
+            if (isIdValid(((obj_id) fogObjectList.get(idx))))
             {
-                boolean playEffect = startFogEffect(((obj_id)fogObjectList.get(idx)));
+                boolean playEffect = startFogEffect(((obj_id) fogObjectList.get(idx)));
             }
         }
         String[] fogItemList = new String[fogObjectList.size() + 1];
@@ -407,17 +424,18 @@ public class stage_controller extends script.terminal.base.base_terminal
         int n = 0;
         for (int i = 1; i < fogItemList.length; i++)
         {
-            if (!isIdValid(((obj_id)fogObjectList.get(n))))
+            if (!isIdValid(((obj_id) fogObjectList.get(n))))
             {
                 continue;
             }
-            String tempName = getEncodedName(((obj_id)fogObjectList.get(n)));
+            String tempName = getEncodedName(((obj_id) fogObjectList.get(n)));
             fogItemList[i] = tempName;
             n++;
         }
         stageMenu(self, player, "Please Select the Fog Machine you wish to activate.", "Stage Controler", fogItemList, "handleFog", true, "fogChoice", "fog.fogListArray");
         return SCRIPT_CONTINUE;
     }
+
     public int handleLight(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -433,20 +451,21 @@ public class stage_controller extends script.terminal.base.base_terminal
         }
         Vector lightList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
         int idx = sui.getListboxSelectedRow(params);
-        boolean playEffect = playLightEffect(((obj_id)lightList.get(idx)));
+        boolean playEffect = playLightEffect(((obj_id) lightList.get(idx)));
         Vector lightObjectList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
         String[] lightItemList = new String[lightObjectList.size()];
         for (int i = 0; i < lightItemList.length; i++)
         {
-            if (!isIdValid(((obj_id)lightObjectList.get(i))))
+            if (!isIdValid(((obj_id) lightObjectList.get(i))))
             {
-                String tempName = getEncodedName(((obj_id)lightObjectList.get(i)));
+                String tempName = getEncodedName(((obj_id) lightObjectList.get(i)));
                 lightItemList[i] = tempName;
             }
         }
         stageMenu(self, player, "Please Select the Light Machine you wish to activate.", "Stage Controler", lightItemList, "handleLightList", true, "lightChoice", "light.lightListArray");
         return SCRIPT_CONTINUE;
     }
+
     public int handleAllBackdropPicture(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -485,22 +504,25 @@ public class stage_controller extends script.terminal.base.base_terminal
         }
         if (propSelection == 0)
         {
-            for (Object o : backdropList) {
-                if (isIdValid(((obj_id) o))) {
+            for (Object o : backdropList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
                     boolean changed = changeBackdrop(((obj_id) o), backdropObjectString, backdropNumber);
                 }
             }
         }
-        else 
+        else
         {
             propSelection--;
-            if (isIdValid(((obj_id)backdropList.get(propSelection))))
+            if (isIdValid(((obj_id) backdropList.get(propSelection))))
             {
-                boolean changed = changeBackdrop(((obj_id)backdropList.get(propSelection)), backdropObjectString, backdropNumber);
+                boolean changed = changeBackdrop(((obj_id) backdropList.get(propSelection)), backdropObjectString, backdropNumber);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean changeBackdrop(obj_id prop, String backdropObject, int backdropNumber) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -541,6 +563,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         }
         return false;
     }
+
     public boolean playSmokeEffect(obj_id prop) throws InterruptedException
     {
         if (!isIdValid(prop))
@@ -559,12 +582,14 @@ public class stage_controller extends script.terminal.base.base_terminal
         obj_id[] players = getAllPlayers(loc, 20.0f);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "appearance/pt_partydroid_fogmachine.prt", loc, 0);
             }
         }
         return true;
     }
+
     public boolean playFireEffect(obj_id prop) throws InterruptedException
     {
         if (!isIdValid(prop))
@@ -583,12 +608,14 @@ public class stage_controller extends script.terminal.base.base_terminal
         obj_id[] players = getAllPlayers(loc, 20.0f);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/stage_controller_explosion_1.cef", loc, 0);
             }
         }
         return true;
     }
+
     public boolean playLightEffect(obj_id prop) throws InterruptedException
     {
         if (!isIdValid(prop))
@@ -607,12 +634,14 @@ public class stage_controller extends script.terminal.base.base_terminal
         obj_id[] players = getAllPlayers(loc, 20.0f);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clientdata/item/client_shared_item_treasure_gem_red_s01.cdf", loc, 0);
             }
         }
         return true;
     }
+
     public boolean startFogEffect(obj_id prop) throws InterruptedException
     {
         obj_id self = getSelf();

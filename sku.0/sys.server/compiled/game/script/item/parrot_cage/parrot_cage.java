@@ -13,26 +13,23 @@ import java.util.StringTokenizer;
 
 public class parrot_cage extends script.base_script
 {
-    public parrot_cage()
-    {
-    }
     public static final String PARROT_VOLUME = "parrot_trigger_volume";
     public static final float HEARING_RADIUS = 6.0f;
     public static final String VAR_MESSAGE = "spoken_message";
     public static final String VAR_BIRD_RESPONSE = "bird_response";
     public static final String VAR_SPEECH_IGNORE = "ignore_next_speech";
     public static final String VAR_MATCHES = "bird_response_matches";
-    public static final String[] BIRD_SOUNDS = 
-    {
-        "SQUACK!",
-        "TWEET",
-        "YIPE!",
-        "WEK?",
-        "AAAAAWK!",
-        "AWK",
-        "CRACKER?",
-        "ZIP"
-    };
+    public static final String[] BIRD_SOUNDS =
+            {
+                    "SQUACK!",
+                    "TWEET",
+                    "YIPE!",
+                    "WEK?",
+                    "AAAAAWK!",
+                    "AWK",
+                    "CRACKER?",
+                    "ZIP"
+            };
     public static final int SOUND_CHANCE = 60;
     public static final int NO_REPLY_PERCENT = 50;
     public static final String VAR_SPECIAL_MESSAGE = "bird_special_message";
@@ -40,6 +37,10 @@ public class parrot_cage extends script.base_script
     public static final int LOOT_RADIUS_MAX = 50;
     public static final int MATCH_COUNT = 50;
     public static final String PARROT_TREASURE_SCRIPT = "item.parrot_cage.parrot_treasure";
+    public parrot_cage()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "#############Parrot script initialized############");
@@ -49,6 +50,7 @@ public class parrot_cage extends script.base_script
         setObjVar(self, VAR_MATCHES, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String message) throws InterruptedException
     {
         String previousMessage = getStringObjVar(self, VAR_MESSAGE);
@@ -66,18 +68,19 @@ public class parrot_cage extends script.base_script
         setObjVar(self, VAR_MESSAGE, message);
         return SCRIPT_CONTINUE;
     }
+
     public int parrotSpeak(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "#############parrotSpeak()############");
-        obj_id parrot = (obj_id)params.get("parrot");
-        obj_id speaker = (obj_id)params.get("speaker");
-        String message = (String)params.get("message");
+        obj_id parrot = (obj_id) params.get("parrot");
+        obj_id speaker = (obj_id) params.get("speaker");
+        String message = (String) params.get("message");
         StringTokenizer st = new StringTokenizer(message);
         int wordCount = st.countTokens();
         int startingPosition = rand(0, wordCount - 1);
         int wordsLeft = wordCount - startingPosition;
         int numberToSpeak = rand(0, wordsLeft);
-        String parrotText = new String();
+        String parrotText = "";
         int chanceSound = rand(0, 100);
         boolean soundOnEnd = false;
         boolean noBirdSounds = false;
@@ -90,13 +93,13 @@ public class parrot_cage extends script.base_script
                 {
                     parrotText += BIRD_SOUNDS[chanceSound];
                 }
-                else 
+                else
                 {
                     soundOnEnd = true;
                 }
             }
         }
-        else 
+        else
         {
             noBirdSounds = true;
         }
@@ -110,7 +113,7 @@ public class parrot_cage extends script.base_script
                 parrotText += " " + st.nextToken();
                 ++tokenCount;
             }
-            else 
+            else
             {
                 st.nextToken();
             }
@@ -135,7 +138,7 @@ public class parrot_cage extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 chat.chat(parrot, parrotText);
                 setObjVar(self, VAR_BIRD_RESPONSE, parrotText);
@@ -145,14 +148,15 @@ public class parrot_cage extends script.base_script
         removeObjVar(self, "ignore_me");
         return SCRIPT_CONTINUE;
     }
+
     public int specialMessage(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "#############specialMessage()############");
-        obj_id parrot = (obj_id)params.get("parrot");
-        obj_id speaker = (obj_id)params.get("speaker");
+        obj_id parrot = (obj_id) params.get("parrot");
+        obj_id speaker = (obj_id) params.get("speaker");
         debug.debugAllMsg("DEBUG", self, "#############creating special message and location############");
         location parrotLoc = getLocation(parrot);
-        location desiredLoc = (location)parrotLoc.clone();
+        location desiredLoc = (location) parrotLoc.clone();
         desiredLoc = findSpotNear(parrot, parrotLoc, LOOT_RADIUS_MAX);
         for (int i = 0; i < 5 && !isValidLocation(desiredLoc, SPECIAL_LOC_RADIUS); ++i)
         {
@@ -160,11 +164,11 @@ public class parrot_cage extends script.base_script
         }
         if (desiredLoc != null)
         {
-            debug.debugAllMsg("DEBUG", self, "#############" + desiredLoc.toString() + "############");
+            debug.debugAllMsg("DEBUG", self, "#############" + desiredLoc + "############");
             string_id specialMessage = new string_id("item_n", "bird_special_message");
             chat.chat(parrot, getName(speaker));
             chat.chat(parrot, specialMessage);
-            String locationStr = new String();
+            String locationStr = "";
             StringTokenizer st = new StringTokenizer(desiredLoc.toString());
             for (int i = 0; i < 3 && st.hasMoreTokens(); ++i)
             {
@@ -177,19 +181,21 @@ public class parrot_cage extends script.base_script
             params.put("specialLoc", desiredLoc);
             messageTo(speaker, "createTreasureLocation", params, 0, true);
         }
-        else 
+        else
         {
             debug.debugAllMsg("DEBUG", self, "#############The special parrot location is bad############");
         }
         messageTo(self, "resetBirdHearing", null, 10, true);
         return SCRIPT_CONTINUE;
     }
+
     public int resetBirdHearing(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ignore_me");
         setObjVar(self, VAR_MATCHES, 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -200,7 +206,7 @@ public class parrot_cage extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"))
         {
             names[idx] = "usemodifier";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

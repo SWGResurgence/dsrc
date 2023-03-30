@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class player_force_rank extends script.base_script
 {
-    public player_force_rank()
-    {
-    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public static final String SCRIPT_VAR_PETITIONERS = "force_rank.vote_petitioners";
@@ -23,6 +20,10 @@ public class player_force_rank extends script.base_script
     public static final String SCRIPT_VAR_CHAL_TERMINAL = "force_rank.challenge_vote_terminal";
     public static final String JEDI_GUARDIAN_TITLE_SKILL = "force_title_jedi_rank_04";
     public static final String JEDI_MASTER_TITLE_SKILL = "force_title_jedi_master";
+    public player_force_rank()
+    {
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (utils.hasScriptVar(self, arena.VAR_I_AM_DUELING))
@@ -35,26 +36,31 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.gcw.player_force_rank");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         force_rank.getEnclaveObjId(self, force_rank.getCouncilAffiliation(self), "enclaveIdResponse");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         updateJediScriptData(self, "bountyTrackingData.forceRank", -1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         force_rank.requestExperienceDebt(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillRevoked(obj_id self, String skill) throws InterruptedException
     {
         if (utils.hasScriptVar(self, force_rank.SCRIPT_VAR_SKILL_RESYNC))
@@ -79,13 +85,14 @@ public class player_force_rank extends script.base_script
                 CustomerServiceLog("force_rank", "Demoting %TU to rank " + (skill_rank - 1) + " since skill " + skill + " was voluntarily surrendered.", self, null);
                 force_rank.demoteForceRank(self, skill_rank - 1);
             }
-            else 
+            else
             {
                 force_rank.removeFromForceRankSystem(self, true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSkillGranted(obj_id self, String skill) throws InterruptedException
     {
         LOG("force_rank", "player_force_rank::OnSkillGranted: -> Skill Granted: " + skill);
@@ -101,16 +108,19 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgResynchFRSData(obj_id self, dictionary params) throws InterruptedException
     {
         force_rank.validateFRSPlayerData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgMoveToCommonSpot(obj_id self, dictionary params) throws InterruptedException
     {
         force_rank.moveEnclavedPlayerToNeutralCell(self);
         return SCRIPT_CONTINUE;
     }
+
     public int PEFSynchResponse(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "player_force_rank::PEFSynchResponse: -> (" + utils.getRealPlayerFirstName(self) + ") Got PEF synch response.");
@@ -123,16 +133,18 @@ public class player_force_rank extends script.base_script
         {
             force_rank.makePlayerEnemyOfGroup(self, enemies);
             LOG("force_rank", "player_force_rank::PEFSynchResponse: -> (" + utils.getRealPlayerFirstName(self) + ") PEFd enemies from enclave.");
-            for (obj_id enemy : enemies) {
+            for (obj_id enemy : enemies)
+            {
                 LOG("force_rank", "player_force_rank::PEFSynchResponse: -> [" + enemy + "]");
             }
         }
-        else 
+        else
         {
             LOG("force_rank", "player_force_rank::PEFSynchResponse: -> (" + utils.getRealPlayerFirstName(self) + ") PEFd enemies received as NULL from enclave.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPvPActionStart(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id initiator = params.getObjId("initiator");
@@ -160,7 +172,7 @@ public class player_force_rank extends script.base_script
                 sendSystemMessageProse(self, pp);
             }
         }
-        else 
+        else
         {
             if (utils.getElementPositionInArray(actionTargets, self) > -1)
             {
@@ -168,7 +180,8 @@ public class player_force_rank extends script.base_script
             }
             string_id sid = null;
             obj_id target = actionTargets[0];
-            switch (pvpAction) {
+            switch (pvpAction)
+            {
                 case force_rank.ACTION_BANISHMENT:
                     sid = new string_id("pvp_rating", "banishment_start");
                     break;
@@ -187,6 +200,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPvPActionEnd(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id killer = null;
@@ -214,7 +228,7 @@ public class player_force_rank extends script.base_script
                 sendSystemMessageProse(self, pp);
             }
         }
-        else 
+        else
         {
             string_id id = null;
             obj_id target = null;
@@ -228,6 +242,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int XPDeathValidateResponse(obj_id self, dictionary params) throws InterruptedException
     {
         java.util.Enumeration pKeys = params.keys();
@@ -235,7 +250,7 @@ public class player_force_rank extends script.base_script
         int curDelta = 0;
         while (pKeys.hasMoreElements())
         {
-            player = (obj_id)pKeys.nextElement();
+            player = (obj_id) pKeys.nextElement();
             curDelta = params.getInt(player);
             if (curDelta > 0)
             {
@@ -245,6 +260,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceRankPromotePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "player_force_rank.msgForceRankPromotePlayer -- " + params);
@@ -269,6 +285,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceRankDemotePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.containsKey("success"))
@@ -305,6 +322,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSCHallengeViewScores(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("force_rank", "player_force_rank.msgFRSCHallengeViewScores");
@@ -312,6 +330,7 @@ public class player_force_rank extends script.base_script
         utils.removeScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChallengeViewChallenges(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
@@ -355,12 +374,14 @@ public class player_force_rank extends script.base_script
         utils.setScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL, self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChallengeDoneLooking(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, arena.SCRIPT_VAR_SUI_CH_PID);
         utils.removeScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChallengeConfirmAcceptChallenge(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
@@ -409,18 +430,19 @@ public class player_force_rank extends script.base_script
                 utils.setScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL, terminal);
                 utils.setScriptVar(self, arena.SCRIPT_VAR_CH_SELECT_ACCEPT, challengerIds);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id("pvp_rating", "ch_terminal_no_challenges_for_rank"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id("pvp_rating", "ch_terminal_no_challenges_for_rank"));
         }
         sendDirtyObjectMenuNotification(terminal);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChallengeConfirmAcceptChallengeFinal(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
@@ -475,6 +497,7 @@ public class player_force_rank extends script.base_script
         sendDirtyObjectMenuNotification(terminal);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChallengeConfirmIssueChallenge(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, arena.SCRIPT_VAR_CH_TERMINAL);
@@ -517,7 +540,7 @@ public class player_force_rank extends script.base_script
                     {
                         sendSystemMessageTestingOnly(self, "QA open slot Vote-Force override.");
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(self, new string_id("pvp_rating", "ch_terminal_no_need_challenge"));
                         return SCRIPT_CONTINUE;
@@ -531,12 +554,12 @@ public class player_force_rank extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, new string_id("pvp_rating", "ch_terminal_arena_closed"));
             }
         }
-        else 
+        else
         {
             prose_package rankBoundsPP = prose.getPackage(new string_id("pvp_rating", "ch_terminal_cant_challenge_rank_bounds"), rank);
             sendSystemMessageProse(self, rankBoundsPP);
@@ -544,6 +567,7 @@ public class player_force_rank extends script.base_script
         sendDirtyObjectMenuNotification(terminal);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerDeath(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, arena.VAR_I_AM_DUELING))
@@ -553,6 +577,7 @@ public class player_force_rank extends script.base_script
         arena.duelistDied(self, utils.getObjIdScriptVar(self, arena.VAR_I_AM_DUELING), force_rank.getEnclave(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVoteStatusSelect(obj_id self, dictionary params) throws InterruptedException
     {
         PROFILER_START("vote_select");
@@ -609,19 +634,19 @@ public class player_force_rank extends script.base_script
         {
             time_str = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(time_remaining));
         }
-        else 
+        else
         {
             time_str = "closed.";
         }
         Vector dsrc = new Vector();
         dsrc.setSize(0);
-        String[] status_names = 
-        {
-            "Petitioning",
-            "Voting",
-            "Acceptance",
-            "Inactive"
-        };
+        String[] status_names =
+                {
+                        "Petitioning",
+                        "Voting",
+                        "Acceptance",
+                        "Inactive"
+                };
         dsrc.add("Current Stage: " + status_names[status - 1]);
         PROFILER_START("vote_select.slots");
         int slots_available = force_rank.getAvailableRankSlots(enclave, row_selected + 1);
@@ -654,7 +679,7 @@ public class player_force_rank extends script.base_script
                     {
                         dsrc.add("   " + petitioners[i] + "    " + votes[i]);
                     }
-                    else 
+                    else
                     {
                         dsrc.add("   " + petitioners[i]);
                     }
@@ -673,7 +698,8 @@ public class player_force_rank extends script.base_script
                     CustomerServiceLog("force_rank", "WARNING: msgFRSVoteStatusSelect winners array too large, size = " + winners.length);
                 }
                 dsrc.add("Awaiting Acceptance:");
-                for (String winner : winners) {
+                for (String winner : winners)
+                {
                     dsrc.add("   " + winner);
                 }
             }
@@ -687,11 +713,13 @@ public class player_force_rank extends script.base_script
         PROFILER_STOP("vote_select");
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVoteStatusClosed(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPT_VAR_SUI_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVoteRecordSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_TERMINAL);
@@ -768,6 +796,7 @@ public class player_force_rank extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_VOTE_RANK, row_selected + 1);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVoteRecordPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_TERMINAL);
@@ -865,6 +894,7 @@ public class player_force_rank extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVotePromotionSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_TERMINAL);
@@ -932,7 +962,8 @@ public class player_force_rank extends script.base_script
             string_id body = new string_id(force_rank.STF_FILE, "vote_last_seat_taken_body");
             String rank_str = localize(new string_id(force_rank.STF_FILE, "rank" + (row_selected + 1)));
             prose_package pp = prose.getPackage(body, rank_str);
-            for (Object winner : winners) {
+            for (Object winner : winners)
+            {
                 utils.sendMail(sub, pp, ((String) winner), "Enclave Records");
             }
             sendSystemMessageProse(self, pp);
@@ -958,7 +989,7 @@ public class player_force_rank extends script.base_script
             {
                 force_rank.resetVotingTerminal(enclave, row_selected + 1);
             }
-            else 
+            else
             {
                 setObjVar(enclave, obj_var_name, winners);
                 if (slots - 1 < 1)
@@ -968,18 +999,20 @@ public class player_force_rank extends script.base_script
                     body = new string_id(force_rank.STF_FILE, "vote_last_seat_taken_body");
                     rank_str = localize(new string_id(force_rank.STF_FILE, "rank" + (row_selected + 1)));
                     pp = prose.getPackage(body, rank_str);
-                    for (Object winner : winners) {
+                    for (Object winner : winners)
+                    {
                         utils.sendMail(sub, pp, ((String) winner), "Enclave Records");
                     }
                 }
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "not_eligible_for_promotion"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVotePetitionSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_TERMINAL);
@@ -1059,12 +1092,13 @@ public class player_force_rank extends script.base_script
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "petitioning_complete"));
             CustomerServiceLog("force_rank", "%TU petitioned for promotion to rank " + row_selected, self, null);
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "petitioning_not_eligible"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSDemoteSelect(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPT_VAR_SUI_PID);
@@ -1130,6 +1164,7 @@ public class player_force_rank extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_RANK_LIST, rank_list);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSDemotePlayerSelected(obj_id self, dictionary params) throws InterruptedException
     {
         String[] rank_list = utils.getStringArrayScriptVar(self, SCRIPT_VAR_RANK_LIST);
@@ -1218,7 +1253,7 @@ public class player_force_rank extends script.base_script
         {
             setObjVar(self, force_rank.VAR_REQUEST_DEMOTE, getGameTime() + force_rank.getDemotionInterval() / 2);
         }
-        else 
+        else
         {
             setObjVar(self, force_rank.VAR_REQUEST_DEMOTE, getGameTime() + force_rank.getDemotionInterval());
         }
@@ -1232,18 +1267,20 @@ public class player_force_rank extends script.base_script
         utils.sendMail(sub, pp_mail, player_selected, "Enclave Records");
         return SCRIPT_CONTINUE;
     }
+
     public int msgForceRankRenamePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params.containsKey("success") && params.getBoolean("success") == true)
         {
             CustomerServiceLog("force_rank", "%TU has been successfully renamed in the Enclave data.", self, null);
         }
-        else 
+        else
         {
             CustomerServiceLog("force_rank", "Failed to rename %TU in the Enclave data.", self, null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChalVoteStatusSelect(obj_id self, dictionary params) throws InterruptedException
     {
         String[] names = utils.getStringArrayScriptVar(self, SCRIPT_VAR_NAMES);
@@ -1292,7 +1329,7 @@ public class player_force_rank extends script.base_script
         {
             time_str = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(time_remaining));
         }
-        else 
+        else
         {
             time_str = "closed.";
         }
@@ -1313,6 +1350,7 @@ public class player_force_rank extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_SUI_PID, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChalVoteRecordSelect(obj_id self, dictionary params) throws InterruptedException
     {
         String[] names = utils.getStringArrayScriptVar(self, SCRIPT_VAR_NAMES);
@@ -1358,17 +1396,18 @@ public class player_force_rank extends script.base_script
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "already_voted"));
             return SCRIPT_CONTINUE;
         }
-        String[] dsrc = 
-        {
-            "@force_rank:vote_for",
-            "@force_rank:vote_against"
-        };
+        String[] dsrc =
+                {
+                        "@force_rank:vote_for",
+                        "@force_rank:vote_against"
+                };
         int pid = sui.listbox(self, self, "Do you vote for or against the removal of " + challenge_selected + "?", sui.OK_CANCEL, "@force_rank:challenge_vote_record_vote_title", dsrc, "msgFRSChalVoteRecordVote");
         utils.setScriptVar(self, SCRIPT_VAR_SUI_PID, pid);
         utils.setScriptVar(self, SCRIPT_VAR_CHAL_TERMINAL, terminal);
         utils.setScriptVar(self, SCRIPT_VAR_CHALLENGE_SELECTED, challenge_selected);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChalVoteRecordVote(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_CHAL_TERMINAL);
@@ -1434,6 +1473,7 @@ public class player_force_rank extends script.base_script
         sendSystemMessage(self, new string_id(force_rank.STF_FILE, "challenge_vote_success"));
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSVoteChalSelectRank(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_CHAL_TERMINAL);
@@ -1472,6 +1512,7 @@ public class player_force_rank extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_RANK_LIST, rank_list);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFRSChalSelectConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = utils.getObjIdScriptVar(self, SCRIPT_VAR_CHAL_TERMINAL);
@@ -1565,11 +1606,11 @@ public class player_force_rank extends script.base_script
         setObjVar(terminal, objvar_name + ".status", 1);
         setObjVar(terminal, objvar_name + ".time", getGameTime() + force_rank.getVoteInterval());
         setObjVar(terminal, objvar_name + ".rank", challenge_rank);
-        int[] votes = 
-        {
-            0,
-            0
-        };
+        int[] votes =
+                {
+                        0,
+                        0
+                };
         setObjVar(terminal, objvar_name + ".votes", votes);
         setObjVar(self, force_rank.VAR_VOTE_CHALLENGE, getGameTime() + force_rank.VOTE_CHALLENGE_DURATION);
         prose_package pp = prose.getPackage(new string_id(force_rank.STF_FILE, "vote_challenge_initiated"), challenge);
@@ -1580,6 +1621,7 @@ public class player_force_rank extends script.base_script
         force_rank.sendChallengeVoterMail(enclave, challenge_rank, sub, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleForceRank(obj_id self, dictionary params) throws InterruptedException
     {
         int row_selected = sui.getListboxSelectedRow(params) + 1;
@@ -1593,10 +1635,11 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayersInForceRankSelected(obj_id self, dictionary params) throws InterruptedException
     {
         int row_selected = utils.getIntScriptVar(self, "row_selected");
-        String force_rank_list[] = params.getStringArray("rank_list");
+        String[] force_rank_list = params.getStringArray("rank_list");
         String rank_str = localize(new string_id(force_rank.STF_FILE, "rank" + row_selected));
         if (utils.hasScriptVar(self, "force_rank.ShowCouncilRank2"))
         {
@@ -1612,6 +1655,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int enclaveIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("enclave"))
@@ -1628,6 +1672,7 @@ public class player_force_rank extends script.base_script
         force_rank.requestPEFs(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgApplyExperienceDebt(obj_id self, dictionary params) throws InterruptedException
     {
         int xp_debt = params.getInt("xp_debt");
@@ -1637,6 +1682,7 @@ public class player_force_rank extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgValidateFRSPlayerData(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -1667,13 +1713,14 @@ public class player_force_rank extends script.base_script
         {
             pvpSetAlignedFaction(self, force_rank.getFactionId("Rebel"));
         }
-        else 
+        else
         {
             pvpSetAlignedFaction(self, force_rank.getFactionId("Imperial"));
         }
         pvpMakeDeclared(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdShowCouncilRank(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

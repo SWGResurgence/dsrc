@@ -12,11 +12,13 @@ public class theater_spawnegg extends script.base_script
     public theater_spawnegg()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginSpawning", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id[] spawnList = getObjIdArrayObjVar(self, "spawnList");
@@ -24,13 +26,16 @@ public class theater_spawnegg extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id aSpawnList : spawnList) {
-            if (isIdValid(aSpawnList)) {
+        for (obj_id aSpawnList : spawnList)
+        {
+            if (isIdValid(aSpawnList))
+            {
                 destroyObject(aSpawnList);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int beginSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         String strNumToSpawn = getStringObjVar(self, "pop");
@@ -72,7 +77,7 @@ public class theater_spawnegg extends script.base_script
         {
             objVarName = "none";
         }
-        else 
+        else
         {
             if (objVarValue == null)
             {
@@ -109,7 +114,7 @@ public class theater_spawnegg extends script.base_script
                     float floatObjVarValue = utils.stringToFloat(objVarValue);
                     setObjVar(npc, objVarName, floatObjVarValue);
                 }
-                else 
+                else
                 {
                     setObjVar(npc, objVarName, objVarValue);
                 }
@@ -135,6 +140,7 @@ public class theater_spawnegg extends script.base_script
         setObjVar(self, "spawnList", spawnList);
         return SCRIPT_CONTINUE;
     }
+
     public location pickLoc(obj_id self, int x) throws InterruptedException
     {
         location here = getLocation(self);
@@ -173,7 +179,7 @@ public class theater_spawnegg extends script.base_script
         {
             return four;
         }
-        else 
+        else
         {
             return other;
         }

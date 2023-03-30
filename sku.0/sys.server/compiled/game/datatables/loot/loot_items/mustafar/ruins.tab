@@ -1,5 +1,6 @@
 strItemType
 s
-item_mustafar_fg_module_interface
-item_mustafar_fg_slave_collar
-item_mustafar_fg_circuit_board
+object/tangible/loot/mustafar/cube_loot/cube_loot_1d.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1m.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1v.iff
+

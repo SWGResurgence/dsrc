@@ -11,6 +11,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
     public mission_deliver_npc()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -19,6 +20,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -27,13 +29,10 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
-        boolean boolDebug = false;
-        if (hasObjVar(speaker, "verboseDebug"))
-        {
-            boolDebug = true;
-        }
+        boolean boolDebug = hasObjVar(speaker, "verboseDebug");
         location here = getLocation(self);
         obj_id[] missionList = getMissionObjects(speaker);
         obj_id missionInfo = null;
@@ -76,7 +75,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                     sendSystemMessageTestingOnly(speaker, "State is dropoff, using end location of value " + missionLoc);
                 }
             }
-            else 
+            else
             {
                 if (boolDebug)
                 {
@@ -206,14 +205,14 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                     sendCraftingSuccess(missionInfo);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("mission/mission_generic", "wrong_item");
                     chat.chat(self, speaker, strSpam);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 string_id message = new string_id("mission/mission_generic", "crafting_already_dropped_off");
                 chat.chat(self, speaker, message);
@@ -246,7 +245,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 {
                     setObjVar(missionInfo, "intMissionComplete", 1);
                 }
-                else 
+                else
                 {
                     setupSpawn(missionInfo, locDropoffLocation);
                 }
@@ -281,7 +280,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 updateMissionWaypoint(missionInfo, locDropoffLocation);
             }
         }
-        else 
+        else
         {
             string_id message = new string_id("mission/mission_generic", "deliver_already_dropped_off");
             chat.chat(self, speaker, message);

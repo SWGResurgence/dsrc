@@ -9,24 +9,29 @@ public class mission_hunting extends script.systems.missions.base.mission_dynami
     public mission_hunting()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendHuntingIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setupInvisibleWaypoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public int huntingIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -35,6 +40,7 @@ public class mission_hunting extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int huntingFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -47,6 +53,7 @@ public class mission_hunting extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int huntingSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intMissionCompleted"))
@@ -59,6 +66,7 @@ public class mission_hunting extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);

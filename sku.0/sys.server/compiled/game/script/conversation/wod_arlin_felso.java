@@ -15,16 +15,18 @@ package script.conversation;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
-import script.library.utils;
 import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class wod_arlin_felso extends script.base_script
 {
-	public wod_arlin_felso()
-	{
-	}
+	public wod_arlin_felso()
+
+	{
+
+	}
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -240,7 +242,7 @@ int wod_arlin_felso_handleBranch7 (obj_id player, obj_id npc, string_id response
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -309,7 +311,7 @@ int wod_arlin_felso_handleBranch9 (obj_id player, obj_id npc, string_id response
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -357,7 +359,7 @@ int wod_arlin_felso_handleBranch10 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -438,7 +440,7 @@ int wod_arlin_felso_handleBranch13 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -637,7 +639,7 @@ int wod_arlin_felso_handleBranch14 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -718,7 +720,7 @@ int wod_arlin_felso_handleBranch15 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -929,7 +931,7 @@ int wod_arlin_felso_handleBranch16 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1140,7 +1142,7 @@ int wod_arlin_felso_handleBranch17 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1351,7 +1353,7 @@ int wod_arlin_felso_handleBranch18 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1467,7 +1469,7 @@ int wod_arlin_felso_handleBranch19 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1583,7 +1585,7 @@ int wod_arlin_felso_handleBranch20 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1652,7 +1654,7 @@ int wod_arlin_felso_handleBranch21 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1739,7 +1741,7 @@ int wod_arlin_felso_handleBranch22 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1867,7 +1869,7 @@ int wod_arlin_felso_handleBranch23 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1995,7 +1997,7 @@ int wod_arlin_felso_handleBranch24 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -2043,7 +2045,7 @@ int wod_arlin_felso_handleBranch25 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -2242,7 +2244,7 @@ int wod_arlin_felso_handleBranch29 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -2441,7 +2443,7 @@ int wod_arlin_felso_handleBranch30 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

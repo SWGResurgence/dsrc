@@ -9,21 +9,25 @@ public class prop_token extends script.base_script
     public prop_token()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerEffectTokenDailyAlarm(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -37,10 +41,12 @@ public class prop_token extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("storyteller", "deploy_prop"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGroundTargetLoc(obj_id self, obj_id player, int menuItem, float x, float y, float z) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -51,11 +57,6 @@ public class prop_token extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         float yaw = getYaw(player);
@@ -71,6 +72,7 @@ public class prop_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

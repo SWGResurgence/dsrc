@@ -7,16 +7,18 @@ import script.obj_var_list;
 
 public class factory_crate extends script.item.container.remove_only
 {
-    public factory_crate()
-    {
-    }
     public static final String SCRIPT_FACTORY_CRATE = "item.container.factory_crate";
     public static final String VAR_TO_ATTACH = "to_attach";
     public static final String VAR_ITEMS_LEFT = "items_left";
+    public factory_crate()
+    {
+    }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int handleFactoryCrate(obj_id self, dictionary params) throws InterruptedException
     {
         obj_var_list ovl = getObjVarList(self, VAR_TO_ATTACH);

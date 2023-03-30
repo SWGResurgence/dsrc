@@ -11,21 +11,25 @@ public class npc_token extends script.base_script
     public npc_token()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerEffectTokenDailyAlarm(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -48,13 +52,14 @@ public class npc_token extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE_OTHER, new string_id("storyteller", "set_npc_level"));
         }
-        else 
+        else
         {
             mi.addSubMenu(menuPlacement, menu_info_types.SERVER_MENU1, new string_id("storyteller", placeMultiMenuLabel));
             mi.addRootMenu(menu_info_types.ITEM_USE_OTHER, new string_id("storyteller", "set_npc_level"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -67,11 +72,6 @@ public class npc_token extends script.base_script
             sendSystemMessage(player, new string_id("storyteller", "placement_not_while_swimming"));
             return SCRIPT_CONTINUE;
         }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
-            return SCRIPT_CONTINUE;
-        }
         if (item == menu_info_types.ITEM_USE_OTHER)
         {
             String prompt = utils.packStringId(new string_id("storyteller", "npc_combat_level_prompt"));
@@ -79,6 +79,7 @@ public class npc_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGroundTargetLoc(obj_id self, obj_id player, int menuItem, float x, float y, float z) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -89,11 +90,6 @@ public class npc_token extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         float yaw = getYaw(player);
@@ -109,7 +105,7 @@ public class npc_token extends script.base_script
             {
                 sendSystemMessage(player, new string_id("storyteller", "failed_to_create_npc"));
             }
-            else 
+            else
             {
                 storyteller.handleTokenUsage(self);
             }
@@ -179,7 +175,7 @@ public class npc_token extends script.base_script
                     sendSystemMessage(player, new string_id("storyteller", "failed_to_create_npc"));
                     break;
                 }
-                else 
+                else
                 {
                     storyteller.handleTokenUsage(self);
                     numSpawned++;
@@ -192,6 +188,7 @@ public class npc_token extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerNpcLevelSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -201,13 +198,14 @@ public class npc_token extends script.base_script
         {
             sendSystemMessage(player, new string_id("storyteller", "npc_combat_level_invalid"));
         }
-        else 
+        else
         {
             sendDirtyObjectMenuNotification(self);
             setObjVar(self, "storytellerNpcCombatLevel", level);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

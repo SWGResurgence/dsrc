@@ -9,6 +9,7 @@ public class holopet_data_cube_gift extends script.base_script
     public holopet_data_cube_gift()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -19,6 +20,7 @@ public class holopet_data_cube_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id containingPlayer = utils.getContainingPlayer(self);
@@ -38,6 +40,7 @@ public class holopet_data_cube_gift extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void openMe(obj_id self, obj_id player) throws InterruptedException
     {
         int roll = rand(1, 100);
@@ -78,7 +81,7 @@ public class holopet_data_cube_gift extends script.base_script
         {
             item_name = "item_holopet_veermok_data_cube_01_01";
         }
-        else 
+        else
         {
             item_name = "item_holopet_slicehound_data_cube_01_01";
         }

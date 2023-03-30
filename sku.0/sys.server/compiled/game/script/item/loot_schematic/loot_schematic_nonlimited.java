@@ -8,9 +8,6 @@ import script.*;
 
 public class loot_schematic_nonlimited extends script.base_script
 {
-    public loot_schematic_nonlimited()
-    {
-    }
     public static final String VAR_SCHEMATIC = "loot_schematic.schematic";
     public static final String VAR_SKILL = "loot_schematic.skill";
     public static final String VAR_SKILL_REQ = "loot_schematic.skill_req";
@@ -24,6 +21,10 @@ public class loot_schematic_nonlimited extends script.base_script
     public static final string_id SID_SKILL = new string_id("loot_schematic", "skill");
     public static final string_id SID_ABILITY = new string_id("loot_schematic", "ability");
     public static final string_id SID_WAYPOINT = new string_id("loot_schematic", "waypoint");
+    public loot_schematic_nonlimited()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_SCHEMATIC) && !static_item.isStaticItem(self))
@@ -43,6 +44,7 @@ public class loot_schematic_nonlimited extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -55,14 +57,14 @@ public class loot_schematic_nonlimited extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        String[] type_str = 
-        {
-            localize(SID_SCHEMATIC),
-            localize(SID_SKILL),
-            localize(SID_ABILITY),
-            localize(SID_WAYPOINT),
-            localize(SID_ABILITY)
-        };
+        String[] type_str =
+                {
+                        localize(SID_SCHEMATIC),
+                        localize(SID_SKILL),
+                        localize(SID_ABILITY),
+                        localize(SID_WAYPOINT),
+                        localize(SID_ABILITY)
+                };
         names[idx] = "knowlege_type";
         attribs[idx] = type_str[type - 1];
         idx++;
@@ -76,6 +78,7 @@ public class loot_schematic_nonlimited extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, township.OBJECT_FOR_SALE_ON_VENDOR))
@@ -91,6 +94,7 @@ public class loot_schematic_nonlimited extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -114,6 +118,21 @@ public class loot_schematic_nonlimited extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
+            if (isGod(player))
+            {
+                String schematic = getStringObjVar(self, VAR_SCHEMATIC);
+                if (hasSchematic(player, schematic))
+                {
+                    sendSystemMessage(player, SID_ALREADY_HAVE_SCHEMATIC);
+                    return SCRIPT_CONTINUE;
+                }
+                else
+                {
+                    grantSchematic(player, schematic);
+                    sendSystemMessage(player, SID_SCHEMATIC_GRANTED);
+                    return SCRIPT_CONTINUE;
+                }
+            }
             if (hasObjVar(self, VAR_SKILL_REQ))
             {
                 String skill_req = getStringObjVar(self, VAR_SKILL_REQ);
@@ -137,6 +156,7 @@ public class loot_schematic_nonlimited extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getLootItemType(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -147,7 +167,7 @@ public class loot_schematic_nonlimited extends script.base_script
         {
             return getIntObjVar(item, VAR_TYPE);
         }
-        else 
+        else
         {
             return 1;
         }

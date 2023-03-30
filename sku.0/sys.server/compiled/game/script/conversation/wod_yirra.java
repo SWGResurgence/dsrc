@@ -19,9 +19,12 @@ import script.*;
 
 public class wod_yirra extends script.base_script
 {
-	public wod_yirra()
-	{
-	}
+	public wod_yirra()
+
+	{
+
+	}
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -278,7 +281,7 @@ int wod_yirra_handleBranch2 (obj_id player, obj_id npc, string_id response) thro
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -335,7 +338,7 @@ int wod_yirra_handleBranch3 (obj_id player, obj_id npc, string_id response) thro
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -367,7 +370,7 @@ int wod_yirra_handleBranch4 (obj_id player, obj_id npc, string_id response) thro
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -454,7 +457,7 @@ int wod_yirra_handleBranch7 (obj_id player, obj_id npc, string_id response) thro
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -484,7 +487,7 @@ int wod_yirra_handleBranch9 (obj_id player, obj_id npc, string_id response) thro
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -512,7 +515,7 @@ int wod_yirra_handleBranch12 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -545,7 +548,7 @@ int wod_yirra_handleBranch14 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -593,7 +596,7 @@ int wod_yirra_handleBranch16 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -650,7 +653,7 @@ int wod_yirra_handleBranch19 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -707,7 +710,7 @@ int wod_yirra_handleBranch20 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -764,7 +767,7 @@ int wod_yirra_handleBranch21 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -799,7 +802,7 @@ int wod_yirra_handleBranch22 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -856,7 +859,7 @@ int wod_yirra_handleBranch24 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -913,7 +916,7 @@ int wod_yirra_handleBranch25 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -970,7 +973,7 @@ int wod_yirra_handleBranch26 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1005,7 +1008,7 @@ int wod_yirra_handleBranch27 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1062,7 +1065,7 @@ int wod_yirra_handleBranch29 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1119,7 +1122,7 @@ int wod_yirra_handleBranch30 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1176,7 +1179,7 @@ int wod_yirra_handleBranch31 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1211,7 +1214,7 @@ int wod_yirra_handleBranch32 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

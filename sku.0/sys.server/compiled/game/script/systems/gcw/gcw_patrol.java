@@ -5,50 +5,52 @@ import script.library.*;
 
 public class gcw_patrol extends script.base_script
 {
-    public gcw_patrol()
-    {
-    }
     public static final string_id SID_THERE_IS_NO_GUARD = new string_id("gcw", "there_is_no_guard_to_entertain");
     public static final string_id SID_PATROL_ALREADY_ENTERTAINED = new string_id("gcw", "patrol_point_already_entertained");
     public static final int ENTERTAINMENT_TIMER = 300;
-    public static final String[] lowImperials = 
+    public static final String[] lowImperials =
+            {
+                    "gcw_city_imperial_1"
+            };
+    public static final String[] normalImperials =
+            {
+                    "gcw_city_imperial_black",
+                    "gcw_city_imperial_2",
+                    "gcw_city_imperial_sandtrooper"
+            };
+    public static final String[] eliteImperials =
+            {
+                    "gcw_city_imperial_3",
+                    "gcw_city_imperial_black_sgt",
+                    "gcw_city_imperial_black_darkt",
+                    "gcw_city_imperial_sandtrooper_sgt"
+            };
+    public static final String[] lowRebels =
+            {
+                    "gcw_city_rebel_grunt_assault",
+                    "gcw_city_rebel_grunt_defense"
+            };
+    public static final String[] normalRebels =
+            {
+                    "gcw_city_rebel_commando_assault",
+                    "gcw_city_rebel_commando_defense"
+            };
+    public static final String[] eliteRebels =
+            {
+                    "gcw_city_rebel_specforce_assault",
+                    "gcw_city_rebel_specforce_defense"
+            };
+    public gcw_patrol()
     {
-        "gcw_city_imperial_1"
-    };
-    public static final String[] normalImperials = 
-    {
-        "gcw_city_imperial_black",
-        "gcw_city_imperial_2",
-        "gcw_city_imperial_sandtrooper"
-    };
-    public static final String[] eliteImperials = 
-    {
-        "gcw_city_imperial_3",
-        "gcw_city_imperial_black_sgt",
-        "gcw_city_imperial_black_darkt",
-        "gcw_city_imperial_sandtrooper_sgt"
-    };
-    public static final String[] lowRebels = 
-    {
-        "gcw_city_rebel_grunt_assault",
-        "gcw_city_rebel_grunt_defense"
-    };
-    public static final String[] normalRebels = 
-    {
-        "gcw_city_rebel_commando_assault",
-        "gcw_city_rebel_commando_defense"
-    };
-    public static final String[] eliteRebels = 
-    {
-        "gcw_city_rebel_specforce_assault",
-        "gcw_city_rebel_specforce_defense"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, gcw.GCW_DEF_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_spawner_tool.iff");
         setObjVar(self, gcw.GCW_OFF_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_patrol_tool.iff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleGCWPatrol", null, rand(5, 10), false);
@@ -61,7 +63,7 @@ public class gcw_patrol extends script.base_script
         messageTo(self, "playQuestIcon", params, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
-    
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -87,13 +89,14 @@ public class gcw_patrol extends script.base_script
         {
             attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
-        else 
+        else
         {
             attribs[idx] = "Never Repaired";
         }
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "faction"))
@@ -116,7 +119,7 @@ public class gcw_patrol extends script.base_script
                 data.setServerNotify(true);
             }
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.ENTERTAINER))
             {
@@ -148,6 +151,7 @@ public class gcw_patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_patrol_point", "OnObjectMenuSelect");
@@ -203,7 +207,7 @@ public class gcw_patrol extends script.base_script
             LOG("gcw_patrol_point", "could not find a valid quest!!!");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             LOG("gcw_patrol_point", "OnObjectMenuSelect - player is my faction");
             if (utils.isProfession(player, utils.ENTERTAINER))
@@ -310,6 +314,7 @@ public class gcw_patrol extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getConstructionQuestsCompleted(obj_id pylon) throws InterruptedException
     {
         int completed = 0;
@@ -323,6 +328,7 @@ public class gcw_patrol extends script.base_script
         }
         return completed;
     }
+
     public int handleGCWPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         int faction = -1;
@@ -388,7 +394,7 @@ public class gcw_patrol extends script.base_script
                 npc = trial.createSchedulerNPC(kit, self, npcName);
                 utils.setScriptVar(kit, "currentPatrol", npc);
             }
-            else 
+            else
             {
                 npc = currentPatrol;
             }
@@ -411,6 +417,7 @@ public class gcw_patrol extends script.base_script
         messageTo(self, "handleGCWPatrol", null, 60.0f + rand(0, 30), false);
         return SCRIPT_CONTINUE;
     }
+
     public int getSchedulerNPCs(obj_id kit, String npcID) throws InterruptedException
     {
         if (!isIdValid(kit) || !exists(kit))
@@ -429,11 +436,13 @@ public class gcw_patrol extends script.base_script
         }
         return npcs.length;
     }
+
     public int destroyGCWPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOffensiveEntertainedNpcCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -468,6 +477,7 @@ public class gcw_patrol extends script.base_script
         trial.cleanupObject(npc);
         return SCRIPT_CONTINUE;
     }
+
     public int flagGCWPatrolEntertained(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id kit = utils.getObjIdScriptVar(self, "creator");
@@ -493,27 +503,32 @@ public class gcw_patrol extends script.base_script
         messageTo(self, "removeGCWPatrolEntertained", null, ENTERTAINMENT_TIMER, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeGCWPatrolEntertained(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "entertained");
         utils.removeScriptVar(self, "entertainment_locked");
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         gcw.playQuestIconHandler(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDestroyPatrol(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDestroyPatrol(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDestroyPatrol(obj_id self, obj_id killer) throws InterruptedException
     {
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 0);

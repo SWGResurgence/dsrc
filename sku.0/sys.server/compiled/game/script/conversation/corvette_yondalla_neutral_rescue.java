@@ -314,7 +314,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -451,7 +451,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -476,7 +476,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -737,7 +737,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -909,7 +909,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1170,7 +1170,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1431,7 +1431,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1692,7 +1692,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1953,7 +1953,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2216,7 +2216,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2309,7 +2309,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2572,7 +2572,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2835,7 +2835,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3098,7 +3098,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_yondalla_neutral_rescue_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3361,7 +3361,7 @@ public class corvette_yondalla_neutral_rescue extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -125,7 +125,7 @@ som_battlefield_commander		of_del_ae_dm_1	10	100		of_dm_7	4	100
 som_battlefield_gk_5		co_ae_dm_3	10	100		me_dm_8	4	100																																																		
 som_working_devistator		devastating_strike	6	100																																																						
 heroic_axkva_axkva_min		axkva_force_storm	10	100		axkva_contagion	13	100		axkva_crystalize	20	100																																														
-heroic_axkva_lelli_hi		lelli_ambush	12	100		lelli_chain_cleave	6	100																																																		
+heroic_axkva_lelli_hi		lelli_ambush	12	100		lelli_chain_cleave	6	100		sp_decoy	20	75
 heroic_axkva_kimaru		kimaru_generate_storm	3	100	once	kimaru_generate_storm	20	100		kimaru_flame_patch	5	100		fs_ae_dm_cc_6	1	100	once	fs_ae_dm_cc_6	30	100																																						
 heroic_axkva_suin_chalo		suin_rampage	2	100		suin_healing_debuff	8	100																																																		
 heroic_axkva_nandina		nandina_heal	10	100		nandina_fester	9	100																																																		
@@ -373,8 +373,11 @@ tusken_iso_s_warrior_melee		of_vortex_5	3	100		sp_hd_melee_6	6	100		sm_ae_dm_mel
 tusken_iso_s_warrior_ranged		bh_dm_crit_8	3	100		bh_dm_8	6	100		sp_dot_5	9	100		bh_sniper_6	20	100																																										
 wod_mutant_rancor_boss	WoD - Mutant Rancor Boss	bm_dampen_pain_5	2	100	once	bm_stomp_5	4	100		bm_shaken_3	6	100	once	bm_shaken_3	9	100		death_troopers_death_wing_afflict	12	100																																						
 ep3_rryatt_katarn	Rryatt Trail - Katarn Boss	bm_dampen_pain_4	2	100	once	bm_stomp_4	4	100		bm_shaken_2	6	100	once	bm_shaken_2	9	100		me_hot_2	15	100																																						
-world_boss_peko	Naboo World Boss	bm_bolster_armor_5	2	100	once	trample_random	3	100		bm_siphon_master	6	100		bm_dampen_pain_5	2	100	once	bm_stomp_5	9	100		bm_shaken_3	6	100	once	bm_shaken_3	18	100																														
-world_boss_krayt	Tatooine World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once																					
+world_boss_peko	Naboo Creature World Boss	bm_bolster_armor_5	2	100	once	trample_random	3	100		bm_siphon_master	6	100		bm_dampen_pain_5	2	100	once	bm_stomp_5	9	100		bm_shaken_3	6	100	once	bm_shaken_3	18	100
+world_boss_krayt	Tatooine Creature World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once
+world_boss_paxvizla	Dxun NPC World Boss	ig88_droideka_shield	6	50		bh_dm_2	9	75		bh_dread_strike_2	3	75		bh_dm_crit_1	2	50		me_bacta_grenade_1	6	100
+world_boss_darth_gizmo	Endor NPC World Boss	fs_sh_2	1	10		fs_saber_reflect	10	50		fs_buff_3	10	75		fs_dm_3	25	100		fs_maelstrom_2	15	5		axkva_forcestorm	10	100	once
+clan_vizla_mandalorian	Clan Vizla Mandalorian	bh_dm_2	9	100		bh_dm_crit_2	2	100		me_hot_1	20	100																																														
 dxun_boma	Boma																																																									
 dxun_cannok	Cannok																																																									
 dxun_devourer	Devourer																																																									
@@ -385,4 +388,4 @@ dxun_skreev	Skreev
 dxun_varlax	Varlax																																																									
 dxun_wodnakki	Wodnakki																																																									
 dxun_zakkeg	Zakkeg																																																									
-czerka_hk80_assault_droid	Czerka Assault Droid	bh_dm_8	9	100		bh_dm_crit_8	3	100		bh_dm_cc_3	3	100		bh_dread_strike_5	3	100		ig88_droideka_shield	6	100																																						
+czerka_hk80_assault_droid	Czerka Assault Droid	bh_dm_8	8	100		bh_dm_crit_8	2	100		bh_dm_cc_3	2	100		bh_dread_strike_5	2	100		ig88_droideka_shield	5	100																																						

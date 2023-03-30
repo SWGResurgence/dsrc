@@ -9,6 +9,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
     public crafting_chemistry_component_attribute()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -19,7 +20,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "power"))
         {
             names[idx] = "power";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "power");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "power");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -30,7 +31,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "charges"))
         {
             names[idx] = "charges";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "charges");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "charges");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -41,7 +42,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "range"))
         {
             names[idx] = "range";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "range");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "range");
             String attrib_str = Integer.toString(attrib);
             attribs[idx] = attrib_str;
             idx++;
@@ -53,7 +54,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "area"))
         {
             names[idx] = "area";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "area");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "area");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -64,7 +65,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "skillModMin"))
         {
             names[idx] = "skillmodmin";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "skillModMin");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "skillModMin");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -75,7 +76,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "potency"))
         {
             names[idx] = "potency";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "potency");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "potency");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -86,7 +87,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "duration"))
         {
             names[idx] = "duration";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "duration");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "duration");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -97,7 +98,7 @@ public class crafting_chemistry_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "hitPoints"))
         {
             names[idx] = "hitpoints";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "hitPoints");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "hitPoints");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

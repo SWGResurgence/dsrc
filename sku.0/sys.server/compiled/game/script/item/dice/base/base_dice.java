@@ -6,9 +6,6 @@ import script.library.prose;
 
 public class base_dice extends script.base_script
 {
-    public base_dice()
-    {
-    }
     public static final String VAR_ROLL_RESULT = "roll_result_value";
     public static final String VAR_FACE_COUNT = "dice_face_count";
     public static final String DICE_TYPE_NAME = "dice_type_name";
@@ -22,17 +19,23 @@ public class base_dice extends script.base_script
     public static final String STF = "dice/dice";
     public static final string_id RED = new string_id(STF, "red");
     public static final string_id BLUE = new string_id(STF, "blue");
+    public base_dice()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########base_dice script attached##############");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########base_dice script initialized##############");
         setObjVar(self, VAR_VALUE_INITIALIZED, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String dice_type_name = getStringObjVar(self, DICE_TYPE_NAME);
@@ -57,7 +60,7 @@ public class base_dice extends script.base_script
             mi.addSubMenu(menu, menu_info_types.DICE_THREE_FACE, new string_id("dice/dice", "dice_three_single"));
             mi.addSubMenu(menu, menu_info_types.DICE_TWO_FACE, new string_id("dice/dice", "dice_two_single"));
         }
-        else 
+        else
         {
             int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("dice/dice", "dice_roll_single"));
             mi.addSubMenu(menu, menu_info_types.DICE_COUNT_FOUR, new string_id("dice/dice", "dice_roll_four_single"));
@@ -67,6 +70,7 @@ public class base_dice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########OnObjectMenuSelect()#########");
@@ -88,7 +92,7 @@ public class base_dice extends script.base_script
                 {
                     color = "blue";
                 }
-                else 
+                else
                 {
                     color = "red";
                 }
@@ -176,20 +180,24 @@ public class base_dice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void informGroupOfResults(int[] rollValues, obj_id player, obj_id die, String color) throws InterruptedException
     {
         obj_id groupId = getGroupObject(player);
         obj_id[] groupMembers = getGroupMemberIds(groupId);
         if (groupMembers != null)
         {
-            for (obj_id groupMember : groupMembers) {
-                if (groupMember != player && groupMember.isLoaded()) {
+            for (obj_id groupMember : groupMembers)
+            {
+                if (groupMember != player && groupMember.isLoaded())
+                {
                     displayResults(player, groupMember, die, rollValues, color);
                 }
             }
         }
         displayResults(player, player, die, rollValues, color);
     }
+
     public void displayResults(obj_id player, obj_id target, obj_id die, int[] rollValues, String color) throws InterruptedException
     {
         if (color != null)
@@ -199,7 +207,7 @@ public class base_dice extends script.base_script
             {
                 pp = prose.getPackage(new string_id(STF, "chance_cube_result_self"), new string_id(STF, color));
             }
-            else 
+            else
             {
                 pp = prose.getPackage(new string_id(STF, "chance_cube_result_other"), player, new string_id(STF, color));
             }
@@ -218,7 +226,7 @@ public class base_dice extends script.base_script
             {
                 pp = prose.getPackage(new string_id(STF, "configurable_dice_result_self"), value, faceCount);
             }
-            else 
+            else
             {
                 pp = prose.getPackage(new string_id(STF, "configurable_dice_result_other"), null, null, null, player, null, null, null, value, null, faceCount, 0.0f);
             }
@@ -228,7 +236,7 @@ public class base_dice extends script.base_script
             return;
         }
         int dieCount = getIntObjVar(die, VAR_DICE_COUNT);
-        String rollStr = new String();
+        String rollStr = "";
         for (int i = 0; i < rollValues.length && rollValues != null; ++i)
         {
             rollStr += " " + rollValues[i];
@@ -241,24 +249,25 @@ public class base_dice extends script.base_script
             {
                 pp = prose.getPackage(new string_id(STF, "roll_one_self"), null, null, null, null, null, sidNumSides, null, rollStr, null, dieCount, 0.0f);
             }
-            else 
+            else
             {
                 pp = prose.getPackage(new string_id(STF, "roll_one_other"), player, null, null, null, null, sidNumSides, null, rollStr, null, dieCount, 0.0f);
             }
         }
-        else 
+        else
         {
             if (target == player)
             {
                 pp = prose.getPackage(new string_id(STF, "roll_many_self"), null, null, null, null, null, sidNumSides, null, rollStr, null, dieCount, 0.0f);
             }
-            else 
+            else
             {
                 pp = prose.getPackage(new string_id(STF, "roll_many_other"), player, null, null, null, null, sidNumSides, null, rollStr, null, dieCount, 0.0f);
             }
         }
         sendSystemMessageProse(target, pp);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########base_dice script detached##############");

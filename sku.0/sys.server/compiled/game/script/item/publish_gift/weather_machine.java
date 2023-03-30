@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class weather_machine extends script.base_script
 {
-    public weather_machine()
-    {
-    }
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
     public static final string_id SID_TURN_ON = new string_id("spam", "weather_machine_on");
     public static final string_id SID_TURN_OFF = new string_id("spam", "weather_machine_off");
@@ -20,6 +17,10 @@ public class weather_machine extends script.base_script
     public static final String OBJVAR_WEATHER_PARTICLE_02 = "particle_2";
     public static final String OBJVAR_WEATHER_PARTICLE_03 = "particle_3";
     public static final String CS_TCG_5_RAIN_MACHINE_CATEGORY = "tcg_set5_rain_machine";
+    public weather_machine()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "weather_machine_on"))
@@ -29,6 +30,7 @@ public class weather_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id weatherMachine = self;
@@ -52,7 +54,7 @@ public class weather_machine extends script.base_script
             {
                 int stormOnOff = mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_OFF);
             }
-            else 
+            else
             {
                 int stormOnOff = mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_ON);
             }
@@ -64,6 +66,7 @@ public class weather_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id weatherMachine = self;
@@ -116,6 +119,7 @@ public class weather_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "weather_machine_on"))
@@ -136,11 +140,13 @@ public class weather_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUpScriptsAndSuch(obj_id self, dictionary params) throws InterruptedException
     {
         cleanUpScriptsAndSuch(self);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpScriptsAndSuch(obj_id weatherMachine) throws InterruptedException
     {
         if (hasObjVar(weatherMachine, "weatherParticleId"))
@@ -155,7 +161,7 @@ public class weather_machine extends script.base_script
                     removeObjVar(weatherMachine, "weatherParticleId");
                 }
             }
-            else 
+            else
             {
                 removeObjVar(weatherMachine, "weatherParticleId");
             }
@@ -169,6 +175,7 @@ public class weather_machine extends script.base_script
             removeObjVar(weatherMachine, "unmoveable");
         }
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "weather_machine_on"))
@@ -188,6 +195,7 @@ public class weather_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkRefreshParticle(obj_id weatherMachine) throws InterruptedException
     {
         if (hasObjVar(weatherMachine, "weather_machine_on"))
@@ -198,6 +206,7 @@ public class weather_machine extends script.base_script
             playWeatherParticle(weatherMachine);
         }
     }
+
     public void stopWeatherParticle(obj_id weatherMachine) throws InterruptedException
     {
         if (hasObjVar(weatherMachine, "weatherParticleId"))
@@ -211,6 +220,7 @@ public class weather_machine extends script.base_script
             }
         }
     }
+
     public void playWeatherParticle(obj_id weatherMachine) throws InterruptedException
     {
         if (!isIdValid(weatherMachine))
@@ -263,6 +273,7 @@ public class weather_machine extends script.base_script
             CustomerServiceLog(CS_TCG_5_RAIN_MACHINE_CATEGORY, "Play Weather Particle: Creating new rain particle(" + weatherParticle + "," + getTemplateName(weatherParticle) + ")...rainMachine = (" + weatherMachine + "," + getTemplateName(weatherMachine) + ")");
         }
     }
+
     public void removeStormObjVar(obj_id weatherMachine) throws InterruptedException
     {
         if (hasObjVar(weatherMachine, "weatherMachine.storm1"))

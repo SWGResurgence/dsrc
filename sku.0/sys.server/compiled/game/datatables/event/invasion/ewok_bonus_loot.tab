@@ -1,8 +1,5 @@
 LOOT	MIN_ROLL
 s	i
-object/tangible/food/spice/spice_kwi_boost.iff	20
-object/tangible/food/spice/spice_kliknik_boost.iff	40
-object/tangible/food/spice/spice_crash_n_burn.iff	60
 object/tangible/loot/quest/bantha_doll.iff	80
 object/tangible/loot/collectible/collectible_parts/orange_rug_adhesive.iff	85
 object/tangible/loot/collectible/collectible_parts/orange_rug_dye.iff	86

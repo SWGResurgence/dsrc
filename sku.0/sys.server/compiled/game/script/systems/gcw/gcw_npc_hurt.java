@@ -11,11 +11,13 @@ public class gcw_npc_hurt extends script.base_script
     public gcw_npc_hurt()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetup", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetup(obj_id self, dictionary params) throws InterruptedException
     {
         gcw.playQuestIconParticle(self);
@@ -25,6 +27,7 @@ public class gcw_npc_hurt extends script.base_script
         messageTo(self, "removeBarkingScripts", null, 4.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removeBarkingScripts(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasScript(self, "ai.soldier"))
@@ -37,6 +40,7 @@ public class gcw_npc_hurt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -50,6 +54,7 @@ public class gcw_npc_hurt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         LOG("gcw_npc_hurt", "OnObjectMenuRequest");
@@ -63,7 +68,7 @@ public class gcw_npc_hurt extends script.base_script
             LOG("gcw_npc_hurt", "faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!utils.isProfession(player, utils.MEDIC))
             {
@@ -86,6 +91,7 @@ public class gcw_npc_hurt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_npc_hurt", "OnObjectMenuSelect");
@@ -109,7 +115,7 @@ public class gcw_npc_hurt extends script.base_script
             LOG("gcw_npc_hurt", "faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!utils.isProfession(player, utils.MEDIC))
             {
@@ -141,6 +147,7 @@ public class gcw_npc_hurt extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

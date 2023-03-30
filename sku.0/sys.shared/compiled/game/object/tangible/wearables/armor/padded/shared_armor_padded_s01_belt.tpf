@@ -9,4 +9,4 @@
 objectName = "wearables_name" "armor_padded_s01_belt"
 detailedDescription = "wearables_detail" "armor_padded_s01_belt"
 appearanceFilename = "appearance/armor_padded_s01_belt_f.sat"
-
+gameObjectType = GOT_armor_misc

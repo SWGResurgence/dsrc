@@ -13,11 +13,12 @@ import java.util.Vector;
 
 public class barracks extends script.base_script
 {
+    public static final string_id SID_BUILD_REINFORCEMENT = new string_id("battlefield", "build_reinforcement");
+    public static final string_id SID_BUILD_REINFORCEMENT_STATUS = new string_id("battlefield", "build_reinforcement_status");
     public barracks()
     {
     }
-    public static final string_id SID_BUILD_REINFORCEMENT = new string_id("battlefield", "build_reinforcement");
-    public static final string_id SID_BUILD_REINFORCEMENT_STATUS = new string_id("battlefield", "build_reinforcement_status");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (battlefield.isSameBattlefieldFaction(player, self))
@@ -30,6 +31,7 @@ public class barracks extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU2)
@@ -63,7 +65,7 @@ public class barracks extends script.base_script
                     dsrc = utils.addElement(dsrc, "Time until next reinforcement: " + time_str);
                 }
             }
-            else 
+            else
             {
                 dsrc = utils.addElement(dsrc, "Ready to issue more reinforcements.");
             }

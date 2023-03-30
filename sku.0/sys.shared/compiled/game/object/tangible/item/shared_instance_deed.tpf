@@ -1,0 +1,9 @@
+@base object/tangible/deed/base/shared_deed_base.iff
+
+@class tangible_object_template 6
+@class object_template 5
+
+objectName = "" ""
+detailedDescription = "" ""
+
+appearanceFilename = "appearance/item_tcg_datapad_s02.apt"

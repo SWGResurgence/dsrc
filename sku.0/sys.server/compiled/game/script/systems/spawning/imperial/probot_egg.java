@@ -9,13 +9,14 @@ import script.obj_id;
 
 public class probot_egg extends script.base_script
 {
-    public probot_egg()
-    {
-    }
     public static final float VOL_SPAWN_RANGE = 80.0f;
     public static final String VOL_SPAWN = "volSpawnProbot";
     public static final float VOL_EFFECT_RANGE = 100.0f;
     public static final String VOL_EFFECT = "volEffect";
+    public probot_egg()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOL_EFFECT, VOL_EFFECT_RANGE, true);
@@ -23,6 +24,7 @@ public class probot_egg extends script.base_script
         setAttributeInterested(self, attrib.ALL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (who == self)
@@ -55,6 +57,7 @@ public class probot_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnProbot(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "spawnedDebris"))
@@ -71,13 +74,14 @@ public class probot_egg extends script.base_script
         }
         obj_id probot = create.object("imperial_probot_drone", getLocation(self));
         if (isIdValid(probot))
-		{
-			attachScript(probot, "ai.override_behavior.scout");
-			messageTo(probot, "handleTargetAssignment", params, 1.0f, false);
-		}
+        {
+            attachScript(probot, "ai.override_behavior.scout");
+            messageTo(probot, "handleTargetAssignment", params, 1.0f, false);
+        }
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnDebris(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "spawnedDebris", true);

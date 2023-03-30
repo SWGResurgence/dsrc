@@ -21,18 +21,18 @@ public class space_crafting extends script.base_script
     public static final String STF_COMPONENT_TOOL = "reverse_engineering_tool";
     public static final String SCRIPT_COMPONENT_NAME_HANDLER = "space.crafting.component_name_handler";
     public static final int DAMAGE_CHANCE = 5;
-    public static final int[] NON_COMPONENT_DAMAGEABLES_LIGHT = 
-    {
-        PLASMA_CONDUIT
-    };
-    public static final int[] NON_COMPONENT_DAMAGEABLES_MEDIUM = 
-    {
-        PLASMA_CONDUIT
-    };
-    public static final int[] NON_COMPONENT_DAMAGEABLES_HEAVY = 
-    {
-        PLASMA_CONDUIT
-    };
+    public static final int[] NON_COMPONENT_DAMAGEABLES_LIGHT =
+            {
+                    PLASMA_CONDUIT
+            };
+    public static final int[] NON_COMPONENT_DAMAGEABLES_MEDIUM =
+            {
+                    PLASMA_CONDUIT
+            };
+    public static final int[] NON_COMPONENT_DAMAGEABLES_HEAVY =
+            {
+                    PLASMA_CONDUIT
+            };
     public static final int REACTOR = ship_chassis_slot_type.SCST_reactor;
     public static final int ENGINE = ship_chassis_slot_type.SCST_engine;
     public static final int SHIELD_GENERATOR = ship_chassis_slot_type.SCST_shield_0;
@@ -82,13 +82,26 @@ public class space_crafting extends script.base_script
             v2 = 2.0 * rand() - 1.0;
             r = v1 * v1 + v2 * v2;
         } while (r >= 1.0 || r == 0.0);
+
         double fac = Math.sqrt(-2.0 * StrictMath.log(r) / r);
-        double value = (avg + (v1 * fac) * (avg * var));
+
+        double deviations = (v1 * fac);
+
+        if (deviations < -3.99)
+        {
+            deviations = -3.99;
+        }
+        else if (deviations > 3.99)
+        {
+            deviations = 3.99;
+        }
+
+        double value = (avg + deviations * (avg * var));
         if (value < 0)
         {
             return 0;
         }
-        else 
+        else
         {
             return value;
         }
@@ -182,7 +195,7 @@ public class space_crafting extends script.base_script
             }
             return dctParams.getInt("reverseEngineeringLevel");
         }
-        else 
+        else
         {
             LOG("space", "MEGA FUCKUP WITH " + objComponent + " template is " + objComponent);
         }
@@ -195,27 +208,27 @@ public class space_crafting extends script.base_script
             switch (reverseEngineeringLevel)
             {
                 case 0:
-                return 0.4f;
+                    return 0.4f;
                 case 1:
-                return 0.3f;
+                    return 0.3f;
                 case 2:
-                return 0.38f;
+                    return 0.38f;
                 case 3:
-                return 0.3f;
+                    return 0.3f;
                 case 4:
-                return 0.36f;
+                    return 0.36f;
                 case 5:
-                return 0.3f;
+                    return 0.3f;
                 case 6:
-                return 0.36f;
+                    return 0.36f;
                 case 7:
-                return 0.3f;
+                    return 0.3f;
                 case 8:
-                return 0.36f;
+                    return 0.36f;
                 case 9:
-                return 0.3f;
+                    return 0.3f;
                 case 10:
-                return 0.35f;
+                    return 0.35f;
             }
         }
         return weaponFireRate;
@@ -226,27 +239,27 @@ public class space_crafting extends script.base_script
             switch (reverseEngineeringLevel)
             {
                 case 0:
-                return 0.4f;
+                    return 0.4f;
                 case 1:
-                return 0.3f;
+                    return 0.3f;
                 case 2:
-                return 0.38f;
+                    return 0.38f;
                 case 3:
-                return 0.3f;
+                    return 0.3f;
                 case 4:
-                return 0.36f;
+                    return 0.36f;
                 case 5:
-                return 0.3f;
+                    return 0.3f;
                 case 6:
-                return 0.36f;
+                    return 0.36f;
                 case 7:
-                return 0.3f;
+                    return 0.3f;
                 case 8:
-                return 0.36f;
+                    return 0.36f;
                 case 9:
-                return 0.3f;
+                    return 0.3f;
                 case 10:
-                return 0.35f;
+                    return 0.35f;
             }
         }
         return weaponFireRate;
@@ -416,7 +429,7 @@ public class space_crafting extends script.base_script
             }
             return objComponent;
         }
-        else 
+        else
         {
             return objComponent;
         }
@@ -816,7 +829,7 @@ public class space_crafting extends script.base_script
         {
             strComponent = "plasma_conduit";
         }
-        else 
+        else
         {
             int intType = ship_chassis_slot_type.getComponentTypeForSlot(intSlot);
             strComponent = getShipComponentStringType(intType);
@@ -862,7 +875,7 @@ public class space_crafting extends script.base_script
                 sendSystemMessage(objPlayer, strSpam);
                 return false;
             }
-            else 
+            else
             {
                 float fltDifference = fltMaximumHitpoints - fltCurrentHitpoints;
                 float fltRemainingRepairPoints = getCount(objRepairKit);
@@ -880,7 +893,7 @@ public class space_crafting extends script.base_script
                         repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
                         return true;
                     }
-                    else 
+                    else
                     {
                         strSpam = new string_id("space/space_interaction", "damage_left_chassis");
                         int intDifference = (int)fltDifference - (int)fltRemainingRepairPoints;
@@ -889,7 +902,7 @@ public class space_crafting extends script.base_script
                         return true;
                     }
                 }
-                else 
+                else
                 {
                     fltCurrentHitpoints = fltCurrentHitpoints + fltDifference;
                     setShipCurrentChassisHitPoints(objShip, fltCurrentHitpoints);
@@ -931,7 +944,7 @@ public class space_crafting extends script.base_script
                 repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
                 return true;
             }
-            else 
+            else
             {
                 strSpam = new string_id("space/space_interaction", "damage_left_component");
                 int intDifference = (int)fltDifference - (int)fltRemainingRepairPoints;
@@ -969,7 +982,7 @@ public class space_crafting extends script.base_script
                 repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
                 return true;
             }
-            else 
+            else
             {
                 strSpam = new string_id("space/space_interaction", "damage_left_component_armor");
                 int intDifference = (int)fltDifference - (int)fltRemainingRepairPoints;
@@ -1073,6 +1086,8 @@ public class space_crafting extends script.base_script
     public static obj_id getDroidContainer(obj_id objShip) {
         return getObjectInSlot(objShip, SHIP_DROID_SLOT_NAME);
     }
+
+
     public static obj_id[] getDatapadDroidCommands(obj_id objControlDevice) throws InterruptedException
     {
         obj_id objDatapad = utils.getDatapad(objControlDevice);
@@ -1086,18 +1101,26 @@ public class space_crafting extends script.base_script
         objCommands.setSize(0);
         for (obj_id objContent : objContents) {
             if (hasObjVar(objContent, "strDroidCommand")) {
-                objCommands = utils.addElement(objCommands, objContent);
+                objCommands.add(objContent);
             }
         }
         if (objCommands.size() > 0)
         {
-            return new obj_id[objCommands.size()];
+            obj_id[] commands = new obj_id[objCommands.size()];
+
+            for (int i = 0; i < objCommands.size(); i++)
+            {
+                commands[i] = (obj_id) objCommands.get(i);
+            }
+
+            return commands;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getDroidCommandLevelFromDatapad(obj_id objControlDevice) throws InterruptedException
     {
         obj_id objDatapad = utils.getDatapad(objControlDevice);
@@ -1124,24 +1147,24 @@ public class space_crafting extends script.base_script
         {
             return false;
         }
-        String[] strDroidTypes = 
-        {
-            "r2",
-            "r2_crafted",
-            "r2d2",
-            "r3",
-            "r3_crafted",
-            "r4",
-            "r4_crafted",
-            "r5",
-            "r5_crafted",
-            "navicomputer_1",
-            "navicomputer_2",
-            "navicomputer_3",
-            "navicomputer_4",
-            "navicomputer_5",
-            "navicomputer_6"
-        };
+        String[] strDroidTypes =
+                {
+                        "r2",
+                        "r2_crafted",
+                        "r2d2",
+                        "r3",
+                        "r3_crafted",
+                        "r4",
+                        "r4_crafted",
+                        "r5",
+                        "r5_crafted",
+                        "navicomputer_1",
+                        "navicomputer_2",
+                        "navicomputer_3",
+                        "navicomputer_4",
+                        "navicomputer_5",
+                        "navicomputer_6"
+                };
         String strName = getStringObjVar(objControlDevice, "pet.creatureName");
         if (strName != null)
         {
@@ -1150,7 +1173,7 @@ public class space_crafting extends script.base_script
 
             return intIndex > -1;
         }
-        else 
+        else
         {
             if (hasObjVar(objControlDevice, "item.objectName"))
             {
@@ -1159,7 +1182,7 @@ public class space_crafting extends script.base_script
                 LOG("space", "intIndex: " + intIndex + " strName: " + strName);
                 return intIndex > -1;
             }
-            else 
+            else
             {
                 LOG("space", "NULL!");
             }
@@ -1168,15 +1191,15 @@ public class space_crafting extends script.base_script
     }
     public static boolean isFlightComputerController(obj_id controlDevice) throws InterruptedException
     {
-        String[] computerTypes = 
-        {
-            "navicomputer_1",
-            "navicomputer_2",
-            "navicomputer_3",
-            "navicomputer_4",
-            "navicomputer_5",
-            "navicomputer_6"
-        };
+        String[] computerTypes =
+                {
+                        "navicomputer_1",
+                        "navicomputer_2",
+                        "navicomputer_3",
+                        "navicomputer_4",
+                        "navicomputer_5",
+                        "navicomputer_6"
+                };
         if (hasObjVar(controlDevice, "item.objectName"))
         {
             String name = getStringObjVar(controlDevice, "item.objectName");
@@ -1505,7 +1528,7 @@ public class space_crafting extends script.base_script
             CustomerServiceLog("space_repair", "Taking " + intTotalCost + " from %TU for repairs", getOwner(objShip));
             repairDamage(objPlayer, objShip, fltPercentage);
         }
-        else 
+        else
         {
             LOG("space", "NOFUNDS");
         }
@@ -1598,7 +1621,7 @@ public class space_crafting extends script.base_script
             intDamage = intDamage + HULL_BREACH_DAMAGE;
             setObjVar(objShip, "intHullBreached", intDamage);
         }
-        else 
+        else
         {
             setObjVar(objShip, "intHullBreached", HULL_BREACH_DAMAGE);
             messageTo(objShip, "doHullBreach", null, HULL_BREACH_DAMAGE_TIMER, false);
@@ -1633,7 +1656,7 @@ public class space_crafting extends script.base_script
         {
             setObjVar(objShip, "locBrokenComponents", locBrokenComponents);
         }
-        else 
+        else
         {
             removeObjVar(objShip, "locBrokenComponents");
         }
@@ -1644,7 +1667,7 @@ public class space_crafting extends script.base_script
             removeObjVar(objShip, "intHullBreached");
             turnOffInteriorAlarms(objShip);
         }
-        else 
+        else
         {
             setObjVar(objShip, "intHullBreached", intHullBreached);
         }
@@ -1749,7 +1772,7 @@ public class space_crafting extends script.base_script
         {
             setObjVar(objShip, "locBrokenComponents", locBrokenComponents);
         }
-        else 
+        else
         {
             turnOffInteriorAlarms(objShip);
             removeObjVar(objShip, "intAlarmsOn");
@@ -1812,7 +1835,7 @@ public class space_crafting extends script.base_script
         {
             space_crafting.applyCountermeasuresToLauncher(objShip, objItem, intSlot, objPlayer, boolVerbose);
         }
-        else 
+        else
         {
             sendSystemMessage(objPlayer, SID_INCORRECTLY_CONFIGURED_ITEM);
         }
@@ -1928,7 +1951,7 @@ public class space_crafting extends script.base_script
                 utils.setScriptVar(player, "chassis_npc.deed", shipDeeds);
             }
         }
-        else 
+        else
         {
             string_id msgNoDeeds = new string_id(BROKER_STF, "no_deeds");
             chat.publicChat(broker, player, msgNoDeeds);
@@ -1978,32 +2001,32 @@ public class space_crafting extends script.base_script
     }
     public static int getComponentSellPrice(obj_id objComponent) throws InterruptedException
     {
-        final String[] strLootLevels = 
-        {
-            "cert_ordnance_level1",
-            "cert_ordnance_level2",
-            "cert_ordnance_level3",
-            "cert_ordnance_level4",
-            "cert_ordnance_level5",
-            "cert_ordnance_level6",
-            "cert_ordnance_level7",
-            "cert_ordnance_level8",
-            "cert_ordnance_level9",
-            "cert_ordnance_levelten"
-        };
-        final int[] intValue = 
-        {
-            1000,
-            2000,
-            3000,
-            4000,
-            5000,
-            6000,
-            7000,
-            8000,
-            9000,
-            10000
-        };
+        final String[] strLootLevels =
+                {
+                        "cert_ordnance_level1",
+                        "cert_ordnance_level2",
+                        "cert_ordnance_level3",
+                        "cert_ordnance_level4",
+                        "cert_ordnance_level5",
+                        "cert_ordnance_level6",
+                        "cert_ordnance_level7",
+                        "cert_ordnance_level8",
+                        "cert_ordnance_level9",
+                        "cert_ordnance_levelten"
+                };
+        final int[] intValue =
+                {
+                        1000,
+                        2000,
+                        3000,
+                        4000,
+                        5000,
+                        6000,
+                        7000,
+                        8000,
+                        9000,
+                        10000
+                };
         String[] strCerts = getRequiredCertifications(objComponent);
         if ((strCerts != null) && (strCerts.length > 0))
         {
@@ -2014,7 +2037,7 @@ public class space_crafting extends script.base_script
             }
             return intValue[intIndex];
         }
-        else 
+        else
         {
             return 500;
         }
@@ -2057,7 +2080,7 @@ public class space_crafting extends script.base_script
                 utils.setScriptVar(objPlayer, "objLootToSell", objLoot);
             }
         }
-        else 
+        else
         {
             strSpam = new string_id("space/space_loot", "nothing_to_sell");
             sendSystemMessage(objPlayer, strSpam);
@@ -2072,7 +2095,7 @@ public class space_crafting extends script.base_script
             setObjVar(newDeed, "ship_chassis.type", type);
             return newDeed;
         }
-        else 
+        else
         {
             return null;
         }
@@ -2106,7 +2129,7 @@ public class space_crafting extends script.base_script
             setShipSlideDampener(objShip, dctShipInfo.getFloat("slideDamp"));
             setShipChassisSpeedMaximumModifier(objShip, dctShipInfo.getFloat("fltMaxSpeedModifier"));
         }
-        else 
+        else
         {
             LOG("space", "NO ROTATIONAL RESET");
             return false;
@@ -2153,7 +2176,7 @@ public class space_crafting extends script.base_script
             {
                 return null;
             }
-            else 
+            else
             {
                 obj_id ship = createObject("object/ship/player/player_" + type + ".iff", pcd, "");
                 if (!hasCertificationsForItem(player, ship))
@@ -2236,7 +2259,7 @@ public class space_crafting extends script.base_script
                     string_id successMessage = new string_id(STF, "succeed");
                     sendSystemMessage(player, successMessage);
                 }
-                else 
+                else
                 {
                     string_id message3 = new string_id(STF, "failed");
                     sendSystemMessage(player, message3);

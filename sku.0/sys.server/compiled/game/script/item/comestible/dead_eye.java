@@ -6,12 +6,13 @@ import script.*;
 
 public class dead_eye extends script.base_script
 {
-    public dead_eye()
-    {
-    }
     public static final string_id SID_DEAD_EYE_ACTIVE = new string_id("combat_effects", "dead_eye_active");
     public static final string_id SID_DEAD_EYE_ALREADY = new string_id("combat_effects", "dead_eye_already");
     public static final string_id SID_DEAD_EYE_WAIT = new string_id("combat_effects", "dead_eye_wait");
+    public dead_eye()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -26,6 +27,7 @@ public class dead_eye extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,6 +36,7 @@ public class dead_eye extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void applyDeadEye(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "dead_eye.active"))
@@ -49,11 +52,11 @@ public class dead_eye extends script.base_script
         int count = getCount(self);
         count--;
         setCount(self, count);
-        int[] vol = 
-        {
-            20,
-            0
-        };
+        int[] vol =
+                {
+                        20,
+                        0
+                };
         boolean wasConsumed = player_stomach.addToStomach(player, player, vol);
         utils.setScriptVar(player, "dead_eye.active", getGameTime());
         utils.setScriptVar(player, "dead_eye.eff", getIntObjVar(self, "deadeye_eff"));
@@ -64,6 +67,7 @@ public class dead_eye extends script.base_script
             destroyObject(self);
         }
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -84,7 +88,7 @@ public class dead_eye extends script.base_script
         if (hasObjVar(self, "deadeye_dur"))
         {
             names[idx] = "duration";
-            attribs[idx] = utils.formatTime((int)getFloatObjVar(self, "deadeye_dur"));
+            attribs[idx] = utils.formatTime((int) getFloatObjVar(self, "deadeye_dur"));
             idx++;
             if (idx >= names.length)
             {

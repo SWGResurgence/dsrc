@@ -8,28 +8,32 @@ public class spawn_template extends script.systems.spawning.spawn_base
     public spawn_template()
     {
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int template_Cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "intCleaningUp", 1);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "intPersistent"))
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setObjVar(self, "intUnloaded", 1);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id objMasterSpawner;
@@ -75,6 +79,7 @@ public class spawn_template extends script.systems.spawning.spawn_base
         debugServerConsoleMsg(self, "Message Sent");
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkIfInCombat(obj_id objLair) throws InterruptedException
     {
         int intNumberOfMobiles = getIntObjVar(objLair, "npc_lair.numberOfMobiles");
