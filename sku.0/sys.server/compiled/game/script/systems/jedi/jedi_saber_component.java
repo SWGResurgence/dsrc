@@ -243,7 +243,7 @@ public class jedi_saber_component extends script.base_script
         setObjVar(self, jedi.VAR_CRYSTAL_OWNER_NAME, getName(player));
         dictionary crystalData = static_item.getMasterItemDictionary(self);
         String name = crystalData.getString("string_name");
-        name = colors_hex.HEADER + colors_hex.AQUAMARINE + "" + name + " (tuned)" + colors_hex.FOOTER;
+        name += colors_hex.HEADER + colors_hex.AQUAMARINE + " (tuned)" + colors_hex.FOOTER;
         setName(self, name);
         sendSystemMessage(player, new string_id("jedi_spam", "crystal_tune_success"));
         sendDirtyObjectMenuNotification(self);
