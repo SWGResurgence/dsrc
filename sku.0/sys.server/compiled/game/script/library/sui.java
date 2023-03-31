@@ -25,6 +25,7 @@ public class sui extends script.base_script
     public static final String BTN_CANCEL = "btnCancel";
     public static final String PROP_NAME = "Name";
     public static final String PROP_TEXT = "Text";
+    public static final String PROP_FONT = "Font";
     public static final String PROP_LOCALTEXT = "LocalText";
     public static final String PROP_SELECTEDROW = "SelectedRow";
     public static final String PROP_SELECTEDTEXT = "SelectedText";
@@ -1194,9 +1195,13 @@ public class sui extends script.base_script
     {
         return utils.stringToInt(params.getString(LISTBOX_LIST + "." + PROP_SELECTEDROW));
     }
+    public static String getListboxSelectedRowText(dictionary params) throws InterruptedException
+    {
+        return params.getString(LISTBOX_LIST + "." + PROP_SELECTEDTEXT);
+    }
     public static String getListboxTitle(dictionary params) throws InterruptedException
     {
-        return params.getString(LISTBOX_TITLE + "." + PROP_TEXT);
+        return params.getString(LISTBOX_LIST + "." + PROP_TEXT);
     }
     public static void listboxButtonSetup(int pid, int buttons) throws InterruptedException
     {

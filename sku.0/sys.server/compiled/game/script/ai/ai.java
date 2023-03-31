@@ -792,6 +792,12 @@ public class ai extends script.base_script
                 "Feel the vibes.",
                 "Ok, if you say so.."
         };
+        String[] EMOTE_WORSHIP_HUMANOID_RESPONSES = {
+                "That's right. I am superior.",
+                "Have you donated to my righteous cause yet?",
+                "You have been blessed, my child.",
+                "Uuh, what are you doing?"
+        };
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
         {
             return SCRIPT_CONTINUE;
@@ -824,7 +830,7 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("slap") || emote.startsWith("backhand"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 chat.chat(self, getRandomArray(EMOTE_SLAP_HUMANOID_RESPONSES));
                 if (enableSlapDamage)
@@ -851,7 +857,7 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("bmoc"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 chat.chat(self, getRandomArray(EMOTE_BMOC_HUMANOID_RESPONSES));
                 startCombat(self, performer);
@@ -865,7 +871,7 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("dance"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 setAnimationMood(self, "themepark_oola");
                 ai_lib.setDefaultCalmMood(self, "themepark_oola");
@@ -875,6 +881,32 @@ public class ai extends script.base_script
             else
             {
                 chat.chat(self, "<This creature cannot dance with you.>");
+            }
+            return SCRIPT_CONTINUE;
+
+        }
+        else if (emote.startsWith("worship"))
+        {
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
+            {
+                chat.chat(self, getRandomArray(EMOTE_DANCE_HUMANOID_RESPONSES));
+                int luckChance = rand(0, 99);
+                if (luckChance >= 50)
+                {
+                    float time = 60.0f * 60.0f;
+                    float value = rand(50, 65);
+                    // note, the previous value is equal to 60 minutes with a random pool of 50-65 value
+                    buff.applyBuff(self, "lckConsumable40", time, value);
+                    broadcast(performer, "You have been blessed by " + getEncodedName(self) + "!");
+                }
+                else
+                {
+                    broadcast(performer, "Based on your deity, this creature has no interest in you.");
+                }
+            }
+            else
+            {
+                chat.chat(self, "<This creature is not worth prophetizing.>");
             }
             return SCRIPT_CONTINUE;
 
