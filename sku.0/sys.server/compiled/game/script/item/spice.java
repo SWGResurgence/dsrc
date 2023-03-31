@@ -106,6 +106,7 @@ public class spice extends script.base_script
         {
             comedere(self, player);
         }
+        destroyObject(self);
         return SCRIPT_CONTINUE;
     }
 
