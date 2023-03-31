@@ -105,8 +105,8 @@ public class spice extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             comedere(self, player);
+            destroyObject(self);
         }
-        destroyObject(self);
         return SCRIPT_CONTINUE;
     }
 
