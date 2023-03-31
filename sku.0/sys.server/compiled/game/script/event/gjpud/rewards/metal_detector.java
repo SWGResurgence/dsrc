@@ -8,6 +8,8 @@ import script.*;
 import script.library.city;
 import script.library.loot;
 
+import static script.library.locations.getGoodLocationAroundLocationAvoidCollidables;
+
 public class metal_detector extends script.base_script
 {
     public String GJPUD_LOOT_DRUM = "object/tangible/container/drum/treasure_drum.iff";
@@ -23,19 +25,19 @@ public class metal_detector extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             getScanResult(self, player);
-            spawnChest(self, player);
-            //alertPlayer
         }
         return SCRIPT_CONTINUE;
     }
     public int OnAttach(obj_id self)
     {
-        setObjVar(self, "gjpud.toolRange", 50);
+        setName(self, "Master Abubb's Metal Detector");
+        setDescriptionString(self, "This is a metal detector. It can be used to detect metal caches on planets. It is a one time use item.");
         return SCRIPT_CONTINUE;
     }
 
     public int OnInitialize(obj_id self)
     {
+        setName(self, "Master Abubb's Metal Detector");
         return SCRIPT_CONTINUE;
     }
     public int getPlanetBonus(obj_id self, obj_id player)
@@ -68,19 +70,20 @@ public class metal_detector extends script.base_script
 
         }
     }
-    public int getScanResult(obj_id self, obj_id player)
+    public int getScanResult(obj_id self, obj_id player) throws InterruptedException
     {
-        int range = getIntObjVar(self, "gjpud.toolRange");
         int bonus = getPlanetBonus(self, player);
-        if (range == 0)
+        if (bonus == 0)
         {
-            broadcast(player, "This detector has not been properly configured.");
+            broadcast(player, "This planet does not have any caches to detect.");
         }
         location chestLoc = new location();
         chestLoc.x = chestLoc.x + (rand(50, 100 * bonus));
         chestLoc.y = getHeightAtLocation(chestLoc.x, chestLoc.y);
         chestLoc.z = chestLoc.z + (rand(50, 100 * bonus));
-        setObjVar(self, "gjpud.cacheLocation", chestLoc);
+        location finalLoc = getGoodLocationAroundLocationAvoidCollidables(chestLoc, 250f, 250f, 250f, 250f, false, true, 10f);
+        setObjVar(self, "gjpud.cacheLocation", finalLoc);
+        spawnChest(self, player);
         return SCRIPT_CONTINUE;
     }
     public int spawnChest(obj_id self, obj_id player) throws InterruptedException
@@ -108,6 +111,15 @@ public class metal_detector extends script.base_script
                 removeObjVar(self, "noTrade");
             }
         }
+        alertPlayer(player, treasureLoc);
         return SCRIPT_CONTINUE;
+    }
+
+    private void alertPlayer(obj_id player, location treasureLoc)
+    {
+        String planet = getCurrentSceneName();
+        String loc = treasureLoc.toReadableFormat(false);
+        String msg = "You have detected a cache of items at " + loc + ".";
+        broadcast(player, msg);
     }
 }

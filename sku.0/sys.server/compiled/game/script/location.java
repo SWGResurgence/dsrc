@@ -150,7 +150,7 @@ public final class location implements Comparable, Serializable
     /**
      * Conversion function.
      *
-     * @return the location as a readable unformated  string.
+     * @return the location as a linebreaked string for a message box prompt..
      */
 
     public String toLineBreakFormat()
@@ -161,12 +161,35 @@ public final class location implements Comparable, Serializable
     /**
      * Conversion function.
      *
-     * @return the location as a readable unformated  string.
+     * @return the location as a string for a waypoint command.
+     * @overload toClipboardFormat(String name)
      */
 
     public String toClipboardFormat()
     {
         return "/wp " + area + " " + x + " " +  z + " " +  y + " " + "orange " + "Waypoint";
+    }
+    public String toClipboardFormat(String name)
+    {
+        return "/wp " + area + " " + x + " " + z + " " + y + " " + "orange " + name;
+    }
+
+    /**
+     * Conversion function.
+     *
+     * @return the location as a string for general readability.
+     */
+
+    public String toReadableFormat(boolean includePlanet)
+    {
+        if (includePlanet)
+        {
+            return x + ", " + y + ", " + z + " " + area;
+        }
+        else
+        {
+            return x + ", " + y + ", " + z;
+        }
     }
 
 	/**

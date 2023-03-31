@@ -13,6 +13,8 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
+import java.util.Arrays;
+
 public class resurgence extends script.base_script
 {
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
@@ -198,11 +200,11 @@ public class resurgence extends script.base_script
         int bank = getBankBalance(target);
         if (cash > 0)
         {
-            withdrawCashFromBank(target, cash, "bankruptPlayer", null, null);
+            withdrawCashFromBank(target, cash, "noHandler", null, null);
         }
         if (bank > 0)
         {
-            withdrawCashFromBank(target, bank, "bankruptPlayer", null, null);
+            withdrawCashFromBank(target, bank, "noHandler", null, null);
         }
         debugServerConsoleMsg(self, "bankruptPlayer() - player is now bankrupt.");
     }
@@ -297,6 +299,102 @@ public class resurgence extends script.base_script
                 debugServerConsoleMsg(self, "removeAllItemsOfTemplate() - item " + template + " removed.");
             }
         }
+    }
+
+    public int broadcastGroup(obj_id player, String message)
+    {
+        obj_id group = getGroupObject(player);
+        if (isIdValid(group))
+        {
+            obj_id[] members = getGroupMemberIds(group);
+            for (obj_id member : members)
+            {
+                if (isIdValid(member))
+                {
+                    broadcast(member, message);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int placePlayersAroundPoint(location point)
+    {
+        obj_id[] targets = getAllPlayers(point, 100.0f);
+        for (obj_id player : targets)
+        {
+            // Make sure the player is valid
+            if (isIdValid(player))
+            {
+                if (isPlayer(player))
+                {
+                    //place them in a ring facing the point.
+                    float angle = rand(0, 360);
+                    float distance = rand(1, 10);
+                    float x = point.x + (float) Math.cos(angle) * distance;
+                    float z = point.z + (float) Math.sin(angle) * distance;
+                    warpPlayer(player, point.area, x, point.y, z, null, 0, 0, 0);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int placePlayersInGridFormation(location x1)
+    {
+        obj_id[] targets = getAllPlayers(x1, 100.0f);
+        for (obj_id player : targets)
+        {
+            // Make sure the player is valid
+            if (isIdValid(player))
+            {
+                if (isPlayer(player))
+                {
+                    //make a 10 x 10 grid and plot each player in a random spot in the grid.
+                    float x = rand(x1.x - 5, x1.x + 5);
+                    float z = rand(x1.z - 5, x1.z + 5);
+                    warpPlayer(player, x1.area, x, x1.y, z, null, 0, 0, 0);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int listCreaturesAlphabetically(obj_id who, float radius, location where) throws InterruptedException
+    {
+        obj_id[] targets = getCreaturesInRange(where, radius);
+        String[] names = new String[targets.length];
+        for (int i = 0; i < targets.length; i++)
+        {
+            names[i] = getName(targets[i]);
+        }
+        Arrays.sort(names);
+        sui.listbox(who, who, "Creatures in range:", sui.OK_ONLY, "Area Tracking", names, "handleTrackingSelection");
+        return SCRIPT_CONTINUE;
+    }
+    public int handleTrackingSelection(obj_id self, dictionary params) throws InterruptedException
+    {
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int idx = sui.getListboxSelectedRow(params);
+        if (idx == -1)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        // Get the list of names but we must use the index because the list isn't baked.
+        int index = sui.getListboxSelectedRow(params);
+        String name = sui.getListboxSelectedRowText(params);
+        obj_id[] targets = getCreaturesInRange(getLocation(self), 100.0f);
+        for (obj_id target : targets)
+        {
+            if (getName(target).equals(name))
+            {
+                debugSpeakMsg(self, "I found " + name + " at " + getLocation(target));
+            }
+        }
+        return SCRIPT_CONTINUE;
     }
 
     public static String getMemoryUsage() throws InterruptedException

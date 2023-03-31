@@ -19,10 +19,10 @@ public class toy extends script.base_script
     {
         int idx = utils.getValidAttributeIndex(names);
         int lastUsed = getIntObjVar(self, "used.timestamp");
-        names[idx] = "last_used";
+        names[idx] = utils.packStringId(new string_id("Last used"));
         attribs[idx] = getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getIntObjVar(self, "used.timestamp"));
         idx++;
-        names[idx] = "next_use";
+        names[idx] = utils.packStringId(new string_id("Next use"));
         attribs[idx] = getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getIntObjVar(self, "used.timestamp") + 14400);
         idx++;
         String NO = "\\#DD1234" + "No" + "\\#FFFFFF";
