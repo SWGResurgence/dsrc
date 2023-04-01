@@ -466,9 +466,9 @@ public class qa_ai_helper_attach extends script.base_script
     }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
-        if (hasScript(self, "player.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
+        if (hasScript(self, "developer.soe.e3demo.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
         {
-            sendSystemMessageTestingOnly(self, "Damage numbers will not be accurate due to player.yavin_e3 script attached to your character");
+            sendSystemMessageTestingOnly(self, "Damage numbers will not be accurate due to developer.soe.e3demo.yavin_e3 script attached to your character");
         }
         else 
         {
@@ -1392,30 +1392,30 @@ public class qa_ai_helper_attach extends script.base_script
     {
         if (!isIncapacitated(self))
         {
-            if (hasScript(self, "player.yavin_e3"))
+            if (hasScript(self, "developer.soe.e3demo.yavin_e3"))
             {
-                detachScript(self, "player.yavin_e3");
+                detachScript(self, "developer.soe.e3demo.yavin_e3");
             }
             setPosture(self, POSTURE_INCAPACITATED);
         }
     }
     public void attachNoDeathScript(obj_id self, obj_id tester) throws InterruptedException
     {
-        if (hasScript(self, "player.yavin_e3"))
+        if (hasScript(self, "developer.soe.e3demo.yavin_e3"))
         {
             sendSystemMessageTestingOnly(tester, "No death script already attached.");
         }
         else 
         {
-            attachScript(self, "player.yavin_e3");
+            attachScript(self, "developer.soe.e3demo.yavin_e3");
             sendSystemMessageTestingOnly(tester, "No death script attached.");
         }
     }
     public void removeNoDeathScript(obj_id self, obj_id tester) throws InterruptedException
     {
-        if (hasScript(self, "player.yavin_e3"))
+        if (hasScript(self, "developer.soe.e3demo.yavin_e3"))
         {
-            detachScript(self, "player.yavin_e3");
+            detachScript(self, "developer.soe.e3demo.yavin_e3");
             sendSystemMessageTestingOnly(tester, "No Death Script Removed.");
         }
         else 

@@ -33,7 +33,7 @@ public class qascript extends script.base_script
         "e3demo.e3_demoer",
         "gm.cmd",
         "player.player_gm",
-        "player.yavin_e3",
+        "developer.soe.e3demo.yavin_e3",
         "quest.utility.quest_test",
         "space.content_tools.content_generation",
         "space.content_tools.missiontest",

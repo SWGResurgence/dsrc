@@ -77,8 +77,8 @@ delayAction:message_ig88_spawn_super_droids:1		message_ig88_droidekas_defeated	r
 delayAction:message_ig88_super_droid_charge:2		message_ig88_droidekas_defeated	r1	0	0	10	0				
 heroic_ig88_super_battle_droid	super_battle_droid1	message_ig88_spawn_super_droids	r1	20	0	-22	0				1
 heroic_ig88_super_battle_droid	super_battle_droid2	message_ig88_spawn_super_droids	r1	-20	0	-22	0				1
-heroic_ig88_mouse_droid	mouse_droid1	message_ig88_spawn_super_droids	r1	1	0	-41	0	"player.yavin_e3,theme_park.heroic.ig88.ig88_mouse_droid"			
-heroic_ig88_mouse_droid	mouse_droid2	message_ig88_spawn_super_droids	r1	1	0	41	0	"player.yavin_e3,theme_park.heroic.ig88.ig88_mouse_droid"
+heroic_ig88_mouse_droid	mouse_droid1	message_ig88_spawn_super_droids	r1	1	0	-41	0	"developer.soe.e3demo.yavin_e3,theme_park.heroic.ig88.ig88_mouse_droid"
+heroic_ig88_mouse_droid	mouse_droid2	message_ig88_spawn_super_droids	r1	1	0	41	0	"developer.soe.e3demo.yavin_e3,theme_park.heroic.ig88.ig88_mouse_droid"
 messageTo;super_battle_droid1;findTarget;none		message_ig88_super_droid_charge	r1	0	0	10	0	
 messageTo;super_battle_droid2;findTarget;none		message_ig88_super_droid_charge	r1	0	0	10	0	
 messageTo;mouse_droid1;findTarget;none		message_ig88_super_droid_charge	r1	0	0	10	0	
