@@ -257,7 +257,7 @@ public class qatool extends script.base_script
         "player.player_gm",
         "gm.cmd",
         "e3demo.e3_demoer",
-        "player.yavin_e3",
+        "developer.soe.e3demo.yavin_e3",
         "space.content_tools.missiontest",
         "space.content_tools.content_generation",
         "quest.utility.quest_test",

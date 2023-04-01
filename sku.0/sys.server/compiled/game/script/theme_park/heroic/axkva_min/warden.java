@@ -19,7 +19,7 @@ public class warden extends script.base_script
     {
         detachScript(self, "ai.ai");
         detachScript(self, "ai.creature_combat");
-        attachScript(self, "player.yavin_e3");
+        attachScript(self, "developer.soe.e3demo.yavin_e3");
         obj_id[] players = trial.getPlayersInDungeon(trial.getTop(self));
         setCreatureCoverVisibility(self, false);
         if (hasObjVar(self, "doBurn"))
