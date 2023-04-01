@@ -162,7 +162,7 @@ public class spice extends script.base_script
         playClientEffectLoc(player, snd, getLocation(player), getScale(player));
         prose_package pp = prose.getPackage(PROSE_CONSUME_ITEM, player, self);
         sendCombatSpamMessageProse(player, pp, COMBAT_RESULT_GENERIC);
-        /*int count = getCount(self);
+        int count = getCount(self);
         count--;
         if (count <= 0)
         {
@@ -171,8 +171,7 @@ public class spice extends script.base_script
         else
         {
             setCount(self, count);
-        }*/
-        decrementCount(self);
+        }
     }
 
     public String formatTime(int seconds) throws InterruptedException
