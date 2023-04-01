@@ -127,7 +127,6 @@ public class craftinglib extends script.base_script
     public static final int STATION_TYPE_WEAPON = 526369;
     public static final int STATION_TYPE_WEAPON_TOOL = 524321;
     public static final int STATION_TYPE_SPACE = 393216;
-    public static final int STATION_TYPE_MEDITATION_ROOM = 327744;
     public static final int STATION_TYPE_GARAGE = 524329;
     public static final string_id RESEARCH_CENTER_MESSAGE = new string_id("city/city", "research_center_message");
     public static final string_id MANUFACTURING_CENTER_MESSAGE = new string_id("city/city", "manufacturing_center_message");
@@ -1780,10 +1779,6 @@ public class craftinglib extends script.base_script
         if (craftingType == STATION_TYPE_GARAGE)
         {
             return "tcg_garage_crafting_station, weapon_station";
-        }
-        if (craftingType == STATION_TYPE_MEDITATION_ROOM)
-        {
-            return "tcg_meditation_rooms_crafting_station";
         }
         return null;
     }
