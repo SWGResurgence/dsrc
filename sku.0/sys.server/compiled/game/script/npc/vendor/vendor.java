@@ -38,7 +38,7 @@ public class vendor extends script.base_script
         }
         if (hasObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR))
         {
-            handleCleanVendor(self);
+            //handleCleanVendor(self);
             return SCRIPT_CONTINUE;
         }
         if (isDead(self))
@@ -235,7 +235,7 @@ public class vendor extends script.base_script
     Cleanup is handled by deleting both all items in the containers and the containers themselves to avoid orphaning random objects, and then triggering initialization again.
      */
     //TODO full implementation with versioning
-    public void handleCleanVendor(obj_id self) throws InterruptedException {
+    /*public void handleCleanVendor(obj_id self) throws InterruptedException {
         obj_id[] containers = getContents(utils.getInventoryContainer(self));
         for (obj_id container : containers) {
             if(getTemplateName(container).equals(VENDOR_CONTAINER_TEMPLATE)) {
@@ -248,6 +248,6 @@ public class vendor extends script.base_script
         }
         removeObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR);
         messageTo(self, "handleInitializeVendor", null, 10, false);
-    }
+    }*/
 
 }
