@@ -32975,4 +32975,10 @@ public class base_class
         public static final int HT_chassis = 3;
         public static final int HT_numTypes = 4;
     }
+    
+    public static String GALAXY_LIVE = "Apotheosis";
+    public static String GALAXY_TC = "Insurgency";
+    public static String GALAXY_LOCAL = "swg";
+    
+    
 }// class base_class

@@ -944,7 +944,8 @@ public class qatool extends script.base_script
     }
     public int cmdQaTool(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10){
+        if (!isGod(self) || getGodLevel(self) < 10)
+        {
             detachScript(self, "test.qatool");
             return SCRIPT_CONTINUE;
         }

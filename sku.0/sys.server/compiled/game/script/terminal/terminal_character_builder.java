@@ -4,6 +4,7 @@ import script.*;
 import script.library.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -33,7 +34,7 @@ public class terminal_character_builder extends script.base_script
     public static final String SHIPCOMPONENT_WEAPON_TBL = "datatables/ship/components/character_builder/frog_weapon.iff";
     public static final String SHIPCOMPONENT_CAPACITOR_TBL = "datatables/ship/components/character_builder/frog_capacitor.iff";
     public static final String GENERIC_PROMPT = "Select the desired testing option.";
-    public static final String GENERIC_TITLE = "Test Center Terminal";
+    public static final String GENERIC_TITLE = getClusterName() + " Character Builder Terminal";
     public static final string_id SID_TERMINAL_PROMPT = new string_id("skill_teacher", "skill_terminal_prompt");
     public static final string_id SID_TERMINAL_TITLE = new string_id("skill_teacher", "skill_terminal_title");
     public static final string_id SID_TERMINAL_DISABLED = new string_id("skill_teacher", "skill_terminal_disabled");
@@ -44,7 +45,7 @@ public class terminal_character_builder extends script.base_script
     public static final String RLS_EFFECT = "appearance/pt_blackhole_01.prt";
     public static final String RLS_SOUND = "sound/item_ding.snd";
     public static final String[] CHARACTER_BUILDER_OPTIONS = {
-            "Resurgence Testing",
+            getClusterName() + " Focus Testing",
             "Weapons",
             "Armor",
             "Skills",
@@ -2088,12 +2089,32 @@ public class terminal_character_builder extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
+        if (isGod(player))
+        {
+            mi.addSubMenu(menu, menu_info_types.SERVER_MENU1, new string_id("Toggle Access"));
+        }
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuSelect(final obj_id self, obj_id player, int item) throws InterruptedException {
-        if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled"))) {
+    public int OnObjectMenuSelect(final obj_id self, obj_id player, int item) throws InterruptedException
+    {
+        if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
+        {
             System.out.println("\nPlayer: " + getName(player) + "(" + player + ") used Character Builder Terminal\n");
+        }
+        if (item == menu_info_types.SERVER_MENU1)
+        {
+            boolean enabled = getBooleanObjVar(self, "locked");
+            if (enabled)
+            {
+                removeObjVar(self, "locked");
+                broadcast(player, "You have lifted the restricted access to this terminal.");
+            }
+            else
+            {
+                setObjVar(self, "locked", true);
+                broadcast(player, "You have restricted access to this terminal.");
+            }
         }
         startCharacterBuilder(player);
         return SCRIPT_CONTINUE;
@@ -2101,9 +2122,14 @@ public class terminal_character_builder extends script.base_script
 
     public void startCharacterBuilder(obj_id player) throws InterruptedException
     {
+        if (hasObjVar(player, "locked"))
+        {
+            sendSystemMessage(player, "This terminal is currently locked.", null);
+            return;
+        }
         obj_id self = getSelf();
         String prompt = "Current Testing Options:";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         closeOldWindow(player);
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true, false);
         setWindowPid(player, pid);
@@ -2369,7 +2395,7 @@ public class terminal_character_builder extends script.base_script
                 String staticitemtitle = "Object Tool";
                 String staticitemmenu = "Usage: Enter valid static item string or object template .iff, Strings can be found in datatables/item/master_item/master_item.iff and .iff's can be found in /object folder.";
                 sui.filteredInputbox(self, player, staticitemmenu, staticitemtitle, "handleStaticItemRequest", message5);
-                refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+                refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
                 break;
             case 22:
                 if (isGod(player) || checkConfigSetting("petsEnabled"))
@@ -2411,7 +2437,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleBuffOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired Buff option", "Test Center Terminal", BUFF_OPTIONS, "handleBuffSelect", false);
+        refreshMenu(player, "Select the desired Buff option", getClusterName() + " Character Builder Terminal", BUFF_OPTIONS, "handleBuffSelect", false);
     }
 
     public int handleBuffSelect(obj_id self, dictionary params) throws InterruptedException
@@ -2447,39 +2473,38 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired buff option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
-        switch (idx)
+        if (idx == 0)
         {
-            case 0:
-                float currentBuffTime = performance.inspireGetMaxDuration(player);
-                buff.applyBuff(player, "buildabuff_inspiration", 7200);
-                utils.setScriptVar(player, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
-                utils.setScriptVar(player, "performance.buildabuff.buffComponentValues", buffComponentValues);
-                utils.setScriptVar(player, "performance.buildabuff.player", player);
-                buff.applyBuff((player), "me_buff_health_2", 7200);
-                buff.applyBuff((player), "me_buff_action_3", 7200);
-                buff.applyBuff((player), "me_buff_strength_3", 7200);
-                buff.applyBuff((player), "me_buff_agility_3", 7200);
-                buff.applyBuff((player), "me_buff_precision_3", 7200);
-                buff.applyBuff((player), "me_buff_melee_gb_1", 7200);
-                buff.applyBuff((player), "me_buff_ranged_gb_1", 7200);
-                buff.applyBuff((player), "of_buff_def_9", 7200);
-                buff.applyBuff((player), "frogBuff", 7200);
-                buff.applyBuff((player), "of_focus_fire_6", 7200);
-                buff.applyBuff((player), "of_tactical_drop_6", 7200);
-                buff.applyBuff((player), "banner_buff_commando", 7200);
-                buff.applyBuff((player), "banner_buff_smuggler", 7200);
-                buff.applyBuff((player), "banner_buff_medic", 7200);
-                buff.applyBuff((player), "banner_buff_officer", 7200);
-                buff.applyBuff((player), "banner_buff_spy", 7200);
-                buff.applyBuff((player), "banner_buff_bounty_hunter", 7200);
-                buff.applyBuff((player), "banner_buff_force_sensitive", 7200);
-                sendSystemMessageTestingOnly(player, "GOD Buffs Granted");
-                break;
-            default:
-                cleanScriptVars(player);
-                break;
+            float currentBuffTime = performance.inspireGetMaxDuration(player);
+            buff.applyBuff(player, "buildabuff_inspiration", 7200);
+            utils.setScriptVar(player, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
+            utils.setScriptVar(player, "performance.buildabuff.buffComponentValues", buffComponentValues);
+            utils.setScriptVar(player, "performance.buildabuff.player", player);
+            buff.applyBuff((player), "me_buff_health_2", 7200);
+            buff.applyBuff((player), "me_buff_action_3", 7200);
+            buff.applyBuff((player), "me_buff_strength_3", 7200);
+            buff.applyBuff((player), "me_buff_agility_3", 7200);
+            buff.applyBuff((player), "me_buff_precision_3", 7200);
+            buff.applyBuff((player), "me_buff_melee_gb_1", 7200);
+            buff.applyBuff((player), "me_buff_ranged_gb_1", 7200);
+            buff.applyBuff((player), "of_buff_def_9", 7200);
+            buff.applyBuff((player), "frogBuff", 7200);
+            buff.applyBuff((player), "of_focus_fire_6", 7200);
+            buff.applyBuff((player), "of_tactical_drop_6", 7200);
+            buff.applyBuff((player), "banner_buff_commando", 7200);
+            buff.applyBuff((player), "banner_buff_smuggler", 7200);
+            buff.applyBuff((player), "banner_buff_medic", 7200);
+            buff.applyBuff((player), "banner_buff_officer", 7200);
+            buff.applyBuff((player), "banner_buff_spy", 7200);
+            buff.applyBuff((player), "banner_buff_bounty_hunter", 7200);
+            buff.applyBuff((player), "banner_buff_force_sensitive", 7200);
+            sendSystemMessageTestingOnly(player, "GOD Buffs Granted");
+        }
+        else
+        {
+            cleanScriptVars(player);
         }
         return SCRIPT_CONTINUE;
     }
@@ -2756,7 +2781,7 @@ public class terminal_character_builder extends script.base_script
         int retCode = params.getInt(money.DICT_CODE);
         if (retCode == money.RET_SUCCESS)
         {
-            String terminal = "Test Center Terminal";
+            String terminal = getClusterName() + " Character Builder Terminal";
             sendSystemMessageTestingOnly(player, "You receive " + CASH_AMOUNT + " credits from the " + terminal);
         }
         else if (retCode == money.RET_FAIL)
@@ -2769,8 +2794,7 @@ public class terminal_character_builder extends script.base_script
     public void handleResourceOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", RESOURCE_TYPES, "handleCategorySelection", false);
-        return;
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", RESOURCE_TYPES, "handleCategorySelection", false);
     }
 
     public int handleCategorySelection(obj_id self, dictionary params) throws InterruptedException
@@ -2801,7 +2825,7 @@ public class terminal_character_builder extends script.base_script
         location loc = getLocation(player);
         String planet = "current";
         String[] resourceList = buildAvailableResourceTree(self, loc, RESOURCE_BASE_TYPES[idx]);
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", resourceList, "handleResourceSelection", false);
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", resourceList, "handleResourceSelection", false);
         if (resourceList[0].startsWith("@resource/resource_names"))
         {
             utils.setScriptVar(player, "character_builder.resourceList", SPACE_RESOURCE_CONST);
@@ -2824,7 +2848,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired resource category", "Test Center Terminal", RESOURCE_TYPES, "handleCategorySelection", false);
+            refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", RESOURCE_TYPES, "handleCategorySelection", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -2866,7 +2890,7 @@ public class terminal_character_builder extends script.base_script
             prose_package proseSuccess = prose.getPackage(resource.SID_SAMPLE_LOCATED, resourceName, AMT);
             sendSystemMessageProse(player, proseSuccess);
         }
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", resourceList, "handleResourceSelection", false);
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", resourceList, "handleResourceSelection", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -2920,19 +2944,13 @@ public class terminal_character_builder extends script.base_script
             {
                 loc.area = planetName;
                 resource_density[] resources = requestResourceList(loc, 0.0f, 1.0f, topParent);
-                for (resource_density resource : resources)
-                {
-                    allResources.add(resource);
-                }
+                Collections.addAll(allResources, resources);
             }
         }
         else
         {
             resource_density[] resources = requestResourceList(loc, 0.0f, 1.0f, topParent);
-            for (resource_density resource : resources)
-            {
-                allResources.add(resource);
-            }
+            Collections.addAll(allResources, resources);
         }
         String[] resourceTree = buildSortedResourceTree(allResources, topParent, 0);
         return resourceTree;
@@ -2969,7 +2987,7 @@ public class terminal_character_builder extends script.base_script
                 {
                     child = "    " + child;
                 }
-                if (resourceTree.indexOf(child) == -1)
+                if (!resourceTree.contains(child))
                 {
                     resourceTree.add(child);
                 }
@@ -3010,8 +3028,7 @@ public class terminal_character_builder extends script.base_script
     public void handleBestResourceOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", BEST_RESOURCE_TYPES, "handleBestCategorySelection", false);
-        return;
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", BEST_RESOURCE_TYPES, "handleBestCategorySelection", false);
     }
 
     public int handleBestCategorySelection(obj_id self, dictionary params) throws InterruptedException
@@ -3042,7 +3059,7 @@ public class terminal_character_builder extends script.base_script
         if (idx > RESOURCE_BASE_TYPES.length - 1)
         {
             utils.setScriptVar(player, "character_builder.specificFilter", -1);
-            refreshMenu(player, "Select the desired resource category", "Test Center Terminal", RESOURCE_TYPES, "handleBestCategorySelection", false);
+            refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", RESOURCE_TYPES, "handleBestCategorySelection", false);
             return SCRIPT_CONTINUE;
         }
         location loc = getLocation(player);
@@ -3071,7 +3088,7 @@ public class terminal_character_builder extends script.base_script
         }
         resourceList = temp;
         temp = null;
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", resourceList, "handleBestResourceSelection", false);
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", resourceList, "handleBestResourceSelection", false);
         utils.setScriptVar(player, "character_builder.resourceList", resourceList);
         return SCRIPT_CONTINUE;
     }
@@ -3111,11 +3128,11 @@ public class terminal_character_builder extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             utils.setScriptVar(player, "character_builder.resourceIndex", idx);
-            refreshMenu(player, "Select the desired attribute", "Test Center Terminal", attribs, "handleBestResourceSelectionWithAttribute", false);
+            refreshMenu(player, "Select the desired attribute", getClusterName() + " Character Builder Terminal", attribs, "handleBestResourceSelectionWithAttribute", false);
             return SCRIPT_CONTINUE;
         }
         craftinglib.makeBestResource(player, resourceList[idx], AMT);
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", resourceList, "handleBestResourceSelection", false);
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", resourceList, "handleBestResourceSelection", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -3150,14 +3167,14 @@ public class terminal_character_builder extends script.base_script
         utils.removeScriptVar(player, "character_builder.specificFilter");
         utils.removeScriptVar(player, "character_builder.resourceIndex");
         craftinglib.makeBestResourceByAttribute(player, resourceList[resourceListIndex], attribs[idx], AMT);
-        refreshMenu(player, "Select the desired resource category", "Test Center Terminal", BEST_RESOURCE_TYPES, "handleBestCategorySelection", false);
+        refreshMenu(player, "Select the desired resource category", getClusterName() + " Character Builder Terminal", BEST_RESOURCE_TYPES, "handleBestCategorySelection", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleVehicleOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired vehicle or mount option", "Test Center Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+        refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
     }
 
     public int handleVehicleOptions(obj_id self, dictionary params) throws InterruptedException
@@ -3192,7 +3209,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         switch (idx)
         {
@@ -3220,7 +3237,7 @@ public class terminal_character_builder extends script.base_script
                 beast_lib.setBCDBeastLevel(bcd, 90);
                 beast_lib.setBeastLevel(beast, 90);
                 beast_lib.initializeBeastStats(bcd, beast);
-                refreshMenu(player, "Select the desired vehicle or mount option", "Test Center Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+                refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
                 break;
             case 4:
                 obj_id playerBeast = beast_lib.getBeastOnPlayer(player);
@@ -3236,12 +3253,12 @@ public class terminal_character_builder extends script.base_script
                 }
                 beast_lib.setBeastLoyalty(playerBeast, 300000.0f);
                 beast_lib.setBCDBeastLoyaltyLevel(beastBcd, 5);
-                refreshMenu(player, "Select the desired vehicle or mount option", "Test Center Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+                refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
                 break;
             case 5:
                 obj_id pInv = utils.getInventoryContainer(player);
                 static_item.createNewItemFunction("item_tow_necklace_taming_03_05", pInv);
-                refreshMenu(player, "Select the desired vehicle or mount option", "Test Center Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+                refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
                 break;
             default:
                 cleanScriptVars(player);
@@ -3360,7 +3377,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", VEHICLE_OPTIONS, "handleVehicleSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", VEHICLE_OPTIONS, "handleVehicleSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -3429,7 +3446,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", MOUNT_OPTIONS, "handleMountSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MOUNT_OPTIONS, "handleMountSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -3471,7 +3488,7 @@ public class terminal_character_builder extends script.base_script
         obj_id egg = createObject("object/tangible/item/beast/bm_egg.iff", inv, "");
         int hashCreatureType = incubator.getHashType(creatureName);
         incubator.setUpEggWithDummyData(player, egg, hashCreatureType);
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", beasts, "handleBeastSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", beasts, "handleBeastSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -3589,7 +3606,7 @@ public class terminal_character_builder extends script.base_script
     public void handleShipOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired ship option", "Test Center Terminal", SHIP_OPTIONS, "handleShipOptions", false);
+        refreshMenu(player, "Select the desired ship option", getClusterName() + " Character Builder Terminal", SHIP_OPTIONS, "handleShipOptions", false);
     }
 
     public int handleShipOptions(obj_id self, dictionary params) throws InterruptedException
@@ -3624,7 +3641,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         switch (idx)
         {
@@ -3875,12 +3892,12 @@ public class terminal_character_builder extends script.base_script
         {
             sendSystemMessageTestingOnly(player, "Failed to create ship. No room in datapad.");
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", options, message, false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", options, message, false);
     }
 
     public void handleShipMenuSelect(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired deed option", "Test Center Terminal", MAIN_SHIP_OPTIONS, "handleShipMenuSelect", false);
+        refreshMenu(player, "Select the desired deed option", getClusterName() + " Character Builder Terminal", MAIN_SHIP_OPTIONS, "handleShipMenuSelect", false);
     }
 
     public int handleShipMenuSelect(obj_id self, dictionary params) throws InterruptedException
@@ -4727,7 +4744,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleDeedOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired deed option", "Test Center Terminal", DEED_OPTIONS, "handleDeedSelect", false);
+        refreshMenu(player, "Select the desired deed option", getClusterName() + " Character Builder Terminal", DEED_OPTIONS, "handleDeedSelect", false);
     }
 
     public int handleDeedSelect(obj_id self, dictionary params) throws InterruptedException
@@ -4967,7 +4984,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleCraftingOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired deed option", "Test Center Terminal", CRAFTING_OPTIONS, "handleCraftingSelect", false);
+        refreshMenu(player, "Select the desired deed option", getClusterName() + " Character Builder Terminal", CRAFTING_OPTIONS, "handleCraftingSelect", false);
     }
 
     public int handleCraftingSelect(obj_id self, dictionary params) throws InterruptedException
@@ -5070,7 +5087,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handlePAOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired deed option", "Test Center Terminal", PA_OPTIONS, "handlePASelect", false);
+        refreshMenu(player, "Select the desired deed option", getClusterName() + " Character Builder Terminal", PA_OPTIONS, "handlePASelect", false);
     }
 
     public int handlePASelect(obj_id self, dictionary params) throws InterruptedException
@@ -5157,7 +5174,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleDevTestingOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired development testing option", "Test Center Terminal", DEV_TESTING_OPTIONS, "handleDevTestingOptions", false);
+        refreshMenu(player, "Select the desired development testing option", getClusterName() + " Character Builder Terminal", DEV_TESTING_OPTIONS, "handleDevTestingOptions", false);
     }
 
     public int handleDevTestingOptions(obj_id self, dictionary params) throws InterruptedException
@@ -5171,7 +5188,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5316,7 +5333,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleWeaponOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
     }
 
     public int handleWeaponOptions(obj_id self, dictionary params) throws InterruptedException
@@ -5330,7 +5347,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5353,31 +5370,31 @@ public class terminal_character_builder extends script.base_script
         switch (idx)
         {
             case 0:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", PISTOL_OPTIONS, "handlePistolSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", PISTOL_OPTIONS, "handlePistolSelect", false);
                 break;
             case 1:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", CARBINE_OPTIONS, "handleCarbineSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", CARBINE_OPTIONS, "handleCarbineSelect", false);
                 break;
             case 2:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", RIFLE_OPTIONS, "handleRifleSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", RIFLE_OPTIONS, "handleRifleSelect", false);
                 break;
             case 3:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", HEAVY_WEAPON_OPTIONS, "handleHeavySelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", HEAVY_WEAPON_OPTIONS, "handleHeavySelect", false);
                 break;
             case 4:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", UNARMED_OPTIONS, "handleUnarmedSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", UNARMED_OPTIONS, "handleUnarmedSelect", false);
                 break;
             case 5:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", ONEHANDED_OPTIONS, "handleOneHandedSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", ONEHANDED_OPTIONS, "handleOneHandedSelect", false);
                 break;
             case 6:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", TWOHANDED_OPTIONS, "handleTwoHandedSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", TWOHANDED_OPTIONS, "handleTwoHandedSelect", false);
                 break;
             case 7:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", POLEARM_OPTIONS, "handlePolearmSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", POLEARM_OPTIONS, "handlePolearmSelect", false);
                 break;
             case 8:
-                refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", BATTLEFIELD_WEAPON_OPTIONS, "handleBattlefieldSelect", false);
+                refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", BATTLEFIELD_WEAPON_OPTIONS, "handleBattlefieldSelect", false);
                 break;
             default:
                 cleanScriptVars(player);
@@ -5398,7 +5415,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5528,7 +5545,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", PISTOL_OPTIONS, "handlePistolSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", PISTOL_OPTIONS, "handlePistolSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -5544,7 +5561,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5641,7 +5658,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", CARBINE_OPTIONS, "handleCarbineSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", CARBINE_OPTIONS, "handleCarbineSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -5657,7 +5674,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5800,7 +5817,7 @@ public class terminal_character_builder extends script.base_script
                 createSnowFlakeFrogWeapon(player, weapon);
             }
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", RIFLE_OPTIONS, "handleRifleSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", RIFLE_OPTIONS, "handleRifleSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -5816,7 +5833,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5904,7 +5921,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", HEAVY_WEAPON_OPTIONS, "handleHeavySelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", HEAVY_WEAPON_OPTIONS, "handleHeavySelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -5920,7 +5937,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -5979,7 +5996,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", UNARMED_OPTIONS, "handleUnarmedSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", UNARMED_OPTIONS, "handleUnarmedSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -5995,7 +6012,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6101,7 +6118,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", ONEHANDED_OPTIONS, "handleOneHandedSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", ONEHANDED_OPTIONS, "handleOneHandedSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6117,7 +6134,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6202,7 +6219,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", TWOHANDED_OPTIONS, "handleTwoHandedSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", TWOHANDED_OPTIONS, "handleTwoHandedSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6218,7 +6235,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6312,7 +6329,7 @@ public class terminal_character_builder extends script.base_script
         {
             createSnowFlakeFrogWeapon(player, weapon);
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", POLEARM_OPTIONS, "handlePolearmSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", POLEARM_OPTIONS, "handlePolearmSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6328,7 +6345,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6411,7 +6428,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", BATTLEFIELD_WEAPON_OPTIONS, "handleBattlefieldSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", BATTLEFIELD_WEAPON_OPTIONS, "handleBattlefieldSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6427,7 +6444,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
+            refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", WEAPON_OPTIONS, "handleWeaponOptions", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6501,13 +6518,13 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired weapon option", "Test Center Terminal", GRENADE_OPTIONS, "handleGrenadeSelect", false);
+        refreshMenu(player, "Select the desired weapon option", getClusterName() + " Character Builder Terminal", GRENADE_OPTIONS, "handleGrenadeSelect", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleArmorOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
     }
 
     public int handleArmorSelect(obj_id self, dictionary params) throws InterruptedException
@@ -6522,7 +6539,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6543,7 +6560,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired armor option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         switch (idx)
         {
@@ -6590,7 +6607,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6628,7 +6645,7 @@ public class terminal_character_builder extends script.base_script
         String handler = "";
         int pid = 0;
         String prompt = "Select the desired armor level option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         switch (type)
         {
             case 0:
@@ -6665,7 +6682,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6737,7 +6754,7 @@ public class terminal_character_builder extends script.base_script
         }
         String[] options = utils.getStringArrayScriptVar(player, "character_builder.armorOptions");
         String handler = utils.getStringScriptVar(player, "character_builder.armorHandler");
-        refreshMenu(player, "Select the desired armor level option", "Test Center Terminal", options, handler, false);
+        refreshMenu(player, "Select the desired armor level option", getClusterName() + " Character Builder Terminal", options, handler, false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6753,7 +6770,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6837,7 +6854,7 @@ public class terminal_character_builder extends script.base_script
         }
         String[] options = utils.getStringArrayScriptVar(player, "character_builder.armorOptions");
         String handler = utils.getStringScriptVar(player, "character_builder.armorHandler");
-        refreshMenu(player, "Select the desired armor level option", "Test Center Terminal", options, handler, false);
+        refreshMenu(player, "Select the desired armor level option", getClusterName() + " Character Builder Terminal", options, handler, false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6853,7 +6870,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -6929,7 +6946,7 @@ public class terminal_character_builder extends script.base_script
         }
         String[] options = utils.getStringArrayScriptVar(player, "character_builder.armorOptions");
         String handler = utils.getStringScriptVar(player, "character_builder.armorHandler");
-        refreshMenu(player, "Select the desired armor level option", "Test Center Terminal", options, handler, false);
+        refreshMenu(player, "Select the desired armor level option", getClusterName() + " Character Builder Terminal", options, handler, false);
         return SCRIPT_CONTINUE;
     }
 
@@ -6945,7 +6962,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_OPTIONS, "handleArmorSelect", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -7000,7 +7017,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_PSG_OPTIONS, "handlePsgSelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_PSG_OPTIONS, "handlePsgSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -7016,7 +7033,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
+            refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ARMOR_PROTECTION_AMOUNT, "handleProtectionAmount", false);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -7104,7 +7121,7 @@ public class terminal_character_builder extends script.base_script
         }
         String[] options = utils.getStringArrayScriptVar(player, "character_builder.armorOptions");
         String handler = utils.getStringScriptVar(player, "character_builder.armorHandler");
-        refreshMenu(player, "Select the desired armor level option", "Test Center Terminal", options, handler, false);
+        refreshMenu(player, "Select the desired armor level option", getClusterName() + " Character Builder Terminal", options, handler, false);
         return SCRIPT_CONTINUE;
     }
 
@@ -7208,7 +7225,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleEnhancementSelect(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired deed option", "Test Center Terminal", ARMOR_ENHANCEMENT_OPTIONS, "handleEnhancementSelect", false);
+        refreshMenu(player, "Select the desired deed option", getClusterName() + " Character Builder Terminal", ARMOR_ENHANCEMENT_OPTIONS, "handleEnhancementSelect", false);
     }
 
     public int handleEnhancementSelect(obj_id self, dictionary params) throws InterruptedException
@@ -7255,19 +7272,18 @@ public class terminal_character_builder extends script.base_script
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
-        switch (idx)
+        if (idx == 0)
         {
-            case 0:
-                if (isGod(player))
-                {
-                    static_item.createNewItemFunction("item_development_combat_test_ring_06_01", pInv);
-                    sendSystemMessageTestingOnly(player, "Combat Enhancement Ring Issued");
-                }
-
-                break;
-            default:
-                cleanScriptVars(player);
-                return SCRIPT_CONTINUE;
+            if (isGod(player))
+            {
+                static_item.createNewItemFunction("item_development_combat_test_ring_06_01", pInv);
+                sendSystemMessageTestingOnly(player, "Combat Enhancement Ring Issued");
+            }
+        }
+        else
+        {
+            cleanScriptVars(player);
+            return SCRIPT_CONTINUE;
         }
         handleEnhancementSelect(player);
         return SCRIPT_CONTINUE;
@@ -7399,7 +7415,7 @@ public class terminal_character_builder extends script.base_script
         if (column != null && !column.equals(""))
         {
             String[] itemSet = dataTableGetStringColumn(HEROIC_JEWELRY_SETS, column);
-            if ((itemSet != null) && (itemSet.length != 0))
+            if (itemSet != null)
             {
                 for (String s : itemSet)
                 {
@@ -7407,13 +7423,13 @@ public class terminal_character_builder extends script.base_script
                 }
             }
         }
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", HEROIC_JEWELRY_LIST, "handleHeroicJewelrySelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", HEROIC_JEWELRY_LIST, "handleHeroicJewelrySelect", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleMiscOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", "Test Center Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
+        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
     }
 
     public int handleMiscOptions(obj_id self, dictionary params) throws InterruptedException
@@ -7658,7 +7674,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", MISC_OPTIONS, "handleMiscSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MISC_OPTIONS, "handleMiscSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -7687,7 +7703,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleQuestOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", "Test Center Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
+        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
     }
 
     public int handleQuestOptions(obj_id self, dictionary params) throws InterruptedException
@@ -7731,21 +7747,21 @@ public class terminal_character_builder extends script.base_script
                 String granttitle = "Quest Grant Tool";
                 String grantmenu = "Usage: Enter a quest string to grant yourself.";
                 sui.filteredInputbox(self, player, grantmenu, granttitle, "handleQuestGrantRequest", message1);
-                refreshMenu(player, "Select the desired item option", "Test Center Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
+                refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
                 break;
             case 1:
                 String message2 = "";
                 String completetitle = "Quest Complete Tool";
                 String completemenu = "Usage: Enter a quest string to complete. Note: This will not complete the whole series of quests. do them in order.";
                 sui.filteredInputbox(self, player, completemenu, completetitle, "handleQuestCompleteRequest", message2);
-                refreshMenu(player, "Select the desired item option", "Test Center Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
+                refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
                 break;
             case 2:
                 String message3 = "";
                 String cleartitle = "Quest Clear Tool";
                 String clearmenu = "Usage: Enter a quest string to clear from your journal.";
                 sui.filteredInputbox(self, player, clearmenu, cleartitle, "handleQuestClearRequest", message3);
-                refreshMenu(player, "Select the desired item option", "Test Center Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
+                refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", QUEST_OPTIONS, "handleQuestOptions", false);
                 break;
             default:
                 cleanScriptVars(player);
@@ -7929,8 +7945,8 @@ public class terminal_character_builder extends script.base_script
                 inventory[i] = dataTableGetString(DATATABLE_INVENTORY, i, "name");
                 static_item.createNewItemFunction(inventory[i], pInv);
                 sendSystemMessageTestingOnly(player, "All Static Items Given.)");
-                return SCRIPT_CONTINUE;
             }
+            return SCRIPT_CONTINUE;
         }
         else if (message5.equals("testitems"))
         {
@@ -7950,7 +7966,7 @@ public class terminal_character_builder extends script.base_script
             String attachtitle = "Script Attach Tool";
             String attachmenu = "Used to test out scripts.";
             sui.filteredInputbox(self, player, attachmenu, attachtitle, "handleAttachScript", ascript);
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         else if (message5.equals("craft"))
@@ -7960,7 +7976,7 @@ public class terminal_character_builder extends script.base_script
             String crafttitle = "Crafting Tool";
             String craftmenu = "Used to craft items, enter valid draft_schematic to craft at maximum cap.";
             sui.filteredInputbox(self, player, craftmenu, crafttitle, "handleCraftToolRequest", craft1);
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         else if (message5.endsWith("detachscript"))
@@ -7969,7 +7985,7 @@ public class terminal_character_builder extends script.base_script
             String detachtitle = "Script Detach Tool";
             String detachmenu = "Used to test out scripts.";
             sui.filteredInputbox(self, player, detachmenu, detachtitle, "handleDetachScript", dscript);
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         else if (message5.equals("buffitems"))
@@ -8018,7 +8034,6 @@ public class terminal_character_builder extends script.base_script
             playClientEffectLoc(player, RLS_SOUND, getLocation(player), 1.0f);
             return SCRIPT_CONTINUE;
         }
-        return SCRIPT_CONTINUE;
     }
 
     public int handleLootBox(obj_id self, dictionary params) throws InterruptedException
@@ -8092,20 +8107,20 @@ public class terminal_character_builder extends script.base_script
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
-        switch (idx)
+        if (idx == 0)
         {
-            case 0:
-                obj_id suit = static_item.createNewItemFunction("item_god_craftingsuit_06_01", pInv);
-                if (isIdValid(suit))
-                {
-                    sendSystemMessageTestingOnly(player, "Blix's Ultra Crafting Suit Issued, May you see nothing but Amazing Crafts!");
-                }
-                break;
-            default:
-                cleanScriptVars(player);
-                return SCRIPT_CONTINUE;
+            obj_id suit = static_item.createNewItemFunction("item_god_craftingsuit_06_01", pInv);
+            if (isIdValid(suit))
+            {
+                sendSystemMessageTestingOnly(player, "Blix's Ultra Crafting Suit Issued, May you see nothing but Amazing Crafts!");
+            }
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", CRAFTING_SUIT, "handleCraftingSuitSelect", false);
+        else
+        {
+            cleanScriptVars(player);
+            return SCRIPT_CONTINUE;
+        }
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", CRAFTING_SUIT, "handleCraftingSuitSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8187,7 +8202,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", SMUGGLER_TOOLS_OPTIONS, "handleSmugglerSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", SMUGGLER_TOOLS_OPTIONS, "handleSmugglerSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8276,7 +8291,7 @@ public class terminal_character_builder extends script.base_script
             setCount(weaponPower, 350);
             sendSystemMessageTestingOnly(player, "Weapon Power Up Issued");
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", getExoticMods(), "handlePowerUpSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", getExoticMods(), "handlePowerUpSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8292,7 +8307,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         String[] skillMods = dataTableGetStringColumn(EXOTIC_SKILL_MODS, "name");
         String prompt = "Select Second Skill Modifier, You will need to pick one more time!";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         if (btn == sui.BP_REVERT)
         {
             handleMiscOption(player);
@@ -8326,7 +8341,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         String[] skillMods = dataTableGetStringColumn(EXOTIC_SKILL_MODS, "name");
         String prompt = "Select Final Skill Modifier";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         if (btn == sui.BP_REVERT)
         {
             handleMiscOption(player);
@@ -8434,7 +8449,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(weaponPower, "reverse_engineering.attachment_level", 2);
             sendSystemMessageTestingOnly(player, "Exotic Weapon Attachment Issued");
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8507,7 +8522,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        if (clothing != null && !clothing.equals(""))
+        if (clothing != null)
         {
             obj_id clothingObject = createObject(clothing, pInv, "");
             if (isIdValid(clothingObject))
@@ -8516,7 +8531,7 @@ public class terminal_character_builder extends script.base_script
                 sendSystemMessageTestingOnly(player, "Clothing Issued");
             }
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", CLOTHING_OPTIONS, "handleClothingSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", CLOTHING_OPTIONS, "handleClothingSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8531,7 +8546,7 @@ public class terminal_character_builder extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         String prompt = "Select Second Skill Modifier, You will need to pick one more time!";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         if (btn == sui.BP_REVERT)
         {
             handleMiscOption(player);
@@ -8564,7 +8579,7 @@ public class terminal_character_builder extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         String prompt = "Select Final Skill Modifier";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         if (btn == sui.BP_REVERT)
         {
             handleMiscOption(player);
@@ -8651,7 +8666,7 @@ public class terminal_character_builder extends script.base_script
             sendSystemMessageTestingOnly(player, "Basic Armor Attachment Issued");
             cleanScriptVars(player);
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8720,7 +8735,7 @@ public class terminal_character_builder extends script.base_script
             static_item.createNewItemFunction(crystal, pInv);
             sendSystemMessageTestingOnly(player, "Enjoy");
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", AURILIA_CRYSTALS, "handleBuffCrystalSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", AURILIA_CRYSTALS, "handleBuffCrystalSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -8826,13 +8841,13 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", MEDICINE_OPTIONS, "handleMedicineSelect", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MEDICINE_OPTIONS, "handleMedicineSelect", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleWarpOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", "Test Center Terminal", WARP_OPTIONS, "handleWarpOptions", false);
+        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", WARP_OPTIONS, "handleWarpOptions", false);
     }
 
     public int handleWarpOptions(obj_id self, dictionary params) throws InterruptedException
@@ -8846,7 +8861,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -9850,13 +9865,13 @@ public class terminal_character_builder extends script.base_script
             default:
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", WARP_OPTIONS, "handleWarpOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", WARP_OPTIONS, "handleWarpOptions", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleOtherOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", "Test Center Terminal", OTHER_OPTIONS, "handleOtherOptions", false);
+        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", OTHER_OPTIONS, "handleOtherOptions", false);
     }
 
     public int handleOtherOptions(obj_id self, dictionary params) throws InterruptedException
@@ -9870,7 +9885,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -9927,13 +9942,13 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", OTHER_OPTIONS, "handleOtherOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", OTHER_OPTIONS, "handleOtherOptions", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleCommandOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", "Test Center Terminal", COMMAND_OPTIONS, "handleCommandOptions", false);
+        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", COMMAND_OPTIONS, "handleCommandOptions", false);
     }
 
     public int handleCommandOptions(obj_id self, dictionary params) throws InterruptedException
@@ -9947,7 +9962,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleCommandSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleCommandSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -9986,7 +10001,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", COMMAND_OPTIONS, "handleCommandOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", COMMAND_OPTIONS, "handleCommandOptions", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -10037,7 +10052,7 @@ public class terminal_character_builder extends script.base_script
     public void handleFactionOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired faction option", "Test Center Terminal", FACTION_OPTIONS, "handleFactionOptions", false);
+        refreshMenu(player, "Select the desired faction option", getClusterName() + " Character Builder Terminal", FACTION_OPTIONS, "handleFactionOptions", false);
     }
 
     public int handleFactionOptions(obj_id self, dictionary params) throws InterruptedException
@@ -10066,7 +10081,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         String factionName = factions.getFaction(player);
         int current_rank = pvpGetCurrentGcwRank(player);
@@ -10170,13 +10185,13 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired faction option", "Test Center Terminal", FACTION_OPTIONS, "handleFactionOptions", false);
+        refreshMenu(player, "Select the desired faction option", getClusterName() + " Character Builder Terminal", FACTION_OPTIONS, "handleFactionOptions", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleRoadmapSkills(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired Roadmap option", "Test Center Terminal", ROADMAP_SKILL_OPTIONS, "handleRoadmapSelect", false);
+        refreshMenu(player, "Select the desired Roadmap option", getClusterName() + " Character Builder Terminal", ROADMAP_SKILL_OPTIONS, "handleRoadmapSelect", false);
     }
 
     public int handleRoadmapSelect(obj_id self, dictionary params) throws InterruptedException
@@ -10211,7 +10226,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired roadmap skill option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         switch (idx)
         {
@@ -10306,7 +10321,7 @@ public class terminal_character_builder extends script.base_script
             closeOldWindow(player);
             utils.setBatchScriptVar(player, "character_builder.roadmap_list", roadmapList);
         }
-        refreshMenu(player, "Select a skill roadmap.", "Test Center Terminal", convertRoadmapNames(roadmapList), "handleRoadmapChoiceSelection", false);
+        refreshMenu(player, "Select a skill roadmap.", getClusterName() + " Character Builder Terminal", convertRoadmapNames(roadmapList), "handleRoadmapChoiceSelection", false);
     }
 
     public int handleRoadmapChoiceSelection(obj_id self, dictionary params) throws InterruptedException
@@ -10316,7 +10331,7 @@ public class terminal_character_builder extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -10398,7 +10413,7 @@ public class terminal_character_builder extends script.base_script
             utils.setScriptVar(player, "character_builder.skill_template", roadmap);
             utils.setBatchScriptVar(player, "character_builder.roadmap_skills", skillList);
         }
-        refreshMenu(player, "Select a the working skill in the roadmap.", "Test Center Terminal", convertSkillListNames(skillList), "handleRoadmapSkillSelection", false);
+        refreshMenu(player, "Select a the working skill in the roadmap.", getClusterName() + " Character Builder Terminal", convertSkillListNames(skillList), "handleRoadmapSkillSelection", false);
     }
 
     public int handleRoadmapSkillSelection(obj_id self, dictionary params) throws InterruptedException
@@ -10408,7 +10423,7 @@ public class terminal_character_builder extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -10441,7 +10456,7 @@ public class terminal_character_builder extends script.base_script
             expertise.autoAllocateExpertiseByLevel(player, false);
             skill.recalcPlayerPools(player, true);
         }
-        refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+        refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
         return SCRIPT_CONTINUE;
     }
 
@@ -10476,7 +10491,7 @@ public class terminal_character_builder extends script.base_script
         {
             abilityNames[i] = utils.packStringId(new string_id("pet/pet_ability", abilityNames[i]));
         }
-        refreshMenu(player, "Select the desired Pet Ability", "Test Center Terminal", abilityNames, "handlePetAbilitySelection", false);
+        refreshMenu(player, "Select the desired Pet Ability", getClusterName() + " Character Builder Terminal", abilityNames, "handlePetAbilitySelection", false);
         utils.setScriptVar(player, "character_builder.petAbilityList", abilityList);
         utils.setScriptVar(player, "character_builder.petAbilityNames", abilityNames);
     }
@@ -10514,14 +10529,11 @@ public class terminal_character_builder extends script.base_script
         {
             if (utils.getElementPositionInArray(chAbilityList, petAbilityList[idx]) > -1)
             {
-                refreshMenu(player, "Select the desired Pet Ability", "Test Center Terminal", petAbilityNames, "handlePetAbilitySelection", false);
+                refreshMenu(player, "Select the desired Pet Ability", getClusterName() + " Character Builder Terminal", petAbilityNames, "handlePetAbilitySelection", false);
                 return SCRIPT_CONTINUE;
             }
             newAbilityList = new int[chAbilityList.length + 1];
-            for (int i = 0; i < chAbilityList.length; i++)
-            {
-                newAbilityList[i] = chAbilityList[i];
-            }
+            System.arraycopy(chAbilityList, 0, newAbilityList, 0, chAbilityList.length);
             newAbilityList[newAbilityList.length - 1] = petAbilityList[idx];
         }
         else
@@ -10530,13 +10542,13 @@ public class terminal_character_builder extends script.base_script
             newAbilityList[0] = petAbilityList[idx];
         }
         setObjVar(player, "ch.petAbility.abilityList", newAbilityList);
-        refreshMenu(player, "Select the desired Pet Ability", "Test Center Terminal", petAbilityNames, "handlePetAbilitySelection", false);
+        refreshMenu(player, "Select the desired Pet Ability", getClusterName() + " Character Builder Terminal", petAbilityNames, "handlePetAbilitySelection", false);
         return SCRIPT_CONTINUE;
     }
 
     public void handleJediOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired Jedi option", "Test Center Terminal", JEDI_OPTIONS, "handleJediSelect", false);
+        refreshMenu(player, "Select the desired Jedi option", getClusterName() + " Character Builder Terminal", JEDI_OPTIONS, "handleJediSelect", false);
     }
 
     public int handleJediSelect(obj_id self, dictionary params) throws InterruptedException
@@ -10572,7 +10584,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_OVERRIDE;
         }
         String prompt = "Select the desired armor option";
-        String title = "Test Center Terminal";
+        String title = getClusterName() + " Character Builder Terminal";
         int pid = 0;
         switch (idx)
         {
@@ -10669,7 +10681,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", CRYSTAL_OPTIONS, "handleCrystalSelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", CRYSTAL_OPTIONS, "handleCrystalSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -10890,7 +10902,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", SABER_OPTIONS, "handleSaberSelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", SABER_OPTIONS, "handleSaberSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -11010,7 +11022,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired armor option", "Test Center Terminal", ROBE_OPTIONS, "handleRobeSelect", false);
+        refreshMenu(player, "Select the desired armor option", getClusterName() + " Character Builder Terminal", ROBE_OPTIONS, "handleRobeSelect", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -11163,7 +11175,7 @@ public class terminal_character_builder extends script.base_script
             cleanScriptVars(player);
             return;
         }
-        if (draw == false)
+        if (!draw)
         {
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL_REFRESH, title, options, myHandler, false, false);
             sui.listboxUseOtherButton(pid, "Back");
@@ -11185,7 +11197,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handlePublishOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired Publish 27 option", "Test Center Terminal", PUBLISH_OPTIONS, "handlePublishOptions", false);
+        refreshMenu(player, "Select the desired Publish 27 option", getClusterName() + " Character Builder Terminal", PUBLISH_OPTIONS, "handlePublishOptions", false);
     }
 
     public int handlePublishOptions(obj_id self, dictionary params) throws InterruptedException
@@ -11200,7 +11212,7 @@ public class terminal_character_builder extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", "Test Center Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -11332,7 +11344,7 @@ public class terminal_character_builder extends script.base_script
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
         }
-        refreshMenu(player, "Select the desired option", "Test Center Terminal", PUBLISH_OPTIONS, "handlePublishOptions", false);
+        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", PUBLISH_OPTIONS, "handlePublishOptions", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -11651,7 +11663,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleDraftSchematicsOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired crafting profession", "Test Center Terminal", CRAFTING_PROFESSIONS, "handleDraftSchematicsList", false);
+        refreshMenu(player, "Select the desired crafting profession", getClusterName() + " Character Builder Terminal", CRAFTING_PROFESSIONS, "handleDraftSchematicsList", false);
     }
 
     public int handleDraftSchematicsList(obj_id self, dictionary params) throws InterruptedException
@@ -11698,7 +11710,7 @@ public class terminal_character_builder extends script.base_script
             int oldpid = utils.getIntScriptVar(player, "character_builder.qualityPercentagePID");
             sui.closeSUI(player, oldpid);
         }
-        refreshMenu(player, "Select a profession draft schematic.  Schematics that require items in addition to resources may not be crafted properly (armor, weapons, droids).  Instead, use this to select the items required for their schematic and then use the crafting tool.", "Test Center Terminal", schematics, "handleSchematicSelect", false);
+        refreshMenu(player, "Select a profession draft schematic.  Schematics that require items in addition to resources may not be crafted properly (armor, weapons, droids).  Instead, use this to select the items required for their schematic and then use the crafting tool.", getClusterName() + " Character Builder Terminal", schematics, "handleSchematicSelect", false);
         int pid = sui.inputbox(self, player, "A high crafting percentage can result in a crafted item that players cannot create legally.", sui.OK_CANCEL, "Crafting Percentage", sui.INPUT_NORMAL, null, "handleCraftQualityPercentage", null);
         utils.setScriptVar(player, "character_builder.qualityPercentagePID", pid);
         return SCRIPT_CONTINUE;
@@ -11770,7 +11782,7 @@ public class terminal_character_builder extends script.base_script
             int oldpid = utils.getIntScriptVar(player, "character_builder.qualityPercentagePID");
             sui.closeSUI(player, oldpid);
         }
-        refreshMenu(player, "Select the draft schematic.  Schematics that require items in addition to resources may not be crafted properly (armor, weapons, droids).  Instead, use this to select the items required for their schematic and then use the crafting tool.", "Test Center Terminal", schematics, "handleSchematicSelect", false);
+        refreshMenu(player, "Select the draft schematic.  Schematics that require items in addition to resources may not be crafted properly (armor, weapons, droids).  Instead, use this to select the items required for their schematic and then use the crafting tool.", getClusterName() + " Character Builder Terminal", schematics, "handleSchematicSelect", false);
         int pid = sui.inputbox(self, player, "A high crafting percentage can result in a crafted item that players cannot create legally. (999 max)", sui.OK_CANCEL, "A high crafting percentage ", sui.INPUT_NORMAL, null, "handleCraftQualityPercentage", null);
         utils.setScriptVar(player, "character_builder.qualityPercentagePID", pid);
         return SCRIPT_CONTINUE;
@@ -11795,9 +11807,9 @@ public class terminal_character_builder extends script.base_script
 
     public void grantChronicleSkills(obj_id objPlayer, String[] strSkillList) throws InterruptedException
     {
-        for (int intI = 0; intI < strSkillList.length; intI++)
+        for (String s : strSkillList)
         {
-            grantSkill(objPlayer, strSkillList[intI]);
+            grantSkill(objPlayer, s);
         }
     }
 }
