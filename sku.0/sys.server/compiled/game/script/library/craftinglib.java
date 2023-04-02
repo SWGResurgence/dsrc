@@ -126,7 +126,12 @@ public class craftinglib extends script.base_script
     public static final int STATION_TYPE_STRUCTURE = 1536;
     public static final int STATION_TYPE_WEAPON = 526369;
     public static final int STATION_TYPE_WEAPON_TOOL = 524321;
+    public static final int STATION_TYPE_POOL = 328768;
     public static final int STATION_TYPE_SPACE = 393216;
+    public static final int STATION_TYPE_JEDI_MEDITATION_ROOM = 327744;
+    public static final int STATION_TYPE_SITH_MEDITATION_ROOM = 327745;
+    public static final int STATION_TYPE_HANGAR = 458816;
+    public static final int STATION_TYPE_ATAT = 491584;
     public static final int STATION_TYPE_GARAGE = 524329;
     public static final string_id RESEARCH_CENTER_MESSAGE = new string_id("city/city", "research_center_message");
     public static final string_id MANUFACTURING_CENTER_MESSAGE = new string_id("city/city", "manufacturing_center_message");
@@ -1778,7 +1783,27 @@ public class craftinglib extends script.base_script
         }
         if (craftingType == STATION_TYPE_GARAGE)
         {
-            return "tcg_garage_crafting_station, weapon_station";
+            return "tcg_garage_artisan_buff, tcg_garage_armor_buff, tcg_garage_weapons_buff, weapon_station";
+        }
+        if (craftingType == STATION_TYPE_HANGAR)
+        {
+            return "tcg_hanger_1_buff, tcg_hanger_2_buff, tcg_hanger_3_buff, tcg_hanger_4_buff, space_station";
+        }
+        if (craftingType == STATION_TYPE_POOL)
+        {
+            return "tcg_relaxation_pool_buff, armor_station";
+        }
+        if (craftingType == STATION_TYPE_JEDI_MEDITATION_ROOM)
+        {
+            return "tcg_meditation_rooms_buff, weapon_station";
+        }
+        if (craftingType == STATION_TYPE_SITH_MEDITATION_ROOM)
+        {
+            return "tcg_meditation_rooms_buff, weapon_station";
+        }
+        if (craftingType == STATION_TYPE_ATAT)
+        {
+            return "tcg_at_at_house_1_buff, tcg_at_at_house_2_buff, weapon_station";
         }
         return null;
     }
