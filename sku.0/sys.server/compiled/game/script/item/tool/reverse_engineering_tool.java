@@ -12,7 +12,7 @@ public class reverse_engineering_tool extends script.base_script
     public static final String STATIC_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
     public static final String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
     public static final String SPECIAL_MOD_TABLE = "datatables/crafting/reverse_engineering_special_mods.iff";
-    public static final String MOD_BIT_TEMPLATE = "object/tangible/component/reverse_engineering/modifier_bits/modifier_bit.iff";
+    public static final String MOD_BIT_TEMPLATE = "object/tangible/component/reverse_engineering/modifier_bit.iff";
     public static final String NO_PUP = "no_pup";
     public String TYPE_SELECTION = "";
     public static final String[] POWER_BIT_TEMPLATE = 
