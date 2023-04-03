@@ -7,6 +7,7 @@ import java.util.Vector;
 
 public class mission_dynamic_base extends script.systems.missions.base.mission_base
 {
+    public static final int BH_MISSION_PAYOUT_BONUS = Integer.parseInt(getConfigSetting("GameServer", "bhMissionPayoutBonus"));
     public static final float MIN_DESTROY_DISTANCE = 350.0f;
     public static final int FACTION_DELIVER_REWARD_VALUE = 150;
     public static final int FACTION_REWARD_VALUE = 100;
@@ -727,7 +728,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             intReward = 20 + intDifficulty;
         }
-        intReward = intReward * 150 + rand(-100, 300);
+        intReward = intReward * BH_MISSION_PAYOUT_BONUS + rand(0, 1000);
         obj_id groupObject = getGroupObject(objCreator);
         if (isIdValid(groupObject))
         {
