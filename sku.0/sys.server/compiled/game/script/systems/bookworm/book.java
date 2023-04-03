@@ -69,11 +69,21 @@ public class book extends script.base_script
         {
             setSUIProperty(page, "pageText.text", "Editable", "False");
         }
-        setSUIProperty(page, "pageText.text", "GetsInput", "True");
-        setSUIProperty(page, "outputPage.text.LocalText", "Text", getStringObjVar(book, "book.title"));
-        setSUIProperty(page, "btnOk", "Text", "Save");
-        setSUIProperty(page, "bg.caption.text", "LocalText", "Edit Book");
-        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
+        setSUIProperty(page, "pageText.text", "GetsInput", "True"); // allow copy and pasting.
+        setSUIProperty(page, "outputPage.text", "Text", getStringObjVar(book, "book.title"));//title
+        setSUIProperty(page, "btnOk", "Text", "Save");//save button
+        if (getCrafter(book) == who) //only the creator of the book can edit it -- show View Book instead.
+        {
+            setSUIProperty(page, "btnOk", "Text", "Save");//save button
+            setSUIProperty(page, "bg.caption.text", "LocalText", "Edit Book");
+            subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
+        }
+        else
+        {
+            setSUIProperty(page, "btnOk", "Text", "Close");//
+            setSUIProperty(page, "bg.caption.text", "LocalText", "View Book");
+        }
+
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
         setSUIAssociatedObject(page, book);
