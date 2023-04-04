@@ -456,14 +456,14 @@ sl_dec_taunt	tauntBuff			2	command.combatFeint	600	private_taunt_bonus	-50		0		0
 sl_inc_dmg	dmgBuff			2	command.highYield	600	combat_multiply_damage_dealt	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sl_inc_armor	armorBuff			2	command.powerBoost	600	private_armor_bonus	1200		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 calledShot	calledShot			1	command.calledShot	30		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-roadmapFsClicky	genBuff_4			50	buffs.genericBuff	30	strength_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapBhClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapCommandoClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapOfficerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapMedicClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapSpyClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapSmugglerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-roadmapEntertainerClicky	genBuff_4			50	buffs.genericBuff	120	healing_music_wound	25	healing_dance_wound	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapFsClicky	genBuffD_10			50	buffs.genericBuff	30	strength_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapBhClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapCommandoClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapOfficerClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapMedicClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapSpyClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapSmugglerClicky	genBuffD_10			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapEntertainerClicky	genBuffD_10			50	buffs.genericBuff	120	healing_music_wound	25	healing_dance_wound	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towMeleeDs_1	genBuff_4			20	command.powerBoost	30	private_melee_dmg_shield	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towMeleeDs_2	genBuff_4			25	command.powerBoost	30	private_melee_dmg_shield	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towMeleeDs_3	genBuff_4			30	command.powerBoost	30	private_melee_dmg_shield	35		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -583,9 +583,9 @@ npeRngSpeedLongDuration	genBuff_4			4	buffs.spiceAction	900	precision_modified	5
 npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHealthMinor	genBuff_3			19	command.regeneration	300	constitution_modified	30		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	1800	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+towCrystalOffenseBurst	genBuffA_1			60	command.detonateDroid	1800	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDefenseBurst	genBuffA_2			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDotImmunity	genBuffD_1			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHelmetAccuracy	genBuff_1			90	command.aim	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towGlovesHealEff	genBuff_1			90	command.sampledna	-1	constitution_modified	30	agility_modified	30	stamina_modified	30	expertise_healing_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towCrystalUberCombat	towCrystal	haste		60	command.dazzle	1800	constitution_modified	200	stamina_modified	200	precision_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1021,7 +1021,7 @@ criticalAcidEffect	criticalEffect			10	command.concussionShot	3	critical_hit_vul
 criticalElectricEffect	criticalEffect			10	command.shock	6	glancing_blow_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalImmunity	criticalEffect			100	state.anger	6		0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 contentClickDetectionAcc2	genBuff_4			45	command.aim	600	detect_hidden	30	luck_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-selonianPSG	genBuff_3			45	buffs.genericBuff	180	agility_modified	30	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+selonianPSG	genBuffA_3			45	buffs.genericBuff	180	agility_modified	30	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 proc_generic_test	proc_generic_test			50	command.regeneration	-1	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 reac_generic_test	reac_generic_test			50	command.powerBoost	-1	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bh_innate_assault	bh_innate_assault			10	command.aim	3	expertise_action_all	90		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
