@@ -575,7 +575,7 @@ public class vehicle_control_device extends script.base_script
         {
             status = false;
         }
-        if (status == false)
+        if (status == false && getIntObjVar(pcd, "difficultyClass") != 1)
         {
             sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
         }

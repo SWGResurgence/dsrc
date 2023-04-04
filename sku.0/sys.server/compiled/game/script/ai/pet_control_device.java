@@ -1891,7 +1891,7 @@ public class pet_control_device extends script.base_script
         final int MAX_HAM_VALUE = 20000;
         final int MAX_HIT_VALUE = 500;
         final int MAX_DAM_VALUE = 1500;
-        if (getIntObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[HEALTH]) > MAX_HAM_VALUE || getIntObjVar(pcd, "creature_attribs.toHitChance") > MAX_HIT_VALUE || getIntObjVar(pcd, "creature_attribs.defenseValue") > MAX_HIT_VALUE || getIntObjVar(pcd, "creature_attribs.minDamage") > MAX_DAM_VALUE || getIntObjVar(pcd, "creature_attribs.maxDamage") > MAX_DAM_VALUE)
+        if ((getIntObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[HEALTH]) > MAX_HAM_VALUE || getIntObjVar(pcd, "creature_attribs.toHitChance") > MAX_HIT_VALUE || getIntObjVar(pcd, "creature_attribs.defenseValue") > MAX_HIT_VALUE || getIntObjVar(pcd, "creature_attribs.minDamage") > MAX_DAM_VALUE || getIntObjVar(pcd, "creature_attribs.maxDamage") > MAX_DAM_VALUE) && getIntObjVar(pcd, "difficultyClass") != 1)
         {
             sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
             return false;
