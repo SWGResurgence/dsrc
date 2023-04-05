@@ -2109,7 +2109,7 @@ public class base_player extends script.base_script
                 attachScript(self, "systems.respec.click_combat_respec");
                 messageTo(self, "delayRespecInstructions", null, 1, false);
             }
-            if (hasObjVar(self, "npe.skippingTutorial"))
+            if (hasObjVar(self, "npe.skippingTutorial") || getLevel(self) == 1)
             {
                 location origin = getLocation(self);
                 location fighting = new location(3521.0f, 0.0f, -4821.0f, origin.area);
