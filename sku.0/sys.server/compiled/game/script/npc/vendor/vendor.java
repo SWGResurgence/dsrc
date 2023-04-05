@@ -90,7 +90,7 @@ public class vendor extends script.base_script
                 {
                     if (isIdValid(containerList[idx]) && exists(containerList[idx]) && (reqClass == 0 || reqClass == idx))
                     {
-                        obj_id objectForSale = obj_id.NULL_ID;
+                        obj_id objectForSale;
                         if (static_item.isStaticItem(item))
                         {
                             objectForSale = static_item.createNewItemFunction(item, containerList[idx]);
