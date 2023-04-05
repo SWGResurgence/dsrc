@@ -22,12 +22,12 @@ public class vendor extends script.base_script
     public static final int REBEL = 11;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        messageTo(self, "handleInitializeVendor", null, 10, true);
+        messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        messageTo(self, "handleInitializeVendor", null, 10, true);
+        messageTo(self, "handleInitializeVendor", null, 10, false);
         return SCRIPT_CONTINUE;
     }
     public int handleInitializeVendor(obj_id self, dictionary params) throws InterruptedException
@@ -247,7 +247,7 @@ public class vendor extends script.base_script
             }
         }
         removeObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR);
-        messageTo(self, "handleInitializeVendor", null, 10, true);
+        messageTo(self, "handleInitializeVendor", null, 10, false);
     }
 
 }
