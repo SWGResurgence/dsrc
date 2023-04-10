@@ -20,7 +20,6 @@ public class component_attrib_mod extends script.base_script
         {
             names[idx] = "health_bonus";
             attribs[idx] = "+" + getIntObjVar(self, "attribute.bonus.0");
-
             idx++;
             if (idx >= names.length)
             {

@@ -78,6 +78,82 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("clipboard"))
+        {
+            String clipboard = "";
+            while (tok.hasMoreTokens())
+            {
+                clipboard += tok.nextToken() + " ";
+            }
+            if (clipboard != null && !clipboard.equals(""))
+            {
+                broadcast(self,"Not enough arguments. Usage: /developer clipboard [location]");
+            }
+            if (clipboard.equals("location"))
+            {
+                String locationString = getLocation(self).toClipboardFormat();
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", locationString);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                broadcast(self, "Location copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            if (clipboard.equals("scripts"))
+            {
+                String scriptString = "";
+                String[] scripts = getScriptList(target);
+                for (String s : scripts)
+                {
+                    String removed = s.replace("script.", "");
+                    scriptString += removed + "\n";
+                }
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", scriptString);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD - SCRIPTS");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                broadcast(self, "Scripts copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            if (clipboard.equals("objvars"))
+            {
+                obj_var_list ovl = getObjVarList(target, "");
+                String objvarString = "";
+                if (ovl != null)
+                {
+                    for (int i = 0; i < ovl.getNumItems(); i++)
+                    {
+                        obj_var ov = ovl.getObjVar(i);
+                        objvarString += ov.getName() + " = " + ov + "\n";
+                    }
+                }
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", objvarString);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD - SCRIPTS");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                broadcast(self, "Objvars copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("say"))
         {
             String speech = tok.nextToken();
