@@ -19,13 +19,21 @@ public class terminal_space extends script.terminal.base.base_terminal {
     public int OnPreloadComplete(obj_id self) throws InterruptedException {
         if (getTemplateName(self).contains("portable")) {
             obj_id building = structure.getContainingBuilding(self);
-            if (isIdValid(building)) {
-                setObjVar(building, "travel.point_name", "Portable Launch Location");
+            if (hasScript(building,"structure.permanent_structure"))
+            {
+                if (isIdValid(building) && player_structure.isBuilding(building)) {
+                    setObjVar(building, "travel.point_name", "Portable Launch Location");
+                }
+                else
+                {
+                    System.out.println("WARNING: terminal_space.OnPreloadComplete -- Terminal is in a building, but the building is a player structure.");
+                }
             }
             else
             {
-                LOG("space__to_ground", "terminal_space.OnPreloadComplete -- portable terminal not in a building");
+                System.out.println("NOTICE: terminal_space.OnPreloadComplete -- Terminal is in a building, but the building is not a player structure.");
             }
+
         }
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
