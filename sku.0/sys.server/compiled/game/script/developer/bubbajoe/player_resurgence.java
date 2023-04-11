@@ -124,15 +124,15 @@ public class player_resurgence extends script.base_script
         }
         if (dungeonStatus.equals("Inactive"))
         {
-            dungeonStatus = "\\#F32B2BInactive\\#FFFFFF";
+            dungeonStatus = "\\#F32B2BInactive\\#.";
         }
         else if (dungeonStatus.equals("Active"))
         {
-            dungeonStatus = "\\#7CFC00Active\\#FFFFFF";
+            dungeonStatus = "\\#7CFC00Active\\#.";
         }
         else if (dungeonStatus.equals("Engaged"))
         {
-            dungeonStatus = "\\#EDBB17Engaged\\#FFFFFF";
+            dungeonStatus = "\\#EDBB17Engaged\\#.";
         }
         return dungeonStatus;
     }
