@@ -9,6 +9,20 @@ import script.obj_id;
 public class emperors_hand_loot extends script.base_script {
 	public emperors_hand_loot() {
 	}
+    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.legacy.hand");
+        setObjVar(tatooine, "dungeon_finder.legacy.hand", "Active");
+        return SCRIPT_CONTINUE;
+    }
+    public int OnDestroy(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.legacy.hand");
+        setObjVar(tatooine, "dungeon_finder.legacy.hand", "Inactive");
+        return SCRIPT_CONTINUE;
+    }
 	public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
 		obj_id corpseInventory = utils.
 		getInventoryContainer(self);
