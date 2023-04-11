@@ -80,24 +80,25 @@ public class player_resurgence extends script.base_script
     public int listAllDungeonStatuses(obj_id self)
     {
         String prompt;
-        prompt = "Content Lockouts:\n";
+        prompt = "Content\n";
+        prompt += "\n";
         prompt = "\tCommon\n";
-        prompt += "\t\tEmperor's Hand: " + getDungeonStatus(self, "legacy.hand") + "\n";
+        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n";
         prompt = "\tWorld Bosses\n";
-        prompt += "\t\tElder Ancient Krayt Dragon: " + getDungeonStatus(self, "world_boss.krayt") + "\n";
-        prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus(self, "world_boss.peko") + "\n";
-        prompt += "\t\tDarth Gizmo: " + getDungeonStatus(self, "world_boss.gizmo") + "\n";
-        prompt += "\t\tPax Vizla: " + getDungeonStatus(self, "world_boss.pax") + "\n";
+        prompt += "\t\tElder Ancient Krayt Dragon: " + getDungeonStatus("world_boss.krayt") + "\n";
+        prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus("world_boss.peko") + "\n";
+        prompt += "\t\tDarth Gizmo: " + getDungeonStatus("world_boss.gizmo") + "\n";
+        prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
         prompt = "\tDungeons\n";
         prompt += "\t\tGeonosian Biolab\n";
-        prompt += "\t\t\tAcklay: " + getDungeonStatus(self, "dungeon.geo_madbio.acklay") + "\n";
-        prompt += "\t\t\tReek: " + getDungeonStatus(self, "dungeon.geo_madbio.reek") + "\n";
-        prompt += "\t\t\tNexu: " + getDungeonStatus(self, "dungeon.geo_madbio.nexu") + "\n";
+        prompt += "\t\t\tAcklay: " + getDungeonStatus("dungeon.geo_madbio.acklay") + "\n";
+        prompt += "\t\t\tReek: " + getDungeonStatus("dungeon.geo_madbio.reek") + "\n";
+        prompt += "\t\t\tNexu: " + getDungeonStatus("dungeon.geo_madbio.nexu") + "\n";
         prompt += "\t\tDeath Watch Bunker\n";
-        prompt += "\t\t\tDeath Watch Overlord: " + getDungeonStatus(self, "dungeon.death_watch_bunker.overlord") + "\n";
+        prompt += "\t\t\tDeath Watch Overlord: " + getDungeonStatus("dungeon.death_watch_bunker.overlord") + "\n";
         prompt += "\tDynamic Dungeons\n";
-        prompt += "\t\tCzerka Hideout: " + getDungeonStatus(self, "dynamic_dungeon.czerka") + "\n";
-        prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus(self, "dynamic_dungeon.caverns") + "\n";
+        prompt += "\t\tCzerka Hideout: " + getDungeonStatus("dynamic_dungeon.czerka") + "\n";
+        prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus("dynamic_dungeon.caverns") + "\n";
 
         int page = createSUIPage("/Script.messageBox", self, self);
         setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
@@ -113,10 +114,26 @@ public class player_resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public String getDungeonStatus(obj_id self, String dungeonName)
+    public String getDungeonStatus(String dungeonName)
     {
         obj_id tatooine = getPlanetByName("tatooine");
         String dungeonStatus = getStringObjVar(tatooine, "dungeon_finder." + dungeonName);
+        if (dungeonStatus == null || dungeonStatus.equals(""))
+        {
+            dungeonStatus = "Unknown";
+        }
+        if (dungeonStatus.equals("Inactive"))
+        {
+            dungeonStatus = "\\#F32B2BInactive\\#FFFFFF";
+        }
+        else if (dungeonStatus.equals("Active"))
+        {
+            dungeonStatus = "\\#7CFC00Active\\#FFFFFF";
+        }
+        else if (dungeonStatus.equals("Engaged"))
+        {
+            dungeonStatus = "\\#EDBB17Engaged\\#FFFFFF";
+        }
         return dungeonStatus;
     }
 }
