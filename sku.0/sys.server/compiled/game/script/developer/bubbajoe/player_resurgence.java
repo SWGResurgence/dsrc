@@ -102,11 +102,11 @@ public class player_resurgence extends script.base_script
         int page = createSUIPage("/Script.messageBox", self, self);
         setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
         setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-        setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD - VARIABLES");
-        setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
-        setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+        setSUIProperty(page, "bg.caption.lblTitle", "Text", "Dungeon Finder: " + getClusterName());
+        setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
+        setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
-        setSUIProperty(page, "btnCancel", "Visible", "false");
+        setSUIProperty(page, "btnCancel", "Visible", "true");
         setSUIProperty(page, "btnRevert", "Visible", "false");
         setSUIProperty(page, "btnOk", "Visible", "false");
         showSUIPage(page);
