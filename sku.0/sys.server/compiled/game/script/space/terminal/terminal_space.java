@@ -33,7 +33,6 @@ public class terminal_space extends script.terminal.base.base_terminal {
             {
                 System.out.println("NOTICE: terminal_space.OnPreloadComplete -- Terminal is in a building, but the building is not a player structure.");
             }
-
         }
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
