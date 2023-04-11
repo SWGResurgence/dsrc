@@ -13417,6 +13417,7 @@ public class base_player extends script.base_script
 
     public int cmdReadyCheck(obj_id self, obj_id target, String param, dictionary params, float defaultTime) throws InterruptedException
     {
+        chat.chat(self, "Are we ready?");
         if (combat.isInCombat(self))
         {
             broadcast(self, "You are in combat and cannot start a ready check now.");
@@ -13429,7 +13430,7 @@ public class base_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
-        String prompt = getPlayerFullName(self) + " has started a ready check. Please respond with the OK or CANCEL (ESC).\n\n";
+        String prompt = getPlayerFullName(self) + " has started a ready check. Please respond with OK (READY) or CANCEL (NOT READY).\n\n";
         for (obj_id indi : groupMembers)
         {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "READY CHECK", "handleReadyCheck");
