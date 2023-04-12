@@ -410,5 +410,60 @@ public class resurgence extends script.base_script
         sui.msgbox(self, self, "Memory usage: " + memory + " bytes.", sui.OK_ONLY, "Memory Usage", "noHandler");
         debugServerConsoleMsg(self, "requestMemoryUsage() - memory usage requested.");
     }
-
+    public static void warpGroup(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
+            }
+        }
+    }
+    public static void warpGroupCell(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0);
+            }
+        }
+    }
+    public static void warpGroupToPlayer(obj_id groupId, obj_id player) throws InterruptedException
+    {
+        location loc = getLocation(player);
+        warpGroup(groupId, loc);
+    }
+    public static void warpGroupToObjectByName(obj_id groupId, String objectName, float tolerance) throws InterruptedException
+    {
+        obj_id[] objects = getAllObjectsWithTemplate(getLocation(groupId), tolerance, objectName);
+        if (objects == null || objects.length == 0)
+        {
+            return;
+        }
+        location loc = getLocation(objects[0]);
+        warpGroup(groupId, loc);
+    }
+    public static void rewardGroup(obj_id group_id, String item, boolean noTrade) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group_id);
+        for (obj_id member : members)
+        {
+            obj_id inventory = utils.getInventoryContainer(member);
+            if (isIdValid(member))
+            {
+                obj_id item_id = createObject(item, inventory, "");
+                if (isIdValid(item_id))
+                {
+                    if (noTrade)
+                    {
+                        setObjVar(item_id, "noTrade", true);
+                    }
+                }
+            }
+        }
+    }
 }

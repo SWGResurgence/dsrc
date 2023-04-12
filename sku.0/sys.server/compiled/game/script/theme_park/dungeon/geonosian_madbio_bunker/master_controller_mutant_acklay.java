@@ -16,6 +16,20 @@ public class master_controller_mutant_acklay extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay");
+        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay", "Active");
+        return SCRIPT_CONTINUE;
+    }
+    public int OnDestroy(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay");
+        setObjVar(tatooine, "dungeon_finder.dungeon.geo_madbio.acklay", "Inactive");
+        return SCRIPT_CONTINUE;
+    }
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -32,11 +46,6 @@ public class master_controller_mutant_acklay extends script.base_script
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
-        /*if (pet_lib.isPet(killer))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION ADVENTURERS: The Mutant Acklay Abomination has been destroyed. " + getPlayerName(pet_lib.getMaster(killer)));
-        }*
-        sendSystemMessageGalaxyTestingOnly("ATTENTION ADVENTURERS: The Mutant Acklay Abomination has been destroyed. " + getName(killer));*/
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException

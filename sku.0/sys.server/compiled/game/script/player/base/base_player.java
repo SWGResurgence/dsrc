@@ -13304,31 +13304,27 @@ public class base_player extends script.base_script
             {
                 if (hasObjVar(content, "noTrade"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template [" +  getTemplateName(content) + "] " + red(" [NO TRADE] ") + colors_hex.FOOTER +  "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template [" +  getTemplateName(content) + "] " + red(" [NO TRADE] ") + colors_hex.FOOTER +  "\n";
                 }
                 else if (getTemplateName(content).contains("character_builder"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + construction(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + construction(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.portamedic"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.toy"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
-                }
-                else if (hasScript(content, "systems.city.city_hire"))
-                {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasObjVar(content, "item.temporary.time_stamp"))
                 {
-                    prompt += "[NwID  " + content + "]" + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "]" + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + "\n";
                 }
             }
             prompt += " ------------------ " + gold("End of Inventory") + " ------------------ " + "\n";
@@ -13421,22 +13417,23 @@ public class base_player extends script.base_script
 
     public int cmdReadyCheck(obj_id self, obj_id target, String param, dictionary params, float defaultTime) throws InterruptedException
     {
-        broadcast(self, "Initiating Ready Check");
-        if (!group.isGrouped(self))
-        {
-            broadcast(self, "You are not in a group!");
-            return SCRIPT_CONTINUE;
-        }
+        chat.chat(self, "Are we ready?");
         if (combat.isInCombat(self))
         {
             broadcast(self, "You are in combat and cannot start a ready check now.");
             return SCRIPT_CONTINUE;
         }
+        broadcast(self, "Initiating Ready Check");
+        if (!group.isGrouped(self))
+        {
+            broadcast(self, "Ready check failed, you are not grouped.");
+            return SCRIPT_CONTINUE;
+        }
         obj_id[] groupMembers = getGroupMemberIds(self);
-        String prompt = getPlayerFullName(self) + " has started a ready check. Please respond with the OK or CANCEL (ESC).\n\n";
+        String prompt = getPlayerFullName(self) + " has started a ready check. Please respond with OK (READY) or CANCEL (NOT READY).\n\n";
         for (obj_id indi : groupMembers)
         {
-            sui.msgbox(indi, indi, prompt, sui.OK_CANCEL, "READY CHECK", "handleReadyCheck");
+            sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "READY CHECK", "handleReadyCheck");
         }
         return SCRIPT_CONTINUE;
     }

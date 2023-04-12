@@ -78,6 +78,84 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("clipboard"))
+        {
+            String clipboard = tok.nextToken();
+            if (clipboard == null)
+            {
+                broadcast(self,"Not enough arguments. Usage: /developer clipboard [location] [scripts] [objvars]");
+            }
+            if (clipboard.equals("location"))
+            {
+                // TODO: 4/10/2023 location to clipboard
+                String locationString = null;// = getLocation(self).toClipboardFormat();
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", "");
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                broadcast(self, "Location copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            if (clipboard.equals("scripts"))
+            {
+                String scriptString = "";
+                String[] scripts = getScriptList(target);
+                for (String s : scripts)
+                {
+                    String removed = s.replace("script.", "");
+                    scriptString += removed + "\n";
+                }
+                String wholePrompt = "Scripts for " + target + ":\n" + scriptString;
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", wholePrompt);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD - SCRIPTS");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                flushSUIPage(page);
+                broadcast(self, "Scripts copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            if (clipboard.equals("objvars"))
+            {
+                obj_var_list ovl = getObjVarList(target, "");
+                String objvarString = "";
+                if (ovl != null)
+                {
+                    int ovCount = ovl.getNumItems();
+                    for (int i = 0; i < ovCount; i++)
+                    {
+                        obj_var ov = ovl.getObjVar(i);
+                        String ovName = ov.getName();
+                        objvarString += ovName + "\n";
+                    }
+                }
+                String objvarPrompt = "Objvars for " + target + ":\n" + objvarString;
+                int page = createSUIPage("/Script.messageBox", self, self);
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", objvarPrompt);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD - VARIABLES");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "false");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                broadcast(self, "Objvars copied to SUI. Press CTRL + C to copy to clipboard. (check keybinds)");
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("say"))
         {
             String speech = tok.nextToken();
@@ -689,7 +767,7 @@ public class player_developer extends base_script
             {
                 flytext += " " + tok.nextToken();
             }
-            showFlyText(self, unlocalized(flytext), 35.0f, colors.WHITE);
+            showFlyText(target, unlocalized(flytext), 2.0f, colors.WHITE);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("flytextTarget"))
@@ -1320,6 +1398,35 @@ public class player_developer extends base_script
                 }
             }
             return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("createJunkCache"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer createJunkCache [total amount] [min amt of each item] [max amt of each item]");
+            }
+            else
+            {
+                String corpseTemplate = "object/tangible/container/loot/large_container.iff";
+                location treasureLoc = getLocation(self);
+                obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
+                attachScript (treasureChest, "item.container.loot_crate_opened");
+                setName(treasureChest, "a cache of junk");
+                String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
+                int COUNT = Integer.parseInt(tok.nextToken());
+                int MIN_COUNT = Integer.parseInt(tok.nextToken());
+                int MAX_COUNT = Integer.parseInt(tok.nextToken());
+                String column = "note";
+                for (int i = 0; i < COUNT; i++)
+                {
+                    String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE)), column);
+                    obj_id junkItem = static_item.createNewItemFunction(junk, treasureChest);
+                    if (isIdValid(junkItem))
+                    {
+                        setCount(junkItem, rand(MIN_COUNT, MAX_COUNT));
+                    }
+                }
+            }
         }
         if (cmd.equalsIgnoreCase("playmusic"))
         {
