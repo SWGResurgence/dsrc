@@ -1399,6 +1399,43 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("createLootableCargo"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCargo <table> <amount>");
+            }
+            else
+            {
+                String table = tok.nextToken();
+                int amt = Integer.parseInt(tok.nextToken());
+                String corpseTemplate = "object/tangible/container/loot/large_container.iff";
+                location treasureLoc = getLocation(self);
+                obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
+                attachScript (treasureChest, "item.container.loot_crate_opened");
+                setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
+                loot.makeLootInContainer(treasureChest, table, amt, 300);
+                sendSystemMessageTestingOnly(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
+                obj_id[] contents = getContents(treasureChest);
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasScript(content, "item.special.nomove"))
+                        {
+                            detachScript(content, "item.special.nomove");
+                            broadcast(self, "Removing nomove script from " + content);
+                        }
+                        if (hasObjVar(content, "noTrade"))
+                        {
+                            removeObjVar(self, "noTrade");
+                            broadcast(self, "Removing No-Trade from " + content);
+                        }
+                    }
+                }
+                setDescriptionStringId(treasureChest, new string_id("A cargo container filled with various treasures. It is unknown how it got here..."));
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("createJunkCache"))
         {
             if (!tok.hasMoreTokens())
@@ -1481,6 +1518,55 @@ public class player_developer extends base_script
             {
                 String music = tok.nextToken();
                 playMusic(iTarget, music);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("getItemStringByName"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer getItemStringByName <item name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String itemName = tok.nextToken();
+                String prompt = "";
+                String[] items = dataTableGetStringColumnNoDefaults("datatables/item/master_item/master_item.iff", "name");
+                for (String item : items)
+                {
+                    if (item.contains(itemName))
+                    {
+                        prompt += item + "\n";
+                    }
+                }
+                int page = createSUIPage("/Script.messageBox", self, self);
+                String finalPrompt = "The following items were found with the name: " + itemName + "\n" + prompt;
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", finalPrompt);
+                setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+                setSUIProperty(page, "bg.caption.lblTitle", "Text", "Strings");
+                setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+                setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+                subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
+                setSUIProperty(page, "btnCancel", "Visible", "true");
+                setSUIProperty(page, "btnRevert", "Visible", "false");
+                setSUIProperty(page, "btnOk", "Visible", "false");
+                showSUIPage(page);
+                flushSUIPage(page);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("runScript"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer runScript <script name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String script = tok.nextToken();
+
             }
             return SCRIPT_CONTINUE;
         }
