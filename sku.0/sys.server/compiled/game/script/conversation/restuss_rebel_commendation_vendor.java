@@ -1,17 +1,13 @@
 package script.conversation;
 
 import script.*;
-import script.base_class.*;
-import script.base_script;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
-import script.library.factions;
 import script.library.prose;
 import script.library.utils;
 
-public class restuss_rebel_comms_vendor extends script.base_script {
+public class restuss_rebel_commendation_vendor extends script.base_script {
     public static final String c_stringFile = "conversation/restuss_rebel_comms_vendor";
 
     public boolean restuss_rebel_comms_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
