@@ -30,20 +30,19 @@ public class painter extends script.base_script
         return SCRIPT_CONTINUE;
     }
     public String header = "\n";
-    public int paint(obj_id self, obj_id[] targets) throws IOException
+    public void paint(obj_id self, obj_id[] targets) throws IOException
     {
-        for (int i = 0; i < targets.length; i++)
+        final BufferedImage image = new BufferedImage(8000, 8000, BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D graphics2D = image.createGraphics();
+        for (obj_id target : targets)
         {
-            location here = getLocation(targets[i]);
-            final BufferedImage image = new BufferedImage( 8000, 8000, BufferedImage.TYPE_INT_ARGB);
-            final Graphics2D graphics2D = image.createGraphics();
+            location here = getLocation(target);
             graphics2D.setPaint(Color.BLACK);
             graphics2D.drawOval((int) here.x, (int) here.z, 2, 2);
-            graphics2D.dispose();
-            ImageIO.write (image, "png", new File( "/home/swg/Desktop/test.png"));
         }
+        graphics2D.dispose();
+        ImageIO.write(image, "png", new File("/home/swg/swg-main/exe/linux/server/test.png"));
         broadcast(self, "Attempting to paint " + targets.length + " objects.");
-        return SCRIPT_CONTINUE;
     }
 
     public int OnSpeaking(obj_id self, String text) throws IOException

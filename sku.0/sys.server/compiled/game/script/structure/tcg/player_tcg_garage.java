@@ -10,7 +10,7 @@ public class player_tcg_garage extends base_script {
         if (isPlayer(item) && utils.isProfession(item, utils.TRADER)) {
             buff.applyBuff(item, "tcg_garage_artisan_buff");
             buff.applyBuff(item, "tcg_garage_armor_buff");
-            buff.applyBuff(item, "tcg_garage_weapon_buff");
+            buff.applyBuff(item, "tcg_garage_weapons_buff");
         }
         return SCRIPT_CONTINUE;
     }
@@ -22,7 +22,7 @@ public class player_tcg_garage extends base_script {
             buff.removeBuff(item, "tcg_garage_armor_buff");
         }
         if (isPlayer(item) && buff.hasBuff(item, "tcg_garage_weapon_buff")) {
-            buff.removeBuff(item, "tcg_garage_weapon_buff");
+            buff.removeBuff(item, "tcg_garage_weapons_buff");
         }
         return SCRIPT_CONTINUE;
     }

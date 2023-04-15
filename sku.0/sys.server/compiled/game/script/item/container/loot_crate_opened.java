@@ -1,15 +1,22 @@
 package script.item.container;
 
+import script.library.chat;
+import script.library.pet_lib;
 import script.obj_id;
 
 public class loot_crate_opened extends script.base_script
 {
+
     public loot_crate_opened()
     {
     }
-
+    public String TRIGGER_NEARBY = "lootCrateTriggerNearby";
+    public String TRIGGER_NEARBY_VISUAL = "clienteffect/level_granted.cef";
+    public String TRIGGER_NEARBY_SOUND= "sound/item_ding.snd";
+    public float TRIGGER_RADIUS = 5.2f;
     public int OnAttach(obj_id self) throws InterruptedException
     {
+        createTriggerVolume(TRIGGER_NEARBY, TRIGGER_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
 
@@ -25,7 +32,26 @@ public class loot_crate_opened extends script.base_script
         }
         debugServerConsoleMsg(self, "\n[SKYNET] Player " + transferer + " is attempting to move " + getName(item) + "(" + item + ") to " + destContainer + "\n");
         broadcast(transferer, "Note: This item will have it's No-Trade tag reapplied upon galaxy initialization.");
-        //@NOTE: This is a hack to transfer the item to the players inventory without breaking the no trade tag. If the item is STATIC, the tag will get reapplied on next load.
+        play2dNonLoopingSound(transferer, TRIGGER_NEARBY_SOUND);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnLostItem(obj_id self, obj_id objDestinationContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
+    {
+        if (getVolumeFree(self) == getTotalVolume(self))
+        {
+            destroyObject(self);
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnTriggerVolumeEntered(obj_id self, String strVolumeName, obj_id objPlayer) throws InterruptedException
+    {
+        if (strVolumeName.equals(TRIGGER_NEARBY))
+        {
+            if (isPlayer(objPlayer))
+            {
+                playClientEffectLoc(objPlayer, TRIGGER_NEARBY_VISUAL, getLocation(self), 0.1f);
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 }

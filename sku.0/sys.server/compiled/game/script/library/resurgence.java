@@ -410,5 +410,123 @@ public class resurgence extends script.base_script
         sui.msgbox(self, self, "Memory usage: " + memory + " bytes.", sui.OK_ONLY, "Memory Usage", "noHandler");
         debugServerConsoleMsg(self, "requestMemoryUsage() - memory usage requested.");
     }
+    public static void warpGroup(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
+            }
+        }
+    }
+    public static void warpGroupCell(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0);
+            }
+        }
+    }
+    public static void warpGroupToPlayer(obj_id groupId, obj_id player) throws InterruptedException
+    {
+        location loc = getLocation(player);
+        warpGroup(groupId, loc);
+    }
+    public static void warpGroupToObjectByName(obj_id groupId, String objectName, float tolerance) throws InterruptedException
+    {
+        obj_id[] objects = getAllObjectsWithTemplate(getLocation(groupId), tolerance, objectName);
+        if (objects == null || objects.length == 0)
+        {
+            return;
+        }
+        location loc = getLocation(objects[0]);
+        warpGroup(groupId, loc);
+    }
+    public static void rewardGroup(obj_id group_id, String item, boolean noTrade) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group_id);
+        for (obj_id member : members)
+        {
+            obj_id inventory = utils.getInventoryContainer(member);
+            if (isIdValid(member))
+            {
+                obj_id item_id = createObject(item, inventory, "");
+                if (isIdValid(item_id))
+                {
+                    if (noTrade)
+                    {
+                        setObjVar(item_id, "noTrade", true);
+                    }
+                }
+            }
+        }
+    }
+    public void echoToGroup(obj_id group, String message) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                sendConsoleMessage(member, message);
+            }
+        }
+    }
+    public void disarmGroup(obj_id group) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group);
+        for (obj_id member : members)
+        {
+            obj_id heldWeapon = getCurrentWeapon(member);
+            if (isIdValid(heldWeapon))
+            {
+                putIn(heldWeapon, utils.getInventoryContainer(member));
+            }
+        }
+    }
+    public void disarmPlayer(obj_id player) throws InterruptedException
+    {
+        obj_id heldWeapon = getCurrentWeapon(player);
+        if (isIdValid(heldWeapon))
+        {
+            putIn(heldWeapon, utils.getInventoryContainer(player));
+        }
+    }
 
+    public void ringBomb(obj_id player, location where, float radius)
+    {
+        String clientEffect = "clienteffect/bacta_bomb.cef";
+        float angle = rand(0, 360);
+        float distance = rand(1, 10);
+        float x = where.x + (float) Math.cos(angle) * distance;
+        float z = where.z + (float) Math.sin(angle) * distance;
+        float y = getHeightAtLocation(x, z);
+        location targetPoint = new location(x, y, z);
+        playClientEffectLoc(player, clientEffect, targetPoint, 0);
+    }
+
+    public void stripPlayer(obj_id player) throws InterruptedException
+    {
+        obj_id[] possessions = utils.getAllItemsInBankAndInventory(player);
+        for (obj_id possession : possessions)
+        {
+            if (isIdValid(possession))
+            {
+                destroyObject(possession);
+            }
+            else {
+                System.out.println("stripPlayer() - possession is invalid. ID: " + possession);
+            }
+        }
+    }
+
+    public int downloadCharacterData(obj_id avatar)
+    {
+        return SCRIPT_CONTINUE;
+    }
 }

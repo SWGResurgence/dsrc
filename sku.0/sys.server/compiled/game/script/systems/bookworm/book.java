@@ -5,6 +5,7 @@ package script.systems.bookworm;/*
 */
 
 import script.*;
+import script.library.buff;
 import script.library.sui;
 import script.library.utils;
 
@@ -69,17 +70,27 @@ public class book extends script.base_script
         {
             setSUIProperty(page, "pageText.text", "Editable", "False");
         }
-        setSUIProperty(page, "pageText.text", "GetsInput", "True");
-        setSUIProperty(page, "outputPage.text.LocalText", "Text", getStringObjVar(book, "book.title"));
-        setSUIProperty(page, "btnOk", "Text", "Save");
-        setSUIProperty(page, "bg.caption.text", "LocalText", "Edit Book");
-        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
+        setSUIProperty(page, "pageText.text", "GetsInput", "True"); // allow copy and pasting.
+        setSUIProperty(page, "outputPage.text", "Text", getStringObjVar(book, "book.title"));//title
+        setSUIProperty(page, "btnOk", "Text", "Save");//save button
+        if (getCrafter(book) == who) //only the creator of the book can edit it -- show View Book instead.
+        {
+            setSUIProperty(page, "btnOk", "Text", "Save");//save button
+            setSUIProperty(page, "bg.caption.text", "LocalText", "Edit Book");
+            subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
+        }
+        else
+        {
+            setSUIProperty(page, "btnOk", "Text", "Close");//
+            setSUIProperty(page, "bg.caption.text", "LocalText", "View Book");
+            subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "readText");
+        }
+
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
         setSUIAssociatedObject(page, book);
-        boolean showResult = showSUIPage(page);
+        showSUIPage(page);
         flushSUIPage(page);
-        String trackPage = "scriptFileName" + page;
         if (!utils.hasScriptVar(who, "pageId"))
         {
             utils.setScriptVar(book, "pageId", page);
@@ -93,7 +104,7 @@ public class book extends script.base_script
     {
         String bookText = params.getString("pageText.text.LocalText");
         obj_id player = sui.getPlayerId(params);
-        if (bookText.length() < 2000)
+        if (bookText.length() < 2000) //max length for objvars fyi
         {
             setObjVar(self, "book.text", bookText);
             broadcast(player, "You have modified this text within this book.");
@@ -103,6 +114,22 @@ public class book extends script.base_script
             broadcast(player, "The maximum word count for this book is 2000 words.");
         }
         sui.closeSUI(player, getIntObjVar(self, "bookPage"));
+        return SCRIPT_CONTINUE;
+    }
+
+    public int readText(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        if (!buff.hasBuff(player, "content_bookworm"))
+        {
+            buff.applyBuff(player, "content_bookworm");
+            playClientEffectLoc(player, "clienteffect/of_scatter.cef", getLocation(player), 1.0f);
+            broadcast(player, "You have read the contents of this book, and have gained the Bookworm buff.");
+        }
+        else
+        {
+            broadcast(player, "You had read the contents of this book.");
+        }
         return SCRIPT_CONTINUE;
     }
     public int handleName(obj_id self, dictionary paramsDict) throws InterruptedException

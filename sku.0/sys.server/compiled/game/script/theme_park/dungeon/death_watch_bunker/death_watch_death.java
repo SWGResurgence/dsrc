@@ -14,6 +14,12 @@ public class death_watch_death extends script.base_script
     public static final String TBL_DEATH_SPAWN = "datatables/spawning/dungeon/death_watch_bunker.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {
+        String creatureName = ai_lib.getCreatureName(self);
+        if (creatureName.equalsIgnoreCase("mand_bunker_dthwatch_gold"))
+        {
+            removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
+            setObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord", "Active");
+        }
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
@@ -70,6 +76,8 @@ public class death_watch_death extends script.base_script
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
+        removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
+        setObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord", "Inactive");
         return SCRIPT_CONTINUE;
     }
     public void createMyLoot(obj_id self) throws InterruptedException

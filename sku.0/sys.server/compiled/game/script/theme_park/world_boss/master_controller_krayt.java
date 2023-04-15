@@ -14,6 +14,23 @@ public class master_controller_krayt extends script.base_script
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
         return SCRIPT_CONTINUE;
     }
+
+    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Active");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnDestroy(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Inactive");
+        return SCRIPT_CONTINUE;
+    }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
@@ -28,6 +45,7 @@ public class master_controller_krayt extends script.base_script
         createStomachContents(self, corpseInventory);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isGod(killer))
@@ -37,9 +55,12 @@ public class master_controller_krayt extends script.base_script
         showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
         if (pet_lib.isPet(killer))
         {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(pet_lib.getMaster(killer)));
         }
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
+        else
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(killer));
+        }
         return SCRIPT_CONTINUE;
     }
 

@@ -14,4 +14,4 @@ updateRanges[UR_normal] = 0
 
 objvars =+["tcg.static_item_deed"="item_tcg_loot_reward_series4_relaxation_pool_deed_02_01", "structure.capacity_override"=450]
 
-scripts =+ [ "structure.tcg.player_tcg_relaxation_pool" ]
+scripts =+ [ "systems.crafting.crafting_structure_pool" ]

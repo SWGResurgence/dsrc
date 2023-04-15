@@ -1,90 +1,88 @@
 item	token7	limit	note
 s	i	i[0]	c
-item_limited_use_schematic_commando_ice_gun_04_01	50		CCV-Cryo Projector
-item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt
+object/tangible/loot/mustafar/cube_loot/cube_loot_1g.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1f.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1e.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1c.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1l.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1k.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1v.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1x.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1q.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1r.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1b.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1o.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1w.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1h.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1i.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1s.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1p.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1d.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1y.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1u.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1j.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1t.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1m.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1n.iff	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2i.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2p.iff	25		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2h.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2s.iff	25		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2e.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2b.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2r.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2t.iff	25		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2g.iff	25		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2q.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2c.iff	15		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2n.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2d.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2m.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2j.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2k.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2f.iff	10		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2o.iff	15		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_2l.iff	15		dimly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3b.iff	40		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3l.iff	65		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3g.iff	70		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3i.iff	70		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3m.iff	100		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	55		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3n.iff	50		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3c.iff	90		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3f.iff	65		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3k.iff	70		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3r.iff	35		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3p.iff	70		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3j.iff	90		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3h.iff	70		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3d.iff	90		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3o.iff	35		warmly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_3e.iff	70		warmly glowing
+item_tcg_loot_reward_series7_deed_vip_bunker	1000		Deed VIP Bunker
 item_schematic_ex_blaster_pistol_barrel	500		Exceptional Blaster Pistol Barrel Schematic
 item_schematic_ex_blaster_rifle_barrel	500		Exceptional Blaster Rifle Barrel Schematic
 item_schematic_ex_gas_cartridge	500		Exceptional Gas Cartridge Schematic
 item_schematic_ex_projectile_pistol_barrel	500		Exceptional Projectile Blaster Pistol Barrel Schematic
 item_schematic_ex_projectile_rifle_barrel	500		Exceptional Projectile Blaster Rifle Barrel Schematic
-item_schematic_ex_reinforcement_core	500		Exceptional Weapon Reinforcement Core Schematic
 item_schematic_ex_vibro_blade_unit	500		Exceptional Vibro Blade Unit Schematic
-item_schematic_vehicle_lava_res_kit	100		Lava Resistance Kit Schematic
-item_tcg_loot_reward_series3_mustafar_travel_advertisement	100		Travel Advertisement: Mustafar
-item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
+item_schematic_ex_reinforcement_core	500		Exceptional Weapon Reinforcement Core Schematic
 item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
-item_tcg_loot_reward_series7_deed_vip_bunker	250		Deed VIP Bunker
-item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
+item_schematic_vehicle_lava_res_kit	100		Lava Resistance Kit Schematic
+item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
 item_tow_ring_architect_04_01	100		Relic Ring of Architecture
-item_tow_ring_beast_master_04_01	150		Relic Ring of Beast Mastery
-item_tow_ring_domestics_04_01	150		Relic Ring of Domestics
-item_tow_ring_engineering_04_01	200		Relic Ring of Engineering
+item_tow_ring_beast_master_04_01	100		Relic Ring of Beast Mastery
+item_tow_ring_domestics_04_01	100		Relic Ring of Domestics
+item_tow_ring_engineering_04_01	175		Relic Ring of Engineering
 item_tow_ring_inspiration_04_01	100		Relic Ring of Inspired Entertainment
-item_tow_ring_munitions_04_01	200		Relic Ring of Munitions
-item_tow_ring_shipwright_04_01	300		Relic Ring of Shipwright
-item_tow_ring_shipwright_04_02	300		Relic Ring of Shipwright
+item_tow_ring_munitions_04_01	175		Relic Ring of Munitions
 item_tow_schematic_psg_05_01	500		Schematic: Old Republic Personal Shield
-object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1b.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1c.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1d.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1e.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1f.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1g.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1h.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1i.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1j.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1k.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1l.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1m.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1n.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1o.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1p.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1q.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1r.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1s.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1t.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1u.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1v.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1w.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1x.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_1y.iff	5		faintly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2b.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2c.iff	15		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2d.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2e.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2f.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2g.iff	25		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2h.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2i.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2j.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2k.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2l.iff	15		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2m.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2n.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2o.iff	15		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2p.iff	25		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2q.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2r.iff	10		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2s.iff	25		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_2t.iff	25		dimly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	55		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3b.iff	40		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3c.iff	90		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3d.iff	90		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3e.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3f.iff	65		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3g.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3h.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3i.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3j.iff	90		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3k.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3l.iff	65		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3m.iff	100		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3n.iff	50		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3o.iff	35		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3p.iff	70		warmly glowing
-object/tangible/loot/mustafar/cube_loot/cube_loot_3r.iff	35		warmly glowing
+item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
+item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt
+item_limited_use_schematic_commando_ice_gun_04_01	50		CCV-Cryo Projector
 weapon_carbine_advanced_sfor_04_01	175		Weapon: Advanced SFOR Carbine
 weapon_pistol_old_republic_ion_relic_04_01	175		Weapon: Old Republic Ion Pistol
+item_tcg_loot_reward_series3_mustafar_travel_advertisement	100		Travel Advertisement: Mustafar

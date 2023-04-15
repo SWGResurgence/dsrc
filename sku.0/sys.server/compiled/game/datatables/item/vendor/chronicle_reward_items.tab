@@ -22,8 +22,6 @@ item_housepack_xeno_table_01_01				5
 item_pgc_booster_pack			20		0		"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
 item_pgc_booster_pack_comm			20
 item_pgc_booster_pack_goto			20
-item_pgc_booster_pack_heroic_pack			50
-item_pgc_booster_pack_world_boss			100
 item_pgc_copper_token_box_01_01			1
 item_pgc_decal_pgc_s01			204
 item_pgc_decal_pgc_s02			204
