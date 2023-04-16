@@ -5214,6 +5214,14 @@ public class terminal_character_builder extends script.base_script
             case 0:  //Heroic Token Box
                 static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
                 break;
+            case 1:  //Mustafar Relic Rings
+                static_item.createNewItemFunction("item_tow_ring_architect_04_01", pInv);
+                static_item.createNewItemFunction("item_tow_ring_beast_master_04_01", pInv);
+                static_item.createNewItemFunction("item_tow_ring_domestics_04_01", pInv);
+                static_item.createNewItemFunction("item_tow_ring_engineering_04_01", pInv);
+                static_item.createNewItemFunction("item_tow_ring_inspiration_04_01", pInv);
+                static_item.createNewItemFunction("item_tow_ring_munitions_04_01", pInv);
+
             case 1:  //New Items & Objects
                 static_item.createNewItemFunction("item_shipwright_crafting_datadisk_01_01", pInv, 25);
                 static_item.createNewItemFunction("item_shipwright_crafting_datadisk_01_02", pInv, 25);
@@ -5258,7 +5266,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield2", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield3", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield4", pInv, 500);
-            case 4:  //Event Tokens
+            case 5:  //Event Tokens
                 static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 500);
@@ -5268,7 +5276,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_gjpud_scrap_heap", pInv, 500);
                 break;
-            case 5:  //GCW Tokens
+            case 6:  //GCW Tokens
                 static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 500);
@@ -5276,7 +5284,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_restuss_imperial_commendation_02_01", pInv, 500);
                 static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 500);
                 break;
-            case 6:  //Heroic Tokens
+            case 7:  //Heroic Tokens
                 static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 500);
@@ -5286,10 +5294,10 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_heroic_token_marauder_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 500);
                 break;
-            case 7: //Other Tokens
+            case 8: //Other Tokens
                 static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 500);
                 break;
-            case 8: //Witches of Dathomir Tokens
+            case 9: //Witches of Dathomir Tokens
                 static_item.createNewItemFunction("item_wod_token_1", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_2", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_3", pInv, 500);
@@ -5297,13 +5305,13 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_wod_token_5", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_6", pInv, 500);
                 break;
-            case 9:  //Space Tokens
+            case 10:  //Space Tokens
                 static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 500);
                 break;
-            case 10: //Special Reward Tokens
+            case 11: //Special Reward Tokens
                 static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 500);
@@ -5311,7 +5319,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_aurillian_certified_scroll_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 500);
                 break;
-            case 11: //Veteran Rewards
+            case 12: //Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
                 static_item.createNewItemFunction("pilotequipment1", pInv);
                 static_item.createNewItemFunction("pilotequipment2", pInv);
@@ -5321,18 +5329,6 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
-                break;
-            case 12: //Enzyme Loot Toggle
-                if (loot.hasToggledEnzymeLootOff(player))
-                {
-                    loot.enableEnzymeLoot(player);
-                    sendSystemMessageTestingOnly(player, "Enzyme Looting Enabled");
-                }
-                else
-                {
-                    loot.disableEnzymeLoot(player);
-                    sendSystemMessageTestingOnly(player, "Enzyme Looting Disabled");
-                }
                 break;
             default:
                 cleanScriptVars(player);
