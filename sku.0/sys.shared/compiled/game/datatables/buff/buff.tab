@@ -2025,7 +2025,7 @@ event_lifeday_wookiee_pipe_crafting	event_lifeday			1	command.sp_smoke_mirrors	3
 ace_pilot_bonus	genBuff_4			80	buffs.genericBuff	-1	space_combat_general	25	movement	10	constitution_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 tcg_garage_artisan_buff	tcg_garage_artisan_buff			1	buffs.tcg_diner	-1	general_assembly	10	general_experimentation	10	luck_modified	50		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_garage_armor_buff	tcg_garage_armor_buff			1	buffs.tcg_diner	-1	armor_assembly	10	assembly_experimentation	10	luck_modified	50	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tcg_garage_weapons_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	10	weapon_experimentation	10	luck_modified	50	station_buff	0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+tcg_garage_weapon_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	10	weapon_experimentation	10	luck_modified	50	station_buff	0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_barn_buff	tcg_structure_buff			1	buffs.tcg_diner	7200	dna_harvesting	25	incubation_time_reduction	11	bm_incubator_dps_armor	3		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_relaxation_pool_buff	tcg_structure_buff			1	buffs.tcg_diner	-1	clothing_assembly	100	luck_modified	150	station_buff	0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_meditation_rooms_buff	tcg_structure_buff			1	buffs.tcg_diner	-1	jedi_saber_assembly	20	jedi_saber_experimentation	10	luck_modified	150	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
