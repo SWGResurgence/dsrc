@@ -5245,61 +5245,58 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_pgc_gold_token_box_01_01", pInv, 25);
                 break;
             case 3:  //Chronicle Tokens
-                static_item.createNewItemFunction("item_pgc_token_01", pInv, 25);
-                static_item.createNewItemFunction("item_pgc_token_02", pInv, 25);
-                static_item.createNewItemFunction("item_pgc_token_03", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_token_01", pInv, 500);
+                static_item.createNewItemFunction("item_pgc_token_02", pInv, 500);
+                static_item.createNewItemFunction("item_pgc_token_03", pInv, 500);
                 break;
             case 4:  //Event Tokens
-                static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 25);
-                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_event_lifeday_imperial_token", pInv, 25);
-                static_item.createNewItemFunction("item_event_halloween_coin", pInv, 25);
-                static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 25);
-                static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
+                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 500);
+                static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 500);
+                static_item.createNewItemFunction("item_event_lifeday_imperial_token", pInv, 500);
+                static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500);
+                static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 500);
+                static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 500);
                 break;
             case 5:  //GCW Tokens
-                static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 25);
-                static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_gcw_imperial_token", pInv, 25);
-                static_item.createNewItemFunction("item_restuss_imperial_commendation_02_01", pInv, 25);
-                static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 25);
+                static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 500);
+                static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 500);
+                static_item.createNewItemFunction("item_gcw_imperial_token", pInv, 500);
+                static_item.createNewItemFunction("item_restuss_imperial_commendation_02_01", pInv, 500);
+                static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 500);
                 break;
             case 6:  //Heroic Tokens
-                static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_black_sun_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_exar_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_echo_base_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_marauder_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_black_sun_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_exar_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_echo_base_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_marauder_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 500);
                 break;
             case 7: //Other Tokens
-                static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 500);
                 break;
             case 8: //Witches of Dathomir Tokens
-                static_item.createNewItemFunction("item_wod_token_1", pInv, 25);
-                static_item.createNewItemFunction("item_wod_token_2", pInv, 25);
-                static_item.createNewItemFunction("item_wod_token_3", pInv, 25);
-                static_item.createNewItemFunction("item_wod_token_4", pInv, 25);
-                static_item.createNewItemFunction("item_wod_token_5", pInv, 25);
-                static_item.createNewItemFunction("item_wod_token_6", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_1", pInv, 500);
+                static_item.createNewItemFunction("item_wod_token_2", pInv, 500);
+                static_item.createNewItemFunction("item_wod_token_3", pInv, 500);
+                static_item.createNewItemFunction("item_wod_token_4", pInv, 500);
+                static_item.createNewItemFunction("item_wod_token_5", pInv, 500);
+                static_item.createNewItemFunction("item_wod_token_6", pInv, 500);
                 break;
             case 9:  //Space Tokens
-                static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
-                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 500);
                 break;
             case 10: //Special Reward Tokens
-                static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 500);
                 break;
             case 11: //Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
