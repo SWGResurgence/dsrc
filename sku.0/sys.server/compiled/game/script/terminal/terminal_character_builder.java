@@ -5249,6 +5249,15 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_pgc_token_02", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_03", pInv, 500);
                 break;
+            case 4:  //Deprecated Battlefield Tokens
+                static_item.createNewItemFunction("item_battlefield_rebel_token_massassi_isle", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield2", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield3", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield4", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_imperial_token_massassi_isle", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield2", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield3", pInv, 500);
+                static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield4", pInv, 500);
             case 4:  //Event Tokens
                 static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 500);
@@ -5257,6 +5266,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500);
                 static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 500);
                 static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_gjpud_scrap_heap", pInv, 500);
                 break;
             case 5:  //GCW Tokens
                 static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
@@ -5297,6 +5307,9 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_kashyyyk_reward_token_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_aurillian_certified_scroll_01_01", pInv, 500);
+                static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 500);
                 break;
             case 11: //Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
