@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/building/player/shared_player_house_wod_ns_hut.iff"
 
-scripts = ["structure.tcg.player_tcg_merchant_tent"]
+scripts = ["structure.buffs.wod_buffs.nightsister_clan_hut_buff"]

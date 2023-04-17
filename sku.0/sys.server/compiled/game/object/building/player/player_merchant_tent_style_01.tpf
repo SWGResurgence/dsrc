@@ -8,4 +8,4 @@ objvars = +[ "force_public" = 1 ]
 
 sharedTemplate = "object/building/player/shared_player_merchant_tent_style_01.iff"
 
-scripts = ["structure.tcg.player_tcg_merchant_tent"]
+scripts = ["structure.buffs.regular_buffs.merchant_tent_buff"]

@@ -140,9 +140,9 @@ public class battle_controller extends script.base_script {
             String battleType = getStringObjVar(self, "space_gcw." + spawner + ".lastBattleType");
             if(battleType != null) {
                 if (battleType.equals(battle_spawner.BATTLE_TYPE_PVE)) {
-                    battleType = battle_spawner.BATTLE_TYPE_PVE;
-                } else {
                     battleType = battle_spawner.BATTLE_TYPE_PVP;
+                } else {
+                    battleType = battle_spawner.BATTLE_TYPE_PVE;
                 }
             }
             else{

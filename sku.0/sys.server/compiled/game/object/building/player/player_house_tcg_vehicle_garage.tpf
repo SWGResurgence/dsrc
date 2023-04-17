@@ -8,4 +8,4 @@ sharedTemplate = "object/building/player/shared_player_house_tcg_vehicle_garage.
 
 objvars =+["tcg.static_item_deed"="item_tcg_loot_reward_series7_deed_vehicle_garage", "structure.capacity_override"=250, "playerStructure_noTransfer"=1]
 
-scripts = ["systems.crafting.crafting_structure_garage"]
+scripts = ["structure.buffs.tcg_buffs.vehicle_garage_buff"]

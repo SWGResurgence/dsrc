@@ -300,11 +300,11 @@ public class trial extends script.base_script
         "item_battlefield_rebel_token_battlefield2",        //#42   Token: Rebel #2 Battlefield Token
         "item_battlefield_rebel_token_battlefield3",        //#43   Token: Rebel #3 Battlefield Token
         "item_battlefield_rebel_token_battlefield4",        //#44   Token: Rebel #4 Battlefield Token
-        "item_battlefield_imperial_token_massassi_isle",    //#45 Token: Imperial Massassi Battlefield Token
-        "item_battlefield_imperial_token_battlefield2",     //#46 Token: Imperial #2 Battlefield Token
-        "item_battlefield_imperial_token_battlefield3",     //#47 Token: Imperial #3 Battlefield Token
-        "item_battlefield_imperial_token_battlefield4",     //#48 Token: Imperial #4 Battlefield Token
-        "item_gjpud_scrap_heap"               //#49   Piece of Junk
+        "item_battlefield_imperial_token_massassi_isle",    //#45   Token: Imperial Massassi Battlefield Token
+        "item_battlefield_imperial_token_battlefield2",     //#46   Token: Imperial #2 Battlefield Token
+        "item_battlefield_imperial_token_battlefield3",     //#47   Token: Imperial #3 Battlefield Token
+        "item_battlefield_imperial_token_battlefield4",     //#48   Token: Imperial #4 Battlefield Token
+        "item_gjpud_scrap_heap"                             //#49   Token: Piece of Junk
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";

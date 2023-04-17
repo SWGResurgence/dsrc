@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/building/player/shared_player_guildhall_tatooine_style_02.iff"
 
-scripts = +["systems.elevator.association_hall_elevators", "structure.tcg.player_tcg_guild_hall"]
+scripts = +["systems.elevator.association_hall_elevators", "structure.buffs.regular_buffs.guild_hall_buff"]
