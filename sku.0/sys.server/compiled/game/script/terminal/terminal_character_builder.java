@@ -96,15 +96,10 @@ public class terminal_character_builder extends script.base_script
             "class_chronicles_master"
     };
     public static final String[] DEV_TESTING_OPTIONS = {
-            "Armor Set: Imperial Storm Commando",
-            "Armor Set: Rebel Pathfinder",
-            "Instances: Heroic Unlocks",
-            "Instances: Mustafar Unlocks",
+            "Instances: Heroic & Mustafar Unlocks",
             "Objects: Ace Pilot Necklaces",
-            "Objects: Heroic Box of Achievements",
             "Objects: Mustafar Relic Rings",
             "Objects: Others",
-            "Objects: Rare Loot Boxes",
             "Objects: Veteran Rewards",
             "Structures: Chronicle Buffs",
             "Structures: City Buffs",
