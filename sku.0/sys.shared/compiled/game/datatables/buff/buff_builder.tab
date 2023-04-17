@@ -38,7 +38,6 @@ crafting_ground_assembly	trade	crafting_ground_assembly	5	2	1	harvest_faire
 crafting_ground_experimentation	trade	crafting_ground_experimentation	7	2	1	harvest_faire  
 crafting_space_assembly	trade	crafting_space_assembly	10	2	25	harvest_faire  
 crafting_space_experimentation	trade	crafting_space_experimentation	7	2	1	harvest_faire  
-hand_sampling	trade	expertise_resource_sampling_increase	10	1	1	harvest_faire  
 dna_harvesting	trade	expertise_bm_dna_harvesting_1	8	5	2	harvest_faire  
 factory_speed	trade	factory_speed	5	2	2	harvest_faire  
 focused_enzyme_manipulation	trade	bm_incubator_dps_armor	10	4	2	harvest_faire  
