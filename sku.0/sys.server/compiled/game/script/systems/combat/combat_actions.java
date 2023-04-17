@@ -3466,7 +3466,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal", "quick_heal_fly"))
+        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal_grenade", "quick_heal_fly"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             return SCRIPT_CONTINUE;
@@ -3484,7 +3484,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal", "quick_heal_fly"))
+        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal_grenade", "quick_heal_fly"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             return SCRIPT_CONTINUE;
@@ -3502,7 +3502,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal", "quick_heal_fly"))
+        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal_grenade", "quick_heal_fly"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             return SCRIPT_CONTINUE;
@@ -3520,7 +3520,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal", "quick_heal_fly"))
+        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal_grenade", "quick_heal_fly"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             return SCRIPT_CONTINUE;
@@ -3538,7 +3538,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal", "quick_heal_fly"))
+        if (target != self && pvpCanHelp(self, target) && successfulFastAttack(self, "me_heal_grenade", "quick_heal_fly"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
             return SCRIPT_CONTINUE;
