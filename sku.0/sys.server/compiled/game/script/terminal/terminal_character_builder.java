@@ -111,6 +111,8 @@ public class terminal_character_builder extends script.base_script
             "Structures: Regular Buffs",
             "Structures: TCG Buffs",
             "Structures: Witches of Dathomir Buffs",
+    };
+    public static final String[] DEV_TESTING_TOKENS = {
             "Tokens: Chronicles",
             "Tokens: Deprecated Battleifelds",
             "Tokens: Events",
@@ -5222,58 +5224,27 @@ public class terminal_character_builder extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         switch (idx)
         {
-            case 0:  // Armor Set: Imperial Storm Commando
-                static_item.createNewItemFunction("armor_imperial_stormcommando_bicep_l", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_bicep_r", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_boots", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_bracer_l", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_bracer_r", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_chest_plate", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_gloves", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_helmet", pInv);
-                static_item.createNewItemFunction("armor_imperial_stormcommando_leggings", pInv);
-                sendSystemMessageTestingOnly(player, "Imperial Storm Commando Armor Set Issued.");
-                break;
-            case 1:  // Armor Set: Rebel Pathfinder
-                static_item.createNewItemFunction("armor_rebel_pathfinder_bicep_l", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_bicep_r", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_boots", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_bracer_l", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_bracer_r", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_chest_plate", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_gloves", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_helmet", pInv);
-                static_item.createNewItemFunction("armor_rebel_pathfinder_leggings", pInv);
-                sendSystemMessageTestingOnly(player, "Rebel Pathfinder Armor Set Issued.");
-                break;
-            case 2: //  Instances: Heroic Unlocks
+            case 0: //  Instances: Heroic & Mustafar Unlocks
                 static_item.createNewItemFunction("heroic_axkva_min", pInv);
                 static_item.createNewItemFunction("heroic_exar_kun", pInv);
                 static_item.createNewItemFunction("heroic_ig88", pInv);
                 static_item.createNewItemFunction("heroic_star_destroyer", pInv);
                 static_item.createNewItemFunction("heroic_tusken_army", pInv);
-                sendSystemMessageTestingOnly(player, "Heroic Instance Unlocks Issued.");
-                break;
-            case 3:  // Instances: Mustafar Unlocks
                 static_item.createNewItemFunction("decrepit_droid_factory", pInv);
                 static_item.createNewItemFunction("mustafar_droid_army", pInv);
                 static_item.createNewItemFunction("mustafar_volcano", pInv);
                 static_item.createNewItemFunction("sher_kar_cave", pInv);
                 static_item.createNewItemFunction("uplink_cave", pInv);
                 static_item.createNewItemFunction("working_droid_factory", pInv);
-                sendSystemMessageTestingOnly(player, "Mustafar Instance Unlocks Issued.");
+                sendSystemMessageTestingOnly(player, "Heroic Instance Unlocks Issued.");
                 break;
-            case 4:  // Objects: Ace Pilot Necklaces
+            case 1:  // Objects: Ace Pilot Necklaces
                 static_item.createNewItemFunction("item_quest_reward_imperial_pilot_medal_01_01", pInv);
                 static_item.createNewItemFunction("item_quest_reward_rebel_pilot_medal_01_01", pInv);
                 static_item.createNewItemFunction("item_quest_reward_neutral_pilot_medal_01_01", pInv);
                 sendSystemMessageTestingOnly(player, "Ace Pilot Necklaces Issued.");
                 break;
-            case 5:  // Objects: Heroic Box of Achievements
-                static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
-                sendSystemMessageTestingOnly(player, "Heroic Box of Achievements Issued.");
-                break;
-            case 6:  // Objects: Mustafar Relic Rings
+            case 2:  // Objects: Mustafar Relic Rings
                 static_item.createNewItemFunction("item_tow_ring_architect_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_beast_master_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_domestics_04_01", pInv);
@@ -5282,32 +5253,30 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tow_ring_munitions_04_01", pInv);
                 sendSystemMessageTestingOnly(player, "Mustafar Relic Rings Issued.");
                 break;
-            case 7:  // Objects: Others
+            case 3:  // Objects: Others
                 static_item.createNewItemFunction("item_gas_recycler_01_01", pInv);
+                static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);
+                static_item.createNewItemFunction("rare_loot_chest_quality_1", pInv);
+                static_item.createNewItemFunction("rare_loot_chest_quality_2", pInv);
+                static_item.createNewItemFunction("rare_loot_chest_quality_3", pInv);
                 static_item.createNewItemFunction("item_resurgence_stark_banner_01_01", pInv);
                 static_item.createNewItemFunction("item_resurgence_targaryen_banner_01_01", pInv);
                 sendSystemMessageTestingOnly(player, "Other Objects Issued.");
                 break;
-            case 8:  // Rare Loot Boxes
-                static_item.createNewItemFunction("rare_loot_chest_quality_1", pInv);
-                static_item.createNewItemFunction("rare_loot_chest_quality_2", pInv);
-                static_item.createNewItemFunction("rare_loot_chest_quality_3", pInv);
-                sendSystemMessageTestingOnly(player, "Set of Rare Loot Boxes Issued.");
-                break;
-            case 9:  // Veteran Rewards
+            case 4:  // Objects: Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
                 sendSystemMessageTestingOnly(player, "Veteran Rewards Issued.");
                 break;
-            case 10: // Structures: Chronicle Buffs
+            case 5: // Structures: Chronicle Buffs
                 static_item.createNewItemFunction("item_pgc_chronicler_tent_deed", pInv);
                 static_item.createNewItemFunction("item_pgc_sandcrawler_house_deed", pInv);
                 sendSystemMessageTestingOnly(player, "Set of Chronicle Structures Issued.");
                 break;
-            case 11: // Structures: City Buffs
+            case 6: // Structures: City Buffs
                 createObject("object/tangible/deed/city_deed/cantina_corellia_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/cantina_naboo_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/cantina_tatooine_deed.iff", pInv, "");
@@ -5316,7 +5285,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/hospital_tatooine_deed.iff", pInv, "");
                 sendSystemMessageTestingOnly(player, "Set of City Structures Issued.");
                 break;
-            case 12: // Structures: Regular Buffs
+            case 7: // Structures: Regular Buffs
                 createObject("object/tangible/deed/guild_deed/generic_guild_deed.iff", pInv, "");
                 createObject("object/tangible/deed/guild_deed/tatooine_guild_deed.iff", pInv, "");
                 createObject("object/tangible/deed/guild_deed/naboo_guild_deed.iff", pInv, "");
@@ -5326,7 +5295,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style03_deed.iff", pInv, "");
                 sendSystemMessageTestingOnly(player, "Set of Guild Halls and Merchant Tents Issued.");
                 break;
-            case 13: // Structures: TCG Buffs
+            case 8: // Structures: TCG Buffs
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_diner", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series3_jedi_meditation_room_deed", pInv);
@@ -5340,18 +5309,64 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tcg_loot_reward_series8_yoda_house_deed", pInv);
                 sendSystemMessageTestingOnly(player, "Set of TCG Structures Issued.");
                 break;
-            case 14: // Structures: Witches of Dathomir
+            case 9: // Structures: Witches of Dathomir
                 createObject("object/tangible/deed/player_house_deed/wod_ns_hut_deed.iff", pInv, "");
                 createObject("object/tangible/deed/player_house_deed/wod_sm_hut_deed.iff", pInv, "");
                 sendSystemMessageTestingOnly(player, "Set of Witches of Dathomir Structures Issued.");
                 break;
-            case 15: // Tokens: Chronicles
+            default:
+                cleanScriptVars(player);
+                break;
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public void handleDevTestingTokenOption(obj_id player) throws InterruptedException
+    {
+        refreshMenu(player, "Select the desired development testing option", getClusterName() + " Character Builder Terminal", DEV_TESTING_TOKENS, "handleDevTestingTokenOptions", false);
+    }
+
+    public int handleDevTestingTokens(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        obj_id player = sui.getPlayerId(params);
+        int btn = sui.getIntButtonPressed(params);
+        int idx = sui.getListboxSelectedRow(params);
+        if (btn == sui.BP_REVERT)
+        {
+            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            return SCRIPT_CONTINUE;
+        }
+        if (btn == sui.BP_CANCEL)
+        {
+            cleanScriptVars(player);
+            closeOldWindow(player);
+            return SCRIPT_CONTINUE;
+        }
+        if (idx == -1 || idx > WEAPON_OPTIONS.length)
+        {
+            cleanScriptVars(player);
+            return SCRIPT_CONTINUE;
+        }
+        if (!isIdValid(player))
+        {
+            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            cleanScriptVars(player);
+            return SCRIPT_OVERRIDE;
+        }
+        obj_id pInv = utils.getInventoryContainer(player);
+        switch (idx)
+        {
+            case 0: // Tokens: Chronicles
                 static_item.createNewItemFunction("item_pgc_token_01", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_02", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_03", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Chronicle Tokens Issued.");
                 break;
-            case 16: // Tokens: Deprecated Battlefields
+            case 1: // Tokens: Deprecated Battlefields
                 static_item.createNewItemFunction("item_battlefield_rebel_token_massassi_isle", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield2", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield3", pInv, 500);
@@ -5361,7 +5376,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield3", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield4", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Deprecated Battlefield Tokens Issued.");
-            case 17: // Tokens: Events
+            case 2: // Tokens: Events
                 static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 500);
@@ -5372,7 +5387,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_gjpud_scrap_heap", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Event Tokens Issued.");
                 break;
-            case 18: // Tokens: GCW
+            case 3: // Tokens: GCW
                 static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 500);
@@ -5381,7 +5396,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of GCW Tokens Issued.");
                 break;
-            case 19: // Tokens: Heroics
+            case 4: // Tokens: Heroics
                 static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 500);
@@ -5392,18 +5407,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Heroic Tokens Issued.");
                 break;
-            case 20: // Tokens: Others
+            case 5: // Tokens: Others
                 static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Other Tokens Issued.");
                 break;
-            case 21: // Tokens: Space
+            case 6: // Tokens: Space
                 static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Space Tokens Issued.");
                 break;
-            case 22: // Tokens: Special Rewards
+            case 7: // Tokens: Special Rewards
                 static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 500);
@@ -5412,7 +5427,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 500);
                 sendSystemMessageTestingOnly(player, "Set of Special Reward Tokens Issued.");
                 break;
-            case 23: // Tokens: Witches of Dathomir
+            case 8: // Tokens: Witches of Dathomir
                 static_item.createNewItemFunction("item_wod_token_1", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_2", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_3", pInv, 500);
