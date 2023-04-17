@@ -8,4 +8,4 @@ objvars = +[ "force_public"=1,"tcg.static_item_deed"="item_pgc_chronicler_tent_d
 
 sharedTemplate = "object/building/player/shared_player_pgc_merchant_tent_s01.iff"
 
-scripts = ["structure.tcg.player_tcg_merchant_tent"]
+scripts = ["structure.buffs.chronicle_buffs.chronicle_tent_buff"]
