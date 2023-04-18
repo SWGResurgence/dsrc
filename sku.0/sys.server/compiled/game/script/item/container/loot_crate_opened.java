@@ -28,10 +28,10 @@ public class loot_crate_opened extends script.base_script
         }
         if (hasObjVar(item, "noTrade"))
         {
+            broadcast(transferer, "Note: This item will have it's No-Trade tag reapplied upon galaxy initialization.");
             removeObjVar(item, "noTrade");
         }
         debugServerConsoleMsg(self, "\n[SKYNET] Player " + transferer + " is attempting to move " + getName(item) + "(" + item + ") to " + destContainer + "\n");
-        broadcast(transferer, "Note: This item will have it's No-Trade tag reapplied upon galaxy initialization.");
         play2dNonLoopingSound(transferer, TRIGGER_NEARBY_SOUND);
         return SCRIPT_CONTINUE;
     }
