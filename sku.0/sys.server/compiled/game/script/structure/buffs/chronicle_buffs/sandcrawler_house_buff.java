@@ -1,7 +1,9 @@
 package script.structure.buffs.chronicle_buffs;
 
-import script.*;
-import script.library.*;
+import script.base_script;
+import script.library.buff;
+import script.library.utils;
+import script.obj_id;
 
 public class sandcrawler_house_buff extends base_script {
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException {
