@@ -7,5 +7,3 @@
 sharedTemplate = "object/building/player/shared_player_house_sandcrawler.iff"
 
 objvars =+["tcg.static_item_deed"="item_pgc_sandcrawler_house_deed", "structure.capacity_override"=350]
-
-scripts = ["structure.buffs.chronicle_buffs.sandcrawler_house_buff"]
