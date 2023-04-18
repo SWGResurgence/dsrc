@@ -4851,6 +4851,7 @@ item_limited_use_schematic_stage_controller_01_01	object/tangible/loot/loot_sche
 item_liquid_harvester_heavy_deed_01_01	object/tangible/deed/harvester_deed/liquid_harvester_deed_heavy.iff							1		"item.special.nomove,item.structure_deed.player_structure_deed"	1	1	Deed For: Heavy Chemical Harvester	A deed for a heavy chemical aparatus.
 item_liquid_harvester_medium_deed_01_01	object/tangible/deed/harvester_deed/liquid_harvester_deed_medium.iff							1		"item.special.nomove,item.structure_deed.player_structure_deed"	1	1	Deed For: Medium Chemical Harvester	A deed for a medium chemical aparatus.
 item_liquid_harvester_personal_deed_01_01	object/tangible/deed/harvester_deed/liquid_harvester_deed.iff							1		"item.special.nomove,item.structure_deed.player_structure_deed"	1	1	Deed For: Personal Chemical Extractor	A deed for a personal chemical aparatus.
+item_loot_roll_bonus	object/tangible/item/loot_roll.iff						1	2		item.loot_roll_item			Holographic Item Synthesizer	This item can be dragged onto a heroic enemy before engaging to add an additional loot roll to the enemy. These items can be stacked onto the enemy to increase the number of additional loot rolls granted.
 item_mail_opt_in_1_reward	object/tangible/furniture/all/frn_all_rug_bantha_skin.iff							4	1000			1	Bantha Skin Rug	A rug made from the hide of a Bantha.
 item_mail_opt_in_2_reward	object/tangible/furniture/all/frn_all_statuette_cityhall_naboo.iff							4	1000			1	An Architects Rendition of a Nabooian City Hall	A model of the Nabooian City hall.	marketing email collection
 item_mail_opt_in_3_reward	object/tangible/furniture/all/frn_all_statuette_jabba_palace.iff							4					An Architects Rendition of Jabba's Palace	A model of Jabba's Palace.	marketing email collection
@@ -6635,53 +6636,53 @@ item_weapon_station_01_01	object/tangible/crafting/station/weapon_station.iff			
 item_weapon_tool_01_01	object/tangible/crafting/station/weapon_tool.iff							1		item.special.nomove	1	1	Weapon and Item Crafting Tool	This tool is used to craft weapons and items.
 item_wind_survey_tool_01_01	object/tangible/survey_tool/survey_tool_wind.iff							1		item.special.nomove	1	1	Wind Survey Device	This advanced device allows the local environment to be scanned for any existing wind resources.
 item_wod_crafting_holocron_01	object/tangible/theme_park/wod/wod_crafting_template.iff							1				1	Allya's Holocron	Item that unlocks the crafting bracelet
-item_wod_gaping_spider_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_gaping_spider.iff							1				1	Gaping Spider Toy
-item_wod_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar.iff							1		theme_park.wod.wod_release_seed_jar		1	WoD Seed Jar	Seed jar that grants random ? tree schematic
-item_wod_malkloc_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_malkloc.iff							1				1	Malkloc Toy
-item_wod_mutated_rancor_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_rancor.iff							1				1	Rancor Toy
-item_wod_ns_boots	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_fruit	object/tangible/content/wod_stim_02.iff						1	1		"object.autostack,item.buff_click_item"
-item_wod_ns_gourd	object/tangible/content/wod_stim_04.iff						1	1		"object.autostack,item.buff_click_item"
-item_wod_ns_havoc	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_ns.iff							1		theme_park.wod.wod_release_seed_jar_ns		1	WoD Seed Jar	Seed jar that grants random ? tree schematic
-item_wod_ns_hood	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_mantle	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_pest_leggings	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_root	object/tangible/content/wod_stim_03.iff						1	1		"object.autostack,item.buff_click_item"
-item_wod_ns_salve	object/tangible/content/wod_stim_01.iff						1	1		"object.autostack,item.medicine.stimpack"
-item_wod_ns_schematic_crafting	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_crone	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_fence	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_gate	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_hut	object/tangible/deed/player_house_deed/wod_ns_hut_deed.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_maiden	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_mother	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_schematic_tower	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_scou_leggings	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_sign_hanging	object/tangible/item/skillmod/skillmod_wod_sm_hanging_sign.iff									systems.sign.special_sign	2
-item_wod_ns_sign_standing	object/tangible/item/skillmod/skillmod_wod_sm_standing_sign.iff									systems.sign.special_sign	2
-item_wod_ns_tarn_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_ns_wrap	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_pro_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar.iff							1				1	WoD Prologue Seed Jar	Seed jar that grants random small/medium tree schematic
-item_wod_pro_ns_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_ns.iff							1				1	WoD Prologue Seed Jar SM	Seed jar that grants random large tree schematic
-item_wod_pro_sm_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_sm.iff							1				1	WoD Prologue Seed Jar NS	Seed jar that grants random large tree schematic
-item_wod_reptilian_flyer_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_reptilian_flyer.iff							1				1	Reptilian Flyer Toy
-item_wod_shear_mite_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_shear_mite.iff							1				1	Shear Mite Toy
-item_wod_smc_boots	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_guard	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_sm.iff							1		theme_park.wod.wod_release_seed_jar_sm		1	WoD Seed Jar	Seed jar that grants random ? tree schematic
-item_wod_smc_hood	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_mantle	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_schematic_hut	object/tangible/deed/player_house_deed/wod_sm_hut_deed.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_schematic_stones	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_schematic_tril	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_schematic_wall	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_skirt_1	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_skirt_2	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_skirt_3	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
-item_wod_smc_wrap	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic
+item_wod_gaping_spider_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_gaping_spider.iff							1				1	Gaping Spider Toy	Gaping Spider Toy
+item_wod_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar.iff							1		theme_park.wod.wod_release_seed_jar		1	Seed Jar	A mysterious seed jar
+item_wod_malkloc_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_malkloc.iff							1				1	Malkloc Toy	Malkloc Toy
+item_wod_mutated_rancor_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_rancor.iff							1				1	Rancor Toy	Rancor Toy
+item_wod_ns_boots	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Boots	Schematic for Nightsister Boots
+item_wod_ns_fruit	object/tangible/content/wod_stim_02.iff						1	1		"object.autostack,item.buff_click_item"		1	Schematic: Nightsister Fruit	Schematic for Nightsister Fruit
+item_wod_ns_gourd	object/tangible/content/wod_stim_04.iff						1	1		"object.autostack,item.buff_click_item"		1	Schematic: Nightsister Gourd	Schematic for Nightsister Gourd
+item_wod_ns_havoc	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Havoc	Schematic for Nightsister Havoc
+item_wod_ns_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_ns.iff							1		theme_park.wod.wod_release_seed_jar_ns		1	Seed Jar	a Seed jar
+item_wod_ns_hood	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Hood	Schematic for Nightsister Hood
+item_wod_ns_mantle	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Mantle	Schematic for Nightsister Mantle
+item_wod_ns_pest_leggings	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Pest Leggings	Schematic for Nightsister Pest Leggings
+item_wod_ns_root	object/tangible/content/wod_stim_03.iff						1	1		"object.autostack,item.buff_click_item"		1	Nightsister Root	Nightsister Root
+item_wod_ns_salve	object/tangible/content/wod_stim_01.iff						1	1		"object.autostack,item.medicine.stimpack"		1	Nightsister Salve	Nightsister Salve
+item_wod_ns_schematic_crafting	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Crafting	Schematic for Nightsister Crafting
+item_wod_ns_schematic_crone	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Crone	Schematic for Nightsister Crone
+item_wod_ns_schematic_fence	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Fence	Schematic for Nightsister Fence
+item_wod_ns_schematic_gate	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Gate	Schematic for Nightsister Gate
+item_wod_ns_schematic_hut	object/tangible/deed/player_house_deed/wod_ns_hut_deed.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Hut	Schematic for Nightsister Hut
+item_wod_ns_schematic_maiden	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Maiden	Schematic for Nightsister Maiden
+item_wod_ns_schematic_mother	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Mother	Schematic for Nightsister Mother
+item_wod_ns_schematic_tower	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Tower	Schematic for Nightsister Tower
+item_wod_ns_scou_leggings	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Scourge Leggings	Schematic for Nightsister Scourge Leggings
+item_wod_ns_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Shroud	Schematic for Nightsister Shroud
+item_wod_ns_sign_hanging	object/tangible/item/skillmod/skillmod_wod_sm_hanging_sign.iff									systems.sign.special_sign	2		Nightsister Sign (Hanging)	A hanging sign for your house with a Nightsister theme.
+item_wod_ns_sign_standing	object/tangible/item/skillmod/skillmod_wod_sm_standing_sign.iff									systems.sign.special_sign	2		Nightsister Sign (Standing)	A standing sign for your house with a Nightsister theme.
+item_wod_ns_tarn_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Tarnished Shroud	Schematic for Nightsister Tarnished Shroud
+item_wod_ns_wrap	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic: Nightsister Wrap	Schematic for Nightsister Wrap
+item_wod_pro_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar.iff							1				1	Prologue Seed Jar	Seed jar that grants random large tree schematic
+item_wod_pro_ns_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_ns.iff							1				1	Prologue Seed Jar	Seed jar that grants random large tree schematic
+item_wod_pro_sm_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_sm.iff							1				1	Prologue Seed Jar	Seed jar that grants random large tree schematic
+item_wod_reptilian_flyer_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_reptilian_flyer.iff							1				1	Reptilian Flyer Toy	Reptilian Flyer Toy
+item_wod_shear_mite_toy	object/tangible/furniture/wod_themepark/wod_pro_toy_shear_mite.iff							1				1	Shear Mite Toy	Shear Mite Toy
+item_wod_smc_boots	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Boots
+item_wod_smc_guard	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Guard
+item_wod_smc_herb_reward_jar	object/tangible/furniture/wod_themepark/wod_pro_seed_jar_sm.iff							1		theme_park.wod.wod_release_seed_jar_sm		1	Seed Jar	Seed jar that grants random ? tree schematic
+item_wod_smc_hood	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Hood
+item_wod_smc_mantle	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Mantle
+item_wod_smc_schematic_hut	object/tangible/deed/player_house_deed/wod_sm_hut_deed.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Trihelion
+item_wod_smc_schematic_stones	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Stones
+item_wod_smc_schematic_tril	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Trihelion
+item_wod_smc_schematic_wall	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Wall
+item_wod_smc_shroud	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Shroud
+item_wod_smc_skirt_1	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Skirt (Style 1)
+item_wod_smc_skirt_2	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Skirt (Style 2)
+item_wod_smc_skirt_3	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Skirt (Style 3)
+item_wod_smc_wrap	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic			Schematic: Singing Mountain Clan Wrap
 item_wod_token_1	object/tangible/content/wod_token_1.iff							1		"item.special.nomove,object.autostack,item.heroic_token"		1	Dathomir Amber
 item_wod_token_2	object/tangible/content/wod_token_2.iff							1		"item.special.nomove,object.autostack,item.heroic_token"		1	Spider Silk
 item_wod_token_3	object/tangible/content/wod_token_3.iff							1		"item.special.nomove,object.autostack,item.heroic_token"		1	Rancor Teeth
