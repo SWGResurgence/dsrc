@@ -3042,7 +3042,7 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			col_resource_energy_renewable_site_limited_geothermal_01	5399	5401	2																		sound/music_acq_miner.snd	gray	0	0						0	0
 	sampling_pet_collection			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_pet_resource_sampling_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_pet_resource_sampling	5402	5407	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_pet_resource_sampling	5402	5407	10																		sound/music_acq_miner.snd	gray	0	0						0	0
 	photo_shop_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_photo_durni_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			photo_durni_activation	5442	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
