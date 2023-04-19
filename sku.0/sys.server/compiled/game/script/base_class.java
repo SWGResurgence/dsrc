@@ -8,6 +8,7 @@ package script;
 import script.library.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -2177,7 +2178,7 @@ public class base_class
 
     public static void pushWebhook(String channel, String msg, String avatarUri)
     {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
+        String apiKey = getConfigSetting("GameServer", "generalWebhookApiKey");// MUST BE SET or error galore.
         String avatar_pic = avatarUri;
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
@@ -2188,7 +2189,25 @@ public class base_class
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }*/
+        }
+    }
+    /**
+     * Send a webhook to the discord channel informing of an action..
+     * @param msg     What to send
+     */
+    public static void notifyGalacticFeed(String msg)
+    {
+        String apiKey = getConfigSetting("GameServer", "galacticFeedWebhookApiKey");// MUST BE SET or error galore.
+        String avatar_pic = "https://i.imgur.com/6EZ5497.png"; //update graphic @zellsune
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setAvatarUrl(avatar_pic);
+        webhook.setUsername("Czerka Corperation");
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
     /**
@@ -2198,7 +2217,7 @@ public class base_class
 
     public static void pushWebhookTiny(String msg)
     {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
+        String apiKey = getConfigSetting("GameServer", "generalTinyWebhookApiKey");// MUST BE SET or error galore.
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
@@ -2209,8 +2228,23 @@ public class base_class
         } catch (IOException io) {
             io.printStackTrace();
         }
-        */
-
+    }
+    /**
+     * On the fly webhook functionality. Be sure to reference the apiKey inside a datatable or as a local var.
+     * @param msg     What to send
+     */
+    public static void pushWebhookByApiKey(String apiKey, String msg, String username, boolean useTTS)
+    {
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setUsername(username);
+        webhook.setTts(useTTS);
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
     public static void debugServerConsoleMsg(obj_id object, String msg)
@@ -2506,7 +2540,6 @@ public class base_class
     public static native long queryPerformanceCounter();
 
     public static native long queryPerformanceCounterFrequency();
-
     /**
      * @}
      * @defgroup triggerVolumeMethods Trigger volume methods
