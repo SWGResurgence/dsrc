@@ -2953,14 +2953,14 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			buddy_02_04_02	6831	-1	-1		grantIfPreReqMet	buddyCollection									buddy_02_04_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 	prof_entertainer			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			officer_1a	2826	2833	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			medic_1a	2834	2841	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			commando_1a	2842	2849	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			force_sensitive_1a	2850	2857	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			bounty_hunter_1a	2858	2865	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			smuggler_1a	2866	2873	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			spy_1a	2874	2881	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			prof_trader	2882	2889	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			officer_1a	2826	2833	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			medic_1a	2834	2841	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			commando_1a	2842	2849	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			force_sensitive_1a	2850	2857	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			bounty_hunter_1a	2858	2865	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			smuggler_1a	2866	2873	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			spy_1a	2874	2881	8																		sound/music_acq_miner.snd	gray	0	0						0	0
+			prof_trader	2882	2889	8																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_entertainer_fan_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			ent_fan_01	5505	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			ent_fan_02	5506	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
