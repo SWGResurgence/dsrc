@@ -3007,11 +3007,11 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			rare_loot_opened_one_2	21837	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			rare_loot_opened_one_3	21841	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rare_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_1	21834	21836	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_1	21834	21836	1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_exceptional_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_2	21838	21840	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_2	21838	21840	2																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_legendary_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_3	21842	21844	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_3	21842	21844	4																		sound/music_acq_miner.snd	gray	0	0						0	0
 	heroic_sd_taxi_service			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		heroic_sd_taxi_service_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			smuggled_groups	5285	5292	25																		sound/music_acq_miner.snd	gray	0	0						0	0			
