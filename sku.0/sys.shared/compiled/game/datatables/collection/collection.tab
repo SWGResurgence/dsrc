@@ -4298,11 +4298,11 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_entertainer_demorazlied_troops_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			entertainer_demorazlied_troops_rebel	15107	15110	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_troop_spawn_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			entertainer_troop_spawn_rebel	15572	15576	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			entertainer_troop_spawn_rebel	15572	15576	10																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_medic_heal_soldier_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			medic_heal_soldier_rebel	6063	6067	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			medic_heal_soldier_rebel	6063	6067	10																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_smuggler_slice_terminal_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			smuggler_slice_terminal_rebel	15577	15581	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			smuggler_slice_terminal_rebel	15577	15581	5																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_spy_destroy_patrol_point_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			spy_destroy_patrol_point_rebel	15582	15585	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_combat_defend_barricade_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4316,13 +4316,13 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_combat_destroy_turret_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			combat_destroy_turret_rebel	15602	15605	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_1_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_1_rebel_01	6843	6848	50	kill_gcw_city_imperial_1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_1_rebel_01	6843	6848	12	kill_gcw_city_imperial_1																	sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_troop_2_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_2_rebel_01	15606	15611	50	kill_gcw_city_imperial_2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_2_rebel_01	15606	15611	25	kill_gcw_city_imperial_2																	sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_troop_3_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_3_rebel_01	15612	15617	50	kill_gcw_city_imperial_3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_3_rebel_01	15612	15617	25	kill_gcw_city_imperial_3																	sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_at_st_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_at_st_rebel_01	15618	15622	10	kill_gcw_city_at_st_1	kill_gcw_city_at_st_2	kill_gcw_city_at_st_3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_at_st_rebel_01	15618	15622	5	kill_gcw_city_at_st_1	kill_gcw_city_at_st_2	kill_gcw_city_at_st_3															sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_at_at_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_combat_at_at_rebel_01	6029	-1	-1	kill_gcw_city_atat																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_general_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4376,11 +4376,11 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_entertainer_demorazlied_troops_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			entertainer_demorazlied_troops_imperial	15687	15690	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_troop_spawn_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			entertainer_troop_spawn_imperial	15691	15695	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			entertainer_troop_spawn_imperial	15691	15695	10																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_medic_heal_soldier_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			medic_heal_soldier_imperial	15696	15700	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_smuggler_slice_terminal_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			smuggler_slice_terminal_imperial	15701	15705	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			smuggler_slice_terminal_imperial	15701	15705	5																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_spy_destroy_patrol_point_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			spy_destroy_patrol_point_imperial	15706	15709	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_combat_defend_barricade_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4394,13 +4394,13 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_combat_destroy_turret_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			combat_destroy_turret_imperial	15726	15729	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_1_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_1_imperial_01	15730	15735	50	kill_gcw_city_rebel_grunt_assault	kill_gcw_city_rebel_grunt_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_1_imperial_01	15730	15735	25	kill_gcw_city_rebel_grunt_assault	kill_gcw_city_rebel_grunt_defense																sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_troop_2_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_2_imperial_01	15736	15741	50	kill_gcw_city_rebel_commando_assault	kill_gcw_city_rebel_commando_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_2_imperial_01	15736	15741	25	kill_gcw_city_rebel_commando_assault	kill_gcw_city_rebel_commando_defense																sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_troop_3_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_3_imperial_01	15742	15747	50	kill_gcw_city_rebel_specforce_assault	kill_gcw_city_rebel_specforce_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_3_imperial_01	15742	15747	25	kill_gcw_city_rebel_specforce_assault	kill_gcw_city_rebel_specforce_defense																sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_at_xt_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_at_xt_imperial_01	15748	15753	10	kill_gcw_city_at_xt_1	kill_gcw_city_at_xt_2	kill_gcw_city_at_xt_3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_at_xt_imperial_01	15748	15753	5	kill_gcw_city_at_xt_1	kill_gcw_city_at_xt_2	kill_gcw_city_at_xt_3															sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_combat_hailfire_droid_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_combat_hailfire_droid_imperial_01	6247	-1	-1	kill_gcw_city_hailfire_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_general_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
