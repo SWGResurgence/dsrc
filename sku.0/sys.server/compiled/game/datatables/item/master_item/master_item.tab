@@ -5230,7 +5230,7 @@ item_painting_wod_scene_03	object/tangible/furniture/wod_themepark/wod_pro_paint
 item_painting_wod_scene_04	object/tangible/furniture/wod_themepark/wod_pro_painting_scene_04.iff							1				1	Dathomir Scenery 4	^
 item_painting_wod_sm_01	object/tangible/furniture/wod_themepark/wod_pro_painting_sm_01.iff							1				1	Dathomir Tapestry SM 1	This is the collection reward
 item_painting_wod_sm_02	object/tangible/furniture/wod_themepark/wod_pro_painting_sm_02.iff							1				1	Dathomir Tapestry SM 2	This is sold by the vendor
-item_pangrack_dna	object/tangible/loot/beast/dna_container.iff							4		systems.beast.cs_dna			DNA Storage Device (Malosaur)	Device that stores harvested DNA cores.	DNA for CS to give out to players who have been borked
+item_pangrack_dna	object/tangible/loot/beast/dna_container.iff							4		systems.beast.cs_dna			DNA Storage Device (Pangrack)	Device that stores harvested DNA cores.	DNA for CS to give out to players who have been borked
 item_pet_egg_chuba_01_01	object/tangible/loot/beast/dna_container.iff							2		systems.beast.dna	3	1	Chuba DNA	This is high quality DNA of a chuba. It can be used in a Beast Master's incubator to create a Chuba pet.
 item_pet_mount_carrion_01_01	object/tangible/deed/pet_deed/carrion_spat_generic_deed.iff							2		"item.special.nomove,npc.pet_deed.reward_pet_deed"		1	Kartha's Cliff-Jumper	A mount given to you for your efforts in assisting Kartha.
 item_pet_mount_lava_flea_01_01	object/tangible/deed/pet_deed/lava_flea_generic_deed.iff		1					2		npc.pet_deed.reward_pet_deed		1	Lava Flea Mount	A Lava Flea mount useful in traversing Mustafar.	ToW expansion
