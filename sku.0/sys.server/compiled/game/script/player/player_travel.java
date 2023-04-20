@@ -1220,6 +1220,7 @@ public class player_travel extends script.base_script
         utils.setScriptVar(player, "instantTravelShip.pickupCraft", pickupCraft);
         utils.setScriptVar(pickupCraft, "playerOwner", player);
         messageTo(pickupCraft, "initializeInstaTravelShip", null, 1, false);
+        faceTo(pickupCraft, player);
         buff.applyBuff(player, ITV_PICKUP_BUFF);
         return true;
     }
