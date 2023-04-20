@@ -65,12 +65,11 @@ public class city_decor_converter extends script.base_script
             else if (getTemplateName(item).contains("object/tangible/"))
             {
                 attachScript(item, "systems.city.city_furniture");
-                String oldName = getStaticItemName(item);
+                String oldName = getName(item);
                 setName(item, oldName + " (City Decoration)");
                 return SCRIPT_CONTINUE;
             }
         }
-
         else
         {
             broadcast(transferer, "You can only convert physical items.");
