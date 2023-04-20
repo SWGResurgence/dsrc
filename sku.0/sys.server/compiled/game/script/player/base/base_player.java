@@ -1211,7 +1211,6 @@ public class base_player extends script.base_script
         messageTo(self, "recapacitationDelay", null, recapacitateTimer, false);
         clearAllAiEnemyFlags(self);
         dot.removeAllDots(self);
-        System.out.print("\nPlayer " + self + " has fallen incapacitated by " + killer + "\n");//remove after lag inspection
         if (stealth.hasInvisibleBuff(self))
         {
             stealth.checkForAndMakeVisible(self);
@@ -1299,7 +1298,6 @@ public class base_player extends script.base_script
             obj_id beastBCD = beast_lib.getBeastBCD(beast);
             messageTo(beastBCD, "ownerGrouped", null, 1, false);
         }
-        System.out.print("\nPlayer " + self + " has been added to group " + groupId + "\n");
         return SCRIPT_CONTINUE;
     }
 
@@ -1311,7 +1309,6 @@ public class base_player extends script.base_script
         }
         squad_leader.clearRallyPoint(self);
         detachScript(self, group.SCRIPT_GROUP_MEMBER);
-        System.out.print("\nPlayer " + self + " has been removed from group " + groupId + "\n");//remove after lag inspection
         return SCRIPT_CONTINUE;
     }
 
@@ -1322,7 +1319,6 @@ public class base_player extends script.base_script
 
     public int OnGroupDisbanded(obj_id self, obj_id group) throws InterruptedException
     {
-        System.out.print("\nPlayer " + self + " has disbanded group " + group + "\n");//remove after lag inspection
         squad_leader.clearRallyPoint(self);
         return SCRIPT_CONTINUE;
     }
@@ -1346,7 +1342,6 @@ public class base_player extends script.base_script
         }
         else
         {
-            System.out.print(self + " !is on a non-core planet. Please investigate.");
             return false;
         }
     }
@@ -1374,7 +1369,6 @@ public class base_player extends script.base_script
             detachScript(self, "name.name");
         }
         location loginLoc = getLocation(self);
-        System.out.println("\nZoning: " + self + " " + getName(self) + " has zoned to " + getCurrentSceneName() + " at " + loginLoc.x + ", " + loginLoc.y + ", " + loginLoc.z + "\n");
         if (!hasObjVar(self, "resurgence_welcome_onetimer"))
         {
             String red = " \\#FF0000";
@@ -2294,7 +2288,6 @@ public class base_player extends script.base_script
     public int OnLogout(obj_id self) throws InterruptedException
     {
         location logoutLoc = getLocation(self);
-        System.out.println("\nZoning: " + self + " " + getName(self) + " has left the galaxy on planet " + getCurrentSceneName() + " at " + logoutLoc.x + ", " + logoutLoc.y + ", " + logoutLoc.z + "\n");
         if (hasObjVar(self, pclib.VAR_CONSENT_FROM_ID))
         {
             pclib.relinquishConsents(self);
@@ -2370,7 +2363,7 @@ public class base_player extends script.base_script
             {
                 if ((endMoney - startMoney) > utils.stringToInt(profitThreshold))
                 {
-                    System.out.print("\nExtraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits\n" ); //remove after lag investigation
+                    LOG("money", "\nExtraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits\n" );
                 }
             }
         }
@@ -13040,7 +13033,6 @@ public class base_player extends script.base_script
             }
 
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU38, new string_id("Grant Static Item"));
-            System.out.print("\nPlayer " + self + " has requested the god menu on " + toUpper(getFirstName(player), 0) + "\n");
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -13406,7 +13398,6 @@ public class base_player extends script.base_script
         {
             sendSystemMessage(player, "You have created " + getStaticItemName(itemObj) + " for " + getPlayerFullName(self) + ".", null);
             sendSystemMessage(self, "You have been awarded " + getStaticItemName(itemObj) + " by " + getPlayerFullName(player) + ".", null);
-            System.out.print("\nADMIN/DEV/GM: " + getPlayerFullName(player) + " has created " + getStaticItemName(itemObj) + " for " + getPlayerFullName(self) + ".\n");
         }
         else
         {

@@ -2108,7 +2108,7 @@ public class terminal_character_builder extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
         {
-            System.out.println("\nPlayer: " + getName(player) + "(" + player + ") used Character Builder Terminal\n");
+            LOG("CustomerService", "Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
