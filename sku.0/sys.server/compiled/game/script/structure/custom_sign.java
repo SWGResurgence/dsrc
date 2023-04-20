@@ -5,17 +5,18 @@ import script.library.*;
 
 public class custom_sign extends script.base_script
 {
-    public custom_sign()
-    {
-    }
-    public static final String SIGN_TYPE = new String("hangingStanding");
-    public static final String MODIFIED_SIGN = new String("modifiedSign");
-    public static final String SPAM = new String("spam");
+    public static final String SIGN_TYPE = "hangingStanding";
+    public static final String MODIFIED_SIGN = "modifiedSign";
+    public static final String SPAM = "spam";
     public static final string_id SUI_TITLE = new string_id(SPAM, "replace_sign_sui");
     public static final string_id SUI_QUESTION = new string_id(SPAM, "replace_sign_sui_question");
     public static final string_id SID_USE = new string_id(SPAM, "change_sign");
     public static final string_id CANT_USE = new string_id(SPAM, "not_sign");
     public static final string_id CANT_DROP = new string_id(SPAM, "cant_drop_sign");
+    public custom_sign()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.SERVER_MENU1);
@@ -24,13 +25,14 @@ public class custom_sign extends script.base_script
         String templateName = getTemplateName(target);
         if (player_structure.isOwner(house, player))
         {
-            if (exists(house) && isIdValid(house) && validSign(target, self, house) == true)
+            if (exists(house) && isIdValid(house) && validSign(target, self, house))
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_USE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id target = getIntendedTarget(player);
@@ -38,7 +40,7 @@ public class custom_sign extends script.base_script
         String templateName = getTemplateName(target);
         if (item == menu_info_types.SERVER_MENU1)
         {
-            if (exists(house) && isIdValid(house) && validSign(target, self, house) == true)
+            if (exists(house) && isIdValid(house) && validSign(target, self, house))
             {
                 if (player_structure.isOwner(house, player))
                 {
@@ -47,13 +49,14 @@ public class custom_sign extends script.base_script
                     int pid = sui.msgbox(self, player, prompt, sui.YES_NO, title, "signReplacementSui");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, CANT_USE);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id newLocationNonPlayer = getTopMostContainer(destContainer);
@@ -75,6 +78,7 @@ public class custom_sign extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int signReplacementSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -90,12 +94,13 @@ public class custom_sign extends script.base_script
         replaceSign(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void replaceSign(obj_id player, obj_id sign) throws InterruptedException
     {
         obj_id target = getIntendedTarget(player);
         obj_id house = utils.getObjIdScriptVar(target, "player_structure.parent");
         String templateName = getTemplateName(target);
-        if (exists(house) && isIdValid(house) && validSign(target, sign, house) == true)
+        if (exists(house) && isIdValid(house) && validSign(target, sign, house))
         {
             if (player_structure.isOwner(house, player))
             {
@@ -109,11 +114,12 @@ public class custom_sign extends script.base_script
                 destroyObject(sign);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, CANT_USE);
         }
     }
+
     public boolean validSign(obj_id target, obj_id self, obj_id structure) throws InterruptedException
     {
         String templateName = getTemplateName(target);
@@ -138,10 +144,7 @@ public class custom_sign extends script.base_script
             }
             if (signType == 2)
             {
-                if (templateName.startsWith("object/tangible/sign/player/shop_sign"))
-                {
-                    return true;
-                }
+                return templateName.startsWith("object/tangible/sign/player/shop_sign");
             }
         }
         return false;

@@ -8,9 +8,6 @@ import script.library.sui;
 
 public class manufacture extends script.base_script
 {
-    public manufacture()
-    {
-    }
     public static final String SCRIPT_ME = "structure.manufacture.manufacture";
     public static final string_id SID_FACTORY_OPTIONS = new string_id("manf_station", "options");
     public static final string_id SID_SCHEMATIC = new string_id("manf_station", "schematic");
@@ -29,6 +26,10 @@ public class manufacture extends script.base_script
     public static final string_id SID_NO_VALID_SCHEMATIC = new string_id("manf_station", "no_valid_schematic");
     public static final String HANDLER_UPDATE_SCHEMATIC = "handleUpdateSchematic";
     public static final String OBJVAR_SCHEMATICS = "crafting.schematics";
+    public manufacture()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, OBJVAR_SCHEMATICS);
@@ -44,6 +45,7 @@ public class manufacture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -62,7 +64,7 @@ public class manufacture extends script.base_script
         {
             mnu = mi.addRootMenu(menu_info_types.EXAMINE, new string_id("", ""));
         }
-        else 
+        else
         {
             mid.setServerNotify(true);
         }
@@ -76,7 +78,7 @@ public class manufacture extends script.base_script
                 (mi.getMenuItemById(id)).setEnabled(false);
             }
         }
-        else 
+        else
         {
             String stationSchematic = getManufactureStationSchematic(self);
             if (stationSchematic != null)
@@ -100,7 +102,7 @@ public class manufacture extends script.base_script
                     (mi.getMenuItemById(id)).setEnabled(false);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_VALID_SCHEMATIC);
             }
@@ -117,6 +119,7 @@ public class manufacture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -145,7 +148,7 @@ public class manufacture extends script.base_script
                 {
                     sui.listbox(player, prompt, ingredients[0]);
                 }
-                else 
+                else
                 {
                 }
             }
@@ -201,7 +204,7 @@ public class manufacture extends script.base_script
                     currentSchematicName = currentSchematicName.substring(markerPos + 1);
                 }
             }
-            else 
+            else
             {
                 currentSchematicName = "";
             }
@@ -220,7 +223,7 @@ public class manufacture extends script.base_script
                         schematicIds[i] = schematics[0][i].substring(0, markerPos);
                         schematics[0][i] = schematics[0][i].substring(markerPos + 1);
                     }
-                    else 
+                    else
                     {
                         String err = "ERROR " + (getClass()).getName() + ".OnObjectMenuSelect: handling SERVER_HARVESTER_MANAGE " + "schematics for player " + player + " returned invalid schematic string <" + schematics[0][i] + ">";
                         debugServerConsoleMsg(null, err);
@@ -233,7 +236,7 @@ public class manufacture extends script.base_script
                 {
                     setObjVar(self, OBJVAR_SCHEMATICS, schematicIds);
                 }
-                else 
+                else
                 {
                     removeObjVar(self, OBJVAR_SCHEMATICS);
                 }
@@ -242,7 +245,7 @@ public class manufacture extends script.base_script
                 {
                     pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, sui.DEFAULT_TITLE, schematics[0], HANDLER_UPDATE_SCHEMATIC, false);
                 }
-                else 
+                else
                 {
                     pid = sui.emptylistbox(self, player, prompt, sui.OK_CANCEL, sui.DEFAULT_TITLE, HANDLER_UPDATE_SCHEMATIC, false);
                 }
@@ -250,7 +253,7 @@ public class manufacture extends script.base_script
                 {
                     LOG("crafting", "Error creating schematic listbox");
                 }
-                else 
+                else
                 {
                     if (!currentSchematicName.equals(""))
                     {
@@ -263,6 +266,7 @@ public class manufacture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUpdateSchematic(obj_id self, dictionary params) throws InterruptedException
     {
         String[] schematicIds = getStringArrayObjVar(self, OBJVAR_SCHEMATICS);
@@ -276,11 +280,11 @@ public class manufacture extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
             case sui.BP_REVERT:
-            
+
             {
-                if (sui.getListboxOtherButtonPressed(params) == true)
+                if (sui.getListboxOtherButtonPressed(params))
                 {
                     removeSchematicFromStation(self, player);
                     return SCRIPT_CONTINUE;
@@ -308,7 +312,7 @@ public class manufacture extends script.base_script
             debugServerConsoleMsg(null, err);
             LOG("crafting", err);
         }
-        else 
+        else
         {
             removeSchematicFromStation(self, player);
             prose_package pp = null;
@@ -319,13 +323,13 @@ public class manufacture extends script.base_script
                 debugServerConsoleMsg(null, err);
                 LOG("crafting", err);
             }
-            else 
+            else
             {
                 if (transferManufactureSchematicToStation(schematic, self))
                 {
                     pp = prose.getPackage(SID_SCHEMATIC_ADDED, schematic);
                 }
-                else 
+                else
                 {
                     pp = prose.getPackage(SID_SCHEMATIC_NOT_ADDED, schematic);
                 }
@@ -337,6 +341,7 @@ public class manufacture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeSchematicFromStation(obj_id station, obj_id player) throws InterruptedException
     {
         prose_package pp = null;
@@ -351,7 +356,7 @@ public class manufacture extends script.base_script
                 {
                     pp = prose.getPackage(SID_SCHEMATIC_REMOVED, schematicId);
                 }
-                else 
+                else
                 {
                     pp = prose.getPackage(SID_SCHEMATIC_NOT_REMOVED, schematicId);
                 }

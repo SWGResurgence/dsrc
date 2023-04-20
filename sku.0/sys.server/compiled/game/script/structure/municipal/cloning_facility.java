@@ -12,16 +12,18 @@ import java.util.Vector;
 
 public class cloning_facility extends script.structure.municipal.cloning_base
 {
+    public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
+    public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/cloning_facility_terminal.iff";
     public cloning_facility()
     {
     }
-    public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
-    public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/cloning_facility_terminal.iff";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleTerminalSpawning", null, 5.0f, false);
         return super.OnInitialize(self);
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id planet = getPlanetByName(getCurrentSceneName());
@@ -33,6 +35,7 @@ public class cloning_facility extends script.structure.municipal.cloning_base
         }
         return super.OnDetach(self);
     }
+
     public int handleTerminalSpawning(obj_id self, dictionary params) throws InterruptedException
     {
         createCloningDroid(self);
@@ -42,6 +45,7 @@ public class cloning_facility extends script.structure.municipal.cloning_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createCloningDroid(obj_id facility) throws InterruptedException
     {
         if (!isIdValid(facility))

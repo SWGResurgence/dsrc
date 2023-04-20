@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class permanent_structure extends script.base_script
 {
-    public permanent_structure()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final String SCRIPT_ITEM_STRUCTURE = "structure.item_structure";
@@ -21,6 +18,10 @@ public class permanent_structure extends script.base_script
     public static final string_id SID_INACTIVE_CITIZEN_WARNING_BODY = new string_id("city/city", "inactive_citizen_warning_body");
     public static final string_id SID_INACTIVE_CITIZEN_WARNING_SUBJECT = new string_id("city/city", "inactive_citizen_warning_subject");
     public static final string_id SID_PACKING_CITY_ABANDONED_STRUCTURE = new string_id("city/city", "packing_city_abandoned_structure");
+    public permanent_structure()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -29,6 +30,7 @@ public class permanent_structure extends script.base_script
         messageToRange(20.0f, "handleRequestCorpseMove", params, 0.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateStructureStorageOverride", null, 2, false);
@@ -75,7 +77,8 @@ public class permanent_structure extends script.base_script
         obj_id[] objLairs = getAllObjectsWithTemplate(getLocation(self), fltDistance, "object/tangible/lair/npc_lair.iff");
         if (objLairs != null)
         {
-            for (obj_id objLair : objLairs) {
+            for (obj_id objLair : objLairs)
+            {
                 messageTo(objLair, "proximityCleanup", null, 1, true);
             }
         }
@@ -124,7 +127,7 @@ public class permanent_structure extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (!isAppropriateText(getName(self)))
             {
@@ -138,6 +141,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "permanent_structure::OnAboutToReceiveItem --" + transferer + " - " + item);
@@ -155,13 +159,13 @@ public class permanent_structure extends script.base_script
                         {
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             return SCRIPT_OVERRIDE;
                         }
                     }
                 }
-                else 
+                else
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -182,6 +186,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "permanent_structure::OnAboutToLooseItem --" + transferer + " - " + item);
@@ -199,7 +204,7 @@ public class permanent_structure extends script.base_script
                         {
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             LOG("LOG_CHANNEL", transferer + "-> You must be an admin to pick up an item here.");
                             sendSystemMessageTestingOnly(transferer, "You must be an admin to pick up an item here.");
@@ -207,7 +212,7 @@ public class permanent_structure extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -215,6 +220,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "permanent_structure::OnReceivedItem --" + transferer + " - " + item);
@@ -253,7 +259,7 @@ public class permanent_structure extends script.base_script
                             city.addCitizen(item, self);
                         }
                     }
-                    else 
+                    else
                     {
                         if (hasObjVar(self, player_structure.VAR_RESIDENCE_BUILDING))
                         {
@@ -269,6 +275,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         int myGot = getGameObjectType(self);
@@ -284,6 +291,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (player_structure.isBuilding(self))
@@ -292,6 +300,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMaintenanceLoop(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "permanent_structure::OnMaintenanceLoop");
@@ -407,7 +416,7 @@ public class permanent_structure extends script.base_script
                         messageTo(objOwner, "transferMoneyToNamedAccount", dctParams, 0, false, self, "ownerNotOnline");
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         LOG("LOG_CHANNEL", "permanent_structure::OnMaintenanceLoop:HARVESTER-GENERATOR " + self + "-- insufficient funds. Applying damage instead.");
                         int damage = player_structure.getDecayRate(self) * loops;
@@ -419,7 +428,7 @@ public class permanent_structure extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (hasObjVar(self, "structure.intNoMaintenance"))
                     {
@@ -436,7 +445,7 @@ public class permanent_structure extends script.base_script
             }
             setObjVar(self, player_structure.VAR_LAST_MAINTANENCE, current_time);
         }
-        else 
+        else
         {
             if (boolSender)
             {
@@ -446,6 +455,7 @@ public class permanent_structure extends script.base_script
         doHouseMaintenanceHousekeeping(self);
         return SCRIPT_CONTINUE;
     }
+
     public void doHouseMaintenanceHousekeeping(obj_id self) throws InterruptedException
     {
         messageTo(self, "OnMaintenanceLoop", null, player_structure.getMaintenanceHeartbeat(), false);
@@ -455,8 +465,8 @@ public class permanent_structure extends script.base_script
         xp.grantCraftingXpChance(self, player_structure.getStructureOwnerObjId(self), 40);
         city.validateCityStructure(self);
         player_structure.sendMaintenanceMail(self);
-        return;
     }
+
     public int handlePayment(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player_id");
@@ -469,24 +479,27 @@ public class permanent_structure extends script.base_script
         {
             setObjVar(self, player_structure.VAR_MAINTENANCE_MOD_MERCHANT, player_structure.MERCHANT_SALES_MODIFIER);
         }
-        else 
+        else
         {
             removeObjVar(self, player_structure.VAR_MAINTENANCE_MOD_MERCHANT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDestroyStructure(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("playerStructure", "Intiating destroy for " + self + " due to character deletion of its owner " + player_structure.getStructureOwner(self));
         player_structure.destroyStructure(self);
         return SCRIPT_CONTINUE;
     }
+
     public int removeResidentVar(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, player_structure.VAR_RESIDENCE_BUILDING);
         city.removeStructureFromCity(self);
         return SCRIPT_CONTINUE;
     }
+
     public int setNewMayor(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -528,12 +541,13 @@ public class permanent_structure extends script.base_script
             LOG("sissynoid", "City Hall/Cloning Center(" + self + ") Found - Messaging to transfer - 10 second delay");
             messageTo(self, "transferStructureToNewMayor", transferParams, 10.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "transferStructureToNewMayor", transferParams, 0.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int transferStructureToNewMayor(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Entered transferStructureToNewMayor");
@@ -558,6 +572,7 @@ public class permanent_structure extends script.base_script
         CustomerServiceLog("player_city_transfer", "Success - Structure(" + structure + ") has successfully transferred to New Mayor(" + new_mayor + ").");
         return SCRIPT_CONTINUE;
     }
+
     public void updateOwnerAndAdmin(obj_id self, obj_id new_mayor) throws InterruptedException
     {
         if (!player_structure.isCivic(self))
@@ -582,8 +597,8 @@ public class permanent_structure extends script.base_script
         obj_id[] adminList = new obj_id[1];
         adminList[0] = new_mayor;
         setObjVar(self, player_structure.VAR_ADMIN_LIST, adminList);
-        return;
     }
+
     public int handleChangeSignSui(obj_id self, dictionary params) throws InterruptedException
     {
         blog("permanent_structure.handleChangeSignSui INITIALIZED");
@@ -633,6 +648,7 @@ public class permanent_structure extends script.base_script
         player_structure.createStructureSign(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cityMapRegister(obj_id self, dictionary params) throws InterruptedException
     {
         if (player_structure.isCivic(self) || player_structure.isCommercial(self))
@@ -652,6 +668,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cityMapUnregister(obj_id self, dictionary params) throws InterruptedException
     {
         if (player_structure.isCivic(self) || player_structure.isCommercial(self))
@@ -663,6 +680,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int takeCityDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -679,7 +697,7 @@ public class permanent_structure extends script.base_script
             prose_package bodypp = prose.getPackage(city.STRUCTURE_DESTROYED_MAINT_BODY, structure_name, mayor_name);
             utils.sendMail(city.STRUCTURE_DESTROYED_MAINT_SUBJECT, bodypp, mayor_name, "City Hall");
         }
-        else 
+        else
         {
             int cost = params.getInt("cost");
             prose_package bodypp = prose.getPackage(city.STRUCTURE_DAMAGED_BODY, null, null, null, null, mayor_name, null, null, structure_name, null, cost, 0.0f);
@@ -687,6 +705,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairCityDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -707,6 +726,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createStructureObjects(obj_id self, dictionary params) throws InterruptedException
     {
         int rotation = params.getInt("rotation");
@@ -715,6 +735,7 @@ public class permanent_structure extends script.base_script
         player_structure.createStructureSign(self, rot_float);
         return SCRIPT_CONTINUE;
     }
+
     public int requestBankBalance(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id requestingObj = params.getObjId("requestingObj");
@@ -725,6 +746,7 @@ public class permanent_structure extends script.base_script
         messageTo(requestingObj, "returnRequestedBankBalance", newParam, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int requestName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id requestingObj = params.getObjId("requestingObj");
@@ -736,7 +758,7 @@ public class permanent_structure extends script.base_script
                 name = getStringObjVar(self, player_structure.VAR_SIGN_NAME);
             }
         }
-        else 
+        else
         {
             name = getEncodedName(self);
         }
@@ -746,6 +768,7 @@ public class permanent_structure extends script.base_script
         messageTo(requestingObj, "returnRequestedName", newParam, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankTransferError(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objSender = null;
@@ -799,6 +822,7 @@ public class permanent_structure extends script.base_script
         doHouseMaintenanceHousekeeping(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBankSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objSender = null;
@@ -825,6 +849,7 @@ public class permanent_structure extends script.base_script
         doHouseMaintenanceHousekeeping(self);
         return SCRIPT_CONTINUE;
     }
+
     public int payCondemnedFees(obj_id self, dictionary params) throws InterruptedException
     {
         if (!player_structure.isStructureCondemned(self))
@@ -863,6 +888,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int moneyTransferredFromOwner(obj_id self, dictionary params) throws InterruptedException
     {
         int transferredAmount = params.getInt("amount");
@@ -871,6 +897,7 @@ public class permanent_structure extends script.base_script
         messageTo(self, "OnMaintenanceLoop", null, player_structure.getMaintenanceHeartbeat(), false);
         return SCRIPT_CONTINUE;
     }
+
     public int ownerNotOnline(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "maint.dontCheckDB"))
@@ -880,18 +907,20 @@ public class permanent_structure extends script.base_script
             obj_id owner = params.getObjId("owner");
             getMoneyFromOfflineObject(owner, amount, money.ACCT_STRUCTURE_MAINTENANCE, "moneyTransferredFromOwner", "ownerNSF", params);
         }
-        else 
+        else
         {
             messageTo(self, "handleBankTransferError", params, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int ownerNSF(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "maint.dontCheckDB", 1);
         messageTo(self, "handleBankTransferError", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int validateHopper(obj_id self, dictionary params) throws InterruptedException
     {
         int objvar_hopper = getIntObjVar(self, player_structure.VAR_DEED_MAX_HOPPER);
@@ -903,6 +932,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void updateFactoryName(obj_id factory) throws InterruptedException
     {
         if (player_structure.isFactory(factory))
@@ -912,13 +942,13 @@ public class permanent_structure extends script.base_script
             {
                 setObjVar(factory, "player_structure.name.original", assignedName == null ? "" : assignedName);
             }
-            else 
+            else
             {
                 if (assignedName != null && assignedName.contains(player_structure.ABANDONED_TEXT))
                 {
                     assignedName = getStringObjVar(factory, "player_structure.name.original");
                 }
-                else 
+                else
                 {
                     setObjVar(factory, "player_structure.name.original", assignedName == null ? "" : assignedName);
                 }
@@ -926,7 +956,8 @@ public class permanent_structure extends script.base_script
             if (assignedName == null || assignedName.length() == 0)
             {
                 String templateName = getTemplateName(factory);
-                switch (templateName) {
+                switch (templateName)
+                {
                     case "object/installation/manufacture/food_factory.iff":
                         assignedName = "Food and Chemical Factory";
                         break;
@@ -947,6 +978,7 @@ public class permanent_structure extends script.base_script
             setName(factory, assignedName + player_structure.ABANDONED_TEXT);
         }
     }
+
     public int checkAndMarkForPreAbandon(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInWorldCell(self) && player_structure.needsPreAbandonCheck(self))
@@ -968,10 +1000,13 @@ public class permanent_structure extends script.base_script
                 if (adminList != null)
                 {
                     String admins = "";
-                    for (String s : adminList) {
-                        if (s != null && !(s.toLowerCase()).contains("guild:")) {
+                    for (String s : adminList)
+                    {
+                        if (s != null && !(s.toLowerCase()).contains("guild:"))
+                        {
                             admins += "|" + getPlayerStationId(utils.stringToObjId(s));
-                            if (admins.length() > 256) {
+                            if (admins.length() > 256)
+                            {
                                 CustomerServiceLog("house_packup_adminlist", admins + "|");
                                 admins = "";
                             }
@@ -983,7 +1018,7 @@ public class permanent_structure extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (!isPreAbandoned && !isAbandoned)
                 {
@@ -1007,6 +1042,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkAndMarkForAbandon(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInWorldCell(self) && player_structure.needsAbandonCheck(self))
@@ -1034,7 +1070,7 @@ public class permanent_structure extends script.base_script
                     player_structure.createStructureSign(self);
                 }
             }
-            else 
+            else
             {
                 if (!isAbandoned)
                 {
@@ -1050,17 +1086,20 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int logStructureInfo(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("house_packup_info", player_structure.getStructureInfo(self));
         return SCRIPT_CONTINUE;
     }
+
     public int handleStructurePackupLockoutRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         blog("permanent_structure.handleStructurePackupLockoutRemoval() Message received by player to remove lockout timer.");
         utils.removeScriptVarTree(self, player_structure.SCRIPTVAR_HOUSE_PACKUP_TREE_PREFIX);
         return SCRIPT_CONTINUE;
     }
+
     public int packAbandonedBuilding(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1071,6 +1110,7 @@ public class permanent_structure extends script.base_script
         player_structure.packAbandonedBuilding(player, self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int moveStructureToSCD(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -1144,26 +1184,33 @@ public class permanent_structure extends script.base_script
         if (players != null)
         {
             blog("player_structure.finalizeAbandonedStructurePackUp Players are in the building that is about to be packed.");
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 expelFromBuilding(player1);
             }
         }
         String[] cells = getCellNames(structure);
         if (cells != null)
         {
-            for (String cell : cells) {
+            for (String cell : cells)
+            {
                 obj_id cellid = getCellId(structure, cell);
-                obj_id contents[] = getContents(cellid);
-                if (contents != null) {
-                    for (obj_id content : contents) {
-                        if (hasCondition(content, CONDITION_VENDOR)) {
+                obj_id[] contents = getContents(cellid);
+                if (contents != null)
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasCondition(content, CONDITION_VENDOR))
+                        {
                             obj_id owner = getObjIdObjVar(content, "vendor_owner");
-                            if (!isIdValid(owner)) {
+                            if (!isIdValid(owner))
+                            {
                                 owner = getOwner(content);
                             }
                             vendor_lib.finalizePackUp(owner, content, player, isAbandoned);
                         }
-                        if (isIdValid(content)) {
+                        if (isIdValid(content))
+                        {
                             messageTo(content, "OnPack", null, 1.0f, false);
                         }
                     }
@@ -1226,6 +1273,7 @@ public class permanent_structure extends script.base_script
         player_structure.housePackingPointIncrease(player);
         return SCRIPT_CONTINUE;
     }
+
     public int cityMoveStructureToSCD(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Entered: cityMoveStructureToSCD");
@@ -1295,7 +1343,8 @@ public class permanent_structure extends script.base_script
         if (players != null)
         {
             LOG("sissynoid", "cityMoveStructureToSCD: Ejecting Players from the house.");
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 expelFromBuilding(player1);
             }
         }
@@ -1303,19 +1352,25 @@ public class permanent_structure extends script.base_script
         if (cells != null)
         {
             LOG("sissynoid", "cityMoveStructureToSCD: Removing Vendors");
-            for (String cell : cells) {
+            for (String cell : cells)
+            {
                 obj_id cellid = getCellId(structure, cell);
-                obj_id contents[] = getContents(cellid);
-                if (contents != null) {
-                    for (obj_id content : contents) {
-                        if (hasCondition(content, CONDITION_VENDOR)) {
+                obj_id[] contents = getContents(cellid);
+                if (contents != null)
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasCondition(content, CONDITION_VENDOR))
+                        {
                             obj_id owner = getObjIdObjVar(content, "vendor_owner");
-                            if (!isIdValid(owner)) {
+                            if (!isIdValid(owner))
+                            {
                                 owner = getOwner(content);
                             }
                             vendor_lib.finalizePackUp(owner, content, player, isCityAbandoned);
                         }
-                        if (isIdValid(content)) {
+                        if (isIdValid(content))
+                        {
                             messageTo(content, "OnPack", null, 1.0f, false);
                         }
                     }
@@ -1375,6 +1430,7 @@ public class permanent_structure extends script.base_script
         CustomerServiceLog("housepackup", "Player " + getPlayerName(player) + " (" + player + ") packed structure (" + structure + ",abandoned=true," + where.toString() + ") owned by player " + getPlayerName(structure_owner) + " (" + structure_owner + ") into device (" + scd + ")");
         return SCRIPT_CONTINUE;
     }
+
     public int checkResidenceLinks(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1419,6 +1475,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int houseCheck(obj_id self, dictionary params) throws InterruptedException
     {
         location landingSpot = params.getLocation("landingSpot");
@@ -1436,20 +1493,21 @@ public class permanent_structure extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "homingBeacon");
                     sendSystemMessage(player, SID_BEACON_MISSING);
                 }
             }
         }
-        else 
+        else
         {
             removeObjVar(player, "homingBeacon");
             sendSystemMessage(player, SID_BEACON_MISSING);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleUnloadedCityStructureReportData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1475,8 +1533,8 @@ public class permanent_structure extends script.base_script
         else if (player_structure.isCivic(self))
         {
             location structureLocation = getLocation(self);
-            float cond = ((float)player_structure.getStructureCondition(self)) / player_structure.getMaxCondition(self);
-            int outcond = (int)(cond * 100);
+            float cond = ((float) player_structure.getStructureCondition(self)) / player_structure.getMaxCondition(self);
+            int outcond = (int) (cond * 100);
             String structureName = getEncodedName(self) + " (Condition : " + outcond + "%)";
             dictionary dict = new dictionary();
             dict.put("player", player);
@@ -1487,12 +1545,13 @@ public class permanent_structure extends script.base_script
             dict.put("unloadedStructureLocation", structureLocation);
             messageTo(city_terminal, "RecievedUnloadedStructureResponse", dict, 0.0f, false);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getStructureCitizenInformation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1515,6 +1574,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpecialSignManagementSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("permanent_structure.handleSpecialSignManagementSelection init");
@@ -1602,6 +1662,7 @@ public class permanent_structure extends script.base_script
         sui.setPid(player, pid, player_structure.VAR_SPECIAL_SIGN_MENU_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpecialSignSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("permanent_structure.handleSpecialSignSelection: init");
@@ -1719,11 +1780,13 @@ public class permanent_structure extends script.base_script
         sendSystemMessage(player, player_structure.SID_SPECIAL_SIGN_SUCCESS);
         return SCRIPT_CONTINUE;
     }
+
     public boolean removeSpecialSignScriptVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, player_structure.VAR_SPECIAL_SIGN_TREE);
         return true;
     }
+
     public int checkCityHousePackupStatus(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Checking Pack Status of HOuse " + self);
@@ -1775,7 +1838,7 @@ public class permanent_structure extends script.base_script
                             {
                                 return SCRIPT_CONTINUE;
                             }
-                            else 
+                            else
                             {
                                 sendMayorInactiveCitizenMail(self, owner, city_mayor, city_id);
                                 LOG("sissynoid", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") has been offline for more than 60 Days.  Sending Mayor In-Game Mail");
@@ -1792,19 +1855,19 @@ public class permanent_structure extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("sissynoid", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") is PROTECTED by the Mayor of City(" + city_id + ") " + cityGetName(city_id) + ".");
                         CustomerServiceLog("city_house_packup", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") is PROTECTED by the Mayor of City(" + city_id + ") " + cityGetName(city_id) + ".");
                     }
                 }
-                else 
+                else
                 {
                     LOG("sissynoid", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") can not be flagged at this time due to City(" + city_id + ") " + cityGetName(city_id) + " being too young (less than 3 weeks old).");
                     CustomerServiceLog("city_house_packup", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") can not be flagged at this time due to City(" + city_id + ") " + cityGetName(city_id) + " being too young (less than 3 weeks old).");
                 }
             }
-            else 
+            else
             {
                 LOG("sissynoid", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") is not currently within City Limits and is not eligible for City Pack Up System.");
                 CustomerServiceLog("city_house_packup", "City Pack Up System - Structure(" + self + ") Owner(" + owner + ") is not currently within City Limits and is not eligible for City Pack Up System.");
@@ -1812,6 +1875,7 @@ public class permanent_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void sendMayorInactiveCitizenMail(obj_id house, obj_id owner, obj_id city_mayor, int city_id) throws InterruptedException
     {
         prose_package bodypp = prose.getPackage(SID_INACTIVE_CITIZEN_WARNING_BODY);
@@ -1819,6 +1883,7 @@ public class permanent_structure extends script.base_script
         utils.sendMail(SID_INACTIVE_CITIZEN_WARNING_SUBJECT, bodypp, city_mayor, "City Hall");
         setObjVar(house, "city_packup.inactive_citizen_mail_sent", 1);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))
@@ -1827,6 +1892,7 @@ public class permanent_structure extends script.base_script
         }
         return true;
     }
+
     public int retrieveHouseCoords(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1852,14 +1918,14 @@ public class permanent_structure extends script.base_script
             {
                 sendCoordsToRequester(self, homeOwner, requester);
             }
-            else 
+            else
             {
                 CustomerServiceLog("travel", "TCG HOME ITV: Player(" + homeOwner + ") did not have a residence set when using the Home ITV");
                 sendSystemMessage(homeOwner, new string_id("tcg", "no_residence_home_itv"));
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             obj_id residenceObjVarOwner = getObjIdObjVar(self, "player_structure.residence.building");
             if (residenceObjVarOwner != homeOwner)
@@ -1872,6 +1938,7 @@ public class permanent_structure extends script.base_script
         sendCoordsToRequester(self, homeOwner, requester);
         return SCRIPT_CONTINUE;
     }
+
     public void sendCoordsToRequester(obj_id structure, obj_id homeOwner, obj_id requester) throws InterruptedException
     {
         location residenceLoc = getBuildingEjectLocation(structure);
@@ -1883,6 +1950,7 @@ public class permanent_structure extends script.base_script
         dict.put("itv", requester);
         messageTo(requester, "ownerResidenceLocationResponse", dict, 0.0f, false);
     }
+
     public int validateStructureStorageOverride(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = "datatables/structure/structure_storage_override.iff";
@@ -1903,7 +1971,7 @@ public class permanent_structure extends script.base_script
                     setObjVar(self, "structure.capacity_override", expectedStorageOverrideValue);
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, "structure.capacity_override", expectedStorageOverrideValue);
             }

@@ -5,12 +5,13 @@ import script.library.*;
 
 public class cloning_base extends script.base_script
 {
-    public cloning_base()
-    {
-    }
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String VAR_NUM_RESPAWN_TUBES = "numRespawnTubes";
     public static final String VAR_CURRENT_RESPAWN_TUBE = "currentTube";
+    public cloning_base()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (player_structure.isCivic(self))
@@ -20,6 +21,7 @@ public class cloning_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id planet = getPlanetByName(getCurrentSceneName());
@@ -31,6 +33,7 @@ public class cloning_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!requestCloningFacilityRegistration(self))
@@ -43,6 +46,7 @@ public class cloning_base extends script.base_script
         messageTo(self, "retryInitializeCloningFacility", params, 120.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (player_structure.isCivic(self))
@@ -60,6 +64,7 @@ public class cloning_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetRespawnLocation(obj_id self, modifiable_int tubeIndex) throws InterruptedException
     {
         deltadictionary scriptvars = self.getScriptVars();
@@ -76,6 +81,7 @@ public class cloning_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerCloningFacility(obj_id self, dictionary params) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -84,7 +90,7 @@ public class cloning_base extends script.base_script
         {
             facilityData = params.getDictionary("facilityData");
         }
-        else 
+        else
         {
             facilityData = dataTableGetRow(structure.DATATABLE_CLONING_FACILITY_RESPAWN, myTemplate);
         }
@@ -124,7 +130,7 @@ public class cloning_base extends script.base_script
                 {
                     pobId = self;
                 }
-                else 
+                else
                 {
                     pobId = getTopMostContainer(self);
                     if (pobId == self)
@@ -149,14 +155,14 @@ public class cloning_base extends script.base_script
                         messageTo(scene, "registerCloningFacility", data, 1.0f, false);
                         CustomerServiceLog("Cloning_Center", "Mapping Cloning Region(" + getTemplateName(self) + "/" + self + ") to " + cloneScene + "(" + cloneArea + ")");
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog("Cloning_Center", "Failed to map clone region(" + getTemplateName(self) + "/" + self + ") invalid scene name " + cloneScene);
                     }
                     idx++;
                 }
             }
-            else 
+            else
             {
                 LOG("DESIGNER_FATAL", "************* registerCloningFacility ****************");
                 LOG("DESIGNER_FATAL", "spawnLoc was returned as null & therefore aborted facility registration");
@@ -167,12 +173,13 @@ public class cloning_base extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("Cloning_Center", "Attempted to register cloning center(" + getTemplateName(self) + "/" + self + ") but could not find planet object for(" + getCurrentSceneName() + ")");
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getCloneName(obj_id self) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);
@@ -183,6 +190,7 @@ public class cloning_base extends script.base_script
         }
         return getCloneName(facilityData.getInt("CLONE_TYPE"), facilityData.getString("NAME"));
     }
+
     public String getCloneName(int cloneType, String nameOverride) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -192,65 +200,66 @@ public class cloning_base extends script.base_script
             case cloninglib.CLONE_TYPE_STANDARD:
             case cloninglib.CLONE_TYPE_PLAYER_CITY:
             case cloninglib.CLONE_TYPE_RESTRICTED:
-            map_location cl = getPlanetaryMapLocation(self);
-            if (cl != null)
-            {
-                cloneName = cl.getLocationName();
-            }
-            else if (nameOverride != null && !nameOverride.equals(""))
-            {
-                cloneName = nameOverride;
-            }
-            else 
-            {
-                cloneName = null;
-            }
-            break;
-            case cloninglib.CLONE_TYPE_JEDI_ONLY:
-            location spawnLoc = cloninglib.getCloneSpawnLocation(self);
-            cloneName = "@base_player:clone_location_force_shrine (" + (int)spawnLoc.x + ", " + (int)spawnLoc.z + ")";
-            break;
-            case cloninglib.CLONE_TYPE_LIGHT_JEDI_ONLY:
-            case cloninglib.CLONE_TYPE_DARK_JEDI_ONLY:
-            cloneName = "@base_player:clone_location_jedi_enclave";
-            break;
-            case cloninglib.CLONE_TYPE_FACTION_IMPERIAL:
-            cloneName = nameOverride;
-            break;
-            case cloninglib.CLONE_TYPE_FACTION_REBEL:
-            cloneName = nameOverride;
-            break;
-            case cloninglib.CLONE_TYPE_PVP_REGION_ADVANCED_IMPERIAL:
-            cloneName = nameOverride;
-            break;
-            case cloninglib.CLONE_TYPE_PVP_REGION_ADVANCED_REBEL:
-            cloneName = nameOverride;
-            break;
-            case cloninglib.CLONE_TYPE_CAMP:
-            obj_id parent = getObjIdObjVar(self, "theater.parent");
-            if (isIdValid(parent))
-            {
-                String name = getName(parent);
-                if (name != null && !name.equals(""))
+                map_location cl = getPlanetaryMapLocation(self);
+                if (cl != null)
                 {
-                    cloneName = name;
+                    cloneName = cl.getLocationName();
                 }
-                else 
+                else if (nameOverride != null && !nameOverride.equals(""))
                 {
                     cloneName = nameOverride;
                 }
-            }
-            else 
-            {
+                else
+                {
+                    cloneName = null;
+                }
+                break;
+            case cloninglib.CLONE_TYPE_JEDI_ONLY:
+                location spawnLoc = cloninglib.getCloneSpawnLocation(self);
+                cloneName = "@base_player:clone_location_force_shrine (" + (int) spawnLoc.x + ", " + (int) spawnLoc.z + ")";
+                break;
+            case cloninglib.CLONE_TYPE_LIGHT_JEDI_ONLY:
+            case cloninglib.CLONE_TYPE_DARK_JEDI_ONLY:
+                cloneName = "@base_player:clone_location_jedi_enclave";
+                break;
+            case cloninglib.CLONE_TYPE_FACTION_IMPERIAL:
                 cloneName = nameOverride;
-            }
-            break;
+                break;
+            case cloninglib.CLONE_TYPE_FACTION_REBEL:
+                cloneName = nameOverride;
+                break;
+            case cloninglib.CLONE_TYPE_PVP_REGION_ADVANCED_IMPERIAL:
+                cloneName = nameOverride;
+                break;
+            case cloninglib.CLONE_TYPE_PVP_REGION_ADVANCED_REBEL:
+                cloneName = nameOverride;
+                break;
+            case cloninglib.CLONE_TYPE_CAMP:
+                obj_id parent = getObjIdObjVar(self, "theater.parent");
+                if (isIdValid(parent))
+                {
+                    String name = getName(parent);
+                    if (name != null && !name.equals(""))
+                    {
+                        cloneName = name;
+                    }
+                    else
+                    {
+                        cloneName = nameOverride;
+                    }
+                }
+                else
+                {
+                    cloneName = nameOverride;
+                }
+                break;
             case cloninglib.CLONE_TYPE_PRIVATE_INSTANCE:
-            cloneName = nameOverride;
-            break;
+                cloneName = nameOverride;
+                break;
         }
         return cloneName;
     }
+
     public int requestCloningData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id requester = params.getObjId("requester");
@@ -265,6 +274,7 @@ public class cloning_base extends script.base_script
         messageTo(requester, "handleCloningDataUpdate", data, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int retryInitializeCloningFacility(obj_id self, dictionary params) throws InterruptedException
     {
         int numberOfRetry = params.getInt("number_of_retry");
@@ -308,6 +318,7 @@ public class cloning_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean requestCloningFacilityRegistration(obj_id cloningFacility) throws InterruptedException
     {
         if (!isValidId(cloningFacility))
