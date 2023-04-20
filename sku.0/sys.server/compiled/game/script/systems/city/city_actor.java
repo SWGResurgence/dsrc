@@ -13,7 +13,6 @@ public class city_actor extends script.base_script
 
     public int OnAttach(obj_id self)
     {
-        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setName(self, "Bio-logical Display Matrix");
         setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked or engaged."));
@@ -22,7 +21,6 @@ public class city_actor extends script.base_script
 
     public int OnInitialize(obj_id self)
     {
-        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked or engaged."));
         return SCRIPT_CONTINUE;
