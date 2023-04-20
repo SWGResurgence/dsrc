@@ -7,13 +7,14 @@ import script.string_id;
 
 public class space_dungeon_data extends script.base_script
 {
-    public space_dungeon_data()
-    {
-    }
     public static final String TEMPLATE_TICKET = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
     public static final String DUNGEON_DATATABLE = "datatables/dungeon/space_dungeon.iff";
     public static final String TRAVEL_DUNGEON = "item.travel_ticket.travel_space_dungeon";
     public static final String DUNGEON_CONTROLLER = "theme_park.dungeon.space_dungeon_controller";
+    public space_dungeon_data()
+    {
+    }
+
     public static string_id getDungeonSuccessString(String name) throws InterruptedException
     {
         if (name == null)
@@ -27,12 +28,13 @@ public class space_dungeon_data extends script.base_script
             String success_string = dataTableGetString(space_dungeon_data.DUNGEON_DATATABLE, idx, "success_string");
             return utils.unpackString(success_string);
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonSuccessString -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static string_id getDungeonFailureString(String name) throws InterruptedException
     {
         if (name == null)
@@ -46,12 +48,13 @@ public class space_dungeon_data extends script.base_script
             String failure_string = dataTableGetString(space_dungeon_data.DUNGEON_DATATABLE, idx, "failure_string");
             return utils.unpackString(failure_string);
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonFailureString -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static int getDungeonMaxPlayers(String name) throws InterruptedException
     {
         if (name == null)
@@ -65,12 +68,13 @@ public class space_dungeon_data extends script.base_script
             int max_players = dataTableGetInt(space_dungeon_data.DUNGEON_DATATABLE, idx, "max_players");
             return max_players;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonMaxPlayers -- Unable to find a datatable entry for " + name);
             return -1;
         }
     }
+
     public static location getDungeonStartLocation(String name) throws InterruptedException
     {
         if (name == null)
@@ -89,12 +93,13 @@ public class space_dungeon_data extends script.base_script
             location start_loc = new location(loc_x, loc_y, loc_z, planet);
             return start_loc;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonStartLocation -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static float getDungeonStartLocationRadius(String name) throws InterruptedException
     {
         if (name == null)
@@ -108,12 +113,13 @@ public class space_dungeon_data extends script.base_script
             dictionary row = dataTableGetRow(space_dungeon_data.DUNGEON_DATATABLE, idx);
             return row.getFloat("start_loc_radius");
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonStartLocationRadius -- Unable to find a datatable entry for " + name);
         }
         return 0.0f;
     }
+
     public static location getDungeonStartLocationRandomized(String name) throws InterruptedException
     {
         location loc = getDungeonStartLocation(name);
@@ -126,6 +132,7 @@ public class space_dungeon_data extends script.base_script
         loc.z += (-1.0f + (2.0f * random.rand())) * startLocationRadius;
         return loc;
     }
+
     public static location getDungeonExitLocation(String name) throws InterruptedException
     {
         if (name == null)
@@ -144,12 +151,13 @@ public class space_dungeon_data extends script.base_script
             location start_loc = new location(loc_x, loc_y, loc_z, planet);
             return start_loc;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonExitLocation -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static float getDungeonExitLocationRadius(String name) throws InterruptedException
     {
         if (name == null)
@@ -163,12 +171,13 @@ public class space_dungeon_data extends script.base_script
             dictionary row = dataTableGetRow(space_dungeon_data.DUNGEON_DATATABLE, idx);
             return row.getFloat("exit_loc_radius");
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonExitLocation -- Unable to find a datatable entry for " + name);
         }
         return 0.0f;
     }
+
     public static location getDungeonExitLocationRandomized(String name) throws InterruptedException
     {
         location loc = getDungeonExitLocation(name);
@@ -181,6 +190,7 @@ public class space_dungeon_data extends script.base_script
         loc.z += (-1.0f + (2.0f * random.rand())) * exitLocationRadius;
         return loc;
     }
+
     public static String getDungeonStartCellName(String name) throws InterruptedException
     {
         if (name == null)
@@ -194,12 +204,13 @@ public class space_dungeon_data extends script.base_script
             String cell_name = dataTableGetString(space_dungeon_data.DUNGEON_DATATABLE, idx, "start_cell_name");
             return cell_name;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonStartCellName -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static String getDungeonPlayerScript(String name) throws InterruptedException
     {
         if (name == null)
@@ -220,21 +231,19 @@ public class space_dungeon_data extends script.base_script
             }
             return script;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "space_dungeon.getDungeonPlayerScript -- Unable to find a datatable entry for " + name);
             return null;
         }
     }
+
     public static boolean isValidDungeon(String name) throws InterruptedException
     {
         int idx = dataTableSearchColumnForString(name, "dungeon", space_dungeon_data.DUNGEON_DATATABLE);
-        if (idx == -1)
-        {
-            return false;
-        }
-        return true;
+        return idx != -1;
     }
+
     public static int getMaxDungeonSesssionTime(String name) throws InterruptedException
     {
         int idx = dataTableSearchColumnForString(name, "dungeon", space_dungeon_data.DUNGEON_DATATABLE);
@@ -248,7 +257,7 @@ public class space_dungeon_data extends script.base_script
             }
             return maxSessionTime;
         }
-        else 
+        else
         {
             LOG("space_dungeon", "spaceDungeonData.getMaxDungeonSessionTime:: dungeon was not found in the table, returning 30 minutes");
             return 3600;

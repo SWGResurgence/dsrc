@@ -4,39 +4,39 @@ import script.*;
 
 public class bounty_hunter extends script.base_script
 {
-    public static final String[] LOW_PAYOUT_COMMS = 
-    {
-        "pp_small_1",
-        "pp_small_2",
-        "pp_small_3",
-        "pp_small_4",
-        "pp_small_5"
-    };
-    public static final String[] MEDIUM_PAYOUT_COMMS = 
-    {
-        "pp_normal_1",
-        "pp_normal_2",
-        "pp_normal_3",
-        "pp_normal_4",
-        "pp_normal_5"
-    };
-    public static final String[] HIGH_PAYOUT_COMMS = 
-    {
-        "pp_big_1",
-        "pp_big_2",
-        "pp_big_3",
-        "pp_big_4",
-        "pp_big_5"
-    };
-    public static final String[] TALKING_COMM_CHARACTER = 
-    {
-        "object/mobile/dressed_tatooine_jabba_thug.iff",
-        "object/mobile/dressed_tatooine_jabba_thief.iff",
-        "object/mobile/dressed_tatooine_jabba_henchman.iff",
-        "object/mobile/dressed_tatooine_jabba_enforcer.iff",
-        "object/mobile/ephant_mon.iff",
-        "object/mobile/dressed_tatooine_jabba_assassin.iff"
-    };
+    public static final String[] LOW_PAYOUT_COMMS =
+            {
+                    "pp_small_1",
+                    "pp_small_2",
+                    "pp_small_3",
+                    "pp_small_4",
+                    "pp_small_5"
+            };
+    public static final String[] MEDIUM_PAYOUT_COMMS =
+            {
+                    "pp_normal_1",
+                    "pp_normal_2",
+                    "pp_normal_3",
+                    "pp_normal_4",
+                    "pp_normal_5"
+            };
+    public static final String[] HIGH_PAYOUT_COMMS =
+            {
+                    "pp_big_1",
+                    "pp_big_2",
+                    "pp_big_3",
+                    "pp_big_4",
+                    "pp_big_5"
+            };
+    public static final String[] TALKING_COMM_CHARACTER =
+            {
+                    "object/mobile/dressed_tatooine_jabba_thug.iff",
+                    "object/mobile/dressed_tatooine_jabba_thief.iff",
+                    "object/mobile/dressed_tatooine_jabba_henchman.iff",
+                    "object/mobile/dressed_tatooine_jabba_enforcer.iff",
+                    "object/mobile/ephant_mon.iff",
+                    "object/mobile/dressed_tatooine_jabba_assassin.iff"
+            };
     public static final int BOUNTY_PAYOUT_AMOUNT_MINIMUM = 50;
     public static final int BOUNTY_PAYOUT_AMOUNT_MAXIMUM = 2000;
     public static final boolean BOUNTY_DO_FREQUENCY_ADJUSTER = false;
@@ -75,6 +75,8 @@ public class bounty_hunter extends script.base_script
     public static final int DROID_SEEKER = 2;
     public static final int DROID_TRACK_TARGET = 1;
     public static final int DROID_FIND_TARGET = 2;
+    public static final int Max_Bounty_Hunters = utils.getIntConfigSetting("GameServer", "maxBountyHunters");
+
     public static void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -82,6 +84,7 @@ public class bounty_hunter extends script.base_script
             LOG("debug/bounty_hunter.scriptlib/" + section, message);
         }
     }
+
     public static boolean isSpammingBountyCheck(obj_id player, boolean sayProse) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -100,7 +103,7 @@ public class bounty_hunter extends script.base_script
                 {
                     if (timeDelta / 60 > 1)
                     {
-                        timeDelta = (int)timeDelta / 60;
+                        timeDelta = timeDelta / 60;
                         timeScale = "minutes";
                         String talkingCharacter = TALKING_COMM_CHARACTER[(rand(0, TALKING_COMM_CHARACTER.length - 1))];
                         prose_package pp = new prose_package();
@@ -108,7 +111,7 @@ public class bounty_hunter extends script.base_script
                         pp.digitInteger = timeDelta;
                         commPlayer(player, player, pp, talkingCharacter);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, PROSE_NO_BOUNTY_SECONDS);
                     }
@@ -118,6 +121,7 @@ public class bounty_hunter extends script.base_script
         }
         return false;
     }
+
     public static boolean canCheckForBounty(obj_id player, obj_id target) throws InterruptedException
     {
         if (isSpammingBountyCheck(player, true))
@@ -157,7 +161,7 @@ public class bounty_hunter extends script.base_script
             debugLogging("//// canCheckForBounty: ", "////>>>> not an npc... !isNpc");
             return false;
         }
-        else 
+        else
         {
             if (!ai_lib.isNpc(target))
             {
@@ -204,10 +208,12 @@ public class bounty_hunter extends script.base_script
         }
         return true;
     }
+
     public static boolean checkForPresenceOfBounty(obj_id player) throws InterruptedException
     {
         return checkForPresenceOfBounty(player, obj_id.NULL_ID);
     }
+
     public static boolean checkForPresenceOfBounty(obj_id player, obj_id target) throws InterruptedException
     {
         debugLogging("//// checkForPresenceOfBounty: ", "////>>>> entered");
@@ -215,7 +221,7 @@ public class bounty_hunter extends script.base_script
         {
             sendSystemMessage(player, NO_BOUNTY_TARGET);
         }
-        else 
+        else
         {
             if (!isGod(player))
             {
@@ -233,17 +239,19 @@ public class bounty_hunter extends script.base_script
         }
         return false;
     }
+
     public static void spawnFugitive(obj_id player, location spawnLoc) throws InterruptedException
     {
         String[] fugitive = dataTableGetStringColumnNoDefaults(BOUNTY_CHECK_TABLE, "fugitive");
-        String mob = new String();
+        String mob = "";
         if (dataTableHasColumn(BOUNTY_CHECK_TABLE, "chance"))
         {
             int[] weights = dataTableGetIntColumnNoDefaults(BOUNTY_CHECK_TABLE, "chance");
             if (weights != null && weights.length > 0)
             {
                 int total = 0;
-                for (int weight : weights) {
+                for (int weight : weights)
+                {
                     total += weight;
                 }
                 if (total < 1)
@@ -273,12 +281,12 @@ public class bounty_hunter extends script.base_script
                     obj_id spawnedFugitive = create.object(mob, spawnLoc);
                     createFugitive(player, spawnedFugitive);
                 }
-                else 
+                else
                 {
                     return;
                 }
             }
-            else 
+            else
             {
                 int pick = rand(0, fugitive.length - 1);
                 mob = fugitive[pick];
@@ -286,15 +294,15 @@ public class bounty_hunter extends script.base_script
                 createFugitive(player, spawnedFugitive);
             }
         }
-        else 
+        else
         {
             int pick = rand(0, fugitive.length - 1);
             mob = fugitive[pick];
             obj_id spawnedFugitive = create.object(mob, spawnLoc);
             createFugitive(player, spawnedFugitive);
         }
-        return;
     }
+
     public static void createFugitive(obj_id player, obj_id spawnedFugitive) throws InterruptedException
     {
         playMusic(player, spawnedFugitive, "sound/mus_duel_of_the_fates_lcv.snd", 0, false);
@@ -304,8 +312,8 @@ public class bounty_hunter extends script.base_script
         startCombat(spawnedFugitive, player);
         addHate(spawnedFugitive, player, 1000.0f);
         setObjVar(spawnedFugitive, "soloCollection", player);
-        return;
     }
+
     public static void payBountyCheckReward(obj_id killer, obj_id target) throws InterruptedException
     {
         int payBracket = getIntObjVar(target, "bountyCheckPayBracket");
@@ -322,16 +330,18 @@ public class bounty_hunter extends script.base_script
         {
             money.bankTo(money.ACCT_BOUNTY, killer, 25000);
         }
-        return;
     }
+
     public static boolean initiatePlayerBountyCollection(obj_id player, obj_id target, int amount) throws InterruptedException
     {
         return true;
     }
+
     public static boolean offerCommandCheckBounty(obj_id player, obj_id target, int amount) throws InterruptedException
     {
         return true;
     }
+
     public static void awardBounty(obj_id player, String creatureName, int amount) throws InterruptedException
     {
         obj_id storedTarget = utils.getObjIdScriptVar(player, "currentBounty");
@@ -340,6 +350,7 @@ public class bounty_hunter extends script.base_script
         params.put("creatureName", getEncodedName(storedTarget));
         money.systemPayout(money.ACCT_BOUNTY_CHECK, player, amount, "handleAwardedBountyCheck", params);
     }
+
     public static void showSetBountySUI(obj_id player, obj_id killer) throws InterruptedException
     {
         String prompt = "@bounty_hunter:setbounty_prompt1 ";
@@ -362,9 +373,11 @@ public class bounty_hunter extends script.base_script
         showSUIPage(pid);
         utils.setScriptVar(player, "setbounty.killer", killer);
     }
+
     public static void endBountySession(obj_id hunter, obj_id target, boolean hunterWon) throws InterruptedException
     {
     }
+
     public static void winBountyMission(obj_id hunter, obj_id target) throws InterruptedException
     {
         int bountyValue = 0;
@@ -390,10 +403,12 @@ public class bounty_hunter extends script.base_script
         pp = prose.setTT(pp, hunter);
         sendSystemMessageProse(target, pp);
         obj_id[] hunters = getJediBounties(target);
-        if (hunters != null && hunters.length > 0)
+        if (hunters != null)
         {
-            for (obj_id hunter1 : hunters) {
-                if (hunter1 != hunter) {
+            for (obj_id hunter1 : hunters)
+            {
+                if (hunter1 != hunter)
+                {
                     messageTo(hunter1, "handleBountyMissionIncomplete", d, 0.0f, true);
                 }
             }
@@ -407,6 +422,7 @@ public class bounty_hunter extends script.base_script
         setJediBountyValue(target, 0);
         removeAllJediBounties(target);
     }
+
     public static void loseBountyMission(obj_id hunter, obj_id target) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -423,16 +439,19 @@ public class bounty_hunter extends script.base_script
         }
         removeJediBounty(target, hunter);
         // remove TEFs that were set when players engaged in battle
-        if(isPlayer(hunter) && isPlayer(target)) {
+        if (isPlayer(hunter) && isPlayer(target))
+        {
             if (pvpHasPersonalEnemyFlag(target, hunter)) pvpRemovePersonalEnemyFlags(target, hunter);
             if (pvpHasPersonalEnemyFlag(hunter, target)) pvpRemovePersonalEnemyFlags(hunter, target);
         }
         CustomerServiceLog("bounty", "%TU was defeated by %TT and failed to collect the bounty on %PT head", hunter, target);
     }
+
     public static obj_id getBountyMission(obj_id player) throws InterruptedException
     {
         return getBountyMission(player, obj_id.NULL_ID);
     }
+
     public static obj_id getBountyMission(obj_id player, obj_id target) throws InterruptedException
     {
         obj_id lastMissionId = null;
@@ -441,17 +460,24 @@ public class bounty_hunter extends script.base_script
             obj_id[] missionList = getMissionObjects(player);
             if (missionList != null)
             {
-                for (obj_id obj_id : missionList) {
+                for (obj_id obj_id : missionList)
+                {
                     String type = getMissionType(obj_id);
-                    if (type.equals("bounty")) {
-                        if (isIdValid(target)) {
-                            if (hasObjVar(obj_id, "objTarget")) {
+                    if (type.equals("bounty"))
+                    {
+                        if (isIdValid(target))
+                        {
+                            if (hasObjVar(obj_id, "objTarget"))
+                            {
                                 obj_id missionTarget = getObjIdObjVar(obj_id, "objTarget");
-                                if (missionTarget == target) {
+                                if (missionTarget == target)
+                                {
                                     return obj_id;
                                 }
                             }
-                        } else {
+                        }
+                        else
+                        {
                             lastMissionId = obj_id;
                         }
                     }
@@ -460,7 +486,7 @@ public class bounty_hunter extends script.base_script
         }
         return lastMissionId;
     }
-    public static final int Max_Bounty_Hunters = utils.getIntConfigSetting("GameServer", "maxBountyHunters");
+
     public static boolean hasMaxBountyMissionsOnTarget(obj_id target) throws InterruptedException
     {
         obj_id[] hunters = getJediBounties(target);
@@ -479,12 +505,9 @@ public class bounty_hunter extends script.base_script
                 maxHunters = Imax;
             }
         }
-        if (numHunters >= maxHunters)
-        {
-            return true;
-        }
-        return false;
+        return numHunters >= maxHunters;
     }
+
     public static float getBountyFactionPointAdjustment(obj_id hunter, obj_id target) throws InterruptedException
     {
         float pvpRating = pvp.getCurrentPvPRating(target);
@@ -500,6 +523,7 @@ public class bounty_hunter extends script.base_script
         }
         return points;
     }
+
     public static void probeDroidTrackTarget(obj_id player, obj_id droid) throws InterruptedException
     {
         int intDroidType = getIntObjVar(droid, "intDroidType");
@@ -536,7 +560,7 @@ public class bounty_hunter extends script.base_script
                     sendSystemMessage(player, strSpam);
                     return;
                 }
-                else 
+                else
                 {
                     boolean boolOnline = dctJediInfo.getBoolean("online");
                     if (!boolOnline)
@@ -595,13 +619,13 @@ public class bounty_hunter extends script.base_script
             {
                 destroyObject(droid);
             }
-            else 
+            else
             {
                 setCount(droid, intCount);
             }
         }
-        return;
     }
+
     public static boolean callProbot(obj_id player, obj_id droid, obj_id objMission) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))

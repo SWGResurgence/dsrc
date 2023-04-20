@@ -10,6 +10,7 @@ public class datatable extends script.base_script
     public datatable()
     {
     }
+
     public static String getRandomTemplate(String datatable) throws InterruptedException
     {
         String[] templateFilenames = dataTableGetStringColumn(datatable, "templateFilename");
@@ -17,26 +18,21 @@ public class datatable extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             int numItems = templateFilenames.length;
             int row = rand(0, numItems - 1);
             return templateFilenames[row];
         }
     }
+
     public static obj_id createRandomTemplateInWorld(String datatable) throws InterruptedException
     {
         String templateFilename = getRandomTemplate(datatable);
         obj_id myObjects = createObject(templateFilename, getLocation(getSelf()));
-        if (myObjects == null)
-        {
-            return null;
-        }
-        else 
-        {
-            return myObjects;
-        }
+        return myObjects;
     }
+
     public static obj_id createRandomTemplateAtTarget(String datatable, obj_id target) throws InterruptedException
     {
         String templateFilename = getRandomTemplate(datatable);
@@ -44,19 +40,13 @@ public class datatable extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id myObject = createObjectAt(templateFilename, target);
-            if (myObject == null)
-            {
-                return null;
-            }
-            else 
-            {
-                return myObject;
-            }
+            return myObject;
         }
     }
+
     public static obj_id createRandomTemplateAtTarget(String datatable, location loc) throws InterruptedException
     {
         String templateFilename = getRandomTemplate(datatable);
@@ -64,19 +54,13 @@ public class datatable extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id myObject = createObject(templateFilename, loc);
-            if (myObject == null)
-            {
-                return null;
-            }
-            else 
-            {
-                return myObject;
-            }
+            return myObject;
         }
     }
+
     public static boolean createDataTable(String strFileName, String[] strHeaders, String[] strHeaderTypes) throws InterruptedException
     {
         if (strFileName == null)
@@ -111,7 +95,7 @@ public class datatable extends script.base_script
                 strHeaderString = strHeaderString + strHeaders[intI] + "\t";
                 strHeaderTypeString = strHeaderTypeString + strHeaderTypes[intI] + "\t";
             }
-            else 
+            else
             {
                 strHeaderString = strHeaderString + strHeaders[intI];
                 strHeaderTypeString = strHeaderTypeString + strHeaderTypes[intI];
@@ -121,12 +105,9 @@ public class datatable extends script.base_script
         strHeaderTypeString = strHeaderTypeString + "\n";
         String strTest = datatable_writer.makeDataTable(strFileName, strHeaderString, strHeaderTypeString);
         LOG("NOT_ERROR", "Datatable filename is " + strFileName);
-        if (strTest != null)
-        {
-            return true;
-        }
-        return false;
+        return strTest != null;
     }
+
     public static void serverDataTableAddRow(String strFileName, dictionary dctParams) throws InterruptedException
     {
         strFileName = "../../dsrc/sku.0/sys.server/compiled/game/" + strFileName;

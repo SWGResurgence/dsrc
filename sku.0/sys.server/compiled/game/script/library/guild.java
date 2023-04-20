@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class guild extends script.base_script
 {
-    public guild()
-    {
-    }
     public static final int GUILD_PERMISSIONS_NONE = 0;
     public static final int GUILD_PERMISSION_MEMBER = (1 << 0);
     public static final int GUILD_PERMISSION_SPONSOR = (1 << 1);
@@ -149,24 +146,24 @@ public class guild extends script.base_script
     public static final string_id SID_GUILD_PERMISSION_WAR_EXCLUDE = new string_id("guild", "war_exclude");
     public static final string_id SID_GUILD_PERMISSION_WAR_INCLUDE = new string_id("guild", "war_include");
     public static final String STR_SUI_BACK_BUTTON = "@guild:back_button";
-    public static final String[] MEMBER_FILTER_LIST = 
-    {
-        "@guild:member_filter_alpha",
-        "@guild:member_filter_permission",
-        "@guild:member_filter_title",
-        "@guild:member_filter_name"
-    };
-    public static final String[] PERMISSION_LIST = 
-    {
-        STR_GUILD_PERMISSION_MAIL,
-        STR_GUILD_PERMISSION_SPONSOR,
-        STR_GUILD_PERMISSION_TITLE,
-        STR_GUILD_PERMISSION_ACCEPT,
-        STR_GUILD_PERMISSION_KICK,
-        STR_GUILD_PERMISSION_WAR,
-        STR_GUILD_PERMISSION_NAMECHANGE,
-        STR_GUILD_PERMISSION_DISBAND
-    };
+    public static final String[] MEMBER_FILTER_LIST =
+            {
+                    "@guild:member_filter_alpha",
+                    "@guild:member_filter_permission",
+                    "@guild:member_filter_title",
+                    "@guild:member_filter_name"
+            };
+    public static final String[] PERMISSION_LIST =
+            {
+                    STR_GUILD_PERMISSION_MAIL,
+                    STR_GUILD_PERMISSION_SPONSOR,
+                    STR_GUILD_PERMISSION_TITLE,
+                    STR_GUILD_PERMISSION_ACCEPT,
+                    STR_GUILD_PERMISSION_KICK,
+                    STR_GUILD_PERMISSION_WAR,
+                    STR_GUILD_PERMISSION_NAMECHANGE,
+                    STR_GUILD_PERMISSION_DISBAND
+            };
     public static final string_id SID_GUILD_CREATE_FAIL_IN_GUILD = new string_id("guild", "create_fail_in_guild");
     public static final string_id SID_GUILD_CREATE_FAIL_NAME_BAD_LENGTH = new string_id("guild", "create_fail_name_bad_length");
     public static final string_id SID_GUILD_CREATE_FAIL_ABBREV_BAD_LENGTH = new string_id("guild", "create_fail_abbrev_bad_length");
@@ -212,21 +209,21 @@ public class guild extends script.base_script
     public static final string_id SID_COMPLETED_ELECTIONS_EMAIL_BODY_LEADER_SAME = new string_id("guild", "sid_completed_elections_email_body_leader_same");
     public static final string_id SID_COMPLETED_ELECTIONS_EMAIL_BODY_LEADER_CHANGED = new string_id("guild", "sid_completed_elections_email_body_leader_changed");
     public static final int MAX_MEMBERS_PER_GUILD = 500;
-    public static final int[] PERMISSION_INTERFACE_FLAGS = 
-    {
-        0,
-        GUILD_PERMISSION_SPONSOR,
-        GUILD_PERMISSION_ACCEPT,
-        GUILD_PERMISSION_KICK,
-        GUILD_PERMISSION_MAIL,
-        GUILD_PERMISSION_TITLE,
-        GUILD_PERMISSION_DISBAND,
-        GUILD_PERMISSION_NAMECHANGE,
-        GUILD_PERMISSION_RANK,
-        GUILD_PERMISSION_WAR,
-        GUILD_PERMISSION_WAR_EXCLUSION,
-        GUILD_PERMISSION_WAR_INCLUSION
-    };
+    public static final int[] PERMISSION_INTERFACE_FLAGS =
+            {
+                    0,
+                    GUILD_PERMISSION_SPONSOR,
+                    GUILD_PERMISSION_ACCEPT,
+                    GUILD_PERMISSION_KICK,
+                    GUILD_PERMISSION_MAIL,
+                    GUILD_PERMISSION_TITLE,
+                    GUILD_PERMISSION_DISBAND,
+                    GUILD_PERMISSION_NAMECHANGE,
+                    GUILD_PERMISSION_RANK,
+                    GUILD_PERMISSION_WAR,
+                    GUILD_PERMISSION_WAR_EXCLUSION,
+                    GUILD_PERMISSION_WAR_INCLUSION
+            };
     public static final int INTERFACE_GUILD_UNKNOWN = 0;
     public static final int INTERFACE_GUILD_ROSTER = 1;
     public static final int INTERFACE_GUILD_RANK_LIST = 2;
@@ -235,6 +232,9 @@ public class guild extends script.base_script
     public static final int INTERFACE_GUILD_ELECTION = 5;
     public static final int INTERFACE_GUILD_WAR_PREFERENCES = 6;
     public static final String VAR_TIME_JOINED_CURRENT_GUILD = "guild.timeJoinedCurrentGuild";
+    public guild()
+    {
+    }
 
     public static String resolveGuildName(int guildId) throws InterruptedException
     {
@@ -249,11 +249,12 @@ public class guild extends script.base_script
         }
         return "none";
     }
+
     public static String resolveMemberName(int guildId, obj_id who) throws InterruptedException
     {
         if (isIdValid(who))
         {
-            
+
             {
                 String s = getName(who);
                 if (s != null && !s.equals(""))
@@ -261,7 +262,7 @@ public class guild extends script.base_script
                     return s;
                 }
             }
-            
+
             {
                 String s = guildGetMemberName(guildId, who);
                 if (s != null && !s.equals(""))
@@ -273,36 +274,39 @@ public class guild extends script.base_script
         }
         return "none";
     }
+
     public static void GuildLog(int guildId, String command, obj_id actor, obj_id target, String description) throws InterruptedException
     {
         String guildDesc = resolveGuildName(guildId);
         String actorDesc = resolveMemberName(guildId, actor);
         CustomerServiceLog("Guild", "[command=" + command + "] [guild=" + guildId + "(" + guildDesc + ")] [actor=" + actor + "(" + resolveMemberName(guildId, actor) + ")] [target=" + target + "(" + resolveMemberName(guildId, target) + ")] - " + description);
     }
+
     public static String buildFakeLocalizedProse(String rawText, String substitute1, String substitute2) throws InterruptedException
     {
         if (rawText.startsWith("@"))
         {
-            String cookedText = new String(rawText);
-            string_id id = new string_id(rawText.substring(1, rawText.indexOf(":")), rawText.substring(rawText.indexOf(":") + 1, rawText.length()));
+            String cookedText = rawText;
+            string_id id = new string_id(rawText.substring(1, rawText.indexOf(":")), rawText.substring(rawText.indexOf(":") + 1));
             cookedText = localize(id);
             int pos1 = cookedText.indexOf("%TU");
             if (pos1 != -1)
             {
-                cookedText = cookedText.substring(0, pos1) + substitute1 + cookedText.substring(pos1 + 3, cookedText.length());
+                cookedText = cookedText.substring(0, pos1) + substitute1 + cookedText.substring(pos1 + 3);
             }
             int pos2 = cookedText.indexOf("%TT");
             if (pos2 != -1)
             {
-                cookedText = cookedText.substring(0, pos2) + substitute2 + cookedText.substring(pos2 + 3, cookedText.length());
+                cookedText = cookedText.substring(0, pos2) + substitute2 + cookedText.substring(pos2 + 3);
             }
             return cookedText;
         }
-        else 
+        else
         {
             return rawText;
         }
     }
+
     public static boolean hasGuildPermission(int guildId, obj_id who, int permission) throws InterruptedException
     {
         if (guildId == 0)
@@ -317,25 +321,25 @@ public class guild extends script.base_script
         {
             return true;
         }
-        if ((guildGetMemberPermissions(guildId, who) & permission) == permission)
-        {
-            return true;
-        }
-        return false;
+        return (guildGetMemberPermissions(guildId, who) & permission) == permission;
     }
+
     public static boolean hasDeclaredWarAgainst(int guildId, int enemyId) throws InterruptedException
     {
         int[] enemies = guildGetEnemies(guildId);
         if (enemies != null)
         {
-            for (int enemy : enemies) {
-                if (enemy == enemyId) {
+            for (int enemy : enemies)
+            {
+                if (enemy == enemyId)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static int create(obj_id actor, String guildName, String guildAbbrev) throws InterruptedException
     {
         if (getGuildId(actor) != 0)
@@ -366,7 +370,7 @@ public class guild extends script.base_script
         {
             sendSystemMessage(actor, SID_GUILD_CREATE_FAIL_NAME_NOT_ALLOWED);
         }
-        else 
+        else
         {
             int guildId = createGuild(guildName, guildAbbrev);
             if (guildId != 0)
@@ -380,6 +384,7 @@ public class guild extends script.base_script
         }
         return 0;
     }
+
     public static void changeLeader(int guildId, obj_id newLeader) throws InterruptedException
     {
         obj_id oldLeader = guildGetLeader(guildId);
@@ -416,25 +421,28 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void disbandForNotEnoughMembers(int guildId) throws InterruptedException
     {
         GuildLog(guildId, "disbandForNotEnoughMembers", null, null, "");
         mailToGuild(guildId, GUILD_MAIL_DISBAND_SUBJECT, GUILD_MAIL_DISBAND_NOT_ENOUGH_MEMBERS_TEXT);
         disbandGuild(guildId);
     }
+
     public static void disband(int guildId, obj_id actor) throws InterruptedException
     {
         if (!hasGuildPermission(guildId, actor, GUILD_PERMISSION_DISBAND))
         {
             sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
         }
-        else 
+        else
         {
             GuildLog(guildId, "disband", actor, null, "");
             mailToGuild(guildId, GUILD_MAIL_DISBAND_SUBJECT, GUILD_MAIL_DISBAND_TEXT, getName(actor));
             disbandGuild(guildId);
         }
     }
+
     public static void sponsor(int guildId, obj_id actor, String who) throws InterruptedException
     {
         obj_id target = utils.getNearbyPlayerByName(actor, who);
@@ -451,7 +459,7 @@ public class guild extends script.base_script
                 dict.put("player", who);
                 messageTo(actor, "onGuildSponsorVerifyResponseProse", dict, 0, false);
             }
-            else 
+            else
             {
                 obj_id[] members = guildGetMemberIds(guildId);
                 if (members.length >= MAX_MEMBERS_PER_GUILD)
@@ -461,7 +469,7 @@ public class guild extends script.base_script
                     dict.put("player", who);
                     messageTo(actor, "onGuildSponsorVerifyResponse", dict, 0, false);
                 }
-                else 
+                else
                 {
                     GuildLog(guildId, "sponsor", actor, target, "");
                     dictionary dict = new dictionary();
@@ -484,6 +492,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void accept(int guildId, obj_id actor, String who) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -494,7 +503,7 @@ public class guild extends script.base_script
         {
             sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
         }
-        else 
+        else
         {
             obj_id memberId = findMemberIdByName(guildId, who, true, false);
             if (isIdValid(memberId))
@@ -520,6 +529,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void leave(obj_id actor) throws InterruptedException
     {
         int guildId = getGuildId(actor);
@@ -529,7 +539,7 @@ public class guild extends script.base_script
             {
                 sendSystemMessage(actor, SID_GUILD_LEAVE_FAIL_LEADER_TRIED_TO_LEAVE);
             }
-            else 
+            else
             {
                 GuildLog(guildId, "leave", actor, null, "");
                 prose_package pp = new prose_package();
@@ -541,6 +551,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void kick(int guildId, obj_id actor, String who) throws InterruptedException
     {
         if (guildId == 0)
@@ -558,7 +569,7 @@ public class guild extends script.base_script
             {
                 sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
             }
-            else 
+            else
             {
                 GuildLog(guildId, "kick", actor, memberId, "removing member");
                 String memberName = guildGetMemberName(guildId, memberId);
@@ -576,7 +587,7 @@ public class guild extends script.base_script
                 guildRemoveMember(guildId, memberId);
             }
         }
-        else 
+        else
         {
             obj_id sponsoredId = findMemberIdByName(guildId, who, true, false);
             if (isIdValid(sponsoredId))
@@ -585,7 +596,7 @@ public class guild extends script.base_script
                 {
                     sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
                 }
-                else 
+                else
                 {
                     GuildLog(guildId, "kick", actor, memberId, "removing sponsored");
                     String memberName = guildGetMemberName(guildId, sponsoredId);
@@ -606,13 +617,14 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void title(int guildId, obj_id actor, String who, String title) throws InterruptedException
     {
         if (!hasGuildPermission(guildId, actor, GUILD_PERMISSION_TITLE))
         {
             sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
         }
-        else 
+        else
         {
             obj_id memberId = findMemberIdByName(guildId, who, false, true);
             if (isIdValid(memberId))
@@ -625,7 +637,7 @@ public class guild extends script.base_script
                 {
                     sendSystemMessage(actor, SID_GUILD_TITLE_FAIL_BAD_LENGTH);
                 }
-                else 
+                else
                 {
                     GuildLog(guildId, "title", actor, memberId, "setting title to '" + title + "'");
                     String memberName = guildGetMemberName(guildId, memberId);
@@ -644,6 +656,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void handleGuildNameChange(int guildId, String newName, String newAbbrev, obj_id changerId) throws InterruptedException
     {
         if (isIdValid(changerId) && !hasGuildPermission(guildId, changerId, GUILD_PERMISSION_NAMECHANGE))
@@ -664,13 +677,14 @@ public class guild extends script.base_script
         }
         mailToGuild(guildId, GUILD_MAIL_NAMECHANGE_SUBJECT, GUILD_MAIL_NAMECHANGE_TEXT, newName, newAbbrev, Objects.requireNonNullElse(memberName, "System"));
     }
+
     public static void nameChange(int guildId, obj_id actor, String newName, String newAbbrev) throws InterruptedException
     {
         if (!hasGuildPermission(guildId, actor, GUILD_PERMISSION_NAMECHANGE))
         {
             sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
         }
-        else 
+        else
         {
             if (newAbbrev.length() < 1 || newAbbrev.length() > 5)
             {
@@ -688,7 +702,7 @@ public class guild extends script.base_script
             {
                 sendSystemMessage(actor, SID_GUILD_NAMECHANGE_FAIL_NAME_NOT_ALLOWED);
             }
-            else 
+            else
             {
                 GuildLog(guildId, "nameChange", actor, null, "queueing change to name='" + newName + "' abbrev='" + newAbbrev + "'");
                 prose_package pp = new prose_package();
@@ -705,7 +719,7 @@ public class guild extends script.base_script
                 {
                     params.put("changerId", actor);
                 }
-                else 
+                else
                 {
                     params.put("changerId", obj_id.NULL_ID);
                 }
@@ -713,6 +727,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void war(int guildId, obj_id actor, String who) throws InterruptedException
     {
         int enemyId = findGuild(who);
@@ -720,11 +735,12 @@ public class guild extends script.base_script
         {
             sendSystemMessage(actor, SID_GUILD_WAR_FAIL_NO_SUCH_GUILD);
         }
-        else 
+        else
         {
             war(guildId, actor, enemyId);
         }
     }
+
     public static void war(int guildId, obj_id actor, int enemyId) throws InterruptedException
     {
         if (enemyId != 0 && enemyId != guildId)
@@ -733,17 +749,19 @@ public class guild extends script.base_script
             {
                 sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
             }
-            else 
+            else
             {
                 GuildLog(guildId, "war", actor, null, "Declaring war with " + enemyId + "(" + guildGetName(enemyId) + ")");
                 guildSetEnemy(guildId, enemyId);
             }
         }
     }
+
     public static void peace(int guildId, obj_id actor, String who) throws InterruptedException
     {
         peace(guildId, actor, findGuild(who));
     }
+
     public static void peace(int guildId, obj_id actor, int enemyId) throws InterruptedException
     {
         if (enemyId != 0 && enemyId != guildId)
@@ -752,13 +770,14 @@ public class guild extends script.base_script
             {
                 sendSystemMessage(actor, SID_GUILD_GENERIC_FAIL_NO_PERMISSION);
             }
-            else 
+            else
             {
                 GuildLog(guildId, "war", actor, null, "Declaring peace with " + enemyId + "(" + guildGetName(enemyId) + ")");
                 guildRemoveEnemy(guildId, enemyId);
             }
         }
     }
+
     public static void togglePersonalPermission(int guildId, obj_id actor, String who, int permBit) throws InterruptedException
     {
         obj_id memberId = findMemberIdByName(guildId, who, false, true);
@@ -768,6 +787,7 @@ public class guild extends script.base_script
             guildSetMemberPermission(guildId, memberId, guildGetMemberPermissions(guildId, memberId) ^ permBit);
         }
     }
+
     public static void togglePermission(int guildId, obj_id actor, String who, int permBit) throws InterruptedException
     {
         if (guildGetLeader(guildId) == actor || isGod(actor))
@@ -780,6 +800,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static void dumpInfo(int guildId, obj_id actor) throws InterruptedException
     {
         debugConsoleMsg(actor, "Guild Id: " + guildId);
@@ -813,19 +834,24 @@ public class guild extends script.base_script
             debugConsoleMsg(actor, (i + 1) + ") " + enemies[i]);
         }
     }
+
     public static obj_id findMemberIdByName(int guildId, String name, boolean fromSponsored, boolean fromMembers) throws InterruptedException
     {
         obj_id[] members = getMemberIds(guildId, fromSponsored, fromMembers);
         if (members != null && members.length > 0)
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(name);
-            if(st != null && st.hasMoreTokens()) {
+            if (st != null && st.hasMoreTokens())
+            {
                 String compareName = toLower(st.nextToken());
-                for (obj_id member : members) {
-                    if (isIdValid(member)) {
+                for (obj_id member : members)
+                {
+                    if (isIdValid(member))
+                    {
                         StringTokenizer st2 = new StringTokenizer(guildGetMemberName(guildId, member));
                         String memberName = toLower(st2.nextToken());
-                        if (compareName.equals(memberName)) {
+                        if (compareName.equals(memberName))
+                        {
                             return member;
                         }
                     }
@@ -834,22 +860,27 @@ public class guild extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public static boolean hasSponsoredMembers(int guildId) throws InterruptedException
     {
         obj_id[] members = guildGetMemberIds(guildId);
         if (members != null)
         {
-            for (obj_id member : members) {
-                if (!isIdValid(member)) {
+            for (obj_id member : members)
+            {
+                if (!isIdValid(member))
+                {
                     return false;
                 }
-                if (guildGetMemberPermissions(guildId, member) == GUILD_PERMISSIONS_NONE) {
+                if (guildGetMemberPermissions(guildId, member) == GUILD_PERMISSIONS_NONE)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static obj_id[] getMemberIds(int guildId, boolean fromSponsored, boolean fromMembers) throws InterruptedException
     {
         if (guildId == 0)
@@ -864,7 +895,7 @@ public class guild extends script.base_script
             {
                 count = members.length;
             }
-            else 
+            else
             {
                 for (int i = 0; i < members.length; ++i)
                 {
@@ -916,6 +947,7 @@ public class guild extends script.base_script
         }
         return ret;
     }
+
     public static String[] getMemberNames(int guildId, boolean fromSponsored, boolean fromMembers) throws InterruptedException
     {
         obj_id[] members = getMemberIds(guildId, fromSponsored, fromMembers);
@@ -942,6 +974,7 @@ public class guild extends script.base_script
         }
         return ret;
     }
+
     public static String[] getMemberNamesAndTitles(int guildId) throws InterruptedException
     {
         obj_id[] members = getMemberIds(guildId, false, true);
@@ -959,7 +992,7 @@ public class guild extends script.base_script
             {
                 ret[i] = name;
             }
-            else 
+            else
             {
                 ret[i] = name + " [" + title + "]";
             }
@@ -967,6 +1000,7 @@ public class guild extends script.base_script
         Arrays.sort(ret);
         return ret;
     }
+
     public static String[] getEnemyNamesAndAbbrevs(int guildId) throws InterruptedException
     {
         int[] enemies_A_to_B = guildGetEnemies(guildId);
@@ -978,8 +1012,10 @@ public class guild extends script.base_script
         }
         if (enemies_B_to_A != null)
         {
-            for (int i1 : enemies_B_to_A) {
-                if (findIntTableOffset(enemies_A_to_B, i1) == -1) {
+            for (int i1 : enemies_B_to_A)
+            {
+                if (findIntTableOffset(enemies_A_to_B, i1) == -1)
+                {
                     ++count;
                 }
             }
@@ -988,13 +1024,17 @@ public class guild extends script.base_script
         int pos = 0;
         if (enemies_A_to_B != null)
         {
-            for (int i1 : enemies_A_to_B) {
+            for (int i1 : enemies_A_to_B)
+            {
                 boolean atWarWith = false;
                 StringBuilder sb = new StringBuilder();
-                if (findIntTableOffset(enemies_B_to_A, i1) == -1) {
+                if (findIntTableOffset(enemies_B_to_A, i1) == -1)
+                {
                     sb.append("> ");
                     atWarWith = false;
-                } else {
+                }
+                else
+                {
                     sb.append("= ");
                     atWarWith = true;
                 }
@@ -1002,7 +1042,8 @@ public class guild extends script.base_script
                 sb.append(" <");
                 sb.append(guildGetAbbrev(i1));
                 sb.append(">");
-                if (atWarWith) {
+                if (atWarWith)
+                {
                     sb.append(" (");
                     sb.append(guildGetCountMembersGuildWarPvPEnabled(i1));
                     sb.append(")");
@@ -1015,7 +1056,8 @@ public class guild extends script.base_script
                     sb.append(" kills vs ");
                     sb.append(killCountBtoA);
                     sb.append(" kills");
-                    if ((killCountAtoBupdateTime > 0) || (killCountBtoAupdateTime > 0)) {
+                    if ((killCountAtoBupdateTime > 0) || (killCountBtoAupdateTime > 0))
+                    {
                         sb.append(" - last updated ");
                         sb.append(getCalendarTimeStringLocal(Math.max(killCountAtoBupdateTime, killCountBtoAupdateTime)));
                     }
@@ -1027,24 +1069,26 @@ public class guild extends script.base_script
         }
         if (enemies_B_to_A != null)
         {
-            for (int i1 : enemies_B_to_A) {
-                if (findIntTableOffset(enemies_A_to_B, i1) == -1) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("< ");
-                    sb.append(guildGetName(i1));
-                    sb.append(" <");
-                    sb.append(guildGetAbbrev(i1));
-                    sb.append(">");
-                    sb.append(" (");
-                    sb.append(guildGetCountMembersGuildWarPvPEnabled(i1));
-                    sb.append(")");
-                    ret[pos] = sb.toString();
+            for (int i1 : enemies_B_to_A)
+            {
+                if (findIntTableOffset(enemies_A_to_B, i1) == -1)
+                {
+                    String sb = "< " +
+                            guildGetName(i1) +
+                            " <" +
+                            guildGetAbbrev(i1) +
+                            ">" +
+                            " (" +
+                            guildGetCountMembersGuildWarPvPEnabled(i1) +
+                            ")";
+                    ret[pos] = sb;
                     ++pos;
                 }
             }
         }
         return ret;
     }
+
     public static int[] getEnemyIds(int guildId) throws InterruptedException
     {
         int[] enemies_A_to_B = guildGetEnemies(guildId);
@@ -1056,8 +1100,10 @@ public class guild extends script.base_script
         }
         if (enemies_B_to_A != null)
         {
-            for (int i1 : enemies_B_to_A) {
-                if (findIntTableOffset(enemies_A_to_B, i1) == -1) {
+            for (int i1 : enemies_B_to_A)
+            {
+                if (findIntTableOffset(enemies_A_to_B, i1) == -1)
+                {
                     ++count;
                 }
             }
@@ -1066,42 +1112,51 @@ public class guild extends script.base_script
         int pos = 0;
         if (enemies_A_to_B != null)
         {
-            for (int i1 : enemies_A_to_B) {
+            for (int i1 : enemies_A_to_B)
+            {
                 ret[pos++] = i1;
             }
         }
         if (enemies_B_to_A != null)
         {
-            for (int i1 : enemies_B_to_A) {
-                if (findIntTableOffset(enemies_A_to_B, i1) == -1) {
+            for (int i1 : enemies_B_to_A)
+            {
+                if (findIntTableOffset(enemies_A_to_B, i1) == -1)
+                {
                     ret[pos++] = i1;
                 }
             }
         }
         return ret;
     }
+
     public static void mailToGuild(int guildId, String subject, string_id textId, String substitute1, String substitute2, String substitute3) throws InterruptedException
     {
         obj_id[] members = getMemberIds(guildId, false, true);
         if (members != null)
         {
-            for (obj_id member : members) {
+            for (obj_id member : members)
+            {
                 mailToGuildMember(guildId, member, subject, textId, substitute1, substitute2, substitute3);
             }
         }
     }
+
     public static void mailToGuild(int guildId, String subject, string_id textId, String substitute1, String substitute2) throws InterruptedException
     {
         mailToGuild(guildId, subject, textId, substitute1, substitute2, "");
     }
+
     public static void mailToGuild(int guildId, String subject, string_id textId, String substitute1) throws InterruptedException
     {
         mailToGuild(guildId, subject, textId, substitute1, "", "");
     }
+
     public static void mailToGuild(int guildId, String subject, string_id textId) throws InterruptedException
     {
         mailToGuild(guildId, subject, textId, "", "", "");
     }
+
     public static void mailToPerson(int guildId, String toName, String subject, string_id textId, String substitute1, String substitute2, String substitute3) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -1111,34 +1166,42 @@ public class guild extends script.base_script
         pp.other.set(substitute3);
         chatSendPersistentMessage(guildGetName(guildId), toName, subject, null, chatMakePersistentMessageOutOfBandBody(null, pp));
     }
+
     public static void mailToPerson(int guildId, String toName, String subject, string_id textId, String substitute1, String substitute2) throws InterruptedException
     {
         mailToPerson(guildId, toName, subject, textId, substitute1, substitute2, "");
     }
+
     public static void mailToPerson(int guildId, String toName, String subject, string_id textId, String substitute1) throws InterruptedException
     {
         mailToPerson(guildId, toName, subject, textId, substitute1, "", "");
     }
+
     public static void mailToPerson(int guildId, String toName, String subject, string_id textId) throws InterruptedException
     {
         mailToPerson(guildId, toName, subject, textId, "", "", "");
     }
+
     public static void mailToGuildMember(int guildId, obj_id memberId, String subject, string_id textId, String substitute1, String substitute2, String substitute3) throws InterruptedException
     {
         mailToPerson(guildId, guildGetMemberName(guildId, memberId), subject, textId, substitute1, substitute2, substitute3);
     }
+
     public static void mailToGuildMember(int guildId, obj_id memberId, String subject, string_id textId, String substitute1, String substitute2) throws InterruptedException
     {
         mailToGuildMember(guildId, memberId, subject, textId, substitute1, substitute2, "");
     }
+
     public static void mailToGuildMember(int guildId, obj_id memberId, String subject, string_id textId, String substitute1) throws InterruptedException
     {
         mailToGuildMember(guildId, memberId, subject, textId, substitute1, "", "");
     }
+
     public static void mailToGuildMember(int guildId, obj_id memberId, String subject, string_id textId) throws InterruptedException
     {
         mailToGuildMember(guildId, memberId, subject, textId, "", "", "");
     }
+
     public static int findIntTableOffset(int[] from, int find) throws InterruptedException
     {
         if (from != null)
@@ -1153,6 +1216,7 @@ public class guild extends script.base_script
         }
         return -1;
     }
+
     public static int findObjIdTableOffset(obj_id[] from, obj_id find) throws InterruptedException
     {
         if (from != null)
@@ -1167,6 +1231,7 @@ public class guild extends script.base_script
         }
         return -1;
     }
+
     public static void selectPermissions(obj_id self, obj_id player, String name, int guildId) throws InterruptedException
     {
         obj_id memberId = findMemberIdByName(guildId, name, true, true);
@@ -1177,6 +1242,7 @@ public class guild extends script.base_script
         params.put("guildId", guildId);
         messageTo(self, "selectPermissionsMessage", params, 1, false);
     }
+
     public static void selectRank(obj_id self, obj_id player, String name, int guildId) throws InterruptedException
     {
         String[] allRanks = guildGetAllRanks();
@@ -1196,7 +1262,7 @@ public class guild extends script.base_script
             {
                 rankDisplay[i] = "+ " + localize(new string_id("guild_rank_title", allRanks[i]));
             }
-            else 
+            else
             {
                 rankDisplay[i] = "- " + localize(new string_id("guild_rank_title", allRanks[i]));
             }
@@ -1209,6 +1275,7 @@ public class guild extends script.base_script
         params.put("rankDisplay", rankDisplay);
         messageTo(self, "selectRankMessage", params, 1, false);
     }
+
     public static void showGuildMembers(obj_id terminal, obj_id player, int firstMember, int permission, String title, String name) throws InterruptedException
     {
         if (guild.hasWindowPid(player))
@@ -1244,7 +1311,7 @@ public class guild extends script.base_script
             {
                 memberData[i][0] = "\\#00FF00" + guildGetMemberName(guildId, memberIds[i]) + "\\#DFDFDF";
             }
-            else 
+            else
             {
                 memberData[i][0] = guildGetMemberName(guildId, memberIds[i]);
             }
@@ -1253,16 +1320,16 @@ public class guild extends script.base_script
             {
                 memberData[i][1] = "";
             }
-            else 
+            else
             {
-                memberData[i][1] = "" + level;
+                memberData[i][1] = String.valueOf(level);
             }
             String profession = guildGetMemberProfession(guildId, memberIds[i]);
             if (profession != null && profession.length() > 0)
             {
                 memberData[i][2] = "@ui_roadmap:" + profession;
             }
-            else 
+            else
             {
                 memberData[i][2] = "Unavailable";
             }
@@ -1273,11 +1340,11 @@ public class guild extends script.base_script
             {
                 rank = "None";
             }
-            else 
+            else
             {
                 for (int k = 0, l = ranks.length; k < l; k++)
                 {
-                    String rankText = new String(ranks[k]);
+                    String rankText = ranks[k];
                     string_id id = new string_id("guild_rank_title", rankText);
                     String finalText = localize(id);
                     rank += finalText;
@@ -1302,17 +1369,17 @@ public class guild extends script.base_script
                     {
                         memberData[i][5] = "Offline " + utils.padTimeDHMS(timeDifference);
                     }
-                    else 
+                    else
                     {
                         memberData[i][5] = "Offline ????d:??h:??m:??s";
                     }
                 }
-                else 
+                else
                 {
                     memberData[i][5] = "Unknown";
                 }
             }
-            else 
+            else
             {
                 String locText = "Unknown";
                 dictionary playerLoc = getConnectedPlayerLocation(memberIds[i]);
@@ -1324,7 +1391,7 @@ public class guild extends script.base_script
                 String region = playerLoc.getString("region");
                 if (region != null && region.length() > 0)
                 {
-                    locText += ":" + localize(new string_id(region.substring(1, region.indexOf(":")), region.substring(region.indexOf(":") + 1, region.length())));
+                    locText += ":" + localize(new string_id(region.substring(1, region.indexOf(":")), region.substring(region.indexOf(":") + 1)));
                 }
                 String city = playerLoc.getString("playerCity");
                 if (city != null && city.length() > 0)
@@ -1334,24 +1401,24 @@ public class guild extends script.base_script
                 memberData[i][5] = "Online " + locText;
             }
         }
-        String[] table_titles = 
-        {
-            "@guild:table_title_name",
-            "@guild:table_title_level",
-            "@guild:table_title_profession",
-            "@guild:table_title_title",
-            "@guild:table_title_rank",
-            "@guild:table_title_status"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "integer",
-            "text",
-            "text",
-            "text",
-            "text"
-        };
+        String[] table_titles =
+                {
+                        "@guild:table_title_name",
+                        "@guild:table_title_level",
+                        "@guild:table_title_profession",
+                        "@guild:table_title_title",
+                        "@guild:table_title_rank",
+                        "@guild:table_title_status"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "integer",
+                        "text",
+                        "text",
+                        "text",
+                        "text"
+                };
         String guildName = guildGetName(guildId);
         String guildAbbreviation = guildGetAbbrev(guildId);
         String guildTitle = "Guild Roster";
@@ -1368,6 +1435,7 @@ public class guild extends script.base_script
         int pid = sui.tableRowMajor(player, player, sui.OK_CANCEL, guildTitle, "onGuildMembersResponse", guildInfoStr, table_titles, table_types, memberData, true);
         setWindowPid(player, pid);
     }
+
     public static void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)
@@ -1375,18 +1443,22 @@ public class guild extends script.base_script
             utils.setScriptVar(player, "guild.pid", pid);
         }
     }
+
     public static int getWindowPid(obj_id player) throws InterruptedException
     {
         return utils.getIntScriptVar(player, "guild.pid");
     }
+
     public static boolean hasWindowPid(obj_id player) throws InterruptedException
     {
         return utils.hasScriptVar(player, "guild.pid");
     }
+
     public static void removeWindowPid(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, "guild.pid");
     }
+
     public static obj_id getGuildRemoteDevice(obj_id player) throws InterruptedException
     {
         if (utils.playerHasItemByTemplateInDataPad(player, STR_GUILD_REMOTE_DEVICE))
@@ -1396,6 +1468,7 @@ public class guild extends script.base_script
         }
         return null;
     }
+
     public static String[] getAvailableMemberOptions(obj_id self, obj_id player) throws InterruptedException
     {
         int guildId = getGuildId(player);
@@ -1437,6 +1510,7 @@ public class guild extends script.base_script
         }
         return ret;
     }
+
     public static void toggleWarExclusion(obj_id player, int guildId, String name) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || guildId <= 0 || name == null || name.length() < 1)
@@ -1455,6 +1529,7 @@ public class guild extends script.base_script
         pp.stringId = SID_GUILD_WAR_EXCLUSION_TOGGLED;
         sendSystemMessageProse(player, pp);
     }
+
     public static void toggleWarInclusion(obj_id player, int guildId, String name) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || guildId <= 0 || name == null || name.length() < 1)
@@ -1473,38 +1548,45 @@ public class guild extends script.base_script
         pp.stringId = SID_GUILD_WAR_INCLUSION_TOGGLED;
         sendSystemMessageProse(player, pp);
     }
+
     public static void chooseTitle(obj_id self, obj_id player, String name) throws InterruptedException
     {
         setMenuContextString(self, player, "guildTitlePlayerName", name);
         int pid = sui.inputbox(self, player, buildFakeLocalizedProse(STR_GUILD_TITLE_PROMPT, name, ""), sui.OK_CANCEL, STR_GUILD_TITLE_TITLE, sui.INPUT_NORMAL, null, "onGuildTitleResponse");
         setWindowPid(player, pid);
     }
+
     public static void setMenuContextString(obj_id self, obj_id player, String varName, String value) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         dd.put("guildMenu." + player + "." + varName, value);
     }
+
     public static void confirmKick(obj_id self, obj_id player, String name) throws InterruptedException
     {
         utils.setScriptVar(self, "guildKickName", name);
         int pid = sui.msgbox(self, player, guild.buildFakeLocalizedProse(STR_GUILD_KICK_PROMPT, name, ""), sui.YES_NO, STR_GUILD_KICK_TITLE, sui.MSG_NORMAL, "onGuildKickResponse");
         setWindowPid(player, pid);
     }
+
     public static void setMenuContextIntArray(obj_id self, obj_id player, String varName, int[] value) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         dd.put("guildMenu." + player + "." + varName, value);
     }
+
     public static String getMenuContextString(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         return dd.getString("guildMenu." + player + "." + varName);
     }
+
     public static void removeMenuContextVar(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         dd.remove("guildMenu." + player + "." + varName);
     }
+
     public static void showPermissionList(obj_id player, int guildId) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1521,6 +1603,7 @@ public class guild extends script.base_script
         sui.showSUIPage(pid);
         setWindowPid(player, pid);
     }
+
     public static void showTitleList(obj_id player, int guildId) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1540,7 +1623,7 @@ public class guild extends script.base_script
             sui.showSUIPage(pid);
             setWindowPid(player, pid);
         }
-        else 
+        else
         {
             if (hasWindowPid(player))
             {
@@ -1549,6 +1632,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static String[] getGuildTitles(int guildId) throws InterruptedException
     {
         if (guildId == 0)
@@ -1569,8 +1653,10 @@ public class guild extends script.base_script
             if (!title.equals(""))
             {
                 boolean alreadyHave = false;
-                for (Object o : titleList) {
-                    if (title.equals(((String) o))) {
+                for (Object o : titleList)
+                {
+                    if (title.equals(o))
+                    {
                         alreadyHave = true;
                         break;
                     }
@@ -1586,11 +1672,13 @@ public class guild extends script.base_script
         Arrays.sort(finalList);
         return finalList;
     }
+
     public static boolean memberHasTitle(int guildId, obj_id memberId, String title) throws InterruptedException
     {
         String memberTitle = guildGetMemberTitle(guildId, memberId);
         return (toLower(memberTitle)).equals(toLower(title));
     }
+
     public static String[] getMemberNamesByPermission(int guildId, int permission) throws InterruptedException
     {
         String[] rawNamesAndTitles = getMemberNamesAndTitles(guildId);
@@ -1610,13 +1698,16 @@ public class guild extends script.base_script
         Arrays.sort(finalList);
         return finalList;
     }
+
     public static String[] getMemberNamesByTitle(int guildId, String title) throws InterruptedException
     {
         obj_id[] members = getMemberIds(guildId, false, true);
         Vector filteredNamesAndTitles = new Vector();
         filteredNamesAndTitles.setSize(0);
-        for (obj_id member : members) {
-            if (memberHasTitle(guildId, member, title)) {
+        for (obj_id member : members)
+        {
+            if (memberHasTitle(guildId, member, title))
+            {
                 filteredNamesAndTitles = utils.addElement(filteredNamesAndTitles, guildGetMemberName(guildId, member));
             }
         }
@@ -1625,13 +1716,16 @@ public class guild extends script.base_script
         Arrays.sort(finalList);
         return finalList;
     }
+
     public static String[] getMemberNamesByName(int guildId, String name) throws InterruptedException
     {
         String[] memberNames = getMemberNames(guildId, false, true);
         Vector filteredNamesAndTitles = new Vector();
         filteredNamesAndTitles.setSize(0);
-        for (String memberName : memberNames) {
-            if ((toLower(memberName)).contains(toLower(name))) {
+        for (String memberName : memberNames)
+        {
+            if ((toLower(memberName)).contains(toLower(name)))
+            {
                 filteredNamesAndTitles = utils.addElement(filteredNamesAndTitles, memberName);
             }
         }
@@ -1640,6 +1734,7 @@ public class guild extends script.base_script
         Arrays.sort(finalList);
         return finalList;
     }
+
     public static void showGuildInfo(obj_id player) throws InterruptedException
     {
         final int guildId = getGuildId(player);
@@ -1677,23 +1772,23 @@ public class guild extends script.base_script
                     {
                         guildInfoStr += ("GCW Region Defender Bonus: " + getGcwDefenderRegionRebelBonus(gcwDefenderRegion) + "%\n");
                     }
-                    else 
+                    else
                     {
                         guildInfoStr += "GCW Region Defender Bonus: (None - cannot determine factional alignment)\n";
                     }
                 }
-                else 
+                else
                 {
                     guildInfoStr += ("GCW Region Defender Bonus: (None - hasn't defended for " + gcwDaysRequiredForGcwRegionDefenderBonus + " days)\n");
                 }
             }
-            else 
+            else
             {
                 guildInfoStr += "\n";
                 guildInfoStr += "GCW Region Defender Bonus: (None - cannot determine time started defending)\n";
             }
         }
-        else 
+        else
         {
             guildInfoStr += "GCW Region Defender: (None)\n";
             guildInfoStr += "GCW Region Defender Bonus: (None)\n";
@@ -1701,23 +1796,27 @@ public class guild extends script.base_script
         guildInfoStr += ("Members: " + memberIds.length);
         sui.msgbox(player, player, guildInfoStr, sui.OK_ONLY, STR_GUILD_INFO_TITLE, sui.MSG_NORMAL, "onGuildInfoResponse");
     }
+
     public static void showGuildEnemies(obj_id player) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(player, "showGuildEnemiesMessage", params, 2, false);
     }
+
     public static int[] getMenuContextIntArray(obj_id self, obj_id player, String varName) throws InterruptedException
     {
         deltadictionary dd = self.getScriptVars();
         return dd.getIntArray("guildMenu." + player + "." + varName);
     }
+
     public static void showGuildSponsored(obj_id player) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("player", player);
         messageTo(player, "showGuildSponsoredMessage", params, 3, false);
     }
+
     public static boolean loadCartridge(obj_id player, obj_id cartridge) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(cartridge))
@@ -1747,7 +1846,7 @@ public class guild extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String cartridgeTemplate = getStringObjVar(cartridge, GUILD_SCREEN_TYPE);
             if (cartridgeTemplate != null && !cartridgeTemplate.equals(""))
@@ -1758,30 +1857,27 @@ public class guild extends script.base_script
         }
         return false;
     }
+
     public static int getVotingTime(int guildId) throws InterruptedException
     {
         return guildGetElectionNextEndTime(guildId);
     }
+
     public static int getGracePeriodTime(int guildId) throws InterruptedException
     {
         return guildGetElectionPreviousEndTime(guildId);
     }
+
     public static boolean isVotingEnabled(int guildId) throws InterruptedException
     {
-        if (getCalendarTime() < getVotingTime(guildId) && getVotingTime(guildId) > getGracePeriodTime(guildId))
-        {
-            return true;
-        }
-        return false;
+        return getCalendarTime() < getVotingTime(guildId) && getVotingTime(guildId) > getGracePeriodTime(guildId);
     }
+
     public static boolean isVotingGracePeriod(int guildId) throws InterruptedException
     {
-        if (getCalendarTime() < getGracePeriodTime(guildId) && getVotingTime(guildId) < getGracePeriodTime(guildId))
-        {
-            return true;
-        }
-        return false;
+        return getCalendarTime() < getGracePeriodTime(guildId) && getVotingTime(guildId) < getGracePeriodTime(guildId);
     }
+
     public static boolean hasElectionEnded(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1795,12 +1891,9 @@ public class guild extends script.base_script
         }
         int votingTime = getVotingTime(guildId);
         int gracePeriodTime = getGracePeriodTime(guildId);
-        if (gracePeriodTime == 0 && votingTime > 0 && votingTime < getCalendarTime())
-        {
-            return true;
-        }
-        return false;
+        return gracePeriodTime == 0 && votingTime > 0 && votingTime < getCalendarTime();
     }
+
     public static obj_id[] getCandidates(int guildId) throws InterruptedException
     {
         if (guildId <= 0)
@@ -1814,8 +1907,10 @@ public class guild extends script.base_script
         }
         Vector candidates = new Vector();
         candidates.setSize(0);
-        for (obj_id memberId : memberIds) {
-            if (isCandidate(guildId, memberId)) {
+        for (obj_id memberId : memberIds)
+        {
+            if (isCandidate(guildId, memberId))
+            {
                 utils.addElement(candidates, memberId);
             }
         }
@@ -1827,6 +1922,7 @@ public class guild extends script.base_script
         }
         return _candidates;
     }
+
     public static String[] getGuildMemberNamesByArray(int guildId, obj_id[] memberIds) throws InterruptedException
     {
         if (guildId <= 0 || memberIds == null || memberIds.length < 1)
@@ -1840,6 +1936,7 @@ public class guild extends script.base_script
         }
         return names;
     }
+
     public static boolean isCandidate(int guildId, obj_id memberId) throws InterruptedException
     {
         if (guildId <= 0 || !isIdValid(memberId))
@@ -1848,6 +1945,7 @@ public class guild extends script.base_script
         }
         return hasGuildPermission(guildId, memberId, GUILD_PERMISSION_ELECTION_CANDIDATE);
     }
+
     public static void makeCandidate(int guildId, obj_id memberId) throws InterruptedException
     {
         if (guildId <= 0 || !isIdValid(memberId))
@@ -1856,6 +1954,7 @@ public class guild extends script.base_script
         }
         guildSetMemberPermissionAndAllegiance(guildId, memberId, guildGetMemberPermissions(guildId, memberId) | GUILD_PERMISSION_ELECTION_CANDIDATE, memberId);
     }
+
     public static void removeCandidate(int guildId, obj_id memberId) throws InterruptedException
     {
         if (guildId <= 0 || !isIdValid(memberId))
@@ -1864,6 +1963,7 @@ public class guild extends script.base_script
         }
         guildSetMemberPermissionAndAllegiance(guildId, memberId, guildGetMemberPermissions(guildId, memberId) & (~GUILD_PERMISSION_ELECTION_CANDIDATE), null);
     }
+
     public static void resetCandidates(int guildId, obj_id[] excluded) throws InterruptedException
     {
         if (guildId <= 0)
@@ -1881,32 +1981,43 @@ public class guild extends script.base_script
         {
             l = candidates.length;
         }
-        for (obj_id memberId : memberIds) {
+        for (obj_id memberId : memberIds)
+        {
             obj_id votedFor = guildGetMemberAllegiance(guildId, memberId);
-            if (isIdValid(votedFor)) {
-                if (!isIdValid(memberId)) {
+            if (isIdValid(votedFor))
+            {
+                if (!isIdValid(memberId))
+                {
                     continue;
                 }
-                if (excluded != null && excluded.length > 0 && utils.isObjIdInArray(excluded, memberId)) {
+                if (excluded != null && excluded.length > 0 && utils.isObjIdInArray(excluded, memberId))
+                {
                     continue;
                 }
-                if (candidates == null || candidates.length < 1) {
+                if (candidates == null || candidates.length < 1)
+                {
                     guildSetMemberAllegiance(guildId, memberId, null);
-                } else {
+                }
+                else
+                {
                     boolean candidateFound = false;
-                    for (int k = 0; k < l; k++) {
-                        if (memberId == candidates[k]) {
+                    for (int k = 0; k < l; k++)
+                    {
+                        if (memberId == candidates[k])
+                        {
                             candidateFound = true;
                             removeCandidate(guildId, memberId);
                         }
                     }
-                    if (!candidateFound) {
+                    if (!candidateFound)
+                    {
                         guildSetMemberAllegiance(guildId, memberId, null);
                     }
                 }
             }
         }
     }
+
     public static obj_id getGuildMemberVote(int guildId, obj_id memberId) throws InterruptedException
     {
         if (guildId <= 0 || !isIdValid(memberId))
@@ -1920,6 +2031,7 @@ public class guild extends script.base_script
         }
         return null;
     }
+
     public static obj_id[] getGuildMemberVotes(int guildId) throws InterruptedException
     {
         if (guildId <= 0)
@@ -1938,6 +2050,7 @@ public class guild extends script.base_script
         }
         return memberVotedFor;
     }
+
     public static int[] getTalliedVotes(int guildId, obj_id[] candidates) throws InterruptedException
     {
         if (guildId <= 0)
@@ -1957,14 +2070,17 @@ public class guild extends script.base_script
         obj_id self = getTopMostContainer(getSelf());
         for (int i = 0, j = candidates.length; i < j; i++)
         {
-            for (obj_id obj_id : voteList) {
-                if (candidates[i] == obj_id) {
+            for (obj_id obj_id : voteList)
+            {
+                if (candidates[i] == obj_id)
+                {
                     voteTotals[i]++;
                 }
             }
         }
         return voteTotals;
     }
+
     public static void allegiance(obj_id actor, String who) throws InterruptedException
     {
         int guildId = getGuildId(actor);
@@ -1985,12 +2101,13 @@ public class guild extends script.base_script
                 sendSystemMessageProse(actor, pp);
                 guildSetMemberAllegiance(guildId, actor, allegianceId);
             }
-            else 
+            else
             {
                 sendSystemMessage(actor, SID_GUILD_ALLEGIANCE_UNCHANGED_SELF);
             }
         }
     }
+
     public static void stopElection(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2012,21 +2129,24 @@ public class guild extends script.base_script
             leaderChanged = SID_COMPLETED_ELECTIONS_EMAIL_BODY_LEADER_CHANGED;
         }
         obj_id[] members = guild.getMemberIds(guildId, false, true);
-        for (obj_id member : members) {
-            if (!isIdValid(member)) {
+        for (obj_id member : members)
+        {
+            if (!isIdValid(member))
+            {
                 continue;
             }
             String cname = guildGetMemberName(guildId, member);
             prose_package bodypp = prose.getPackage(leaderChanged, cname);
             utils.sendMail(new string_id("guild", "open_elections_email_subject"), bodypp, cname, "Guild Management");
         }
-        obj_id[] exluded = 
-        {
-            oldLeader,
-            newLeader
-        };
+        obj_id[] exluded =
+                {
+                        oldLeader,
+                        newLeader
+                };
         resetCandidates(guildId, exluded);
     }
+
     public static obj_id determineLeaderByAllegiance(int guildId) throws InterruptedException
     {
         if (guildId == 0)
@@ -2065,6 +2185,7 @@ public class guild extends script.base_script
         }
         return newLeader;
     }
+
     public static void showStandings(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2114,7 +2235,7 @@ public class guild extends script.base_script
             {
                 votingData[i][0] = "GM: " + guildGetMemberName(guildId, leader);
             }
-            else 
+            else
             {
                 votingData[i][0] = guildGetMemberName(guildId, candidates[i]);
             }
@@ -2122,24 +2243,24 @@ public class guild extends script.base_script
             {
                 votingData[i][1] = "X";
             }
-            else 
+            else
             {
                 votingData[i][1] = "";
             }
-            votingData[i][2] = "" + vote_counts[i];
+            votingData[i][2] = String.valueOf(vote_counts[i]);
         }
-        String[] table_titles = 
-        {
-            "Name",
-            "Voted For",
-            "Votes"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "integer"
-        };
+        String[] table_titles =
+                {
+                        "Name",
+                        "Voted For",
+                        "Votes"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "integer"
+                };
         String guildName = guildGetName(guildId);
         String guildAbbreviation = guildGetAbbrev(guildId);
         String guildTitle = "Guild Candidates Running For Office";
@@ -2151,6 +2272,7 @@ public class guild extends script.base_script
         int pid = sui.tableRowMajor(player, player, sui.OK_CANCEL, guildTitle, "onGuildVotingResponse", null, table_titles, table_types, votingData);
         guild.setWindowPid(player, pid);
     }
+
     public static void showMasterGuildWarTableDictionary(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2195,11 +2317,12 @@ public class guild extends script.base_script
         {
             utils.setScriptVar(player, "guild.masterGuildWarTablePid", newPid);
         }
-        else 
+        else
         {
             sendSystemMessage(player, "No data to display.", "");
         }
     }
+
     public static void closedMasterGuildWarTableDictionary(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2211,6 +2334,7 @@ public class guild extends script.base_script
             utils.removeScriptVar(player, "guild.masterGuildWarTablePid");
         }
     }
+
     public static void showInactiveGuildWarTableDictionary(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2255,11 +2379,12 @@ public class guild extends script.base_script
         {
             utils.setScriptVar(player, "guild.inactiveGuildWarTablePid", newPid);
         }
-        else 
+        else
         {
             sendSystemMessage(player, "No data to display.", "");
         }
     }
+
     public static void closedInactiveGuildWarTableDictionary(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2271,6 +2396,7 @@ public class guild extends script.base_script
             utils.removeScriptVar(player, "guild.inactiveGuildWarTablePid");
         }
     }
+
     public static void showRankSummary(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2301,18 +2427,18 @@ public class guild extends script.base_script
         }
         utils.setScriptVar(player, "guild.allRanks", allRanks);
         String[][] rankData = new String[allRanks.length][3];
-        String[] table_titles = 
-        {
-            "Rank",
-            "Count",
-            "Show"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "integer",
-            "text"
-        };
+        String[] table_titles =
+                {
+                        "Rank",
+                        "Count",
+                        "Show"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "integer",
+                        "text"
+                };
         int[] rankTotals = new int[allRanks.length];
         int[] ranksPreferred = getIntArrayObjVar(player, "guild.ranksPreferred");
         for (int i = 0, j = members.length; i < j; i++)
@@ -2333,13 +2459,14 @@ public class guild extends script.base_script
                 }
                 if (i == j - 1)
                 {
-                    rankData[k][1] = "" + rankTotals[k];
+                    rankData[k][1] = String.valueOf(rankTotals[k]);
                 }
             }
         }
-        if (ranksPreferred != null && ranksPreferred.length > 0)
+        if (ranksPreferred != null)
         {
-            for (int i1 : ranksPreferred) {
+            for (int i1 : ranksPreferred)
+            {
                 rankData[i1][2] = "X";
             }
         }
@@ -2354,6 +2481,7 @@ public class guild extends script.base_script
         int pid = sui.tableRowMajor(player, player, sui.OK_CANCEL, guildTitle, "onGuildRankSummaryResponse", STR_GUILD_RANK_SUMMARY_PROMPT, table_titles, table_types, rankData);
         guild.setWindowPid(player, pid);
     }
+
     public static void showRankList(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2388,7 +2516,7 @@ public class guild extends script.base_script
         {
             tableWidth = ranksPreferred.length + 1;
         }
-        else 
+        else
         {
             tableWidth = 21;
         }
@@ -2419,21 +2547,21 @@ public class guild extends script.base_script
                 {
                     rankIndex = ranksPreferred[k];
                 }
-                else 
+                else
                 {
                     rankIndex = k;
                 }
                 if (i == 0)
                 {
                     String rank = localize(new string_id("guild_rank_title", allRanks[rankIndex]));
-                    table_titles[k + 1] = rank.substring(6, rank.length());
+                    table_titles[k + 1] = rank.substring(6);
                     table_types[k + 1] = "text";
                 }
                 if (guildHasMemberRank(guildId, members[i], allRanks[rankIndex]))
                 {
                     rankData[i][k + 1] = "X";
                 }
-                else 
+                else
                 {
                     rankData[i][k + 1] = "";
                 }
@@ -2451,6 +2579,7 @@ public class guild extends script.base_script
         int pid = sui.tableRowMajor(player, player, sui.OK_CANCEL, guildTitle, "onGuildRankListResponse", null, table_titles, table_types, rankData);
         guild.setWindowPid(player, pid);
     }
+
     public static void showPermissionSummary(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2475,36 +2604,36 @@ public class guild extends script.base_script
             return;
         }
         String[][] permissionData = new String[members.length][12];
-        String[] table_titles = 
-        {
-            "Name",
-            "Sponsor",
-            "Sponsor Accept",
-            "Kick",
-            "Mail",
-            "Title",
-            "Disband",
-            "Guild Name Change",
-            "Rank",
-            "War",
-            "War Excluded",
-            "War Exclusive"
-        };
-        String[] table_types = 
-        {
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text",
-            "text"
-        };
+        String[] table_titles =
+                {
+                        "Name",
+                        "Sponsor",
+                        "Sponsor Accept",
+                        "Kick",
+                        "Mail",
+                        "Title",
+                        "Disband",
+                        "Guild Name Change",
+                        "Rank",
+                        "War",
+                        "War Excluded",
+                        "War Exclusive"
+                };
+        String[] table_types =
+                {
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text",
+                        "text"
+                };
         int[] permissionFlags = PERMISSION_INTERFACE_FLAGS;
         int[] permissionCounts = new int[11];
         for (int i = 0, j = members.length; i < j; i++)
@@ -2522,7 +2651,7 @@ public class guild extends script.base_script
                     permissionData[i][k + 1] = "X";
                     permissionCounts[k]++;
                 }
-                else 
+                else
                 {
                     permissionData[i][k + 1] = "";
                 }
@@ -2544,6 +2673,7 @@ public class guild extends script.base_script
         int pid = sui.tableRowMajor(player, player, sui.OK_CANCEL, guildTitle, "onGuildPermissionListResponse", null, table_titles, table_types, permissionData);
         guild.setWindowPid(player, pid);
     }
+
     public static void statusNotification(int guildId, obj_id who, boolean login) throws InterruptedException
     {
         if (guildId <= 0)
@@ -2555,11 +2685,14 @@ public class guild extends script.base_script
         {
             return;
         }
-        for (obj_id member : members) {
-            if (!isIdValid(member)) {
+        for (obj_id member : members)
+        {
+            if (!isIdValid(member))
+            {
                 continue;
             }
-            if (isPlayerConnected(member) && guild.hasGuildPermission(guildId, member, guild.GUILD_PERMISSION_ONLINE_STATUS)) {
+            if (isPlayerConnected(member) && guild.hasGuildPermission(guildId, member, guild.GUILD_PERMISSION_ONLINE_STATUS))
+            {
                 dictionary params = new dictionary();
                 params.put("guildId", guildId);
                 params.put("player", who);
@@ -2568,6 +2701,7 @@ public class guild extends script.base_script
             }
         }
     }
+
     public static boolean inSameGuild(obj_id target1, obj_id target2) throws InterruptedException
     {
         int guildId1 = getGuildId(target1);
@@ -2576,13 +2710,6 @@ public class guild extends script.base_script
         {
             return false;
         }
-        else if (guildId1 == guildId2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return guildId1 == guildId2;
     }
 }

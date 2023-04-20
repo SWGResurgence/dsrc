@@ -9,14 +9,17 @@ public class luck extends script.base_script
     public luck()
     {
     }
+
     public static boolean isLucky(obj_id player) throws InterruptedException
     {
         return isLucky(player, 0.10f, true);
     }
+
     public static boolean isLucky(obj_id player, float mod) throws InterruptedException
     {
         return isLucky(player, mod, true);
     }
+
     public static boolean isLucky(obj_id player, float mod, boolean showFlyText) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -45,6 +48,7 @@ public class luck extends script.base_script
         }
         return false;
     }
+
     public static void showLuckyFlyText(obj_id player) throws InterruptedException
     {
         prose_package pp = new prose_package();

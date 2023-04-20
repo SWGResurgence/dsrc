@@ -4,18 +4,15 @@ import script.*;
 
 public class camping extends script.base_script
 {
-    public camping()
-    {
-    }
-    public static final float CAMP_SIZE[] = 
-    {
-            6.0f,
-            8.0f,
-            10.0f,
-            13.0f,
-            15.0f,
-            20.0f
-    };
+    public static final float[] CAMP_SIZE =
+            {
+                    6.0f,
+                    8.0f,
+                    10.0f,
+                    13.0f,
+                    15.0f,
+                    20.0f
+            };
     public static final float MAX_SIZE = 14.0f;
     public static final int NUM_MARKER = 6;
     public static final float HEARTBEAT_CREATION = 1.0f;
@@ -37,11 +34,11 @@ public class camping extends script.base_script
     public static final String VAR_CAMP_POWER = VAR_CAMP_BASE + ".power";
     public static final String VAR_TRIGGER_VOLUME = VAR_CAMP_BASE + ".triggerVolume";
     public static final String VAR_CAMP_ITEM_BASE = VAR_CAMP_BASE + ".items";
-    public static final String VAR_ITEM_IDX = VAR_CAMP_BASE + ".item_idx";
-    public static final String VAR_ITEM_MAX = VAR_CAMP_BASE + ".item_max";
     public static final String VAR_MARKERS = VAR_CAMP_ITEM_BASE + ".markers";
     public static final String VAR_GENERAL_ITEMS = VAR_CAMP_ITEM_BASE + ".general";
     public static final String VAR_ADVANCED_ITEMS = VAR_CAMP_ITEM_BASE + ".advanced";
+    public static final String VAR_ITEM_IDX = VAR_CAMP_BASE + ".item_idx";
+    public static final String VAR_ITEM_MAX = VAR_CAMP_BASE + ".item_max";
     public static final String VAR_PLAYER_CAMP = VAR_CAMP_BASE + ".id";
     public static final String VAR_CURRENT_CAMP = VAR_CAMP_BASE + ".current";
     public static final int STATUS_UNKNOWN = -1;
@@ -86,20 +83,25 @@ public class camping extends script.base_script
     public static final string_id PROSE_CAMP_ENTER = new string_id("camp", "prose_camp_enter");
     public static final string_id PROSE_CAMP_EXIT = new string_id("camp", "prose_camp_exit");
     public static final string_id SID_RECRUITER_MODULE_ABORTED = new string_id("camp", "recruiter_aborted");
-    public static final String CAMP_THEATERS[] = 
-    {
-        "object/building/poi/scout_camp_s0.iff",
-        "object/building/poi/scout_camp_s1.iff",
-        "object/building/poi/scout_camp_s2.iff",
-        "object/building/poi/scout_camp_s3.iff",
-        "object/building/poi/scout_camp_s4.iff",
-        "object/building/poi/scout_camp_s5.iff"
-    };
+    public static final String[] CAMP_THEATERS =
+            {
+                    "object/building/poi/scout_camp_s0.iff",
+                    "object/building/poi/scout_camp_s1.iff",
+                    "object/building/poi/scout_camp_s2.iff",
+                    "object/building/poi/scout_camp_s3.iff",
+                    "object/building/poi/scout_camp_s4.iff",
+                    "object/building/poi/scout_camp_s5.iff"
+            };
     public static final String CAMP_DATATABLE = "datatables/item/camp.iff";
+    public camping()
+    {
+    }
+
     public static obj_id createCamp(obj_id creator) throws InterruptedException
     {
         return createCamp(creator, 1);
     }
+
     public static obj_id createCamp(obj_id creator, int campPower) throws InterruptedException
     {
         if (!isIdValid(creator))
@@ -124,7 +126,7 @@ public class camping extends script.base_script
                 sendSystemMessage(creator, new string_id("camp", "bad_creation"));
                 return null;
             }
-            else 
+            else
             {
                 setCampOwner(master, creator);
                 setCampMasterName(master);
@@ -148,7 +150,7 @@ public class camping extends script.base_script
                 attachScript(master, SCRIPT_MASTER_OBJECT);
                 setStatus(master, STATUS_NEW);
                 setObjVar(master, VAR_ITEM_IDX, 0);
-                int maxItem = (int)(mod_camp / 20) + 2;
+                int maxItem = (mod_camp / 20) + 2;
                 setObjVar(master, VAR_ITEM_MAX, maxItem);
                 sendCampCreationHeartbeat(master);
                 int createTime = getGameTime();
@@ -156,12 +158,13 @@ public class camping extends script.base_script
                 return master;
             }
         }
-        else 
+        else
         {
             LOG("camping", "Cannot place camp here...");
         }
         return null;
     }
+
     public static obj_id createCampTheater(location here, int campPower) throws InterruptedException
     {
         if (here == null)
@@ -170,6 +173,7 @@ public class camping extends script.base_script
         }
         return createObject(CAMP_THEATERS[campPower - 1], here);
     }
+
     public static boolean canPlaceCampHere(obj_id creator, location here, int campPower) throws InterruptedException
     {
         if (!isIdValid(creator) || (here == null))
@@ -227,6 +231,7 @@ public class camping extends script.base_script
         }
         return true;
     }
+
     public static boolean nukeCamp(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master) || !exists(master))
@@ -238,9 +243,10 @@ public class camping extends script.base_script
         if ((players == null) || (players.length == 0))
         {
         }
-        else 
+        else
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 clearCurrentCamp(player);
             }
         }
@@ -254,12 +260,9 @@ public class camping extends script.base_script
                 sendSystemMessage(owner, SID_ERROR_CAMP_DISBAND);
             }
         }
-        if (!destroyObject(master))
-        {
-            return false;
-        }
-        return true;
+        return destroyObject(master);
     }
+
     public static obj_id getCurrentCamp(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -275,6 +278,7 @@ public class camping extends script.base_script
         }
         return camp;
     }
+
     public static boolean setCurrentCamp(obj_id target, obj_id master) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(master))
@@ -285,6 +289,7 @@ public class camping extends script.base_script
         dd.put(VAR_CURRENT_CAMP, master);
         return true;
     }
+
     public static boolean clearCurrentCamp(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -295,6 +300,7 @@ public class camping extends script.base_script
         dd.remove(VAR_CURRENT_CAMP);
         return true;
     }
+
     public static float getCampSize(obj_id master) throws InterruptedException
     {
         int campPower = getIntObjVar(master, VAR_CAMP_POWER) - 1;
@@ -304,6 +310,7 @@ public class camping extends script.base_script
         }
         return CAMP_SIZE[campPower];
     }
+
     public static boolean isTooCloseToAnotherCamp(location here, obj_id creator) throws InterruptedException
     {
         if (here == null || !isIdValid(creator))
@@ -312,18 +319,21 @@ public class camping extends script.base_script
         }
         float range = 2 * MAX_SIZE + 1;
         obj_id[] objs = getNonCreaturesInRange(here, range);
-        if ((objs == null) || (objs.length == 0))
+        if (objs == null)
         {
             return false;
         }
-        else 
+        else
         {
-            for (obj_id item : objs) {
-                if (hasObjVar(item, VAR_OWNER)) {
+            for (obj_id item : objs)
+            {
+                if (hasObjVar(item, VAR_OWNER))
+                {
                     sendSystemMessage(creator, SID_ERROR_CAMP_TOO_CLOSE);
                     return true;
                 }
-                if (player_structure.isBuilding(item)) {
+                if (player_structure.isBuilding(item))
+                {
                     sendSystemMessage(creator, SID_ERROR_BUILDING_TOO_CLOSE);
                     return true;
                 }
@@ -331,6 +341,7 @@ public class camping extends script.base_script
         }
         return false;
     }
+
     public static obj_id getCampOwner(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -339,6 +350,7 @@ public class camping extends script.base_script
         }
         return getObjIdObjVar(master, VAR_OWNER);
     }
+
     public static boolean setCampOwner(obj_id master, obj_id newOwner) throws InterruptedException
     {
         if (!isIdValid(master) || !isIdValid(newOwner))
@@ -349,6 +361,7 @@ public class camping extends script.base_script
         setObjVar(newOwner, VAR_PLAYER_CAMP, master);
         return true;
     }
+
     public static boolean clearCampOwner(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -363,11 +376,13 @@ public class camping extends script.base_script
         setObjVar(master, VAR_OWNER, obj_id.NULL_ID);
         return true;
     }
+
     public static boolean updateCampOwner(obj_id master, obj_id newOwner) throws InterruptedException
     {
         setCampOwner(master, newOwner);
         return setStatus(master, STATUS_MAINTAIN);
     }
+
     public static boolean campAbandoned(obj_id master) throws InterruptedException
     {
         obj_id owner = getCampOwner(master);
@@ -382,8 +397,10 @@ public class camping extends script.base_script
             return true;
         }
         int numKids = children.length;
-        for (obj_id thisChild : children) {
-            if (hasScript(thisChild, "systems.camping.camp_controlpanel")) {
+        for (obj_id thisChild : children)
+        {
+            if (hasScript(thisChild, "systems.camping.camp_controlpanel"))
+            {
                 setName(thisChild, SID_ABANDONED_CAMP);
             }
         }
@@ -391,6 +408,7 @@ public class camping extends script.base_script
         messageTo(master, "handleNuke", null, 300.0f, false);
         return setStatus(master, STATUS_ABANDONED);
     }
+
     public static int getStatus(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -399,6 +417,7 @@ public class camping extends script.base_script
         }
         return getIntObjVar(master, VAR_STATUS);
     }
+
     public static boolean setStatus(obj_id master, int newStatus) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -410,26 +429,32 @@ public class camping extends script.base_script
         messageTo(master, HANDLER_SET_STATUS, d, 0, false);
         return setObjVar(master, VAR_STATUS, newStatus);
     }
+
     public static boolean isOwnerInVicinity(obj_id master) throws InterruptedException
     {
         return getBooleanObjVar(master, VAR_OWNER_NEAR);
     }
+
     public static void sendCampCreationHeartbeat(obj_id master) throws InterruptedException
     {
         messageTo(master, HANDLER_CAMP_CREATE, null, HEARTBEAT_CREATION, false);
     }
+
     public static void sendCampCreationComplete(obj_id master) throws InterruptedException
     {
         messageTo(master, HANDLER_CAMP_COMPLETE, null, HEARTBEAT_CREATION, false);
     }
+
     public static void sendCampMaintenanceHeartbeat(obj_id master) throws InterruptedException
     {
         messageTo(master, HANDLER_CAMP_MAINTAIN, null, HEARTBEAT_MAINTAIN, false);
     }
+
     public static void sendCampRestoreHeartbeat(obj_id master) throws InterruptedException
     {
         messageTo(master, HANDLER_CAMP_RESTORE, null, HEARTBEAT_RESTORE, false);
     }
+
     public static int campingSkillCheck(obj_id owner) throws InterruptedException
     {
         int roll = rand(0, 100);
@@ -437,6 +462,7 @@ public class camping extends script.base_script
         int delta = chanceSuccess - roll;
         return delta;
     }
+
     public static void setCampMasterName(obj_id master) throws InterruptedException
     {
         if (isIdValid(master))
@@ -445,6 +471,7 @@ public class camping extends script.base_script
             setName(master, SID_CAMP_MASTER_NAME);
         }
     }
+
     public static int getCampRepelValue(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -456,12 +483,13 @@ public class camping extends script.base_script
         {
             return 0;
         }
-        else 
+        else
         {
             int val = getIntObjVar(master, VAR_CAMP_REPEL);
             return val;
         }
     }
+
     public static boolean repelledByCamp(obj_id npc, obj_id player) throws InterruptedException
     {
         if (!isIdValid(npc))
@@ -479,44 +507,36 @@ public class camping extends script.base_script
         }
         int repel = getIntObjVar(camp, VAR_CAMP_REPEL);
         int maxlevel = (repel - 2) * 15 + 20;
-        if (ai_lib.getLevel(npc) <= maxlevel)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return ai_lib.getLevel(npc) <= maxlevel;
     }
+
     public static float getCampHealModifier(obj_id master) throws InterruptedException
     {
         int campPower = getIntObjVar(master, VAR_CAMP_POWER);
         switch (campPower)
         {
             case 1:
-            return 0.65f;
+                return 0.65f;
             case 2:
-            return 0.65f;
+                return 0.65f;
             case 3:
-            return 0.75f;
+                return 0.75f;
             case 4:
-            return 0.85f;
+                return 0.85f;
             case 5:
-            return 0.95f;
+                return 0.95f;
             case 6:
-            return 1.0f;
+                return 1.0f;
             default:
-            return 0.65f;
+                return 0.65f;
         }
     }
+
     public static boolean isRecruiterModule(String module_template) throws InterruptedException
     {
-        if ((module_template.equals("object/building/poi/player_camp_imperial_recruiter.iff")) || (module_template.equals("object/building/poi/player_camp_rebel_recruiter.iff")))
-        {
-            return true;
-        }
-        return false;
+        return (module_template.equals("object/building/poi/player_camp_imperial_recruiter.iff")) || (module_template.equals("object/building/poi/player_camp_rebel_recruiter.iff"));
     }
+
     public static boolean validateRecruiter(obj_id player, String module_template, int recruitersPlaced) throws InterruptedException
     {
         if (!isRecruiterModule(module_template))
@@ -526,11 +546,7 @@ public class camping extends script.base_script
         String playerFaction = factions.getFaction(player);
         if (playerFaction == null || playerFaction.equals(""))
         {
-            if (recruitersPlaced == 0)
-            {
-                return true;
-            }
-            return false;
+            return recruitersPlaced == 0;
         }
         if (playerFaction.equals(factions.FACTION_IMPERIAL))
         {
@@ -546,14 +562,12 @@ public class camping extends script.base_script
         {
             if (module_template.equals("object/building/poi/player_camp_rebel_recruiter.iff"))
             {
-                if (recruitersPlaced == 0)
-                {
-                    return true;
-                }
+                return recruitersPlaced == 0;
             }
         }
         return false;
     }
+
     public static void initializeAdvancedCamp(obj_id deed, obj_id camp, obj_id player, location loc) throws InterruptedException
     {
         setObjVar(camp, VAR_OWNER, player);
@@ -585,11 +599,12 @@ public class camping extends script.base_script
                     {
                         if (ovl.getFloatObjVar(modules[i]) != 0.0f)
                         {
-                            location tempLoc = (location)loc.clone();
+                            location tempLoc = (location) loc.clone();
                             location nodeLoc = getAdvancedCampNodeLocation(camp, tempLoc, nodeCount);
                             int nodeYaw = getAdvancedCampNodeYaw(camp, nodeCount);
                             String module_template = "";
-                            switch (modules[i]) {
+                            switch (modules[i])
+                            {
                                 case "shuttle_beacon":
                                     module_template = "object/building/poi/player_camp_shuttle_beacon.iff";
                                     break;
@@ -647,7 +662,7 @@ public class camping extends script.base_script
                                         nodeCount++;
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     sendSystemMessage(player, SID_RECRUITER_MODULE_ABORTED);
                                 }
@@ -665,22 +680,26 @@ public class camping extends script.base_script
         messageTo(camp, "handleControlTerminalLocation", null, 10.0f, false);
         messageTo(camp, "handleCampDecay", null, lifetime, false);
     }
+
     public static float getAdvancedCampRadius(obj_id camp) throws InterruptedException
     {
         String filename = utils.getTemplateFilenameNoPath(camp);
         return dataTableGetFloat(CAMP_DATATABLE, filename, "radius");
     }
+
     public static int getAdvancedCampNumberOfNodes(obj_id camp) throws InterruptedException
     {
         String filename = utils.getTemplateFilenameNoPath(camp);
         return dataTableGetInt(CAMP_DATATABLE, filename, "nodes");
     }
+
     public static int getAdvancedCampNodeYaw(obj_id camp, int node) throws InterruptedException
     {
         String filename = utils.getTemplateFilenameNoPath(camp);
         String yawCol = "yaw" + node;
         return dataTableGetInt(CAMP_DATATABLE, filename, yawCol);
     }
+
     public static location getAdvancedCampNodeLocation(obj_id camp, location loc, int node) throws InterruptedException
     {
         String filename = utils.getTemplateFilenameNoPath(camp);
@@ -692,26 +711,32 @@ public class camping extends script.base_script
         loc.z += z;
         return loc;
     }
+
     public static obj_id getCurrentAdvancedCamp(obj_id player) throws InterruptedException
     {
         obj_id[] objects = getNonCreaturesInRange(player, 25.0f);
-        if (objects == null || objects.length == 0)
+        if (objects == null)
         {
             return null;
         }
-        for (obj_id object : objects) {
-            if (hasScript(object, "item.camp.camp_advanced")) {
-                if (isInTriggerVolume(object, "campsite", player)) {
+        for (obj_id object : objects)
+        {
+            if (hasScript(object, "item.camp.camp_advanced"))
+            {
+                if (isInTriggerVolume(object, "campsite", player))
+                {
                     return object;
                 }
             }
         }
         return null;
     }
+
     public static boolean isInEntertainmentCamp(obj_id player) throws InterruptedException
     {
         return isInEntertainmentCamp(player, obj_id.NULL_ID);
     }
+
     public static boolean isInEntertainmentCamp(obj_id player, obj_id camp) throws InterruptedException
     {
         if (!isIdValid(camp))
@@ -722,10 +747,6 @@ public class camping extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(camp, "modules.entertainer"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(camp, "modules.entertainer");
     }
 }

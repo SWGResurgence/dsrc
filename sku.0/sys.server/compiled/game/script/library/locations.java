@@ -7,35 +7,36 @@ import java.util.Vector;
 
 public class locations extends script.base_script
 {
+    public static final float GOOD_LOCATION_SEARCH_SIZE = 200;
+    public static final String[] PLANETS =
+            {
+                    "tatooine",
+                    "naboo",
+                    "talus",
+                    "corellia",
+                    "yavin4",
+                    "dantooine",
+                    "dathomir",
+                    "lok",
+                    "rori",
+                    "endor",
+                    "dxun"
+            };
+    public static final String NO_AREA = "no_area";
+    public static final String PLANET_LEVEL_TABLE = "datatables/spawning/planetary_data/planet_level.iff";
     public locations()
     {
     }
-    public static final float GOOD_LOCATION_SEARCH_SIZE = 200;
-    public static final String[] PLANETS = 
-    {
-        "tatooine",
-        "naboo",
-        "talus",
-        "corellia",
-        "yavin4",
-        "dantooine",
-        "dathomir",
-        "lok",
-        "rori",
-        "endor",
-        "dxun"
-    };
-    public static final String NO_AREA = "no_area";
-    public static final String PLANET_LEVEL_TABLE = "datatables/spawning/planetary_data/planet_level.iff";
+
     public static float getRegionExtents(region rgnTest) throws InterruptedException
     {
         location locLowerLeft = new location();
         location locUpperRight = new location();
         location[] locExtents = getRegionExtent(rgnTest);
-        locLowerLeft = (location)locExtents[0].clone();
-        locUpperRight = (location)locExtents[1].clone();
-        LOG("mission", "Lower Left is " + locLowerLeft.toString());
-        LOG("mission", "Upper Right is " + locUpperRight.toString());
+        locLowerLeft = (location) locExtents[0].clone();
+        locUpperRight = (location) locExtents[1].clone();
+        LOG("mission", "Lower Left is " + locLowerLeft);
+        LOG("mission", "Upper Right is " + locUpperRight);
         float fltXDistance = locUpperRight.x - locLowerLeft.x;
         float fltZDistance = locUpperRight.z - locLowerLeft.z;
         if (fltXDistance > fltZDistance)
@@ -43,12 +44,13 @@ public class locations extends script.base_script
             LOG("mission", "fltXDistance returning with a value of " + fltXDistance);
             return fltXDistance;
         }
-        else 
+        else
         {
             LOG("mission", "fltZDistance returning with a value of " + fltZDistance);
             return fltZDistance;
         }
     }
+
     public static region getSmallestRegion(region[] rgnRegions) throws InterruptedException
     {
         if (rgnRegions == null)
@@ -61,42 +63,47 @@ public class locations extends script.base_script
         }
         region rgnSmallestRegion = rgnRegions[0];
         float fltExtents = 1000000000;
-        for (region rgnRegion : rgnRegions) {
+        for (region rgnRegion : rgnRegions)
+        {
             float fltRegionExtents = getRegionExtents(rgnRegion);
-            if (fltRegionExtents < fltExtents) {
+            if (fltRegionExtents < fltExtents)
+            {
                 rgnSmallestRegion = rgnRegion;
                 fltExtents = fltRegionExtents;
             }
         }
         return rgnSmallestRegion;
     }
+
     public static float getRegionXSize(region rgnSearchRegion) throws InterruptedException
     {
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        location locLowerLeft = (location)locExtents[0].clone();
-        location locUpperRight = (location)locExtents[1].clone();
-        LOG("mission", "Lower Left is " + locLowerLeft.toString());
-        LOG("mission", "Upper Right is " + locUpperRight.toString());
+        location locLowerLeft = (location) locExtents[0].clone();
+        location locUpperRight = (location) locExtents[1].clone();
+        LOG("mission", "Lower Left is " + locLowerLeft);
+        LOG("mission", "Upper Right is " + locUpperRight);
         float fltXDistance = locUpperRight.x - locLowerLeft.x;
         return fltXDistance;
     }
+
     public static float getRegionZSize(region rgnSearchRegion) throws InterruptedException
     {
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        location locLowerLeft = (location)locExtents[0].clone();
-        location locUpperRight = (location)locExtents[1].clone();
-        LOG("mission", "Lower Left is " + locLowerLeft.toString());
-        LOG("mission", "Upper Right is " + locUpperRight.toString());
+        location locLowerLeft = (location) locExtents[0].clone();
+        location locUpperRight = (location) locExtents[1].clone();
+        LOG("mission", "Lower Left is " + locLowerLeft);
+        LOG("mission", "Upper Right is " + locUpperRight);
         float fltZDistance = locUpperRight.z - locLowerLeft.z;
         return fltZDistance;
     }
+
     public static float[] getRegionSize(region rgnSearchRegion) throws InterruptedException
     {
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        location locLowerLeft = (location)locExtents[0].clone();
-        location locUpperRight = (location)locExtents[1].clone();
-        LOG("mission", "Lower Left is " + locLowerLeft.toString());
-        LOG("mission", "Upper Right is " + locUpperRight.toString());
+        location locLowerLeft = (location) locExtents[0].clone();
+        location locUpperRight = (location) locExtents[1].clone();
+        LOG("mission", "Lower Left is " + locLowerLeft);
+        LOG("mission", "Upper Right is " + locUpperRight);
         float fltXDistance = locUpperRight.x - locLowerLeft.x;
         float fltZDistance = locUpperRight.z - locLowerLeft.z;
         float[] fltRegionSize = new float[2];
@@ -104,19 +111,21 @@ public class locations extends script.base_script
         fltRegionSize[1] = fltZDistance;
         return fltRegionSize;
     }
+
     public static location getRegionCenter(region rgnSearchRegion) throws InterruptedException
     {
         location locLowerLeft = new location();
         location locUpperRight = new location();
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        locLowerLeft = (location)locExtents[0].clone();
-        locUpperRight = (location)locExtents[1].clone();
-        location locRegionCenter = (location)locLowerLeft.clone();
+        locLowerLeft = (location) locExtents[0].clone();
+        locUpperRight = (location) locExtents[1].clone();
+        location locRegionCenter = (location) locLowerLeft.clone();
         locRegionCenter.x = (locLowerLeft.x + locUpperRight.x) / 2;
         locRegionCenter.z = (locLowerLeft.z + locUpperRight.z) / 2;
-        LOG("missions", "locRegionCenter is " + locRegionCenter.toString());
+        LOG("missions", "locRegionCenter is " + locRegionCenter);
         return locRegionCenter;
     }
+
     public static location getGoodLocationOutsideOfRegion(region rgnSearchRegion, float fltXSize, float fltZSize, float fltDistance) throws InterruptedException
     {
         if (rgnSearchRegion == null)
@@ -130,16 +139,17 @@ public class locations extends script.base_script
         location locRegionCenter = getRegionCenter(rgnSearchRegion);
         LOG("mission", "got centers and extents");
         location locDestination = utils.getRandomLocationInRing(locRegionCenter, fltRegionExtent, fltRegionExtent + fltDistance);
-        location locLowerLeft = (location)locDestination.clone();
+        location locLowerLeft = (location) locDestination.clone();
         locLowerLeft.x = locLowerLeft.x - GOOD_LOCATION_SEARCH_SIZE + fltXSize;
         locLowerLeft.z = locLowerLeft.z - GOOD_LOCATION_SEARCH_SIZE + fltZSize;
-        location locUpperRight = (location)locDestination.clone();
+        location locUpperRight = (location) locDestination.clone();
         locUpperRight.x = locUpperRight.x + GOOD_LOCATION_SEARCH_SIZE + fltXSize;
         locUpperRight.z = locUpperRight.z + GOOD_LOCATION_SEARCH_SIZE + fltZSize;
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, false, false);
         LOG("mission", "gotGoodLocation");
         return locGoodLocation;
     }
+
     public static location getGoodLocationOutsideOfRegion(region rgnSearchRegion, float fltXSize, float fltZSize, float fltDistance, boolean boolIgnoreWater, boolean boolIgnoreSlope) throws InterruptedException
     {
         debugServerConsoleMsg(null, "getting good locoutsideofregion");
@@ -148,16 +158,17 @@ public class locations extends script.base_script
         location locRegionCenter = getRegionCenter(rgnSearchRegion);
         LOG("mission", "got centers and extents");
         location locDestination = utils.getRandomLocationInRing(locRegionCenter, fltRegionExtent, fltRegionExtent + fltDistance);
-        location locLowerLeft = (location)locDestination.clone();
+        location locLowerLeft = (location) locDestination.clone();
         locLowerLeft.x = locLowerLeft.x - GOOD_LOCATION_SEARCH_SIZE + fltXSize;
         locLowerLeft.z = locLowerLeft.z - GOOD_LOCATION_SEARCH_SIZE + fltZSize;
-        location locUpperRight = (location)locDestination.clone();
+        location locUpperRight = (location) locDestination.clone();
         locUpperRight.x = locUpperRight.x + GOOD_LOCATION_SEARCH_SIZE + fltXSize;
         locUpperRight.z = locUpperRight.z + GOOD_LOCATION_SEARCH_SIZE + fltZSize;
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, boolIgnoreWater, boolIgnoreSlope);
         LOG("mission", "gotGoodLocation");
         return locGoodLocation;
     }
+
     public static region getClosestCityRegion(region rgnStartRegion) throws InterruptedException
     {
         String strName = rgnStartRegion.getName();
@@ -196,6 +207,7 @@ public class locations extends script.base_script
         LOG("mission", "returned region is " + rgnClosestRegion);
         return rgnClosestRegion;
     }
+
     public static region getDeliverCityRegion(region rgnStartRegion) throws InterruptedException
     {
         Vector strPlanets = new Vector();
@@ -215,14 +227,16 @@ public class locations extends script.base_script
         LOG("locations", "length is " + rgnCities.length);
         if (rgnCities.length < 3)
         {
-            for (String strTestString : PLANETS) {
+            for (String strTestString : PLANETS)
+            {
                 LOG("locations", "strTestString is " + strTestString);
                 LOG("locations", "strPlanet is " + strPlanet);
-                if (!strTestString.equals(strPlanet)) {
+                if (!strTestString.equals(strPlanet))
+                {
                     strPlanets = utils.addElement(strPlanets, strTestString);
                 }
             }
-            String strNewPlanet = ((String)strPlanets.get(rand(0, strPlanets.size() - 1)));
+            String strNewPlanet = ((String) strPlanets.get(rand(0, strPlanets.size() - 1)));
             LOG("locations", "new planet is " + strNewPlanet);
             rgnCities = getRegionsWithMunicipal(strNewPlanet, regions.MUNI_TRUE);
             if ((rgnCities != null) && (rgnCities.length > 0))
@@ -231,12 +245,12 @@ public class locations extends script.base_script
                 LOG("locations", "rgnCity is " + rgnCity.getName());
                 return rgnCity;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             int intI = 0;
             String strStartName = rgnStartRegion.getName();
@@ -249,10 +263,11 @@ public class locations extends script.base_script
                 }
                 intI = intI + 1;
             }
-            region rgnCity = ((region)rgnNewCities.get(rand(0, rgnNewCities.size() - 1)));
+            region rgnCity = ((region) rgnNewCities.get(rand(0, rgnNewCities.size() - 1)));
             return rgnCity;
         }
     }
+
     public static region getCityRegion(region rgnStartRegion) throws InterruptedException
     {
         region[] rgnCitiesArray = getRegionsWithMunicipal(rgnStartRegion.getPlanetName(), regions.MUNI_TRUE);
@@ -277,7 +292,7 @@ public class locations extends script.base_script
         String strStartName = rgnStartRegion.getName();
         while (intI < rgnCities.size())
         {
-            String strNewName = ((region)rgnCities.get(intI)).getName();
+            String strNewName = ((region) rgnCities.get(intI)).getName();
             if (strStartName.equals(strNewName))
             {
                 rgnCities = utils.removeElementAt(rgnCities, intI);
@@ -285,9 +300,10 @@ public class locations extends script.base_script
             }
             intI = intI + 1;
         }
-        region rgnCity = ((region)rgnCities.get(rand(0, rgnCities.size() - 1)));
+        region rgnCity = ((region) rgnCities.get(rand(0, rgnCities.size() - 1)));
         return rgnCity;
     }
+
     public static region getCityRegion(location locCurrentLocation) throws InterruptedException
     {
         region[] rgnCities = getRegionsWithMunicipalAtPoint(locCurrentLocation, regions.MUNI_TRUE);
@@ -298,15 +314,13 @@ public class locations extends script.base_script
         region rgnCity = rgnCities[rand(0, rgnCities.length - 1)];
         return rgnCity;
     }
+
     public static boolean isInCity(location locTestLocation) throws InterruptedException
     {
         region[] rgnCities = getRegionsWithMunicipalAtPoint(locTestLocation, regions.MUNI_TRUE);
-        if (rgnCities != null)
-        {
-            return true;
-        }
-        return false;
+        return rgnCities != null;
     }
+
     public static boolean isInMissionCity(location locTestLocation) throws InterruptedException
     {
         if (city.isInCity(locTestLocation))
@@ -319,32 +333,31 @@ public class locations extends script.base_script
             return true;
         }
         rgnCities = getRegionsWithGeographicalAtPoint(locTestLocation, regions.GEO_CITY);
-        if (rgnCities != null)
-        {
-            return true;
-        }
-        return false;
+        return rgnCities != null;
     }
+
     public static location getGoodLocationInRegion(region rgnSearchRegion, float fltXSize, float fltZSize) throws InterruptedException
     {
         location locLowerLeft = new location();
         location locUpperRight = new location();
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        locLowerLeft = (location)locExtents[0].clone();
-        locUpperRight = (location)locExtents[1].clone();
+        locLowerLeft = (location) locExtents[0].clone();
+        locUpperRight = (location) locExtents[1].clone();
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, false, false);
         return locGoodLocation;
     }
+
     public static location getGoodLocationInRegion(region rgnSearchRegion, float fltXSize, float fltZSize, boolean boolIgnoreWater, boolean boolIgnoreSlope) throws InterruptedException
     {
         location locLowerLeft = new location();
         location locUpperRight = new location();
         location[] locExtents = getRegionExtent(rgnSearchRegion);
-        locLowerLeft = (location)locExtents[0].clone();
-        locUpperRight = (location)locExtents[1].clone();
+        locLowerLeft = (location) locExtents[0].clone();
+        locUpperRight = (location) locExtents[1].clone();
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, boolIgnoreWater, boolIgnoreSlope);
         return locGoodLocation;
     }
+
     public static location getRandomGoodLocation(location start, float searchMin, float searchMax, float bestSize) throws InterruptedException
     {
         location result = null;
@@ -363,29 +376,31 @@ public class locations extends script.base_script
         }
         return result;
     }
+
     public static location getGoodLocationAroundLocation(location locSearchLocation, float fltXSize, float fltZSize, float fltXSearchSize, float fltZSearchSize) throws InterruptedException
     {
-        location locLowerLeft = (location)locSearchLocation.clone();
+        location locLowerLeft = (location) locSearchLocation.clone();
         locLowerLeft.x = locLowerLeft.x - fltXSearchSize;
         locLowerLeft.z = locLowerLeft.z - fltZSearchSize;
-        LOG("mission", "locLowerLeft is " + locLowerLeft.toString());
-        location locUpperRight = (location)locSearchLocation.clone();
+        LOG("mission", "locLowerLeft is " + locLowerLeft);
+        location locUpperRight = (location) locSearchLocation.clone();
         locUpperRight.x = locUpperRight.x + fltXSearchSize;
         locUpperRight.z = locUpperRight.z + fltZSearchSize;
-        LOG("mission", "locUpperRight is " + locUpperRight.toString());
+        LOG("mission", "locUpperRight is " + locUpperRight);
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, false, false);
         return locGoodLocation;
     }
+
     public static location getGoodLocationAroundLocation(location locSearchLocation, float fltXSize, float fltZSize, float fltXSearchSize, float fltZSearchSize, boolean boolIgnoreWater, boolean boolIgnoreSlope) throws InterruptedException
     {
-        location locLowerLeft = (location)locSearchLocation.clone();
+        location locLowerLeft = (location) locSearchLocation.clone();
         locLowerLeft.x = locLowerLeft.x - fltXSearchSize;
         locLowerLeft.z = locLowerLeft.z - fltZSearchSize;
-        LOG("mission", "locLowerLeft is " + locLowerLeft.toString());
-        location locUpperRight = (location)locSearchLocation.clone();
+        LOG("mission", "locLowerLeft is " + locLowerLeft);
+        location locUpperRight = (location) locSearchLocation.clone();
         locUpperRight.x = locUpperRight.x + fltXSearchSize;
         locUpperRight.z = locUpperRight.z + fltZSearchSize;
-        LOG("mission", "locUpperRight is " + locUpperRight.toString());
+        LOG("mission", "locUpperRight is " + locUpperRight);
         location locGoodLocation = getGoodLocation(fltXSize, fltZSize, locLowerLeft, locUpperRight, boolIgnoreWater, boolIgnoreSlope);
         if (locGoodLocation == null)
         {
@@ -398,16 +413,17 @@ public class locations extends script.base_script
         }
         return locGoodLocation;
     }
+
     public static location getGoodLocationAroundLocationAvoidCollidables(location locSearchLocation, float fltXSize, float fltZSize, float fltXSearchSize, float fltZSearchSize, boolean boolIgnoreWater, boolean boolIgnoreSlope, float staticObjDistance) throws InterruptedException
     {
-        location locLowerLeft = (location)locSearchLocation.clone();
+        location locLowerLeft = (location) locSearchLocation.clone();
         locLowerLeft.x = locLowerLeft.x - fltXSearchSize;
         locLowerLeft.z = locLowerLeft.z - fltZSearchSize;
-        LOG("mission", "locLowerLeft is " + locLowerLeft.toString());
-        location locUpperRight = (location)locSearchLocation.clone();
+        LOG("mission", "locLowerLeft is " + locLowerLeft);
+        location locUpperRight = (location) locSearchLocation.clone();
         locUpperRight.x = locUpperRight.x + fltXSearchSize;
         locUpperRight.z = locUpperRight.z + fltZSearchSize;
-        LOG("mission", "locUpperRight is " + locUpperRight.toString());
+        LOG("mission", "locUpperRight is " + locUpperRight);
         location locGoodLocation = getGoodLocationAvoidCollidables(fltXSize, fltZSize, locLowerLeft, locUpperRight, boolIgnoreWater, boolIgnoreSlope, staticObjDistance);
         if (locGoodLocation == null)
         {
@@ -420,6 +436,7 @@ public class locations extends script.base_script
         }
         return locGoodLocation;
     }
+
     public static String getCityName(location locCurrentLocation) throws InterruptedException
     {
         region[] rgnCities = getRegionsWithMunicipalAtPoint(locCurrentLocation, regions.MUNI_TRUE);
@@ -432,6 +449,7 @@ public class locations extends script.base_script
         String strAsciiId = strFictionalName.getAsciiId();
         return strAsciiId;
     }
+
     public static String getGuardSpawnerRegionName(location locCurrentLocation) throws InterruptedException
     {
         if (locCurrentLocation == null)
@@ -447,6 +465,7 @@ public class locations extends script.base_script
         String strName = rgnCity.getName();
         return strName;
     }
+
     public static location getBountyLocation(String strPlanet) throws InterruptedException
     {
         region[] rgnCities = getRegionsWithMunicipal(strPlanet, regions.MUNI_TRUE);
@@ -462,7 +481,7 @@ public class locations extends script.base_script
             location locCenter = getRegionCenter(rgnCities[intRoll]);
             return locCenter;
         }
-        else 
+        else
         {
             location locDestination = new location();
             locDestination.x = rand(-6500, 6500);
@@ -481,9 +500,10 @@ public class locations extends script.base_script
             return locDestination;
         }
     }
+
     public static location moveLocationTowardsLocation(location locStartLocation, location locEndLocation, float fltDistance) throws InterruptedException
     {
-        location locNewLocation = (location)locStartLocation.clone();
+        location locNewLocation = (location) locStartLocation.clone();
         float fltTotalDistance = getDistance(locStartLocation, locEndLocation);
         if (fltTotalDistance <= 0)
         {
@@ -497,14 +517,12 @@ public class locations extends script.base_script
         locNewLocation.z = locNewLocation.z + fltNewZ;
         return locNewLocation;
     }
+
     public static boolean isCityRegion(region rgnTest) throws InterruptedException
     {
-        if (rgnTest.getMunicipalType() == regions.MUNI_TRUE)
-        {
-            return true;
-        }
-        return false;
+        return rgnTest.getMunicipalType() == regions.MUNI_TRUE;
     }
+
     public static location getDifferentGoodCityLocation(location locStartLocation) throws InterruptedException
     {
         LOG("missions", "getting different city location");
@@ -540,7 +558,7 @@ public class locations extends script.base_script
         int intI = 0;
         while (intI < rgnGoodLocations.size())
         {
-            String strNewName = ((region)rgnGoodLocations.get(intI)).getName();
+            String strNewName = ((region) rgnGoodLocations.get(intI)).getName();
             if (strNewName.equals(strOldName))
             {
                 rgnGoodLocations = utils.removeElementAt(rgnGoodLocations, intI);
@@ -548,11 +566,12 @@ public class locations extends script.base_script
             }
             intI = intI + 1;
         }
-        region rgnSpawnRegion = ((region)rgnGoodLocations.get(rand(0, rgnGoodLocations.size() - 1)));
+        region rgnSpawnRegion = ((region) rgnGoodLocations.get(rand(0, rgnGoodLocations.size() - 1)));
         locGoodLocation = findPointInRegion(rgnSpawnRegion);
         LOG("mission_spam", "Got good location of " + locGoodLocation.toString() + " in locations.getGoodCityLocation");
         return locGoodLocation;
     }
+
     public static location getDifferentGoodCityRegionLocation(location locStartLocation) throws InterruptedException
     {
         LOG("missions", "getting different city location");
@@ -587,7 +606,7 @@ public class locations extends script.base_script
         int intI = 0;
         while (intI < rgnGoodLocations.size())
         {
-            String strNewName = ((region)rgnGoodLocations.get(intI)).getName();
+            String strNewName = ((region) rgnGoodLocations.get(intI)).getName();
             if (strNewName.equals(strOldName))
             {
                 rgnGoodLocations = utils.removeElementAt(rgnGoodLocations, intI);
@@ -595,11 +614,12 @@ public class locations extends script.base_script
             }
             intI = intI + 1;
         }
-        region rgnSpawnRegion = ((region)rgnGoodLocations.get(rand(0, rgnGoodLocations.size() - 1)));
+        region rgnSpawnRegion = ((region) rgnGoodLocations.get(rand(0, rgnGoodLocations.size() - 1)));
         locGoodLocation = getRegionCenter(rgnSpawnRegion);
-        LOG("mission_spam", "Got good location of " + locGoodLocation.toString() + " in locations.getGoodCityLocation");
+        LOG("mission_spam", "Got good location of " + locGoodLocation + " in locations.getGoodCityLocation");
         return locGoodLocation;
     }
+
     public static location getGoodCityLocation(region rgnCity, String strPlanet) throws InterruptedException
     {
         if (rgnCity == null || strPlanet == null)
@@ -609,7 +629,7 @@ public class locations extends script.base_script
         }
         location locGoodLocation = new location();
         string_id strFictionalName = utils.unpackString(rgnCity.getName());
-        if(strFictionalName == null)
+        if (strFictionalName == null)
         {
             LOG("mission_spam", "getGoodCityLocation was unable to get the Fictional name from rgnCity (" + rgnCity.getName() + ")");
             return null;
@@ -637,6 +657,7 @@ public class locations extends script.base_script
         LOG("mission_spam", "Got good location of " + locGoodLocation.toString() + " in locations.getGoodCityLocation");
         return locGoodLocation;
     }
+
     public static location getGoodCityRegionLocation(region rgnCity, String strPlanet) throws InterruptedException
     {
         if (rgnCity == null || strPlanet == null)
@@ -644,7 +665,8 @@ public class locations extends script.base_script
             return null;
         }
         string_id strFictionalName = utils.unpackString(rgnCity.getName());
-        if(strFictionalName == null){
+        if (strFictionalName == null)
+        {
             LOG("mission_spam", "Can't unpack city name (" + rgnCity.getName() + ") to get fictional name.");
             return null;
         }
@@ -664,6 +686,7 @@ public class locations extends script.base_script
         locGoodLocation = getRegionCenter(rgnSpawnRegion);
         return locGoodLocation;
     }
+
     public static int normalizeDifficultyForRegion(int intDifficulty, location locTest) throws InterruptedException
     {
         region[] rgnRegionsAtPoint = getRegionsWithSpawnableAtPoint(locTest, regions.SPAWN_TRUE);
@@ -687,6 +710,7 @@ public class locations extends script.base_script
         LOG("locations", "intMinRegionDifficulty: " + intMinRegionDifficulty + " intMaxRegionDifficulty: " + intMaxRegionDifficulty + " intDifficulty: " + intDifficulty);
         return rand(intMinRegionDifficulty, intMaxRegionDifficulty);
     }
+
     public static region[] getDifficultyRegionsAtLocation(location locTest) throws InterruptedException
     {
         region[] rgnRegionsAtPoint = getRegionsWithSpawnableAtPoint(locTest, regions.SPAWN_TRUE);
@@ -700,6 +724,7 @@ public class locations extends script.base_script
         }
         return rgnRegionsAtPoint;
     }
+
     public static int getMinMissionDifficultyAtLocation(location locTest) throws InterruptedException
     {
         region[] rgnRegionsAtPoint = getRegionsWithMissionAtPoint(locTest, regions.MISSION_OTHER);
@@ -712,14 +737,17 @@ public class locations extends script.base_script
             }
         }
         int minDifficulty = 90;
-        for (region region : rgnRegionsAtPoint) {
+        for (region region : rgnRegionsAtPoint)
+        {
             int regionMinDifficulty = region.getMinDifficultyType();
-            if (minDifficulty > regionMinDifficulty) {
+            if (minDifficulty > regionMinDifficulty)
+            {
                 minDifficulty = regionMinDifficulty;
             }
         }
         return minDifficulty;
     }
+
     public static int getMinDifficultyForPlanet(String planet) throws InterruptedException
     {
         int difficulty = 1;
@@ -732,7 +760,7 @@ public class locations extends script.base_script
         {
             difficulty = planetLevels.getInt("minLevel");
         }
-        else 
+        else
         {
             difficulty = -1;
         }
@@ -742,6 +770,7 @@ public class locations extends script.base_script
         }
         return difficulty;
     }
+
     public static int getMaxDifficultyForPlanet(String planet) throws InterruptedException
     {
         int difficulty = 90;
@@ -754,7 +783,7 @@ public class locations extends script.base_script
         {
             difficulty = planetLevels.getInt("maxLevel");
         }
-        else 
+        else
         {
             difficulty = -1;
         }
@@ -764,6 +793,7 @@ public class locations extends script.base_script
         }
         return difficulty;
     }
+
     public static int getMinDifficultyForLocation(location locTest) throws InterruptedException
     {
         region[] rgnRegionList = getDifficultyRegionsAtLocation(locTest);
@@ -772,14 +802,17 @@ public class locations extends script.base_script
             return 0;
         }
         int minDifficulty = Integer.MAX_VALUE;
-        for (region region : rgnRegionList) {
+        for (region region : rgnRegionList)
+        {
             int regionMinDifficulty = region.getMinDifficultyType();
-            if (minDifficulty > regionMinDifficulty) {
+            if (minDifficulty > regionMinDifficulty)
+            {
                 minDifficulty = regionMinDifficulty;
             }
         }
         return minDifficulty;
     }
+
     public static int getMaxDifficultyForLocation(location locTest) throws InterruptedException
     {
         region[] rgnRegionList = getDifficultyRegionsAtLocation(locTest);
@@ -788,14 +821,17 @@ public class locations extends script.base_script
             return Integer.MAX_VALUE;
         }
         int maxDifficulty = Integer.MIN_VALUE;
-        for (region region : rgnRegionList) {
+        for (region region : rgnRegionList)
+        {
             int regionMaxDifficulty = region.getMaxDifficultyType();
-            if (maxDifficulty < regionMaxDifficulty) {
+            if (maxDifficulty < regionMaxDifficulty)
+            {
                 maxDifficulty = regionMaxDifficulty;
             }
         }
         return maxDifficulty;
     }
+
     public static int capMinDifficultyForLocation(location locTest, int intDifficulty) throws InterruptedException
     {
         int intMinRegionDifficulty = getMinDifficultyForLocation(locTest);
@@ -805,6 +841,7 @@ public class locations extends script.base_script
         }
         return intDifficulty;
     }
+
     public static int capMaxDifficultyForLocation(location locTest, int intDifficulty) throws InterruptedException
     {
         int intMaxRegionDifficulty = getMaxDifficultyForLocation(locTest);
@@ -814,6 +851,7 @@ public class locations extends script.base_script
         }
         return intDifficulty;
     }
+
     public static boolean destroyLocationObject(obj_id locationObject) throws InterruptedException
     {
         if (isIdValid(locationObject))
@@ -823,6 +861,7 @@ public class locations extends script.base_script
         }
         return false;
     }
+
     public static String getBuildoutAreaName(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object) || !exists(object))
@@ -831,6 +870,7 @@ public class locations extends script.base_script
         }
         return getBuildoutAreaName(getLocation(trial.getTop(object)));
     }
+
     public static String getBuildoutAreaName(location loc) throws InterruptedException
     {
         if (isIdValid(loc.cell))
@@ -861,6 +901,7 @@ public class locations extends script.base_script
         }
         return area_name;
     }
+
     public static int getBuildoutAreaRow(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object) || !exists(object))
@@ -869,6 +910,7 @@ public class locations extends script.base_script
         }
         return getBuildoutAreaRow(getLocation(trial.getTop(object)));
     }
+
     public static int getBuildoutAreaRow(location loc) throws InterruptedException
     {
         if (isIdValid(loc.cell))
@@ -899,19 +941,23 @@ public class locations extends script.base_script
         }
         return row;
     }
+
     public static boolean isInRegion(obj_id player, String regionName) throws InterruptedException
     {
         region[] regionList = getRegionsAtPoint(getLocation(player));
         obj_id planetId = getPlanetByName(getLocation(player).area);
-        if (regionList == null || regionList.length == 0)
+        if (regionList == null)
         {
             return false;
         }
-        for (region region : regionList) {
-            if (region == null || (region.getName()).length() <= 0) {
+        for (region region : regionList)
+        {
+            if (region == null || (region.getName()).length() <= 0)
+            {
                 continue;
             }
-            if (regionName.equals(region.getName())) {
+            if (regionName.equals(region.getName()))
+            {
                 return true;
             }
         }

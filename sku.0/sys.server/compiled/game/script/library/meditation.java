@@ -6,9 +6,6 @@ import script.string_id;
 
 public class meditation extends script.base_script
 {
-    public meditation()
-    {
-    }
     public static final float TIME_TICK = 5.0f;
     public static final float DELAY_MIN = 3.0f;
     public static final float DELAY_MAX = 7.0f;
@@ -41,12 +38,16 @@ public class meditation extends script.base_script
     public static final string_id SID_STATE_PREVENTS_POWERBOOST = new string_id(STF_TERASKASI, "state_prevent_powerboost");
     public static final string_id SID_MIND_POOL_TOO_LOW = new string_id(STF_TERASKASI, "mind_pool_too_low");
     public static final string_id PROSE_CUREWOUND = new string_id(STF_TERASKASI, "prose_curewound");
-    public static final String[] MEDITATE_BUFFS = 
+    public static final String[] MEDITATE_BUFFS =
+            {
+                    "fs_meditate_1",
+                    "fs_meditate_2",
+                    "fs_meditate_3"
+            };
+    public meditation()
     {
-        "fs_meditate_1",
-        "fs_meditate_2",
-        "fs_meditate_3"
-    };
+    }
+
     public static int getMeditationSkillMod(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -56,6 +57,7 @@ public class meditation extends script.base_script
         int meditate = getEnhancedSkillStatisticModifierUncapped(player, MOD_MEDITATE);
         return meditate;
     }
+
     public static boolean startMeditation(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -68,6 +70,7 @@ public class meditation extends script.base_script
         sendSystemMessage(player, SID_MED_BEGIN);
         return true;
     }
+
     public static void endMeditation(obj_id player, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -83,22 +86,21 @@ public class meditation extends script.base_script
             sendSystemMessage(player, SID_MED_END);
         }
     }
+
     public static void endMeditation(obj_id player) throws InterruptedException
     {
         endMeditation(player, true);
     }
+
     public static boolean isMeditating(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return false;
         }
-        if (getState(player, STATE_MEDITATE) == 1)
-        {
-            return true;
-        }
-        return false;
+        return getState(player, STATE_MEDITATE) == 1;
     }
+
     public static float trance(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -142,6 +144,7 @@ public class meditation extends script.base_script
         }
         return delay;
     }
+
     public static float slowDOT(obj_id player, int modval, String dotType) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -160,6 +163,7 @@ public class meditation extends script.base_script
         }
         return 5.0f;
     }
+
     public static int getDOTReductionAmount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -170,6 +174,7 @@ public class meditation extends script.base_script
         float ret = dotMod * (1.0f + rand(-RAND_MODIFIER, RAND_MODIFIER));
         return Math.round(ret);
     }
+
     public static int getWoundReductionAmount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -180,6 +185,7 @@ public class meditation extends script.base_script
         float ret = dotMod * (1.0f + rand(-RAND_MODIFIER, RAND_MODIFIER));
         return Math.round(ret);
     }
+
     public static float cureWounds(obj_id player, int modval) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -194,6 +200,7 @@ public class meditation extends script.base_script
         }
         return 5.0f;
     }
+
     public static boolean forceOfWill(obj_id player, int delta) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -231,13 +238,14 @@ public class meditation extends script.base_script
             }
             sendSystemMessage(player, new string_id(STF_TERASKASI, "forceofwill_normal"));
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STF_TERASKASI, "forceofwill_exceptional"));
         }
         innate.equalizeEffect(player);
         return true;
     }
+
     public static boolean forceOfWill(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -246,6 +254,7 @@ public class meditation extends script.base_script
         }
         return forceOfWill(player, rand(1, getMeditationSkillMod(player)));
     }
+
     public static boolean powerBoost(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -268,7 +277,7 @@ public class meditation extends script.base_script
             return false;
         }
         int now = getGameTime();
-        float duration = 300.0f + (float)(modval) * 3 * rand(0.95f, 1.05f);
+        float duration = 300.0f + (float) (modval) * 3 * rand(0.95f, 1.05f);
         int maxMind = utils.getUnbuffedWoundedMaxAttrib(player, MIND);
         if (maxMind < 10)
         {
@@ -285,8 +294,8 @@ public class meditation extends script.base_script
         addAttribModifier(player, "meditation.powerboost.mind", MIND, boost, duration, POWERBOOST_RAMP, POWERBOOST_RAMP, false, false, true);
         addAttribModifier(player, "meditation.powerboost.health", HEALTH, boost, duration, POWERBOOST_RAMP, POWERBOOST_RAMP, false, false, false);
         addAttribModifier(player, "meditation.powerboost.action", ACTION, boost, duration, POWERBOOST_RAMP, POWERBOOST_RAMP, false, false, false);
-        int wane_time = (int)(duration + POWERBOOST_RAMP);
-        int expire_time = wane_time + (int)POWERBOOST_RAMP;
+        int wane_time = (int) (duration + POWERBOOST_RAMP);
+        int expire_time = wane_time + (int) POWERBOOST_RAMP;
         int expiration = now + expire_time;
         setObjVar(player, VAR_POWERBOOST_ACTIVE, expiration);
         dictionary d = new dictionary();

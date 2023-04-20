@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class veteran_deprecated extends script.base_script
 {
-    public veteran_deprecated()
-    {
-    }
     public static final int UNENTITLED_TIME_LIMIT = 14;
     public static final int MONTHS_PER_MILESTONE = 3;
     public static final int DAYS_PER_MONTH = 30;
@@ -100,6 +97,9 @@ public class veteran_deprecated extends script.base_script
     private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
     private static final boolean ONE_YEAR_ANNIV_ENABLED = utils.checkConfigFlag("GameServer", "enableOneYearAnniversary");
     private static final boolean FLASH_SPEEDER_REWARD_ENABLED = utils.checkConfigFlag("GameServer", "flashSpeederReward");
+    public veteran_deprecated()
+    {
+    }
 
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
@@ -107,7 +107,8 @@ public class veteran_deprecated extends script.base_script
         {
             return;
         }
-        if (!VETERAN_REWARDS_ENABLED) {
+        if (!VETERAN_REWARDS_ENABLED)
+        {
             return;
         }
         if ((player.getScriptVars()).hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
@@ -132,11 +133,13 @@ public class veteran_deprecated extends script.base_script
             setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
         }
     }
+
     public static boolean canGetReward(obj_id player) throws InterruptedException
     {
         int[] milestones = getVeteranRewardMilestones(player);
         return ((milestones != null) && (milestones.length >= 1));
     }
+
     public static boolean requestVeteranRewards(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -190,6 +193,7 @@ public class veteran_deprecated extends script.base_script
         (player.getScriptVars()).put(SCRIPTVAR_AVAILABLE_MILESTONES, milestones);
         return true;
     }
+
     public static boolean requestVeteranRewards(obj_id player, int milestone) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -271,6 +275,7 @@ public class veteran_deprecated extends script.base_script
         (player.getScriptVars()).put(SCRIPTVAR_SELECTED_MILESTONE, milestone);
         return true;
     }
+
     public static int[] getVeteranRewardMilestones(obj_id player) throws InterruptedException
     {
         int veteranTime = getIntObjVar(player, OBJVAR_TIME_ACTIVE);
@@ -317,6 +322,7 @@ public class veteran_deprecated extends script.base_script
         }
         return milestoneArray;
     }
+
     public static int givePlayerReward(obj_id player, int rewardIndex, boolean checkMilestoneMismatch) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -417,10 +423,7 @@ public class veteran_deprecated extends script.base_script
             if (onetimes != null)
             {
                 onetimesNew = new int[onetimes.length + 1];
-                for (int i = 0; i < onetimes.length; ++i)
-                {
-                    onetimesNew[i] = onetimes[i];
-                }
+                System.arraycopy(onetimes, 0, onetimesNew, 0, onetimes.length);
                 onetimesNew[onetimes.length] = templateCrc;
             }
             else
@@ -438,6 +441,7 @@ public class veteran_deprecated extends script.base_script
         cleanupPlayerData(player);
         return GIVE_PLAYER_REWARD_SUCCESS;
     }
+
     public static void cleanupPlayerData(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -448,6 +452,7 @@ public class veteran_deprecated extends script.base_script
         (player.getScriptVars()).remove(SCRIPTVAR_SELECTED_MILESTONE);
         (player.getScriptVars()).remove(SCRIPTVAR_AVAILABLE_MILESTONES);
     }
+
     public static String getRewardNameAtIndex(int index) throws InterruptedException
     {
         String name = null;
@@ -463,6 +468,7 @@ public class veteran_deprecated extends script.base_script
         }
         return name;
     }
+
     public static int canGetRewardAtIndex(obj_id player, int index, int milestone) throws InterruptedException
     {
         int templateCrc = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_TEMPLATE);
@@ -472,8 +478,10 @@ public class veteran_deprecated extends script.base_script
             int[] onetimes = getIntArrayObjVar(player, OBJVAR_ONETIME_REWARDS_RECEIVED);
             if (onetimes != null)
             {
-                for (int onetime : onetimes) {
-                    if (onetime == templateCrc) {
+                for (int onetime : onetimes)
+                {
+                    if (onetime == templateCrc)
+                    {
                         return CAN_GET_REWARD_FAIL_ALREADY_CLAIMED;
                     }
                 }
@@ -486,6 +494,7 @@ public class veteran_deprecated extends script.base_script
         }
         return CAN_GET_REWARD_SUCCESS;
     }
+
     public static boolean checkVeteranMilestone(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -502,6 +511,7 @@ public class veteran_deprecated extends script.base_script
         int mask = 0x00000001 << (milestone - index * 32);
         return (rewardsReceived[index] & mask) != 0;
     }
+
     public static boolean checkMilestoneNotified(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -518,6 +528,7 @@ public class veteran_deprecated extends script.base_script
         int mask = 0x00000001 << (milestone - index * 32);
         return (milestonesNotified[index] & mask) != 0;
     }
+
     public static void setVeteranMilestone(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -535,6 +546,7 @@ public class veteran_deprecated extends script.base_script
         rewardsReceived[index] |= mask;
         setObjVar(player, OBJVAR_REWARDS_RECEIVED, rewardsReceived);
     }
+
     public static void setMilestoneNotified(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -552,6 +564,7 @@ public class veteran_deprecated extends script.base_script
         milestonesNotified[index] |= mask;
         setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, milestonesNotified);
     }
+
     public static void clearVeteranMilestone(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -570,6 +583,7 @@ public class veteran_deprecated extends script.base_script
         rewardsReceived[index] &= ~mask;
         setObjVar(player, OBJVAR_REWARDS_RECEIVED, rewardsReceived);
     }
+
     public static void clearMilestoneNotified(obj_id player, int milestone) throws InterruptedException
     {
         if (milestone < 1 || milestone > MAX_MILESTONE)
@@ -587,6 +601,7 @@ public class veteran_deprecated extends script.base_script
         milestonesNotified[index] &= ~mask;
         setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, milestonesNotified);
     }
+
     public static boolean checkVeteranTarget(obj_id target) throws InterruptedException
     {
         if (isIdValid(target) && isPlayer(target))
@@ -606,9 +621,11 @@ public class veteran_deprecated extends script.base_script
         }
         return false;
     }
+
     public static void giveOneYearAnniversaryReward(obj_id player) throws InterruptedException
     {
-        if(!ONE_YEAR_ANNIV_ENABLED) {
+        if (!ONE_YEAR_ANNIV_ENABLED)
+        {
             return;
         }
         if (!isPlayer(player))
@@ -662,14 +679,17 @@ public class veteran_deprecated extends script.base_script
         pp.stringId = SID_ONE_YEAR_ANNIVERSARY;
         utils.sendMail(SID_ONE_YEAR_ANNIVERSARY_SUBJECT, pp, player, "@" + SID_ONE_YEAR_ANNIVERSARY_FROM);
     }
+
     public static boolean checkFlashSpeederReward(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
         {
             return false;
         }
-        if (FLASH_SPEEDER_REWARD_ENABLED) {
-            if (!hasObjVar(player, "flash_speeder.granted")) {
+        if (FLASH_SPEEDER_REWARD_ENABLED)
+        {
+            if (!hasObjVar(player, "flash_speeder.granted"))
+            {
                 createObjectInInventoryAllowOverload("object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff", player);
                 CustomerServiceLog("flash_speeder", "%TU has received a JtL pre-order Flash Speeder.", player);
                 string_id sub = new string_id(VETERAN_STRING_TABLE, "flash_speeder_granted_sub");

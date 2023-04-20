@@ -4,12 +4,13 @@ import script.*;
 
 public class hue extends script.base_script
 {
-    public hue()
-    {
-    }
     public static final String INDEX_BASE = "/private/index_color_";
     public static final String INDEX_1 = "/private/index_color_1";
     public static final String INDEX_2 = "/private/index_color_2";
+    public hue()
+    {
+    }
+
     public static boolean setColor(obj_id target, int varIdx, color c) throws InterruptedException
     {
         if (!isIdValid(target) || (c == null) || (varIdx < 0))
@@ -19,6 +20,7 @@ public class hue extends script.base_script
         String varPathName = INDEX_BASE + varIdx;
         return setColor(target, varPathName, c);
     }
+
     public static boolean setColor(obj_id target, String varPathName, color c) throws InterruptedException
     {
         if (!isIdValid(target) || (varPathName == null) || (c == null))
@@ -38,7 +40,7 @@ public class hue extends script.base_script
         {
             return false;
         }
-        palcolor_custom_var pcv = (palcolor_custom_var)cv;
+        palcolor_custom_var pcv = (palcolor_custom_var) cv;
         if (pcv == null)
         {
             return false;
@@ -46,6 +48,7 @@ public class hue extends script.base_script
         pcv.setToClosestColor(c);
         return true;
     }
+
     public static boolean setColor(obj_id target, int varIdx, int paletteIdx) throws InterruptedException
     {
         if (!isIdValid(target) || (varIdx < 0) || (paletteIdx < 0))
@@ -55,6 +58,7 @@ public class hue extends script.base_script
         String varPathName = INDEX_BASE + varIdx;
         return setColor(target, varPathName, paletteIdx);
     }
+
     public static boolean setColor(obj_id target, String varPathName, int paletteIdx) throws InterruptedException
     {
         if (!isIdValid(target) || (varPathName == null) || (paletteIdx < 0))
@@ -74,7 +78,7 @@ public class hue extends script.base_script
         {
             return false;
         }
-        ranged_int_custom_var ri = (ranged_int_custom_var)cv;
+        ranged_int_custom_var ri = (ranged_int_custom_var) cv;
         if (ri == null)
         {
             return false;
@@ -82,6 +86,7 @@ public class hue extends script.base_script
         ri.setValue(paletteIdx);
         return true;
     }
+
     public static int getVarColorIndex(obj_id target, String varPathName) throws InterruptedException
     {
         if (!isIdValid(target) || (varPathName == null))
@@ -101,13 +106,14 @@ public class hue extends script.base_script
         {
             return -1;
         }
-        ranged_int_custom_var ri = (ranged_int_custom_var)cv;
+        ranged_int_custom_var ri = (ranged_int_custom_var) cv;
         if (ri == null)
         {
             return -1;
         }
         return ri.getValue();
     }
+
     public static void setPalcolorCustomVarClosestColor(obj_id target, String varPathName, color c) throws InterruptedException
     {
         if (varPathName.startsWith("/"))
@@ -116,6 +122,7 @@ public class hue extends script.base_script
         }
         setPalcolorCustomVarClosestColor(target, varPathName, c.getR(), c.getG(), c.getB(), c.getA());
     }
+
     public static ranged_int_custom_var[] getPalcolorVars(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -130,15 +137,19 @@ public class hue extends script.base_script
             return null;
         }
         int count = 0;
-        for (custom_var allVar1 : allVars) {
-            if (allVar1.isPalColor()) {
+        for (custom_var allVar1 : allVars)
+        {
+            if (allVar1.isPalColor())
+            {
                 ++count;
             }
         }
         ranged_int_custom_var[] ret = new ranged_int_custom_var[count];
         int pos = 0;
-        for (custom_var allVar : allVars) {
-            if (allVar.isPalColor()) {
+        for (custom_var allVar : allVars)
+        {
+            if (allVar.isPalColor())
+            {
                 ranged_int_custom_var ri = (ranged_int_custom_var) (allVar);
                 ret[pos++] = ri;
             }
@@ -151,6 +162,7 @@ public class hue extends script.base_script
         PROFILER_STOP("hue.getPalcolorVars");
         return ret;
     }
+
     public static dictionary getPalcolorData(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -165,12 +177,14 @@ public class hue extends script.base_script
             return null;
         }
         dictionary d = new dictionary();
-        for (ranged_int_custom_var ri : palColors) {
+        for (ranged_int_custom_var ri : palColors)
+        {
             d.put(ri.getVarName(), ri.getValue());
         }
         PROFILER_STOP("hue.getPalcolorData");
         return d;
     }
+
     public static void setPalcolorData(obj_id target, dictionary colorData) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -182,25 +196,29 @@ public class hue extends script.base_script
             return;
         }
         ranged_int_custom_var[] palColors = getPalcolorVars(target);
-        if (palColors == null || palColors.length == 0)
+        if (palColors == null)
         {
             return;
         }
-        for (ranged_int_custom_var palColor : palColors) {
+        for (ranged_int_custom_var palColor : palColors)
+        {
             String varName = palColor.getVarName();
-            if (colorData.containsKey(varName)) {
+            if (colorData.containsKey(varName))
+            {
                 int colorValue = colorData.getInt(varName);
                 palColor.setValue(colorValue);
             }
         }
     }
+
     public static void hueObject(obj_id target) throws InterruptedException
     {
         PROFILER_START("hue.hueObject");
         ranged_int_custom_var[] c = getPalcolorVars(target);
         if (c != null)
         {
-            for (ranged_int_custom_var ranged_int_custom_var : c) {
+            for (ranged_int_custom_var ranged_int_custom_var : c)
+            {
                 int min = ranged_int_custom_var.getMinRangeInclusive();
                 int max = ranged_int_custom_var.getMaxRangeInclusive();
                 int randVal = rand(min, max);
@@ -209,18 +227,21 @@ public class hue extends script.base_script
         }
         PROFILER_STOP("hue.hueObject");
     }
+
     public static void hueObject(obj_id target, int color) throws InterruptedException
     {
         PROFILER_START("hue.hueObjectColor");
         ranged_int_custom_var[] c = getPalcolorVars(target);
         if (c != null)
         {
-            for (ranged_int_custom_var ranged_int_custom_var : c) {
+            for (ranged_int_custom_var ranged_int_custom_var : c)
+            {
                 ranged_int_custom_var.setValue(color);
             }
         }
         PROFILER_STOP("hue.hueObjectColor");
     }
+
     public static ranged_int_custom_var[] getRangedIntVars(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -243,8 +264,10 @@ public class hue extends script.base_script
         }
         int n = 0;
         PROFILER_START("hue.getRangedIntVars.loopA." + allVars.length);
-        for (custom_var allVar : allVars) {
-            if (allVar.isRangedInt()) {
+        for (custom_var allVar : allVars)
+        {
+            if (allVar.isRangedInt())
+            {
                 ri[n] = (ranged_int_custom_var) allVar;
                 n++;
             }
@@ -262,20 +285,19 @@ public class hue extends script.base_script
             return null;
         }
         PROFILER_START("hue.getRangedIntVars.loopB." + n);
-        for (int i = 0; i < n; i++)
-        {
-            ret[i] = ri[i];
-        }
+        System.arraycopy(ri, 0, ret, 0, n);
         PROFILER_STOP("hue.getRangedIntVars.loopB." + n);
         return ret;
     }
+
     public static void reshapeObject(obj_id target) throws InterruptedException
     {
         PROFILER_START("hue.reshapeObject");
         ranged_int_custom_var[] c = getRangedIntVars(target);
         if (c != null)
         {
-            for (ranged_int_custom_var ranged_int_custom_var : c) {
+            for (ranged_int_custom_var ranged_int_custom_var : c)
+            {
                 PROFILER_START("hue.reshapeObject.innerLoop");
                 int min = ranged_int_custom_var.getMinRangeInclusive();
                 int max = ranged_int_custom_var.getMaxRangeInclusive();
@@ -284,16 +306,18 @@ public class hue extends script.base_script
                 PROFILER_STOP("hue.reshapeObject.innerLoop");
             }
         }
-        else 
+        else
         {
         }
         PROFILER_STOP("hue.reshapeObject");
     }
+
     public static void randomizeObject(obj_id target) throws InterruptedException
     {
         reshapeObject(target);
         hueObject(target);
     }
+
     public static boolean setRangedIntCustomVar(obj_id target, String cvar_name, int idx) throws InterruptedException
     {
         if (!isIdValid(target) || (cvar_name == null) || cvar_name.equals("") || (idx < 0))
@@ -313,7 +337,7 @@ public class hue extends script.base_script
         {
             return false;
         }
-        ranged_int_custom_var ri = (ranged_int_custom_var)cv;
+        ranged_int_custom_var ri = (ranged_int_custom_var) cv;
         if (ri == null)
         {
             return false;
@@ -321,6 +345,7 @@ public class hue extends script.base_script
         ri.setValue(idx);
         return true;
     }
+
     public static boolean setTexture(obj_id target, int idx, int value) throws InterruptedException
     {
         if (!isIdValid(target) || (idx < 1) || (value < 0))

@@ -40,16 +40,20 @@ public class restuss_event extends script.base_script
     public static final String TRIG_EXITCOMBAT = "trigger_marks.ExitCombat";
     public static final String TRIG_ARRIVELOCATION = "trigger_marks.OnArrivedAtLocation";
     public static final String TRIG_CUSTOMSIGNAL = "trigger_marks.CustomSignal";
+
     public static void playMusicInArea(obj_id controller, String music) throws InterruptedException
     {
         playMusicInArea(controller, music, 50.0f);
     }
+
     public static void playMusicInArea(obj_id controller, String music, float range) throws InterruptedException
     {
     }
+
     public static void sendAreaSystemMessage(obj_id controller, string_id message) throws InterruptedException
     {
     }
+
     public static boolean getIsStatic(obj_id subject) throws InterruptedException
     {
         if (utils.hasScriptVar(subject, IS_STATIC))
@@ -59,10 +63,12 @@ public class restuss_event extends script.base_script
         utils.setScriptVar(subject, IS_STATIC, false);
         return false;
     }
+
     public static void setIsStatic(obj_id subject, boolean state) throws InterruptedException
     {
         utils.setScriptVar(subject, IS_STATIC, state);
     }
+
     public static int getPhase(obj_id object) throws InterruptedException
     {
         if (hasObjVar(object, "base_builder.current_phase"))
@@ -76,6 +82,7 @@ public class restuss_event extends script.base_script
         }
         return getPhase(parent);
     }
+
     public static void incrimentPhase(obj_id object) throws InterruptedException
     {
         if (hasObjVar(object, "base_builder.current_phase"))
@@ -90,6 +97,7 @@ public class restuss_event extends script.base_script
         }
         messageTo(parent, "incrimentPhase", null, 0, false);
     }
+
     public static void decrimentPhase(obj_id object) throws InterruptedException
     {
         if (hasObjVar(object, "base_builder.current_phase"))
@@ -104,10 +112,12 @@ public class restuss_event extends script.base_script
         }
         messageTo(parent, "decrimentPhase", null, 0, false);
     }
+
     public static int getRequiredQuestNumber(obj_id subject, String questName) throws InterruptedException
     {
         return dataTableGetInt(QUEST_TABLE, questName, "completion_number");
     }
+
     public static int getCompletedQuestCount(obj_id subject, String questName) throws InterruptedException
     {
         int cQuest = 0;
@@ -118,10 +128,12 @@ public class restuss_event extends script.base_script
         }
         return cQuest;
     }
+
     public static float getCompletedQuestRatio(obj_id subject, String questName) throws InterruptedException
     {
-        return (float)getCompletedQuestCount(subject, questName) / getRequiredQuestNumber(subject, questName);
+        return (float) getCompletedQuestCount(subject, questName) / getRequiredQuestNumber(subject, questName);
     }
+
     public static void setCompletedQuestCount(obj_id subject, String questName, int number) throws InterruptedException
     {
         int max = getRequiredQuestNumber(subject, questName);
@@ -131,12 +143,14 @@ public class restuss_event extends script.base_script
         }
         setObjVar(subject, PREFIX + questName, number);
     }
+
     public static void incrimentCompletedQuestCount(obj_id subject, String questName) throws InterruptedException
     {
         int current = getCompletedQuestCount(subject, questName);
         current += 1;
         setCompletedQuestCount(trial.getParent(subject), questName, current);
     }
+
     public static void decrimentCompletedQuestCount(obj_id subject, String questName) throws InterruptedException
     {
         int current = getCompletedQuestCount(subject, questName);
@@ -147,10 +161,12 @@ public class restuss_event extends script.base_script
         }
         setCompletedQuestCount(trial.getParent(subject), questName, current);
     }
+
     public static boolean isRequiredCountMet(obj_id subject, String questName) throws InterruptedException
     {
         return (getCompletedQuestRatio(subject, questName) == 1);
     }
+
     public static int getWinningFaction(obj_id self) throws InterruptedException
     {
         obj_id restuss_controller = getFirstObjectWithScript(getLocation(self), 1000.0f, "theme_park.restuss_event.stage_one_watcher");
@@ -164,6 +180,7 @@ public class restuss_event extends script.base_script
         }
         return getIntObjVar(restuss_controller, WINNING_FACTION);
     }
+
     public static boolean grantEventBadge(obj_id player) throws InterruptedException
     {
         if (!factions.isRebel(player) && !factions.isImperial(player))
@@ -175,15 +192,17 @@ public class restuss_event extends script.base_script
         {
             return false;
         }
-        String[] badgeList = 
+        String[] badgeList =
+                {
+                        "restuss_rebel_first",
+                        "restuss_rebel_second",
+                        "restuss_imperial_first",
+                        "restuss_imperial_second"
+                };
+        for (String s : badgeList)
         {
-            "restuss_rebel_first",
-            "restuss_rebel_second",
-            "restuss_imperial_first",
-            "restuss_imperial_second"
-        };
-        for (String s : badgeList) {
-            if (badge.hasBadge(player, s)) {
+            if (badge.hasBadge(player, s))
+            {
                 return false;
             }
         }
@@ -193,17 +212,24 @@ public class restuss_event extends script.base_script
         {
             return false;
         }
-        for (String quest : quests) {
-            if (quest.contains("rebel")) {
-                if (factions.isRebel(player)) {
-                    if (groundquests.hasCompletedQuest(player, quest)) {
+        for (String quest : quests)
+        {
+            if (quest.contains("rebel"))
+            {
+                if (factions.isRebel(player))
+                {
+                    if (groundquests.hasCompletedQuest(player, quest))
+                    {
                         eligable = true;
                     }
                 }
             }
-            if (quest.contains("imperial")) {
-                if (factions.isImperial(player)) {
-                    if (groundquests.hasCompletedQuest(player, quest)) {
+            if (quest.contains("imperial"))
+            {
+                if (factions.isImperial(player))
+                {
+                    if (groundquests.hasCompletedQuest(player, quest))
+                    {
                         eligable = true;
                     }
                 }
@@ -239,6 +265,7 @@ public class restuss_event extends script.base_script
         }
         return false;
     }
+
     public static boolean isRestussInStageThree(obj_id npc) throws InterruptedException
     {
         obj_id top = trial.getTop(npc);
@@ -248,8 +275,10 @@ public class restuss_event extends script.base_script
         {
             return false;
         }
-        for (obj_id obj_id : controller_id) {
-            if ((getStringObjVar(obj_id, "element")).equals("ph1_restuss_master")) {
+        for (obj_id obj_id : controller_id)
+        {
+            if ((getStringObjVar(obj_id, "element")).equals("ph1_restuss_master"))
+            {
                 restuss_controller = obj_id;
                 break;
             }
@@ -258,15 +287,9 @@ public class restuss_event extends script.base_script
         {
             return true;
         }
-        if (getPhase(restuss_controller) == 2)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return getPhase(restuss_controller) == 2;
     }
+
     public static int getRestussPhase(obj_id npc) throws InterruptedException
     {
         obj_id top = trial.getTop(npc);
@@ -276,8 +299,10 @@ public class restuss_event extends script.base_script
         {
             return -1;
         }
-        for (obj_id obj_id : controller_id) {
-            if ((getStringObjVar(obj_id, "element")).equals("ph1_restuss_master")) {
+        for (obj_id obj_id : controller_id)
+        {
+            if ((getStringObjVar(obj_id, "element")).equals("ph1_restuss_master"))
+            {
                 restuss_controller = obj_id;
                 break;
             }

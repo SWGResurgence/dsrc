@@ -6,143 +6,141 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
 public class qa extends script.base_script
 {
-    public qa()
-    {
-    }
     public static final String[] QATOOL_MAIN_MENU = dataTableGetStringColumn("datatables/test/qa_tool_menu.iff", "main_tool");
     public static final String QATOOL_TITLE = "QA Tools";
     public static final String QATOOL_PROMPT = "Choose the tool you want to use";
-    public static final String[] SPACE_QUEST_TYPES = 
-    {
-        "assassinate",
-        "delivery",
-        "delivery_no_pickup",
-        "destroy",
-        "destroy_duty",
-        "destroy_surpriseattack",
-        "escort",
-        "escort_duty",
-        "inspect",
-        "patrol",
-        "recovery",
-        "recovery_duty",
-        "rescue",
-        "rescue_duty",
-        "space_battle",
-        "survival"
-    };
-    public static final String[] GRANT_SPACE_SKILLS = 
-    {
-        "_novice",
-        "_droid_01",
-        "_procedures_01",
-        "_weapons_01",
-        "_starships_01",
-        "_droid_02",
-        "_procedures_02",
-        "_weapons_02",
-        "_starships_02",
-        "_droid_03",
-        "_procedures_03",
-        "_weapons_03",
-        "_starships_03",
-        "_droid_04",
-        "_procedures_04",
-        "_weapons_04",
-        "_starships_04",
-        "_master"
-    };
-    public static final String[] REVOKE_SPACE_SKILLS = 
-    {
-        "_master",
-        "_starships_04",
-        "_weapons_04",
-        "_procedures_04",
-        "_droid_04",
-        "_starships_03",
-        "_weapons_03",
-        "_procedures_03",
-        "_droid_03",
-        "_starships_02",
-        "_weapons_02",
-        "_procedures_02",
-        "_droid_02",
-        "_starships_01",
-        "_weapons_01",
-        "_procedures_01",
-        "_droid_01",
-        "_novice"
-    };
-    public static final String[][] KNOWN_CHARACTER_SLOTS = 
-    {
-        
-        {
-            "hat",
-            "earring_l",
-            "earring_r",
-            "eyes",
-            "neck",
-            "chest1",
-            "chest2",
-            "chest3_l",
-            "chest3_r",
-            "back",
-            "cloak",
-            "bicep_l",
-            "bicep_r",
-            "bracer_upper_r",
-            "bracer_lower_r",
-            "bracer_upper_l",
-            "bracer_lower_l",
-            "wrist_l",
-            "wrist_r",
-            "gloves",
-            "hold_r",
-            "hold_l",
-            "ring_l",
-            "ring_r",
-            "utility_belt",
-            "pants1",
-            "pants2",
-            "shoes"
-        },
-        
-        {
-            "Hat: ",
-            "Left ear ring: ",
-            "Right ear ring: ",
-            "Eyes: ",
-            "Neck: ",
-            "Primary chest: ",
-            "Secondary chest: ",
-            "Trinary chest left",
-            "Trinary chest right",
-            "Back:",
-            "Cloak: ",
-            "Left bicep: ",
-            "Right bicep: ",
-            "Upper right bracer: ",
-            "Lower right bracer: ",
-            "Upper left bracer: ",
-            "Left lower bracer: ",
-            "Left wrist: ",
-            "Right wrist: ",
-            "Gloves: ",
-            "Holding right hand: ",
-            "Holding left hand: ",
-            "Left ring: ",
-            "Right ring: ",
-            "Belt: ",
-            "Primary pants: ",
-            "Secondary pants: ",
-            "Shoes: "
-        }
-    };
+    public static final String[] SPACE_QUEST_TYPES =
+            {
+                    "assassinate",
+                    "delivery",
+                    "delivery_no_pickup",
+                    "destroy",
+                    "destroy_duty",
+                    "destroy_surpriseattack",
+                    "escort",
+                    "escort_duty",
+                    "inspect",
+                    "patrol",
+                    "recovery",
+                    "recovery_duty",
+                    "rescue",
+                    "rescue_duty",
+                    "space_battle",
+                    "survival"
+            };
+    public static final String[] GRANT_SPACE_SKILLS =
+            {
+                    "_novice",
+                    "_droid_01",
+                    "_procedures_01",
+                    "_weapons_01",
+                    "_starships_01",
+                    "_droid_02",
+                    "_procedures_02",
+                    "_weapons_02",
+                    "_starships_02",
+                    "_droid_03",
+                    "_procedures_03",
+                    "_weapons_03",
+                    "_starships_03",
+                    "_droid_04",
+                    "_procedures_04",
+                    "_weapons_04",
+                    "_starships_04",
+                    "_master"
+            };
+    public static final String[] REVOKE_SPACE_SKILLS =
+            {
+                    "_master",
+                    "_starships_04",
+                    "_weapons_04",
+                    "_procedures_04",
+                    "_droid_04",
+                    "_starships_03",
+                    "_weapons_03",
+                    "_procedures_03",
+                    "_droid_03",
+                    "_starships_02",
+                    "_weapons_02",
+                    "_procedures_02",
+                    "_droid_02",
+                    "_starships_01",
+                    "_weapons_01",
+                    "_procedures_01",
+                    "_droid_01",
+                    "_novice"
+            };
+    public static final String[][] KNOWN_CHARACTER_SLOTS =
+            {
+
+                    {
+                            "hat",
+                            "earring_l",
+                            "earring_r",
+                            "eyes",
+                            "neck",
+                            "chest1",
+                            "chest2",
+                            "chest3_l",
+                            "chest3_r",
+                            "back",
+                            "cloak",
+                            "bicep_l",
+                            "bicep_r",
+                            "bracer_upper_r",
+                            "bracer_lower_r",
+                            "bracer_upper_l",
+                            "bracer_lower_l",
+                            "wrist_l",
+                            "wrist_r",
+                            "gloves",
+                            "hold_r",
+                            "hold_l",
+                            "ring_l",
+                            "ring_r",
+                            "utility_belt",
+                            "pants1",
+                            "pants2",
+                            "shoes"
+                    },
+
+                    {
+                            "Hat: ",
+                            "Left ear ring: ",
+                            "Right ear ring: ",
+                            "Eyes: ",
+                            "Neck: ",
+                            "Primary chest: ",
+                            "Secondary chest: ",
+                            "Trinary chest left",
+                            "Trinary chest right",
+                            "Back:",
+                            "Cloak: ",
+                            "Left bicep: ",
+                            "Right bicep: ",
+                            "Upper right bracer: ",
+                            "Lower right bracer: ",
+                            "Upper left bracer: ",
+                            "Left lower bracer: ",
+                            "Left wrist: ",
+                            "Right wrist: ",
+                            "Gloves: ",
+                            "Holding right hand: ",
+                            "Holding left hand: ",
+                            "Left ring: ",
+                            "Right ring: ",
+                            "Belt: ",
+                            "Primary pants: ",
+                            "Secondary pants: ",
+                            "Shoes: "
+                    }
+            };
     public static final String DAMAGE_PID_SCRIPTVAR = "doDamage.pid";
     public static final String DAMAGE_SCRIPTVAR = "doDamageVar";
     public static final String HEAL_PID_SCRIPTVAR = "healDamage.pid";
@@ -153,27 +151,33 @@ public class qa extends script.base_script
     public static final String DAMAGE_TOOL_TITLE = "DAMAGE AMOUNT";
     public static final String FROG_STRING = "object/tangible/terminal/terminal_character_builder.iff";
     public static final String KASHYYYK_FROG_STRING = "object/tangible/terminal/terminal_kashyyyk_content.iff";
+    public qa()
+    {
+    }
+
     public static void qaToolMainMenu(obj_id player) throws InterruptedException
     {
         qa.refreshMenu(player, QATOOL_PROMPT, QATOOL_TITLE, QATOOL_MAIN_MENU, "toolMainMenu", true, "qatool.pid");
     }
+
     public static void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, boolean cancel, String PIDVar) throws InterruptedException
     {
         obj_id self = getSelf();
         closeOldWindow(player, PIDVar);
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, options, myHandler, false, false);
-        if (cancel == false)
+        if (!cancel)
         {
             setSUIProperty(pid, sui.LISTBOX_BTN_CANCEL, sui.PROP_TEXT, "Back");
         }
         sui.showSUIPage(pid);
         setWindowPid(player, pid, PIDVar);
     }
+
     public static void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, boolean cancel, String PIDVar, String scriptVar) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
         int pid = sui.listbox(player, player, prompt, sui.OK_CANCEL, title, options, myHandler, false, false);
-        if (cancel == false)
+        if (!cancel)
         {
             setSUIProperty(pid, sui.LISTBOX_BTN_CANCEL, sui.PROP_TEXT, "Back");
         }
@@ -181,6 +185,7 @@ public class qa extends script.base_script
         setWindowPid(player, pid, PIDVar);
         utils.setScriptVar(player, scriptVar, options);
     }
+
     public static void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, String scriptVar, int btnConfig) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
@@ -189,6 +194,7 @@ public class qa extends script.base_script
         sui.showSUIPage(pid);
         setWindowPid(player, pid, scriptVar);
     }
+
     public static void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, String PIDVar, String scriptVar, int btnConfig) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
@@ -198,18 +204,16 @@ public class qa extends script.base_script
         setWindowPid(player, pid, PIDVar);
         utils.setScriptVar(player, scriptVar, options);
     }
+
     public static void refreshMenu(obj_id player, String prompt, String title, String[][] options, String myHandler, boolean cancel, String PIDVar, String scriptVar) throws InterruptedException
     {
         closeOldWindow(player, scriptVar);
         String[] firstDimension = new String[options[0].length];
-        for (int i = 0; i < options[0].length; i++)
-        {
-            firstDimension[i] = options[0][i];
-        }
+        System.arraycopy(options[0], 0, firstDimension, 0, options[0].length);
         if (firstDimension.length > 0)
         {
             int pid = sui.listbox(player, player, prompt, sui.OK_CANCEL, title, firstDimension, myHandler, false, false);
-            if (cancel == false)
+            if (!cancel)
             {
                 setSUIProperty(pid, sui.LISTBOX_BTN_CANCEL, sui.PROP_TEXT, "Back");
             }
@@ -218,10 +222,12 @@ public class qa extends script.base_script
             utils.setScriptVar(player, scriptVar, options);
         }
     }
+
     public static void showConfirmationSui(obj_id self, String titleText, String confirmationMessage, String handler) throws InterruptedException
     {
         int pid = sui.msgbox(self, self, confirmationMessage, sui.YES_NO, titleText, handler);
     }
+
     public static void checkParams(dictionary params, String scriptVar) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -236,9 +242,9 @@ public class qa extends script.base_script
         if (idx == -1)
         {
             removeScriptVars(player, scriptVar);
-            return;
         }
     }
+
     public static void checkParams(dictionary params, String scriptVar, boolean chkIndex) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -250,15 +256,15 @@ public class qa extends script.base_script
         }
         int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
-        if (chkIndex == true)
+        if (chkIndex)
         {
             if (idx == -1)
             {
                 utils.removeScriptVarTree(player, scriptVar);
-                return;
             }
         }
     }
+
     public static void closeOldWindow(obj_id player, String scriptVar) throws InterruptedException
     {
         if (utils.hasScriptVar(player, scriptVar))
@@ -268,6 +274,7 @@ public class qa extends script.base_script
             utils.removeScriptVarTree(player, scriptVar);
         }
     }
+
     public static void setWindowPid(obj_id player, int pid, String scriptVar) throws InterruptedException
     {
         if (pid > -1)
@@ -275,6 +282,7 @@ public class qa extends script.base_script
             utils.setScriptVar(player, scriptVar, pid);
         }
     }
+
     public static String[] populateArray(obj_id player, String datatableName, String choice, String column1, String column2) throws InterruptedException
     {
         int firstColumn = dataTableFindColumnNumber(datatableName, column1);
@@ -301,12 +309,13 @@ public class qa extends script.base_script
         Arrays.sort(menuArray);
         return menuArray;
     }
+
     public static String[] populateArray(obj_id player, String col, String datatableName) throws InterruptedException
     {
-        String[] errorZeroLengthArray = 
-        {
-            "The Array was empty, could be that you passed the wrong type"
-        };
+        String[] errorZeroLengthArray =
+                {
+                        "The Array was empty, could be that you passed the wrong type"
+                };
         String[] arrayList = dataTableGetStringColumn(datatableName, col);
         if (arrayList.length == 0)
         {
@@ -315,20 +324,19 @@ public class qa extends script.base_script
         }
         int listingLength = arrayList.length;
         HashSet theSet = new HashSet();
-        for (String s : arrayList) {
-            theSet.add(s);
-        }
+        Collections.addAll(theSet, arrayList);
         String[] menuArray = new String[theSet.size()];
         theSet.toArray(menuArray);
         Arrays.sort(menuArray);
         return menuArray;
     }
+
     public static String[] populateArray(obj_id player, String col, String datatableName, String noNeed) throws InterruptedException
     {
-        String[] errorZeroLengthArray = 
-        {
-            "The Array was empty, could be that you passed the wrong type"
-        };
+        String[] errorZeroLengthArray =
+                {
+                        "The Array was empty, could be that you passed the wrong type"
+                };
         String[] arrayList = dataTableGetStringColumn(datatableName, col);
         if (arrayList.length == 0)
         {
@@ -337,8 +345,10 @@ public class qa extends script.base_script
         }
         int listingLength = arrayList.length;
         HashSet theSet = new HashSet();
-        for (String s : arrayList) {
-            if (!s.equals(noNeed)) {
+        for (String s : arrayList)
+        {
+            if (!s.equals(noNeed))
+            {
                 theSet.add(s);
             }
         }
@@ -347,12 +357,15 @@ public class qa extends script.base_script
         Arrays.sort(menuArray);
         return menuArray;
     }
+
     public static String[] populateArrayDoNotSort(obj_id player, String col, String datatableName) throws InterruptedException
     {
         String[] menu = dataTableGetStringColumn(datatableName, col);
         Vector theVectorData = new Vector();
-        for (String menu1 : menu) {
-            if (!menu1.equals("")) {
+        for (String menu1 : menu)
+        {
+            if (!menu1.equals(""))
+            {
                 theVectorData.addElement(menu1);
             }
         }
@@ -360,17 +373,20 @@ public class qa extends script.base_script
         theVectorData.toArray(menuArray);
         return menuArray;
     }
+
     public static void removeScriptVars(obj_id player, String scriptVar) throws InterruptedException
     {
         utils.removeScriptVarTree(player, "qatool");
         utils.removeScriptVarTree(player, scriptVar);
     }
+
     public static void removePlayer(obj_id player, String SCRIPTVAR, String err) throws InterruptedException
     {
         sendSystemMessageTestingOnly(player, err);
         qa.removeScriptVars(player, SCRIPTVAR);
         utils.removeScriptVarTree(player, SCRIPTVAR);
     }
+
     public static void createInputBox(obj_id player, String prompt, String title, String myHandler, String scriptVar) throws InterruptedException
     {
         qa.closeOldWindow(player, scriptVar);
@@ -379,6 +395,7 @@ public class qa extends script.base_script
         setWindowPid(player, pid, scriptVar);
         utils.setScriptVar(player, scriptVar, player);
     }
+
     public static void createMsgBox(obj_id player, String prompt, String title, String myHandler, String scriptVar) throws InterruptedException
     {
         qa.closeOldWindow(player, scriptVar);
@@ -387,6 +404,7 @@ public class qa extends script.base_script
         setWindowPid(player, pid, scriptVar);
         utils.setScriptVar(player, scriptVar, player);
     }
+
     public static void spawnStaticItemInInventory(obj_id self, String staticItemString, String altMessage) throws InterruptedException
     {
         String messageString = "";
@@ -394,7 +412,7 @@ public class qa extends script.base_script
         {
             messageString = altMessage;
         }
-        else 
+        else
         {
             messageString = staticItemString;
         }
@@ -406,7 +424,7 @@ public class qa extends script.base_script
             {
                 sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
             }
-            else 
+            else
             {
                 static_item.createNewItemFunction(staticItemString, inv);
                 sendSystemMessageTestingOnly(self, messageString + " was placed in your inventory");
@@ -414,6 +432,7 @@ public class qa extends script.base_script
             }
         }
     }
+
     public static obj_id spawnStaticItemInInventory(obj_id self, String staticItemString, String altMessage, boolean silent) throws InterruptedException
     {
         String messageString = "";
@@ -421,7 +440,7 @@ public class qa extends script.base_script
         {
             messageString = altMessage;
         }
-        else 
+        else
         {
             messageString = staticItemString;
         }
@@ -433,7 +452,7 @@ public class qa extends script.base_script
             {
                 sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
             }
-            else 
+            else
             {
                 obj_id staticItemId = static_item.createNewItemFunction(staticItemString, inv);
                 if (!silent)
@@ -446,6 +465,7 @@ public class qa extends script.base_script
         }
         return null;
     }
+
     public static obj_id findTarget(obj_id self) throws InterruptedException
     {
         obj_id intendedTarget = getIntendedTarget(self);
@@ -459,7 +479,7 @@ public class qa extends script.base_script
         {
             finalTarget = lookAtTarget;
         }
-        else 
+        else
         {
             finalTarget = self;
         }
@@ -469,6 +489,7 @@ public class qa extends script.base_script
         }
         return self;
     }
+
     public static String getObjectVariables(obj_id self, obj_id item) throws InterruptedException
     {
         String objvariable = "";
@@ -488,6 +509,7 @@ public class qa extends script.base_script
         }
         return objvariable;
     }
+
     public static String qaTargetDump(obj_id self, obj_id objTarget, boolean colorFlag) throws InterruptedException
     {
         String strTest = "";
@@ -561,7 +583,7 @@ public class qa extends script.base_script
                     strTest += "Guild Abbrev.: " + guildGetAbbrev(guildId) + "\r\n";
                     strTest += "Guild Leader Name & OID: " + getName(guildGetLeader(guildId)) + " " + guildGetLeader(guildId) + "\r\n";
                 }
-                else 
+                else
                 {
                     strTest += "No guild\r\n";
                 }
@@ -576,8 +598,10 @@ public class qa extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (s.indexOf("_modified") > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (s.indexOf("_modified") > 0)
+                            {
                                 int underscoreIdx = s.indexOf("_");
                                 String nonModifiedSkillname = s.substring(0, underscoreIdx);
                                 strTest += localize(new string_id("stat_n", s)) + ": " + getSkillStatisticModifier(objTarget, nonModifiedSkillname) + "\r\n";
@@ -590,9 +614,12 @@ public class qa extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (s.indexOf("expertise_") == 0) {
-                                if (getSkillStatisticModifier(objTarget, s) > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (s.indexOf("expertise_") == 0)
+                            {
+                                if (getSkillStatisticModifier(objTarget, s) > 0)
+                                {
                                     strTest += localize(new string_id("stat_n", s)) + ": " + getSkillStatisticModifier(objTarget, s) + "\r\n";
                                 }
                             }
@@ -604,8 +631,10 @@ public class qa extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (getEnhancedSkillStatisticModifierUncapped(objTarget, s) > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (getEnhancedSkillStatisticModifierUncapped(objTarget, s) > 0)
+                            {
                                 strTest += localize(new string_id("stat_n", s)) + " ( " + s + " ): " + getEnhancedSkillStatisticModifierUncapped(objTarget, s) + "\r\n";
                             }
                         }
@@ -621,7 +650,7 @@ public class qa extends script.base_script
                 {
                     strTest += "current faction: Rebel \r\n";
                 }
-                else 
+                else
                 {
                     strTest += "current faction: Neutral \r\n";
                 }
@@ -640,33 +669,39 @@ public class qa extends script.base_script
                 int[] buffs = _getAllBuffs(objTarget);
                 if (buffs != null && buffs.length != 0)
                 {
-                    for (int b : buffs) {
+                    for (int b : buffs)
+                    {
                         obj_id buffOwner = null;
                         String buffName = buff.getBuffNameFromCrc(b);
                         float duration = buff.getDuration(buffName);
                         boolean debuff = buff.isDebuff(buffName);
                         boolean groupBuff = buff.isGroupBuff(buffName);
                         boolean ownedBuff = buff.isOwnedBuff(buffName);
-                        if (ownedBuff) {
+                        if (ownedBuff)
+                        {
                             buffOwner = buff.getBuffOwner(objTarget, buffName);
                         }
                         strTest += buffName + "\r\nDuration: " + duration + "\r\n";
-                        if (debuff) {
+                        if (debuff)
+                        {
                             strTest += "Debuff: " + debuff + "\r\n";
                         }
-                        if (groupBuff) {
+                        if (groupBuff)
+                        {
                             strTest += "Group buff: " + debuff + "\r\n";
                         }
-                        if (ownedBuff) {
+                        if (ownedBuff)
+                        {
                             strTest += "Owned buff: " + ownedBuff + "\r\n";
-                            if (isIdValid(buffOwner)) {
+                            if (isIdValid(buffOwner))
+                            {
                                 strTest += "Buff Owner: " + getName(buffOwner) + "\r\n";
                             }
                             strTest += "Owner OID: " + buffOwner + "\r\n";
                         }
                     }
                 }
-                else 
+                else
                 {
                     strTest += "No buffs" + "\r\n";
                 }
@@ -707,11 +742,12 @@ public class qa extends script.base_script
             if (skillList != null && skillList.length > 0)
             {
                 strTest += "\r\nSKILLS:\r\n";
-                for (String s : skillList) {
+                for (String s : skillList)
+                {
                     strTest += s + "\r\n";
                 }
             }
-            else 
+            else
             {
                 strTest += "\r\nSKILLS:\r\n";
                 strTest += "none\r\n";
@@ -721,11 +757,12 @@ public class qa extends script.base_script
             {
                 strTest += "\r\nGROUND AND SPACE QUESTS:\r\n";
                 strTest += "A = active, C = completed\r\n";
-                for (String allQuest : allQuests) {
+                for (String allQuest : allQuests)
+                {
                     strTest += allQuest + "\r\n";
                 }
             }
-            else 
+            else
             {
                 strTest += "\r\nGROUND AND SPACE QUESTS:\r\n";
                 strTest += "none\r\n";
@@ -769,7 +806,7 @@ public class qa extends script.base_script
                                         }
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     strTest += "nothing in saber.\r\n";
                                 }
@@ -785,9 +822,12 @@ public class qa extends script.base_script
                 obj_id[] objContents = utils.getContents(targetDatapad, true);
                 if (objContents != null && objContents.length > 0)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
-                            if (getTemplateName(objContent) != null) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
+                            if (getTemplateName(objContent) != null)
+                            {
                                 strTest += "\tTemplate: " + getTemplateName(objContent) + "\r\n";
                                 strTest += "\tOID: " + objContent + "\r\n";
                                 strTest += getObjectVariables(self, objContent);
@@ -796,7 +836,7 @@ public class qa extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     strTest += "no datpad items.\r\n";
                 }
@@ -808,7 +848,7 @@ public class qa extends script.base_script
                 strTest += enemyFlags;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -819,7 +859,7 @@ public class qa extends script.base_script
                 strTest += playerBountyMissions;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -830,7 +870,7 @@ public class qa extends script.base_script
                 strTest += playerBounties;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -841,7 +881,7 @@ public class qa extends script.base_script
                 strTest += huntersOfPlayer;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -852,7 +892,7 @@ public class qa extends script.base_script
                 strTest += fsQuestData;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -863,7 +903,7 @@ public class qa extends script.base_script
                 strTest += fsBranchesUnlocked;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -962,7 +1002,8 @@ public class qa extends script.base_script
             }
             strTest += "SHIP STATS BELOW\r\n";
             int[] intSlots = space_crafting.getShipInstalledSlots(objTarget);
-            for (int intSlot : intSlots) {
+            for (int intSlot : intSlots)
+            {
                 strTest += dump.getShipComponentDebugString(objTarget, intSlot);
                 strTest += "\n\r";
             }
@@ -986,6 +1027,7 @@ public class qa extends script.base_script
         }
         return strTest;
     }
+
     public static void createCustomUI(obj_id self, String combinedString) throws InterruptedException
     {
         String uiTitle = "Target Data";
@@ -1002,6 +1044,7 @@ public class qa extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
     }
+
     public static void findOrCreateAndEquipQABag(obj_id self, obj_id testerInventoryId, boolean moveContents) throws InterruptedException
     {
         obj_id[] invAndEquip = getInventoryAndEquipment(self);
@@ -1015,25 +1058,29 @@ public class qa extends script.base_script
             {
                 putInOverloaded(firstBag, testerInventoryId);
             }
-            for (obj_id obj_id : invAndEquip) {
+            for (obj_id obj_id : invAndEquip)
+            {
                 String templateName = getTemplateName(obj_id);
-                if (templateName.equals("object/tangible/test/qabag.iff")) {
+                if (templateName.equals("object/tangible/test/qabag.iff"))
+                {
                     hasBag = true;
                     myBag = obj_id;
                 }
             }
-            if (hasBag == false)
+            if (!hasBag)
             {
                 myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
             }
             equip(myBag, self, "back");
             obj_id[] invItems = getContents(testerInventoryId);
             Vector itemsVector = new Vector();
-            if (moveContents == true && invItems.length >= 1)
+            if (moveContents && invItems.length >= 1)
             {
-                for (obj_id invItem : invItems) {
+                for (obj_id invItem : invItems)
+                {
                     String templateName = getTemplateName(invItem);
-                    if (!(templateName.equals(FROG_STRING)) && !(templateName.equals(KASHYYYK_FROG_STRING))) {
+                    if (!(templateName.equals(FROG_STRING)) && !(templateName.equals(KASHYYYK_FROG_STRING)))
+                    {
                         itemsVector.add(invItem);
                     }
                 }
@@ -1042,20 +1089,23 @@ public class qa extends script.base_script
                 moveObjects(tempArray, myBag);
             }
         }
-        else 
+        else
         {
             obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
             equip(myBag, self, "back");
         }
     }
+
     public static obj_id[] getAllValidWaypoints(obj_id tester) throws InterruptedException
     {
         HashSet waypointSet = new HashSet();
         obj_id[] datapadWaypoints = getWaypointsInDatapad(tester);
         if (datapadWaypoints != null)
         {
-            for (obj_id datapadWaypoint : datapadWaypoints) {
-                if (isIdValid(datapadWaypoint)) {
+            for (obj_id datapadWaypoint : datapadWaypoints)
+            {
+                if (isIdValid(datapadWaypoint))
+                {
                     waypointSet.add(datapadWaypoint);
                 }
             }
@@ -1064,7 +1114,8 @@ public class qa extends script.base_script
         waypointSet.toArray(waypointArray);
         return waypointArray;
     }
-    public static String[] getMenuList(obj_id tester, obj_id objList[], String objectType) throws InterruptedException
+
+    public static String[] getMenuList(obj_id tester, obj_id[] objList, String objectType) throws InterruptedException
     {
         if (objList.length > -1)
         {
@@ -1084,7 +1135,7 @@ public class qa extends script.base_script
                 {
                     returnedList[x] = stringData;
                 }
-                else 
+                else
                 {
                     returnedList[x] = "There was an error in the object type condition";
                 }
@@ -1094,7 +1145,8 @@ public class qa extends script.base_script
         sendSystemMessageTestingOnly(tester, "No menu options received.  Tool Failed. ");
         return null;
     }
-    public static location[] getLocationList(obj_id tester, obj_id waypointList[]) throws InterruptedException
+
+    public static location[] getLocationList(obj_id tester, obj_id[] waypointList) throws InterruptedException
     {
         if (waypointList.length > -1)
         {
@@ -1112,6 +1164,7 @@ public class qa extends script.base_script
         sendSystemMessageTestingOnly(tester, "No locations received.  Tool Failed. ");
         return null;
     }
+
     public static void templateObjectSpawner(obj_id player, String templateData) throws InterruptedException
     {
         obj_id inventoryContainer = utils.getInventoryContainer(player);
@@ -1119,13 +1172,14 @@ public class qa extends script.base_script
         {
             sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
         }
-        else 
+        else
         {
             createObject(templateData, inventoryContainer, "");
             sendSystemMessageTestingOnly(player, "Item Issued.");
             CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has spawned (" + templateData + ") using a QA Tool or command.");
         }
     }
+
     public static obj_id templateObjectSpawner(obj_id player, String templateData, boolean silent) throws InterruptedException
     {
         obj_id inventoryContainer = utils.getInventoryContainer(player);
@@ -1133,7 +1187,7 @@ public class qa extends script.base_script
         {
             sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
         }
-        else 
+        else
         {
             obj_id returnedId = createObject(templateData, inventoryContainer, "");
             if (!silent)
@@ -1145,6 +1199,7 @@ public class qa extends script.base_script
         }
         return null;
     }
+
     public static void revokeAllSkills(obj_id player) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(player);
@@ -1153,8 +1208,10 @@ public class qa extends script.base_script
         {
             while (skillList.length > 0 && attempts > 0)
             {
-                for (String skillName : skillList) {
-                    if (!skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("demo_") && !skillName.startsWith("force_title_") && !skillName.startsWith("force_sensitive_") && !skillName.startsWith("combat_melee_basic") && !skillName.startsWith("pilot_") && !skillName.startsWith("combat_ranged_weapon_basic")) {
+                for (String skillName : skillList)
+                {
+                    if (!skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("demo_") && !skillName.startsWith("force_title_") && !skillName.startsWith("force_sensitive_") && !skillName.startsWith("combat_melee_basic") && !skillName.startsWith("pilot_") && !skillName.startsWith("combat_ranged_weapon_basic"))
+                    {
                         skill.revokeSkillSilent(player, skillName);
                     }
                 }
@@ -1170,6 +1227,7 @@ public class qa extends script.base_script
         CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has had their entire profession removed/revoked by using a QA Tool or command.");
         sendSystemMessageTestingOnly(player, "All Professions removed from character.");
     }
+
     public static void revokePilotingSkills(obj_id player) throws InterruptedException
     {
         if (hasSkill(player, "pilot_rebel_navy_novice") || hasSkill(player, "pilot_imperial_navy_novice") || hasSkill(player, "pilot_neutral_novice"))
@@ -1191,19 +1249,21 @@ public class qa extends script.base_script
             {
                 pilotFaction = "neutral";
             }
-            else 
+            else
             {
                 pilotFaction = "";
             }
             if (!pilotFaction.equals(""))
             {
-                for (String revokeSpaceSkill : REVOKE_SPACE_SKILLS) {
+                for (String revokeSpaceSkill : REVOKE_SPACE_SKILLS)
+                {
                     skill.revokeSkill(player, "pilot_" + pilotFaction + revokeSpaceSkill);
                 }
                 utils.removeScriptVar(player, "revokePilotSkill");
             }
         }
     }
+
     public static boolean revokeAndGrantPilot(obj_id self, String factionType) throws InterruptedException
     {
         if (toLower(factionType) == "rebel" || factionType.equals("Rebel Ships"))
@@ -1230,18 +1290,21 @@ public class qa extends script.base_script
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained Master Neutral Pilot by using a QA Tool or command.");
             return true;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "The revokeAndGrantPilot function was not used properly. Exiting.");
         }
         return false;
     }
+
     public static void grantPilotingSkills(obj_id self, String factionToggle) throws InterruptedException
     {
-        for (String grantSpaceSkill : GRANT_SPACE_SKILLS) {
+        for (String grantSpaceSkill : GRANT_SPACE_SKILLS)
+        {
             grantSkill(self, "pilot_" + factionToggle + grantSpaceSkill);
         }
     }
+
     public static String getClientBuffName(obj_id self, String buffCommand) throws InterruptedException
     {
         if (!buffCommand.equals(""))
@@ -1252,13 +1315,14 @@ public class qa extends script.base_script
             {
                 return buffString;
             }
-            else 
+            else
             {
                 return buffCommand;
             }
         }
         return "null";
     }
+
     public static void applyBuffOption(obj_id self, String buffArg, String buffName) throws InterruptedException
     {
         if (!buffName.equals(""))
@@ -1269,6 +1333,7 @@ public class qa extends script.base_script
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has used the buff (" + buffName + ") attained from a QA Tool or command.");
         }
     }
+
     public static void stopCreatureCombat(obj_id self, obj_id tester) throws InterruptedException
     {
         stopCombat(self);
@@ -1278,6 +1343,7 @@ public class qa extends script.base_script
         utils.removeScriptVarTree(self, "ai.combat");
         detachScript(self, "ai.creature_combat");
     }
+
     public static void followTester(obj_id self, obj_id tester) throws InterruptedException
     {
         float testerSpeed = getRunSpeed(tester);
@@ -1286,6 +1352,7 @@ public class qa extends script.base_script
         setBaseRunSpeed(self, (testerSpeed * 2));
         sendSystemMessageTestingOnly(tester, "Follow command given to mobile.");
     }
+
     public static void damageMobTool(obj_id self) throws InterruptedException
     {
         obj_id finalTarget = findTarget(self);
@@ -1296,16 +1363,17 @@ public class qa extends script.base_script
                 sendSystemMessageTestingOnly(self, "Damaging self.");
             }
             int targetCurrentHealth = getAttrib(finalTarget, HEALTH);
-            utils.setScriptVar(self, DAMAGE_SCRIPTVAR + ".lookAtTarget", "" + finalTarget);
+            utils.setScriptVar(self, DAMAGE_SCRIPTVAR + ".lookAtTarget", String.valueOf(finalTarget));
             int pid = sui.transfer(self, self, DAMAGE_TOOL_PROMPT, DAMAGE_TOOL_TITLE, "Available", targetCurrentHealth, "Amount", 0, "doTheDamage");
             sui.showSUIPage(pid);
             utils.setScriptVar(self, DAMAGE_PID_SCRIPTVAR, pid);
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool damage while targeting the mob/player.");
         }
     }
+
     public static void healMobTool(obj_id self) throws InterruptedException
     {
         obj_id finalTarget = findTarget(self);
@@ -1320,29 +1388,27 @@ public class qa extends script.base_script
             int healthDifference = targetMaxHealth - targetCurrentHealth;
             if (healthDifference > 0)
             {
-                utils.setScriptVar(self, HEAL_SCRIPTVAR + ".lookAtTarget", "" + finalTarget);
+                utils.setScriptVar(self, HEAL_SCRIPTVAR + ".lookAtTarget", String.valueOf(finalTarget));
                 int pid = sui.transfer(self, self, HEAL_TOOL_PROMPT, HEAL_TOOL_TITLE, "Available", healthDifference, "Amount", 0, "healDamage");
                 sui.showSUIPage(pid);
                 utils.setScriptVar(self, HEAL_PID_SCRIPTVAR, pid);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The target health pool is maximum and cannot be healed.");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool heal while targeting the mob/player.");
         }
     }
+
     public static boolean checkGodLevel(obj_id tester) throws InterruptedException
     {
-        if (getGodLevel(tester) < 10)
-        {
-            return false;
-        }
-        return true;
+        return getGodLevel(tester) >= 10;
     }
+
     public static String[] getAllQuests(obj_id player) throws InterruptedException
     {
         if (!isIdNull(player))
@@ -1352,21 +1418,17 @@ public class qa extends script.base_script
             Vector allQuestStringsCombined = new Vector();
             if (allActive != null)
             {
-                for (String s : allActive) {
-                    allQuestStringsCombined.add(s);
-                }
+                Collections.addAll(allQuestStringsCombined, allActive);
             }
             if (allComplete != null)
             {
-                for (String s : allComplete) {
-                    allQuestStringsCombined.add(s);
-                }
+                Collections.addAll(allQuestStringsCombined, allComplete);
             }
             if (allActive == null && allComplete == null)
             {
                 allQuestStringsCombined.add("No Active or Completed Quests to Display.");
             }
-            else 
+            else
             {
                 if (allQuestStringsCombined.size() > 0)
                 {
@@ -1378,6 +1440,7 @@ public class qa extends script.base_script
         }
         return null;
     }
+
     public static String[] getAllActiveQuests(obj_id player) throws InterruptedException
     {
         int[] activeQuestIds = questGetAllActiveQuestIds(player);
@@ -1385,13 +1448,18 @@ public class qa extends script.base_script
         {
             HashSet allQuestStringsFound = new HashSet();
             String activeQuestString = "";
-            for (int activeQuestId : activeQuestIds) {
+            for (int activeQuestId : activeQuestIds)
+            {
                 activeQuestString = questGetQuestName(activeQuestId);
-                if (!activeQuestString.equals("")) {
-                    if (activeQuestString.indexOf("quest/") == 0) {
+                if (!activeQuestString.equals(""))
+                {
+                    if (activeQuestString.indexOf("quest/") == 0)
+                    {
                         String groundCodeAndTitle = getGroundQuestStringAndTitle(player, activeQuestString);
                         allQuestStringsFound.add("(A) " + groundCodeAndTitle);
-                    } else if (activeQuestString.indexOf("spacequest/") == 0) {
+                    }
+                    else if (activeQuestString.indexOf("spacequest/") == 0)
+                    {
                         String spaceCodeAndTitle = getSpaceQuestStringAndTitle(player, activeQuestString);
                         allQuestStringsFound.add("(A) " + spaceCodeAndTitle);
                     }
@@ -1407,6 +1475,7 @@ public class qa extends script.base_script
         }
         return null;
     }
+
     public static String[] getAllCompletedQuests(obj_id player) throws InterruptedException
     {
         int[] completedQuestIds = questGetAllCompletedQuestIds(player);
@@ -1414,13 +1483,18 @@ public class qa extends script.base_script
         {
             HashSet allQuestStringsFound = new HashSet();
             String completedQuestString = "";
-            for (int completedQuestId : completedQuestIds) {
+            for (int completedQuestId : completedQuestIds)
+            {
                 completedQuestString = questGetQuestName(completedQuestId);
-                if (!completedQuestString.equals("")) {
-                    if (completedQuestString.indexOf("quest/") == 0) {
+                if (!completedQuestString.equals(""))
+                {
+                    if (completedQuestString.indexOf("quest/") == 0)
+                    {
                         String groundCodeAndTitle = getGroundQuestStringAndTitle(player, completedQuestString);
                         allQuestStringsFound.add("(C) " + groundCodeAndTitle);
-                    } else if (completedQuestString.indexOf("spacequest/") == 0) {
+                    }
+                    else if (completedQuestString.indexOf("spacequest/") == 0)
+                    {
                         String spaceCodeAndTitle = getSpaceQuestStringAndTitle(player, completedQuestString);
                         allQuestStringsFound.add("(C) " + spaceCodeAndTitle);
                     }
@@ -1436,6 +1510,7 @@ public class qa extends script.base_script
         }
         return null;
     }
+
     public static String getGroundQuestStringAndTitle(obj_id player, String questString) throws InterruptedException
     {
         String localizeThis = questString.substring(6);
@@ -1443,20 +1518,24 @@ public class qa extends script.base_script
         String questTitle = localize(new string_id(questStringLoc, "journal_entry_title"));
         return questString + " - " + questTitle;
     }
+
     public static String getSpaceQuestStringAndTitle(obj_id self, String questString) throws InterruptedException
     {
         String questTitle = localize(new string_id(questString, "title"));
         return questString + " - " + questTitle;
     }
+
     public static void grantGroundQuest(obj_id self, String questString) throws InterruptedException
     {
         groundquests.requestGrantQuest(self, questString, true);
     }
+
     public static boolean grantSpaceQuest(obj_id self, String questType, String questName) throws InterruptedException
     {
         boolean questSuccess = space_quest.grantQuest(self, questType, questName);
         return questSuccess;
     }
+
     public static String getSpaceQuestType(obj_id self, String questString) throws InterruptedException
     {
         if (questString.indexOf("spacequest/") == 0)
@@ -1469,13 +1548,14 @@ public class qa extends script.base_script
             {
                 return questType;
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The quest type was typed incorrectly");
             }
         }
         return "Error";
     }
+
     public static String getSpaceQuestName(obj_id self, String questString) throws InterruptedException
     {
         if (questString.indexOf("spacequest/") == 0)
@@ -1487,18 +1567,22 @@ public class qa extends script.base_script
         }
         return "Error";
     }
+
     public static boolean checkQuestType(obj_id self, String questType) throws InterruptedException
     {
         if (!questType.equals(""))
         {
-            for (String spaceQuestType : SPACE_QUEST_TYPES) {
-                if (questType.equals(spaceQuestType)) {
+            for (String spaceQuestType : SPACE_QUEST_TYPES)
+            {
+                if (questType.equals(spaceQuestType))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static boolean completeActiveQuest(obj_id self, String questString) throws InterruptedException
     {
         if (questString.indexOf("spacequest/") == 0)
@@ -1509,8 +1593,10 @@ public class qa extends script.base_script
                 if (isIdValid(datapad))
                 {
                     obj_id[] dpobjs = getContents(datapad);
-                    for (obj_id dpobj : dpobjs) {
-                        if (hasObjVar(dpobj, space_quest.QUEST_TYPE) && hasObjVar(dpobj, space_quest.QUEST_NAME)) {
+                    for (obj_id dpobj : dpobjs)
+                    {
+                        if (hasObjVar(dpobj, space_quest.QUEST_TYPE) && hasObjVar(dpobj, space_quest.QUEST_NAME))
+                        {
                             space_quest.setQuestWon(self, dpobj);
                         }
                     }
@@ -1518,7 +1604,7 @@ public class qa extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int questid = questGetQuestId(questString);
             if ((questid != 0) && questIsQuestActive(questid, self))
@@ -1530,6 +1616,7 @@ public class qa extends script.base_script
         }
         return false;
     }
+
     public static boolean clearQuest(obj_id self, String questString) throws InterruptedException
     {
         if (questString.indexOf("spacequest/") == 0)
@@ -1540,16 +1627,20 @@ public class qa extends script.base_script
                 if (isIdValid(datapad))
                 {
                     obj_id[] dpobjs = getContents(datapad);
-                    for (obj_id dpobj : dpobjs) {
-                        if (hasObjVar(dpobj, space_quest.QUEST_TYPE) && hasObjVar(dpobj, space_quest.QUEST_NAME)) {
+                    for (obj_id dpobj : dpobjs)
+                    {
+                        if (hasObjVar(dpobj, space_quest.QUEST_TYPE) && hasObjVar(dpobj, space_quest.QUEST_NAME))
+                        {
                             space_quest.setQuestAborted(self, dpobj);
                             String questType = "";
                             String questName = "";
                             questType = getSpaceQuestType(self, questString);
-                            if (!questType.equals("Error") && !questType.equals("")) {
+                            if (!questType.equals("Error") && !questType.equals(""))
+                            {
                                 questName = getSpaceQuestName(self, questString);
                             }
-                            if (!questName.equals("Error") && !questName.equals("")) {
+                            if (!questName.equals("Error") && !questName.equals(""))
+                            {
                                 String spaceObjVar = "space_quest." + questType + "." + questName;
                                 blowOutObjVars(self, spaceObjVar);
                                 sendSystemMessageTestingOnly(self, "Space quest ObjVar removed.");
@@ -1567,6 +1658,7 @@ public class qa extends script.base_script
         }
         return false;
     }
+
     public static boolean evalSpaceQuestThenGrant(obj_id self, String spaceString) throws InterruptedException
     {
         String questType = "";
@@ -1584,20 +1676,21 @@ public class qa extends script.base_script
                     {
                         return true;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(self, "The was a problem granting: " + spaceString);
                         return false;
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Unknown quest string: " + spaceString);
             }
         }
         return false;
     }
+
     public static boolean blowOutObjVars(obj_id self, String objVar) throws InterruptedException
     {
         if (objVar.equals("space"))
@@ -1609,36 +1702,46 @@ public class qa extends script.base_script
             removeObjVar(self, "space_quest");
             removeObjVar(self, "quest");
         }
-        else 
+        else
         {
             removeObjVar(self, objVar);
         }
         return true;
     }
+
     public static boolean grantPilotSkill(obj_id self, String skillStringData) throws InterruptedException
     {
         String[] allSkillStrings = split(skillStringData, ';');
-        for (String allSkillString : allSkillStrings) {
+        for (String allSkillString : allSkillStrings)
+        {
             skill.noisyGrantSkill(self, allSkillString);
             messageTo(self, "delay", null, 1, false);
         }
         return true;
     }
+
     public static boolean grantOrClearSpaceQuest(obj_id self, String questData, String fateSwitch) throws InterruptedException
     {
         String[] allData = split(questData, ';');
-        for (String allDatum : allData) {
-            if (fateSwitch.equals("clear")) {
+        for (String allDatum : allData)
+        {
+            if (fateSwitch.equals("clear"))
+            {
                 clearQuest(self, allDatum);
-            } else if (fateSwitch.equals("grant")) {
+            }
+            else if (fateSwitch.equals("grant"))
+            {
                 evalSpaceQuestThenGrant(self, allDatum);
                 messageTo(self, "delay", null, 4, false);
                 qa.completeActiveQuest(self, allDatum);
                 String questType = getSpaceQuestType(self, questData);
-                if (!questType.equals("Error") && !questType.equals("")) {
+                if (!questType.equals("Error") && !questType.equals(""))
+                {
                     String questName = getSpaceQuestName(self, questData);
-                    if (!questType.equals("Error") && !questType.equals("")) {
-                        if (!space_quest.hasWonQuest(self, questType, questName)) {
+                    if (!questType.equals("Error") && !questType.equals(""))
+                    {
+                        if (!space_quest.hasWonQuest(self, questType, questName))
+                        {
                             evalSpaceQuestThenGrant(self, allDatum);
                             messageTo(self, "delay", null, 4, false);
                             qa.completeActiveQuest(self, allDatum);
@@ -1649,6 +1752,7 @@ public class qa extends script.base_script
         }
         return true;
     }
+
     public static boolean createAQaWaypointInDataPad(obj_id self, location waypointData, String waypointName) throws InterruptedException
     {
         obj_id wayp = createWaypointInDatapad(self, waypointData);
@@ -1660,6 +1764,7 @@ public class qa extends script.base_script
         setWaypointName(wayp, waypointName);
         return true;
     }
+
     public static void forceEggSpawn(obj_id self) throws InterruptedException
     {
         obj_id lookAtTarget = qa.findTarget(self);
@@ -1689,16 +1794,17 @@ public class qa extends script.base_script
             {
                 requestLocation(lookAtTarget, strSpawn, locTest, rand(100, 200), fltSize, true, true);
             }
-            else 
+            else
             {
                 createSpawnerMobNow(self, strSpawn, null, locTest, fltRadius, lookAtTarget);
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "Not recognized as a spawner.  Tool failed.");
         }
     }
+
     public static void createSpawnerMobNow(obj_id self, String strId, obj_id objLocationObject, location locLocation, float fltRadius, obj_id lookAtTarget) throws InterruptedException
     {
         float spawnerYaw = getYaw(lookAtTarget);
@@ -1718,7 +1824,7 @@ public class qa extends script.base_script
             attachScript(objTemplate, "systems.spawning.spawned_tracker");
             setYaw(objTemplate, spawnerYaw);
         }
-        else 
+        else
         {
             obj_id objMob = create.object(strId, locLocation);
             if (!isIdValid(objMob))
@@ -1740,8 +1846,8 @@ public class qa extends script.base_script
             return;
         }
         messageTo(lookAtTarget, "doSpawnEvent", null, fltRespawnTime, false);
-        return;
     }
+
     public static float getClosestSize(float fltOriginalSize) throws InterruptedException
     {
         if (fltOriginalSize <= 4.0f)

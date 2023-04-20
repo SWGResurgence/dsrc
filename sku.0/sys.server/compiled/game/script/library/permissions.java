@@ -7,9 +7,6 @@ import script.string_id;
 
 public class permissions extends script.base_script
 {
-    public permissions()
-    {
-    }
     public static final String VAR_PERMISSION_BASE = "permissions_list";
     public static final String VAR_PERMISSION_BANNED = "permissions_list.banned";
     public static final String VAR_PERMISSION_USERS = "permissions_list.users";
@@ -35,6 +32,10 @@ public class permissions extends script.base_script
     public static final int canOpen = 10;
     public static final int canLock = 11;
     public static final int canReTarget = 12;
+    public permissions()
+    {
+    }
+
     public static boolean createPermissionsGroup(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -64,6 +65,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "createPermissionsGroup: cannot create group where group_name is null");
         return false;
     }
+
     public static boolean deletePermissionsGroup(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -115,6 +117,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "createPermissionsGroup: cannot create group where group_name is null");
         return false;
     }
+
     public static boolean addUserToPermissionsGroup(obj_id target, obj_id player, String player_name, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -162,10 +165,12 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "addUserToPermissionsGroup: function was passed a null variable");
         return false;
     }
+
     public static boolean addUserToPermissionsGroup(obj_id target, obj_id player, String group_name) throws InterruptedException
     {
         return addUserToPermissionsGroup(target, player, getName(player), group_name);
     }
+
     public static boolean deleteUserFromPermissionsGroup(obj_id target, obj_id player, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -197,7 +202,7 @@ public class permissions extends script.base_script
                     debugServerConsoleMsg(target, "deleteUserFromPermissionsGroup: updated user tally!");
                     return true;
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "deleteUserFromPermissionsGroup: failed user update!");
                     return false;
@@ -209,6 +214,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "deleteUserFromPermissionsGroup: group " + group_name + " does not exist");
         return false;
     }
+
     public static boolean addUserToBanned(obj_id target, obj_id player, String player_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -235,9 +241,8 @@ public class permissions extends script.base_script
                 for (int i = 0; i < numGroups; i++)
                 {
                     obj_var tmpGroup = groupsList.getObjVar(i);
-                    if (tmpGroup instanceof script.obj_var_list)
+                    if (tmpGroup instanceof obj_var_list lstGroup)
                     {
-                        obj_var_list lstGroup = (obj_var_list)tmpGroup;
                         if (lstGroup.hasObjVar("group_members." + toString(player)))
                         {
                             String objVarToNuke = "permissions_list.groups." + toString(lstGroup.getName()) + ".group_members." + toString(player);
@@ -250,10 +255,12 @@ public class permissions extends script.base_script
         setObjVar(target, "permissions_list.banned." + toString(player), player_name);
         return true;
     }
+
     public static boolean addUserToBanned(obj_id target, obj_id player) throws InterruptedException
     {
         return addUserToBanned(target, player, getName(player));
     }
+
     public static boolean deleteUserFromBanned(obj_id target, obj_id player) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -274,6 +281,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "deleteUserToBanned: player " + toString(player) + " is not on the banned list");
         return false;
     }
+
     public static int[] getGroupPermissions(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -293,6 +301,7 @@ public class permissions extends script.base_script
         }
         return null;
     }
+
     public static int[] getUserPermissions(obj_id target, obj_id player) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -312,6 +321,7 @@ public class permissions extends script.base_script
         }
         return new int[PERMISSIONS_ARRAY_SIZE];
     }
+
     public static boolean grantGroupPermission(obj_id target, String group_name, int idx) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -339,7 +349,7 @@ public class permissions extends script.base_script
                 {
                     permissions[index] |= permissionsValue;
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "grantGroupPermission: error returned from setBit!");
                 }
@@ -347,7 +357,7 @@ public class permissions extends script.base_script
                 {
                     setObjVar(target, groupPath + ".permissions", permissions);
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "grantGroupPermission: permissions was being set as null in objvar " + groupPath + ".permissions");
                     return false;
@@ -370,6 +380,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "grantGroupPermission: function was passed a null variable");
         return false;
     }
+
     public static boolean revokeGroupPermission(obj_id target, String group_name, int idx) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -415,6 +426,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "revokeGroupPermission: function was passed a null variable");
         return false;
     }
+
     public static boolean checkGroupPermissionIndex(obj_id target, String group_name, int idx) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -443,6 +455,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "checkGroupPermissionIndex: function was passed a null variable");
         return false;
     }
+
     public static boolean checkUserPermissionIndex(obj_id target, obj_id player, int idx) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -464,11 +477,7 @@ public class permissions extends script.base_script
                 int index = idx / 32;
                 int bitPos = idx % 32;
                 int bitVal = (int) StrictMath.pow(2, bitPos);
-                if ((permissions[index] & bitVal) == bitVal)
-                {
-                    return true;
-                }
-                return false;
+                return (permissions[index] & bitVal) == bitVal;
             }
             debugServerConsoleMsg(target, "checkUserPermissionIndex: permissions were returned by getUserPermissions as null");
             return false;
@@ -476,10 +485,12 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "checkUserPermissionIndex: function was passed a null variable");
         return false;
     }
+
     public static boolean hasPermission(obj_id target, String groupName, int idx) throws InterruptedException
     {
         return checkGroupPermissionIndex(target, groupName, idx);
     }
+
     public static boolean hasPermission(obj_id target, obj_id player, int idx) throws InterruptedException
     {
         if (isIdValid(player) && isGod(player))
@@ -488,6 +499,7 @@ public class permissions extends script.base_script
         }
         return checkUserPermissionIndex(target, player, idx);
     }
+
     public static boolean addToUserTally(obj_id target, obj_id player, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -523,7 +535,7 @@ public class permissions extends script.base_script
                 setObjVar(target, "permissions_list.users." + toString(player), userPermissions);
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -531,6 +543,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "addToUserTally: at least one set of permissions was returned as null");
         return false;
     }
+
     public static boolean updateUserTally(obj_id target, obj_id player) throws InterruptedException
     {
         debugServerConsoleMsg(target, "updateUserTally: entering updateUserTally");
@@ -568,9 +581,8 @@ public class permissions extends script.base_script
                 {
                     debugServerConsoleMsg(target, "updateUserTally: was returned a null obj_var below groups!");
                 }
-                if (tmpGroup instanceof script.obj_var_list)
+                if (tmpGroup instanceof obj_var_list lstGroup)
                 {
-                    obj_var_list lstGroup = (obj_var_list)tmpGroup;
                     if (lstGroup.hasObjVar("group_members." + toString(player)))
                     {
                         inGroup++;
@@ -594,7 +606,7 @@ public class permissions extends script.base_script
             {
                 setObjVar(target, "permissions_list.users." + toString(player), userPermissions);
             }
-            else 
+            else
             {
                 removeObjVar(target, "permissions_list.users." + toString(player));
             }
@@ -603,6 +615,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "updateUserTally: the target object lacks obj_var permissions_list.groups");
         return false;
     }
+
     public static boolean isBanned(obj_id target, obj_id player) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -617,6 +630,7 @@ public class permissions extends script.base_script
         }
         return hasObjVar(target, "permissions_list.banned." + toString(player));
     }
+
     public static String[] listGroupMemberNames(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -647,6 +661,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "listGroupMemberNames: function was passed a null group_name pointer");
         return null;
     }
+
     public static String[] listGroupMemberIds(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -682,6 +697,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "listGroupMemberIds: function was passed a null group_name pointer");
         return null;
     }
+
     public static String[] listBannedIds(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -712,6 +728,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "listBannedIds: object does not have a banned list");
         return null;
     }
+
     public static int groupMemberCount(obj_id target, String group_name) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -729,7 +746,7 @@ public class permissions extends script.base_script
                 {
                     return groupMembers.getNumItems();
                 }
-                else 
+                else
                 {
                     return 0;
                 }
@@ -740,6 +757,7 @@ public class permissions extends script.base_script
         debugServerConsoleMsg(target, "groupMemberCount: function was passed a null group_name pointer");
         return -1;
     }
+
     public static boolean initializePermissions(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))

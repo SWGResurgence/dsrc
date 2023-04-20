@@ -7,10 +7,12 @@ public class posture extends script.base_script
     public posture()
     {
     }
+
     public static boolean isStanding(obj_id object) throws InterruptedException
     {
         return (getPosture(object) == POSTURE_UPRIGHT);
     }
+
     public static void stand(obj_id object) throws InterruptedException
     {
         if (!isStanding(object))
@@ -18,14 +20,17 @@ public class posture extends script.base_script
             queueCommand(object, (-1465754503), object, "", COMMAND_PRIORITY_FRONT);
         }
     }
+
     public static boolean isKnockedDown(obj_id object) throws InterruptedException
     {
         return (getPosture(object) == POSTURE_KNOCKED_DOWN);
     }
+
     public static boolean isKneeling(obj_id object) throws InterruptedException
     {
         return (getPosture(object) == POSTURE_CROUCHED);
     }
+
     public static void kneel(obj_id object) throws InterruptedException
     {
         if (!isKneeling(object))
@@ -33,10 +38,12 @@ public class posture extends script.base_script
             queueCommand(object, (28609318), object, "", COMMAND_PRIORITY_FRONT);
         }
     }
+
     public static boolean isProne(obj_id object) throws InterruptedException
     {
         return (getPosture(object) == POSTURE_PRONE);
     }
+
     public static void prone(obj_id object) throws InterruptedException
     {
         if (!isProne(object))

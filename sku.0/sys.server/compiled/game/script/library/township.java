@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class township extends script.base_script
 {
-    public township()
-    {
-    }
     public static final int MIN_LEVEL = 70;
     public static final int TRAVEL_COST = 2500;
     public static final int RANK_TWO_AMOUNT = 200;
@@ -35,6 +32,10 @@ public class township extends script.base_script
     public static final String NOVA_ORION_OBJECT_FOR_SALE_SCRIPT = "theme_park.dungeon.nova_orion_station.nova_orion_object_for_sale";
     public static final String MTP_LUMP = "item_meatlump_lump_01_01";
     public static final String MTP_OBJECT_FOR_SALE_SCRIPT = "theme_park.meatlump.mtp_object_for_sale";
+    public township()
+    {
+    }
+
     public static boolean isTownshipEligible(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -44,6 +45,7 @@ public class township extends script.base_script
         }
         return getLevel(player) >= MIN_LEVEL || space_skill.isMasterPilot(player);
     }
+
     public static boolean giveTravelListFromAurilia(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -81,14 +83,19 @@ public class township extends script.base_script
             return false;
         }
         boolean foundAlready;
-        for (String subGroup : subGroups) {
+        for (String subGroup : subGroups)
+        {
             foundAlready = false;
-            for (Object resizeGroup : resizeGroups) {
-                if (subGroup.equals(resizeGroup)) {
+            for (Object resizeGroup : resizeGroups)
+            {
+                if (subGroup.equals(resizeGroup))
+                {
                     foundAlready = true;
+                    break;
                 }
             }
-            if (!foundAlready) {
+            if (!foundAlready)
+            {
                 utils.addElement(localizedGroups, "@nexus:" + subGroup);
                 utils.addElement(resizeGroups, subGroup);
             }
@@ -99,6 +106,7 @@ public class township extends script.base_script
         sui.setPid(player, pid, PID_VAR);
         return true;
     }
+
     public static boolean displayTravelListBySub(obj_id player, obj_id npc, String sub) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -145,7 +153,7 @@ public class township extends script.base_script
                     utils.addElement(resizeLocations, locations[i]);
                     utils.addElement(localizedLocations, "@nexus:" + locations[i]);
                 }
-                else 
+                else
                 {
                     utils.addElement(resizeLocations, locations[i]);
                     utils.addElement(localizedLocations, "@nexus:" + locations[i] + "_no_perm");
@@ -159,6 +167,7 @@ public class township extends script.base_script
         sui.setPid(player, pid, PID_VAR);
         return true;
     }
+
     public static int getMidlitheCrystalCount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -172,11 +181,14 @@ public class township extends script.base_script
         }
         return getCount(crystal);
     }
+
     public static void clearAllNovaOrionQuestStatus(obj_id player) throws InterruptedException
     {
         String[] questsToReset = dataTableGetStringColumnNoDefaults(NOVA_ORION_RESET_DATATABLE, "quest_name");
-        for (String groundQuestName : questsToReset) {
-            if (groundquests.isQuestActiveOrComplete(player, groundQuestName)) {
+        for (String groundQuestName : questsToReset)
+        {
+            if (groundquests.isQuestActiveOrComplete(player, groundQuestName))
+            {
                 groundquests.clearQuest(player, groundQuestName);
             }
         }
@@ -185,7 +197,8 @@ public class township extends script.base_script
             removeObjVar(player, OBJVAR_NOVA_ORION_FACTION);
         }
         String[] slotsToReset = dataTableGetStringColumnNoDefaults(NOVA_ORION_RESET_DATATABLE, "rank_slot_name");
-        for (String slotRankName : slotsToReset) {
+        for (String slotRankName : slotsToReset)
+        {
             long slotValue = getCollectionSlotValue(player, slotRankName);
             modifyCollectionSlotValue(player, slotRankName, (-1 * slotValue));
         }
@@ -223,6 +236,7 @@ public class township extends script.base_script
             }
         }
     }
+
     public static string_id getNovaOrionRumor(obj_id player) throws InterruptedException
     {
         String stringFile = "utterance/nova_orion";

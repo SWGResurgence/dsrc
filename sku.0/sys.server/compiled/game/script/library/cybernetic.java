@@ -2,14 +2,12 @@ package script.library;
 
 import script.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
 public class cybernetic extends script.base_script
 {
-    public cybernetic()
-    {
-    }
     public static final String CYBORG_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String CYBORG_LEGS = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff";
     public static final String CYBORG_LEFT_ARM = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_arm_l.iff";
@@ -22,6 +20,10 @@ public class cybernetic extends script.base_script
     public static final int CYBERNETIC_FOREARM_COST = 2;
     public static final int CYBERNETIC_HAND_COST = 1;
     public static final String PID_VAR = "cybernetics";
+    public cybernetic()
+    {
+    }
+
     public static void installCybernetics(obj_id player, obj_id npc) throws InterruptedException
     {
         if (sui.hasPid(player, cybernetic.PID_VAR))
@@ -31,6 +33,7 @@ public class cybernetic extends script.base_script
         }
         showCyberneticsPage(player, npc, CYBERNETICS_UI_OPENTYPE_INSTALL);
     }
+
     public static void installCyberneticItem(obj_id player, obj_id npc, obj_id item) throws InterruptedException
     {
         if (!hasScript(player, "cybernetic.cybernetic_player"))
@@ -49,6 +52,7 @@ public class cybernetic extends script.base_script
         int amt = dataTableGetInt(CYBORG_TABLE, getTemplateName(item), "installCost");
         verifyInstallPayment(npc, player, amt, item);
     }
+
     public static void unInstallCybernetics(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!hasScript(player, "cybernetic.cybernetic_player"))
@@ -62,11 +66,13 @@ public class cybernetic extends script.base_script
         }
         showCyberneticsPage(player, npc, CYBERNETICS_UI_OPENTYPE_UNINSTALL);
     }
+
     public static void unInstallCyberneticItem(obj_id player, obj_id npc, obj_id item) throws InterruptedException
     {
         int amt = dataTableGetInt(CYBORG_TABLE, getTemplateName(item), "removeCost");
         verifyUnInstallPayment(npc, player, amt, item);
     }
+
     public static void repairCybernetics(obj_id player, obj_id npc) throws InterruptedException
     {
         if (sui.hasPid(player, cybernetic.PID_VAR))
@@ -76,6 +82,7 @@ public class cybernetic extends script.base_script
         }
         showCyberneticsPage(player, npc, CYBERNETICS_UI_OPENTYPE_REPAIR);
     }
+
     public static void repairCyberneticItem(obj_id player, obj_id npc, obj_id item) throws InterruptedException
     {
         int costPerPoint = dataTableGetInt(CYBORG_TABLE, getTemplateName(item), "repairCost");
@@ -87,15 +94,17 @@ public class cybernetic extends script.base_script
         {
             sendSystemMessage(player, new string_id("ep3/cybernetic", "no_repair_needed"));
         }
-        else 
+        else
         {
             verifyRepairPayment(npc, player, amt, item);
         }
     }
+
     public static boolean hasMaxInstalled(obj_id player) throws InterruptedException
     {
         return false;
     }
+
     public static boolean oldHasMaxInstalled(obj_id player) throws InterruptedException
     {
         obj_id[] contents = getContents(player);
@@ -104,38 +113,43 @@ public class cybernetic extends script.base_script
             return false;
         }
         int count = 0;
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String templateName = getTemplateName(content);
-            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) {
+            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic"))
+            {
                 ++count;
-                if (count >= MAX_INSTALLED) {
+                if (count >= MAX_INSTALLED)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static int getPlayerInstalledCyberneticCount(obj_id player) throws InterruptedException
     {
         obj_id[] allSlots = getAllWornItems(player, false);
         HashSet duplicateEater = new HashSet();
-        for (obj_id allSlot : allSlots) {
-            duplicateEater.add(allSlot);
-        }
+        Collections.addAll(duplicateEater, allSlots);
         obj_id[] contents = new obj_id[duplicateEater.size()];
         duplicateEater.toArray(contents);
         int count = 0;
         LOG("sissynoid", "contents length: " + contents.length);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             LOG("sissynoid", "Contents: (" + content + ") ::::: " + getTemplateName(content));
             String templateName = getTemplateName(content);
-            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) {
+            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic"))
+            {
                 count += getCyberneticPointValue(content);
             }
         }
         LOG("sissynoid", "Cybernetic Count - " + count);
         return count;
     }
+
     public static int getCyberneticPointValue(obj_id object) throws InterruptedException
     {
         int value = 0;
@@ -167,6 +181,7 @@ public class cybernetic extends script.base_script
         }
         return value;
     }
+
     public static void applyDeathCybernetic(obj_id player) throws InterruptedException
     {
         CustomerServiceLog("Death", "Player(" + player + ") has entered 'applyDeathCybernetic' options.");
@@ -189,9 +204,9 @@ public class cybernetic extends script.base_script
             case (-1344817832):
             case (1372916281):
             case (-1240008136):
-            return;
+                return;
             default:
-            break;
+                break;
         }
         if (hasCyberneticItem(player))
         {
@@ -258,7 +273,7 @@ public class cybernetic extends script.base_script
             obj_id newCybernetic = createObject(CYBORG_LEGS, player, "");
             CustomerServiceLog("Death", "Player(" + player + ") just received Cyborg Legs(" + newCybernetic + ")");
         }
-        else 
+        else
         {
             String BracerUpperName = "bracer_upper_l";
             String BracerLowerName = "bracer_lower_l";
@@ -318,30 +333,32 @@ public class cybernetic extends script.base_script
             {
                 newCybernetic = createObject(CYBORG_RIGHT_ARM, player, "");
             }
-            else 
+            else
             {
                 newCybernetic = createObject(CYBORG_LEFT_ARM, player, "");
             }
             CustomerServiceLog("Death", "Player(" + player + ") just received a Cyborg Arm(" + newCybernetic + ")");
         }
     }
+
     public static boolean hasCyberneticItem(obj_id player) throws InterruptedException
     {
         obj_id[] allSlots = getAllWornItems(player, false);
         HashSet duplicateEater = new HashSet();
-        for (obj_id allSlot : allSlots) {
-            duplicateEater.add(allSlot);
-        }
+        Collections.addAll(duplicateEater, allSlots);
         obj_id[] contents = new obj_id[duplicateEater.size()];
         duplicateEater.toArray(contents);
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String templateName = getTemplateName(content);
-            if ((hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) && (!isGameObjectTypeOf(content, GOT_cybernetic_component))) {
+            if ((hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) && (!isGameObjectTypeOf(content, GOT_cybernetic_component)))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean hasCyberneticItemInInventory(obj_id player) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -350,35 +367,39 @@ public class cybernetic extends script.base_script
             return false;
         }
         obj_id[] contents = getContents(inv);
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return false;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String templateName = getTemplateName(content);
-            if ((hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) && (!isGameObjectTypeOf(content, GOT_cybernetic_component))) {
+            if ((hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) && (!isGameObjectTypeOf(content, GOT_cybernetic_component)))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean hasCyberneticsToRepair(obj_id player) throws InterruptedException
     {
         return (hasCyberneticItem(player) || hasCyberneticItemInInventory(player));
     }
+
     public static obj_id[] getInstalledCybernetics(obj_id player) throws InterruptedException
     {
         obj_id[] allSlots = getAllWornItems(player, false);
         HashSet duplicateEater = new HashSet();
-        for (obj_id allSlot : allSlots) {
-            duplicateEater.add(allSlot);
-        }
+        Collections.addAll(duplicateEater, allSlots);
         obj_id[] contents = new obj_id[duplicateEater.size()];
         duplicateEater.toArray(contents);
         Vector cyberneticItems = new Vector();
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String templateName = getTemplateName(content);
-            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) {
+            if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic"))
+            {
                 cyberneticItems.addElement(content);
             }
         }
@@ -390,6 +411,7 @@ public class cybernetic extends script.base_script
         cyberneticItems.toArray(ret);
         return ret;
     }
+
     public static void applyCyberneticMods(obj_id player, obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -404,7 +426,7 @@ public class cybernetic extends script.base_script
             installedCybernetics[0] = templateName;
             utils.setScriptVar(player, "cyberneticItems", installedCybernetics);
         }
-        else 
+        else
         {
             String[] installedCybernetics = utils.getStringArrayScriptVar(player, "cyberneticItems");
             String[] newInstalledCybernetics = new String[installedCybernetics.length + 1];
@@ -415,6 +437,7 @@ public class cybernetic extends script.base_script
         applyRunBoostMod(player, templateName);
         grantSpecialCommands(player, templateName);
     }
+
     public static void removeCyberneticMods(obj_id player, obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -444,8 +467,10 @@ public class cybernetic extends script.base_script
             return;
         }
         Vector newInstallList = new Vector();
-        for (String installedCybernetic : installedCybernetics) {
-            if (!installedCybernetic.equals(templateName)) {
+        for (String installedCybernetic : installedCybernetics)
+        {
+            if (!installedCybernetic.equals(templateName))
+            {
                 newInstallList.addElement(installedCybernetic);
             }
         }
@@ -453,7 +478,7 @@ public class cybernetic extends script.base_script
         {
             utils.removeScriptVar(player, "cyberneticItems");
         }
-        else 
+        else
         {
             String[] ret = new String[newInstallList.size()];
             newInstallList.toArray(ret);
@@ -462,6 +487,7 @@ public class cybernetic extends script.base_script
         removeRunBoostMod(player, templateName);
         revokeSpecialCommands(player, templateName);
     }
+
     public static void setupArmorValues(obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -474,6 +500,7 @@ public class cybernetic extends script.base_script
         float conditionAmount = parms.getFloat("conditionAmount");
         armor.setArmorDataPercent(cyberneticItem, -1, -1, protectionAmount, conditionAmount);
     }
+
     public static void applyRunBoostMod(obj_id player, String templateName) throws InterruptedException
     {
         String moveBuff = dataTableGetString(CYBORG_TABLE, templateName, "moveRateBuff");
@@ -483,6 +510,7 @@ public class cybernetic extends script.base_script
         }
         buff.applyBuff(player, moveBuff);
     }
+
     public static void removeRunBoostMod(obj_id player, String templateName) throws InterruptedException
     {
         String moveBuff = dataTableGetString(CYBORG_TABLE, templateName, "moveRateBuff");
@@ -492,6 +520,7 @@ public class cybernetic extends script.base_script
         }
         buff.removeBuff(player, moveBuff);
     }
+
     public static void grantSpecialCommands(obj_id player, String templateName) throws InterruptedException
     {
         String specialCommands = dataTableGetString(CYBORG_TABLE, templateName, "specialCommand");
@@ -504,6 +533,7 @@ public class cybernetic extends script.base_script
             grantCommand(player, specialCommands);
         }
     }
+
     public static void revokeSpecialCommands(obj_id player, String templateName) throws InterruptedException
     {
         String specialCommands = dataTableGetString(CYBORG_TABLE, templateName, "specialCommand");
@@ -511,8 +541,9 @@ public class cybernetic extends script.base_script
         {
             return;
         }
-        while (hasCommand(player, specialCommands))revokeCommand(player, specialCommands);
+        while (hasCommand(player, specialCommands)) revokeCommand(player, specialCommands);
     }
+
     public static void setHueColor(obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -522,6 +553,7 @@ public class cybernetic extends script.base_script
             hue.setColor(cyberneticItem, "/private/index_color_1", hueColor);
         }
     }
+
     public static float getThrowRangeMod(obj_id player, float maxRange) throws InterruptedException
     {
         float rangeMod = getSkillStatMod(player, "cybernetic_throw_range");
@@ -531,6 +563,7 @@ public class cybernetic extends script.base_script
         }
         return maxRange;
     }
+
     public static float getRangedRangeMod(obj_id player, float maxRange) throws InterruptedException
     {
         float rangeMod = getSkillStatMod(player, "cybernetic_ranged_range");
@@ -540,6 +573,7 @@ public class cybernetic extends script.base_script
         }
         return maxRange;
     }
+
     public static float getCyberneticHealingMod(obj_id player, float maxHealMod) throws InterruptedException
     {
         float healMod = getSkillStatMod(player, "cybernetic_healing_mod");
@@ -550,6 +584,7 @@ public class cybernetic extends script.base_script
         }
         return maxHealMod;
     }
+
     public static float getCyberneticRangedAccuracyMod(obj_id player, float baseAccuracy) throws InterruptedException
     {
         float accMod = getSkillStatMod(player, "cybernetic_ranged_acc");
@@ -560,6 +595,7 @@ public class cybernetic extends script.base_script
         }
         return baseAccuracy;
     }
+
     public static float getCyberneticMeleeAccuracyMod(obj_id player, float baseAccuracy) throws InterruptedException
     {
         float accMod = getSkillStatMod(player, "cybernetic_melee_acc");
@@ -570,6 +606,7 @@ public class cybernetic extends script.base_script
         }
         return baseAccuracy;
     }
+
     public static float getCyberneticMeleeDefenseMod(obj_id player, float baseDefense) throws InterruptedException
     {
         float defMod = getSkillStatMod(player, "cybernetic_melee_def");
@@ -580,10 +617,12 @@ public class cybernetic extends script.base_script
         }
         return baseDefense;
     }
+
     public static boolean hasCommandoLegs(obj_id player) throws InterruptedException
     {
         return (getSkillStatMod(player, "cybernetic_heavy_weapon_legs") != 0);
     }
+
     public static void grantCyberneticSkillMods(obj_id player, obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -637,6 +676,7 @@ public class cybernetic extends script.base_script
             applySkillStatisticModifier(player, "cybernetic_heavy_weapon_legs", skillMod);
         }
     }
+
     public static void revokeCyberneticSkillMods(obj_id player, obj_id cyberneticItem) throws InterruptedException
     {
         String templateName = getTemplateName(cyberneticItem);
@@ -686,6 +726,7 @@ public class cybernetic extends script.base_script
             applySkillStatisticModifier(player, "cybernetic_heavy_weapon_legs", (-1 * skillMod));
         }
     }
+
     public static void validateSkillMods(obj_id player) throws InterruptedException
     {
         int skillMod = getSkillStatMod(player, "cybernetic_throw_range");
@@ -729,19 +770,22 @@ public class cybernetic extends script.base_script
             applySkillStatisticModifier(player, "cybernetic_heavy_weapon_legs", (-1 * skillMod));
         }
         obj_id[] cybernetics = getInstalledCybernetics(player);
-        if (cybernetics != null && cybernetics.length > 0)
+        if (cybernetics != null)
         {
-            for (obj_id cybernetic : cybernetics) {
+            for (obj_id cybernetic : cybernetics)
+            {
                 grantCyberneticSkillMods(player, cybernetic);
             }
         }
         movement.refresh(player);
     }
+
     public static void revokeAllOccurancesOfCommand(obj_id player, String commandName) throws InterruptedException
     {
         revokeCommand(player, commandName);
-        while (hasCommand(player, commandName))revokeCommand(player, commandName);
+        while (hasCommand(player, commandName)) revokeCommand(player, commandName);
     }
+
     public static boolean doCyborgRevive(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -779,6 +823,7 @@ public class cybernetic extends script.base_script
         messageTo(player, "handleReviveStand", null, 5, false);
         return true;
     }
+
     public static obj_id getSpecificCybernetic(obj_id player, String commandName) throws InterruptedException
     {
         int colNum = dataTableFindColumnNumber(CYBORG_TABLE, "specialCommand");
@@ -801,14 +846,17 @@ public class cybernetic extends script.base_script
         {
             return null;
         }
-        for (obj_id obj_id : installed) {
-            if (itemName.equals(getTemplateName(obj_id))) {
+        for (obj_id obj_id : installed)
+        {
+            if (itemName.equals(getTemplateName(obj_id)))
+            {
                 return obj_id;
             }
         }
         revokeAllOccurancesOfCommand(player, commandName);
         return null;
     }
+
     public static boolean hasUndamagedCybernetic(obj_id player, String commandName) throws InterruptedException
     {
         obj_id cyberneticItem = getSpecificCybernetic(player, commandName);
@@ -825,6 +873,7 @@ public class cybernetic extends script.base_script
         sendSystemMessage(player, new string_id("ep3/cybernetic", "too_damaged"));
         return false;
     }
+
     public static void verifyInstallPayment(obj_id npc, obj_id player, int amt, obj_id item) throws InterruptedException
     {
         prose_package prompt = new prose_package();
@@ -836,6 +885,7 @@ public class cybernetic extends script.base_script
         int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, sui.MSG_QUESTION, "handleInstallPaymentConfirmed");
         sui.setPid(player, pid, PID_VAR);
     }
+
     public static void verifyUnInstallPayment(obj_id npc, obj_id player, int amt, obj_id item) throws InterruptedException
     {
         prose_package prompt = new prose_package();
@@ -847,6 +897,7 @@ public class cybernetic extends script.base_script
         int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, sui.MSG_QUESTION, "handleUnInstallPaymentConfirmed");
         sui.setPid(player, pid, PID_VAR);
     }
+
     public static void verifyRepairPayment(obj_id npc, obj_id player, int amt, obj_id item) throws InterruptedException
     {
         prose_package prompt = new prose_package();
@@ -858,6 +909,7 @@ public class cybernetic extends script.base_script
         int pid = sui.msgbox(player, player, prompt, sui.OK_CANCEL, title, sui.MSG_QUESTION, "handleRepairPaymentConfirmed");
         sui.setPid(player, pid, PID_VAR);
     }
+
     public static boolean canInstallSelectedCybernetic(obj_id player, obj_id cybernetic) throws InterruptedException
     {
         int playerInstalledCount = getPlayerInstalledCyberneticCount(player);

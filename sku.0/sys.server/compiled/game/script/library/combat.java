@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class combat extends script.base_script
 {
-    public combat()
-    {
-    }
     public static final float IN_COMBAT_REGEN_MULT = 1.0f;
     public static final float OUT_COMBAT_REGEN_MULT = 4.0f;
     public static final int PLAYER_COMBAT_BASE_DAMAGE = 60;
@@ -41,23 +38,23 @@ public class combat extends script.base_script
     public static final int B_MELEE = 0x10000000;
     public static final int B_ALL = 0x20000000;
     public static final int B_ALL_LIGHTSABERS = 0x40000000;
-    public static final int[] weaponTypeToBitValueMap = 
-    {
-        B_ALL | B_RANGED | B_RIFLE,
-        B_ALL | B_RANGED | B_CARBINE,
-        B_ALL | B_RANGED | B_PISTOL,
-        B_ALL | B_RANGED | B_HEAVY,
-        B_ALL | B_MELEE | B_1HAND_MELEE,
-        B_ALL | B_MELEE | B_2HAND_MELEE,
-        B_ALL | B_MELEE | B_UNARMED,
-        B_ALL | B_MELEE | B_POLEARM,
-        B_ALL | B_RANGED | B_THROWN,
-        B_ALL | B_ALL_LIGHTSABERS | B_1HAND_LIGHTSABER,
-        B_ALL | B_ALL_LIGHTSABERS | B_2HAND_LIGHTSABER,
-        B_ALL | B_ALL_LIGHTSABERS | B_POLEARM_LIGHTSABER,
-        B_ALL | B_RANGED | B_HEAVY | B_GROUND_TARGETTING,
-        B_ALL | B_RANGED | B_HEAVY | B_DIRECTIONAL
-    };
+    public static final int[] weaponTypeToBitValueMap =
+            {
+                    B_ALL | B_RANGED | B_RIFLE,
+                    B_ALL | B_RANGED | B_CARBINE,
+                    B_ALL | B_RANGED | B_PISTOL,
+                    B_ALL | B_RANGED | B_HEAVY,
+                    B_ALL | B_MELEE | B_1HAND_MELEE,
+                    B_ALL | B_MELEE | B_2HAND_MELEE,
+                    B_ALL | B_MELEE | B_UNARMED,
+                    B_ALL | B_MELEE | B_POLEARM,
+                    B_ALL | B_RANGED | B_THROWN,
+                    B_ALL | B_ALL_LIGHTSABERS | B_1HAND_LIGHTSABER,
+                    B_ALL | B_ALL_LIGHTSABERS | B_2HAND_LIGHTSABER,
+                    B_ALL | B_ALL_LIGHTSABERS | B_POLEARM_LIGHTSABER,
+                    B_ALL | B_RANGED | B_HEAVY | B_GROUND_TARGETTING,
+                    B_ALL | B_RANGED | B_HEAVY | B_DIRECTIONAL
+            };
     public static final int EFFECT_MAX_DURATION = 180;
     public static final float DELAY_EFFECT_TIMER = 30.0f;
     public static final int TKA_JEDI_ARMOR_HARD_CAP = 9000;
@@ -113,39 +110,39 @@ public class combat extends script.base_script
     public static final String DEFENDER_DODGE = DEFENDER_DATA + ".dodge_chance";
     public static final String DEFENDER_EVADE = DEFENDER_DATA + ".evade_chance";
     public static final String DEFENDER_BLOCK = DEFENDER_DATA + ".block_chance";
-    public static final String[][] ARMOR_SLOT_LOCATIONS = 
-    {
-        
-        {
-            "chest2",
-            "chest2"
-        },
-        
-        {
-            "hat",
-            "hat"
-        },
-        
-        {
-            "bicep_r",
-            "bracer_upper_r"
-        },
-        
-        {
-            "bicep_l",
-            "bracer_upper_l"
-        },
-        
-        {
-            "pants2",
-            "pants2"
-        },
-        
-        {
-            "pants2",
-            "pants2"
-        }
-    };
+    public static final String[][] ARMOR_SLOT_LOCATIONS =
+            {
+
+                    {
+                            "chest2",
+                            "chest2"
+                    },
+
+                    {
+                            "hat",
+                            "hat"
+                    },
+
+                    {
+                            "bicep_r",
+                            "bracer_upper_r"
+                    },
+
+                    {
+                            "bicep_l",
+                            "bracer_upper_l"
+                    },
+
+                    {
+                            "pants2",
+                            "pants2"
+                    },
+
+                    {
+                            "pants2",
+                            "pants2"
+                    }
+            };
     public static final String PSG_SLOT_LOCATION = "utility_belt";
     public static final float PSG_BASE_DMG_PER_HIT = 50.0f;
     public static final float PSG_DAMAGE_SCALE = 200.0f;
@@ -165,23 +162,23 @@ public class combat extends script.base_script
     public static final int DISTANCE_FARTHEST = 13;
     public static final String NONCOMBAT_DATATABLE = "datatables/combat/non_combat_data.iff";
     public static final String WEAPON_LEVEL_TABLE = "datatables/combat/weapon_level.iff";
-    public static final int[] RANGED_WEAPONS = 
-    {
-        WEAPON_TYPE_RIFLE,
-        WEAPON_TYPE_LIGHT_RIFLE,
-        WEAPON_TYPE_PISTOL,
-        WEAPON_TYPE_HEAVY
-    };
-    public static final int[] MELEE_WEAPONS = 
-    {
-        WEAPON_TYPE_1HAND_MELEE,
-        WEAPON_TYPE_2HAND_MELEE,
-        WEAPON_TYPE_UNARMED,
-        WEAPON_TYPE_POLEARM,
-        WEAPON_TYPE_WT_1HAND_LIGHTSABER,
-        WEAPON_TYPE_WT_2HAND_LIGHTSABER,
-        WEAPON_TYPE_WT_POLEARM_LIGHTSABER
-    };
+    public static final int[] RANGED_WEAPONS =
+            {
+                    WEAPON_TYPE_RIFLE,
+                    WEAPON_TYPE_LIGHT_RIFLE,
+                    WEAPON_TYPE_PISTOL,
+                    WEAPON_TYPE_HEAVY
+            };
+    public static final int[] MELEE_WEAPONS =
+            {
+                    WEAPON_TYPE_1HAND_MELEE,
+                    WEAPON_TYPE_2HAND_MELEE,
+                    WEAPON_TYPE_UNARMED,
+                    WEAPON_TYPE_POLEARM,
+                    WEAPON_TYPE_WT_1HAND_LIGHTSABER,
+                    WEAPON_TYPE_WT_2HAND_LIGHTSABER,
+                    WEAPON_TYPE_WT_POLEARM_LIGHTSABER
+            };
     public static final String VAR_VOLLEY_GROUPS = "squadleader.volleyGroups";
     public static final String ID_VOLLEY_FIRE_PARTICLE = "squadleader.volleyFire";
     public static final int VOLLEY_INTERVAL = 30;
@@ -218,35 +215,51 @@ public class combat extends script.base_script
     public static final int DR_DEFENDER_GLANCE = 5;
     public static final int DR_DEFENDER_EVADE = 6;
     public static final int DR_ATTACKER_CRITICAL_2 = 7;
+    public static final int ACTION_SUCCESS = 0;
+    public static final int ACTION_INVALID_DATA = 1;
+    public static final int ACTION_INVALID_WEAPON = 2;
+    public static final int ACTION_TOO_TIRED = 3;
+
+    public combat()
+    {
+    }
+
     public static void sendCombatSpam(obj_id attacker, obj_id defender, obj_id weapon, combat_engine.hit_result result, string_id attackName, boolean sendToAttacker, boolean sendToDefender, boolean sendToBystanders) throws InterruptedException
     {
         sendCombatSpam(attacker, defender, weapon, result, attackName, sendToAttacker, sendToDefender, sendToBystanders, COMBAT_RESULT_GENERIC);
     }
+
     public static void sendCombatSpam(obj_id attacker, obj_id defender, string_id weapon, combat_engine.hit_result result, string_id attackName, boolean sendToAttacker, boolean sendToDefender, boolean sendToBystanders) throws InterruptedException
     {
         sendCombatSpam(attacker, defender, weapon, result, attackName, sendToAttacker, sendToDefender, sendToBystanders, COMBAT_RESULT_GENERIC);
     }
+
     public static void sendCombatSpamMessage(obj_id player, string_id message) throws InterruptedException
     {
         sendCombatSpamMessage(player, message, COMBAT_RESULT_GENERIC);
     }
+
     public static void sendCombatSpamMessage(obj_id attacker, obj_id defender, string_id message, boolean sendToAttacker, boolean sendToDefender, boolean sendToBystanders) throws InterruptedException
     {
         sendCombatSpamMessage(attacker, defender, message, sendToAttacker, sendToDefender, sendToBystanders, COMBAT_RESULT_GENERIC);
     }
+
     public static void sendCombatSpamMessageProse(obj_id player, prose_package pp) throws InterruptedException
     {
         sendCombatSpamMessageProse(player, pp, COMBAT_RESULT_GENERIC);
     }
+
     public static void sendCombatSpamMessageProse(obj_id attacker, obj_id defender, prose_package pp, boolean sendToAttacker, boolean sendToDefender, boolean sendToBystanders) throws InterruptedException
     {
         sendCombatSpamMessageProse(attacker, defender, pp, sendToAttacker, sendToDefender, sendToBystanders, COMBAT_RESULT_GENERIC);
     }
+
     public static void doBasicCombatSpam(String attackName, attacker_results attackerResults, defender_results[] defenderResults, hit_result[] hitData) throws InterruptedException
     {
         string_id attackId = new string_id("cmd_n", attackName);
         doBasicCombatSpam(attackId, SID_NONE, null, attackerResults, defenderResults, hitData);
     }
+
     public static void doBasicCombatSpam(string_id attackId, string_id weaponId, obj_id weapon, attacker_results attackerResults, defender_results[] defenderResults, hit_result[] hitData) throws InterruptedException
     {
         if (isIdValid(weapon))
@@ -256,7 +269,7 @@ public class combat extends script.base_script
                 sendCombatSpam(attackerResults.id, defenderResults[i].id, weapon, hitData[i], attackId, true, true, true, defenderResults[i].result);
             }
         }
-        else 
+        else
         {
             for (int i = 0; i < defenderResults.length; ++i)
             {
@@ -264,31 +277,33 @@ public class combat extends script.base_script
             }
         }
     }
+
     public static boolean isAreaAttack(int attackType) throws InterruptedException
     {
-        if (attackType == CONE || attackType == AREA || attackType == TARGET_AREA)
-        {
-            return true;
-        }
-        return false;
+        return attackType == CONE || attackType == AREA || attackType == TARGET_AREA;
     }
+
     public static boolean breakMez(obj_id defender) throws InterruptedException
     {
         int[] buffs = buff.getAllBuffs(defender);
-        if (buffs == null || buffs.length == 0)
+        if (buffs == null)
         {
             return true;
         }
-        for (int b : buffs) {
-            for (int j = 1; j <= buff.MAX_EFFECTS; j++) {
+        for (int b : buffs)
+        {
+            for (int j = 1; j <= buff.MAX_EFFECTS; j++)
+            {
                 String effect = buff.getEffectParam(b, j);
-                if (effect.equals("delay_attack")) {
+                if (effect.equals("delay_attack"))
+                {
                     buff.removeBuff(defender, b);
                 }
             }
         }
         return true;
     }
+
     public static int getAiLevelDiff(obj_id attacker, obj_id defender) throws InterruptedException
     {
         obj_id master = null;
@@ -331,11 +346,13 @@ public class combat extends script.base_script
         defenderLevel += buffBonus;
         return (aiLevel - defenderLevel);
     }
+
     public static float getConBalanceScalar(int levelDiff) throws InterruptedException
     {
         float scale = (Math.abs(levelDiff) + AI_CON_SCALE_MULT) / (10.0f + AI_CON_SCALE_MULT);
         return scale;
     }
+
     public static int getWeaponDamage(obj_id objAttacker, obj_id objDefender, weapon_data cbtWeaponData, int intAttackerRoll, int intDefenderRoll) throws InterruptedException
     {
         int intFinalDamage = 0;
@@ -347,22 +364,23 @@ public class combat extends script.base_script
             {
                 return getAiDamage(objAttacker, objDefender, fltMinDamage, fltMaxDamage);
             }
-            else 
+            else
             {
-                return (int)rand(fltMinDamage, fltMinDamage + (fltMaxDamage - fltMinDamage));
+                return (int) rand(fltMinDamage, fltMinDamage + (fltMaxDamage - fltMinDamage));
             }
         }
         if (intAttackerRoll > intDefenderRoll)
         {
-            int intDamage = (int)rand(fltMinDamage + (fltMaxDamage - fltMinDamage), fltMaxDamage);
+            int intDamage = (int) rand(fltMinDamage + (fltMaxDamage - fltMinDamage), fltMaxDamage);
             return intDamage;
         }
-        else 
+        else
         {
-            int intDamage = (int)(rand(fltMinDamage, fltMinDamage + (fltMaxDamage - fltMinDamage)));
+            int intDamage = (int) (rand(fltMinDamage, fltMinDamage + (fltMaxDamage - fltMinDamage)));
             return intDamage;
         }
     }
+
     public static int getAiDamage(obj_id attacker, obj_id defender, float minDamage, float maxDamage) throws InterruptedException
     {
         if (!isPlayer(attacker))
@@ -389,7 +407,7 @@ public class combat extends script.base_script
                     maxDamage = maxCap;
                 }
             }
-            else 
+            else
             {
                 float maxDmgMod = 1.0f + (levelDiffMod / 10.0f);
                 combatLog(attacker, defender, "modifyAiRawDamage", "AI Max Damage Mod = " + maxDmgMod);
@@ -420,9 +438,10 @@ public class combat extends script.base_script
                 }
             }
         }
-        int intDamage = (int)rand(minDamage, maxDamage);
+        int intDamage = (int) rand(minDamage, maxDamage);
         return intDamage;
     }
+
     public static void assignDamageCredit(obj_id attacker, obj_id defender, weapon_data weaponData, int damage) throws InterruptedException
     {
         String xpType = xp.getWeaponXpType(weaponData.weaponType);
@@ -447,19 +466,18 @@ public class combat extends script.base_script
         }
         xp.updateCombatXpList(defender, attacker, xpType, damage);
     }
+
     public static boolean expertiseRandomBuffChance(obj_id attacker, combat_data actionData) throws InterruptedException
     {
         String specialLine = actionData.specialLine;
         if (getSkillStatisticModifier(attacker, "expertise_use_buff_chance_line_" + specialLine) > 0 || getSkillStatisticModifier(attacker, "private_use_buff_chance_line_" + specialLine) > 0)
         {
             int chance = getSkillStatisticModifier(attacker, "expertise_buff_chance_line_" + specialLine);
-            if (rand(0, 99) > chance)
-            {
-                return false;
-            }
+            return rand(0, 99) <= chance;
         }
         return true;
     }
+
     public static boolean applyDefenderCombatBuffs(obj_id attacker, obj_id defender, weapon_data weaponData, combat_data actionData) throws InterruptedException
     {
         String actionName = actionData.actionName;
@@ -479,7 +497,7 @@ public class combat extends script.base_script
         if (effectName.equals("dot"))
         {
             effectName = buff.getEffectParam(buffName, 1);
-            String type = effectName.substring((effectName.lastIndexOf("_") + 1), effectName.length());
+            String type = effectName.substring((effectName.lastIndexOf("_") + 1));
             if (dot.attemptDotResist(defender, type, 100, true))
             {
                 return false;
@@ -492,6 +510,7 @@ public class combat extends script.base_script
         buffDuration += getExpertiseBuffDurationMods(attacker, actionData, buffName, buffDuration);
         return buff.applyBuff(defender, attacker, buffName, buffDuration, buffStrength);
     }
+
     public static boolean applyAttackerCombatBuffs(obj_id attacker, combat_data actionData) throws InterruptedException
     {
         String actionName = actionData.actionName;
@@ -510,6 +529,7 @@ public class combat extends script.base_script
         buffDuration += getExpertiseBuffDurationMods(attacker, actionData, buffName, buffDuration);
         return buff.applyBuff(attacker, attacker, buffName, buffDuration, buffStrength);
     }
+
     public static float getExpertiseBuffDurationMods(obj_id buffCaster, combat_data actionData, String buffName, float buffDuration) throws InterruptedException
     {
         float expertiseBuffDurationMod = 0.0f;
@@ -529,6 +549,7 @@ public class combat extends script.base_script
         expertiseBuffDurationMod += getEnhancedSkillStatisticModifierUncapped(buffCaster, "expertise_buff_duration_single_" + toLower(buffName));
         return expertiseBuffDurationMod;
     }
+
     public static boolean applyCombatMovementModifier(obj_id attacker, obj_id defender, String actionName) throws InterruptedException
     {
         boolean isRoot = movement.isRoot(actionName);
@@ -549,7 +570,7 @@ public class combat extends script.base_script
         {
             lastMovementMod = utils.getIntScriptVar(defender, "combat.movement." + movementType + ".time");
         }
-        else 
+        else
         {
             lastMovementMod = utils.getIntScriptVar(defender, "combat.movement." + movementType + "." + attacker + ".time");
         }
@@ -588,12 +609,13 @@ public class combat extends script.base_script
         {
             utils.setScriptVar(defender, "combat.movement." + movementType + ".time", getGameTime());
         }
-        else 
+        else
         {
             utils.setScriptVar(defender, "combat.movement." + movementType + "." + attacker + ".time", getGameTime());
         }
         return true;
     }
+
     public static void removeCombatMovementModifierEffect(obj_id self, String buffName) throws InterruptedException
     {
         if (buffName == null || buffName.equals(""))
@@ -638,6 +660,7 @@ public class combat extends script.base_script
             playClientEffectObj(self, "sound/sta_snared_off.snd", self, "");
         }
     }
+
     public static void removeCombatBuffEffect(obj_id self, String buffName) throws InterruptedException
     {
         for (int i = 1; i <= buff.MAX_EFFECTS; i++)
@@ -651,6 +674,7 @@ public class combat extends script.base_script
             }
         }
     }
+
     public static boolean gainCombatActionAttribute(obj_id self, int action) throws InterruptedException
     {
         if (getMaxAction(self) == getAction(self))
@@ -665,39 +689,32 @@ public class combat extends script.base_script
         setAction(self, newAction);
         return true;
     }
+
     public static boolean drainCombatActionAttributes(obj_id self, int[] actionCost) throws InterruptedException
     {
-        if (!(drainAttributes(self, actionCost[1], actionCost[2])))
-        {
-            return false;
-        }
-        return true;
+        return drainAttributes(self, actionCost[1], actionCost[2]);
     }
+
     public static boolean canDrainCombatActionAttributes(obj_id self, int actionCost) throws InterruptedException
     {
-        int[] tempArray = 
-        {
-            0,
-            actionCost,
-            0
-        };
+        int[] tempArray =
+                {
+                        0,
+                        actionCost,
+                        0
+                };
         return canDrainCombatActionAttributes(self, tempArray);
     }
+
     public static boolean canDrainCombatActionAttributes(obj_id self, int[] actionCost) throws InterruptedException
     {
         if (actionCost[1] > 0)
         {
-            if (testDrainAttribute(self, ACTION, actionCost[1]) < 0)
-            {
-                return false;
-            }
+            return testDrainAttribute(self, ACTION, actionCost[1]) >= 0;
         }
         return true;
     }
-    public static final int ACTION_SUCCESS = 0;
-    public static final int ACTION_INVALID_DATA = 1;
-    public static final int ACTION_INVALID_WEAPON = 2;
-    public static final int ACTION_TOO_TIRED = 3;
+
     public static int canPerformAction(String actionName, obj_id self) throws InterruptedException
     {
         actionName = getBestAction(self, actionName);
@@ -719,10 +736,12 @@ public class combat extends script.base_script
         }
         return ACTION_SUCCESS;
     }
+
     public static boolean isCommandoBonus(obj_id self, weapon_data weaponData, int commandType) throws InterruptedException
     {
         return isPlayer(self) && utils.isProfession(self, utils.COMMANDO) && isHeavyWeapon(weaponData) && (commandType == LEFT_CLICK_DEFAULT);
     }
+
     public static int[] getActionCost(obj_id self, weapon_data weaponData, dictionary actionData) throws InterruptedException
     {
         int[] cost = new int[3];
@@ -732,9 +751,9 @@ public class combat extends script.base_script
         actionCost = actionData.getFloat("actionCost");
         if (isCommandoBonus(self, weaponData, actionData.getInt("commandType")))
         {
-            cost[0] = (int)(0);
-            cost[1] = (int)(0);
-            cost[2] = (int)(0);
+            cost[0] = 0;
+            cost[1] = 0;
+            cost[2] = 0;
             return cost;
         }
         String specialLine = actionData.getString("specialLine");
@@ -752,9 +771,9 @@ public class combat extends script.base_script
                 pp = prose.setStringId(pp, new string_id("cbt_spam", "freeshot"));
                 pp = prose.setTU(pp, self);
                 sendCombatSpamMessageProse(self, self, pp, true, true, true, COMBAT_RESULT_GENERIC);
-                cost[0] = (int)(0);
-                cost[1] = (int)(0);
-                cost[2] = (int)(0);
+                cost[0] = 0;
+                cost[1] = 0;
+                cost[2] = 0;
                 return cost;
             }
         }
@@ -786,40 +805,40 @@ public class combat extends script.base_script
             switch (weaponData.weaponType)
             {
                 case WEAPON_TYPE_PISTOL:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_pistol");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_pistol");
+                    break;
                 case WEAPON_TYPE_RIFLE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_rifle");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_rifle");
+                    break;
                 case WEAPON_TYPE_LIGHT_RIFLE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_carbine");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_carbine");
+                    break;
                 case WEAPON_TYPE_HEAVY:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_GROUND_TARGETTING:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_DIRECTIONAL:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_1HAND_MELEE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_1h");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_1h");
+                    break;
                 case WEAPON_TYPE_2HAND_MELEE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_2h");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_2h");
+                    break;
                 case WEAPON_TYPE_UNARMED:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_unarmed");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_unarmed");
+                    break;
                 case WEAPON_TYPE_POLEARM:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_polearm");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_polearm");
+                    break;
                 case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
                 case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
                 case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_lightsaber");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_lightsaber");
+                    break;
             }
             actionCost = actionCost - (actionCost * (expertiseActionCostMod / 100.0f));
             if (actionCost < 0)
@@ -831,7 +850,7 @@ public class combat extends script.base_script
         {
             float expertiseActionCostMod = 0;
             int actionTotal = getLevel(self) * 100;
-            actionCost = actionTotal * (float)(-1.0f * ((float)actionCost / 100.0f));
+            actionCost = actionTotal * (-1.0f * (actionCost / 100.0f));
             expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_all");
             if (specialLine != null && !specialLine.equals(""))
             {
@@ -851,9 +870,9 @@ public class combat extends script.base_script
             {
                 utils.setScriptVar(self, "buff.action_burn.timestamp", rightNow);
                 float burnRatio = utils.getFloatScriptVar(self, "buff.action_burn.value");
-                float actionBurn = (float)actionCost * (burnRatio / 100);
+                float actionBurn = actionCost * (burnRatio / 100);
                 int currentHealth = getHealth(self);
-                int modifiedHealth = currentHealth - (int)actionBurn;
+                int modifiedHealth = currentHealth - (int) actionBurn;
                 if (modifiedHealth < 1)
                 {
                     modifiedHealth = 1;
@@ -869,15 +888,16 @@ public class combat extends script.base_script
                 showFlyTextPrivateProseWithFlags(self, burnBuffOwner, pp, 1.5f, colors.ORANGERED, FLY_TEXT_FLAG_IS_CRITICAL_HIT);
                 pp = prose.setStringId(pp, new string_id("cbt_spam", "crippling_pain"));
                 pp = prose.setTU(pp, self);
-                pp = prose.setDI(pp, (int)actionBurn);
+                pp = prose.setDI(pp, (int) actionBurn);
                 sendCombatSpamMessageProse(self, burnBuffOwner, pp, true, true, true, COMBAT_RESULT_DEBUFF);
             }
         }
-        cost[0] = (int)(0);
-        cost[1] = (int)(actionCost);
-        cost[2] = (int)(0);
+        cost[0] = 0;
+        cost[1] = (int) (actionCost);
+        cost[2] = 0;
         return cost;
     }
+
     public static int[] getActionCost(obj_id self, weapon_data weaponData, combat_data actionData) throws InterruptedException
     {
         int[] cost = new int[3];
@@ -887,15 +907,15 @@ public class combat extends script.base_script
         actionCost = actionData.actionCost;
         if (isCommandoBonus(self, weaponData, actionData.commandType))
         {
-            cost[0] = (int)(0);
-            cost[1] = (int)(0);
-            cost[2] = (int)(0);
+            cost[0] = 0;
+            cost[1] = 0;
+            cost[2] = 0;
             return cost;
         }
         if (beast_lib.isBeast(self))
         {
             cost[0] = 0;
-            cost[1] = (int)actionData.vigorCost;
+            cost[1] = (int) actionData.vigorCost;
             cost[2] = 0;
             return cost;
         }
@@ -914,9 +934,9 @@ public class combat extends script.base_script
                 pp = prose.setStringId(pp, new string_id("cbt_spam", "freeshot"));
                 pp = prose.setTU(pp, self);
                 sendCombatSpamMessageProse(self, self, pp, true, true, true, COMBAT_RESULT_GENERIC);
-                cost[0] = (int)(0);
-                cost[1] = (int)(0);
-                cost[2] = (int)(0);
+                cost[0] = 0;
+                cost[1] = 0;
+                cost[2] = 0;
                 return cost;
             }
         }
@@ -951,40 +971,40 @@ public class combat extends script.base_script
             switch (weaponData.weaponType)
             {
                 case WEAPON_TYPE_PISTOL:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_pistol");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_pistol");
+                    break;
                 case WEAPON_TYPE_RIFLE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_rifle");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_rifle");
+                    break;
                 case WEAPON_TYPE_LIGHT_RIFLE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_carbine");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_carbine");
+                    break;
                 case WEAPON_TYPE_HEAVY:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_GROUND_TARGETTING:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_DIRECTIONAL:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_heavy");
+                    break;
                 case WEAPON_TYPE_1HAND_MELEE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_1h");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_1h");
+                    break;
                 case WEAPON_TYPE_2HAND_MELEE:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_2h");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_2h");
+                    break;
                 case WEAPON_TYPE_UNARMED:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_unarmed");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_unarmed");
+                    break;
                 case WEAPON_TYPE_POLEARM:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_polearm");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_polearm");
+                    break;
                 case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
                 case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
                 case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-                expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_lightsaber");
-                break;
+                    expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_lightsaber");
+                    break;
             }
             actionCost = actionCost - (actionCost * (expertiseActionCostMod / 100.0f));
             if (actionCost < 0)
@@ -996,7 +1016,7 @@ public class combat extends script.base_script
         {
             float expertiseActionCostMod = 0;
             int actionTotal = getLevel(self) * 100;
-            actionCost = actionTotal * (float)(-1.0f * ((float)actionCost / 100.0f));
+            actionCost = actionTotal * (-1.0f * (actionCost / 100.0f));
             expertiseActionCostMod += getEnhancedSkillStatisticModifierUncapped(self, "expertise_action_all");
             if (specialLine != null && !specialLine.equals(""))
             {
@@ -1016,9 +1036,9 @@ public class combat extends script.base_script
             {
                 utils.setScriptVar(self, "buff.action_burn.timestamp", rightNow);
                 float burnRatio = utils.getFloatScriptVar(self, "buff.action_burn.value");
-                float actionBurn = (float)actionCost * (burnRatio / 100);
+                float actionBurn = actionCost * (burnRatio / 100);
                 int currentHealth = getHealth(self);
-                int modifiedHealth = currentHealth - (int)actionBurn;
+                int modifiedHealth = currentHealth - (int) actionBurn;
                 if (modifiedHealth < 1)
                 {
                     modifiedHealth = 1;
@@ -1034,24 +1054,27 @@ public class combat extends script.base_script
                 showFlyTextPrivateProseWithFlags(self, burnBuffOwner, pp, 1.5f, colors.ORANGERED, FLY_TEXT_FLAG_IS_CRITICAL_HIT);
                 pp = prose.setStringId(pp, new string_id("cbt_spam", "crippling_pain"));
                 pp = prose.setTU(pp, self);
-                pp = prose.setDI(pp, (int)actionBurn);
+                pp = prose.setDI(pp, (int) actionBurn);
                 sendCombatSpamMessageProse(self, burnBuffOwner, pp, true, true, true, COMBAT_RESULT_DEBUFF);
             }
         }
-        cost[0] = (int)(0);
-        cost[1] = (int)(actionCost);
-        cost[2] = (int)(0);
+        cost[0] = 0;
+        cost[1] = (int) (actionCost);
+        cost[2] = 0;
         combatLog(self, null, "getActionCost", "Final Action cost = [" + cost[0] + ", " + cost[1] + ", " + cost[2] + "]");
         return cost;
     }
+
     public static int getForceCost(obj_id self, weapon_data weaponData, dictionary actionData) throws InterruptedException
     {
         return 0;
     }
+
     public static int getForceCost(obj_id self, weapon_data weaponData, combat_data actionData) throws InterruptedException
     {
         return 0;
     }
+
     public static boolean validateTarget(obj_id target, int targetCheck) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -1062,31 +1085,32 @@ public class combat extends script.base_script
         switch (targetCheck)
         {
             case VALID_TARGET_MOB:
-            return isMob(target) && !vehicle.isVehicle(target);
+                return isMob(target) && !vehicle.isVehicle(target);
             case VALID_TARGET_CREATURE:
-            return ai_lib.isMonster(target);
+                return ai_lib.isMonster(target);
             case VALID_TARGET_NPC:
-            return ai_lib.isNpc(target);
+                return ai_lib.isNpc(target);
             case VALID_TARGET_DROID:
-            return ai_lib.isDroid(target) || ai_lib.isAndroid(target);
+                return ai_lib.isDroid(target) || ai_lib.isAndroid(target);
             case VALID_TARGET_PVP:
-            return pvpCanAttack(self, target);
+                return pvpCanAttack(self, target);
             case VALID_TARGET_JEDI:
-            if (isPlayer(target))
-            {
-                return isJedi(target);
-            }
-            else 
-            {
-                return jedi.isLightsaber(getCurrentWeapon(target));
-            }
+                if (isPlayer(target))
+                {
+                    return isJedi(target);
+                }
+                else
+                {
+                    return jedi.isLightsaber(getCurrentWeapon(target));
+                }
             case VALID_TARGET_DEAD:
-            return isDead(target);
+                return isDead(target);
             case VALID_TARGET_FRIEND:
-            return pvpCanHelp(self, target);
+                return pvpCanHelp(self, target);
         }
         return true;
     }
+
     public static String getCreatureAnimationName(obj_id self, String playbackName, hit_result hitData, weapon_data weaponData) throws InterruptedException
     {
         String animName = "";
@@ -1095,7 +1119,7 @@ public class combat extends script.base_script
         {
             animName = "droid_attack";
         }
-        else 
+        else
         {
             if (playbackName.endsWith("ranged"))
             {
@@ -1105,7 +1129,7 @@ public class combat extends script.base_script
             {
                 animName = "creature_attack";
             }
-            else 
+            else
             {
                 animName = "creature_attack_special_" + rand(1, 2);
             }
@@ -1115,16 +1139,18 @@ public class combat extends script.base_script
         {
             animName += "_medium";
         }
-        else 
+        else
         {
             animName += "_light";
         }
         return animName;
     }
+
     public static boolean checkWeaponCerts(obj_id player, weapon_data weaponData) throws InterruptedException
     {
         return checkWeaponCerts(player, weaponData, true);
     }
+
     public static boolean checkWeaponCerts(obj_id player, weapon_data weaponData, boolean verbose) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -1148,17 +1174,16 @@ public class combat extends script.base_script
                     return false;
                 }
             }
-            if (buff.hasBuff(player, "forceRun_1") || buff.hasBuff(player, "forceRun_2"))
-            {
-                return false;
-            }
+            return !buff.hasBuff(player, "forceRun_1") && !buff.hasBuff(player, "forceRun_2");
         }
         return true;
     }
+
     public static int applyArmorProtection(obj_id attacker, obj_id defender, weapon_data weaponData, hit_result hitData, float bypassArmor) throws InterruptedException
     {
         return applyArmorProtection(attacker, defender, weaponData, hitData, bypassArmor, 0.0f);
     }
+
     public static int applyArmorProtection(obj_id attacker, obj_id defender, weapon_data weaponData, hit_result hitData, float bypassArmor, float expertiseDamageBonus) throws InterruptedException
     {
         float baseDamage = hitData.damage;
@@ -1207,7 +1232,7 @@ public class combat extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             baseProtection = getNpcArmorProtection(defender, weaponData.damageType);
             baseProtection *= neglectMod;
@@ -1215,7 +1240,7 @@ public class combat extends script.base_script
         }
         if (bypassArmor == 0 && strikethrough)
         {
-            float strikethroughRating = (float)(getStrikethroughValue(attacker, defender) / 100.0f);
+            float strikethroughRating = getStrikethroughValue(attacker, defender) / 100.0f;
             bypassArmor = rand(strikethroughRating / 2.0f, strikethroughRating);
             hitData.strikethroughAmmount = bypassArmor * 100.0f;
         }
@@ -1236,7 +1261,7 @@ public class combat extends script.base_script
         {
             basePsgProtection = scalePsgProtectionByBaseProtection(basePsgProtection, baseProtection);
         }
-        int baseDmgAbsorbed = (int)(baseDamage * (baseProtection + basePsgProtection));
+        int baseDmgAbsorbed = (int) (baseDamage * (baseProtection + basePsgProtection));
         baseDamage -= baseDmgAbsorbed;
         int blockValue = 0;
         if (hitData.blockResult)
@@ -1244,10 +1269,10 @@ public class combat extends script.base_script
             blockValue = combat.getBlockAmmount(defender);
             if (baseDamage <= blockValue)
             {
-                hitData.block = (int)baseDamage;
+                hitData.block = (int) baseDamage;
                 baseDamage = 0.0f;
             }
-            else 
+            else
             {
                 baseDamage -= blockValue;
                 hitData.block = blockValue;
@@ -1268,7 +1293,7 @@ public class combat extends script.base_script
         {
             elementalDamage = elementalDamage * (1.0f + (expertiseDamageBonus / 100.0f));
         }
-        int elementalDmgAbsorbed = (int)(elementalDamage * (elementalProtection));
+        int elementalDmgAbsorbed = (int) (elementalDamage * (elementalProtection));
         elementalDamage -= elementalDmgAbsorbed;
         if (elementalDamage < 0)
         {
@@ -1279,9 +1304,9 @@ public class combat extends script.base_script
         {
             decayArmorPiece(psg, baseDamage * basePsgProtection + elementalDamage * elementalPsgProtection);
         }
-        hitData.elementalDamage = (int)elementalDamage;
+        hitData.elementalDamage = (int) elementalDamage;
         hitData.elementalDamageType = weaponData.elementalType;
-        hitData.damage = (int)baseDamage;
+        hitData.damage = (int) baseDamage;
         if ((baseProtection > 0 || elementalProtection > 0) && isIdValid(armorPiece))
         {
             hitData.blockingArmor = armorPiece;
@@ -1292,6 +1317,7 @@ public class combat extends script.base_script
         }
         return (baseDmgAbsorbed + elementalDmgAbsorbed);
     }
+
     public static float scalePsgProtectionByBaseProtection(float basePsgProtection, float baseProtection) throws InterruptedException
     {
         if (baseProtection < 0.2f)
@@ -1302,6 +1328,7 @@ public class combat extends script.base_script
         basePsgProtection = (basePsgProtection / 100) / (100 + ((basePsgProtection / 100))) / (baseProtection * 4);
         return basePsgProtection;
     }
+
     public static obj_id getArmorPieceHit(obj_id defender, int hitLocation) throws InterruptedException
     {
         String[] armorSlots = ARMOR_SLOT_LOCATIONS[hitLocation];
@@ -1314,6 +1341,7 @@ public class combat extends script.base_script
         }
         return null;
     }
+
     public static obj_id getPsgArmor(obj_id defender) throws InterruptedException
     {
         obj_id psg = getObjectInSlot(defender, PSG_SLOT_LOCATION);
@@ -1323,6 +1351,7 @@ public class combat extends script.base_script
         }
         return null;
     }
+
     public static float getNpcArmorProtection(obj_id defender, int damageType) throws InterruptedException
     {
         int generalProtection = 0;
@@ -1336,15 +1365,17 @@ public class combat extends script.base_script
         }
         if (utils.hasScriptVar(defender, "ai.combat.genProtectionBonus"))
         {
-            generalProtection += (int)utils.getFloatScriptVar(defender, "ai.combat.genProtectionBonus");
+            generalProtection += (int) utils.getFloatScriptVar(defender, "ai.combat.genProtectionBonus");
         }
         float armorProtection = convertProtectionToPercent(generalProtection);
         return armorProtection;
     }
+
     public static float getArmorProtection(obj_id defender, obj_id armorPiece, obj_id psg, int damageType, float[] psgProtectionResult) throws InterruptedException
     {
         return getArmorProtection(defender, armorPiece, psg, damageType, psgProtectionResult, obj_id.NULL_ID);
     }
+
     public static float getArmorProtection(obj_id defender, obj_id armorPiece, obj_id psg, int damageType, float[] psgProtectionResult, obj_id attacker) throws InterruptedException
     {
         int generalProtection = 0;
@@ -1369,37 +1400,37 @@ public class combat extends script.base_script
         switch (damageType)
         {
             case DAMAGE_KINETIC:
-            damageString = "kinetic";
-            break;
+                damageString = "kinetic";
+                break;
             case DAMAGE_ENERGY:
-            damageString = "energy";
-            break;
+                damageString = "energy";
+                break;
             case DAMAGE_BLAST:
-            damageString = "blast";
-            break;
+                damageString = "blast";
+                break;
             case DAMAGE_STUN:
-            damageString = "stun";
-            break;
+                damageString = "stun";
+                break;
             case DAMAGE_RESTRAINT:
-            damageString = "lightsaber";
-            break;
+                damageString = "lightsaber";
+                break;
             case DAMAGE_ELEMENTAL_HEAT:
-            damageString = "heat";
-            break;
+                damageString = "heat";
+                break;
             case DAMAGE_ELEMENTAL_COLD:
-            damageString = "cold";
-            break;
+                damageString = "cold";
+                break;
             case DAMAGE_ELEMENTAL_ACID:
-            damageString = "acid";
-            break;
+                damageString = "acid";
+                break;
             case DAMAGE_ELEMENTAL_ELECTRICAL:
-            damageString = "electricity";
-            break;
+                damageString = "electricity";
+                break;
             case DAMAGE_ENVIRONMENTAL_ELECTRICAL:
-            damageString = "electricity";
-            break;
+                damageString = "electricity";
+                break;
             default:
-            break;
+                break;
         }
         float value = generalProtection;
         float psgValue = 0;
@@ -1432,6 +1463,7 @@ public class combat extends script.base_script
         value = convertProtectionToPercent(value);
         return value;
     }
+
     public static float getTerasKasiProtection(obj_id defender) throws InterruptedException
     {
         if (utils.getIntScriptVar(defender, armor.SCRIPTVAR_ARMOR_COUNT) > 0)
@@ -1463,6 +1495,7 @@ public class combat extends script.base_script
         protection += armorBonus;
         return protection;
     }
+
     public static float convertProtectionToPercent(float protection) throws InterruptedException
     {
         final int reductionThreshold = 2000;
@@ -1476,7 +1509,7 @@ public class combat extends script.base_script
             protection = protection / (100.0f - (protection / 100.0f));
             protection = -0.2f + (protection / 100.0f);
         }
-        else 
+        else
         {
             protection -= reductionThreshold;
             protection = protection / (100.0f + (protection / 100.0f));
@@ -1484,6 +1517,7 @@ public class combat extends script.base_script
         }
         return protection;
     }
+
     public static float getArmorDecayPercentage(obj_id armorPiece) throws InterruptedException
     {
         float ARMOR_REDUCTION_THRESHOLD = 0.5f;
@@ -1502,6 +1536,7 @@ public class combat extends script.base_script
         }
         return reduction;
     }
+
     public static float reduceArmorProtectionFromDecay(obj_id armorPiece, float value) throws InterruptedException
     {
         float ARMOR_REDUCTION_THRESHOLD = 0.5f;
@@ -1520,6 +1555,7 @@ public class combat extends script.base_script
         }
         return value;
     }
+
     public static void decayArmorPiece(obj_id armorPiece, float newDamage) throws InterruptedException
     {
         if (armor.isPsg(armorPiece))
@@ -1541,17 +1577,16 @@ public class combat extends script.base_script
         }
         if (static_item.isStaticItem(armorPiece))
         {
-            return;
         }
     }
+
     public static boolean getGrenadeData(obj_id player, weapon_data weaponData, String params, boolean verbose) throws InterruptedException
     {
         Long lngId;
         try
         {
             lngId = Long.valueOf(params);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             if (verbose)
             {
@@ -1596,6 +1631,7 @@ public class combat extends script.base_script
         weaponData.attackCost = getWeaponAttackCost(grenade);
         return true;
     }
+
     public static boolean canPaintTarget(obj_id squadLeader, obj_id target) throws InterruptedException
     {
         if (!isValidId(target))
@@ -1622,12 +1658,9 @@ public class combat extends script.base_script
             }
         }
         obj_id[] groupMembers = getGroupMemberIds(groupId);
-        if (groupMembers == null || groupMembers.length < 2)
-        {
-            return false;
-        }
-        return true;
+        return groupMembers != null && groupMembers.length >= 2;
     }
+
     public static void doPaintTarget(obj_id squadLeader, obj_id target) throws InterruptedException
     {
         obj_id groupId = getGroupObject(squadLeader);
@@ -1644,6 +1677,7 @@ public class combat extends script.base_script
         messageTo(target, "msgUnmarkedByGroup", parms, VOLLEY_INTERVAL * 0.7f, false);
         playClientEffectObj(groupMembers, "appearance/pt_special_attack_volley_fire.prt", target, "", new transform(), ID_VOLLEY_FIRE_PARTICLE);
     }
+
     public static boolean canUseWeaponWithAbility(obj_id self, weapon_data weaponData, combat_data actionData, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(weaponData.id))
@@ -1661,10 +1695,12 @@ public class combat extends script.base_script
         }
         return false;
     }
+
     public static boolean canUseWeaponWithAbility(obj_id self, weapon_data weaponData, String actionName, boolean verbose) throws InterruptedException
     {
         return canUseWeaponWithAbility(self, weaponData, combat_engine.getCombatData(actionName), verbose);
     }
+
     public static void addHateProcess(obj_id attacker, obj_id defender, hit_result hitData, combat_data actionData) throws InterruptedException
     {
         if (defender == attacker)
@@ -1717,7 +1753,7 @@ public class combat extends script.base_script
                     addHate(defender, attacker, totalHateDamage);
                 }
             }
-            else 
+            else
             {
                 if ((isPlayer(attacker) || beast_lib.isBeast(attacker)) && (isMob(defender) && !beast_lib.isBeast(defender)))
                 {
@@ -1735,19 +1771,22 @@ public class combat extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             addHate(defender, attacker, 1.0f);
         }
         if (isPlayer(attacker))
         {
             addHate(attacker, defender, 0.0f);
-            
+
             {
                 obj_id[] hateList = getHateList(attacker);
-                for (obj_id hateTarget : hateList) {
-                    if (!isPlayer(hateTarget) && isTangible(hateTarget)) {
-                        if (getHateTarget(hateTarget) == attacker) {
+                for (obj_id hateTarget : hateList)
+                {
+                    if (!isPlayer(hateTarget) && isTangible(hateTarget))
+                    {
+                        if (getHateTarget(hateTarget) == attacker)
+                        {
                             resetHateTimer(hateTarget);
                         }
                     }
@@ -1755,6 +1794,7 @@ public class combat extends script.base_script
             }
         }
     }
+
     public static boolean cachedIsRidingVehicle(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.ridingVehicle";
@@ -1766,6 +1806,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, ridingVehicle);
         return ridingVehicle;
     }
+
     public static boolean cachedIsGalloping(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.galloping";
@@ -1782,6 +1823,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, galloping);
         return galloping;
     }
+
     public static boolean cachedIsDead(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.isDead";
@@ -1793,6 +1835,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, dead);
         return dead;
     }
+
     public static boolean cachedIsIncapacitated(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.isIncapped";
@@ -1804,6 +1847,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, incapped);
         return incapped;
     }
+
     public static int cachedGetLocomotion(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.locomotion";
@@ -1815,6 +1859,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, locomotion);
         return locomotion;
     }
+
     public static float cachedGetMovementSpeed(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.moveSpeed";
@@ -1826,6 +1871,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, moveSpeed);
         return moveSpeed;
     }
+
     public static float cachedGetRunSpeed(obj_id attacker) throws InterruptedException
     {
         String cacheId = "combat.cache.runSpeed";
@@ -1837,6 +1883,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, runSpeed);
         return runSpeed;
     }
+
     public static float cachedGetDistance(obj_id attacker, obj_id defender) throws InterruptedException
     {
         String cacheId = "combat.cache." + defender + ".distance";
@@ -1848,6 +1895,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, dist);
         return dist;
     }
+
     public static float cachedGetSpeedAdjustMin(obj_id attacker, obj_id defender) throws InterruptedException
     {
         String cacheId = "combat.cache." + defender + ".speedAdjustMin";
@@ -1882,6 +1930,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, adjustMin);
         return adjustMin;
     }
+
     public static float cachedGetSpeedAdjustMax(obj_id attacker, obj_id defender) throws InterruptedException
     {
         String cacheId = "combat.cache." + defender + ".speedAdjustMax";
@@ -1916,10 +1965,12 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, adjustMax);
         return adjustMax;
     }
+
     public static boolean cachedCanSee(obj_id attacker, obj_id defender) throws InterruptedException
     {
         return canSee(attacker, defender);
     }
+
     public static boolean cachedPvpCanAttack(obj_id attacker, obj_id defender) throws InterruptedException
     {
         String cacheId = "combat.cache." + defender + ".pvpCanAttack";
@@ -1931,6 +1982,7 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, attackerCanAttack);
         return attackerCanAttack;
     }
+
     public static boolean cachedIsSameSocialGroup(obj_id attacker, obj_id defender) throws InterruptedException
     {
         String cacheId = "combat.cache." + defender + ".sameSocialGroup";
@@ -1947,12 +1999,14 @@ public class combat extends script.base_script
         setCachedCombatValue(attacker, cacheId, sameSocialGroup);
         return sameSocialGroup;
     }
+
     public static boolean isCachedServerFrame(obj_id attacker) throws InterruptedException
     {
         int serverFrame = utils.getIntScriptVar(attacker, "combat.cache.serverFrame");
         int currentFrame = getServerFrame();
         return (serverFrame == currentFrame);
     }
+
     public static void setCachedServerFrame(obj_id attacker) throws InterruptedException
     {
         if (!isCachedServerFrame(attacker))
@@ -1962,6 +2016,7 @@ public class combat extends script.base_script
             utils.setScriptVar(attacker, "combat.cache.serverFrame", currentFrame);
         }
     }
+
     public static boolean hasCachedCombatValue(obj_id attacker, String cacheId) throws InterruptedException
     {
         if (isCachedServerFrame(attacker))
@@ -1970,6 +2025,7 @@ public class combat extends script.base_script
         }
         return false;
     }
+
     public static int getCachedCombatValueInt(obj_id attacker, String cacheId) throws InterruptedException
     {
         if (isCachedServerFrame(attacker))
@@ -1978,6 +2034,7 @@ public class combat extends script.base_script
         }
         return 0;
     }
+
     public static float getCachedCombatValueFloat(obj_id attacker, String cacheId) throws InterruptedException
     {
         if (isCachedServerFrame(attacker))
@@ -1986,6 +2043,7 @@ public class combat extends script.base_script
         }
         return 0.0f;
     }
+
     public static boolean getCachedCombatValueBool(obj_id attacker, String cacheId) throws InterruptedException
     {
         if (isCachedServerFrame(attacker))
@@ -1994,25 +2052,30 @@ public class combat extends script.base_script
         }
         return false;
     }
+
     public static void setCachedCombatValue(obj_id attacker, String cacheId, int value) throws InterruptedException
     {
         setCachedServerFrame(attacker);
         utils.setScriptVar(attacker, "combat.cache." + cacheId, value);
     }
+
     public static void setCachedCombatValue(obj_id attacker, String cacheId, float value) throws InterruptedException
     {
         setCachedServerFrame(attacker);
         utils.setScriptVar(attacker, "combat.cache." + cacheId, value);
     }
+
     public static void setCachedCombatValue(obj_id attacker, String cacheId, boolean value) throws InterruptedException
     {
         setCachedServerFrame(attacker);
         utils.setScriptVar(attacker, "combat.cache." + cacheId, value);
     }
+
     public static void combatLog(obj_id attacker, obj_id defender, String logName, String logMsg) throws InterruptedException
     {
-        
+
     }
+
     public static int getWeaponCategory(String weaponType) throws InterruptedException
     {
         if (weaponType.equals("rifle"))
@@ -2069,6 +2132,7 @@ public class combat extends script.base_script
         }
         return 0;
     }
+
     public static int getWeaponCategory(int weaponType) throws InterruptedException
     {
         if (weaponType == WEAPON_TYPE_RIFLE)
@@ -2125,6 +2189,7 @@ public class combat extends script.base_script
         }
         return 0;
     }
+
     public static String getWeaponStringCategory(int weaponType) throws InterruptedException
     {
         int weaponCategory = getWeaponCategory(weaponType);
@@ -2142,6 +2207,7 @@ public class combat extends script.base_script
         }
         return null;
     }
+
     public static String getWeaponStringCategory(String weaponType) throws InterruptedException
     {
         int weaponCategory = getWeaponCategory(weaponType);
@@ -2159,6 +2225,7 @@ public class combat extends script.base_script
         }
         return null;
     }
+
     public static int getWeaponType(String weaponType) throws InterruptedException
     {
         if (weaponType.equals("rifle"))
@@ -2211,110 +2278,121 @@ public class combat extends script.base_script
         }
         return 0;
     }
+
     public static int getCorrectedWeaponType(int passedType) throws InterruptedException
     {
         switch (passedType)
         {
             case WEAPON_TYPE_GROUND_TARGETTING:
-            return WEAPON_TYPE_HEAVY;
+                return WEAPON_TYPE_HEAVY;
             case WEAPON_TYPE_DIRECTIONAL:
-            return WEAPON_TYPE_HEAVY;
+                return WEAPON_TYPE_HEAVY;
         }
         return passedType;
     }
+
     public static String getWeaponStringType(int weaponType) throws InterruptedException
     {
         switch (weaponType)
         {
             case WEAPON_TYPE_RIFLE:
-            return "rifle";
+                return "rifle";
             case WEAPON_TYPE_LIGHT_RIFLE:
-            return "carbine";
+                return "carbine";
             case WEAPON_TYPE_PISTOL:
-            return "pistol";
+                return "pistol";
             case WEAPON_TYPE_HEAVY:
-            return "heavyweapon";
+                return "heavyweapon";
             case WEAPON_TYPE_1HAND_MELEE:
-            return "onehandmelee";
+                return "onehandmelee";
             case WEAPON_TYPE_2HAND_MELEE:
-            return "twohandmelee";
+                return "twohandmelee";
             case WEAPON_TYPE_UNARMED:
-            return "unarmed";
+                return "unarmed";
             case WEAPON_TYPE_POLEARM:
-            return "polearm";
+                return "polearm";
             case WEAPON_TYPE_THROWN:
-            return "thrown";
+                return "thrown";
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return "onehandlightsaber";
+                return "onehandlightsaber";
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return "twohandlightsaber";
+                return "twohandlightsaber";
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return "polearmlightsaber";
+                return "polearmlightsaber";
             case WEAPON_TYPE_FORCE_POWER:
-            return "force";
+                return "force";
         }
         return "";
     }
+
     public static boolean isMeleeWeapon(obj_id weapon) throws InterruptedException
     {
         int weaponType = getWeaponType(weapon);
         return isMeleeWeapon(weaponType);
     }
+
     public static boolean isMeleeWeapon(int weaponType) throws InterruptedException
     {
         return hasBit(weaponType, B_MELEE);
     }
+
     public static boolean isRangedWeapon(obj_id weapon) throws InterruptedException
     {
         int weaponType = getWeaponType(weapon);
         return isRangedWeapon(weaponType);
     }
+
     public static boolean isHeavyWeapon(int weaponType) throws InterruptedException
     {
         return hasBit(weaponType, B_HEAVY);
     }
+
     public static boolean isHeavyWeapon(obj_id weapon) throws InterruptedException
     {
         int weaponType = getWeaponType(weapon);
         return hasBit(weaponType, B_HEAVY);
     }
+
     public static boolean isRangedWeapon(int weaponType) throws InterruptedException
     {
         return hasBit(weaponType, B_RANGED);
     }
+
     public static boolean isLightsaberWeapon(obj_id weapon) throws InterruptedException
     {
         int weaponType = getWeaponType(weapon);
         return isLightsaberWeapon(weaponType);
     }
+
     public static boolean isLightsaberWeapon(int weaponType) throws InterruptedException
     {
         return hasBit(weaponType, B_ALL_LIGHTSABERS);
     }
+
     public static boolean isGrenade(weapon_data weaponData) throws InterruptedException
     {
         return hasBit(weaponData.weaponType, B_THROWN);
     }
+
     public static boolean isHeavyWeapon(weapon_data weaponData) throws InterruptedException
     {
         return hasBit(weaponData.weaponType, B_HEAVY);
     }
+
     public static boolean canApplyCombatEffect(obj_id objPlayer) throws InterruptedException
     {
         if (!isIdValid(objPlayer))
         {
             return false;
         }
-        if (ai_lib.aiGetNiche(objPlayer) == NICHE_DROID || vehicle.isVehicle(objPlayer) || ai_lib.isTurret(objPlayer) || ai_lib.isAndroid(objPlayer))
-        {
-            return false;
-        }
-        return true;
+        return ai_lib.aiGetNiche(objPlayer) != NICHE_DROID && !vehicle.isVehicle(objPlayer) && !ai_lib.isTurret(objPlayer) && !ai_lib.isAndroid(objPlayer);
     }
+
     public static boolean hasCertification(obj_id objPlayer, obj_id objWeapon) throws InterruptedException
     {
         return hasCertification(objPlayer, objWeapon, true);
     }
+
     public static boolean hasCertification(obj_id objPlayer, obj_id objWeapon, boolean verbose) throws InterruptedException
     {
         boolean hasCert = true;
@@ -2393,7 +2471,7 @@ public class combat extends script.base_script
                 hasCert = false;
             }
         }
-        else 
+        else
         {
             String skillRequired = dataTableGetString(WEAPON_LEVEL_TABLE, template, "secondary_restriction");
             if (skillRequired != null && !skillRequired.equals(""))
@@ -2412,7 +2490,7 @@ public class combat extends script.base_script
             {
                 levelRequired = getIntObjVar(objWeapon, weapons.OBJVAR_WP_LEVEL);
             }
-            else 
+            else
             {
                 levelRequired = dataTableGetInt(WEAPON_LEVEL_TABLE, template, "weapon_level");
             }
@@ -2431,6 +2509,7 @@ public class combat extends script.base_script
         }
         return hasCert;
     }
+
     public static void applyCombatSpeedDelay(obj_id target, float delay, int duration) throws InterruptedException
     {
         int delayStampStart = getGameTime();
@@ -2438,8 +2517,8 @@ public class combat extends script.base_script
         utils.setScriptVar(target, "speedDelayEffectStart", delayStampStart);
         utils.setScriptVar(target, "speedDelayEffectEnd", delayStampEnd);
         utils.setScriptVar(target, "speedDelayPotency", delay);
-        return;
     }
+
     public static void doCombatDebuffs(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "fltNonCombatHealthRegen"))
@@ -2449,6 +2528,7 @@ public class combat extends script.base_script
             setRegenRate(self, HEALTH, 0);
         }
     }
+
     public static boolean clearCombatDebuffs(obj_id self) throws InterruptedException
     {
         if (getGameTime() > utils.getIntScriptVar(self, "incap.timeStamp"))
@@ -2463,10 +2543,12 @@ public class combat extends script.base_script
         }
         return false;
     }
+
     public static boolean isInCombat(obj_id objTarget) throws InterruptedException
     {
-        return getState(objTarget, STATE_COMBAT) > 0 ? true : false;
+        return getState(objTarget, STATE_COMBAT) > 0;
     }
+
     public static String getAttackName(obj_id self) throws InterruptedException
     {
         String actionName = null;
@@ -2505,7 +2587,7 @@ public class combat extends script.base_script
             {
                 actionName = "rangedShot";
             }
-            else 
+            else
             {
                 actionName = "creatureRangedAttack";
             }
@@ -2516,7 +2598,7 @@ public class combat extends script.base_script
             {
                 actionName = "meleeHit";
             }
-            else 
+            else
             {
                 actionName = "creatureMeleeAttack";
             }
@@ -2527,13 +2609,14 @@ public class combat extends script.base_script
             {
                 actionName = "saberHit";
             }
-            else 
+            else
             {
                 actionName = "creatureMeleeAttack";
             }
         }
         return actionName;
     }
+
     public static String getBestAction(obj_id player, String actionName) throws InterruptedException
     {
         for (int i = 2; i > 0; i--)
@@ -2546,10 +2629,12 @@ public class combat extends script.base_script
         }
         return actionName;
     }
+
     public static String getActionAnimation(combat_data actionData, String weaponType) throws InterruptedException
     {
         String animation = "";
-        switch (weaponType) {
+        switch (weaponType)
+        {
             case "unarmed":
                 animation = actionData.anim_unarmed;
                 break;
@@ -2605,6 +2690,7 @@ public class combat extends script.base_script
         }
         return animation;
     }
+
     public static String getCreatureAnimationName(String playbackName) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -2614,7 +2700,7 @@ public class combat extends script.base_script
         {
             animName = "droid_attack";
         }
-        else 
+        else
         {
             if (playbackName.endsWith("ranged"))
             {
@@ -2626,7 +2712,7 @@ public class combat extends script.base_script
                 {
                     animName = "creature_attack";
                 }
-                else 
+                else
                 {
                     animName = "creature_attack_special_1";
                 }
@@ -2634,13 +2720,13 @@ public class combat extends script.base_script
                 {
                     animName += "_light";
                 }
-                else 
+                else
                 {
                     animName += "_heavy";
                 }
                 return animName;
             }
-            else 
+            else
             {
                 animName = "creature_attack_special_" + rand(1, 2);
             }
@@ -2648,6 +2734,7 @@ public class combat extends script.base_script
         animName += "_medium";
         return animName;
     }
+
     public static obj_id makeTrackerEgg(obj_id objPlayer, location locTest, combat_data actionData) throws InterruptedException
     {
         obj_id objEgg = createObject(actionData.delayAttackEggTemplate, locTest);
@@ -2662,10 +2749,12 @@ public class combat extends script.base_script
         attachScript(objEgg, "systems.combat.combat_delayed_tracker");
         return objEgg;
     }
+
     public static int makeBit(int bit) throws InterruptedException
     {
         return (1 << (bit - 1));
     }
+
     public static boolean hasBit(int weaponType, int bitValue) throws InterruptedException
     {
         if (weaponType == -1)
@@ -2674,6 +2763,7 @@ public class combat extends script.base_script
         }
         return ((weaponTypeToBitValueMap[weaponType] & bitValue) != 0);
     }
+
     public static float doCriticalHitEffect(attacker_data attackerData, defender_data defenderData, weapon_data weaponData, hit_result hitData, combat_data actionData) throws InterruptedException
     {
         int elementalType = weaponData.elementalType;
@@ -2703,87 +2793,89 @@ public class combat extends script.base_script
             switch (elementalType)
             {
                 case DAMAGE_ELEMENTAL_HEAT:
-                if (resistRoll > critResist + heatResist)
-                {
-                    int level = getLevel(attackerData.id);
-                    if (level == 90)
+                    if (resistRoll > critResist + heatResist)
                     {
-                        buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_4");
+                        int level = getLevel(attackerData.id);
+                        if (level == 90)
+                        {
+                            buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_4");
+                        }
+                        else if (level >= 75)
+                        {
+                            buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_3");
+                        }
+                        else if (level >= 50)
+                        {
+                            buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_2");
+                        }
+                        else if (level >= 25)
+                        {
+                            buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_1");
+                        }
+                        damageMod = 1.5f;
+                        hitData.critDamage = 3;
+                        return damageMod;
                     }
-                    else if (level >= 75)
-                    {
-                        buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_3");
-                    }
-                    else if (level >= 50)
-                    {
-                        buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_2");
-                    }
-                    else if (level >= 25)
-                    {
-                        buff.applyBuff(defenderData.id, attackerData.id, "crit_fire_dot_1");
-                    }
-                    damageMod = 1.5f;
-                    hitData.critDamage = 3;
-                    return damageMod;
-                }
-                break;
+                    break;
                 case DAMAGE_ELEMENTAL_COLD:
-                if (resistRoll > critResist + coldResist && !buff.hasBuff(defenderData.id, "criticalImmunity"))
-                {
-                    if (!buff.hasBuff(defenderData.id, "criticalColdEffect"))
+                    if (resistRoll > critResist + coldResist && !buff.hasBuff(defenderData.id, "criticalImmunity"))
                     {
-                        buff.applyBuff(defenderData.id, "criticalColdEffect", 6, (float)elementalDamage / 10.0f);
+                        if (!buff.hasBuff(defenderData.id, "criticalColdEffect"))
+                        {
+                            buff.applyBuff(defenderData.id, "criticalColdEffect", 6, elementalDamage / 10.0f);
+                        }
+                        damageMod = 1.5f;
+                        hitData.critDamage = 4;
+                        return damageMod;
                     }
-                    damageMod = 1.5f;
-                    hitData.critDamage = 4;
-                    return damageMod;
-                }
-                break;
+                    break;
                 case DAMAGE_ELEMENTAL_ACID:
-                if (resistRoll > critResist + acidResist && !buff.hasBuff(defenderData.id, "criticalAcidEffect") && !buff.hasBuff(defenderData.id, "criticalImmunity"))
-                {
-                    buff.applyBuff(defenderData.id, "criticalAcidEffect");
-                    damageMod = 1.5f;
-                    hitData.critDamage = 5;
-                    return damageMod;
-                }
-                break;
+                    if (resistRoll > critResist + acidResist && !buff.hasBuff(defenderData.id, "criticalAcidEffect") && !buff.hasBuff(defenderData.id, "criticalImmunity"))
+                    {
+                        buff.applyBuff(defenderData.id, "criticalAcidEffect");
+                        damageMod = 1.5f;
+                        hitData.critDamage = 5;
+                        return damageMod;
+                    }
+                    break;
                 case DAMAGE_ELEMENTAL_ELECTRICAL:
-                if (resistRoll > critResist + electricResist && !buff.hasBuff(defenderData.id, "criticalElectricEffect") && !buff.hasBuff(defenderData.id, "criticalImmunity"))
-                {
-                    buff.applyBuff(defenderData.id, "criticalElectricEffect");
-                    damageMod = 1.5f;
-                    hitData.critDamage = 6;
-                    return damageMod;
-                }
-                break;
+                    if (resistRoll > critResist + electricResist && !buff.hasBuff(defenderData.id, "criticalElectricEffect") && !buff.hasBuff(defenderData.id, "criticalImmunity"))
+                    {
+                        buff.applyBuff(defenderData.id, "criticalElectricEffect");
+                        damageMod = 1.5f;
+                        hitData.critDamage = 6;
+                        return damageMod;
+                    }
+                    break;
             }
         }
         return damageMod;
     }
+
     public static color getCriticalColor(int hitDataCritDamage) throws InterruptedException
     {
         color criticalColor = colors.MEDIUMVIOLETRED;
         switch (hitDataCritDamage)
         {
             case 1:
-            criticalColor = colors.SLATEGREY;
-            break;
+                criticalColor = colors.SLATEGREY;
+                break;
             case 3:
-            criticalColor = colors.ORANGERED;
-            break;
+                criticalColor = colors.ORANGERED;
+                break;
             case 4:
-            criticalColor = colors.LIGHTSKYBLUE;
-            break;
+                criticalColor = colors.LIGHTSKYBLUE;
+                break;
             case 5:
-            criticalColor = colors.DARKOLIVEGREEN;
-            break;
+                criticalColor = colors.DARKOLIVEGREEN;
+                break;
             case 6:
-            criticalColor = colors.SILVER;
-            break;
+                criticalColor = colors.SILVER;
+                break;
         }
         return criticalColor;
     }
+
     public static obj_id directDamageToDifferentTarget(obj_id attacker, obj_id defender) throws InterruptedException
     {
         if (buff.hasBuff(defender, "bm_shield_master_player"))
@@ -2805,13 +2897,14 @@ public class combat extends script.base_script
             {
                 return guardian;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(defender, DAMAGE_REDIRECT);
             }
         }
         return defender;
     }
+
     public static float getMissChance(attacker_data attackerData, defender_data defenderData, combat_data actionData, boolean autoAim) throws InterruptedException
     {
         obj_id attacker = attackerData.id;
@@ -2847,6 +2940,7 @@ public class combat extends script.base_script
         missChance += defenderData.increaseMiss;
         return missChance;
     }
+
     public static float getAttackerMissChance(attacker_data attackerData, combat_data actionData, boolean autoAim) throws InterruptedException
     {
         float attackerMissChance = 0.0f;
@@ -2864,6 +2958,7 @@ public class combat extends script.base_script
         attackerMissChance -= (getEnhancedSkillStatisticModifierUncapped(attackerData.id, "combat_all_attack_miss_reduction") / 10.0f);
         return attackerMissChance;
     }
+
     public static float getDefenderMissChance(defender_data defenderData, combat_data actionData, boolean autoAim) throws InterruptedException
     {
         float defenderMissChance = 0.0f;
@@ -2871,6 +2966,7 @@ public class combat extends script.base_script
         defenderMissChance -= (getEnhancedSkillStatisticModifierUncapped(defenderData.id, "combat_all_attack_miss_vulnerability") / 10.0f);
         return defenderMissChance;
     }
+
     public static float getGlancingBlowChance(attacker_data attackerData, defender_data defenderData, combat_data actionData) throws InterruptedException
     {
         obj_id attacker = attackerData.id;
@@ -2878,7 +2974,7 @@ public class combat extends script.base_script
         float glancingChance = 0.0f;
         if (isMob(defender) && beast_lib.isBeast(defender))
         {
-            glancingChance += (int)beast_lib.getBeastGlanceChance(defender);
+            glancingChance += (int) beast_lib.getBeastGlanceChance(defender);
         }
         if ((isPlayer(attacker) || beast_lib.isBeast(attacker)) && (!isPlayer(defender) && !beast_lib.isBeast(defender)))
         {
@@ -2892,16 +2988,16 @@ public class combat extends script.base_script
             switch (difficultyClass)
             {
                 case 1:
-                if (glancingChance < 5.0f)
-                {
-                    glancingChance = 5.0f;
-                }
-                break;
+                    if (glancingChance < 5.0f)
+                    {
+                        glancingChance = 5.0f;
+                    }
+                    break;
                 case 2:
-                if (glancingChance < 15.0f)
-                {
-                    glancingChance = 15.0f;
-                }
+                    if (glancingChance < 15.0f)
+                    {
+                        glancingChance = 15.0f;
+                    }
             }
         }
         if ((!isPlayer(attacker) && !beast_lib.isBeast(attacker)) && (isPlayer(defender) || beast_lib.isBeast(defender)))
@@ -2941,6 +3037,7 @@ public class combat extends script.base_script
         }
         return glancingChance;
     }
+
     public static float getDefenderGlancingBlowChance(obj_id defender) throws InterruptedException
     {
         float glancingChance = 0.0f;
@@ -2954,6 +3051,7 @@ public class combat extends script.base_script
         glancingChance += (getDiminishedReturnValue(getEnhancedSkillStatisticModifierUncapped(defender, "combat_glancing"), DR_DEFENDER_GLANCE) / 10.0f);
         return glancingChance;
     }
+
     public static float getAttackerGlancingReduction(obj_id attacker) throws InterruptedException
     {
         float glancingReduce = 0.0f;
@@ -2961,11 +3059,12 @@ public class combat extends script.base_script
         {
             glancingReduce += beast_lib.getBeastModGlancingReduction(attacker);
         }
-        glancingReduce += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "combat_glancing_blow_reduction") / 7.0f);
+        glancingReduce += getEnhancedSkillStatisticModifierUncapped(attacker, "combat_glancing_blow_reduction") / 7.0f;
         glancingReduce += (getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_glancing_blow_reduction"));
         glancingReduce -= getEnhancedSkillStatisticModifierUncapped(attacker, "glancing_blow_vulnerable");
         return glancingReduce;
     }
+
     public static float getPunishingBlowChance(attacker_data attackerData, defender_data defenderData) throws InterruptedException
     {
         obj_id attacker = attackerData.id;
@@ -2983,21 +3082,22 @@ public class combat extends script.base_script
             switch (difficultyClass)
             {
                 case 1:
-                if (punishingChance < 5.0f)
-                {
-                    punishingChance = 5.0f;
-                }
-                break;
+                    if (punishingChance < 5.0f)
+                    {
+                        punishingChance = 5.0f;
+                    }
+                    break;
                 case 2:
-                if (punishingChance < 15.0f)
-                {
-                    punishingChance = 15.0f;
-                }
+                    if (punishingChance < 15.0f)
+                    {
+                        punishingChance = 15.0f;
+                    }
             }
         }
         punishingChance -= defenderData.reducePunishing;
         return punishingChance;
     }
+
     public static float getDefenderPunishingBlowReduction(obj_id defender) throws InterruptedException
     {
         float punishingChance = 0.0f;
@@ -3007,6 +3107,7 @@ public class combat extends script.base_script
         }
         return punishingChance;
     }
+
     public static float getDodgeChance(attacker_data attackerData, defender_data defenderData, combat_data actionData) throws InterruptedException
     {
         obj_id attacker = attackerData.id;
@@ -3032,6 +3133,7 @@ public class combat extends script.base_script
         }
         return dodgeChance;
     }
+
     public static float getDefenderDodgeChance(obj_id player) throws InterruptedException
     {
         float dodgeChance = isPlayer(player) || beast_lib.isBeast(player) ? 5.0f : getLevel(player) * 0.10f;
@@ -3047,14 +3149,16 @@ public class combat extends script.base_script
         }
         return dodgeChance;
     }
+
     public static float getAttackerDodgeReduction(obj_id attacker) throws InterruptedException
     {
         float dodgeReduction = 0.0f;
         dodgeReduction += (getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_dodge_reduction"));
-        dodgeReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_dodge_reduction") / 7.0f);
-        dodgeReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "combat_dodge_reduction") / 7.0f);
+        dodgeReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_dodge_reduction") / 7.0f;
+        dodgeReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "combat_dodge_reduction") / 7.0f;
         return dodgeReduction;
     }
+
     public static float getParryChance(attacker_data attackerData, defender_data defenderData, combat_data actionData) throws InterruptedException
     {
         float parryChance = 0.0f;
@@ -3063,6 +3167,7 @@ public class combat extends script.base_script
         parryChance -= actionData.reduceParry;
         return parryChance;
     }
+
     public static float getDefenderParryChance(obj_id player) throws InterruptedException
     {
         float parrySkill = isPlayer(player) || beast_lib.isBeast(player) ? 5.0f : getLevel(player) * 0.09f;
@@ -3086,14 +3191,16 @@ public class combat extends script.base_script
         parrySkill = parrySkill > 75.0f ? 75.0f : parrySkill;
         return parrySkill;
     }
+
     public static float getAttackerParryReduction(obj_id attacker) throws InterruptedException
     {
         float parryReduction = 0.0f;
         parryReduction += (getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_parry_reduction"));
-        parryReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_parry_reduction") / 7.0f);
-        parryReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "combat_parry_reduction") / 7.0f);
+        parryReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_parry_reduction") / 7.0f;
+        parryReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "combat_parry_reduction") / 7.0f;
         return parryReduction;
     }
+
     public static float getBlockChance(attacker_data attackerData, defender_data defenderData, combat_data actionData) throws InterruptedException
     {
         float blockChance = 0.0f;
@@ -3119,6 +3226,7 @@ public class combat extends script.base_script
         }
         return blockChance;
     }
+
     public static float getDefenderBlockChance(obj_id player) throws InterruptedException
     {
         float blockChance = isPlayer(player) ? 5.0f : getLevel(player) * 0.14f;
@@ -3155,14 +3263,16 @@ public class combat extends script.base_script
         }
         return blockChance;
     }
+
     public static float getAttackerBlockReduction(obj_id attacker) throws InterruptedException
     {
         float blockReduction = 0.0f;
         blockReduction += (getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_block_reduction"));
-        blockReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_block_reduction") / 5.0f);
-        blockReduction += (float)(getEnhancedSkillStatisticModifierUncapped(attacker, "combat_block_reduction") / 5.0f);
+        blockReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "exotic_block_reduction") / 5.0f;
+        blockReduction += getEnhancedSkillStatisticModifierUncapped(attacker, "combat_block_reduction") / 5.0f;
         return blockReduction;
     }
+
     public static int getBlockAmmount(obj_id player) throws InterruptedException
     {
         int blockAmmount = isPlayer(player) || beast_lib.isBeast(player) ? 25 : Math.round((getLevel(player) * 2));
@@ -3170,7 +3280,7 @@ public class combat extends script.base_script
         blockStat += getEnhancedSkillStatisticModifierUncapped(player, "strength_modified");
         blockStat += getSkillStatisticModifier(player, "strength");
         blockStat += getEnhancedSkillStatisticModifierUncapped(player, "combat_block_value");
-        blockStat = Math.round((float)blockStat * 0.5f);
+        blockStat = Math.round(blockStat * 0.5f);
         blockAmmount += blockStat;
         if (beast_lib.isBeastMaster(player) || beast_lib.isBeast(player))
         {
@@ -3178,6 +3288,7 @@ public class combat extends script.base_script
         }
         return blockAmmount;
     }
+
     public static float getEvasionChance(attacker_data attackerData, defender_data defenderData) throws InterruptedException
     {
         float evasionChance = 0.0f;
@@ -3185,6 +3296,7 @@ public class combat extends script.base_script
         evasionChance -= attackerData.reduceEvade;
         return evasionChance;
     }
+
     public static float getDefenderEvasionChance(obj_id player) throws InterruptedException
     {
         float evasionChance = isPlayer(player) || beast_lib.isBeast(player) ? 5.0f : (getLevel(player) * 0.2f);
@@ -3200,18 +3312,22 @@ public class combat extends script.base_script
         }
         return evasionChance;
     }
+
     public static float getAttackerEvasionReduction(obj_id attacker) throws InterruptedException
     {
         return 0.0f;
     }
+
     public static float getHitReductionChance(obj_id player) throws InterruptedException
     {
         return getEnhancedSkillStatisticModifierUncapped(player, "expertise_critical_hit_reduction");
     }
+
     public static float getPvPHitReductionChance(obj_id player) throws InterruptedException
     {
         return getEnhancedSkillStatisticModifierUncapped(player, "expertise_critical_hit_pvp_reduction");
     }
+
     public static float getEvasionRoll(obj_id player) throws InterruptedException
     {
         float evasionRoll = 0.0f;
@@ -3229,6 +3345,7 @@ public class combat extends script.base_script
         }
         return evasionRoll > 99.0f ? 99.0f : evasionRoll;
     }
+
     public static float getCriticalHitChance(attacker_data attackerData, defender_data defenderData, combat_data actionData, boolean autoAiming) throws InterruptedException
     {
         obj_id attacker = attackerData.id;
@@ -3268,6 +3385,7 @@ public class combat extends script.base_script
         critChance += altCritChance;
         return critChance;
     }
+
     public static float getAttackerCritMod(obj_id attacker) throws InterruptedException
     {
         float critMod = isPlayer(attacker) ? 5.0f : getLevel(attacker) * 0.15f;
@@ -3301,14 +3419,16 @@ public class combat extends script.base_script
             dr_critMod += (getEnhancedSkillStatisticModifierUncapped(attacker, "combat_critical_ranged") / 10.0f);
             critMod += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_undiminished_critical_ranged");
         }
-        else 
+        else
         {
             dr_critMod2 += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_melee");
             dr_critMod += (getEnhancedSkillStatisticModifierUncapped(attacker, "combat_critical_melee") / 10.0f);
             critMod += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_undiminished_critical_melee");
         }
-        if(weaponData != null) {
-            switch (weaponData.weaponType) {
+        if (weaponData != null)
+        {
+            switch (weaponData.weaponType)
+            {
                 case WEAPON_TYPE_PISTOL:
                     dr_critMod2 += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_pistol");
                     critMod += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_undiminished_critical_pistol");
@@ -3363,6 +3483,7 @@ public class combat extends script.base_script
         critMod += dr_critMod2;
         return critMod;
     }
+
     public static float getDefenderCriticalChance(obj_id defender) throws InterruptedException
     {
         float critChance = 0.0f;
@@ -3371,6 +3492,7 @@ public class combat extends script.base_script
         critChance += getEnhancedSkillStatisticModifierUncapped(defender, "expertise_critical_hit_reduction");
         return critChance;
     }
+
     public static float getStrikethroughChance(attacker_data attackerData, defender_data defenderData, combat_data actionData) throws InterruptedException
     {
         float strikethroughChance = 0.0f;
@@ -3379,6 +3501,7 @@ public class combat extends script.base_script
         strikethroughChance += actionData.increaseStrikethrough;
         return strikethroughChance;
     }
+
     public static float getAttackerStrikethroughChance(obj_id player) throws InterruptedException
     {
         float strikethrough = isPlayer(player) || beast_lib.isBeast(player) ? 5.0f : getLevel(player) * 0.08f;
@@ -3394,16 +3517,19 @@ public class combat extends script.base_script
         }
         return strikethrough;
     }
+
     public static float getDefenderStrikethroughReduction(obj_id player) throws InterruptedException
     {
         float strikethroughChance = 0.0f;
         strikethroughChance -= getEnhancedSkillStatisticModifierUncapped(player, "strikethrough_vulnerable");
         return strikethroughChance;
     }
+
     public static float getStrikethroughValue(obj_id attacker, obj_id defender) throws InterruptedException
     {
         return getAttackerStrikethroughValue(attacker);
     }
+
     public static float getAttackerStrikethroughValue(obj_id player) throws InterruptedException
     {
         float strikethroughValue = isPlayer(player) ? 10.0f : 35.0f;
@@ -3416,6 +3542,7 @@ public class combat extends script.base_script
         }
         return strikethroughValue > 99.0f ? 99.0f : strikethroughValue;
     }
+
     public static float getToHitBonus(obj_id player) throws InterruptedException
     {
         float hitBonus = 0.0f;
@@ -3428,11 +3555,13 @@ public class combat extends script.base_script
         }
         return hitBonus;
     }
+
     public static float getDefenderHitReduction(obj_id player) throws InterruptedException
     {
         float increaseMiss = 0.0f;
         return increaseMiss;
     }
+
     public static attacker_data fillAttackerCombatAttributes(attacker_data attackerData) throws InterruptedException
     {
         if (!utils.hasScriptVar(attackerData.id, ATTACKER_DATA))
@@ -3453,6 +3582,7 @@ public class combat extends script.base_script
         attackerData.reduceEvade = utils.getFloatScriptVar(attackerData.id, ATTACKER_REDUCE_EVADE);
         return attackerData;
     }
+
     public static defender_data fillDefenderCombatAttributes(defender_data defenderData) throws InterruptedException
     {
         if (!utils.hasScriptVar(defenderData.id, DEFENDER_DATA))
@@ -3470,23 +3600,26 @@ public class combat extends script.base_script
         defenderData.blockChance = utils.getFloatScriptVar(defenderData.id, DEFENDER_BLOCK);
         return defenderData;
     }
+
     public static void cacheCombatData(obj_id self) throws InterruptedException
     {
         cacheAttackerData(self);
         cacheDefenderData(self);
     }
+
     public static void clearCachedCombatData(obj_id self) throws InterruptedException
     {
         utils.removeScriptVarTree(self, ATTACKER_DATA);
         utils.removeScriptVarTree(self, DEFENDER_DATA);
     }
+
     public static void cacheAttackerData(obj_id attacker) throws InterruptedException
     {
         utils.setScriptVar(attacker, ATTACKER_BASE_CRIT, getAttackerCritMod(attacker));
-        utils.setScriptVar(attacker, ATTACKER_PVP_CRIT, (float)getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_pvp"));
-        utils.setScriptVar(attacker, ATTACKER_DROID_CRIT, (float)getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_droid"));
-        utils.setScriptVar(attacker, ATTACKER_NPC_CRIT, (float)getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_npc"));
-        utils.setScriptVar(attacker, ATTACKER_CREATURE_CRIT, (float)getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_creature"));
+        utils.setScriptVar(attacker, ATTACKER_PVP_CRIT, (float) getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_pvp"));
+        utils.setScriptVar(attacker, ATTACKER_DROID_CRIT, (float) getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_droid"));
+        utils.setScriptVar(attacker, ATTACKER_NPC_CRIT, (float) getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_npc"));
+        utils.setScriptVar(attacker, ATTACKER_CREATURE_CRIT, (float) getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_critical_niche_creature"));
         utils.setScriptVar(attacker, ATTACKER_HIT_BONUS, getToHitBonus(attacker));
         utils.setScriptVar(attacker, ATTACKER_STRIKETHROUGH, getAttackerStrikethroughChance(attacker));
         utils.setScriptVar(attacker, ATTACKER_REDUCE_PARRY, getAttackerParryReduction(attacker));
@@ -3495,6 +3628,7 @@ public class combat extends script.base_script
         utils.setScriptVar(attacker, ATTACKER_REDUCE_GLANCING, getAttackerGlancingReduction(attacker));
         utils.setScriptVar(attacker, ATTACKER_REDUCE_EVADE, getAttackerEvasionReduction(attacker));
     }
+
     public static void cacheDefenderData(obj_id defender) throws InterruptedException
     {
         utils.setScriptVar(defender, DEFENDER_REDUCE_CRIT, getDefenderCriticalChance(defender));
@@ -3507,6 +3641,7 @@ public class combat extends script.base_script
         utils.setScriptVar(defender, DEFENDER_EVADE, getDefenderEvasionChance(defender));
         utils.setScriptVar(defender, DEFENDER_BLOCK, getDefenderBlockChance(defender));
     }
+
     public static obj_id getRandomHateTarget(obj_id self) throws InterruptedException
     {
         obj_id[] potentialTargets = getHateList(self);
@@ -3517,9 +3652,12 @@ public class combat extends script.base_script
         float max_range = 64.0f;
         Vector validTargets = new Vector();
         validTargets.setSize(0);
-        for (obj_id potentialTarget : potentialTargets) {
-            if (isIdValid(potentialTarget) && exists(potentialTarget) && canSee(self, potentialTarget) && !stealth.hasInvisibleBuff(potentialTarget) && getMaster(potentialTarget) == null && !isDead(potentialTarget)) {
-                if (getDistance(self, potentialTarget) < max_range) {
+        for (obj_id potentialTarget : potentialTargets)
+        {
+            if (isIdValid(potentialTarget) && exists(potentialTarget) && canSee(self, potentialTarget) && !stealth.hasInvisibleBuff(potentialTarget) && getMaster(potentialTarget) == null && !isDead(potentialTarget))
+            {
+                if (getDistance(self, potentialTarget) < max_range)
+                {
                     utils.addElement(validTargets, potentialTarget);
                 }
             }
@@ -3528,8 +3666,9 @@ public class combat extends script.base_script
         {
             return null;
         }
-        return ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+        return ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
     }
+
     public static boolean doBhTaunt(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -3557,13 +3696,14 @@ public class combat extends script.base_script
         {
             increasedHate += BH_TAUNT_HATE_INCREASE_MID;
         }
-        else 
+        else
         {
             increasedHate += BH_TAUNT_HATE_INCREASE_HIGH;
         }
         addHate(target, player, increasedHate);
         return true;
     }
+
     public static boolean dsFsTaunt(obj_id player, obj_id target) throws InterruptedException
     {
         int stanceBuff = buff.getBuffOnTargetFromGroup(player, "fsStance");
@@ -3596,26 +3736,28 @@ public class combat extends script.base_script
         {
             increasedHate += FS_TAUNT_HATE_INCREASE_MID;
         }
-        else 
+        else
         {
             increasedHate += FS_TAUNT_HATE_INCREASE_HIGH;
         }
         addHate(target, player, increasedHate);
         return true;
     }
+
     public static boolean isStunned(obj_id target) throws InterruptedException
     {
         return utils.hasScriptVar(target, TEMP_COMBAT_BLOCK);
     }
+
     public static int[] getSuccessBasedSingleTargetActionCost(hit_result hitData, combat_data actionData, obj_id attacker, weapon_data weaponData) throws InterruptedException
     {
         boolean isSingleTargetAttack = actionData.hitType == -1 && actionData.attackType == combat.SINGLE_TARGET && actionData.commandType != combat.LEFT_CLICK_DEFAULT;
-        int[] freeShot = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] freeShot =
+                {
+                        0,
+                        0,
+                        0
+                };
         if (!isSingleTargetAttack)
         {
             return freeShot;
@@ -3626,28 +3768,28 @@ public class combat extends script.base_script
         int freeCrit = getEnhancedSkillStatisticModifierUncapped(attacker, "freeshot_case_crit");
         int freeStrike = getEnhancedSkillStatisticModifierUncapped(attacker, "freeshot_case_strikethrough");
         boolean isFreeshot = false;
-        if (hitData.success == false)
+        if (!hitData.success)
         {
             if (freeMiss > 0)
             {
                 isFreeshot = true;
             }
-            if (hitData.dodge == true && freeDodge > 0)
+            if (hitData.dodge && freeDodge > 0)
             {
                 isFreeshot = true;
             }
-            if (hitData.parry == true && freeParry > 0)
+            if (hitData.parry && freeParry > 0)
             {
                 isFreeshot = true;
             }
         }
-        if (hitData.success == true)
+        if (hitData.success)
         {
-            if (hitData.critical == true && freeCrit > 0)
+            if (hitData.critical && freeCrit > 0)
             {
                 isFreeshot = true;
             }
-            if (hitData.strikethrough == true && freeStrike > 0)
+            if (hitData.strikethrough && freeStrike > 0)
             {
                 isFreeshot = true;
             }
@@ -3662,6 +3804,7 @@ public class combat extends script.base_script
         int[] shotCost = getActionCost(attacker, weaponData, actionData);
         return shotCost;
     }
+
     public static void setPersistCombatMode(obj_id target, boolean state) throws InterruptedException
     {
         if (!isMob(target))
@@ -3677,12 +3820,13 @@ public class combat extends script.base_script
             return;
         }
         utils.setScriptVar(target, combat.PERSIST_COMBAT, 1);
-        return;
     }
+
     public static boolean isPersistCombatMode(obj_id self) throws InterruptedException
     {
         return utils.hasScriptVar(self, combat.PERSIST_COMBAT);
     }
+
     public static boolean isValidPersistCombat(obj_id self) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -3703,15 +3847,13 @@ public class combat extends script.base_script
             return false;
         }
         boolean hasLos = true;
-        for (obj_id obj_id : hateList) {
+        for (obj_id obj_id : hateList)
+        {
             hasLos |= canSee(self, obj_id);
         }
-        if (!hasLos)
-        {
-            return false;
-        }
-        return true;
+        return hasLos;
     }
+
     public static boolean isDamageImmune(obj_id attacker, obj_id defender, combat_data actionData) throws InterruptedException
     {
         boolean attackerImmune = getEnhancedSkillStatisticModifierUncapped(attacker, "damage_immune") > 0;
@@ -3740,52 +3882,56 @@ public class combat extends script.base_script
         }
         return (attackerImmune || defenderImmune) && !isBeneficial;
     }
+
     public static float getDiminishedReturnValue(float value, int modType) throws InterruptedException
     {
         if (value < 0.0f)
         {
             return value;
         }
-        float[] seedList = 
-        {
-            500.0f,
-            500.0f,
-            500.0f,
-            500.0f,
-            500.0f,
-            500.0f,
-            500.0f,
-            50.0f
-        };
+        float[] seedList =
+                {
+                        500.0f,
+                        500.0f,
+                        500.0f,
+                        500.0f,
+                        500.0f,
+                        500.0f,
+                        500.0f,
+                        50.0f
+                };
         switch (modType)
         {
             case DR_ATTACKER_CRITICAL:
-            return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_CRITICAL]))));
+                return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_CRITICAL]))));
             case DR_ATTACKER_STRIKETHROUGH:
-            return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_STRIKETHROUGH]))));
+                return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_STRIKETHROUGH]))));
             case DR_DEFENDER_BLOCK:
-            return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_BLOCK]))));
+                return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_BLOCK]))));
             case DR_DEFENDER_DODGE:
-            return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_DODGE]))));
+                return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_DODGE]))));
             case DR_DEFENDER_PARRY:
-            return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_PARRY]))));
+                return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_PARRY]))));
             case DR_DEFENDER_GLANCE:
-            return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_GLANCE]))));
+                return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_GLANCE]))));
             case DR_DEFENDER_EVADE:
-            return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_EVADE]))));
+                return (value * (1.0f - (value / (value + seedList[DR_DEFENDER_EVADE]))));
             case DR_ATTACKER_CRITICAL_2:
-            return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_CRITICAL_2]))));
+                return (value * (1.0f - (value / (value + seedList[DR_ATTACKER_CRITICAL_2]))));
         }
         return value;
     }
+
     public static void mirrorArmor(obj_id commando) throws InterruptedException
     {
         obj_id[] haters = getHateList(commando);
         if (haters != null || haters.length > 0)
         {
-            for (obj_id hater : haters) {
+            for (obj_id hater : haters)
+            {
                 float myHate = getHate(hater, commando);
-                if (myHate <= 0.0f) {
+                if (myHate <= 0.0f)
+                {
                     continue;
                 }
                 myHate /= 2.0f;
@@ -3793,6 +3939,7 @@ public class combat extends script.base_script
             }
         }
     }
+
     public static boolean setKillMeter(obj_id player, int value) throws InterruptedException
     {
         int current = getKillMeter(player);
@@ -3800,6 +3947,7 @@ public class combat extends script.base_script
         incrementKillMeter(player, delta);
         return true;
     }
+
     public static boolean modifyKillMeter(obj_id player, int value) throws InterruptedException
     {
         int current = getKillMeter(player);
@@ -3815,6 +3963,7 @@ public class combat extends script.base_script
         setKillMeter(player, delta);
         return true;
     }
+
     public static boolean canDrainKillMeter(obj_id player, int value) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -3823,8 +3972,9 @@ public class combat extends script.base_script
         }
         int current = getKillMeter(player);
         int delta = current - value;
-        return delta < 0 ? false : true;
+        return delta >= 0;
     }
+
     public static boolean drainKillMeter(obj_id player, int value) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -3837,6 +3987,7 @@ public class combat extends script.base_script
         }
         return modifyKillMeter(player, -1 * value);
     }
+
     public static location getCommandGroundTargetLocation(String params) throws InterruptedException
     {
         String[] stringLocationParams = split(params, ' ');
@@ -3845,18 +3996,14 @@ public class combat extends script.base_script
             return null;
         }
         location eggLoc = new location();
-        boolean inCell = false;
-        if (isIdValid(utils.stringToObjId(stringLocationParams[3])))
-        {
-            inCell = true;
-        }
+        boolean inCell = isIdValid(utils.stringToObjId(stringLocationParams[3]));
         if (!inCell)
         {
             eggLoc.x = utils.stringToFloat(stringLocationParams[0]);
             eggLoc.y = utils.stringToFloat(stringLocationParams[1]);
             eggLoc.z = utils.stringToFloat(stringLocationParams[2]);
         }
-        else 
+        else
         {
             eggLoc.cell = utils.stringToObjId(stringLocationParams[3]);
             eggLoc.x = utils.stringToFloat(stringLocationParams[4]);
@@ -3865,6 +4012,7 @@ public class combat extends script.base_script
         }
         return eggLoc;
     }
+
     public static float getDevastationChance(obj_id attacker) throws InterruptedException
     {
         float devastationBonus = 2.0f;
@@ -3872,6 +4020,7 @@ public class combat extends script.base_script
         devastationBonus += getEnhancedSkillStatisticModifierUncapped(attacker, "expertise_devastation_bonus") / 10.0f;
         return devastationBonus;
     }
+
     public static float getElementalPenetration(obj_id attacker, String damageString) throws InterruptedException
     {
         float elementalPenetrationAmount = 0.0f;
@@ -3888,6 +4037,7 @@ public class combat extends script.base_script
         }
         return elementalPenetrationAmount;
     }
+
     public static boolean hasPrescience(obj_id attacker, obj_id defender, combat_data actionData) throws InterruptedException
     {
         if (!buff.hasBuff(defender, "bh_prescience"))

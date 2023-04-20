@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class force_rank extends script.base_script
 {
-    public force_rank()
-    {
-    }
     public static final String FRS_DATATABLE = "datatables/pvp/force_rank.iff";
     public static final String FRS_DARK_DATATABLE = "datatables/pvp/force_rank_dark.iff";
     public static final String JEDI_TERMINAL_DATATABLE = "datatables/pvp/jedi_enclave_terminals.iff";
@@ -47,12 +44,12 @@ public class force_rank extends script.base_script
     public static final int TEST_COUNCIL = 0;
     public static final int DARK_COUNCIL = 1;
     public static final int LIGHT_COUNCIL = 2;
-    public static final String[] COUNCIL_NAMES = 
-    {
-        "Test Enclave",
-        "Dark Enclave",
-        "Light Enclave"
-    };
+    public static final String[] COUNCIL_NAMES =
+            {
+                    "Test Enclave",
+                    "Dark Enclave",
+                    "Light Enclave"
+            };
     public static final String VAR_RATING = "force_rank.rating";
     public static final String VAR_RANK = "force_rank.rank";
     public static final String VAR_COUNCIL = "force_rank.council";
@@ -102,6 +99,10 @@ public class force_rank extends script.base_script
     public static final String VAR_NOTIFY_ENCLAVE_OF_DEATH = "force_rank.notifyEnclaveOfDeath";
     public static final String VAR_MY_ENCLAVE_ID = "force_rank.myEnclaveId";
     public static final float MIN_KILL_CONTRIB_FOR_ACTION_DEATH = 0.51f;
+    public force_rank()
+    {
+    }
+
     public static boolean addToForceRankSystem(obj_id player, int council) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -127,7 +128,7 @@ public class force_rank extends script.base_script
             setJediState(player, JEDI_STATE_FORCE_RANKED_LIGHT);
             pvpSetAlignedFaction(player, getFactionId("Rebel"));
         }
-        else 
+        else
         {
             setJediState(player, JEDI_STATE_FORCE_RANKED_DARK);
             pvpSetAlignedFaction(player, getFactionId("Imperial"));
@@ -144,6 +145,7 @@ public class force_rank extends script.base_script
         force_rank.grantRankItems(player);
         return true;
     }
+
     public static boolean removeFromForceRankSystem(obj_id player, boolean surrendered) throws InterruptedException
     {
         LOG("force_rank", "force_rank.removeFromForceRankSystem");
@@ -176,6 +178,7 @@ public class force_rank extends script.base_script
         sendSystemMessageProse(player, pp);
         return true;
     }
+
     public static int adjustForceRankXP(obj_id player, int amt) throws InterruptedException
     {
         LOG("force_rank", "force_rank.adjustForceRankXP -- player ->" + player + " amt ->" + amt);
@@ -194,7 +197,7 @@ public class force_rank extends script.base_script
             prose_package pp = prose.getPackage(new string_id(STF_FILE, "experience_granted"), amt);
             sendSystemMessageProse(player, pp);
         }
-        else 
+        else
         {
             int current_xp = getExperiencePoints(player, FRS_XP);
             if (amt * -1 > current_xp)
@@ -216,6 +219,7 @@ public class force_rank extends script.base_script
         }
         return getExperiencePoints(player, FRS_XP);
     }
+
     public static boolean addExperienceDebt(obj_id enclave, String player_name, int xp_debt) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -239,7 +243,7 @@ public class force_rank extends script.base_script
             Vector rank_list = getPlayersInForceRankResizeable(enclave, i);
             if (rank_list != null)
             {
-                if (rank_list.indexOf(player_name) != -1)
+                if (rank_list.contains(player_name))
                 {
                     in_rank = true;
                     break;
@@ -258,12 +262,13 @@ public class force_rank extends script.base_script
             setObjVar(enclave, obj_var_name, current_debt);
             return true;
         }
-        else 
+        else
         {
             LOG("force_rank", "force_rank.addExperienceDebt -- " + player_name + " is not in the force rank list.");
             return false;
         }
     }
+
     public static int spendForceRankXP(obj_id player, int amt) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -283,12 +288,13 @@ public class force_rank extends script.base_script
         {
             return -1;
         }
-        else 
+        else
         {
             adjustForceRankXP(player, amt * -1);
             return getExperiencePoints(player, FRS_XP);
         }
     }
+
     public static boolean promoteForceRank(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -317,6 +323,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(player, council, 3, Integer.toString(current_rank), "msgForceRankPromotePlayer", true);
         return true;
     }
+
     public static boolean demoteForceRank(obj_id player, int rank) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -349,6 +356,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(player, council, 4, Integer.toString(rank), "msgForceRankDemotePlayer", true);
         return true;
     }
+
     public static boolean demoteForceRank(obj_id enclave, String player_name, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -370,6 +378,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(enclave, council, 5, player_name + " " + rank, "msgForceRankDemotePlayer", true);
         return true;
     }
+
     public static boolean resetClusterData(obj_id enclave) throws InterruptedException
     {
         LOG("force_rank", "force_rank.resetClusterData");
@@ -387,6 +396,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(enclave, council, 8, "", "msgFRSUpdateClusterData", true);
         return true;
     }
+
     public static boolean renameRankMember(obj_id player, String old_name) throws InterruptedException
     {
         if (old_name == null)
@@ -409,6 +419,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(player, council, 9, old_name, "msgForceRankRenamePlayer", true);
         return true;
     }
+
     public static boolean removeForceRankSkills(obj_id player, int rank) throws InterruptedException
     {
         LOG("force_rank", "force_rank.removeForceRankSkills");
@@ -447,6 +458,7 @@ public class force_rank extends script.base_script
         utils.removeScriptVar(player, SCRIPT_VAR_SKILL_RESYNC);
         return true;
     }
+
     public static boolean resyncForceRankSkills(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -500,6 +512,7 @@ public class force_rank extends script.base_script
         utils.removeScriptVar(player, SCRIPT_VAR_SKILL_RESYNC);
         return true;
     }
+
     public static boolean performEnclaveMaintenance(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -516,7 +529,7 @@ public class force_rank extends script.base_script
                 setObjVar(enclave, VAR_XP_MAINTENANCE, getGameTime() + getXpInterval());
             }
         }
-        else 
+        else
         {
             setObjVar(enclave, VAR_XP_MAINTENANCE, getGameTime() + getXpInterval());
         }
@@ -534,6 +547,7 @@ public class force_rank extends script.base_script
         utils.setScriptVar(enclave, force_rank.SCRIPT_VAR_DATA_REQUEST + request_id, 0);
         return true;
     }
+
     public static boolean checkVotingResults(obj_id enclave) throws InterruptedException
     {
         LOG("force_rank", "force_rank.checkVotingResults");
@@ -562,7 +576,7 @@ public class force_rank extends script.base_script
             switch (status)
             {
                 case 1:
-                
+
                 {
                     if (time_expired)
                     {
@@ -575,12 +589,12 @@ public class force_rank extends script.base_script
                                 setObjVar(enclave, obj_var_base + ".status", 1);
                                 setObjVar(enclave, obj_var_base + ".time", getGameTime() + getPetitionInterval());
                             }
-                            else 
+                            else
                             {
                                 resetVotingTerminal(enclave, rank);
                             }
                         }
-                        else 
+                        else
                         {
                             int avail_slots = getAvailableRankSlots(enclave, rank);
                             if (petitioners.length <= avail_slots || petitioners.length == 1)
@@ -593,11 +607,12 @@ public class force_rank extends script.base_script
                                 setObjVar(enclave, obj_var_base + ".time", getGameTime() + getAcceptanceInterval());
                                 string_id sub = new string_id(force_rank.STF_FILE, "vote_win_sub");
                                 string_id body = new string_id(force_rank.STF_FILE, "vote_win_body");
-                                for (String petitioner : petitioners) {
+                                for (String petitioner : petitioners)
+                                {
                                     utils.sendMail(sub, body, petitioner, "Enclave Records");
                                 }
                             }
-                            else 
+                            else
                             {
                                 setObjVar(enclave, obj_var_base + ".status", 2);
                                 setObjVar(enclave, obj_var_base + ".time", getGameTime() + getVoteInterval());
@@ -617,7 +632,7 @@ public class force_rank extends script.base_script
                     break;
                 }
                 case 2:
-                
+
                 {
                     if (time_expired)
                     {
@@ -632,7 +647,8 @@ public class force_rank extends script.base_script
                             {
                                 Vector winners = new Vector();
                                 winners.setSize(0);
-                                for (int top_vote : top_votes) {
+                                for (int top_vote : top_votes)
+                                {
                                     int vote_idx = utils.getElementPositionInArray(votes, top_vote);
                                     winners.add(petitioners[vote_idx]);
                                     votes[vote_idx] = -1;
@@ -650,13 +666,13 @@ public class force_rank extends script.base_script
                                     setObjVar(enclave, obj_var_base + ".time", getGameTime() + getAcceptanceInterval());
                                 }
                             }
-                            else 
+                            else
                             {
                                 LOG("force_rank", "force_rank.checkVotingResults -- voting failed for rank " + rank + " due to a null top_votes.");
                                 resetVotingTerminal(enclave, rank);
                             }
                         }
-                        else 
+                        else
                         {
                             int[] top_votes = getTopVotes(votes, 1);
                             if (top_votes != null)
@@ -665,17 +681,17 @@ public class force_rank extends script.base_script
                                 removeObjVar(enclave, obj_var_base + ".petition");
                                 removeObjVar(enclave, obj_var_base + ".time");
                                 removeObjVar(enclave, obj_var_base + ".votes");
-                                String[] winner_list = 
-                                {
-                                    petitioners[vote_idx]
-                                };
+                                String[] winner_list =
+                                        {
+                                                petitioners[vote_idx]
+                                        };
                                 setObjVar(enclave, obj_var_base + ".winner", winner_list);
                                 setObjVar(enclave, obj_var_base + ".status", 4);
                                 string_id sub = new string_id(force_rank.STF_FILE, "vote_win_sub");
                                 string_id body = new string_id(force_rank.STF_FILE, "vote_win_no_slot_body");
                                 utils.sendMail(sub, body, petitioners[vote_idx], "Enclave Records");
                             }
-                            else 
+                            else
                             {
                                 LOG("force_rank", "force_rank.checkVotingResults -- voting failed for rank " + rank + " due to a null top_votes.");
                                 resetVotingTerminal(enclave, rank);
@@ -686,7 +702,7 @@ public class force_rank extends script.base_script
                     break;
                 }
                 case 3:
-                
+
                 {
                     if (time_expired)
                     {
@@ -697,7 +713,8 @@ public class force_rank extends script.base_script
                             string_id body = new string_id(force_rank.STF_FILE, "acceptance_expired_body");
                             String rank_str = localize(new string_id(force_rank.STF_FILE, "rank" + rank));
                             prose_package pp = prose.getPackage(body, rank_str);
-                            for (String winner : winners) {
+                            for (String winner : winners)
+                            {
                                 utils.sendMail(sub, pp, winner, "Enclave Records");
                                 CustomerServiceLog("force_rank", winner + "'s chance to accept a promotion to rank " + rank + " has expired.");
                             }
@@ -707,7 +724,7 @@ public class force_rank extends script.base_script
                     break;
                 }
                 case 4:
-                
+
                 {
                     int avail_slots = getAvailableRankSlots(enclave, rank);
                     if (avail_slots > 0)
@@ -721,11 +738,12 @@ public class force_rank extends script.base_script
                             string_id body = new string_id(force_rank.STF_FILE, "vote_seat_available_body");
                             String rank_str = localize(new string_id(force_rank.STF_FILE, "rank" + rank));
                             prose_package pp = prose.getPackage(body, rank_str);
-                            for (String winner : winners) {
+                            for (String winner : winners)
+                            {
                                 utils.sendMail(sub, pp, winner, "Enclave Records");
                             }
                         }
-                        else 
+                        else
                         {
                             setObjVar(enclave, obj_var_base + ".status", 1);
                             setObjVar(enclave, obj_var_base + ".time", getGameTime() + getPetitionInterval());
@@ -736,6 +754,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean checkChallengeVotingResults(obj_id enclave) throws InterruptedException
     {
         LOG("force_rank", "force_rank.checkChallengeVotingResults");
@@ -788,7 +807,7 @@ public class force_rank extends script.base_script
             switch (status)
             {
                 case 1:
-                
+
                 {
                     if (challenge_rank != rank)
                     {
@@ -822,7 +841,7 @@ public class force_rank extends script.base_script
                             prose_package pp = prose.getPackage(body, name, Integer.toString(votes[0]), votes[1]);
                             sendChallengeVoterMail(enclave, challenge_rank, sub, pp);
                         }
-                        else 
+                        else
                         {
                             string_id sub = new string_id(force_rank.STF_FILE, "challenge_vote_fail_sub");
                             string_id body = new string_id(force_rank.STF_FILE, "challenge_vote_fail_body");
@@ -835,7 +854,7 @@ public class force_rank extends script.base_script
                     break;
                 }
                 case 2:
-                
+
                 {
                     if (time_expired)
                     {
@@ -854,6 +873,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean checkMissedVotes(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -880,10 +900,13 @@ public class force_rank extends script.base_script
                 String[] rank_list = getPlayersInForceRank(enclave, vote_rank);
                 if (rank_list != null)
                 {
-                    int xp_debt = (int)(MISSED_VOTE_PENALTY * StrictMath.pow(vote_rank, 2));
-                    for (String s : rank_list) {
-                        if (voters != null) {
-                            if (voters.indexOf(s) != -1) {
+                    int xp_debt = (int) (MISSED_VOTE_PENALTY * StrictMath.pow(vote_rank, 2));
+                    for (String s : rank_list)
+                    {
+                        if (voters != null)
+                        {
+                            if (voters.contains(s))
+                            {
                                 continue;
                             }
                         }
@@ -900,6 +923,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static int getVoteStatus(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -917,11 +941,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return 4;
         }
     }
+
     public static int getVoteEndTime(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -939,11 +964,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static boolean isVoteTimeExpired(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -957,15 +983,9 @@ public class force_rank extends script.base_script
             return false;
         }
         int time = getVoteEndTime(enclave, rank);
-        if (time < getGameTime())
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return time < getGameTime();
     }
+
     public static int getChallengeVoteStatus(obj_id terminal, String challenged) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -983,11 +1003,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(terminal, obj_var_name);
         }
-        else 
+        else
         {
             return 3;
         }
     }
+
     public static int getChallengeVoteEndTime(obj_id terminal, String challenged) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1005,11 +1026,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(terminal, obj_var_name);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static boolean isChallengeVoteTimeExpired(obj_id terminal, String challenged) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1023,15 +1045,9 @@ public class force_rank extends script.base_script
             return false;
         }
         int time = getChallengeVoteEndTime(terminal, challenged);
-        if (time < getGameTime())
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return time < getGameTime();
     }
+
     public static int getChallengeVoteRank(obj_id terminal, String challenged) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1049,11 +1065,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(terminal, obj_var_name);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static int[] getChallengeVotes(obj_id terminal, String challenged) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1069,16 +1086,17 @@ public class force_rank extends script.base_script
             {
                 return null;
             }
-            else 
+            else
             {
                 return votes;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String[] getChallengeVoteList(obj_id terminal) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1115,11 +1133,12 @@ public class force_rank extends script.base_script
             }
             return _names;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getNumChallengeVoteList(obj_id terminal) throws InterruptedException
     {
         if (!isIdValid(terminal))
@@ -1132,11 +1151,12 @@ public class force_rank extends script.base_script
         {
             return vote_list.getNumItems();
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static String[] getRankPetitioners(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1154,11 +1174,12 @@ public class force_rank extends script.base_script
         {
             return getStringArrayObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static Vector getRankPetitionersResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1176,11 +1197,12 @@ public class force_rank extends script.base_script
         {
             return getResizeableStringArrayObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int[] getRankPetitionerVotes(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1198,11 +1220,12 @@ public class force_rank extends script.base_script
         {
             return getIntArrayObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static Vector getRankPetitionerVotesResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1220,11 +1243,12 @@ public class force_rank extends script.base_script
         {
             return getResizeableIntArrayObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int[] getTopVotes(int[] votes, int winners) throws InterruptedException
     {
         if (votes == null)
@@ -1249,6 +1273,7 @@ public class force_rank extends script.base_script
         }
         return top_votes;
     }
+
     public static String[] getVoteWinners(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1266,11 +1291,12 @@ public class force_rank extends script.base_script
         {
             return getStringArrayObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id getVotingTerminal(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1285,16 +1311,17 @@ public class force_rank extends script.base_script
             {
                 return terminal;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id getArenaTerminal(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1309,16 +1336,17 @@ public class force_rank extends script.base_script
             {
                 return terminal;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id getChallengeVotingTerminal(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1333,16 +1361,17 @@ public class force_rank extends script.base_script
             {
                 return terminal;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static boolean resetVotingTerminal(obj_id enclave, int rank) throws InterruptedException
     {
         LOG("force_rank", "force_rank.resetVotingTerminal -- " + VAR_VOTING_BASE + rank);
@@ -1366,6 +1395,7 @@ public class force_rank extends script.base_script
         removeObjVar(enclave, VAR_VOTING_BASE + rank);
         return true;
     }
+
     public static boolean deductXpMaintenance(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1380,7 +1410,8 @@ public class force_rank extends script.base_script
             if (rank_list != null)
             {
                 int xp_cost = base_xp_cost * rank;
-                for (String s : rank_list) {
+                for (String s : rank_list)
+                {
                     addExperienceDebt(enclave, s, xp_cost);
                     CustomerServiceLog("force_rank", "Adding experience debt of " + xp_cost + " to " + s + " for regular experience maintenance.");
                     string_id sub = new string_id(force_rank.STF_FILE, "xp_maintenace_sub");
@@ -1392,6 +1423,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean checkExperienceDebt(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1405,15 +1437,21 @@ public class force_rank extends script.base_script
             if (rank_list != null)
             {
                 int xp_to_demote = 5000 * i;
-                for (String s : rank_list) {
+                for (String s : rank_list)
+                {
                     String obj_var_name = VAR_MEMBER_DATA + s + ".xp_debt";
-                    if (hasObjVar(enclave, obj_var_name)) {
+                    if (hasObjVar(enclave, obj_var_name))
+                    {
                         int xp_debt = getIntObjVar(enclave, obj_var_name);
-                        if (xp_debt > xp_to_demote) {
-                            if (!demoteForceRank(enclave, s, i - 1)) {
+                        if (xp_debt > xp_to_demote)
+                        {
+                            if (!demoteForceRank(enclave, s, i - 1))
+                            {
                                 LOG("force_rank", "force_rank.checkExperienceDebt -- failed to demote " + s + " due to too much xp debt.");
                                 CustomerServiceLog("force_rank", "Failed to demote " + s + " for too much xp debt");
-                            } else {
+                            }
+                            else
+                            {
                                 CustomerServiceLog("force_rank", "Demoting " + s + " for too much xp debt");
                                 string_id sub = new string_id(force_rank.STF_FILE, "demote_xp_debt_sub");
                                 string_id body = new string_id(force_rank.STF_FILE, "demote_xp_debt_body");
@@ -1426,6 +1464,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean requestExperienceDebt(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1442,11 +1481,12 @@ public class force_rank extends script.base_script
             messageTo(enclave, "msgRequestExperienceDebt", d, 3.0f, false);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static int getExperienceDebt(obj_id enclave, String player_name) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1464,11 +1504,12 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(enclave, obj_var_name);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static boolean validateFRSPlayerData(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1501,6 +1542,7 @@ public class force_rank extends script.base_script
         messageTo(enclave, "msgValidateFRSPlayerData", d, 10.0f, false);
         return true;
     }
+
     public static int getForceRank(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1514,6 +1556,7 @@ public class force_rank extends script.base_script
         }
         return -1;
     }
+
     public static int getForceRank(obj_id enclave, String player_name) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1540,6 +1583,7 @@ public class force_rank extends script.base_script
         }
         return -1;
     }
+
     public static int getForceTier(int rank) throws InterruptedException
     {
         if (rank < 0 || rank > 11)
@@ -1573,6 +1617,7 @@ public class force_rank extends script.base_script
         }
         return -1;
     }
+
     public static obj_id getEnclave(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1584,11 +1629,12 @@ public class force_rank extends script.base_script
         {
             return getObjIdObjVar(player, VAR_MY_ENCLAVE_ID);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getCouncilAffiliation(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -1606,6 +1652,7 @@ public class force_rank extends script.base_script
         }
         return -1;
     }
+
     public static String getCouncilName(int council) throws InterruptedException
     {
         if (COUNCIL_NAMES.length < council)
@@ -1617,11 +1664,12 @@ public class force_rank extends script.base_script
         {
             return name;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getAvailableRankSlots(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1640,12 +1688,13 @@ public class force_rank extends script.base_script
             }
             return max_slots - slots_taken;
         }
-        else 
+        else
         {
             LOG("force_rank", "force_rank.getAvailableRankSlots -- invalid rank value of " + rank);
             return -1;
         }
     }
+
     public static int getFactionId(String faction) throws InterruptedException
     {
         if (faction == null)
@@ -1661,6 +1710,7 @@ public class force_rank extends script.base_script
         int faction_id = dataTableGetInt("datatables/faction/faction.iff", faction_num, "pvpFaction");
         return faction_id;
     }
+
     public static String getForceRankSkill(int rank, int council) throws InterruptedException
     {
         if (council != LIGHT_COUNCIL && council != DARK_COUNCIL)
@@ -1673,7 +1723,7 @@ public class force_rank extends script.base_script
         {
             datatable = FRS_DATATABLE;
         }
-        else 
+        else
         {
             datatable = FRS_DARK_DATATABLE;
         }
@@ -1688,11 +1738,12 @@ public class force_rank extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             return skill;
         }
     }
+
     public static int getForceSkillRank(String skill, int council) throws InterruptedException
     {
         if (skill == null)
@@ -1710,13 +1761,14 @@ public class force_rank extends script.base_script
         {
             datatable = FRS_DATATABLE;
         }
-        else 
+        else
         {
             datatable = FRS_DARK_DATATABLE;
         }
         int index = dataTableSearchColumnForString(skill, "skill", datatable);
         return index;
     }
+
     public static int getForceRankNumSlots(int rank) throws InterruptedException
     {
         int index = dataTableSearchColumnForInt(rank, "rank", FRS_DATATABLE);
@@ -1728,6 +1780,7 @@ public class force_rank extends script.base_script
         int num_slots = dataTableGetInt(FRS_DATATABLE, index, "num_slots");
         return num_slots;
     }
+
     public static int getForceRankMinXp(int rank) throws InterruptedException
     {
         int index = dataTableSearchColumnForInt(rank, "rank", FRS_DATATABLE);
@@ -1739,6 +1792,7 @@ public class force_rank extends script.base_script
         int min_xp = dataTableGetInt(FRS_DATATABLE, index, "min_xp");
         return min_xp;
     }
+
     public static int getVotesForPlayer(obj_id player, obj_id enclave) throws InterruptedException
     {
         int playerRank = getForceRank(enclave, utils.getRealPlayerFirstName(player));
@@ -1761,6 +1815,7 @@ public class force_rank extends script.base_script
         }
         return votes[idx];
     }
+
     public static void setVotesForPlayer(obj_id player, int numVotes, obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(player) || player == null)
@@ -1789,7 +1844,7 @@ public class force_rank extends script.base_script
                 utils.removeElementAt(petitioners, idx);
                 utils.removeElementAt(votes, idx);
             }
-            else 
+            else
             {
                 votes.set(idx, numVotes);
             }
@@ -1801,8 +1856,8 @@ public class force_rank extends script.base_script
         }
         setObjVar(enclave, VAR_VOTING_BASE + (playerRank + 1) + ".petition", petitioners);
         setObjVar(enclave, VAR_VOTING_BASE + (playerRank + 1) + ".votes", votes);
-        return;
     }
+
     public static Vector getAllPlayerNamesInForceRank(obj_id enclave) throws InterruptedException
     {
         Vector allNames = new Vector();
@@ -1817,6 +1872,7 @@ public class force_rank extends script.base_script
         }
         return allNames;
     }
+
     public static obj_id[] getAllPlayersInForceRank(obj_id enclave, int rank) throws InterruptedException
     {
         Vector playerIds = new Vector();
@@ -1835,14 +1891,16 @@ public class force_rank extends script.base_script
                 }
                 return _playerIds;
             }
-            for (String player1 : players) {
+            for (String player1 : players)
+            {
                 player = getPlayerIdFromFirstName(player1);
-                if (player != null && isIdValid(player)) {
+                if (player != null && isIdValid(player))
+                {
                     utils.addElement(playerIds, player);
                 }
             }
         }
-        else 
+        else
         {
             for (int h = 1; h < 12; h++)
             {
@@ -1851,9 +1909,11 @@ public class force_rank extends script.base_script
                 {
                     continue;
                 }
-                for (String player1 : players) {
+                for (String player1 : players)
+                {
                     player = getPlayerIdFromFirstName(player1);
-                    if (player != null && isIdValid(player)) {
+                    if (player != null && isIdValid(player))
+                    {
                         utils.addElement(playerIds, player);
                     }
                 }
@@ -1867,6 +1927,7 @@ public class force_rank extends script.base_script
         }
         return _playerIds;
     }
+
     public static int getVoteWeight(int voter_rank, int promotion_rank) throws InterruptedException
     {
         if (voter_rank < 1)
@@ -1919,6 +1980,7 @@ public class force_rank extends script.base_script
         }
         return -1;
     }
+
     public static int getChallengeVoteWeight(int voter_rank, int challenge_rank) throws InterruptedException
     {
         if (voter_rank < 1)
@@ -1936,11 +1998,12 @@ public class force_rank extends script.base_script
         {
             return 1;
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static String[] getPlayersInForceRank(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -1954,8 +2017,10 @@ public class force_rank extends script.base_script
             String[] rank_list = getStringArrayObjVar(enclave, objvar_name);
             Vector final_list = new Vector();
             final_list.setSize(0);
-            for (String s : rank_list) {
-                if (s != null && s.length() > 0 && !s.equals(EMPTY_SLOT)) {
+            for (String s : rank_list)
+            {
+                if (s != null && s.length() > 0 && !s.equals(EMPTY_SLOT))
+                {
                     final_list = utils.addElement(final_list, s);
                 }
             }
@@ -1969,16 +2034,17 @@ public class force_rank extends script.base_script
                 }
                 return _final_list;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static Vector getPlayersInForceRankResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2003,13 +2069,14 @@ public class force_rank extends script.base_script
             {
                 return rank_list;
             }
-            else 
+            else
             {
                 return null;
             }
         }
         return null;
     }
+
     public static boolean getPlayersInForceRank(obj_id source, int rank, int council, String handler) throws InterruptedException
     {
         if (!isIdValid(source))
@@ -2030,6 +2097,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(source, council, 1, Integer.toString(rank), handler, false);
         return true;
     }
+
     public static boolean isPlayerEligibleForPromotion(obj_id player, int rank) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2054,11 +2122,12 @@ public class force_rank extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             return skill.hasRequiredXpForSkillPurchase(player, skill_name);
         }
     }
+
     public static boolean getEnclaveObjId(obj_id source, int council, String handler) throws InterruptedException
     {
         if (!isIdValid(source))
@@ -2074,6 +2143,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(source, council, 6, "None", handler, false);
         return true;
     }
+
     public static Vector getRankMembersFromDictionary(dictionary enclave_data, int rank) throws InterruptedException
     {
         if (enclave_data == null)
@@ -2103,6 +2173,7 @@ public class force_rank extends script.base_script
         }
         return rank_list;
     }
+
     public static String[] getPvpBoardNames(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2119,8 +2190,10 @@ public class force_rank extends script.base_script
             }
             Vector final_list = new Vector();
             final_list.setSize(0);
-            for (String name : names) {
-                if (name != null && name.length() > 0 && !name.equals(EMPTY_SLOT)) {
+            for (String name : names)
+            {
+                if (name != null && name.length() > 0 && !name.equals(EMPTY_SLOT))
+                {
                     final_list = utils.addElement(final_list, name);
                 }
             }
@@ -2134,16 +2207,17 @@ public class force_rank extends script.base_script
                 }
                 return _final_list;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int[] getPvpBoardRatings(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2160,8 +2234,10 @@ public class force_rank extends script.base_script
             }
             Vector final_list = new Vector();
             final_list.setSize(0);
-            for (int rating : ratings) {
-                if (rating > 0) {
+            for (int rating : ratings)
+            {
+                if (rating > 0)
+                {
                     final_list = utils.addElement(final_list, rating);
                 }
             }
@@ -2178,16 +2254,17 @@ public class force_rank extends script.base_script
                 }
                 return _final_list;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getPvpRankingForPlayer(obj_id enclave, String player_name) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2203,6 +2280,7 @@ public class force_rank extends script.base_script
         Vector pvp_board_names = utils.getResizeableStringBatchObjVar(enclave, BATCH_VAR_PVPBOARD_NAME);
         return pvp_board_names.indexOf(player_name);
     }
+
     public static boolean getPvpBoardRatings(obj_id source, int council, String handler) throws InterruptedException
     {
         if (!isIdValid(source))
@@ -2218,6 +2296,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(source, council, 2, Integer.toString(0), handler, false);
         return true;
     }
+
     public static boolean updatePvpBoardData(obj_id player, int rating, int council, String handler) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2233,6 +2312,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(player, council, 7, Integer.toString(rating), handler, true);
         return true;
     }
+
     public static dictionary adjustPvpBoardRankings(obj_id player, int player_rating, dictionary enclave_data) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2294,12 +2374,12 @@ public class force_rank extends script.base_script
                 board_names.add(utils.getRealPlayerFirstName(player));
                 board_ratings.add(utils.getRealPlayerFirstName(player));
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             if (on_board)
             {
@@ -2322,11 +2402,12 @@ public class force_rank extends script.base_script
         {
             String key_name = BATCH_VAR_PVPBOARD_NAME + i;
             String key_rating = BATCH_VAR_PVPBOARD_RATING + i;
-            enclave_data.put(key_name, ((String)board_names.get(i)));
-            enclave_data.put(key_rating, ((Integer)board_ratings.get(i)).intValue());
+            enclave_data.put(key_name, ((String) board_names.get(i)));
+            enclave_data.put(key_rating, ((Integer) board_ratings.get(i)).intValue());
         }
         return enclave_data;
     }
+
     public static boolean sendRankMail(obj_id enclave, int rank, string_id subject, prose_package body) throws InterruptedException
     {
         LOG("force_rank", "force_rank.sendRankMail -- " + rank);
@@ -2351,6 +2432,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean sendVoterMail(obj_id enclave, int rank, string_id subject, prose_package body) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2373,6 +2455,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean sendChallengeVoterMail(obj_id enclave, int rank, string_id subject, prose_package body) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2394,6 +2477,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean resetEnclaveData(obj_id enclave) throws InterruptedException
     {
         LOG("force_rank", "force_rank.resetEnclaveData");
@@ -2414,6 +2498,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean replaceEnclaveClusterData(obj_id enclave, int lock_key) throws InterruptedException
     {
         LOG("force_rank", "force_rank.replaceEnclaveClusterData");
@@ -2451,6 +2536,7 @@ public class force_rank extends script.base_script
         replaceClusterWideData(CLUSTER_DATA_NAME, STRING_CLUSTER_ENCLAVE_NAME + council, enclave_info, false, lock_key);
         return true;
     }
+
     public static boolean updateEnclaveClusterData(obj_id enclave, dictionary enclave_data) throws InterruptedException
     {
         LOG("force_rank", "force_rank.updateEnclaveClusterData");
@@ -2475,7 +2561,7 @@ public class force_rank extends script.base_script
         java.util.Enumeration e = enclave_data.keys();
         while (e.hasMoreElements())
         {
-            String key_name = (String)(e.nextElement());
+            String key_name = (String) (e.nextElement());
             if (key_name.length() > 0)
             {
                 if (key_name.startsWith(VAR_RANK_BASE))
@@ -2503,7 +2589,7 @@ public class force_rank extends script.base_script
                     {
                         continue;
                     }
-                    Vector edit_list = (Vector)(ranks[rank - 1]);
+                    Vector edit_list = (Vector) (ranks[rank - 1]);
                     edit_list.add(enclave_data.getString(key_name));
                 }
                 if (key_name.startsWith(BATCH_VAR_PVPBOARD_NAME))
@@ -2527,13 +2613,14 @@ public class force_rank extends script.base_script
         for (int i = 0; i < ranks.length; i++)
         {
             Object obj_list = ranks[i];
-            Vector vec_list = (Vector)obj_list;
+            Vector vec_list = (Vector) obj_list;
             String[] rank_list = new String[vec_list.size()];
             vec_list.toArray(rank_list);
             setObjVar(enclave, VAR_RANK_BASE + (i + 1), rank_list);
         }
         return true;
     }
+
     public static boolean backupEnclaveData(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2552,6 +2639,7 @@ public class force_rank extends script.base_script
         setObjVar(enclave, VAR_BACKUP_TIME, getGameTime());
         return true;
     }
+
     public static boolean restoreEnclaveData(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2569,6 +2657,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean logEnclaveData(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -2587,8 +2676,10 @@ public class force_rank extends script.base_script
             String[] rank_list = getPlayersInForceRank(enclave, i);
             if (rank_list != null)
             {
-                for (String s : rank_list) {
-                    if (s != null) {
+                for (String s : rank_list)
+                {
+                    if (s != null)
+                    {
                         obj_id player = getPlayerIdFromFirstName(s);
                         CustomerServiceLog("force_rank", COUNCIL_NAMES[council] + " Data: " + s + "(" + player + ") is at rank " + i);
                     }
@@ -2597,6 +2688,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static dictionary removeExtraSlotFromRankList(dictionary enclave_data, int rank) throws InterruptedException
     {
         if (enclave_data == null)
@@ -2622,9 +2714,12 @@ public class force_rank extends script.base_script
             }
             String key_name = force_rank.VAR_RANK_BASE + rank + "-";
             int data_idx = 0;
-            for (Object o : rank_list) {
-                if (slots_to_remove > 0) {
-                    if (((String) o) == null || ((String) o).length() < 1 || ((String) o).equals(EMPTY_SLOT)) {
+            for (Object o : rank_list)
+            {
+                if (slots_to_remove > 0)
+                {
+                    if (o == null || ((String) o).length() < 1 || o.equals(EMPTY_SLOT))
+                    {
                         rank_length--;
                         slots_to_remove--;
                         continue;
@@ -2643,20 +2738,23 @@ public class force_rank extends script.base_script
             }
             return enclave_data;
         }
-        else 
+        else
         {
             LOG("force_rank", "force_rank.removeEntryFromRankList -- rank_list is null.");
             return null;
         }
     }
+
     public static boolean grantRankItems(obj_id player, boolean retroactive) throws InterruptedException
     {
         return false;
     }
+
     public static boolean grantRankItems(obj_id player) throws InterruptedException
     {
         return grantRankItems(player, false);
     }
+
     public static boolean performFRSAttack(obj_id player, obj_id defender, hit_result results, weapon_data weapondat) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2704,7 +2802,7 @@ public class force_rank extends script.base_script
                 performFRSAttackSuffering(player, defender, weapon_id, damage, suffering_rating);
             }
         }
-        else 
+        else
         {
             int vigilance_rating = getEnhancedSkillStatisticModifier(player, "frs_light_vigilance");
             if (vigilance_rating > 0)
@@ -2719,6 +2817,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static boolean performFRSAttackEnvy(obj_id player, obj_id defender, obj_id weapon, int damage, int rating) throws InterruptedException
     {
         if (!isJedi(player))
@@ -2733,12 +2832,12 @@ public class force_rank extends script.base_script
         {
             rating = 100;
         }
-        int drain = (int)(damage * (rating / 200.0f));
+        int drain = (int) (damage * (rating / 200.0f));
         if (drain < 1)
         {
             drain = 1;
         }
-        int gain = (int)(drain * (rating / 100.0f));
+        int gain = (int) (drain * (rating / 100.0f));
         if (gain < 1)
         {
             gain = 1;
@@ -2765,6 +2864,7 @@ public class force_rank extends script.base_script
         playClientEffectLoc(player, "clienteffect/frs_dark_envy.cef", getLocation(defender), 1.5f);
         return true;
     }
+
     public static boolean performFRSAttackSuffering(obj_id player, obj_id defender, obj_id weapon, int damage, int rating) throws InterruptedException
     {
         if (isJedi(defender))
@@ -2774,34 +2874,41 @@ public class force_rank extends script.base_script
                 return false;
             }
         }
-        int drain = (int)(damage * (rating / 300.0f));
+        int drain = (int) (damage * (rating / 300.0f));
         if (drain < 1)
         {
             drain = 1;
         }
         int current_val = 0;
-        int[] attribs = 
+        int[] attribs =
+                {
+                        1,
+                        2,
+                        4,
+                        5
+                };
+        for (int attrib : attribs)
         {
-            1,
-            2,
-            4,
-            5
-        };
-        for (int attrib : attribs) {
             int current_attrib = getAttrib(defender, attrib);
-            if (current_attrib - 1 <= drain) {
+            if (current_attrib - 1 <= drain)
+            {
                 drain = current_attrib - 1;
-                if (drain < 1) {
+                if (drain < 1)
+                {
                     continue;
                 }
             }
-            if (hasAttribModifier(defender, "force_rank.suffering_" + attrib)) {
+            if (hasAttribModifier(defender, "force_rank.suffering_" + attrib))
+            {
                 attrib_mod[] mods = getAttribModifiers(defender, attrib);
-                for (attrib_mod mod : mods) {
+                for (attrib_mod mod : mods)
+                {
                     String name = mod.getName();
-                    if (name != null && name.equals("force_rank.suffering_" + attrib)) {
+                    if (name != null && name.equals("force_rank.suffering_" + attrib))
+                    {
                         int val = mod.getValue();
-                        if (val != 0) {
+                        if (val != 0)
+                        {
                             removeAttribOrSkillModModifier(defender, "force_rank.suffering_" + attrib);
                             current_val = Math.abs(val);
                         }
@@ -2820,11 +2927,13 @@ public class force_rank extends script.base_script
         combat.sendCombatSpamMessageProse(player, defender, pp, true, true, false);
         return true;
     }
+
     public static boolean performFRSAttackVengeance(obj_id player, obj_id defender, int damage, int rating) throws InterruptedException
     {
         playClientEffectLoc(player, "clienteffect/frs_dark_vengeance.cef", getLocation(defender), 1.5f);
         return true;
     }
+
     public static boolean performFRSAttackVigilance(obj_id player, obj_id defender, obj_id weapon, int damage, int rating) throws InterruptedException
     {
         if (!isJedi(player))
@@ -2839,7 +2948,7 @@ public class force_rank extends script.base_script
         {
             rating = 100;
         }
-        int drain = (int)(damage * (rating / 100.0f));
+        int drain = (int) (damage * (rating / 100.0f));
         if (drain < 1)
         {
             drain = 1;
@@ -2862,6 +2971,7 @@ public class force_rank extends script.base_script
         playClientEffectLoc(player, "clienteffect/frs_light_vigilance.cef", getLocation(defender), 1.5f);
         return true;
     }
+
     public static boolean performFRSAttackWisdom(obj_id player, obj_id defender, obj_id weapon, int damage, int rating) throws InterruptedException
     {
         if (isJedi(defender))
@@ -2871,12 +2981,12 @@ public class force_rank extends script.base_script
                 return false;
             }
         }
-        int drain = (int)(damage * (rating / 200.0f));
+        int drain = (int) (damage * (rating / 200.0f));
         if (drain < 1)
         {
             drain = 1;
         }
-        int gain = (int)(drain * (rating / 100.0f));
+        int gain = (int) (drain * (rating / 100.0f));
         if (gain < 1)
         {
             gain = 1;
@@ -2898,35 +3008,43 @@ public class force_rank extends script.base_script
         playClientEffectLoc(player, "clienteffect/frs_light_wisdom.cef", getLocation(defender), 1.5f);
         return true;
     }
+
     public static boolean performFRSAttackSerenity(obj_id player, obj_id defender, int damage, int rating) throws InterruptedException
     {
-        int drain = (int)(damage * (rating / 400.0f));
+        int drain = (int) (damage * (rating / 400.0f));
         if (drain < 1)
         {
             drain = 1;
         }
         int current_val = 0;
-        int[] attribs = 
+        int[] attribs =
+                {
+                        1,
+                        3,
+                        6
+                };
+        for (int attrib : attribs)
         {
-            1,
-            3,
-            6
-        };
-        for (int attrib : attribs) {
             int current_attrib = getAttrib(defender, attrib);
-            if (current_attrib - 1 <= drain) {
+            if (current_attrib - 1 <= drain)
+            {
                 drain = current_attrib - 1;
-                if (drain < 1) {
+                if (drain < 1)
+                {
                     continue;
                 }
             }
-            if (hasAttribModifier(defender, "force_rank.serenity_" + attrib)) {
+            if (hasAttribModifier(defender, "force_rank.serenity_" + attrib))
+            {
                 attrib_mod[] mods = getAttribModifiers(defender, attrib);
-                for (attrib_mod mod : mods) {
+                for (attrib_mod mod : mods)
+                {
                     String name = mod.getName();
-                    if (name != null && name.equals("force_rank.serenity_" + attrib)) {
+                    if (name != null && name.equals("force_rank.serenity_" + attrib))
+                    {
                         int val = mod.getValue();
-                        if (val != 0) {
+                        if (val != 0)
+                        {
                             removeAttribOrSkillModModifier(defender, "force_rank.serenity_" + attrib);
                             current_val = Math.abs(val);
                         }
@@ -2946,6 +3064,7 @@ public class force_rank extends script.base_script
         playClientEffectLoc(player, "clienteffect/frs_light_serenity.cef", getLocation(defender), 1.5f);
         return true;
     }
+
     public static void handleCondemnedPlayerDeath(obj_id darkEnclave, dictionary params) throws InterruptedException
     {
         trace.log("force_rank", "force_rank::handledCondemnedPlayerDeath: -> Enter method");
@@ -2965,7 +3084,7 @@ public class force_rank extends script.base_script
         float totalDarkJediDeathContrib = 0;
         while (pKeys.hasMoreElements())
         {
-            obj_id key = (obj_id)pKeys.nextElement();
+            obj_id key = (obj_id) pKeys.nextElement();
             winners[s] = key;
             contributions[s] = params.getFloat(key);
             totalDarkJediDeathContrib += contributions[s];
@@ -3027,24 +3146,24 @@ public class force_rank extends script.base_script
             {
                 setVotesForPlayer(victim, 0, darkEnclave);
                 _clearPvPActionDataForPlayer(victim, new String[]
-                {
-                    VAR_VICTIMS
-                }, ACTION_CANDIDATE_SUDDEN_DEATH, darkEnclave);
+                        {
+                                VAR_VICTIMS
+                        }, ACTION_CANDIDATE_SUDDEN_DEATH, darkEnclave);
                 sendSystemMessage(victim, new string_id("pvp_rating", "dark_jedi_kill_lost_votes"));
                 trace.log("force_rank", utils.getRealPlayerFirstName(victim) + " has lost " + victimsVotes + " votes for dying during the voting sudden-death period.", victim, trace.TL_CS_LOG | trace.TL_DEBUG);
                 int votesGained = 0;
                 for (int x = 0; x < suddenDeathWinners.size(); x++)
                 {
                     curContrib = (Float) suddenDeathContribs.get(x) / totSDContribs;
-                    curWinnerVotes = getVotesForPlayer(((obj_id)suddenDeathWinners.get(x)), darkEnclave);
-                    votesGained = (int)Math.floor(victimsVotes * curContrib);
-                    trace.log("force_rank", utils.getRealPlayerFirstName(((obj_id)suddenDeathWinners.get(x))) + " has gained " + votesGained + " for killing " + utils.getRealPlayerFirstName(victim), ((obj_id)suddenDeathWinners.get(x)), trace.TL_CS_LOG | trace.TL_DEBUG);
-                    setVotesForPlayer(((obj_id)suddenDeathWinners.get(x)), curWinnerVotes + votesGained, darkEnclave);
+                    curWinnerVotes = getVotesForPlayer(((obj_id) suddenDeathWinners.get(x)), darkEnclave);
+                    votesGained = (int) Math.floor(victimsVotes * curContrib);
+                    trace.log("force_rank", utils.getRealPlayerFirstName(((obj_id) suddenDeathWinners.get(x))) + " has gained " + votesGained + " for killing " + utils.getRealPlayerFirstName(victim), ((obj_id) suddenDeathWinners.get(x)), trace.TL_CS_LOG | trace.TL_DEBUG);
+                    setVotesForPlayer(((obj_id) suddenDeathWinners.get(x)), curWinnerVotes + votesGained, darkEnclave);
                     prose_package pp = new prose_package();
                     pp.target.set(utils.getRealPlayerFirstName(victim));
                     pp.digitInteger = votesGained;
                     pp.stringId = new string_id("pvp_rating", "dark_jedi_kill_won_votes");
-                    sendSystemMessageProse(((obj_id)suddenDeathWinners.get(x)), pp);
+                    sendSystemMessageProse(((obj_id) suddenDeathWinners.get(x)), pp);
                 }
             }
         }
@@ -3052,8 +3171,8 @@ public class force_rank extends script.base_script
         {
             demoteDeadPlayerToRankZero(victim, darkEnclave);
         }
-        return;
     }
+
     public static void moveEnclavedPlayerToNeutralCell(obj_id player) throws InterruptedException
     {
         if (arena.isPlayerInEnclave(player))
@@ -3079,7 +3198,7 @@ public class force_rank extends script.base_script
                 y = -43.42f;
                 z = -31.26f;
             }
-            else 
+            else
             {
                 cellName = "lobby";
                 x = -0.02f;
@@ -3099,6 +3218,7 @@ public class force_rank extends script.base_script
             }
         }
     }
+
     public static String getEnclaveAligmentString(obj_id enclave) throws InterruptedException
     {
         if (DEBUGGING)
@@ -3116,12 +3236,13 @@ public class force_rank extends script.base_script
         {
             alignment = "dark";
         }
-        else 
+        else
         {
             alignment = "light";
         }
         return alignment;
     }
+
     public static void updateAllRoomPermissions(obj_id enclave) throws InterruptedException
     {
         String alignment = getEnclaveAligmentString(enclave);
@@ -3134,32 +3255,38 @@ public class force_rank extends script.base_script
         String[] enclaveRooms = getCellNames(enclave);
         String columnName = "";
         int[] allowedRanks = new int[0];
-        for (String enclaveRoom : enclaveRooms) {
-            if (utils.getElementPositionInArray(commonsAreaCells, enclaveRoom) > -1) {
+        for (String enclaveRoom : enclaveRooms)
+        {
+            if (utils.getElementPositionInArray(commonsAreaCells, enclaveRoom) > -1)
+            {
                 continue;
             }
             columnName = alignment + "_" + enclaveRoom;
             allowedRanks = dataTableGetIntColumnNoDefaults(JEDI_ROOM_PERMISSIONS_TABLE, columnName);
-            if (allowedRanks == null || allowedRanks.length < 1) {
+            if (allowedRanks == null || allowedRanks.length < 1)
+            {
                 continue;
             }
             adjustPermissionListForRoom(enclave, enclaveRoom, allowedRanks);
         }
-        return;
     }
+
     public static Vector playerNamesToIds(String[] playerNames) throws InterruptedException
     {
         Vector players = new Vector();
         players.setSize(0);
         obj_id player = null;
-        for (String playerName : playerNames) {
+        for (String playerName : playerNames)
+        {
             player = getPlayerIdFromFirstName(playerName);
-            if (isIdValid(player) && player != null) {
+            if (isIdValid(player) && player != null)
+            {
                 utils.addElement(players, player);
             }
         }
         return players;
     }
+
     public static void adjustPermissionListForRoom(obj_id enclave, String cellName, int[] allowedRanks) throws InterruptedException
     {
         obj_id cellId = getCellId(enclave, cellName);
@@ -3170,32 +3297,36 @@ public class force_rank extends script.base_script
         }
         clearCellAllowList(cellId);
         String[] allowedPlayers = null;
-        for (int allowedRank : allowedRanks) {
+        for (int allowedRank : allowedRanks)
+        {
             allowedPlayers = force_rank.getPlayersInForceRank(enclave, allowedRank);
-            if (allowedPlayers == null || allowedPlayers.length < 1) {
+            if (allowedPlayers == null || allowedPlayers.length < 1)
+            {
                 continue;
             }
-            for (String allowedPlayer : allowedPlayers) {
+            for (String allowedPlayer : allowedPlayers)
+            {
                 permissionsAddAllowed(cellId, allowedPlayer);
             }
         }
-        return;
     }
+
     public static void setAllCellsPrivate(obj_id enclave) throws InterruptedException
     {
         String[] cellNames = getCellNames(enclave);
         obj_id cellId = null;
         if (cellNames != null)
         {
-            for (String cellName : cellNames) {
+            for (String cellName : cellNames)
+            {
                 cellId = getCellId(enclave, cellName);
                 permissionsMakePrivate(cellId);
                 clearCellBanList(cellId);
                 clearCellAllowList(cellId);
             }
         }
-        return;
     }
+
     public static void clearCellBanList(obj_id cell) throws InterruptedException
     {
         String[] banned = permissionsGetBanned(cell);
@@ -3203,11 +3334,12 @@ public class force_rank extends script.base_script
         {
             return;
         }
-        for (String s : banned) {
+        for (String s : banned)
+        {
             permissionsRemoveBanned(cell, s);
         }
-        return;
     }
+
     public static void clearCellAllowList(obj_id cell) throws InterruptedException
     {
         String[] allowed = permissionsGetAllowed(cell);
@@ -3215,11 +3347,12 @@ public class force_rank extends script.base_script
         {
             return;
         }
-        for (String s : allowed) {
+        for (String s : allowed)
+        {
             permissionsRemoveAllowed(cell, s);
         }
-        return;
     }
+
     public static void setCommonsRoomsToPublic(obj_id enclave) throws InterruptedException
     {
         String alignment = getEnclaveAligmentString(enclave);
@@ -3235,15 +3368,17 @@ public class force_rank extends script.base_script
             return;
         }
         obj_id cellId = null;
-        for (String commonsAreaCell : commonsAreaCells) {
+        for (String commonsAreaCell : commonsAreaCells)
+        {
             cellId = getCellId(enclave, commonsAreaCell);
-            if (!isIdValid(cellId)) {
+            if (!isIdValid(cellId))
+            {
                 trace.log("force_rank", "force_rank::setCommonRoomsToPublic -> Bunk Commons Area Cell ID for cell name " + commonsAreaCell + ". Cell not set to public.", enclave, trace.TL_WARNING | trace.TL_DEBUG);
             }
             permissionsMakePublic(cellId);
         }
-        return;
     }
+
     public static boolean checkCellPermission(obj_id item, obj_id cell, boolean silent) throws InterruptedException
     {
         if (isGod(item))
@@ -3285,7 +3420,7 @@ public class force_rank extends script.base_script
                 pet_lib.packAllCurrentPets(item, new string_id("pvp_rating", "enclave_deny_pet_entry"));
                 return true;
             }
-            else 
+            else
             {
                 int[] allowedRanks = dataTableGetIntColumnNoDefaults(force_rank.JEDI_ROOM_PERMISSIONS_TABLE, columnName);
                 int rank = force_rank.getForceRank(item);
@@ -3296,7 +3431,7 @@ public class force_rank extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             expelFromBuilding(item);
         }
@@ -3306,86 +3441,98 @@ public class force_rank extends script.base_script
         }
         return false;
     }
+
     public static void setCellScripts(obj_id enclave) throws InterruptedException
     {
         String[] enclaveRooms = getCellNames(enclave);
         obj_id cellId = null;
-        for (String enclaveRoom : enclaveRooms) {
+        for (String enclaveRoom : enclaveRooms)
+        {
             cellId = getCellId(enclave, enclaveRoom);
-            if (!isIdValid(cellId)) {
+            if (!isIdValid(cellId))
+            {
                 continue;
             }
             attachScript(cellId, "systems.gcw.enclave_cell");
         }
-        return;
     }
+
     public static void makeAllCellsPublic(obj_id enclave) throws InterruptedException
     {
         String[] enclaveRooms = getCellNames(enclave);
         obj_id cellId = null;
-        for (String enclaveRoom : enclaveRooms) {
+        for (String enclaveRoom : enclaveRooms)
+        {
             cellId = getCellId(enclave, enclaveRoom);
-            if (!isIdValid(cellId)) {
+            if (!isIdValid(cellId))
+            {
                 continue;
             }
             permissionsMakePublic(cellId);
         }
     }
+
     public static void refreshAllRoomPermissions(obj_id enclave) throws InterruptedException
     {
         setAllCellsPrivate(enclave);
         setCommonsRoomsToPublic(enclave);
         updateAllRoomPermissions(enclave);
     }
+
     public static void makePlayersPermaEnemies(obj_id player1, obj_id player2) throws InterruptedException
     {
         trace.log("force_rank", "Setting PEF for " + player1 + " and " + player2 + " - now enemies.", null, trace.TL_CS_LOG | trace.TL_DEBUG);
         pvpSetPermanentPersonalEnemyFlag(player1, player2);
         pvpSetPermanentPersonalEnemyFlag(player2, player1);
-        return;
     }
+
     public static void makePlayersPermaFriends(obj_id player1, obj_id player2) throws InterruptedException
     {
         trace.log("force_rank", "Making players " + utils.getRealPlayerFirstName(player1) + " and " + utils.getRealPlayerFirstName(player2) + " friends. (not really)", null, trace.TL_DEBUG);
-        return;
     }
+
     public static void makePlayerEnemyOfGroup(obj_id player, obj_id[] enemyGroup) throws InterruptedException
     {
         if (enemyGroup == null)
         {
             return;
         }
-        for (obj_id obj_id : enemyGroup) {
-            if (player != obj_id) {
+        for (obj_id obj_id : enemyGroup)
+        {
+            if (player != obj_id)
+            {
                 makePlayersPermaEnemies(player, obj_id);
             }
         }
-        return;
     }
+
     public static void makePlayerFriendsWithGroup(obj_id player, obj_id[] friendGroup) throws InterruptedException
     {
         if (friendGroup == null)
         {
             return;
         }
-        for (obj_id obj_id : friendGroup) {
-            if (player != obj_id) {
+        for (obj_id obj_id : friendGroup)
+        {
+            if (player != obj_id)
+            {
                 makePlayersPermaFriends(player, obj_id);
             }
         }
-        return;
     }
+
     public static void makePlayerGroupsEnemies(obj_id[] group1, obj_id[] group2) throws InterruptedException
     {
         if (group1 == null || group2 == null)
         {
             return;
         }
-        for (obj_id obj_id : group1) {
+        for (obj_id obj_id : group1)
+        {
             makePlayerEnemyOfGroup(obj_id, group2);
         }
-        return;
     }
+
     public static dictionary packageActionData(Vector initz, Vector victz, Vector startz) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -3398,6 +3545,7 @@ public class force_rank extends script.base_script
         d.put("times", startz);
         return d;
     }
+
     public static void setPvPActionData(dictionary data, String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         if (!isIdValid(darkEnclave))
@@ -3423,7 +3571,7 @@ public class force_rank extends script.base_script
                 trace.log("force_rank", "force_rank::setPvPActionData -> @data has no victim/starter/time data. removing all action data for " + pvpAction + " from enclave.  this is means all actions of this type are done.", darkEnclave, trace.TL_DEBUG);
                 removeObjVar(darkEnclave, pvpAction);
             }
-            else 
+            else
             {
                 trace.log("force_rank", "force_rank::setPvPActionData: -> pvp action data (" + pvpAction + ") invalid.  not set to enclave.", darkEnclave, trace.TL_WARNING | trace.TL_DEBUG);
             }
@@ -3435,8 +3583,8 @@ public class force_rank extends script.base_script
         setObjVar(darkEnclave, pvpAction + VAR_INITIATORS, inits);
         setObjVar(darkEnclave, pvpAction + VAR_VICTIMS, victs);
         setObjVar(darkEnclave, pvpAction + VAR_START_TIMESTAMPS, startTms);
-        return;
     }
+
     public static dictionary getAndValidatePvPActionData(String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         if (getCouncilAffiliation(darkEnclave) != DARK_COUNCIL)
@@ -3474,6 +3622,7 @@ public class force_rank extends script.base_script
         dictionary actionData = packageActionData(initiatorz, victimz, timez);
         return validatePvPActionData(actionData);
     }
+
     public static dictionary validatePvPActionData(dictionary data) throws InterruptedException
     {
         if (data == null)
@@ -3499,6 +3648,7 @@ public class force_rank extends script.base_script
         }
         return data;
     }
+
     public static void deleteExpiredPvPActions(obj_id darkEnclave) throws InterruptedException
     {
         Vector initiatorz = new Vector();
@@ -3507,34 +3657,40 @@ public class force_rank extends script.base_script
         victimz.setSize(0);
         Vector timez = new Vector();
         timez.setSize(0);
-        String[] actions = 
-        {
-            ACTION_VENDETTA,
-            ACTION_PURGE_COUNCIL,
-            ACTION_BANISHMENT
-        };
-        int[] durations = 
-        {
-            ACTION_VENDETTA_DURATION,
-            ACTION_PURGE_COUNCIL_DURATION,
-            ACTION_BANISHMENT_DURATION
-        };
+        String[] actions =
+                {
+                        ACTION_VENDETTA,
+                        ACTION_PURGE_COUNCIL,
+                        ACTION_BANISHMENT
+                };
+        int[] durations =
+                {
+                        ACTION_VENDETTA_DURATION,
+                        ACTION_PURGE_COUNCIL_DURATION,
+                        ACTION_BANISHMENT_DURATION
+                };
         int now = getGameTime();
-        for (String action : actions) {
+        for (String action : actions)
+        {
             dictionary data = getAndValidatePvPActionData(action, darkEnclave);
-            if (data == null) {
+            if (data == null)
+            {
                 return;
             }
             utils.concatArrays(initiatorz, data.getObjIdArray("initiators"));
             utils.concatArrays(victimz, data.getObjIdArray("victims"));
             utils.concatArrays(timez, data.getIntArray("times"));
             int x = 0;
-            while (x < timez.size()) {
-                if (now - (Integer) timez.get(x) >= durations[x]) {
+            while (x < timez.size())
+            {
+                if (now - (Integer) timez.get(x) >= durations[x])
+                {
                     utils.removeElementAt(timez, x);
                     utils.removeElementAt(victimz, x);
                     utils.removeElementAt(initiatorz, x);
-                } else {
+                }
+                else
+                {
                     x++;
                 }
             }
@@ -3544,8 +3700,8 @@ public class force_rank extends script.base_script
             victimz.clear();
             initiatorz.clear();
         }
-        return;
     }
+
     public static void demoteDeadPlayerToRankZero(obj_id player, obj_id darkEnclave) throws InterruptedException
     {
         Vector peaceTarget = new Vector();
@@ -3556,24 +3712,25 @@ public class force_rank extends script.base_script
         utils.concatArrays(recips, getAllPlayersInForceRank(darkEnclave, -1));
         demoteForceRank(darkEnclave, utils.getRealPlayerFirstName(player), 0);
         notifyPlayerOfPvPActionEnd(null, ACTION_BANISHMENT, peaceTarget, recips, false);
-        String[] lists = 
+        String[] lists =
+                {
+                        VAR_VICTIMS,
+                        VAR_INITIATORS
+                };
+        String[] actions =
+                {
+                        ACTION_PURGE_COUNCIL,
+                        ACTION_CANDIDATE_SUDDEN_DEATH,
+                        ACTION_BANISHMENT,
+                        ACTION_VENDETTA
+                };
+        for (String action : actions)
         {
-            VAR_VICTIMS,
-            VAR_INITIATORS
-        };
-        String[] actions = 
-        {
-            ACTION_PURGE_COUNCIL,
-            ACTION_CANDIDATE_SUDDEN_DEATH,
-            ACTION_BANISHMENT,
-            ACTION_VENDETTA
-        };
-        for (String action : actions) {
             _clearPvPActionDataForPlayer(player, lists, action, darkEnclave);
         }
         removeObjVar(player, VAR_NOTIFY_ENCLAVE_OF_DEATH);
-        return;
     }
+
     public static boolean _clearPvPActionDataForPlayer(obj_id player, String[] whichLists, String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         dictionary data = getAndValidatePvPActionData(pvpAction, darkEnclave);
@@ -3591,23 +3748,33 @@ public class force_rank extends script.base_script
         Vector startTms = new Vector();
         startTms.setSize(0);
         utils.concatArrays(startTms, data.getIntArray("times"));
-        for (String whichList : whichLists) {
+        for (String whichList : whichLists)
+        {
             int idx = -1;
-            if (whichList.equals(VAR_INITIATORS)) {
+            if (whichList.equals(VAR_INITIATORS))
+            {
                 idx = utils.getElementPositionInArray(inits, player);
-            } else if (whichList.equals(VAR_VICTIMS)) {
+            }
+            else if (whichList.equals(VAR_VICTIMS))
+            {
                 idx = utils.getElementPositionInArray(victs, player);
-            } else {
+            }
+            else
+            {
                 trace.log("force_rank", "force_rank::clearAllPvPActionsForPlayer passed bad value for @whichList array .  Bailing without clearing action status.", player, trace.TL_ERROR_LOG | trace.TL_DEBUG);
                 continue;
             }
-            while (idx > -1) {
+            while (idx > -1)
+            {
                 inits = utils.removeElementAt(inits, idx);
                 victs = utils.removeElementAt(victs, idx);
                 startTms = utils.removeElementAt(startTms, idx);
-                if (whichList.equals(VAR_INITIATORS)) {
+                if (whichList.equals(VAR_INITIATORS))
+                {
                     idx = utils.getElementPositionInArray(inits, player);
-                } else {
+                }
+                else
+                {
                     idx = utils.getElementPositionInArray(victs, player);
                 }
             }
@@ -3616,6 +3783,7 @@ public class force_rank extends script.base_script
         setPvPActionData(newData, pvpAction, darkEnclave);
         return true;
     }
+
     public static boolean isPartOfSameVendetta(obj_id player1, obj_id player2, dictionary vendettaData) throws InterruptedException
     {
         Vector initiatorz = new Vector();
@@ -3627,7 +3795,7 @@ public class force_rank extends script.base_script
         int idx = initiatorz.indexOf(player1);
         while (idx > -1)
         {
-            if (((obj_id)victimz.get(idx)) == player2)
+            if (victimz.get(idx) == player2)
             {
                 trace.log("force_rating", "force_rank::isPartOfSameVendetta: -> " + utils.getRealPlayerFirstName(player1) + " is same vendetta as " + utils.getRealPlayerFirstName(player2), player1, trace.TL_DEBUG);
                 return true;
@@ -3637,7 +3805,7 @@ public class force_rank extends script.base_script
         idx = victimz.indexOf(player1);
         while (idx > -1)
         {
-            if (((obj_id)initiatorz.get(idx)) == player2)
+            if (initiatorz.get(idx) == player2)
             {
                 trace.log("force_rating", "force_rank::isPartOfSameVendetta: -> " + utils.getRealPlayerFirstName(player1) + " is same vendetta as " + utils.getRealPlayerFirstName(player2), player1, trace.TL_DEBUG);
                 return true;
@@ -3646,15 +3814,13 @@ public class force_rank extends script.base_script
         }
         return false;
     }
+
     public static boolean isPvPActionInitiator(obj_id player, dictionary actionData1) throws InterruptedException
     {
         obj_id[] initiatorz = actionData1.getObjIdArray("initiators");
-        if (utils.getElementPositionInArray(initiatorz, player) > -1)
-        {
-            return true;
-        }
-        return false;
+        return utils.getElementPositionInArray(initiatorz, player) > -1;
     }
+
     public static boolean isPvPActionVictim(obj_id player, dictionary actionData2) throws InterruptedException
     {
         obj_id[] victimz = actionData2.getObjIdArray("victims");
@@ -3667,22 +3833,21 @@ public class force_rank extends script.base_script
         trace.log("force_rank", "force_rank::isPvPActionVictim: -> " + utils.getRealPlayerFirstName(player) + " is NOT a victim.", player, trace.TL_DEBUG);
         return false;
     }
+
     public static boolean isPartOfPvPAction(obj_id player, obj_id darkEnclave, dictionary actionData3) throws InterruptedException
     {
         return (isPvPActionInitiator(player, actionData3) || isPvPActionVictim(player, actionData3));
     }
+
     public static boolean bothArePartOfSameSuddenDeathRank(obj_id player1, obj_id player2, obj_id darkEnclave, dictionary suddenDeathData) throws InterruptedException
     {
         if (getForceRank(darkEnclave, utils.getRealPlayerFirstName(player1)) != getForceRank(darkEnclave, utils.getRealPlayerFirstName(player2)))
         {
             return false;
         }
-        if (isPvPActionVictim(player1, suddenDeathData) && isPvPActionVictim(player2, suddenDeathData))
-        {
-            return true;
-        }
-        return false;
+        return isPvPActionVictim(player1, suddenDeathData) && isPvPActionVictim(player2, suddenDeathData);
     }
+
     public static boolean _initiateCouncilPurge(obj_id darkEnclave, obj_id purger) throws InterruptedException
     {
         obj_id[] members = getAllPlayersInForceRank(darkEnclave, COUNCIL_RANK_NUMBER);
@@ -3703,8 +3868,10 @@ public class force_rank extends script.base_script
         Vector timez = new Vector();
         timez.setSize(0);
         int time = getGameTime();
-        for (obj_id member : members) {
-            if (member != null) {
+        for (obj_id member : members)
+        {
+            if (member != null)
+            {
                 utils.addElement(victimz, member);
                 utils.addElement(initiatorz, purger);
                 utils.addElement(timez, time);
@@ -3721,6 +3888,7 @@ public class force_rank extends script.base_script
         notifyPlayerOfPvPActionStart(purger, ACTION_PURGE_COUNCIL, victimz, recips, darkEnclave);
         return true;
     }
+
     public static boolean startPvPAction(obj_id initiator, Vector allVictims, String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         trace.log("force_rank", "force_rank::startPvPAction: -> " + pvpAction + " started by " + initiator, initiator, trace.TL_CS_LOG | trace.TL_DEBUG);
@@ -3755,16 +3923,18 @@ public class force_rank extends script.base_script
         dictionary newData = packageActionData(initiatorz, victimz, timez);
         setPvPActionData(newData, pvpAction, darkEnclave);
         String victimList = "";
-        for (Object allVictim : allVictims) {
-            victimList += "" + ((obj_id) allVictim) + ",";
+        for (Object allVictim : allVictims)
+        {
+            victimList += allVictim + ",";
         }
         trace.log("force_rank", "Dark Jedi PvP Action Started: " + pvpAction + ".  Initiator: " + initiator + ", Victims: " + victimList, null, trace.TL_CS_LOG | trace.TL_DEBUG);
         Vector recips = new Vector();
         recips.setSize(0);
-        switch (pvpAction) {
+        switch (pvpAction)
+        {
             case ACTION_VENDETTA:
                 recips.add(initiator);
-                recips.add(((obj_id) victimz.get(0)));
+                recips.add(victimz.get(0));
                 break;
             case ACTION_BANISHMENT:
                 utils.concatArrays(recips, getAllPlayersInForceRank(darkEnclave, -1));
@@ -3776,6 +3946,7 @@ public class force_rank extends script.base_script
         notifyPlayerOfPvPActionStart(initiator, pvpAction, allVictims, recips, darkEnclave);
         return true;
     }
+
     public static void notifyPlayerOfPvPActionStart(obj_id theInitiator, String pvpAction, Vector actionTargets, Vector msgRecipients, obj_id darkEnclave) throws InterruptedException
     {
         if (msgRecipients == null || msgRecipients.size() < 1)
@@ -3788,11 +3959,12 @@ public class force_rank extends script.base_script
         parms.put("pvpAction", pvpAction);
         parms.put("actionTargets", actionTargets);
         parms.put("enclave", darkEnclave);
-        for (Object msgRecipient : msgRecipients) {
+        for (Object msgRecipient : msgRecipients)
+        {
             messageTo(((obj_id) msgRecipient), "msgPvPActionStart", parms, 0, false);
         }
-        return;
     }
+
     public static void notifyPlayerOfPvPActionEnd(obj_id killer, String pvpAction, Vector peaceTargets, Vector msgRecipients, boolean actionTimedOut) throws InterruptedException
     {
         if (msgRecipients == null || msgRecipients.size() < 1 || peaceTargets == null || peaceTargets.size() < 1)
@@ -3808,11 +3980,12 @@ public class force_rank extends script.base_script
         parms.put("pvpAction", pvpAction);
         parms.put("peaceTargets", peaceTargets);
         parms.put("actionTimedOut", actionTimedOut);
-        for (Object msgRecipient : msgRecipients) {
+        for (Object msgRecipient : msgRecipients)
+        {
             messageTo(((obj_id) msgRecipient), "msgPvPActionEnd", parms, 0, false);
         }
-        return;
     }
+
     public static obj_id[] getMyVendettaEnemies(dictionary vendettaData, obj_id player) throws InterruptedException
     {
         Vector initiatorz = new Vector();
@@ -3826,13 +3999,13 @@ public class force_rank extends script.base_script
         int idx = initiatorz.indexOf(player);
         while (idx > -1)
         {
-            utils.addElement(vEnemies, ((obj_id)victimz.get(idx)));
+            utils.addElement(vEnemies, victimz.get(idx));
             idx = initiatorz.indexOf(player, idx + 1);
         }
         idx = victimz.indexOf(player);
         while (idx > -1)
         {
-            utils.addElement(vEnemies, ((obj_id)initiatorz.get(idx)));
+            utils.addElement(vEnemies, initiatorz.get(idx));
             idx = victimz.indexOf(player, idx + 1);
         }
         trace.log("force_rating", "force_rank::getMyVendettaEnemies: -> " + utils.getRealPlayerFirstName(player) + " has " + vEnemies.size() + " vendettas.", player, trace.TL_DEBUG);
@@ -3844,6 +4017,7 @@ public class force_rank extends script.base_script
         }
         return _vEnemies;
     }
+
     public static obj_id[] getMySuddenDeathEnemies(dictionary suddenDeathData, obj_id player, obj_id darkEnclave) throws InterruptedException
     {
         Vector candidateVictims = new Vector();
@@ -3866,9 +4040,11 @@ public class force_rank extends script.base_script
         {
             return new obj_id[0];
         }
-        for (Object candidateVictim : candidateVictims) {
-            if ((((obj_id) candidateVictim) != player) && (getForceRank(darkEnclave, utils.getRealPlayerFirstName(((obj_id) candidateVictim))) == playerRank)) {
-                utils.addElement(enemies, ((obj_id) candidateVictim));
+        for (Object candidateVictim : candidateVictims)
+        {
+            if ((candidateVictim != player) && (getForceRank(darkEnclave, utils.getRealPlayerFirstName(((obj_id) candidateVictim))) == playerRank))
+            {
+                utils.addElement(enemies, candidateVictim);
             }
         }
         obj_id[] _enemies = new obj_id[0];
@@ -3879,6 +4055,7 @@ public class force_rank extends script.base_script
         }
         return _enemies;
     }
+
     public static obj_id[] getEnemiesForPvPAction(obj_id player, String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         dictionary data = getAndValidatePvPActionData(pvpAction, darkEnclave);
@@ -3896,6 +4073,7 @@ public class force_rank extends script.base_script
         }
         return data.getObjIdArray("victims");
     }
+
     public static void requestPEFs(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, VAR_MY_ENCLAVE_ID))
@@ -3912,8 +4090,8 @@ public class force_rank extends script.base_script
         parms.put("sender", player);
         messageTo(myEnclave, "PEFSynchRequest", parms, 0, false);
         trace.log("force_rank", "force_rank::requestPEFs-> requesting enemy list from enclave", player, trace.TL_DEBUG);
-        return;
     }
+
     public static obj_id[] getCurrentDarkJediEnemies(obj_id player, obj_id enclave) throws InterruptedException
     {
         Vector enemies = new Vector();
@@ -3926,7 +4104,7 @@ public class force_rank extends script.base_script
             obj_id[] enemies2 = getAllPlayersInForceRank(enclave, -1);
             utils.concatArrays(enemies, enemies2);
         }
-        else 
+        else
         {
             trace.log("force_rank", "force_rank::getCurrentDarkJediEnemies: -> " + utils.getRealPlayerFirstName(player) + " is NOT victim of purge/banishment. Checking for specific enemies...", player, trace.TL_DEBUG);
             utils.concatArrays(enemies, getEnemiesForPvPAction(player, ACTION_VENDETTA, enclave));
@@ -3942,10 +4120,12 @@ public class force_rank extends script.base_script
         }
         return _enemies;
     }
+
     public static boolean isForceRanked(obj_id player) throws InterruptedException
     {
         return (getForceRank(player) >= 0);
     }
+
     public static boolean canForceRankedPetEnterEnclave(obj_id pet, obj_id enclave) throws InterruptedException
     {
         if (pet_lib.isPet(pet))
@@ -3959,17 +4139,12 @@ public class force_rank extends script.base_script
         }
         return false;
     }
+
     public static boolean isPlayersEnclave(obj_id enclave, obj_id player) throws InterruptedException
     {
-        if (getCouncilAffiliation(enclave) == getCouncilAffiliation(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return getCouncilAffiliation(enclave) == getCouncilAffiliation(player);
     }
+
     public static boolean createEnclaveTerminals(obj_id enclave) throws InterruptedException
     {
         if (!isIdValid(enclave))
@@ -3994,7 +4169,7 @@ public class force_rank extends script.base_script
                     return false;
                 }
             }
-            else 
+            else
             {
                 if (isIdValid(chal_voting_terminal))
                 {
@@ -4055,6 +4230,7 @@ public class force_rank extends script.base_script
         }
         return true;
     }
+
     public static int getPetitionInterval() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "frsPetitionInterval");
@@ -4063,11 +4239,12 @@ public class force_rank extends script.base_script
         {
             return value;
         }
-        else 
+        else
         {
             return PETITION_INTERVAL;
         }
     }
+
     public static int getVoteInterval() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "frsVoteInterval");
@@ -4076,11 +4253,12 @@ public class force_rank extends script.base_script
         {
             return value;
         }
-        else 
+        else
         {
             return VOTING_INTERVAL;
         }
     }
+
     public static int getAcceptanceInterval() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "frsAcceptanceInterval");
@@ -4089,11 +4267,12 @@ public class force_rank extends script.base_script
         {
             return value;
         }
-        else 
+        else
         {
             return ACCEPTANCE_INTERVAL;
         }
     }
+
     public static int getDemotionInterval() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "frsDemotionInterval");
@@ -4102,11 +4281,12 @@ public class force_rank extends script.base_script
         {
             return value;
         }
-        else 
+        else
         {
             return REQUEST_DEMOTION_DURATION;
         }
     }
+
     public static int getXpInterval() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "frsXpInterval");
@@ -4115,11 +4295,12 @@ public class force_rank extends script.base_script
         {
             return value;
         }
-        else 
+        else
         {
             return XP_MAINTENANCE_INTERVAL;
         }
     }
+
     public static boolean _updateForceRankData(obj_id source, int council, int data_mode, String params, String handler, boolean lock_data) throws InterruptedException
     {
         if (!isIdValid(source))

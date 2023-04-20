@@ -9,6 +9,7 @@ public class uberlair extends script.base_script
     public uberlair()
     {
     }
+
     public static void spawnBossMobiles(obj_id poiBaseObject, obj_id[] objLargeMobSpawners) throws InterruptedException
     {
         LOG("uber", "SPAWN BOSS MOBILES FUNCTION");
@@ -21,8 +22,10 @@ public class uberlair extends script.base_script
         location locSpawnLocation;
         obj_id objMob;
 
-        for (obj_id objLargeMobSpawner : objLargeMobSpawners) {
-            if (strLargeMobs.length == 0) {
+        for (obj_id objLargeMobSpawner : objLargeMobSpawners)
+        {
+            if (strLargeMobs.length == 0)
+            {
                 LOG("DESIGNER_FATAL", lairType + " has large mob spawners but no large mobs!");
                 break;
             }
@@ -30,7 +33,8 @@ public class uberlair extends script.base_script
             locSpawnLocation = getLocation(objLargeMobSpawner);
             objMob = poi.createObject(poiBaseObject, strMobToSpawn, locSpawnLocation);
             ai_lib.setDefaultCalmBehavior(objMob, ai_lib.BEHAVIOR_SENTINEL);
-            if (strLargeMobScript.length > 0) {
+            if (strLargeMobScript.length > 0)
+            {
                 attachScript(objMob, strLargeMobScript[0]);
                 setObjVar(objMob, "uberlair.strScript", strLargeMobScript[0]);
             }
@@ -39,6 +43,7 @@ public class uberlair extends script.base_script
             setObjVar(objMob, "uberlair.objParent", poiBaseObject);
         }
     }
+
     public static void spawnNpcLairMobiles(obj_id poiBaseObject, obj_id[] objMobSpawners) throws InterruptedException
     {
         final int SPAWNS_PER_EVENT = 3;
@@ -52,7 +57,7 @@ public class uberlair extends script.base_script
         String lairDatatable = "datatables/uberlair/" + lairType + ".iff";
         String[] strMobs = dataTableGetStringColumnNoDefaults(lairDatatable, "strMobs");
         String[] strMobScript = dataTableGetStringColumnNoDefaults(lairDatatable, "strMobScripts");
-        int intMaxSpawns[] = dataTableGetIntColumnNoDefaults(lairDatatable, "intMobCount");
+        int[] intMaxSpawns = dataTableGetIntColumnNoDefaults(lairDatatable, "intMobCount");
         int intMobCount = intMaxSpawns[0];
         intMaxSpawns = dataTableGetIntColumnNoDefaults(lairDatatable, "intTotalMobs");
         int intTotalMobs = intMaxSpawns[0];
@@ -95,6 +100,7 @@ public class uberlair extends script.base_script
         removeObjVar(poiBaseObject, "intSpawnIndex");
         messageTo(poiBaseObject, "spawnFormations", null, 3, false);
     }
+
     public static void respawnMobile(obj_id poiBaseObject, location locSpawnLocation, String strMobToSpawn, String strScript) throws InterruptedException
     {
         int intTotalMobs = getIntObjVar(poiBaseObject, "intTotalMobs");
@@ -112,6 +118,7 @@ public class uberlair extends script.base_script
         }
         setObjVar(poiBaseObject, "intSpawnCount", intCurrentSpawnCount);
     }
+
     public static void createFormations(obj_id objParent) throws InterruptedException
     {
         LOG("uber", "SPAWN_formations FUNCTION");
@@ -156,6 +163,7 @@ public class uberlair extends script.base_script
             }
         }
     }
+
     public static location[] getPatrolOffsets(location locParentLocation, float fltDistance) throws InterruptedException
     {
         location[] locWaypoints = new location[4];

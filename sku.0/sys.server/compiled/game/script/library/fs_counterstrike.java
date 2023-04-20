@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class fs_counterstrike extends script.base_script
 {
-    public fs_counterstrike()
-    {
-    }
     public static final String MOUSE_DROID_NAME_ID = "name_mdroid_";
     public static final String SHIELD_TR_VOLUME = "fs_camp.tr_volume";
     public static final String CAMP_DOOR_TEMPLATE = "object/installation/battlefield/destructible/bfield_base_gate_impl.iff";
@@ -73,6 +70,10 @@ public class fs_counterstrike extends script.base_script
     public static final String OBJVAR_CAMP_GUARDS_KILLED = "fs_cs.campGuardKilled";
     public static final String OBJVAR_BORN_ON = "fs_cs.creationDate";
     public static final int MAX_NUM_CAMPS_PER_CYCLE = 20;
+    public fs_counterstrike()
+    {
+    }
+
     public static void doCampLootSpawn(obj_id camp) throws InterruptedException
     {
         location here = getLocation(camp);
@@ -90,35 +91,40 @@ public class fs_counterstrike extends script.base_script
                 {
                     seed /= 2;
                 }
-                trace.log(fs_dyn_village.LOG_CHAN, "Created camp loot spawner " + spawner + " at " + where.toString());
+                trace.log(fs_dyn_village.LOG_CHAN, "Created camp loot spawner " + spawner + " at " + where);
             }
-            reseed((int)seed);
+            reseed((int) seed);
         }
         messageTo(camp, "msgDoLootSpawn", null, CAMP_LOOT_SPAWN_INTERVAL, false);
     }
+
     public static void resetPlayer(obj_id player) throws InterruptedException
     {
         String[] possibleSteps = new String[]
-        {
-            "fs_cs_intro",
-            "fs_cs_kill5_guards",
-            "fs_cs_ensure_capture",
-            "fs_cs_last_chance",
-            "fs_cs_escort_commander_pri",
-            "fs_cs_escort_commander_sec",
-            "fs_cs_quest_done",
-            "fs_cs_quest_failed_escort"
-        };
+                {
+                        "fs_cs_intro",
+                        "fs_cs_kill5_guards",
+                        "fs_cs_ensure_capture",
+                        "fs_cs_last_chance",
+                        "fs_cs_escort_commander_pri",
+                        "fs_cs_escort_commander_sec",
+                        "fs_cs_quest_done",
+                        "fs_cs_quest_failed_escort"
+                };
         obj_id questGiver = null;
-        for (String possibleStep1 : possibleSteps) {
-            if (quests.isActive(possibleStep1, player)) {
+        for (String possibleStep1 : possibleSteps)
+        {
+            if (quests.isActive(possibleStep1, player))
+            {
                 trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::resetPlayer: -> System removed player from quest and quest step " + possibleStep1 + ". Quest timed out.", player, trace.TL_CS_LOG);
                 questGiver = getCurrentQuestGiver(player, possibleStep1);
                 quests.deactivate(possibleStep1, player);
             }
         }
-        for (String possibleStep : possibleSteps) {
-            if (quests.isComplete(possibleStep, player)) {
+        for (String possibleStep : possibleSteps)
+        {
+            if (quests.isComplete(possibleStep, player))
+            {
                 clearCompletedQuest(player, quests.getQuestId(possibleStep));
             }
         }
@@ -131,23 +137,25 @@ public class fs_counterstrike extends script.base_script
         {
             attachScript(player, "systems.fs_quest.fs_cs_player");
         }
-        return;
     }
+
     public static void resetPlayerToStart(obj_id player, obj_id questGiver) throws InterruptedException
     {
         String[] possibleSteps = new String[]
+                {
+                        "fs_cs_intro",
+                        "fs_cs_kill5_guards",
+                        "fs_cs_ensure_capture",
+                        "fs_cs_last_chance",
+                        "fs_cs_escort_commander_pri",
+                        "fs_cs_escort_commander_sec",
+                        "fs_cs_quest_done",
+                        "fs_cs_quest_failed_escort"
+                };
+        for (String possibleStep : possibleSteps)
         {
-            "fs_cs_intro",
-            "fs_cs_kill5_guards",
-            "fs_cs_ensure_capture",
-            "fs_cs_last_chance",
-            "fs_cs_escort_commander_pri",
-            "fs_cs_escort_commander_sec",
-            "fs_cs_quest_done",
-            "fs_cs_quest_failed_escort"
-        };
-        for (String possibleStep : possibleSteps) {
-            if (quests.isActive(possibleStep, player)) {
+            if (quests.isActive(possibleStep, player))
+            {
                 trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::resetPlayerToStart: -> Player was still in active quest step " + possibleStep, player, trace.TL_WARNING);
                 questGiver = getCurrentQuestGiver(player, possibleStep);
                 quests.complete(possibleStep, player, false);
@@ -157,8 +165,8 @@ public class fs_counterstrike extends script.base_script
         destroyCommanderRescueWaypoint(player);
         removeObjVar(player, "fs_cs");
         quests.activate("fs_cs_intro", player, questGiver);
-        return;
     }
+
     public static void destroyCommanderRescueWaypoint(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "fs_cs.returnCommanderWaypoint"))
@@ -166,20 +174,18 @@ public class fs_counterstrike extends script.base_script
             destroyWaypointInDatapad(getObjIdObjVar(player, "fs_cs.returnCommanderWaypoint"), player);
             removeObjVar(player, "fs_cs.returnCommanderWaypoint");
         }
-        return;
     }
+
     public static boolean isShortCommanderRescue() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "FS_P3_ShortCommanderRescue");
         if (config != null)
         {
-            if ((toLower(config)).equals("true") || config.equals("1"))
-            {
-                return true;
-            }
+            return (toLower(config)).equals("true") || config.equals("1");
         }
         return false;
     }
+
     public static float getCampResetTime() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "FS_P3_CampResetTime");
@@ -194,6 +200,7 @@ public class fs_counterstrike extends script.base_script
         }
         return CAMP_SHIELD_REBOOT_TIME;
     }
+
     public static float getCampBossDeathTime() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "FS_P3_CampBossDeathTime");
@@ -208,19 +215,20 @@ public class fs_counterstrike extends script.base_script
         }
         return CAMP_BOSS_DEATH_TIME;
     }
+
     public static void markPhaseItemCreated(obj_id item) throws InterruptedException
     {
         setObjVar(item, OBJVAR_BORN_ON, getGameTime());
-        return;
     }
+
     public static void checkPhaseItemDisable(obj_id item, int phase) throws InterruptedException
     {
         if (getPhaseItemPercentDecay(item, phase) >= 100)
         {
             setCondition(item, CONDITION_DISABLED);
         }
-        return;
     }
+
     public static int getPhaseItemPercentDecay(obj_id item, int phase) throws InterruptedException
     {
         if (!hasObjVar(item, OBJVAR_BORN_ON))
@@ -231,13 +239,14 @@ public class fs_counterstrike extends script.base_script
         int now = getGameTime();
         float phaseDuration = fs_dyn_village.getPhaseDuration(phase);
         float itemAge = now - bornOn;
-        int percentDecay = (int)((itemAge / phaseDuration) * 100);
+        int percentDecay = (int) ((itemAge / phaseDuration) * 100);
         if (percentDecay > 100)
         {
             percentDecay = 100;
         }
         return percentDecay;
     }
+
     public static Vector getAllCampHintsFromDT() throws InterruptedException
     {
         int numRows = dataTableGetNumRows(DT_TABLE_NAME);
@@ -262,6 +271,7 @@ public class fs_counterstrike extends script.base_script
         rslt.add(names);
         return rslt;
     }
+
     public static int getMaxCampsPerCycle() throws InterruptedException
     {
         String config = getConfigSetting("GameServer", "FS_MaxPhase3EnemyCamps");
@@ -272,10 +282,12 @@ public class fs_counterstrike extends script.base_script
         }
         return MAX_NUM_CAMPS_PER_CYCLE;
     }
+
     public static boolean isOnCsQuest(obj_id player) throws InterruptedException
     {
         return quests.isActive("fs_cs_intro", player) || quests.isActive("fs_cs_kill5_guards", player) || quests.isActive("fs_cs_ensure_capture", player) || quests.isActive("fs_cs_last_chance", player) || quests.isActive("fs_cs_escort_commander_sec", player) || quests.isActive("fs_cs_quest_done", player) || quests.isActive("fs_cs_escort_commander_pri", player);
     }
+
     public static void pickAndWriteCycleNamesAndLocs(obj_id villageMaster) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Updating location hints and names used for this cycle.");
@@ -306,8 +318,8 @@ public class fs_counterstrike extends script.base_script
             trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::pickAndWriteCycleNamesAndLocs: -> getAllCampHints returned badly structured data. Camps not determine camp info for this cycle.", null, trace.TL_ERROR_LOG);
             return;
         }
-        Vector locs = (Vector)campsDat.get(0);
-        Vector names = (Vector)campsDat.get(1);
+        Vector locs = (Vector) campsDat.get(0);
+        Vector names = (Vector) campsDat.get(1);
         trace.log(fs_dyn_village.LOG_CHAN, "DT has " + locs.size() + " locs and " + names.size() + " names.");
         int idx = -1;
         for (int i = 0; i < phaseNames.size(); i++)
@@ -339,15 +351,15 @@ public class fs_counterstrike extends script.base_script
         trace.log(fs_dyn_village.LOG_CHAN, "_picknames: phaseNames.size()=" + phaseNames.size() + ", phaseLocs.size()=" + phaseLocs.size());
         setObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES, phaseNames);
         setObjVar(villageMaster, OBJVAR_PHASE_CAMP_LOC_HINTS, phaseLocs);
-        return;
     }
+
     public static void initializeEnemyCamps(obj_id villageMaster) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Init Enemy Camps.");
         pickAndWriteCycleNamesAndLocs(villageMaster);
         _createEnemyCamps(villageMaster);
-        return;
     }
+
     public static void _createEnemyCamps(obj_id villageMaster) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Creating Enemy Camps from hint data.");
@@ -370,15 +382,15 @@ public class fs_counterstrike extends script.base_script
         }
         for (int i = 0; i < phaseLocs.size(); i++)
         {
-            boolean rslt = createRemoteTheater(DT_TABLE_POI_NAME, (location)phaseLocs.get(i), "systems.fs_quest.fs_outpost_master", villageMaster, (String)phaseNames.get(i), TLT_none);
-            trace.log(fs_dyn_village.LOG_CHAN, "Attempting (" + rslt + ") to create theatre " + (String)phaseNames.get(i) + " at idx " + i + " at location " + (location)phaseLocs.get(i));
+            boolean rslt = createRemoteTheater(DT_TABLE_POI_NAME, (location) phaseLocs.get(i), "systems.fs_quest.fs_outpost_master", villageMaster, (String) phaseNames.get(i), TLT_none);
+            trace.log(fs_dyn_village.LOG_CHAN, "Attempting (" + rslt + ") to create theatre " + phaseNames.get(i) + " at idx " + i + " at location " + phaseLocs.get(i));
         }
-        return;
     }
+
     public static void theatreDestroyed(obj_id villageMaster, obj_id destroyedCamp) throws InterruptedException
     {
-        return;
     }
+
     public static String setLocForCamp(obj_id villageMaster, obj_id campId, location loc, String campName) throws InterruptedException
     {
         String rslt = "";
@@ -427,9 +439,10 @@ public class fs_counterstrike extends script.base_script
         campIds[nameIdx] = campId;
         utils.setScriptVar(villageMaster, OBJVAR_CREATED_CAMP_LOCS, locs);
         utils.setScriptVar(villageMaster, OBJVAR_CREATED_CAMP_IDS, campIds);
-        rslt = (String)names.get(nameIdx);
+        rslt = (String) names.get(nameIdx);
         return rslt;
     }
+
     public static void failQuestForCampers(obj_id campId) throws InterruptedException
     {
         obj_id commander = null;
@@ -445,8 +458,8 @@ public class fs_counterstrike extends script.base_script
             shieldKiller = getObjIdObjVar(campId, OBJVAR_CAMP_SHIELD_KILLER);
             messageTo(shieldKiller, "msgShieldPowerup", null, 0.0f, false);
         }
-        return;
     }
+
     public static void resetCamp(obj_id campId, boolean recreate) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Resetting camp " + campId);
@@ -472,7 +485,7 @@ public class fs_counterstrike extends script.base_script
                 setInvulnerable(turret1, false);
                 setObjVar(turret1, turret.OBJVAR_CAN_ATTACK, "allPlayers");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -492,7 +505,7 @@ public class fs_counterstrike extends script.base_script
                 setInvulnerable(turret2, false);
                 setObjVar(turret2, turret.OBJVAR_CAN_ATTACK, "allPlayers");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -512,7 +525,7 @@ public class fs_counterstrike extends script.base_script
                 setInvulnerable(turret3, false);
                 setObjVar(turret3, turret.OBJVAR_CAN_ATTACK, "allPlayers");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -533,7 +546,7 @@ public class fs_counterstrike extends script.base_script
                 detachScript(door1, "systems.battlefield.destructible_building");
                 attachScript(door1, "systems.fs_quest.destructible_obj");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -554,7 +567,7 @@ public class fs_counterstrike extends script.base_script
                 detachScript(door2, "systems.battlefield.destructible_building");
                 attachScript(door2, "systems.fs_quest.destructible_obj");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -574,7 +587,7 @@ public class fs_counterstrike extends script.base_script
                 detachScript(antenna, "systems.battlefield.destructible_building");
                 attachScript(antenna, "systems.fs_quest.destructible_obj");
             }
-            else 
+            else
             {
                 destroyObject(campId);
             }
@@ -595,8 +608,8 @@ public class fs_counterstrike extends script.base_script
         {
             removeObjVar(campId, OBJVAR_CAMP_COMMANDER_TAKER);
         }
-        return;
     }
+
     public static boolean antennaExists(obj_id campId) throws InterruptedException
     {
         boolean rslt = false;
@@ -610,6 +623,7 @@ public class fs_counterstrike extends script.base_script
         }
         return rslt;
     }
+
     public static String[] getSpawnWaves(obj_id campId) throws InterruptedException
     {
         int numPlayers = 1;
@@ -619,25 +633,25 @@ public class fs_counterstrike extends script.base_script
             numPlayers = players.length;
         }
         String[] spawnWaves = new String[]
-        {
-            "fs_counterstrike_small"
-        };
+                {
+                        "fs_counterstrike_small"
+                };
         if (numPlayers > 10)
         {
             if (antennaExists(campId))
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_medium"
+                        };
             }
-            else 
+            else
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_medium"
+                        };
             }
         }
         if (numPlayers > 20)
@@ -645,19 +659,19 @@ public class fs_counterstrike extends script.base_script
             if (antennaExists(campId))
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_medium"
+                        };
             }
-            else 
+            else
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_medium"
+                        };
             }
         }
         if (numPlayers > 30)
@@ -665,25 +679,26 @@ public class fs_counterstrike extends script.base_script
             if (antennaExists(campId))
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_medium",
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_medium",
+                                "fs_counterstrike_medium"
+                        };
             }
-            else 
+            else
             {
                 spawnWaves = new String[]
-                {
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_small",
-                    "fs_counterstrike_medium"
-                };
+                        {
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_small",
+                                "fs_counterstrike_medium"
+                        };
             }
         }
         return spawnWaves;
     }
+
     public static void doCampDefenseSpawn(obj_id campId, boolean scheduleNext) throws InterruptedException
     {
         if (hasObjVar(campId, OBJVAR_STOP_DEFENSE_SPAWN) || !hasObjVar(campId, OBJVAR_CAMP_SHIELD_KILLER))
@@ -699,20 +714,23 @@ public class fs_counterstrike extends script.base_script
         {
             seed /= 2;
         }
-        reseed((int)seed);
+        reseed((int) seed);
         String wave = "";
         float heading = 0.0f;
         location spawnerLoc = null;
         location masterLoc = getLocation(campId);
         obj_id spawner = null;
         String[] spawnWaves = getSpawnWaves(campId);
-        for (String spawnWave : spawnWaves) {
+        for (String spawnWave : spawnWaves)
+        {
             wave = spawnWave;
             spawnerLoc = utils.getRandomAwayLocation(masterLoc, 50.0f, 110.0f);
             spawner = quests.createSpawner(wave, spawnerLoc, fs_dyn_village.CITY_BAD_GUY_SPAWN_TABLE, campId);
-            if (isIdValid(spawner)) {
+            if (isIdValid(spawner))
+            {
                 seed = spawner.getValue();
-                while (seed > Integer.MAX_VALUE) {
+                while (seed > Integer.MAX_VALUE)
+                {
                     seed /= 2;
                 }
                 setObjVar(spawner, OBJVAR_MY_CAMP_ID, campId);
@@ -724,6 +742,7 @@ public class fs_counterstrike extends script.base_script
             messageTo(campId, "msgDoCampDefenseSpawn", null, rand(CAMP_REINFORCEMENT_MIN, CAMP_REINFORCEMENT_MAX), false);
         }
     }
+
     public static void erectShield() throws InterruptedException
     {
         obj_id me = getSelf();
@@ -738,14 +757,16 @@ public class fs_counterstrike extends script.base_script
             createTriggerVolume(SHIELD_TR_VOLUME, SHIELD_RADIUS, true);
         }
         obj_id[] intruders = getCreaturesInRange(here, SHIELD_RADIUS + 1);
-        for (obj_id intruder : intruders) {
+        for (obj_id intruder : intruders)
+        {
             sendSystemMessage(intruder, new string_id("fs_quest_village", "expel_shield"));
-            if (!isGod(intruder) && !hasScript(intruder, "systems.fs_quest.fs_camp_commander_ai")) {
+            if (!isGod(intruder) && !hasScript(intruder, "systems.fs_quest.fs_camp_commander_ai"))
+            {
                 expelFromTriggerVolume(me, SHIELD_TR_VOLUME, intruder);
             }
         }
-        return;
     }
+
     public static boolean arePlayersInSameGroup(obj_id player1, obj_id player2) throws InterruptedException
     {
         obj_id group = getGroupObject(player1);
@@ -754,12 +775,9 @@ public class fs_counterstrike extends script.base_script
             return false;
         }
         obj_id[] members = getGroupMemberIds(group);
-        if (utils.getElementPositionInArray(members, player2) > -1)
-        {
-            return true;
-        }
-        return false;
+        return utils.getElementPositionInArray(members, player2) > -1;
     }
+
     public static boolean attemptPowerDownShield(obj_id player, String remoteId) throws InterruptedException
     {
         if (locations.isInCity(getLocation(player)))
@@ -773,25 +791,35 @@ public class fs_counterstrike extends script.base_script
             return false;
         }
         obj_id[] stuff = getNonCreaturesInRange(getLocation(player), SHIELD_REMOTE_RANGE);
-        for (obj_id obj_id : stuff) {
-            if (hasObjVar(obj_id, OBJVAR_IS_REMOTE_RECEIVER)) {
+        for (obj_id obj_id : stuff)
+        {
+            if (hasObjVar(obj_id, OBJVAR_IS_REMOTE_RECEIVER))
+            {
                 obj_id campMaster = getMyOutpostId(obj_id);
-                if (campMaster == null) {
+                if (campMaster == null)
+                {
                     continue;
                 }
-                if (!hasTriggerVolume(campMaster, SHIELD_TR_VOLUME)) {
+                if (!hasTriggerVolume(campMaster, SHIELD_TR_VOLUME))
+                {
                     sendSystemMessage(player, new string_id("fs_quest_village", "remote_shield_down_already"));
                     return false;
                 }
-                if (hasObjVar(campMaster, OBJVAR_CAMP_NAME)) {
-                    if ((getStringObjVar(campMaster, OBJVAR_CAMP_NAME)).equals(remoteId)) {
+                if (hasObjVar(campMaster, OBJVAR_CAMP_NAME))
+                {
+                    if ((getStringObjVar(campMaster, OBJVAR_CAMP_NAME)).equals(remoteId))
+                    {
                         setObjVar(campMaster, OBJVAR_CAMP_SHIELD_KILLER, player);
-                        if (group.isGrouped(player)) {
+                        if (group.isGrouped(player))
+                        {
                             obj_id[] gang = null;
                             gang = getGroupMemberIds(getGroupObject(player));
-                            if ((gang != null) && (gang.length > 0)) {
-                                for (obj_id thisGuy : gang) {
-                                    if (isIdValid(thisGuy) && exists(thisGuy) && thisGuy != player) {
+                            if (gang != null)
+                            {
+                                for (obj_id thisGuy : gang)
+                                {
+                                    if (isIdValid(thisGuy) && exists(thisGuy) && thisGuy != player)
+                                    {
                                         sendSystemMessage(thisGuy, new string_id("fs_quest_village", "remote_powering_down"));
                                     }
                                 }
@@ -805,7 +833,9 @@ public class fs_counterstrike extends script.base_script
                         setObjVar(player, OBJVAR_MY_CAMP_ID, campMaster);
                         sendSystemMessage(player, new string_id("fs_quest_village", "fs_cs_step_intro_complete"));
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         sendSystemMessage(player, new string_id("fs_quest_village", "shield_remote_wrong_camp"));
                         return false;
                     }
@@ -815,14 +845,12 @@ public class fs_counterstrike extends script.base_script
         sendSystemMessage(player, new string_id("fs_quest_village", "remote_nothing_happens"));
         return false;
     }
+
     public static boolean allowedToPowerDownShield(obj_id player) throws InterruptedException
     {
-        if (quests.isActive("fs_cs_intro", player))
-        {
-            return true;
-        }
-        return false;
+        return quests.isActive("fs_cs_intro", player);
     }
+
     public static obj_id createCommander(obj_id campId) throws InterruptedException
     {
         obj_id commander = null;
@@ -854,12 +882,13 @@ public class fs_counterstrike extends script.base_script
             setObjVar(commander, OBJVAR_MY_CAMP_ID, campId);
             attachScript(commander, "systems.fs_quest.fs_camp_commander_ai");
         }
-        else 
+        else
         {
             trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::createCommnader: -> Error creating camp commander for camp " + campId + "Quest cannot complete.  Person who powered down shield was " + shieldKiller, shieldKiller, trace.TL_ERROR_LOG | trace.TL_CS_LOG);
         }
         return commander;
     }
+
     public static obj_id getCurrentQuestGiver(obj_id player, String questName) throws InterruptedException
     {
         obj_id questGiver = null;
@@ -870,6 +899,7 @@ public class fs_counterstrike extends script.base_script
         }
         return questGiver;
     }
+
     public static void powerDownShield() throws InterruptedException
     {
         obj_id me = getSelf();
@@ -907,8 +937,8 @@ public class fs_counterstrike extends script.base_script
                 setInvulnerable(antenna, false);
             }
         }
-        return;
     }
+
     public static void spawnSurveillanceDroids(obj_id campMaster) throws InterruptedException
     {
         location here = getLocation(campMaster);
@@ -917,7 +947,8 @@ public class fs_counterstrike extends script.base_script
         {
             existingDroids = utils.getResizeableObjIdBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS);
         }
-        for (Object existingDroid : existingDroids) {
+        for (Object existingDroid : existingDroids)
+        {
             messageTo((obj_id) existingDroid, "msgSilentSelfDestruct", null, 0.0f, false);
         }
         Vector newDroids = new Vector();
@@ -931,8 +962,8 @@ public class fs_counterstrike extends script.base_script
             }
         }
         utils.setResizeableBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS, newDroids);
-        return;
     }
+
     public static obj_id _createSingleDroid(obj_id campMaster, location here) throws InterruptedException
     {
         location where = utils.getRandomAwayLocation(here, MIN_DROID_DISTANCE, MAX_DROID_DISTANCE);
@@ -950,6 +981,7 @@ public class fs_counterstrike extends script.base_script
         }
         return curDroid;
     }
+
     public static void droidDied(obj_id campMaster, obj_id deadDroid) throws InterruptedException
     {
         Vector existingDroids = new Vector();
@@ -968,8 +1000,8 @@ public class fs_counterstrike extends script.base_script
             existingDroids.add(newDroid);
         }
         utils.setResizeableBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS, existingDroids);
-        return;
     }
+
     public static void registerCampObjIds(obj_id campMaster) throws InterruptedException
     {
         if (!isIdValid(campMaster))
@@ -991,25 +1023,32 @@ public class fs_counterstrike extends script.base_script
         String tName = "";
         boolean foundFirstDoor = false;
         int turretNum = 1;
-        for (obj_id obj : objs) {
-            if (!isIdValid(obj) || !exists(obj)) {
+        for (obj_id obj : objs)
+        {
+            if (!isIdValid(obj) || !exists(obj))
+            {
                 continue;
             }
             tName = getTemplateName(obj);
             setObjVar(obj, OBJVAR_IS_REMOTE_RECEIVER, true);
             setObjVar(obj, OBJVAR_MY_CAMP_ID, campMaster);
-            if (tName == null) {
+            if (tName == null)
+            {
                 trace.log("fs_quest", "fs_counterstrike::registerCampObjIds: -> " + obj + " has no template.");
                 continue;
             }
-            switch (tName) {
+            switch (tName)
+            {
                 case CAMP_DOOR_TEMPLATE:
-                    if (!foundFirstDoor) {
+                    if (!foundFirstDoor)
+                    {
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR1, obj);
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR1_LOC, getLocation(obj));
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR1_YAW, getYaw(obj));
                         foundFirstDoor = true;
-                    } else {
+                    }
+                    else
+                    {
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR2, obj);
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR2_LOC, getLocation(obj));
                         setObjVar(campMaster, OBJVAR_CAMP_DOOR2_YAW, getYaw(obj));
@@ -1037,8 +1076,8 @@ public class fs_counterstrike extends script.base_script
                     break;
             }
         }
-        return;
     }
+
     public static void setupCamp(obj_id campMaster, boolean registerLocs) throws InterruptedException
     {
         if (!hasObjVar(campMaster, OBJVAR_CAMP_OBJS) || !hasObjVar(campMaster, OBJVAR_CAMP_NAME))
@@ -1056,8 +1095,8 @@ public class fs_counterstrike extends script.base_script
         }
         erectShield();
         spawnSurveillanceDroids(campMaster);
-        return;
     }
+
     public static obj_id getMyOutpostId(obj_id outpostObject) throws InterruptedException
     {
         if (hasObjVar(outpostObject, OBJVAR_MY_CAMP_ID))

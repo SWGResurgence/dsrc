@@ -2,9 +2,6 @@ package script.library;
 
 public class attrib extends script.base_script
 {
-    public attrib()
-    {
-    }
     public static final int ALL = 1;
     public static final int HERBIVORE = 2;
     public static final int CARNIVORE = 3;
@@ -25,4 +22,7 @@ public class attrib extends script.base_script
     public static final int OUTBREAK_SURVIVOR = 17;
     public static final int OUTBREAK_AFFLICTED = 18;
     public static final int OUTBREAK_SURVIVOR_GUARD = 19;
+    public attrib()
+    {
+    }
 }

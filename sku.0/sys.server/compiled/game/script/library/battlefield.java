@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class battlefield extends script.base_script
 {
-    public battlefield()
-    {
-    }
     public static final String BATTLEFIELD_DATATABLE = "datatables/battlefield/battlefield.iff";
     public static final String BATTLEFIELD_MARKER_DATATABLE = "datatables/battlefield/marker.iff";
     public static final String BUILDABLE_STRUCTURE_DATATABLE = "datatables/battlefield/buildable_structure.iff";
@@ -147,6 +144,10 @@ public class battlefield extends script.base_script
     public static final String STRING_TRIG_BOUNDARY = "battlefield_boundary";
     public static final String STRING_TRIG_OUTER_PERIMETER = "battlefield_outer_perimeter";
     public static final String GAME_SCRIPT_PATH = "systems.battlefield.game_";
+    public battlefield()
+    {
+    }
+
     public static void createBattlefieldRegions(String area) throws InterruptedException
     {
         int numItems = dataTableGetNumRows(BATTLEFIELD_DATATABLE);
@@ -184,7 +185,7 @@ public class battlefield extends script.base_script
                 {
                     regionPvpType = regions.PVP_REGION_TYPE_BATTLEFIELD_PVE;
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", "   Unsupported pvp type " + type + " read, skipping");
                     continue;
@@ -195,7 +196,7 @@ public class battlefield extends script.base_script
                 {
                     LOG("LOG_CHANNEL", "   " + type.toUpperCase() + " Battlefield found, skipping...");
                 }
-                else 
+                else
                 {
                     int geography = regions.GEO_PLAINS;
                     region testRegion = getSmallestRegionAtPoint(loc);
@@ -231,8 +232,8 @@ public class battlefield extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static void destroyBattlefieldRegions(String area) throws InterruptedException
     {
         if (area == null)
@@ -268,17 +269,19 @@ public class battlefield extends script.base_script
                     {
                         regionPvpType = regions.PVP_REGION_TYPE_BATTLEFIELD_PVE;
                     }
-                    else 
+                    else
                     {
                         LOG("LOG_CHANNEL", "   Unsupported pvp type " + type + " read, skipping");
                         continue;
                     }
                     region[] regs = getRegionsWithPvPAtPoint(loc, regionPvpType);
-                    if (regs != null && regs.length > 0)
+                    if (regs != null)
                     {
-                        for (region reg : regs) {
+                        for (region reg : regs)
+                        {
                             obj_id bf_object = getMasterObjectFromRegion(reg);
-                            if (isIdValid(bf_object)) {
+                            if (isIdValid(bf_object))
+                            {
                                 destroyBattlefield(bf_object);
                             }
                         }
@@ -287,6 +290,7 @@ public class battlefield extends script.base_script
             }
         }
     }
+
     public static boolean updateBattlefieldData(obj_id master_object, region bf) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield::updateBattlefield");
@@ -372,7 +376,7 @@ public class battlefield extends script.base_script
                 setObjVar(master_object, VAR_START_LOCATIONS, start_locations);
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::updateBattlefield -- there are no allowed factions for " + master_object);
             return false;
@@ -384,6 +388,7 @@ public class battlefield extends script.base_script
         setObjVar(master_object, VAR_VERSION, CURRENT_VERSION);
         return true;
     }
+
     public static boolean markBattlefield(region r) throws InterruptedException
     {
         if (r == null)
@@ -397,7 +402,7 @@ public class battlefield extends script.base_script
         {
             degree_incr = 90;
         }
-        float radian_incr = (float)Math.toRadians(degree_incr);
+        float radian_incr = (float) Math.toRadians(degree_incr);
         Vector markers = new Vector();
         markers.setSize(0);
         for (float angle = 0.0f; angle < 2 * Math.PI; angle = angle + radian_incr)
@@ -417,6 +422,7 @@ public class battlefield extends script.base_script
         }
         return true;
     }
+
     public static region getBattlefield(location loc) throws InterruptedException
     {
         region[] rPvP = getRegionsWithPvPAtPoint(loc, regions.PVP_REGION_TYPE_BATTLEFIELD_PVP);
@@ -424,7 +430,7 @@ public class battlefield extends script.base_script
         {
             return rPvP[0];
         }
-        else 
+        else
         {
             region[] rPvE = getRegionsWithPvPAtPoint(loc, regions.PVP_REGION_TYPE_BATTLEFIELD_PVE);
             if (rPvE != null)
@@ -434,6 +440,7 @@ public class battlefield extends script.base_script
         }
         return null;
     }
+
     public static region getBattlefield(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
@@ -443,6 +450,7 @@ public class battlefield extends script.base_script
         location loc = getLocation(object);
         return getBattlefield(loc);
     }
+
     public static boolean isBattlefieldPvP(region r) throws InterruptedException
     {
         if (r == null)
@@ -450,15 +458,9 @@ public class battlefield extends script.base_script
             return false;
         }
         int pvpType = r.getPvPType();
-        if (pvpType == regions.PVP_REGION_TYPE_BATTLEFIELD_PVP)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return pvpType == regions.PVP_REGION_TYPE_BATTLEFIELD_PVP;
     }
+
     public static boolean isBattlefieldPvE(region r) throws InterruptedException
     {
         if (r == null)
@@ -466,15 +468,9 @@ public class battlefield extends script.base_script
             return false;
         }
         int pvpType = r.getPvPType();
-        if (pvpType == regions.PVP_REGION_TYPE_BATTLEFIELD_PVE)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return pvpType == regions.PVP_REGION_TYPE_BATTLEFIELD_PVE;
     }
+
     public static boolean isBattlefieldActive(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -482,15 +478,9 @@ public class battlefield extends script.base_script
             return false;
         }
         int time = getGameTimeRemaining(master_object);
-        if (time == -1)
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return time != -1;
     }
+
     public static boolean isBattlefieldActive(region r) throws InterruptedException
     {
         if (r == null)
@@ -500,6 +490,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return isBattlefieldActive(master_object);
     }
+
     public static boolean isFactionTeamMember(obj_id player, String faction, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -513,14 +504,17 @@ public class battlefield extends script.base_script
         obj_id[] faction_team = getFactionTeam(master_object, faction);
         if (faction_team != null)
         {
-            for (obj_id obj_id : faction_team) {
-                if (player == obj_id) {
+            for (obj_id obj_id : faction_team)
+            {
+                if (player == obj_id)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static boolean isFactionAllowed(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -537,15 +531,9 @@ public class battlefield extends script.base_script
             return false;
         }
         int idx = utils.getElementPositionInArray(factions_allowed, faction);
-        if (idx == -1)
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return idx != -1;
     }
+
     public static boolean isFactionRemaining(obj_id master_object, String faction) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield::isFactionRemaining -- " + master_object + " " + faction);
@@ -561,20 +549,14 @@ public class battlefield extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             String[] factions_remaining = getFactionsRemaining(master_object);
             int idx = utils.getElementPositionInArray(factions_remaining, faction);
-            if (idx == -1)
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return idx != -1;
         }
     }
+
     public static boolean isPlayerFaction(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -590,18 +572,19 @@ public class battlefield extends script.base_script
                 LOG("LOG_CHANNEL", "battlefield::isPlayerFaction -- true");
                 return true;
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", "battlefield::isPlayerFaction -- false");
                 return false;
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::isPlayerFaction -- factions_allowed is null.");
             return false;
         }
     }
+
     public static boolean isAIFaction(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -612,21 +595,15 @@ public class battlefield extends script.base_script
         if (ai_factions != null)
         {
             int idx = utils.getElementPositionInArray(ai_factions, faction);
-            if (idx != -1)
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return idx != -1;
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::isAIFaction -- ai_factions is null.");
             return false;
         }
     }
+
     public static boolean hasSelectFactionSui(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -639,12 +616,13 @@ public class battlefield extends script.base_script
             LOG("LOG_CHANNEL", "battlefield::hasSelectFactionSui -- " + player + " (true)");
             return true;
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::hasSelectFactionSui -- " + player + " (false)");
             return false;
         }
     }
+
     public static boolean canJoinFaction(obj_id master_object, obj_id player, String faction) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.canJoinFaction -- " + master_object + "/" + player + "/" + faction);
@@ -671,21 +649,26 @@ public class battlefield extends script.base_script
         int faction_size = 0;
         if (factions_allowed != null)
         {
-            for (String s : factions_allowed) {
+            for (String s : factions_allowed)
+            {
                 obj_id[] faction_team = getFactionTeam(master_object, s);
                 int size;
-                if (faction_team != null) {
+                if (faction_team != null)
+                {
                     size = faction_team.length;
-                } else {
+                }
+                else
+                {
                     size = 0;
                 }
                 factions_allowed_sizes = utils.addElement(factions_allowed_sizes, size);
-                if (s.equals(faction)) {
+                if (s.equals(faction))
+                {
                     faction_size = size;
                 }
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield.canJoinFaction -- factions_allowed is null for " + master_object);
             return false;
@@ -711,6 +694,7 @@ public class battlefield extends script.base_script
         }
         return true;
     }
+
     public static boolean isNearBattlefieldConstructor(obj_id master_object, location loc, String faction) throws InterruptedException
     {
         if (loc.y == 0.0f)
@@ -720,12 +704,15 @@ public class battlefield extends script.base_script
         obj_id[] objects = getObjectsInRange(loc, CONSTRUCTOR_RANGE);
         if (objects != null)
         {
-            for (obj_id object : objects) {
-                if (hasScript(object, SCRIPT_BATTLEFIELD_CONSTRUCTOR)) {
+            for (obj_id object : objects)
+            {
+                if (hasScript(object, SCRIPT_BATTLEFIELD_CONSTRUCTOR))
+                {
                     region bf = getRegionFromMasterObject(master_object);
                     int obj_faction_id = pvpBattlefieldGetFaction(object, bf);
                     String obj_faction = factions.getFactionNameByHashCode(obj_faction_id);
-                    if (faction.equals(obj_faction)) {
+                    if (faction.equals(obj_faction))
+                    {
                         LOG("LOG_CHANNEL", "constructor ->" + object);
                         return true;
                     }
@@ -734,36 +721,25 @@ public class battlefield extends script.base_script
         }
         return false;
     }
+
     public static boolean isBattlefieldConstructed(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
         {
             return false;
         }
-        if (hasObjVar(object, VAR_CONSTRUCTED))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(object, VAR_CONSTRUCTED);
     }
+
     public static boolean isBattlefieldSpawned(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
         {
             return false;
         }
-        if (hasObjVar(object, VAR_SPAWNED_BY))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(object, VAR_SPAWNED_BY);
     }
+
     public static boolean isSameBattlefieldFaction(obj_id object1, obj_id object2) throws InterruptedException
     {
         if (object1 == null || object1 == obj_id.NULL_ID)
@@ -787,15 +763,9 @@ public class battlefield extends script.base_script
         obj_id master_object = battlefield.getMasterObjectFromRegion(bf);
         int object1_id = pvpBattlefieldGetFaction(object1, bf);
         int object2_id = pvpBattlefieldGetFaction(object2, bf);
-        if (object1_id == object2_id)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return object1_id == object2_id;
     }
+
     public static boolean canJoinBattlefield(obj_id master_object, obj_id player, boolean verbose) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -826,20 +796,22 @@ public class battlefield extends script.base_script
                 }
                 return false;
             }
-            else 
+            else
             {
                 return true;
             }
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static boolean canJoinBattlefield(obj_id master_object, obj_id player) throws InterruptedException
     {
         return canJoinBattlefield(master_object, player, false);
     }
+
     public static boolean canJoinBattlefield(region r, obj_id player) throws InterruptedException
     {
         if (r == null)
@@ -849,6 +821,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return canJoinBattlefield(master_object, player);
     }
+
     public static boolean canBuildBattlefieldStructure(obj_id master_object, obj_id player) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -883,6 +856,7 @@ public class battlefield extends script.base_script
         }
         return true;
     }
+
     public static boolean canBuildReinforcement(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -893,27 +867,21 @@ public class battlefield extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             if (hasObjVar(structure, VAR_LAST_BUILD))
             {
                 int time = getGameTime();
                 int build_rate = getIntObjVar(structure, VAR_BUILD_RATE);
-                if (time - getIntObjVar(structure, VAR_LAST_BUILD) <= build_rate)
-                {
-                    return false;
-                }
-                else 
-                {
-                    return true;
-                }
+                return time - getIntObjVar(structure, VAR_LAST_BUILD) > build_rate;
             }
-            else 
+            else
             {
                 return true;
             }
         }
     }
+
     public static boolean canEnterBattlefield(obj_id master_object, obj_id player) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -924,15 +892,9 @@ public class battlefield extends script.base_script
         {
             return true;
         }
-        if (hasObjVar(player, VAR_TEAM_FACTION))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(player, VAR_TEAM_FACTION);
     }
+
     public static boolean canEnterBattlefield(region r, obj_id player) throws InterruptedException
     {
         if (r == null)
@@ -942,6 +904,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return canEnterBattlefield(master_object, player);
     }
+
     public static boolean canExitBattlefield(obj_id master_object, obj_id player, boolean verbose) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -963,16 +926,17 @@ public class battlefield extends script.base_script
                 }
                 return false;
             }
-            else 
+            else
             {
                 return true;
             }
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static obj_id addBattlefieldObject(obj_id master_object, String template, location loc, float yaw, String faction) throws InterruptedException
     {
         obj_id object = createObject(template, loc);
@@ -988,6 +952,7 @@ public class battlefield extends script.base_script
         pvpBattlefieldSetParticipant(object, bf, faction_id);
         return object;
     }
+
     public static boolean removeBattlefieldObject(obj_id master_object, obj_id object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1003,6 +968,7 @@ public class battlefield extends script.base_script
         messageTo(object, "msgDestroyBattlefieldObject", null, 0.0f, true);
         return true;
     }
+
     public static boolean removeBattlefieldObject(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
@@ -1017,6 +983,7 @@ public class battlefield extends script.base_script
         }
         return removeBattlefieldObject(master_object, object);
     }
+
     public static boolean removeFromBattlefieldObjectList(obj_id master_object, obj_id object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1031,6 +998,7 @@ public class battlefield extends script.base_script
         pvpBattlefieldSetParticipant(object, bf, 0);
         return true;
     }
+
     public static obj_id addBattlefieldMob(obj_id master_object, String name, location loc, String faction) throws InterruptedException
     {
         obj_id mob = create.createCreature(name, loc, true);
@@ -1045,6 +1013,7 @@ public class battlefield extends script.base_script
         pvpBattlefieldSetParticipant(mob, bf, faction_id);
         return mob;
     }
+
     public static obj_id addBattlefieldWaypoint(obj_id player, obj_id structure) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1077,6 +1046,7 @@ public class battlefield extends script.base_script
         LOG("LOG_CHANNEL", "battlefield::AddBattlefieldWaypoint -- adding waypoint(" + waypoint + ") to player " + player + " for " + structure);
         return waypoint;
     }
+
     public static boolean removeBattlefieldWaypoint(obj_id player, obj_id waypoint) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1098,7 +1068,7 @@ public class battlefield extends script.base_script
                 {
                     removeObjVar(player, VAR_WAYPOINTS);
                 }
-                else 
+                else
                 {
                     setObjVar(player, VAR_WAYPOINTS, waypoint_list);
                 }
@@ -1107,6 +1077,7 @@ public class battlefield extends script.base_script
         destroyObject(waypoint);
         return true;
     }
+
     public static boolean destroyBattlefield(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1119,7 +1090,8 @@ public class battlefield extends script.base_script
         if (hasObjVar(master_object, VAR_MARKERS))
         {
             obj_id[] markers = getObjIdArrayObjVar(master_object, VAR_MARKERS);
-            for (obj_id marker : markers) {
+            for (obj_id marker : markers)
+            {
                 destroyObject(marker);
             }
         }
@@ -1127,6 +1099,7 @@ public class battlefield extends script.base_script
         destroyObject(master_object);
         return true;
     }
+
     public static boolean destroyBattlefield(region r) throws InterruptedException
     {
         if (r == null)
@@ -1136,6 +1109,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return destroyBattlefield(master_object);
     }
+
     public static boolean destroyBaseObjects(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1146,18 +1120,21 @@ public class battlefield extends script.base_script
         obj_id[] base_objects = pvpBattlefieldGetParticipantsForFaction(reg, 0);
         if (base_objects != null)
         {
-            for (obj_id base_object : base_objects) {
-                if (hasScript(base_object, SCRIPT_BATTLEFIELD_OBJECT)) {
+            for (obj_id base_object : base_objects)
+            {
+                if (hasScript(base_object, SCRIPT_BATTLEFIELD_OBJECT))
+                {
                     messageTo(base_object, "msgDestroyBattlefieldObject", null, 30.0f, false);
                 }
             }
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static region getRegionFromMasterObject(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1168,6 +1145,7 @@ public class battlefield extends script.base_script
         String regionName = getStringObjVar(master_object, VAR_NAME);
         return getRegion(regionPlanet, regionName);
     }
+
     public static obj_id getMasterObjectFromRegion(region battlefield) throws InterruptedException
     {
         if (battlefield == null)
@@ -1176,6 +1154,7 @@ public class battlefield extends script.base_script
         }
         return getBattlefieldRegionMasterObject(battlefield);
     }
+
     public static String getBattlefieldName(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1189,6 +1168,7 @@ public class battlefield extends script.base_script
         }
         return name;
     }
+
     public static String getBattlefieldName(region r) throws InterruptedException
     {
         if (r == null)
@@ -1202,6 +1182,7 @@ public class battlefield extends script.base_script
         }
         return name;
     }
+
     public static String getBattlefieldLocalizedName(obj_id master_object) throws InterruptedException
     {
         if (!isIdValid(master_object))
@@ -1212,6 +1193,7 @@ public class battlefield extends script.base_script
         string_id name_id = utils.unpackString("@battlefield:" + name);
         return localize(name_id);
     }
+
     public static float getBattlefieldExtent(region r) throws InterruptedException
     {
         if (r == null)
@@ -1221,6 +1203,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getFloatObjVar(master_object, VAR_EXTENT);
     }
+
     public static float getBattlefieldExtent(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1229,6 +1212,7 @@ public class battlefield extends script.base_script
         }
         return getFloatObjVar(master_object, VAR_EXTENT);
     }
+
     public static location getBattlefieldLocation(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1237,6 +1221,7 @@ public class battlefield extends script.base_script
         }
         return getLocation(master_object);
     }
+
     public static location getBattlefieldLocation(region r) throws InterruptedException
     {
         if (r == null)
@@ -1246,6 +1231,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getBattlefieldLocation(master_object);
     }
+
     public static int getBattlefieldVersion(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1256,11 +1242,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, VAR_VERSION);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getGameTimeRemaining(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1271,11 +1258,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, VAR_TIME_REMAINING);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getGameTimeRemaining(region r) throws InterruptedException
     {
         if (r == null)
@@ -1285,6 +1273,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getGameTimeRemaining(master_object);
     }
+
     public static String getBattlefieldGameType(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1293,6 +1282,7 @@ public class battlefield extends script.base_script
         }
         return getStringObjVar(master_object, VAR_GAME_TYPE);
     }
+
     public static String getBattlefieldGameType(region r) throws InterruptedException
     {
         if (r == null)
@@ -1302,6 +1292,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getBattlefieldGameType(master_object);
     }
+
     public static int getNextGameTime(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1312,11 +1303,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, VAR_NEXT_GAME);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getNextGameTime(region r) throws InterruptedException
     {
         if (r == null)
@@ -1326,6 +1318,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getNextGameTime(master_object);
     }
+
     public static int getGameDuration(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1334,6 +1327,7 @@ public class battlefield extends script.base_script
         }
         return getIntObjVar(master_object, VAR_GAME_DURATION);
     }
+
     public static int getGameDuration(region r) throws InterruptedException
     {
         if (r == null)
@@ -1343,6 +1337,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getGameDuration(master_object);
     }
+
     public static int getTimeSpentInBattlefield(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1362,6 +1357,7 @@ public class battlefield extends script.base_script
         }
         return time_exited - time_entered;
     }
+
     public static String[] getBuildableStructures(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1410,11 +1406,12 @@ public class battlefield extends script.base_script
             }
             return _buildable_objects;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static dictionary getBuildableStructureStats(obj_id master_object, int index) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1437,11 +1434,12 @@ public class battlefield extends script.base_script
         {
             return dataTableGetRow(BUILDABLE_STRUCTURE_DATATABLE, structure_idx);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static dictionary getBuildableStructureStats(obj_id master_object, String template) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1472,6 +1470,7 @@ public class battlefield extends script.base_script
         }
         return null;
     }
+
     public static boolean attachGameScript(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1485,11 +1484,12 @@ public class battlefield extends script.base_script
             attachScript(master_object, script);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean detachGameScript(obj_id master_object) throws InterruptedException
     {
         if (!isIdValid(master_object))
@@ -1503,7 +1503,7 @@ public class battlefield extends script.base_script
         {
             script = GAME_SCRIPT_PATH + game_type.toLowerCase();
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::detachGameScript -- game_type is null for " + master_object);
             return false;
@@ -1514,11 +1514,12 @@ public class battlefield extends script.base_script
             detachScript(master_object, script);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static String getChatRoomName(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1529,6 +1530,7 @@ public class battlefield extends script.base_script
         String chat_name = "SWG." + getGalaxyName() + "." + getCurrentSceneName() + ".battlefield." + bf_name;
         return chat_name;
     }
+
     public static String getChatRoomNameAllFactions(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1537,6 +1539,7 @@ public class battlefield extends script.base_script
         }
         return getChatRoomName(master_object) + ".allFactions";
     }
+
     public static String getChatRoomNameFaction(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1545,6 +1548,7 @@ public class battlefield extends script.base_script
         }
         return getChatRoomName(master_object) + "." + faction;
     }
+
     public static int getFactionKills(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1556,11 +1560,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, objVar_team_kills);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static int getFactionDeaths(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1572,11 +1577,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, objVar_team_deaths);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static obj_id[] getParticipantsOnBattlefield(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1587,11 +1593,12 @@ public class battlefield extends script.base_script
         {
             return utils.getObjIdBatchObjVar(master_object, VAR_PARTICIPANTS);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id[] getParticipantsOnBattlefield(region r) throws InterruptedException
     {
         if (r == null)
@@ -1601,6 +1608,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getParticipantsOnBattlefield(master_object);
     }
+
     public static obj_id[] getFactionTeam(obj_id master_object, String faction) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.getFactionTeam");
@@ -1613,16 +1621,19 @@ public class battlefield extends script.base_script
         faction_team.setSize(0);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 String player_faction = getPlayerTeamFaction(player);
-                if (player_faction != null) {
-                    if (player_faction.equals(faction)) {
+                if (player_faction != null)
+                {
+                    if (player_faction.equals(faction))
+                    {
                         faction_team = utils.addElement(faction_team, player);
                     }
                 }
             }
         }
-        else 
+        else
         {
             return null;
         }
@@ -1634,6 +1645,7 @@ public class battlefield extends script.base_script
         }
         return _faction_team;
     }
+
     public static obj_id[] getFactionTeam(region r, String faction) throws InterruptedException
     {
         if (r == null)
@@ -1643,6 +1655,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getFactionTeam(master_object, faction);
     }
+
     public static String[] getFactionsAllowed(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1651,6 +1664,7 @@ public class battlefield extends script.base_script
         }
         return getStringArrayObjVar(master_object, VAR_FACTIONS_ALLOWED);
     }
+
     public static String[] getFactionsAllowed(region r) throws InterruptedException
     {
         if (r == null)
@@ -1660,6 +1674,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getFactionsAllowed(master_object);
     }
+
     public static String[] getFactionsRemaining(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1670,11 +1685,12 @@ public class battlefield extends script.base_script
         {
             return getStringArrayObjVar(master_object, VAR_FACTIONS_REMAINING);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String[] getAIFactionsAllowed(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1685,11 +1701,12 @@ public class battlefield extends script.base_script
         {
             return getStringArrayObjVar(master_object, VAR_FACTIONS_AI_ALLOWED);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String[] getAIFactionsRemaining(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1700,11 +1717,12 @@ public class battlefield extends script.base_script
         {
             return getStringArrayObjVar(master_object, VAR_FACTIONS_AI_REMAINING);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String[] getAllFactionsRemaining(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1739,12 +1757,13 @@ public class battlefield extends script.base_script
         {
             return ai_factions;
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::getAllFactionsRemaining -- there are no factions remaining for " + master_object);
             return null;
         }
     }
+
     public static String[] getAllFactionsAllowed(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1779,12 +1798,13 @@ public class battlefield extends script.base_script
         {
             return ai_factions;
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield::getAllFactionsRemaining -- there are no factions remaining for " + master_object);
             return null;
         }
     }
+
     public static int getFactionId(String faction) throws InterruptedException
     {
         int faction_num = factions.getFactionNumber(faction);
@@ -1795,6 +1815,7 @@ public class battlefield extends script.base_script
         int faction_id = dataTableGetInt("datatables/faction/faction.iff", faction_num, "pvpFaction");
         return faction_id;
     }
+
     public static int getGameRestartMinimum(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1803,6 +1824,7 @@ public class battlefield extends script.base_script
         }
         return getIntObjVar(master_object, VAR_RESTART_TIME_MIN);
     }
+
     public static int getGameRestartMaximum(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1811,6 +1833,7 @@ public class battlefield extends script.base_script
         }
         return getIntObjVar(master_object, VAR_RESTART_TIME_MAX);
     }
+
     public static int getFactionBuildPoints(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1822,11 +1845,12 @@ public class battlefield extends script.base_script
         {
             return getIntObjVar(master_object, objVar_name);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static obj_id[] getGameCriticalObjects(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1839,8 +1863,10 @@ public class battlefield extends script.base_script
         obj_id[] items = pvpBattlefieldGetParticipantsForFaction(bf, 0);
         if (items != null)
         {
-            for (obj_id item : items) {
-                if (hasObjVar(item, VAR_GAME_CRITICAL)) {
+            for (obj_id item : items)
+            {
+                if (hasObjVar(item, VAR_GAME_CRITICAL))
+                {
                     critical_items = utils.addElement(critical_items, item);
                 }
             }
@@ -1855,11 +1881,12 @@ public class battlefield extends script.base_script
             }
             return _critical_items;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id[] getPlayersOnBattlefieldComplete(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1873,12 +1900,17 @@ public class battlefield extends script.base_script
         obj_id[] items = getObjectsInRange(loc, radius);
         if (items != null)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     players = utils.addElement(players, item);
-                } else if (player_structure.isBuilding(item)) {
+                }
+                else if (player_structure.isBuilding(item))
+                {
                     obj_id[] player_building = player_structure.getPlayersInBuilding(item);
-                    if (player_building != null) {
+                    if (player_building != null)
+                    {
                         players = utils.concatArrays(players, player_building);
                     }
                 }
@@ -1892,6 +1924,7 @@ public class battlefield extends script.base_script
         }
         return _players;
     }
+
     public static obj_id[] getPlayersOnBattlefield(obj_id master_object) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1920,7 +1953,7 @@ public class battlefield extends script.base_script
             {
                 return null;
             }
-            else 
+            else
             {
                 obj_id[] _loaded_players = new obj_id[0];
                 if (loaded_players != null)
@@ -1931,11 +1964,12 @@ public class battlefield extends script.base_script
                 return _loaded_players;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id[] getPlayersOnBattlefield(region r) throws InterruptedException
     {
         if (r == null)
@@ -1945,6 +1979,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return getPlayersOnBattlefield(master_object);
     }
+
     public static String getPlayerTeamFaction(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1955,11 +1990,12 @@ public class battlefield extends script.base_script
         {
             return getStringObjVar(player, VAR_TEAM_FACTION);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id getBattlefieldEntered(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1970,11 +2006,12 @@ public class battlefield extends script.base_script
         {
             return getObjIdObjVar(player, VAR_BATTLEFIELD_ENTERED);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getBattlefieldIndex(obj_id master_object, String datatable) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -1998,7 +2035,7 @@ public class battlefield extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (name.equals(bf_name))
                 {
@@ -2008,6 +2045,7 @@ public class battlefield extends script.base_script
         }
         return -1;
     }
+
     public static location getFactionStartLocation(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2025,16 +2063,17 @@ public class battlefield extends script.base_script
             return null;
         }
         location[] start_locations = getLocationArrayObjVar(master_object, VAR_START_LOCATIONS);
-        location loc = (location)start_locations[idx].clone();
+        location loc = (location) start_locations[idx].clone();
         if (loc.x == 0.0f && loc.y == 0.0f && loc.z == 0.0f)
         {
             return null;
         }
-        else 
+        else
         {
             return loc;
         }
     }
+
     public static dictionary getSpawnerData(String spawner_name) throws InterruptedException
     {
         if (spawner_name == null)
@@ -2064,7 +2103,7 @@ public class battlefield extends script.base_script
             {
                 break;
             }
-            else 
+            else
             {
                 spawn_template = utils.addElement(spawn_template, row.getString(DATATABLE_COL_SPAWNER_TEMPLATE));
                 min_number = utils.addElement(min_number, row.getInt(DATATABLE_COL_SPAWNER_MIN_NUMBER));
@@ -2079,6 +2118,7 @@ public class battlefield extends script.base_script
         spawn_data.put("weight", weight);
         return spawn_data;
     }
+
     public static obj_id[] createRandomSpawn(obj_id master_object, obj_id spawner) throws InterruptedException
     {
         if (spawner == null || spawner == obj_id.NULL_ID)
@@ -2123,7 +2163,8 @@ public class battlefield extends script.base_script
             return null;
         }
         int total_weight = 0;
-        for (int i1 : weight) {
+        for (int i1 : weight)
+        {
             total_weight = total_weight + i1;
         }
         if (total_weight < 1)
@@ -2169,7 +2210,7 @@ public class battlefield extends script.base_script
                 current_population++;
                 num_spawn--;
             }
-            else 
+            else
             {
                 break;
             }
@@ -2179,7 +2220,7 @@ public class battlefield extends script.base_script
             LOG("LOG_CHANNEL", "battlefield::createRandomSpawn -- unable to create spawn for " + spawner);
             return null;
         }
-        else 
+        else
         {
             setObjVar(spawner, VAR_SPAWNER_CURRENT_POPULATION, current_population);
             setObjVar(spawner, VAR_SPAWNER_CURRENT, current_spawn + 1);
@@ -2192,6 +2233,7 @@ public class battlefield extends script.base_script
             return _spawned_mobs;
         }
     }
+
     public static boolean sendBattlefieldMessage(obj_id master_object, String text) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2204,6 +2246,7 @@ public class battlefield extends script.base_script
         LOG("LOG_CHANNEL", master_object + " (Battlefield Message) ->" + text);
         return true;
     }
+
     public static boolean sendBattlefieldMessage(region r, String text) throws InterruptedException
     {
         if (r == null)
@@ -2213,6 +2256,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return sendBattlefieldMessage(master_object, text);
     }
+
     public static boolean sendFactionMessage(obj_id master_object, String faction, String text) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2228,11 +2272,12 @@ public class battlefield extends script.base_script
             LOG("LOG_CHANNEL", master_object + " (Battlefield " + faction + " Message) ->" + text);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean sendFactionMessage(region r, String faction, String text) throws InterruptedException
     {
         if (r == null)
@@ -2242,6 +2287,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return sendFactionMessage(master_object, faction, text);
     }
+
     public static boolean registerBattlefieldKill(obj_id killer, obj_id victim, obj_id master_object) throws InterruptedException
     {
         if (killer == null || killer == obj_id.NULL_ID)
@@ -2304,6 +2350,7 @@ public class battlefield extends script.base_script
         messageTo(master_object, "msgBattlefieldKill", params, 0.0f, true);
         return true;
     }
+
     public static boolean addPlayerToPlayerList(obj_id player, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2325,7 +2372,7 @@ public class battlefield extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             players = utils.addElement(players, player);
             removeObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD);
@@ -2333,6 +2380,7 @@ public class battlefield extends script.base_script
         }
         return true;
     }
+
     public static boolean removePlayerFromPlayerList(obj_id player, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2353,7 +2401,7 @@ public class battlefield extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             players = utils.removeElementAt(players, idx);
             removeObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD);
@@ -2361,6 +2409,7 @@ public class battlefield extends script.base_script
             return true;
         }
     }
+
     public static boolean addPlayerToTeam(obj_id player, String faction, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2422,6 +2471,7 @@ public class battlefield extends script.base_script
         LOG("LOG_CHANNEL", "battlefield::addPlayerToTeam -- added " + player);
         return true;
     }
+
     public static boolean addPlayerToTeam(obj_id player, String faction, region r) throws InterruptedException
     {
         if (r == null)
@@ -2431,6 +2481,7 @@ public class battlefield extends script.base_script
         obj_id master_object = getMasterObjectFromRegion(r);
         return addPlayerToTeam(player, faction, master_object);
     }
+
     public static boolean movePlayerToStartLocation(obj_id player, obj_id master_object) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "movePlayerToStartLocation --" + player + "   " + master_object);
@@ -2452,6 +2503,7 @@ public class battlefield extends script.base_script
         setLocation(player, rand_loc);
         return true;
     }
+
     public static boolean expelPlayerFromBattlefield(obj_id player, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2466,6 +2518,7 @@ public class battlefield extends script.base_script
         expelFromTriggerVolume(master_object, STRING_TRIG_OUTER_PERIMETER, player);
         return true;
     }
+
     public static boolean removeFactionItems(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2480,6 +2533,7 @@ public class battlefield extends script.base_script
         factions.unequipFactionEquipment(player, true);
         return true;
     }
+
     public static int setGameTimer(obj_id master_object, boolean reset) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2492,7 +2546,7 @@ public class battlefield extends script.base_script
             setObjVar(master_object, VAR_TIME_REMAINING, game_time);
             return game_time;
         }
-        else 
+        else
         {
             if (hasObjVar(master_object, VAR_TIME_REMAINING))
             {
@@ -2503,17 +2557,18 @@ public class battlefield extends script.base_script
                 {
                     return 0;
                 }
-                else 
+                else
                 {
                     return time_remaining;
                 }
             }
-            else 
+            else
             {
                 return 0;
             }
         }
     }
+
     public static boolean setBattlefieldEntered(obj_id player, obj_id master_object) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2528,6 +2583,7 @@ public class battlefield extends script.base_script
         setObjVar(player, VAR_TIME_ENTERED, getGameTime());
         return true;
     }
+
     public static boolean decrementFactionBuildPoints(obj_id master_object, String faction, int amt) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2548,6 +2604,7 @@ public class battlefield extends script.base_script
         setObjVar(master_object, objVar_name, build_points);
         return true;
     }
+
     public static boolean incrementFactionBuildPoints(obj_id master_object, String faction, int amt) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2568,6 +2625,7 @@ public class battlefield extends script.base_script
         setObjVar(master_object, objVar_name, build_points);
         return true;
     }
+
     public static boolean spendFactionPoints(obj_id player, float amt) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2599,12 +2657,13 @@ public class battlefield extends script.base_script
             }
             return false;
         }
-        else 
+        else
         {
             factions.addFactionStanding(player, faction, amt * -1);
             return true;
         }
     }
+
     public static boolean eliminateFaction(obj_id master_object, String faction) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -2629,14 +2688,14 @@ public class battlefield extends script.base_script
                 LOG("LOG_CHANNEL", "battlefield::eliminateFaction -- cannot find " + faction + " in " + master_object);
                 return false;
             }
-            else 
+            else
             {
                 ai_factions = utils.removeElementAt(ai_factions, idx);
                 if (ai_factions.size() > 0)
                 {
                     setObjVar(master_object, VAR_FACTIONS_AI_REMAINING, ai_factions);
                 }
-                else 
+                else
                 {
                     if (hasObjVar(master_object, VAR_FACTIONS_AI_REMAINING))
                     {
@@ -2647,8 +2706,10 @@ public class battlefield extends script.base_script
                 obj_id[] base_objects = pvpBattlefieldGetParticipantsForFaction(bf, 0);
                 if (base_objects != null)
                 {
-                    for (obj_id base_object : base_objects) {
-                        if (isBattlefieldSpawned(base_object)) {
+                    for (obj_id base_object : base_objects)
+                    {
+                        if (isBattlefieldSpawned(base_object))
+                        {
                             destroyObject(base_object);
                         }
                     }
@@ -2657,7 +2718,7 @@ public class battlefield extends script.base_script
                 return true;
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield.eliminateFaction -- eliminate player faction " + faction);
             factions_remaining = utils.removeElementAt(factions_remaining, idx);
@@ -2665,7 +2726,7 @@ public class battlefield extends script.base_script
             {
                 setObjVar(master_object, VAR_FACTIONS_REMAINING, factions_remaining);
             }
-            else 
+            else
             {
                 if (hasObjVar(master_object, VAR_FACTIONS_REMAINING))
                 {
@@ -2676,7 +2737,8 @@ public class battlefield extends script.base_script
             obj_id[] faction_team = getFactionTeam(master_object, faction);
             if (faction_team != null)
             {
-                for (obj_id obj_id : faction_team) {
+                for (obj_id obj_id : faction_team)
+                {
                     expelPlayerFromBattlefield(obj_id, master_object);
                 }
             }
@@ -2684,6 +2746,7 @@ public class battlefield extends script.base_script
             return true;
         }
     }
+
     public static boolean startBattlefield(obj_id master_object) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "Starting battlefield game for " + master_object);
@@ -2695,7 +2758,8 @@ public class battlefield extends script.base_script
         obj_id[] players = getPlayersOnBattlefield(master_object);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 expelPlayerFromBattlefield(player, master_object);
             }
         }
@@ -2716,14 +2780,16 @@ public class battlefield extends script.base_script
         {
             setObjVar(master_object, VAR_FACTIONS_AI_REMAINING, factions_ai);
         }
-        for (String s : factions_allowed) {
+        for (String s : factions_allowed)
+        {
             String objVar_name = VAR_BUILD_POINTS + s;
             setObjVar(master_object, objVar_name, STARTING_BUILD_POINTS);
         }
-        messageTo(master_object, "msgGameTimePulse", null, (int)GAME_TIME_PULSE, false);
+        messageTo(master_object, "msgGameTimePulse", null, GAME_TIME_PULSE, false);
         attachGameScript(master_object);
         return true;
     }
+
     public static boolean endBattlefield(obj_id master_object, boolean restart) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "Ending battlefield game for " + master_object);
@@ -2735,13 +2801,15 @@ public class battlefield extends script.base_script
         if (participants != null)
         {
             region bf = getRegionFromMasterObject(master_object);
-            for (obj_id participant : participants) {
+            for (obj_id participant : participants)
+            {
                 dictionary end_params = new dictionary();
                 String chatroom = getChatRoomNameAllFactions(master_object);
                 end_params.put("chatroom", chatroom);
                 int faction_id = pvpBattlefieldGetFaction(participant, bf);
                 String faction = factions.getFactionNameByHashCode(faction_id);
-                if (faction != null) {
+                if (faction != null)
+                {
                     String chatroom_faction = getChatRoomNameFaction(master_object, faction);
                     end_params.put("chatroom_faction", chatroom_faction);
                 }
@@ -2766,17 +2834,19 @@ public class battlefield extends script.base_script
             setObjVar(master_object, VAR_NEXT_GAME, getGameTime() + restart_time);
             messageTo(master_object, "msgStartGame", null, restart_time, true);
         }
-        else 
+        else
         {
             setObjVar(master_object, VAR_NEXT_GAME, -9999);
         }
         detachGameScript(master_object);
         return true;
     }
+
     public static boolean endBattlefield(obj_id master_object) throws InterruptedException
     {
         return endBattlefield(master_object, true);
     }
+
     public static void createBattlefieldObjects(obj_id master_object, int idx) throws InterruptedException
     {
         int num_items = dataTableGetNumRows(BATTLEFIELD_DATATABLE);
@@ -2814,14 +2884,14 @@ public class battlefield extends script.base_script
                             location bf_loc = getLocation(master_object);
                             faction_start = new location(bf_loc.x - x, bf_loc.y - y, bf_loc.z - z, planet);
                         }
-                        else 
+                        else
                         {
                             faction_start = new location(x, y, z, planet);
                         }
                         location[] start_locations = getLocationArrayObjVar(master_object, VAR_START_LOCATIONS);
                         if (start_locations != null && start_locations.length > 0)
                         {
-                            start_locations[jidx] = (location)faction_start.clone();
+                            start_locations[jidx] = (location) faction_start.clone();
                             setObjVar(master_object, VAR_START_LOCATIONS, start_locations);
                         }
                     }
@@ -2833,7 +2903,7 @@ public class battlefield extends script.base_script
                     location bf_loc = getLocation(master_object);
                     obj_loc = new location(bf_loc.x - x, bf_loc.y - y, bf_loc.z - z, planet);
                 }
-                else 
+                else
                 {
                     obj_loc = new location(x, y, z, planet);
                 }
@@ -2842,11 +2912,11 @@ public class battlefield extends script.base_script
                 {
                     LOG("LOG_CHANNEL", "Unable to create " + obj_template);
                 }
-                else 
+                else
                 {
                     if (heading != 0.0f)
                     {
-                        
+
                     }
                     setYaw(object, heading);
                     region reg = getRegionFromMasterObject(master_object);
@@ -2868,7 +2938,7 @@ public class battlefield extends script.base_script
                             {
                                 LOG("LOG_CHANNEL", "battlefield::createBattlefieldObjects -- Invalid spawner type for " + object + " in battlefield " + master_object);
                             }
-                            else 
+                            else
                             {
                                 LOG("LOG_CHANNEL", "spawn_idx ->" + spawn_idx);
                                 dictionary spawn_row = dataTableGetRow(SPAWNER_DATATABLE, spawn_idx);
@@ -2905,8 +2975,8 @@ public class battlefield extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static void startBuildingConstruction(obj_id master_object, obj_id player, location position, int rotation, dictionary stats) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield::startBuildingConstruction --" + stats);
@@ -2942,8 +3012,8 @@ public class battlefield extends script.base_script
         stats.put("player", player);
         messageTo(structure, "msgConstructionComplete", stats, time, true);
         sendFactionMessage(master_object, faction, getFirstName(player) + " started construction on " + name);
-        return;
     }
+
     public static obj_id buildReinforcement(obj_id master_object, obj_id structure, obj_id player) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -2975,11 +3045,12 @@ public class battlefield extends script.base_script
             sendFactionMessage(master_object, faction, getName(player) + " has acquired a reinforcement " + name + ".");
             return reinforcement;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static boolean repairBattlefieldStructure(obj_id master_object, obj_id player, obj_id structure) throws InterruptedException
     {
         if (master_object == null || master_object == obj_id.NULL_ID)
@@ -3012,7 +3083,7 @@ public class battlefield extends script.base_script
             sendSystemMessageTestingOnly(player, "Repairs initiated.");
             return true;
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", player + " ->You do not have the " + repair_cost + " build points to initiate repair.");
             sendSystemMessageTestingOnly(player, "You do not have the " + repair_cost + " build points to initiate repair.");

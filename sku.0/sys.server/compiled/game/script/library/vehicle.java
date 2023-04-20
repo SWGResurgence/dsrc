@@ -4,9 +4,6 @@ import script.*;
 
 public class vehicle extends script.base_script
 {
-    public vehicle()
-    {
-    }
     public static final int MAX_STORED_VEHICLES = 3;
     public static final int MAX_STORED_VEHICLES_MUSTAFAR_EXPANSION = 6;
     public static final int MAX_VEHICLES = 1;
@@ -57,62 +54,67 @@ public class vehicle extends script.base_script
      * ObjVar attached to Vehicle Control Device and Vehicle Objects if it is resistant
      * to lava (as applied by Resistance Kit, not through template exemption).
      *
-     * @since SWG Source 3.1 - September 2021
      * @apiNote must match to value in src CreatureController.cpp
+     * @since SWG Source 3.1 - September 2021
      */
     public static final String VAR_LAVA_RESISTANT = "vehicle.lava_resistance";
     public static final String[] s_varInfoNames = new String[]
-    {
-        "/private/index_speed_min",
-        "/private/index_speed_max",
-        "/private/index_turn_rate_min",
-        "/private/index_turn_rate_max",
-        "/private/index_accel_min",
-        "/private/index_accel_max",
-        "/private/index_decel",
-        "/private/index_slope_mod",
-        "/private/index_damp_roll",
-        "/private/index_damp_pitch",
-        "/private/index_damp_height",
-        "/private/index_glide",
-        "/private/index_banking",
-        "/private/index_hover_height",
-        "/private/index_auto_level",
-        "/private/index_strafe"
-    };
+            {
+                    "/private/index_speed_min",
+                    "/private/index_speed_max",
+                    "/private/index_turn_rate_min",
+                    "/private/index_turn_rate_max",
+                    "/private/index_accel_min",
+                    "/private/index_accel_max",
+                    "/private/index_decel",
+                    "/private/index_slope_mod",
+                    "/private/index_damp_roll",
+                    "/private/index_damp_pitch",
+                    "/private/index_damp_height",
+                    "/private/index_glide",
+                    "/private/index_banking",
+                    "/private/index_hover_height",
+                    "/private/index_auto_level",
+                    "/private/index_strafe"
+            };
     public static final float[] s_varInfoConversions = new float[]
-    {
-        10.0f,
-        10.0f,
-        1.0f,
-        1.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        10.0f,
-        1.0f,
-        10.0f,
-        100.0f,
-        1.0f
-    };
+            {
+                    10.0f,
+                    10.0f,
+                    1.0f,
+                    1.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    10.0f,
+                    1.0f,
+                    10.0f,
+                    100.0f,
+                    1.0f
+            };
     public static final int VEHICLE_DECAY_CYCLE = 600;
     public static final int CUSTOMIZATION_COUNT = 200;
     public static final String VAR_PALVAR_BASE = "ai.pet.palvar";
     public static final String VAR_PALVAR_VARS = VAR_PALVAR_BASE + ".vars";
     public static final String VAR_PALVAR_CNT = VAR_PALVAR_BASE + ".cnt";
     public static final String VAR_DECONSTRUCT_SCHEMATIC = "schematic.name";
+    public vehicle()
+    {
+    }
+
     public static int setValue(obj_id vehicle, float value, int var_index) throws InterruptedException
     {
         String vi_name = s_varInfoNames[var_index];
         float vi_conversion = s_varInfoConversions[var_index];
-        int ivalue = (int)(value * vi_conversion);
+        int ivalue = (int) (value * vi_conversion);
         setRangedIntCustomVarValue(vehicle, vi_name, ivalue);
         return ivalue;
     }
+
     public static float getValue(obj_id vehicle, int var_index) throws InterruptedException
     {
         String vi_name = s_varInfoNames[var_index];
@@ -120,150 +122,189 @@ public class vehicle extends script.base_script
         int ivalue = getRangedIntCustomVarValue(vehicle, vi_name);
         return ivalue / vi_conversion;
     }
+
     public static void setMinimumSpeed(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_SPEED_MIN);
     }
+
     public static void setMaximumSpeed(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_SPEED_MAX);
     }
+
     public static void setTurnRateMin(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_TURN_RATE_MIN);
     }
+
     public static void setTurnRateMax(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_TURN_RATE_MAX);
     }
+
     public static void setAccelMin(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_ACCEL_MIN);
     }
+
     public static void setAccelMax(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_ACCEL_MAX);
     }
+
     public static void setDecel(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_DECEL);
     }
+
     public static void setDampingRoll(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_DAMP_ROLL);
     }
+
     public static void setDampingPitch(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_DAMP_PITCH);
     }
+
     public static void setDampingHeight(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_DAMP_HEIGHT);
     }
+
     public static void setGlide(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_GLIDE);
     }
+
     public static void setBankingAngle(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_BANKING);
     }
+
     public static void setHoverHeight(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_HOVER_HEIGHT);
     }
+
     public static void setAutoLevelling(obj_id vehicle, float value) throws InterruptedException
     {
         setValue(vehicle, value, VAR_AUTO_LEVEL);
     }
+
     public static void setStrafe(obj_id vehicle, boolean canStrafe) throws InterruptedException
     {
         float value = canStrafe ? 1.0f : 0.0f;
         setValue(vehicle, value, VAR_STRAFE);
     }
+
     public static float getMinimumSpeed(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_SPEED_MIN);
     }
+
     public static float getMaximumSpeed(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_SPEED_MAX);
     }
+
     public static float getTurnRateMin(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_TURN_RATE_MIN);
     }
+
     public static float getTurnRateMax(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_TURN_RATE_MAX);
     }
+
     public static float getAccelMin(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_ACCEL_MIN);
     }
+
     public static float getAccelMax(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_ACCEL_MAX);
     }
+
     public static float getDecel(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_DECEL);
     }
+
     public static float getDampingRoll(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_DAMP_ROLL);
     }
+
     public static float getDampingPitch(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_DAMP_PITCH);
     }
+
     public static float getDampingHeight(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_DAMP_HEIGHT);
     }
+
     public static float getGlide(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_GLIDE);
     }
+
     public static float getBankingAngle(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_BANKING);
     }
+
     public static float getHoverHeight(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_HOVER_HEIGHT);
     }
+
     public static float getAutoLevelling(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_AUTO_LEVEL);
     }
+
     public static boolean getStrafe(obj_id vehicle) throws InterruptedException
     {
         return getValue(vehicle, VAR_STRAFE) > 0.0f;
     }
-    public static boolean isRidingVehicle(obj_id objPlayer) throws InterruptedException {
-        if (!isMob(objPlayer)) {
+
+    public static boolean isRidingVehicle(obj_id objPlayer) throws InterruptedException
+    {
+        if (!isMob(objPlayer))
+        {
             return false;
         }
         obj_id objMount = getMountId(objPlayer);
         return isIdValid(objMount) && (hasScript(objMount, "systems.vehicle_system.vehicle_base") || isBattlefieldVehicle(objMount));
     }
-    public static boolean isRidingBattlefieldVehicle(obj_id objPlayer) throws InterruptedException {
+
+    public static boolean isRidingBattlefieldVehicle(obj_id objPlayer) throws InterruptedException
+    {
         obj_id objMount = getMountId(objPlayer);
         return isIdValid(objMount) && isBattlefieldVehicle(objMount);
     }
+
     public static boolean isDriveableVehicle(obj_id objThing) throws InterruptedException
     {
         return hasScript(objThing, "systems.vehicle_system.vehicle_base");
     }
+
     public static boolean isVehicle(obj_id obj) throws InterruptedException
     {
         return isGameObjectTypeOf(getGameObjectType(obj), GOT_vehicle);
     }
+
     public static boolean isBattlefieldVehicle(obj_id obj) throws InterruptedException
     {
         return isVehicle(obj) && hasScript(obj, "systems.vehicle_system.battlefield_vehicle");
     }
+
     public static String getVehicleTemplate(obj_id controlDevice)
     {
         if (!isIdValid(controlDevice))
@@ -277,6 +318,7 @@ public class vehicle extends script.base_script
         }
         return dataTableGetString(create.VEHICLE_TABLE, ref, "OBJECT_TEMPLATE");
     }
+
     public static void doTempMaxSpeedReduction(obj_id vehicle, float factor, float duration) throws InterruptedException
     {
         if (factor < 0.01f || factor > 1.0f)
@@ -295,6 +337,7 @@ public class vehicle extends script.base_script
         messageTo(vehicle, "revertVehicleMod", params, duration, false);
         setMaximumSpeed(vehicle, currentMaxSpeed * factor);
     }
+
     public static String getVehicleReference(obj_id controlDevice)
     {
         if (!isIdValid(controlDevice))
@@ -303,6 +346,7 @@ public class vehicle extends script.base_script
         }
         return getStringObjVar(controlDevice, "vehicle_attribs.object_ref");
     }
+
     public static boolean repairVehicle(obj_id player, obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(vehicle) || !vehicle.isLoaded())
@@ -361,6 +405,7 @@ public class vehicle extends script.base_script
         }
         return false;
     }
+
     public static int getVehicleRepairCost(obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(vehicle))
@@ -392,6 +437,7 @@ public class vehicle extends script.base_script
         utils.setScriptVar(vehicle, "vehicleRepair.city_tax", city_cut);
         return Math.round((toHeal * repair_rate) * city_tax);
     }
+
     public static float getVehicleRepairRate(obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(vehicle))
@@ -410,6 +456,7 @@ public class vehicle extends script.base_script
         }
         return dataTableGetFloat(create.VEHICLE_TABLE, ref, "REPAIR_RATE");
     }
+
     public static void decayVehicle(obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(vehicle))
@@ -430,7 +477,7 @@ public class vehicle extends script.base_script
             float ratio = delta / VEHICLE_DECAY_CYCLE;
             decayAmt = Math.round(ratio * decay_rate);
         }
-        else 
+        else
         {
             decayAmt = Math.round(decay_rate / 2.0f);
         }
@@ -449,6 +496,7 @@ public class vehicle extends script.base_script
         utils.setScriptVar(vehicle, "decay.stamp", now);
         messageTo(vehicle, "handleVehicleDecay", null, VEHICLE_DECAY_CYCLE, false);
     }
+
     public static float getVehicleDecayRate(obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(vehicle))
@@ -467,6 +515,7 @@ public class vehicle extends script.base_script
         }
         return dataTableGetFloat(create.VEHICLE_TABLE, ref, "DECAY_RATE");
     }
+
     public static boolean isInValidUnpackLocation(obj_id master) throws InterruptedException
     {
         if (isSpaceScene())
@@ -487,6 +536,7 @@ public class vehicle extends script.base_script
         }
         return true;
     }
+
     public static boolean isInRestrictedScene(obj_id master) throws InterruptedException
     {
         String scene = getCurrentSceneName();
@@ -518,10 +568,13 @@ public class vehicle extends script.base_script
         }
         return false;
     }
-    public static boolean canQuickUnpack(obj_id master) throws InterruptedException {
+
+    public static boolean canQuickUnpack(obj_id master) throws InterruptedException
+    {
         location yourLoc = getLocation(master);
         return !isIdValid(yourLoc.cell) && !isInRestrictedScene(master);
     }
+
     public static boolean isInValidCallState(obj_id player) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -536,10 +589,12 @@ public class vehicle extends script.base_script
         }
         return true;
     }
+
     public static boolean storeVehicle(obj_id vehicleControlDevice, obj_id player) throws InterruptedException
     {
         return storeVehicle(vehicleControlDevice, player, true);
     }
+
     public static boolean storeVehicle(obj_id vehicleControlDevice, obj_id player, boolean checkCombat) throws InterruptedException
     {
         obj_id currentVehicle = callable.getCDCallable(vehicleControlDevice);
@@ -576,10 +631,12 @@ public class vehicle extends script.base_script
         callable.setCDCallable(vehicleControlDevice, null);
         return true;
     }
+
     public static void setTimeStored(obj_id PCD) throws InterruptedException
     {
         setObjVar(PCD, "pet.timeStored", getGameTime());
     }
+
     public static void storeAllVehicles(obj_id master) throws InterruptedException
     {
         debugServerConsoleMsg(master, "+++ VEHICLE library . storeAllVehicles +++ just entered function. master obj_id fed in is: " + master);
@@ -590,7 +647,7 @@ public class vehicle extends script.base_script
             {
                 messageTo(objVehicle, "handlePackRequest", null, 0, false);
             }
-            else 
+            else
             {
                 if (group.isGrouped(objVehicle))
                 {
@@ -613,13 +670,13 @@ public class vehicle extends script.base_script
                         }
                         destroyObject(objVehicle);
                     }
-                    else 
+                    else
                     {
                         debugServerConsoleMsg(master, "+++ VEHICLE library . storeAllVehicles +++ Looks like we're dead, but pet's weren't faction. Firing off a storeVehicle function.");
                         storeVehicle(objVehicle, master);
                     }
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(master, "+++ VEHICLE library . storeAllVehicles +++ We aren't dead. Firing off a storeVehicle function.");
                     storeVehicle(objVehicle, master);
@@ -627,10 +684,12 @@ public class vehicle extends script.base_script
             }
         }
     }
+
     public static boolean hasMaxStoredVehicles(obj_id player) throws InterruptedException
     {
         return callable.hasMaxStoredRideables(player);
     }
+
     public static void reHueVehicle(obj_id vehicleControlDevice, obj_id vehicle) throws InterruptedException
     {
         int colorIdx = hue.getVarColorIndex(vehicleControlDevice, hue.INDEX_1);
@@ -640,6 +699,7 @@ public class vehicle extends script.base_script
         }
         hue.setColor(vehicle, hue.INDEX_1, colorIdx);
     }
+
     public static void saveVehicleInfo(obj_id vehicleControlDevice, obj_id vehicle) throws InterruptedException
     {
         if (!isIdValid(vehicle) || !isIdValid(vehicleControlDevice))
@@ -661,12 +721,15 @@ public class vehicle extends script.base_script
         if (ri != null && ri.length > 0)
         {
             String varpath;
-            for (ranged_int_custom_var aRi : ri) {
+            for (ranged_int_custom_var aRi : ri)
+            {
                 int val = aRi.getValue();
-                if (val > -1) {
+                if (val > -1)
+                {
                     varpath = VAR_PALVAR_VARS + "." + aRi.getVarName();
                     int cur = getIntObjVar(vehicleControlDevice, varpath);
-                    if (cur != val) {
+                    if (cur != val)
+                    {
                         setObjVar(vehicleControlDevice, varpath, val);
                     }
                 }
@@ -677,6 +740,7 @@ public class vehicle extends script.base_script
             }
         }
     }
+
     public static void restoreCustomization(obj_id vehicle, obj_id vehicleControlDevice) throws InterruptedException
     {
         if (hasObjVar(vehicleControlDevice, pet_lib.VAR_PALVAR_BASE))
@@ -695,6 +759,7 @@ public class vehicle extends script.base_script
             }
         }
     }
+
     public static void storeDamage(obj_id vcd, int currentHP, int penalty) throws InterruptedException
     {
         if (!isIdValid(vcd))
@@ -712,10 +777,12 @@ public class vehicle extends script.base_script
         }
         setObjVar(vcd, "attrib.hit_points", currentHP);
     }
+
     public static void initializeVehicle(obj_id vehicle) throws InterruptedException
     {
         initializeVehicle(vehicle, null);
     }
+
     public static void initializeVehicle(obj_id vehicle, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -830,6 +897,7 @@ public class vehicle extends script.base_script
             debugConsoleMsg(player, "Your vehicle has been analyzed and tuned.");
         }
     }
+
     public static boolean mountPermissionCheck(obj_id vehicle, obj_id rider, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(vehicle) || !isIdValid(rider))
@@ -881,6 +949,7 @@ public class vehicle extends script.base_script
         }
         return true;
     }
+
     public static void restoreVehicle(obj_id player, obj_id vehicle) throws InterruptedException
     {
         obj_id tool = utils.getItemPlayerHasByTemplate(player, "object/tangible/item/ep3/barc_repair_tool.iff");
@@ -897,11 +966,12 @@ public class vehicle extends script.base_script
             --currentCount;
             setCount(tool, currentCount);
         }
-        else 
+        else
         {
             destroyObject(tool);
         }
     }
+
     public static boolean isJetPack(obj_id vehicleControlDevice) throws InterruptedException
     {
         if (!isValidId(vehicleControlDevice))
@@ -911,6 +981,7 @@ public class vehicle extends script.base_script
         String name = getVehicleTemplate(vehicleControlDevice);
         return isJetPackTemplate(name);
     }
+
     public static boolean isJetPackVehicle(obj_id vehicle) throws InterruptedException
     {
         if (!isValidId(vehicle))
@@ -920,6 +991,7 @@ public class vehicle extends script.base_script
         String name = getTemplateName(vehicle);
         return isJetPackTemplate(name);
     }
+
     public static boolean isJetPackTemplate(String template) throws InterruptedException
     {
         if (template == null || template.length() <= 0)
@@ -936,6 +1008,7 @@ public class vehicle extends script.base_script
         }
         return template.equals("object/mobile/vehicle/tcg_hk47_jetpack.iff");
     }
+
     public static void applyVehicleBuffs(obj_id player, obj_id vehicle) throws InterruptedException
     {
         String template = getTemplateName(vehicle);
@@ -973,6 +1046,7 @@ public class vehicle extends script.base_script
             buff.applyBuff(vehicle, vehicleBuffName);
         }
     }
+
     public static boolean canRepairDisabledVehicle(obj_id controlDevice) throws InterruptedException
     {
         String ref = getVehicleReference(controlDevice);
@@ -982,6 +1056,7 @@ public class vehicle extends script.base_script
         }
         return dataTableGetInt(create.VEHICLE_TABLE, ref, "CAN_REPAIR_DISABLED") == 1;
     }
+
     public static boolean checkForMountAndDismountPlayer(obj_id player) throws InterruptedException
     {
         obj_id playerCurrentMount = getMountId(player);
@@ -991,7 +1066,7 @@ public class vehicle extends script.base_script
             {
                 queueCommand(player, (1988230683), playerCurrentMount, getName(playerCurrentMount), COMMAND_PRIORITY_IMMEDIATE);
             }
-            else 
+            else
             {
                 queueCommand(player, (117012717), playerCurrentMount, getName(playerCurrentMount), COMMAND_PRIORITY_IMMEDIATE);
             }
@@ -999,6 +1074,7 @@ public class vehicle extends script.base_script
         }
         return false;
     }
+
     public static boolean turnVehicleIntoSchem(obj_id player, obj_id vehiclePCD) throws InterruptedException
     {
         if (!isIdValid(vehiclePCD) || !exists(vehiclePCD))
@@ -1044,10 +1120,12 @@ public class vehicle extends script.base_script
         CustomerServiceLog("new_vehicle_conversion", "vehiclePCD(" + vehiclePCD + ") about to be destroyed on player " + getFirstName(player) + "(" + player + ") because it was converted into schematic " + schemName + "(" + newSchem + ")");
         return true;
     }
+
     public static obj_id[] findVehicleControlDevicesForPlayer(obj_id player) throws InterruptedException
     {
         return findVehicleControlDevicesForPlayer(player, false);
     }
+
     public static obj_id[] findVehicleControlDevicesForPlayer(obj_id player, boolean includeHangerSlot) throws InterruptedException
     {
         obj_id datapad = utils.getDatapad(player);
@@ -1062,18 +1140,22 @@ public class vehicle extends script.base_script
             if (datapadContents != null)
             {
                 int count = 0;
-                for (obj_id datapadContent : datapadContents) {
-                    if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_vehicle_control_device) {
+                for (obj_id datapadContent : datapadContents)
+                {
+                    if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_vehicle_control_device)
+                    {
                         ++count;
                     }
                 }
                 if (includeHangerSlot && isIdValid(playerHangarSlot))
                 {
                     obj_id[] hangarContents = getContents(playerHangarSlot);
-                    if (hangarContents != null && hangarContents.length > 0)
+                    if (hangarContents != null)
                     {
-                        for (obj_id hangarContent : hangarContents) {
-                            if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device) {
+                        for (obj_id hangarContent : hangarContents)
+                        {
+                            if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device)
+                            {
                                 ++count;
                             }
                         }
@@ -1083,18 +1165,22 @@ public class vehicle extends script.base_script
                 {
                     obj_id[] vehicleControlDevices = new obj_id[count];
                     count = 0;
-                    for (obj_id datapadContent : datapadContents) {
-                        if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_vehicle_control_device) {
+                    for (obj_id datapadContent : datapadContents)
+                    {
+                        if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_vehicle_control_device)
+                        {
                             vehicleControlDevices[count++] = datapadContent;
                         }
                     }
                     if (includeHangerSlot && isIdValid(playerHangarSlot))
                     {
                         obj_id[] hangarContents = getContents(playerHangarSlot);
-                        if (hangarContents != null && hangarContents.length > 0)
+                        if (hangarContents != null)
                         {
-                            for (obj_id hangarContent : hangarContents) {
-                                if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device) {
+                            for (obj_id hangarContent : hangarContents)
+                            {
+                                if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device)
+                                {
                                     vehicleControlDevices[count++] = hangarContent;
                                 }
                             }
@@ -1106,6 +1192,7 @@ public class vehicle extends script.base_script
         }
         return null;
     }
+
     public static obj_id[] findVehicleControlDevicesInHangarSlot(obj_id player) throws InterruptedException
     {
         obj_id playerHangarSlot = utils.getPlayerHangar(player);
@@ -1116,8 +1203,10 @@ public class vehicle extends script.base_script
             {
                 int count = 0;
 
-                for (obj_id hangarContent : hangarContents) {
-                    if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device) {
+                for (obj_id hangarContent : hangarContents)
+                {
+                    if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device)
+                    {
                         ++count;
                     }
                 }
@@ -1125,8 +1214,10 @@ public class vehicle extends script.base_script
                 {
                     obj_id[] vehicleHangarSlotControlDevices = new obj_id[count];
                     count = 0;
-                    for (obj_id hangarContent : hangarContents) {
-                        if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device) {
+                    for (obj_id hangarContent : hangarContents)
+                    {
+                        if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_vehicle_control_device)
+                        {
                             vehicleHangarSlotControlDevices[count++] = hangarContent;
                         }
                     }
@@ -1136,16 +1227,16 @@ public class vehicle extends script.base_script
         }
         return null;
     }
-  /**
-     * @param vehicleControlDevice the OID of the intangible vehicle control device
-     *                             (NOT the tangible vehicle object)
-     *
+
+    /**
+     * @param vehicleControlDevice
+     *         the OID of the intangible vehicle control device
+     *         (NOT the tangible vehicle object)
      * @return true if this vehicle is lava resistant based either on its template
-     * being included in the exemption table or if a kit has been used on it to apply
-     * the exemption ObjVar.
-     *
-     * @since SWG Source 3.1 - September 2021
+     *         being included in the exemption table or if a kit has been used on it to apply
+     *         the exemption ObjVar.
      * @author Aconite
+     * @since SWG Source 3.1 - September 2021
      */
     public static boolean isLavaResistant(obj_id vehicleControlDevice)
     {
@@ -1154,17 +1245,16 @@ public class vehicle extends script.base_script
     }
 
     /**
-     * @param vehicleTemplate template of the actual vehicle (not control device)
-     *
+     * @param vehicleTemplate
+     *         template of the actual vehicle (not control device)
      * @return true if this vehicle's template is lava resistant
-     *
-     * @since SWG Source 3.1 - September 2021
      * @author Aconite
+     * @since SWG Source 3.1 - September 2021
      */
     public static boolean isLavaResistant(String vehicleTemplate)
     {
         dictionary d = dataTableGetRow(TABLE_LAVA_RESISTANCE, vehicleTemplate);
-        if(d != null && d.size() > 0)
+        if (d != null && d.size() > 0)
         {
             return d.getFloat("lava_resistance") >= 100f;
         }

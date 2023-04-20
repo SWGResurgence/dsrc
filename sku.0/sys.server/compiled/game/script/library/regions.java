@@ -6,9 +6,6 @@ import script.region;
 
 public class regions extends script.base_script
 {
-    public regions()
-    {
-    }
     public static final int GEO_DESERT = 0;
     public static final int GEO_FOREST = 1;
     public static final int GEO_JUNGLE = 2;
@@ -102,6 +99,10 @@ public class regions extends script.base_script
     public static final int BIT_MUNICIPAL = 2;
     public static final int BIT_SPAWNABLE = 3;
     public static final int BIT_MISSION = 4;
+    public regions()
+    {
+    }
+
     public static String translateGeoToString(int geo) throws InterruptedException
     {
         if ((geo >= GEO_MAX) || (geo < 0))
@@ -111,61 +112,63 @@ public class regions extends script.base_script
         switch (geo)
         {
             case GEO_DESERT:
-            return "desert";
+                return "desert";
             case GEO_FOREST:
-            return "forest";
+                return "forest";
             case GEO_JUNGLE:
-            return "jungle";
+                return "jungle";
             case GEO_PLATEAU:
-            return "plateau";
+                return "plateau";
             case GEO_OASIS:
-            return "oasis";
+                return "oasis";
             case GEO_CANYON:
-            return "canyon";
+                return "canyon";
             case GEO_LAKE:
-            return "lake";
+                return "lake";
             case GEO_LAKESHORE:
-            return "lakeshore";
+                return "lakeshore";
             case GEO_BEACH:
-            return "beach";
+                return "beach";
             case GEO_OCEAN:
-            return "ocean";
+                return "ocean";
             case GEO_UNDERWATER:
-            return "underwater";
+                return "underwater";
             case GEO_RIVER:
-            return "river";
+                return "river";
             case GEO_VOLCANO:
-            return "volcano";
+                return "volcano";
             case GEO_SWAMP:
-            return "swamp";
+                return "swamp";
             case GEO_PLAINS:
-            return "plains";
+                return "plains";
             case GEO_PRAIRIE:
-            return "prairie";
+                return "prairie";
             case GEO_MOUNTAINS:
-            return "mountains";
+                return "mountains";
             case GEO_HILLS:
-            return "hills";
+                return "hills";
             case GEO_GRASSLAND:
-            return "grassland";
+                return "grassland";
             case GEO_WASTELAND:
-            return "wasteland";
+                return "wasteland";
             case GEO_CITY:
-            return "city";
+                return "city";
             case GEO_FICTIONAL:
-            return "fictional";
+                return "fictional";
             case GEO_OVERLOAD:
-            return "overload";
+                return "overload";
             case GEO_DEFAULT:
-            return "default";
+                return "default";
             case GEO_THEATER:
-            return "theater";
+                return "theater";
         }
         return null;
     }
+
     public static int getDeliverMissionRegionType(String strRegionName) throws InterruptedException
     {
-        switch (strRegionName) {
+        switch (strRegionName)
+        {
             case "anchorhead":
                 return MISSION_TATOOINE_ANCHORHEAD;
             case "bestine":
@@ -233,6 +236,7 @@ public class regions extends script.base_script
         }
         return 0;
     }
+
     public static String getPlanetNameByObjId(obj_id objPlanet) throws InterruptedException
     {
         LOG("regions_spam", "objPlanet is " + objPlanet);
@@ -304,6 +308,7 @@ public class regions extends script.base_script
         }
         return null;
     }
+
     public static boolean isInPvPRegion(obj_id object) throws InterruptedException
     {
         location loc = getLocation(object);
@@ -313,9 +318,11 @@ public class regions extends script.base_script
             return false;
         }
         String regionName;
-        for (region region : regions) {
+        for (region region : regions)
+        {
             regionName = region.getName();
-            if (isIdValid(gcw.getPvpRegionControllerIdByName(object, regionName))) {
+            if (isIdValid(gcw.getPvpRegionControllerIdByName(object, regionName)))
+            {
                 return true;
             }
         }

@@ -96,18 +96,18 @@ public class stealth extends script.base_script
     public static final int TRAP_HX2 = 3;
     public static final int TRAP_KAMINODART = 4;
     public static final int[] ALL_TRAP_TYPES = new int[]
-    {
-        TRAP_CALTROP,
-        TRAP_FLASHBANG,
-        TRAP_HX2,
-        TRAP_KAMINODART
-    };
+            {
+                    TRAP_CALTROP,
+                    TRAP_FLASHBANG,
+                    TRAP_HX2,
+                    TRAP_KAMINODART
+            };
     public static final int[] ALL_TRIGGER_TYPES = new int[]
-    {
-        TRIGGER_TYPE_TIMER,
-        TRIGGER_TYPE_REMOTE,
-        TRIGGER_TYPE_PROXIMITY
-    };
+            {
+                    TRIGGER_TYPE_TIMER,
+                    TRIGGER_TYPE_REMOTE,
+                    TRIGGER_TYPE_PROXIMITY
+            };
     public static final float TRAP_MIN_DISTANCE_BETWEEN = 10.0f;
     public static final float TRAP_SELF_DESTRUCT_TIMEOUT = 60 * 10;
     public static final float TRAP_HX2_BLAST_RADIUS = 15.0f;
@@ -133,13 +133,15 @@ public class stealth extends script.base_script
     public static final float CHAFF_FLARE_DISTANCE = 15.0f;
     public static final float MAX_BIO_PROBE_STORAGE_TIME = 3600;
     public static final float MAX_PROBE_DISTANCE = 10.0f;
-    public static final String[] TRAP_RESTRICTED_REGIONS = 
-    {
-        "dathomir_fs_village_unpassable"
-    };
+    public static final String[] TRAP_RESTRICTED_REGIONS =
+            {
+                    "dathomir_fs_village_unpassable"
+            };
+
     public static void setBioProbeData(obj_id trap, obj_id target, String targetName) throws InterruptedException
     {
     }
+
     public static void setTriggerData(obj_id trap, int triggerType, int accuracy, int param) throws InterruptedException
     {
         setObjVar(trap, TRAP_TR_ACCURACY, accuracy);
@@ -147,17 +149,18 @@ public class stealth extends script.base_script
         switch (triggerType)
         {
             case TRIGGER_TYPE_TIMER:
-            setObjVar(trap, TIMER_TIME, param);
-            break;
+                setObjVar(trap, TIMER_TIME, param);
+                break;
             case TRIGGER_TYPE_REMOTE:
-            String frequency = "" + rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
-            setObjVar(trap, stealth.TRAP_FREQUENCY, frequency);
-            break;
+                String frequency = rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
+                setObjVar(trap, stealth.TRAP_FREQUENCY, frequency);
+                break;
             case TRIGGER_TYPE_PROXIMITY:
-            setObjVar(trap, PROXIMITY_RANGE, param);
-            break;
+                setObjVar(trap, PROXIMITY_RANGE, param);
+                break;
         }
     }
+
     public static void createRangerLoot(int level, String object, obj_id container, int count) throws InterruptedException
     {
         object = toLower(object);
@@ -224,13 +227,15 @@ public class stealth extends script.base_script
                 break;
         }
     }
+
     public static void createRangerLoot(obj_id mob, int level, String object, obj_id container) throws InterruptedException
     {
         createRangerLoot(level, object, container, -1);
     }
+
     public static int getNumLootItems(int level, obj_id destContainer) throws InterruptedException
     {
-        int numItems = 1 + (int)Math.ceil((level / 30));
+        int numItems = 1 + (int) Math.ceil((level / 30));
         int free = getVolumeFree(destContainer);
         if (free < numItems)
         {
@@ -238,6 +243,7 @@ public class stealth extends script.base_script
         }
         return numItems;
     }
+
     public static int getPowerLevel(int level, boolean includeVariance) throws InterruptedException
     {
         if (includeVariance)
@@ -248,8 +254,9 @@ public class stealth extends script.base_script
         float maxPower = 1000;
         float difference = maxPower - minPower;
         float ratio = level / 100.0f;
-        return (int)Math.ceil(minPower + (difference * ratio));
+        return (int) Math.ceil(minPower + (difference * ratio));
     }
+
     public static obj_id createHEPObject(obj_id container, int power, int count) throws InterruptedException
     {
         String template = "object/tangible/scout/misc/hep.iff";
@@ -267,7 +274,7 @@ public class stealth extends script.base_script
                 setCount(hep, power);
                 setObjVar(hep, HEP_EFFECTIVENESS, Math.round((power / 2)));
             }
-            else 
+            else
             {
                 setObjVar(hep, HEP_EFFECTIVENESS, power);
                 power = Math.round((power / 2));
@@ -277,6 +284,7 @@ public class stealth extends script.base_script
         }
         return hep;
     }
+
     public static obj_id createTrackingBeaconObject(obj_id container, float power, int count) throws InterruptedException
     {
         String template = "object/tangible/scout/misc/trackingbeacon.iff";
@@ -294,6 +302,7 @@ public class stealth extends script.base_script
         }
         return probe;
     }
+
     public static obj_id createBioProbeObject(obj_id container, float power, int count) throws InterruptedException
     {
         String template = "object/tangible/scout/misc/biosensorprobe.iff";
@@ -309,6 +318,7 @@ public class stealth extends script.base_script
         }
         return probe;
     }
+
     public static obj_id createMotionSensorObject(obj_id container, float batteryPower, int count) throws InterruptedException
     {
         String template = "object/tangible/scout/misc/motionsensor.iff";
@@ -324,6 +334,7 @@ public class stealth extends script.base_script
         }
         return sensor;
     }
+
     public static obj_id createChaffFlareObject(obj_id container, int power, int count) throws InterruptedException
     {
         String template = "object/tangible/scout/misc/chaffflare.iff";
@@ -339,6 +350,7 @@ public class stealth extends script.base_script
         }
         return flare;
     }
+
     public static obj_id createTrapObject(obj_id container, int power, int trapType, int count, int triggerType, int triggerAccuracy, int triggerParam) throws InterruptedException
     {
         String template;
@@ -370,17 +382,21 @@ public class stealth extends script.base_script
         setCount(trap, count);
         return trap;
     }
+
     public static boolean canPlaceMotionSensor(obj_id player, obj_id sensor) throws InterruptedException
     {
         obj_id[] stuff = getNonCreaturesInRange(getLocation(player), TRAP_MIN_DISTANCE_BETWEEN * 2);
-        for (obj_id aStuff : stuff) {
-            if (hasObjVar(aStuff, TRAP_TYPE) || hasObjVar(aStuff, BEACON_BATTERY)) {
+        for (obj_id aStuff : stuff)
+        {
+            if (hasObjVar(aStuff, TRAP_TYPE) || hasObjVar(aStuff, BEACON_BATTERY))
+            {
                 sendSystemMessage(player, new string_id("spam", "other_trap"));
                 return false;
             }
         }
         return true;
     }
+
     public static void placeMotionSensor(obj_id player, obj_id sensor) throws InterruptedException
     {
         location loc = getLocation(player);
@@ -396,6 +412,7 @@ public class stealth extends script.base_script
         playClientEffectLoc(sensor, "clienteffect/frs_light_vigilance.cef", getLocation(sensor), 0.0f);
         messageTo(sensor, "msgDeploy", null, 1, false);
     }
+
     public static void tripMotionSensor(obj_id sensor, obj_id breacher, boolean wasFiltered) throws InterruptedException
     {
         obj_id owner = getOwner(sensor);
@@ -420,6 +437,7 @@ public class stealth extends script.base_script
         dic.put("sensorLoc", getLocation(sensor));
         messageTo(owner, "msgMotionSensorTripped", dic, 1, false);
     }
+
     public static void cleanComponentFromContainer(obj_id component, obj_id container) throws InterruptedException
     {
         if (!isIdValid(container))
@@ -446,6 +464,7 @@ public class stealth extends script.base_script
             }
         }
     }
+
     public static boolean canActivateTrackingBeacon(obj_id player, obj_id beacon, boolean silent) throws InterruptedException
     {
         if (!utils.testItemClassRequirements(player, beacon, false, "") || !utils.testItemLevelRequirements(player, beacon, false, ""))
@@ -479,6 +498,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void startTrackingBeacon(obj_id player, obj_id beacon) throws InterruptedException
     {
         obj_id target = getObjIdObjVar(beacon, BIO_PROBE_TRAP_TARGET);
@@ -498,6 +518,7 @@ public class stealth extends script.base_script
             messageTo(target, "msgTrackingBeaconLocationRequest", dic, 0, false);
         }
     }
+
     public static void stopTrackingBeacon(obj_id beacon, obj_id player) throws InterruptedException
     {
         if (hasObjVar(beacon, BEACON_MSG_DISPATCHED))
@@ -513,6 +534,7 @@ public class stealth extends script.base_script
             removeObjVar(beacon, BEACON_TARGET_NAME);
         }
     }
+
     public static void updateTrackingBeaconDisplay(obj_id beacon) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(beacon);
@@ -535,7 +557,7 @@ public class stealth extends script.base_script
         {
             sendSystemMessage(player, new string_id("spam", "tracking_failed"));
         }
-        else 
+        else
         {
             setObjVar(beacon, BEACON_LAST_KNOWN_LOC, getLocationObjVar(beacon, BEACON_LOCATION));
             setObjVar(beacon, BEACON_LAST_KNOWN_TARGET_NAME, getStringObjVar(beacon, BEACON_TARGET_NAME));
@@ -557,17 +579,19 @@ public class stealth extends script.base_script
                 messageTo(getObjIdObjVar(beacon, BEACON_TARGET), "msgTrackingBeaconLocationRequest", dic, 0, false);
             }
         }
-        else 
+        else
         {
             stopTrackingBeacon(beacon, player);
         }
     }
+
     public static void updateTrackingBeaconData(obj_id beacon, obj_id target, location targetLoc, String targetName) throws InterruptedException
     {
         setObjVar(beacon, BEACON_LOCATION, targetLoc);
         setObjVar(beacon, BEACON_TARGET, target);
         setObjVar(beacon, BEACON_TARGET_NAME, targetName);
     }
+
     public static obj_id getBioProbeTarget(obj_id thing) throws InterruptedException
     {
         obj_id target = null;
@@ -583,6 +607,7 @@ public class stealth extends script.base_script
         }
         return target;
     }
+
     public static boolean canBioProbe(obj_id player, obj_id probe, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -607,6 +632,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void bioProbe(obj_id player, obj_id probe, obj_id target) throws InterruptedException
     {
         float timeToDecay = getFloatObjVar(probe, BIO_PROBE_STORAGE_TIME);
@@ -625,6 +651,7 @@ public class stealth extends script.base_script
         pp = prose.setTT(pp, target);
         sendSystemMessageProse(player, pp);
     }
+
     public static void doChaffFlareEffect(obj_id player, obj_id flare) throws InterruptedException
     {
         doAnimationAction(player, "manipulate_high");
@@ -635,13 +662,16 @@ public class stealth extends script.base_script
         boolean foundSomething = false;
         prose_package pp = prose.getPackage(new string_id("spam", "chaff_uncover"));
         pp = prose.setTT(pp, player);
-        for (obj_id aStuff : stuff) {
-            if (!hasObjVar(aStuff, TRAP_TYPE) || !validateTrapTarget(aStuff, player)) {
+        for (obj_id aStuff : stuff)
+        {
+            if (!hasObjVar(aStuff, TRAP_TYPE) || !validateTrapTarget(aStuff, player))
+            {
                 continue;
             }
             int hidePower = getIntObjVar(aStuff, CAMO_SKILL);
             int chaffPower = getIntObjVar(flare, DETECT_EFFECTIVENESS);
-            if (hidePower > chaffPower) {
+            if (hidePower > chaffPower)
+            {
                 continue;
             }
             pp = prose.setTU(pp, aStuff);
@@ -653,11 +683,12 @@ public class stealth extends script.base_script
             sendSystemMessage(player, new string_id("spam", "chaff_foundsomething"));
             doAnimationAction(player, "point_forward");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "chaff_nothing"));
         }
     }
+
     public static boolean canDisarmTrap(obj_id player, obj_id trap) throws InterruptedException
     {
         if (!hasObjVar(trap, TRAP_TYPE) && !hasObjVar(trap, BEACON_BATTERY))
@@ -672,6 +703,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void disarmTrap(obj_id player, obj_id trap) throws InterruptedException
     {
         if (getOwner(trap) == player || hasObjVar(trap, BEACON_BATTERY))
@@ -716,7 +748,7 @@ public class stealth extends script.base_script
             playTrapFizzle(trap);
             destroyObject(trap);
         }
-        else 
+        else
         {
             if (hasObjVar(trap, stealth.TRAP_FREQUENCY))
             {
@@ -732,10 +764,12 @@ public class stealth extends script.base_script
             sendSystemMessage(player, new string_id("spam", "fail_disarm"));
         }
     }
+
     public static boolean canDetectCamouflage(obj_id player) throws InterruptedException
     {
         return true;
     }
+
     public static void detectCamouflage(obj_id player, boolean findMobiles, boolean findInanimate, float distance, float baseChanceToDetect) throws InterruptedException
     {
         obj_id[] stuff = getObjectsInRange(player, distance);
@@ -755,7 +789,7 @@ public class stealth extends script.base_script
             {
                 playClientEffectLoc(player, "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
             }
-            else 
+            else
             {
                 Vector clients = new Vector();
                 clients = utils.addElement(clients, player);
@@ -771,61 +805,82 @@ public class stealth extends script.base_script
                 playClientEffectLoc(utils.toStaticObjIdArray(clients), "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
             }
         }
-        else 
+        else
         {
             playClientEffectLoc(player, "appearance/pt_fireworks_secondary_shockwave2.prt", getLocation(player), 0.0f);
         }
-        for (obj_id aStuff : stuff) {
+        for (obj_id aStuff : stuff)
+        {
             objIsMobile = false;
             target = aStuff;
-            if (!isIdValid(target)) {
+            if (!isIdValid(target))
+            {
                 continue;
             }
-            if (isPlayer(target) || ai_lib.isHumanoid(target) || isMob(target)) {
+            if (isPlayer(target) || ai_lib.isHumanoid(target) || isMob(target))
+            {
                 objIsMobile = true;
-                if (!pvpCanAttack(player, target)) {
+                if (!pvpCanAttack(player, target))
+                {
                     continue;
                 }
                 invis = getInvisBuff(target);
-                if (invis == null) {
-                    continue;
-                } else if (buff.getPriority(invis) > MAX_INVIS_BUFF_TO_DETECT) {
+                if (invis == null)
+                {
                     continue;
                 }
-                if (invis.startsWith("invis_sp_buff_invis_notrace") || invis.startsWith("invis_sp_diversion_stealth")) {
+                else if (buff.getPriority(invis) > MAX_INVIS_BUFF_TO_DETECT)
+                {
+                    continue;
+                }
+                if (invis.startsWith("invis_sp_buff_invis_notrace") || invis.startsWith("invis_sp_diversion_stealth"))
+                {
                     continue;
                 }
                 detected = utils.getResizeableStringBatchObjVar(target, DETECT_ATTEMPTS);
                 times = utils.getResizeableStringBatchObjVar(target, DETECT_TIMES);
-                if (detected == null) {
+                if (detected == null)
+                {
                     detected = new Vector();
                 }
-                if (times == null) {
+                if (times == null)
+                {
                     times = new Vector();
                 }
-                if (detected.size() != times.size()) {
+                if (detected.size() != times.size())
+                {
                     continue;
                 }
                 int idx = detected.indexOf(player);
-                if (idx > -1) {
+                if (idx > -1)
+                {
                     int when = (Integer) times.get(idx);
-                    if (when - now < PLAYER_DETECT_SAFETY_INTERVAL) {
+                    if (when - now < PLAYER_DETECT_SAFETY_INTERVAL)
+                    {
                         continue;
                     }
                     times.setElementAt(now, idx);
-                } else {
+                }
+                else
+                {
                     detected.add(player);
                     times.add(now);
                 }
                 utils.setResizeableBatchObjVar(target, DETECT_ATTEMPTS, detected);
                 utils.setResizeableBatchObjVar(target, DETECT_TIMES, times);
-            } else if (!hasObjVar(target, CONCEALED_OBJECT) || !validateTrapTarget(target, player)) {
+            }
+            else if (!hasObjVar(target, CONCEALED_OBJECT) || !validateTrapTarget(target, player))
+            {
                 continue;
             }
-            if (activeDetectHiddenTarget(target, player, baseChanceToDetect)) {
-                if (objIsMobile) {
+            if (activeDetectHiddenTarget(target, player, baseChanceToDetect))
+            {
+                if (objIsMobile)
+                {
                     checkForAndMakeVisible(target);
-                } else {
+                }
+                else
+                {
                     unconcealDevice(player, target);
                 }
                 foundSomething = true;
@@ -837,11 +892,12 @@ public class stealth extends script.base_script
             sendSystemMessage(player, new string_id("spam", "detected_something"));
             doAnimationAction(player, "point_forward");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "no_detect"));
         }
     }
+
     public static boolean canConcealDevice(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -874,6 +930,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void concealDevice(obj_id player, obj_id target) throws InterruptedException
     {
         int camoSkill = getEnhancedSkillStatisticModifier(player, "camouflage");
@@ -883,6 +940,7 @@ public class stealth extends script.base_script
         setObjVar(target, CAMOUFLAGED_AT_LEVEL, getLevel(player));
         hideFromClient(target, true);
     }
+
     public static void unconcealDevice(obj_id player, obj_id target) throws InterruptedException
     {
         removeObjVar(target, CONCEALED_OBJECT);
@@ -895,6 +953,7 @@ public class stealth extends script.base_script
         stopClientEffectObjByLabel(target, "trapConceal");
         doAnimationAction(player, "point_down");
     }
+
     public static boolean canSetTrap(obj_id player, obj_id trap) throws InterruptedException
     {
         if (!isIdValid(trap) || !hasScript(trap, "systems.skills.stealth.trap"))
@@ -946,23 +1005,29 @@ public class stealth extends script.base_script
             }
         }
         obj_id[] stuff = getNonCreaturesInRange(getLocation(player), TRAP_MIN_DISTANCE_BETWEEN);
-        for (obj_id aStuff : stuff) {
-            if (hasObjVar(aStuff, TRAP_TYPE)) {
+        for (obj_id aStuff : stuff)
+        {
+            if (hasObjVar(aStuff, TRAP_TYPE))
+            {
                 sendSystemMessage(player, new string_id("spam", "other_trap"));
                 return false;
             }
         }
         return true;
     }
+
     public static boolean inTrapRestrictedRegion(obj_id player) throws InterruptedException
     {
-        for (String TRAP_RESTRICTED_REGION : TRAP_RESTRICTED_REGIONS) {
-            if (groundquests.isInNamedRegion(player, TRAP_RESTRICTED_REGION)) {
+        for (String TRAP_RESTRICTED_REGION : TRAP_RESTRICTED_REGIONS)
+        {
+            if (groundquests.isInNamedRegion(player, TRAP_RESTRICTED_REGION))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static void onGetTrapAttributes(obj_id self, obj_id player, String[] names, String[] attribs, int free) throws InterruptedException
     {
         if (free == -1)
@@ -971,29 +1036,34 @@ public class stealth extends script.base_script
         }
         if (hasObjVar(self, TRAP_TYPE))
         {
-            switch (getIntObjVar(self, TRAP_TYPE)) {
-                case TRAP_CALTROP: {
+            switch (getIntObjVar(self, TRAP_TYPE))
+            {
+                case TRAP_CALTROP:
+                {
                     float trapRadiusFlt = TRAP_CALTROP_BLAST_RADIUS;
                     names[free] = "trap_radius";
-                    attribs[free++] = "" + trapRadiusFlt + "m";
+                    attribs[free++] = trapRadiusFlt + "m";
                     break;
                 }
-                case TRAP_FLASHBANG: {
+                case TRAP_FLASHBANG:
+                {
                     float trapRadiusFlt = TRAP_FLASHBANG_BLAST_RADIUS;
                     names[free] = "trap_radius";
-                    attribs[free++] = "" + trapRadiusFlt + "m";
+                    attribs[free++] = trapRadiusFlt + "m";
                     break;
                 }
-                case TRAP_HX2: {
+                case TRAP_HX2:
+                {
                     float trapRadiusFlt = TRAP_HX2_BLAST_RADIUS;
                     names[free] = "trap_radius";
-                    attribs[free++] = "" + trapRadiusFlt + "m";
+                    attribs[free++] = trapRadiusFlt + "m";
                     break;
                 }
-                case TRAP_KAMINODART: {
+                case TRAP_KAMINODART:
+                {
                     float trapRadiusFlt = TRAP_KAMINODART_BLAST_RADIUS;
                     names[free] = "trap_radius";
-                    attribs[free++] = "" + trapRadiusFlt + "m";
+                    attribs[free++] = trapRadiusFlt + "m";
                     break;
                 }
             }
@@ -1001,12 +1071,12 @@ public class stealth extends script.base_script
         if (hasObjVar(self, TRAP_POWER))
         {
             names[free] = "trap_power";
-            attribs[free++] = "" + floatFormat.format(getIntObjVar(self, TRAP_POWER) / 10) + "%";
+            attribs[free++] = floatFormat.format(getIntObjVar(self, TRAP_POWER) / 10) + "%";
         }
         if (hasObjVar(self, TIMER_TIME) && (utils.isNestedWithin(self, player) || getOwner(self) == player))
         {
             names[free] = "trigger_time";
-            attribs[free++] = "" + getIntObjVar(self, TIMER_TIME) + " seconds";
+            attribs[free++] = getIntObjVar(self, TIMER_TIME) + " seconds";
             names[free] = "tooltip.trap_type";
             attribs[free++] = "@spam:trap_trigger_timed";
             names[free] = "trap_type";
@@ -1021,7 +1091,7 @@ public class stealth extends script.base_script
             {
                 meterPluralization = " meter";
             }
-            attribs[free++] = "" + proximityRange + meterPluralization;
+            attribs[free++] = proximityRange + meterPluralization;
             names[free] = "tooltip.trap_type";
             attribs[free++] = "@spam:trap_trigger_proximity";
             names[free] = "trap_type";
@@ -1037,16 +1107,17 @@ public class stealth extends script.base_script
         if (hasObjVar(self, TRAP_FREQUENCY) && hasObjVar(self, "armed"))
         {
             names[free] = "trap_frequency";
-            attribs[free++] = "" + getStringObjVar(self, TRAP_FREQUENCY) + " mHz";
+            attribs[free++] = getStringObjVar(self, TRAP_FREQUENCY) + " mHz";
         }
         if (hasObjVar(self, BIO_PROBE_TRAP_TARGET))
         {
             names[free] = "trigger_filter";
-            attribs[free++] = "" + getStringObjVar(self, BIO_PROBE_TARGET_NAME);
+            attribs[free++] = getStringObjVar(self, BIO_PROBE_TARGET_NAME);
         }
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "trap.");
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "trap.trigger.");
     }
+
     public static boolean tryDetonateTrap(obj_id trap, obj_id target) throws InterruptedException
     {
         if (!hasObjVar(trap, "armed"))
@@ -1071,7 +1142,7 @@ public class stealth extends script.base_script
             return false;
         }
         Vector targets = getTrapTargets(trap, trapType);
-        if (validateTrapTarget(trap, target) && targets.indexOf(target) == -1)
+        if (validateTrapTarget(trap, target) && !targets.contains(target))
         {
             targets.add(target);
         }
@@ -1079,6 +1150,7 @@ public class stealth extends script.base_script
         doTrapDetonateEffect(trap, trapType, targets, 0, target);
         return true;
     }
+
     public static Vector getTrapTargets(obj_id trap, int trapType) throws InterruptedException
     {
         obj_id[] targets = new obj_id[0];
@@ -1099,15 +1171,19 @@ public class stealth extends script.base_script
         }
         Vector finalTargets = new Vector();
         obj_id filter = getBioProbeTarget(trap);
-        for (obj_id target : targets) {
-            if (!isIdValid(filter) || target == filter) {
-                if (validateTrapTarget(trap, target)) {
+        for (obj_id target : targets)
+        {
+            if (!isIdValid(filter) || target == filter)
+            {
+                if (validateTrapTarget(trap, target))
+                {
                     finalTargets.add(target);
                 }
             }
         }
         return finalTargets;
     }
+
     public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets, float percentMod, obj_id breacher) throws InterruptedException
     {
         if (targets.size() > 0)
@@ -1119,7 +1195,7 @@ public class stealth extends script.base_script
                     obj_id owner = getOwner(trap);
                     if (!isIdValid(breacher))
                     {
-                        breacher = (obj_id)targets.elementAt(0);
+                        breacher = (obj_id) targets.elementAt(0);
                         if (!isIdValid(breacher))
                         {
                             break;
@@ -1140,30 +1216,34 @@ public class stealth extends script.base_script
                     break;
             }
         }
-        else 
+        else
         {
             playClientEffectLoc(trap, "clienteffect/lair_damage_heavy.cef", getLocation(trap), 0.0f);
         }
         destroyObject(trap);
     }
+
     public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets) throws InterruptedException
     {
         doTrapDetonateEffect(trap, trapType, targets, 0);
     }
+
     public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets, float percentMod) throws InterruptedException
     {
         doTrapDetonateEffect(trap, trapType, targets, 0, null);
     }
+
     public static void doKaminoDartDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doKaminoDartDetonate(trap, targets, 0);
     }
+
     public static void doKaminoDartDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
-        int potency = (int)(KAMINODART_MAX_POTENCY * (trapPower / 1000));
-        int duration = (int)(KAMINODART_MAX_DURATION * (trapPower / 1000));
-        int strength = (int)(KAMINODART_MAX_STRENGTH * (trapPower / 1000));
+        int potency = (int) (KAMINODART_MAX_POTENCY * (trapPower / 1000));
+        int duration = (int) (KAMINODART_MAX_DURATION * (trapPower / 1000));
+        int strength = (int) (KAMINODART_MAX_STRENGTH * (trapPower / 1000));
         obj_id owner = getOwner(trap);
         boolean isInvis;
         String invis = null;
@@ -1179,23 +1259,28 @@ public class stealth extends script.base_script
         obj_id curObj;
         prose_package pp = prose.getPackage(new string_id("spam", "kamino_trap_hit"));
         //playClientEffectLoc(trap, "clienteffect/lair_damage_light.cef", getLocation(curObj), 0.0f);
-        for (Object target : targets) {
+        for (Object target : targets)
+        {
             curObj = (obj_id) target;
             playClientEffectLoc(curObj, "clienteffect/lair_damage_light.cef", getLocation(curObj), 0.0f);
             dot.applyDotEffect(curObj, owner, dot.DOT_POISON, "rangerTrapKaminoDart", HEALTH, potency, strength, duration, true, null);
             pp = prose.setTT(pp, curObj);
-            if (attackerPresent) {
-                if (isInvis && rand(1, 100) < 50) {
+            if (attackerPresent)
+            {
+                if (isInvis && rand(1, 100) < 50)
+                {
                     continue;
                 }
                 startCombat(curObj, owner);
             }
         }
     }
+
     public static void doCaltropDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doCaltropDetonate(trap, targets, 0);
     }
+
     public static void doCaltropDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
@@ -1219,13 +1304,17 @@ public class stealth extends script.base_script
         {
             snareAmount = 95;
         }
-        for (Object target : targets) {
+        for (Object target : targets)
+        {
             curObj = (obj_id) target;
-            if (buff.canApplyBuff(curObj, "caltropSnare")) {
+            if (buff.canApplyBuff(curObj, "caltropSnare"))
+            {
                 playClientEffectLoc(curObj, "clienteffect/lair_damage_light.cef", getLocation(curObj), 0.0f);
                 buff.applyBuff(curObj, "caltropSnare", duration, snareAmount);
-                if (attackerPresent) {
-                    if (isInvis && rand(1, 100) < 50) {
+                if (attackerPresent)
+                {
+                    if (isInvis && rand(1, 100) < 50)
+                    {
                         continue;
                     }
                     startCombat(curObj, owner);
@@ -1233,10 +1322,12 @@ public class stealth extends script.base_script
             }
         }
     }
+
     public static void doFlashBangDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doFlashBangDetonate(trap, targets, 0);
     }
+
     public static void doFlashBangDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
@@ -1257,15 +1348,20 @@ public class stealth extends script.base_script
         playClientEffectLoc(trap, "appearance/pt_flash_bomb.prt", getLocation(trap), 0.0f);
         duration += duration * percentMod;
         amount += amount * percentMod;
-        for (Object target : targets) {
+        for (Object target : targets)
+        {
             curObj = (obj_id) target;
-            if (buff.canApplyBuff(curObj, "flashBang")) {
-                if (isPlayer(curObj)) {
+            if (buff.canApplyBuff(curObj, "flashBang"))
+            {
+                if (isPlayer(curObj))
+                {
                     doAnimationAction(curObj, "cover_ears_mocking");
                 }
                 buff.applyBuff(curObj, "flashBang", duration, amount);
-                if (attackerPresent) {
-                    if (isInvis && rand(1, 100) < 50) {
+                if (attackerPresent)
+                {
+                    if (isInvis && rand(1, 100) < 50)
+                    {
                         continue;
                     }
                     startCombat(curObj, owner);
@@ -1273,6 +1369,7 @@ public class stealth extends script.base_script
             }
         }
     }
+
     public static boolean safePvPCanAttack(obj_id trap, obj_id target) throws InterruptedException
     {
         obj_id trapOwner = getOwner(trap);
@@ -1310,7 +1407,8 @@ public class stealth extends script.base_script
         }
         if (!targetIsPlayer)
         {
-            if (targetFaction != 0) {
+            if (targetFaction != 0)
+            {
                 return actorFaction != targetFaction && pvpAreFactionsOpposed(actorFaction, targetFaction);
             }
             else
@@ -1320,6 +1418,7 @@ public class stealth extends script.base_script
         }
         return false;
     }
+
     public static boolean validateTrapTarget(obj_id trap, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || trap == target)
@@ -1340,20 +1439,19 @@ public class stealth extends script.base_script
         }
         location trapLoc = getLocation(trap);
         trapLoc.y += 0.5f;
-        if (!canSee(target, trapLoc))
-        {
-            return false;
-        }
-        return true;
+        return canSee(target, trapLoc);
     }
+
     public static void playTrapFizzle(obj_id trap) throws InterruptedException
     {
         playClientEffectLoc(trap, "clienteffect/frs_light_serenity.cef", getLocation(trap), 0.0f);
     }
+
     public static void playSelfDestruct(obj_id trap) throws InterruptedException
     {
         playClientEffectLoc(trap, "clienteffect/combat_grenade_thermal_detonator.cef", getLocation(trap), 0.0f);
     }
+
     public static boolean setTrap(obj_id player, obj_id invTrap) throws InterruptedException
     {
         if (!hasObjVar(invTrap, TRIGGER_TYPE))
@@ -1397,7 +1495,7 @@ public class stealth extends script.base_script
                     destroyObject(trap);
                     return false;
                 }
-                String frequency = "" + rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
+                String frequency = rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
 
                 setObjVar(remoteTrigger, stealth.TRAP_FREQUENCY, frequency);
                 setObjVar(trap, stealth.TRAP_FREQUENCY, frequency);
@@ -1437,12 +1535,13 @@ public class stealth extends script.base_script
         {
             destroyObject(invTrap);
         }
-        else 
+        else
         {
             setCount(invTrap, count);
         }
         return true;
     }
+
     public static obj_id getTrigger(obj_id trap) throws InterruptedException
     {
         if (hasObjVar(trap, TRAP_MY_PROXIMITY_TRIGGER))
@@ -1450,13 +1549,16 @@ public class stealth extends script.base_script
             return getObjIdObjVar(trap, TRAP_MY_PROXIMITY_TRIGGER);
         }
         obj_id[] stuff = getContents(trap);
-        for (obj_id aStuff : stuff) {
-            if (hasScript(aStuff, "systems.skills.stealth.traptrigger")) {
+        for (obj_id aStuff : stuff)
+        {
+            if (hasScript(aStuff, "systems.skills.stealth.traptrigger"))
+            {
                 return aStuff;
             }
         }
         return null;
     }
+
     public static boolean doTheftLoot(obj_id thief, obj_id mark) throws InterruptedException
     {
         obj_id thiefInventory = utils.getInventoryContainer(thief);
@@ -1516,7 +1618,7 @@ public class stealth extends script.base_script
                         {
                             break;
                         }
-                        int amt = (int)(getNpcCash(mark) * 0.2f);
+                        int amt = (int) (getNpcCash(mark) * 0.2f);
                         if (amt > 0)
                         {
                             dictionary d = new dictionary();
@@ -1596,7 +1698,7 @@ public class stealth extends script.base_script
                         {
                             break;
                         }
-                        String templateLoot = (String)itms.get(rand(0, itms.size() - 1));
+                        String templateLoot = (String) itms.get(rand(0, itms.size() - 1));
                         if (templateLoot == null || templateLoot.length() < 1)
                         {
                             break;
@@ -1624,16 +1726,18 @@ public class stealth extends script.base_script
                     case STEAL_MARKED_ITEMS:
                         obj_id[] stuff = utils.getFilteredPlayerContents(mark);
                         Vector eligibleItems = new Vector();
-                            for (obj_id aStuff : stuff) {
-                                if (isItemStealable(aStuff)) {
-                                    eligibleItems.add(aStuff);
-                                }
+                        for (obj_id aStuff : stuff)
+                        {
+                            if (isItemStealable(aStuff))
+                            {
+                                eligibleItems.add(aStuff);
                             }
+                        }
                         if (eligibleItems.size() < 1)
                         {
                             break;
                         }
-                        obj_id markedObj = (obj_id)eligibleItems.get(rand(0, eligibleItems.size() - 1));
+                        obj_id markedObj = (obj_id) eligibleItems.get(rand(0, eligibleItems.size() - 1));
                         gotSomething = putIn(markedObj, thiefInventory);
                         if (gotSomething)
                         {
@@ -1679,6 +1783,7 @@ public class stealth extends script.base_script
         }
         return gotSomething;
     }
+
     public static boolean hasStealingLootTableEntry(obj_id mark) throws InterruptedException
     {
         String name = getCreatureName(mark);
@@ -1687,6 +1792,7 @@ public class stealth extends script.base_script
         int row = dataTableSearchColumnForInt(getStringCrc(type), "npc_type", table);
         return row >= 0;
     }
+
     public static String getStealableTemplateFromTable(obj_id mark) throws InterruptedException
     {
         Vector stuff = new Vector();
@@ -1735,32 +1841,38 @@ public class stealth extends script.base_script
         }
         if (idx < stuff.size())
         {
-            return (String)stuff.get(idx);
+            return (String) stuff.get(idx);
         }
-        return (String)stuff.get(rand(0, stuff.size() - 1));
+        return (String) stuff.get(rand(0, stuff.size() - 1));
     }
+
     public static void flagItemAsStealable(obj_id item) throws InterruptedException
     {
         setObjVar(item, STEAL_ITEM_IS_STEALABLE, 1);
     }
+
     public static boolean isItemStealable(obj_id item) throws InterruptedException
     {
         return hasObjVar(item, STEAL_ITEM_IS_STEALABLE);
     }
+
     public static void unflagItemAsStealable(obj_id item) throws InterruptedException
     {
         removeObjVar(item, STEAL_ITEM_IS_STEALABLE);
     }
+
     public static void addStealableTemplate(obj_id mark, String template) throws InterruptedException
     {
         Vector itms = getStealableTemplates(mark);
         itms.add(template);
         utils.setResizeableBatchObjVar(mark, STEAL_TEMPLATE_ITEMS, itms);
     }
+
     public static Vector getStealableTemplates(obj_id mark) throws InterruptedException
     {
         return utils.getResizeableStringBatchObjVar(mark, STEAL_TEMPLATE_ITEMS);
     }
+
     public static int getNpcCash(obj_id mark) throws InterruptedException
     {
         String mobType = ai_lib.getCreatureName(mark);
@@ -1778,6 +1890,7 @@ public class stealth extends script.base_script
         cash = cash * level;
         return cash;
     }
+
     public static boolean canSteal(obj_id thief, obj_id mark) throws InterruptedException
     {
         if (!pvpCanAttack(thief, mark))
@@ -1801,6 +1914,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean steal(obj_id thief, obj_id mark) throws InterruptedException
     {
         if (!luck.isLucky(thief, 0.01f))
@@ -1820,7 +1934,7 @@ public class stealth extends script.base_script
                     prose_package pp = prose.getPackage(new string_id("spam", "almost_got_item_stolen"), thief);
                     sendSystemMessageProse(mark, pp);
                 }
-                else 
+                else
                 {
                     startCombat(mark, thief);
                     startCombat(thief, mark);
@@ -1829,15 +1943,18 @@ public class stealth extends script.base_script
             }
         }
         showFlyTextPrivate(thief, thief, new string_id("spam", "stealin_on"), 1.5f, colors.TOMATO);
-        if (!doTheftLoot(thief, mark)) {
+        if (!doTheftLoot(thief, mark))
+        {
             sendSystemMessage(thief, new string_id("spam", "stolen_nothing"));
         }
         return true;
     }
+
     public static boolean isCoughtWhileStealing(obj_id thief, obj_id mark) throws InterruptedException
     {
         return passiveDetectHiddenTarget(thief, mark, PASSIVE_BREACH_NEAR);
     }
+
     public static boolean witnessModifiedSkillCheck(obj_id player, String skillMod, float distance, int witnessPenalty, int skillModMod) throws InterruptedException
     {
         int skill = getEnhancedSkillStatisticModifier(player, skillMod) + skillModMod;
@@ -1850,10 +1967,13 @@ public class stealth extends script.base_script
         int sGuildId = getGuildId(player);
         if (stuff.length > 0)
         {
-            for (obj_id aStuff : stuff) {
-                if (ai_lib.isHumanoid(aStuff)) {
+            for (obj_id aStuff : stuff)
+            {
+                if (ai_lib.isHumanoid(aStuff))
+                {
                     boolean isInSameGuild = (sGuildId != 0) && (getGuildId(aStuff) == sGuildId);
-                    if (!isInSameGuild && !group.inSameGroup(player, aStuff)) {
+                    if (!isInSameGuild && !group.inSameGroup(player, aStuff))
+                    {
                         skill -= witnessPenalty;
                     }
                 }
@@ -1863,6 +1983,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void invisBuffRemoved(obj_id player, String sbuff) throws InterruptedException
     {
         if (buff.hasBuff(player, BUFF_NO_BREAK_INVIS))
@@ -1876,6 +1997,7 @@ public class stealth extends script.base_script
         _makeVisible(player, new string_id("spam", "stealthoff"), null);
         messageTo(player, "addAppearanceItemEffect", null, 1, false);
     }
+
     public static void OnLocomotionChange(obj_id player, int oldLoco, int newLoco) throws InterruptedException
     {
         String invis = getInvisBuff(player);
@@ -1890,6 +2012,7 @@ public class stealth extends script.base_script
             buff.removeBuff(player, invis);
         }
     }
+
     public static void OnPostureChanged(obj_id player, int before, int after) throws InterruptedException
     {
         String invis = getInvisBuff(player);
@@ -1904,6 +2027,7 @@ public class stealth extends script.base_script
             buff.removeBuff(player, invis);
         }
     }
+
     public static int getApplicableInvisSkillMod(obj_id thing, String buffName) throws InterruptedException
     {
         String modName = "camouflage";
@@ -1938,6 +2062,7 @@ public class stealth extends script.base_script
         }
         return mod;
     }
+
     public static int getApplicableInvisSkillMod(obj_id thing) throws InterruptedException
     {
         int mod = 0;
@@ -1950,12 +2075,13 @@ public class stealth extends script.base_script
             }
             mod = getApplicableInvisSkillMod(thing, invis);
         }
-        else 
+        else
         {
             mod = getIntObjVar(thing, "camouflageMod");
         }
         return mod;
     }
+
     public static float getDetectChance(obj_id target, obj_id detector, float baseChanceToDetect) throws InterruptedException
     {
         String invis = getInvisBuff(target);
@@ -1985,7 +2111,7 @@ public class stealth extends script.base_script
             {
                 levelChanceToDetectMod = (levelDiff * 5.0f);
             }
-            else 
+            else
             {
                 levelChanceToDetectMod = (levelDiff * 1.5f);
             }
@@ -2055,6 +2181,7 @@ public class stealth extends script.base_script
         }
         return finalChanceToDetect;
     }
+
     public static float getDetectChanceWithDetailedOutput(obj_id target, obj_id detector, float baseChanceToDetect, obj_id objectToReceiveDetailedOutput) throws InterruptedException
     {
         String invis = getInvisBuff(target);
@@ -2085,7 +2212,7 @@ public class stealth extends script.base_script
                 levelChanceToDetectMod = (levelDiff * 5.0f);
                 sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: stealtherLevel > detectorLevel, levelDiff=" + levelDiff + ", baseChanceToDetect > 30, levelChanceToDetectMod (levelDiff * 5.0f)=" + levelChanceToDetectMod);
             }
-            else 
+            else
             {
                 levelChanceToDetectMod = (levelDiff * 1.5f);
                 sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: stealtherLevel > detectorLevel, levelDiff=" + levelDiff + ", baseChanceToDetect <= 30, levelChanceToDetectMod (levelDiff * 1.5f)=" + levelChanceToDetectMod);
@@ -2160,12 +2287,14 @@ public class stealth extends script.base_script
         sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: ****FINAL CALCULATED*** finalChanceToDetect=" + finalChanceToDetect);
         return finalChanceToDetect;
     }
+
     public static boolean activeDetectHiddenTarget(obj_id target, obj_id detector, float baseChanceToDetect) throws InterruptedException
     {
         float finalChanceToDetect = getDetectChance(target, detector, baseChanceToDetect);
         float roll = rand(0.0f, 100.0f);
         return (roll < finalChanceToDetect);
     }
+
     public static boolean passiveDetectHiddenTarget(obj_id target, obj_id detector, int volume) throws InterruptedException
     {
         if (isPlayer(detector))
@@ -2175,7 +2304,7 @@ public class stealth extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isAggroToward(detector, target))
             {
@@ -2195,6 +2324,7 @@ public class stealth extends script.base_script
         float roll = rand(0.0f, 100.0f);
         return (roll < finalChanceToDetect);
     }
+
     public static boolean passiveDetectHiddenTargetWithDetailedOutput(obj_id target, obj_id detector, int volume, obj_id objectToReceiveDetailedOutput) throws InterruptedException
     {
         sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: stealther=" + target + ", detector=" + detector + ", volume=" + volume);
@@ -2206,7 +2336,7 @@ public class stealth extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isAggroToward(detector, target))
             {
@@ -2232,12 +2362,13 @@ public class stealth extends script.base_script
         {
             sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: getDetectChanceWithDetailedOutput() returned finalChanceToDetect=" + finalChanceToDetect + ", dice roll=" + roll + ", dice roll < finalChanceToDetect so returning detection SUCCESS");
         }
-        else 
+        else
         {
             sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: getDetectChanceWithDetailedOutput() returned finalChanceToDetect=" + finalChanceToDetect + ", dice roll=" + roll + ", dice roll >= finalChanceToDetect so returning detection FAIL");
         }
         return (roll < finalChanceToDetect);
     }
+
     public static boolean testBubbleBreached(obj_id bubbleHolder, obj_id breacher, int volume) throws InterruptedException
     {
         if (hasObjVar(bubbleHolder, "debuggingPassiveDetectDetailedOutput"))
@@ -2257,11 +2388,12 @@ public class stealth extends script.base_script
             }
             return passiveDetectHiddenTargetWithDetailedOutput(bubbleHolder, breacher, volume, objectToReceiveDetailedOutput);
         }
-        else 
+        else
         {
             return passiveDetectHiddenTarget(bubbleHolder, breacher, volume);
         }
     }
+
     public static void testUseAction(obj_id player, obj_id object, int menuItem) throws InterruptedException
     {
         String invis = getInvisBuff(player);
@@ -2270,10 +2402,12 @@ public class stealth extends script.base_script
             buff.removeBuff(player, invis);
         }
     }
+
     public static void testInvisNonCombatAction(obj_id player, obj_id target) throws InterruptedException
     {
         testInvisCombatAction(player, target, -1);
     }
+
     public static void testInvisNonCombatAction(obj_id player, obj_id target, combat_data combatData) throws InterruptedException
     {
         if (!combatData.specialLine.equals("no_proc"))
@@ -2281,6 +2415,7 @@ public class stealth extends script.base_script
             testInvisCombatAction(player, target, combatData.minInvisLevelRequired);
         }
     }
+
     public static void testInvisNonCombatAction(obj_id player, obj_id target, int minInvisRequiredForAction) throws InterruptedException
     {
         if (isIdValid(player) && exists(player) && beast_lib.isBeast(player))
@@ -2300,10 +2435,12 @@ public class stealth extends script.base_script
             }
         }
     }
+
     public static void testInvisCombatAction(obj_id player, obj_id target) throws InterruptedException
     {
         testInvisCombatAction(player, target, -1);
     }
+
     public static void testInvisCombatAction(obj_id player, obj_id target, combat_data combatData) throws InterruptedException
     {
         if (!combatData.specialLine.equals("no_proc"))
@@ -2311,6 +2448,7 @@ public class stealth extends script.base_script
             testInvisCombatAction(player, target, combatData.minInvisLevelRequired);
         }
     }
+
     public static void testInvisCombatAction(obj_id player, obj_id target, int minInvisRequiredForAction) throws InterruptedException
     {
         if (isIdValid(player) && exists(player) && beast_lib.isBeast(player))
@@ -2338,6 +2476,7 @@ public class stealth extends script.base_script
             }
         }
     }
+
     public static void reinstateInvisFromCombat(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isPlayer(player))
@@ -2354,20 +2493,21 @@ public class stealth extends script.base_script
             {
                 buff.applyBuff(player, invisName, timeLeft);
             }
-            else 
+            else
             {
                 float duration = buff.getDuration(invisName);
                 if (duration < 0)
                 {
                     buff.applyBuff(player, invisName, -1);
                 }
-                else 
+                else
                 {
                     clearPreviousInvis(player);
                 }
             }
         }
     }
+
     public static void clearPreviousInvis(obj_id player) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -2377,12 +2517,14 @@ public class stealth extends script.base_script
         utils.removeScriptVar(player, "stealth.invisRemoved");
         utils.removeScriptVar(player, "stealth.invisRemovedTime");
     }
+
     public static float calcBreachDistanceForSkill(obj_id player, String skillMod) throws InterruptedException
     {
         int mod = getEnhancedSkillStatisticModifier(player, skillMod);
         float difference = INVIS_BREAK_MAX_FAR_DISTANCE - INVIS_BREAK_NEAR_DISTANCE;
         return INVIS_BREAK_NEAR_DISTANCE + (difference / (1 + ((mod) / 100)));
     }
+
     public static void cleanupHate(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -2390,14 +2532,17 @@ public class stealth extends script.base_script
             return;
         }
         obj_id[] hateList = getHateList(player);
-        for (obj_id aHateList : hateList) {
-            if (isIdValid(aHateList) && exists(aHateList)) {
+        for (obj_id aHateList : hateList)
+        {
+            if (isIdValid(aHateList) && exists(aHateList))
+            {
                 removeHateTarget(aHateList, player);
                 removeHateTarget(player, aHateList);
             }
         }
         clearHateList(player);
     }
+
     public static obj_id makeBeastInvisible(obj_id player, String clientEffect) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !beast_lib.isBeastMaster(player))
@@ -2430,6 +2575,7 @@ public class stealth extends script.base_script
         }
         return beast;
     }
+
     public static boolean canBeastStealth(obj_id beast) throws InterruptedException
     {
         obj_id master = getMaster(beast);
@@ -2437,12 +2583,9 @@ public class stealth extends script.base_script
         {
             return false;
         }
-        if (isIdValid(master) && exists(master) && getState(master, STATE_COVER) == 1)
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(master) && exists(master) && getState(master, STATE_COVER) == 1;
     }
+
     public static void makeCreatureVisible(obj_id creature) throws InterruptedException
     {
         if (!isIdValid(creature) || !exists(creature))
@@ -2455,6 +2598,7 @@ public class stealth extends script.base_script
         setCreatureCoverVisibility(creature, true);
         playClientEffectObj(creature, "appearance/pt_sonic_pulse.prt", creature, "");
     }
+
     public static void makeBeastVisible(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !beast_lib.isBeastMaster(player))
@@ -2463,6 +2607,7 @@ public class stealth extends script.base_script
         }
         makeCreatureVisible(beast_lib.getBeastOnPlayer(player));
     }
+
     public static void makePassiveRevealed(obj_id target) throws InterruptedException
     {
         obj_id beast = null;
@@ -2483,16 +2628,20 @@ public class stealth extends script.base_script
             obj_id groupObj = getGroupObject(target);
             obj_id[] groupMembers = getGroupMemberIds(groupObj);
             int numGroupMembers = groupMembers.length;
-            for (obj_id groupie : groupMembers) {
-                if (isIdValid(groupie) && exists(groupie) && groupie != target) {
+            for (obj_id groupie : groupMembers)
+            {
+                if (isIdValid(groupie) && exists(groupie) && groupie != target)
+                {
                     addPassiveReveal(target, groupie, 1);
-                    if (isIdValid(beast) && exists(beast)) {
+                    if (isIdValid(beast) && exists(beast))
+                    {
                         addPassiveReveal(beast, groupie, 1);
                     }
                 }
             }
         }
     }
+
     public static void _makeInvisible(obj_id player, string_id flyText, String clientEffect, string_id msg, float breachDistance) throws InterruptedException
     {
         if (breachDistance <= INVIS_BREAK_NEAR_DISTANCE)
@@ -2527,6 +2676,7 @@ public class stealth extends script.base_script
             createTriggerVolume(INVIS_BREAK_RADIUS_NEAR, INVIS_BREAK_NEAR_DISTANCE, true);
         }
     }
+
     public static void _makeVisible(obj_id player, string_id flyText, string_id msg) throws InterruptedException
     {
         removeTriggerVolume(INVIS_BREAK_RADIUS_FAR);
@@ -2548,22 +2698,25 @@ public class stealth extends script.base_script
             }
             playClientEffectObj(player, "appearance/pt_sonic_pulse.prt", player, "");
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "supressVisible");
         }
     }
+
     public static boolean checkRevealRecourse(obj_id player) throws InterruptedException
     {
         return buff.hasBuff(player, "sp_sneak_recourse");
     }
+
     public static boolean checkAttackRevealRecourse(obj_id player) throws InterruptedException
     {
         return buff.hasBuff(player, "sp_attack_invis_recourse");
     }
+
     public static boolean canPerformForceCloak(obj_id player) throws InterruptedException
     {
-        if (combat.isInCombat(player) && (int)getSkillStatisticModifier(player, "expertise_force_cloak_combat_escape") <= 0)
+        if (combat.isInCombat(player) && getSkillStatisticModifier(player, "expertise_force_cloak_combat_escape") <= 0)
         {
             return false;
         }
@@ -2588,10 +2741,12 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean canPerformHide(obj_id player) throws InterruptedException
     {
         return canPerformStationaryInvis(player);
     }
+
     public static void forceCloak(obj_id player) throws InterruptedException
     {
         if (buff.hasBuff(player, "fs_force_run"))
@@ -2600,10 +2755,12 @@ public class stealth extends script.base_script
         }
         _makeInvisible(player, new string_id("combat_effects", "go_cloak"), "clienteffect/combat_special_attacker_cover.cef", null, -1);
     }
+
     public static void hide(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "hide_go"), "clienteffect/combat_special_attacker_cover.cef", null, -1);
     }
+
     public static boolean canPerformSmokeGrenade(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -2632,6 +2789,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean canPerformWithoutTrace(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -2655,6 +2813,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean canPerformStationaryInvis(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -2678,15 +2837,18 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void smokeGrenade(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "smokegrenade"), "appearance/pt_smoke_puff.prt", null, -1);
         buff.applyBuff(player, BUFF_NO_BREAK_INVIS);
     }
+
     public static void bothanInnate(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "fly_bothan_ability_1"), "appearance/pt_smoke_puff.prt", null, -1);
     }
+
     public static boolean canPerformStealth(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -2727,11 +2889,13 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void stealth(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "stealth"), "appearance/pt_smoke_puff.prt", null, calcBreachDistanceForSkill(player, "camouflage"));
         buff.applyBuff(player, BUFF_NO_BREAK_INVIS);
     }
+
     public static void withoutTrace(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "without_trace"), "appearance/pt_smoke_puff.prt", null, -1);
@@ -2742,11 +2906,13 @@ public class stealth extends script.base_script
         }
         buff.applyBuff(player, BUFF_NO_BREAK_INVIS);
     }
+
     public static void decoyStealth(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("spam", "decoy_stealth"), "", null, -1);
         buff.applyBuff(player, BUFF_NO_BREAK_INVIS);
     }
+
     public static void invisBuffAdded(obj_id mobile, String effectName) throws InterruptedException
     {
         effectName = toLower(effectName);
@@ -2779,8 +2945,9 @@ public class stealth extends script.base_script
         {
             decoyStealth(mobile);
         }
-			makeBeastInvisible(mobile, effectName);
+        makeBeastInvisible(mobile, effectName);
     }
+
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -2816,6 +2983,7 @@ public class stealth extends script.base_script
         utils.setScriptVar(player, CAMO_KIT_ID, kit);
         return true;
     }
+
     public static void camouflageSelf(obj_id player) throws InterruptedException
     {
         obj_id kit = utils.getObjIdScriptVar(player, CAMO_KIT_ID);
@@ -2829,11 +2997,12 @@ public class stealth extends script.base_script
         {
             _makeInvisible(player, new string_id("spam", "camouflaged"), "appearance/pt_smoke_puff.prt", null, calcBreachDistanceForSkill(player, "camouflage"));
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "failedcamo"));
         }
     }
+
     public static boolean canPerformCamouflageAlly(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -2896,6 +3065,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean canPerformUrbanStealth(obj_id player, obj_id possibleHep) throws InterruptedException
     {
         if (buff.hasBuff(player, "forceRun") || buff.hasBuff(player, "forceRun_1") || buff.hasBuff(player, "forceRun_2"))
@@ -2938,10 +3108,13 @@ public class stealth extends script.base_script
             int sGuildId = getGuildId(player);
             boolean isInSameGuild = false;
             obj_id[] stuff = getCreaturesInRange(player, 20.0f);
-            for (obj_id aStuff : stuff) {
-                if (isPlayer(aStuff) || ai_lib.isNpc(aStuff)) {
+            for (obj_id aStuff : stuff)
+            {
+                if (isPlayer(aStuff) || ai_lib.isNpc(aStuff))
+                {
                     isInSameGuild = (sGuildId != 0) && (getGuildId(aStuff) == sGuildId);
-                    if (!isInSameGuild && !group.inSameGroup(player, aStuff)) {
+                    if (!isInSameGuild && !group.inSameGroup(player, aStuff))
+                    {
                         sendSystemMessage(player, new string_id("spam", "cant_urban_stealth_people_in_area"));
                         return false;
                     }
@@ -2951,6 +3124,7 @@ public class stealth extends script.base_script
         utils.setScriptVar(player, CAMO_KIT_ID, hep);
         return true;
     }
+
     public static void urbanStealth(obj_id player) throws InterruptedException
     {
         obj_id hep = utils.getObjIdScriptVar(player, CAMO_KIT_ID);
@@ -2970,6 +3144,7 @@ public class stealth extends script.base_script
         }
         _makeInvisible(player, new string_id("spam", "stealthon"), "appearance/pt_detector.prt", null, calcBreachDistanceForSkill(player, "stealth"));
     }
+
     public static boolean canPerformWildernessStealth(obj_id player) throws InterruptedException
     {
         if (buff.hasBuff(player, "forceRun") || buff.hasBuff(player, "forceRun_1") || buff.hasBuff(player, "forceRun_2"))
@@ -3014,6 +3189,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void wildernessStealth(obj_id player) throws InterruptedException
     {
         obj_id kit = utils.getObjIdScriptVar(player, CAMO_KIT_ID);
@@ -3027,7 +3203,7 @@ public class stealth extends script.base_script
             consumeCamoKit(kit);
             penalty = 50;
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "supressVisible", 1);
         }
@@ -3036,12 +3212,13 @@ public class stealth extends script.base_script
         {
             _makeInvisible(player, new string_id("spam", "stealthon"), "appearance/pt_smoke_puff.prt", null, calcBreachDistanceForSkill(player, "stealth"));
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "supressVisible");
             sendSystemMessage(player, new string_id("spam", "stealthfail"));
         }
     }
+
     public static boolean canPerformCover(obj_id player) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -3065,11 +3242,13 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static void cover(obj_id player) throws InterruptedException
     {
         _makeInvisible(player, new string_id("combat_effects", "go_cover"), "clienteffect/combat_special_attacker_cover.cef", null, calcBreachDistanceForSkill(player, "camouflage"));
         sendSystemMessage(player, new string_id("cbt_spam", "cover_success_single"));
     }
+
     public static void disableHep(obj_id hep, obj_id player) throws InterruptedException
     {
         if (isIdValid(hep) && exists(hep))
@@ -3080,7 +3259,7 @@ public class stealth extends script.base_script
             {
                 multiplier = 0.95f;
             }
-            power = (int)(getIntObjVar(hep, HEP_BASE_POWER) * multiplier);
+            power = (int) (getIntObjVar(hep, HEP_BASE_POWER) * multiplier);
             setCount(hep, power);
             setObjVar(hep, HEP_BASE_POWER, power);
             utils.clearNoDropFromItem(hep);
@@ -3095,6 +3274,7 @@ public class stealth extends script.base_script
             removeObjVar(player, ACTIVE_HEP);
         }
     }
+
     public static boolean testAndDoHepUpkeep(obj_id hep, obj_id player, boolean silent) throws InterruptedException
     {
         int power = getCount(hep);
@@ -3110,6 +3290,7 @@ public class stealth extends script.base_script
         setCount(hep, power);
         return true;
     }
+
     public static boolean checkSpyStealthUpkeep(obj_id player) throws InterruptedException
     {
         float camouflage = getEnhancedSkillStatisticModifierUncapped(player, "camouflage");
@@ -3119,7 +3300,7 @@ public class stealth extends script.base_script
         {
             drainRatio = 7.91f - (0.1f / (0.1f + ((camouflage) / 100.0f)));
         }
-        int actionCost = (int)(getMaxAction(player) / drainRatio);
+        int actionCost = (int) (getMaxAction(player) / drainRatio);
         int action = testDrainAttribute(player, ACTION, actionCost);
         if (action < 0 || !drainAttributes(player, actionCost, 0))
         {
@@ -3133,6 +3314,7 @@ public class stealth extends script.base_script
         showFlyText(player, pp, 1.0f, colors.GREEN);
         return true;
     }
+
     public static boolean checkUrbanStealthUpkeep(obj_id player) throws InterruptedException
     {
         if (!isInUrban(player))
@@ -3154,6 +3336,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean checkWildernessStealthUpkeep(obj_id player) throws InterruptedException
     {
         if (!isInWilderness(player))
@@ -3164,6 +3347,7 @@ public class stealth extends script.base_script
         }
         return true;
     }
+
     public static boolean checkForceCloakUpkeep(obj_id player) throws InterruptedException
     {
         float forceCost = dataTableGetFloat(jedi.JEDI_ACTIONS_FILE, "forceCloak", "extraForceCost");
@@ -3190,13 +3374,14 @@ public class stealth extends script.base_script
             nearCount = 0;
         }
         forceCost *= nearCount;
-        if (!jedi.drainForcePower(player, (int)forceCost))
+        if (!jedi.drainForcePower(player, (int) forceCost))
         {
             buff.removeBuff(player, "invi_forceCloak");
             return false;
         }
         return true;
     }
+
     public static boolean checkForAndMakeVisible(obj_id player) throws InterruptedException
     {
         String ibuff = getInvisBuff(player);
@@ -3208,6 +3393,7 @@ public class stealth extends script.base_script
         buff.removeBuff(player, ibuff);
         return true;
     }
+
     public static boolean checkForAndMakeVisibleNoRecourse(obj_id player) throws InterruptedException
     {
         String ibuff = getInvisBuff(player);
@@ -3218,10 +3404,12 @@ public class stealth extends script.base_script
         buff.removeBuff(player, ibuff);
         return true;
     }
+
     public static boolean hasInvisibleBuff(obj_id object) throws InterruptedException
     {
         return getInvisBuff(object) != null || (isMob(object) && !getCreatureCoverVisibility(object));
     }
+
     public static String getInvisBuff(obj_id player) throws InterruptedException
     {
         int[] buffs = buff.getAllBuffs(player);
@@ -3230,18 +3418,22 @@ public class stealth extends script.base_script
             return null;
         }
         String curBuff = "";
-        for (int aBuff : buffs) {
+        for (int aBuff : buffs)
+        {
             curBuff = buff.getBuffNameFromCrc(aBuff);
-            if (curBuff != null && curBuff.startsWith("invis_")) {
+            if (curBuff != null && curBuff.startsWith("invis_"))
+            {
                 return curBuff;
             }
         }
         return null;
     }
+
     public static boolean hasServerCoverState(obj_id player) throws InterruptedException
     {
         return getState(player, STATE_COVER) > 0;
     }
+
     public static obj_id getHEPObj(obj_id player, obj_id possibleHep) throws InterruptedException
     {
         int power = 0;
@@ -3260,10 +3452,13 @@ public class stealth extends script.base_script
         }
         obj_id[] contents = getContents(pInv);
         obj_id hep = null;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "isHEP")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "isHEP"))
+            {
                 power = getCount(content);
-                if (power >= HEP_UPKEEP_COST) {
+                if (power >= HEP_UPKEEP_COST)
+                {
                     hep = content;
                     break;
                 }
@@ -3271,6 +3466,7 @@ public class stealth extends script.base_script
         }
         return hep;
     }
+
     public static obj_id getCamoKitForCurrentPlanet(obj_id player) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
@@ -3289,10 +3485,13 @@ public class stealth extends script.base_script
         }
         obj_id[] contents = getContents(pInv);
         obj_id kit = null;
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "camokit")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "camokit"))
+            {
                 String kitPlanet = getStringObjVar(content, "camokit");
-                if (kitPlanet.equals(planetName)) {
+                if (kitPlanet.equals(planetName))
+                {
                     kit = content;
                     break;
                 }
@@ -3300,6 +3499,7 @@ public class stealth extends script.base_script
         }
         return kit;
     }
+
     public static void consumeCamoKit(obj_id kit) throws InterruptedException
     {
         int count = getCount(kit);
@@ -3307,12 +3507,13 @@ public class stealth extends script.base_script
         {
             destroyObject(kit);
         }
-        else 
+        else
         {
             count--;
             setCount(kit, count);
         }
     }
+
     public static boolean isInWilderness(obj_id player) throws InterruptedException
     {
         obj_id container = getTopMostContainer(player);
@@ -3327,29 +3528,31 @@ public class stealth extends script.base_script
         }
         obj_id[] stuff = getNonCreaturesInRange(loc, 50.0f);
         int numStructures = 0;
-        for (obj_id aStuff : stuff) {
-            if (isGameObjectTypeOf(aStuff, GOT_building) || isGameObjectTypeOf(aStuff, GOT_installation)) {
+        for (obj_id aStuff : stuff)
+        {
+            if (isGameObjectTypeOf(aStuff, GOT_building) || isGameObjectTypeOf(aStuff, GOT_installation))
+            {
                 numStructures++;
             }
         }
-        if (numStructures > MAX_BUILDINGS_FOR_WILDNERNESS)
-        {
-            return false;
-        }
-        return true;
+        return numStructures <= MAX_BUILDINGS_FOR_WILDNERNESS;
     }
+
     public static boolean isInUrban(obj_id player) throws InterruptedException
     {
         return (!isInWilderness(player));
     }
+
     public static boolean isFlagSet(int mask, int flag) throws InterruptedException
     {
         return (mask & flag) == flag;
     }
+
     public static boolean isPvPTrap(obj_id trap) throws InterruptedException
     {
         return getIntObjVar(trap, TRIGGER_TYPE) == TRIGGER_TYPE_PROXIMITY;
     }
+
     public static obj_id createDecoy(obj_id spy) throws InterruptedException
     {
         location myLoc = getLocation(spy);
@@ -3409,11 +3612,13 @@ public class stealth extends script.base_script
             {
                 ranged_int_custom_var ricv;
                 String var;
-                for (custom_var aVar_list : var_list) {
+                for (custom_var aVar_list : var_list)
+                {
                     ricv = (ranged_int_custom_var) aVar_list;
                     var = ricv.getVarName();
                     int value = ricv.getValue();
-                    if (value != 0) {
+                    if (value != 0)
+                    {
                         setRangedIntCustomVarValue(hologram, var, value);
                     }
                 }
@@ -3428,24 +3633,33 @@ public class stealth extends script.base_script
                 ranged_int_custom_var ricv;
                 String var;
 
-                for (obj_id content : contents) {
-                    if (isIdValid(content)) {
-                        if (getContainerType(content) == 0) {
-                            if (!(getTemplateName(content)).endsWith("player.iff")) {
-                                if (headSlotItem == content && isPlayerHelmetHidden(spy)) {
+                for (obj_id content : contents)
+                {
+                    if (isIdValid(content))
+                    {
+                        if (getContainerType(content) == 0)
+                        {
+                            if (!(getTemplateName(content)).endsWith("player.iff"))
+                            {
+                                if (headSlotItem == content && isPlayerHelmetHidden(spy))
+                                {
                                     continue;
                                 }
-                                if (getGameObjectType(content) == GOT_misc_appearance_only_invisible) {
+                                if (getGameObjectType(content) == GOT_misc_appearance_only_invisible)
+                                {
                                     continue;
                                 }
                                 object_var = getAllCustomVars(content);
                                 newObject = createObject(getTemplateName(content), hologram, "");
-                                if (object_var != null && isIdValid(newObject)) {
-                                    for (custom_var anObject_var : object_var) {
+                                if (object_var != null && isIdValid(newObject))
+                                {
+                                    for (custom_var anObject_var : object_var)
+                                    {
                                         ricv = (ranged_int_custom_var) anObject_var;
                                         var = ricv.getVarName();
                                         int value = ricv.getValue();
-                                        if (value != 0) {
+                                        if (value != 0)
+                                        {
                                             setRangedIntCustomVarValue(newObject, var, value);
                                         }
                                     }
@@ -3464,11 +3678,13 @@ public class stealth extends script.base_script
                 {
                     ranged_int_custom_var ricv;
                     String var;
-                    for (custom_var anObject_var : object_var) {
+                    for (custom_var anObject_var : object_var)
+                    {
                         ricv = (ranged_int_custom_var) anObject_var;
                         var = ricv.getVarName();
                         int value = ricv.getValue();
-                        if (value != 0) {
+                        if (value != 0)
+                        {
                             setRangedIntCustomVarValue(newObject, var, value);
                         }
                     }
@@ -3480,7 +3696,7 @@ public class stealth extends script.base_script
             {
                 holoWeapon = getCurrentWeapon(hologram);
             }
-            else 
+            else
             {
                 holoWeapon = createObject(getTemplateName(spyWeapon), hologram, "");
             }
@@ -3509,9 +3725,11 @@ public class stealth extends script.base_script
             if (buffCrc != null && buffCrc.length > 0)
             {
                 String curBuff;
-                for (int aBuffCrc : buffCrc) {
+                for (int aBuffCrc : buffCrc)
+                {
                     curBuff = buff.getBuffNameFromCrc(aBuffCrc);
-                    if (curBuff != null && curBuff.startsWith("invis_")) {
+                    if (curBuff != null && curBuff.startsWith("invis_"))
+                    {
                         continue;
                     }
                     buff.applyBuff(hologram, aBuffCrc, 360.0f);
@@ -3522,28 +3740,22 @@ public class stealth extends script.base_script
             float blockChance = combat.getDefenderBlockChance(spy);
             float glanceChance = combat.getDefenderGlancingBlowChance(spy);
             float evadeChance = combat.getDefenderEvasionChance(spy);
-            addSkillModModifier(hologram, "expertise_dodge", "expertise_dodge", (int)dodgeChance, 20.0f, false, true);
-            addSkillModModifier(hologram, "expertise_parry", "expertise_parry", (int)parryChance, 20.0f, false, true);
-            addSkillModModifier(hologram, "expertise_block_chance", "expertise_block_chance", (int)blockChance, 20.0f, false, true);
-            addSkillModModifier(hologram, "expertise_glancing_blow_all", "expertise_glancing_blow_all", (int)glanceChance, 20.0f, false, true);
-            addSkillModModifier(hologram, "expertise_evasion_chance", "expertise_evasion_chance", (int)evadeChance, 20.0f, false, true);
+            addSkillModModifier(hologram, "expertise_dodge", "expertise_dodge", (int) dodgeChance, 20.0f, false, true);
+            addSkillModModifier(hologram, "expertise_parry", "expertise_parry", (int) parryChance, 20.0f, false, true);
+            addSkillModModifier(hologram, "expertise_block_chance", "expertise_block_chance", (int) blockChance, 20.0f, false, true);
+            addSkillModModifier(hologram, "expertise_glancing_blow_all", "expertise_glancing_blow_all", (int) glanceChance, 20.0f, false, true);
+            addSkillModModifier(hologram, "expertise_evasion_chance", "expertise_evasion_chance", (int) evadeChance, 20.0f, false, true);
             if (hasCommand(spy, "sp_avoid_damage"))
             {
                 messageTo(hologram, "queue_ad", null, 1.0f, false);
             }
             int diversionLevel = getEnhancedSkillStatisticModifierUncapped(spy, "expertise_improved_decoy");
-            if (diversionLevel > 0)
-            {
-                utils.setScriptVar(hologram, "flank", true);
-            }
-            else 
-            {
-                utils.setScriptVar(hologram, "flank", false);
-            }
+            utils.setScriptVar(hologram, "flank", diversionLevel > 0);
             return hologram;
         }
         return null;
     }
+
     public static boolean isDecoy(obj_id object) throws InterruptedException
     {
         return utils.hasScript(object, "ai.spy_decoy");

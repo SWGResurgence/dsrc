@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class ship_ai extends script.base_script
 {
-    public ship_ai()
-    {
-    }
     public static final float DEFAULT_FOLLOW_DISTANCE = 20.0f;
     public static final int BEHAVIOR_IDLE = 0;
     public static final int BEHAVIOR_TRACK = 1;
@@ -29,75 +26,92 @@ public class ship_ai extends script.base_script
     public static final int FORMATION_DELTA = 4;
     public static final int FORMATION_BROAD = 5;
     public static final int FORMATION_X = 6;
+    public ship_ai()
+    {
+    }
+
     public static int unitGetBehavior(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetBehavior(unit);
     }
+
     public static void unitIdle(obj_id unit) throws InterruptedException
     {
         _spaceUnitIdle(unit);
     }
+
     public static void squadIdle(int squadId) throws InterruptedException
     {
         _spaceSquadIdle(squadId);
     }
+
     public static void unitTrack(obj_id unit, obj_id target) throws InterruptedException
     {
         _spaceUnitTrack(unit, target);
     }
+
     public static void squadTrack(int squadId, obj_id target) throws InterruptedException
     {
         _spaceSquadTrack(squadId, target);
     }
+
     public static void unitMoveTo(obj_id unit, transform[] path) throws InterruptedException
     {
         _spaceUnitMoveTo(unit, path);
     }
+
     public static void squadMoveTo(int squadId, transform[] path) throws InterruptedException
     {
         _spaceSquadMoveTo(squadId, path);
     }
+
     public static void unitMoveTo(obj_id unit, transform position) throws InterruptedException
     {
-        transform path[] = new transform[1];
+        transform[] path = new transform[1];
         path[0] = position;
         _spaceUnitMoveTo(unit, path);
     }
+
     public static void squadMoveTo(int squadId, transform position) throws InterruptedException
     {
-        transform path[] = new transform[1];
+        transform[] path = new transform[1];
         path[0] = position;
         _spaceSquadMoveTo(squadId, path);
     }
+
     public static void unitAddPatrolPath(obj_id unit, transform[] path) throws InterruptedException
     {
         _spaceUnitAddPatrolPath(unit, path);
     }
+
     public static void squadAddPatrolPath(int squadId, transform[] path) throws InterruptedException
     {
         _spaceSquadAddPatrolPath(squadId, path);
     }
+
     public static void unitPatrol(obj_id unit, transform[] path) throws InterruptedException
     {
         unitClearPatrolPath(unit);
         unitAddPatrolPath(unit, path);
     }
+
     public static void squadPatrol(int squadId, transform[] path) throws InterruptedException
     {
         squadClearPatrolPath(squadId);
         squadAddPatrolPath(squadId, path);
     }
+
     public static transform[] createPatrolPathCircle(vector position_w, float radius) throws InterruptedException
     {
         final int points = 20;
-        transform path[] = new transform[points];
+        transform[] path = new transform[points];
         float radian;
         float x;
         float y;
         float z;
         for (int i = 0; i < points; ++i)
         {
-            radian = (float)Math.PI * 2.0f * ((float)i / points);
+            radian = (float) Math.PI * 2.0f * ((float) i / points);
             x = position_w.x + (float) StrictMath.sin(radian) * radius;
             y = position_w.y;
             z = position_w.z + (float) StrictMath.cos(radian) * radius;
@@ -105,97 +119,119 @@ public class ship_ai extends script.base_script
         }
         return path;
     }
+
     public static transform[] createPatrolPathLoiter(transform transform_w, float minDist, float maxDist) throws InterruptedException
     {
         final int points = 20;
-        transform path[] = new transform[points];
+        transform[] path = new transform[points];
         vector direction;
         vector position;
         for (int i = 0; i < points; ++i)
         {
             direction = vector.randomUnit();
-            position = (transform_w.getPosition_p()).add(direction.multiply(minDist + (float)Math.random() * (maxDist - minDist)));
+            position = (transform_w.getPosition_p()).add(direction.multiply(minDist + (float) Math.random() * (maxDist - minDist)));
             path[i] = transform.identity.setPosition_p(position);
         }
         return path;
     }
+
     public static void unitLoiter(obj_id unit, transform transform_w, float minDist, float maxDist) throws InterruptedException
     {
         unitPatrol(unit, createPatrolPathLoiter(transform_w, minDist, maxDist));
     }
+
     public static void squadLoiter(int squadId, transform transform_w, float minDist, float maxDist) throws InterruptedException
     {
         squadPatrol(squadId, createPatrolPathLoiter(transform_w, minDist, maxDist));
     }
+
     public static void unitClearPatrolPath(obj_id unit) throws InterruptedException
     {
         _spaceUnitClearPatrolPath(unit);
     }
+
     public static void squadClearPatrolPath(int squadId) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
-        for (obj_id anUnitList : unitList) {
+        for (obj_id anUnitList : unitList)
+        {
             _spaceUnitClearPatrolPath(anUnitList);
         }
     }
+
     public static void unitFollow(obj_id unit, obj_id followedUnit, vector direction_o, float distance) throws InterruptedException
     {
         _spaceUnitFollow(unit, followedUnit, direction_o, distance);
     }
+
     public static void squadFollow(int squadId, obj_id followedUnit, vector direction_o, float distance) throws InterruptedException
     {
         _spaceSquadFollow(squadId, followedUnit, direction_o, distance);
     }
+
     public static void unitAddDamageTaken(obj_id unit, obj_id targetUnit, float damage) throws InterruptedException
     {
         _spaceUnitAddDamageTaken(unit, targetUnit, damage);
     }
+
     public static void unitSetAttackOrders(obj_id unit, int attackOrders) throws InterruptedException
     {
         _spaceUnitSetAttackOrders(unit, attackOrders);
     }
+
     public static void squadSetAttackOrders(int squadId, int attackOrders) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
-        for (obj_id anUnitList : unitList) {
+        for (obj_id anUnitList : unitList)
+        {
             unitSetAttackOrders(anUnitList, attackOrders);
         }
     }
+
     public static void unitSetLeashDistance(obj_id unit, float distance) throws InterruptedException
     {
         _spaceUnitSetLeashDistance(unit, distance);
     }
+
     public static void squadSetLeashDistance(int squadId, float distance) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
-        for (obj_id anUnitList : unitList) {
+        for (obj_id anUnitList : unitList)
+        {
             unitSetLeashDistance(anUnitList, distance);
         }
     }
+
     public static void unitSetPilotType(obj_id unit, String pilotType) throws InterruptedException
     {
         _spaceUnitSetPilotType(unit, pilotType);
     }
+
     public static String unitGetPilotType(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetPilotType(unit);
     }
+
     public static obj_id unitGetPrimaryAttackTarget(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetPrimaryAttackTarget(unit);
     }
+
     public static obj_id[] unitGetAttackTargetList(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetAttackTargetList(unit);
     }
+
     public static obj_id[] unitGetWhoIsTargetingMe(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetWhoIsTargetingMe(unit);
     }
+
     public static boolean unitIsAttacking(obj_id unit) throws InterruptedException
     {
         return _spaceUnitIsAttacking(unit);
     }
+
     public static void unitIncreaseHate(obj_id unit, obj_id unitToHate, float amountToHate, float hateDelay, int maxRecursions) throws InterruptedException
     {
         if ((!isIdValid(unit)) || isPlayer(unit) || !isIdValid(unitToHate))
@@ -230,67 +266,89 @@ public class ship_ai extends script.base_script
         parms.put("maxRecursions", maxRecursions);
         messageTo(unit, "handleUnitIncreaseHate", parms, hateDelay, false);
     }
+
     public static void unitRemoveAttackTarget(obj_id unit, obj_id unitToRemove) throws InterruptedException
     {
         _spaceUnitRemoveAttackTarget(unit, unitToRemove);
     }
+
     public static void unitRemoveFromAllAttackTargetLists(obj_id unit) throws InterruptedException
     {
         obj_id[] whoIsTargetingMeList = unitGetWhoIsTargetingMe(unit);
-        for (obj_id aWhoIsTargetingMeList : whoIsTargetingMeList) {
-            if (exists(aWhoIsTargetingMeList) && (aWhoIsTargetingMeList.isLoaded())) {
-                if (!space_utils.isPlayerControlledShip(aWhoIsTargetingMeList)) {
+        for (obj_id aWhoIsTargetingMeList : whoIsTargetingMeList)
+        {
+            if (exists(aWhoIsTargetingMeList) && (aWhoIsTargetingMeList.isLoaded()))
+            {
+                if (!space_utils.isPlayerControlledShip(aWhoIsTargetingMeList))
+                {
                     unitRemoveAttackTarget(aWhoIsTargetingMeList, unit);
-                } else {
+                }
+                else
+                {
                     LOG("space", aWhoIsTargetingMeList + " was passed into getWhoistargetingme but it's a PLAYER");
                 }
-            } else {
+            }
+            else
+            {
                 LOG("space", aWhoIsTargetingMeList + " was passed into unitGetWhoIsTargetingMe but doesn't exist on the server");
             }
         }
     }
+
     public static void unitSetPrimaryTarget(obj_id unit, obj_id targetUnit) throws InterruptedException
     {
         unitAddDamageTaken(unit, targetUnit, 100000.0f);
     }
+
     public static void unitAddTarget(obj_id unit, obj_id targetUnit) throws InterruptedException
     {
         unitAddDamageTaken(unit, targetUnit, 100.0f);
     }
+
     public static void squadSetPrimaryTarget(int squadId, obj_id targetUnit) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
-        for (obj_id anUnitList : unitList) {
+        for (obj_id anUnitList : unitList)
+        {
             unitAddDamageTaken(anUnitList, targetUnit, 100000.0f);
         }
     }
+
     public static void squadAddTarget(int squadId, obj_id targetUnit) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
-        for (obj_id anUnitList : unitList) {
+        for (obj_id anUnitList : unitList)
+        {
             unitAddDamageTaken(anUnitList, targetUnit, 100.0f);
         }
     }
+
     public static void squadSetPrimaryTarget(int squadId, int targetSquadId) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
         obj_id[] targetUnitList = squadGetUnitList(targetSquadId);
-        for (obj_id anUnitList : unitList) {
-            for (obj_id aTargetUnitList : targetUnitList) {
+        for (obj_id anUnitList : unitList)
+        {
+            for (obj_id aTargetUnitList : targetUnitList)
+            {
                 unitAddDamageTaken(anUnitList, aTargetUnitList, (float) Math.random() * 100000.0f + 100000.0f);
             }
         }
     }
+
     public static void squadAddTarget(int squadId, int targetSquadId) throws InterruptedException
     {
         obj_id[] unitList = squadGetUnitList(squadId);
         obj_id[] targetUnitList = squadGetUnitList(targetSquadId);
-        for (obj_id anUnitList : unitList) {
-            for (obj_id aTargetUnitList : targetUnitList) {
+        for (obj_id anUnitList : unitList)
+        {
+            for (obj_id aTargetUnitList : targetUnitList)
+            {
                 unitAddDamageTaken(anUnitList, aTargetUnitList, (float) Math.random() * 100.0f + 100.0f);
             }
         }
     }
+
     public static void unitSetSquadId(obj_id unit, int squadId) throws InterruptedException
     {
         if (unitGetSquadId(unit) != squadId)
@@ -298,34 +356,42 @@ public class ship_ai extends script.base_script
             _spaceUnitSetSquadId(unit, squadId);
         }
     }
+
     public static int unitGetSquadId(obj_id unit) throws InterruptedException
     {
         return _spaceUnitGetSquadId(unit);
     }
+
     public static int squadCreateSquadId() throws InterruptedException
     {
         return _spaceSquadCreateSquadId();
     }
+
     public static int squadRemoveUnit(obj_id unit) throws InterruptedException
     {
         return _spaceSquadRemoveUnit(unit);
     }
+
     public static int squadCombine(int squadId1, int squadId2) throws InterruptedException
     {
         return _spaceSquadCombine(squadId1, squadId2);
     }
+
     public static int squadGetSize(int squadId) throws InterruptedException
     {
         return _spaceSquadGetSize(squadId);
     }
+
     public static obj_id[] squadGetUnitList(int squadId) throws InterruptedException
     {
         return _spaceSquadGetUnitList(squadId);
     }
+
     public static void squadSetFormation(int squadId, int formation) throws InterruptedException
     {
         _spaceSquadSetFormation(squadId, formation);
     }
+
     public static void squadSetFormationRandom(int squadId) throws InterruptedException
     {
         Random random = new Random();
@@ -357,97 +423,123 @@ public class ship_ai extends script.base_script
         }
         _spaceSquadSetFormation(squadId, formation);
     }
+
     public static void squadSetFormationSpacing(int squadId, float scale) throws InterruptedException
     {
         _spaceSquadSetFormationSpacing(squadId, scale);
     }
+
     public static int squadGetFormation(int squadId) throws InterruptedException
     {
         return _spaceSquadGetFormation(squadId);
     }
+
     public static void squadSetLeader(int squadId, obj_id unit) throws InterruptedException
     {
         _spaceSquadSetLeader(squadId, unit);
     }
+
     public static obj_id squadGetLeader(int squadId) throws InterruptedException
     {
         return _spaceSquadGetLeader(squadId);
     }
+
     public static void squadSetGuardTarget(int squad, int targetSquad) throws InterruptedException
     {
         _spaceSquadSetGuardTarget(squad, targetSquad);
     }
+
     public static boolean squadIsGuarding(int squad) throws InterruptedException
     {
         return (squadGetGuardTarget(squad) == 0);
     }
+
     public static int squadGetGuardTarget(int squad) throws InterruptedException
     {
         return _spaceSquadGetGuardTarget(squad);
     }
+
     public static void squadRemoveGuardTarget(int squad) throws InterruptedException
     {
         _spaceSquadRemoveGuardTarget(squad);
     }
+
     public static void unitDock(obj_id unit, obj_id dockTarget, float timeAtDock) throws InterruptedException
     {
         _spaceUnitDock(unit, dockTarget, timeAtDock);
     }
+
     public static void unitDock(obj_id unit, obj_id dockTarget) throws InterruptedException
     {
         unitDock(unit, dockTarget, -1.0f);
     }
+
     public static void unitUnDock(obj_id unit) throws InterruptedException
     {
         _spaceUnitUnDock(unit);
     }
+
     public static boolean unitIsDocked(obj_id unit) throws InterruptedException
     {
         return _spaceUnitIsDocked(unit);
     }
+
     public static boolean unitIsDocking(obj_id unit) throws InterruptedException
     {
         return _spaceUnitIsDocking(unit);
     }
+
     public static void unitSetAutoAggroImmuneTime(obj_id unit, float time) throws InterruptedException
     {
         _spaceUnitSetAutoAggroImmuneTime(unit, time);
     }
+
     public static void unitSetAutoAggroImmune(obj_id unit, boolean enabled) throws InterruptedException
     {
         _spaceUnitSetAutoAggroImmuneTime(unit, enabled ? -1.0f : 0.0f);
     }
+
     public static boolean unitIsAutoAggroImmune(obj_id unit) throws InterruptedException
     {
         return _spaceUnitIsAutoAggroImmune(unit);
     }
+
     public static void unitSetDamageAggroImmune(obj_id unit, boolean enabled) throws InterruptedException
     {
         _spaceUnitSetDamageAggroImmune(unit, enabled);
     }
+
     public static transform unitGetDockTransform(obj_id dockTarget, obj_id dockingUnit) throws InterruptedException
     {
         return _spaceUnitGetDockTransform(dockTarget, dockingUnit);
     }
+
     public static void unitAddExclusiveAggro(obj_id unit, obj_id pilot) throws InterruptedException
     {
         _spaceUnitAddExclusiveAggro(unit, pilot);
     }
+
     public static void unitRemoveExclusiveAggro(obj_id unit, obj_id pilot) throws InterruptedException
     {
         _spaceUnitRemoveExclusiveAggro(unit, pilot);
     }
+
     public static boolean isSquadIdValid(int squadId) throws InterruptedException
     {
         return _spaceSquadIsSquadIdValid(squadId);
     }
-    public static boolean isShipDead(obj_id ship) throws InterruptedException {
+
+    public static boolean isShipDead(obj_id ship) throws InterruptedException
+    {
         return !isIdValid(ship) || !ship.isLoaded() || (hasObjVar(ship, "ship.isDead"));
     }
-    public static boolean isPlayerShip(obj_id ship) throws InterruptedException {
+
+    public static boolean isPlayerShip(obj_id ship) throws InterruptedException
+    {
         obj_id pilot = getPilotId(ship);
         return isIdValid(pilot) && (isPlayer(pilot));
     }
+
     public static boolean isShipAggro(obj_id ship) throws InterruptedException
     {
         if (isPlayerShip(ship))
@@ -461,6 +553,7 @@ public class ship_ai extends script.base_script
         String shipName = getStringObjVar(ship, "ship.shipName");
         return (dataTableGetInt("datatables/space_mobile/space_mobile.iff", shipName, "isAggro") == 1);
     }
+
     public static boolean isShipAggroToward(obj_id ship, obj_id target) throws InterruptedException
     {
         String shipFaction = getShipFaction(ship);
@@ -483,13 +576,16 @@ public class ship_ai extends script.base_script
             return false;
         }
         String[] enemiesList = split(enemyFactionList, ',');
-        for (String anEnemiesList : enemiesList) {
-            if (anEnemiesList.equals(targetFaction)) {
+        for (String anEnemiesList : enemiesList)
+        {
+            if (anEnemiesList.equals(targetFaction))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isShipAlliedWith(obj_id ship, obj_id target) throws InterruptedException
     {
         if (!isShipSocial(ship))
@@ -516,13 +612,16 @@ public class ship_ai extends script.base_script
             return false;
         }
         String[] allyList = split(allyFactionList, ',');
-        for (String anAllyList : allyList) {
-            if (anAllyList.equals(targetFaction)) {
+        for (String anAllyList : allyList)
+        {
+            if (anAllyList.equals(targetFaction))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isShipSocial(obj_id ship) throws InterruptedException
     {
         if (!hasObjVar(ship, "ship.shipName"))
@@ -536,12 +635,9 @@ public class ship_ai extends script.base_script
         {
             return false;
         }
-        if (enemyFactionList.equals("") || allyFactionList.equals(""))
-        {
-            return false;
-        }
-        return true;
+        return !enemyFactionList.equals("") && !allyFactionList.equals("");
     }
+
     public static boolean isSameFaction(obj_id ship, obj_id target) throws InterruptedException
     {
         String shipFaction = getShipFaction(ship);
@@ -552,16 +648,20 @@ public class ship_ai extends script.base_script
         }
         return (shipFaction.equals(targetFaction));
     }
+
     public static obj_id[] getGroupShips(obj_id group, obj_id primaryTarget) throws InterruptedException
     {
         obj_id[] groupMembers = getGroupMemberIds(group);
         Vector groupShips = new Vector();
         groupShips.add(primaryTarget);
         obj_id ship;
-        for (obj_id groupMember : groupMembers) {
-            if (groupMember.isLoaded()) {
+        for (obj_id groupMember : groupMembers)
+        {
+            if (groupMember.isLoaded())
+            {
                 ship = getPilotedShip(groupMember);
-                if (isIdValid(ship) && ship != primaryTarget && getDistance(ship, primaryTarget) < 120.0f) {
+                if (isIdValid(ship) && ship != primaryTarget && getDistance(ship, primaryTarget) < 120.0f)
+                {
                     groupShips.add(ship);
                 }
             }
@@ -570,6 +670,7 @@ public class ship_ai extends script.base_script
         groupShips.toArray(returnArray);
         return returnArray;
     }
+
     public static String unitGetBehaviorString(int behavior) throws InterruptedException
     {
         String result;
@@ -596,6 +697,7 @@ public class ship_ai extends script.base_script
         }
         return result;
     }
+
     public static String unitGetAttackOrdersString(int attackOrders) throws InterruptedException
     {
         String result;
@@ -616,90 +718,112 @@ public class ship_ai extends script.base_script
         }
         return result;
     }
+
     public static void spaceAttack(obj_id ship, obj_id target) throws InterruptedException
     {
         unitAddDamageTaken(ship, target, 100000.0f);
     }
+
     public static void spaceAttack(obj_id ship, obj_id[] targets) throws InterruptedException
     {
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             unitAddDamageTaken(ship, target, 100000.0f);
         }
     }
+
     public static obj_id spaceGetPrimaryTarget(obj_id ship) throws InterruptedException
     {
         return unitGetPrimaryAttackTarget(ship);
     }
+
     public static boolean spaceIsInCombat(obj_id ship) throws InterruptedException
     {
         return unitIsAttacking(ship);
     }
+
     public static void spaceStopAttack(obj_id ship) throws InterruptedException
     {
         unitSetAttackOrders(ship, ATTACK_ORDERS_HOLD_FIRE);
     }
+
     public static void spaceStopAttack(obj_id ship, obj_id target) throws InterruptedException
     {
         unitRemoveAttackTarget(ship, target);
     }
+
     public static void spaceGuard(obj_id ship, obj_id target) throws InterruptedException
     {
         debugServerConsoleMsg(ship, "Guarding is not supported ATM");
     }
+
     public static void spaceGuard(obj_id ship, obj_id[] targets) throws InterruptedException
     {
         debugServerConsoleMsg(ship, "Guarding is not supported ATM");
     }
+
     public static Vector spaceGetGuardList(obj_id ship) throws InterruptedException
     {
         debugServerConsoleMsg(ship, "Guarding is not supported ATM");
         return null;
     }
+
     public static boolean spaceIsGuarding(obj_id ship, obj_id target) throws InterruptedException
     {
         debugServerConsoleMsg(ship, "Guarding is not supported ATM");
         return false;
     }
+
     public static void spaceStopGuarding(obj_id ship, obj_id target) throws InterruptedException
     {
         debugServerConsoleMsg(ship, "Guarding is not supported ATM");
     }
+
     public static void spaceMoveTo(obj_id ship, transform position) throws InterruptedException
     {
         unitMoveTo(ship, position);
     }
+
     public static void spaceMoveTo(obj_id ship, transform[] path) throws InterruptedException
     {
         unitMoveTo(ship, path);
     }
+
     public static void spacePatrol(obj_id ship, transform[] transforms) throws InterruptedException
     {
         unitAddPatrolPath(ship, transforms);
     }
+
     public static void spaceStop(obj_id ship) throws InterruptedException
     {
         unitIdle(ship);
     }
+
     public static void spaceLoiter(obj_id ship, transform transform_w, float minDist, float maxDist) throws InterruptedException
     {
         unitLoiter(ship, transform_w, minDist, maxDist);
     }
+
     public static void spaceFollow(obj_id ship, obj_id target, float dist) throws InterruptedException
     {
         unitFollow(ship, target, new vector(0.0f, 0.0f, 1.0f), dist);
     }
+
     public static void spaceFollow(obj_id ship, obj_id target) throws InterruptedException
     {
         spaceFollow(ship, target, DEFAULT_FOLLOW_DISTANCE);
     }
+
     public static void spaceFollowInFormation(obj_id ship, obj_id target, int formationType) throws InterruptedException
     {
         spaceFollow(ship, target, DEFAULT_FOLLOW_DISTANCE);
     }
+
     public static int spaceGetShipBehavior(obj_id ship) throws InterruptedException
     {
         return unitGetBehavior(ship);
     }
+
     public static obj_id[] getWhoIsTargetingShip(obj_id ship) throws InterruptedException
     {
         return unitGetWhoIsTargetingMe(ship);

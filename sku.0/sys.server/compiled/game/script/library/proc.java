@@ -8,16 +8,18 @@ import java.util.Vector;
 
 public class proc extends script.base_script
 {
-    public proc()
-    {
-    }
     public static final String CYBERNETICS_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String PROC_TABLE = "datatables/proc/proc.iff";
     public static final String REAC_BASE = "reactive_proc.";
+    public proc()
+    {
+    }
+
     public static void executeProcEffects(obj_id attacker, obj_id defender) throws InterruptedException
     {
         executeProcEffects(attacker, defender, null);
     }
+
     public static void executeProcEffects(obj_id attacker, obj_id defender, combat_data actionData) throws InterruptedException
     {
         String params = "";
@@ -53,36 +55,47 @@ public class proc extends script.base_script
                 String requiredBuffs;
                 String procCommand;
 
-                for (Object procEffect : procEffects) {
+                for (Object procEffect : procEffects)
+                {
                     parms = dataTableGetRow(PROC_TABLE, ((String) procEffect));
-                    if (parms != null) {
+                    if (parms != null)
+                    {
                         int procChance = parms.getInt("procChance");
                         int expertiseProcChance = getSkillStatisticModifier(attacker, ((String) procEffect));
-                        if (expertiseProcChance > 0) {
+                        if (expertiseProcChance > 0)
+                        {
                             procChance = expertiseProcChance;
-                            if (((String) procEffect).startsWith("kill_meter_")) {
+                            if (((String) procEffect).startsWith("kill_meter_"))
+                            {
                                 procChance *= getKillMeter(attacker);
                             }
                         }
                         noSelfProcBuffs = parms.getString("noSelfProcBuffs");
                         noTargetProcBuffs = parms.getString("noTargetProcBuffs");
-                        if (isGod(attacker) || isGod(defender)) {
+                        if (isGod(attacker) || isGod(defender))
+                        {
                             LOG("expertise", "Proc: " + parms.getString("procString") + " noSelfProcBuffs: " + noSelfProcBuffs + " noTargetProcBuffs: " + noTargetProcBuffs);
                         }
-                        if (buff.hasAnyBuffInList(attacker, noSelfProcBuffs) || buff.hasAnyBuffInList(defender, noTargetProcBuffs)) {
+                        if (buff.hasAnyBuffInList(attacker, noSelfProcBuffs) || buff.hasAnyBuffInList(defender, noTargetProcBuffs))
+                        {
                             continue;
                         }
                         requiredBuffs = parms.getString("requiredSelfBuffs");
-                        if (requiredBuffs.length() > 0 && !buff.hasAnyBuffInList(attacker, requiredBuffs)) {
+                        if (requiredBuffs.length() > 0 && !buff.hasAnyBuffInList(attacker, requiredBuffs))
+                        {
                             continue;
                         }
-                        if (procChance != 100) {
+                        if (procChance != 100)
+                        {
                             procChance = Math.round(weaponData.attackSpeed * procChance);
                         }
-                        if (rand(0, 99) < procChance) {
+                        if (rand(0, 99) < procChance)
+                        {
                             procCommand = parms.getString("procString");
-                            if (procCommand != null) {
-                                if (combat.canUseWeaponWithAbility(attacker, weaponData, procCommand, false)) {
+                            if (procCommand != null)
+                            {
+                                if (combat.canUseWeaponWithAbility(attacker, weaponData, procCommand, false))
+                                {
                                     queueCommand(attacker, getStringCrc(procCommand.toLowerCase()), defender, params, COMMAND_PRIORITY_DEFAULT);
                                     showFlyTextPrivateProseWithFlags(
                                             attacker,
@@ -116,41 +129,55 @@ public class proc extends script.base_script
                 String reacCommand;
                 String cooldownGroup;
 
-                for (Object reacEffect : reacEffects) {
+                for (Object reacEffect : reacEffects)
+                {
                     reacParms = dataTableGetRow(PROC_TABLE, ((String) reacEffect));
-                    if (reacParms != null) {
+                    if (reacParms != null)
+                    {
                         int reacChance = reacParms.getInt("procChance");
                         int expertiseReacChance = getSkillStatisticModifier(defender, ((String) reacEffect));
-                        if (expertiseReacChance > 0) {
+                        if (expertiseReacChance > 0)
+                        {
                             reacChance = expertiseReacChance;
-                            if (((String) reacEffect).startsWith("kill_meter_")) {
+                            if (((String) reacEffect).startsWith("kill_meter_"))
+                            {
                                 reacChance *= getKillMeter(defender);
                             }
                         }
-                        if (buff.hasAnyBuffInList(defender, reacParms.getString("noSelfProcBuffs")) || buff.hasAnyBuffInList(attacker, reacParms.getString("noTargetProcBuffs"))) {
+                        if (buff.hasAnyBuffInList(defender, reacParms.getString("noSelfProcBuffs")) || buff.hasAnyBuffInList(attacker, reacParms.getString("noTargetProcBuffs")))
+                        {
                             return;
                         }
-                        if (reacChance != 100) {
+                        if (reacChance != 100)
+                        {
                             reacChance = Math.round(weaponData.attackSpeed * reacChance);
                         }
-                        if (rand(0, 99) < reacChance) {
+                        if (rand(0, 99) < reacChance)
+                        {
                             reacCommand = reacParms.getString("procString");
-                            if (reacCommand != null) {
+                            if (reacCommand != null)
+                            {
                                 combat_data abilityData = combat_engine.getCombatData(reacCommand);
                                 cooldownGroup = abilityData.cooldownGroup;
                                 boolean canProc = false;
                                 int timeLapse = -1;
-                                if (utils.hasScriptVar(defender, REAC_BASE + cooldownGroup)) {
+                                if (utils.hasScriptVar(defender, REAC_BASE + cooldownGroup))
+                                {
                                     int lastProc = utils.getIntScriptVar(defender, REAC_BASE + cooldownGroup);
                                     timeLapse = getGameTime() - lastProc;
-                                    if (timeLapse >= abilityData.cooldownTime) {
+                                    if (timeLapse >= abilityData.cooldownTime)
+                                    {
                                         canProc = true;
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     canProc = true;
                                 }
-                                if (canProc) {
-                                    if (queueCommand(defender, getStringCrc(reacCommand.toLowerCase()), attacker, "", COMMAND_PRIORITY_DEFAULT)) {
+                                if (canProc)
+                                {
+                                    if (queueCommand(defender, getStringCrc(reacCommand.toLowerCase()), attacker, "", COMMAND_PRIORITY_DEFAULT))
+                                    {
                                         LOG("procCommand", "Reac -- " + reacCommand + " activated");
                                         utils.setScriptVar(defender, REAC_BASE + cooldownGroup, getGameTime());
                                     }
@@ -162,6 +189,7 @@ public class proc extends script.base_script
             }
         }
     }
+
     public static void buildCurrentProcList(obj_id player) throws InterruptedException
     {
         Vector currentProcList = new Vector();
@@ -174,17 +202,19 @@ public class proc extends script.base_script
             if (procEffect != null && !procEffect.equals(""))
             {
                 String[] weaponProcEffects = split(procEffect, ',');
-                for (String weaponProcEffect : weaponProcEffects) {
+                for (String weaponProcEffect : weaponProcEffects)
+                {
                     currentProcList.addElement(weaponProcEffect);
                 }
             }
         }
-        else 
+        else
         {
             if (hasObjVar(weapon, "procEffect"))
             {
                 String[] weaponProcEffects = getStringArrayObjVar(weapon, "procEffect");
-                for (String weaponProcEffect : weaponProcEffects) {
+                for (String weaponProcEffect : weaponProcEffects)
+                {
                     currentProcList.addElement(weaponProcEffect);
                 }
             }
@@ -192,7 +222,8 @@ public class proc extends script.base_script
         if (utils.hasScriptVar(player, "procBuffEffects"))
         {
             String[] buffProcEffects = utils.getStringArrayScriptVar(player, "procBuffEffects");
-            for (String buffProcEffect : buffProcEffects) {
+            for (String buffProcEffect : buffProcEffects)
+            {
                 currentProcList.addElement(buffProcEffect);
             }
         }
@@ -200,9 +231,11 @@ public class proc extends script.base_script
         {
             String[] installedCybernetics = utils.getStringArrayScriptVar(player, "cyberneticItems");
             String procString = null;
-            for (String installedCybernetic : installedCybernetics) {
+            for (String installedCybernetic : installedCybernetics)
+            {
                 procString = dataTableGetString(CYBERNETICS_TABLE, installedCybernetic, "procEffectString");
-                if (procString != null && !procString.equals("")) {
+                if (procString != null && !procString.equals(""))
+                {
                     currentProcList.addElement(procString);
                 }
             }
@@ -210,8 +243,10 @@ public class proc extends script.base_script
         if (utils.hasScriptVar(player, "expertiseProcReacList"))
         {
             Vector expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
-            for (Object anExpertiseList : expertiseList) {
-                if (((String) anExpertiseList).endsWith("_proc")) {
+            for (Object anExpertiseList : expertiseList)
+            {
+                if (((String) anExpertiseList).endsWith("_proc"))
+                {
                     currentProcList.addElement(anExpertiseList);
                 }
             }
@@ -220,8 +255,10 @@ public class proc extends script.base_script
         {
             Vector tempProcList = new Vector();
             tempProcList.setSize(0);
-            for (Object aCurrentProcList : currentProcList) {
-                if (!tempProcList.contains(aCurrentProcList)) {
+            for (Object aCurrentProcList : currentProcList)
+            {
+                if (!tempProcList.contains(aCurrentProcList))
+                {
                     tempProcList.addElement(aCurrentProcList);
                 }
             }
@@ -232,47 +269,57 @@ public class proc extends script.base_script
             utils.removeScriptVar(player, "currentProcList");
         }
     }
+
     public static void buildCurrentReacList(obj_id player) throws InterruptedException
     {
         Vector currentReacList = new Vector();
         currentReacList.setSize(0);
-        final String strWear[] = 
-        {
-            "chest2",
-            "chest1",
-            "hat",
-            "bicep_r",
-            "bicep_l",
-            "bracer_upper_r",
-            "bracer_upper_l",
-            "pants2",
-            "pants1",
-            "bandolier",
-            "wrist_r",
-            "wrist_l",
-            "gloves",
-            "ring_r",
-            "ring_l",
-            "utility_belt",
-            "shoes"
-        };
+        final String[] strWear =
+                {
+                        "chest2",
+                        "chest1",
+                        "hat",
+                        "bicep_r",
+                        "bicep_l",
+                        "bracer_upper_r",
+                        "bracer_upper_l",
+                        "pants2",
+                        "pants1",
+                        "bandolier",
+                        "wrist_r",
+                        "wrist_l",
+                        "gloves",
+                        "ring_r",
+                        "ring_l",
+                        "utility_belt",
+                        "shoes"
+                };
         obj_id wearable;
         dictionary wearableData;
         String reacEffect;
 
-        for (String aStrWear : strWear) {
+        for (String aStrWear : strWear)
+        {
             wearable = getObjectInSlot(player, aStrWear);
-            if (!isIdNull(wearable)) {
-                if (static_item.isStaticItem(wearable)) {
-                    if (static_item.getStaticObjectType(static_item.getStaticItemName(wearable)) == 2) {
+            if (!isIdNull(wearable))
+            {
+                if (static_item.isStaticItem(wearable))
+                {
+                    if (static_item.getStaticObjectType(static_item.getStaticItemName(wearable)) == 2)
+                    {
                         wearableData = static_item.getStaticArmorDictionary(wearable);
-                    } else {
+                    }
+                    else
+                    {
                         wearableData = static_item.getStaticItemDictionary(wearable);
                     }
-                    if (wearableData != null) {
+                    if (wearableData != null)
+                    {
                         reacEffect = wearableData.getString("reactive_effect");
-                        if (reacEffect != null && !reacEffect.equals("")) {
-                            for (String wearableReacEffect : split(reacEffect, ',')) {
+                        if (reacEffect != null && !reacEffect.equals(""))
+                        {
+                            for (String wearableReacEffect : split(reacEffect, ','))
+                            {
                                 currentReacList.addElement(wearableReacEffect);
                             }
                         }
@@ -283,7 +330,8 @@ public class proc extends script.base_script
         if (utils.hasScriptVar(player, "reacBuffEffects"))
         {
             String[] buffReacEffects = utils.getStringArrayScriptVar(player, "reacBuffEffects");
-            for (String buffReacEffect : buffReacEffects) {
+            for (String buffReacEffect : buffReacEffects)
+            {
                 currentReacList.addElement(buffReacEffect);
             }
         }
@@ -291,9 +339,11 @@ public class proc extends script.base_script
         {
             String[] installedCybernetics = utils.getStringArrayScriptVar(player, "cyberneticItems");
             String reacString;
-            for (String installedCybernetic : installedCybernetics) {
+            for (String installedCybernetic : installedCybernetics)
+            {
                 reacString = dataTableGetString(CYBERNETICS_TABLE, installedCybernetic, "reacEffectString");
-                if (reacString != null && !reacString.equals("")) {
+                if (reacString != null && !reacString.equals(""))
+                {
                     currentReacList.addElement(reacString);
                 }
                 reacString = null;
@@ -302,8 +352,10 @@ public class proc extends script.base_script
         if (utils.hasScriptVar(player, "expertiseProcReacList"))
         {
             Vector expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
-            for (Object anExpertiseList : expertiseList) {
-                if (((String) anExpertiseList).endsWith("_reac")) {
+            for (Object anExpertiseList : expertiseList)
+            {
+                if (((String) anExpertiseList).endsWith("_reac"))
+                {
                     currentReacList.addElement(anExpertiseList);
                 }
             }
