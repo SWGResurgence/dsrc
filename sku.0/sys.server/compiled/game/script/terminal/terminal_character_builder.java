@@ -45,7 +45,7 @@ public class terminal_character_builder extends script.base_script
     public static final String RLS_EFFECT = "appearance/pt_blackhole_01.prt";
     public static final String RLS_SOUND = "sound/item_ding.snd";
     public static final String[] CHARACTER_BUILDER_OPTIONS = {
-            getClusterName() + " Focus Testing",
+            toUpper(getClusterName(), 0) + " Focus Testing",
             "Weapons",
             "Armor",
             "Skills",
@@ -2109,6 +2109,7 @@ public class terminal_character_builder extends script.base_script
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
         {
             LOG("CustomerService", "Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
+            startCharacterBuilder(player);
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
@@ -2124,23 +2125,26 @@ public class terminal_character_builder extends script.base_script
                 broadcast(player, "You have restricted access to this terminal.");
             }
         }
-        startCharacterBuilder(player);
+
         return SCRIPT_CONTINUE;
     }
 
     public void startCharacterBuilder(obj_id player) throws InterruptedException
     {
-        if (hasObjVar(player, "locked"))
+        obj_id self = getSelf();
+        if (!hasObjVar(self, "locked"))
+        {
+            String prompt = "Current Testing Options:";
+            String title = getClusterName() + " Character Builder Terminal";
+            closeOldWindow(player);
+            int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true, false);
+            setWindowPid(player, pid);
+
+        }
+        else
         {
             sendSystemMessage(player, "This terminal is currently locked.", null);
-            return;
         }
-        obj_id self = getSelf();
-        String prompt = "Current Testing Options:";
-        String title = getClusterName() + " Character Builder Terminal";
-        closeOldWindow(player);
-        int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true, false);
-        setWindowPid(player, pid);
     }
 
     public int handleOptionSelect(obj_id self, dictionary params) throws InterruptedException
