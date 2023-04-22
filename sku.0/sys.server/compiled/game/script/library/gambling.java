@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class gambling extends script.base_script
 {
-    public gambling()
-    {
-    }
     public static final String SCRIPTVAR_GAMBLING = "isGambling";
     public static final String VAR_GAMBLE_BASE = "gambling";
     public static final String VAR_PREDEFINED_TYPE = VAR_GAMBLE_BASE + ".predefined";
@@ -59,6 +56,10 @@ public class gambling extends script.base_script
     public static final string_id PROSE_STARTING_IN = new string_id(STF_INTERFACE, "prose_starting_in");
     public static final string_id FLY_WINNER = new string_id(STF_INTERFACE, "fly_winner");
     public static final String STF_GAME_N = "gambling/game_n";
+    public gambling()
+    {
+    }
+
     public static boolean initializeTable(obj_id table, String gameType) throws InterruptedException
     {
         if (!isIdValid(table) || gameType == null || gameType.equals(""))
@@ -79,6 +80,7 @@ public class gambling extends script.base_script
         litmus &= setObjVar(table, VAR_TABLE_BET_MAX, row.getInt(COL_BET_MAX));
         return litmus;
     }
+
     public static void addTablePlayer(obj_id table, obj_id player, String params) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))
@@ -132,7 +134,7 @@ public class gambling extends script.base_script
                 prose_package ppJoin = prose.getPackage(PROSE_PLAYER_JOIN, sid_type);
                 sendSystemMessageProse(player, ppJoin);
             }
-            else 
+            else
             {
                 prose_package ppJoin = prose.getPackage(PROSE_PLAYER_JOIN, gameType);
                 sendSystemMessageProse(player, ppJoin);
@@ -143,6 +145,7 @@ public class gambling extends script.base_script
             messageTo(table, "handlePlayerAdded", d, 1.0f, false);
         }
     }
+
     public static void removeTablePlayer(obj_id table, obj_id player, String params) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))
@@ -174,7 +177,7 @@ public class gambling extends script.base_script
         {
             removeObjVar(table, VAR_TABLE_PLAYERS);
         }
-        else 
+        else
         {
             setObjVar(table, VAR_TABLE_PLAYERS, players);
         }
@@ -184,7 +187,7 @@ public class gambling extends script.base_script
             prose_package ppJoin = prose.getPackage(PROSE_PLAYER_LEAVE, sid_type);
             sendSystemMessageProse(player, ppJoin);
         }
-        else 
+        else
         {
             prose_package ppJoin = prose.getPackage(PROSE_PLAYER_LEAVE, gameType);
             sendSystemMessageProse(player, ppJoin);
@@ -194,6 +197,7 @@ public class gambling extends script.base_script
         d.put("player", player);
         messageTo(table, "handlePlayerRemoved", d, 1.0f, false);
     }
+
     public static boolean isTablePlayer(obj_id table, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))
@@ -207,6 +211,7 @@ public class gambling extends script.base_script
         }
         return (utils.getElementPositionInArray(players, player) > -1);
     }
+
     public static void placeBet(obj_id table, obj_id player, String params) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player) || params == null || params.equals(""))
@@ -247,13 +252,14 @@ public class gambling extends script.base_script
         }
         money.requestPayment(player, table, amt, "handleBetPlaced", d);
     }
+
     public static void refundAbortedGame(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
         {
-            return;
         }
     }
+
     public static int parsePaySchedule(obj_id table, obj_id player, int[] results, int amt, String tbl) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player) || amt < 1 || tbl == null || tbl.equals(""))
@@ -265,7 +271,8 @@ public class gambling extends script.base_script
             return -1;
         }
         String result = "";
-        for (int result1 : results) {
+        for (int result1 : results)
+        {
             result += Integer.toString(result1);
         }
         String[] schedule = dataTableGetStringColumnNoDefaults(tbl, "SCHEDULE");
@@ -288,9 +295,12 @@ public class gambling extends script.base_script
                         {
                             Vector perms = new Vector();
                             perms.setSize(0);
-                            for (String s2 : opt) {
-                                for (String s1 : opt) {
-                                    for (String s : opt) {
+                            for (String s2 : opt)
+                            {
+                                for (String s1 : opt)
+                                {
+                                    for (String s : opt)
+                                    {
                                         perms = utils.addElement(perms, s2 + s1 + s);
                                     }
                                 }
@@ -299,7 +309,7 @@ public class gambling extends script.base_script
                             if (idx > -1)
                             {
                                 LOG("gambling", "** found valid combination!");
-                                LOG("gambling", "result = " + result + " combo = " + ((String)perms.get(idx)));
+                                LOG("gambling", "result = " + result + " combo = " + perms.get(idx));
                                 return getPayoutValue(tbl, i, amt);
                             }
                         }
@@ -307,20 +317,21 @@ public class gambling extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int max = getIntObjVar(table, VAR_TABLE_BET_MAX);
             if (amt >= max)
             {
                 return dataTableGetInt(tbl, idx, "PAYOUT_MAX");
             }
-            else 
+            else
             {
                 return getPayoutValue(tbl, idx, amt);
             }
         }
         return 0;
     }
+
     public static int getPayoutValue(String tbl, int idx, int amt) throws InterruptedException
     {
         if (tbl == null || tbl.equals(""))
@@ -335,6 +346,7 @@ public class gambling extends script.base_script
         int multiplier = dataTableGetInt(tbl, idx, "COIN_MULTIPLIER");
         return base * amt * multiplier;
     }
+
     public static Vector calculateReelOdds(obj_id table) throws InterruptedException
     {
         if (!isIdValid(table))
@@ -363,6 +375,7 @@ public class gambling extends script.base_script
         }
         return reelOdds;
     }
+
     public static int getGamePlayerIndex(obj_id table, obj_id player) throws InterruptedException
     {
         if (!isIdValid(table) || !isIdValid(player))

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class fs_quests_cc extends script.base_script
 {
-    public fs_quests_cc()
-    {
-    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###0.00%");
     public static final String SCRIPTVAR_CRAFTING_TRACKER = fs_dyn_village.OBJVAR_MY_MASTER_OBJECT;
     public static final String SCRIPTVAR_VILLAGE_PHASE = "community_crafting.village_phase";
@@ -26,6 +23,10 @@ public class fs_quests_cc extends script.base_script
     public static final string_id SID_QUALITY_PROMPT_LIMITED = new string_id("crafting", "quality_prompt_limited");
     public static final string_id SID_QUANTITY_PROMPT = new string_id("crafting", "quantity_prompt");
     public static final string_id SID_QUANTITY_PROMPT_LIMITED = new string_id("crafting", "quantity_prompt_limited");
+    public fs_quests_cc()
+    {
+    }
+
     public static boolean testCommunityCraftingEnabled(obj_id npc, int phase) throws InterruptedException
     {
         if (utils.getIntScriptVar(npc, SCRIPTVAR_VILLAGE_PHASE) != phase)
@@ -39,6 +40,7 @@ public class fs_quests_cc extends script.base_script
         }
         return false;
     }
+
     public static void showPlayerProjectAttribs(obj_id npc, obj_id player, int phase) throws InterruptedException
     {
         if (testCommunityCraftingEnabled(npc, phase))
@@ -57,13 +59,14 @@ public class fs_quests_cc extends script.base_script
             String[] attributes = new String[names.size()];
             for (int i = 0; i < attributes.length; ++i)
             {
-                double f = (((Float)(values.get(i)))).doubleValue();
+                double f = (((Float) (values.get(i)))).doubleValue();
                 values.set(i, floatFormat.format(f / 1000.0));
                 attributes[i] = "@" + names.get(i) + " \\>200" + values.get(i);
             }
             int pid = sui.listbox(player, "@" + SID_ATTRIBUTES_PROMPT, "@" + SID_ATTRIBUTES_TITLE, sui.OK_ONLY, attributes);
         }
     }
+
     public static void showPlayerProjectStats(obj_id npc, obj_id player, int slot, boolean quality, int phase) throws InterruptedException
     {
         if (testCommunityCraftingEnabled(npc, phase))
@@ -86,7 +89,7 @@ public class fs_quests_cc extends script.base_script
                 prompt = SID_QUALITY_PROMPT;
                 for (int i = 0; i < values.size(); ++i)
                 {
-                    double f = (((Float)(values.get(i)))).doubleValue();
+                    double f = (((Float) (values.get(i)))).doubleValue();
                     values.set(i, floatFormat.format(f / 100.0));
                 }
             }
@@ -96,20 +99,20 @@ public class fs_quests_cc extends script.base_script
             int count = 0;
             for (int i = 0; i < playerIds.size() && count < sui.MAX_ARRAY_SIZE; ++i)
             {
-                if (isIdValid((obj_id)(playerIds.get(i))))
+                if (isIdValid((obj_id) (playerIds.get(i))))
                 {
                     if (playerIds.get(i) == player)
                     {
-                        rankings.add("\\#pcontrast1 " + getPlayerName((obj_id)(playerIds.get(i))) + "\\>200" + values.get(i) + "\\#.");
+                        rankings.add("\\#pcontrast1 " + getPlayerName((obj_id) (playerIds.get(i))) + "\\>200" + values.get(i) + "\\#.");
                         ++count;
                         addedPlayer = true;
                     }
                     else if ((addedPlayer && count < sui.MAX_ARRAY_SIZE) || (!addedPlayer && count < sui.MAX_ARRAY_SIZE - 1))
                     {
-                        rankings.add(getPlayerName((obj_id)(playerIds.get(i))) + "\\>200" + values.get(i));
+                        rankings.add(getPlayerName((obj_id) (playerIds.get(i))) + "\\>200" + values.get(i));
                         ++count;
                     }
-                    else 
+                    else
                     {
                         skippingPlayers = true;
                     }
@@ -125,7 +128,7 @@ public class fs_quests_cc extends script.base_script
                 {
                     prompt = SID_QUANTITY_PROMPT_LIMITED;
                 }
-                else 
+                else
                 {
                     prompt = SID_QUALITY_PROMPT_LIMITED;
                 }

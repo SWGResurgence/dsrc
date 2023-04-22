@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class turnstile extends script.base_script
 {
-    public turnstile()
-    {
-    }
     public static final int TURNSTILE_DEFAULT_FEE = 5;
     public static final int TURNSTILE_DEFAULT_TIME = 0;
     public static final int TURNSTILE_DEFAULT_GRACE = 30;
@@ -28,6 +25,10 @@ public class turnstile extends script.base_script
     public static final String VAR_TURNSTILE_GREETING_LONG = "turnstile.greeting.long";
     public static final String SCRIPT_TURNSTILE_CLEANUP = "turnstile.turnstile_cleanup";
     public static final string_id SID_WAIT_TURNSTILE = new string_id("player_structure", "turnstile_wait");
+    public turnstile()
+    {
+    }
+
     public static boolean addTurnstile(obj_id building, int fee, int time) throws InterruptedException
     {
         if (building == null)
@@ -49,14 +50,17 @@ public class turnstile extends script.base_script
         obj_id[] contents = player_structure.getObjectsInBuilding(building);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (hasScript(content, "terminal.vendor")) {
+            for (obj_id content : contents)
+            {
+                if (hasScript(content, "terminal.vendor"))
+                {
                     setEntranceCharge(content, fee);
                 }
             }
         }
         return true;
     }
+
     public static boolean canAddTurnstile(obj_id player, obj_id building) throws InterruptedException
     {
         if (utils.hasScriptVar(building, "turnstile_delay.time"))
@@ -67,7 +71,7 @@ public class turnstile extends script.base_script
             {
                 utils.removeObjVar(building, "turnstile_delay.time");
             }
-            else 
+            else
             {
                 prose_package pp = prose.getPackage(SID_WAIT_TURNSTILE, ((removeTime + 900 - curTime) / 60) + 1);
                 sendSystemMessageProse(player, pp);
@@ -76,6 +80,7 @@ public class turnstile extends script.base_script
         }
         return true;
     }
+
     public static int getFee(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -88,6 +93,7 @@ public class turnstile extends script.base_script
         }
         return getIntObjVar(building, VAR_TURNSTILE_FEE);
     }
+
     public static int getTime(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -100,9 +106,12 @@ public class turnstile extends script.base_script
         }
         return getIntObjVar(building, VAR_TURNSTILE_TIME);
     }
-    public static boolean hasTurnstile(obj_id building) throws InterruptedException {
+
+    public static boolean hasTurnstile(obj_id building) throws InterruptedException
+    {
         return building != null && hasObjVar(building, VAR_TURNSTILE_BASE);
     }
+
     public static boolean removeTurnstile(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -118,14 +127,17 @@ public class turnstile extends script.base_script
         obj_id[] contents = player_structure.getObjectsInBuilding(building);
         if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (hasScript(content, "terminal.vendor")) {
+            for (obj_id content : contents)
+            {
+                if (hasScript(content, "terminal.vendor"))
+                {
                     setEntranceCharge(content, 0);
                 }
             }
         }
         return true;
     }
+
     public static boolean addPatron(obj_id building, obj_id player) throws InterruptedException
     {
         if ((building == null) || (player == null))
@@ -166,6 +178,7 @@ public class turnstile extends script.base_script
         }
         return true;
     }
+
     public static boolean removePatron(obj_id building, obj_id player) throws InterruptedException
     {
         if ((building == null) || (player == null))
@@ -189,7 +202,7 @@ public class turnstile extends script.base_script
         {
             removeObjVar(building, VAR_TURNSTILE_PATRON_IDS);
         }
-        else 
+        else
         {
             setObjVar(building, VAR_TURNSTILE_PATRON_IDS, patrons);
         }
@@ -197,12 +210,13 @@ public class turnstile extends script.base_script
         {
             removeObjVar(building, VAR_TURNSTILE_PATRON_STAMPS);
         }
-        else 
+        else
         {
             setObjVar(building, VAR_TURNSTILE_PATRON_STAMPS, timestamps);
         }
         return true;
     }
+
     public static boolean isPatron(obj_id building, obj_id player) throws InterruptedException
     {
         if ((building == null) || (player == null))
@@ -217,6 +231,7 @@ public class turnstile extends script.base_script
         int arrayPosition = utils.getElementPositionInArray(patrons, player);
         return arrayPosition != -1;
     }
+
     public static boolean hasExpired(obj_id building, obj_id player) throws InterruptedException
     {
         if ((building == null) || (player == null))
@@ -229,7 +244,8 @@ public class turnstile extends script.base_script
         }
         obj_id[] patrons = getObjIdArrayObjVar(building, VAR_TURNSTILE_PATRON_IDS);
         int[] timestamps = getIntArrayObjVar(building, VAR_TURNSTILE_PATRON_STAMPS);
-        if(timestamps == null){
+        if (timestamps == null)
+        {
             return false;
         }
         int arrayPosition = utils.getElementPositionInArray(patrons, player);
@@ -239,6 +255,7 @@ public class turnstile extends script.base_script
         }
         return timestamps[arrayPosition] < getGameTime();
     }
+
     public static boolean cleanupExpiredPatrons(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -269,11 +286,13 @@ public class turnstile extends script.base_script
                 expired = utils.addElement(expired, patrons[i]);
             }
         }
-        for (Object anExpired : expired) {
+        for (Object anExpired : expired)
+        {
             removePatron(building, ((obj_id) anExpired));
         }
         return true;
     }
+
     public static boolean expirePatron(obj_id building, obj_id player) throws InterruptedException
     {
         if ((building == null) || (player == null))
@@ -288,7 +307,7 @@ public class turnstile extends script.base_script
         {
             removePatron(building, player);
         }
-        else 
+        else
         {
             return false;
         }

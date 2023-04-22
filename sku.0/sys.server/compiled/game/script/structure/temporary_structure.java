@@ -6,10 +6,12 @@ import script.library.sui;
 
 public class temporary_structure extends script.base_script
 {
+    public static final string_id SID_TERMINAL_MANAGEMENT_STATUS = new string_id("player_structure", "management_status");
+
     public temporary_structure()
     {
     }
-    public static final string_id SID_TERMINAL_MANAGEMENT_STATUS = new string_id("player_structure", "management_status");
+
     public int OnBuildingComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "temporary_structure::msgBuildingComplete");
@@ -33,21 +35,25 @@ public class temporary_structure extends script.base_script
         messageTo(owner, "OnRemoveStructure", new_params, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDestroyStructure(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.destroyStructure(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateConstruction", null, 180, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_TERMINAL_MANAGEMENT_STATUS, SID_TERMINAL_MANAGEMENT_STATUS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "temporary_structure::OnObjectMenuSelect");
@@ -58,6 +64,7 @@ public class temporary_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int statusMenuRefresh(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -71,10 +78,12 @@ public class temporary_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showConstructionStatus(obj_id self) throws InterruptedException
     {
         return showConstructionStatus(self, null);
     }
+
     public int showConstructionStatus(obj_id self, obj_id player) throws InterruptedException
     {
         int build_time = getIntObjVar(self, player_structure.VAR_DEED_BUILDTIME);
@@ -89,14 +98,14 @@ public class temporary_structure extends script.base_script
             {
                 sendSystemMessageTestingOnly(player, "Construction process restarted.");
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Construction restart failed.");
                 CustomerServiceLog("structure", "Building Marker " + self + "destroyed");
                 destroyObject(self);
             }
         }
-        else 
+        else
         {
             int[] conv_time = player_structure.convertSecondsTime(time);
             String time_str = player_structure.assembleTimeRemaining(conv_time);
@@ -111,6 +120,7 @@ public class temporary_structure extends script.base_script
         }
         return -1;
     }
+
     public boolean restartConstruction(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -122,7 +132,7 @@ public class temporary_structure extends script.base_script
         {
             params.put("template", getStringObjVar(self, player_structure.VAR_TEMP_TEMPLATE));
         }
-        else 
+        else
         {
             return false;
         }
@@ -130,7 +140,7 @@ public class temporary_structure extends script.base_script
         {
             params.put("rotation", getIntObjVar(self, player_structure.VAR_TEMP_ROTATION));
         }
-        else 
+        else
         {
             return false;
         }
@@ -138,7 +148,7 @@ public class temporary_structure extends script.base_script
         {
             params.put("owner", getObjIdObjVar(self, player_structure.VAR_TEMP_OWNER));
         }
-        else 
+        else
         {
             return false;
         }
@@ -156,7 +166,7 @@ public class temporary_structure extends script.base_script
         {
             deed_info.put("build_time", getIntObjVar(self, player_structure.VAR_DEED_BUILDTIME));
         }
-        else 
+        else
         {
             return false;
         }
@@ -164,7 +174,7 @@ public class temporary_structure extends script.base_script
         {
             deed_info.put("owner_name", getStringObjVar(self, player_structure.VAR_TEMP_OWNER_NAME));
         }
-        else 
+        else
         {
             return false;
         }
@@ -178,6 +188,7 @@ public class temporary_structure extends script.base_script
         messageTo(self, "OnBuildingComplete", params, buildtime, false);
         return true;
     }
+
     public int validateConstruction(obj_id self, dictionary params) throws InterruptedException
     {
         int timestamp = getIntObjVar(self, player_structure.VAR_DEED_TIMESTAMP);

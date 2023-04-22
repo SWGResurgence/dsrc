@@ -8,17 +8,19 @@ import script.player.base.base_player;
 
 public class house_control_device extends script.base_script
 {
-    public house_control_device()
-    {
-    }
     public static final string_id UNPACK_HOUSE = new string_id("sui", "unpack_house");
     public static final string_id SID_NO_PLACING_STRUCTURES_IN_SPACE = new string_id("space/space_interaction", "no_placing_structures_in_space");
     public static final String IN_USE_OBJVAR = "house_redeed.inUse";
+    public house_control_device()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", 1);
@@ -52,17 +54,20 @@ public class house_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
         trace.log("housepackup", "Structure control device " + self + ", contained by %TU has been destroyed.", player, trace.TL_CS_LOG);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id objPlayer, String[] strNames, String[] strAttribs) throws InterruptedException
     {
         int intIndex = utils.getValidAttributeIndex(strNames);
@@ -91,6 +96,7 @@ public class house_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -106,6 +112,7 @@ public class house_control_device extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_TERMINAL_MANAGEMENT_PAY, new string_id("player_structure", "management_pay"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasObjVar(self, "player_structure.deed.scene"))
@@ -153,10 +160,12 @@ public class house_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getContents(self);

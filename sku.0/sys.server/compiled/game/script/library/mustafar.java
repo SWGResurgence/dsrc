@@ -5,9 +5,6 @@ import script.*;
 
 public class mustafar extends script.base_script
 {
-    public mustafar()
-    {
-    }
     public static final String CONST_TBL_EVENT_DATA = "datatables/dungeon/mustafar_trials/obiwan_finale/obiwan_event_data.iff";
     public static final String STF_OBI_MSGS = "mustafar/obiwan_finale";
     public static final string_id SID_OBIWAN_BUSY = new string_id(STF_OBI_MSGS, "obi_busy_elsewhere");
@@ -15,24 +12,28 @@ public class mustafar extends script.base_script
     public static final string_id SID_NO_OBI_CONVO_YET = new string_id(STF_OBI_MSGS, "obiwan_finale_launch_before_convo");
     public static final string_id SID_NOT_READY = new string_id(STF_OBI_MSGS, "not_prepared");
     public static final string_id SID_MOUNTED = new string_id(STF_OBI_MSGS, "not_while_riding");
-    public static final String[] REQUIRED_QUEST_NAMES = 
-    {
-        "som_kenobi_collectors_business_1",
-        "som_kenobi_cursed_shard_2",
-        "som_kenobi_hidden_treasure_2",
-        "som_kenobi_historian_2",
-        "som_kenobi_moral_choice_1",
-        "som_kenobi_reunite_shard_3",
-        "som_kenobi_samaritan_1",
-        "som_kenobi_serpent_shard_1",
-        "som_kenobi_symbiosis_1"
-    };
+    public static final String[] REQUIRED_QUEST_NAMES =
+            {
+                    "som_kenobi_collectors_business_1",
+                    "som_kenobi_cursed_shard_2",
+                    "som_kenobi_hidden_treasure_2",
+                    "som_kenobi_historian_2",
+                    "som_kenobi_moral_choice_1",
+                    "som_kenobi_reunite_shard_3",
+                    "som_kenobi_samaritan_1",
+                    "som_kenobi_serpent_shard_1",
+                    "som_kenobi_symbiosis_1"
+            };
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public static final String STF = "som/som_quest";
     public static final String QUEST_ACCEPT_OK = "@" + STF + ":quest_accept_ok";
     public static final String QUEST_ACCEPT_CANCEL = "@" + STF + ":quest_accept_cancel";
     public static final String BEGIN_QUEST_PROMPT = "@" + STF + ":begin_quest_prompt";
     public static final String BEGIN_QUEST_TITLE = "@" + STF + ":begin_quest_title";
+    public mustafar()
+    {
+    }
+
     public static void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -40,14 +41,17 @@ public class mustafar extends script.base_script
             LOG("debug/mustafar/" + section, message);
         }
     }
+
     public static boolean canCallObiwan(obj_id player) throws InterruptedException
     {
         return canCallObiwan(player, null, false);
     }
+
     public static boolean canCallObiwan(obj_id player, obj_id recallObject) throws InterruptedException
     {
         return canCallObiwan(player, recallObject, false);
     }
+
     public static boolean canCallObiwan(obj_id player, obj_id recallObject, boolean giveFailureFeedback) throws InterruptedException
     {
         debugLogging("canCallObiwan: ", " entered.");
@@ -100,6 +104,7 @@ public class mustafar extends script.base_script
         LOG("space_dungeon", "theme_park.dungeon.mustafar_trials.obiwan_finale.obiwan_recall_object.canCallObiwan");
         return false;
     }
+
     public static boolean obiwanAlreadyPresent(obj_id player, boolean giveFailureFeedback) throws InterruptedException
     {
         debugLogging("obiwanAlreadyPresent: ", " entered.");
@@ -117,26 +122,32 @@ public class mustafar extends script.base_script
         debugLogging("obiwanAlreadyPresent: ", "there is no pre-existing obiwan object");
         return false;
     }
+
     public static obj_id callObiwan(obj_id player) throws InterruptedException
     {
         return callObiwan(player, null, false, 0);
     }
+
     public static obj_id callObiwan(obj_id player, boolean timeout) throws InterruptedException
     {
         return callObiwan(player, null, timeout, 0);
     }
+
     public static obj_id callObiwan(obj_id player, boolean timeout, int appearanceComment) throws InterruptedException
     {
         return callObiwan(player, null, timeout, appearanceComment);
     }
+
     public static obj_id callObiwan(obj_id player, obj_id landmark) throws InterruptedException
     {
         return callObiwan(player, landmark, false, 0);
     }
+
     public static obj_id callObiwan(obj_id player, obj_id landmark, boolean timeout) throws InterruptedException
     {
         return callObiwan(player, landmark, timeout, 0);
     }
+
     public static obj_id callObiwan(obj_id player, obj_id landmark, boolean timeout, int appearanceComment) throws InterruptedException
     {
         debugLogging("//***// callObiwan: ", "////>>>> entered.");
@@ -181,6 +192,7 @@ public class mustafar extends script.base_script
         }
         return obiwan;
     }
+
     public static void spawnContents(obj_id dungeon, String spawnType, int numberOfCopies) throws InterruptedException
     {
         debugLogging("//***// spawnContents: ", "////>>>> entered. SpawnType requested was: " + spawnType);
@@ -253,8 +265,8 @@ public class mustafar extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static boolean moveBossAround(String moveTargetName, obj_id boss, obj_id dungeon) throws InterruptedException
     {
         debugLogging("moveBoss: ", ">>>> entered.");
@@ -282,15 +294,19 @@ public class mustafar extends script.base_script
         ai.pathTo(boss, gotoLoc);
         return true;
     }
+
     public static boolean hasCompletedTrials(obj_id player) throws InterruptedException
     {
-        for (String requiredQuestName : REQUIRED_QUEST_NAMES) {
-            if (!groundquests.hasCompletedQuest(player, requiredQuestName)) {
+        for (String requiredQuestName : REQUIRED_QUEST_NAMES)
+        {
+            if (!groundquests.hasCompletedQuest(player, requiredQuestName))
+            {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean stillWithinDungeonCheck(obj_id player, obj_id dungeon) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(dungeon))
@@ -298,12 +314,9 @@ public class mustafar extends script.base_script
             return false;
         }
         obj_id currentTopMost = getTopMostContainer(player);
-        if (currentTopMost == dungeon)
-        {
-            return true;
-        }
-        return false;
+        return currentTopMost == dungeon;
     }
+
     public static void activateQuestAcceptSUI(obj_id player, obj_id self) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "handleQuestOfferResponse");

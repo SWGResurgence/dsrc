@@ -7,16 +7,18 @@ import script.ranged_int_custom_var;
 
 public class dressup extends script.base_script
 {
-    public dressup()
-    {
-    }
     public static final String NPC_DATATABLE = "datatables/npc_customization/npc.iff";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STORMTROOPER = "datatables/npc_customization/clothing/stormtrooper.iff";
+    public dressup()
+    {
+    }
+
     public static void dressNpc(obj_id npc, String clothesTable) throws InterruptedException
     {
         dressNpc(npc, clothesTable, false);
     }
+
     public static void dressNpc(obj_id npc, String clothesTable, boolean override) throws InterruptedException
     {
         if (!override && !isClothesWearing(npc))
@@ -50,7 +52,7 @@ public class dressup extends script.base_script
             {
                 debugServerConsoleMsg(npc, "LIBRARY.CREATE DRESSNPC ERROR: row was " + clothesNum + " and column was " + columnNum);
             }
-            else 
+            else
             {
                 PROFILER_START("createObject");
                 obj_id newClothes = createObject(clothes, npc, "");
@@ -59,7 +61,7 @@ public class dressup extends script.base_script
                 {
                     debugServerConsoleMsg(npc, "LIBRARY.CREATE DRESSNPC ERROR: unable to create " + clothes + " for npc " + getName(npc) + " objid: " + npc);
                 }
-                else 
+                else
                 {
                     setSpecificHue(newClothes, intX, clothesNum, clothesTable);
                 }
@@ -78,32 +80,33 @@ public class dressup extends script.base_script
             hue.randomizeObject(npc);
             PROFILER_STOP("hue.randomizeObject");
         }
-        else 
+        else
         {
             int designation = rand(1, 5);
             String StName = "TK-";
             switch (designation)
             {
                 case 1:
-                StName = "TK-";
-                break;
+                    StName = "TK-";
+                    break;
                 case 2:
-                StName = "GK-";
-                break;
+                    StName = "GK-";
+                    break;
                 case 3:
-                StName = "RK-";
-                break;
+                    StName = "RK-";
+                    break;
                 case 4:
-                StName = "LK-";
-                break;
+                    StName = "LK-";
+                    break;
                 case 5:
-                StName = "VK-";
-                break;
+                    StName = "VK-";
+                    break;
             }
             setName(npc, StName + rand(1, 820));
         }
         PROFILER_STOP("dressup.dressNpc.conclude" + clothesTable);
     }
+
     public static void equipNpcWeapon(obj_id npc, String weaponTable) throws InterruptedException
     {
         if (weaponTable.equals("none"))
@@ -148,6 +151,7 @@ public class dressup extends script.base_script
         }
         PROFILER_STOP("dressup.equipNpcWeapon." + weaponTable);
     }
+
     public static String chooseRandomWeapon(String weaponTable, int columnNumber) throws InterruptedException
     {
         if ((dataTableGetNumColumns(weaponTable) - 1) < columnNumber)
@@ -161,16 +165,17 @@ public class dressup extends script.base_script
             {
                 return null;
             }
-            else 
+            else
             {
                 return weaponList[rand(0, (weaponList.length - 1))];
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static void hueClothes(obj_id newClothes, String clothes) throws InterruptedException
     {
         custom_var[] allVars = getAllCustomVars(newClothes);
@@ -179,13 +184,16 @@ public class dressup extends script.base_script
             return;
         }
         PROFILER_START("dressup.hueClothes.loop." + allVars.length);
-        for (custom_var cv : allVars) {
-            if (cv.isPalColor()) {
+        for (custom_var cv : allVars)
+        {
+            if (cv.isPalColor())
+            {
                 ranged_int_custom_var ri = (ranged_int_custom_var) cv;
                 int min = ri.getMinRangeInclusive();
                 int max = ri.getMaxRangeInclusive();
                 int randVal = rand(min, max);
-                if (max > 128) {
+                if (max > 128)
+                {
                     max = max - 128;
                 }
                 ri.setValue(randVal);
@@ -193,6 +201,7 @@ public class dressup extends script.base_script
         }
         PROFILER_STOP("dressup.hueClothes.loop." + allVars.length);
     }
+
     public static void setSpecificHue(obj_id newClothes, int col, int row, String datatable) throws InterruptedException
     {
         PROFILER_START("dressup.setSpecificHue");
@@ -201,15 +210,15 @@ public class dressup extends script.base_script
         {
             hueClothes(newClothes, datatable);
         }
-        else 
+        else
         {
             int maxColor = dataTableGetInt(datatable, row, col + 1);
             hue.setColor(newClothes, 1, minColor);
             hue.setColor(newClothes, 2, maxColor);
         }
         PROFILER_STOP("dressup.setSpecificHue");
-        return;
     }
+
     public static void setWeaponDamage(obj_id npc, obj_id weapon) throws InterruptedException
     {
         if (npc == null)
@@ -233,6 +242,7 @@ public class dressup extends script.base_script
         setWeaponMinDamage(weapon, intMinDamage);
         weapons.setWeaponData(weapon);
     }
+
     public static boolean isClothesWearing(obj_id npc) throws InterruptedException
     {
         String tempName = getTemplateName(npc);
@@ -248,12 +258,9 @@ public class dressup extends script.base_script
         {
             return false;
         }
-        else if (tempName.contains("gungan"))
-        {
-            return false;
-        }
-        return true;
+        else return !tempName.contains("gungan");
     }
+
     public static void giveHair(obj_id npc) throws InterruptedException
     {
         PROFILER_START("dressup.giveHair");
@@ -290,8 +297,8 @@ public class dressup extends script.base_script
         obj_id setHair = createObject(hair, npc, "");
         hueClothes(setHair, hair);
         PROFILER_STOP("dressup.giveHair");
-        return;
     }
+
     public static boolean setFactionRecruiter(obj_id npc, String faction) throws InterruptedException
     {
         if (npc == null || npc == obj_id.NULL_ID)

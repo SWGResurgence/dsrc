@@ -7,94 +7,95 @@ import java.util.Vector;
 
 public class dump extends script.base_script
 {
+    public static final String DATATABLE_FS_QUESTS = "datatables/player/quests.iff";
+    public static final String[] SPACE_QUEST_TYPES =
+            {
+                    "assassinate",
+                    "delivery",
+                    "delivery_no_pickup",
+                    "destroy",
+                    "destroy_duty",
+                    "destroy_surpriseattack",
+                    "escort",
+                    "escort_duty",
+                    "inspect",
+                    "patrol",
+                    "recovery",
+                    "recovery_duty",
+                    "rescue",
+                    "rescue_duty",
+                    "space_battle",
+                    "survival"
+            };
+    public static final String[][] KNOWN_CHARACTER_SLOTS =
+            {
+
+                    {
+                            "hat",
+                            "earring_l",
+                            "earring_r",
+                            "eyes",
+                            "neck",
+                            "chest1",
+                            "chest2",
+                            "chest3_l",
+                            "chest3_r",
+                            "back",
+                            "cloak",
+                            "bicep_l",
+                            "bicep_r",
+                            "bracer_upper_r",
+                            "bracer_lower_r",
+                            "bracer_upper_l",
+                            "bracer_lower_l",
+                            "wrist_l",
+                            "wrist_r",
+                            "gloves",
+                            "hold_r",
+                            "hold_l",
+                            "ring_l",
+                            "ring_r",
+                            "utility_belt",
+                            "pants1",
+                            "pants2",
+                            "shoes"
+                    },
+
+                    {
+                            "Hat: ",
+                            "Left ear ring: ",
+                            "Right ear ring: ",
+                            "Eyes: ",
+                            "Neck: ",
+                            "Primary chest: ",
+                            "Secondary chest: ",
+                            "Trinary chest left",
+                            "Trinary chest right",
+                            "Back:",
+                            "Cloak: ",
+                            "Left bicep: ",
+                            "Right bicep: ",
+                            "Upper right bracer: ",
+                            "Lower right bracer: ",
+                            "Upper left bracer: ",
+                            "Left lower bracer: ",
+                            "Left wrist: ",
+                            "Right wrist: ",
+                            "Gloves: ",
+                            "Holding right hand: ",
+                            "Holding left hand: ",
+                            "Left ring: ",
+                            "Right ring: ",
+                            "Belt: ",
+                            "Primary pants: ",
+                            "Secondary pants: ",
+                            "Shoes: "
+                    }
+            };
     public dump()
     {
     }
-    public static final String DATATABLE_FS_QUESTS = "datatables/player/quests.iff";
-    public static final String[] SPACE_QUEST_TYPES = 
-    {
-        "assassinate",
-        "delivery",
-        "delivery_no_pickup",
-        "destroy",
-        "destroy_duty",
-        "destroy_surpriseattack",
-        "escort",
-        "escort_duty",
-        "inspect",
-        "patrol",
-        "recovery",
-        "recovery_duty",
-        "rescue",
-        "rescue_duty",
-        "space_battle",
-        "survival"
-    };
-    public static final String[][] KNOWN_CHARACTER_SLOTS = 
-    {
-        
-        {
-            "hat",
-            "earring_l",
-            "earring_r",
-            "eyes",
-            "neck",
-            "chest1",
-            "chest2",
-            "chest3_l",
-            "chest3_r",
-            "back",
-            "cloak",
-            "bicep_l",
-            "bicep_r",
-            "bracer_upper_r",
-            "bracer_lower_r",
-            "bracer_upper_l",
-            "bracer_lower_l",
-            "wrist_l",
-            "wrist_r",
-            "gloves",
-            "hold_r",
-            "hold_l",
-            "ring_l",
-            "ring_r",
-            "utility_belt",
-            "pants1",
-            "pants2",
-            "shoes"
-        },
-        
-        {
-            "Hat: ",
-            "Left ear ring: ",
-            "Right ear ring: ",
-            "Eyes: ",
-            "Neck: ",
-            "Primary chest: ",
-            "Secondary chest: ",
-            "Trinary chest left",
-            "Trinary chest right",
-            "Back:",
-            "Cloak: ",
-            "Left bicep: ",
-            "Right bicep: ",
-            "Upper right bracer: ",
-            "Lower right bracer: ",
-            "Upper left bracer: ",
-            "Left lower bracer: ",
-            "Left wrist: ",
-            "Right wrist: ",
-            "Gloves: ",
-            "Holding right hand: ",
-            "Holding left hand: ",
-            "Left ring: ",
-            "Right ring: ",
-            "Belt: ",
-            "Primary pants: ",
-            "Secondary pants: ",
-            "Shoes: "
-        }
-    };
+
     public static String getTargetInfoStringByLong(long lTarget) throws InterruptedException
     {
         obj_id target = obj_id.getObjId(lTarget);
@@ -104,6 +105,7 @@ public class dump extends script.base_script
         }
         return getTargetInfoString(target);
     }
+
     public static String getTargetInfoString(obj_id objTarget) throws InterruptedException
     {
         String strTest = "Object: " + objTarget + "\r\n";
@@ -175,7 +177,8 @@ public class dump extends script.base_script
             }
             strTest += "=====================SHIP STATS BELOW====================\r\n";
             int[] intSlots = space_crafting.getShipInstalledSlots(objTarget);
-            for (int intSlot : intSlots) {
+            for (int intSlot : intSlots)
+            {
                 strTest += getShipComponentDebugString(objTarget, intSlot) + "\r\n";
             }
         }
@@ -190,6 +193,7 @@ public class dump extends script.base_script
         }
         return strTest;
     }
+
     public static String getReadableObjVars(obj_id objTarget) throws InterruptedException
     {
         String strObjVars = getPackedObjvars(objTarget);
@@ -208,29 +212,35 @@ public class dump extends script.base_script
         }
         return strTest;
     }
+
     public static String getReadableScripts(obj_id objTarget) throws InterruptedException
     {
         String[] strScriptArray = getScriptList(objTarget);
         String strScripts = "";
-        for (String s : strScriptArray) {
+        for (String s : strScriptArray)
+        {
             String script = s;
-            if (script.contains("script.")) {
+            if (script.contains("script."))
+            {
                 script = script.substring(7);
                 strScripts += script + "\r\n";
             }
         }
         return strScripts;
     }
+
     public static String getReadableScriptVars(obj_id objTarget) throws InterruptedException
     {
         deltadictionary dctScriptVars = objTarget.getScriptVars();
         return dctScriptVars.toString();
     }
+
     public static String getReadableLocalVars(obj_id objTarget) throws InterruptedException
     {
         dictionary dd = objTarget.getScriptDictionary();
         return dd.toString();
     }
+
     public static String getReadableContainmentTree(obj_id objTarget) throws InterruptedException
     {
         final int MAX_DEPTH = 32;
@@ -253,6 +263,7 @@ public class dump extends script.base_script
         readableContainmentTree += "<world>\n";
         return readableContainmentTree;
     }
+
     public static String getReadableContainer(obj_id container) throws InterruptedException
     {
         int type = getContainerType(container);
@@ -268,38 +279,59 @@ public class dump extends script.base_script
         }
         return container + " type=" + type + " " + template + "\n\t" + loc + "\n";
     }
+
     public static String getReadableEnemyFlags(obj_id objTarget) throws InterruptedException
     {
         String readableEnemyFlags = "";
         String[] enemies = pvpGetEnemyFlags(objTarget);
         if (enemies != null)
         {
-            for (String enemy : enemies) {
+            for (String enemy : enemies)
+            {
                 StringTokenizer st = new StringTokenizer(enemy);
                 String sTarget = st.nextToken();
                 String sTargetName = getPlayerName(utils.stringToObjId(sTarget));
                 String sTefFac = st.nextToken();
                 int iTefFac = utils.stringToInt(sTefFac);
                 String sTefFacName = "<unknown>";
-                if (iTefFac == (-526735576)) {
+                if (iTefFac == (-526735576))
+                {
                     sTefFacName = "battlefield";
-                } else if (iTefFac == (1183528962)) {
+                }
+                else if (iTefFac == (1183528962))
+                {
                     sTefFacName = "duel";
-                } else if (iTefFac == (-429740311)) {
+                }
+                else if (iTefFac == (-429740311))
+                {
                     sTefFacName = "bountyduel";
-                } else if (iTefFac == (221551254)) {
+                }
+                else if (iTefFac == (221551254))
+                {
                     sTefFacName = "nonaggressive";
-                } else if (iTefFac == (-160237431)) {
+                }
+                else if (iTefFac == (-160237431))
+                {
                     sTefFacName = "unattackable";
-                } else if (iTefFac == (84709322)) {
+                }
+                else if (iTefFac == (84709322))
+                {
                     sTefFacName = "bountytarget";
-                } else if (iTefFac == (-1526926610)) {
+                }
+                else if (iTefFac == (-1526926610))
+                {
                     sTefFacName = "guildwarcooldownperiod";
-                } else if (iTefFac == (-615855020)) {
+                }
+                else if (iTefFac == (-615855020))
+                {
                     sTefFacName = "imperial";
-                } else if (iTefFac == (370444368)) {
+                }
+                else if (iTefFac == (370444368))
+                {
                     sTefFacName = "rebel";
-                } else if (iTefFac == (-377582139)) {
+                }
+                else if (iTefFac == (-377582139))
+                {
                     sTefFacName = "bubblecombat";
                 }
                 String sExpiration = st.nextToken();
@@ -322,27 +354,36 @@ public class dump extends script.base_script
         }
         return readableEnemyFlags;
     }
+
     public static String getReadableBountyMissions(obj_id objTarget) throws InterruptedException
     {
         String readableBountyMissions = "";
         obj_id[] objMissions = getMissionObjects(objTarget);
         if (objMissions != null)
         {
-            for (obj_id objMission : objMissions) {
+            for (obj_id objMission : objMissions)
+            {
                 String missionType = getMissionType(objMission);
-                if (missionType.equals("bounty")) {
+                if (missionType.equals("bounty"))
+                {
                     readableBountyMissions += "mission id: ";
                     readableBountyMissions += objMission;
                     readableBountyMissions += ", target id: ";
-                    if (hasObjVar(objMission, "objTarget")) {
+                    if (hasObjVar(objMission, "objTarget"))
+                    {
                         readableBountyMissions += getObjIdObjVar(objMission, "objTarget");
-                    } else {
+                    }
+                    else
+                    {
                         readableBountyMissions += "NPC";
                     }
                     readableBountyMissions += ", target name: ";
-                    if (hasObjVar(objMission, "strTargetName")) {
+                    if (hasObjVar(objMission, "strTargetName"))
+                    {
                         readableBountyMissions += getStringObjVar(objMission, "strTargetName");
-                    } else {
+                    }
+                    else
+                    {
                         readableBountyMissions += "<unset>";
                     }
                     readableBountyMissions += "\r\n";
@@ -355,13 +396,15 @@ public class dump extends script.base_script
         }
         return readableBountyMissions;
     }
+
     public static String getReadableBounties(obj_id objTarget) throws InterruptedException
     {
         String readableBounties = "";
         obj_id[] bounties = getBountyHunterBounties(objTarget);
         if (bounties != null)
         {
-            for (obj_id bounty : bounties) {
+            for (obj_id bounty : bounties)
+            {
                 readableBounties += bounty;
                 readableBounties += " (";
                 readableBounties += getPlayerName(bounty);
@@ -375,13 +418,15 @@ public class dump extends script.base_script
         }
         return readableBounties;
     }
+
     public static String getReadableBountyHunters(obj_id objTarget) throws InterruptedException
     {
         String readableBountyHunters = "";
         obj_id[] hunters = getJediBounties(objTarget);
         if (hunters != null)
         {
-            for (obj_id hunter : hunters) {
+            for (obj_id hunter : hunters)
+            {
                 readableBountyHunters += hunter;
                 readableBountyHunters += " (";
                 readableBountyHunters += getPlayerName(hunter);
@@ -395,6 +440,7 @@ public class dump extends script.base_script
         }
         return readableBountyHunters;
     }
+
     public static String getReadableFsQuests(obj_id objTarget) throws InterruptedException
     {
         String readableFsQuests = "";
@@ -438,7 +484,7 @@ public class dump extends script.base_script
         java.util.Enumeration enum_ = questMap.keys();
         while (enum_.hasMoreElements())
         {
-            String questName = (String)enum_.nextElement();
+            String questName = (String) enum_.nextElement();
             dictionary childQuestDict = questMap.getDictionary(questName);
             String parentQuestName = childQuestDict.getString("parentQuest");
             if (parentQuestName != null)
@@ -459,7 +505,7 @@ public class dump extends script.base_script
         enum_ = questMap.keys();
         while (enum_.hasMoreElements())
         {
-            String questName = (String)enum_.nextElement();
+            String questName = (String) enum_.nextElement();
             dictionary d = questMap.getDictionary(questName);
             if (d.containsKey("parentQuest"))
             {
@@ -470,6 +516,7 @@ public class dump extends script.base_script
         }
         return readableFsQuests;
     }
+
     public static String getReadableFsQuestChildren(dictionary questMap, String questName, int indentLevel) throws InterruptedException
     {
         String readableFsQuestChildren = "";
@@ -477,13 +524,15 @@ public class dump extends script.base_script
         String[] childQuests = d.getStringArray("childQuests");
         if (childQuests != null)
         {
-            for (String childQuest : childQuests) {
+            for (String childQuest : childQuests)
+            {
                 readableFsQuestChildren += getReadableFsQuest(questMap, childQuest, indentLevel);
                 readableFsQuestChildren += getReadableFsQuestChildren(questMap, childQuest, indentLevel + 1);
             }
         }
         return readableFsQuestChildren;
     }
+
     public static String getReadableFsQuest(dictionary questMap, String questName, int indentLevel) throws InterruptedException
     {
         String readableFsQuest = "";
@@ -496,7 +545,7 @@ public class dump extends script.base_script
         {
             readableFsQuest += "[x] ";
         }
-        else 
+        else
         {
             readableFsQuest += "[ ] ";
         }
@@ -516,6 +565,7 @@ public class dump extends script.base_script
         readableFsQuest += "\n";
         return readableFsQuest;
     }
+
     public static String getReadableFsBranchesUnlocked(obj_id objTarget) throws InterruptedException
     {
         String branch_list = "";
@@ -533,6 +583,7 @@ public class dump extends script.base_script
         }
         return branch_list;
     }
+
     public static String getReadableSpaceQuests(obj_id objTarget) throws InterruptedException
     {
         String readableSpaceQuests = "";
@@ -542,18 +593,19 @@ public class dump extends script.base_script
             java.util.Enumeration typeEnum = typeList.keys();
             while (typeEnum.hasMoreElements())
             {
-                String questType = (String)typeEnum.nextElement();
+                String questType = (String) typeEnum.nextElement();
                 obj_var_list questList = typeList.getObjVarList(questType);
                 java.util.Enumeration questEnum = questList.keys();
                 while (questEnum.hasMoreElements())
                 {
-                    String questName = (String)questEnum.nextElement();
+                    String questName = (String) questEnum.nextElement();
                     readableSpaceQuests += getReadableSpaceQuest(objTarget, questType, questName);
                 }
             }
         }
         return readableSpaceQuests;
     }
+
     public static String getReadableSpaceQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         String readableSpaceQuest = "";
@@ -567,7 +619,7 @@ public class dump extends script.base_script
         {
             readableSpaceQuest += "[ ]";
         }
-        else 
+        else
         {
             readableSpaceQuest += "???";
         }
@@ -607,6 +659,7 @@ public class dump extends script.base_script
         readableSpaceQuest += "\n";
         return readableSpaceQuest;
     }
+
     public static String csTargetDump(obj_id self, obj_id objTarget, boolean colorFlag) throws InterruptedException
     {
         String strTest = "";
@@ -680,7 +733,7 @@ public class dump extends script.base_script
                     strTest += "Guild Abbrev.: " + guildGetAbbrev(guildId) + "\r\n";
                     strTest += "Guild Leader Name & OID: " + getName(guildGetLeader(guildId)) + " " + guildGetLeader(guildId) + "\r\n";
                 }
-                else 
+                else
                 {
                     strTest += "No guild\r\n";
                 }
@@ -695,8 +748,10 @@ public class dump extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (s.indexOf("_modified") > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (s.indexOf("_modified") > 0)
+                            {
                                 int underscoreIdx = s.indexOf("_");
                                 String nonModifiedSkillname = s.substring(0, underscoreIdx);
                                 strTest += localize(new string_id("stat_n", s)) + ": " + getSkillStatisticModifier(objTarget, nonModifiedSkillname) + "\r\n";
@@ -709,9 +764,12 @@ public class dump extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (s.indexOf("expertise_") == 0) {
-                                if (getSkillStatisticModifier(objTarget, s) > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (s.indexOf("expertise_") == 0)
+                            {
+                                if (getSkillStatisticModifier(objTarget, s) > 0)
+                                {
                                     strTest += localize(new string_id("stat_n", s)) + ": " + getSkillStatisticModifier(objTarget, s) + "\r\n";
                                 }
                             }
@@ -723,8 +781,10 @@ public class dump extends script.base_script
                 {
                     if (arrayLength > 0)
                     {
-                        for (String s : allSkillModsList) {
-                            if (getEnhancedSkillStatisticModifierUncapped(objTarget, s) > 0) {
+                        for (String s : allSkillModsList)
+                        {
+                            if (getEnhancedSkillStatisticModifierUncapped(objTarget, s) > 0)
+                            {
                                 strTest += localize(new string_id("stat_n", s)) + " ( " + s + " ): " + getEnhancedSkillStatisticModifierUncapped(objTarget, s) + "\r\n";
                             }
                         }
@@ -740,7 +800,7 @@ public class dump extends script.base_script
                 {
                     strTest += "current faction: Rebel \r\n";
                 }
-                else 
+                else
                 {
                     strTest += "current faction: Neutral \r\n";
                 }
@@ -759,33 +819,39 @@ public class dump extends script.base_script
                 int[] buffs = _getAllBuffs(objTarget);
                 if (buffs != null && buffs.length != 0)
                 {
-                    for (int b : buffs) {
+                    for (int b : buffs)
+                    {
                         obj_id buffOwner = null;
                         String buffName = buff.getBuffNameFromCrc(b);
                         float duration = buff.getDuration(buffName);
                         boolean debuff = buff.isDebuff(buffName);
                         boolean groupBuff = buff.isGroupBuff(buffName);
                         boolean ownedBuff = buff.isOwnedBuff(buffName);
-                        if (ownedBuff) {
+                        if (ownedBuff)
+                        {
                             buffOwner = buff.getBuffOwner(objTarget, buffName);
                         }
                         strTest += buffName + "\r\nDuration: " + duration + "\r\n";
-                        if (debuff) {
+                        if (debuff)
+                        {
                             strTest += "Debuff: " + debuff + "\r\n";
                         }
-                        if (groupBuff) {
+                        if (groupBuff)
+                        {
                             strTest += "Group buff: " + debuff + "\r\n";
                         }
-                        if (ownedBuff) {
+                        if (ownedBuff)
+                        {
                             strTest += "Owned buff: " + ownedBuff + "\r\n";
-                            if (isIdValid(buffOwner)) {
+                            if (isIdValid(buffOwner))
+                            {
                                 strTest += "Buff Owner: " + getName(buffOwner) + "\r\n";
                             }
                             strTest += "Owner OID: " + buffOwner + "\r\n";
                         }
                     }
                 }
-                else 
+                else
                 {
                     strTest += "No buffs" + "\r\n";
                 }
@@ -842,11 +908,12 @@ public class dump extends script.base_script
             if (skillList != null && skillList.length > 0)
             {
                 strTest += "\r\nSKILLS:\r\n";
-                for (String s : skillList) {
+                for (String s : skillList)
+                {
                     strTest += s + "\r\n";
                 }
             }
-            else 
+            else
             {
                 strTest += "\r\nSKILLS:\r\n";
                 strTest += "none\r\n";
@@ -855,11 +922,12 @@ public class dump extends script.base_script
             if (allQuests != null && allQuests.length > 0)
             {
                 strTest += "\r\nGROUND AND SPACE QUESTS:\r\n";
-                for (String allQuest : allQuests) {
+                for (String allQuest : allQuests)
+                {
                     strTest += allQuest + "\r\n";
                 }
             }
-            else 
+            else
             {
                 strTest += "\r\nGROUND AND SPACE QUESTS:\r\n";
                 strTest += "none\r\n";
@@ -903,7 +971,7 @@ public class dump extends script.base_script
                                         }
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     strTest += "nothing in saber.\r\n";
                                 }
@@ -919,9 +987,12 @@ public class dump extends script.base_script
                 obj_id[] objContents = utils.getContents(targetDatapad, true);
                 if (objContents != null && objContents.length > 0)
                 {
-                    for (obj_id objContent : objContents) {
-                        if (isIdValid(objContent)) {
-                            if (getTemplateName(objContent) != null) {
+                    for (obj_id objContent : objContents)
+                    {
+                        if (isIdValid(objContent))
+                        {
+                            if (getTemplateName(objContent) != null)
+                            {
                                 strTest += "\tTemplate: " + getTemplateName(objContent) + "\r\n";
                                 strTest += "\tOID: " + objContent + "\r\n";
                                 strTest += getObjectVariables(self, objContent);
@@ -930,7 +1001,7 @@ public class dump extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     strTest += "no datpad items.\r\n";
                 }
@@ -942,7 +1013,7 @@ public class dump extends script.base_script
                 strTest += enemyFlags;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -953,7 +1024,7 @@ public class dump extends script.base_script
                 strTest += playerBountyMissions;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -964,7 +1035,7 @@ public class dump extends script.base_script
                 strTest += playerBounties;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -975,7 +1046,7 @@ public class dump extends script.base_script
                 strTest += huntersOfPlayer;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -986,7 +1057,7 @@ public class dump extends script.base_script
                 strTest += fsQuestData;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -997,7 +1068,7 @@ public class dump extends script.base_script
                 strTest += fsBranchesUnlocked;
                 strTest += "\n\r";
             }
-            else 
+            else
             {
                 strTest += "none\n\r";
             }
@@ -1096,7 +1167,8 @@ public class dump extends script.base_script
             }
             strTest += "SHIP STATS BELOW\r\n";
             int[] intSlots = space_crafting.getShipInstalledSlots(objTarget);
-            for (int intSlot : intSlots) {
+            for (int intSlot : intSlots)
+            {
                 strTest += getShipComponentDebugString(objTarget, intSlot);
                 strTest += "\n\r";
             }
@@ -1120,6 +1192,7 @@ public class dump extends script.base_script
         }
         return strTest;
     }
+
     public static String getObjectVariables(obj_id self, obj_id item) throws InterruptedException
     {
         String objvariable = "";
@@ -1139,6 +1212,7 @@ public class dump extends script.base_script
         }
         return objvariable;
     }
+
     public static obj_id findDumpTarget(obj_id self) throws InterruptedException
     {
         obj_id intendedTarget = getIntendedTarget(self);
@@ -1154,6 +1228,7 @@ public class dump extends script.base_script
         }
         return finalTarget;
     }
+
     public static String getAllCompletedCollections(obj_id player, String[] collectionBooks) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1165,13 +1240,18 @@ public class dump extends script.base_script
             return null;
         }
         String retrunString = "";
-        for (String collectionBook : collectionBooks) {
+        for (String collectionBook : collectionBooks)
+        {
             String[] completedCollections = getCompletedCollectionsInBook(player, collectionBook);
-            if (completedCollections == null || completedCollections.length <= 0) {
+            if (completedCollections == null || completedCollections.length <= 0)
+            {
                 continue;
-            } else {
+            }
+            else
+            {
                 retrunString += "\t" + collectionBook + "\r\n";
-                for (String completedCollection : completedCollections) {
+                for (String completedCollection : completedCollections)
+                {
                     int sizeOf = completedCollection.length();
                     retrunString += "\t\t" + completedCollection + "\r\n";
                 }
@@ -1179,6 +1259,7 @@ public class dump extends script.base_script
         }
         return retrunString;
     }
+
     public static String getAllIncompleteCollections(obj_id player, String[] collectionBooks) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1190,37 +1271,47 @@ public class dump extends script.base_script
             return null;
         }
         String returnString = "";
-        for (String collectionBook : collectionBooks) {
+        for (String collectionBook : collectionBooks)
+        {
             returnString += "\t" + collectionBook + "\r\n";
             String[] allCollections = getAllCollectionsInBook(collectionBook);
-            if (allCollections == null || allCollections.length <= 0) {
+            if (allCollections == null || allCollections.length <= 0)
+            {
                 continue;
             }
             boolean hasCollectionDataForBook = false;
-            for (String allCollection : allCollections) {
-                if (hasCompletedCollection(player, allCollection)) {
+            for (String allCollection : allCollections)
+            {
+                if (hasCompletedCollection(player, allCollection))
+                {
                     continue;
                 }
                 String[] allSlots = getAllCollectionSlotsInCollection(allCollection);
-                if (allSlots == null || allSlots.length <= 0) {
+                if (allSlots == null || allSlots.length <= 0)
+                {
                     continue;
                 }
                 boolean startedNotFinished = false;
-                for (String allSlot1 : allSlots) {
-                    if (getCollectionSlotValue(player, allSlot1) > 0) {
+                for (String allSlot1 : allSlots)
+                {
+                    if (getCollectionSlotValue(player, allSlot1) > 0)
+                    {
                         startedNotFinished = true;
                         break;
                     }
                 }
-                if (startedNotFinished) {
+                if (startedNotFinished)
+                {
                     returnString += "\t\t" + allCollection + "\r\n";
                     hasCollectionDataForBook = true;
-                    for (String allSlot : allSlots) {
+                    for (String allSlot : allSlots)
+                    {
                         returnString += "\t\t\t" + allSlot + ": " + getCollectionSlotValue(player, allSlot) + "\r\n";
                     }
                 }
             }
-            if (!hasCollectionDataForBook) {
+            if (!hasCollectionDataForBook)
+            {
                 returnString += "\t\tNone\r\n";
             }
         }

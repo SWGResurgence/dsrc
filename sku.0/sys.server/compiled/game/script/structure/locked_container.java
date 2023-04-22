@@ -37,6 +37,7 @@ public class locked_container extends script.base_script
     public static final string_id SID_LOCK_REMOVE_ACCESSOR_NOT_FOUND = new string_id("spam", "sid_lock_remove_accessor_not_found");
     public static final String OBJVAR_PLAYER_ACCESS_LIST = "tangible_object.accessList";
     public static final String OBJVAR_GUILD_ACCESS_LIST = "tangible_object.guildAccessList";
+
     public void addGuildToAccess(obj_id container, int guildId) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container) || guildId == 0)
@@ -45,6 +46,7 @@ public class locked_container extends script.base_script
         }
         addGuildToAccessList(container, guildId);
     }
+
     public void removeGuildFromAccess(obj_id container, int guildId) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container) || guildId == 0)
@@ -53,6 +55,7 @@ public class locked_container extends script.base_script
         }
         removeGuildFromAccessList(container, guildId);
     }
+
     public void clearGuildAccess(obj_id container) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container))
@@ -61,6 +64,7 @@ public class locked_container extends script.base_script
         }
         clearGuildAccessList(container);
     }
+
     public int[] getGuildAccess(obj_id container) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container))
@@ -69,6 +73,7 @@ public class locked_container extends script.base_script
         }
         return getIntArrayObjVar(container, OBJVAR_GUILD_ACCESS_LIST);
     }
+
     public void addPlayerToAccess(obj_id container, obj_id player) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container) || !isIdValid(player))
@@ -77,6 +82,7 @@ public class locked_container extends script.base_script
         }
         addUserToAccessList(container, player);
     }
+
     public void removePlayerFromAccess(obj_id container, obj_id player) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container) || !isIdValid(player))
@@ -85,6 +91,7 @@ public class locked_container extends script.base_script
         }
         removeUserFromAccessList(container, player);
     }
+
     public void clearPlayerAccess(obj_id container) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container))
@@ -93,6 +100,7 @@ public class locked_container extends script.base_script
         }
         clearUserAccessList(container);
     }
+
     public obj_id[] getPlayerAccess(obj_id container) throws InterruptedException
     {
         if (!isIdValid(container) || !exists(container))
@@ -101,6 +109,7 @@ public class locked_container extends script.base_script
         }
         return getObjIdArrayObjVar(container, OBJVAR_PLAYER_ACCESS_LIST);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -121,6 +130,7 @@ public class locked_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id lockedBy = getObjIdObjVar(self, "lock_owner");
@@ -154,6 +164,7 @@ public class locked_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id lockedBy = getObjIdObjVar(self, "lock_owner");
@@ -211,17 +222,20 @@ public class locked_container extends script.base_script
             {
                 guildsCount = guildsWithAccess.length;
             }
-            if (guildsWithAccess != null && guildsWithAccess.length > 0)
+            if (guildsWithAccess != null)
             {
-                for (int guildsWithAccess1 : guildsWithAccess) {
+                for (int guildsWithAccess1 : guildsWithAccess)
+                {
                     utils.addElement(accessList, "Guild: " + guildGetName(guildsWithAccess1));
                 }
             }
-            if (accessors != null && accessors.length > 0)
+            if (accessors != null)
             {
-                for (obj_id accessor : accessors) {
-                    if (isIdValid(accessor)) {
-                        utils.addElement(accessList, "" + getPlayerFullName(accessor));
+                for (obj_id accessor : accessors)
+                {
+                    if (isIdValid(accessor))
+                    {
+                        utils.addElement(accessList, getPlayerFullName(accessor));
                     }
                 }
             }
@@ -230,6 +244,7 @@ public class locked_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lockAddPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -242,7 +257,7 @@ public class locked_container extends script.base_script
                 addPlayerToAccess(self, target);
                 sendSystemMessage(player, SID_LOCK_ADDED_PLAYER);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.actor.set(accessorName);
@@ -252,6 +267,7 @@ public class locked_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lockRemovePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -269,7 +285,7 @@ public class locked_container extends script.base_script
                 removePlayerFromAccess(self, target);
                 sendSystemMessage(player, SID_LOCK_REMOVED_PLAYER);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.actor.set(accessorName);
@@ -279,6 +295,7 @@ public class locked_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lockAddGuild(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -290,11 +307,14 @@ public class locked_container extends script.base_script
             {
                 int[] guildsOnContainer = getGuildAccess(self);
                 boolean addable = true;
-                if (guildsOnContainer != null && guildsOnContainer.length > 0)
+                if (guildsOnContainer != null)
                 {
-                    for (int i1 : guildsOnContainer) {
-                        if (i1 == guildId) {
+                    for (int i1 : guildsOnContainer)
+                    {
+                        if (i1 == guildId)
+                        {
                             addable = false;
+                            break;
                         }
                     }
                 }
@@ -303,18 +323,19 @@ public class locked_container extends script.base_script
                     addGuildToAccess(self, guildId);
                     sendSystemMessage(player, SID_LOCK_ADDED_GUILD);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_LOCK_GUILD_ALREADY_ADDED);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_LOCK_GUILD_NOT_FOUND);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int lockRemoveGuild(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -326,11 +347,14 @@ public class locked_container extends script.base_script
             {
                 int[] guildsOnContainer = getGuildAccess(self);
                 boolean removable = false;
-                if (guildsOnContainer != null && guildsOnContainer.length > 0)
+                if (guildsOnContainer != null)
                 {
-                    for (int i1 : guildsOnContainer) {
-                        if (i1 == guildId) {
+                    for (int i1 : guildsOnContainer)
+                    {
+                        if (i1 == guildId)
+                        {
                             removable = true;
+                            break;
                         }
                     }
                 }
@@ -339,12 +363,12 @@ public class locked_container extends script.base_script
                     removeGuildFromAccess(self, guildId);
                     sendSystemMessage(player, SID_LOCK_REMOVED_GUILD);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_LOCK_GUILD_NOT_ADDED);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_LOCK_GUILD_NOT_FOUND);
             }

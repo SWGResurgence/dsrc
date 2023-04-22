@@ -6,9 +6,6 @@ import script.string_id;
 
 public class temp_schematic extends script.base_script
 {
-    public temp_schematic()
-    {
-    }
     public static final int DEFAULT_USE_COUNT = 1;
     public static final String VAR_TEMP_SCHEMATIC_BASE = "temp_schematic";
     public static final String VAR_TEMP_SCHEMATIC_BIO_LINK = "bioLinkSchematic.schematic";
@@ -21,10 +18,15 @@ public class temp_schematic extends script.base_script
     public static final String LIMITED_USE_DATA_TABLE = "datatables/crafting/limited_use_schematics.iff";
     public static final String COL_SCHEMATIC_NAME = "schematic_name";
     public static final String COL_SCHEMATIC_USES = "schematic_uses";
+    public temp_schematic()
+    {
+    }
+
     public static boolean grant(obj_id player, String schematic, int useCount) throws InterruptedException
     {
         return grant(player, obj_id.NULL_ID, schematic, useCount);
     }
+
     public static boolean grant(obj_id player, obj_id bioLink, String schematic, int useCount) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == null || schematic.equals(""))
@@ -33,10 +35,12 @@ public class temp_schematic extends script.base_script
         }
         return grant(player, bioLink, getObjectTemplateCrc(schematic), useCount);
     }
+
     public static boolean grant(obj_id player, int schematic, int useCount) throws InterruptedException
     {
         return grant(player, obj_id.NULL_ID, schematic, useCount);
     }
+
     public static boolean grant(obj_id player, obj_id bioLink, int schematic, int useCount) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == 0)
@@ -68,14 +72,17 @@ public class temp_schematic extends script.base_script
         }
         return false;
     }
+
     public static boolean grant(obj_id player, String schematic) throws InterruptedException
     {
         return grant(player, schematic, DEFAULT_USE_COUNT);
     }
+
     public static boolean grant(obj_id player, int schematic) throws InterruptedException
     {
         return grant(player, schematic, DEFAULT_USE_COUNT);
     }
+
     public static boolean revoke(obj_id player, String schematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == null || schematic.equals(""))
@@ -84,6 +91,7 @@ public class temp_schematic extends script.base_script
         }
         return revoke(player, getObjectTemplateCrc(schematic));
     }
+
     public static boolean revoke(obj_id player, int schematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == 0)
@@ -105,6 +113,7 @@ public class temp_schematic extends script.base_script
         }
         return false;
     }
+
     public static boolean decrement(obj_id player, String schematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == null || schematic.equals(""))
@@ -113,6 +122,7 @@ public class temp_schematic extends script.base_script
         }
         return decrement(player, getObjectTemplateCrc(schematic));
     }
+
     public static boolean decrement(obj_id player, int schematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || schematic == 0)
@@ -144,7 +154,7 @@ public class temp_schematic extends script.base_script
             }
             return revoke(player, schematic);
         }
-        else 
+        else
         {
             prose_package ppExpire = prose.getPackage(PROSE_USES_DECREMENTED, product_name);
             sendSystemMessageProse(player, ppExpire);
@@ -153,6 +163,7 @@ public class temp_schematic extends script.base_script
         }
         return true;
     }
+
     public static boolean decrement(obj_id player, obj_id manufacturingSchematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(manufacturingSchematic))
@@ -161,6 +172,7 @@ public class temp_schematic extends script.base_script
         }
         return decrement(player, getDraftSchematicCrc(manufacturingSchematic));
     }
+
     public static obj_id getBioLinkSchematicId(obj_id player, int schematic) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || !exists(player) || schematic == 0)

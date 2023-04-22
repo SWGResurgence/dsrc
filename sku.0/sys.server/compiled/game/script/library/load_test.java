@@ -7,85 +7,83 @@ import script.vector;
 
 public class load_test extends script.base_script
 {
+    public static final String VAR_AI_SHIPS = "load_test.aiShips";
+    public static final String[] REBEL_PILOT =
+            {
+                    "pilot_rebel_navy",
+                    "pilot_rebel_navy_novice",
+                    "pilot_rebel_navy_starships_01",
+                    "pilot_rebel_navy_weapons_01",
+                    "pilot_rebel_navy_procedures_01",
+                    "pilot_rebel_navy_droid_01",
+                    "pilot_rebel_navy_starships_02",
+                    "pilot_rebel_navy_weapons_02",
+                    "pilot_rebel_navy_procedures_02",
+                    "pilot_rebel_navy_droid_02",
+                    "pilot_rebel_navy_weapons_03",
+                    "pilot_rebel_navy_starships_03",
+                    "pilot_rebel_navy_procedures_03",
+                    "pilot_rebel_navy_droid_03",
+                    "pilot_rebel_navy_starships_04",
+                    "pilot_rebel_navy_weapons_04",
+                    "pilot_rebel_navy_procedures_04",
+                    "pilot_rebel_navy_droid_04",
+                    "pilot_rebel_navy_master"
+            };
+    public static final String[] IMPERIAL_PILOT =
+            {
+                    "pilot_imperial_navy",
+                    "pilot_imperial_navy_novice",
+                    "pilot_imperial_navy_starships_01",
+                    "pilot_imperial_navy_weapons_01",
+                    "pilot_imperial_navy_procedures_01",
+                    "pilot_imperial_navy_droid_01",
+                    "pilot_imperial_navy_starships_02",
+                    "pilot_imperial_navy_weapons_02",
+                    "pilot_imperial_navy_procedures_02",
+                    "pilot_imperial_navy_droid_02",
+                    "pilot_imperial_navy_weapons_03",
+                    "pilot_imperial_navy_starships_03",
+                    "pilot_imperial_navy_procedures_03",
+                    "pilot_imperial_navy_droid_03",
+                    "pilot_imperial_navy_starships_04",
+                    "pilot_imperial_navy_weapons_04",
+                    "pilot_imperial_navy_procedures_04",
+                    "pilot_imperial_navy_droid_04",
+                    "pilot_imperial_navy_master"
+            };
+    public static final String[] NEUTRAL_PILOT =
+            {
+                    "pilot_neutral",
+                    "pilot_neutral_novice",
+                    "pilot_neutral_starships_01",
+                    "pilot_neutral_weapons_01",
+                    "pilot_neutral_procedures_01",
+                    "pilot_neutral_droid_01",
+                    "pilot_neutral_starships_02",
+                    "pilot_neutral_weapons_02",
+                    "pilot_neutral_procedures_02",
+                    "pilot_neutral_droid_02",
+                    "pilot_neutral_weapons_03",
+                    "pilot_neutral_starships_03",
+                    "pilot_neutral_procedures_03",
+                    "pilot_neutral_droid_03",
+                    "pilot_neutral_starships_04",
+                    "pilot_neutral_weapons_04",
+                    "pilot_neutral_procedures_04",
+                    "pilot_neutral_droid_04",
+                    "pilot_neutral_master"
+            };
     public load_test()
     {
     }
-    public static final String VAR_AI_SHIPS = "load_test.aiShips";
-    public static final String[] REBEL_PILOT = 
-    {
-        "pilot_rebel_navy",
-        "pilot_rebel_navy_novice",
-        "pilot_rebel_navy_starships_01",
-        "pilot_rebel_navy_weapons_01",
-        "pilot_rebel_navy_procedures_01",
-        "pilot_rebel_navy_droid_01",
-        "pilot_rebel_navy_starships_02",
-        "pilot_rebel_navy_weapons_02",
-        "pilot_rebel_navy_procedures_02",
-        "pilot_rebel_navy_droid_02",
-        "pilot_rebel_navy_weapons_03",
-        "pilot_rebel_navy_starships_03",
-        "pilot_rebel_navy_procedures_03",
-        "pilot_rebel_navy_droid_03",
-        "pilot_rebel_navy_starships_04",
-        "pilot_rebel_navy_weapons_04",
-        "pilot_rebel_navy_procedures_04",
-        "pilot_rebel_navy_droid_04",
-        "pilot_rebel_navy_master"
-    };
-    public static final String[] IMPERIAL_PILOT = 
-    {
-        "pilot_imperial_navy",
-        "pilot_imperial_navy_novice",
-        "pilot_imperial_navy_starships_01",
-        "pilot_imperial_navy_weapons_01",
-        "pilot_imperial_navy_procedures_01",
-        "pilot_imperial_navy_droid_01",
-        "pilot_imperial_navy_starships_02",
-        "pilot_imperial_navy_weapons_02",
-        "pilot_imperial_navy_procedures_02",
-        "pilot_imperial_navy_droid_02",
-        "pilot_imperial_navy_weapons_03",
-        "pilot_imperial_navy_starships_03",
-        "pilot_imperial_navy_procedures_03",
-        "pilot_imperial_navy_droid_03",
-        "pilot_imperial_navy_starships_04",
-        "pilot_imperial_navy_weapons_04",
-        "pilot_imperial_navy_procedures_04",
-        "pilot_imperial_navy_droid_04",
-        "pilot_imperial_navy_master"
-    };
-    public static final String[] NEUTRAL_PILOT = 
-    {
-        "pilot_neutral",
-        "pilot_neutral_novice",
-        "pilot_neutral_starships_01",
-        "pilot_neutral_weapons_01",
-        "pilot_neutral_procedures_01",
-        "pilot_neutral_droid_01",
-        "pilot_neutral_starships_02",
-        "pilot_neutral_weapons_02",
-        "pilot_neutral_procedures_02",
-        "pilot_neutral_droid_02",
-        "pilot_neutral_weapons_03",
-        "pilot_neutral_starships_03",
-        "pilot_neutral_procedures_03",
-        "pilot_neutral_droid_03",
-        "pilot_neutral_starships_04",
-        "pilot_neutral_weapons_04",
-        "pilot_neutral_procedures_04",
-        "pilot_neutral_droid_04",
-        "pilot_neutral_master"
-    };
+
     public static boolean loadClientSupportEnabled() throws InterruptedException
     {
         String value = getConfigSetting("GameServer", "loadClientSupportEnabled");
-        if (value != null && (value.equals("1") || value.equals("true") || value.equals("yes")))
-        {
-            return true;
-        }
-        return false;
+        return value != null && (value.equals("1") || value.equals("true") || value.equals("yes"));
     }
+
     public static void handleLoadClientSetup(obj_id clientCreature, String optionsString) throws InterruptedException
     {
         String shipName = "xwing";
@@ -98,7 +96,7 @@ public class load_test extends script.base_script
         {
             team = (370444368);
         }
-        else 
+        else
         {
             team = (-615855020);
         }
@@ -130,7 +128,7 @@ public class load_test extends script.base_script
                     {
                         battlefield = true;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(clientCreature, "loadClientSetup: Bad option [" + options[i] + "] specified.");
                         return;
@@ -144,7 +142,7 @@ public class load_test extends script.base_script
             {
                 shipName = "xwing";
             }
-            else 
+            else
             {
                 shipName = "tieinterceptor";
             }
@@ -182,7 +180,7 @@ public class load_test extends script.base_script
                 d.put(VAR_AI_SHIPS, aiShips);
             }
         }
-        else 
+        else
         {
             space_utils.destroyShipControlDevices(clientCreature, false);
             obj_id shipControlDevice = space_utils.createShipControlDevice(clientCreature, shipName, false);
@@ -207,7 +205,7 @@ public class load_test extends script.base_script
                         float z = 0.0f + rand(-100, 100);
                         warpPlayer(clientCreature, spaceSceneName, x, y, z, null, x, y, z);
                     }
-                    else 
+                    else
                     {
                         setImperialSkills(clientCreature);
                         float x = 6000.0f + rand(-100, 100);
@@ -216,31 +214,36 @@ public class load_test extends script.base_script
                         warpPlayer(clientCreature, spaceSceneName, x, y, z, null, x, y, z);
                     }
                 }
-                else 
+                else
                 {
                     warpPlayer(clientCreature, spaceSceneName, 10.0f, 0.0f, 10.0f, null, 10.0f, 0.0f, 10.0f);
                 }
             }
         }
     }
+
     public static void setRebelSkills(obj_id creature) throws InterruptedException
     {
         revokeSkills(creature, IMPERIAL_PILOT);
         revokeSkills(creature, NEUTRAL_PILOT);
         grantSkills(creature, REBEL_PILOT);
     }
+
     public static void setImperialSkills(obj_id creature) throws InterruptedException
     {
         revokeSkills(creature, REBEL_PILOT);
         revokeSkills(creature, NEUTRAL_PILOT);
         grantSkills(creature, IMPERIAL_PILOT);
     }
+
     public static void grantSkills(obj_id creature, String[] skills) throws InterruptedException
     {
-        for (String skill : skills) {
+        for (String skill : skills)
+        {
             grantSkill(creature, skill);
         }
     }
+
     public static void revokeSkills(obj_id creature, String[] skills) throws InterruptedException
     {
         for (int i = skills.length - 1; i >= 0; --i)

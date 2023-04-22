@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class slicing extends script.base_script
 {
-    public slicing()
-    {
-    }
     public static final string_id SID_SLICING_UNDERWAY = new string_id("slicing/slicing", "slicing_underway");
     public static final string_id SID_ALREADY_SLICING = new string_id("slicing/slicing", "already_slicing");
     public static final string_id SID_ALREADY_SLICED = new string_id("slicing/slicing", "already_sliced");
@@ -31,6 +28,10 @@ public class slicing extends script.base_script
     public static final string_id SID_MISSING_COMP = new string_id("slicing/slicing", "missing_comp");
     public static final String SLICE_WEAPON_TABLE = "datatables/smuggler/slice_weapon.iff";
     public static final String SLICE_ARMOR_TABLE = "datatables/smuggler/slice_armor.iff";
+    public slicing()
+    {
+    }
+
     public static void startSlicing(obj_id player, obj_id item, String callback, String type) throws InterruptedException
     {
         if (jedi.isLightsaber(item))
@@ -73,6 +74,7 @@ public class slicing extends script.base_script
         attachScript(player, "player.player_slicing");
         slicingQuery(player, item, type);
     }
+
     public static void clearSlicing(obj_id player) throws InterruptedException
     {
         obj_id slice_item = utils.getObjIdScriptVar(player, "slicing.slice_item");
@@ -90,6 +92,7 @@ public class slicing extends script.base_script
         utils.removeScriptVar(player, "slicing.apply_status");
         detachScript(player, "player.player_slicing");
     }
+
     public static void slicingQuery(obj_id player, obj_id item, String query) throws InterruptedException
     {
         int skillMod = getSkillStatisticModifier(player, "slice_" + query);
@@ -138,6 +141,7 @@ public class slicing extends script.base_script
         }
         sui.listbox(player, player, "@slicing/slicing:" + query, sui.OK_CANCEL, "@slicing/slicing:cat_title", categories, "handleSlicingCategory", true);
     }
+
     public static void handleSlicingCategory(obj_id player, int idx) throws InterruptedException
     {
         String query = utils.getStringScriptVar(player, "slicing.type");
@@ -206,6 +210,7 @@ public class slicing extends script.base_script
         }
         sui.listbox(player, player, "@slicing/slicing:select_slice", sui.OK_CANCEL, "@slicing/slicing:slice_title", slices, "handleSlicingSelect", true);
     }
+
     public static void handleSlicingSelect(obj_id player, int idx) throws InterruptedException
     {
         int row = utils.getIntScriptVar(player, "slicing." + idx);
@@ -248,7 +253,7 @@ public class slicing extends script.base_script
                 apply_status = new string_id("slicing/slicing", "already_applied");
                 utils.setScriptVar(player, "slicing.apply_status", 2);
             }
-            else 
+            else
             {
                 apply_status = new string_id("slicing/slicing", "can_apply");
                 utils.setScriptVar(player, "slicing.apply_status", 3);
@@ -269,8 +274,10 @@ public class slicing extends script.base_script
             obj_id pInv = utils.getInventoryContainer(player);
             obj_id[] contents = utils.getContents(pInv, true);
             int found = 0;
-            for (obj_id content : contents) {
-                if (getTemplateName(content).equals(component_path)) {
+            for (obj_id content : contents)
+            {
+                if (getTemplateName(content).equals(component_path))
+                {
                     found = 1;
                     break;
                 }
@@ -283,20 +290,21 @@ public class slicing extends script.base_script
             }
         }
         utils.setScriptVar(player, "slicing.row", row);
-        prose_package slice_attributes[] = new prose_package[4];
+        prose_package[] slice_attributes = new prose_package[4];
         slice_attributes[0] = prose.getPackage(SID_CUSTOMIZATION, effect.getInt("COST"));
         slice_attributes[1] = prose.getPackage(new string_id("slicing/slicing_" + query, effect.getString("STAT") + "_attrib"), effect.getInt("AMOUNT"));
         if (component == null || component.equals(""))
         {
             slice_attributes[2] = prose.getPackage(SID_NO_COMPONENT_REQUIRED);
         }
-        else 
+        else
         {
             slice_attributes[2] = prose.getPackage(SID_REQUIRES_COMPONENT, component_sid);
         }
         slice_attributes[3] = prose.getPackage(apply_status, apply_status_also);
         sui.listbox(player, player, "@slicing/slicing_" + query + ":" + effect.getString("STAT") + "_detail", sui.OK_CANCEL, "@slicing/slicing:slice_attributes", slice_attributes, "handleApplySlice", true, false);
     }
+
     public static void handleApplySlice(obj_id player, int idx) throws InterruptedException
     {
         int row = utils.getIntScriptVar(player, "slicing.row");
@@ -352,8 +360,10 @@ public class slicing extends script.base_script
             obj_id pInv = utils.getInventoryContainer(player);
             obj_id[] contents = utils.getContents(pInv, true);
             int found = 0;
-            for (obj_id content : contents) {
-                if (getTemplateName(content).equals(component_path)) {
+            for (obj_id content : contents)
+            {
+                if (getTemplateName(content).equals(component_path))
+                {
                     found = 1;
                     consumeComponent(content);
                     break;
@@ -371,6 +381,7 @@ public class slicing extends script.base_script
         }
         successSlicing(player, item, row);
     }
+
     public static void successSlicing(obj_id player, obj_id item, int row) throws InterruptedException
     {
         String callback = utils.getStringScriptVar(player, "slicing.callback");
@@ -381,6 +392,7 @@ public class slicing extends script.base_script
         messageTo(item, callback, outp, 0.0f, true);
         clearSlicing(player);
     }
+
     public static void failSlicing(obj_id player, obj_id item) throws InterruptedException
     {
         String callback = utils.getStringScriptVar(player, "slicing.callback");
@@ -390,6 +402,7 @@ public class slicing extends script.base_script
         messageTo(item, callback, outp, 0.0f, true);
         clearSlicing(player);
     }
+
     public static void consumeComponent(obj_id item) throws InterruptedException
     {
         int count = getCount(item);
@@ -398,7 +411,7 @@ public class slicing extends script.base_script
         {
             destroyObject(item);
         }
-        else 
+        else
         {
             setCount(item, count);
         }

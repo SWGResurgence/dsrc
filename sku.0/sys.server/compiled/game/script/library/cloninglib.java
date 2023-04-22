@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class cloninglib extends script.base_script
 {
-    public cloninglib()
-    {
-    }
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String SCRVAR_CLONE_COUPON = "clone_coupon";
     public static final String DATATABLE_CLONE_SPAWN = "datatables/structure/municipal/cloning_facility_respawn.iff";
@@ -57,6 +54,10 @@ public class cloninglib extends script.base_script
     public static final int CLONE_DAMAGE_LOW = 2;
     public static final int CLONE_DAMAGE_HIGH = 10;
     public static final float DEFAULT_REPAIR_RATIO = 10.0f;
+    public cloninglib()
+    {
+    }
+
     public static dictionary getCloningAreas(String planet, String area) throws InterruptedException
     {
         dictionary data = new dictionary();
@@ -83,10 +84,12 @@ public class cloninglib extends script.base_script
         }
         return data;
     }
+
     public static location getCloneSpawnLocation(obj_id facility) throws InterruptedException
     {
         return getCloneSpawnLocation(getLocation(facility), facility);
     }
+
     public static location getCloneSpawnLocation(location baseLoc, obj_id facility) throws InterruptedException
     {
         String facilityTemplate = getTemplateName(facility);
@@ -104,17 +107,18 @@ public class cloninglib extends script.base_script
             {
                 facilityData = dataTableGetRow(DATATABLE_CLONE_SPAWN, pos);
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
         return getCloneSpawnLocation(baseLoc, facilityData);
     }
+
     public static location getCloneSpawnLocation(location baseLoc, dictionary facilityData) throws InterruptedException
     {
         float x = facilityData.getFloat(COL_SPAWN_X);
@@ -128,7 +132,7 @@ public class cloninglib extends script.base_script
             z += baseLoc.z;
             return new location(x, y, z, baseLoc.area);
         }
-        else 
+        else
         {
             obj_id cloner = getTopMostContainer(getSelf());
             if (!isIdValid(cloner) || !exists(cloner))
@@ -143,10 +147,12 @@ public class cloninglib extends script.base_script
         }
         return null;
     }
+
     public static String getSpawnCellName(obj_id facility) throws InterruptedException
     {
         return getSpawnCellName(getTemplateName(facility));
     }
+
     public static String getSpawnCellName(String facilityTemplate) throws InterruptedException
     {
         if (facilityTemplate == null)
@@ -162,18 +168,19 @@ public class cloninglib extends script.base_script
                 dictionary d = dataTableGetRow(DATATABLE_CLONE_SPAWN, pos);
                 return d.getString(COL_SPAWN_CELLNAME);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(null, "WARNING: getCloneSpawnLocation cannot find template " + facilityTemplate + " in datatable " + DATATABLE_CLONE_SPAWN);
                 return null;
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "WARNING: getCloneSpawnLocation cannot find datatable " + DATATABLE_CLONE_SPAWN);
             return null;
         }
     }
+
     public static String getCloneFacilityName(obj_id facility) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
@@ -187,6 +194,7 @@ public class cloninglib extends script.base_script
         }
         return "@base_player:clone_location_unknown";
     }
+
     public static boolean canUseBindFacility(String planet, String area) throws InterruptedException
     {
         dictionary data = new dictionary();
@@ -209,6 +217,7 @@ public class cloninglib extends script.base_script
         }
         return true;
     }
+
     public static boolean requestBind(obj_id player, obj_id terminal) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -236,6 +245,7 @@ public class cloninglib extends script.base_script
         }
         return false;
     }
+
     public static boolean setBind(obj_id player, obj_id cloningFacility) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -257,6 +267,7 @@ public class cloninglib extends script.base_script
         sendSystemMessage(player, SID_BIND_SUCCESSFUL);
         return true;
     }
+
     public static boolean verifyFundsForCloning(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -272,18 +283,19 @@ public class cloninglib extends script.base_script
             {
                 sendSystemMessage(player, SID_NSF_CLONE1);
             }
-            else 
+            else
             {
                 prose_package ppNsf = prose.getPackage(SID_NSF_CLONE, diff);
                 sendSystemMessageProse(player, ppNsf);
             }
             return false;
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static int getRegisterCloneCost(obj_id player) throws InterruptedException
     {
         location playerLoc = getWorldLocation(player);
@@ -329,6 +341,7 @@ public class cloninglib extends script.base_script
         }
         return cost;
     }
+
     public static Vector getAvailableCloningFacilities(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -405,27 +418,27 @@ public class cloninglib extends script.base_script
             {
                 break;
             }
-            if (((String)areaList.get(i)) != null && area != null)
+            if (areaList.get(i) != null && area != null)
             {
-                if (!((String)areaList.get(i)).equals("") && !((String)areaList.get(i)).equals(area))
+                if (!areaList.get(i).equals("") && !areaList.get(i).equals(area))
                 {
                     continue;
                 }
-                if (isIdValid(playerPob) && isIdValid(((obj_id)areaIdList.get(i))) && playerPob != ((obj_id)areaIdList.get(i)))
+                if (isIdValid(playerPob) && isIdValid(((obj_id) areaIdList.get(i))) && playerPob != areaIdList.get(i))
                 {
                     continue;
                 }
             }
-            if (!isIdValid(((obj_id)idList.get(i))))
+            if (!isIdValid(((obj_id) idList.get(i))))
             {
                 continue;
             }
-            float dist = getDistance(worldLoc, ((location)locList.get(i)));
+            float dist = getDistance(worldLoc, ((location) locList.get(i)));
             if (dist == -1)
             {
                 dist = Float.MAX_VALUE;
             }
-            if (((obj_id)idList.get(i)) == registeredFacility)
+            if (idList.get(i) == registeredFacility)
             {
                 dist = -1;
             }
@@ -433,124 +446,124 @@ public class cloninglib extends script.base_script
             switch ((Integer) cloneTypeList.get(i))
             {
                 case CLONE_TYPE_STANDARD:
-                facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                break;
+                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    break;
                 case CLONE_TYPE_PLAYER_CITY:
-                if (dist < playerCityDist && !city.isCityBanned(player, ((obj_id)idList.get(i))))
-                {
-                    playerFacility = ((obj_id)idList.get(i));
-                    playerFacilityName = ((String)nameList.get(i));
-                    playerFacilityLoc = (location)((location)locList.get(i)).clone();
-                    playerFacilitySpawnLoc = (location)((location)respawnList.get(i)).clone();
-                    playerCityDist = dist;
-                }
-                break;
+                    if (dist < playerCityDist && !city.isCityBanned(player, ((obj_id) idList.get(i))))
+                    {
+                        playerFacility = ((obj_id) idList.get(i));
+                        playerFacilityName = ((String) nameList.get(i));
+                        playerFacilityLoc = (location) ((location) locList.get(i)).clone();
+                        playerFacilitySpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                        playerCityDist = dist;
+                    }
+                    break;
                 case CLONE_TYPE_JEDI_ONLY:
-                if (isJedi(player))
-                {
-                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                }
-                break;
+                    if (isJedi(player))
+                    {
+                        facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    }
+                    break;
                 case CLONE_TYPE_LIGHT_JEDI_ONLY:
-                if (isJedi(player) && hasSkill(player, "force_rank_light_novice"))
-                {
-                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                }
-                break;
+                    if (isJedi(player) && hasSkill(player, "force_rank_light_novice"))
+                    {
+                        facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    }
+                    break;
                 case CLONE_TYPE_DARK_JEDI_ONLY:
-                if (isJedi(player) && hasSkill(player, "force_rank_dark_novice"))
-                {
-                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                }
-                break;
+                    if (isJedi(player) && hasSkill(player, "force_rank_dark_novice"))
+                    {
+                        facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    }
+                    break;
                 case CLONE_TYPE_RESTRICTED:
-                if (isIdValid(playerPob) && playerPob == ((obj_id)areaIdList.get(i)))
-                {
-                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                }
-                break;
+                    if (isIdValid(playerPob) && playerPob == areaIdList.get(i))
+                    {
+                        facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    }
+                    break;
                 case CLONE_TYPE_FACTION_IMPERIAL:
-                if (factions.isImperial(player))
-                {
-                    if (dist < factionFacilityDist)
+                    if (factions.isImperial(player))
                     {
-                        factionFacility = ((obj_id)idList.get(i));
-                        factionFacilityName = ((String)nameList.get(i));
-                        factionFacilityLoc = (location)((location)locList.get(i)).clone();
-                        factionFacilitySpawnLoc = (location)((location)respawnList.get(i)).clone();
-                        factionFacilityDist = dist;
+                        if (dist < factionFacilityDist)
+                        {
+                            factionFacility = ((obj_id) idList.get(i));
+                            factionFacilityName = ((String) nameList.get(i));
+                            factionFacilityLoc = (location) ((location) locList.get(i)).clone();
+                            factionFacilitySpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                            factionFacilityDist = dist;
+                        }
                     }
-                }
-                break;
+                    break;
                 case CLONE_TYPE_FACTION_REBEL:
-                if (factions.isRebel(player))
-                {
-                    if (dist < factionFacilityDist)
+                    if (factions.isRebel(player))
                     {
-                        factionFacility = ((obj_id)idList.get(i));
-                        factionFacilityName = ((String)nameList.get(i));
-                        factionFacilityLoc = (location)((location)locList.get(i)).clone();
-                        factionFacilitySpawnLoc = (location)((location)respawnList.get(i)).clone();
-                        factionFacilityDist = dist;
+                        if (dist < factionFacilityDist)
+                        {
+                            factionFacility = ((obj_id) idList.get(i));
+                            factionFacilityName = ((String) nameList.get(i));
+                            factionFacilityLoc = (location) ((location) locList.get(i)).clone();
+                            factionFacilitySpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                            factionFacilityDist = dist;
+                        }
                     }
-                }
-                break;
+                    break;
                 case CLONE_TYPE_PVP_REGION_ADVANCED_IMPERIAL:
-                if (!factions.isImperial(player))
-                {
+                    if (!factions.isImperial(player))
+                    {
+                        break;
+                    }
+                    deathLocRegions = getRegionsWithPvPAtPoint(worldLoc, regions.PVP_REGION_TYPE_ADVANCED);
+                    if (deathLocRegions == null || deathLocRegions.length == 0)
+                    {
+                        break;
+                    }
+                    if (dist < pvpAdvancedFacilityDist)
+                    {
+                        pvpAdvancedFacility = ((obj_id) idList.get(i));
+                        pvpAdvancedFacilityName = ((String) nameList.get(i));
+                        pvpAdvancedFacilityLoc = (location) ((location) locList.get(i)).clone();
+                        pvpAdvancedFacilitySpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                        pvpAdvancedFacilityDist = dist;
+                    }
                     break;
-                }
-                deathLocRegions = getRegionsWithPvPAtPoint(worldLoc, regions.PVP_REGION_TYPE_ADVANCED);
-                if (deathLocRegions == null || deathLocRegions.length == 0)
-                {
-                    break;
-                }
-                if (dist < pvpAdvancedFacilityDist)
-                {
-                    pvpAdvancedFacility = ((obj_id)idList.get(i));
-                    pvpAdvancedFacilityName = ((String)nameList.get(i));
-                    pvpAdvancedFacilityLoc = (location)((location)locList.get(i)).clone();
-                    pvpAdvancedFacilitySpawnLoc = (location)((location)respawnList.get(i)).clone();
-                    pvpAdvancedFacilityDist = dist;
-                }
-                break;
                 case CLONE_TYPE_PVP_REGION_ADVANCED_REBEL:
-                if (!factions.isRebel(player))
-                {
+                    if (!factions.isRebel(player))
+                    {
+                        break;
+                    }
+                    deathLocRegions = getRegionsWithPvPAtPoint(worldLoc, regions.PVP_REGION_TYPE_ADVANCED);
+                    if (deathLocRegions == null || deathLocRegions.length == 0)
+                    {
+                        break;
+                    }
+                    if (dist < pvpAdvancedFacilityDist)
+                    {
+                        pvpAdvancedFacility = ((obj_id) idList.get(i));
+                        pvpAdvancedFacilityName = ((String) nameList.get(i));
+                        pvpAdvancedFacilityLoc = (location) ((location) locList.get(i)).clone();
+                        pvpAdvancedFacilitySpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                        pvpAdvancedFacilityDist = dist;
+                    }
                     break;
-                }
-                deathLocRegions = getRegionsWithPvPAtPoint(worldLoc, regions.PVP_REGION_TYPE_ADVANCED);
-                if (deathLocRegions == null || deathLocRegions.length == 0)
-                {
-                    break;
-                }
-                if (dist < pvpAdvancedFacilityDist)
-                {
-                    pvpAdvancedFacility = ((obj_id)idList.get(i));
-                    pvpAdvancedFacilityName = ((String)nameList.get(i));
-                    pvpAdvancedFacilityLoc = (location)((location)locList.get(i)).clone();
-                    pvpAdvancedFacilitySpawnLoc = (location)((location)respawnList.get(i)).clone();
-                    pvpAdvancedFacilityDist = dist;
-                }
-                break;
                 case CLONE_TYPE_CAMP:
-                if (dist < playerCampDist)
-                {
-                    playerCamp = ((obj_id)idList.get(i));
-                    playerCampName = ((String)nameList.get(i));
-                    playerCampLoc = (location)((location)locList.get(i)).clone();
-                    playerCampSpawnLoc = (location)((location)respawnList.get(i)).clone();
-                    playerCampDist = dist;
-                }
-                break;
+                    if (dist < playerCampDist)
+                    {
+                        playerCamp = ((obj_id) idList.get(i));
+                        playerCampName = ((String) nameList.get(i));
+                        playerCampLoc = (location) ((location) locList.get(i)).clone();
+                        playerCampSpawnLoc = (location) ((location) respawnList.get(i)).clone();
+                        playerCampDist = dist;
+                    }
+                    break;
                 case CLONE_TYPE_PRIVATE_INSTANCE:
-                if (((obj_id)idList.get(i)) == instance_controller)
-                {
-                    facilityList = addAvailableCloningFacility(facilityList, ((obj_id)idList.get(i)), ((location)locList.get(i)), ((location)respawnList.get(i)), ((String)nameList.get(i)), dist);
-                }
-                break;
+                    if (idList.get(i) == instance_controller)
+                    {
+                        facilityList = addAvailableCloningFacility(facilityList, ((obj_id) idList.get(i)), ((location) locList.get(i)), ((location) respawnList.get(i)), ((String) nameList.get(i)), dist);
+                    }
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         if (playerFacility != null)
@@ -571,6 +584,7 @@ public class cloninglib extends script.base_script
         }
         return facilityList;
     }
+
     public static Vector addAvailableCloningFacility(Vector facilityList, obj_id facility, location facilityLoc, location spawnLoc, String name, float dist) throws InterruptedException
     {
         dictionary facilityData = new dictionary();
@@ -583,11 +597,11 @@ public class cloninglib extends script.base_script
         {
             facilityList.add(facilityData);
         }
-        else 
+        else
         {
             for (int i = 0; i < facilityList.size(); i++)
             {
-                dictionary compareData = (dictionary)(facilityList.get(i));
+                dictionary compareData = (dictionary) (facilityList.get(i));
                 float compareDist = compareData.getFloat("distance");
                 if (dist < compareDist)
                 {
@@ -603,6 +617,7 @@ public class cloninglib extends script.base_script
         }
         return facilityList;
     }
+
     public static boolean isDamagedOnClone(obj_id player, obj_id item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(item))
@@ -611,21 +626,16 @@ public class cloninglib extends script.base_script
         }
         if (pclib.isContainedByPlayer(player, item) && !isUninsurable(item))
         {
-            if (isDamagedOnCloneGOT(getGameObjectType(item)))
-            {
-                return true;
-            }
+            return isDamagedOnCloneGOT(getGameObjectType(item));
         }
         return false;
     }
+
     public static boolean isDamagedOnCloneGOT(int got) throws InterruptedException
     {
-        if (isGameObjectTypeOf(got, GOT_armor) || isGameObjectTypeOf(got, GOT_clothing) || isGameObjectTypeOf(got, GOT_weapon) || isGameObjectTypeOf(got, GOT_tool) || isGameObjectTypeOf(got, GOT_jewelry) || isGameObjectTypeOf(got, GOT_cybernetic))
-        {
-            return true;
-        }
-        return false;
+        return isGameObjectTypeOf(got, GOT_armor) || isGameObjectTypeOf(got, GOT_clothing) || isGameObjectTypeOf(got, GOT_weapon) || isGameObjectTypeOf(got, GOT_tool) || isGameObjectTypeOf(got, GOT_jewelry) || isGameObjectTypeOf(got, GOT_cybernetic);
     }
+
     public static void damageItemsOnClone(obj_id player, int damage) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -634,16 +644,19 @@ public class cloninglib extends script.base_script
         }
         float percent = damage / 100.0f;
         obj_id[] eq = getInventoryAndEquipment(player);
-        if (eq == null || eq.length == 0)
+        if (eq == null)
         {
             return;
         }
-        for (obj_id obj_id : eq) {
-            if (isIdValid(obj_id) && !isAutoInsured(obj_id) && isDamagedOnCloneGOT(getGameObjectType(obj_id))) {
+        for (obj_id obj_id : eq)
+        {
+            if (isIdValid(obj_id) && !isAutoInsured(obj_id) && isDamagedOnCloneGOT(getGameObjectType(obj_id)))
+            {
                 pclib.damageAndDecayItem(obj_id, percent);
             }
         }
     }
+
     public static obj_id[] getAllRepairItems(obj_id player) throws InterruptedException
     {
         Vector repairList = new Vector();
@@ -653,9 +666,11 @@ public class cloninglib extends script.base_script
         {
             return null;
         }
-        for (obj_id obj_id : eq) {
+        for (obj_id obj_id : eq)
+        {
             int damage = getItemDamageAmount(obj_id);
-            if (damage > 0) {
+            if (damage > 0)
+            {
                 repairList = utils.addElement(repairList, obj_id);
             }
         }
@@ -667,6 +682,7 @@ public class cloninglib extends script.base_script
         }
         return _repairList;
     }
+
     public static int getItemRepairCost(obj_id item) throws InterruptedException
     {
         int repairAmount = getItemDamageAmount(item);
@@ -675,14 +691,16 @@ public class cloninglib extends script.base_script
             return 0;
         }
         float repairRatio = getItemRepairRatio(item);
-        int repairCost = (int)(repairAmount * repairRatio);
+        int repairCost = (int) (repairAmount * repairRatio);
         return repairCost;
     }
+
     public static int getTotalRepairCost(obj_id player) throws InterruptedException
     {
         obj_id[] repairList = getAllRepairItems(player);
         return getTotalRepairCost(player, repairList);
     }
+
     public static int getTotalRepairCost(obj_id player, obj_id[] repairList) throws InterruptedException
     {
         if (repairList == null || repairList.length == 0)
@@ -690,14 +708,17 @@ public class cloninglib extends script.base_script
             return 0;
         }
         int totalCost = 0;
-        for (obj_id obj_id : repairList) {
+        for (obj_id obj_id : repairList)
+        {
             int cost = getItemRepairCost(obj_id);
-            if (cost > 0) {
+            if (cost > 0)
+            {
                 totalCost += cost;
             }
         }
         return totalCost;
     }
+
     public static int[] getItemRepairCostList(obj_id player, obj_id[] list) throws InterruptedException
     {
         int[] costList = new int[list.length];
@@ -707,6 +728,7 @@ public class cloninglib extends script.base_script
         }
         return costList;
     }
+
     public static int getItemDamageAmount(obj_id item) throws InterruptedException
     {
         int maxHp = getMaxHitpoints(item);
@@ -714,10 +736,12 @@ public class cloninglib extends script.base_script
         int damage = maxHp - curHp;
         return damage;
     }
+
     public static float getStaticItemRepairModifier(obj_id item) throws InterruptedException
     {
         return 1.0f;
     }
+
     public static float getItemRepairRatio(obj_id item) throws InterruptedException
     {
         float staticItemModifier = 1.0f;
@@ -748,12 +772,13 @@ public class cloninglib extends script.base_script
             repairRatio = dataTableGetFloat("datatables/cloning/repair_costs.iff", row, "staticItemCost");
             repairRatio *= staticItemModifier;
         }
-        else 
+        else
         {
             repairRatio = dataTableGetFloat("datatables/cloning/repair_costs.iff", row, "standardItemCost");
         }
         return repairRatio;
     }
+
     public static boolean payRepairFee(obj_id player, obj_id terminal, int cost) throws InterruptedException
     {
         int playerMoney = getTotalMoney(player);
@@ -766,17 +791,19 @@ public class cloninglib extends script.base_script
         data.put(money.DICT_OTHER, getGameTime());
         return money.pay(player, terminal, cost, "handlePayRepairSuccess", data, true);
     }
+
     public static void repairItems(obj_id player, obj_id[] repairList) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return;
         }
-        if (repairList == null || repairList.length == 0)
+        if (repairList == null)
         {
             return;
         }
-        for (obj_id obj_id : repairList) {
+        for (obj_id obj_id : repairList)
+        {
             int maxHp = getMaxHitpoints(obj_id);
             setInvulnerableHitpoints(obj_id, maxHp);
         }

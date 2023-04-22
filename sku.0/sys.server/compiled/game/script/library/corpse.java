@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class corpse extends script.base_script
 {
-    public corpse()
-    {
-    }
     public static final String SCRIPT_PLAYER_CORPSE = "corpse.player_corpse";
     public static final String SCRIPT_AI_CORPSE = "corpse.ai_corpse";
     public static final String SCRIPT_AI_CORPSE_INVENTORY = "corpse.ai_corpse_inventory";
@@ -81,13 +78,13 @@ public class corpse extends script.base_script
     public static final String DATATABLE_COL_BONE_TYPE = "boneType";
     public static final String DATATABLE_COL_RARE_AMT = "rare";
     public static final String DATATABLE_COL_RARE_TYPE = "rareType";
-    public static final String[] DATATABLE_COL = 
-    {
-        DATATABLE_COL_MEAT_AMT,
-        DATATABLE_COL_HIDE_AMT,
-        DATATABLE_COL_BONE_AMT,
-        DATATABLE_COL_RARE_AMT
-    };
+    public static final String[] DATATABLE_COL =
+            {
+                    DATATABLE_COL_MEAT_AMT,
+                    DATATABLE_COL_HIDE_AMT,
+                    DATATABLE_COL_BONE_AMT,
+                    DATATABLE_COL_RARE_AMT
+            };
     public static final int CCR_MEAT = 0;
     public static final int CCR_HIDE = 1;
     public static final int CCR_BONE = 2;
@@ -97,6 +94,10 @@ public class corpse extends script.base_script
     public static final float GROUP_BONUS = 1.2f;
     public static final float GROUP_BONUS_SCOUT = 1.3f;
     public static final float GROUP_BONUS_MASTERSCOUT = 1.4f;
+    public corpse()
+    {
+    }
+
     public static obj_id spawnPlayerCorpse(obj_id player) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -111,7 +112,7 @@ public class corpse extends script.base_script
             sendSystemMessageTestingOnly(player, "spawnPlayerCorpse: loc = " + loc.toString());
             return null;
         }
-        else 
+        else
         {
             persistObject(corpse);
             setYaw(corpse, getYaw(player));
@@ -120,7 +121,7 @@ public class corpse extends script.base_script
             {
                 setName(corpse, "Corpse of Unknown Player");
             }
-            else 
+            else
             {
                 setName(corpse, "Corpse of " + pname);
             }
@@ -133,10 +134,12 @@ public class corpse extends script.base_script
             if (hasObjVar(player, pclib.VAR_CONSENT_TO_ID))
             {
                 obj_id[] consented = getObjIdArrayObjVar(player, pclib.VAR_CONSENT_TO_ID);
-                if ((consented != null) && (consented.length > 0))
+                if (consented != null)
                 {
-                    for (obj_id obj_id : consented) {
-                        if (!grantCorpseConsent(corpse, obj_id)) {
+                    for (obj_id obj_id : consented)
+                    {
+                        if (!grantCorpseConsent(corpse, obj_id))
+                        {
                         }
                     }
                 }
@@ -145,6 +148,7 @@ public class corpse extends script.base_script
         }
         return corpse;
     }
+
     public static boolean initializeCorpsePermissions(obj_id corpse, dictionary params) throws InterruptedException
     {
         if (!isIdValid(corpse))
@@ -158,6 +162,7 @@ public class corpse extends script.base_script
         messageTo(corpse, HANDLER_PERMISSIONS_INITIALIZED, params, 1.0f, isObjectPersisted(corpse));
         return litmus;
     }
+
     public static boolean grantCorpseConsent(obj_id corpse, obj_id player) throws InterruptedException
     {
         if (!isIdValid(corpse) || !isIdValid(player))
@@ -168,6 +173,7 @@ public class corpse extends script.base_script
         d.put(DICT_PLAYER_ID, player);
         return messageTo(corpse, HANDLER_ADD_CONSENTED, d, 1.0f, isObjectPersisted(corpse));
     }
+
     public static boolean grantCorpseConsent(obj_id[] corpses, obj_id player) throws InterruptedException
     {
         if ((corpses == null) || (corpses.length == 0) || !isIdValid(player))
@@ -175,11 +181,13 @@ public class corpse extends script.base_script
             return false;
         }
         boolean litmus = true;
-        for (obj_id corps : corpses) {
+        for (obj_id corps : corpses)
+        {
             litmus &= grantCorpseConsent(corps, player);
         }
         return litmus;
     }
+
     public static boolean revokeCorpseConsent(obj_id corpse, obj_id player) throws InterruptedException
     {
         if (!isIdValid(corpse) || !isIdValid(player))
@@ -190,6 +198,7 @@ public class corpse extends script.base_script
         d.put(DICT_PLAYER_ID, player);
         return messageTo(corpse, HANDLER_REMOVE_CONSENTED, d, 1.0f, isObjectPersisted(corpse));
     }
+
     public static boolean revokeCorpseConsent(obj_id[] corpses, obj_id player) throws InterruptedException
     {
         if ((corpses == null) || (corpses.length == 0) || !isIdValid(player))
@@ -197,11 +206,13 @@ public class corpse extends script.base_script
             return false;
         }
         boolean litmus = true;
-        for (obj_id corps : corpses) {
+        for (obj_id corps : corpses)
+        {
             litmus &= revokeCorpseConsent(corps, player);
         }
         return litmus;
     }
+
     public static boolean revokeAllCorpseConsent(obj_id owner) throws InterruptedException
     {
         if (!isIdValid(owner))
@@ -215,17 +226,21 @@ public class corpse extends script.base_script
             return false;
         }
         boolean litmus = true;
-        for (obj_id corps : corpses) {
-            for (obj_id obj_id : consented) {
+        for (obj_id corps : corpses)
+        {
+            for (obj_id obj_id : consented)
+            {
                 litmus &= revokeCorpseConsent(corps, obj_id);
             }
         }
         return litmus;
     }
+
     public static boolean cleanUpPlayerCorpse(obj_id corpse) throws InterruptedException
     {
         return cleanUpPlayerCorpse(corpse, true);
     }
+
     public static boolean cleanUpPlayerCorpse(obj_id corpse, boolean withDestroyMessage) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(corpse, utils.VAR_OWNER);
@@ -248,6 +263,7 @@ public class corpse extends script.base_script
         }
         return true;
     }
+
     public static boolean dragPlayerCorpse(obj_id player, obj_id corpse, boolean giveFeedback) throws InterruptedException
     {
         if ((player == null) || (corpse == null))
@@ -258,8 +274,10 @@ public class corpse extends script.base_script
         {
             location playerLoc = getLocation(player);
             obj_id[] stuff = getObjectsInRange(playerLoc, 20.0f);
-            for (obj_id obj_id : stuff) {
-                if (isPlayer(obj_id)) {
+            for (obj_id obj_id : stuff)
+            {
+                if (isPlayer(obj_id))
+                {
                     playClientEffectLoc(obj_id, "clienteffect/medic_drag.cef", getLocation(corpse), 0.0f);
                 }
             }
@@ -269,10 +287,12 @@ public class corpse extends script.base_script
         }
         return false;
     }
+
     public static boolean dragPlayerCorpse(obj_id player, obj_id corpse) throws InterruptedException
     {
         return dragPlayerCorpse(player, corpse, true);
     }
+
     public static obj_id[] dragPlayerCorpse(obj_id player, obj_id[] corpses) throws InterruptedException
     {
         if (!isIdValid(player) || (corpses == null) || (corpses.length == 0))
@@ -281,8 +301,10 @@ public class corpse extends script.base_script
         }
         Vector moved = new Vector();
         moved.setSize(0);
-        for (obj_id corps : corpses) {
-            if (dragPlayerCorpse(player, corps, false)) {
+        for (obj_id corps : corpses)
+        {
+            if (dragPlayerCorpse(player, corps, false))
+            {
                 moved = utils.addElement(moved, corps);
             }
         }
@@ -298,22 +320,23 @@ public class corpse extends script.base_script
         }
         return _moved;
     }
+
     public static boolean isPlayerCorpse(obj_id objectInQuestion) throws InterruptedException
     {
-        if (isPlayer(objectInQuestion) && getPosture(objectInQuestion) == POSTURE_DEAD)
-        {
-            return true;
-        }
-        return false;
+        return isPlayer(objectInQuestion) && getPosture(objectInQuestion) == POSTURE_DEAD;
     }
+
     public static obj_id[] getDraggableCorpsesInRange(obj_id player, boolean feedback) throws InterruptedException
     {
         Vector corpses = new Vector();
         corpses.setSize(0);
         obj_id[] stuff = getObjectsInRange(player, 100.0f);
-        for (obj_id obj_id : stuff) {
-            if (isPlayerCorpse(obj_id)) {
-                if (canDragPlayerCorpse(player, obj_id, true)) {
+        for (obj_id obj_id : stuff)
+        {
+            if (isPlayerCorpse(obj_id))
+            {
+                if (canDragPlayerCorpse(player, obj_id, true))
+                {
                     corpses = utils.addElement(corpses, obj_id);
                 }
             }
@@ -330,6 +353,7 @@ public class corpse extends script.base_script
         }
         return _corpses;
     }
+
     public static boolean canDragPlayerCorpse(obj_id player, obj_id corpse, boolean giveFeedback) throws InterruptedException
     {
         if ((player == null) || (corpse == null))
@@ -361,7 +385,7 @@ public class corpse extends script.base_script
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     if (giveFeedback)
                     {
@@ -370,7 +394,7 @@ public class corpse extends script.base_script
                     return false;
                 }
             }
-            else 
+            else
             {
                 obj_id corpseContainer = structure.getContainingBuilding(corpse);
                 if (corpseContainer == null)
@@ -381,18 +405,15 @@ public class corpse extends script.base_script
                     }
                     return false;
                 }
-                else 
+                else
                 {
                     obj_id playerContainer = structure.getContainingBuilding(player);
                     if (playerContainer == null)
                     {
                         location bLoc = getLocation(corpseContainer);
-                        if (utils.getDistance2D(pLoc, bLoc) <= pclib.RANGE_CORPSE_DRAG_INTERIOR)
-                        {
-                            return true;
-                        }
+                        return utils.getDistance2D(pLoc, bLoc) <= pclib.RANGE_CORPSE_DRAG_INTERIOR;
                     }
-                    else 
+                    else
                     {
                         if (corpseContainer == playerContainer)
                         {
@@ -408,6 +429,7 @@ public class corpse extends script.base_script
         }
         return false;
     }
+
     public static boolean updateCorpseOwnerWaypoint(obj_id player, obj_id corpse) throws InterruptedException
     {
         if ((player == null) || (corpse == null))
@@ -430,6 +452,7 @@ public class corpse extends script.base_script
         d.put(DICT_CORPSE_WAYPOINT, waypoint);
         return messageTo(owner, HANDLER_CORPSE_WAYPOINT_UPDATE, d, 0, false);
     }
+
     public static boolean lootCorpseCoins(obj_id player, obj_id corpse) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(corpse))
@@ -449,6 +472,7 @@ public class corpse extends script.base_script
         }
         return false;
     }
+
     public static boolean openPlayerCorpse(obj_id player, obj_id corpse) throws InterruptedException
     {
         boolean lootedCoins = lootCorpseCoins(player, corpse);
@@ -465,6 +489,7 @@ public class corpse extends script.base_script
         }
         return true;
     }
+
     public static boolean lootPlayerCorpse(obj_id player, obj_id corpse) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(corpse))
@@ -494,7 +519,7 @@ public class corpse extends script.base_script
                 if ((leftContents == null) || (leftContents.length == 0))
                 {
                 }
-                else 
+                else
                 {
                     int itemSize = getVolume(leftContents[0]);
                     int freeVol = getVolumeFree(pInv);
@@ -513,7 +538,7 @@ public class corpse extends script.base_script
             {
                 cleanUpPlayerCorpse(corpse);
             }
-            else 
+            else
             {
                 if (!hasObjVar(corpse, "cleanupStamp"))
                 {
@@ -524,6 +549,7 @@ public class corpse extends script.base_script
         }
         return false;
     }
+
     public static boolean openAICorpse(obj_id player, obj_id corpse) throws InterruptedException
     {
         obj_id[] corpseContents = getContents(utils.getInventoryContainer(corpse));
@@ -535,6 +561,7 @@ public class corpse extends script.base_script
         }
         return true;
     }
+
     public static boolean lootAICorpse(obj_id player, obj_id corpse) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(corpse))
@@ -554,6 +581,7 @@ public class corpse extends script.base_script
         LOG("grouping", "lootAICorpse: returning false");
         return false;
     }
+
     public static boolean lootAICorpseContents(obj_id player, obj_id corpse) throws InterruptedException
     {
         boolean grouped = false;
@@ -592,7 +620,8 @@ public class corpse extends script.base_script
                 Vector movedContents = utils.removeElements(corpseContents, leftContents);
                 if (movedContents != null && movedContents.size() > 0)
                 {
-                    for (Object movedContent : movedContents) {
+                    for (Object movedContent : movedContents)
+                    {
                         group.notifyItemLoot(gid, player, corpse, ((obj_id) movedContent));
                     }
                 }
@@ -611,6 +640,7 @@ public class corpse extends script.base_script
         sendSystemMessage(player, SID_CORPSE_LOOTED);
         return true;
     }
+
     public static obj_id[] getValidLootContents(obj_id[] corpseContents) throws InterruptedException
     {
         if (corpseContents == null || corpseContents.length == 0)
@@ -619,10 +649,14 @@ public class corpse extends script.base_script
         }
         Vector validContents = new Vector();
         validContents.setSize(0);
-        for (obj_id corpseContent : corpseContents) {
-            if (!utils.hasScriptVar(corpseContent, "isCreatureWeapon")) {
+        for (obj_id corpseContent : corpseContents)
+        {
+            if (!utils.hasScriptVar(corpseContent, "isCreatureWeapon"))
+            {
                 utils.addElement(validContents, corpseContent);
-            } else {
+            }
+            else
+            {
                 trial.cleanupObject(corpseContent);
             }
         }
@@ -634,6 +668,7 @@ public class corpse extends script.base_script
         }
         return _validContents;
     }
+
     public static int[] hasResource(String mobType) throws InterruptedException
     {
         if ((mobType == null) || (mobType.equals("")))
@@ -652,7 +687,7 @@ public class corpse extends script.base_script
                 {
                     ret[i] = 1;
                 }
-                else 
+                else
                 {
                     ret[i] = 0;
                 }
@@ -673,6 +708,7 @@ public class corpse extends script.base_script
         }
         return null;
     }
+
     public static boolean hasResource(obj_id corpse) throws InterruptedException
     {
         if (corpse == null)
@@ -681,6 +717,7 @@ public class corpse extends script.base_script
         }
         return (hasResource(ai_lib.getCreatureName(corpse)) != null);
     }
+
     public static boolean harvestCreatureCorpse(obj_id player, obj_id corpse, String restype) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -719,7 +756,7 @@ public class corpse extends script.base_script
         {
             params = getRandomHarvestCorpseResources(player, corpse, 1);
         }
-        else 
+        else
         {
             params = getHarvestCorpseResources(player, corpse, restype);
         }
@@ -739,24 +776,30 @@ public class corpse extends script.base_script
         int actualAmount = 0;
         while (keys.hasMoreElements())
         {
-            String resourceType = (String)(keys.nextElement());
+            String resourceType = (String) (keys.nextElement());
             amt = params.getInt(resourceType);
             amt += amt * bonusHarvest;
-            amt = (int)(amt * skillEfficiency);
+            amt = (int) (amt * skillEfficiency);
             if (group.isGrouped(player))
             {
                 obj_id[] groupMembers = getGroupMemberIds(getGroupObject(player));
-                for (obj_id groupMember : groupMembers) {
-                    if (isIdValid(groupMember) && exists(groupMember) && isPlayer(groupMember) && groupMember != player) {
+                for (obj_id groupMember : groupMembers)
+                {
+                    if (isIdValid(groupMember) && exists(groupMember) && isPlayer(groupMember) && groupMember != player)
+                    {
                         float dist = getDistance(player, groupMember);
-                        if (dist != -1 && dist <= 64) {
-                            if (inGroupBonusMultiplier == GROUP_BONUS_NONE) {
+                        if (dist != -1 && dist <= 64)
+                        {
+                            if (inGroupBonusMultiplier == GROUP_BONUS_NONE)
+                            {
                                 inGroupBonusMultiplier = GROUP_BONUS;
                             }
-                            if (hasSkill(groupMember, "outdoors_scout_novice") && inGroupBonusMultiplier < GROUP_BONUS_SCOUT) {
+                            if (hasSkill(groupMember, "outdoors_scout_novice") && inGroupBonusMultiplier < GROUP_BONUS_SCOUT)
+                            {
                                 inGroupBonusMultiplier = GROUP_BONUS_SCOUT;
                             }
-                            if (hasSkill(groupMember, "outdoors_scout_master")) {
+                            if (hasSkill(groupMember, "outdoors_scout_master"))
+                            {
                                 inGroupBonusMultiplier = GROUP_BONUS_MASTERSCOUT;
                             }
                         }
@@ -782,7 +825,7 @@ public class corpse extends script.base_script
                 {
                     actualAmount = npe.harvestNpeResourceStack(player, type, amt);
                 }
-                else 
+                else
                 {
                     actualAmount = extractCorpseResource(type, amt, getLocation(getTopMostContainer(corpse)), pInv, cInv, 1);
                 }
@@ -802,14 +845,14 @@ public class corpse extends script.base_script
                         messageTo(player, "handleNewPlayerScoutAction", webster, 1, false);
                     }
                 }
-                else 
+                else
                 {
-                    litmus &= false;
+                    litmus = false;
                 }
             }
-            else 
+            else
             {
-                litmus &= false;
+                litmus = false;
             }
         }
         obj_id groupId = getGroupObject(player);
@@ -840,7 +883,7 @@ public class corpse extends script.base_script
         {
             sendSystemMessage(player, SID_NOTHING_TO_HARVEST);
         }
-        else 
+        else
         {
             if (hasObjVar(player, "newbie_handoff.mission.harvest"))
             {
@@ -850,9 +893,11 @@ public class corpse extends script.base_script
         messageTo(corpse, HANDLER_CORPSE_EMPTY, null, 1.0f, isObjectPersisted(corpse));
         return litmus;
     }
+
     public static void setCreatureHarvestXp(obj_id corpse, obj_id player) throws InterruptedException
     {
     }
+
     public static dictionary getHarvestCorpseResources(obj_id player, obj_id corpse, String restype) throws InterruptedException
     {
         if ((player == null) || (corpse == null))
@@ -865,7 +910,7 @@ public class corpse extends script.base_script
         {
             return null;
         }
-        int amt = (int)(StrictMath.pow(ai_lib.getLevel(corpse), 1.65f) * 0.4f + 2.0f);
+        int amt = (int) (StrictMath.pow(ai_lib.getLevel(corpse), 1.65f) * 0.4f + 2.0f);
         amt += 25;
         if (amt < 1)
         {
@@ -881,12 +926,12 @@ public class corpse extends script.base_script
             if ((typeName == null) || (typeName.equals("")) || (typeName.equals("none")))
             {
             }
-            else 
+            else
             {
                 d.put(typeName, amt);
             }
         }
-        else 
+        else
         {
             for (int i = 0; i <= CCR_BONE; i++)
             {
@@ -894,7 +939,7 @@ public class corpse extends script.base_script
                 if ((typeName == null) || (typeName.equals("")) || (typeName.equals("none")))
                 {
                 }
-                else 
+                else
                 {
                     d.put(typeName, amt);
                 }
@@ -902,6 +947,7 @@ public class corpse extends script.base_script
         }
         return d;
     }
+
     public static dictionary getRandomHarvestCorpseResources(obj_id player, obj_id corpse, int maxTypes) throws InterruptedException
     {
         if ((player == null) || (corpse == null) || (maxTypes < 1))
@@ -924,9 +970,9 @@ public class corpse extends script.base_script
                 int idx = rand(0, size - 1);
                 for (int i = 0; i < idx; i++)
                 {
-                    String temp = (String)keys.nextElement();
+                    String temp = (String) keys.nextElement();
                 }
-                String type = (String)keys.nextElement();
+                String type = (String) keys.nextElement();
                 int amt = params.getInt(type);
                 ret.put(type, amt);
                 params.remove(type);
@@ -939,10 +985,12 @@ public class corpse extends script.base_script
         }
         return ret;
     }
+
     public static dictionary getRandomHarvestCorpseResources(obj_id player, obj_id corpse) throws InterruptedException
     {
         return getRandomHarvestCorpseResources(player, corpse, 1);
     }
+
     public static int extractCorpseResource(String resourceClass, int amt, location loc, obj_id pInv, obj_id cInv, int min) throws InterruptedException
     {
         if ((resourceClass.equals("")) || (amt < 1) || (loc == null) || (pInv == null) || (cInv == null))
@@ -961,12 +1009,15 @@ public class corpse extends script.base_script
             return -1;
         }
         int total = 0;
-        for (obj_id crate1 : crates) {
+        for (obj_id crate1 : crates)
+        {
             total += getResourceContainerQuantity(crate1);
         }
         boolean movefail = false;
-        for (obj_id crate : crates) {
-            if (!putIn(crate, pInv, playerId)) {
+        for (obj_id crate : crates)
+        {
+            if (!putIn(crate, pInv, playerId))
+            {
                 movefail = true;
             }
         }
@@ -977,6 +1028,7 @@ public class corpse extends script.base_script
         }
         return total;
     }
+
     public static boolean isCorpseEmpty(obj_id objCorpse) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(objCorpse);
@@ -995,7 +1047,7 @@ public class corpse extends script.base_script
                         LOG("corpse_debug", "resources is very yes");
                         return false;
                     }
-                    else 
+                    else
                     {
                         LOG("corpse_debug", "no resources here");
                         return true;
@@ -1005,9 +1057,11 @@ public class corpse extends script.base_script
         }
         return false;
     }
+
     public static boolean hasLootPermissions(obj_id corpse, obj_id player) throws InterruptedException
     {
-        if(!isIdValid(corpse) || !exists(corpse) || corpse == null || corpse == obj_id.NULL_ID){
+        if (!isIdValid(corpse) || !exists(corpse) || corpse == null || corpse == obj_id.NULL_ID)
+        {
             return false;
         }
         obj_id killCredit = getObjIdObjVar(corpse, xp.VAR_TOP_GROUP);
@@ -1038,14 +1092,17 @@ public class corpse extends script.base_script
         if (group.isGroupObject(killCredit))
         {
             obj_id[] killList = getGroupMemberIds(killCredit);
-            for (obj_id listItem : killList) {
-                if (player == listItem) {
+            for (obj_id listItem : killList)
+            {
+                if (player == listItem)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static void showLootMeParticle(obj_id corpse) throws InterruptedException
     {
         obj_id killCredit = getObjIdObjVar(corpse, xp.VAR_TOP_GROUP);
@@ -1054,7 +1111,7 @@ public class corpse extends script.base_script
         {
             killList = getGroupMemberIds(killCredit);
         }
-        else 
+        else
         {
             killList = new obj_id[1];
             killList[0] = killCredit;
@@ -1062,6 +1119,7 @@ public class corpse extends script.base_script
         transform offset = transform.identity.setPosition_p(0.0f, getObjectCollisionRadius(corpse), 0);
         playClientEffectObj(killList, "appearance/pt_loot_disc.prt", corpse, "", offset, "lootMe");
     }
+
     public static void clearLootMeParticle(obj_id corpse) throws InterruptedException
     {
         obj_id killCredit = getObjIdObjVar(corpse, xp.VAR_TOP_GROUP);
@@ -1070,7 +1128,7 @@ public class corpse extends script.base_script
         {
             killList = getGroupMemberIds(killCredit);
         }
-        else 
+        else
         {
             killList = new obj_id[1];
             killList[0] = killCredit;

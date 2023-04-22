@@ -10,9 +10,6 @@ import script.string_id;
 
 public class heavyweapons extends script.base_script
 {
-    public heavyweapons()
-    {
-    }
     public static final int TYPE_LAUNCHER_PISTOL = 1;
     public static final int TYPE_ROCKET_LAUNCHER = 2;
     public static final int TYPE_FLAME_THROWER = 3;
@@ -49,6 +46,10 @@ public class heavyweapons extends script.base_script
     public static final float DEMOLITION_2_DAM_MULTIPLIER = 1.8f;
     public static final String ATTACK_NAME_BASE_SINGLE = "co_hw_dot_";
     public static final String ATTACK_NAME_BASE_AREA = "co_ae_hw_dot_";
+    public heavyweapons()
+    {
+    }
+
     public static int getHeavyWeaponType(obj_id weapon) throws InterruptedException
     {
         if (!hasObjVar(weapon, "intWeaponType"))
@@ -62,6 +63,7 @@ public class heavyweapons extends script.base_script
         }
         return type;
     }
+
     public static boolean fillHeavyWeaponData(weapon_data dat) throws InterruptedException
     {
         int weaponType = getHeavyWeaponType(dat.id);
@@ -86,6 +88,7 @@ public class heavyweapons extends script.base_script
         dat.hvyWeaponAeDamageMod = AOEDamagePercent;
         return true;
     }
+
     public static boolean canFireHeavyWeapon(obj_id player, weapon_data weapon) throws InterruptedException
     {
         if (cybernetic.hasCommandoLegs(player))
@@ -94,6 +97,7 @@ public class heavyweapons extends script.base_script
         }
         return true;
     }
+
     public static float getDemolitionShotDamageMod(obj_id attacker, obj_id defender, String actionName) throws InterruptedException
     {
         float mult = 1.05f;
@@ -102,7 +106,8 @@ public class heavyweapons extends script.base_script
             return mult;
         }
         actionName = toLower(actionName);
-        switch (actionName) {
+        switch (actionName)
+        {
             case "demolitionshot_2":
                 mult = DEMOLITION_2_DAM_MULTIPLIER;
                 break;
@@ -115,6 +120,7 @@ public class heavyweapons extends script.base_script
         }
         return mult;
     }
+
     public static obj_id[] getAllHeavyWeaponTargets(obj_id attacker, obj_id defender, weapon_data weapon, dictionary actionData) throws InterruptedException
     {
         float rangeModifier = 1.0f;
@@ -125,9 +131,9 @@ public class heavyweapons extends script.base_script
             if (actionName.startsWith("demolition") || actionName.startsWith("overkill"))
             {
                 return new obj_id[]
-                {
-                    defender
-                };
+                        {
+                                defender
+                        };
             }
             if (actionName.startsWith("deadbang"))
             {
@@ -142,48 +148,48 @@ public class heavyweapons extends script.base_script
         switch (weapon.hvyWeaponType)
         {
             case TYPE_LAUNCHER_PISTOL:
-            defenders = pvpGetTargetsInRange(attacker, defender, LAUNCHER_PISTOL_AOE_RADIUS * areaModifier);
-            break;
+                defenders = pvpGetTargetsInRange(attacker, defender, LAUNCHER_PISTOL_AOE_RADIUS * areaModifier);
+                break;
             case TYPE_LAVA_CANNON:
-            defenders = pvpGetTargetsInRange(attacker, defender, LAVA_CANNON_AOE_RADIUS * areaModifier);
-            break;
+                defenders = pvpGetTargetsInRange(attacker, defender, LAVA_CANNON_AOE_RADIUS * areaModifier);
+                break;
             case TYPE_FLAME_THROWER:
-            defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, FLAME_THROWER_CONE_ANGLE * areaModifier);
-            break;
+                defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, FLAME_THROWER_CONE_ANGLE * areaModifier);
+                break;
             case TYPE_HEAVY_FLAME_THROWER:
-            defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, HEAVY_FLAME_THROWER_CONE_ANGLE * areaModifier);
-            break;
+                defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, HEAVY_FLAME_THROWER_CONE_ANGLE * areaModifier);
+                break;
             case TYPE_HEAVY_PARTICLE_BEAM:
-            defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, PARTICLE_BEAM_CONE_ANGLE * areaModifier);
-            if (defenders != null && defenders.length > 1)
-            {
-                obj_id temp = defenders[0];
-                defenders[0] = defenders[defenders.length - 1];
-                defenders[defenders.length - 1] = temp;
-            }
-            break;
+                defenders = pvpGetTargetsInCone(attacker, attacker, defender, weapon.maxRange * rangeModifier, PARTICLE_BEAM_CONE_ANGLE * areaModifier);
+                if (defenders != null && defenders.length > 1)
+                {
+                    obj_id temp = defenders[0];
+                    defenders[0] = defenders[defenders.length - 1];
+                    defenders[defenders.length - 1] = temp;
+                }
+                break;
             case TYPE_HEAVY_ACID_BEAM:
-            defenders = pvpGetTargetsInRange(attacker, defender, HVY_ACID_BEAM_AOE_RADIUS * areaModifier);
-            break;
+                defenders = pvpGetTargetsInRange(attacker, defender, HVY_ACID_BEAM_AOE_RADIUS * areaModifier);
+                break;
             case TYPE_LIGHTNING_BEAM_CANON:
-            defenders = pvpGetTargetsInRange(attacker, defender, HVY_LIGHTNING_BEAM_AOE_RADIUS * areaModifier);
-            break;
+                defenders = pvpGetTargetsInRange(attacker, defender, HVY_LIGHTNING_BEAM_AOE_RADIUS * areaModifier);
+                break;
             default:
-            defenders = new obj_id[]
-            {
-                defender
-            };
-            break;
+                defenders = new obj_id[]
+                        {
+                                defender
+                        };
+                break;
         }
         return defenders;
     }
+
     public static void finalizeHeavyWeaponAttack(attacker_data attacker, defender_data[] defenders, weapon_data weapon) throws InterruptedException
     {
         effect_data dat = new effect_data();
         defender_data defender = defenders[0];
-        switch (weapon.hvyWeaponType)
+        if (weapon.hvyWeaponType == TYPE_ACID_RIFLE)
         {
-            case TYPE_ACID_RIFLE:
             float distance = getDistance(attacker.id, defender.id);
             if (distance > (weapon.maxRange - weapon.minRange) / 2)
             {
@@ -193,57 +199,60 @@ public class heavyweapons extends script.base_script
             {
                 sendSystemMessage(attacker.id, new string_id("cbt_spam", "acid_rifle_selfblind"));
             }
-            break;
         }
-        return;
     }
+
     public static effect_data doHeavyWeaponDefenderEffect(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         effect_data rslt = new effect_data();
         switch (weapon.hvyWeaponType)
         {
             case TYPE_LAUNCHER_PISTOL:
-            rslt = _doLauncherPistolAttack(attacker, defender, weapon);
-            break;
+                rslt = _doLauncherPistolAttack(attacker, defender, weapon);
+                break;
             case TYPE_ROCKET_LAUNCHER:
-            rslt = _doRocketLauncherAttack(attacker, defender, weapon);
-            break;
+                rslt = _doRocketLauncherAttack(attacker, defender, weapon);
+                break;
             case TYPE_FLAME_THROWER:
             case TYPE_HEAVY_FLAME_THROWER:
-            rslt = _doFlameThrowerAttack(attacker, defender, weapon);
-            break;
+                rslt = _doFlameThrowerAttack(attacker, defender, weapon);
+                break;
             case TYPE_LAVA_CANNON:
-            rslt = _doLavaCannonAttack(attacker, defender, weapon);
-            break;
+                rslt = _doLavaCannonAttack(attacker, defender, weapon);
+                break;
             case TYPE_HEAVY_PARTICLE_BEAM:
-            rslt = _doHeavyParticleBeamAttack(attacker, defender, weapon);
-            break;
+                rslt = _doHeavyParticleBeamAttack(attacker, defender, weapon);
+                break;
             case TYPE_ACID_RIFLE:
-            rslt = _doAcidRifleAttack(attacker, defender, weapon);
-            break;
+                rslt = _doAcidRifleAttack(attacker, defender, weapon);
+                break;
             case TYPE_HEAVY_ACID_BEAM:
-            rslt = _doHeavyAcidBeamAttack(attacker, defender, weapon);
-            break;
+                rslt = _doHeavyAcidBeamAttack(attacker, defender, weapon);
+                break;
             case TYPE_LIGHTNING_BEAM_CANON:
-            rslt = _doLightningBeamCanonAttack(attacker, defender, weapon);
-            break;
+                rslt = _doLightningBeamCanonAttack(attacker, defender, weapon);
+                break;
         }
         return rslt;
     }
+
     public static effect_data _doLauncherPistolAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         return new effect_data();
     }
+
     public static effect_data _doLavaCannonAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         return new effect_data();
     }
+
     public static effect_data _doRocketLauncherAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         effect_data dat = new effect_data();
         dat.posture = POSTURE_KNOCKED_DOWN;
         return dat;
     }
+
     public static effect_data _doFlameThrowerAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         if (rand(1, 100) <= FLAME_THROWER_DOT_CHANCE)
@@ -252,46 +261,50 @@ public class heavyweapons extends script.base_script
         }
         return new effect_data();
     }
+
     public static effect_data _doHeavyParticleBeamAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         return new effect_data();
     }
+
     public static effect_data _doAcidRifleAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         effect_data dat = new effect_data();
         dat.states = new int[]
-        {
-            STATE_BLINDED
-        };
+                {
+                        STATE_BLINDED
+                };
         dat.durations = new float[]
-        {
-            ACID_RIFLE_PUNISHMENT_DURATION
-        };
+                {
+                        ACID_RIFLE_PUNISHMENT_DURATION
+                };
         float distance = getDistance(defender.id, attacker.id);
         if (distance <= (weapon.maxRange - weapon.minRange) / 2)
         {
             dat.stateChance = ACID_RIFLE_MID_BLIND_CHANCE;
         }
-        else 
+        else
         {
             dat.stateChance = ACID_RIFLE_MAX_BLIND_CHANCE;
         }
         return dat;
     }
+
     public static effect_data _doHeavyAcidBeamAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         effect_data dat = new effect_data();
         dat.states = new int[]
-        {
-            STATE_BLINDED
-        };
+                {
+                        STATE_BLINDED
+                };
         dat.durations = new float[]
-        {
-            HVY_ACID_BEAM_BLIND_DURATION
-        };
+                {
+                        HVY_ACID_BEAM_BLIND_DURATION
+                };
         dat.stateChance = HVY_ACID_BEAM_AOE_CHANCE;
         return dat;
     }
+
     public static effect_data _doLightningBeamCanonAttack(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         if (rand(1, 100) <= LIGHTNING_BEAM_CANON_DOT_CHANCE)
@@ -306,6 +319,7 @@ public class heavyweapons extends script.base_script
         }
         return new effect_data();
     }
+
     public static void _applyHealthStatFireDot(attacker_data attacker, defender_data defender, weapon_data weapon) throws InterruptedException
     {
         int duration = 0;
@@ -315,7 +329,7 @@ public class heavyweapons extends script.base_script
         {
             case TYPE_FLAME_THROWER:
             case TYPE_LIGHTNING_BEAM_CANON:
-            
+
             {
                 duration = rand(15, 45);
                 potency = rand(125, 225);
@@ -323,7 +337,7 @@ public class heavyweapons extends script.base_script
             }
             break;
             case TYPE_HEAVY_FLAME_THROWER:
-            
+
             {
                 duration = rand(15, 60);
                 potency = rand(150, 275);
@@ -333,16 +347,19 @@ public class heavyweapons extends script.base_script
         }
         dot.applyDotEffect(defender.id, attacker.id, dot.DOT_FIRE, "hvyWeaponDot_" + HEALTH + "_" + attacker.id, HEALTH, potency, strength, duration, true, null);
     }
+
     public static String getHeavyWeaponDotName(obj_id player, obj_id weapon, boolean singleTarget) throws InterruptedException
     {
         int elementalDamageType = getWeaponElementalType(weapon);
         return getHeavyWeaponDotName(player, elementalDamageType, singleTarget);
     }
+
     public static String getHeavyWeaponDotName(obj_id player, weapon_data weaponData, boolean singleTarget) throws InterruptedException
     {
         int elementalDamageType = weaponData.elementalType;
         return getHeavyWeaponDotName(player, elementalDamageType, singleTarget);
     }
+
     public static String getHeavyWeaponDotName(obj_id player, int elementalDamageType, boolean singleTarget) throws InterruptedException
     {
         int playerLevel = getLevel(player);
@@ -358,32 +375,32 @@ public class heavyweapons extends script.base_script
         {
             attackNameBase = ATTACK_NAME_BASE_SINGLE;
         }
-        else 
+        else
         {
             attackNameBase = ATTACK_NAME_BASE_AREA;
         }
         switch (elementalDamageType)
         {
             case DAMAGE_ENERGY:
-            attackNameType = "energy_";
-            break;
+                attackNameType = "energy_";
+                break;
             case DAMAGE_KINETIC:
-            attackNameType = "kinetic_";
-            break;
+                attackNameType = "kinetic_";
+                break;
             case DAMAGE_ELEMENTAL_HEAT:
-            attackNameType = "fire_";
-            break;
+                attackNameType = "fire_";
+                break;
             case DAMAGE_ELEMENTAL_COLD:
-            attackNameType = "cold_";
-            break;
+                attackNameType = "cold_";
+                break;
             case DAMAGE_ELEMENTAL_ACID:
-            attackNameType = "acid_";
-            break;
+                attackNameType = "acid_";
+                break;
             case DAMAGE_ELEMENTAL_ELECTRICAL:
-            attackNameType = "electrical_";
-            break;
+                attackNameType = "electrical_";
+                break;
             default:
-            break;
+                break;
         }
         if (playerLevel == 90)
         {

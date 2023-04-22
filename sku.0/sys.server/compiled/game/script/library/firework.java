@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class firework extends script.base_script
 {
-    public firework()
-    {
-    }
     public static final int SHOW_EVENT_MAX = 20;
     public static final float SHOW_DELAY_MIN = 1.0f;
     public static final float SHOW_DELAY_MAX = 10.0f;
@@ -35,6 +32,10 @@ public class firework extends script.base_script
     public static final string_id SID_NO_SHOWS_TO_DISPLAY = new string_id(STF, "no_shows_to_display");
     public static final string_id SID_NO_NEED_TO_REORDER = new string_id(STF, "no_need_to_reorder");
     public static final string_id SID_DUD_FIREWORK = new string_id(STF, "dud_firework");
+    public firework()
+    {
+    }
+
     public static boolean launch(obj_id target, obj_id firework) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(firework))
@@ -63,6 +64,7 @@ public class firework extends script.base_script
         messageTo(target, HANDLER_FIREWORK_PREPARE, params, 0, false);
         return true;
     }
+
     public static void launchShow(obj_id target, obj_id show) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(show))
@@ -97,6 +99,7 @@ public class firework extends script.base_script
             destroyObject(show);
         }
     }
+
     public static boolean addShowEvent(obj_id target, obj_id show, obj_id firework) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(show) || !isIdValid(firework))
@@ -123,6 +126,7 @@ public class firework extends script.base_script
         }
         return litmus;
     }
+
     public static void removeShowEvent(obj_id target, obj_id show, int idx) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(show) || idx < 0)
@@ -158,6 +162,7 @@ public class firework extends script.base_script
         setObjVar(show, VAR_SHOW_DELAY, show_delay);
         incrementCount(show, -1);
     }
+
     public static void setShowEventDelay(obj_id target, obj_id show, int idx, float delay) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(show) || idx < 0)
@@ -189,6 +194,7 @@ public class firework extends script.base_script
         show_delay.set(idx, delay);
         setObjVar(show, VAR_SHOW_DELAY, show_delay);
     }
+
     public static void showEventDataSUI(obj_id player, obj_id show) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -215,6 +221,7 @@ public class firework extends script.base_script
             setSUIScriptVars(show, pid, player);
         }
     }
+
     public static void showRemoveEventSUI(obj_id player, obj_id show) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -241,6 +248,7 @@ public class firework extends script.base_script
             setSUIScriptVars(show, pid, player);
         }
     }
+
     public static void showReorderEventsSUI(obj_id player, obj_id show) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -267,6 +275,7 @@ public class firework extends script.base_script
             setSUIScriptVars(show, pid, player);
         }
     }
+
     public static void showModifyEventIndexSUI(obj_id player, obj_id show) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -293,6 +302,7 @@ public class firework extends script.base_script
             setSUIScriptVars(show, pid, player);
         }
     }
+
     public static void showModifyEventTimeSUI(obj_id player, obj_id show, int idx) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show) || idx < 0)
@@ -310,8 +320,8 @@ public class firework extends script.base_script
         {
             return;
         }
-        int current = (int)((Float) delays.get(idx) * 10);
-        int available = (int)(SHOW_DELAY_MAX * 10) - current;
+        int current = (int) ((Float) delays.get(idx) * 10);
+        int available = (int) (SHOW_DELAY_MAX * 10) - current;
         String title = "@firework:modify_delay_title";
         String prompt = "@firework:modify_delay_prompt";
         int pid = sui.transfer(show, player, prompt, title, "Available", available, "Delay", current, "handleModifyEventTimeSUI");
@@ -320,23 +330,27 @@ public class firework extends script.base_script
             setSUIScriptVars(show, pid, player, idx);
         }
     }
+
     public static void setSUIScriptVars(obj_id show, int pid, obj_id player) throws InterruptedException
     {
         utils.setScriptVar(show, "firework.pid", pid);
         utils.setScriptVar(show, "firework.player", player);
     }
+
     public static void setSUIScriptVars(obj_id show, int pid, obj_id player, int idx) throws InterruptedException
     {
         utils.setScriptVar(show, "firework.pid", pid);
         utils.setScriptVar(show, "firework.player", player);
         utils.setScriptVar(show, "firework.idx", idx);
     }
+
     public static void removeSUIScriptVars(obj_id show) throws InterruptedException
     {
         utils.removeScriptVar(show, "firework.pid");
         utils.removeScriptVar(show, "firework.player");
         utils.removeScriptVar(show, "firework.idx");
     }
+
     public static void cleanupSUIScriptVars(obj_id show) throws InterruptedException
     {
         if (utils.hasScriptVar(show, "firework.pid"))
@@ -350,6 +364,7 @@ public class firework extends script.base_script
             removeSUIScriptVars(show);
         }
     }
+
     public static Vector getShowListEntries(obj_id show) throws InterruptedException
     {
         Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
@@ -369,7 +384,7 @@ public class firework extends script.base_script
         {
             time += (Float) show_delay.get(i);
             String sTime = utils.formatTime(time);
-            entries = utils.addElement(entries, "(" + sTime + "s) " + getString(new string_id("firework_n", ((String)show_fx.get(i)))));
+            entries = utils.addElement(entries, "(" + sTime + "s) " + getString(new string_id("firework_n", ((String) show_fx.get(i)))));
         }
         if (entries == null || entries.size() == 0)
         {
@@ -377,6 +392,7 @@ public class firework extends script.base_script
         }
         return entries;
     }
+
     public static void swapEvents(obj_id player, obj_id show, int idx1, int idx2) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -398,15 +414,16 @@ public class firework extends script.base_script
         {
             return;
         }
-        String tmpFx = ((String)show_fx.get(idx1));
+        String tmpFx = ((String) show_fx.get(idx1));
         float tmpDelay = (Float) show_delay.get(idx1);
-        show_fx.set(idx1, ((String)show_fx.get(idx2)));
-        show_delay.set(idx1, (Float) show_delay.get(idx2));
+        show_fx.set(idx1, show_fx.get(idx2));
+        show_delay.set(idx1, show_delay.get(idx2));
         show_fx.set(idx2, tmpFx);
         show_delay.set(idx2, tmpDelay);
         setObjVar(show, VAR_SHOW_FX, show_fx);
         setObjVar(show, VAR_SHOW_DELAY, show_delay);
     }
+
     public static void setEventDelay(obj_id player, obj_id show, int idx, float delay) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(show))
@@ -433,6 +450,7 @@ public class firework extends script.base_script
             sendSystemMessageProse(player, ppDelayUpdated);
         }
     }
+
     public static void setEffect(obj_id firework, String fx, color pColor) throws InterruptedException
     {
         if (!isIdValid(firework) || fx == null || fx.equals("") || pColor == null)
@@ -441,6 +459,7 @@ public class firework extends script.base_script
         }
         setObjVar(firework, VAR_FIREWORK_FX, fx);
     }
+
     public static void makeRandomEffect(obj_id firework) throws InterruptedException
     {
         if (!isIdValid(firework))
@@ -450,6 +469,7 @@ public class firework extends script.base_script
         String fx = getRandomFireworkEffect();
         setObjVar(firework, VAR_FIREWORK_FX, fx);
     }
+
     public static String getRandomFireworkEffect() throws InterruptedException
     {
         String[] names = dataTableGetStringColumn(TBL_FX, "name");
@@ -460,11 +480,13 @@ public class firework extends script.base_script
         int idx = rand(0, names.length - 1);
         return names[idx];
     }
+
     public static void dud(obj_id target) throws InterruptedException
     {
         sendSystemMessage(target, SID_DUD_FIREWORK);
         decrementFireworkCount(target);
     }
+
     public static void decrementFireworkCount(obj_id target) throws InterruptedException
     {
         int cnt = utils.getIntScriptVar(target, firework.SCRIPTVAR_COUNT);
@@ -475,6 +497,7 @@ public class firework extends script.base_script
             detachScript(target, firework.SCRIPT_PLAYER);
         }
     }
+
     public static void useCharge(obj_id firework) throws InterruptedException
     {
         incrementCount(firework, -1);

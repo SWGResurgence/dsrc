@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class ai_lib extends script.base_script
 {
-    public ai_lib()
-    {
-    }
     public static final float PLAYER_RUN_SPEED = 8.0f;
     public static final float AI_MAX_MOVEMENT_SPEED = PLAYER_RUN_SPEED;
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
@@ -52,12 +49,17 @@ public class ai_lib extends script.base_script
     public static final int DIFFICULTY_ELITE = 1;
     public static final int DIFFICULTY_BOSS = 2;
     public static final String SHARED_HEALTH_LIST = "shared_health_list";
+    public ai_lib()
+    {
+    }
+
     public static boolean isWithinLeash(obj_id ai) throws InterruptedException
     {
         final float distanceToHome = getDistance(getLocation(ai), aiGetLeashAnchorLocation(ai));
         final float leashRadius = aiGetLeashRadius();
         return (distanceToHome <= leashRadius);
     }
+
     public static void resetAi() throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -68,6 +70,7 @@ public class ai_lib extends script.base_script
         messageTo(self, "resumeDefaultCalmBehavior", null, 1, false);
         LOGC(aiLoggingEnabled(self), "debug_ai", ("ai_lib::resetAi() --- END RESET AI --- self(" + self + ") getName(" + getName(self) + ")"));
     }
+
     public static void resetCombatTriggerVolumes() throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -97,6 +100,7 @@ public class ai_lib extends script.base_script
             createTriggerVolume(ai_lib.AGGRO_VOLUME_NAME, aiGetAggroRadius(self), false);
         }
     }
+
     public static void clearCombatData() throws InterruptedException
     {
         final obj_id self = getSelf();
@@ -109,10 +113,12 @@ public class ai_lib extends script.base_script
         removeTriggerVolume(ai_lib.ALERT_VOLUME_NAME);
         removeTriggerVolume(ai_lib.AGGRO_VOLUME_NAME);
     }
+
     public static boolean isInCombat(obj_id ai) throws InterruptedException
     {
         return (getState(ai, STATE_COMBAT) == 1);
     }
+
     public static void setAttackable(obj_id npc, boolean val) throws InterruptedException
     {
         if (val)
@@ -124,10 +130,12 @@ public class ai_lib extends script.base_script
             removeObjVar(npc, OBJVAR_ATTACKABLE_OVERRIDE);
         }
     }
+
     public static boolean isAttackable(obj_id npc) throws InterruptedException
     {
         return hasObjVar(npc, OBJVAR_ATTACKABLE_OVERRIDE);
     }
+
     public static void setMood(obj_id npc, String mood) throws InterruptedException
     {
         if (getSelf() != npc)
@@ -145,7 +153,7 @@ public class ai_lib extends script.base_script
         {
             removeObjVar(npc, "ai.mood");
         }
-        else 
+        else
         {
             setObjVar(npc, "ai.mood", mood);
         }
@@ -165,6 +173,7 @@ public class ai_lib extends script.base_script
         }
         setAnimationMood(npc, mood);
     }
+
     public static void doAction(obj_id npc, String anim) throws InterruptedException
     {
         if (getSelf() != npc)
@@ -187,15 +196,17 @@ public class ai_lib extends script.base_script
             }
             removeObjVar(npc, "ai.combat.moveMode");
         }
-        else 
+        else
         {
             doAnimationAction(npc, anim);
         }
     }
+
     public static void setPatrolPath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         setPatrolPath(npc, waypoints, 0);
     }
+
     public static void setPatrolPath(obj_id npc, String[] waypoints, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -207,10 +218,12 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolOncePath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         setPatrolOncePath(npc, waypoints, 0);
     }
+
     public static void setPatrolOncePath(obj_id npc, String[] waypoints, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -222,6 +235,7 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolRandomPath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -233,6 +247,7 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolRandomOncePath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -244,10 +259,12 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolFlipPath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         setPatrolFlipPath(npc, waypoints, 0);
     }
+
     public static void setPatrolFlipPath(obj_id npc, String[] waypoints, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -259,10 +276,12 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolFlipOncePath(obj_id npc, String[] waypoints) throws InterruptedException
     {
         setPatrolFlipOncePath(npc, waypoints, 0);
     }
+
     public static void setPatrolFlipOncePath(obj_id npc, String[] waypoints, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && waypoints != null)
@@ -274,10 +293,12 @@ public class ai_lib extends script.base_script
             }
         }
     }
+
     public static void setPatrolPath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         setPatrolPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolPath(obj_id npc, location[] patrolLoc, int startPoint) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(npc), "debug_ai", ("ai_lib::setPatrolPath() self(" + npc + ") getName(" + getName(npc) + ") patrolLength(" + patrolLoc.length + ")"));
@@ -288,10 +309,12 @@ public class ai_lib extends script.base_script
             patrol(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolOncePath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         setPatrolOncePath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolOncePath(obj_id npc, location[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -301,6 +324,7 @@ public class ai_lib extends script.base_script
             patrolOnce(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolRandomPath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -310,6 +334,7 @@ public class ai_lib extends script.base_script
             patrolRandom(npc, patrolLoc);
         }
     }
+
     public static void setPatrolRandomOncePath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -319,10 +344,12 @@ public class ai_lib extends script.base_script
             patrolRandomOnce(npc, patrolLoc);
         }
     }
+
     public static void setPatrolFlipPath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         setPatrolFlipPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolFlipPath(obj_id npc, location[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -332,10 +359,12 @@ public class ai_lib extends script.base_script
             patrolFlip(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolFlipOncePath(obj_id npc, location[] patrolLoc) throws InterruptedException
     {
         setPatrolFlipOncePath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolFlipOncePath(obj_id npc, location[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -345,10 +374,12 @@ public class ai_lib extends script.base_script
             patrolFlipOnce(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         setPatrolNamedPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolNamedPath(obj_id npc, String[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -358,10 +389,12 @@ public class ai_lib extends script.base_script
             patrol(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolOnceNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         setPatrolOnceNamedPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolOnceNamedPath(obj_id npc, String[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -371,6 +404,7 @@ public class ai_lib extends script.base_script
             patrolOnce(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolRandomNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -389,6 +423,7 @@ public class ai_lib extends script.base_script
             patrolRandom(npc, patrolLoc);
         }
     }
+
     public static void setPatrolRandomOnceNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -398,10 +433,12 @@ public class ai_lib extends script.base_script
             patrolRandomOnce(npc, patrolLoc);
         }
     }
+
     public static void setPatrolFlipNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         setPatrolFlipNamedPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolFlipNamedPath(obj_id npc, String[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -411,10 +448,12 @@ public class ai_lib extends script.base_script
             patrolFlip(npc, patrolLoc, startPoint);
         }
     }
+
     public static void setPatrolFlipOnceNamedPath(obj_id npc, String[] patrolLoc) throws InterruptedException
     {
         setPatrolFlipOnceNamedPath(npc, patrolLoc, 0);
     }
+
     public static void setPatrolFlipOnceNamedPath(obj_id npc, String[] patrolLoc, int startPoint) throws InterruptedException
     {
         if (isIdValid(npc) && patrolLoc != null)
@@ -424,6 +463,7 @@ public class ai_lib extends script.base_script
             patrolFlipOnce(npc, patrolLoc, startPoint);
         }
     }
+
     public static void clearPatrolPath(obj_id npc) throws InterruptedException
     {
         if (isIdValid(npc))
@@ -433,6 +473,7 @@ public class ai_lib extends script.base_script
             utils.removeScriptVar(npc, SCRIPTVAR_CACHED_PATROL_TYPE);
         }
     }
+
     public static void resumePatrol(obj_id npc) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(npc), "debug_ai", ("ai_lib::resumePatrol() self(" + npc + ") getName(" + getName(npc) + ")"));
@@ -441,9 +482,12 @@ public class ai_lib extends script.base_script
             resumeMovement(npc);
         }
     }
-    public static boolean canPatrol(obj_id npc) throws InterruptedException {
+
+    public static boolean canPatrol(obj_id npc) throws InterruptedException
+    {
         return isIdValid(npc) && utils.hasScriptVar(npc, SCRIPTVAR_CACHED_PATROL_TYPE);
     }
+
     public static location[] parseWaypoints(obj_id npc, String[] waypoints) throws InterruptedException
     {
         if (!isIdValid(npc) || waypoints == null)
@@ -471,7 +515,7 @@ public class ai_lib extends script.base_script
                 patrolLoc.x = baseLoc.x + coords[0];
                 patrolLoc.z = baseLoc.z + coords[1];
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(npc, "*  ERROR: COULD NOT PARSE WAYPOINT STRING <" + waypoints[i] + "> *");
             }
@@ -479,6 +523,7 @@ public class ai_lib extends script.base_script
         }
         return patrolLocs;
     }
+
     public static float[] parseWaypoints(String text) throws InterruptedException
     {
         float[] returnCoords = new float[2];
@@ -486,10 +531,12 @@ public class ai_lib extends script.base_script
         returnCoords[1] = Float.parseFloat(text.split(",")[1]);
         return returnCoords;
     }
+
     public static void setIgnoreCombat(obj_id npc) throws InterruptedException
     {
         setWantSawAttackTriggers(npc, false);
     }
+
     public static void barkString(obj_id npc, String text) throws InterruptedException
     {
         if (!text.equals("death"))
@@ -528,7 +575,7 @@ public class ai_lib extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             if (rand(1, 10) != 1)
             {
@@ -543,56 +590,69 @@ public class ai_lib extends script.base_script
         }
         chat.chat(npc, speakString);
     }
+
     public static boolean isAnimal(obj_id npc) throws InterruptedException
     {
         return isMonster(npc);
     }
+
     public static boolean isMonster(obj_id npc) throws InterruptedException
     {
         int myNiche = aiGetNiche(npc);
         return myNiche == NICHE_MONSTER || myNiche == NICHE_HERBIVORE || myNiche == NICHE_CARNIVORE || myNiche == NICHE_PREDATOR;
     }
+
     public static boolean isDroid(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_DROID;
     }
+
     public static boolean isPredator(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_PREDATOR;
     }
+
     public static boolean isCarnivore(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_CARNIVORE;
     }
+
     public static boolean isHerbivore(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_HERBIVORE;
     }
+
     public static boolean isVehicle(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_VEHICLE;
     }
+
     public static boolean isAndroid(obj_id npc) throws InterruptedException
     {
         return aiGetNiche(npc) == NICHE_ANDROID;
     }
+
     public static boolean isHumanoid(obj_id target) throws InterruptedException
     {
         int niche = aiGetNiche(target);
         return isPlayer(target) || niche == NICHE_NPC || niche == NICHE_ANDROID;
     }
+
     public static boolean isNpc(obj_id npc) throws InterruptedException
     {
         return (aiGetNiche(npc) == NICHE_NPC);
     }
+
     public static boolean isTurret(obj_id npc) throws InterruptedException
     {
         return isGameObjectTypeOf(getGameObjectType(npc), GOT_installation_turret);
     }
+
     public static void setIgnoreCombat(obj_id npc, boolean b) throws InterruptedException
     {
         setWantSawAttackTriggers(npc, b);
     }
+
     public static void setDefaultCalmBehavior(obj_id npc, int behavior) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(npc), "debug_ai", "ai_lib::setDefaultCalmBehavior() self(" + npc + getName(npc) + ") behavior(" + behavior + ")");
@@ -607,6 +667,7 @@ public class ai_lib extends script.base_script
         setObjVar(npc, "ai.defaultCalmBehavior", behavior);
         messageTo(npc, "handleSetDefaultBehavior", null, 1, false);
     }
+
     public static void greet(obj_id ai, obj_id player) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_lib::greet() ai(" + ai + ":" + getName(ai) + ") player(" + player + ":" + getName(player) + ")");
@@ -625,12 +686,13 @@ public class ai_lib extends script.base_script
             chat.setGoodMood(ai);
             ai_lib.barkString(ai, "hi_nice");
         }
-        else 
+        else
         {
             chat.setNeutralMood(ai);
             ai_lib.barkString(ai, "hi_mid");
         }
     }
+
     public static void dismiss(obj_id ai, obj_id player) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_lib::dismiss() ai(" + ai + ":" + getName(ai) + ") player(" + player + ":" + getName(player) + ")");
@@ -649,26 +711,32 @@ public class ai_lib extends script.base_script
             chat.setGoodMood(ai);
             ai_lib.barkString(ai, "bye_nice");
         }
-        else 
+        else
         {
             chat.setNeutralMood(ai);
             ai_lib.barkString(ai, "bye_mid");
         }
     }
+
     public static boolean aiIsDead(obj_id npc) throws InterruptedException
     {
         return isAiDead(npc);
     }
-    public static boolean isAiDead(obj_id npc) throws InterruptedException {
-        if (!isMob(npc)) {
+
+    public static boolean isAiDead(obj_id npc) throws InterruptedException
+    {
+        if (!isMob(npc))
+        {
             return (isDisabled(npc));
         }
         return isIncapacitated(npc) || isDead(npc);
     }
+
     public static void aiFollow(obj_id npc, obj_id target) throws InterruptedException
     {
         aiFollow(npc, target, DEFAULT_FOLLOW_MIN, DEFAULT_FOLLOW_MAX);
     }
+
     public static void aiFollow(obj_id npc, obj_id target, float min_dist, float max_dist) throws InterruptedException
     {
         if (target == npc)
@@ -697,9 +765,12 @@ public class ai_lib extends script.base_script
         setObjVar(npc, "ai.persistantFollowing.max_dist", max_dist);
         follow(npc, target, min_dist, max_dist);
     }
-    public static boolean isFollowing(obj_id npc) throws InterruptedException {
+
+    public static boolean isFollowing(obj_id npc) throws InterruptedException
+    {
         return isIdValid(npc) && hasObjVar(npc, "ai.persistantFollowing");
     }
+
     public static obj_id getFollowTarget(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc))
@@ -708,6 +779,7 @@ public class ai_lib extends script.base_script
         }
         return getObjIdObjVar(npc, "ai.persistantFollowing.target");
     }
+
     public static void resumeFollow(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc))
@@ -732,6 +804,7 @@ public class ai_lib extends script.base_script
         }
         aiStopFollowing(npc);
     }
+
     public static void aiStopFollowing(obj_id npc) throws InterruptedException
     {
         stop(npc);
@@ -741,17 +814,19 @@ public class ai_lib extends script.base_script
             messageTo(npc, "resumeDefaultCalmBehavior", null, 5, false);
         }
     }
+
     public static String getMood(obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "ai.mood"))
         {
             return ai_lib.MOOD_CALM;
         }
-        else 
+        else
         {
             return getStringObjVar(npc, "ai.mood");
         }
     }
+
     public static void pathNear(obj_id npc, location dest, float range) throws InterruptedException
     {
         location startLoc = getLocation(npc);
@@ -759,7 +834,7 @@ public class ai_lib extends script.base_script
         {
             dest.x += range;
         }
-        else 
+        else
         {
             dest.x -= range;
         }
@@ -767,12 +842,13 @@ public class ai_lib extends script.base_script
         {
             dest.z += range;
         }
-        else 
+        else
         {
             dest.z -= range;
         }
         pathTo(npc, dest);
     }
+
     public static void followInFormation(obj_id npc, obj_id leader, int formationType, int position) throws InterruptedException
     {
         if (npc == leader)
@@ -789,6 +865,7 @@ public class ai_lib extends script.base_script
             resumeFormationFollowing(npc);
         }
     }
+
     public static void resumeFormationFollowing(obj_id npc) throws InterruptedException
     {
         if (isInCombat(npc))
@@ -805,19 +882,20 @@ public class ai_lib extends script.base_script
         switch (getIntObjVar(npc, "ai.formationType"))
         {
             case FORMATION_WEDGE:
-            followInWedgeFormation(npc, leader, position);
-            break;
+                followInWedgeFormation(npc, leader, position);
+                break;
             case FORMATION_LINE:
-            followInLineFormation(npc, leader, position);
-            break;
+                followInLineFormation(npc, leader, position);
+                break;
             case FORMATION_BOX:
-            followInBoxFormation(npc, leader, position);
-            break;
+                followInBoxFormation(npc, leader, position);
+                break;
             default:
-            followInColumnFormation(npc, leader, position);
-            break;
+                followInColumnFormation(npc, leader, position);
+                break;
         }
     }
+
     public static void followInWedgeFormation(obj_id npc, obj_id leader, int position) throws InterruptedException
     {
         if (npc == leader)
@@ -828,11 +906,12 @@ public class ai_lib extends script.base_script
         position = Math.max(1, position);
         location offset = new location();
         final float spacing = getObjectCollisionRadius(leader) * 2.25f;
-        final float x = (spacing * (float)Math.ceil(position / 2.0f));
+        final float x = (spacing * (float) Math.ceil(position / 2.0f));
         offset.x = (position % 2 == 0) ? -x : x;
         offset.z = -x;
         follow(npc, leader, offset);
     }
+
     public static void followInBoxFormation(obj_id npc, obj_id leader, int position) throws InterruptedException
     {
         if (npc == leader)
@@ -865,11 +944,12 @@ public class ai_lib extends script.base_script
         {
             follow(npc, leader, rand(15, 20), rand(10, 18));
         }
-        else 
+        else
         {
             follow(npc, leader, offset);
         }
     }
+
     public static void followInLineFormation(obj_id npc, obj_id leader, int position) throws InterruptedException
     {
         if (npc == leader)
@@ -880,10 +960,11 @@ public class ai_lib extends script.base_script
         position = Math.max(1, position);
         location offset = new location();
         final float spacing = getObjectCollisionRadius(leader) * 2.25f;
-        final float x = (spacing * (float)Math.ceil(position / 2.0f));
+        final float x = (spacing * (float) Math.ceil(position / 2.0f));
         offset.x = (position % 2 == 0) ? -x : x;
         follow(npc, leader, offset);
     }
+
     public static void followInColumnFormation(obj_id npc, obj_id leader, int position) throws InterruptedException
     {
         if (npc == leader)
@@ -895,9 +976,10 @@ public class ai_lib extends script.base_script
         location offset = new location();
         final float spacing = getObjectCollisionRadius(leader) * 2.25f;
         offset.x = (position % 2 == 0) ? 0.0f : spacing;
-        offset.z = -(spacing * (float)Math.ceil((position - 1) / 2.0f));
+        offset.z = -(spacing * (float) Math.ceil((position - 1) / 2.0f));
         follow(npc, leader, offset);
     }
+
     public static void pathAwayFrom(obj_id npc, obj_id target) throws InterruptedException
     {
         if (npc == target || !isIdValid(npc) || !isIdValid(target))
@@ -918,38 +1000,50 @@ public class ai_lib extends script.base_script
         }
         location myLoc = getLocation(npc);
         location targetLoc = getLocation(target);
-        if(isValidLocation(myLoc) && isValidLocation(targetLoc)) {
-            if (myLoc.x < targetLoc.x) {
+        if (isValidLocation(myLoc) && isValidLocation(targetLoc))
+        {
+            if (myLoc.x < targetLoc.x)
+            {
                 myLoc.x -= rand(20.0f, 40.0f);
-            } else {
+            }
+            else
+            {
                 myLoc.x += rand(20.0f, 40.0f);
             }
-            if (myLoc.z < targetLoc.z) {
+            if (myLoc.z < targetLoc.z)
+            {
                 myLoc.z -= rand(20.0f, 40.0f);
-            } else {
+            }
+            else
+            {
                 myLoc.z += rand(20.0f, 40.0f);
             }
             setObjVar(npc, "ai.pathingAwayFrom", target);
             pathTo(npc, myLoc);
         }
-        else{
-            LOG("debug_ai","Unable to get a valid location for myLoc (" + myLoc + ") or targetLoc (" + targetLoc + ") to make vendor path away.");
+        else
+        {
+            LOG("debug_ai", "Unable to get a valid location for myLoc (" + myLoc + ") or targetLoc (" + targetLoc + ") to make vendor path away.");
         }
         messageTo(npc, "handleClearPathingFlag", null, 30.0f, isObjectPersisted(npc));
     }
+
     public static void setLoiterRanges(obj_id npc, float minRange, float maxRange) throws InterruptedException
     {
         setObjVar(npc, "ai.loiterMinRange", minRange);
         setObjVar(npc, "ai.loiterMaxRange", maxRange);
     }
+
     public static int aiGetSpecies(obj_id npc) throws InterruptedException
     {
         return getSpecies(npc);
     }
+
     public static void setCustomIdleAnimation(obj_id npc, String animationString) throws InterruptedException
     {
         setDefaultCalmMood(npc, animationString);
     }
+
     public static void setDefaultCalmMood(obj_id npc, String mood) throws InterruptedException
     {
         setObjVar(npc, "ai.defaultCalmMood", mood);
@@ -958,6 +1052,7 @@ public class ai_lib extends script.base_script
             setMood(npc, MOOD_CALM);
         }
     }
+
     public static int getDefaultCalmBehavior(obj_id ai) throws InterruptedException
     {
         int behavior = BEHAVIOR_LOITER;
@@ -967,6 +1062,7 @@ public class ai_lib extends script.base_script
         }
         return behavior;
     }
+
     public static void aiPathTo(obj_id npc, location pathLoc) throws InterruptedException
     {
         if ((pathLoc.x == 0.0f) && (pathLoc.z == 0.0f))
@@ -977,6 +1073,7 @@ public class ai_lib extends script.base_script
         stop(npc);
         pathTo(npc, pathLoc);
     }
+
     public static int aiGetNiche(obj_id npc) throws InterruptedException
     {
         if (isPlayer(npc))
@@ -988,11 +1085,12 @@ public class ai_lib extends script.base_script
         {
             return (dataTableGetInt(CREATURE_TABLE, creatureName, "niche"));
         }
-        else 
+        else
         {
             return NICHE_NONE;
         }
     }
+
     public static int aiGetNiche(String creatureName) throws InterruptedException
     {
         if (creatureName == null || creatureName.equals(""))
@@ -1001,6 +1099,7 @@ public class ai_lib extends script.base_script
         }
         return dataTableGetInt(CREATURE_TABLE, creatureName, "niche");
     }
+
     public static String getSocialGroup(obj_id npc) throws InterruptedException
     {
         String creatureName = getCreatureName(npc);
@@ -1010,6 +1109,7 @@ public class ai_lib extends script.base_script
         }
         return null;
     }
+
     public static boolean isSameSocialGroup(obj_id npc, obj_id target) throws InterruptedException
     {
         boolean result = false;
@@ -1036,21 +1136,29 @@ public class ai_lib extends script.base_script
         }
         return result;
     }
-    public static boolean isHerdingCreature(obj_id npc) throws InterruptedException {
-        if (isNpc(npc) || isPlayer(npc) || isAndroid(npc)) {
+
+    public static boolean isHerdingCreature(obj_id npc) throws InterruptedException
+    {
+        if (isNpc(npc) || isPlayer(npc) || isAndroid(npc))
+        {
             return false;
         }
         String creatureName = getCreatureName(npc);
         return creatureName != null && (dataTableGetInt(CREATURE_TABLE, creatureName, "herd") == 1);
     }
-    public static boolean isStalkingCreature(obj_id ai) throws InterruptedException {
-        if (!(isPlayer(ai) || aiGetNiche(ai) == NICHE_NPC || isAndroid(ai))) {
-            if (!hasScript(ai, "ai.pet_advance")) {
+
+    public static boolean isStalkingCreature(obj_id ai) throws InterruptedException
+    {
+        if (!(isPlayer(ai) || aiGetNiche(ai) == NICHE_NPC || isAndroid(ai)))
+        {
+            if (!hasScript(ai, "ai.pet_advance"))
+            {
                 return aiIsStalker(ai);
             }
         }
         return false;
     }
+
     public static boolean isAggroToward(obj_id npc, obj_id threat) throws InterruptedException
     {
         if (hasScript(npc, "ai.pet_advance"))
@@ -1084,6 +1192,7 @@ public class ai_lib extends script.base_script
         }
         return ai_lib.aiGetNiche(npc) == NICHE_CARNIVORE && ai_lib.aiGetNiche(threat) == NICHE_HERBIVORE;
     }
+
     public static boolean isAggro(obj_id ai) throws InterruptedException
     {
         if (isPlayer(ai))
@@ -1100,17 +1209,22 @@ public class ai_lib extends script.base_script
         }
         return aiIsAggressive(ai);
     }
-    public static boolean isHealingNpc(obj_id npc) throws InterruptedException {
-        if (isPlayer(npc)) {
+
+    public static boolean isHealingNpc(obj_id npc) throws InterruptedException
+    {
+        if (isPlayer(npc))
+        {
             return false;
         }
         int niche = aiGetNiche(npc);
-        if (niche != NICHE_NPC && niche != NICHE_ANDROID) {
+        if (niche != NICHE_NPC && niche != NICHE_ANDROID)
+        {
             return false;
         }
         String creatureName = getCreatureName(npc);
         return creatureName != null && (dataTableGetInt(CREATURE_TABLE, creatureName, "healer") != 0);
     }
+
     public static void incapacitateMob(obj_id target) throws InterruptedException
     {
         if (target == null || !isMob(target))
@@ -1121,13 +1235,17 @@ public class ai_lib extends script.base_script
         setAction(target, -50);
         setMind(target, -50);
     }
-    public static boolean isHumanSkeleton(obj_id npc) throws InterruptedException {
-        if (isPlayer(npc)) {
+
+    public static boolean isHumanSkeleton(obj_id npc) throws InterruptedException
+    {
+        if (isPlayer(npc))
+        {
             return true;
         }
         int speciesNum = ai_lib.aiGetSpecies(npc);
         return speciesNum != -1 && dataTableGetString("datatables/ai/species.iff", speciesNum, "Skeleton").equals("human");
     }
+
     public static String getSkeleton(int speciesNum) throws InterruptedException
     {
         if (speciesNum == -1)
@@ -1136,6 +1254,7 @@ public class ai_lib extends script.base_script
         }
         return dataTableGetString("datatables/ai/species.iff", speciesNum, "Skeleton");
     }
+
     public static String getSkeleton(obj_id npc) throws InterruptedException
     {
         int speciesNum = ai_lib.aiGetSpecies(npc);
@@ -1148,6 +1267,7 @@ public class ai_lib extends script.base_script
         LOG("mount", "skeleton is " + skeleton);
         return skeleton;
     }
+
     public static void doThreatenAnimation(obj_id npc) throws InterruptedException
     {
         if (ai_lib.aiGetNiche(npc) != NICHE_NPC || !isAndroid(npc))
@@ -1202,6 +1322,7 @@ public class ai_lib extends script.base_script
         }
         ai_lib.doAction(npc, anim);
     }
+
     public static void doVictoryDance(obj_id npc) throws InterruptedException
     {
         if (ai_lib.isMonster(npc))
@@ -1212,12 +1333,12 @@ public class ai_lib extends script.base_script
                 {
                     doAnimationAction(npc, "trick_1");
                 }
-                else 
+                else
                 {
                     doAnimationAction(npc, "trick_2");
                 }
             }
-            else 
+            else
             {
                 doAction(npc, "vocalize");
             }
@@ -1303,6 +1424,7 @@ public class ai_lib extends script.base_script
         }
         doAction(npc, anim);
     }
+
     public static obj_id getLair(obj_id npc) throws InterruptedException
     {
         if (isPlayer(npc))
@@ -1328,17 +1450,19 @@ public class ai_lib extends script.base_script
         utils.setScriptVar(npc, "ai.hasLair", myPOI);
         return myPOI;
     }
+
     public static int aiGetApproachTriggerRange(obj_id npc) throws InterruptedException
     {
-        return (int)aiGetAggroRadius(npc);
+        return (int) aiGetAggroRadius(npc);
     }
+
     public static void aiSetPosture(obj_id npc, int newPosture) throws InterruptedException
     {
         if (getState(npc, STATE_COMBAT) != 1)
         {
             setPostureClientImmediate(npc, newPosture);
         }
-        else 
+        else
         {
             attacker_results cbtAnimationResults = new attacker_results();
             cbtAnimationResults.endPosture = newPosture;
@@ -1346,30 +1470,40 @@ public class ai_lib extends script.base_script
             doCombatResults("change_posture", cbtAnimationResults, null);
         }
     }
-    public static boolean canSit(obj_id npc) throws InterruptedException {
+
+    public static boolean canSit(obj_id npc) throws InterruptedException
+    {
         int speciesNum = ai_lib.aiGetSpecies(npc);
         return speciesNum != -1 && dataTableGetInt("datatables/ai/species.iff", speciesNum, "CanSit") == 1;
     }
-    public static boolean canLieDown(obj_id npc) throws InterruptedException {
+
+    public static boolean canLieDown(obj_id npc) throws InterruptedException
+    {
         int speciesNum = ai_lib.aiGetSpecies(npc);
         return speciesNum != -1 && dataTableGetInt("datatables/ai/species.iff", speciesNum, "CanLieDown") == 1;
     }
-    public static boolean isInSameBuilding(obj_id npc, obj_id target) throws InterruptedException {
-        if (!isIdValid(npc) || !isIdValid(target)) {
+
+    public static boolean isInSameBuilding(obj_id npc, obj_id target) throws InterruptedException
+    {
+        if (!isIdValid(npc) || !isIdValid(target))
+        {
             return false;
         }
         obj_id npcCell = getLocation(npc).cell;
         obj_id targetCell = getLocation(target).cell;
-        if (!isIdValid(npcCell) && !isIdValid(targetCell)) {
+        if (!isIdValid(npcCell) && !isIdValid(targetCell))
+        {
             return true; //we're both outside
         }
-        else if (!isIdValid(npcCell) || !isIdValid(targetCell)) {
+        else if (!isIdValid(npcCell) || !isIdValid(targetCell))
+        {
             return false;
         }
         obj_id npcBldg = getTopMostContainer(npc);
         obj_id targetBldg = getTopMostContainer(target);
         return npcBldg == targetBldg && (canSee(npc, target));//we're in the same building (and can see each other)
     }
+
     public static String getAttackString(int hash) throws InterruptedException
     {
         if (hash == 0)
@@ -1386,6 +1520,7 @@ public class ai_lib extends script.base_script
         }
         return "@combat_effects:unknown_attack";
     }
+
     public static String getMilkType(obj_id npc) throws InterruptedException
     {
         String creatureName = getCreatureName(npc);
@@ -1395,6 +1530,7 @@ public class ai_lib extends script.base_script
         }
         return dataTableGetString(CREATURE_TABLE, creatureName, "milkType");
     }
+
     public static boolean checkForSmuggler(obj_id player) throws InterruptedException
     {
         if (!hasSkill(player, "class_smuggler_phase1_novice"))
@@ -1434,6 +1570,7 @@ public class ai_lib extends script.base_script
         sendSystemMessage(player, SMUGGLER_SCAN_SUCCESS);
         return true;
     }
+
     public static boolean checkForJedi(obj_id player) throws InterruptedException
     {
         if (!utils.isProfession(player, utils.FORCE_SENSITIVE) || factions.getFactionFlag(player) == factions.FACTION_FLAG_NEUTRAL)
@@ -1453,16 +1590,18 @@ public class ai_lib extends script.base_script
         {
             mindTrick += 30;
         }
-        else 
+        else
         {
             mindTrick += 10;
         }
         return rand(1, 100) <= mindTrick;
     }
+
     public static boolean setupNpc(obj_id npc, boolean conversable, boolean invulnerable) throws InterruptedException
     {
         return setupNpc(npc, null, conversable, invulnerable);
     }
+
     public static boolean setupNpc(obj_id npc, String name, boolean conversable, boolean invulnerable) throws InterruptedException
     {
         if (name != null && !name.equals(""))
@@ -1476,6 +1615,7 @@ public class ai_lib extends script.base_script
         setInvulnerable(npc, invulnerable);
         return true;
     }
+
     public static void establishAgroLink(obj_id subject, float range) throws InterruptedException
     {
         String socialGroup = getSocialGroup(subject);
@@ -1487,9 +1627,11 @@ public class ai_lib extends script.base_script
         Vector linkedCreatures = new Vector();
         linkedCreatures.setSize(0);
         String creatureSocialGroup;
-        for (obj_id creature : creatures) {
+        for (obj_id creature : creatures)
+        {
             creatureSocialGroup = getSocialGroup(creature);
-            if (creatureSocialGroup != null && creatureSocialGroup.equals(socialGroup)) {
+            if (creatureSocialGroup != null && creatureSocialGroup.equals(socialGroup))
+            {
                 utils.addElement(linkedCreatures, creature);
             }
         }
@@ -1507,6 +1649,7 @@ public class ai_lib extends script.base_script
         }
         utils.setScriptVar(subject, ALLY_LIST, creatureList);
     }
+
     public static void establishAgroLink(obj_id subject, obj_id[] allies) throws InterruptedException
     {
         if (allies == null || allies.length == 0)
@@ -1515,6 +1658,7 @@ public class ai_lib extends script.base_script
         }
         utils.setScriptVar(subject, ALLY_LIST, allies);
     }
+
     public static void triggerAgroLinks(obj_id subject, obj_id attacker) throws InterruptedException
     {
         if (!utils.hasScriptVar(subject, ALLY_LIST))
@@ -1522,20 +1666,26 @@ public class ai_lib extends script.base_script
             return;
         }
         obj_id[] allyList = utils.getObjIdArrayScriptVar(subject, ALLY_LIST);
-        if (allyList == null || allyList.length == 0)
+        if (allyList == null)
         {
             return;
         }
-        for (obj_id ally : allyList) {
-            if (isIdValid(ally) && exists(ally) && !isDead(ally)) {
-                if (!isInCombat(ally)) {
+        for (obj_id ally : allyList)
+        {
+            if (isIdValid(ally) && exists(ally) && !isDead(ally))
+            {
+                if (!isInCombat(ally))
+                {
                     startCombat(ally, attacker);
-                } else {
+                }
+                else
+                {
                     addHate(ally, attacker, 1);
                 }
             }
         }
     }
+
     public static void creatureLevelUp(obj_id creature, obj_id victim) throws InterruptedException
     {
         showFlyText(creature, new string_id("cbt_spam", "level_up"), 2.5f, colors.CORNFLOWERBLUE);
@@ -1544,14 +1694,17 @@ public class ai_lib extends script.base_script
         if (creatureName.indexOf("elite_") < 1 && creatureName.indexOf("boss_") < 1)
         {
             dictionary d = utils.dataTableGetRow(CREATURE_TABLE, creatureName);
-            if (d != null) {
-                create.initializeCreature(creature, creatureName, d, getLevel(creature) + 1);
-            } else
+            if (d != null)
             {
-                debugConsoleMsg(creature, "ai_lib.creatureLevelUp() Could not get data table dictionary for row requested for creature "+creatureName);
+                create.initializeCreature(creature, creatureName, d, getLevel(creature) + 1);
+            }
+            else
+            {
+                debugConsoleMsg(creature, "ai_lib.creatureLevelUp() Could not get data table dictionary for row requested for creature " + creatureName);
             }
         }
     }
+
     public static boolean mindTrick(obj_id player, obj_id target) throws InterruptedException
     {
         int niche = aiGetNiche(target);
@@ -1573,7 +1726,7 @@ public class ai_lib extends script.base_script
                 removeHateTarget(target, player);
                 return true;
             }
-            else 
+            else
             {
                 showFlyTextPrivate(target, player, new string_id("cbt_spam", "resist"), 1.5f, colors.WHITE);
                 return false;
@@ -1581,17 +1734,20 @@ public class ai_lib extends script.base_script
         }
         return false;
     }
+
     public static boolean isTauntable(obj_id creature) throws InterruptedException
     {
         return !utils.hasScriptVar(creature, "combat.immune.taunt");
     }
+
     public static void establishSharedHealth(Vector allies) throws InterruptedException
     {
         for (int i = 0; i < allies.size(); i++)
         {
-            utils.setScriptVar(((obj_id)allies.get(i)), SHARED_HEALTH_LIST, allies);
+            utils.setScriptVar(((obj_id) allies.get(i)), SHARED_HEALTH_LIST, allies);
         }
     }
+
     public static int triggerSharedHealthLink(obj_id self, int totalDamage) throws InterruptedException
     {
         if (utils.hasScriptVar(self, ai_lib.SHARED_HEALTH_LIST))
@@ -1604,11 +1760,13 @@ public class ai_lib extends script.base_script
             {
                 return totalDamage;
             }
-            for (Object ally : allies) {
-                if (!isIdValid(((obj_id) ally)) || !exists(((obj_id) ally)) || isDead(((obj_id) ally)) || aiIsTethered(((obj_id) ally))) {
+            for (Object ally : allies)
+            {
+                if (!isIdValid(((obj_id) ally)) || !exists(((obj_id) ally)) || isDead(((obj_id) ally)) || aiIsTethered(((obj_id) ally)))
+                {
                     continue;
                 }
-                validList.add(((obj_id) ally));
+                validList.add(ally);
             }
             utils.setScriptVar(self, ai_lib.SHARED_HEALTH_LIST, validList);
             if (validList.size() < 2)
@@ -1616,8 +1774,10 @@ public class ai_lib extends script.base_script
                 return totalDamage;
             }
             int split = Math.round((float) totalDamage / validList.size());
-            for (Object aValidList : validList) {
-                if (aValidList == self) {
+            for (Object aValidList : validList)
+            {
+                if (aValidList == self)
+                {
                     continue;
                 }
                 damage(((obj_id) aValidList), DAMAGE_ELEMENTAL_HEAT, HIT_LOCATION_BODY, split);
@@ -1626,6 +1786,7 @@ public class ai_lib extends script.base_script
         }
         return totalDamage;
     }
+
     public static int getDifficultyClass(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target) || !hasObjVar(target, "difficultyClass"))
@@ -1634,6 +1795,7 @@ public class ai_lib extends script.base_script
         }
         return getIntObjVar(target, "difficultyClass");
     }
+
     public static boolean isVehicleMine(obj_id self) throws InterruptedException
     {
         return hasScript(self, "theme_park.heroic.echo_base.vehicle_mine");

@@ -1,6 +1,9 @@
 package script.library;
 
-import script.*;
+import script.dictionary;
+import script.obj_id;
+import script.string_id;
+import script.transform;
 
 import java.util.Vector;
 
@@ -9,22 +12,27 @@ public class space_create extends script.base_script
     public static final int MAX_SQUAD_SIZE = 10;
     public static final String SHIP_DATATABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String SHIP_DIRECTORY = "object/ship/";
+
     public static obj_id createShip(String strShipType, transform locTransform) throws InterruptedException
     {
         return createShip(strShipType, locTransform, null);
     }
+
     public static obj_id createShip(String strShipType, transform locTransform, obj_id objCell) throws InterruptedException
     {
         return _createShip(strShipType, locTransform, objCell, false);
     }
+
     public static obj_id createShipHyperspace(String strShipType, transform locTransform) throws InterruptedException
     {
         return _createShip(strShipType, locTransform, null, true);
     }
+
     public static obj_id createShipHyperspace(String strShipType, transform locTransform, obj_id objCell) throws InterruptedException
     {
         return _createShip(strShipType, locTransform, objCell, true);
     }
+
     public static obj_id _createShip(String strShipType, transform locTransform, obj_id objCell, boolean hyperspace) throws InterruptedException
     {
         dictionary dctShipInfo = dataTableGetRow(SHIP_DATATABLE, strShipType);
@@ -38,7 +46,7 @@ public class space_create extends script.base_script
         {
             objShip = createObjectHyperspace(strShip, locTransform, objCell);
         }
-        else 
+        else
         {
             objShip = createObject(strShip, locTransform, objCell);
         }
@@ -60,7 +68,7 @@ public class space_create extends script.base_script
             int index = strShipt.lastIndexOf("_");
             if (index > -1)
             {
-                String tier = strShipt.substring(index + 1, strShipt.length());
+                String tier = strShipt.substring(index + 1);
                 setShipDifficulty(objShip, tier);
             }
         }
@@ -123,7 +131,8 @@ public class space_create extends script.base_script
         if (script != null && script.length() > 0)
         {
             String[] scriptArray = split(script, ',');
-            for (String s : scriptArray) {
+            for (String s : scriptArray)
+            {
                 attachScript(objShip, s);
             }
         }
@@ -138,7 +147,7 @@ public class space_create extends script.base_script
                 {
                     cargo = cargo_types[0];
                 }
-                else 
+                else
                 {
                     cargo = cargo_types[rand(0, cargo_types.length - 1)];
                 }
@@ -174,7 +183,7 @@ public class space_create extends script.base_script
             {
                 setObjVar(objShip, "convo.appearance", strAppearances[0]);
             }
-            else 
+            else
             {
                 setObjVar(objShip, "convo.appearance", strAppearances[rand(0, strAppearances.length - 1)]);
             }
@@ -199,6 +208,7 @@ public class space_create extends script.base_script
         utils.setLocalVar(objShip, "intRebelFactionPoints", dctShipInfo.getInt("intRebelFactionPoints"));
         return objShip;
     }
+
     public static obj_id makeCreditChip(obj_id objContainer, int intCredits) throws InterruptedException
     {
         String TEMPLATE_NAME = "object/tangible/item/loot_credit_chip.iff";
@@ -213,7 +223,7 @@ public class space_create extends script.base_script
                 setObjVar(objCreditChip, "loot.intCredits", intAmount);
                 return objCreditChip;
             }
-            else 
+            else
             {
                 if (isIdValid(objContainer))
                 {
@@ -229,6 +239,7 @@ public class space_create extends script.base_script
         }
         return null;
     }
+
     public static obj_id getCreditChip(obj_id objContainer) throws InterruptedException
     {
         if (!isIdValid(objContainer))
@@ -240,21 +251,26 @@ public class space_create extends script.base_script
         {
             return null;
         }
-        for (obj_id objContent : objContents) {
-            if (hasObjVar(objContent, "loot.intCredits")) {
+        for (obj_id objContent : objContents)
+        {
+            if (hasObjVar(objContent, "loot.intCredits"))
+            {
                 return objContent;
             }
         }
         return null;
     }
+
     public static Vector<obj_id> createSquad(obj_id objParent, String strSquad, transform trSpawnLocation, float fltDistance, obj_id objCell) throws InterruptedException
     {
         return _createSquad(objParent, strSquad, trSpawnLocation, fltDistance, objCell, false);
     }
+
     public static Vector<obj_id> createSquadHyperspace(obj_id objParent, String strSquad, transform trSpawnLocation, float fltDistance, obj_id objCell) throws InterruptedException
     {
         return _createSquad(objParent, strSquad, trSpawnLocation, fltDistance, objCell, true);
     }
+
     public static Vector<obj_id> _createSquad(obj_id objParent, String strSquad, transform trSpawnLocation, float fltDistance, obj_id objCell, boolean hyperspace) throws InterruptedException
     {
         dictionary dctSquadInfo = dataTableGetRow("datatables/space_content/spawners/squads.iff", strSquad);
@@ -263,7 +279,7 @@ public class space_create extends script.base_script
             return null;
         }
         Vector<obj_id> objMembers = new Vector<>(0);
-        
+
         for (int intI = 1; intI < MAX_SQUAD_SIZE; intI++)
         {
             String strShipType = dctSquadInfo.getString("strShip" + intI);
@@ -277,7 +293,7 @@ public class space_create extends script.base_script
                     transform trFoo = (getTransform_o2p(objShip)).rotateTranslate_l2p(trTest);
                     setTransform_o2p(objShip, trFoo);
                 }
-                else 
+                else
                 {
                     transform trTest = space_utils.getRandomPositionInSphere(trSpawnLocation, 0.0f, fltDistance, true);
                     objShip = space_create._createShip(strShipType, trTest, objCell, hyperspace);
@@ -293,7 +309,7 @@ public class space_create extends script.base_script
                     attachScript(objShip, "space.content_tools.squad_member");
                 }
             }
-            else 
+            else
             {
                 intI = MAX_SQUAD_SIZE + 1;
             }
@@ -322,12 +338,13 @@ public class space_create extends script.base_script
             ship_ai.squadSetFormation(intSquadId, dctSquadInfo.getInt("intFormationShape"));
             ship_ai.squadSetLeader(intSquadId, objMember);
         }
-        else 
+        else
         {
             return null;
         }
         return objMembers;
     }
+
     public static obj_id setupShipFromObjVars(obj_id objShip) throws InterruptedException
     {
         String strShipType = getStringObjVar(objShip, "ship.shipName");
@@ -347,7 +364,7 @@ public class space_create extends script.base_script
                 strPilot = "default";
             }
         }
-        else 
+        else
         {
             if ((strPilot == null) || (strPilot.equals("")))
             {
@@ -360,7 +377,7 @@ public class space_create extends script.base_script
             int index = strPilot.lastIndexOf("_");
             if (index > -1)
             {
-                String tier = strPilot.substring(index + 1, strPilot.length());
+                String tier = strPilot.substring(index + 1);
                 setShipDifficulty(objShip, tier);
             }
         }
@@ -370,7 +387,7 @@ public class space_create extends script.base_script
         {
             strFaction = dctShipInfo.getString("space_faction");
         }
-        else 
+        else
         {
             strFaction = getStringObjVar(objShip, "ship.space_faction");
         }
@@ -380,6 +397,7 @@ public class space_create extends script.base_script
         ship_ai.unitSetPilotType(objShip, strPilot);
         return objShip;
     }
+
     public static void setupAIFlightModeling(obj_id objShip, String strPilotType) throws InterruptedException
     {
         if ((strPilotType != null) && (!strPilotType.equals("")))

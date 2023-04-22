@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class faction_perk extends script.base_script
 {
-    public faction_perk()
-    {
-    }
     public static final String TBL_PREJUDICE = "datatables/faction/prejudice.iff";
     public static final String TBL_PERK_INVENTORY_BASE = "datatables/npc/faction_recruiter/perk_inventory/";
     public static final String VAR_COVERT_DETECTOR = "covert_detector";
@@ -44,11 +41,11 @@ public class faction_perk extends script.base_script
     public static final string_id PROSE_NSF_LOTS = new string_id(STF_PERK, "prose_nsf_lots");
     public static final string_id PROSE_WRONG_FACTION = new string_id(STF_PERK, "prose_wrong_faction");
     public static final string_id PROSE_NOT_NEUTRAL = new string_id(STF_PERK, "prose_not_neutral");
-    public static final string_id[] FACTION_PERK_GROUPS = 
-    {
-        new string_id("faction_recruiter", "option_purchase_weapons_armor"),
-        new string_id("faction_recruiter", "option_purchase_installation")
-    };
+    public static final string_id[] FACTION_PERK_GROUPS =
+            {
+                    new string_id("faction_recruiter", "option_purchase_weapons_armor"),
+                    new string_id("faction_recruiter", "option_purchase_installation")
+            };
     public static final float FACTION_LOSING_COST_MODIFIER = 0.70f;
     public static final String VAR_FACTION = "faction_recruiter.faction";
     public static final String SCRIPT_FACTION_RECRUITER = "npc.faction_recruiter.faction_recruiter";
@@ -86,6 +83,10 @@ public class faction_perk extends script.base_script
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "comm_already_used");
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
+    public faction_perk()
+    {
+    }
+
     public static int prejudicePerkCost(obj_id player, String faction, int base_cost) throws InterruptedException
     {
         if (!isIdValid(player) || (faction == null) || (faction.equals("")) || (base_cost < 1))
@@ -107,16 +108,18 @@ public class faction_perk extends script.base_script
         if (mod > 0)
         {
             float cost = base_cost * mod;
-            return (int)cost;
+            return (int) cost;
         }
         return -1;
     }
+
     public static float getFactionPrejudice(int species, String faction) throws InterruptedException
     {
         faction = toLower(faction);
         String strSpecies = utils.getPlayerSpeciesName(species);
         return dataTableGetFloat(TBL_PREJUDICE, strSpecies, faction);
     }
+
     public static boolean canDeployFactionalDeed(obj_id player, obj_id deed) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(deed))
@@ -175,12 +178,9 @@ public class faction_perk extends script.base_script
             sendSystemMessage(player, SID_NO_BUILD_AREA);
             return false;
         }
-        if (!player_structure.canPlaceFactionPerkDeed(deed, player))
-        {
-            return false;
-        }
-        return true;
+        return player_structure.canPlaceFactionPerkDeed(deed, player);
     }
+
     public static void decloakCovertFactionMember(obj_id detector, obj_id player) throws InterruptedException
     {
         if (!isIdValid(detector) || !isIdValid(player))
@@ -197,19 +197,23 @@ public class faction_perk extends script.base_script
                 String dFacName = factions.getFactionNameByHashCode(dFac);
                 boolean hasGlobalTef = false;
                 String[] tefs = pvpGetEnemyFlags(player);
-                if (tefs != null && tefs.length > 0)
+                if (tefs != null)
                 {
-                    for (String tef : tefs) {
+                    for (String tef : tefs)
+                    {
                         StringTokenizer st = new StringTokenizer(tef);
                         String sTarget = st.nextToken();
                         String sTefFac = st.nextToken();
                         String sExpiration = st.nextToken();
                         int iTefFac = utils.stringToInt(sTefFac);
                         String tefFac = factions.getFactionNameByHashCode(iTefFac);
-                        if (tefFac != null && !tefFac.equals("")) {
-                            if (tefFac.equals(dFacName)) {
+                        if (tefFac != null && !tefFac.equals(""))
+                        {
+                            if (tefFac.equals(dFacName))
+                            {
                                 obj_id target = utils.stringToObjId(sTarget);
-                                if (!isIdValid(target)) {
+                                if (!isIdValid(target))
+                                {
                                     hasGlobalTef = true;
                                     break;
                                 }
@@ -227,15 +231,17 @@ public class faction_perk extends script.base_script
                 if (!factions.setTemporaryEnemyFlag(player, detector))
                 {
                 }
-                else 
+                else
                 {
                     obj_id[] inRange = getNonCreaturesInRange(detector, DETECTOR_NOTIFY_RANGE);
                     if ((inRange != null) && (inRange.length > 0))
                     {
                         dictionary d = new dictionary();
                         d.put("target", player);
-                        for (obj_id obj_id : inRange) {
-                            if (getGameObjectType(obj_id) == GOT_installation_turret) {
+                        for (obj_id obj_id : inRange)
+                        {
+                            if (getGameObjectType(obj_id) == GOT_installation_turret)
+                            {
                                 messageTo(obj_id, "enemyDecloaked", d, 3, false);
                             }
                         }
@@ -244,27 +250,28 @@ public class faction_perk extends script.base_script
             }
         }
     }
+
     public static boolean displayAvailableFactionItemRanks(obj_id player, obj_id npc, int playerGcwRank, String playerGcwFaction) throws InterruptedException
     {
         if (playerGcwRank > 0)
         {
             String perksDatatable = "datatables/npc/faction_recruiter/perk_inventory/gcw_rewards.iff";
-            int[] itemsPerRankList = 
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            };
+            int[] itemsPerRankList =
+                    {
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                    };
             int num_items = dataTableGetNumRows(perksDatatable);
             for (int i = 0; i < num_items; i++)
             {
@@ -355,7 +362,7 @@ public class faction_perk extends script.base_script
                 {
                     rankList = utils.addElement(rankList, text);
                 }
-                else 
+                else
                 {
                     string_id contrastText_sid = new string_id("faction_recruiter", "rank_list_empty");
                     prose_package pp = prose.getPackage(contrastText_sid);
@@ -376,18 +383,22 @@ public class faction_perk extends script.base_script
         }
         return false;
     }
+
     public static boolean displayItemPurchaseSUI(obj_id player, int rank, String faction, obj_id objNPC) throws InterruptedException
     {
         return displayItemPurchaseSUI(player, rank, faction, 1.0f, objNPC);
     }
+
     public static boolean displayItemPurchaseSUI(obj_id player, int rank, String faction) throws InterruptedException
     {
         return displayItemPurchaseSUI(player, rank, faction, 1.0f);
     }
+
     public static boolean displayItemPurchaseSUI(obj_id player, int rank, String faction, float systemMultiplier) throws InterruptedException
     {
         return displayItemPurchaseSUI(player, rank, faction, systemMultiplier, null);
     }
+
     public static boolean displayItemPurchaseSUI(obj_id player, int rank, String faction, float systemMultiplier, obj_id objRecruiter) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -500,7 +511,7 @@ public class faction_perk extends script.base_script
                             {
                                 float fltCost = cost;
                                 fltCost = faction_perk.getModifiedGCWCost(fltCost, objRecruiter, faction);
-                                cost = (int)(fltCost);
+                                cost = (int) (fltCost);
                             }
                             cost *= systemMultiplier;
                             items = utils.addElement(items, row_name + " (Cost: " + cost + ")");
@@ -530,7 +541,7 @@ public class faction_perk extends script.base_script
         String prompt = getString(new string_id("faction_recruiter", "select_item_purchase"));
         if (totalMultiplier != 1.0f)
         {
-            int delta = (int)((totalMultiplier - 1.0f) * 100);
+            int delta = (int) ((totalMultiplier - 1.0f) * 100);
             prompt += "\n\nCost modifier at this time: " + delta + "%";
         }
         String myHandler = "msgFactionItemPurchaseSelected";
@@ -548,6 +559,7 @@ public class faction_perk extends script.base_script
         }
         return false;
     }
+
     public static float getModifiedGCWCost(float fltCost, obj_id objNPC, String strFaction) throws InterruptedException
     {
         float MINIMUM_MODIFIER = 0.50f;
@@ -561,7 +573,7 @@ public class faction_perk extends script.base_script
         {
             fltRatio = gcw.getImperialRatio(objNPC);
         }
-        else 
+        else
         {
             return fltCost;
         }
@@ -575,10 +587,12 @@ public class faction_perk extends script.base_script
         fltCost = fltCost * fltModifier;
         return fltCost;
     }
+
     public static void factionItemPurchased(dictionary params) throws InterruptedException
     {
         factionItemPurchased(params, 1.0f);
     }
+
     public static void factionItemPurchased(dictionary params, float systemMultiplier) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -673,7 +687,7 @@ public class faction_perk extends script.base_script
         }
         float fltCost = cost;
         fltCost = faction_perk.getModifiedGCWCost(fltCost, self, faction);
-        cost = (int)(fltCost);
+        cost = (int) (fltCost);
         cost *= systemMultiplier;
         if (!money.hasFunds(player, money.MT_TOTAL, cost))
         {
@@ -681,7 +695,7 @@ public class faction_perk extends script.base_script
             prose_package pp = prose.getPackage(faction_perk.SID_NOT_ENOUGH_CREDITS, name);
             sendSystemMessageProse(player, pp);
         }
-        else 
+        else
         {
             if (item_template.startsWith("object/draft_schematic"))
             {
@@ -705,7 +719,7 @@ public class faction_perk extends script.base_script
                         return;
                     }
                 }
-                else 
+                else
                 {
                     if (!grantSchematic(player, item_template))
                     {
@@ -740,7 +754,7 @@ public class faction_perk extends script.base_script
                     money.requestPayment(player, self, cost, "pass_fail", null, true);
                 }
             }
-            else 
+            else
             {
                 int free_space = getVolumeFree(inv);
                 if (free_space < 1)
@@ -767,13 +781,13 @@ public class faction_perk extends script.base_script
                                 item = static_item.createNewItemFunction(itemName, inv);
                             }
                         }
-                        else 
+                        else
                         {
                             item = static_item.createNewItemFunction(itemName, inv);
                         }
                     }
                 }
-                else 
+                else
                 {
                     item = weapons.createPossibleWeapon(item_template, inv, 0.8f);
                 }
@@ -797,8 +811,8 @@ public class faction_perk extends script.base_script
             }
         }
         faction_perk.displayItemPurchaseSUI(player, rank, playerGcwFaction, self);
-        return;
     }
+
     public static void applyFactionCostObjvarFromSchematic(obj_id craftedObject, obj_id manfSchematic) throws InterruptedException
     {
         if (!isIdValid(craftedObject) || !isIdValid(manfSchematic))
@@ -837,6 +851,7 @@ public class faction_perk extends script.base_script
             setObjVar(craftedObject, VAR_BIO_LINK_FACTION_POINTS, cost);
         }
     }
+
     public static boolean isValidReconTarget(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -866,12 +881,9 @@ public class faction_perk extends script.base_script
         {
             return true;
         }
-        else if (isGameObjectTypeOf(got, GOT_building_factional))
-        {
-            return true;
-        }
-        return false;
+        else return isGameObjectTypeOf(got, GOT_building_factional);
     }
+
     public static String[] getReconReport(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -902,6 +914,7 @@ public class faction_perk extends script.base_script
         }
         return _dta;
     }
+
     public static void giveBonusBaseDeeds(obj_id player, obj_id inv, String item_template, String faction, int declared) throws InterruptedException
     {
         int level = 1;
@@ -941,8 +954,8 @@ public class faction_perk extends script.base_script
         sendSystemMessage(player, strSpam);
         sendSystemMessageProse(player, spam1);
         sendSystemMessageProse(player, spam2);
-        return;
     }
+
     public static int grabFactionBasePointValue(obj_id base) throws InterruptedException
     {
         String base_template = getTemplateName(base);
@@ -962,6 +975,7 @@ public class faction_perk extends script.base_script
         }
         return point_value;
     }
+
     public static boolean executeComlinkReinforcements(obj_id player) throws InterruptedException
     {
         obj_id comlink = getPlayerComlink(player);
@@ -999,6 +1013,7 @@ public class faction_perk extends script.base_script
         utils.setScriptVar(player, COMM_COOLDOWN, getGameTime());
         return true;
     }
+
     public static obj_id getPlayerComlink(obj_id player) throws InterruptedException
     {
         if (factions.isRebel(player))
@@ -1009,15 +1024,17 @@ public class faction_perk extends script.base_script
         {
             return utils.getStaticItemInInventory(player, "item_pvp_lieutenant_comm_link_imperial_reward_04_01");
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static boolean spawnTroopers(obj_id player) throws InterruptedException
     {
         return spawnTroopers(player, null, -1);
     }
+
     public static boolean spawnTroopers(obj_id player, String faction, int rank) throws InterruptedException
     {
         if (rank == -1)

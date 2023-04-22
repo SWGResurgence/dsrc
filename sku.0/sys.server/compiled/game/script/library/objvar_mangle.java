@@ -4,13 +4,14 @@ import script.obj_id;
 
 public class objvar_mangle extends script.base_script
 {
-    public objvar_mangle()
-    {
-    }
     public static final int INTS_PER_SEGMENT = 80;
     public static final int FLOATS_PER_SEGMENT = 40;
     public static final int STRINGS_PER_SEGMENT = 10;
     public static final int OBJIDS_PER_SEGMENT = 40;
+    public objvar_mangle()
+    {
+    }
+
     public static int[] getMangledIntArrayObjVar(obj_id self, String varName) throws InterruptedException
     {
         if (hasObjVar(self, varName))
@@ -44,6 +45,7 @@ public class objvar_mangle extends script.base_script
         }
         return values;
     }
+
     public static void setMangledIntArrayObjVar(obj_id self, String varName, int[] values) throws InterruptedException
     {
         removeObjVar(self, varName);
@@ -68,6 +70,7 @@ public class objvar_mangle extends script.base_script
             }
         }
     }
+
     public static float[] getMangledFloatArrayObjVar(obj_id self, String varName) throws InterruptedException
     {
         if (hasObjVar(self, varName))
@@ -102,6 +105,7 @@ public class objvar_mangle extends script.base_script
         }
         return values;
     }
+
     public static void setMangledFloatArrayObjVar(obj_id self, String varName, float[] values) throws InterruptedException
     {
         removeObjVar(self, varName);
@@ -127,6 +131,7 @@ public class objvar_mangle extends script.base_script
             }
         }
     }
+
     public static String[] getMangledStringArrayObjVar(obj_id self, String varName) throws InterruptedException
     {
         if (hasObjVar(self, varName))
@@ -161,6 +166,7 @@ public class objvar_mangle extends script.base_script
         }
         return values;
     }
+
     public static String[] getBrokenMangledStringArrayObjVar(obj_id self, String varName) throws InterruptedException
     {
         if (hasObjVar(self, varName))
@@ -199,6 +205,7 @@ public class objvar_mangle extends script.base_script
         }
         return values;
     }
+
     public static void setMangledStringArrayObjVar(obj_id self, String varName, String[] values) throws InterruptedException
     {
         removeObjVar(self, varName);
@@ -224,6 +231,7 @@ public class objvar_mangle extends script.base_script
             }
         }
     }
+
     public static obj_id[] getMangledObjIdArrayObjVar(obj_id self, String varName) throws InterruptedException
     {
         if (hasObjVar(self, varName))
@@ -259,6 +267,7 @@ public class objvar_mangle extends script.base_script
         }
         return values;
     }
+
     public static void setMangledObjIdArrayObjVar(obj_id self, String varName, obj_id[] values) throws InterruptedException
     {
         removeObjVar(self, varName);

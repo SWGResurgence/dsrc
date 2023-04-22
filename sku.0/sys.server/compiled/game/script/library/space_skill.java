@@ -5,9 +5,6 @@ import script.obj_id;
 
 public class space_skill extends script.base_script
 {
-    public space_skill()
-    {
-    }
     public static final String WAYPOINT_BTN = "@space/space_interaction:retire_waypoint_btn";
     public static final String REBEL_WARNING = "@space/space_interaction:retire_rebel_warning";
     public static final String IMPERIAL_WARNING = "@space/space_interaction:retire_imperial_warning";
@@ -19,39 +16,46 @@ public class space_skill extends script.base_script
     public static final String REBEL = "pilot_rebel_navy";
     public static final String IMPERIAL = "pilot_imperial_navy";
     public static final String NEUTRAL = "pilot_neutral";
-    public static final String[] SKILL_NAMES = 
+    public static final String[] SKILL_NAMES =
+            {
+                    "_master",
+                    "_starships_04",
+                    "_weapons_04",
+                    "_procedures_04",
+                    "_droid_04",
+                    "_starships_03",
+                    "_weapons_03",
+                    "_procedures_03",
+                    "_droid_03",
+                    "_starships_02",
+                    "_weapons_02",
+                    "_procedures_02",
+                    "_droid_02",
+                    "_starships_01",
+                    "_weapons_01",
+                    "_procedures_01",
+                    "_droid_01",
+                    "_novice"
+            };
+    public space_skill()
     {
-        "_master",
-        "_starships_04",
-        "_weapons_04",
-        "_procedures_04",
-        "_droid_04",
-        "_starships_03",
-        "_weapons_03",
-        "_procedures_03",
-        "_droid_03",
-        "_starships_02",
-        "_weapons_02",
-        "_procedures_02",
-        "_droid_02",
-        "_starships_01",
-        "_weapons_01",
-        "_procedures_01",
-        "_droid_01",
-        "_novice"
-    };
+    }
+
     public static boolean hasRebelSkill(obj_id player) throws InterruptedException
     {
         return (hasSkill(player, "pilot_rebel_navy_novice"));
     }
+
     public static boolean hasImperialSkill(obj_id player) throws InterruptedException
     {
         return (hasSkill(player, "pilot_imperial_navy_novice"));
     }
+
     public static boolean hasPilotSkill(obj_id player) throws InterruptedException
     {
         return (hasSkill(player, "pilot_neutral_novice"));
     }
+
     public static boolean hasSpaceSkills(obj_id player) throws InterruptedException
     {
         if (hasRebelSkill(player))
@@ -62,26 +66,23 @@ public class space_skill extends script.base_script
         {
             return true;
         }
-        else if (hasPilotSkill(player))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        else return hasPilotSkill(player);
     }
+
     public static void retire(obj_id player, String profession) throws InterruptedException
     {
         utils.setScriptVar(player, "revokePilotSkill", 1);
-        for (String skillName : SKILL_NAMES) {
+        for (String skillName : SKILL_NAMES)
+        {
             String skill = profession + skillName;
-            if (hasSkill(player, skill)) {
+            if (hasSkill(player, skill))
+            {
                 revokeSkill(player, skill);
             }
         }
         utils.removeScriptVar(player, "revokePilotSkill");
     }
+
     public static void retireWarning(obj_id player, String skill) throws InterruptedException
     {
         String prompt = "";
@@ -105,7 +106,7 @@ public class space_skill extends script.base_script
             wp_name = NEUTRAL_WP_NAME;
             loc = new location(-1174.0f, 0.0f, -3647.0f, "tatooine");
         }
-        else 
+        else
         {
             return;
         }
@@ -122,6 +123,7 @@ public class space_skill extends script.base_script
             utils.setScriptVar(player, "revokePilotSkillWarningWpName", wp_name);
         }
     }
+
     public static void revokeExperienceForRetire(obj_id player, String skill) throws InterruptedException
     {
         String prestigeXpName = "";
@@ -137,7 +139,7 @@ public class space_skill extends script.base_script
         {
             prestigeXpName = xp.SPACE_PRESTIGE_PILOT;
         }
-        else 
+        else
         {
             return;
         }
@@ -154,6 +156,7 @@ public class space_skill extends script.base_script
             xp.grantUnmodifiedExperience(player, xp.SPACE_COMBAT_GENERAL, combatXp);
         }
     }
+
     public static boolean isMasterPilot(obj_id player) throws InterruptedException
     {
         if (hasRebelSkill(player))

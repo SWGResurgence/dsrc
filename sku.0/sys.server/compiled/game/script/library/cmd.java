@@ -4,9 +4,6 @@ import script.obj_id;
 
 public class cmd extends script.base_script
 {
-    public cmd()
-    {
-    }
     public static final int ACHE = (-1057579270);
     public static final int ADJUST = (-1680170559);
     public static final int ADN = (-1332248058);
@@ -348,14 +345,20 @@ public class cmd extends script.base_script
     public static final int BOW4 = (2024204859);
     public static final int BOW2 = (1646307209);
     public static final int BOW3 = (1726069310);
+    public cmd()
+    {
+    }
+
     public static int qDo(obj_id player, int command) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public static int qClear(obj_id player, int command) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public static int qWait(obj_id player, int command) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

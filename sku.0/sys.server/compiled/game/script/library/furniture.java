@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class furniture extends script.base_script
 {
-    public furniture()
-    {
-    }
     public static final String VAR_CHAIR_OCCUPIED_BASE = "occupied";
     public static final String VAR_CHAIR_OCCUPIED_IDS = "occupied.ids";
     public static final String VAR_CHAIR_OCCUPIED_LIMIT = "occupied.limit";
@@ -18,6 +15,10 @@ public class furniture extends script.base_script
     public static final String SCRIPT_CHAIR = "item.furniture.chair";
     public static final String SCRIPT_PLAYER_SEATED = "player.player_seated";
     public static final string_id SID_SEAT_FULL = new string_id("error_message", "seat_full");
+    public furniture()
+    {
+    }
+
     public static boolean sit(obj_id player, obj_id chair) throws InterruptedException
     {
         if ((player == null) || (chair == null))
@@ -47,11 +48,12 @@ public class furniture extends script.base_script
             attachScript(player, SCRIPT_PLAYER_SEATED);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean unseat(obj_id player) throws InterruptedException
     {
         if (player == null)

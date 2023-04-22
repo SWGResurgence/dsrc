@@ -6,12 +6,16 @@ import java.util.Vector;
 
 public class quests extends script.base_script
 {
-    public quests()
-    {
-    }
     public static final int IS_ON_QUEST = 1;
     public static final int COMPLETED_QUEST = 2;
     public static final int FAILED_QUEST = 3;
+    public static final int CAN_INFILTRATE = 1;
+    public static final int COMPLETED_INFILTRATE = 2;
+
+    public quests()
+    {
+    }
+
     public static void setQuestStatus(obj_id player, String questId, int questStatus) throws InterruptedException
     {
         setObjVar(player, "themeparkQuestFlags." + questId, questStatus);
@@ -21,16 +25,19 @@ public class quests extends script.base_script
             removeObjVar(player, questId);
         }
     }
+
     public static boolean hasQuest(obj_id player, String QUEST_ID) throws InterruptedException
     {
         return getQuestStatus(player, QUEST_ID) == IS_ON_QUEST;
     }
+
     public static void removeQuestStatus(obj_id player, String questId) throws InterruptedException
     {
         removeObjVar(player, "themeparkQuestFlags." + questId);
         clearAllWaypoints(player, questId);
         removeObjVar(player, questId);
     }
+
     public static int getQuestStatus(obj_id player, String questId) throws InterruptedException
     {
         if (!hasObjVar(player, "themeparkQuestFlags." + questId))
@@ -39,18 +46,22 @@ public class quests extends script.base_script
         }
         return getIntObjVar(player, "themeparkQuestFlags." + questId);
     }
+
     public static void completeQuest(obj_id player, String questId) throws InterruptedException
     {
         setQuestStatus(player, questId, quests.COMPLETED_QUEST);
     }
+
     public static boolean hasCompletedQuest(obj_id player, String questId) throws InterruptedException
     {
         return (getQuestStatus(player, questId) == quests.COMPLETED_QUEST);
     }
+
     public static void setQuestFlag(obj_id player, String questId, String flagname, int value) throws InterruptedException
     {
         setObjVar(player, questId + ".Flags." + flagname, value);
     }
+
     public static int getQuestFlag(obj_id player, String questId, String flagname) throws InterruptedException
     {
         if (!hasObjVar(player, questId + ".Flags." + flagname))
@@ -59,35 +70,39 @@ public class quests extends script.base_script
         }
         return getIntObjVar(player, questId + ".Flags." + flagname);
     }
+
     public static void removeQuestFlag(obj_id player, String questId, String flagname) throws InterruptedException
     {
         removeObjVar(player, questId + ".Flags." + flagname);
     }
-    public static final int CAN_INFILTRATE = 1;
-    public static final int COMPLETED_INFILTRATE = 2;
+
     public static boolean canInfiltrate(obj_id player, String questId) throws InterruptedException
     {
         return hasObjVar(player, "themeparkQuestFlags.INFILTRATION." + questId);
     }
+
     public static void setInfiltrateFlag(obj_id player, String questId, int canInfiltrate) throws InterruptedException
     {
         if (canInfiltrate == CAN_INFILTRATE || canInfiltrate == COMPLETED_INFILTRATE)
         {
             setObjVar(player, "themeparkQuestFlags.INFILTRATION." + questId, canInfiltrate);
         }
-        else 
+        else
         {
             removeObjVar(player, "themeparkQuestFlags.INFILTRATION." + questId);
         }
     }
+
     public static void removeInfiltrateFlag(obj_id player, String questId) throws InterruptedException
     {
         removeObjVar(player, "themeparkQuestFlags.INFILTRATION." + questId);
     }
+
     public static int getInfiltrateFlag(obj_id player, String questId) throws InterruptedException
     {
         return getIntObjVar(player, "themeparkQuestFlags.INFILTRATION." + questId);
     }
+
     public static obj_id addQuestLocationTarget(obj_id player, String questId, String name, location loc, float radius) throws InterruptedException
     {
         addLocationTarget(name, loc, radius);
@@ -101,6 +116,7 @@ public class quests extends script.base_script
         setObjVar(player, questId + ".waypoint." + name, waypoint);
         return waypoint;
     }
+
     public static obj_id addThemeParkWaypoint(obj_id player, String questId, String name, location loc, float radius, String display, String file, String entry) throws InterruptedException
     {
         addLocationTarget(name, loc, radius);
@@ -116,6 +132,7 @@ public class quests extends script.base_script
         setObjVar(player, "questID", questId);
         return waypoint;
     }
+
     public static void clearQuestLocationTarget(obj_id player, String questId, String name) throws InterruptedException
     {
         if (hasObjVar(player, questId + ".waypoint." + name))
@@ -128,6 +145,7 @@ public class quests extends script.base_script
             removeObjVar(player, questId + ".waypoint." + name);
         }
     }
+
     public static void clearAllWaypoints(obj_id player, String questId) throws InterruptedException
     {
         if (!hasObjVar(player, questId + ".waypoint"))
@@ -152,6 +170,7 @@ public class quests extends script.base_script
         }
         removeObjVar(player, questId + ".waypoint");
     }
+
     public static obj_id spawnAttacker(String msgHandlerName, String template, location loc, obj_id target) throws InterruptedException
     {
         obj_id attacker = createObject(template, loc);
@@ -160,10 +179,12 @@ public class quests extends script.base_script
         attachScript(attacker, "theme_park.utils.npcdeath");
         return attacker;
     }
+
     public static obj_id spawnAttacker(String template, location loc, obj_id target) throws InterruptedException
     {
         return createObject(template, loc);
     }
+
     public static obj_id[] spawnAttackers(String msgHandlerName, int number, String template, location loc, obj_id target) throws InterruptedException
     {
         obj_id[] attackers = new obj_id[number];
@@ -177,6 +198,7 @@ public class quests extends script.base_script
         }
         return attackers;
     }
+
     public static obj_id[] spawnAttackers(int number, String template, location loc, obj_id target) throws InterruptedException
     {
         obj_id[] attackers = new obj_id[number];
@@ -190,26 +212,28 @@ public class quests extends script.base_script
         }
         return attackers;
     }
+
     public static location chooseNearbyLocation(obj_id self) throws InterruptedException
     {
         location loc = new location(getLocation(self));
         switch (rand(1, 4))
         {
             case 1:
-            loc.x = loc.x + 20;
-            break;
+                loc.x = loc.x + 20;
+                break;
             case 2:
-            loc.x = loc.x - 20;
-            break;
+                loc.x = loc.x - 20;
+                break;
             case 3:
-            loc.y = loc.y + 20;
-            break;
+                loc.y = loc.y + 20;
+                break;
             case 4:
-            loc.y = loc.y - 20;
-            break;
+                loc.y = loc.y - 20;
+                break;
         }
         return loc;
     }
+
     public static location getTargetLocation(obj_id self) throws InterruptedException
     {
         location target = null;
@@ -226,6 +250,7 @@ public class quests extends script.base_script
         }
         return target;
     }
+
     public static String getConvoType(obj_id self) throws InterruptedException
     {
         String convoType;
@@ -251,7 +276,7 @@ public class quests extends script.base_script
                 }
                 convoType = "npc_mission/static_" + type + "_deliver";
             }
-            else 
+            else
             {
                 type = getStringObjVar(self, "questType");
                 convoType = "npc_mission/static_" + type + "_deliver";
@@ -259,7 +284,7 @@ public class quests extends script.base_script
             setObjVar(self, "questType", type);
             return convoType;
         }
-        else 
+        else
         {
             type = getCreatureName(self);
             convoType = "npc_mission/static_" + type + "_deliver";
@@ -267,6 +292,7 @@ public class quests extends script.base_script
             return convoType;
         }
     }
+
     public static String getDataTableName(obj_id self) throws InterruptedException
     {
         String datatable;
@@ -292,7 +318,7 @@ public class quests extends script.base_script
                 }
                 datatable = "datatables/npc/static_quest/" + type + "_deliveries.iff";
             }
-            else 
+            else
             {
                 type = getStringObjVar(self, "questType");
                 datatable = "datatables/npc/static_quest/" + type + "_deliveries.iff";
@@ -300,7 +326,7 @@ public class quests extends script.base_script
             setObjVar(self, "questType", type);
             return datatable;
         }
-        else 
+        else
         {
             type = getCreatureName(self);
             setObjVar(self, "questType", type);
@@ -308,6 +334,7 @@ public class quests extends script.base_script
             return datatable;
         }
     }
+
     public static String getType(obj_id self) throws InterruptedException
     {
         String type = "businessman";
@@ -331,42 +358,40 @@ public class quests extends script.base_script
                         break;
                 }
             }
-            else 
+            else
             {
                 type = getStringObjVar(self, "questType");
             }
             return type;
         }
-        else 
+        else
         {
             type = getCreatureName(self);
         }
         return type;
     }
+
     public static boolean checkForSerendipity(obj_id self) throws InterruptedException
     {
         final String npcType = getCreatureName(self);
-        if (npcType.equals("noble") || npcType.equals("scientist") || npcType.equals("criminal") || npcType.equals("businessman"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return npcType.equals("noble") || npcType.equals("scientist") || npcType.equals("criminal") || npcType.equals("businessman");
     }
+
     public static boolean checkForItem(obj_id inv) throws InterruptedException
     {
         String giveMe = dataTableGetString(quests.getDataTableName(getSelf()), 0, getIntObjVar(getSelf(), "quest"));
         boolean hadIt = false;
-        for (obj_id content : getContents(inv)) {
-            if (getTemplateName(content).equals(giveMe)) {
+        for (obj_id content : getContents(inv))
+        {
+            if (getTemplateName(content).equals(giveMe))
+            {
                 destroyObject(content);
                 hadIt = true;
             }
         }
         return hadIt;
     }
+
     public static location getThemeParkLocation(obj_id self) throws InterruptedException
     {
         location target = null;
@@ -395,7 +420,7 @@ public class quests extends script.base_script
                 {
                     return null;
                 }
-                else 
+                else
                 {
                     rgnFoos = rgnTest;
                 }
@@ -424,6 +449,7 @@ public class quests extends script.base_script
         }
         return target;
     }
+
     public static void giveThemeParkReward(obj_id self, obj_id player, int questNum) throws InterruptedException
     {
         String datatable = "datatables/theme_park/" + getStringObjVar(self, "quest_table") + ".iff";
@@ -439,7 +465,7 @@ public class quests extends script.base_script
             {
                 for (int i = 0; i < party.size(); i++)
                 {
-                    int partyMemberGating = getIntObjVar((obj_id)party.elementAt(i), gatingString);
+                    int partyMemberGating = getIntObjVar((obj_id) party.elementAt(i), gatingString);
                     if (partyMemberGating == 0)
                     {
                         partyMemberGating = 1;
@@ -448,12 +474,12 @@ public class quests extends script.base_script
                     {
                         gating = gating + 1;
                         setObjVar(player, gatingString, gating);
-                        setObjVar((obj_id)party.elementAt(i), gatingString, gating);
+                        setObjVar((obj_id) party.elementAt(i), gatingString, gating);
                     }
                 }
             }
         }
-        else 
+        else
         {
             gating = gating + 1;
             setObjVar(player, gatingString, gating);
@@ -584,10 +610,12 @@ public class quests extends script.base_script
             detachScript(player, playerScript);
         }
     }
+
     public static int getQuestId(String questName) throws InterruptedException
     {
         return dataTableSearchColumnForString(questName, 0, "datatables/player/quests.iff");
     }
+
     public static String getParentQuestName(String questName) throws InterruptedException
     {
         int questRow = getQuestId(questName);
@@ -597,10 +625,12 @@ public class quests extends script.base_script
         }
         return null;
     }
+
     public static boolean isComplete(String questName, obj_id player) throws InterruptedException
     {
         return isQuestComplete(player, getQuestId(questName));
     }
+
     public static boolean canActivate(String questName, obj_id player) throws InterruptedException
     {
         boolean result = false;
@@ -616,17 +646,17 @@ public class quests extends script.base_script
                         LOG("newquests", (questName + " is available because the parent quest has been completed and " + questName + " has not been completed"));
                         result = true;
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", (questName + " has already been completed"));
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", (questName + " has a parent, " + parentQuestName + " but the parent quest is not complete"));
                 }
             }
-            else 
+            else
             {
                 if (!isActive(questName, player))
                 {
@@ -637,13 +667,14 @@ public class quests extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             LOG("newquests", (questName + " is active"));
         }
         LOG("newquests", ("canActivate(" + questName + ", " + player + ") returned " + result));
         return result;
     }
+
     public static boolean isActive(String questName, obj_id player) throws InterruptedException
     {
         boolean result = false;
@@ -654,6 +685,7 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static void activate(String questName, obj_id player, obj_id questGiver) throws InterruptedException
     {
         if (questName == null)
@@ -696,16 +728,17 @@ public class quests extends script.base_script
                     sendSystemMessage(player, sid);
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "quest " + questName + " for player " + player + " could not be activated");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "could not activate quest " + questName + " for player " + player + " because the quest could not be found in " + datatable);
         }
     }
+
     public static void complete(String questName, obj_id player, boolean succeeded) throws InterruptedException
     {
         LOG("newquest", "quests: complete(" + questName + ", " + player + ", " + succeeded + ")");
@@ -728,7 +761,7 @@ public class quests extends script.base_script
                 string_id sid = new string_id("quest/quests", "task_complete");
                 sendSystemMessage(player, sid);
             }
-            else 
+            else
             {
                 string_id sid = new string_id("quest/quests", "task_failure");
                 sendSystemMessage(player, sid);
@@ -741,7 +774,7 @@ public class quests extends script.base_script
             questGiver = getObjIdObjVar(player, objvarname);
             LOG("newquests", "quests: hasObjVar(" + player + ", " + objvarname + ") = true. setting questGiver=" + questGiver);
         }
-        else 
+        else
         {
             LOG("newquests", "quests: hasObjVar(" + player + ", " + objvarname + ") = false");
         }
@@ -762,7 +795,7 @@ public class quests extends script.base_script
             String taskList = getDataEntry(questName, "TASK_ON_COMPLETE");
             nextTasks = split(taskList, ';');
         }
-        else 
+        else
         {
             String taskList = getDataEntry(questName, "TASK_ON_FAIL");
             nextTasks = split(taskList, ';');
@@ -780,6 +813,7 @@ public class quests extends script.base_script
             removeObjVar(player, "quest." + questName);
         }
     }
+
     public static void deactivate(String questName, obj_id player) throws InterruptedException
     {
         String datatable = "datatables/player/quests.iff";
@@ -809,6 +843,7 @@ public class quests extends script.base_script
             deactivateQuest(player, questRow);
         }
     }
+
     public static String[] getActiveQuestsWithScript(String scriptName, obj_id player) throws InterruptedException
     {
         Vector result = new Vector();
@@ -835,6 +870,7 @@ public class quests extends script.base_script
         result.toArray(_result);
         return _result;
     }
+
     public static String getDataEntry(String questName, String columnName) throws InterruptedException
     {
         String result = null;
@@ -845,6 +881,7 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static String getDataEntry(int questId, String columnName) throws InterruptedException
     {
         String result = null;
@@ -854,6 +891,7 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static location getTheaterLocationTarget(obj_id self, int questRow) throws InterruptedException
     {
         location result = null;
@@ -875,15 +913,17 @@ public class quests extends script.base_script
         {
             target = getStringObjVar(self, "quest." + questName + ".target");
         }
-        else 
+        else
         {
             String parameterString = quests.getDataEntry(questRow, "PARAMETER");
             if (parameterString != null && !parameterString.equals(""))
             {
                 LOG("newquests", "GET THEATER LOCATION TARGET: parsing parameter string: " + parameterString);
                 String[] params = split(parameterString, ':');
-                for (String param : params) {
-                    if (Character.isDigit(param.charAt(0))) {
+                for (String param : params)
+                {
+                    if (Character.isDigit(param.charAt(0)))
+                    {
                         parameter = utils.stringToFloat(param);
                         haveParameter = true;
                         LOG("newquests", "GET THEATER LOCATION TARGET: search radius parameter found: " + parameter);
@@ -918,7 +958,7 @@ public class quests extends script.base_script
             {
                 planet = tokens[0];
             }
-            else 
+            else
             {
                 planet = tokens[1];
             }
@@ -937,9 +977,9 @@ public class quests extends script.base_script
                 result = locations.getRandomGoodLocation(getLocation(self), 800.0f, 1500.0f, 32.0f);
                 if (result != null)
                 {
-                    LOG("newquests", "GET THEATER LOCATION TARGET: no planet/no parameter - good location attempt: " + result.toString());
+                    LOG("newquests", "GET THEATER LOCATION TARGET: no planet/no parameter - good location attempt: " + result);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "GET THEATER LOCATION TARGET: no planet/no parameter - good location attempt: null");
                 }
@@ -954,9 +994,9 @@ public class quests extends script.base_script
                 result = locations.getRandomGoodLocation(getLocation(self), parameter - 200.0f, parameter + 600.0f, 32.0f);
                 if (result != null)
                 {
-                    LOG("newquests", "GET THEATER LOCATION TARGET: no planet/parameter - good location attempt: " + result.toString());
+                    LOG("newquests", "GET THEATER LOCATION TARGET: no planet/parameter - good location attempt: " + result);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "GET THEATER LOCATION TARGET: no planet/parameter - good location attempt: null");
                 }
@@ -974,21 +1014,22 @@ public class quests extends script.base_script
                     result = locations.getRandomGoodLocation(getLocation(self), parameter - 200.0f, parameter + 600.0f, 32.0f);
                     if (result != null)
                     {
-                        LOG("newquests", "GET THEATER LOCATION TARGET: planet/parameter - good location attempt: " + result.toString());
+                        LOG("newquests", "GET THEATER LOCATION TARGET: planet/parameter - good location attempt: " + result);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "GET THEATER LOCATION TARGET: planet/parameter - good location attempt: null");
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "GET THEATER LOCATION TARGET: planet/parameter - good location fall through: waiting for planet warp");
                 waitForPlanetWarp = new location(0.0f, 0.0f, 0.0f, planet);
             }
         }
-        else {
+        else
+        {
             String currentScene = getCurrentSceneName();
             if (currentScene != null && currentScene.equals(planet))
             {
@@ -999,15 +1040,15 @@ public class quests extends script.base_script
                     result = locations.getRandomGoodLocation(getLocation(self), 800.0f, 1500.0f, 32.0f);
                     if (result != null)
                     {
-                        LOG("newquests", "GET THEATER LOCATION TARGET: planet/no parameter - good location attempt: " + result.toString());
+                        LOG("newquests", "GET THEATER LOCATION TARGET: planet/no parameter - good location attempt: " + result);
                     }
-                    else 
+                    else
                     {
                         LOG("newquests", "GET THEATER LOCATION TARGET: planet/no parameter - good location attempt: null");
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "GET THEATER LOCATION TARGET: planet/parameter - good location fall through: waiting for planet warp");
                 waitForPlanetWarp = new location(0.0f, 0.0f, 0.0f, planet);
@@ -1022,9 +1063,9 @@ public class quests extends script.base_script
                 {
                     sendSystemMessageTestingOnly(self, "GOD MODE - WARNING: The good location chosen for the theater lies within a battlefield");
                 }
-                LOG("newquests", "the good location chosen for the theater lies within a battlefield: " + result.toString());
+                LOG("newquests", "the good location chosen for the theater lies within a battlefield: " + result);
             }
-            LOG("newquests", "GET THEATER LOCATION TARGET: good location found: " + result.toString());
+            LOG("newquests", "GET THEATER LOCATION TARGET: good location found: " + result);
             setObjVar(self, "quest." + questName + ".selected_location", result);
             if (!hasObjVar(self, "theaterRecoveryTarget"))
             {
@@ -1041,6 +1082,7 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static location getLocationTarget(obj_id self, int questRow) throws InterruptedException
     {
         location result = null;
@@ -1055,7 +1097,7 @@ public class quests extends script.base_script
                 radius = getFloatObjVar(self, "quest." + questName + ".parameter");
                 LOG("newquests", "the target location radius is overridden by an object variable. radius = " + radius);
             }
-            else 
+            else
             {
                 LOG("newquests", "default target radius of 64 meters will be used");
             }
@@ -1066,12 +1108,12 @@ public class quests extends script.base_script
                 {
                     LOG("newquests", "location target for " + questName + " is overridden by an object variable. new location is " + result);
                 }
-                else 
+                else
                 {
                     LOG("newquests", "location target for " + questName + " was supposed to be overridden, but the location could not be retrieved from the location object variable quest." + questName + ".target");
                 }
             }
-            else 
+            else
             {
                 String planetName = null;
                 obj_id cell = null;
@@ -1121,7 +1163,7 @@ public class quests extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             LOG("newquests", "location first token is a number");
                             if (tokens.length > 1)
@@ -1155,7 +1197,7 @@ public class quests extends script.base_script
                         result = locations.getRandomGoodLocation(getLocation(self), parameter - 100.0f, parameter + 100.0f, 32.0f);
                         LOG("newquests", "location generating a random location on " + planetName + " between " + (parameter - 100.0f) + " and " + (parameter + 100.0f) + " meters away");
                     }
-                    else 
+                    else
                     {
                         waitForPlanetWarp = true;
                         LOG("newquests", "location generating a random location on " + planetName + " between " + (parameter - 100.0f) + " and " + (parameter + 100.0f) + " meters away");
@@ -1169,7 +1211,7 @@ public class quests extends script.base_script
                         result = locations.getRandomGoodLocation(getLocation(self), parameter - 800.0f, 1200.0f, 32.0f);
                         LOG("newquests", "location generating a random location on " + planetName + " between 800 and 1200 meters away");
                     }
-                    else 
+                    else
                     {
                         waitForPlanetWarp = true;
                         LOG("newquests", "location a location will be generated when the player travels to " + planetName);
@@ -1225,16 +1267,18 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static boolean isMyQuest(int questRow, String scriptName) throws InterruptedException
     {
         boolean result = false;
         String s = getDataEntry(questRow, "ATTACH_SCRIPT");
-        if ((s != null) && (scriptName != null) && (s.equals(scriptName)))
+        if ((s != null) && (s.equals(scriptName)))
         {
             result = true;
         }
         return result;
     }
+
     public static obj_id getTargetForQuest(obj_id self, String questName) throws InterruptedException
     {
         String objvarname = "encounter.target." + questName;
@@ -1242,6 +1286,7 @@ public class quests extends script.base_script
         LOG("newquests", "quest target " + objvarname + "=" + result + " self=" + self);
         return result;
     }
+
     public static int getQuestIdForTarget(obj_id self, obj_id target) throws InterruptedException
     {
         int result = -1;
@@ -1271,7 +1316,7 @@ public class quests extends script.base_script
                                     targetName = getStringObjVar(self, objvarname);
                                     LOG("newquests", "destroy - target is overriden by objvar " + objvarname + " target=" + targetName);
                                 }
-                                else 
+                                else
                                 {
                                     targetName = quests.getDataEntry(iter, "TARGET");
                                     LOG("newquests", "destroy - using data table target name " + targetName);
@@ -1293,7 +1338,7 @@ public class quests extends script.base_script
                                                 break;
                                             }
                                         }
-                                        else 
+                                        else
                                         {
                                             LOG("newquests", "destroy - target does not have the " + objvarname + " objvar");
                                         }
@@ -1303,22 +1348,23 @@ public class quests extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     LOG("newquests", "destroy - encounterName could not be determined");
                 }
             }
-            else 
+            else
             {
                 LOG("newquests", "the " + objvarname + " objvar was not present");
             }
         }
-        else 
+        else
         {
             LOG("newquests", "destroy - target id " + target + " is not valid");
         }
         return result;
     }
+
     public static boolean doEncounterSpawn(obj_id self, int questRow) throws InterruptedException
     {
         boolean success = false;
@@ -1331,7 +1377,7 @@ public class quests extends script.base_script
             creatureName = getStringObjVar(self, objvarname);
             LOG("newquests", "encounter - target is overridden by " + objvarname + " (" + creatureName + ")");
         }
-        else 
+        else
         {
             creatureName = quests.getDataEntry(questRow, "TARGET");
             LOG("newquests", "encounter - target is " + creatureName);
@@ -1362,16 +1408,18 @@ public class quests extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             LOG("newquests", "encounter - failed to get a spawn location");
         }
         return success;
     }
+
     public static obj_id createSpawner(String spawner, location loc, String datatable) throws InterruptedException
     {
         return createSpawner(spawner, loc, datatable, null);
     }
+
     public static obj_id createSpawner(String spawner, location loc, String datatable, obj_id parent) throws InterruptedException
     {
         if (spawner == null || spawner.length() < 1)
@@ -1419,7 +1467,7 @@ public class quests extends script.base_script
         {
             setObjVar(spawner_object, "quest_spawner.time_expired", expire + getGameTime());
         }
-        else 
+        else
         {
             setObjVar(spawner_object, "quest_spawner.time_expired", 0);
         }
@@ -1430,6 +1478,7 @@ public class quests extends script.base_script
         }
         return spawner_object;
     }
+
     public static obj_id getQuestGiver(String questName, obj_id player) throws InterruptedException
     {
         obj_id result = null;
@@ -1440,10 +1489,12 @@ public class quests extends script.base_script
         }
         return result;
     }
+
     public static obj_id getQuestGiver(int questRow, obj_id player) throws InterruptedException
     {
         return getQuestGiver(getDataEntry(questRow, "NAME"), player);
     }
+
     public static boolean safeHasObjVar(obj_id self, String objvarName) throws InterruptedException
     {
         obj_var ov = getObjVar(self, objvarName);

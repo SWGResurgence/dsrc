@@ -156,7 +156,7 @@ public class pclib extends script.base_script
     public static final String DECAY_REMAINDER = "decay.remainder";
     public static final float MIN_CLONING_SICKNESS_COST = 100;
     public static final float MAX_CLONING_SICKNESS_COST = 5000;
-	
+
     public static int getCloningSicknessCureCost(obj_id player) throws InterruptedException
     {
         float minCost = MIN_CLONING_SICKNESS_COST;
@@ -169,10 +169,12 @@ public class pclib extends script.base_script
         }
         return (int) (minCost + ((maxCost - minCost) * (getLevel(player) / 90.0f)));
     }
+
     public static boolean canAffordCloningSicknessCure(obj_id player) throws InterruptedException
     {
         return getCloningSicknessCureCost(player) <= getTotalMoney(player);
     }
+
     public static void cureCloningSickness(obj_id player) throws InterruptedException
     {
         if (!canAffordCloningSicknessCure(player))
@@ -189,6 +191,7 @@ public class pclib extends script.base_script
         buff.removeBuff(player, "cloning_sickness");
         playMusic(player, "sound/vo_meddroid_01.snd");
     }
+
     public static obj_id grantWayPoint(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || (!isPlayer(player)) || !isIdValid(target))
@@ -204,6 +207,7 @@ public class pclib extends script.base_script
         setWaypointVisible(waypoint, true);
         return waypoint;
     }
+
     public static boolean giveTip(obj_id player, obj_id target, String targetName, int amt, boolean useCash) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || targetName == null)
@@ -277,7 +281,7 @@ public class pclib extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             int bank = getBankBalance(player);
             if (amt > bank)
@@ -296,6 +300,7 @@ public class pclib extends script.base_script
         }
         return true;
     }
+
     public static int showTipSui(obj_id player, obj_id target, String targetName, int amt) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || (targetName == null) || (targetName.equals("")))
@@ -313,6 +318,7 @@ public class pclib extends script.base_script
         }
         return cBox;
     }
+
     public static void cleanupTipSui(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -324,6 +330,7 @@ public class pclib extends script.base_script
         utils.removeScriptVar(player, VAR_TIP_AMT);
         utils.removeScriptVar(player, VAR_TIP_SUI);
     }
+
     public static void doTipLogging(obj_id player, obj_id target, int amt) throws InterruptedException
     {
         int trackTipNumIn = 0;
@@ -338,7 +345,7 @@ public class pclib extends script.base_script
             trackTipNumOut = 1;
             trackTipAmtOut = amt;
         }
-        else 
+        else
         {
             int tipNum = utils.getIntScriptVar(player, utils.TIP_OUT_NUM) + 1;
             int tipAmt = utils.getIntScriptVar(player, utils.TIP_OUT_AMMOUNT) + amt;
@@ -355,7 +362,7 @@ public class pclib extends script.base_script
             trackTipNumIn = 1;
             trackTipAmtIn = amt;
         }
-        else 
+        else
         {
             int tipNum = utils.getIntScriptVar(target, utils.TIP_IN_NUM) + 1;
             int tipAmt = utils.getIntScriptVar(target, utils.TIP_IN_AMMOUNT) + amt;
@@ -373,6 +380,7 @@ public class pclib extends script.base_script
             CustomerServiceLog("exploit", "Free Trial Tipping -- Suspicious activity -- %TU has made " + trackTipNumOut + " tips for a total of " + trackTipAmtOut + " over the course of " + pTimeHack + "seconds, %TT has recieved " + trackTipNumIn + " tips for a total of " + trackTipAmtIn + " over the course of " + tTimeHack + " seconds.", player, target);
         }
     }
+
     public static boolean consent(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -406,7 +414,7 @@ public class pclib extends script.base_script
             sendSystemMessageProse(player, prose.getPackage(PROSE_CONSENT_LIST_FULL, LIMIT_CONSENT_TO));
             return false;
         }
-        else 
+        else
         {
             consentTo = utils.addElement(consentTo, target);
             obj_id[] corpses = getObjIdArrayObjVar(player, VAR_CORPSE_ID);
@@ -426,6 +434,7 @@ public class pclib extends script.base_script
         }
         return false;
     }
+
     public static boolean unconsent(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -442,7 +451,7 @@ public class pclib extends script.base_script
         {
             corpse.revokeCorpseConsent(corpses, target);
         }
-        else 
+        else
         {
             removeObjVar(player, VAR_CORPSE_ID);
         }
@@ -457,7 +466,7 @@ public class pclib extends script.base_script
                 {
                     removeObjVar(player, VAR_CONSENT_TO_BASE);
                 }
-                else 
+                else
                 {
                     setObjVar(player, VAR_CONSENT_TO_ID, consentTo);
                 }
@@ -466,17 +475,18 @@ public class pclib extends script.base_script
                 d.put(DICT_CONSENTER_ID, player);
                 messageTo(target, HANDLER_RECEIVED_UNCONSENT, d, 0, true);
             }
-            else 
+            else
             {
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     public static boolean hasConsent(obj_id player, obj_id target, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -489,7 +499,8 @@ public class pclib extends script.base_script
         }
         boolean isConsented = false;
         obj_id[] consentFrom = getObjIdArrayObjVar(player, VAR_CONSENT_FROM_ID);
-        if ((consentFrom != null) && (consentFrom.length != 0)) {
+        if ((consentFrom != null) && (consentFrom.length != 0))
+        {
             if (utils.getElementPositionInArray(consentFrom, target) > -1)
             {
                 isConsented = true;
@@ -503,7 +514,7 @@ public class pclib extends script.base_script
                 prose.setTT(ppYouHaveConsentFrom, target);
                 sendSystemMessageProse(player, ppYouHaveConsentFrom);
             }
-            else 
+            else
             {
                 prose_package ppYouDoNotHaveConsent = prose.getPackage(SID_YOU_DO_NOT_HAVE_CONSENT);
                 prose.setTT(ppYouDoNotHaveConsent, target);
@@ -512,10 +523,12 @@ public class pclib extends script.base_script
         }
         return isConsented;
     }
+
     public static boolean hasConsent(obj_id player, obj_id target) throws InterruptedException
     {
         return hasConsent(player, target, false);
     }
+
     public static boolean relinquishConsents(obj_id player) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -532,7 +545,8 @@ public class pclib extends script.base_script
             dictionary d = new dictionary();
             d.put(corpse.DICT_PLAYER_ID, player);
             boolean litmus = true;
-            for (obj_id consentFromItem : consentFromList) {
+            for (obj_id consentFromItem : consentFromList)
+            {
                 litmus &= messageTo(consentFromItem, HANDLER_CONSENT_TO_LOGOUT, d, 0, true);
             }
             removeObjVar(player, VAR_CONSENT_FROM_BASE);
@@ -540,6 +554,7 @@ public class pclib extends script.base_script
         }
         return false;
     }
+
     public static location getEffectiveDeathLocation(obj_id player) throws InterruptedException
     {
         location loc = getLocation(player);
@@ -554,10 +569,12 @@ public class pclib extends script.base_script
         }
         return new location(0.0f, 0.0f, 0.0f, "tatooine");
     }
+
     public static void killPlayer(obj_id player, obj_id killer) throws InterruptedException
     {
         killPlayer(player, killer, true);
     }
+
     public static void killPlayer(obj_id player, obj_id killer, boolean usePVPRules) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(killer) || (!isPlayer(player)))
@@ -567,10 +584,12 @@ public class pclib extends script.base_script
         addAttribModifier(player, HEALTH, -(getAttrib(player, HEALTH) + 50), 0.0f, 0.0f, MOD_POOL);
         coupDeGrace(player, killer, false, usePVPRules);
     }
+
     public static void coupDeGrace(obj_id victim, obj_id killer, boolean playAnim) throws InterruptedException
     {
         coupDeGrace(victim, killer, playAnim, true);
     }
+
     public static void coupDeGrace(obj_id victim, obj_id killer, boolean playAnim, boolean usePVPRules) throws InterruptedException
     {
         if (!isIdValid(victim) || !isIdValid(killer))
@@ -585,7 +604,7 @@ public class pclib extends script.base_script
             {
                 return;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(victim, "death.beingCoupDeGraced");
             }
@@ -653,7 +672,7 @@ public class pclib extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             onBattlefield = true;
             if (!pvpIsEnemy(killer, victim) && (killer != victim))
@@ -666,8 +685,10 @@ public class pclib extends script.base_script
         {
             playDeathBlowAnimation(victim, killer);
         }
-        if (getPosture(victim) != POSTURE_DEAD) {
-            if (!setPosture(victim, POSTURE_DEAD)) {
+        if (getPosture(victim) != POSTURE_DEAD)
+        {
+            if (!setPosture(victim, POSTURE_DEAD))
+            {
                 debugSpeakMsg(victim, "coupDeGrace: unable to set my posture to dead!");
             }
         }
@@ -691,6 +712,7 @@ public class pclib extends script.base_script
         }
         playerDeath(victim, killer);
     }
+
     public static void playDeathBlowAnimation(obj_id victim, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(victim) || !isIdValid(killer))
@@ -701,7 +723,8 @@ public class pclib extends script.base_script
         if (dataTableOpen(DATATABLE_AI_SPECIES))
         {
             int species = getSpecies(killer);
-            if (species != -1) {
+            if (species != -1)
+            {
                 skeleton = dataTableGetString(DATATABLE_AI_SPECIES, species, DATATABLE_COL_SKELETON);
             }
         }
@@ -717,13 +740,13 @@ public class pclib extends script.base_script
                 {
                     strPlaybackScript = "ranged_coup_de_grace";
                 }
-                else 
+                else
                 {
                     if (intWeaponType == WEAPON_TYPE_UNARMED)
                     {
                         strPlaybackScript = "unarmed_coup_de_grace";
                     }
-                    else 
+                    else
                     {
                         strPlaybackScript = "melee_coup_de_grace";
                     }
@@ -741,10 +764,12 @@ public class pclib extends script.base_script
             }
         }
     }
+
     public static void coupDeGrace(obj_id victim, obj_id killer) throws InterruptedException
     {
         coupDeGrace(victim, killer, true);
     }
+
     public static boolean playerDeath(obj_id player, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(player) || killer == null)
@@ -760,7 +785,7 @@ public class pclib extends script.base_script
         {
             sendSystemMessage(player, SID_VICTIM_DEAD);
         }
-        else 
+        else
         {
             sendSystemMessageProse(player, prose.getPackage(PROSE_VICTIM_DEAD, killer));
         }
@@ -780,7 +805,7 @@ public class pclib extends script.base_script
             {
                 bounty_hunter.loseBountyMission(player, killer);
             }
-            else 
+            else
             {
                 if ((getTotalMoney(player) >= bounty_hunter.MIN_BOUNTY_SET) && getLevel(killer) >= 20)
                 {
@@ -802,10 +827,10 @@ public class pclib extends script.base_script
         {
             group.notifyDeath(gid, player);
         }
-		
-		/* // RESTUSS PVP COMMENDATION SYSTEM BEGIN
-		
-		region[] regionList = getRegionsAtPoint(getLocation(killer));
+
+        /* // RESTUSS PVP COMMENDATION SYSTEM BEGIN
+
+        region[] regionList = getRegionsAtPoint(getLocation(killer));
         if (regionList != null && regionList.length > 0)
         {
             for (int i = 0, j = regionList.length; i < j; i++)
@@ -830,31 +855,35 @@ public class pclib extends script.base_script
                 }
             }
         }
-		
-		// RESTUSS PVP COMMENDATION SYSTEM END */
-		
+
+        // RESTUSS PVP COMMENDATION SYSTEM END */
+
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();
         params.put("victim", player);
         messageTo(killer, "handleKillerDeathBlow", params, 1, false);
         return true;
     }
+
     public static void clearAllHate(obj_id self) throws InterruptedException
     {
         obj_id[] myHateList = getHateList(self);
-        if (myHateList == null || myHateList.length == 0)
+        if (myHateList == null)
         {
             return;
         }
-        for (obj_id hateItem : myHateList) {
+        for (obj_id hateItem : myHateList)
+        {
             removeHateTarget(self, hateItem);
             removeHateTarget(hateItem, self);
         }
     }
+
     public static boolean playerRevive(obj_id player) throws InterruptedException
     {
         return playerRevive(player, getWorldLocation(player), getLocation(player), 0);
     }
+
     public static boolean playerRevive(obj_id player, location reviveLoc, location spawnLoc, int damage) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -878,6 +907,7 @@ public class pclib extends script.base_script
         }
         return true;
     }
+
     public static boolean equipClone(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -893,22 +923,28 @@ public class pclib extends script.base_script
         if ((items != null) && (items.length > 0))
         {
             int got;
-            for (obj_id item : items) {
+            for (obj_id item : items)
+            {
                 got = getGameObjectType(item);
-                if (isGameObjectTypeOf(got, GOT_clothing) || isGameObjectTypeOf(got, GOT_armor)) {
+                if (isGameObjectTypeOf(got, GOT_clothing) || isGameObjectTypeOf(got, GOT_armor))
+                {
                     equip(item, player);
                 }
             }
         }
         return true;
     }
-    public static boolean autoInsureItem(obj_id item) throws InterruptedException {
+
+    public static boolean autoInsureItem(obj_id item) throws InterruptedException
+    {
         return isIdValid(item) && setAutoInsured(item);
     }
+
     public static boolean resurrectPlayer(obj_id target) throws InterruptedException
     {
         return resurrectPlayer(target, false);
     }
+
     public static boolean resurrectPlayer(obj_id target, boolean playCloneAnimation) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -943,21 +979,28 @@ public class pclib extends script.base_script
         dot.removeAllDots(target);
         return true;
     }
+
     public static boolean clearCombatData(obj_id target) throws InterruptedException
     {
         queueCommand(target, (-1465754503), target, "", COMMAND_PRIORITY_IMMEDIATE);
         setCombatTarget(target, null);
         stopCombat(target);
         obj_id[] objEnemies = getHateList(target);
-        for (obj_id objEnemy : objEnemies) {
-            if (!isIdValid(objEnemy) || !exists(objEnemy)) {
+        for (obj_id objEnemy : objEnemies)
+        {
+            if (!isIdValid(objEnemy) || !exists(objEnemy))
+            {
                 continue;
             }
-            if (!isPlayer(objEnemy)) {
-                if (isIdValid(objEnemy) && exists(objEnemy) && isIdValid(target) && exists(target)) {
+            if (!isPlayer(objEnemy))
+            {
+                if (isIdValid(objEnemy) && exists(objEnemy) && isIdValid(target) && exists(target))
+                {
                     removeHateTarget(objEnemy, target);
                 }
-            } else {
+            }
+            else
+            {
                 setCombatTarget(objEnemy, null);
             }
         }
@@ -973,10 +1016,12 @@ public class pclib extends script.base_script
         pvpRemoveAllTempEnemyFlags(target);
         return true;
     }
+
     public static boolean clearBuffData(obj_id target) throws InterruptedException
     {
         return buff.removeAllBuffs(target);
     }
+
     public static void trimLastKiller(obj_id self) throws InterruptedException
     {
         Vector killers = utils.getResizeableObjIdBatchObjVar(self, VAR_CORPSE_KILLER);
@@ -988,11 +1033,12 @@ public class pclib extends script.base_script
         {
             removeObjVar(self, VAR_CORPSE_KILLER);
         }
-        else 
+        else
         {
             utils.setResizeableBatchObjVar(self, VAR_CORPSE_KILLER, killers);
         }
     }
+
     public static boolean checkCovertRespawn(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1009,7 +1055,7 @@ public class pclib extends script.base_script
                 {
                     covertRespawn(player, "outside");
                 }
-                else 
+                else
                 {
                     String sFac = factions.getFaction(topMost);
                     if (sFac == null || sFac.equals("") || !sFac.equals(pFac))
@@ -1021,6 +1067,7 @@ public class pclib extends script.base_script
         }
         return false;
     }
+
     public static void covertRespawn(obj_id player, String faction) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1041,11 +1088,12 @@ public class pclib extends script.base_script
         {
             sendSystemMessage(player, SID_COVERT_RESPAWN_OUTSIDE);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_COVERT_RESPAWN_UNFRIENDLY);
         }
     }
+
     public static void destroyPlayerEquipment(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1068,6 +1116,7 @@ public class pclib extends script.base_script
             }
         }
     }
+
     public static void destroyPlayerInventory(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1084,12 +1133,15 @@ public class pclib extends script.base_script
         {
             return;
         }
-        for (obj_id content : contents) {
-            if (isIdValid(content)) {
+        for (obj_id content : contents)
+        {
+            if (isIdValid(content))
+            {
                 destroyObject(content);
             }
         }
     }
+
     public static void destroyPlayerBank(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1106,18 +1158,23 @@ public class pclib extends script.base_script
         {
             return;
         }
-        for (obj_id content : contents) {
-            if (isIdValid(content)) {
+        for (obj_id content : contents)
+        {
+            if (isIdValid(content))
+            {
                 destroyObject(content);
             }
         }
     }
+
     public static void damageAndDecayItem(obj_id item, float percent) throws InterruptedException
     {
     }
+
     public static void damageAndDecayItem(obj_id item, int amount) throws InterruptedException
     {
     }
+
     public static boolean sendToCloneSpawn(obj_id player, String callback, location world, location spawn) throws InterruptedException
     {
         if ((player == null) || (world == null) || (!isPlayer(player)))
@@ -1132,12 +1189,13 @@ public class pclib extends script.base_script
         {
             warpPlayer(player, spawn.area, spawn.x, spawn.y, spawn.z, null, spawn.x, spawn.y, spawn.z, callback);
         }
-        else 
+        else
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, spawn.cell, spawn.x, spawn.y, spawn.z, callback);
         }
         return true;
     }
+
     public static boolean sendToAnyLocation(obj_id player, location world, location interior) throws InterruptedException
     {
         if ((player == null) || (world == null) || (!isPlayer(player)))
@@ -1148,12 +1206,13 @@ public class pclib extends script.base_script
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, null, world.x, world.y, world.z);
         }
-        else 
+        else
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, interior.cell, interior.x, interior.y, interior.z);
         }
         return true;
     }
+
     public static boolean sendToAnyLocation(obj_id player, String callback, location world, location interior) throws InterruptedException
     {
         if ((player == null) || (world == null) || (!isPlayer(player)))
@@ -1165,12 +1224,13 @@ public class pclib extends script.base_script
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, null, world.x, world.y, world.z, callback);
         }
-        else 
+        else
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, interior.cell, interior.x, interior.y, interior.z, callback);
         }
         return true;
     }
+
     public static boolean sendToAnyLocation(obj_id player, location world, location interior, String interiorCell) throws InterruptedException
     {
         if ((player == null) || (world == null) || (!isPlayer(player)))
@@ -1181,12 +1241,13 @@ public class pclib extends script.base_script
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, null, world.x, world.y, world.z);
         }
-        else 
+        else
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, interior.cell, interiorCell, interior.x, interior.y, interior.z);
         }
         return true;
     }
+
     public static boolean sendToAnyLocation(obj_id player, String callback, location world, location interior, String interiorCell) throws InterruptedException
     {
         if ((player == null) || (world == null) || (!isPlayer(player)))
@@ -1198,12 +1259,13 @@ public class pclib extends script.base_script
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, null, world.x, world.y, world.z, callback);
         }
-        else 
+        else
         {
             warpPlayer(player, world.area, world.x, world.y, world.z, interior.cell, interiorCell, interior.x, interior.y, interior.z, callback);
         }
         return true;
     }
+
     public static boolean clearEffectsForDeath(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1235,6 +1297,7 @@ public class pclib extends script.base_script
         setPosture(player, POSTURE_INCAPACITATED);
         return true;
     }
+
     public static boolean isContainedByPlayer(obj_id player, obj_id item) throws InterruptedException
     {
         if ((player == null) || (item == null))
@@ -1255,6 +1318,7 @@ public class pclib extends script.base_script
         }
         return utils.getElementPositionInArray(containers, player) > -1;
     }
+
     public static boolean msgAttachScript(obj_id player, String scriptName) throws InterruptedException
     {
         if ((player == null) || (scriptName.equals("")))
@@ -1265,6 +1329,7 @@ public class pclib extends script.base_script
         params.put(DICT_SCRIPT_NAME, scriptName);
         return messageTo(player, HANDLER_ATTACH_SCRIPT, params, 0, true);
     }
+
     public static boolean msgDetachScript(obj_id player, String scriptName) throws InterruptedException
     {
         if ((player == null) || (scriptName.equals("")))
@@ -1275,6 +1340,7 @@ public class pclib extends script.base_script
         params.put(DICT_SCRIPT_NAME, scriptName);
         return messageTo(player, HANDLER_DETACH_SCRIPT, params, 0, true);
     }
+
     public static boolean msgRemoveObjVar(obj_id player, String objVarName) throws InterruptedException
     {
         if ((player == null) || (objVarName.equals("")))
@@ -1285,6 +1351,7 @@ public class pclib extends script.base_script
         params.put(DICT_OBJVAR_NAME, objVarName);
         return messageTo(player, HANDLER_REMOVE_OBJVAR, params, 0, true);
     }
+
     public static boolean msgGrantXP(obj_id player, String xpType, int xpAmount) throws InterruptedException
     {
         if ((player == null) || (xpType.equals("")))
@@ -1296,23 +1363,24 @@ public class pclib extends script.base_script
         params.put(DICT_XP_AMOUNT, xpAmount);
         return messageTo(player, HANDLER_GRANT_XP, params, 0, true);
     }
+
     public static boolean notifyGM(obj_id player, int nc) throws InterruptedException
     {
         if (player == null)
         {
             return false;
         }
-        switch (nc)
+        if (nc == NC_DEATH)
         {
-            case NC_DEATH:
             sendSystemMessagePlanetTestingOnly("DEATH-related error for player " + getName(player) + " (" + player + "). Please alert a GM on their behalf.");
-            break;
-            default:
+        }
+        else
+        {
             sendSystemMessagePlanetTestingOnly("Unknown error for player " + getName(player) + " (" + player + "). Please alert a GM on their behalf.");
-            break;
         }
         return true;
     }
+
     public static void requestWaypointDestroy(obj_id target, obj_id wp) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(wp))
@@ -1323,6 +1391,7 @@ public class pclib extends script.base_script
         params.put("wp", wp);
         messageTo(target, "handleWaypointDestroyRequest", params, 1.0f, true);
     }
+
     public static void requestWaypointRename(obj_id target, obj_id wp, String name) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(wp) || name == null || name.equals(""))
@@ -1334,6 +1403,7 @@ public class pclib extends script.base_script
         params.put("name", name);
         messageTo(target, "handleWaypointRenameRequest", params, 1.0f, true);
     }
+
     public static void requestWaypointRename(obj_id target, obj_id wp, string_id sid_name) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(wp) || sid_name == null)
@@ -1343,6 +1413,7 @@ public class pclib extends script.base_script
         String name = utils.packStringId(sid_name);
         requestWaypointRename(target, wp, name);
     }
+
     public static String[] buildSortedResourceList(obj_id[] resources, String resourceClass, int branchLevel) throws InterruptedException
     {
         Vector resourceList = new Vector();
@@ -1350,26 +1421,33 @@ public class pclib extends script.base_script
         String parent;
         String child;
 
-        for (obj_id resource : resources) {
-            if (!isResourceDerivedFrom(resource, resourceClass)) {
+        for (obj_id resource : resources)
+        {
+            if (!isResourceDerivedFrom(resource, resourceClass))
+            {
                 continue;
             }
             parent = getResourceClass(resource);
             child = null;
-            if (parent == null) {
+            if (parent == null)
+            {
                 continue;
             }
-            while (!parent.equals(resourceClass)) {
+            while (!parent.equals(resourceClass))
+            {
                 child = parent;
                 parent = getResourceParentClass(child);
             }
-            if (child == null) {
+            if (child == null)
+            {
                 child = "\\#pcontrast1 " + getResourceName(resource) + "\\#.";
             }
-            for (int j = 0; j < branchLevel; j++) {
+            for (int j = 0; j < branchLevel; j++)
+            {
                 child = "    " + child;
             }
-            if (resourceList.indexOf(child) == -1) {
+            if (!resourceList.contains(child))
+            {
                 resourceList.add(child);
             }
         }
@@ -1377,7 +1455,8 @@ public class pclib extends script.base_script
         {
             parent = ((String) resourceList.get(i)).trim();
             String[] childBranchs = buildSortedResourceList(resources, parent, branchLevel + 1);
-            for (String childBranch : childBranchs) {
+            for (String childBranch : childBranchs)
+            {
                 resourceList.add(++i, childBranch);
             }
         }
@@ -1389,27 +1468,34 @@ public class pclib extends script.base_script
         }
         return _resourceList;
     }
+
     public static String createResourcePlanetReport(String[] resourceList, String planet, String resourceClass) throws InterruptedException
     {
         String report = "Incoming planetary survey report...\n\n" + "\\#pcontrast3 Planet: \\#pcontrast1 " + toUpper(planet, 0) + "\n" + "\\#pcontrast3 Resource Class: \\#pcontrast1 " + getClassString(resourceClass) + "\n\n" + "\\#pcontrast3 Resources located...\\#.\n\n";
         String resourceName;
         obj_id resourceId;
 
-        for (String resource : resourceList) {
+        for (String resource : resourceList)
+        {
             resourceName = resource.trim();
-            if (resourceName.startsWith("\\#")) {
+            if (resourceName.startsWith("\\#"))
+            {
                 resourceName = resourceName.substring(13, resourceName.length() - 3);
             }
             resourceId = getResourceTypeByName(resourceName);
-            if (resourceId == null) {
+            if (resourceId == null)
+            {
                 report += "    " + getTab(resource) + getClassString(resourceName) + "\n";
-            } else {
+            }
+            else
+            {
                 report += "        " + resource + "\n";
             }
         }
         report += "\n\n";
         return report;
     }
+
     public static String getClassString(String className) throws InterruptedException
     {
         final String resourceTable = "datatables/resource/resource_tree.iff";
@@ -1423,6 +1509,7 @@ public class pclib extends script.base_script
         }
         return classString;
     }
+
     public static String getTab(String str) throws InterruptedException
     {
         String tab = "";

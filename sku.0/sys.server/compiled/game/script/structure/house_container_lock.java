@@ -5,19 +5,21 @@ import script.library.utils;
 
 public class house_container_lock extends script.base_script
 {
-    public house_container_lock()
-    {
-    }
     public static final string_id SID_LOCK_BAD_STRUCTURE = new string_id("spam", "sid_lock_bad_structure");
     public static final string_id SID_LOCK_BAD_LOCK_TARGET = new string_id("spam", "sid_lock_bad_lock_target");
     public static final string_id SID_LOCK_BAD_ALREADY_LOCKED = new string_id("spam", "sid_lock_bad_already_locked");
     public static final string_id SID_LOCK_BAD_INVENTORY_LOCATION = new string_id("spam", "sid_lock_bad_inventory_location");
     public static final string_id SID_LOCK_BAD_LOCK_CONTAINER = new string_id("spam", "sid_lock_bad_lock_container");
     public static final string_id SID_LOCK_APPLIED = new string_id("spam", "sid_lock_applied");
+    public house_container_lock()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -69,6 +71,7 @@ public class house_container_lock extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

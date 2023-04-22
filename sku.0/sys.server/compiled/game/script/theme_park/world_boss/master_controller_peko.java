@@ -19,6 +19,7 @@ public class master_controller_peko extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PEKO);
         return SCRIPT_CONTINUE;
     }
 
@@ -69,6 +70,7 @@ public class master_controller_peko extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(getMaster(killer)));
         }
+        resurgence.doWorldBossDeathMsg(self);
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;
     }

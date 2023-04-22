@@ -73,11 +73,10 @@ public class incubator extends script.base_script
     public static final String BASE_INCUBATOR_POWER_OBJVAR = "power";
     public static final String ACTIVE_INCUBATOR = BASE_INCUBATOR_OBJVAR + ".active";
     public static final String SESSION_NUMBER = BASE_INCUBATOR_OBJVAR + ".session";
-    public static final String LAST_MUTATION = BASE_INCUBATOR_OBJVAR + ".last_mutation";
     public static final String ACTIVE_SESSION = SESSION_NUMBER + ".active";
+    public static final String LAST_MUTATION = BASE_INCUBATOR_OBJVAR + ".last_mutation";
     public static final String NEXT_SESSION = BASE_INCUBATOR_OBJVAR + ".next_session";
     public static final String POINTS_ALLOCATED = BASE_INCUBATOR_OBJVAR + ".points_allocated";
-    public static final String OBJVAR_EGG_CREATED = BASE_INCUBATOR_OBJVAR + ".egg_created";
     public static final String ALLOCATED_DPS = POINTS_ALLOCATED + ".dps";
     public static final String ALLOCATED_ARMOR = POINTS_ALLOCATED + ".armor";
     public static final String ALLOCATED_HEALTH = POINTS_ALLOCATED + ".health";
@@ -92,12 +91,39 @@ public class incubator extends script.base_script
     public static final String ALLOCATED_STRIKETHROUGH = POINTS_ALLOCATED + ".strikethrough";
     public static final String ALLOCATED_STRIKETHROUGH_RATING = POINTS_ALLOCATED + ".strikethrough_rating";
     public static final String ALLOCATED_CRITICAL_HIT = POINTS_ALLOCATED + ".critical_hit";
+    public static final String[] ARRAY_ATTRIBUTES =
+            {
+                    ALLOCATED_DPS,
+                    ALLOCATED_ARMOR,
+                    ALLOCATED_HEALTH,
+                    ALLOCATED_HIT_CHANCE,
+                    ALLOCATED_DODGE,
+                    ALLOCATED_PARRY_CHANCE,
+                    ALLOCATED_GLANCING_BLOW,
+                    ALLOCATED_BLOCK_CHANCE,
+                    ALLOCATED_BLOCK_VALUE,
+                    ALLOCATED_CRITICAL_HIT,
+                    ALLOCATED_EVASION,
+                    ALLOCATED_EVASION_RATING,
+                    ALLOCATED_STRIKETHROUGH,
+                    ALLOCATED_STRIKETHROUGH_RATING
+            };
     public static final String ALLOCATED_AGGRESSION = POINTS_ALLOCATED + ".aggression";
     public static final String ALLOCATED_BEASTIAL_RESILIENCE = POINTS_ALLOCATED + ".beastialResilience";
     public static final String ALLOCATED_HUNTERS_INSTINCT = POINTS_ALLOCATED + ".huntersInstinct";
     public static final String ALLOCATED_INTELLIGENCE = POINTS_ALLOCATED + ".intelligence";
     public static final String ALLOCATED_SURVIVAL = POINTS_ALLOCATED + ".survival";
     public static final String ALLOCATED_CUNNING = POINTS_ALLOCATED + ".cunning";
+    public static final String[] ARRAY_SKILLS =
+            {
+                    ALLOCATED_AGGRESSION,
+                    ALLOCATED_BEASTIAL_RESILIENCE,
+                    ALLOCATED_HUNTERS_INSTINCT,
+                    ALLOCATED_INTELLIGENCE,
+                    ALLOCATED_SURVIVAL,
+                    ALLOCATED_CUNNING
+            };
+    public static final String OBJVAR_EGG_CREATED = BASE_INCUBATOR_OBJVAR + ".egg_created";
     public static final String ALLOCATED_CREATURE_HUE_INDEX = "incubator.hueIndex";
     public static final String TEMPLATE_STORED = ".creature_template";
     public static final String STATION_QUALITY_OBJVAR = "crafting.stationMod_1";
@@ -169,129 +195,103 @@ public class incubator extends script.base_script
     public static final String COMM_SFX_MUTATE_ATTRIB = "sound/voc_huttese_blurt_rnd_06_thru_08.snd";
     public static final String COMM_SFX_MUTATION_3_VADER = "sound/darth_1.snd";
     public static final String GUI_SCRIPT_VAR = "incubator.lastSessionTime";
-    public static final String[] ENZYME_TYPES = 
-    {
-        "",
-        "Quality",
-        "Stat",
-        "Skill"
-    };
-    public static final String[] STAT_LIST = 
-    {
-        "Hit Chance",
-        "Dodge",
-        "Parry Chance",
-        "Glancing Blow",
-        "Block Chance",
-        "Block Value",
-        "Critical Hit",
-        "Evasion",
-        "Evasion Rating",
-        "Strikethrough",
-        "Strikethrough Rating",
-        "Health Bonus"
-    };
-    public static final String[] COMM_MUTATION_APP = 
-    {
-        "object/mobile/incubator_mutation_comm_01.iff",
-        "object/mobile/incubator_mutation_comm_02.iff",
-        "object/mobile/incubator_mutation_comm_03.iff"
-    };
-    public static final String[] ARRAY_SKILLS = 
-    {
-        ALLOCATED_AGGRESSION,
-        ALLOCATED_BEASTIAL_RESILIENCE,
-        ALLOCATED_HUNTERS_INSTINCT,
-        ALLOCATED_INTELLIGENCE,
-        ALLOCATED_SURVIVAL,
-        ALLOCATED_CUNNING
-    };
-    public static final String[] SKILL_DISPLAY_NAMES = 
-    {
-        "aggression_skill",
-        "beastial_resilience_skill",
-        "hunters_instinct_skill",
-        "intelligence_skill",
-        "survival_skill",
-        "cunning_skill"
-    };
-    public static final String[] ARRAY_ATTRIBUTES = 
-    {
-        ALLOCATED_DPS,
-        ALLOCATED_ARMOR,
-        ALLOCATED_HEALTH,
-        ALLOCATED_HIT_CHANCE,
-        ALLOCATED_DODGE,
-        ALLOCATED_PARRY_CHANCE,
-        ALLOCATED_GLANCING_BLOW,
-        ALLOCATED_BLOCK_CHANCE,
-        ALLOCATED_BLOCK_VALUE,
-        ALLOCATED_CRITICAL_HIT,
-        ALLOCATED_EVASION,
-        ALLOCATED_EVASION_RATING,
-        ALLOCATED_STRIKETHROUGH,
-        ALLOCATED_STRIKETHROUGH_RATING
-    };
-    public static final String[] ATTRIBUTE_DISPLAY_NAMES = 
-    {
-        "dps_bonus",
-        "armor_bonus",
-        "health_bonus",
-        "hit_chance_bonus",
-        "dodge_bonus",
-        "parry_bonus",
-        "glancing_blow_bonus",
-        "block_chance_bonus",
-        "block_value_bonus",
-        "critical_hit_bonus",
-        "evasion_bonus",
-        "evasion_rating_bonus",
-        "strikethrough_bonus",
-        "strikethrough_rating_bonus"
-    };
-    public static final String[] ENZYME_COLORS = 
-    {
-        "Yellow",
-        "Orange",
-        "Red",
-        "Violet",
-        "Purple",
-        "Dark Blue",
-        "Light Blue",
-        "Teal",
-        "Green",
-        "Lime"
-    };
-    public static final String[] ENZYME_COLLECTION_NAMES = 
-    {
-        "col_yellow_enzyme",
-        "col_orange_enzyme",
-        "col_red_enzyme",
-        "col_violet_enzyme",
-        "col_purple_enzyme",
-        "col_dark_blue_enzyme",
-        "col_light_blue_enzyme",
-        "col_teal_enzyme",
-        "col_green_enzyme",
-        "none"
-    };
-    public static final float[] ATTRIBUTE_DISPLAY_CONVERSION_RATES = 
-    {
-        0.1f,
-        0.1f,
-        0.2f,
-        0.1f,
-        0.1f,
-        0.1f,
-        0.1f,
-        0.1f,
-        1.0f,
-        0.1f,
-        0.1f,
-        1.0f,
-        0.1f,
-        1.0f
-    };
+    public static final String[] ENZYME_TYPES =
+            {
+                    "",
+                    "Quality",
+                    "Stat",
+                    "Skill"
+            };
+    public static final String[] STAT_LIST =
+            {
+                    "Hit Chance",
+                    "Dodge",
+                    "Parry Chance",
+                    "Glancing Blow",
+                    "Block Chance",
+                    "Block Value",
+                    "Critical Hit",
+                    "Evasion",
+                    "Evasion Rating",
+                    "Strikethrough",
+                    "Strikethrough Rating",
+                    "Health Bonus"
+            };
+    public static final String[] COMM_MUTATION_APP =
+            {
+                    "object/mobile/incubator_mutation_comm_01.iff",
+                    "object/mobile/incubator_mutation_comm_02.iff",
+                    "object/mobile/incubator_mutation_comm_03.iff"
+            };
+    public static final String[] SKILL_DISPLAY_NAMES =
+            {
+                    "aggression_skill",
+                    "beastial_resilience_skill",
+                    "hunters_instinct_skill",
+                    "intelligence_skill",
+                    "survival_skill",
+                    "cunning_skill"
+            };
+    public static final String[] ATTRIBUTE_DISPLAY_NAMES =
+            {
+                    "dps_bonus",
+                    "armor_bonus",
+                    "health_bonus",
+                    "hit_chance_bonus",
+                    "dodge_bonus",
+                    "parry_bonus",
+                    "glancing_blow_bonus",
+                    "block_chance_bonus",
+                    "block_value_bonus",
+                    "critical_hit_bonus",
+                    "evasion_bonus",
+                    "evasion_rating_bonus",
+                    "strikethrough_bonus",
+                    "strikethrough_rating_bonus"
+            };
+    public static final String[] ENZYME_COLORS =
+            {
+                    "Yellow",
+                    "Orange",
+                    "Red",
+                    "Violet",
+                    "Purple",
+                    "Dark Blue",
+                    "Light Blue",
+                    "Teal",
+                    "Green",
+                    "Lime"
+            };
+    public static final String[] ENZYME_COLLECTION_NAMES =
+            {
+                    "col_yellow_enzyme",
+                    "col_orange_enzyme",
+                    "col_red_enzyme",
+                    "col_violet_enzyme",
+                    "col_purple_enzyme",
+                    "col_dark_blue_enzyme",
+                    "col_light_blue_enzyme",
+                    "col_teal_enzyme",
+                    "col_green_enzyme",
+                    "none"
+            };
+    public static final float[] ATTRIBUTE_DISPLAY_CONVERSION_RATES =
+            {
+                    0.1f,
+                    0.1f,
+                    0.2f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    1.0f,
+                    0.1f,
+                    0.1f,
+                    1.0f,
+                    0.1f,
+                    1.0f
+            };
     public static final string_id SID_NOT_YOUR_INCUBATOR = new string_id("beast", "incubator_not_yours");
     public static final string_id SID_DNA_ALREADY_BEEN_SAMPLED = new string_id("incubator", "dna_already_sampled");
     public static final string_id SID_DNA_CREATURE_NOT_ON_LIST = new string_id("incubator", "dna_creature_not_on_list");
@@ -320,19 +320,20 @@ public class incubator extends script.base_script
     public static final string_id SID_COMM_MUTATION_COLOR_CORRECT = new string_id("incubator", "comm_mutation_color_correct");
     public static final string_id SID_ATTRIBUTE_MUTATION = new string_id("incubator", "sys_message_attribute_mutated");
     public static final string_id SID_CHEATER_DNA_CHANGED = new string_id("incubator", "cheater_dna_changed");
-    public static final string_id[] COMM_MUTATED_TEMPLATE_TEXT = 
-    {
-        SID_COMM_RDM_MUTATION_1,
-        SID_COMM_RDM_MUTATION_2,
-        SID_COMM_RDM_MUTATION_3
-    };
-    public static final string_id[] COMM_MUTATED_ATTRIB_TEXT = 
-    {
-        SID_COMM_ATTRIB_MUTATION_1,
-        SID_COMM_ATTRIB_MUTATION_2,
-        SID_COMM_ATTRIB_MUTATION_3
-    };
+    public static final string_id[] COMM_MUTATED_TEMPLATE_TEXT =
+            {
+                    SID_COMM_RDM_MUTATION_1,
+                    SID_COMM_RDM_MUTATION_2,
+                    SID_COMM_RDM_MUTATION_3
+            };
+    public static final string_id[] COMM_MUTATED_ATTRIB_TEXT =
+            {
+                    SID_COMM_ATTRIB_MUTATION_1,
+                    SID_COMM_ATTRIB_MUTATION_2,
+                    SID_COMM_ATTRIB_MUTATION_3
+            };
     public static final boolean LOGGING_ENABLED = true;
+
     public static int getIntEnzymeType(obj_id enzyme) throws InterruptedException
     {
         if (!hasObjVar(enzyme, ENZYME_TYPE_OBJVAR))
@@ -341,6 +342,7 @@ public class incubator extends script.base_script
         }
         return getIntObjVar(enzyme, ENZYME_TYPE_OBJVAR);
     }
+
     public static String getStringEnzymeType(obj_id enzyme) throws InterruptedException
     {
         if (!hasObjVar(enzyme, ENZYME_TYPE_OBJVAR))
@@ -350,59 +352,55 @@ public class incubator extends script.base_script
         int enzymeType = getIntObjVar(enzyme, ENZYME_TYPE_OBJVAR);
         return ENZYME_TYPES[enzymeType];
     }
+
     public static boolean isQualityEnzyme(obj_id enzyme) throws InterruptedException
     {
-        if (hasObjVar(enzyme, ENZYME_QUALITY_OBJVAR) && exists(enzyme))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(enzyme, ENZYME_QUALITY_OBJVAR) && exists(enzyme);
     }
+
     public static boolean isStatEnzyme(obj_id enzyme) throws InterruptedException
     {
         if (exists(enzyme))
         {
-            if (hasObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR) || hasObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR))
-            {
-                return true;
-            }
+            return hasObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR) || hasObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR);
         }
         return false;
     }
+
     public static boolean isSkillEnzyme(obj_id enzyme) throws InterruptedException
     {
-        if (hasObjVar(enzyme, ENZYME_PURITY_OBJVAR) && exists(enzyme))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(enzyme, ENZYME_PURITY_OBJVAR) && exists(enzyme);
     }
+
     public static int getEnzymeRandomStats(obj_id enzyme) throws InterruptedException
     {
         if (hasObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR) && exists(enzyme))
         {
             return getIntObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static String getEnzymeFreeStat(obj_id enzyme) throws InterruptedException
     {
         if (hasObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR) && exists(enzyme))
         {
             return getStringObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR);
         }
-        else 
+        else
         {
             return "";
         }
     }
+
     public static float getEnzymeSkillPoints(obj_id enzyme) throws InterruptedException
     {
         return getFloatObjVar(enzyme, ENZYME_PURITY_OBJVAR);
     }
+
     public static float getEnzymeQuality(obj_id enzyme) throws InterruptedException
     {
         float baseQuality = 0.0f;
@@ -412,10 +410,12 @@ public class incubator extends script.base_script
         }
         return baseQuality;
     }
+
     public static int getEnzyemColor(obj_id enzyme) throws InterruptedException
     {
         return getIntObjVar(enzyme, ENZYME_COLOR_OBJVAR);
     }
+
     public static float getEnzyemMutagen(obj_id enzyme) throws InterruptedException
     {
         float mutagen = 0.0f;
@@ -425,6 +425,7 @@ public class incubator extends script.base_script
         }
         return mutagen;
     }
+
     public static String getEnzyemTrait(obj_id enzyme) throws InterruptedException
     {
         String trait = "";
@@ -434,50 +435,42 @@ public class incubator extends script.base_script
         }
         return trait;
     }
+
     public static boolean hasEnzymeColor(obj_id enzyme) throws InterruptedException
     {
-        if (hasObjVar(enzyme, ENZYME_COLOR_OBJVAR) && exists(enzyme))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(enzyme, ENZYME_COLOR_OBJVAR) && exists(enzyme);
     }
+
     public static boolean hasDnaQuality(obj_id dnaContainer) throws InterruptedException
     {
-        if (hasObjVar(dnaContainer, DNA_QUALITY_OBJVAR) && exists(dnaContainer))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(dnaContainer, DNA_QUALITY_OBJVAR) && exists(dnaContainer);
     }
+
     public static boolean hasDnaTemplate(obj_id dnaContainer) throws InterruptedException
     {
-        if (hasObjVar(dnaContainer, DNA_TEMPLATE_OBJVAR) && exists(dnaContainer))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(dnaContainer, DNA_TEMPLATE_OBJVAR) && exists(dnaContainer);
     }
+
     public static boolean hasDnaParentCreature(obj_id dnaContainer) throws InterruptedException
     {
-        if (hasObjVar(dnaContainer, DNA_PARENT_TEMPLATE) && exists(dnaContainer))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(dnaContainer, DNA_PARENT_TEMPLATE) && exists(dnaContainer);
     }
+
     public static float getDnaQuality(obj_id dnaContainer) throws InterruptedException
     {
         return getFloatObjVar(dnaContainer, DNA_QUALITY_OBJVAR);
     }
+
     public static int getDnaCreatureTemplate(obj_id dnaContainer) throws InterruptedException
     {
         return getIntObjVar(dnaContainer, DNA_TEMPLATE_OBJVAR);
     }
+
     public static String getDnaParentCreature(obj_id dnaContainer) throws InterruptedException
     {
         return getStringObjVar(dnaContainer, DNA_PARENT_TEMPLATE);
     }
+
     public static void setUpEnzymeWithDummyData(obj_id enzyme) throws InterruptedException
     {
         if (hasObjVar(enzyme, ENZYME_TYPE_OBJVAR))
@@ -487,23 +480,24 @@ public class incubator extends script.base_script
             switch (enzymeType)
             {
                 case 1:
-                setObjVar(enzyme, ENZYME_QUALITY_OBJVAR, 90.0f);
-                enzymeColor = rand(0, NUMBER_OF_COLORS);
-                setObjVar(enzyme, ENZYME_COLOR_OBJVAR, enzymeColor);
-                hue.setColor(enzyme, "/private/index_color_1", enzymeColor);
-                break;
+                    setObjVar(enzyme, ENZYME_QUALITY_OBJVAR, 90.0f);
+                    enzymeColor = rand(0, NUMBER_OF_COLORS);
+                    setObjVar(enzyme, ENZYME_COLOR_OBJVAR, enzymeColor);
+                    hue.setColor(enzyme, "/private/index_color_1", enzymeColor);
+                    break;
                 case 2:
-                initializeEnzymes(enzyme);
-                break;
+                    initializeEnzymes(enzyme);
+                    break;
                 case 3:
-                blog("BEAST_ENZYME", "Skill Point Enzyme, we no longer do anything with these. They are setup elsewhere");
-                break;
+                    blog("BEAST_ENZYME", "Skill Point Enzyme, we no longer do anything with these. They are setup elsewhere");
+                    break;
                 default:
-                blog("BEAST_ENZYME", "default case in switch statement. This shouldnt happen.");
-                break;
+                    blog("BEAST_ENZYME", "default case in switch statement. This shouldnt happen.");
+                    break;
             }
         }
     }
+
     public static void initializeEnzymes(obj_id enzyme) throws InterruptedException
     {
         int creatureLevel = getIntObjVar(enzyme, ENZYME_LEVEL_OBJVAR);
@@ -514,89 +508,86 @@ public class incubator extends script.base_script
             switch (enzymeType)
             {
                 case 1:
-                float minRange = 0.0f;
-                float maxRange = MIN_QUALITY_RANGE;
-                boolean foundRange = false;
-                for (int i = 10; i <= 75; i += 5)
-                {
-                    if (creatureLevel <= i)
+                    float minRange = 0.0f;
+                    float maxRange = MIN_QUALITY_RANGE;
+                    boolean foundRange = false;
+                    for (int i = 10; i <= 75; i += 5)
                     {
-                        minRange = creatureLevel;
-                        maxRange = creatureLevel + 5;
+                        if (creatureLevel <= i)
+                        {
+                            minRange = creatureLevel;
+                            maxRange = creatureLevel + 5;
+                            foundRange = true;
+                            break;
+                        }
+                    }
+                    if (!foundRange)
+                    {
+                        minRange = 80.0f;
+                        maxRange = MAX_QUALITY_RANGE;
                         foundRange = true;
-                        break;
                     }
-                }
-                if (!foundRange)
-                {
-                    minRange = 80.0f;
-                    maxRange = MAX_QUALITY_RANGE;
-                    foundRange = true;
-                }
-                float quality = rand(minRange, maxRange);
-                blog("BEAST_ENZYME", "quality = " + quality);
-                setObjVar(enzyme, ENZYME_QUALITY_OBJVAR, quality);
-                break;
+                    float quality = rand(minRange, maxRange);
+                    blog("BEAST_ENZYME", "quality = " + quality);
+                    setObjVar(enzyme, ENZYME_QUALITY_OBJVAR, quality);
+                    break;
                 case 2:
-                int randomChance = rand(1, 100);
-                int statListMinusOne = STAT_LIST.length - 1;
-                int maxRandomWithKnown = STAT_LIST.length - 3;
-                if (randomChance <= CHANCE_FOR_ONE_KNOWN_SKILL)
-                {
-                    int statIndex = rand(0, statListMinusOne);
-                    String freeStatName = STAT_LIST[statIndex];
-                    int numRandomStats = rand(0, maxRandomWithKnown);
-                    blog("BEAST_ENZYME", "numRandomStats = " + numRandomStats);
-                    blog("BEAST_ENZYME", "freeStatName = " + freeStatName);
-                    setObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR, numRandomStats);
-                    setObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR, freeStatName);
-                }
-                else 
-                {
-                    if (hasObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR))
+                    int randomChance = rand(1, 100);
+                    int statListMinusOne = STAT_LIST.length - 1;
+                    int maxRandomWithKnown = STAT_LIST.length - 3;
+                    if (randomChance <= CHANCE_FOR_ONE_KNOWN_SKILL)
                     {
-                        removeObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR);
+                        int statIndex = rand(0, statListMinusOne);
+                        String freeStatName = STAT_LIST[statIndex];
+                        int numRandomStats = rand(0, maxRandomWithKnown);
+                        blog("BEAST_ENZYME", "numRandomStats = " + numRandomStats);
+                        blog("BEAST_ENZYME", "freeStatName = " + freeStatName);
+                        setObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR, numRandomStats);
+                        setObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR, freeStatName);
                     }
-                    int numRandomStats = rand(1, statListMinusOne);
-                    blog("BEAST_ENZYME", "numRandomStats = " + numRandomStats);
-                    setObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR, numRandomStats);
-                }
-                break;
+                    else
+                    {
+                        if (hasObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR))
+                        {
+                            removeObjVar(enzyme, ENZYME_FREE_STAT_OBJVAR);
+                        }
+                        int numRandomStats = rand(1, statListMinusOne);
+                        blog("BEAST_ENZYME", "numRandomStats = " + numRandomStats);
+                        setObjVar(enzyme, ENZYME_RANDOM_STATS_OBJVAR, numRandomStats);
+                    }
+                    break;
                 case 3:
-                blog("BEAST_ENZYME", "Skill Point Enzyme, we no longer do anything with these. They are setup elsewhere");
+                    blog("BEAST_ENZYME", "Skill Point Enzyme, we no longer do anything with these. They are setup elsewhere");
                 default:
-                blog("BEAST_ENZYME", "default case in switch statement. This shouldnt happen.");
-                break;
+                    blog("BEAST_ENZYME", "default case in switch statement. This shouldnt happen.");
+                    break;
             }
         }
         int enzymeColor = rand(0, NUMBER_OF_COLORS);
         setObjVar(enzyme, ENZYME_COLOR_OBJVAR, enzymeColor);
         hue.setColor(enzyme, "/private/index_color_1", enzymeColor);
     }
+
     public static boolean hasActiveUser(obj_id station) throws InterruptedException
     {
-        if (!hasObjVar(station, ACTIVE_INCUBATOR))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(station, ACTIVE_INCUBATOR);
     }
+
     public static obj_id getIncubatorActiveUser(obj_id station) throws InterruptedException
     {
         return (utils.getObjIdObjVar(station, ACTIVE_INCUBATOR, obj_id.NULL_ID));
     }
+
     public static boolean hasActiveIncubator(obj_id player) throws InterruptedException
     {
-        if (!hasObjVar(player, ACTIVE_INCUBATOR))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(player, ACTIVE_INCUBATOR);
     }
+
     public static obj_id getActiveIncubator(obj_id player) throws InterruptedException
     {
         return (utils.getObjIdObjVar(player, ACTIVE_INCUBATOR, obj_id.NULL_ID));
     }
+
     public static boolean setActiveUser(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && isIdValid(station))
@@ -610,33 +601,43 @@ public class incubator extends script.base_script
         }
         return false;
     }
-    public static boolean setNextSessionTime(obj_id station, obj_id player) throws InterruptedException {
-        if (isIdValid(player) && isIdValid(station)) {
+
+    public static boolean setNextSessionTime(obj_id station, obj_id player) throws InterruptedException
+    {
+        if (isIdValid(player) && isIdValid(station))
+        {
             int currentTime = getGameTime();
-            int expertiseModifier = (int) getSkillStatisticModifier(player, "expertise_bm_incubation_time");
+            int expertiseModifier = getSkillStatisticModifier(player, "expertise_bm_incubation_time");
             float stationFunctionality = getFloatObjVar(station, STATION_FUNCTIONALITY_OBJVAR);
             int modifiedTime = currentTime + NEXT_SESSION_TIME;
-            if (expertiseModifier > 0) {
+            if (expertiseModifier > 0)
+            {
                 modifiedTime -= expertiseModifier * 3600;
             }
-            int skillModifier = (int) getSkillStatisticModifier(player, "incubation_time_reduction");
-            if (skillModifier > 0) {
+            int skillModifier = getSkillStatisticModifier(player, "incubation_time_reduction");
+            if (skillModifier > 0)
+            {
                 modifiedTime -= skillModifier * 60;
             }
             int city_id = city.checkCity(player, false);
-            if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR)) {
+            if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR))
+            {
                 modifiedTime -= (5 * 60 * 60);
             }
-            if (stationFunctionality != 0) {
+            if (stationFunctionality != 0)
+            {
                 modifiedTime -= Math.round(stationFunctionality * 3600);
             }
-            if (modifiedTime > currentTime + MAX_SESSION_TIME) {
+            if (modifiedTime > currentTime + MAX_SESSION_TIME)
+            {
                 modifiedTime = currentTime + MAX_SESSION_TIME;
             }
-            if (modifiedTime <= 0) {
+            if (modifiedTime <= 0)
+            {
                 modifiedTime = 3600;
             }
-            if (modifiedTime > 0) {
+            if (modifiedTime > 0)
+            {
                 setObjVar(player, NEXT_SESSION, modifiedTime);
                 CustomerServiceLog("INCUBATOR: ", "Incubator Session Completed, next session can be performed in " + ((modifiedTime - currentTime) / 3600) + " hours");
                 return true;
@@ -644,6 +645,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean isSessionEligible(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))
@@ -652,26 +654,22 @@ public class incubator extends script.base_script
             int nextSessionTime = getIntObjVar(player, NEXT_SESSION);
             if (nextSessionTime >= 0)
             {
-                if (currentTime >= nextSessionTime)
-                {
-                    return true;
-                }
+                return currentTime >= nextSessionTime;
             }
         }
         return false;
     }
+
     public static boolean isIncubationComplete(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(station))
         {
             int sessionNumber = getIntObjVar(station, ACTIVE_SESSION);
-            if (sessionNumber >= SESSIONS_TO_HATCH && isSessionEligible(player))
-            {
-                return true;
-            }
+            return sessionNumber >= SESSIONS_TO_HATCH && isSessionEligible(player);
         }
         return false;
     }
+
     public static obj_id extractDna(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -744,12 +742,13 @@ public class incubator extends script.base_script
             sendSystemMessage(player, SID_DNA_SAMPLED);
             return dnaContainer;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_DNA_FAILED_SAMPLE);
             return obj_id.NULL_ID;
         }
     }
+
     public static void setUpDnaWithDummyData(obj_id dnaContainer, obj_id player) throws InterruptedException
     {
         initializeDna(dnaContainer, player);
@@ -759,6 +758,7 @@ public class incubator extends script.base_script
         int hashTemplate = dataTableGetInt(DATATABLE_INCUBATOR_TEMPLATES, row, "hash_initial_template");
         setObjVar(dnaContainer, DNA_TEMPLATE_OBJVAR, hashTemplate);
     }
+
     public static void initializeDna(obj_id dna, obj_id player) throws InterruptedException
     {
         if (hasObjVar(dna, DNA_QUALITY_OBJVAR))
@@ -781,11 +781,12 @@ public class incubator extends script.base_script
             blog("BEAST_DNA", "quality " + quality);
             setObjVar(dna, DNA_QUALITY_OBJVAR, quality);
         }
-        else 
+        else
         {
             setObjVar(dna, DNA_QUALITY_OBJVAR, MAX_QUALITY_RANGE);
         }
     }
+
     public static void clearMiniGameCooldown(obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && isGod(player))
@@ -794,6 +795,7 @@ public class incubator extends script.base_script
             setObjVar(player, NEXT_SESSION, getGameTime());
         }
     }
+
     public static boolean removeActiveUser(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && isIdValid(station))
@@ -808,6 +810,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static void forceRemoveIncubatorFromUser(obj_id station, obj_id player) throws InterruptedException
     {
         if (station == getActiveIncubator(player))
@@ -815,6 +818,7 @@ public class incubator extends script.base_script
             removeObjVar(player, ACTIVE_INCUBATOR);
         }
     }
+
     public static boolean validateActiveUser(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && isIdValid(station))
@@ -823,14 +827,12 @@ public class incubator extends script.base_script
             obj_id currentStation = getActiveIncubator(player);
             if (!isIdNull(stationOwner) && !isIdNull(currentStation))
             {
-                if ((stationOwner == player) && (currentStation == station))
-                {
-                    return true;
-                }
+                return (stationOwner == player) && (currentStation == station);
             }
         }
         return false;
     }
+
     public static void checkIncubatorForMismatch(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(player) && isIdValid(station))
@@ -846,6 +848,7 @@ public class incubator extends script.base_script
             }
         }
     }
+
     public static boolean incubatorTotalCleanse(obj_id station) throws InterruptedException
     {
         if (isIdValid(station))
@@ -864,18 +867,17 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean isSessionActive(obj_id station) throws InterruptedException
     {
         if (isIdValid(station))
         {
             int sessionNumber = getIntObjVar(station, SESSION_NUMBER);
-            if (sessionNumber > 0)
-            {
-                return true;
-            }
+            return sessionNumber > 0;
         }
         return false;
     }
+
     public static int getCurrentSessionNumber(obj_id station) throws InterruptedException
     {
         if (isIdValid(station))
@@ -888,6 +890,7 @@ public class incubator extends script.base_script
         }
         return 1;
     }
+
     public static int getIntBonusLastSession(obj_id station, int sessionNumber, String bonusItem) throws InterruptedException
     {
         String objVarNeeded = POINTS_ALLOCATED + "." + bonusItem;
@@ -896,11 +899,12 @@ public class incubator extends script.base_script
         {
             return getIntObjVar(station, objVarNeeded);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static float getFloatBonusLastSession(obj_id station, int sessionNumber, String bonusItem) throws InterruptedException
     {
         String objVarNeeded = POINTS_ALLOCATED + "." + bonusItem;
@@ -909,11 +913,12 @@ public class incubator extends script.base_script
         {
             return getFloatObjVar(station, objVarNeeded);
         }
-        else 
+        else
         {
             return 0.0f;
         }
     }
+
     public static String getTemplateLastSession(obj_id station, int sessionNumber) throws InterruptedException
     {
         String objVarNeeded = SESSION_NUMBER + sessionNumber + TEMPLATE_STORED;
@@ -921,11 +926,12 @@ public class incubator extends script.base_script
         {
             return getStringObjVar(station, objVarNeeded);
         }
-        else 
+        else
         {
             return "";
         }
     }
+
     public static int getIncubatorCreatureTemplate(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, STATION_STORED_CREATURE_TEMPLATE))
@@ -934,6 +940,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static boolean getMutationChance(String template, int slotOneColor, int slotTwoColor, int slotThreeColor, obj_id station, obj_id player) throws InterruptedException
     {
         if (isConvertedPet(station))
@@ -974,7 +981,7 @@ public class incubator extends script.base_script
             }
             --numRight;
         }
-        else 
+        else
         {
             int index = rand(0, 2);
             npe.commTutorialPlayer(station, player, 12.0f, SID_COMM_MUTATION_COLOR_CORRECT, "", COMM_MUTATION_APP[index]);
@@ -989,15 +996,9 @@ public class incubator extends script.base_script
             }
             --numRight;
         }
-        if (numRight == 3)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return numRight == 3;
     }
+
     public static float getIncubatorQuality(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, STATION_QUALITY_OBJVAR))
@@ -1015,12 +1016,13 @@ public class incubator extends script.base_script
             }
             return stationQuality;
         }
-        else 
+        else
         {
             setObjVar(station, STATION_QUALITY_OBJVAR, STATION_QUALITY_MIN);
             return STATION_QUALITY_MIN;
         }
     }
+
     public static float getIncubatorFunctionality(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, STATION_FUNCTIONALITY_OBJVAR))
@@ -1038,23 +1040,25 @@ public class incubator extends script.base_script
             }
             return stationFunctionality;
         }
-        else 
+        else
         {
             setObjVar(station, STATION_FUNCTIONALITY_OBJVAR, STATION_FUNCTIONALITY_MIN);
             return STATION_FUNCTIONALITY_MIN;
         }
     }
+
     public static int getLastSessionMutated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, LAST_MUTATION))
         {
             return getIntObjVar(station, LAST_MUTATION);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static String getMutatedTemplate(String template, int session, obj_id station, obj_id player) throws InterruptedException
     {
         blog("INCUBATOR", "session(" + session + ") getMutatedTemplate::template " + template);
@@ -1070,7 +1074,7 @@ public class incubator extends script.base_script
             row = dataTableSearchColumnForString(template, "initial_template", DATATABLE_INCUBATOR_TEMPLATES);
             blog("INCUBATOR", "session(" + session + ") initial_template: row " + row);
         }
-        else 
+        else
         {
             row = dataTableSearchColumnForString(template, "mutated_template_" + lastMutationSession, DATATABLE_INCUBATOR_TEMPLATES);
             blog("INCUBATOR", "session(" + session + ") mutated_template_" + lastMutationSession + ": row " + row);
@@ -1091,7 +1095,7 @@ public class incubator extends script.base_script
             playClientEffectObj(station, "clienteffect/incubator_mutation.cef", station, PARTICLE_HARDPOINT_THREE, null, "");
             return template;
         }
-        else 
+        else
         {
             blog("INCUBATOR", "This creature has a mutation");
             setObjVar(station, LAST_MUTATION, (lastMutationSession + 1));
@@ -1099,14 +1103,14 @@ public class incubator extends script.base_script
             {
                 npe.commTutorialPlayer(station, player, 12.0f, SID_COMM_VADER_MUTATION_3, COMM_SFX_MUTATION_3_VADER, COMM_APPEARANCE_VADER);
             }
-            else 
+            else
             {
                 int index = rand(0, 2);
                 if (template.equals(newTemplate))
                 {
                     npe.commTutorialPlayer(station, player, 12.0f, COMM_MUTATED_ATTRIB_TEXT[index], COMM_SFX_MUTATE_ATTRIB, COMM_MUTATION_APP[index]);
                 }
-                else 
+                else
                 {
                     npe.commTutorialPlayer(station, player, 12.0f, COMM_MUTATED_TEMPLATE_TEXT[index], COMM_SFX_MUTATE_TEMPLATE, COMM_MUTATION_APP[index]);
                 }
@@ -1115,6 +1119,7 @@ public class incubator extends script.base_script
             return dict.getString("mutated_template_" + (lastMutationSession + 1));
         }
     }
+
     public static boolean updateSessionVariables(obj_id station, dictionary values) throws InterruptedException
     {
         if (values == null || values.isEmpty())
@@ -1317,6 +1322,7 @@ public class incubator extends script.base_script
         setObjVar(station, STATION_STORED_CREATURE_TEMPLATE, newTemplate);
         return true;
     }
+
     public static obj_id getStationDnaInInventory(obj_id station) throws InterruptedException
     {
         obj_id[] stationContents = utils.getContents(station, false);
@@ -1326,15 +1332,13 @@ public class incubator extends script.base_script
         }
         return stationContents[0];
     }
+
     public static boolean stationHasDnaInInventory(obj_id station) throws InterruptedException
     {
         obj_id dna = getStationDnaInInventory(station);
-        if (isIdNull(dna))
-        {
-            return false;
-        }
-        return true;
+        return !isIdNull(dna);
     }
+
     public static boolean canOpenInventory(obj_id station) throws InterruptedException
     {
         boolean ready = false;
@@ -1346,7 +1350,7 @@ public class incubator extends script.base_script
                 ready = true;
             }
         }
-        else 
+        else
         {
             if (hasActiveUser(station))
             {
@@ -1355,25 +1359,17 @@ public class incubator extends script.base_script
         }
         return ready;
     }
+
     public static boolean isReadyToRetrieveEgg(obj_id station) throws InterruptedException
     {
-        if (getCurrentSessionNumber(station) == 5)
-        {
-            return true;
-        }
-        return false;
+        return getCurrentSessionNumber(station) == 5;
     }
+
     public static boolean stationHasDnaStored(obj_id station) throws InterruptedException
     {
-        if (hasObjVar(station, STATION_DNA))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(station, STATION_DNA);
     }
+
     public static boolean startSession(obj_id station, obj_id player) throws InterruptedException
     {
         if (!validateActiveUser(station, player))
@@ -1433,7 +1429,7 @@ public class incubator extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             prose_package pp = new prose_package();
             String playerName = getPlayerName(player);
@@ -1461,7 +1457,7 @@ public class incubator extends script.base_script
             hashTemplate = getIntObjVar(station, STATION_DNA_CREATURE_TEMPLATE);
             blog("INCUBATOR", "startSession hashTemplate " + hashTemplate);
         }
-        else 
+        else
         {
             if (session > 1)
             {
@@ -1472,12 +1468,13 @@ public class incubator extends script.base_script
         }
         template = convertHashTemplateToString(hashTemplate, station);
         blog("INCUBATOR", "template " + template);
-        int powerPercentage = Math.round(((float)stationPowerAmount / RESOURCE_POWER_AMOUNT_CAP) * MAX_GUI_POWER);
+        int powerPercentage = Math.round(((float) stationPowerAmount / RESOURCE_POWER_AMOUNT_CAP) * MAX_GUI_POWER);
         blog("INCUBATOR", "powerPercentage = (" + stationPowerAmount + " / " + RESOURCE_POWER_AMOUNT_CAP + ") * " + MAX_GUI_POWER);
         blog("INCUBATOR", "powerPercentage " + powerPercentage);
         incubatorStart(session, player, station, powerPercentage, initialPointsSurvival, initialPointsBeastialResilience, initialPointsCunning, initialPointsIntelligence, initialPointsAggression, initialPointsHuntersInstinct, tempGaugeSliderPos, nutGaugeSliderPos, initialCreatureColorIndex, template);
         return true;
     }
+
     public static int getTemperatureGaugePosition(obj_id station, int session) throws InterruptedException
     {
         String builtObjVarString = SESSION_NUMBER + "." + session + POINTS_SPENT_POS_TEMP_SLIDER;
@@ -1487,6 +1484,7 @@ public class incubator extends script.base_script
         }
         return 5;
     }
+
     public static int getNutrientGaugePosition(obj_id station, int session) throws InterruptedException
     {
         String builtObjVarString = SESSION_NUMBER + "." + session + POINTS_SPENT_POS_NUTRIENT_SLIDER;
@@ -1496,6 +1494,7 @@ public class incubator extends script.base_script
         }
         return 5;
     }
+
     public static int getCreatureHueIndex(obj_id station, int session) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_CREATURE_HUE_INDEX))
@@ -1504,6 +1503,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getAggressionPointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_AGGRESSION))
@@ -1512,6 +1512,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getBeastialResiliencePointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_BEASTIAL_RESILIENCE))
@@ -1520,6 +1521,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getHuntersInstinctPointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_HUNTERS_INSTINCT))
@@ -1528,6 +1530,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getIntelligencePointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_INTELLIGENCE))
@@ -1536,6 +1539,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getSurvivalPointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_SURVIVAL))
@@ -1544,6 +1548,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static int getCunningPointsAllocated(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, ALLOCATED_CUNNING))
@@ -1552,6 +1557,7 @@ public class incubator extends script.base_script
         }
         return 0;
     }
+
     public static obj_id convertDnaToEgg(obj_id station, obj_id player) throws InterruptedException
     {
         if (!validateActiveUser(station, player))
@@ -1584,7 +1590,7 @@ public class incubator extends script.base_script
                 return obj_id.NULL_ID;
             }
         }
-        else 
+        else
         {
             prose_package pp = new prose_package();
             String playerName = getPlayerName(player);
@@ -1607,11 +1613,12 @@ public class incubator extends script.base_script
             CustomerServiceLog("BeastEggCreated: ", "Player " + getPlayerName(player) + "(" + player + ") has finished incubation and created an egg (" + egg + ").");
             return egg;
         }
-        else 
+        else
         {
             return obj_id.NULL_ID;
         }
     }
+
     public static void setUpEggWithDummyData(obj_id player, obj_id egg, int beastType) throws InterruptedException
     {
         setObjVar(egg, beast_lib.OBJVAR_BEAST_TYPE, beastType);
@@ -1636,6 +1643,7 @@ public class incubator extends script.base_script
         setObjVar(egg, beast_lib.OBJVAR_INCREASE_STRIKETHROUGH, rand(0, MAX_TOTAL_POINTS_ATTRIBUTES));
         setObjVar(egg, beast_lib.OBJVAR_INCREASE_STRIKETHROUGH_RATING, rand(0, MAX_TOTAL_POINTS_ATTRIBUTES));
     }
+
     public static void initializeEgg(obj_id egg) throws InterruptedException
     {
         obj_id station = getContainedBy(egg);
@@ -1715,11 +1723,12 @@ public class incubator extends script.base_script
             setObjVar(station, OBJVAR_EGG_CREATED, 1);
             setEggHue(egg);
         }
-        else 
+        else
         {
             blog("beast", "Beast egg not not in incubator, we are in: (" + station + ")" + template);
         }
     }
+
     public static String cleanAppearanceOfHueTag(String appearance) throws InterruptedException
     {
         blog("BEAST_DNA_CLEAN_HUE", "appearance = " + appearance);
@@ -1754,32 +1763,33 @@ public class incubator extends script.base_script
             blog("BEAST_DNA_CLEAN_HUE", "FinalAappearance = " + appearance);
             return appearance;
         }
-        else 
+        else
         {
             return appearance;
         }
     }
+
     public static boolean hasPower(obj_id station) throws InterruptedException
     {
         int amount = getStationPowerAmount(station);
-        if (amount > 0)
-        {
-            return true;
-        }
-        return false;
+        return amount > 0;
     }
+
     public static String getStationPowerName(obj_id station) throws InterruptedException
     {
         return (getStringObjVar(station, RESOURCE_POWER_NAME));
     }
+
     public static int getStationPowerAmount(obj_id station) throws InterruptedException
     {
         return (getIntObjVar(station, RESOURCE_POWER_AMOUNT));
     }
+
     public static int getStationPowerQuality(obj_id station) throws InterruptedException
     {
         return (getIntObjVar(station, RESOURCE_POWER_QUALITY));
     }
+
     public static boolean addPowerIncubator(obj_id station, obj_id player, int amount, int quality, String resourceName) throws InterruptedException
     {
         if (isIdValid(station) && isIdValid(player))
@@ -1800,6 +1810,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean removeAllPowerIncubator(obj_id station, obj_id player) throws InterruptedException
     {
         if (isIdValid(station) && isIdValid(player))
@@ -1828,18 +1839,17 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean hasPowerForSession(obj_id station) throws InterruptedException
     {
         if (isIdValid(station))
         {
             int powerInStation = getStationPowerAmount(station);
-            if (powerInStation >= POWER_PER_SESSION)
-            {
-                return true;
-            }
+            return powerInStation >= POWER_PER_SESSION;
         }
         return false;
     }
+
     public static boolean decrementPowerForSession(obj_id station) throws InterruptedException
     {
         if (isIdValid(station))
@@ -1855,7 +1865,7 @@ public class incubator extends script.base_script
                 removeObjVar(station, BASE_INCUBATOR_POWER_OBJVAR);
                 return true;
             }
-            else 
+            else
             {
                 setObjVar(station, RESOURCE_POWER_AMOUNT, powerAmount);
                 return true;
@@ -1863,6 +1873,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean addPowerPreCheck(obj_id station, obj_id player, int amount, String resourceName) throws InterruptedException
     {
         if (isIdValid(station) && isIdValid(player))
@@ -1889,12 +1900,12 @@ public class incubator extends script.base_script
                     sendSystemMessage(player, RESOURCE_POWER_AMOUNT_FULL);
                     return false;
                 }
-                else 
+                else
                 {
                     return true;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, RESOURCE_TYPE_MISMATCH);
                 return false;
@@ -1902,6 +1913,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static float getIncubatorDnaQuality(obj_id station) throws InterruptedException
     {
         if (hasObjVar(station, STATION_DNA_QUALITY))
@@ -1910,6 +1922,7 @@ public class incubator extends script.base_script
         }
         return MIN_QUALITY_RANGE;
     }
+
     public static boolean convertPcdIntoPetItem(obj_id player, obj_id pcd) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -1929,7 +1942,7 @@ public class incubator extends script.base_script
                 sendSystemMessage(player, SID_REPORT_PET_NOT_CONVERTING);
                 return false;
             }
-            else 
+            else
             {
                 dictionary dict = dataTableGetRow(create.CREATURE_TABLE, row);
                 pcdAppearance = dict.getString("template");
@@ -1978,7 +1991,7 @@ public class incubator extends script.base_script
         if (copyObjVar(pcd, convertedPetItem, "ai"))
         {
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "pcd (" + pcd + ")" + " was NOT converted into a stuffed pet, for player " + getFirstName(player) + "(" + player + "). This is because we had an invalid objvar (ai) transfer.");
             return false;
@@ -1986,7 +1999,7 @@ public class incubator extends script.base_script
         if (copyObjVar(pcd, convertedPetItem, "pet"))
         {
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "pcd (" + pcd + ")" + " was NOT converted into a stuffed pet, for player " + getFirstName(player) + "(" + player + "). This is because we had an invalid objvar (pet) transfer.");
             return false;
@@ -2003,7 +2016,7 @@ public class incubator extends script.base_script
             hue.setColor(convertedPetItem, hue.INDEX_1, hueColor);
             setObjVar(convertedPetItem, DNA_HUE_OLD_PET, hueColor);
         }
-        else 
+        else
         {
             row = dataTableSearchColumnForString(parentTemplate, "creatureName", create.CREATURE_TABLE);
             if (row >= 0)
@@ -2048,6 +2061,7 @@ public class incubator extends script.base_script
         CustomerServiceLog("BeastPetConversion: ", "Old Pcd (" + pcd + ")" + " is about to be destroyed. New Pet Decoration item (" + convertedPetItem + ") has been placed in thier inventory, complete with all the necessary data.");
         return true;
     }
+
     public static boolean convertDeedIntoPetItem(obj_id player, obj_id deed) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -2082,6 +2096,7 @@ public class incubator extends script.base_script
         }
         return true;
     }
+
     public static boolean convertPetItemToDna(obj_id player, obj_id petItem) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2108,7 +2123,7 @@ public class incubator extends script.base_script
         if (copyObjVar(petItem, dnaContainer, "ai"))
         {
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was not converted into a dna object, for player " + getFirstName(player) + "(" + player + "). This is because we had an invalid objvar (ai) transfer.");
             destroyObject(dnaContainer);
@@ -2117,7 +2132,7 @@ public class incubator extends script.base_script
         if (copyObjVar(petItem, dnaContainer, "pet"))
         {
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was NOT converted into a dna object, for player " + getFirstName(player) + "(" + player + "). This is because we had an invalid objvar (pet) transfer.");
             destroyObject(dnaContainer);
@@ -2131,7 +2146,7 @@ public class incubator extends script.base_script
                 setObjVar(dnaContainer, DNA_PARENT_TEMPLATE_NAME, name);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was NOT converted into a dna object, for player " + getFirstName(player) + "(" + player + "). This is because we had an invalid objvar (beast) transfer.");
             destroyObject(dnaContainer);
@@ -2144,6 +2159,7 @@ public class incubator extends script.base_script
         CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was converted into a dna object" + dnaContainer + "), for player " + getFirstName(player) + "(" + player + "). All data has been transfered, and we will now destroy the PetItem(" + petItem + ")");
         return true;
     }
+
     public static String convertHashTemplateToString(int hashTemplate, obj_id station) throws InterruptedException
     {
         if (hashTemplate == 0)
@@ -2183,12 +2199,12 @@ public class incubator extends script.base_script
             {
                 template = dataTableGetString(DATATABLE_INCUBATOR_TEMPLATES, row, "mutated_template_" + lastMutatedSession);
             }
-            else 
+            else
             {
                 template = dataTableGetString(DATATABLE_INCUBATOR_TEMPLATES, row, "mutated_template_" + (lastMutatedSession + 1));
             }
         }
-        else 
+        else
         {
             blog("INCUBATOR", "convertHashTemplateToString no mutation yet");
             row = dataTableSearchColumnForInt(hashTemplate, "hash_initial_template", DATATABLE_INCUBATOR_TEMPLATES);
@@ -2203,6 +2219,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "convertHashTemplateToString returning " + template);
         return template;
     }
+
     public static int convertStringTemplateToCrC(String strTemplate) throws InterruptedException
     {
         if (strTemplate == null || strTemplate.equals(""))
@@ -2225,6 +2242,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "convertStringTemplateToCrC returning " + crcTemplate);
         return crcTemplate;
     }
+
     public static int getHashType(String beastType) throws InterruptedException
     {
         int hashType = 0;
@@ -2246,6 +2264,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "getHashType returning " + hashType);
         return hashType;
     }
+
     public static String convertHashTypeToString(int hashType) throws InterruptedException
     {
         if (hashType == 0)
@@ -2267,6 +2286,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "convertHashTypeToString returning " + beastType);
         return beastType;
     }
+
     public static void blog(String identifier, String text) throws InterruptedException
     {
         if (LOGGING_ENABLED)
@@ -2274,6 +2294,7 @@ public class incubator extends script.base_script
             LOG(identifier, text);
         }
     }
+
     public static boolean isEggMountType(obj_id egg) throws InterruptedException
     {
         int hashBeastType = 0;
@@ -2281,18 +2302,15 @@ public class incubator extends script.base_script
         {
             hashBeastType = getIntObjVar(egg, beast_lib.OBJVAR_BEAST_TYPE);
         }
-        else 
+        else
         {
             return false;
         }
         int row = dataTableSearchColumnForInt(hashBeastType, "hashBeastType", beast_lib.BEASTS_TABLE);
         String mountTemplate = dataTableGetString(beast_lib.BEASTS_TABLE, row, "mountTemplate");
-        if (mountTemplate == null || mountTemplate.equals(""))
-        {
-            return false;
-        }
-        return true;
+        return mountTemplate != null && !mountTemplate.equals("");
     }
+
     public static String getMountTemplate(obj_id egg, obj_id player) throws InterruptedException
     {
         int hashBeastType = 0;
@@ -2300,7 +2318,7 @@ public class incubator extends script.base_script
         {
             hashBeastType = getIntObjVar(egg, beast_lib.OBJVAR_BEAST_TYPE);
         }
-        else 
+        else
         {
             return "";
         }
@@ -2308,6 +2326,7 @@ public class incubator extends script.base_script
         String mountTemplate = dataTableGetString(beast_lib.BEASTS_TABLE, row, "mountTemplate");
         return mountTemplate;
     }
+
     public static boolean stampEggAsMount(obj_id egg, obj_id player) throws InterruptedException
     {
         if (!isIdValid(egg) || !exists(egg))
@@ -2325,6 +2344,7 @@ public class incubator extends script.base_script
         setObjVar(egg, beast_lib.OBJVAR_BEAST_MOUNT_FLAG, 1);
         return true;
     }
+
     public static obj_id convertEggToMount(obj_id egg, obj_id player) throws InterruptedException
     {
         String mountType = getMountTemplate(egg, player);
@@ -2373,6 +2393,7 @@ public class incubator extends script.base_script
         sendSystemMessage(player, pet_lib.SID_SYS_TOO_MANY_STORED_PETS);
         return obj_id.NULL_ID;
     }
+
     public static void setUpPetControlDevice(obj_id petControlDevice, String petType, obj_id egg) throws InterruptedException
     {
         setObjVar(petControlDevice, "pet.creatureName", petType);
@@ -2393,8 +2414,8 @@ public class incubator extends script.base_script
         }
         setBeastTypeToName(egg, petControlDevice);
         setObjVar(petControlDevice, beast_lib.OBJVAR_OLD_PET_IDENTIFIER, 1);
-        return;
     }
+
     public static boolean setBeastTypeToName(obj_id egg, obj_id pcd) throws InterruptedException
     {
         if (hasObjVar(egg, beast_lib.OBJVAR_BEAST_TYPE))
@@ -2408,6 +2429,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static boolean giveMutationAttributeBonus(obj_id station, obj_id player, float[] attributesUpdateAmount, String[] attributes) throws InterruptedException
     {
         if (!isValidId(station) || !exists(station))
@@ -2435,7 +2457,7 @@ public class incubator extends script.base_script
         {
             attrib = attributesUpdateAmount[index] * 0.2f;
         }
-        else 
+        else
         {
             attrib = attributesUpdateAmount[index] * 0.1f;
         }
@@ -2451,6 +2473,7 @@ public class incubator extends script.base_script
         CustomerServiceLog("incubatorMutationLog: ", "Player '" + getPlayerName(player) + "' (" + player + ") received a Type 1 mutation. This type of mutation gives a bonuse to stats. They received " + bonusAmt + " points to " + attributes[index] + ".");
         return true;
     }
+
     public static String getCreatureTypeFromHashTemplate(obj_id station) throws InterruptedException
     {
         if (!isValidId(station) || !exists(station))
@@ -2469,14 +2492,12 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "creatureName = " + creatureName);
         return creatureName;
     }
+
     public static boolean isConvertedPet(obj_id item) throws InterruptedException
     {
-        if (hasObjVar(item, DNA_OLD_PET_IDENTIFIER) || hasObjVar(item, STATION_DNA_OLD_PET_IDENTIFIER))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(item, DNA_OLD_PET_IDENTIFIER) || hasObjVar(item, STATION_DNA_OLD_PET_IDENTIFIER);
     }
+
     public static boolean fixDnaData(obj_id dna, obj_id player) throws InterruptedException
     {
         if (hasObjVar(dna, DNA_TEMPLATE_OBJVAR))
@@ -2489,6 +2510,7 @@ public class incubator extends script.base_script
         }
         return false;
     }
+
     public static String getCurrentSessionParticleLabelName(obj_id station) throws InterruptedException
     {
         int currentSession = getCurrentSessionNumber(station);
@@ -2496,26 +2518,27 @@ public class incubator extends script.base_script
         switch (currentSession)
         {
             case 1:
-            sessionLabel = PARTICLE_LABEL_DEFAULT;
-            break;
+                sessionLabel = PARTICLE_LABEL_DEFAULT;
+                break;
             case 2:
-            sessionLabel = PARTICLE_LABEL_PHASE_ONE;
-            break;
+                sessionLabel = PARTICLE_LABEL_PHASE_ONE;
+                break;
             case 3:
-            sessionLabel = PARTICLE_LABEL_PHASE_TWO;
-            break;
+                sessionLabel = PARTICLE_LABEL_PHASE_TWO;
+                break;
             case 4:
-            sessionLabel = PARTICLE_LABEL_PHASE_THREE;
-            break;
+                sessionLabel = PARTICLE_LABEL_PHASE_THREE;
+                break;
             case 5:
-            sessionLabel = PARTICLE_LABEL_PHASE_FOUR;
-            break;
+                sessionLabel = PARTICLE_LABEL_PHASE_FOUR;
+                break;
             default:
-            sessionLabel = PARTICLE_LABEL_DEFAULT;
-            break;
+                sessionLabel = PARTICLE_LABEL_DEFAULT;
+                break;
         }
         return sessionLabel;
     }
+
     public static String advanceParticleLabelName(String labelName) throws InterruptedException
     {
         String sessionLabel = null;
@@ -2544,6 +2567,7 @@ public class incubator extends script.base_script
         }
         return sessionLabel;
     }
+
     public static String getCurrentSessionParticle(obj_id station) throws InterruptedException
     {
         int currentSession = getCurrentSessionNumber(station);
@@ -2551,26 +2575,27 @@ public class incubator extends script.base_script
         switch (currentSession)
         {
             case 1:
-            sessionParticle = PARTICLE_DEFAULT;
-            break;
+                sessionParticle = PARTICLE_DEFAULT;
+                break;
             case 2:
-            sessionParticle = PARTICLE_PHASE_ONE;
-            break;
+                sessionParticle = PARTICLE_PHASE_ONE;
+                break;
             case 3:
-            sessionParticle = PARTICLE_PHASE_TWO;
-            break;
+                sessionParticle = PARTICLE_PHASE_TWO;
+                break;
             case 4:
-            sessionParticle = PARTICLE_PHASE_THREE;
-            break;
+                sessionParticle = PARTICLE_PHASE_THREE;
+                break;
             case 5:
-            sessionParticle = PARTICLE_PHASE_FOUR;
-            break;
+                sessionParticle = PARTICLE_PHASE_FOUR;
+                break;
             default:
-            sessionParticle = PARTICLE_DEFAULT;
-            break;
+                sessionParticle = PARTICLE_DEFAULT;
+                break;
         }
         return sessionParticle;
     }
+
     public static String getCurrentSessionParticle(String labelName) throws InterruptedException
     {
         String sessionParticle = null;
@@ -2599,6 +2624,7 @@ public class incubator extends script.base_script
         }
         return sessionParticle;
     }
+
     public static String getCurrentParticleHardpoint(String sessionParticle) throws InterruptedException
     {
         String hardPoint = null;
@@ -2627,6 +2653,7 @@ public class incubator extends script.base_script
         }
         return hardPoint;
     }
+
     public static void advanceSessionParticle(obj_id station) throws InterruptedException
     {
         if (!isValidId(station))
@@ -2646,8 +2673,8 @@ public class incubator extends script.base_script
                 playClientEffectObj(station, sessionParticle, station, hardPoint, null, newLabel);
             }
         }
-        return;
     }
+
     public static void stopAllSessionParticles(obj_id station) throws InterruptedException
     {
         stopClientEffectObjByLabel(station, PARTICLE_LABEL_DEFAULT);
@@ -2655,20 +2682,17 @@ public class incubator extends script.base_script
         stopClientEffectObjByLabel(station, PARTICLE_LABEL_PHASE_TWO);
         stopClientEffectObjByLabel(station, PARTICLE_LABEL_PHASE_THREE);
         stopClientEffectObjByLabel(station, PARTICLE_LABEL_PHASE_FOUR);
-        return;
     }
+
     public static boolean isEggMountFlagged(obj_id egg) throws InterruptedException
     {
         if (!isIdValid(egg) || !exists(egg))
         {
             return false;
         }
-        if (hasObjVar(egg, beast_lib.OBJVAR_BEAST_MOUNT_FLAG))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(egg, beast_lib.OBJVAR_BEAST_MOUNT_FLAG);
     }
+
     public static boolean giveMutationSkillBonus(obj_id station, obj_id player, int[] skillArray, String newTemplate) throws InterruptedException
     {
         blog("INCUBATOR_SKILLS", "giveMutationSkillBonus::start");
@@ -2692,21 +2716,19 @@ public class incubator extends script.base_script
         CustomerServiceLog("incubatorMutationLog: ", "Player '" + getPlayerName(player) + "' (" + player + ") received a template mutation. This type of mutation gives a bonus of " + MUTATION_SKILL_BONUS_AMT + " to all skills and a template appearance change. They now have the template of " + newTemplate + " in their incubator.");
         return true;
     }
+
     public static boolean setEggHue(obj_id egg) throws InterruptedException
     {
         return setEggHue(egg, obj_id.NULL_ID);
     }
+
     public static boolean setEggHue(obj_id egg, obj_id player) throws InterruptedException
     {
         if (!exists(egg) || !isIdValid(egg))
         {
             return false;
         }
-        boolean hasPlayerId = false;
-        if (isIdValid(player))
-        {
-            hasPlayerId = true;
-        }
+        boolean hasPlayerId = isIdValid(player);
         if (hasObjVar(egg, beast_lib.OBJVAR_BEAST_HUE))
         {
             int eggHue = getIntObjVar(egg, beast_lib.OBJVAR_BEAST_HUE);
@@ -2731,11 +2753,12 @@ public class incubator extends script.base_script
             hue.setColor(egg, "/private/index_color_1", eggHue);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static String getCreatureTypeFromHashTemplateDna(obj_id dna, int hashTemplate) throws InterruptedException
     {
         if (!isValidId(dna) || !exists(dna))
@@ -2753,6 +2776,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "creatureName = " + creatureName);
         return creatureName;
     }
+
     public static String convertHashTemplateToStringDna(int hashTemplate, obj_id dna) throws InterruptedException
     {
         if (hashTemplate == 0)
@@ -2780,6 +2804,7 @@ public class incubator extends script.base_script
         blog("INCUBATOR", "convertHashTemplateToString returning " + template);
         return template;
     }
+
     public static void awardEnzymeCollection(obj_id enzyme) throws InterruptedException
     {
         if (!isIdValid(enzyme) || !exists(enzyme))
@@ -2803,7 +2828,7 @@ public class incubator extends script.base_script
                 return;
             }
             removeObjVar(enzyme, "collection_enzyme");
-            int collectionSlot = (int)getCollectionSlotValue(player, ENZYME_COLLECTION_NAMES[color]);
+            int collectionSlot = (int) getCollectionSlotValue(player, ENZYME_COLLECTION_NAMES[color]);
             if (collectionSlot <= 0)
             {
                 boolean modified = modifyCollectionSlotValue(player, ENZYME_COLLECTION_NAMES[color], 1);

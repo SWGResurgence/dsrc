@@ -5,18 +5,20 @@ import script.obj_id;
 
 public class debug extends script.base_script
 {
-    public debug()
-    {
-    }
     public static final String VERSION = "v0.01.00";
     public static final String VAR_DEBUG_BASE = "debug";
     public static final String VAR_DICTIONARY_IN = "debug.dict.in";
     public static final String VAR_DICTIONARY_OUT = "debug.dict.out";
+    public debug()
+    {
+    }
+
     public static void debugAllMsg(String channelName, obj_id self, String message) throws InterruptedException
     {
         debugServerConsoleMsg(self, message);
         LOG(channelName, message);
     }
+
     public static void print(String msg) throws InterruptedException
     {
         if (msg == null || msg.equals(""))
@@ -25,11 +27,14 @@ public class debug extends script.base_script
         }
         debugServerConsoleMsg(getSelf(), msg);
     }
+
     public static void barkContents(obj_id self, obj_id[] contents) throws InterruptedException
     {
         String contentsMsg = "Contents: ";
-        for (obj_id content : contents) {
-            if (content != null) {
+        for (obj_id content : contents)
+        {
+            if (content != null)
+            {
                 contentsMsg += " [";
                 contentsMsg += content.toString();
                 contentsMsg += "]";
@@ -37,6 +42,7 @@ public class debug extends script.base_script
         }
         debugServerConsoleMsg(self, contentsMsg);
     }
+
     public static void barkBug(Object script, obj_id self, String msgText) throws InterruptedException
     {
         String msg = "in file: ";
@@ -45,19 +51,21 @@ public class debug extends script.base_script
         msg += msgText;
         debugServerConsoleMsg(self, msg);
     }
+
     public static String getDebugName(obj_id id) throws InterruptedException
     {
         if (id == null)
         {
-            return (String)("[debug.getDebugName] ERROR: id == null");
+            return "[debug.getDebugName] ERROR: id == null";
         }
         String name = base_class.getName(id);
         if (name == null)
         {
-            return (String)("invalid object id");
+            return "invalid object id";
         }
-        return (String)(base_class.getName(id) + " [" + id + "] ");
+        return base_class.getName(id) + " [" + id + "] ";
     }
+
     public static boolean fullHeal(obj_id target) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -74,6 +82,7 @@ public class debug extends script.base_script
         }
         return litmus;
     }
+
     public static boolean damageMob(obj_id target, int attrib, int amt) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -82,6 +91,7 @@ public class debug extends script.base_script
         }
         return healing.healDamage(target, attrib, -amt);
     }
+
     public static boolean heal(obj_id target, int attrib, int amt) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -90,22 +100,17 @@ public class debug extends script.base_script
         }
         return healing.healDamage(target, attrib, amt);
     }
+
     public static boolean woundMob(obj_id target, int attrib, int amt) throws InterruptedException
     {
-        if ((target == null) || (!isMob(target)))
-        {
-            return false;
-        }
-        return true;
+        return (target != null) && (isMob(target));
     }
+
     public static boolean healWounds(obj_id target) throws InterruptedException
     {
-        if ((target == null) || (!isMob(target)))
-        {
-            return false;
-        }
-        return true;
+        return (target != null) && (isMob(target));
     }
+
     public static boolean getShock(obj_id target) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -116,6 +121,7 @@ public class debug extends script.base_script
         debugSpeakMsg(target, "(" + getGameTime() + ") my shock wound value = " + shock);
         return true;
     }
+
     public static boolean addShock(obj_id target, int amt) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -128,6 +134,7 @@ public class debug extends script.base_script
         }
         return false;
     }
+
     public static boolean healShock(obj_id target, int amt) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -140,6 +147,7 @@ public class debug extends script.base_script
         }
         return false;
     }
+
     public static boolean zeroShock(obj_id target) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -152,6 +160,7 @@ public class debug extends script.base_script
         }
         return false;
     }
+
     public static boolean incapacitateMob(obj_id target) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)))
@@ -167,6 +176,7 @@ public class debug extends script.base_script
         damage(target, 0, 0, dam * 10);
         return litmus;
     }
+
     public static boolean killCreature(obj_id target) throws InterruptedException
     {
         if ((target == null) || (!isMob(target)) || (isPlayer(target)))
@@ -179,6 +189,7 @@ public class debug extends script.base_script
         }
         return false;
     }
+
     public static void forceSuicide(obj_id target) throws InterruptedException
     {
         if ((target == null) || (target == obj_id.NULL_ID))
@@ -187,6 +198,7 @@ public class debug extends script.base_script
         }
         suicide(target);
     }
+
     public static void suicide(obj_id self) throws InterruptedException
     {
         pclib.killPlayer(self, self);

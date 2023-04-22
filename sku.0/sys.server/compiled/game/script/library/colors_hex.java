@@ -2,9 +2,6 @@ package script.library;
 
 public class colors_hex extends script.base_script
 {
-    public colors_hex()
-    {
-    }
     public static final String HEADER = "\\#";
     public static final String BLACK = "000000";
     public static final String COLOR_REBELS = "D93311";
@@ -142,162 +139,205 @@ public class colors_hex extends script.base_script
     public static final String GOLD = "CD7F32";
     public static final String SILVER = "E6E8FA";
     public static final String FOOTER = "\\#.";
+    public colors_hex()
+    {
+    }
+
     public static String White(String source)
     {
         return HEADER + WHITE + source;
     }
+
     public static String Gold(String source)
     {
         return HEADER + GOLD + source;
     }
+
     public static String Silver(String source)
     {
         return HEADER + SILVER + source;
     }
+
     public static String Copper(String source)
     {
         return HEADER + COPPER + source;
     }
+
     public static String Yellow(String source)
     {
         return HEADER + YELLOW + source;
     }
+
     public static String Moccasin(String source)
     {
         return HEADER + MOCCASIN + source;
     }
+
     public static String GoldenRod(String source)
     {
         return HEADER + GOLDENROD + source;
     }
+
     public static String GoldYellow(String source)
     {
         return HEADER + GOLDYELLOW + source;
     }
+
     public static String CornSilk(String source)
     {
         return HEADER + CORNSILK + source;
     }
+
     public static String PapayaWhip(String source)
     {
         return HEADER + PAPAYAWHIP + source;
     }
+
     public static String PaleGoldenRod(String source)
     {
         return HEADER + PALEGOLDENROD + source;
     }
+
     public static String LightYellow(String source)
     {
         return HEADER + LIGHTYELLOW + source;
     }
+
     public static String LightGoldenRodYellow(String source)
     {
         return HEADER + LIGHTGOLDENRODYELLOW + source;
     }
+
     public static String LightGoldenRod(String source)
     {
         return HEADER + LIGHTGOLDENROD + source;
     }
+
     public static String LemonChiffon(String source)
     {
         return HEADER + LEMONCHIFFON + source;
     }
+
     public static String DarkGoldenRod(String source)
     {
         return HEADER + DARKGOLDENROD + source;
     }
+
     public static String BlanchedAlmond(String source)
     {
         return HEADER + BLANCHEDALMOND + source;
     }
+
     public static String Default(String source)
     {
         return HEADER + WHITE + source;
     }
+
     public static String Wheat(String source)
     {
         return HEADER + WHEAT + source;
     }
+
     public static String Snow(String source)
     {
         return HEADER + SNOW + source;
     }
+
     public static String SeaShell(String source)
     {
         return HEADER + SEASHELL + source;
     }
+
     public static String Linen(String source)
     {
         return HEADER + LINEN + source;
     }
+
     public static String Ivory(String source)
     {
         return HEADER + IVORY + source;
     }
+
     public static String Gainsboro(String source)
     {
         return HEADER + GAINSBORO + source;
     }
+
     public static String WhiteSmoke(String source)
     {
         return HEADER + WHITESMOKE + source;
     }
+
     public static String OldLace(String source)
     {
         return HEADER + OLDLACE + source;
     }
+
     public static String NavajoWhite(String source)
     {
         return HEADER + NAVAJOWHITE + source;
     }
+
     public static String GhostWhite(String source)
     {
         return HEADER + GHOSTWHITE + source;
     }
+
     public static String FloralWhite(String source)
     {
         return HEADER + FLORALWHITE + source;
     }
+
     public static String AntiqueWhite(String source)
     {
         return HEADER + ANTIQUEWHITE + source;
     }
+
     public static String Violet(String source)
     {
         return HEADER + VIOLET + source;
     }
+
     public static String Thistle(String source)
     {
         return HEADER + THISTLE + source;
     }
+
     public static String Purple(String source)
     {
         return HEADER + PURPLE + source;
     }
+
     public static String Plum(String source)
     {
         return HEADER + PLUM + source;
     }
+
     public static String Orchid(String source)
     {
         return HEADER + ORCHID + source;
     }
+
     public static String MediumOrchid(String source)
     {
         return HEADER + MEDIUMORCHID + source;
     }
+
     public static String MediumPurple(String source)
     {
         return HEADER + MEDIUMPURPLE + source;
     }
+
     public static String BlueViolet(String source)
     {
         return HEADER + BLUEVIOLET + source;
     }
+
     public static String DarkViolet(String source)
     {
         return HEADER + DARKVIOLET + source;
     }
+
     public static String DarkOrchid(String source)
     {
         return HEADER + DARKORCHID + source;

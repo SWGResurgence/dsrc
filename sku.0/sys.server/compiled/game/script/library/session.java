@@ -4,9 +4,6 @@ import script.obj_id;
 
 public class session extends script.base_script
 {
-    public session()
-    {
-    }
     public static final int ACTIVITY_NONE = 0;
     public static final int ACTIVITY_PVE = 1;
     public static final int ACTIVITY_PVP = 2;
@@ -23,6 +20,10 @@ public class session extends script.base_script
     public static final int ACTIVITY_ACCESS_FACTORY = 4096;
     public static final int ACTIVITY_ACCESS_STRUCTURE = 8192;
     public static final int ACTIVITY_FISHING = 16384;
+    public session()
+    {
+    }
+
     public static void logActivity(obj_id player, int activityType) throws InterruptedException
     {
         _logActivity(player, activityType);

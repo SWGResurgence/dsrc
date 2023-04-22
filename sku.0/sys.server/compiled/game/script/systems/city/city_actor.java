@@ -13,7 +13,6 @@ public class city_actor extends script.base_script
 
     public int OnAttach(obj_id self)
     {
-        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setName(self, "Bio-logical Display Matrix");
         setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked or engaged."));
@@ -22,7 +21,6 @@ public class city_actor extends script.base_script
 
     public int OnInitialize(obj_id self)
     {
-        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked or engaged."));
         return SCRIPT_CONTINUE;
@@ -222,7 +220,7 @@ public class city_actor extends script.base_script
         String barkmsg = getStringObjVar(self, "bark.msg");
         Float time = getFloatObjVar(self, "bark.timer");
         chat.chat(self, barkmsg);
-        messageTo(self, "bark", null, time, true);
+        messageTo(self, "bark", null, time, false);
     }
 
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
@@ -234,11 +232,11 @@ public class city_actor extends script.base_script
         {
             return true;
         }
-        if (city.isMilitiaOfCity(player, city_id))
+        else if (city.isMilitiaOfCity(player, city_id))
         {
             return true;
         }
-        if (isMayor)
+        else if (isMayor)
         {
             return true;
         }
