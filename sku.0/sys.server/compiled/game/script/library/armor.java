@@ -60,7 +60,6 @@ public class armor extends script.base_script
                     SPECIAL_PROTECTION_PREFIX + "stun",
                     SPECIAL_PROTECTION_PREFIX + "lightsaber"
             };
-    public static final Map SPECIAL_PROTECTION_MAP = collections.newMap(DATATABLE_SPECIAL_PROTECTIONS, SID_SPECIAL_PROTECTIONS);
     public static final String ARMOR_PENALTY_PREFIX = "cat_armor_penalty.armor_penalty_";
     public static final String RAW_ARMOR_PENALTY_PREFIX = "cat_armor_penalty_raw.armor_penalty_";
     public static final String[] SID_ARMOR_PENALTIES =
@@ -260,6 +259,7 @@ public class armor extends script.base_script
     public static final string_id SID_CONVERT_CONVERT_FAIL = new string_id("spam", "armor_to_schem_failure");
     public static final string_id SID_CONVERT_CONVERT_SUCCESS = new string_id("spam", "armor_to_schem_success");
     public static final string_id SID_CONVERT_INVALID_RESPONSE = new string_id("spam", "armor_to_schem_invalid_response");
+    public static final Map SPECIAL_PROTECTION_MAP = collections.newMap(DATATABLE_SPECIAL_PROTECTIONS, SID_SPECIAL_PROTECTIONS);
     public armor()
     {
     }
