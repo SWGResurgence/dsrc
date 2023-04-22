@@ -14,6 +14,7 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class resurgence extends script.base_script
 {
@@ -39,14 +40,14 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void sendToOrigin(obj_id self) throws InterruptedException
+    public static void sendToOrigin(obj_id self)
     {
         location loc = getLocation(self);
         obj_id planet = getPlanetByName(loc.area);
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
     }
 
-    public static void listAllPumpkins(obj_id self) throws InterruptedException
+    public static void listAllPumpkins(obj_id self)
     {
         obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(self), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
         if (allPumpkins == null || allPumpkins.length == 0)
@@ -60,7 +61,7 @@ public class resurgence extends script.base_script
         }
     }
 
-    public static int moveAllPlayers(obj_id self, dictionary params) throws InterruptedException
+    public static int moveAllPlayers(obj_id self, dictionary params)
     {
         String planet = params.getString("planet");
         float x = params.getFloat("x");
@@ -79,7 +80,7 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle) throws InterruptedException
+    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle)
     {
 
         location loc = getLocation(target);
@@ -96,7 +97,7 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void renameItems(obj_id self, obj_id target, String name) throws InterruptedException
+    public static void renameItems(obj_id self, obj_id target, String name)
     {
         obj_id[] items = getInventoryAndEquipment(target);
         if (items == null || items.length == 0)
@@ -108,22 +109,6 @@ public class resurgence extends script.base_script
         {
             setName(item, name);
         }
-    }
-
-    public static void applyGMNameTag(obj_id self, obj_id target) throws InterruptedException
-    {
-        if (!isIdValid(target) || !exists(target))
-        {
-            debugServerConsoleMsg(self, "applyGMNameTag() - target is not a valid object.");
-        }
-        if (!isPlayer(target))
-        {
-            debugServerConsoleMsg(self, "applyGMNameTag() - target is not a player.");
-        }
-        String name = getName(target);
-        String gmName = name + " *GM*";
-        setName(target, gmName);
-        debugServerConsoleMsg(self, "applyGMNameTag() - GM filter tag applied.");
     }
 
     public static void createCreatureGrid(obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException
@@ -159,38 +144,58 @@ public class resurgence extends script.base_script
         }
     }
 
-    public static void setRainbowName(obj_id self, obj_id target) throws InterruptedException
+    public static String setRainbowName(obj_id target) throws InterruptedException
     {
         String name = getName(target);
-        debugServerConsoleMsg(self, "setRainbowName(" + name + ") - rainbow name applied.");
+        String rainbowName = "";
+        for (int i = 0; i < name.length(); i++)
+        {
+            Random obj = new Random();
+            int rand_num = obj.nextInt(0xffffff + 1);
+            rainbowName += "\\#" + rand_num  + name.charAt(i);
+        }
+        return rainbowName;
     }
 
-    public static void relax(obj_id self, obj_id target) throws InterruptedException
+    public static void relax(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
         {
-            debugServerConsoleMsg(self, "relax() - target is not a valid object.");
+            debugServerConsoleMsg(target, "relax() - target is not a valid object.");
         }
         if (!isPlayer(target))
         {
-            debugServerConsoleMsg(self, "relax() - target is not a player.");
+            debugServerConsoleMsg(target, "relax() - target is not a player.");
         }
         setPosture(target, POSTURE_SITTING);
-        debugServerConsoleMsg(self, "relax() - player relaxed.");
+        debugServerConsoleMsg(target, "relax() - player relaxed.");
     }
 
-    public static void suspicious(obj_id self, obj_id target) throws InterruptedException
+    public static void suspicious(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
         {
-            debugServerConsoleMsg(self, "suspicious() - target is not a valid object.");
+            debugServerConsoleMsg(target, "suspicious() - target is not a valid object.");
         }
         if (!isPlayer(target))
         {
-            debugServerConsoleMsg(self, "suspicious() - target is not a player.");
+            debugServerConsoleMsg(target, "suspicious() - target is not a player.");
         }
         setPosture(target, POSTURE_CROUCHED);
-        debugServerConsoleMsg(self, "suspicious() - player is now suspicious.");
+        debugServerConsoleMsg(target, "suspicious() - player is now suspicious.");
+    }
+    public static void sneak(obj_id target) throws InterruptedException
+    {
+        if (!isIdValid(target) || !exists(target))
+        {
+            debugServerConsoleMsg(target, "sneak() - target is not a valid object.");
+        }
+        if (!isPlayer(target))
+        {
+            debugServerConsoleMsg(target, "sneak() - target is not a player.");
+        }
+        setPosture(target, POSTURE_SNEAKING);
+        debugServerConsoleMsg(target, "sneak() - player is now suspicious.");
     }
 
     public static void bankruptPlayer(obj_id self, obj_id target) throws InterruptedException
@@ -591,7 +596,7 @@ public class resurgence extends script.base_script
             String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: \n" + toUpper(attackerList[0], 0);
             for (int i = 1; i < attackerList.length; i++)
             {
-                msg += "\n" + toUpper(attackerList[i], 0) + "";
+                msg += "\n" + toUpper(attackerList[i], 0);
             }
             msg += "\n\nCongratulations to all!";
             notifyGalacticFeed(msg);
@@ -601,5 +606,21 @@ public class resurgence extends script.base_script
     public int downloadCharacterData(obj_id avatar)
     {
         return SCRIPT_CONTINUE;
+    }
+
+    public void doClientEffect(obj_id[] players, String clientEffect) throws InterruptedException
+    {
+        for (obj_id player : players)
+        {
+            playClientEffectObj(player, clientEffect, player, "");
+        }
+    }
+
+    public void doParticleEffect(obj_id[] players, String particleEffect) throws InterruptedException
+    {
+        for (obj_id player : players)
+        {
+            playClientEffectObj(player, particleEffect, player, "");
+        }
     }
 }
