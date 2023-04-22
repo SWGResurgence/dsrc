@@ -220,7 +220,7 @@ public class city_actor extends script.base_script
         String barkmsg = getStringObjVar(self, "bark.msg");
         Float time = getFloatObjVar(self, "bark.timer");
         chat.chat(self, barkmsg);
-        messageTo(self, "bark", null, time, true);
+        messageTo(self, "bark", null, time, false);
     }
 
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
