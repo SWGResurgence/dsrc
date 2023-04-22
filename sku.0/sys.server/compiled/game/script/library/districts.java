@@ -6,9 +6,6 @@ import script.string_id;
 
 public class districts extends script.base_script
 {
-    public districts()
-    {
-    }
     public static final int DISTRICT_SIZE = 256;
     public static final int PLANET_X_MIN = -8192;
     public static final int PLANET_Z_MIN = -8192;
@@ -29,6 +26,10 @@ public class districts extends script.base_script
     public static final String VAR_PLANET_DISTRICT_REGISTER = "districts.register";
     public static final String VAR_PLANET_DISTRICT_OBJ_IDS = "districts.obj_ids";
     public static final String SCRIPT_CITIES_PLANET = "systems.player_run_cities.planet";
+    public districts()
+    {
+    }
+
     public static int calculateDistrictNumber(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -39,11 +40,12 @@ public class districts extends script.base_script
         {
             return -1;
         }
-        int gridColumn = (int)(loc.x / DISTRICT_SIZE);
-        int gridRow = (int)(loc.z / DISTRICT_SIZE);
+        int gridColumn = (int) (loc.x / DISTRICT_SIZE);
+        int gridRow = (int) (loc.z / DISTRICT_SIZE);
         int districtNumber = (gridRow * PLANET_DISTRICT_WIDTH) + gridColumn;
         return districtNumber;
     }
+
     public static location calculateDistrictCoordinate(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -54,13 +56,14 @@ public class districts extends script.base_script
         {
             return null;
         }
-        int gridColumn = (int)(loc.x / DISTRICT_SIZE);
-        int gridRow = (int)(loc.z / DISTRICT_SIZE);
+        int gridColumn = (int) (loc.x / DISTRICT_SIZE);
+        int gridRow = (int) (loc.z / DISTRICT_SIZE);
         location retLoc = new location();
         retLoc.x = gridColumn * DISTRICT_SIZE;
         retLoc.z = gridRow * DISTRICT_SIZE;
         return retLoc;
     }
+
     public static location calculateDistrictCoordinate(int districtId) throws InterruptedException
     {
         if (districtId < 0)
@@ -74,6 +77,7 @@ public class districts extends script.base_script
         retLoc.z = gridRow * DISTRICT_SIZE;
         return retLoc;
     }
+
     public static boolean registerDistrictWithPlanet(region district) throws InterruptedException
     {
         return true;

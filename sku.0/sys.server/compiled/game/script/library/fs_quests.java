@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class fs_quests extends script.base_script
 {
-    public fs_quests()
-    {
-    }
     public static final String DATATABLE_SKILL_BRANCH = "datatables/quest/force_sensitive/skill_branch.iff";
     public static final String VAR_BRANCHES_UNLOCKED = "fs_quest.branches_unlocked";
     public static final String VAR_FREE_UNLOCK_USED = "fs_quest.free_unlock_used";
@@ -26,14 +23,18 @@ public class fs_quests extends script.base_script
     public static final String SCRIPT_VAR_REMOVE_TASK_PLAYER = "fs_quest.remove_task_player";
     public static final String SCRIPT_VAR_UNLOCK_BRANCH_SUI = "fs_quest.unlock_branch_sui";
     public static final String SCRIPT_VAR_UNLOCK_BRANCH_PLAYER = "fs_quest.unlock_branch_player";
+    public fs_quests()
+    {
+    }
+
     public static void badgeLeadin(obj_id player) throws InterruptedException
     {
         int randomNumber = rand(1, 250);
         if (randomNumber == 250)
         {
         }
-        return;
     }
+
     public static void setDelay(obj_id player, int stage) throws InterruptedException
     {
         setObjVar(player, "fs_timestamp", getGameTime());
@@ -42,7 +43,7 @@ public class fs_quests extends script.base_script
         switch (stage)
         {
             case 0:
-            
+
             {
                 fs_quests.advanceStage(player);
                 String config = getConfigSetting("GameServer", "forceSensitiveIntroDelayFloor");
@@ -88,7 +89,7 @@ public class fs_quests extends script.base_script
                 break;
             }
             case 3:
-            
+
             {
                 String config = getConfigSetting("GameServer", "forceSensitiveIntroDelayFloor");
                 int delayFloor = utils.stringToInt(config);
@@ -106,29 +107,27 @@ public class fs_quests extends script.base_script
                 break;
             }
             case 13:
-            randomTimeDelay = rand(15600, 86400);
-            break;
+                randomTimeDelay = rand(15600, 86400);
+                break;
             default:
-            break;
+                break;
         }
         setObjVar(player, "fs_delay", randomTimeDelay);
-        return;
     }
+
     public static boolean checkDelay(obj_id player) throws InterruptedException
     {
         int currentTime = getGameTime();
         int startTime = getIntObjVar(player, "fs_timestamp");
         int delayTime = getIntObjVar(player, "fs_delay");
-        if (currentTime > (startTime + delayTime))
-        {
-            return true;
-        }
-        return false;
+        return currentTime > (startTime + delayTime);
     }
+
     public static boolean isVillageEligible(obj_id player) throws InterruptedException
     {
         return false;
     }
+
     public static boolean makeVillageEligible(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -140,6 +139,7 @@ public class fs_quests extends script.base_script
         setObjVar(player, VAR_VILLAGE_ELIGIBLE, 1);
         return true;
     }
+
     public static boolean isEndQuestEligible(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -149,6 +149,7 @@ public class fs_quests extends script.base_script
         }
         return hasObjVar(player, VAR_VILLAGE_COMPLETE);
     }
+
     public static int getBranchesLearned(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -170,6 +171,7 @@ public class fs_quests extends script.base_script
         }
         return learned_branches;
     }
+
     public static int getBranchId(String branch) throws InterruptedException
     {
         if (branch == null)
@@ -185,6 +187,7 @@ public class fs_quests extends script.base_script
         }
         return dataTableGetInt(DATATABLE_SKILL_BRANCH, index, "id");
     }
+
     public static String getBranchFromId(int id) throws InterruptedException
     {
         if (id < 0)
@@ -200,6 +203,7 @@ public class fs_quests extends script.base_script
         }
         return dataTableGetString(DATATABLE_SKILL_BRANCH, index, "branch");
     }
+
     public static String getBranchFromSkill(String skill) throws InterruptedException
     {
         if (skill == null)
@@ -215,6 +219,7 @@ public class fs_quests extends script.base_script
         }
         return dataTableGetString(DATATABLE_SKILL_BRANCH, index, "branch");
     }
+
     public static boolean hasUnlockedBranch(obj_id player, String branch) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -236,7 +241,7 @@ public class fs_quests extends script.base_script
         {
             branches_unlocked = getIntObjVar(player, VAR_BRANCHES_UNLOCKED);
         }
-        else 
+        else
         {
             return false;
         }
@@ -248,6 +253,7 @@ public class fs_quests extends script.base_script
         }
         return utils.checkBit(branches_unlocked, pos);
     }
+
     public static boolean hasUnlockedBranch(obj_id player, int id) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -260,12 +266,13 @@ public class fs_quests extends script.base_script
         {
             branches_unlocked = getIntObjVar(player, VAR_BRANCHES_UNLOCKED);
         }
-        else 
+        else
         {
             return false;
         }
         return utils.checkBit(branches_unlocked, id);
     }
+
     public static boolean unlockBranch(obj_id player, String branch) throws InterruptedException
     {
         int branches_unlocked = 0;
@@ -293,6 +300,7 @@ public class fs_quests extends script.base_script
         sendSystemMessageProse(player, pp);
         return true;
     }
+
     public static boolean setQuestAccepted(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -304,7 +312,7 @@ public class fs_quests extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             attachScript(player, "systems.fs_quest.fs_quest_player");
         }
@@ -313,6 +321,7 @@ public class fs_quests extends script.base_script
         sendSystemMessage(player, new string_id("quest/force_sensitive/utils", "quest_accepted"));
         return true;
     }
+
     public static boolean setQuestCompleted(obj_id player, String questName) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -329,7 +338,7 @@ public class fs_quests extends script.base_script
         {
             setQuestAccepted(player);
         }
-        else 
+        else
         {
             phase = getIntObjVar(player, VAR_QUEST_ACCEPTED);
         }
@@ -337,6 +346,7 @@ public class fs_quests extends script.base_script
         setObjVar(player, VAR_QUEST_COMPLETED, questName);
         return true;
     }
+
     public static boolean hasQuestCompleted(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -346,6 +356,7 @@ public class fs_quests extends script.base_script
         }
         return hasObjVar(player, VAR_QUEST_COMPLETED);
     }
+
     public static boolean hasQuestAccepted(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -355,6 +366,7 @@ public class fs_quests extends script.base_script
         }
         return hasObjVar(player, fs_quests.VAR_QUEST_ACCEPTED);
     }
+
     public static boolean hasFreeUnlockBranches(obj_id player) throws InterruptedException
     {
         if (hasJediSlot(player))
@@ -362,15 +374,9 @@ public class fs_quests extends script.base_script
             return false;
         }
         int free_unlock = getFreeUnlockBranches(player);
-        if (free_unlock > 0)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return free_unlock > 0;
     }
+
     public static int getFreeUnlockBranches(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -391,23 +397,23 @@ public class fs_quests extends script.base_script
         switch (skills_remaining)
         {
             case 0:
-            max_free_unlock = 6;
-            break;
+                max_free_unlock = 6;
+                break;
             case 1:
-            max_free_unlock = 5;
-            break;
+                max_free_unlock = 5;
+                break;
             case 2:
-            max_free_unlock = 4;
-            break;
+                max_free_unlock = 4;
+                break;
             case 3:
-            max_free_unlock = 3;
-            break;
+                max_free_unlock = 3;
+                break;
             case 4:
-            max_free_unlock = 2;
-            break;
+                max_free_unlock = 2;
+                break;
             case 5:
-            max_free_unlock = 1;
-            break;
+                max_free_unlock = 1;
+                break;
         }
         int unlock_used = 0;
         if (hasObjVar(player, VAR_FREE_UNLOCK_USED))
@@ -418,6 +424,7 @@ public class fs_quests extends script.base_script
         CustomerServiceLog("fs_quests", "%TU has " + unlock_remaining + " unlocked free unlocks remaining.", player, null);
         return unlock_remaining;
     }
+
     public static boolean showBranchUnlockSUI(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -463,21 +470,19 @@ public class fs_quests extends script.base_script
                 attachScript(player, "quest.force_sensitive.fs_xp_convert");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("quests/force_sensitive/utils", "no_available_branches"));
         }
         return true;
     }
+
     public static boolean isValidLocationForEncounter(location loc) throws InterruptedException
     {
         String area = toLower(loc.area);
-        if (area.equals("dathomir") || area.startsWith("kashyyyk") || area.startsWith("space_"))
-        {
-            return false;
-        }
-        return true;
+        return !area.equals("dathomir") && !area.startsWith("kashyyyk") && !area.startsWith("space_");
     }
+
     public static boolean canBeginEncounter(obj_id player) throws InterruptedException
     {
         location here = getLocation(player);
@@ -494,31 +499,28 @@ public class fs_quests extends script.base_script
         {
             return false;
         }
-        if (isIdValid(getMountId(player)))
-        {
-            return false;
-        }
-        return true;
+        return !isIdValid(getMountId(player));
     }
+
     public static void advanceStage(obj_id player) throws InterruptedException
     {
         int stage = getIntObjVar(player, "fs_kickoff_stage");
         int nextStage = stage + 1;
         setObjVar(player, "fs_kickoff_stage", nextStage);
-        return;
     }
+
     public static void decreaseStage(obj_id player) throws InterruptedException
     {
         int stage = getIntObjVar(player, "fs_kickoff_stage");
         int nextStage = stage - 1;
         setObjVar(player, "fs_kickoff_stage", nextStage);
-        return;
     }
+
     public static void setStage(obj_id player, int stage) throws InterruptedException
     {
         setObjVar(player, "fs_kickoff_stage", stage);
-        return;
     }
+
     public static void oldManDepart(obj_id player, obj_id npc, int flag) throws InterruptedException
     {
         if ((isIdValid(player)) && (exists(player)))
@@ -553,8 +555,8 @@ public class fs_quests extends script.base_script
         }
         clearCompletedQuest(player, dataRow);
         messageTo(npc, "cleanUp", null, 8, false);
-        return;
     }
+
     public static boolean clearFSData(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -604,6 +606,7 @@ public class fs_quests extends script.base_script
         setJediState(player, JEDI_STATE_NONE);
         return true;
     }
+
     public static boolean resetFSTask(obj_id player, obj_id owner) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -649,11 +652,12 @@ public class fs_quests extends script.base_script
             utils.setBatchScriptVar(owner, SCRIPT_VAR_REMOVE_TASK_LIST, tasks);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean unlockBranchSUI(obj_id player, obj_id owner) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -666,25 +670,25 @@ public class fs_quests extends script.base_script
             LOG("force_sensitive", "fs_quests.unlockBranchSUI -- owner is invalid");
             return false;
         }
-        String[] branches = 
-        {
-            "force_sensitive_combat_prowess_ranged_accuracy",
-            "force_sensitive_combat_prowess_ranged_speed",
-            "force_sensitive_combat_prowess_melee_accuracy",
-            "force_sensitive_combat_prowess_melee_speed",
-            "force_sensitive_enhanced_reflexes_ranged_defense",
-            "force_sensitive_enhanced_reflexes_melee_defense",
-            "force_sensitive_enhanced_reflexes_vehicle_control",
-            "force_sensitive_enhanced_reflexes_survival",
-            "force_sensitive_crafting_mastery_experimentation",
-            "force_sensitive_crafting_mastery_assembly",
-            "force_sensitive_crafting_mastery_repair",
-            "force_sensitive_crafting_mastery_technique",
-            "force_sensitive_heightened_senses_healing",
-            "force_sensitive_heightened_senses_surveying",
-            "force_sensitive_heightened_senses_persuasion",
-            "force_sensitive_heightened_senses_luck"
-        };
+        String[] branches =
+                {
+                        "force_sensitive_combat_prowess_ranged_accuracy",
+                        "force_sensitive_combat_prowess_ranged_speed",
+                        "force_sensitive_combat_prowess_melee_accuracy",
+                        "force_sensitive_combat_prowess_melee_speed",
+                        "force_sensitive_enhanced_reflexes_ranged_defense",
+                        "force_sensitive_enhanced_reflexes_melee_defense",
+                        "force_sensitive_enhanced_reflexes_vehicle_control",
+                        "force_sensitive_enhanced_reflexes_survival",
+                        "force_sensitive_crafting_mastery_experimentation",
+                        "force_sensitive_crafting_mastery_assembly",
+                        "force_sensitive_crafting_mastery_repair",
+                        "force_sensitive_crafting_mastery_technique",
+                        "force_sensitive_heightened_senses_healing",
+                        "force_sensitive_heightened_senses_surveying",
+                        "force_sensitive_heightened_senses_persuasion",
+                        "force_sensitive_heightened_senses_luck"
+                };
         String[] dsrc = new String[branches.length];
         for (int i = 0; i < branches.length; i++)
         {

@@ -55,15 +55,15 @@ public class city extends script.base_script
     public static final int SPECIAL_STRUCTURE = SF_MISSION_TERMINAL | SF_SKILL_TRAINER | SF_DECORATION;
     public static final int PAY_STRUCTURE = SF_COST_CITY_HALL | SF_COST_CITY_HI | SF_COST_CITY_MED | SF_COST_CITY_LOW | SF_COST_CITY_GARDEN_SMALL | SF_COST_CITY_GARDEN_LARGE;
     public static final int SPEC_MASK = SF_SPEC_SAMPLE_RICH | SF_SPEC_FARMING | SF_SPEC_INDUSTRY | SF_SPEC_RESEARCH | SF_SPEC_CLONING | SF_SPEC_MISSIONS | SF_SPEC_ENTERTAINER | SF_SPEC_DOCTOR | SF_SPEC_STRONGHOLD | SF_SPEC_MASTER_MANUFACTURING | SF_SPEC_MASTER_HEALING | SF_SPEC_DECOR_INCREASE | SF_SPEC_STORYTELLER | SF_SPEC_INCUBATOR;
-    public static final int CITY_MAINTENANCE_COSTS[] = 
-    {
-        2500,
-        7500,
-        2000,
-        150,
-        1000,
-        3000
-    };
+    public static final int[] CITY_MAINTENANCE_COSTS =
+            {
+                    2500,
+                    7500,
+                    2000,
+                    150,
+                    1000,
+                    3000
+            };
     public static final string_id NEW_CITY_STRUCTURE_SUBJECT = new string_id("city/city", "new_city_structure_subject");
     public static final string_id NEW_CITY_STRUCTURE_BODY = new string_id("city/city", "new_city_structure_body");
     public static final string_id NEW_CITY_STRUCTURE_OTHER_SUBJECT = new string_id("city/city", "new_city_structure_other_subject");
@@ -101,59 +101,65 @@ public class city extends script.base_script
     public static final string_id SID_OVER_MAX_LIMIT = new string_id("city/city", "must_remove_decorations_or_structures");
     public static final String CITY_SPECS = "datatables/city/specializations.iff";
     public static final string_id SID_NO_RIGHTS = new string_id("player_structure", "no_transfer_rights");
-    public static final String RESERVED_CITY_NAMES[] = 
-    {
-        "bela vistal",
-        "coronet",
-        "doaba guerfel",
-        "kor vella",
-        "tyrena",
-        "vreni island",
-        "dee'ja peak",
-        "deeja peak",
-        "keren",
-        "kadaara",
-        "kaadara",
-        "moenia",
-        "theed",
-        "narmle",
-        "restuss",
-        "dearic",
-        "daeric",
-        "nashal",
-        "anchorhead",
-        "bestine",
-        "mos eisley",
-        "mos espa",
-        "mos entha",
-        "mos taike",
-        "wayfar",
-        "lake retreat",
-        "czerka outpost",
-        "pandath",
-        "pendath",
-    };
+    public static final String[] RESERVED_CITY_NAMES =
+            {
+                    "bela vistal",
+                    "coronet",
+                    "doaba guerfel",
+                    "kor vella",
+                    "tyrena",
+                    "vreni island",
+                    "dee'ja peak",
+                    "deeja peak",
+                    "keren",
+                    "kadaara",
+                    "kaadara",
+                    "moenia",
+                    "theed",
+                    "narmle",
+                    "restuss",
+                    "dearic",
+                    "daeric",
+                    "nashal",
+                    "anchorhead",
+                    "bestine",
+                    "mos eisley",
+                    "mos espa",
+                    "mos entha",
+                    "mos taike",
+                    "wayfar",
+                    "lake retreat",
+                    "czerka outpost",
+                    "pandath",
+                    "pendath",
+            };
     public static final String OBJVAR_DERANK_EXEMPT = "city.derank_exempt";
     public static final String CITIZEN_LIST_QUERIED = "cityhall.citizen_list_queried";
     public static final String CITIZEN_LIST_DATA = "cityhall.citizen_list_data";
+
     public static int canBuildCityHere(obj_id player, location loc) throws InterruptedException
     {
         int[] all_cities = getAllCityIds();
-        for (int all_city : all_cities) {
+        for (int all_city : all_cities)
+        {
             location other_loc = cityGetLocation(all_city);
-            if (other_loc.area.equals(loc.area)) {
+            if (other_loc.area.equals(loc.area))
+            {
                 float dist = utils.getDistance2D(loc, other_loc);
-                if (dist < 1100) {
+                if (dist < 1100)
+                {
                     return all_city;
                 }
             }
         }
         return -1;
     }
+
     public static boolean isInCity(obj_id obj) throws InterruptedException
     {
         return isInCity(getLocation(obj));
     }
+
     public static boolean isInCity(location loc) throws InterruptedException
     {
         int city_id = 0;
@@ -162,15 +168,9 @@ public class city extends script.base_script
             loc = getLocation(getTopMostContainer(loc.cell));
         }
         city_id = getCityAtLocation(loc, 0);
-        if (cityExists(city_id))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return cityExists(city_id);
     }
+
     public static boolean isPartOfCity(obj_id structure, int city_id) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -182,29 +182,36 @@ public class city extends script.base_script
         {
             return false;
         }
-        for (obj_id city_structure : city_structures) {
-            if (city_structure == structure) {
+        for (obj_id city_structure : city_structures)
+        {
+            if (city_structure == structure)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isAMayor(obj_id player) throws InterruptedException
     {
         int[] cities = getAllCityIds();
-        for (int city : cities) {
+        for (int city : cities)
+        {
             obj_id mayor = cityGetLeader(city);
-            if (mayor == player) {
+            if (mayor == player)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isTheCityMayor(obj_id player, int city_id) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
         return mayor == player;
     }
+
     public static int getCityRank(int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -214,13 +221,16 @@ public class city extends script.base_script
         int rad = cityGetRadius(city_id);
         int[] radList = dataTableGetIntColumn(city.RANK_TABLE, city.RANK_RADIUS);
         int rank = 0;
-        for (int i1 : radList) {
-            if (rad >= i1) {
+        for (int i1 : radList)
+        {
+            if (rad >= i1)
+            {
                 rank++;
             }
         }
         return rank;
     }
+
     public static boolean addStructureToCity(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -236,11 +246,12 @@ public class city extends script.base_script
         {
             return addStructureToCity(structure, city_id);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean addStructureToCity(obj_id structure, int city_id) throws InterruptedException
     {
         if (!isPartOfCity(structure, city_id))
@@ -258,23 +269,23 @@ public class city extends script.base_script
                 switch (cost)
                 {
                     case 1:
-                    flags |= SF_COST_CITY_HALL;
-                    break;
+                        flags |= SF_COST_CITY_HALL;
+                        break;
                     case 2:
-                    flags |= SF_COST_CITY_HI;
-                    break;
+                        flags |= SF_COST_CITY_HI;
+                        break;
                     case 3:
-                    flags |= SF_COST_CITY_MED;
-                    break;
+                        flags |= SF_COST_CITY_MED;
+                        break;
                     case 4:
-                    flags |= SF_COST_CITY_LOW;
-                    break;
+                        flags |= SF_COST_CITY_LOW;
+                        break;
                     case 5:
-                    flags |= SF_COST_CITY_GARDEN_SMALL;
-                    break;
+                        flags |= SF_COST_CITY_GARDEN_SMALL;
+                        break;
                     case 6:
-                    flags |= SF_COST_CITY_GARDEN_LARGE;
-                    break;
+                        flags |= SF_COST_CITY_GARDEN_LARGE;
+                        break;
                 }
             }
             citySetStructureInfo(city_id, structure, flags, true);
@@ -296,7 +307,7 @@ public class city extends script.base_script
             }
             return true;
         }
-        else 
+        else
         {
             if (getStructureCityId(structure) != city_id)
             {
@@ -305,6 +316,7 @@ public class city extends script.base_script
         }
         return false;
     }
+
     public static boolean removeStructureFromCity(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -318,6 +330,7 @@ public class city extends script.base_script
         }
         return false;
     }
+
     public static boolean removeStructureFromCity(int city_id, obj_id structure) throws InterruptedException
     {
         if (isPartOfCity(structure, city_id))
@@ -339,17 +352,18 @@ public class city extends script.base_script
             {
                 detachScript(structure, "planet_map.map_loc_both");
             }
-            else 
+            else
             {
                 setStructureCityId(structure, 0);
             }
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static void validateCityStructure(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -375,7 +389,7 @@ public class city extends script.base_script
                     player_structure.destroyStructure(structure);
                     return;
                 }
-                else 
+                else
                 {
                     if (!isIdValid(getContainedBy(structure)))
                     {
@@ -402,7 +416,7 @@ public class city extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (city_id > 0)
             {
@@ -412,13 +426,14 @@ public class city extends script.base_script
                     addStructureToCity(structure, city_id);
                 }
             }
-            else 
+            else
             {
             }
         }
         checkStructureValid(city_id, structure);
         city.updateRegistrationScript(city_id, structure);
     }
+
     public static boolean validateSpecialStructure(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -449,7 +464,7 @@ public class city extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("player_city", "Special object loaded outside a city.  Removing object.  Object: " + structure);
             destroyObject(structure);
@@ -457,6 +472,7 @@ public class city extends script.base_script
         }
         return checkStructureValid(city_id, structure);
     }
+
     public static boolean isCitizenOfCity(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -468,13 +484,16 @@ public class city extends script.base_script
         {
             return false;
         }
-        for (obj_id citizen : citizens) {
-            if (citizen == player) {
+        for (obj_id citizen : citizens)
+        {
+            if (citizen == player)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isMilitiaOfCity(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -486,13 +505,16 @@ public class city extends script.base_script
         {
             return false;
         }
-        for (obj_id citizen : citizens) {
-            if ((citizen == player) && hasMilitiaFlag(player, city_id)) {
+        for (obj_id citizen : citizens)
+        {
+            if ((citizen == player) && hasMilitiaFlag(player, city_id))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean hasMilitiaFlag(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -504,12 +526,9 @@ public class city extends script.base_script
             return false;
         }
         int flags = cityGetCitizenPermissions(city_id, player);
-        if (0 != (flags & CP_MILITIA))
-        {
-            return true;
-        }
-        return false;
+        return 0 != (flags & CP_MILITIA);
     }
+
     public static void addCitizen(obj_id citizen, obj_id residence) throws InterruptedException
     {
         if (!isIdValid(residence))
@@ -552,6 +571,7 @@ public class city extends script.base_script
         bodypp = prose.getPackage(NEW_CITY_CITIZEN_OTHER_BODY, mayor_name, citizen_name, city_name);
         utils.sendMail(NEW_CITY_CITIZEN_OTHER_SUBJECT, bodypp, cname, "City Hall");
     }
+
     public static void removeCitizen(obj_id citizen, obj_id residence) throws InterruptedException
     {
         if (!isIdValid(residence))
@@ -561,6 +581,7 @@ public class city extends script.base_script
         int city_id = getCityAtLocation(getLocation(residence), 0);
         removeCitizen(citizen, city_id, residence);
     }
+
     public static void removeCitizen(obj_id citizen, int city_id, obj_id residence) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -595,11 +616,12 @@ public class city extends script.base_script
         {
             CustomerServiceLog("player_city", "Removed citizen from city.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen + " Residence: " + residence);
         }
-        else 
+        else
         {
             CustomerServiceLog("player_city", "Removed citizen from city.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen + " Residence: (none specified)");
         }
     }
+
     public static void addMilitia(int city_id, obj_id citizen) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
@@ -611,6 +633,7 @@ public class city extends script.base_script
         obj_id city_hall = cityGetCityHall(city_id);
         CustomerServiceLog("player_city", "Added militia.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen);
     }
+
     public static void removeMilitia(int city_id, obj_id citizen) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
@@ -622,6 +645,7 @@ public class city extends script.base_script
         obj_id city_hall = cityGetCityHall(city_id);
         CustomerServiceLog("player_city", "Removed militia.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen);
     }
+
     public static void setCityResidence(obj_id citizen, obj_id newresidence) throws InterruptedException
     {
         int new_city = getCityAtLocation(getLocation(newresidence), 0);
@@ -640,22 +664,27 @@ public class city extends script.base_script
         removeCitizen(citizen, old_city, null);
         addCitizen(citizen, newresidence);
     }
+
     public static void setMayor(int city_id, obj_id new_mayor) throws InterruptedException
     {
         citySetLeader(city_id, new_mayor);
     }
+
     public static void setRadius(int city_id, int new_radius) throws InterruptedException
     {
         citySetRadius(city_id, new_radius);
     }
+
     public static void setName(int city_id, String new_name) throws InterruptedException
     {
         citySetName(city_id, new_name);
     }
+
     public static void setCitizenAllegiance(int city_id, obj_id citizen, obj_id new_allegiance) throws InterruptedException
     {
         citySetCitizenInfo(city_id, citizen, cityGetCitizenName(city_id, citizen), new_allegiance, cityGetCitizenPermissions(city_id, citizen));
     }
+
     public static boolean addStarport(obj_id shuttleport, location cityTravelLoc, int cityTravelCost, boolean cityTravelIntp) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(shuttleport), 0);
@@ -674,6 +703,7 @@ public class city extends script.base_script
         citySetTravelInfo(city_id, cityTravelLoc, cityTravelCost, cityTravelIntp);
         return true;
     }
+
     public static boolean removeStarport(obj_id shuttleport) throws InterruptedException
     {
         int city_id = getStructureCityId(shuttleport);
@@ -683,6 +713,7 @@ public class city extends script.base_script
         }
         return removeStarport(shuttleport, city_id);
     }
+
     public static boolean removeStarport(obj_id shuttleport, int city_id) throws InterruptedException
     {
         String city_name = cityGetName(city_id);
@@ -691,14 +722,16 @@ public class city extends script.base_script
         citySetTravelInfo(city_id, new location(), 0, false);
         return true;
     }
+
     public static boolean addGarage(String template) throws InterruptedException
     {
         return true;
     }
+
     public static void removeGarage(obj_id structure) throws InterruptedException
     {
-        return;
     }
+
     public static boolean isUniqueCityName(String newName) throws InterruptedException
     {
         int[] city_ids = getAllCityIds();
@@ -706,20 +739,25 @@ public class city extends script.base_script
         {
             return true;
         }
-        for (int city_id : city_ids) {
+        for (int city_id : city_ids)
+        {
             String city_name = cityGetName(city_id);
-            if (city_name.equals(newName)) {
+            if (city_name.equals(newName))
+            {
                 return false;
             }
         }
         String lowerNewName = newName.toLowerCase();
-        for (String reservedCityName : RESERVED_CITY_NAMES) {
-            if (lowerNewName.contains(reservedCityName)) {
+        for (String reservedCityName : RESERVED_CITY_NAMES)
+        {
+            if (lowerNewName.contains(reservedCityName))
+            {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean isCityBanned(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -731,18 +769,22 @@ public class city extends script.base_script
         {
             return false;
         }
-        for (int bannedId : bannedIds) {
-            if (bannedId == city_id) {
+        for (int bannedId : bannedIds)
+        {
+            if (bannedId == city_id)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isCityBanned(obj_id player, obj_id structure) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(structure), 0);
         return isCityBanned(player, city_id);
     }
+
     public static boolean removeBan(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -755,8 +797,10 @@ public class city extends script.base_script
             return false;
         }
         int found = 0;
-        for (int banCity1 : banCities) {
-            if (banCity1 == city_id) {
+        for (int banCity1 : banCities)
+        {
+            if (banCity1 == city_id)
+            {
                 found = 1;
                 break;
             }
@@ -769,12 +813,14 @@ public class city extends script.base_script
         {
             removeObjVar(player, "city.banlist");
         }
-        else 
+        else
         {
             int j = 0;
             int[] newBanCities = new int[banCities.length - 1];
-            for (int banCity : banCities) {
-                if (banCity != city_id) {
+            for (int banCity : banCities)
+            {
+                if (banCity != city_id)
+                {
                     newBanCities[j] = banCity;
                     j++;
                 }
@@ -783,6 +829,7 @@ public class city extends script.base_script
         }
         return true;
     }
+
     public static void removeTaxesSetRadius(int city_id, int new_radius) throws InterruptedException
     {
         citySetIncomeTax(city_id, 0);
@@ -795,10 +842,12 @@ public class city extends script.base_script
         }
         citySetRadius(city_id, new_radius);
     }
+
     public static void removeTaxes(int city_id) throws InterruptedException
     {
         removeTaxesSetRadius(city_id, cityGetRadius(city_id));
     }
+
     public static void setIncomeTax(int city_id, int new_tax) throws InterruptedException
     {
         String city_name = cityGetName(city_id);
@@ -806,6 +855,7 @@ public class city extends script.base_script
         CustomerServiceLog("player_city", "Changed income tax.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Value: " + new_tax);
         citySetIncomeTax(city_id, new_tax);
     }
+
     public static void setPropertyTax(int city_id, int new_tax) throws InterruptedException
     {
         String city_name = cityGetName(city_id);
@@ -813,6 +863,7 @@ public class city extends script.base_script
         CustomerServiceLog("player_city", "Changed property tax.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Value: " + new_tax);
         citySetPropertyTax(city_id, new_tax);
     }
+
     public static void setSalesTax(int city_id, int new_tax) throws InterruptedException
     {
         String city_name = cityGetName(city_id);
@@ -820,6 +871,7 @@ public class city extends script.base_script
         CustomerServiceLog("player_city", "Changed sales tax.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Value: " + new_tax);
         citySetSalesTax(city_id, new_tax);
     }
+
     public static void setTravelFee(int city_id, int new_fee) throws InterruptedException
     {
         location cityTravelLoc = cityGetTravelLocation(city_id);
@@ -830,6 +882,7 @@ public class city extends script.base_script
         CustomerServiceLog("player_city", "Changed travel fee.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Value: " + new_fee);
         citySetTravelInfo(city_id, cityTravelLoc, cityTravelCost, cityTravelIntp);
     }
+
     public static void setGarageFee(int city_id, int new_fee) throws InterruptedException
     {
         int garageUseCost = new_fee;
@@ -838,6 +891,7 @@ public class city extends script.base_script
         String garageCity = city_name + ".garageFee";
         setObjVar(city_hall, garageCity, garageUseCost);
     }
+
     public static void setCloneInfo(int city_id, location cityCloneLoc, location cityCloneRespawn, obj_id cityCloneId) throws InterruptedException
     {
         String city_name = cityGetName(city_id);
@@ -845,12 +899,14 @@ public class city extends script.base_script
         CustomerServiceLog("player_city", "Changed clone info.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Clone Loc: " + cityCloneLoc + " Id: " + cityCloneId);
         citySetCloneInfo(city_id, cityCloneLoc, cityCloneRespawn, cityCloneId);
     }
+
     public static void updateLocation(int city_id, location new_loc) throws InterruptedException
     {
         obj_id cityHall = cityGetCityHall(city_id);
-        location cityLoc = (location)new_loc.clone();
+        location cityLoc = (location) new_loc.clone();
         citySetLocation(city_id, new_loc);
     }
+
     public static int getPropertyTax(obj_id structure) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(structure), 0);
@@ -860,6 +916,7 @@ public class city extends script.base_script
         }
         return 0;
     }
+
     public static obj_id getCityHall(obj_id structure) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(structure), 0);
@@ -869,16 +926,19 @@ public class city extends script.base_script
         }
         return null;
     }
+
     public static void setStructureType(int city_id, obj_id structure, int structureType) throws InterruptedException
     {
         boolean structureValid = cityGetStructureValid(city_id, structure);
         citySetStructureInfo(city_id, structure, structureType, structureValid);
     }
+
     public static void setStructureValid(int city_id, obj_id structure, boolean structureValid) throws InterruptedException
     {
         int structureType = cityGetStructureType(city_id, structure);
         citySetStructureInfo(city_id, structure, structureType, structureValid);
     }
+
     public static boolean isCityRegistered(int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -887,15 +947,9 @@ public class city extends script.base_script
         }
         obj_id hall = cityGetCityHall(city_id);
         int flags = cityGetStructureType(city_id, hall);
-        if (0 != (flags & SF_PM_REGISTER))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return 0 != (flags & SF_PM_REGISTER);
     }
+
     public static void registerCity(int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -903,8 +957,10 @@ public class city extends script.base_script
             return;
         }
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (!isNormalStructure(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (!isNormalStructure(city_id, structure))
+            {
                 continue;
             }
             int flags = cityGetStructureType(city_id, structure);
@@ -916,6 +972,7 @@ public class city extends script.base_script
             messageTo(structure, "cityMapRegister", null, 0.0f, false);
         }
     }
+
     public static void unregisterCity(int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -923,8 +980,10 @@ public class city extends script.base_script
             return;
         }
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (!isNormalStructure(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (!isNormalStructure(city_id, structure))
+            {
                 continue;
             }
             int flags = cityGetStructureType(city_id, structure);
@@ -936,6 +995,7 @@ public class city extends script.base_script
             messageTo(structure, "cityMapUnregister", null, 0.0f, false);
         }
     }
+
     public static void updateRegistrationScript(int city_id, obj_id structure) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -954,7 +1014,7 @@ public class city extends script.base_script
                 attachScript(structure, "planet_map.map_loc_both");
             }
         }
-        else 
+        else
         {
             if (hasScript(structure, "planet_map.map_loc_both"))
             {
@@ -962,10 +1022,12 @@ public class city extends script.base_script
             }
         }
     }
+
     public static boolean checkStructureValid(int city_id, obj_id structure) throws InterruptedException
     {
         return checkStructureValid(city_id, structure, getCityRank(city_id));
     }
+
     public static boolean checkStructureValid(int city_id, obj_id structure, int city_rank) throws InterruptedException
     {
         if (!isNormalStructure(city_id, structure))
@@ -998,7 +1060,7 @@ public class city extends script.base_script
                 setObjVar(structure, "city.invalid_timestamp", getGameTime());
                 CustomerServiceLog("player_city", "City can't support valid structure.  Marking structure invalid.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Structure: " + structure);
             }
-            else 
+            else
             {
                 int invalid_time = getIntObjVar(structure, "city.invalid_timestamp");
                 if (invalid_time == 0)
@@ -1017,7 +1079,7 @@ public class city extends script.base_script
                 utils.sendMail(STRUCTURE_DESTROYED_SUBJECT, bodypp, mayor_name, "City Hall");
             }
         }
-        else 
+        else
         {
             if (!valid)
             {
@@ -1029,10 +1091,12 @@ public class city extends script.base_script
         }
         return true;
     }
+
     public static boolean checkSpecialValid(int city_id, obj_id structure) throws InterruptedException
     {
         return checkSpecialValid(city_id, structure, getCityRank(city_id));
     }
+
     public static boolean checkSpecialValid(int city_id, obj_id structure, int rank) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
@@ -1069,18 +1133,19 @@ public class city extends script.base_script
             {
                 removeSkillTrainer(structure);
             }
-            else 
+            else
             {
                 destroyObject(structure);
             }
             utils.setScriptVar(city_hall, varstring, utils.getIntScriptVar(city_hall, varstring) + 1);
             return false;
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static int getStructureCost(int city_id, obj_id structure) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -1108,7 +1173,7 @@ public class city extends script.base_script
                 {
                     cost += 75000 * diff;
                 }
-                else 
+                else
                 {
                     setObjVar(structure, "city.civic_cap_penalty", 1);
                 }
@@ -1139,11 +1204,12 @@ public class city extends script.base_script
         {
             return CITY_MAINTENANCE_COSTS[5];
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static void initCitizen(obj_id citizen) throws InterruptedException
     {
         int city_id = getCitizenOfCityId(citizen);
@@ -1183,28 +1249,33 @@ public class city extends script.base_script
             utils.sendMail(INCOME_TAX_NOPAY_MAYOR_SUBJECT, bodypp, mayor_name, "City Hall");
             setObjVar(citizen, "city.income_tax_delinquent", 1);
         }
-        else 
+        else
         {
             prose_package bodypp = prose.getPackage(INCOME_TAX_PAID_BODY, citizen_name, income_tax);
             utils.sendMail(INCOME_TAX_PAID_SUBJECT, bodypp, citizen_name, "City Hall");
             removeObjVar(citizen, "city.income_tax_delinquent");
         }
     }
+
     public static int getCivicCount(int city_id) throws InterruptedException
     {
         int count = 0;
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (isPayStructure(city_id, structure) && isNormalStructure(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (isPayStructure(city_id, structure) && isNormalStructure(city_id, structure))
+            {
                 count++;
             }
         }
         return count;
     }
+
     public static int getMaxCivicCount(int city_id) throws InterruptedException
     {
         return getMaxCivicCount(city_id, getCityRank(city_id));
     }
+
     public static int getMaxCivicCount(int city_id, int rank) throws InterruptedException
     {
         int baseCivicCount = (1 + (rank * 9));
@@ -1217,26 +1288,32 @@ public class city extends script.base_script
         }
         return baseCivicCount;
     }
+
     public static int getMTCount(int city_id) throws InterruptedException
     {
         int count = 0;
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
+        for (obj_id structure : structures)
+        {
             int flags = cityGetStructureType(city_id, structure);
-            if (0 != (flags & SF_MISSION_TERMINAL)) {
+            if (0 != (flags & SF_MISSION_TERMINAL))
+            {
                 count++;
             }
         }
         return count;
     }
+
     public static int getMaxMTCount(int city_id) throws InterruptedException
     {
         return getMaxMTCount(city_id, getCityRank(city_id));
     }
+
     public static int getMaxMTCount(int city_id, int rank) throws InterruptedException
     {
         return rank * 3;
     }
+
     public static void addMissionTerminal(int city_id, obj_id player, String template) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -1255,6 +1332,7 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Adding mission terminal.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + mt);
     }
+
     public static void removeMissionTerminal(obj_id terminal) throws InterruptedException
     {
         int city_id = checkCity(terminal, false);
@@ -1267,26 +1345,32 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Removing mission terminal.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + terminal);
     }
+
     public static int getTrainerCount(int city_id) throws InterruptedException
     {
         int count = 0;
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
+        for (obj_id structure : structures)
+        {
             int flags = cityGetStructureType(city_id, structure);
-            if (0 != (flags & SF_SKILL_TRAINER)) {
+            if (0 != (flags & SF_SKILL_TRAINER))
+            {
                 count++;
             }
         }
         return count;
     }
+
     public static int getMaxTrainerCount(int city_id) throws InterruptedException
     {
         return getMaxTrainerCount(city_id, getCityRank(city_id));
     }
+
     public static int getMaxTrainerCount(int city_id, int rank) throws InterruptedException
     {
         return 0;
     }
+
     public static void addSkillTrainer(int city_id, obj_id player, String template) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -1304,6 +1388,7 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Adding skill trainer.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + st);
     }
+
     public static void removeSkillTrainer(obj_id trainer) throws InterruptedException
     {
         int city_id = checkCity(trainer, false);
@@ -1316,22 +1401,27 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Removing skill trainer.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + trainer);
     }
+
     public static int getDecorationCount(int city_id) throws InterruptedException
     {
         int count = 0;
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
+        for (obj_id structure : structures)
+        {
             int flags = cityGetStructureType(city_id, structure);
-            if (0 != (flags & SF_DECORATION)) {
+            if (0 != (flags & SF_DECORATION))
+            {
                 count++;
             }
         }
         return count;
     }
+
     public static int getMaxDecorationCount(int city_id) throws InterruptedException
     {
         return getMaxDecorationCount(city_id, getCityRank(city_id));
     }
+
     public static int getMaxDecorationCount(int city_id, int rank) throws InterruptedException
     {
         int baseDecorCount = rank * 2500;
@@ -1344,6 +1434,7 @@ public class city extends script.base_script
         }
         return baseDecorCount;
     }
+
     public static void addDecoration(int city_id, obj_id player, obj_id deco) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -1357,6 +1448,7 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Adding decoration.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + deco);
     }
+
     public static void removeDecoration(obj_id deco) throws InterruptedException
     {
         int city_id = checkCity(deco, false);
@@ -1369,6 +1461,7 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Removing decoration.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + deco);
     }
+
     public static void setSpecialization(int city_id, String spec) throws InterruptedException
     {
         if (spec == null || spec.length() <= 0)
@@ -1415,6 +1508,7 @@ public class city extends script.base_script
         LOG("sissynoid", "Setting specialization.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Spec: " + spec);
         CustomerServiceLog("player_city", "Setting specialization.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Spec: " + spec);
     }
+
     public static boolean cityHasSpec(int city_id, int spec_bit) throws InterruptedException
     {
         if (city_id <= 0)
@@ -1425,12 +1519,14 @@ public class city extends script.base_script
         int flags = cityGetStructureType(city_id, city_hall);
         return (0 != (flags & spec_bit));
     }
+
     public static int cityGetSpec(int city_id) throws InterruptedException
     {
         obj_id city_hall = cityGetCityHall(city_id);
         int flags = cityGetStructureType(city_id, city_hall);
         return flags & SPEC_MASK;
     }
+
     public static String cityGetSpecString(int city_id) throws InterruptedException
     {
         int spec = cityGetSpec(city_id);
@@ -1444,6 +1540,7 @@ public class city extends script.base_script
         }
         return null;
     }
+
     public static int cityGetSpecCost(int city_id) throws InterruptedException
     {
         int spec = cityGetSpec(city_id);
@@ -1457,12 +1554,14 @@ public class city extends script.base_script
         }
         return 0;
     }
+
     public static boolean isCityZoned(int city_id) throws InterruptedException
     {
         obj_id city_hall = cityGetCityHall(city_id);
         int flags = cityGetStructureType(city_id, city_hall);
         return (0 != (flags & SF_REQUIRE_ZONE_RIGHTS));
     }
+
     public static void setCityZoned(int city_id, boolean zoned) throws InterruptedException
     {
         obj_id city_hall = cityGetCityHall(city_id);
@@ -1471,7 +1570,7 @@ public class city extends script.base_script
         {
             flags |= SF_REQUIRE_ZONE_RIGHTS;
         }
-        else 
+        else
         {
             flags = flags & ~SF_REQUIRE_ZONE_RIGHTS;
         }
@@ -1479,6 +1578,7 @@ public class city extends script.base_script
         String city_name = cityGetName(city_id);
         CustomerServiceLog("player_city", "Setting zoning requirement.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Zoning: " + zoned);
     }
+
     public static int checkCity(obj_id self, boolean notify) throws InterruptedException
     {
         obj_id checkobj = self;
@@ -1502,6 +1602,7 @@ public class city extends script.base_script
         }
         return city_id;
     }
+
     public static int checkMayorCity(obj_id self, boolean notify) throws InterruptedException
     {
         int city_id = checkCity(self, notify);
@@ -1516,74 +1617,62 @@ public class city extends script.base_script
         }
         return city_id;
     }
+
     public static boolean isNormalStructure(int city_id, obj_id structure) throws InterruptedException
     {
         int flags = cityGetStructureType(city_id, structure);
-        if (0 != (flags & SPECIAL_STRUCTURE))
-        {
-            return false;
-        }
-        return true;
+        return 0 == (flags & SPECIAL_STRUCTURE);
     }
+
     public static boolean isPayStructure(int city_id, obj_id structure) throws InterruptedException
     {
         int flags = cityGetStructureType(city_id, structure);
-        if (0 == (flags & PAY_STRUCTURE))
-        {
-            return false;
-        }
-        return true;
+        return 0 != (flags & PAY_STRUCTURE);
     }
+
     public static boolean isMissionTerminal(int city_id, obj_id structure) throws InterruptedException
     {
         int flags = cityGetStructureType(city_id, structure);
-        if (0 != (flags & SF_MISSION_TERMINAL))
-        {
-            return true;
-        }
-        return false;
+        return 0 != (flags & SF_MISSION_TERMINAL);
     }
+
     public static boolean isSkillTrainer(int city_id, obj_id structure) throws InterruptedException
     {
         int flags = cityGetStructureType(city_id, structure);
-        if (0 != (flags & SF_SKILL_TRAINER))
-        {
-            return true;
-        }
-        return false;
+        return 0 != (flags & SF_SKILL_TRAINER);
     }
+
     public static boolean isDecoration(int city_id, obj_id structure) throws InterruptedException
     {
         int flags = cityGetStructureType(city_id, structure);
-        if (0 != (flags & SF_DECORATION))
-        {
-            return true;
-        }
-        return false;
+        return 0 != (flags & SF_DECORATION);
     }
+
     public static int setStructureCityId(obj_id structure, int city_id) throws InterruptedException
     {
         if (player_structure.isBuilding(structure))
         {
             setBuildingCityId(structure, city_id);
         }
-        else 
+        else
         {
             setObjVar(structure, "city_id", city_id);
         }
         return city_id;
     }
+
     public static int getStructureCityId(obj_id structure) throws InterruptedException
     {
         if (player_structure.isBuilding(structure))
         {
             return getBuildingCityId(structure);
         }
-        else 
+        else
         {
             return getIntObjVar(structure, "city_id");
         }
     }
+
     public static void clearAbsenceFlags(obj_id citizen, int city_id) throws InterruptedException
     {
         String citname = cityGetCitizenName(city_id, citizen);
@@ -1596,6 +1685,7 @@ public class city extends script.base_script
         flags = flags & ~CP_ABSENT_WEEK_5;
         citySetCitizenInfo(city_id, citizen, citname, citall, flags);
     }
+
     public static void doMayoralStructureTransfer(obj_id new_mayor, obj_id ousted_mayor, int city_id) throws InterruptedException
     {
         if (!isIdValid(new_mayor))
@@ -1618,39 +1708,48 @@ public class city extends script.base_script
             CustomerServiceLog("player_city_transfer", "New Mayor Structure Transfer Failed! (" + new_mayor + ") " + cityGetCitizenName(city_id, new_mayor) + " of City (" + city_id + ") " + cityGetName(city_id) + " array was null or empty.");
             return;
         }
-        for (obj_id structure : structures) {
-            if (city.isNormalStructure(city_id, structure)) {
-                if (!messageTo(structure, "setNewMayor", outparams, 5.0f, true)) {
+        for (obj_id structure : structures)
+        {
+            if (city.isNormalStructure(city_id, structure))
+            {
+                if (!messageTo(structure, "setNewMayor", outparams, 5.0f, true))
+                {
                     CustomerServiceLog("player_city_transfer", "City Civic Structure Transfer - MessageTo Failed: Structure(" + structure + ") should be owned by Mayor(" + new_mayor + ") " + cityGetCitizenName(city_id, new_mayor) + ".");
                 }
             }
-            if (city.isDecoration(city_id, structure)) {
-                if (!messageTo(structure, "setNewMayor", outparams, 5.0f, true)) {
+            if (city.isDecoration(city_id, structure))
+            {
+                if (!messageTo(structure, "setNewMayor", outparams, 5.0f, true))
+                {
                     CustomerServiceLog("player_city_transfer", "City Decoration Transfer - MessageTo Failed: Structure(" + structure + ") should be owned by Mayor(" + new_mayor + ") " + cityGetCitizenName(city_id, new_mayor) + ".");
                 }
             }
         }
     }
+
     public static void moveNoTradeItemsInStructureToOwner(obj_id building, obj_id ousted_mayor, int city_id) throws InterruptedException
     {
         obj_id buildingOwner = getOwner(building);
         if ((isIdValid(buildingOwner) && ousted_mayor == buildingOwner))
         {
             obj_id[] cellList = getContents(building);
-            if (cellList != null && cellList.length > 0)
+            if (cellList != null)
             {
-                for (obj_id obj_id : cellList) {
-                    if ((getTemplateName(obj_id)).equals(structure.TEMPLATE_CELL)) {
+                for (obj_id obj_id : cellList)
+                {
+                    if ((getTemplateName(obj_id)).equals(structure.TEMPLATE_CELL))
+                    {
                         checkItemsForNoTradeTransfer(obj_id, buildingOwner, city_id);
                     }
                 }
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("player_city_transfer", "Mayor Change: Attempted to move NoTrade Items to Ousted Mayor's Inventory but failed: Structure Owner(" + buildingOwner + ") " + cityGetCitizenName(city_id, buildingOwner) + " was not the same as the Ousted Mayor(" + ousted_mayor + ") " + cityGetCitizenName(city_id, ousted_mayor) + ".");
         }
     }
+
     public static void checkItemsForNoTradeTransfer(obj_id container, obj_id player, int city_id) throws InterruptedException
     {
         if (!isIdValid(container))
@@ -1664,35 +1763,46 @@ public class city extends script.base_script
             return;
         }
         obj_id[] cellContents = getContents(container);
-        if (cellContents != null && cellContents.length > 0)
+        if (cellContents != null)
         {
-            for (obj_id object : cellContents) {
-                if (isIdValid(object)) {
+            for (obj_id object : cellContents)
+            {
+                if (isIdValid(object))
+                {
                     boolean isValidPlayerOwnedObject = true;
                     obj_id objectOwner = getOwner(object);
-                    if (player != objectOwner) {
-                        if (hasScript(object, "item.special.nomove")) {
+                    if (player != objectOwner)
+                    {
+                        if (hasScript(object, "item.special.nomove"))
+                        {
                             CustomerServiceLog("player_city_transfer", "Mayoral NoTrade Item Transfer - (" + object + ") " + getEncodedName(object) + " is NOT OWNED BY (" + player + ") " + cityGetCitizenName(city_id, player) + "(the ousted mayor) But was inside the City Hall/Cloning Center at the time of transfer of City: " + cityGetName(city_id) + ". Item is actually owned by (" + objectOwner + ") " + getEncodedName(objectOwner) + ".");
                             isValidPlayerOwnedObject = false;
                         }
                     }
-                    if (!isObjectPersisted(object)) {
+                    if (!isObjectPersisted(object))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isPlayer(object)) {
+                    if (isPlayer(object))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isMob(object)) {
+                    if (isMob(object))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (hasCondition(object, CONDITION_VENDOR)) {
+                    if (hasCondition(object, CONDITION_VENDOR))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isValidPlayerOwnedObject) {
-                        if (getContainerType(object) != 0 && getGameObjectType(object) != GOT_misc_factory_crate && !hasScript(object, "item.special.nomove")) {
+                    if (isValidPlayerOwnedObject)
+                    {
+                        if (getContainerType(object) != 0 && getGameObjectType(object) != GOT_misc_factory_crate && !hasScript(object, "item.special.nomove"))
+                        {
                             checkItemsForNoTradeTransfer(object, player, city_id);
                         }
-                        if (hasScript(object, "item.special.nomove")) {
+                        if (hasScript(object, "item.special.nomove"))
+                        {
                             CustomerServiceLog("player_city_transfer", "Mayoral NoTrade Item Transfer - NoTrade Item(" + object + ") " + getEncodedName(object) + " moved to ousted Mayor's(" + player + ") " + cityGetCitizenName(city_id, player) + " Inventory.  The item was located in a CityHall or Cloning Center when the City: (" + cityGetName(city_id) + ")" + cityGetName(city_id) + " transferred.");
                             moveToOfflinePlayerInventoryAndUnload(object, player);
                         }
@@ -1701,6 +1811,7 @@ public class city extends script.base_script
             }
         }
     }
+
     public static boolean hasZoningRights(obj_id player, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || city_id <= 0)
@@ -1720,17 +1831,11 @@ public class city extends script.base_script
                 return false;
             }
             int rights_time = getIntObjVar(player, "city.zoning_rights_time");
-            if (cur_time - rights_time > (24 * 60 * 60))
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return cur_time - rights_time <= (24 * 60 * 60);
         }
         return false;
     }
+
     public static boolean hasStorytellerZoningRights(obj_id player, int city_id) throws InterruptedException
     {
         if (!isIdValid(player) || city_id <= 0)
@@ -1768,7 +1873,7 @@ public class city extends script.base_script
                 {
                     break;
                 }
-                else 
+                else
                 {
                     return true;
                 }
@@ -1776,6 +1881,7 @@ public class city extends script.base_script
         }
         return false;
     }
+
     public static boolean hasMayorProtectionFlag(obj_id player, int city_id) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -1787,12 +1893,9 @@ public class city extends script.base_script
             return false;
         }
         int flags = cityGetCitizenPermissions(city_id, player);
-        if (0 != (flags & CP_INACTIVE_PROTECTED))
-        {
-            return true;
-        }
-        return false;
+        return 0 != (flags & CP_INACTIVE_PROTECTED);
     }
+
     public static int getMaxSafeHouseCount(int city_id) throws InterruptedException
     {
         int currentRank = getCityRank(city_id);
@@ -1800,25 +1903,26 @@ public class city extends script.base_script
         switch (currentRank)
         {
             case 1:
-            safeCount = CITY_SAFEHOUSE_TIER1;
-            break;
+                safeCount = CITY_SAFEHOUSE_TIER1;
+                break;
             case 2:
-            safeCount = CITY_SAFEHOUSE_TIER2;
-            break;
+                safeCount = CITY_SAFEHOUSE_TIER2;
+                break;
             case 3:
-            safeCount = CITY_SAFEHOUSE_TIER3;
-            break;
+                safeCount = CITY_SAFEHOUSE_TIER3;
+                break;
             case 4:
-            safeCount = CITY_SAFEHOUSE_TIER4;
-            break;
+                safeCount = CITY_SAFEHOUSE_TIER4;
+                break;
             case 5:
-            safeCount = CITY_SAFEHOUSE_TIER5;
-            break;
+                safeCount = CITY_SAFEHOUSE_TIER5;
+                break;
             default:
-            break;
+                break;
         }
         return safeCount;
     }
+
     public static int getCurrentSafeHouseCount(int city_id) throws InterruptedException
     {
         obj_id[] citizens = cityGetCitizenIds(city_id);
@@ -1827,15 +1931,20 @@ public class city extends script.base_script
         {
             return 0;
         }
-        for (obj_id citizen : citizens) {
-            if (!hasMayorProtectionFlag(citizen, city_id)) {
+        for (obj_id citizen : citizens)
+        {
+            if (!hasMayorProtectionFlag(citizen, city_id))
+            {
                 continue;
-            } else {
+            }
+            else
+            {
                 tracker++;
             }
         }
         return tracker;
     }
+
     public static void addSafeHouseCitizen(int city_id, obj_id citizen) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
@@ -1847,6 +1956,7 @@ public class city extends script.base_script
         obj_id city_hall = cityGetCityHall(city_id);
         CustomerServiceLog("player_city", "Added Safe House.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen + " is now protected from City Packup Rules.");
     }
+
     public static void removeSafeHouseCitizen(int city_id, obj_id citizen) throws InterruptedException
     {
         obj_id mayor = cityGetLeader(city_id);
@@ -1858,6 +1968,7 @@ public class city extends script.base_script
         obj_id city_hall = cityGetCityHall(city_id);
         CustomerServiceLog("player_city", "Removed Safe House.  City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Citizen: " + citizen + " is no longer protected from City Packup Rules");
     }
+
     public static obj_id[] getCitySafeHouseCitizenList(int city_id) throws InterruptedException
     {
         Vector safeHouseCitizens = new Vector();
@@ -1875,10 +1986,14 @@ public class city extends script.base_script
             CustomerServiceLog("player_city", "Attempting to remove Safe House Citizen(s) - but City does not Citizens(citizen array was null): CityID:" + city_id);
             return null;
         }
-        for (obj_id citizen : citizens) {
-            if (!hasMayorProtectionFlag(citizen, city_id)) {
+        for (obj_id citizen : citizens)
+        {
+            if (!hasMayorProtectionFlag(citizen, city_id))
+            {
                 continue;
-            } else {
+            }
+            else
+            {
                 utils.addElement(safeHouseCitizens, citizen);
             }
         }

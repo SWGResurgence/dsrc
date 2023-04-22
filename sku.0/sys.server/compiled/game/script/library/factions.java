@@ -135,6 +135,8 @@ public class factions extends script.base_script
     public static final string_id SID_MERC_REBEL_SF_TERMINATED = new string_id("gcw", "merc_rebel_sf_status_terminated");
     public static final string_id SID_MERC_REBEL_COMBATANT_GRANTED = new string_id("gcw", "merc_rebel_combatant_status_granted");
     public static final string_id SID_MERC_REBEL_COMBATANT_TERMINATED = new string_id("gcw", "merc_rebel_combatant_status_terminated");
+    public static final String IGNORE_PLAYER = "ignorePlayer";
+
     public static void goCovertWithDelay(obj_id objPlayer, float fltDelay) throws InterruptedException
     {
         if (!canGoCovert(objPlayer))
@@ -145,6 +147,7 @@ public class factions extends script.base_script
         pvpPrepareToBeCovert(objPlayer);
         messageTo(objPlayer, "msgGoCovert", null, fltDelay, true);
     }
+
     public static void goCovert(obj_id objPlayer) throws InterruptedException
     {
         if (!hasObjVar(objPlayer, "intChangingFactionStatus"))
@@ -162,12 +165,14 @@ public class factions extends script.base_script
         pvpMakeCovert(objPlayer);
         CustomerServiceLog("player_faction", "PLAYER-FACTION ALTERED|TIME:" + getGameTime() + "|PLAYER:" + objPlayer + "|PLAYER NAME:" + getName(objPlayer) + "|ZONE:" + getCurrentSceneName() + "|Player has been set to covert");
     }
+
     public static void goOvertWithDelay(obj_id objPlayer, float fltDelay) throws InterruptedException
     {
         setObjVar(objPlayer, "intChangingFactionStatus", 1);
         pvpPrepareToBeDeclared(objPlayer);
         messageTo(objPlayer, "msgGoOvert", null, fltDelay, true);
     }
+
     public static void goOvert(obj_id objPlayer) throws InterruptedException
     {
         if (!hasObjVar(objPlayer, "intChangingFactionStatus"))
@@ -181,6 +186,7 @@ public class factions extends script.base_script
         pvpMakeDeclared(objPlayer);
         CustomerServiceLog("player_faction", "PLAYER-FACTION ALTERED|TIME:" + getGameTime() + "|PLAYER:" + objPlayer + "|PLAYER NAME:" + getName(objPlayer) + "|ZONE:" + getCurrentSceneName() + "|Player has been set to overt");
     }
+
     public static void goOnLeaveWithDelay(obj_id objPlayer, float fltDelay) throws InterruptedException
     {
         if (!canGoOnLeave(objPlayer))
@@ -191,6 +197,7 @@ public class factions extends script.base_script
         pvpPrepareToBeNeutral(objPlayer);
         messageTo(objPlayer, "msgGoOnLeave", null, fltDelay, true);
     }
+
     public static void goOnLeave(obj_id objPlayer) throws InterruptedException
     {
         if (!hasObjVar(objPlayer, "intChangingFactionStatus"))
@@ -208,6 +215,7 @@ public class factions extends script.base_script
         pvpMakeOnLeave(objPlayer);
         CustomerServiceLog("player_faction", "PLAYER-FACTION ALTERED|TIME:" + getGameTime() + "|PLAYER:" + objPlayer + "|PLAYER NAME:" + getName(objPlayer) + "|ZONE:" + getCurrentSceneName() + "|Player has been set to On Leave");
     }
+
     public static void unequipFactionEquipment(obj_id self, boolean checkForDeclaredObjVar) throws InterruptedException
     {
         obj_id[] items = getContents(self);
@@ -217,11 +225,15 @@ public class factions extends script.base_script
             return;
         }
         obj_id inv = getObjectInSlot(self, "inventory");
-        for (obj_id item : items) {
-            if (hasScript(item, factions.SCRIPT_FACTION_ITEM)) {
-                if (!checkForDeclaredObjVar || hasObjVar(item, factions.VAR_DECLARED)) {
+        for (obj_id item : items)
+        {
+            if (hasScript(item, factions.SCRIPT_FACTION_ITEM))
+            {
+                if (!checkForDeclaredObjVar || hasObjVar(item, factions.VAR_DECLARED))
+                {
                     String strTemplate = getTemplateName(item);
-                    if (!strTemplate.endsWith("marine/armor_marine_backpack.iff")) {
+                    if (!strTemplate.endsWith("marine/armor_marine_backpack.iff"))
+                    {
                         putInOverloaded(item, inv);
                     }
                 }
@@ -239,14 +251,18 @@ public class factions extends script.base_script
             LOG("LOG_CHANNEL", "Player " + self + " has an appearance inventory, but the contents were null. Skipping appearance inventory faction unequip...");
             return;
         }
-        for (obj_id appInvItem : appInvItems) {
-            if (hasScript(appInvItem, factions.SCRIPT_FACTION_ITEM)) {
-                if (!checkForDeclaredObjVar || hasObjVar(appInvItem, factions.VAR_DECLARED)) {
+        for (obj_id appInvItem : appInvItems)
+        {
+            if (hasScript(appInvItem, factions.SCRIPT_FACTION_ITEM))
+            {
+                if (!checkForDeclaredObjVar || hasObjVar(appInvItem, factions.VAR_DECLARED))
+                {
                     putInOverloaded(appInvItem, inv);
                 }
             }
         }
     }
+
     public static boolean isDeclared(obj_id target) throws InterruptedException
     {
         if (pvpGetType(target) == PVPTYPE_DECLARED)
@@ -255,11 +271,13 @@ public class factions extends script.base_script
         }
         return false;
     }
+
     public static boolean isCovert(obj_id target) throws InterruptedException
     {
         int pvpType = pvpGetType(target);
         return pvpType == PVPTYPE_COVERT || pvpType == PVPTYPE_DECLARED;
     }
+
     public static String getFaction(obj_id target) throws InterruptedException
     {
         if (isPlayer(target))
@@ -270,11 +288,12 @@ public class factions extends script.base_script
             }
             return getFactionNameByHashCode(pvpGetAlignedFaction(target));
         }
-        else 
+        else
         {
             return getStringObjVar(target, FACTION);
         }
     }
+
     public static int getFactionFlag(obj_id target) throws InterruptedException
     {
         if (isRebel(target))
@@ -285,11 +304,12 @@ public class factions extends script.base_script
         {
             return FACTION_FLAG_IMPERIAL;
         }
-        else 
+        else
         {
             return FACTION_FLAG_NEUTRAL;
         }
     }
+
     public static boolean isRebelHelper(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -303,6 +323,7 @@ public class factions extends script.base_script
         }
         return (370444368) == currentMercenaryFaction;
     }
+
     public static boolean isImperialHelper(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -316,6 +337,7 @@ public class factions extends script.base_script
         }
         return (-615855020) == currentMercenaryFaction;
     }
+
     public static boolean isRebelorRebelHelper(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -324,6 +346,7 @@ public class factions extends script.base_script
         }
         return isRebelHelper(target) || getFactionFlag(target) == FACTION_FLAG_REBEL;
     }
+
     public static boolean isImperialorImperialHelper(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -332,6 +355,7 @@ public class factions extends script.base_script
         }
         return isImperialHelper(target) || getFactionFlag(target) == FACTION_FLAG_IMPERIAL;
     }
+
     public static boolean isSameFactionorFactionHelper(obj_id target, obj_id target2) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target) || !isIdValid(target2) || !exists(target2))
@@ -340,10 +364,12 @@ public class factions extends script.base_script
         }
         return (isImperialorImperialHelper(target) && isImperialorImperialHelper(target2)) || (isRebelorRebelHelper(target) && isRebelorRebelHelper(target2));
     }
+
     public static float getFactionStanding(obj_id target, int intFaction) throws InterruptedException
     {
         return getFactionStanding(target, getFactionNameByHashCode(intFaction));
     }
+
     public static float getFactionStanding(obj_id target, String factionName) throws InterruptedException
     {
         if (!exists(target))
@@ -356,7 +382,7 @@ public class factions extends script.base_script
             {
                 return FACTION_RATING_MAX;
             }
-            else 
+            else
             {
                 return 0.0f;
             }
@@ -365,19 +391,22 @@ public class factions extends script.base_script
         {
             return 0.0f;
         }
-        else 
+        else
         {
             return getFloatObjVar(target, FACTION + "." + factionName);
         }
     }
+
     public static float getFactionMax(obj_id target, int intFactionId) throws InterruptedException
     {
         return getFactionMax(target, getFactionNameByHashCode(intFactionId));
     }
+
     public static float getFactionMax(obj_id target, String factionName) throws InterruptedException
     {
         return FACTION_RATING_MAX;
     }
+
     public static void validateFactionStanding(obj_id player, String factionName) throws InterruptedException
     {
         float currentStanding = getFactionStanding(player, factionName);
@@ -387,14 +416,16 @@ public class factions extends script.base_script
             setFactionStanding(player, factionName, maxStanding);
             prose_package ppFactionLower = prose.getPackage(SID_FACTION_ADJUSTED_LOWER);
             prose.setTO(ppFactionLower, new string_id("faction/faction_names", factionName));
-            prose.setDI(ppFactionLower, (int)maxStanding);
+            prose.setDI(ppFactionLower, (int) maxStanding);
             sendSystemMessageProse(player, ppFactionLower);
         }
     }
+
     public static String getRankName(int rank, String faction) throws InterruptedException
     {
         return utils.packStringId(getRankNameStringId(rank, faction));
     }
+
     public static string_id getRankNameStringId(int rank, String faction) throws InterruptedException
     {
         String rankName = constructRankName(rank, faction);
@@ -405,22 +436,25 @@ public class factions extends script.base_script
         CustomerServiceLog("faction", "WARNING: factions.getRankNameStringId() called with rank " + rank + " that has no rank name associated with it");
         return SID_NO_RANK_NAME;
     }
+
     public static String constructRankName(int rank, String faction) throws InterruptedException
     {
         return toLower(faction) + "_rank" + rank;
     }
+
     public static int getRankCost(int rank) throws InterruptedException
     {
         return dataTableGetInt(TBL_RANK, rank, COL_COST);
     }
+
     public static int getAvailableFactionPoints(obj_id target, String factionName) throws InterruptedException
     {
         if (isIdValid(target) && isPlayer(target) && factionName != null && !factionName.equals(""))
         {
-            int standing = (int)getFactionStanding(target, factionName);
+            int standing = (int) getFactionStanding(target, factionName);
             if (standing > 0)
             {
-                int available = standing - (int)FACTION_RATING_DECLARABLE_MIN;
+                int available = standing - (int) FACTION_RATING_DECLARABLE_MIN;
                 if (available > 0)
                 {
                     return available;
@@ -429,6 +463,7 @@ public class factions extends script.base_script
         }
         return 0;
     }
+
     public static int getAvailableFactionPoints(obj_id target, int faction) throws InterruptedException
     {
         if (isIdValid(target) && isPlayer(target))
@@ -438,6 +473,7 @@ public class factions extends script.base_script
         }
         return 0;
     }
+
     public static void delegateFactionPoints(obj_id self, obj_id target, String params) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -482,7 +518,7 @@ public class factions extends script.base_script
         {
             return;
         }
-        float multiplier = (float)ratioTo / ratioFrom;
+        float multiplier = (float) ratioTo / ratioFrom;
         if (params == null || params.equals(""))
         {
             String title = utils.packStringId(SID_SUI_DELEGATE_FACTION);
@@ -499,14 +535,14 @@ public class factions extends script.base_script
             }
             return;
         }
-        else 
+        else
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(params);
             String sAmt = st.nextToken();
             int amt = utils.stringToInt(sAmt);
             if (amt > 0)
             {
-                int required = (int)Math.ceil(amt / multiplier);
+                int required = (int) Math.ceil(amt / multiplier);
                 if (required > available)
                 {
                     prose_package ppLackPointsToGive = prose.getPackage(SID_FACTION_LACK_POINTS_TO_GIVE);
@@ -515,10 +551,10 @@ public class factions extends script.base_script
                     prose.setDI(ppLackPointsToGive, required);
                     sendSystemMessageProse(self, ppLackPointsToGive);
                 }
-                else 
+                else
                 {
-                    int targetMax = (int)getFactionMax(target, sFac);
-                    int targetCur = (int)getFactionStanding(target, sFac);
+                    int targetMax = (int) getFactionMax(target, sFac);
+                    int targetCur = (int) getFactionStanding(target, sFac);
                     int targetDelta = targetMax - targetCur;
                     if (targetDelta == 0)
                     {
@@ -551,10 +587,12 @@ public class factions extends script.base_script
         }
         sendSystemMessage(self, SID_FACTION_DELEGATE_SYNTAX);
     }
+
     public static void resignFromFaction(obj_id player, int intFaction) throws InterruptedException
     {
         resignFromFaction(player, getFactionNameByHashCode(intFaction));
     }
+
     public static void resignFromFaction(obj_id player, String resign_faction) throws InterruptedException
     {
         if (isInAdhocPvpArea(player))
@@ -605,14 +643,17 @@ public class factions extends script.base_script
         prose_package pp = prose.getPackage(SID_RESIGN_COMPLETE, resign_faction);
         sendSystemMessageProse(player, pp);
     }
+
     public static void resignFromFaction(obj_id player) throws InterruptedException
     {
         resignFromFaction(player, getFaction(player));
     }
+
     public static boolean addFactionStanding(obj_id target, int intFaction, float value) throws InterruptedException
     {
         return addFactionStanding(target, getFactionNameByHashCode(intFaction), value);
     }
+
     public static boolean addFactionStanding(obj_id target, String factionName, float value) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -621,6 +662,7 @@ public class factions extends script.base_script
         }
         return addUnmodifiedFactionStanding(target, factionName, value) && grantFactionBonus(target, factionName, value);
     }
+
     public static boolean addUnmodifiedFactionStanding(obj_id target, String factionName, float value, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(target) || factionName == null || factionName.equals("") || value == 0.0f)
@@ -674,20 +716,20 @@ public class factions extends script.base_script
             setObjVar(target, FACTION + "." + factionName, newRating);
             if (verbose)
             {
-                if ((int)value > 0)
+                if ((int) value > 0)
                 {
-                    prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(factionName), (int)actual_value);
+                    prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(factionName), (int) actual_value);
                     sendSystemMessageProse(target, pp);
                 }
-                else 
+                else
                 {
                     actual_value = actual_value * -1;
-                    prose_package pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(factionName), (int)actual_value);
+                    prose_package pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(factionName), (int) actual_value);
                     sendSystemMessageProse(target, pp);
                 }
             }
         }
-        else 
+        else
         {
             removeObjVar(target, FACTION + "." + factionName);
         }
@@ -706,14 +748,17 @@ public class factions extends script.base_script
         }
         return true;
     }
+
     public static boolean addUnmodifiedFactionStanding(obj_id target, String factionName, float value) throws InterruptedException
     {
         return addUnmodifiedFactionStanding(target, factionName, value, true);
     }
+
     public static boolean grantFactionBonus(obj_id target, String factionName, float value) throws InterruptedException
     {
         return !(!isIdValid(target) || factionName == null || factionName.equals("") || value == 0.0f);
     }
+
     public static float getFactionStoryReward(obj_id target, String factionName, float value) throws InterruptedException
     {
         float bonus = 0;
@@ -727,6 +772,7 @@ public class factions extends script.base_script
         }
         return bonus;
     }
+
     public static void setFactionStanding(obj_id target, String factionName, float value) throws InterruptedException
     {
         if (factionName == null || factionName.equals(""))
@@ -771,7 +817,7 @@ public class factions extends script.base_script
             }
             setObjVar(target, FACTION + "." + factionName, value);
         }
-        else 
+        else
         {
             removeObjVar(target, FACTION + "." + factionName);
             messageTo(target, "removeSmugglingBonuses", null, 1.0f, false);
@@ -783,6 +829,7 @@ public class factions extends script.base_script
             weapons.adjustWeaponRangeForExpertise(target, tempWeapon, true);
         }
     }
+
     public static void setFaction(obj_id target, String factionName) throws InterruptedException
     {
         if (factionName == null || factionName.equals(""))
@@ -791,14 +838,17 @@ public class factions extends script.base_script
         }
         setFaction(target, factionName, true);
     }
+
     public static void setFaction(obj_id target, String factionName, int pvpOnly) throws InterruptedException
     {
         setFaction(target, factionName, true, pvpOnly);
     }
+
     public static void setFaction(obj_id target, String factionName, boolean isAggro) throws InterruptedException
     {
         setFaction(target, factionName, isAggro, 0);
     }
+
     public static void setFaction(obj_id target, String factionName, boolean isAggro, int pvpOnly) throws InterruptedException
     {
         if (factionName == null || factionName.equals(""))
@@ -855,6 +905,7 @@ public class factions extends script.base_script
         pvpSetAlignedFaction(target, factionHashCode);
         pvpMakeDeclared(target);
     }
+
     public static boolean isNeutral(obj_id target) throws InterruptedException
     {
         int intPlayerFaction = pvpGetAlignedFaction(target);
@@ -864,6 +915,7 @@ public class factions extends script.base_script
         }
         return pvpGetType(target) == PVPTYPE_NEUTRAL;
     }
+
     public static String getFactionNameByHashCode(int hashCode) throws InterruptedException
     {
         if (hashCode == 0)
@@ -880,6 +932,7 @@ public class factions extends script.base_script
         }
         return null;
     }
+
     public static int getFactionNumber(String factionName) throws InterruptedException
     {
         if (factionName == null)
@@ -888,6 +941,7 @@ public class factions extends script.base_script
         }
         return dataTableSearchColumnForString(factionName, "factionName", FACTION_TABLE);
     }
+
     public static int getFactionStatus(obj_id ai, obj_id target) throws InterruptedException
     {
         int result = STATUS_NEUTRAL;
@@ -902,6 +956,7 @@ public class factions extends script.base_script
         }
         return result;
     }
+
     public static int getFactionReaction(obj_id npc, obj_id target) throws InterruptedException
     {
         PROFILER_START("library.faction.getFactionReaction");
@@ -932,7 +987,7 @@ public class factions extends script.base_script
                         PROFILER_STOP("library.faction.getFactionReaction");
                         return REACTION_POSITIVE;
                     }
-                    else 
+                    else
                     {
                         PROFILER_STOP("library.faction.getFactionReaction");
                         return REACTION_NEGATIVE;
@@ -964,7 +1019,7 @@ public class factions extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 String targetFaction = getFaction(target);
                 if (targetFaction != null)
@@ -977,28 +1032,28 @@ public class factions extends script.base_script
                             result = REACTION_POSITIVE;
                         }
                     }
-                    else 
+                    else
                     {
                         int targetFactionNum = getFactionNumber(targetFaction);
                         if (targetFactionNum == AD_HOC_FACTION)
                         {
                             result = REACTION_NEUTRAL;
                         }
-                        else 
+                        else
                         {
                             String enemies = dataTableGetString(FACTION_TABLE, npcFaction, "enemies");
                             if (enemies == null)
                             {
                                 result = REACTION_NEUTRAL;
                             }
-                            else 
+                            else
                             {
                                 String[] enemiesList = split(enemies, ',');
                                 if (utils.getElementPositionInArray(enemiesList, targetFaction) != -1)
                                 {
                                     result = REACTION_NEGATIVE;
                                 }
-                                else 
+                                else
                                 {
                                     result = REACTION_NEUTRAL;
                                 }
@@ -1011,6 +1066,7 @@ public class factions extends script.base_script
         PROFILER_STOP("library.faction.getFactionReaction");
         return result;
     }
+
     public static String getDeclaredFaction(obj_id target) throws InterruptedException
     {
         if (!isDeclared(target))
@@ -1024,6 +1080,7 @@ public class factions extends script.base_script
         int factionHashCode = pvpGetAlignedFaction(target);
         return getFactionNameByHashCode(factionHashCode);
     }
+
     public static boolean isAggro(obj_id npc) throws InterruptedException
     {
         String factionName = getFaction(npc);
@@ -1038,6 +1095,7 @@ public class factions extends script.base_script
         }
         return (dataTableGetInt(FACTION_TABLE, factionNum, "isAggro") == 1);
     }
+
     public static void clearFaction(obj_id npc) throws InterruptedException
     {
         if (isPlayer(npc))
@@ -1047,6 +1105,7 @@ public class factions extends script.base_script
         removeObjVar(npc, FACTION);
         pvpMakeNeutral(npc);
     }
+
     public static boolean awardFactionStanding(obj_id player, String factionName, int value) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -1067,6 +1126,7 @@ public class factions extends script.base_script
         }
         return addFactionStanding(player, factionName, value);
     }
+
     public static void grantCombatFaction(obj_id killer, obj_id target, double percentDamage) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(killer) || percentDamage < 0.0f || percentDamage > 1.0f)
@@ -1113,8 +1173,8 @@ public class factions extends script.base_script
             int kRank = pvpGetCurrentGcwRank(killer);
             int tRank = pvpGetCurrentGcwRank(target);
             float diffFactor = 1.0f + (tRank - kRank) / (2 * MAXIMUM_RANK);
-            int actualReward = (int)(MAX_FACTION_KILL_REWARD * percentDamage * diffFactor);
-            int factionLoss = (int)(-1.5f * actualReward);
+            int actualReward = (int) (MAX_FACTION_KILL_REWARD * percentDamage * diffFactor);
+            int factionLoss = (int) (-1.5f * actualReward);
             if (hasSkill(target, "class_smuggler_phase2_novice"))
             {
                 actualReward /= 2;
@@ -1128,7 +1188,7 @@ public class factions extends script.base_script
             addFactionStanding(killer, targetFaction, factionLoss);
             addFactionStanding(target, targetFaction, factionLoss);
         }
-        else 
+        else
         {
             if (targetDiff > 25)
             {
@@ -1140,12 +1200,13 @@ public class factions extends script.base_script
             }
             int diffDelta = (targetDiff - killerDiff) + 25;
             float diffFactor = diffDelta / 50.0f;
-            int actualReward = (int)(MAX_FACTION_KILL_REWARD * percentDamage * diffFactor);
-            int factionLoss = (int)(-1.5f * actualReward);
+            int actualReward = (int) (MAX_FACTION_KILL_REWARD * percentDamage * diffFactor);
+            int factionLoss = (int) (-1.5f * actualReward);
             awardFactionStanding(killer, killerFaction, actualReward);
             addFactionStanding(killer, targetFaction, factionLoss);
         }
     }
+
     public static void adjustSocialStanding(obj_id target, String faction, int amount) throws InterruptedException
     {
         if (!isPlayer(target))
@@ -1180,8 +1241,10 @@ public class factions extends script.base_script
         if (allies != null)
         {
             String[] alliesList = split(allies, ',');
-            for (String s : alliesList) {
-                if (!s.equals(FACTION_IMPERIAL) && !s.equals(FACTION_REBEL)) {
+            for (String s : alliesList)
+            {
+                if (!s.equals(FACTION_IMPERIAL) && !s.equals(FACTION_REBEL))
+                {
                     addFactionStanding(target, s, amount);
                 }
             }
@@ -1197,16 +1260,20 @@ public class factions extends script.base_script
             return;
         }
         String[] enemiesList = split(enemies, ',');
-        for (String s : enemiesList) {
-            if (!s.equals(FACTION_IMPERIAL) && !s.equals(FACTION_REBEL)) {
+        for (String s : enemiesList)
+        {
+            if (!s.equals(FACTION_IMPERIAL) && !s.equals(FACTION_REBEL))
+            {
                 addFactionStanding(target, s, -amount);
             }
         }
     }
+
     public static string_id getLocalizedFactionName(String factionName) throws InterruptedException
     {
         return (new string_id("faction/faction_names", toLower(factionName)));
     }
+
     public static boolean setTemporaryEnemyFlag(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -1230,6 +1297,7 @@ public class factions extends script.base_script
         }
         return true;
     }
+
     public static boolean areFactionsOpposed(String faction1, String faction2) throws InterruptedException
     {
         int facNum1 = getFactionNumber(faction1);
@@ -1246,10 +1314,12 @@ public class factions extends script.base_script
         }
         return pvpAreFactionsOpposed(hc1, hc2);
     }
+
     public static obj_id getFactionParentObject() throws InterruptedException
     {
         return getPlanetByName("tatooine");
     }
+
     public static void changeFactionPoints(String strFaction, int intPoints) throws InterruptedException
     {
         obj_id objParent = getFactionParentObject();
@@ -1257,11 +1327,13 @@ public class factions extends script.base_script
         intPoints = intPoints + intOldPoints;
         setObjVar(objParent, "gcw." + strFaction, intPoints);
     }
+
     public static int getFactionPointStanding(String strFaction) throws InterruptedException
     {
         obj_id objParent = getFactionParentObject();
         return getIntObjVar(objParent, strFaction);
     }
+
     public static void shiftPointsTo(String strFaction, int intPoints) throws InterruptedException
     {
         if (strFaction.equals(FACTION_REBEL))
@@ -1275,6 +1347,7 @@ public class factions extends script.base_script
             changeFactionPoints(factions.FACTION_IMPERIAL, intPoints * -1);
         }
     }
+
     public static boolean isFactionWinning(String strFaction) throws InterruptedException
     {
         obj_id objParent = getFactionParentObject();
@@ -1292,10 +1365,12 @@ public class factions extends script.base_script
         }
         return false;
     }
+
     public static boolean setRank(obj_id player, int rank) throws InterruptedException
     {
         return false;
     }
+
     public static boolean releaseFactionHirelings(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1310,11 +1385,12 @@ public class factions extends script.base_script
             sendSystemMessageProse(player, pp);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isNewlyDeclared(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1323,6 +1399,7 @@ public class factions extends script.base_script
         }
         return utils.hasScriptVar(player, VAR_NEWLY_DECLARED);
     }
+
     public static boolean canUseFactionItem(obj_id player, obj_id item) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(item))
@@ -1335,7 +1412,7 @@ public class factions extends script.base_script
         {
             faction = getStringObjVar(item, VAR_FACTION);
         }
-        else 
+        else
         {
             CustomerServiceLog("Faction", "WARNING: factions::canUseFactionItem -- " + item + " is a faction item with no faction objvar.");
             return false;
@@ -1360,6 +1437,7 @@ public class factions extends script.base_script
         }
         return true;
     }
+
     public static void awardKashyyykFaction(obj_id player, int ammount) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -1381,12 +1459,13 @@ public class factions extends script.base_script
         float lose = hsskorAmmount - ammount;
         setObjVar(player, FACTION + "." + KASHYYYK, gain);
         setObjVar(player, FACTION + "." + HSSKOR, lose);
-        prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(KASHYYYK), (int)ammount);
+        prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(KASHYYYK), ammount);
         sendSystemMessageProse(player, pp);
         ammount *= -1;
-        pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(HSSKOR), (int)ammount);
+        pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(HSSKOR), ammount);
         sendSystemMessageProse(player, pp);
     }
+
     public static void awardHsskorFaction(obj_id player, int ammount) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -1408,12 +1487,13 @@ public class factions extends script.base_script
         float lose = kashyyykAmmount - ammount;
         setObjVar(player, FACTION + "." + HSSKOR, gain);
         setObjVar(player, FACTION + "." + KASHYYYK, lose);
-        prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(HSSKOR), (int)ammount);
+        prose_package pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(HSSKOR), ammount);
         sendSystemMessageProse(player, pp);
         ammount *= -1;
-        pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(KASHYYYK), (int)ammount);
+        pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(KASHYYYK), ammount);
         sendSystemMessageProse(player, pp);
     }
+
     public static void validateBalance(obj_id player, String faction) throws InterruptedException
     {
         String checkHsskor = FACTION + "." + HSSKOR;
@@ -1442,12 +1522,13 @@ public class factions extends script.base_script
             {
                 setObjVar(player, checkKashyyyk, -1 * getFactionStanding(player, HSSKOR));
             }
-            else 
+            else
             {
                 setObjVar(player, checkHsskor, -1 * getFactionStanding(player, KASHYYYK));
             }
         }
     }
+
     public static boolean isUnaligned(obj_id player) throws InterruptedException
     {
         String hsskor = FACTION + "." + HSSKOR;
@@ -1459,6 +1540,7 @@ public class factions extends script.base_script
         }
         return getFloatObjVar(player, hsskor) == 0;
     }
+
     public static boolean isAlignedKashyyyk(obj_id player) throws InterruptedException
     {
         if (isUnaligned(player))
@@ -1467,6 +1549,7 @@ public class factions extends script.base_script
         }
         return (getFactionStanding(player, KASHYYYK) > 0);
     }
+
     public static boolean isAlignedHsskor(obj_id player) throws InterruptedException
     {
         if (isUnaligned(player))
@@ -1475,26 +1558,32 @@ public class factions extends script.base_script
         }
         return (getFactionStanding(player, HSSKOR) > 0);
     }
+
     public static boolean isImperial(obj_id objPlayer) throws InterruptedException
     {
         return pvpGetAlignedFaction(objPlayer) == (-615855020);
     }
+
     public static boolean isRebel(obj_id objPlayer) throws InterruptedException
     {
         return pvpGetAlignedFaction(objPlayer) == (370444368);
     }
+
     public static boolean isOnLeave(obj_id objPlayer) throws InterruptedException
     {
         return (pvpGetAlignedFaction(objPlayer) != 0) && pvpGetType(objPlayer) == PVPTYPE_NEUTRAL;
     }
+
     public static boolean isActiveImperial(obj_id objPlayer) throws InterruptedException
     {
         return (isImperial(objPlayer) && !isOnLeave(objPlayer));
     }
+
     public static boolean isActiveRebel(obj_id objPlayer) throws InterruptedException
     {
         return (isRebel(objPlayer) && !isOnLeave(objPlayer));
     }
+
     public static boolean isGatedByJoinTimer(obj_id player, String factionJoining) throws InterruptedException
     {
         factionJoining = toLower(factionJoining);
@@ -1516,6 +1605,7 @@ public class factions extends script.base_script
         }
         return false;
     }
+
     public static boolean canJoinFaction(obj_id player, int faction_id) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1545,13 +1635,14 @@ public class factions extends script.base_script
             {
                 player_faction_id = 0;
             }
-            else 
+            else
             {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean isFactionMember(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1572,6 +1663,7 @@ public class factions extends script.base_script
         }
         return player_faction_id == npc_faction_id;
     }
+
     public static boolean joinFaction(obj_id player, int faction_id, boolean returnFromReserves) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1600,28 +1692,34 @@ public class factions extends script.base_script
         LOG("LOG_CHANNEL", "faction_recruiter::joinFaction -- " + player + " has joined faction " + faction_id);
         return true;
     }
+
     public static boolean joinFaction(obj_id player, int faction_id) throws InterruptedException
     {
         return joinFaction(player, faction_id, false);
     }
+
     public static boolean isOnLeaveFromFriendlyFaction(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         return pvpGetAlignedFaction(objPlayer) == pvpGetAlignedFaction(objNPC) && (pvpGetType(objPlayer) == PVPTYPE_NEUTRAL);
     }
+
     public static boolean isInEnemyFaction(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         int intFaction = pvpGetAlignedFaction(objPlayer);
         return (intFaction != 0) && (intFaction != pvpGetAlignedFaction(objNPC));
     }
+
     public static boolean isInFriendlyFaction(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         return pvpGetAlignedFaction(objPlayer) == pvpGetAlignedFaction(objNPC);
     }
+
     public static boolean isOnLeaveFromEnemyFaction(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         int intFaction = pvpGetAlignedFaction(objPlayer);
         return (intFaction != 0) && (intFaction != pvpGetAlignedFaction(objNPC) && (pvpGetType(objPlayer) == PVPTYPE_NEUTRAL));
     }
+
     public static boolean qualifiesForPromotion(obj_id objPlayer, int intFaction) throws InterruptedException
     {
         int intPlayerFaction = pvpGetAlignedFaction(objPlayer);
@@ -1635,16 +1733,17 @@ public class factions extends script.base_script
             return false;
         }
         int cost = factions.getRankCost(current_rank + 1);
-        int faction_standing = (int)factions.getFactionStanding(objPlayer, intFaction);
+        int faction_standing = (int) factions.getFactionStanding(objPlayer, intFaction);
         return faction_standing >= cost;
     }
+
     public static void applyPromotion(obj_id objPlayer, int intFaction) throws InterruptedException
     {
         if (qualifiesForPromotion(objPlayer, intFaction))
         {
             int current_rank = pvpGetCurrentGcwRank(objPlayer);
             int cost = factions.getRankCost(current_rank + 1);
-            int faction_standing = (int)factions.getFactionStanding(objPlayer, intFaction);
+            int faction_standing = (int) factions.getFactionStanding(objPlayer, intFaction);
             if (factions.addFactionStanding(objPlayer, intFaction, -cost))
             {
                 CustomerServiceLog("player_faction", "PLAYER-FACTION ALTERED|TIME:" + getGameTime() + "|PLAYER:" + objPlayer + "|PLAYER NAME:" + getName(objPlayer) + "|ZONE:" + getCurrentSceneName() + "|Player has purchased rank for " + cost);
@@ -1652,18 +1751,16 @@ public class factions extends script.base_script
             }
         }
     }
+
     public static boolean isSmuggler(obj_id player) throws InterruptedException
     {
         if (hasSkill(player, "class_smuggler_phase3_novice"))
         {
             return true;
         }
-        else if (hasSkill(player, "class_smuggler_phase4_novice"))
-        {
-            return true;
-        }
-        return false;
+        else return hasSkill(player, "class_smuggler_phase4_novice");
     }
+
     public static boolean canBuyFaction(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         int intNPCFaction = pvpGetAlignedFaction(objNPC);
@@ -1674,7 +1771,7 @@ public class factions extends script.base_script
         {
             oppfaction = "Rebel";
         }
-        else 
+        else
         {
             oppfaction = "Imperial";
         }
@@ -1687,11 +1784,13 @@ public class factions extends script.base_script
         }
         else return !(ourstanding >= fltFactionMax);
     }
+
     public static void buyFaction(obj_id objPlayer, obj_id objNPC, int intAmount) throws InterruptedException
     {
         dictionary outp = new dictionary();
         money.requestPayment(objPlayer, objNPC, intAmount, "payBribe", outp, true);
     }
+
     public static boolean leaveFaction(obj_id player, int faction_id) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1709,10 +1808,12 @@ public class factions extends script.base_script
         int pid = sui.inputbox(player, player, prompt, title, "handleLeaveFactionSui", "");
         return (pid > -1);
     }
+
     public static boolean isPVPStatusChanging(obj_id objPlayer) throws InterruptedException
     {
         return hasObjVar(objPlayer, "intChangingFactionStatus");
     }
+
     public static boolean pvpDoAllowedAttackCheck(obj_id objPlayer, obj_id objTarget) throws InterruptedException
     {
         if (!isPlayer(objPlayer))
@@ -1734,7 +1835,7 @@ public class factions extends script.base_script
                 LOG("combat", "return 3");
                 return false;
             }
-            else 
+            else
             {
                 int intMyPVPType = pvpGetType(objPlayer);
                 int intYourPVPType = pvpGetType(objTarget);
@@ -1799,12 +1900,13 @@ public class factions extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             LOG("combat", "return 14");
             return true;
         }
     }
+
     public static void doTransitionSui(obj_id objPlayer, obj_id objTarget, float fltDelay) throws InterruptedException
     {
         if (hasObjVar(objPlayer, "intChangingFactionStatus"))
@@ -1820,9 +1922,11 @@ public class factions extends script.base_script
         int intYourPVPType = pvpGetType(objTarget);
         string_id strTitleId = new string_id("gcw", "gcw_status_change");
         String strTitle = utils.packStringId(strTitleId);
-        switch (intMyPVPType) {
+        switch (intMyPVPType)
+        {
             case PVPTYPE_NEUTRAL:
-                switch (intYourPVPType) {
+                switch (intYourPVPType)
+                {
                     case PVPTYPE_COVERT:
                     {
                         string_id strSpam = new string_id("gcw", "gcw_status_change_covert");
@@ -1843,7 +1947,8 @@ public class factions extends script.base_script
                 }
                 break;
             case PVPTYPE_COVERT:
-                switch (intYourPVPType) {
+                switch (intYourPVPType)
+                {
                     case PVPTYPE_COVERT:
                         sendSystemMessageTestingOnly(objPlayer, "Error # 1 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
                         break;
@@ -1862,6 +1967,7 @@ public class factions extends script.base_script
                 break;
         }
     }
+
     public static boolean pvpDoAllowedHelpCheck(obj_id objPlayer, obj_id objTarget) throws InterruptedException
     {
         if (!isPlayer(objPlayer))
@@ -1883,7 +1989,7 @@ public class factions extends script.base_script
                 LOG("combat", "return 3");
                 return false;
             }
-            else 
+            else
             {
                 int intMyPVPType = pvpGetType(objPlayer);
                 int intYourPVPType = pvpGetType(objTarget);
@@ -1899,20 +2005,23 @@ public class factions extends script.base_script
             }
             return false;
         }
-        else 
+        else
         {
             LOG("combat", "return 14");
             return true;
         }
     }
+
     public static boolean canGoOnLeave(obj_id objPlayer) throws InterruptedException
     {
         return !isInAdhocPvpArea(objPlayer);
     }
+
     public static boolean canGoCovert(obj_id objPlayer) throws InterruptedException
     {
         return !isInAdhocPvpArea(objPlayer);
     }
+
     public static prose_package getFactionProsePackage(String factionName, int actualValue) throws InterruptedException
     {
         prose_package pp = null;
@@ -1920,13 +2029,13 @@ public class factions extends script.base_script
         {
             pp = prose.getPackage(PROSE_AWARD_FACTION, getLocalizedFactionName(factionName), actualValue);
         }
-        else 
+        else
         {
             pp = prose.getPackage(PROSE_LOSE_FACTION, getLocalizedFactionName(factionName), -actualValue);
         }
         return pp;
     }
-    public static final String IGNORE_PLAYER = "ignorePlayer";
+
     public static boolean ignorePlayer(obj_id attacker, obj_id target) throws InterruptedException
     {
         if (isPlayer(attacker) || (isMob(attacker) && isIdValid(getMaster(attacker)) && isPlayer(getMaster(attacker))))
@@ -1936,7 +2045,7 @@ public class factions extends script.base_script
                 return true;
             }
         }
-        else 
+        else
         {
             if (isPlayer(target) || (isMob(target) && isIdValid(getMaster(target)) && isPlayer(getMaster(target))))
             {
@@ -1952,10 +2061,12 @@ public class factions extends script.base_script
         }
         return false;
     }
+
     public static void setIgnorePlayer(obj_id npc) throws InterruptedException
     {
         utils.setScriptVar(npc, IGNORE_PLAYER, true);
     }
+
     public static boolean isInAdhocPvpArea(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1968,6 +2079,7 @@ public class factions extends script.base_script
         }
         return false;
     }
+
     public static void removeAllPvpSkills(obj_id player) throws InterruptedException
     {
         skill.revokeSkill(player, "pvp_imperial_retaliation_ability");
@@ -1983,12 +2095,14 @@ public class factions extends script.base_script
         skill.revokeSkill(player, "pvp_rebel_aura_buff_self");
         skill.revokeSkill(player, "pvp_rebel_airstrike_ability");
     }
+
     public static boolean shareSocialGroup(obj_id creatureOne, obj_id creatureTwo) throws InterruptedException
     {
         String socialOne = getStringObjVar(creatureOne, "socialGroup");
         String socialTwo = getStringObjVar(creatureTwo, "socialGroup");
         return socialOne.equals(socialTwo);
     }
+
     public static boolean areCreaturesAllied(obj_id creatureOne, obj_id creatureTwo) throws InterruptedException
     {
         String factionOne = getStringObjVar(creatureOne, "faction");
@@ -2012,13 +2126,16 @@ public class factions extends script.base_script
             return false;
         }
         String[] alliesParse = split(allies, ',');
-        for (String s : alliesParse) {
-            if (s.equals(factionTwo)) {
+        for (String s : alliesParse)
+        {
+            if (s.equals(factionTwo))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isPlayerSameGcwFactionAsSchedulerObject(obj_id player, obj_id object) throws InterruptedException
     {
         LOG("faction_check", "isPlayerSameGcwFactionAsSchedulerObject init");
@@ -2045,12 +2162,9 @@ public class factions extends script.base_script
         if (0 != pvpGetAlignedFaction(player))
         {
             LOG("faction_check", "isPlayerSameGcwFactionAsSchedulerObject FACTIONED player");
-            if (intFaction != factions.getFactionFlag(player))
-            {
-                return false;
-            }
+            return intFaction == factions.getFactionFlag(player);
         }
-        else 
+        else
         {
             LOG("faction_check", "isPlayerSameGcwFactionAsSchedulerObject NEUTRAL player");
             int currentMercenaryFaction = pvpNeutralGetMercenaryFaction(player);
@@ -2063,13 +2177,10 @@ public class factions extends script.base_script
             {
                 return false;
             }
-            if ((370444368) == currentMercenaryFaction && intFaction != FACTION_FLAG_REBEL)
-            {
-                return false;
-            }
+            return (370444368) != currentMercenaryFaction || intFaction == FACTION_FLAG_REBEL;
         }
-        return true;
     }
+
     public static boolean canChangeNeutralMercenaryStatus(obj_id player, String faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2089,7 +2200,7 @@ public class factions extends script.base_script
             return false;
         }
         final int timeNow = getCalendarTime();
-        if ((faction.toLowerCase()).equals("imperial") && hasObjVar(player, "factionalHelper.timeStopHelpingRebel"))
+        if ((faction).equalsIgnoreCase("imperial") && hasObjVar(player, "factionalHelper.timeStopHelpingRebel"))
         {
             int time = getIntObjVar(player, "factionalHelper.timeStopHelpingRebel");
             if ((time > 0) && ((time + 1800) > timeNow))
@@ -2098,7 +2209,7 @@ public class factions extends script.base_script
                 return false;
             }
         }
-        if ((faction.toLowerCase()).equals("rebel") && hasObjVar(player, "factionalHelper.timeStopHelpingImperial"))
+        if ((faction).equalsIgnoreCase("rebel") && hasObjVar(player, "factionalHelper.timeStopHelpingImperial"))
         {
             int time = getIntObjVar(player, "factionalHelper.timeStopHelpingImperial");
             if ((time > 0) && ((time + 1800) > timeNow))
@@ -2109,6 +2220,7 @@ public class factions extends script.base_script
         }
         return true;
     }
+
     public static boolean neutralMercenaryStatusMenu(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2143,7 +2255,7 @@ public class factions extends script.base_script
                 if (isDeclared)
                 {
                     String configSetting = getConfigSetting("GameServer", "enableCovertImperialMercenary");
-                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
                     {
                         choicesDisplay.addElement("I want to help the Imperials as a Combatant.");
                         choicesInternal.addElement("covert_imperial_mercenary_begin");
@@ -2151,12 +2263,12 @@ public class factions extends script.base_script
                     choicesDisplay.addElement("I want to stop being a Special Forces Imperial helper.");
                     choicesInternal.addElement("overt_imperial_mercenary_end");
                 }
-                else 
+                else
                 {
                     choicesDisplay.addElement("I want to stop being a Combatant Imperial helper.");
                     choicesInternal.addElement("covert_imperial_mercenary_end");
                     String configSetting = getConfigSetting("GameServer", "enableOvertImperialMercenary");
-                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
                     {
                         choicesDisplay.addElement("I want to help the Imperials as a Special Forces.");
                         choicesInternal.addElement("overt_imperial_mercenary_begin");
@@ -2174,7 +2286,7 @@ public class factions extends script.base_script
                 if (isDeclared)
                 {
                     String configSetting = getConfigSetting("GameServer", "enableCovertRebelMercenary");
-                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
                     {
                         choicesDisplay.addElement("I want to help the Rebels as a Combatant.");
                         choicesInternal.addElement("covert_rebel_mercenary_begin");
@@ -2182,12 +2294,12 @@ public class factions extends script.base_script
                     choicesDisplay.addElement("I want to stop being a Special Forces Rebel helper.");
                     choicesInternal.addElement("overt_rebel_mercenary_end");
                 }
-                else 
+                else
                 {
                     choicesDisplay.addElement("I want to stop being a Combatant Rebel helper.");
                     choicesInternal.addElement("covert_rebel_mercenary_end");
                     String configSetting = getConfigSetting("GameServer", "enableOvertRebelMercenary");
-                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+                    if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
                     {
                         choicesDisplay.addElement("I want to help the Rebels as a Special Forces.");
                         choicesInternal.addElement("overt_rebel_mercenary_begin");
@@ -2224,13 +2336,13 @@ public class factions extends script.base_script
         if (secondsUntilCanHelpImperial <= 0)
         {
             String configSetting = getConfigSetting("GameServer", "enableCovertImperialMercenary");
-            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
             {
                 choicesDisplay.addElement("I want to help the Imperials as a Combatant.");
                 choicesInternal.addElement("covert_imperial_mercenary_begin");
             }
             configSetting = getConfigSetting("GameServer", "enableOvertImperialMercenary");
-            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
             {
                 choicesDisplay.addElement("I want to help the Imperials as a Special Forces.");
                 choicesInternal.addElement("overt_imperial_mercenary_begin");
@@ -2239,13 +2351,13 @@ public class factions extends script.base_script
         if (secondsUntilCanHelpRebel <= 0)
         {
             String configSetting = getConfigSetting("GameServer", "enableCovertRebelMercenary");
-            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
             {
                 choicesDisplay.addElement("I want to help the Rebels as a Combatant.");
                 choicesInternal.addElement("covert_rebel_mercenary_begin");
             }
             configSetting = getConfigSetting("GameServer", "enableOvertRebelMercenary");
-            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
+            if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting).equalsIgnoreCase("false") && !configSetting.equals("0"))
             {
                 choicesDisplay.addElement("I want to help the Rebels as a Special Forces.");
                 choicesInternal.addElement("overt_rebel_mercenary_begin");
@@ -2272,6 +2384,7 @@ public class factions extends script.base_script
         utils.setScriptVar(player, SCRIPTVAR_FACTIONAL_HELPER_SUI_ID, pid);
         return true;
     }
+
     public static boolean setNeturalMercenaryCovert(obj_id player, int factionFlag) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2304,12 +2417,13 @@ public class factions extends script.base_script
             sendSystemMessage(player, "Reducing wait to 5 seconds ***BECAUSE YOU ARE IN GOD MODE***.", "");
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 5.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 60.0f, false);
         }
         return true;
     }
+
     public static boolean setNeturalMercenaryOvert(obj_id player, int factionFlag) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2342,12 +2456,13 @@ public class factions extends script.base_script
             sendSystemMessage(player, "Reducing wait to 5 seconds ***BECAUSE YOU ARE IN GOD MODE***.", "");
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 5.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 60.0f, false);
         }
         return true;
     }
+
     public static boolean removeNeturalMercenary(obj_id player, int factionFlag) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2367,7 +2482,7 @@ public class factions extends script.base_script
                 sendSystemMessage(player, SID_MERC_REBEL_SF_END);
                 type = MERC_END_OVERT_REBEL;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_MERC_REBEL_COMBATANT_END);
                 type = MERC_END_COVERT_REBEL;
@@ -2380,7 +2495,7 @@ public class factions extends script.base_script
                 sendSystemMessage(player, SID_MERC_IMPERIAL_SF_END);
                 type = MERC_END_OVERT_IMPERIAL;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_MERC_IMPERIAL_COMBATANT_END);
                 type = MERC_END_COVERT_IMPERIAL;
@@ -2397,7 +2512,7 @@ public class factions extends script.base_script
             sendSystemMessage(player, "Reducing wait to 5 seconds ***BECAUSE YOU ARE IN GOD MODE***.", "");
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 5.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "executeFactionalHelperChoice", messageToParams, 60.0f, false);
         }

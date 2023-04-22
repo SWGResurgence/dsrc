@@ -3,13 +3,136 @@ package script.terminal;
 import script.*;
 import script.library.*;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.*;
 
 public class terminal_character_builder extends script.base_script
 {
+    public static class warp_location extends locations {
+        private int worldX, worldY, worldZ;
+        private int cellX, cellY, cellZ = 0;
+        private obj_id cell;
+        private String locationLabel, scene;
+
+        public warp_location(String locationLabel, String scene, int worldX, int worldY, int worldZ) {
+            this.locationLabel = locationLabel;
+            setScene(scene);
+            setWorldX(worldX);
+            setWorldY(worldY);
+            setWorldZ(worldZ);
+        }
+
+        public void warp(obj_id player) {
+            warpPlayer(
+                    player,
+                    getScene(),
+                    getWorldX(),
+                    getWorldY(),
+                    getWorldZ(),
+                    getCell(),
+                    getCellX(),
+                    getCellY(),
+                    getCellZ(),
+                    "",
+                    false
+            );
+        }
+
+        public String getSceneLabel() {
+            switch(this.scene) {
+                case "tatooine":
+                case "dantooine":
+                case "naboo":
+                case "corellia":
+                case "lok":
+                case "endor":
+                case "dathomir":
+                case "talus":
+                case "rori":
+                case "mustafar":
+                    return scene.substring(0, 1).toUpperCase() + scene.substring(1);
+                case "Yavin IV":
+                    return "Yavin IV";
+                case "kashyyyk_main":
+                    return "Kashyyyk";
+                case "dxun":
+                    return toUpper(scene, 0);
+                default:
+                    return scene;
+            }
+        }
+
+        public int getWorldX() {
+            return worldX;
+        }
+
+        public void setWorldX(int worldX) {
+            this.worldX = worldX;
+        }
+
+        public int getWorldY() {
+            return worldY;
+        }
+
+        public void setWorldY(int worldY) {
+            this.worldY = worldY;
+        }
+
+        public int getWorldZ() {
+            return worldZ;
+        }
+
+        public void setWorldZ(int worldZ) {
+            this.worldZ = worldZ;
+        }
+
+        public int getCellX() {
+            return cellX;
+        }
+
+        public void setCellX(int cellX) {
+            this.cellX = cellX;
+        }
+
+        public int getCellY() {
+            return cellY;
+        }
+
+        public void setCellY(int cellY) {
+            this.cellY = cellY;
+        }
+
+        public int getCellZ() {
+            return cellZ;
+        }
+
+        public void setCellZ(int cellZ) {
+            this.cellZ = cellZ;
+        }
+
+        public obj_id getCell() {
+            return cell;
+        }
+
+        public void setCell(obj_id cell) {
+            this.cell = cell;
+        }
+
+        public String getLocationLabel() {
+            return locationLabel;
+        }
+
+        public void setLocationLabel(String locationLabel) {
+            this.locationLabel = locationLabel;
+        }
+
+        public String getScene() {
+            return scene;
+        }
+
+        public void setScene(String scene) {
+            this.scene = scene;
+        }
+    }
     public static final int CASH_AMOUNT = 10000000;
     public static final int AMT = 10000000;
     public static final int FACTION_AMT = 5000;
@@ -45,23 +168,23 @@ public class terminal_character_builder extends script.base_script
     public static final String RLS_EFFECT = "appearance/pt_blackhole_01.prt";
     public static final String RLS_SOUND = "sound/item_ding.snd";
     public static final String[] CHARACTER_BUILDER_OPTIONS = {
-            getClusterName() + " Focus Testing",
+            toUpper(getClusterName(), 0) + " Focus Testing",
             "Weapons",
-            "Armor",
+            "Armor and Equipment",
             "Skills",
             "Commands",
             "Resources",
             "Credits",
             "Faction",
             "Vehicles and Beasts",
-            "Ships",
+            "Pilots and Ships",
             "Crafting",
             "Structures",
             "Guild Halls",
             "Items",
             "Jedi",
-            "Best Resource",
-            "Flag for Instances",
+            "Best Resources",
+            "Flag for All Instances",
             "Draft Schematics",
             "Buffs",
             "Warps",
@@ -69,10 +192,10 @@ public class terminal_character_builder extends script.base_script
             "Static Items",
             "Pet Abilities",
             "Internal",
-            "Terminal Information"
+            "[About]"
     };
     public static final String[] BUFF_OPTIONS = {
-            "Apply GOD Buffs"
+            "Generic Buff Set"
     };
     public static final String[] CHRONICLER_SKILLS = {
             "class_chronicles",
@@ -607,334 +730,7 @@ public class terminal_character_builder extends script.base_script
             "blacksun_vaksai",
             "hutt_turret_ship"
     };
-    public static final String[] WARP_OPTIONS = {
-            "0. Stone Head Formation, Dantooine",
-            "1. TCG Black Market (Wayfar,Tatooine)",
-            "2. TCG Black Market (Lake Retreat, Naboo)",
-            "3. TCG Black Market (Bela Vistal, Corellia)",
-            "4. empty",
-            "5. empty",
-            "6. Mos Eisley, Tatooine",
-            "7. Fort Tusken, Tatooine",
-            "8. Jabba's Palace, Tatooine",
-            "9. Jawa Fortress, Tatooine",
-            "10. Ben Kenobi's Hut, Tatooine",
-            "11. Lars Homestead, Tatooine",
-            "12. Krayt Hunting Grounds, Tatooine",
-            "13. Sarlacc Pit, Tatooine",
-            "14. Beggar's Canyon, Tatooine",
-            "15. Pod Race Track Start, Tatooine",
-            "16. Darklighter Residence, Tatooine",
-            "17. Kenobi's Homestead, Tatooine",
-            "18. Oasis, Tatooine",
-            "19. The Shrub, Tatooine",
-            "20. R2/3PO Escape Pod, Tatooine",
-            "21. Arnthout, Tatooine",
-            "22. Krayt Skeleton, Tatooine",
-            "23. Krayt Skeleton, Tatooine",
-            "24. Hedge maze, Tatooine",
-            "25. Oasis II, Tatooine",
-            "26. Oasis III, Tatooine",
-            "27. Oasis IV, Tatooine",
-            "28. White Thranta Shipping Bunker, Tatooine",
-            "29. Anchorhead, Tatooine",
-            "30. Mos Entha, Tatooine",
-            "31. Mos Espa, Tatooine",
-            "32. Mos Taike, Tatooine",
-            "33. Wayfar, Tatooine",
-            "34. Bestine, Tatooine",
-            "35. Crashed Escape Pod and gravestones, Tatooine",
-            "36. Wattoo's Shop, Tatooine",
-            "37. Lucky Despot Cantina, Tatooine",
-            "38. Mushroom Mesa, Tatooine",
-            "39. The Grand Arena Flats, Tatooine",
-            "40. Aartan Race Track, Tatooine",
-            "41. Hutt Hideout, Tatooine",
-            "42. Jedi Shrine, Tatooine",
-            "43. Squill Cave, Tatooine",
-            "44. Krayt Cult Cave, Tatooine",
-            "45. Sennex Slave Bunker, Tatooine",
-            "46. Valarian Pod Racers Bunker, Tatooine",
-            "47. Sennex Beetle Cave, Tatooine",
-            "48. Alkhara Bandit Camp, Tatooine",
-            "49. Golden Orb Hall, Tatooine",
-            "50. Disabled Sand Crawler, Tatooine",
-            "51. Mos Espa Hotel Arboretum, Tatooine",
-            "52. Anakin's House?, Tatooine",
-            "53. empty",
-            "54. empty",
-            "55. empty",
-            "56. empty",
-            "57. Theed City, Naboo",
-            "58. Keren, Naboo",
-            "59. Kaadaara, Naboo",
-            "60. Moenia, Naboo",
-            "61. Moenia Starport, Naboo",
-            "62. Theed Hanger, Naboo",
-            "63. Dee'ja Peak, Naboo",
-            "64. Lake Retreat, Naboo",
-            "65. Emperor's Retreat, Naboo",
-            "66. GCW Static Base, Naboo",
-            "67. Amidala's Private Beach, Naboo",
-            "68. The Bottom of Theed Falls, Naboo",
-            "69. Gungan Sacred Place, Naboo",
-            "70. Borvo's Vault, Naboo",
-            "71. Gungan Warrior Stronghold, Naboo",
-            "72. Imperial vs. Gungan Battle, Naboo",
-            "73. Keren Street Race, Naboo",
-            "74. Mauler Stronghold, Naboo",
-            "75. Mordran, Naboo",
-            "76. Naboo Kidnapped Royalty, Naboo",
-            "77. Naboo Crystal Cave, Naboo",
-            "78. Weapon Development Facility, Naboo",
-            "79. Cool Cliff, Naboo",
-            "80. Theed Waterfall, Naboo",
-            "81. Small island fishing spot, Naboo",
-            "82. Water Ruins, Naboo",
-            "83. Lianorm Swamps, Naboo",
-            "84. Bootjack Cave, Naboo",
-            "85. Kaadara Beach, Naboo",
-            "86. Gallo Mountains, Naboo",
-            "87. Narglatch Cave, Naboo",
-            "88. Lake Paonga, Naboo",
-            "89. The Coastline, Naboo",
-            "90. Rainforest, Naboo",
-            "91. Small Island, Naboo",
-            "92. Origin, Naboo",
-            "93. empty",
-            "94. empty",
-            "95. empty",
-            "96. empty",
-            "97. Coronet Starport, Corellia",
-            "98. Doaba Guerfel, Corellia",
-            "99. Kor Vella, Corellia",
-            "100. Tyrena, Corellia",
-            "101. Bela Vistal, Corellia",
-            "102. Grand Theater of Vreni Island, Corellia",
-            "103. Rebel Hideout, Corellia",
-            "104. Rogue Corsec Base, Corellia",
-            "105. Agrilat Swamps, Corellia",
-            "106. Agrilat Inner, Corellia",
-            "107. Beach cliff, Corellia",
-            "108. Golden beaches, Corellia",
-            "109. Corellia Imperial Stronghold, Corellia",
-            "110. Afarathu Cave, Corellia",
-            "111. Crystal Fountain of Bela Vistal, Corellia",
-            "112. Drall Patriot's Cave, Corellia",
-            "113. Lord Nyax's Cult, Corellia",
-            "114. Tactical Training Facility, Corellia",
-            "115. Mountain Top, Corellia",
-            "116. Small farm?, Corellia",
-            "117. Agrilat Swamps edge, Corellia",
-            "118. Broken White Bridge, Corellia",
-            "119. Unknown Statue, Corellia",
-            "120. Droid Graveyard, Corellia",
-            "121. Ignar Ominaz? NPC, Corellia",
-            "122. Serji-X Arrogantus? NPC, Corellia",
-            "123. Wind Generator Farm, Corellia",
-            "124. Rebel Theme Park, Hidden Base, Corellia",
-            "125. empty",
-            "126. empty",
-            "127. empty",
-            "128. Imperial Outpost, Dantooine",
-            "129. Mining Outpost, Dantooine",
-            "130. Pirate Outpost, Dantooine",
-            "131. Abandoned Rebel Base, Dantooine",
-            "132. Dantari Rock Village, Dantooine",
-            "133. Dantari Village, Dantooine",
-            "134. Jedi Temple Ruins, Dantooine",
-            "135. Janta Stronghold, Dantooine",
-            "136. Kunga Stronghold, Dantooine",
-            "137. Mokk Stronghold, Dantooine",
-            "138. The Warren, Dantooine",
-            "139. Force Crystal Hunter's Cave, Dantooine",
-            "140. Island with Jedi Ruins, Dantooine",
-            "141. Island with Glowing Stone, Dantooine",
-            "142. Path Bridge, Dantooine",
-            "143. RIS Armor Mol ni'mai, Dantooine",
-            "144. Secondstepes, Dantooine",
-            "145. Small Lakes, Dantooine",
-            "146. Native Hut, Dantooine",
-            "147. Large sharp stones arranged fence, Dantooine",
-            "148. Stone Arches zig-zag, Dantooine",
-            "149. Jedi era building on top hill, Planet",
-            "150. Jedi Shrine, Dantooine",
-            "151. Jedi Shrine II, Dantooine",
-            "152. Jedi ruins, Dantooine",
-            "153. empty",
-            "154. empty",
-            "155. empty",
-            "156. empty",
-            "157. Nyms Stronghold, Lok",
-            "158. An Imperial Outpost, Lok",
-            "159. IG-88, Lok",
-            "160. Canyon Corsair Stronghold, Lok",
-            "161. Droid Engineer's Cave, Lok",
-            "162. Great Kimogila Skeleton, Lok",
-            "163. Great Maze of Lok, Lok",
-            "164. Gurk King's Lair, Lok",
-            "165. Mount Chaolt, Lok",
-            "166. Kimogila Town, Lok",
-            "167. Blood Razor Base, Lok",
-            "168. Pirate Cave, Lok",
-            "169. Gas Mine, Lok",
-            "170. Research Facility, Lok",
-            "171. Nyms Themepark, Lok",
-            "172. Lok Marathon, Lok",
-            "173. Rebel Themepark, Lok",
-            "174. Rocky Wasteland, Lok",
-            "175. Volcano, Lok",
-            "176. Twin Craters, Planet",
-            "177. Large Mesa, Planet",
-            "178. empty",
-            "179. empty",
-            "180. empty",
-            "181. empty",
-            "182. Imperial Fortress, Yavin4",
-            "183. Labor Outpost, Yavin4",
-            "184. Mining Outpost, Yavin4",
-            "185. Geonosian Bio Lab, Yavin4",
-            "186. Great Massassi Temple, Yavin4",
-            "187. Blueleaf Temple, Yavin4",
-            "188. Exar Kun Temple, Yavin4",
-            "189. Woolamander Palace, Yavin4",
-            "190. Dark Jedi Enclave, Yavin4",
-            "191. Light Jedi Enclave, Yavin4",
-            "192. Massassi Sacrificial Stone, Yavin4",
-            "193. Massassi Pyramid, Yavin4",
-            "194. Death Star Turret, Yavin4",
-            "195. Burning Tree, Yavin4",
-            "196. Large Crater, Yavin4",
-            "197. Gazebo, Yavin4",
-            "198. Long Beach Front, Yavin4",
-            "199. empty",
-            "200. empty",
-            "201. empty",
-            "202. empty",
-            "203. Research Outpost, Endor",
-            "204. Smugglers Outpost, Endor",
-            "205. Death Watch Bunker, Endor",
-            "206. Dulok Village, Endor",
-            "207. Ewok Lake Village, Endor",
-            "208. Ewok Tree Village, Endor",
-            "209. Marauder Base, Endor",
-            "210. Mercenary Camp, Endor",
-            "211. Jinda Ritualis's Cave, Endor",
-            "212. Korga Cave, Endor",
-            "213. Pubarn Tribe Camp, Endor",
-            "214. Orphaned Marauder Cave, Endor",
-            "215. Ewok Lake Village II, Endor",
-            "216. Ewok Tree Village II, Endor",
-            "217. empty",
-            "218. empty",
-            "219. empty",
-            "220. empty",
-            "221. Science Outpost, Dathomir",
-            "222. Trade Outpost, Dathomir",
-            "223. Quarantine Zone, Dathomir",
-            "224. Aurilia, Dathomir",
-            "225. Nightsister Stronghold, Dathomir",
-            "226. Imperial Prison, Dathomir",
-            "227. Abandoned Escape Pod, Dathomir",
-            "228. Crash Site, Dathomir",
-            "229. Greater Misty Falls, Dathomir",
-            "230. Lesser Misty Falls, Dathomir",
-            "231. Lessar Sarlacc, Dathomir",
-            "232. Nightsister Forced Labor Camp, Dathomir",
-            "233. Singing Mountain Clan, Dathomir",
-            "234. Rancor Cave, Dathomir",
-            "235. Spider Clan Cave, Dathomir",
-            "236. Nightsister Guard Camp, Dathomir",
-            "237. Nightsister Outcast Camp, Dathomir",
-            "238. Purbole Lair, Dathomir",
-            "239. Tar Pits, Dathomir",
-            "240. Nightsister v. Singing Mountain Clan, Dathomir",
-            "241. Beach Canyon Inlet, Dathomir",
-            "242. Misty Path, Dathomir",
-            "243. Dark Pond, Dathomir",
-            "244. Redhills, Dathomir",
-            "245. Beach shoreline, Dathomir",
-            "246. empty",
-            "247. empty",
-            "248. empty",
-            "249. empty",
-            "250. Dearic, Talus",
-            "251. Nashal, Talus",
-            "252. Imperial Outpost, Talus",
-            "253. Weapons Depot, Talus",
-            "254. Aa'Kuan Champion's Cave, Talus",
-            "255. Binyare Pirate Bunker, Talus",
-            "256. Detainment Center, Talus",
-            "257. Erran Sif, Talus",
-            "258. Corsec vs Flail Battle, Talus",
-            "259. Giant Decay Mite Cave, Talus",
-            "260. Giant Fynock Cave, Talus",
-            "261. Imperial vs Rebel Battle, Talus",
-            "262. Kahmurra Biogenetic Research Station, Talus",
-            "263. Lost Aqaualish War Party's Cave, Talus",
-            "264. Lost village of Durbin, Talus",
-            "265. Beach Ruins, Talus",
-            "266. Mesa, Talus",
-            "267. Mud Flats, Planet",
-            "268. empty",
-            "269. empty",
-            "270. empty",
-            "271. empty",
-            "272. Restuss Starport, Rori",
-            "273. Restuss, Rori",
-            "274. Narmle Starport, Rori",
-            "275. Rebel Outpost, Rori",
-            "276. Borgle Bat Cave, Rori",
-            "277. Cobral Hideout, Rori",
-            "278. Garyn Raider's Bunker, Rori",
-            "279. Giant Bark Mite Cave, Rori",
-            "280. Rori Gungan's Swamp Town, Rori",
-            "281. Hyperdrive Research Facility, Rori",
-            "282. Kobola Spice Mine, Rori",
-            "283. Poacher vs. Creature Battle, Rori",
-            "284. Pygmy Torton Cave, Rori",
-            "285. Large lake, Rori",
-            "286. A monolith, Rori",
-            "287. empty",
-            "288. empty",
-            "289. empty",
-            "290. empty",
-            "291. Mensix Mining Facility, Mustafar",
-            "292. Old Mining Facility, Mustafar",
-            "293. Bandit Camp, Mustafar",
-            "294. Southwest Plateau, Mustafar",
-            "295. Lava Crystal Field, Mustafar",
-            "296. Jedi Enclave_1, Mustafar",
-            "297. Jedi Enclave_2, Mustafar",
-            "298. Jedi Enclave_3, Mustafar",
-            "299. Striking Mining Camp, Mustafar",
-            "300. Ruins, Mustafar",
-            "301. Burning Plains, Mustafar",
-            "302. Old Republic Research Facility, Mustafar",
-            "303. Tulras Nesting Grounds, Mustafar",
-            "304. Entrance to Dragon Lair, Mustafar",
-            "305. Volcano Crash Excavation, Mustafar",
-            "306. Droid Factory, Mustafar",
-            "307. Entrance to Droid Army Zone, Mustafar",
-            "308. Droid Army Buildout Area, Mustafar",
-            "309. Volcano Buildout Area, Mustafar",
-            "310. Crystal Lair Buildout, Mustafar",
-            "311. ORF Buildout Area, Mustafar",
-            "312. Sher Kar Buildout Area, Mustafar",
-            "313. empty",
-            "314. empty",
-            "315. empty",
-            "316. empty",
-            "317. Kachirho Starport, Kashyyyk",
-            "318. Kachirho, Kashyyyk",
-            "319. Rryatt Trial, Kashyyyk",
-            "320. Blackscale Slave Compound, Kashyyyk",
-            "321. Kkowir Forest, Kashyyyk",
-            "322. Etyyy Hunting Grounds, Kashyyyk",
-            "323. Rodian Hunters Camp, Kashyyyk",
-            "324. Isolationist Wookiee Village, Kashyyyk",
-            "325. empty"
-    };
+    public static List<warp_location> WARP_OPTIONS;
     public static final String[] OTHER_SHIP_OPTIONS = {
             "Sorosuub",
             "Eta-2 Actis (Jedi Starfighter)",
@@ -1373,6 +1169,7 @@ public class terminal_character_builder extends script.base_script
                     "Nothing",
                     "Attach QA Tool",
                     "Attach Event Tool",
+                    "Attach Developer Tool",
                     "Detach Tools",
                     "Build Terminal",
             };
@@ -2103,6 +1900,7 @@ public class terminal_character_builder extends script.base_script
         if (isGod(player))
         {
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU1, new string_id("Toggle Access"));
+            mi.addSubMenu(menu, menu_info_types.SERVER_MENU2, new string_id("Duplicate"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -2111,7 +1909,8 @@ public class terminal_character_builder extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
         {
-            System.out.println("\nPlayer: " + getName(player) + "(" + player + ") used Character Builder Terminal\n");
+            LOG("CustomerService", "Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
+            startCharacterBuilder(player);
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
@@ -2127,23 +1926,45 @@ public class terminal_character_builder extends script.base_script
                 broadcast(player, "You have restricted access to this terminal.");
             }
         }
-        startCharacterBuilder(player);
+        if (item == menu_info_types.SERVER_MENU2)
+        {
+            if (isGod(player))
+            {
+                obj_id inventory = utils.getInventoryContainer(player);
+                obj_id duplicate = createObject(getTemplateName(self), inventory, "");
+                if (duplicate == null)
+                {
+                    sendSystemMessage(player, "Unable to duplicate terminal.", null);
+                }
+                else
+                {
+                    setObjVar(duplicate, "noTrade", 1);
+                    attachScript(duplicate, "item.special.nomove");
+                    setObjVar(duplicate, "owner", player);
+                    sendSystemMessage(player, "Terminal duplicated.", null);
+                }
+            }
+        }
+
         return SCRIPT_CONTINUE;
     }
 
     public void startCharacterBuilder(obj_id player) throws InterruptedException
     {
-        if (hasObjVar(player, "locked"))
+        obj_id self = getSelf();
+        if (!hasObjVar(self, "locked"))
+        {
+            String prompt = "Current Testing Options:";
+            String title = getClusterName() + " Character Builder Terminal";
+            closeOldWindow(player);
+            int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true, false);
+            setWindowPid(player, pid);
+
+        }
+        else
         {
             sendSystemMessage(player, "This terminal is currently locked.", null);
-            return;
         }
-        obj_id self = getSelf();
-        String prompt = "Current Testing Options:";
-        String title = getClusterName() + " Character Builder Terminal";
-        closeOldWindow(player);
-        int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true, false);
-        setWindowPid(player, pid);
     }
 
     public int handleOptionSelect(obj_id self, dictionary params) throws InterruptedException
@@ -2174,7 +1995,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Development Testing option is currently disabled.");
+                    broadcast(player, "The Development Testing option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2185,7 +2006,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Weapons option is currently disabled.");
+                    broadcast(player, "The Weapons option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2196,7 +2017,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Armor option is currently disabled.");
+                    broadcast(player, "The Armor option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2207,7 +2028,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Skills Builder option is currently disabled.");
+                    broadcast(player, "The Skills Builder option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2218,7 +2039,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Commands option is currently disabled.");
+                    broadcast(player, "The Commands option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2229,7 +2050,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Resources option is currently disabled.");
+                    broadcast(player, "The Resources option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2240,7 +2061,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Credits option is currently disabled.");
+                    broadcast(player, "The Credits option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2251,7 +2072,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Factions option is currently disabled.");
+                    broadcast(player, "The Factions option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2262,7 +2083,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Vehicles and Beasts option is currently disabled.");
+                    broadcast(player, "The Vehicles and Beasts option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2273,7 +2094,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Ships option is currently disabled.");
+                    broadcast(player, "The Ships option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2284,7 +2105,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Crafting options is currently disabled.");
+                    broadcast(player, "The Crafting options is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2295,7 +2116,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "This Structures deeds option is currently disabled.");
+                    broadcast(player, "This Structures deeds option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2306,7 +2127,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "This Guild Halls option is currently disabled.");
+                    broadcast(player, "This Guild Halls option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2317,7 +2138,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Items option is currently disabled.");
+                    broadcast(player, "The Items option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2328,7 +2149,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Jedi options is currently disabled.");
+                    broadcast(player, "The Jedi options is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2339,7 +2160,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Best Resources option is currently disabled.");
+                    broadcast(player, "The Best Resources option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2351,7 +2172,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Flag for Instances option is currently disabled.");
+                    broadcast(player, "The Flag for Instances option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2362,7 +2183,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Draft Schematics option is currently disabled.");
+                    broadcast(player, "The Draft Schematics option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2373,7 +2194,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Buffs option is currently disabled.");
+                    broadcast(player, "The Buffs option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2385,7 +2206,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Warp options is for developers only.");
+                    broadcast(player, "The Warp options is for developers only.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2397,7 +2218,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Quests option is for developers only.");
+                    broadcast(player, "The Quests option is for developers only.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
@@ -2415,19 +2236,19 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The Pet Abilities option is currently disabled.");
+                    broadcast(player, "The Pet Abilities option is currently disabled.");
                     return SCRIPT_CONTINUE;
                 }
                 break;
             case 23:
                 if (isGod(player))
                 {
-                    sendSystemMessageTestingOnly(player, "God Options: Pay attention to what you click.");
+                    broadcast(player, "God Options: Pay attention to what you click.");
                     handleOtherOption(player);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "Access Denied. Contact Development if you are in the god table.");
+                    broadcast(player, "Access Denied. Contact Development if you are in the god table.");
                 }
                 break;
             case 24:
@@ -2479,7 +2300,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -2501,7 +2322,10 @@ public class terminal_character_builder extends script.base_script
             buff.applyBuff((player), "me_buff_melee_gb_1", 7200);
             buff.applyBuff((player), "me_buff_ranged_gb_1", 7200);
             buff.applyBuff((player), "of_buff_def_9", 7200);
-            buff.applyBuff((player), "frogBuff", 7200);
+            if (isGod(player))
+            {
+                buff.applyBuff((player), "frogBuff", 7200); //should not be used for practical testing of combat.
+            }
             buff.applyBuff((player), "of_focus_fire_6", 7200);
             buff.applyBuff((player), "of_tactical_drop_6", 7200);
             buff.applyBuff((player), "banner_buff_commando", 7200);
@@ -2511,7 +2335,7 @@ public class terminal_character_builder extends script.base_script
             buff.applyBuff((player), "banner_buff_spy", 7200);
             buff.applyBuff((player), "banner_buff_bounty_hunter", 7200);
             buff.applyBuff((player), "banner_buff_force_sensitive", 7200);
-            sendSystemMessageTestingOnly(player, "GOD Buffs Granted");
+            broadcast(player, "Generic Buff Set Applied.");
         }
         else
         {
@@ -2638,12 +2462,12 @@ public class terminal_character_builder extends script.base_script
                                 String armorLevelName = armorSetName.substring(armorSetName.length() - 1);
                                 if (!armorCategoryName.equals("assault") && !armorCategoryName.equals("battle") && !armorCategoryName.equals("recon"))
                                 {
-                                    sendSystemMessageTestingOnly(player, "Invalid armor category " + armorCategoryName + " for skill entry " + skill);
+                                    broadcast(player, "Invalid armor category " + armorCategoryName + " for skill entry " + skill);
                                     continue;
                                 }
                                 if (!armorLevelName.equals("1") && !armorLevelName.equals("2") && !armorLevelName.equals("3"))
                                 {
-                                    sendSystemMessageTestingOnly(player, "Invalid armor level " + armorLevelName + " for skill entry " + skill);
+                                    broadcast(player, "Invalid armor level " + armorLevelName + " for skill entry " + skill);
                                     continue;
                                 }
                                 int armorCategory = AC_none;
@@ -2700,7 +2524,7 @@ public class terminal_character_builder extends script.base_script
                                 }
                                 if (armorSet == null)
                                 {
-                                    sendSystemMessageTestingOnly(player, "Unable to get armor set for armor category " + armorCategoryName);
+                                    broadcast(player, "Unable to get armor set for armor category " + armorCategoryName);
                                     continue;
                                 }
                                 for (String s : armorSet)
@@ -2752,24 +2576,24 @@ public class terminal_character_builder extends script.base_script
         {
             if (shipCount > 0)
             {
-                sendSystemMessageTestingOnly(player, shipCount + " ships were placed in your datapad.");
+                broadcast(player, shipCount + " ships were placed in your datapad.");
             }
             if (itemCount > 0)
             {
-                sendSystemMessageTestingOnly(player, itemCount + " items were placed in your inventory.");
+                broadcast(player, itemCount + " items were placed in your inventory.");
             }
-            sendSystemMessageTestingOnly(player, "Have fun storming the castle!");
+            broadcast(player, "Have fun storming the castle!");
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "No new items were placed in your inventory. You've got everything you need.");
+            broadcast(player, "No new items were placed in your inventory. You've got everything you need.");
         }
         startCharacterBuilder(player);
     }
 
     public void handleCreditOption(obj_id player) throws InterruptedException
     {
-        if (getCashBalance(player) < 100000000)
+        if (getCashBalance(player) < 100000)
         {
             dictionary d = new dictionary();
             d.put("payoutTarget", player);
@@ -2777,7 +2601,7 @@ public class terminal_character_builder extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "You already have 100,000,000+ credits. Why do you need any more money?");
+            broadcast(player, "You already have 100,000+ credits. Why do you need any more credits?");
         }
         startCharacterBuilder(player);
     }
@@ -2793,11 +2617,11 @@ public class terminal_character_builder extends script.base_script
         if (retCode == money.RET_SUCCESS)
         {
             String terminal = getClusterName() + " Character Builder Terminal";
-            sendSystemMessageTestingOnly(player, "You receive " + CASH_AMOUNT + " credits from the " + terminal);
+            broadcast(player, "You receive " + CASH_AMOUNT + " credits from the " + terminal);
         }
         else if (retCode == money.RET_FAIL)
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2893,7 +2717,7 @@ public class terminal_character_builder extends script.base_script
         obj_id resourceCrate = createResourceCrate(resourceId, AMT, inv);
         if (isIdNull(resourceCrate))
         {
-            sendSystemMessageTestingOnly(player, "Resource grant failed. It is likely your inventory is full.");
+            broadcast(player, "Resource grant failed. It is likely your inventory is full.");
         }
         else
         {
@@ -2908,12 +2732,12 @@ public class terminal_character_builder extends script.base_script
     public void makeSpaceResource(obj_id self, String rclass) throws InterruptedException
     {
         obj_id[] rtypes = getResourceTypes(rclass);
-        sendSystemMessageTestingOnly(self, "Types are..." + rtypes[0].toString());
+        broadcast(self, "Types are..." + rtypes[0].toString());
         obj_id rtype = rtypes[0];
         if (!isIdValid(rtype))
         {
-            sendSystemMessageTestingOnly(self, "No id found");
-            sendSystemMessageTestingOnly(self, "Type was " + rclass);
+            broadcast(self, "No id found");
+            broadcast(self, "Type was " + rclass);
             return;
         }
         String crateTemplate = getResourceContainerForType(rtype);
@@ -2925,7 +2749,7 @@ public class terminal_character_builder extends script.base_script
                 obj_id crate = createObject(crateTemplate, pInv, "");
                 if (addResourceToContainer(crate, rtype, AMT, self))
                 {
-                    sendSystemMessageTestingOnly(self, "Resource of class " + rclass + " added");
+                    broadcast(self, "Resource of class " + rclass + " added");
                 }
             }
         }
@@ -2945,6 +2769,9 @@ public class terminal_character_builder extends script.base_script
                     {
                             "corellia",
                             "dantooine",
+                            "dathomir",
+                            "endor",
+                            "dxun",
                             "lok",
                             "naboo",
                             "rori",
@@ -3185,7 +3012,7 @@ public class terminal_character_builder extends script.base_script
     public void handleVehicleOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+        refreshMenu(player, "Select the desired vehicle, mount or beast option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
     }
 
     public int handleVehicleOptions(obj_id self, dictionary params) throws InterruptedException
@@ -3215,7 +3042,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3306,19 +3133,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3326,63 +3153,63 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/deed/vehicle_deed/speederbike_swoop_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Swoop Deed Issued.");
+                broadcast(player, "Swoop Deed Issued.");
                 break;
             case 1:
                 createObject("object/tangible/deed/vehicle_deed/speederbike_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Speederbike Deed Issued.");
+                broadcast(player, "Speederbike Deed Issued.");
                 break;
             case 2:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_x34_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "X34 Landspeeder Deed Issued.");
+                broadcast(player, "X34 Landspeeder Deed Issued.");
                 break;
             case 3:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_ab1_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "AB1 Deed Issued.");
+                broadcast(player, "AB1 Deed Issued.");
                 break;
             case 4:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_v35_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "V-35 SoroSuub Carrier Deed Issued.");
+                broadcast(player, "V-35 SoroSuub Carrier Deed Issued.");
                 break;
             case 5:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_xp38_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "XP38 Landspeeder Deed Issued.");
+                broadcast(player, "XP38 Landspeeder Deed Issued.");
                 break;
             case 6:
                 createObject("object/tangible/deed/vehicle_deed/barc_speeder_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Barc Speeder Deed Issued.");
+                broadcast(player, "Barc Speeder Deed Issued.");
                 break;
             case 7:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_av21_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "AV21 Deed Issued.");
+                broadcast(player, "AV21 Deed Issued.");
                 break;
             case 8:
                 createObject("object/tangible/deed/vehicle_deed/landspeeder_x31_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "X31 Deed Issued.");
+                broadcast(player, "X31 Deed Issued.");
                 break;
             case 9:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series1_mechno_chair", pInv);
-                sendSystemMessageTestingOnly(player, "Mechno Chair Issued");
+                broadcast(player, "Mechno Chair Issued");
                 break;
             case 10:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series1_sith_speeder", pInv);
-                sendSystemMessageTestingOnly(player, "Sith Speeder Issued.");
+                broadcast(player, "Sith Speeder Issued.");
                 break;
             case 11:
                 static_item.createNewItemFunction("item_tcg_merr_sonn_jt12_jetpack_deed", pInv);
-                sendSystemMessageTestingOnly(player, "Merr-Sonn JT-12 Jetpack");
+                broadcast(player, "Merr-Sonn JT-12 Jetpack");
                 break;
             case 12:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series6_ric_920_speeder", pInv);
-                sendSystemMessageTestingOnly(player, "RIC-920 Issued");
+                broadcast(player, "RIC-920 Issued");
                 break;
             case 13:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series7_buildreward_republic_gunship", pInv);
-                sendSystemMessageTestingOnly(player, "Republic Gunship Issued");
+                broadcast(player, "Republic Gunship Issued");
                 break;
             case 14:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series1_organa_speeder", pInv);
-                sendSystemMessageTestingOnly(player, "XJ-2 Issued");
+                broadcast(player, "XJ-2 Issued");
                 break;
             default:
                 cleanScriptVars(player);
@@ -3420,7 +3247,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3490,7 +3317,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3551,7 +3378,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "For some reason, the creature spawned can NOT be turned into a mount. Might be out of SCALE, could be several other things.");
+                    broadcast(player, "For some reason, the creature spawned can NOT be turned into a mount. Might be out of SCALE, could be several other things.");
                 }
             }
         }
@@ -3607,7 +3434,7 @@ public class terminal_character_builder extends script.base_script
             params.put("pet", pet);
             params.put("master", master);
             messageTo(pet, "handleAddMaster", params, 1, false);
-            sendSystemMessageTestingOnly(master, creatureName + " Issued and Stored on Your Datapad.");
+            broadcast(master, creatureName + " Issued and Stored on Your Datapad.");
             return true;
         }
         sendSystemMessage(master, pet_lib.SID_SYS_TOO_MANY_STORED_PETS);
@@ -3617,7 +3444,7 @@ public class terminal_character_builder extends script.base_script
     public void handleShipOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired ship option", getClusterName() + " Character Builder Terminal", SHIP_OPTIONS, "handleShipOptions", false);
+        refreshMenu(player, "Select the desired JTL related options.", getClusterName() + " Character Builder Terminal", SHIP_OPTIONS, "handleShipOptions", false);
     }
 
     public int handleShipOptions(obj_id self, dictionary params) throws InterruptedException
@@ -3647,7 +3474,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3709,7 +3536,7 @@ public class terminal_character_builder extends script.base_script
                     skill.revokeSkill(player, "pilot_" + pilotFaction + space_skill.SKILL_NAMES[i]);
                 }
                 utils.removeScriptVar(player, "revokePilotSkill");
-                sendSystemMessageTestingOnly(player, "Pilot Skills Revoked.");
+                broadcast(player, "Pilot Skills Revoked.");
                 return true;
             }
         }
@@ -3748,7 +3575,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3759,7 +3586,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!pilotRevoked)
         {
-            sendSystemMessageTestingOnly(player, "The system was unable to revoke your pilot skills.");
+            broadcast(player, "The system was unable to revoke your pilot skills.");
             return SCRIPT_OVERRIDE;
         }
         if (idx == 0)
@@ -3782,7 +3609,7 @@ public class terminal_character_builder extends script.base_script
             skill.grantSkill(player, "pilot_imperial_navy_droid_03");
             skill.grantSkill(player, "pilot_imperial_navy_droid_04");
             skill.grantSkill(player, "pilot_imperial_navy_master");
-            sendSystemMessageTestingOnly(player, "Master Imperial Pilot skills received.");
+            broadcast(player, "Master Imperial Pilot skills received.");
         }
         else if (idx == 1)
         {
@@ -3804,7 +3631,7 @@ public class terminal_character_builder extends script.base_script
             skill.grantSkill(player, "pilot_rebel_navy_droid_03");
             skill.grantSkill(player, "pilot_rebel_navy_droid_04");
             skill.grantSkill(player, "pilot_rebel_navy_master");
-            sendSystemMessageTestingOnly(player, "Master Rebel Pilot skills received.");
+            broadcast(player, "Master Rebel Pilot skills received.");
         }
         else if (idx == 2)
         {
@@ -3826,7 +3653,7 @@ public class terminal_character_builder extends script.base_script
             skill.grantSkill(player, "pilot_neutral_droid_03");
             skill.grantSkill(player, "pilot_neutral_droid_04");
             skill.grantSkill(player, "pilot_neutral_master");
-            sendSystemMessageTestingOnly(player, "Master Privateer Pilot skills received.");
+            broadcast(player, "Master Privateer Pilot skills received.");
         }
         handlePilotSkillSelect(player);
         return SCRIPT_CONTINUE;
@@ -3883,7 +3710,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return;
         }
@@ -3892,16 +3719,16 @@ public class terminal_character_builder extends script.base_script
             obj_id shipId = space_utils.createShipControlDevice(player, types[idx], false);
             if (isIdValid(shipId))
             {
-                sendSystemMessageTestingOnly(player, "Created ship (" + options[idx] + ") in datapad.");
+                broadcast(player, "Created ship (" + options[idx] + ") in datapad.");
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Failed to create ship.");
+                broadcast(player, "Failed to create ship.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Failed to create ship. No room in datapad.");
+            broadcast(player, "Failed to create ship. No room in datapad.");
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", options, message, false);
     }
@@ -3939,19 +3766,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -3969,7 +3796,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_gunship_imperial_schematic", pInv);
                 static_item.createNewItemFunction("item_gunship_rebel_schematic", pInv);
                 static_item.createNewItemFunction("item_gunship_neutral_schematic", pInv);
-                sendSystemMessageTestingOnly(player, "Gunship Schematics Issued.");
+                broadcast(player, "Gunship Schematics Issued.");
                 handleShipMenuSelect(player);
                 break;
             case 3:
@@ -4019,19 +3846,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4043,7 +3870,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_collection_reward_booster_01_mk3_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_booster_01_mk2_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_booster_01_mk1_schematic", pInv);
-                sendSystemMessageTestingOnly(player, "Component Schematics Issued.");
+                broadcast(player, "Component Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             case 1:
@@ -4052,7 +3879,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_collection_reward_capacitor_01_mk3_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_capacitor_01_mk2_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_capacitor_01_mk1_schematic", pInv);
-                sendSystemMessageTestingOnly(player, "Component Schematics Issued.");
+                broadcast(player, "Component Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             case 2:
@@ -4061,7 +3888,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_collection_reward_engine_01_mk3_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_engine_01_mk2_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_engine_01_mk1_schematic", pInv);
-                sendSystemMessageTestingOnly(player, "Component Schematics Issued.");
+                broadcast(player, "Component Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             case 3:
@@ -4070,7 +3897,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_collection_reward_reactor_01_mk3_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_reactor_01_mk2_schematic", pInv);
                 static_item.createNewItemFunction("item_collection_reward_reactor_01_mk1_schematic", pInv);
-                sendSystemMessageTestingOnly(player, "Component Schematics Issued.");
+                broadcast(player, "Component Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             case 4:
@@ -4078,7 +3905,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_reward_nova_engine_schematic_01_01", pInv);
                 static_item.createNewItemFunction("item_reward_orion_wpn_schematic_01_01", pInv);
                 static_item.createNewItemFunction("item_reward_nova_wpn_schematic_01_01", pInv);
-                sendSystemMessageTestingOnly(player, "Component Schematics Issued.");
+                broadcast(player, "Component Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             case 5:
@@ -4087,7 +3914,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_interface_scanner_schematic", pInv);
                 static_item.createNewItemFunction("item_space_weapon_efficiency_booster", pInv);
                 static_item.createNewItemFunction("item_space_shield_high_capacity_projector", pInv);
-                sendSystemMessageTestingOnly(player, "Schematics Issued.");
+                broadcast(player, "Schematics Issued.");
                 handleCollectionComponentSelect(player);
                 break;
             default:
@@ -4134,19 +3961,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4188,19 +4015,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4284,19 +4111,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4347,19 +4174,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4410,19 +4237,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4473,19 +4300,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4536,19 +4363,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4599,19 +4426,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4662,19 +4489,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4725,19 +4552,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4786,19 +4613,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -4806,43 +4633,43 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/deed/factory_deed/clothing_factory_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Clothing Factory Deed Issued.");
+                broadcast(player, "Clothing Factory Deed Issued.");
                 break;
             case 1:
                 createObject("object/tangible/deed/factory_deed/food_factory_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Food Factory Deed Issued.");
+                broadcast(player, "Food Factory Deed Issued.");
                 break;
             case 2:
                 createObject("object/tangible/deed/factory_deed/item_factory_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Item Factory Deed Issued.");
+                broadcast(player, "Item Factory Deed Issued.");
                 break;
             case 3:
                 createObject("object/tangible/deed/factory_deed/structure_factory_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Structure Factory Deed Issued.");
+                broadcast(player, "Structure Factory Deed Issued.");
                 break;
             case 4:
                 createObject("object/tangible/deed/player_house_deed/generic_house_small_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Generic House Deed Issued.");
+                broadcast(player, "Generic House Deed Issued.");
                 break;
             case 5:
                 createObject("object/tangible/deed/player_house_deed/tatooine_house_small_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Small Tatooine House Deed Issued.");
+                broadcast(player, "Small Tatooine House Deed Issued.");
                 break;
             case 6:
                 createObject("object/tangible/deed/player_house_deed/naboo_house_small_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Small Naboo House Deed Issued.");
+                broadcast(player, "Small Naboo House Deed Issued.");
                 break;
             case 7:
                 createObject("object/tangible/deed/player_house_deed/corellia_house_small_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Small Corellia House Deed Issued.");
+                broadcast(player, "Small Corellia House Deed Issued.");
                 break;
             case 8:
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style_03_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Merchant Tent Deed Issued.");
+                broadcast(player, "Merchant Tent Deed Issued.");
                 break;
             case 9:
                 obj_id mineral = createObject("object/tangible/deed/harvester_deed/ore_harvester_heavy_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Mineral Harvester Issued.");
+                broadcast(player, "Heavy Mineral Harvester Issued.");
                 if (isIdValid(mineral))
                 {
                     setObjVar(mineral, "player_structure.deed.maxExtractionRate", 13);
@@ -4851,7 +4678,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 10:
                 obj_id flora = createObject("object/tangible/deed/harvester_deed/flora_harvester_deed_heavy.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Flora Harvester Issued.");
+                broadcast(player, "Heavy Flora Harvester Issued.");
                 if (isIdValid(flora))
                 {
                     setObjVar(flora, "player_structure.deed.maxExtractionRate", 13);
@@ -4860,7 +4687,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 11:
                 obj_id gas = createObject("object/tangible/deed/harvester_deed/gas_harvester_deed_heavy.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Gas Harvester Issued.");
+                broadcast(player, "Heavy Gas Harvester Issued.");
                 if (isIdValid(gas))
                 {
                     setObjVar(gas, "player_structure.deed.maxExtractionRate", 13);
@@ -4869,7 +4696,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 12:
                 obj_id chemical = createObject("object/tangible/deed/harvester_deed/liquid_harvester_deed_heavy.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Chemical Harvester Issued.");
+                broadcast(player, "Heavy Chemical Harvester Issued.");
                 if (isIdValid(chemical))
                 {
                     setObjVar(chemical, "player_structure.deed.maxExtractionRate", 13);
@@ -4878,7 +4705,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 13:
                 obj_id moisture = createObject("object/tangible/deed/harvester_deed/moisture_harvester_deed_heavy.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Moisture Vaporator Issued.");
+                broadcast(player, "Heavy Moisture Vaporator Issued.");
                 if (isIdValid(moisture))
                 {
                     setObjVar(moisture, "player_structure.deed.maxExtractionRate", 13);
@@ -4887,7 +4714,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 14:
                 mineral = createObject("object/tangible/deed/harvester_deed/ore_harvester_deed_elite.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Elite Mineral Harvester Issued.");
+                broadcast(player, "Elite Mineral Harvester Issued.");
                 if (isIdValid(mineral))
                 {
                     setObjVar(mineral, "player_structure.deed.maxExtractionRate", 13);
@@ -4896,7 +4723,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 15:
                 flora = createObject("object/tangible/deed/harvester_deed/flora_harvester_deed_elite.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Elite Flora Harvester Issued.");
+                broadcast(player, "Elite Flora Harvester Issued.");
                 if (isIdValid(flora))
                 {
                     setObjVar(flora, "player_structure.deed.maxExtractionRate", 13);
@@ -4905,7 +4732,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 16:
                 gas = createObject("object/tangible/deed/harvester_deed/gas_harvester_deed_elite.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Elite Gas Harvester Issued.");
+                broadcast(player, "Elite Gas Harvester Issued.");
                 if (isIdValid(gas))
                 {
                     setObjVar(gas, "player_structure.deed.maxExtractionRate", 13);
@@ -4914,7 +4741,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 17:
                 chemical = createObject("object/tangible/deed/harvester_deed/liquid_harvester_deed_elite.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Elite Chemical Harvester Issued.");
+                broadcast(player, "Elite Chemical Harvester Issued.");
                 if (isIdValid(chemical))
                 {
                     setObjVar(chemical, "player_structure.deed.maxExtractionRate", 13);
@@ -4923,7 +4750,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 18:
                 moisture = createObject("object/tangible/deed/harvester_deed/moisture_harvester_deed_elite.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Heavy Moisture Vaporator Issued.");
+                broadcast(player, "Heavy Moisture Vaporator Issued.");
                 if (isIdValid(moisture))
                 {
                     setObjVar(moisture, "player_structure.deed.maxExtractionRate", 13);
@@ -4932,7 +4759,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 19:
                 obj_id fusion = createObject("object/tangible/deed/generator_deed/power_generator_fusion_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Fusion Reactor Issued.");
+                broadcast(player, "Fusion Reactor Issued.");
                 if (isIdValid(fusion))
                 {
                     setObjVar(fusion, "player_structure.deed.maxExtractionRate", 16);
@@ -4947,7 +4774,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/garden_corellia_lrg_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_corellia_med_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_corellia_sml_01_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Corellia City Pack Created");
+                broadcast(player, "Corellia City Pack Created");
                 break;
             case 21:
                 createObject("object/tangible/deed/city_deed/cityhall_naboo_deed.iff", pInv, "");
@@ -4957,7 +4784,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/garden_naboo_lrg_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_naboo_med_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_naboo_sml_01_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Naboo City Pack Created");
+                broadcast(player, "Naboo City Pack Created");
                 break;
             case 22:
                 createObject("object/tangible/deed/city_deed/cityhall_tatooine_deed.iff", pInv, "");
@@ -4967,7 +4794,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/garden_tatooine_lrg_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_tatooine_med_01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/garden_tatooine_sml_01_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Tatooine City Pack Created");
+                broadcast(player, "Tatooine City Pack Created");
                 break;
             case 23:
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_diner", pInv);
@@ -4984,7 +4811,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tcg_loot_reward_series8_bespin_house_deed", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series8_yoda_house_deed", pInv);
                 static_item.createNewItemFunction("item_player_house_deed_jabbas_sail_barge", pInv);
-                sendSystemMessageTestingOnly(player, "TCG House Pack Created");
+                broadcast(player, "TCG House Pack Created");
             default:
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
@@ -5026,19 +4853,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5046,47 +4873,47 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/crafting/station/weapon_station.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Weapon Crafting Station Issued.");
+                broadcast(player, "Weapon Crafting Station Issued.");
                 break;
             case 1:
                 createObject("object/tangible/crafting/station/structure_station.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Structure Crafting Station Issued.");
+                broadcast(player, "Structure Crafting Station Issued.");
                 break;
             case 2:
                 createObject("object/tangible/crafting/station/clothing_station.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Clothing Crafting Station Issued.");
+                broadcast(player, "Clothing Crafting Station Issued.");
                 break;
             case 3:
                 createObject("object/tangible/crafting/station/food_station.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Food Crafting Station Issued.");
+                broadcast(player, "Food Crafting Station Issued.");
                 break;
             case 4:
                 createObject("object/tangible/crafting/station/generic_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Generic Crafting Tool Issued.");
+                broadcast(player, "Generic Crafting Tool Issued.");
                 break;
             case 5:
                 createObject("object/tangible/crafting/station/weapon_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Weapon Crafting Tool Issued.");
+                broadcast(player, "Weapon Crafting Tool Issued.");
                 break;
             case 6:
                 createObject("object/tangible/crafting/station/structure_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Structure Crafting Tool Issued.");
+                broadcast(player, "Structure Crafting Tool Issued.");
                 break;
             case 7:
                 createObject("object/tangible/crafting/station/clothing_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Clothing Crafting Tool Issued.");
+                broadcast(player, "Clothing Crafting Tool Issued.");
                 break;
             case 8:
                 createObject("object/tangible/crafting/station/food_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Food Crafting Tool Issued.");
+                broadcast(player, "Food Crafting Tool Issued.");
                 break;
             case 9:
                 createObject("object/tangible/crafting/station/space_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Ship Crafting Tool Issued.");
+                broadcast(player, "Ship Crafting Tool Issued.");
                 break;
             case 10:
                 createObject("object/tangible/crafting/station/space_station.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Ship Crafting Station Issued.");
+                broadcast(player, "Ship Crafting Station Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -5129,19 +4956,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5149,31 +4976,31 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/deed/guild_deed/generic_guild_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Generic PA Hall Deed Issued.");
+                broadcast(player, "Generic PA Hall Deed Issued.");
                 break;
             case 1:
                 createObject("object/tangible/deed/guild_deed/tatooine_guild_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Tatooine PA Hall Deed Issued.");
+                broadcast(player, "Tatooine PA Hall Deed Issued.");
                 break;
             case 2:
                 createObject("object/tangible/deed/guild_deed/naboo_guild_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Naboo PA Hall Deed Issued.");
+                broadcast(player, "Naboo PA Hall Deed Issued.");
                 break;
             case 3:
                 createObject("object/tangible/deed/guild_deed/corellia_guild_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Corellia PA Hall Deed Issued.");
+                broadcast(player, "Corellia PA Hall Deed Issued.");
                 break;
             case 4:
                 createObject("object/tangible/deed/city_deed/cityhall_tatooine_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Tatooine City Hall Deed Issued.");
+                broadcast(player, "Tatooine City Hall Deed Issued.");
                 break;
             case 5:
                 createObject("object/tangible/deed/city_deed/cityhall_naboo_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Naboo City Hall Deed Issued.");
+                broadcast(player, "Naboo City Hall Deed Issued.");
                 break;
             case 6:
                 createObject("object/tangible/deed/city_deed/cityhall_corellia_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Corellia City Hall Deed Issued.");
+                broadcast(player, "Corellia City Hall Deed Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -5215,7 +5042,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5232,7 +5059,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("armor_imperial_stormcommando_gloves", pInv);
                 static_item.createNewItemFunction("armor_imperial_stormcommando_helmet", pInv);
                 static_item.createNewItemFunction("armor_imperial_stormcommando_leggings", pInv);
-                sendSystemMessageTestingOnly(player, "Imperial Storm Commando Armor Set Issued.");
+                broadcast(player, "Imperial Storm Commando Armor Set Issued.");
                 break;
             case 1: //  Instances: Heroic Unlocks
                 static_item.createNewItemFunction("heroic_axkva_min", pInv);
@@ -5240,7 +5067,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("heroic_ig88", pInv);
                 static_item.createNewItemFunction("heroic_star_destroyer", pInv);
                 static_item.createNewItemFunction("heroic_tusken_army", pInv);
-                sendSystemMessageTestingOnly(player, "Heroic Instance Unlocks Issued.");
+                broadcast(player, "Heroic Instance Unlocks Issued.");
                 break;
             case 2:  // Instances: Mustafar Unlocks
                 static_item.createNewItemFunction("decrepit_droid_factory", pInv);
@@ -5249,24 +5076,24 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("sher_kar_cave", pInv);
                 static_item.createNewItemFunction("uplink_cave", pInv);
                 static_item.createNewItemFunction("working_droid_factory", pInv);
-                sendSystemMessageTestingOnly(player, "Mustafar Instance Unlocks Issued.");
+                broadcast(player, "Mustafar Instance Unlocks Issued.");
                 break;
             case 3:  // Objects: Ace Pilot Necklaces
                 static_item.createNewItemFunction("item_quest_reward_imperial_pilot_medal_01_01", pInv);
                 static_item.createNewItemFunction("item_quest_reward_rebel_pilot_medal_01_01", pInv);
                 static_item.createNewItemFunction("item_quest_reward_neutral_pilot_medal_01_01", pInv);
-                sendSystemMessageTestingOnly(player, "Ace Pilot Necklaces Issued.");
+                broadcast(player, "Ace Pilot Necklaces Issued.");
                 break;
             case 4:  // Objects: Gift Boxes
                 static_item.createNewItemFunction("item_first_anniversary_gift_01_01", pInv);
                 static_item.createNewItemFunction("game_update_4_gift", pInv);
                 static_item.createNewItemFunction("game_update_5_gift", pInv);
                 static_item.createNewItemFunction("game_update_6_gift", pInv);
-                sendSystemMessageTestingOnly(player, "Gift Boxes Issued.");
+                broadcast(player, "Gift Boxes Issued.");
                 break;
             case 5:  // Objects: Heroic Box of Achievements
                 static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
-                sendSystemMessageTestingOnly(player, "Heroic Box of Achievements Issued.");
+                broadcast(player, "Heroic Box of Achievements Issued.");
                 break;
             case 6:  // Objects: Mustafar Relic Rings
                 static_item.createNewItemFunction("item_tow_ring_architect_04_01", pInv);
@@ -5275,32 +5102,32 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tow_ring_engineering_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_inspiration_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_munitions_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Mustafar Relic Rings Issued.");
+                broadcast(player, "Mustafar Relic Rings Issued.");
                 break;
             case 7:  // Objects: Others
                 static_item.createNewItemFunction("item_gas_recycler_01_01", pInv);
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);
                 static_item.createNewItemFunction("item_resurgence_stark_banner_01_01", pInv);
                 static_item.createNewItemFunction("item_resurgence_targaryen_banner_01_01", pInv);
-                sendSystemMessageTestingOnly(player, "Other Objects Issued.");
+                broadcast(player, "Other Objects Issued.");
                 break;
             case 8:  // Objects: Rare Loot Boxes
                 static_item.createNewItemFunction("rare_loot_chest_quality_1", pInv);
                 static_item.createNewItemFunction("rare_loot_chest_quality_2", pInv);
                 static_item.createNewItemFunction("rare_loot_chest_quality_3", pInv);
-                sendSystemMessageTestingOnly(player, "Rare Loot Box Set Issued.");
+                broadcast(player, "Rare Loot Box Set Issued.");
                 break;
             case 9:  // Objects: Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
-                sendSystemMessageTestingOnly(player, "Veteran Rewards Issued.");
+                broadcast(player, "Veteran Rewards Issued.");
                 break;
             case 10: // Structures: Chronicle Buffs
                 static_item.createNewItemFunction("item_pgc_chronicler_tent_deed", pInv);
                 static_item.createNewItemFunction("item_pgc_sandcrawler_house_deed", pInv);
-                sendSystemMessageTestingOnly(player, "Set of Chronicle Structures Issued.");
+                broadcast(player, "Set of Chronicle Structures Issued.");
                 break;
             case 11: // Structures: City Buffs
                 createObject("object/tangible/deed/city_deed/cantina_corellia_deed.iff", pInv, "");
@@ -5309,7 +5136,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/hospital_corellia_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/hospital_naboo_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/hospital_tatooine_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Set of City Structures Issued.");
+                broadcast(player, "Set of City Structures Issued.");
                 break;
             case 12: // Structures: Regular Buffs
                 createObject("object/tangible/deed/guild_deed/generic_guild_deed.iff", pInv, "");
@@ -5319,7 +5146,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style01_deed.iff", pInv, "");
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style02_deed.iff", pInv, "");
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style03_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Set of Guild Halls and Merchant Tents Issued.");
+                broadcast(player, "Set of Guild Halls and Merchant Tents Issued.");
                 break;
             case 13: // Structures: TCG Buffs
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", pInv);
@@ -5333,18 +5160,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tcg_loot_reward_series6_deed_rebel_spire", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series7_deed_vehicle_garage", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series8_yoda_house_deed", pInv);
-                sendSystemMessageTestingOnly(player, "Set of TCG Structures Issued.");
+                broadcast(player, "Set of TCG Structures Issued.");
                 break;
             case 14: // Structures: Witches of Dathomir
                 createObject("object/tangible/deed/player_house_deed/wod_ns_hut_deed.iff", pInv, "");
                 createObject("object/tangible/deed/player_house_deed/wod_sm_hut_deed.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Set of Witches of Dathomir Structures Issued.");
+                broadcast(player, "Set of Witches of Dathomir Structures Issued.");
                 break;
             case 15: // Tokens: Chronicles
                 static_item.createNewItemFunction("item_pgc_token_01", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_02", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_03", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Chronicle Tokens Issued.");
+                broadcast(player, "Set of Chronicle Tokens Issued.");
                 break;
             case 16: // Tokens: Deprecated Battlefields
                 static_item.createNewItemFunction("item_battlefield_rebel_token_massassi_isle", pInv, 500);
@@ -5355,7 +5182,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield2", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield3", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield4", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Deprecated Battlefield Tokens Issued.");
+                broadcast(player, "Set of Deprecated Battlefield Tokens Issued.");
                 break;
             case 17: // Tokens: Events
                 static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
@@ -5366,7 +5193,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 500);
                 static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_gjpud_crap_heap", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Event Tokens Issued.");
+                broadcast(player, "Set of Event Tokens Issued.");
                 break;
             case 18: // Tokens: GCW
                 static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
@@ -5375,7 +5202,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_gcw_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_restuss_imperial_commendation_02_01", pInv, 500);
                 static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of GCW Tokens Issued.");
+                broadcast(player, "Set of GCW Tokens Issued.");
                 break;
             case 19: // Tokens: Heroics
                 static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 500);
@@ -5386,18 +5213,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_heroic_token_echo_base_01_01", pInv, 500);
                 //static_item.createNewItemFunction("item_heroic_token_marauder_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Heroic Tokens Issued.");
+                broadcast(player, "Set of Heroic Tokens Issued.");
                 break;
             case 20: // Tokens: Others
                 static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Other Tokens Issued.");
+                broadcast(player, "Set of Other Tokens Issued.");
                 break;
             case 21: // Tokens: Space
                 static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Space Tokens Issued.");
+                broadcast(player, "Set of Space Tokens Issued.");
                 break;
             case 22: // Tokens: Special Rewards
                 static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
@@ -5406,7 +5233,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_kashyyyk_reward_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_aurillian_certified_scroll_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Special Reward Tokens Issued.");
+                broadcast(player, "Set of Special Reward Tokens Issued.");
                 break;
             case 23: // Tokens: Witches of Dathomir
                 static_item.createNewItemFunction("item_wod_token_1", pInv, 500);
@@ -5415,7 +5242,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_wod_token_4", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_5", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_6", pInv, 500);
-                sendSystemMessageTestingOnly(player, "Set of Witches of Dathomir Tokens Issued.");
+                broadcast(player, "Set of Witches of Dathomir Tokens Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -5451,7 +5278,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5515,7 +5342,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5583,19 +5410,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5729,19 +5556,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -5842,19 +5669,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6001,19 +5828,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6052,15 +5879,15 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 10:
                 static_item.createNewItemFunction("weapon_mandalorian_heavy_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Crusader M-XX Heavy Rifle Issued.");
+                broadcast(player, "Crusader M-XX Heavy Rifle Issued.");
                 break;
             case 11:
                 static_item.createNewItemFunction("weapon_rebel_heavy_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "C-M 'Frag Storm' Heavy Shotgun Issued.");
+                broadcast(player, "C-M 'Frag Storm' Heavy Shotgun Issued.");
                 break;
             case 12:
                 static_item.createNewItemFunction("weapon_tow_heavy_acid_beam_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Devastator Acid Launcher Issued.");
+                broadcast(player, "Devastator Acid Launcher Issued.");
                 break;
             case 13:
                 weapon = "object/weapon/ranged/heavy/heavy_carbonite_rifle.iff";
@@ -6105,19 +5932,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6138,7 +5965,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 4:
                 static_item.createNewItemFunction("weapon_tow_blasterfist_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Guardian Blaster Fist");
+                broadcast(player, "Guardian Blaster Fist");
                 break;
             default:
                 cleanScriptVars(player);
@@ -6180,19 +6007,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6302,19 +6129,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6403,19 +6230,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6513,19 +6340,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6534,47 +6361,47 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 static_item.createNewItemFunction("weapon_westar_pistol_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Westar-34 Blaster Pistol Issued.");
+                broadcast(player, "Westar-34 Blaster Pistol Issued.");
                 break;
             case 1:
                 static_item.createNewItemFunction("weapon_carbine_ngant_zarvel_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "NGant-Zarvel 9118 Carbine Issued.");
+                broadcast(player, "NGant-Zarvel 9118 Carbine Issued.");
                 break;
             case 2:
                 static_item.createNewItemFunction("weapon_westar_rifle_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Westar-M5 Blaster Rifle Issued.");
+                broadcast(player, "Westar-M5 Blaster Rifle Issued.");
                 break;
             case 3:
                 static_item.createNewItemFunction("weapon_heavy_cr1_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "CR-1 Blast Cannon Issued.");
+                broadcast(player, "CR-1 Blast Cannon Issued.");
                 break;
             case 4:
                 static_item.createNewItemFunction("weapon_knuckler_buzz_knuck", pInv);
-                sendSystemMessageTestingOnly(player, "Buzz-Knuck Issued.");
+                broadcast(player, "Buzz-Knuck Issued.");
                 break;
             case 5:
                 static_item.createNewItemFunction("weapon_sword_1h_pvp_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Sith Sword Issued.");
+                broadcast(player, "Sith Sword Issued.");
                 break;
             case 6:
                 static_item.createNewItemFunction("weapon_sword_2h_pvp_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Vibrosword Issued.");
+                broadcast(player, "Vibrosword Issued.");
                 break;
             case 7:
                 static_item.createNewItemFunction("weapon_magna_guard_polearm_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Magnaguard Electrostaff Issued.");
+                broadcast(player, "Magnaguard Electrostaff Issued.");
                 break;
             case 8:
                 static_item.createNewItemFunction("item_schematic_pvp_bf_saber_03_01", pInv);
-                sendSystemMessageTestingOnly(player, "One-Handed Sith-Saber Hilt Schematic Issued.");
+                broadcast(player, "One-Handed Sith-Saber Hilt Schematic Issued.");
                 break;
             case 9:
                 static_item.createNewItemFunction("item_schematic_pvp_bf_saber_03_02", pInv);
-                sendSystemMessageTestingOnly(player, "Two-Handed Mysterious Lightsaber Hilt Schematic Issued.");
+                broadcast(player, "Two-Handed Mysterious Lightsaber Hilt Schematic Issued.");
                 break;
             case 10:
                 static_item.createNewItemFunction("item_schematic_pvp_bf_saber_03_03", pInv);
-                sendSystemMessageTestingOnly(player, "Double-Bladed Darth Phobos Lightsaber Hilt Schematic Issued.");
+                broadcast(player, "Double-Bladed Darth Phobos Lightsaber Hilt Schematic Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -6612,19 +6439,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6634,37 +6461,37 @@ public class terminal_character_builder extends script.base_script
             case 0:
                 item = createObject("object/weapon/ranged/grenade/grenade_fragmentation_light.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Light Fragmentation Grenade with many charges Issued.");
+                broadcast(player, "Light Fragmentation Grenade with many charges Issued.");
                 break;
             case 1:
                 item = createObject("object/weapon/ranged/grenade/grenade_fragmentation.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Fragmentation Grenade with many charges Issued.");
+                broadcast(player, "Fragmentation Grenade with many charges Issued.");
                 break;
             case 2:
                 item = createObject("object/weapon/ranged/grenade/grenade_imperial_detonator.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Imperial Detonator with many charges Issued.");
+                broadcast(player, "Imperial Detonator with many charges Issued.");
                 break;
             case 3:
                 item = createObject("object/weapon/ranged/grenade/grenade_proton.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Proton Grenade with many charges Issued.");
+                broadcast(player, "Proton Grenade with many charges Issued.");
                 break;
             case 4:
                 item = createObject("object/weapon/ranged/grenade/grenade_thermal_detonator.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Thermal Detonator with many charges Issued.");
+                broadcast(player, "Thermal Detonator with many charges Issued.");
                 break;
             case 5:
                 item = createObject("object/weapon/ranged/grenade/grenade_glop.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Glop Grenade with many charges Issued.");
+                broadcast(player, "Glop Grenade with many charges Issued.");
                 break;
             case 6:
                 item = createObject("object/weapon/ranged/grenade/grenade_cryoban.iff", pInv, "");
                 setCount(item, 500);
-                sendSystemMessageTestingOnly(player, "Cryoban Grenade with many charges Issued.");
+                broadcast(player, "Cryoban Grenade with many charges Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -6707,7 +6534,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6775,19 +6602,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 9)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6850,19 +6677,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 9)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6870,35 +6697,35 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_1);
-                sendSystemMessageTestingOnly(player, "Composite Armor Set Issued.");
+                broadcast(player, "Composite Armor Set Issued.");
                 break;
             case 1:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_3);
-                sendSystemMessageTestingOnly(player, "Marauder Assault Armor Set Issued.");
+                broadcast(player, "Marauder Assault Armor Set Issued.");
                 break;
             case 2:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_2);
-                sendSystemMessageTestingOnly(player, "Chitin Armor Set Issued.");
+                broadcast(player, "Chitin Armor Set Issued.");
                 break;
             case 3:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_4);
-                sendSystemMessageTestingOnly(player, "Crafted Bounty Hunter Armor Set Issued.");
+                broadcast(player, "Crafted Bounty Hunter Armor Set Issued.");
                 break;
             case 4:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_WOOKIEE);
-                sendSystemMessageTestingOnly(player, "Kashyyykian Hunting Armor Set Issued.");
+                broadcast(player, "Kashyyykian Hunting Armor Set Issued.");
                 break;
             case 5:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_ITHORIAN);
-                sendSystemMessageTestingOnly(player, "Ithorian Sentinel Armor Set Issued.");
+                broadcast(player, "Ithorian Sentinel Armor Set Issued.");
                 break;
             case 6:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_IMPERIAL);
-                sendSystemMessageTestingOnly(player, "Shocktrooper Armor Set Issued.");
+                broadcast(player, "Shocktrooper Armor Set Issued.");
                 break;
             case 7:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSAULT_REBEL);
-                sendSystemMessageTestingOnly(player, "Rebel Assault Armor Set Issued.");
+                broadcast(player, "Rebel Assault Armor Set Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -6938,19 +6765,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 9)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -6958,47 +6785,47 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_3);
-                sendSystemMessageTestingOnly(player, "Padded Armor Set Issued.");
+                broadcast(player, "Padded Armor Set Issued.");
                 break;
             case 1:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_2);
-                sendSystemMessageTestingOnly(player, "Marauder Battle Armor Set Issued.");
+                broadcast(player, "Marauder Battle Armor Set Issued.");
                 break;
             case 2:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_4);
-                sendSystemMessageTestingOnly(player, "RIS Armor Set Issued.");
+                broadcast(player, "RIS Armor Set Issued.");
                 break;
             case 3:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_1);
-                sendSystemMessageTestingOnly(player, "Bone Armor Set Issued.");
+                broadcast(player, "Bone Armor Set Issued.");
                 break;
             case 4:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_WOOKIEE);
-                sendSystemMessageTestingOnly(player, "Kashyyykian Black Mountain Armor Set Issued.");
+                broadcast(player, "Kashyyykian Black Mountain Armor Set Issued.");
                 break;
             case 5:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_ITHORIAN);
-                sendSystemMessageTestingOnly(player, "Ithorian Defender Armor Set Issued.");
+                broadcast(player, "Ithorian Defender Armor Set Issued.");
                 break;
             case 6:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_IMPERIAL);
-                sendSystemMessageTestingOnly(player, "Stormtrooper Armor Set Issued.");
+                broadcast(player, "Stormtrooper Armor Set Issued.");
                 break;
             case 7:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_REBEL);
-                sendSystemMessageTestingOnly(player, "Rebel Battle Armor Set Issued.");
+                broadcast(player, "Rebel Battle Armor Set Issued.");
                 break;
             case 8:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_SNOWTROOPER);
-                sendSystemMessageTestingOnly(player, "Imperial Snowtrooper Set Issued.");
+                broadcast(player, "Imperial Snowtrooper Set Issued.");
                 break;
             case 9:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_INFILTRATOR_S01);
-                sendSystemMessageTestingOnly(player, "Infiltrator Armor Set 1 Issued.");
+                broadcast(player, "Infiltrator Armor Set 1 Issued.");
                 break;
             case 10:
                 issueBattleArmorSet(player, ARMOR_SET_BATTLE_INFILTRATOR_S02);
-                sendSystemMessageTestingOnly(player, "Infiltrator Armor Set 1 Issued.");
+                broadcast(player, "Infiltrator Armor Set 1 Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -7038,19 +6865,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 9)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7058,39 +6885,39 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 issueReconArmorSet(player, ARMOR_SET_RECON_3);
-                sendSystemMessageTestingOnly(player, "Tantel Armor Set Issued.");
+                broadcast(player, "Tantel Armor Set Issued.");
                 break;
             case 1:
                 issueReconArmorSet(player, ARMOR_SET_RECON_4);
-                sendSystemMessageTestingOnly(player, "Ubese Armor Set Issued.");
+                broadcast(player, "Ubese Armor Set Issued.");
                 break;
             case 2:
                 issueReconArmorSet(player, ARMOR_SET_RECON_1);
-                sendSystemMessageTestingOnly(player, "Mabari Armor Set Issued.");
+                broadcast(player, "Mabari Armor Set Issued.");
                 break;
             case 3:
                 issueReconArmorSet(player, ARMOR_SET_RECON_2);
-                sendSystemMessageTestingOnly(player, "Recon Marauder Armor Set Issued.");
+                broadcast(player, "Recon Marauder Armor Set Issued.");
                 break;
             case 4:
                 issueReconArmorSet(player, ARMOR_SET_RECON_WOOKIEE);
-                sendSystemMessageTestingOnly(player, "Kashyyykian Ceremonial Armor Set Issued.");
+                broadcast(player, "Kashyyykian Ceremonial Armor Set Issued.");
                 break;
             case 5:
                 issueReconArmorSet(player, ARMOR_SET_RECON_ITHORIAN);
-                sendSystemMessageTestingOnly(player, "Ithorian Guardian Armor Set Issued.");
+                broadcast(player, "Ithorian Guardian Armor Set Issued.");
                 break;
             case 6:
                 issueReconArmorSet(player, ARMOR_SET_RECON_IMPERIAL);
-                sendSystemMessageTestingOnly(player, "Scout Trooper Armor Set Issued.");
+                broadcast(player, "Scout Trooper Armor Set Issued.");
                 break;
             case 7:
                 issueReconArmorSet(player, ARMOR_SET_RECON_REBEL);
-                sendSystemMessageTestingOnly(player, "Rebel Marine Armor Set Issued.");
+                broadcast(player, "Rebel Marine Armor Set Issued.");
                 break;
             case 8:
                 issueReconArmorSet(player, ARMOR_SET_REBEL_SNOW);
-                sendSystemMessageTestingOnly(player, "Rebel Snow Armor Set Issued.");
+                broadcast(player, "Rebel Snow Armor Set Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -7130,19 +6957,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 2)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7152,18 +6979,18 @@ public class terminal_character_builder extends script.base_script
             case 0:
                 item = createObject("object/tangible/component/armor/shield_generator_personal.iff", pInv, "");
                 armor.initializePsg(item, 2.5f, 500, 10000);
-                sendSystemMessageTestingOnly(player, "PSG Mark I Issued.");
+                broadcast(player, "PSG Mark I Issued.");
                 break;
             case 1:
                 item = createObject("object/tangible/component/armor/shield_generator_personal_b.iff", pInv, "");
                 armor.initializePsg(item, 2.5f, 1000, 10000);
-                sendSystemMessageTestingOnly(player, "PSG Mark II Issued.");
+                broadcast(player, "PSG Mark II Issued.");
                 break;
             case 2:
                 item = createObject("object/tangible/component/armor/shield_generator_personal_c.iff", pInv, "");
                 armor.initializePsg(item, 2.5f, 2000, 10000);
                 setSocketsUp(item);
-                sendSystemMessageTestingOnly(player, "PSG Mark III Issued.");
+                broadcast(player, "PSG Mark III Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -7201,19 +7028,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 9)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 9 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7221,27 +7048,27 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 issuePvPSet(player, ARMOR_SET_PVP_IMPERIAL_BLACK);
-                sendSystemMessageTestingOnly(player, "Imperial Black PvP Set Issued.");
+                broadcast(player, "Imperial Black PvP Set Issued.");
                 break;
             case 1:
                 issuePvPSet(player, ARMOR_SET_PVP_IMPERIAL_WHITE);
-                sendSystemMessageTestingOnly(player, "Imperial White PvP Set Issued.");
+                broadcast(player, "Imperial White PvP Set Issued.");
                 break;
             case 2:
                 issuePvPSet(player, ARMOR_SET_PVP_REBEL_GREY);
-                sendSystemMessageTestingOnly(player, "Rebel Grey PvP Set Issued.");
+                broadcast(player, "Rebel Grey PvP Set Issued.");
                 break;
             case 3:
                 issuePvPSet(player, ARMOR_SET_PVP_REBEL_GREEN);
-                sendSystemMessageTestingOnly(player, "Rebel Green PvP Set Issued.");
+                broadcast(player, "Rebel Green PvP Set Issued.");
                 break;
             case 4:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSUALT_GALACTIC_MARINE);
-                sendSystemMessageTestingOnly(player, "Galactic Marine Armor Set Issued.");
+                broadcast(player, "Galactic Marine Armor Set Issued.");
                 break;
             case 5:
                 issueAssaultArmorSet(player, ARMOR_SET_ASSUALT_REBEL_SPECFORCE);
-                sendSystemMessageTestingOnly(player, "Rebel SpecForce Armor Set Issued.");
+                broadcast(player, "Rebel SpecForce Armor Set Issued.");
                 break;
             case 6:
                 static_item.createNewItemFunction("armor_mandalorian_imperial_belt_04_01", pInv);
@@ -7408,19 +7235,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7429,7 +7256,7 @@ public class terminal_character_builder extends script.base_script
             if (isGod(player))
             {
                 static_item.createNewItemFunction("item_development_combat_test_ring_06_01", pInv);
-                sendSystemMessageTestingOnly(player, "Combat Enhancement Ring Issued");
+                broadcast(player, "Combat Enhancement Ring Issued");
             }
         }
         else
@@ -7469,19 +7296,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 5)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7611,7 +7438,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7685,19 +7512,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7705,50 +7532,50 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/wearables/backpack/backpack_s06.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Spec-Ops Pack Issued.");
+                broadcast(player, "Spec-Ops Pack Issued.");
                 break;
             case 1:
                 createObject("object/tangible/wearables/backpack/backpack_krayt_skull.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Krayt Pack Issued.");
+                broadcast(player, "Krayt Pack Issued.");
                 break;
             case 2:
                 createObject("object/tangible/wearables/backpack/backpack_s09.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Pilot Ace Pack Issued.");
+                broadcast(player, "Pilot Ace Pack Issued.");
                 break;
             case 3:
                 static_item.createNewItemFunction("item_fannypack_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Jedi Belt of Master Bodo Baas Issued.");
+                broadcast(player, "Jedi Belt of Master Bodo Baas Issued.");
                 break;
             case 4:
                 static_item.createNewItemFunction("armor_snowtrooper_backpack", pInv);
-                sendSystemMessageTestingOnly(player, "Snowtrooper Backpack Issued.");
+                broadcast(player, "Snowtrooper Backpack Issued.");
                 break;
             case 5:
                 static_item.createNewItemFunction("armor_rebel_snow_backpack", pInv);
-                sendSystemMessageTestingOnly(player, "Alliance Cold Weather Backpack Issued.");
+                broadcast(player, "Alliance Cold Weather Backpack Issued.");
                 break;
             case 6:
                 createObject("object/tangible/mission/mission_bounty_droid_probot.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Arakyd Probe Droid Issued.");
+                broadcast(player, "Arakyd Probe Droid Issued.");
                 break;
             case 7:
                 createObject("object/tangible/mission/mission_bounty_droid_seeker.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Seeker Droid Issued.");
+                broadcast(player, "Seeker Droid Issued.");
                 break;
             case 8:
                 static_item.createNewItemFunction("item_limited_use_schematic_bounty_ee3_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Master Crafted EE3 Draft Schematic Issued.");
+                broadcast(player, "Master Crafted EE3 Draft Schematic Issued.");
                 break;
             case 9:
                 static_item.createNewItemFunction("item_limited_use_schematic_bounty_dc15_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Master Crafted DC-15 Draft Schematic Issued.");
+                broadcast(player, "Master Crafted DC-15 Draft Schematic Issued.");
                 break;
             case 10:
                 for (int i = 0; i < 4; i++)
                 {
                     createObject("object/tangible/veteran_reward/resource.iff", pInv, "");
                 }
-                sendSystemMessageTestingOnly(player, "Resource Kits Issued");
+                broadcast(player, "Resource Kits Issued");
                 break;
             case 11:
                 static_item.createNewItemFunction("item_pvp_captain_battle_banner_imperial_reward_04_01", pInv);
@@ -7759,7 +7586,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_heroic_ig_88_head_01_01", pInv);
                 static_item.createNewItemFunction("item_tow_cystal_buff_drained_05_01", pInv);
                 static_item.createNewItemFunction("item_tow_crystal_uber_05_02", pInv);
-                sendSystemMessageTestingOnly(player, "Buff Items issued.");
+                broadcast(player, "Buff Items issued.");
                 break;
             case 12:
                 createObject("object/tangible/wearables/pants/nightsister_pants_s01.iff", pInv, "");
@@ -7773,7 +7600,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/wearables/hat/nightsister_hat_s03.iff", pInv, "");
                 createObject("object/tangible/wearables/boots/nightsister_boots.iff", pInv, "");
                 createObject("object/tangible/wearables/armor/nightsister/armor_nightsister_bicep_r_s01.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Nightsister Clothing Issued");
+                broadcast(player, "Nightsister Clothing Issued");
                 break;
             case 13:
                 createObject("object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff", pInv, "");
@@ -7786,22 +7613,22 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/wearables/armor/mandalorian/armor_mandalorian_gloves.iff", pInv, "");
                 createObject("object/tangible/wearables/armor/mandalorian/armor_mandalorian_leggings.iff", pInv, "");
                 createObject("object/tangible/wearables/armor/mandalorian/armor_mandalorian_shoes.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Mandalorian Armor Issued");
+                broadcast(player, "Mandalorian Armor Issued");
                 break;
             case 14:
                 groundquests.clearQuest(player, "cyborg_headband_reward_quest");
                 groundquests.grantQuest(player, "cyborg_headband_reward_quest");
-                sendSystemMessageTestingOnly(player, "Quest Obtained - Accept and Choose Reward");
+                broadcast(player, "Quest Obtained - Accept and Choose Reward");
                 break;
             case 15:
-                sendSystemMessageTestingOnly(player, "This option is disabled.");
+                broadcast(player, "This option is disabled.");
                 break;
             case 16:
                 obj_id attachment = createObject("object/tangible/gem/clothing.iff", pInv, "");
                 setObjVar(attachment, "skillmod.bonus.factory_speed", 9999);
                 setName(attachment, "Clothing Attachment: Factory Speed");
                 setBioLink(attachment, player);
-                sendSystemMessageTestingOnly(player, "Factory Speed Attachment Issued.");
+                broadcast(player, "Factory Speed Attachment Issued.");
                 break;
             case 17:
                 if (isGod(player))
@@ -7811,7 +7638,7 @@ public class terminal_character_builder extends script.base_script
                     setName(drink, "Breath of the Force");
                     setCount(drink, 10);
                     setBioLink(drink, player);
-                    sendSystemMessageTestingOnly(player, "Breath of the Force Issued.");
+                    broadcast(player, "Breath of the Force Issued.");
                 }
                 break;
             case 18:
@@ -7820,7 +7647,7 @@ public class terminal_character_builder extends script.base_script
                 setName(drink1, "Bespin Port (x10)");
                 setCount(drink1, 4);
                 setBioLink(drink1, player);
-                sendSystemMessageTestingOnly(player, "Liquid Gold Issued.");
+                broadcast(player, "Liquid Gold Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -7885,7 +7712,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -7941,7 +7768,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_CONTINUE;
         }
         groundquests.grantQuest(player, message1);
-        sendSystemMessageTestingOnly(player, "Granted: " + message1 + " If it didn't grant the quest check spelling and try again.");
+        broadcast(player, "Granted: " + message1 + " If it didn't grant the quest check spelling and try again.");
         return SCRIPT_CONTINUE;
     }
 
@@ -7966,7 +7793,7 @@ public class terminal_character_builder extends script.base_script
         float craftingnum = 1000.0f;
         obj_id container = utils.getInventoryContainer(player);
         makeCraftedItem(craft1, craftingnum, container);
-        sendSystemMessageTestingOnly(player, "Crafted: " + craft1 + " If it did not craft the item, check spelling and try again.");
+        broadcast(player, "Crafted: " + craft1 + " If it did not craft the item, check spelling and try again.");
         return SCRIPT_CONTINUE;
     }
 
@@ -7989,7 +7816,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_CONTINUE;
         }
         groundquests.completeQuest(player, message2);
-        sendSystemMessageTestingOnly(player, "Completed: " + message2 + " If it didn't complete the quest check spelling and try again.");
+        broadcast(player, "Completed: " + message2 + " If it didn't complete the quest check spelling and try again.");
         return SCRIPT_CONTINUE;
     }
 
@@ -8012,7 +7839,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_CONTINUE;
         }
         groundquests.clearQuest(player, message3);
-        sendSystemMessageTestingOnly(player, "Cleared.: " + message3 + " If it didn't clear the quest check spelling and try again.");
+        broadcast(player, "Cleared.: " + message3 + " If it didn't clear the quest check spelling and try again.");
         return SCRIPT_CONTINUE;
     }
 
@@ -8035,7 +7862,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_CONTINUE;
         }
         attachScript(player, ascript);
-        sendSystemMessageTestingOnly(player, "Attached.");
+        broadcast(player, "Attached.");
         return SCRIPT_CONTINUE;
     }
 
@@ -8058,7 +7885,7 @@ public class terminal_character_builder extends script.base_script
             return SCRIPT_CONTINUE;
         }
         detachScript(player, dscript);
-        sendSystemMessageTestingOnly(player, "Detached.");
+        broadcast(player, "Detached.");
         return SCRIPT_CONTINUE;
     }
 
@@ -8078,12 +7905,12 @@ public class terminal_character_builder extends script.base_script
         String message5 = sui.getInputBoxText(params);
         if (message5 == null)
         {
-            sendSystemMessageTestingOnly(player, "Invalid Item");
+            broadcast(player, "Invalid Item");
             return SCRIPT_CONTINUE;
         }
         if (message5.equals("item_ultra_battery_10_01") && !isGod(self))
         {
-            sendSystemMessageTestingOnly(player, "Nice try, but this item is off limits.");
+            broadcast(player, "Nice try, but this item is off limits.");
             return SCRIPT_CONTINUE;
         }
         if (message5.equals("all"))
@@ -8096,19 +7923,19 @@ public class terminal_character_builder extends script.base_script
             {
                 inventory[i] = dataTableGetString(DATATABLE_INVENTORY, i, "name");
                 static_item.createNewItemFunction(inventory[i], pInv);
-                sendSystemMessageTestingOnly(player, "All Static Items Given.)");
+                broadcast(player, "All Static Items Given.)");
             }
             return SCRIPT_CONTINUE;
         }
         else if (message5.equals("testitems"))
         {
-            sendSystemMessageTestingOnly(player, "Is this even working?");
+            broadcast(player, "Is this even working?");
             return SCRIPT_CONTINUE;
         }
         else if (message5.endsWith(".iff"))
         {
             createObject(message5, pInv, "");
-            sendSystemMessageTestingOnly(player, "Object: " + message5 + " issued. If you did not recieve this item please check object/to/path.iff!");
+            broadcast(player, "Object: " + message5 + " issued. If you did not recieve this item please check object/to/path.iff!");
             playClientEffectLoc(player, RLS_SOUND, getLocation(player), 1.0f);
             return SCRIPT_CONTINUE;
         }
@@ -8123,7 +7950,7 @@ public class terminal_character_builder extends script.base_script
         }
         else if (message5.equals("craft"))
         {
-            sendSystemMessageTestingOnly(player, "Crafting Tool");
+            broadcast(player, "Crafting Tool");
             String craft1 = "";
             String crafttitle = "Crafting Tool";
             String craftmenu = "Used to craft items, enter valid draft_schematic to craft at maximum cap.";
@@ -8157,17 +7984,8 @@ public class terminal_character_builder extends script.base_script
             static_item.createNewItemFunction("item_tcg_loot_reward_series5_signal_unit", pInv);
             static_item.createNewItemFunction("item_heroic_ig_88_head_01_01", pInv);
             static_item.createNewItemFunction("item_tow_cystal_buff_drained_05_01", pInv);
-            sendSystemMessageTestingOnly(player, "Buff Items issued.");
+            broadcast(player, "Buff Items issued.");
             playClientEffectLoc(player, RLS_SOUND, getLocation(player), 1.0f);
-            return SCRIPT_CONTINUE;
-        }
-        else if (message5.equals("frog"))
-        {
-            createObject("object/tangible/terminal/terminal_character_builder.iff", pInv, "");
-            sendSystemMessageTestingOnly(player, "Test Center Terminal issued.");
-            sendSystemMessageTestingOnly(player, "Note: You can only use this once placed in a house if you are not in god mode.");
-            sendSystemMessageTestingOnly(player, "Once dropped, you cannot pick it back up.");
-            setObjVar(player, "character_builder.object_tool.frog", 1);
             return SCRIPT_CONTINUE;
         }
         else if (message5.equals("loot")) // this is hidden so only me and u guys know about it.
@@ -8181,7 +7999,7 @@ public class terminal_character_builder extends script.base_script
         else
         {
             static_item.createNewItemFunction(message5, pInv);
-            sendSystemMessageTestingOnly(player, "Item: " + message5 + " issued. If you did not recieve an item, please check spelling.");
+            broadcast(player, "Item: " + message5 + " issued. If you did not recieve an item, please check spelling.");
             setObjVar(player, "character_builder.used_item_giver", 1);
             playClientEffectLoc(player, RLS_SOUND, getLocation(player), 1.0f);
             return SCRIPT_CONTINUE;
@@ -8203,7 +8021,7 @@ public class terminal_character_builder extends script.base_script
         String lootManager = sui.getInputBoxText(params);
         if (lootManager == null)
         {
-            sendSystemMessageTestingOnly(player, "Invalid Table");
+            broadcast(player, "Invalid Table");
             return SCRIPT_CONTINUE;
         }
         String lootTable = lootManager;
@@ -8211,7 +8029,7 @@ public class terminal_character_builder extends script.base_script
         location treasureLoc = getLocation(player);
         obj_id treasureChest = createObject("object/tangible/container/drum/treasure_drum.iff", treasureLoc);
         loot.makeLootInContainer(treasureChest, lootTable, lootCount, 0);
-        sendSystemMessageTestingOnly(player, "A loot chest was made with 20 items from the loot table: " + lootTable);
+        broadcast(player, "A loot chest was made with 20 items from the loot table: " + lootTable);
         return SCRIPT_CONTINUE;
     }
 
@@ -8243,19 +8061,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8264,7 +8082,7 @@ public class terminal_character_builder extends script.base_script
             obj_id suit = static_item.createNewItemFunction("item_god_craftingsuit_06_01", pInv);
             if (isIdValid(suit))
             {
-                sendSystemMessageTestingOnly(player, "Blix's Ultra Crafting Suit Issued, May you see nothing but Amazing Crafts!");
+                broadcast(player, "Blix's Ultra Crafting Suit Issued, May you see nothing but Amazing Crafts!");
             }
         }
         else
@@ -8304,19 +8122,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8324,31 +8142,31 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 createObject("object/tangible/smuggler/simple_toolkit.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Simple Toolkit Issued.");
+                broadcast(player, "Simple Toolkit Issued.");
                 break;
             case 1:
                 createObject("object/tangible/smuggler/finely_crafted_toolset.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Finely Crafted Toolset Issued.");
+                broadcast(player, "Finely Crafted Toolset Issued.");
                 break;
             case 2:
                 createObject("object/tangible/smuggler/trandoshan_interframe.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Trandoshan Interframe Issued.");
+                broadcast(player, "Trandoshan Interframe Issued.");
                 break;
             case 3:
                 createObject("object/tangible/smuggler/delicate_trigger_assembly.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Delicate Trigger Issued.");
+                broadcast(player, "Delicate Trigger Issued.");
                 break;
             case 4:
                 createObject("object/tangible/smuggler/illegal_core_booster.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Illegal Core Booster Issued.");
+                broadcast(player, "Illegal Core Booster Issued.");
                 break;
             case 5:
                 createObject("object/tangible/smuggler/mandalorian_interframe.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Mandalorian Interframe Issued.");
+                broadcast(player, "Mandalorian Interframe Issued.");
                 break;
             case 6:
                 createObject("object/tangible/smuggler/reactive_micro_plating.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Micro Plating Issued.");
+                broadcast(player, "Micro Plating Issued.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -8397,19 +8215,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8425,7 +8243,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(armorPower, "reverse_engineering.reverse_engineering_ratio", powerRatio);
             setObjVar(armorPower, "reverse_engineering.reverse_engineering_power", power);
             setCount(armorPower, 350);
-            sendSystemMessageTestingOnly(player, "Armor Power Up Issued");
+            broadcast(player, "Armor Power Up Issued");
         }
         if (isIdValid(shirtPower))
         {
@@ -8433,7 +8251,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(shirtPower, "reverse_engineering.reverse_engineering_ratio", powerRatio);
             setObjVar(shirtPower, "reverse_engineering.reverse_engineering_power", power);
             setCount(shirtPower, 350);
-            sendSystemMessageTestingOnly(player, "Shirt Power Up Issued");
+            broadcast(player, "Shirt Power Up Issued");
         }
         if (isIdValid(weaponPower))
         {
@@ -8441,7 +8259,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(weaponPower, "reverse_engineering.reverse_engineering_ratio", powerRatio);
             setObjVar(weaponPower, "reverse_engineering.reverse_engineering_power", power);
             setCount(weaponPower, 350);
-            sendSystemMessageTestingOnly(player, "Weapon Power Up Issued");
+            broadcast(player, "Weapon Power Up Issued");
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", getExoticMods(), "handlePowerUpSelect", false);
         return SCRIPT_CONTINUE;
@@ -8545,19 +8363,19 @@ public class terminal_character_builder extends script.base_script
         utils.setScriptVar(player, "character_builder.modTypeThree", idx);
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8583,7 +8401,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(armorPower, "skillmod.bonus." + stringSkillModTwo, powerTwo);
             setObjVar(armorPower, "skillmod.bonus." + stringSkillModThree, powerThree);
             setObjVar(armorPower, "reverse_engineering.attachment_level", 2);
-            sendSystemMessageTestingOnly(player, "Exotic Armor Attachment Issued");
+            broadcast(player, "Exotic Armor Attachment Issued");
         }
         if (isIdValid(shirtPower))
         {
@@ -8591,7 +8409,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(shirtPower, "skillmod.bonus." + stringSkillModTwo, powerTwo);
             setObjVar(shirtPower, "skillmod.bonus." + stringSkillModThree, powerThree);
             setObjVar(shirtPower, "reverse_engineering.attachment_level", 2);
-            sendSystemMessageTestingOnly(player, "Exotic Shirt Attachment Issued");
+            broadcast(player, "Exotic Shirt Attachment Issued");
         }
         if (isIdValid(weaponPower))
         {
@@ -8599,7 +8417,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(weaponPower, "skillmod.bonus." + stringSkillModTwo, powerTwo);
             setObjVar(weaponPower, "skillmod.bonus." + stringSkillModThree, powerThree);
             setObjVar(weaponPower, "reverse_engineering.attachment_level", 2);
-            sendSystemMessageTestingOnly(player, "Exotic Weapon Attachment Issued");
+            broadcast(player, "Exotic Weapon Attachment Issued");
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
         return SCRIPT_CONTINUE;
@@ -8633,19 +8451,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8680,7 +8498,7 @@ public class terminal_character_builder extends script.base_script
             if (isIdValid(clothingObject))
             {
                 setSocketsUp(clothingObject);
-                sendSystemMessageTestingOnly(player, "Clothing Issued");
+                broadcast(player, "Clothing Issued");
             }
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", CLOTHING_OPTIONS, "handleClothingSelect", false);
@@ -8782,19 +8600,19 @@ public class terminal_character_builder extends script.base_script
         utils.setScriptVar(player, "character_builder.basicModTypeThree", idx);
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8815,7 +8633,7 @@ public class terminal_character_builder extends script.base_script
             setObjVar(armorPower, "skillmod.bonus." + stringSkillModTwo, power);
             setObjVar(armorPower, "skillmod.bonus." + stringSkillModThree, power);
             setObjVar(armorPower, "reverse_engineering.attachment_level", 2);
-            sendSystemMessageTestingOnly(player, "Basic Armor Attachment Issued");
+            broadcast(player, "Basic Armor Attachment Issued");
             cleanScriptVars(player);
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", MISCITEM_OPTIONS, "handleMiscOptions", false);
@@ -8850,19 +8668,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8885,7 +8703,7 @@ public class terminal_character_builder extends script.base_script
         if (crystal != null && !crystal.equals(""))
         {
             static_item.createNewItemFunction(crystal, pInv);
-            sendSystemMessageTestingOnly(player, "Enjoy");
+            broadcast(player, "Enjoy");
         }
         refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", AURILIA_CRYSTALS, "handleBuffCrystalSelect", false);
         return SCRIPT_CONTINUE;
@@ -8919,19 +8737,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -8943,11 +8761,11 @@ public class terminal_character_builder extends script.base_script
                 {
                     setCount(stima, 350);
                     setObjVar(stima, "healing.power", 250);
-                    sendSystemMessageTestingOnly(player, "High Charge Instant Stimpack-A Issued!");
+                    broadcast(player, "High Charge Instant Stimpack-A Issued!");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction, Invalid Stim.");
+                    broadcast(player, "The system is unable to complete the transaction, Invalid Stim.");
                 }
                 break;
             case 1:
@@ -8956,11 +8774,11 @@ public class terminal_character_builder extends script.base_script
                 {
                     setCount(stimb, 350);
                     setObjVar(stimb, "healing.power", 400);
-                    sendSystemMessageTestingOnly(player, "High Charge Instant Stimpack-B Issued!");
+                    broadcast(player, "High Charge Instant Stimpack-B Issued!");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction, Invalid Stim.");
+                    broadcast(player, "The system is unable to complete the transaction, Invalid Stim.");
                 }
                 break;
             case 2:
@@ -8969,11 +8787,11 @@ public class terminal_character_builder extends script.base_script
                 {
                     setCount(stimc, 350);
                     setObjVar(stimc, "healing.power", 700);
-                    sendSystemMessageTestingOnly(player, "High Charge Instant Stimpack-C Issued!");
+                    broadcast(player, "High Charge Instant Stimpack-C Issued!");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction, Invalid Stim.");
+                    broadcast(player, "The system is unable to complete the transaction, Invalid Stim.");
                 }
                 break;
             case 3:
@@ -8982,11 +8800,11 @@ public class terminal_character_builder extends script.base_script
                 {
                     setCount(stimd, 350);
                     setObjVar(stimd, "healing.power", 1200);
-                    sendSystemMessageTestingOnly(player, "High Charge Instant Stimpack-D Issued!");
+                    broadcast(player, "High Charge Instant Stimpack-D Issued!");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction, Invalid Stim.");
+                    broadcast(player, "The system is unable to complete the transaction, Invalid Stim.");
                 }
                 break;
             default:
@@ -8999,9 +8817,334 @@ public class terminal_character_builder extends script.base_script
 
     public void handleWarpOption(obj_id player) throws InterruptedException
     {
-        refreshMenu(player, "Select the desired item option", getClusterName() + " Character Builder Terminal", WARP_OPTIONS, "handleWarpOptions", false);
+        WARP_OPTIONS = null;
+        Collections.addAll(WARP_OPTIONS = new ArrayList<>(),
+                new warp_location("World Boss: Ancient Elder Krayt Dragon", "tatooine", -4657, 54, -4368),
+                new warp_location("World Boss: Empress Peko-Peko", "naboo", -5859, 411, -1580),
+                new warp_location("World Boss: Pax Vizla", "dxun", -4459, 160, -2340),
+                new warp_location("World Boss: Darth Gizmo", "endor", -574, 0, -5009),
+                new warp_location("Mos Eisley, Tatooine", "tatooine", 3528, 0, -4804),
+                new warp_location("Fort Tusken, Tatooine", "tatooine", -4000, 0, 6250),
+                new warp_location("Jabba's Palace, Tatooine", "tatooine", -5868, 0, -6189),
+                new warp_location("Jawa Fortress, Tatooine", "tatooine", -6100, 0, 1892),
+                new warp_location("Ben Kenobi's Hut, Tatooine", "tatooine", -4773, 0, -3009),
+                new warp_location("Lars Homestead, Tatooine", "tatooine", -2600, 0, -5500),
+                new warp_location("Krayt Hunting Grounds, Tatooine", "tatooine", 7092, 0, 4533),
+                new warp_location("Sarlacc Pit, Tatooine", "tatooine", -6183, 0, -3371),
+                new warp_location("Beggar's Canyon, Tatooine", "tatooine", -3880, 0, -800),
+                new warp_location("Pod Race Track Start, Tatooine", "tatooine", 133, 0, 4127),
+                new warp_location("Darklighter Residence, Tatooine", "tatooine", -696, 0, -6728),
+                new warp_location("Kenobi's Homestead, Tatooine", "tatooine", -4512, 0, -2270),
+                new warp_location("Oasis I, Tatooine", "tatooine", -5270, 0, 2810),
+                new warp_location("Oasis II, Tatooine", "tatooine", 1807, 0, -6061),
+                new warp_location("Oasis III, Tatooine", "tatooine", 6283, 0, -422),
+                new warp_location("Oasis IV, Tatooine", "tatooine", 6645, 0, 5453),
+                new warp_location("The Shrub, Tatooine", "tatooine", -5249, 0, 2551),
+                new warp_location("R2/3PO Escape Pod, Tatooine", "tatooine", -3933, 0, -4417),
+                new warp_location("Arnthout, Tatooine", "tatooine", -1470, 0, 3730),
+                new warp_location("Krayt Skeleton, Tatooine", "tatooine", -4670, 0, -4350),
+                new warp_location("Krayt Skeleton, Tatooine", "tatooine", -4642, 0, -1912),
+                new warp_location("Hedge maze, Tatooine", "tatooine", -3039, 0, -5104),
+                new warp_location("White Thranta Shipping Bunker, Tatooine", "tatooine", 3727, 0, -4182),
+                new warp_location("Anchorhead, Tatooine", "tatooine", 100, 0, -5300),
+                new warp_location("Mos Entha, Tatooine", "tatooine", 1900, 0, 3300),
+                new warp_location("Mos Espa, Tatooine", "tatooine", -2915, 0, 2361),
+                new warp_location("Mos Taike, Tatooine", "tatooine", 3764, 0, 2381),
+                new warp_location("Wayfar, Tatooine", "tatooine", -5126, 75, -6599),
+                new warp_location("Bestine, Tatooine", "tatooine", -1290, 0, -3590),
+                new warp_location("Crashed Escape Pod and gravestones, Tatooine", "tatooine", -6174, 0, 5888),
+                new warp_location("Wattoo's Shop, Tatooine", "tatooine", -2910, 0, 2435),
+                new warp_location("Lucky Despot Cantina, Tatooine", "tatooine", 3333, 0, -4605),
+                new warp_location("Mushroom Mesa, Tatooine", "tatooine", 900, 0, 5568),
+                new warp_location("The Grand Arena Flats, Tatooine", "tatooine", 2520, 0, 4700),
+                new warp_location("Aartan Race Track, Tatooine", "tatooine", 2380, 0, 5000),
+                new warp_location("Hutt Hideout, Tatooine", "tatooine", 5121, 0, 647),
+                new warp_location("Jedi Shrine, Tatooine", "tatooine", -6505, 0, -3667),
+                new warp_location("Squill Cave, Tatooine", "tatooine", 58, 0, -79),
+                new warp_location("Krayt Cult Cave, Tatooine", "tatooine", 3444, 0, -4186),
+                new warp_location("Sennex Slave Bunker, Tatooine", "tatooine", 70, 0, -5256),
+                new warp_location("Valarian Pod Racers Bunker, Tatooine", "tatooine", -700, 0, -6300),
+                new warp_location("Sennex Beetle Cave, Tatooine", "tatooine", 6553, 0, -1312),
+                new warp_location("Alkhara Bandit Camp, Tatooine", "tatooine", -5455, 0, -6122),
+                new warp_location("Golden Orb Hall, Tatooine", "tatooine", -2886, 0, 1977),
+                new warp_location("Disabled Sand Crawler, Tatooine", "tatooine", -3651, 0, -4755),
+                new warp_location("Mos Espa Hotel Arboretum, Tatooine", "tatooine", -3069, 0, 2159),
+                new warp_location("Anakin's House?, Tatooine", "tatooine", -2878, 0, 2542),
+                new warp_location("Theed City, Naboo", "naboo", -5901, 0, 4098),
+                new warp_location("Keren, Naboo", "naboo", 1984, 0, 2154),
+                new warp_location("Kaadaara, Naboo", "naboo", 5011, -192, 6805),
+                new warp_location("Moenia, Naboo", "naboo", 4697, 0, -4897),
+                new warp_location("Moenia Starport, Naboo", "naboo", 4800, 0, -4700),
+                new warp_location("Theed Hanger, Naboo", "naboo", -4855, 0, 4167),
+                new warp_location("Dee'ja Peak, Naboo", "naboo", 5141, 0, -1470),
+                new warp_location("Lake Retreat, Naboo", "naboo", -5565, 0, -34),
+                new warp_location("Emperor's Retreat, Naboo", "naboo", 2447, 0, -3918),
+                new warp_location("GCW Static Base, Naboo", "naboo", 1019, 0, -1508),
+                new warp_location("Amidala's Private Beach, Naboo", "naboo", -5825, -158, -99),
+                new warp_location("The Bottom of Theed Falls, Naboo", "naboo", -4630, 0, 4213),
+                new warp_location("Gungan Sacred Place, Naboo", "naboo", -2064, 5, -5423),
+                new warp_location("Borvo's Vault, Naboo", "naboo", 4321, 0, -4774),
+                new warp_location("Gungan Warrior Stronghold, Naboo", "naboo", -264, 0, 2823),
+                new warp_location("Imperial vs. Gungan Battle, Naboo", "naboo", 4771, 0, -3868),
+                new warp_location("Keren Street Race, Naboo", "naboo", 1396, 0, 2686),
+                new warp_location("Mauler Stronghold, Naboo", "naboo", 2850, 0, 1084),
+                new warp_location("Mordran, Naboo", "naboo", -1969, 0, 5295),
+                new warp_location("Naboo Kidnapped Royalty, Naboo", "naboo", -1500, 0, -1730),
+                new warp_location("Naboo Crystal Cave, Naboo", "naboo", 1932, 0, -1574),
+                new warp_location("Weapon Development Facility, Naboo", "naboo", 936, 0, -1582),
+                new warp_location("Cool Cliff, Naboo", "naboo", -5902, -196, 4823),
+                new warp_location("Theed Waterfall, Naboo", "naboo", -4439, 6, 4173),
+                new warp_location("Small island fishing spot, Naboo", "naboo", -3512, 3, 2081),
+                new warp_location("Water Ruins, Naboo", "naboo", -3151, 10, 2586),
+                new warp_location("Lianorm Swamps, Naboo", "naboo", 4223, 3, -6096),
+                new warp_location("Bootjack Cave, Naboo", "naboo", 4546, 79, -898),
+                new warp_location("Kaadara Beach, Naboo", "naboo", 5146, -192, 6850),
+                new warp_location("Gallo Mountains, Naboo", "naboo", 5702, 329, -1596),
+                new warp_location("Narglatch Cave, Naboo", "naboo", 5829, 36, -4664),
+                new warp_location("Lake Paonga, Naboo", "naboo", 5, 3, -6172),
+                new warp_location("The Coastline, Naboo", "naboo", -10, -202, 5839),
+                new warp_location("Rainforest, Naboo", "naboo", 0, 10, 1996),
+                new warp_location("Small Island, Naboo", "naboo", 198, 30, 1311),
+                new warp_location("Origin, Naboo", "naboo", 0, 0, 0),
+                new warp_location("Coronet Starport, Corellia", "corellia", -137, 28, -4723),
+                new warp_location("Doaba Guerfel, Corellia", "corellia", 3083, 0, 4989),
+                new warp_location("Kor Vella, Corellia", "corellia", -3366, 0, 3154),
+                new warp_location("Tyrena, Corellia", "corellia", -5479, 0, -2668),
+                new warp_location("Bela Vistal, Corellia", "corellia", 6752, 0, -5696),
+                new warp_location("Grand Theater of Vreni Island, Corellia", "corellia", -5420, 0, -6247),
+                new warp_location("Rebel Hideout, Corellia", "corellia", -6530, 0, 5967),
+                new warp_location("Rogue Corsec Base, Corellia", "corellia", 5224, 0, 1589),
+                new warp_location("Agrilat Swamps, Corellia", "corellia", 1388, 0, 3756),
+                new warp_location("Agrilat Inner, Corellia", "corellia", 905, 19, 4633),
+                new warp_location("Beach cliff, Corellia", "corellia", -667, 29, -4635),
+                new warp_location("Golden beaches, Corellia", "corellia", -1843, 5, -4434),
+                new warp_location("Corellia Imperial Stronghold, Corellia", "corellia", 4630, 0, -5740),
+                new warp_location("Afarathu Cave, Corellia", "corellia", -2483, 19, 2905),
+                new warp_location("Crystal Fountain of Bela Vistal, Corellia", "corellia", 6760, 0, -5617),
+                new warp_location("Drall Patriot's Cave, Corellia", "corellia", 1029, 0, 4199),
+                new warp_location("Lord Nyax's Cult, Corellia", "corellia", 1414, 0, -316),
+                new warp_location("Tactical Training Facility, Corellia", "corellia", 4722, 0, -5233),
+                new warp_location("Mountain Top, Corellia", "corellia", -669, 473, 3189),
+                new warp_location("Small farm?, Corellia", "corellia", 4500, 21, 3600),
+                new warp_location("Agrilat Swamps edge, Corellia", "corellia", 123, 31, 4246),
+                new warp_location("Broken White Bridge, Corellia", "corellia", -4250, 1, 3630),
+                new warp_location("Unknown Statue, Corellia", "corellia", -1905, 223, 3988),
+                new warp_location("Droid Graveyard, Corellia", "corellia", -1646, 21, -31),
+                new warp_location("Ignar Ominaz? NPC, Corellia", "corellia", 1803, 30, 4991),
+                new warp_location("Serji-X Arrogantus? NPC, Corellia", "corellia", -204, 44, 4577),
+                new warp_location("Wind Generator Farm, Corellia", "corellia", 6309, 28, 4380),
+                new warp_location("Rebel Theme Park, Hidden Base, Corellia", "corellia", -6528, 398, 5967),
+                new warp_location("Imperial Outpost, Dantooine", "dantooine", -4228, 0, -2380),
+                new warp_location("Mining Outpost, Dantooine", "dantooine", -617, 0, 2478),
+                new warp_location("Pirate Outpost, Dantooine", "dantooine", 1595, 0, -6391),
+                new warp_location("Abandoned Rebel Base, Dantooine", "dantooine", -6826, 0, 5502),
+                new warp_location("Dantari Rock Village, Dantooine", "dantooine", -7155, 0, -882),
+                new warp_location("Dantari Village, Dantooine", "dantooine", -3861, 0, -5706),
+                new warp_location("Jedi Temple Ruins, Dantooine", "dantooine", 4194, 0, 5200),
+                new warp_location("Janta Stronghold, Dantooine", "dantooine", 7028, 47, -4103),
+                new warp_location("Kunga Stronghold, Dantooine", "dantooine", -138, 0, -368),
+                new warp_location("Mokk Stronghold, Dantooine", "dantooine", -7028, 0, -3270),
+                new warp_location("The Warren, Dantooine", "dantooine", -555, 0, -3825),
+                new warp_location("Force Crystal Hunter's Cave, Dantooine", "dantooine", -6221, 0, 7396),
+                new warp_location("Island with Jedi Ruins, Dantooine", "dantooine", -758, 1, 2093),
+                new warp_location("Island with Glowing Stone, Dantooine", "dantooine", 3070, 5, 1212),
+                new warp_location("Path Bridge, Dantooine", "dantooine", -5196, 8, 387),
+                new warp_location("RIS Armor Mol ni'mai, Dantooine", "dantooine", -6805, 125, 6012),
+                new warp_location("Secondstepes, Dantooine", "dantooine", 5952, 0, -5312),
+                new warp_location("Small Lakes, Dantooine", "dantooine", -393, 46, -228),
+                new warp_location("Native Hut, Dantooine", "dantooine", -7085, 0, -6149),
+                new warp_location("Large stone fence, Dantooine", "dantooine", -7256, 5, 4321),
+                new warp_location("Stone Arches, Dantooine", "dantooine", -6143, 37, 4675),
+                new warp_location("Jedi Building (Hilltop), Dantooine", "dantooine", -4492, 70, 1615),
+                new warp_location("Jedi Shrine, Dantooine", "dantooine", -6999, 11, -5269),
+                new warp_location("Jedi Shrine II, Dantooine", "dantooine", 2163, 161, 7548),
+                new warp_location("Jedi ruins, Dantooine", "dantooine", 442, 5, 4590),
+                new warp_location("Nyms Stronghold, Lok", "lok", 423, 2, 5438),
+                new warp_location("An Imperial Outpost, Lok", "lok", -1816, 12, -3087),
+                new warp_location("IG-88, Lok", "lok", -7590, 0, 3491),
+                new warp_location("Canyon Corsair Stronghold, Lok", "lok", -3840, 0, -3858),
+                new warp_location("Droid Engineer's Cave, Lok", "lok", 3320, 0, -4906),
+                new warp_location("Great Kimogila Skeleton, Lok", "lok", 4578, 0, -1151),
+                new warp_location("Great Maze of Lok, Lok", "lok", 3820, 0, -505),
+                new warp_location("Gurk King's Lair, Lok", "lok", -3742, 62, -3500),
+                new warp_location("Mount Chaolt, Lok", "lok", 3091, 0, -4638),
+                new warp_location("Kimogila Town, Lok", "lok", -70, 0, 2650),
+                new warp_location("Blood Razor Base, Lok", "lok", 3610, 0, 2229),
+                new warp_location("Pirate Cave, Lok", "lok", -3030, 0, -678),
+                new warp_location("Gas Mine, Lok", "lok", 6453, 66, 3867),
+                new warp_location("Research Facility, Lok", "lok", 901, 0, -4192),
+                new warp_location("Nyms Themepark, Lok", "lok", 475, 34, 4769),
+                new warp_location("Lok Marathon, Lok", "lok", 627, 12, 5053),
+                new warp_location("Rebel Themepark, Lok", "lok", 471, 11, 5057),
+                new warp_location("Rocky Wasteland, Lok", "lok", 2159, 25, 2324),
+                new warp_location("Volcano, Lok", "lok", 2865, 314, -4753),
+                new warp_location("Twin Craters, Lok", "lok", -1928, 0, 1697),
+                new warp_location("Large Mesa, Lok", "lok", -2128, 103, 1164),
+                new warp_location("Imperial Fortress, Yavin IV", "Yavin IV", 4049, 0, -6217),
+                new warp_location("Labor Outpost, Yavin IV", "Yavin IV", -6922, 0, -5723),
+                new warp_location("Mining Outpost, Yavin IV", "Yavin IV", -270, 0, 4895),
+                new warp_location("Geonosian Bio Lab, Yavin IV", "Yavin IV", -6488, 0, -417),
+                new warp_location("Great Massassi Temple, Yavin IV", "Yavin IV", -3187, 0, -3123),
+                new warp_location("Blueleaf Temple, Yavin IV", "Yavin IV", -875, 0, -2048),
+                new warp_location("Exar Kun Temple, Yavin IV", "Yavin IV", 5076, 0, 5537),
+                new warp_location("Woolamander Palace, Yavin IV", "Yavin IV", 517, 0, -650),
+                new warp_location("Dark Jedi Enclave, Yavin IV", "Yavin IV", 5080, 0, 306),
+                new warp_location("Light Jedi Enclave, Yavin IV", "Yavin IV", -5574, 0, 4901),
+                new warp_location("Massassi Sacrificial Stone, Yavin IV", "Yavin IV", -7555, 155, -433),
+                new warp_location("Massassi Pyramid, Yavin IV", "Yavin IV", -6350, 65, -670),
+                new warp_location("Death Star Turret, Yavin IV", "Yavin IV", -4156, 65, 5328),
+                new warp_location("Burning Tree, Yavin IV", "Yavin IV", 317, 190, -5302),
+                new warp_location("Large Crater, Yavin IV", "Yavin IV", 5900, 695, -4320),
+                new warp_location("Gazebo, Yavin IV", "Yavin IV", 943, 86, -1438),
+                new warp_location("Long Beach Front, Yavin IV", "Yavin IV", 6495, 10, 4490),
+                new warp_location("Research Outpost, Endor", "endor", 3222, 0, -3467),
+                new warp_location("Smugglers Outpost, Endor", "endor", -970, 0, 1557),
+                new warp_location("Death Watch Bunker, Endor", "endor", -4676, 0, 4331),
+                new warp_location("Dulok Village, Endor", "endor", 6053, 0, -2477),
+                new warp_location("Ewok Lake Village, Endor", "endor", -658, 0, -5076),
+                new warp_location("Ewok Tree Village, Endor", "endor", 4660, 0, -2424),
+                new warp_location("Marauder Base, Endor", "endor", -4687, 0, -2274),
+                new warp_location("Mercenary Camp, Endor", "endor", 656, 204, 5051),
+                new warp_location("Jinda Ritualis's Cave, Endor", "endor", -1710, 32, -2),
+                new warp_location("Korga Cave, Endor", "endor", 2250, 0, 3500),
+                new warp_location("Pubarn Tribe Camp, Endor", "endor", 6000, 0, -2250),
+                new warp_location("Orphaned Marauder Cave, Endor", "endor", -6900, 0, 600),
+                new warp_location("Ewok Lake Village II, Endor", "endor", -4525, 0, -2317),
+                new warp_location("Ewok Tree Village II, Endor", "endor", 1578, 0, -3271),
+                new warp_location("Science Outpost, Dathomir", "dathomir", -85, 0, -1600),
+                new warp_location("Trade Outpost, Dathomir", "dathomir", 600, 0, 3072),
+                new warp_location("Quarantine Zone, Dathomir", "dathomir", -5775, 511, -6542),
+                new warp_location("Aurilia, Dathomir", "dathomir", 5306, 0, -4145),
+                new warp_location("Nightsister Stronghold, Dathomir", "dathomir", -3987, 0, -78),
+                new warp_location("Imperial Prison, Dathomir", "dathomir", -6304, 0, 753),
+                new warp_location("Abandoned Escape Pod, Dathomir", "dathomir", -4434, 0, 574),
+                new warp_location("Crash Site, Dathomir", "dathomir", 5663, 0, 1950),
+                new warp_location("Greater Misty Falls, Dathomir", "dathomir", 3017, 0, 1287),
+                new warp_location("Lesser Misty Falls, Dathomir", "dathomir", 3557, 0, 1548),
+                new warp_location("Lessar Sarlacc, Dathomir", "dathomir", -2102, 0, 3165),
+                new warp_location("Nightsister Forced Labor Camp, Dathomir", "dathomir", 2545, 0, -1662),
+                new warp_location("Singing Mountain Clan, Dathomir", "dathomir", 158, 0, 4524),
+                new warp_location("Rancor Cave, Dathomir", "dathomir", -4204, 25, -2076),
+                new warp_location("Spider Clan Cave, Dathomir", "dathomir", -1200, 0, 6250),
+                new warp_location("Nightsister Guard Camp, Dathomir", "dathomir", -4100, 0, -950),
+                new warp_location("Nightsister Outcast Camp, Dathomir", "dathomir", -2250, 0, 5000),
+                new warp_location("Purbole Lair, Dathomir", "dathomir", 5500, 0, 1950),
+                new warp_location("Tar Pits, Dathomir", "dathomir", 722, 0, -4773),
+                new warp_location("Nightsister v.s. Singing Mountain Clan, Dathomir", "dathomir", -2494, 128, 1474),
+                new warp_location("Beach Canyon Inlet, Dathomir", "dathomir", 240, 27, 6720),
+                new warp_location("Misty Path, Dathomir", "dathomir", 3488, 25, 1580),
+                new warp_location("Dark Pond, Dathomir", "dathomir", -3735, 54, 4082),
+                new warp_location("Redhills, Dathomir", "dathomir", -1100, 140, 2570),
+                new warp_location("Beach shoreline, Dathomir", "dathomir", 6322, 9, 6347),
+                new warp_location("Dearic, Talus", "talus", 559, 0, -3028),
+                new warp_location("Nashal, Talus", "talus", 4371, 0, 5165),
+                new warp_location("Imperial Outpost, Talus", "talus", -2226, 20, 2321),
+                new warp_location("Weapons Depot, Talus", "talus", -4938, 66, -3107),
+                new warp_location("Aa'Kuan Champion's Cave, Talus", "talus", 5936, 44, 4635),
+                new warp_location("Binyare Pirate Bunker, Talus", "talus", 5556, 0, -4079),
+                new warp_location("Detainment Center, Talus", "talus", 4984, 0, -6026),
+                new warp_location("Erran Sif, Talus", "talus", 2148, 120, -5588),
+                new warp_location("Corsec vs Flail Battle, Talus", "talus", 3067, 41, 6065),
+                new warp_location("Giant Decay Mite Cave, Talus", "talus", -5525, 32, -4673),
+                new warp_location("Giant Fynock Cave, Talus", "talus", 1563, 0, -867),
+                new warp_location("Imperial vs Rebel Battle, Talus", "talus", -2595, 0, 3724),
+                new warp_location("Kahmurra Biogenetic Research Station, Talus", "talus", -4016, 0, -4752),
+                new warp_location("Lost Aqaualish War Party's Cave, Talus", "talus", -4425, 0, -1414),
+                new warp_location("Lost village of Durbin, Talus", "talus", 4285, 0, 1032),
+                new warp_location("Beach Ruins, Talus", "talus", -3800, 0, -6500),
+                new warp_location("Mesa, Talus", "talus", -2419, 138, 3001),
+                new warp_location("Mud Flats, Talus", "talus", 3100, 67, -3800),
+                new warp_location("Restuss Starport, Rori", "rori", 5295, 80, 6171),
+                new warp_location("Restuss, Rori", "rori", 5071, 0, 5747),
+                new warp_location("Narmle Starport, Rori", "rori", -5310, 0, -2221),
+                new warp_location("Rebel Outpost, Rori", "rori", 3700, 96, -6404),
+                new warp_location("Borgle Bat Cave, Rori", "rori", 900, 0, -4935),
+                new warp_location("Cobral Hideout, Rori", "rori", 5451, 0, 5044),
+                new warp_location("Garyn Raider's Bunker, Rori", "rori", -6003, 0, -1851),
+                new warp_location("Giant Bark Mite Cave, Rori", "rori", 3570, 0, 5430),
+                new warp_location("Rori Gungan's Swamp Town, Rori", "rori", -2073, 0, 3339),
+                new warp_location("Hyperdrive Research Facility, Rori", "rori", -1107, 76, 4550),
+                new warp_location("Kobola Spice Mine, Rori", "rori", 7348, 78, 105),
+                new warp_location("Poacher vs. Creature Battle, Rori", "rori", 772, 87, -2109),
+                new warp_location("Pygmy Torton Cave, Rori", "rori", -1813, 0, -4532),
+                new warp_location("Large lake, Rori", "rori", -4624, 75, 3986),
+                new warp_location("A monolith, Rori", "rori", -3384, 108, -2098),
+                new warp_location("Mensix Mining Facility, Mustafar", "mustafar", -2530, 0, 1650),
+                new warp_location("Old Mining Facility, Mustafar", "mustafar", -1850, 0, 820),
+                new warp_location("Bandit Camp, Mustafar", "mustafar", -6011, 0, 42),
+                new warp_location("Southwest Plateau, Mustafar", "mustafar", -5631, 0, 1031),
+                new warp_location("Lava Crystal Field, Mustafar", "mustafar", -4395, 0, 1684),
+                new warp_location("Jedi Enclave I, Mustafar", "mustafar", -4331, 0, 3196),
+                new warp_location("Jedi Enclave II, Mustafar", "mustafar", -5320, 0, 6150),
+                new warp_location("Jedi Enclave III, Mustafar", "mustafar", 152, 0, 4448),
+                new warp_location("Striking Mining Camp, Mustafar", "mustafar", -5380, 0, 4440),
+                new warp_location("Ruins, Mustafar", "mustafar", -2660, 0, 6050),
+                new warp_location("Burning Plains, Mustafar", "mustafar", -3466, 0, 5204),
+                new warp_location("Old Republic Research Facility, Mustafar", "mustafar", -700, 0, 6000),
+                new warp_location("Tulras Nesting Grounds, Mustafar", "mustafar", -1708, 0, 2600),
+                new warp_location("Entrance to Dragon Lair, Mustafar", "mustafar", -2000, 0, 4200),
+                new warp_location("Volcano Crash Excavation, Mustafar", "mustafar", -2710, 0, 3409),
+                new warp_location("Droid Factory, Mustafar", "mustafar", 466, 0, 2000),
+                new warp_location("Entrance to Droid Army Zone, Mustafar", "mustafar", 175, 0, -200),
+                new warp_location("Droid Army Buildout Area, Mustafar", "mustafar", 4848, 0, 6090),
+                new warp_location("Volcano Buildout Area, Mustafar", "mustafar", 2100, 0, 5550),
+                new warp_location("Crystal Lair Buildout, Mustafar", "mustafar", 6750, 0, 6950),
+                new warp_location("ORF Buildout Area, Mustafar", "mustafar", -6750, 0, -4750),
+                new warp_location("Sher Kar Buildout Area, Mustafar", "mustafar", -6750, 0, -5750),
+                new warp_location("Kachirho Starport, Kashyyyk", "kashyyyk_main", -679, 0, -150),
+                new warp_location("Kachirho, Kashyyyk", "kashyyyk_main", -557, 0, -115),
+                new warp_location("Rryatt Trial, Kashyyyk", "kashyyyk_main", -63, 18, 826),
+                new warp_location("Blackscale Slave Compound, Kashyyyk", "kashyyyk_main", 412, 18, 933),
+                new warp_location("Kkowir Forest, Kashyyyk", "kashyyyk_main", -762, 17, 239),
+                new warp_location("Etyyy Hunting Grounds, Kashyyyk", "kashyyyk_main", 224, 18, -401),
+                new warp_location("Rodian Hunters Camp, Kashyyyk", "kashyyyk_main", 721, 23, -611),
+                new warp_location("Isolationist Wookiee Village, Kashyyyk", "kashyyyk_main", 340, 32, -173)
+        );
+        String[] sceneLabels = WARP_OPTIONS.stream().map(warp_location::getSceneLabel).distinct().sorted().toArray(String[]::new);
+        refreshMenu(
+                player,
+                "Select the desired Planet.",
+                GENERIC_TITLE,
+                sceneLabels,
+                "handleWarpSceneOptions",
+                false
+        );
     }
-
+    public int handleWarpSceneOptions(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        int btn = sui.getIntButtonPressed(params);
+        if (btn == sui.BP_REVERT)
+        {
+            handleMiscOption(player);
+            return SCRIPT_CONTINUE;
+        }
+        else if (btn == sui.BP_CANCEL)
+        {
+            cleanScriptVars(player);
+            closeOldWindow(player);
+            return SCRIPT_CONTINUE;
+        }
+        int idx = sui.getListboxSelectedRow(params);
+        if (idx == -1 || idx > 999)
+        {
+            cleanScriptVars(player);
+            closeOldWindow(player);
+            return SCRIPT_CONTINUE;
+        }
+        String[] sceneLabels = WARP_OPTIONS.stream().map(warp_location::getSceneLabel).distinct().sorted().toArray(String[]::new);
+        String[] warpLocations = WARP_OPTIONS.stream().filter(loc -> loc.getSceneLabel().equals(sceneLabels[idx])).map(warp_location::getLocationLabel).toArray(String[]::new);
+        utils.setLocalVar(self, "warp.options", warpLocations);
+        refreshMenu(
+                player,
+                sceneLabels[idx] + " - Warp Locations",
+                GENERIC_TITLE,
+                warpLocations,
+                "handleWarpOptions",
+                false
+        );
+        return SCRIPT_CONTINUE;
+    }
     public int handleWarpOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -9010,18 +9153,18 @@ public class terminal_character_builder extends script.base_script
         }
         obj_id player = sui.getPlayerId(params);
         int btn = sui.getIntButtonPressed(params);
-        int idx = sui.getListboxSelectedRow(params);
         if (btn == sui.BP_REVERT)
         {
-            refreshMenu(player, "Select the desired character option", getClusterName() + " Character Builder Terminal", CHARACTER_BUILDER_OPTIONS, "handleOptionSelect", true);
+            handleWarpOption(player);
             return SCRIPT_CONTINUE;
         }
-        if (btn == sui.BP_CANCEL)
+        else if (btn == sui.BP_CANCEL)
         {
             cleanScriptVars(player);
             closeOldWindow(player);
             return SCRIPT_CONTINUE;
         }
+        int idx = sui.getListboxSelectedRow(params);
         if (idx == -1 || idx > 999)
         {
             cleanScriptVars(player);
@@ -9030,994 +9173,27 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
-        switch (idx)
-        {
-            case 0:
-                warpPlayer(player, "dantooine", -5661, 0, 7068, null, 0, 0, 0, "", false);
-                break;
-            case 1:
-                warpPlayer(player, "tatooine", -5060, 75, -6610, null, 0, 0, 0, "", false);
-                break;
-            case 2:
-                warpPlayer(player, "naboo", -5550, -150, -75, null, 0, 0, 0, "", false);
-                break;
-            case 3:
-                warpPlayer(player, "corellia", 6806, 315, -5725, null, 0, 0, 0, "", false);
-                break;
-            case 4:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 5:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 6:
-                warpPlayer(player, "tatooine", 3528, 0, -4804, null, 0, 0, 0, "", false);
-                break;
-            case 7:
-                warpPlayer(player, "tatooine", -4000, 0, 6250, null, 0, 0, 0, "", false);
-                break;
-            case 8:
-                warpPlayer(player, "tatooine", -5868, 0, -6189, null, 0, 0, 0, "", false);
-                break;
-            case 9:
-                warpPlayer(player, "tatooine", -6100, 0, 1892, null, 0, 0, 0, "", false);
-                break;
-            case 10:
-                warpPlayer(player, "tatooine", -4773, 0, -3009, null, 0, 0, 0, "", false);
-                break;
-            case 11:
-                warpPlayer(player, "tatooine", -2600, 0, -5500, null, 0, 0, 0, "", false);
-                break;
-            case 12:
-                warpPlayer(player, "tatooine", 7092, 0, 4533, null, 0, 0, 0, "", false);
-                break;
-            case 13:
-                warpPlayer(player, "tatooine", -6183, 0, -3371, null, 0, 0, 0, "", false);
-                break;
-            case 14:
-                warpPlayer(player, "tatooine", -3880, 0, -800, null, 0, 0, 0, "", false);
-                break;
-            case 15:
-                warpPlayer(player, "tatooine", 133, 0, 4127, null, 0, 0, 0, "", false);
-                break;
-            case 16:
-                warpPlayer(player, "tatooine", -696, 0, -6728, null, 0, 0, 0, "", false);
-                break;
-            case 17:
-                warpPlayer(player, "tatooine", -4512, 0, -2270, null, 0, 0, 0, "", false);
-                break;
-            case 18:
-                warpPlayer(player, "tatooine", -5270, 0, 2810, null, 0, 0, 0, "", false);
-                break;
-            case 19:
-                warpPlayer(player, "tatooine", -5249, 0, 2551, null, 0, 0, 0, "", false);
-                break;
-            case 20:
-                warpPlayer(player, "tatooine", -3933, 0, -4417, null, 0, 0, 0, "", false);
-                break;
-            case 21:
-                warpPlayer(player, "tatooine", -1470, 0, 3730, null, 0, 0, 0, "", false);
-                break;
-            case 22:
-                warpPlayer(player, "tatooine", -4670, 0, -4350, null, 0, 0, 0, "", false);
-                break;
-            case 23:
-                warpPlayer(player, "tatooine", -4642, 0, -1912, null, 0, 0, 0, "", false);
-                break;
-            case 24:
-                warpPlayer(player, "tatooine", -3039, 0, -5104, null, 0, 0, 0, "", false);
-                break;
-            case 25:
-                warpPlayer(player, "tatooine", 1807, 0, -6061, null, 0, 0, 0, "", false);
-                break;
-            case 26:
-                warpPlayer(player, "tatooine", 6283, 0, -422, null, 0, 0, 0, "", false);
-                break;
-            case 27:
-                warpPlayer(player, "tatooine", 6645, 0, 5453, null, 0, 0, 0, "", false);
-                break;
-            case 28:
-                warpPlayer(player, "tatooine", 3727, 0, -4182, null, 0, 0, 0, "", false);
-                break;
-            case 29:
-                warpPlayer(player, "tatooine", 100, 0, -5300, null, 0, 0, 0, "", false);
-                break;
-            case 30:
-                warpPlayer(player, "tatooine", 1900, 0, 3300, null, 0, 0, 0, "", false);
-                break;
-            case 31:
-                warpPlayer(player, "tatooine", -2915, 0, 2361, null, 0, 0, 0, "", false);
-                break;
-            case 32:
-                warpPlayer(player, "tatooine", 3764, 0, 2381, null, 0, 0, 0, "", false);
-                break;
-            case 33:
-                warpPlayer(player, "tatooine", -5126, 75, -6599, null, 0, 0, 0, "", false);
-                break;
-            case 34:
-                warpPlayer(player, "tatooine", -1290, 0, -3590, null, 0, 0, 0, "", false);
-                break;
-            case 35:
-                warpPlayer(player, "tatooine", -6174, 0, 5888, null, 0, 0, 0, "", false);
-                break;
-            case 36:
-                warpPlayer(player, "tatooine", -2910, 0, 2435, null, 0, 0, 0, "", false);
-                break;
-            case 37:
-                warpPlayer(player, "tatooine", 3333, 0, -4605, null, 0, 0, 0, "", false);
-                break;
-            case 38:
-                warpPlayer(player, "tatooine", 900, 0, 5568, null, 0, 0, 0, "", false);
-                break;
-            case 39:
-                warpPlayer(player, "tatooine", 2520, 0, 4700, null, 0, 0, 0, "", false);
-                break;
-            case 40:
-                warpPlayer(player, "tatooine", 2380, 0, 5000, null, 0, 0, 0, "", false);
-                break;
-            case 41:
-                warpPlayer(player, "tatooine", 5121, 0, 647, null, 0, 0, 0, "", false);
-                break;
-            case 42:
-                warpPlayer(player, "tatooine", -6505, 0, -3667, null, 0, 0, 0, "", false);
-                break;
-            case 43:
-                warpPlayer(player, "tatooine", 58, 0, -79, null, 0, 0, 0, "", false);
-                break;
-            case 44:
-                warpPlayer(player, "tatooine", 3444, 0, -4186, null, 0, 0, 0, "", false);
-                break;
-            case 45:
-                warpPlayer(player, "tatooine", 70, 0, -5256, null, 0, 0, 0, "", false);
-                break;
-            case 46:
-                warpPlayer(player, "tatooine", -700, 0, -6300, null, 0, 0, 0, "", false);
-                break;
-            case 47:
-                warpPlayer(player, "tatooine", 6553, 0, -1312, null, 0, 0, 0, "", false);
-                break;
-            case 48:
-                warpPlayer(player, "tatooine", -5455, 0, -6122, null, 0, 0, 0, "", false);
-                break;
-            case 49:
-                warpPlayer(player, "tatooine", -2886, 0, 1977, null, 0, 0, 0, "", false);
-                break;
-            case 50:
-                warpPlayer(player, "tatooine", -3651, 0, -4755, null, 0, 0, 0, "", false);
-                break;
-            case 51:
-                warpPlayer(player, "tatooine", -3069, 0, 2159, null, 0, 0, 0, "", false);
-                break;
-            case 52:
-                warpPlayer(player, "tatooine", -2878, 0, 2542, null, 0, 0, 0, "", false);
-                break;
-            case 53:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 54:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 55:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 56:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 57:
-                warpPlayer(player, "naboo", -5901, 0, 4098, null, 0, 0, 0, "", false);
-                break;
-            case 58:
-                warpPlayer(player, "naboo", 1984, 0, 2154, null, 0, 0, 0, "", false);
-                break;
-            case 59:
-                warpPlayer(player, "naboo", 5011, -192, 6805, null, 0, 0, 0, "", false);
-                break;
-            case 60:
-                warpPlayer(player, "naboo", 4697, 0, -4897, null, 0, 0, 0, "", false);
-                break;
-            case 61:
-                warpPlayer(player, "naboo", 4800, 0, -4700, null, 0, 0, 0, "", false);
-                break;
-            case 62:
-                warpPlayer(player, "naboo", -4855, 0, 4167, null, 0, 0, 0, "", false);
-                break;
-            case 63:
-                warpPlayer(player, "naboo", 5141, 0, -1470, null, 0, 0, 0, "", false);
-                break;
-            case 64:
-                warpPlayer(player, "naboo", -5565, 0, -34, null, 0, 0, 0, "", false);
-                break;
-            case 65:
-                warpPlayer(player, "naboo", 2447, 0, -3918, null, 0, 0, 0, "", false);
-                break;
-            case 66:
-                warpPlayer(player, "naboo", 1019, 0, -1508, null, 0, 0, 0, "", false);
-                break;
-            case 67:
-                warpPlayer(player, "naboo", -5825, -158, -99, null, 0, 0, 0, "", false);
-                break;
-            case 68:
-                warpPlayer(player, "naboo", -4630, 0, 4213, null, 0, 0, 0, "", false);
-                break;
-            case 69:
-                warpPlayer(player, "naboo", -2064, 5, -5423, null, 0, 0, 0, "", false);
-                break;
-            case 70:
-                warpPlayer(player, "naboo", 4321, 0, -4774, null, 0, 0, 0, "", false);
-                break;
-            case 71:
-                warpPlayer(player, "naboo", -264, 0, 2823, null, 0, 0, 0, "", false);
-                break;
-            case 72:
-                warpPlayer(player, "naboo", 4771, 0, -3868, null, 0, 0, 0, "", false);
-                break;
-            case 73:
-                warpPlayer(player, "naboo", 1396, 0, 2686, null, 0, 0, 0, "", false);
-                break;
-            case 74:
-                warpPlayer(player, "naboo", 2850, 0, 1084, null, 0, 0, 0, "", false);
-                break;
-            case 75:
-                warpPlayer(player, "naboo", -1969, 0, 5295, null, 0, 0, 0, "", false);
-                break;
-            case 76:
-                warpPlayer(player, "naboo", -1500, 0, -1730, null, 0, 0, 0, "", false);
-                break;
-            case 77:
-                warpPlayer(player, "naboo", 1932, 0, -1574, null, 0, 0, 0, "", false);
-                break;
-            case 78:
-                warpPlayer(player, "naboo", 936, 0, -1582, null, 0, 0, 0, "", false);
-                break;
-            case 79:
-                warpPlayer(player, "naboo", -5902, -196, 4823, null, 0, 0, 0, "", false);
-                break;
-            case 80:
-                warpPlayer(player, "naboo", -4439, 6, 4173, null, 0, 0, 0, "", false);
-                break;
-            case 81:
-                warpPlayer(player, "naboo", -3512, 3, 2081, null, 0, 0, 0, "", false);
-                break;
-            case 82:
-                warpPlayer(player, "naboo", -3151, 10, 2586, null, 0, 0, 0, "", false);
-                break;
-            case 83:
-                warpPlayer(player, "naboo", 4223, 3, -6096, null, 0, 0, 0, "", false);
-                break;
-            case 84:
-                warpPlayer(player, "naboo", 4546, 79, -898, null, 0, 0, 0, "", false);
-                break;
-            case 85:
-                warpPlayer(player, "naboo", 5146, -192, 6850, null, 0, 0, 0, "", false);
-                break;
-            case 86:
-                warpPlayer(player, "naboo", 5702, 329, -1596, null, 0, 0, 0, "", false);
-                break;
-            case 87:
-                warpPlayer(player, "naboo", 5829, 36, -4664, null, 0, 0, 0, "", false);
-                break;
-            case 88:
-                warpPlayer(player, "naboo", 5, 3, -6172, null, 0, 0, 0, "", false);
-                break;
-            case 89:
-                warpPlayer(player, "naboo", -10, -202, 5839, null, 0, 0, 0, "", false);
-                break;
-            case 90:
-                warpPlayer(player, "naboo", 0, 10, 1996, null, 0, 0, 0, "", false);
-                break;
-            case 91:
-                warpPlayer(player, "naboo", 198, 30, 1311, null, 0, 0, 0, "", false);
-                break;
-            case 92:
-                warpPlayer(player, "naboo", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 93:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 94:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 95:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 96:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 97:
-                warpPlayer(player, "corellia", -137, 28, -4723, null, 0, 0, 0, "", false);
-                break;
-            case 98:
-                warpPlayer(player, "corellia", 3083, 0, 4989, null, 0, 0, 0, "", false);
-                break;
-            case 99:
-                warpPlayer(player, "corellia", -3366, 0, 3154, null, 0, 0, 0, "", false);
-                break;
-            case 100:
-                warpPlayer(player, "corellia", -5479, 0, -2668, null, 0, 0, 0, "", false);
-                break;
-            case 101:
-                warpPlayer(player, "corellia", 6752, 0, -5696, null, 0, 0, 0, "", false);
-                break;
-            case 102:
-                warpPlayer(player, "corellia", -5420, 0, -6247, null, 0, 0, 0, "", false);
-                break;
-            case 103:
-                warpPlayer(player, "corellia", -6530, 0, 5967, null, 0, 0, 0, "", false);
-                break;
-            case 104:
-                warpPlayer(player, "corellia", 5224, 0, 1589, null, 0, 0, 0, "", false);
-                break;
-            case 105:
-                warpPlayer(player, "corellia", 1388, 0, 3756, null, 0, 0, 0, "", false);
-                break;
-            case 106:
-                warpPlayer(player, "corellia", 905, 19, 4633, null, 0, 0, 0, "", false);
-                break;
-            case 107:
-                warpPlayer(player, "corellia", -667, 29, -4635, null, 0, 0, 0, "", false);
-                break;
-            case 108:
-                warpPlayer(player, "corellia", -1843, 5, -4434, null, 0, 0, 0, "", false);
-                break;
-            case 109:
-                warpPlayer(player, "corellia", 4630, 0, -5740, null, 0, 0, 0, "", false);
-                break;
-            case 110:
-                warpPlayer(player, "corellia", -2483, 19, 2905, null, 0, 0, 0, "", false);
-                break;
-            case 111:
-                warpPlayer(player, "corellia", 6760, 0, -5617, null, 0, 0, 0, "", false);
-                break;
-            case 112:
-                warpPlayer(player, "corellia", 1029, 0, 4199, null, 0, 0, 0, "", false);
-                break;
-            case 113:
-                warpPlayer(player, "corellia", 1414, 0, -316, null, 0, 0, 0, "", false);
-                break;
-            case 114:
-                warpPlayer(player, "corellia", 4722, 0, -5233, null, 0, 0, 0, "", false);
-                break;
-            case 115:
-                warpPlayer(player, "corellia", -669, 473, 3189, null, 0, 0, 0, "", false);
-                break;
-            case 116:
-                warpPlayer(player, "corellia", 4500, 21, 3600, null, 0, 0, 0, "", false);
-                break;
-            case 117:
-                warpPlayer(player, "corellia", 123, 31, 4246, null, 0, 0, 0, "", false);
-                break;
-            case 118:
-                warpPlayer(player, "corellia", -4250, 1, 3630, null, 0, 0, 0, "", false);
-                break;
-            case 119:
-                warpPlayer(player, "corellia", -1905, 223, 3988, null, 0, 0, 0, "", false);
-                break;
-            case 120:
-                warpPlayer(player, "corellia", -1646, 21, -31, null, 0, 0, 0, "", false);
-                break;
-            case 121:
-                warpPlayer(player, "corellia", 1803, 30, 4991, null, 0, 0, 0, "", false);
-                break;
-            case 122:
-                warpPlayer(player, "corellia", -204, 44, 4577, null, 0, 0, 0, "", false);
-                break;
-            case 123:
-                warpPlayer(player, "corellia", 6309, 28, 4380, null, 0, 0, 0, "", false);
-                break;
-            case 124:
-                warpPlayer(player, "corellia", -6528, 398, 5967, null, 0, 0, 0, "", false);
-                break;
-            case 125:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 126:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 127:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 128:
-                warpPlayer(player, "dantooine", -4228, 0, -2380, null, 0, 0, 0, "", false);
-                break;
-            case 129:
-                warpPlayer(player, "dantooine", -617, 0, 2478, null, 0, 0, 0, "", false);
-                break;
-            case 130:
-                warpPlayer(player, "dantooine", 1595, 0, -6391, null, 0, 0, 0, "", false);
-                break;
-            case 131:
-                warpPlayer(player, "dantooine", -6826, 0, 5502, null, 0, 0, 0, "", false);
-                break;
-            case 132:
-                warpPlayer(player, "dantooine", -7155, 0, -882, null, 0, 0, 0, "", false);
-                break;
-            case 133:
-                warpPlayer(player, "dantooine", -3861, 0, -5706, null, 0, 0, 0, "", false);
-                break;
-            case 134:
-                warpPlayer(player, "dantooine", 4194, 0, 5200, null, 0, 0, 0, "", false);
-                break;
-            case 135:
-                warpPlayer(player, "dantooine", 7028, 47, -4103, null, 0, 0, 0, "", false);
-                break;
-            case 136:
-                warpPlayer(player, "dantooine", -138, 0, -368, null, 0, 0, 0, "", false);
-                break;
-            case 137:
-                warpPlayer(player, "dantooine", -7028, 0, -3270, null, 0, 0, 0, "", false);
-                break;
-            case 138:
-                warpPlayer(player, "dantooine", -555, 0, -3825, null, 0, 0, 0, "", false);
-                break;
-            case 139:
-                warpPlayer(player, "dantooine", -6221, 0, 7396, null, 0, 0, 0, "", false);
-                break;
-            case 140:
-                warpPlayer(player, "dantooine", -758, 1, 2093, null, 0, 0, 0, "", false);
-                break;
-            case 141:
-                warpPlayer(player, "dantooine", 3070, 5, 1212, null, 0, 0, 0, "", false);
-                break;
-            case 142:
-                warpPlayer(player, "dantooine", -5196, 8, 387, null, 0, 0, 0, "", false);
-                break;
-            case 143:
-                warpPlayer(player, "dantooine", -6805, 125, 6012, null, 0, 0, 0, "", false);
-                break;
-            case 144:
-                warpPlayer(player, "dantooine", 5952, 0, -5312, null, 0, 0, 0, "", false);
-                break;
-            case 145:
-                warpPlayer(player, "dantooine", -393, 46, -228, null, 0, 0, 0, "", false);
-                break;
-            case 146:
-                warpPlayer(player, "dantooine", -7085, 0, -6149, null, 0, 0, 0, "", false);
-                break;
-            case 147:
-                warpPlayer(player, "dantooine", -7256, 5, 4321, null, 0, 0, 0, "", false);
-                break;
-            case 148:
-                warpPlayer(player, "dantooine", -6143, 37, 4675, null, 0, 0, 0, "", false);
-                break;
-            case 149:
-                warpPlayer(player, "dantooine", -4492, 70, 1615, null, 0, 0, 0, "", false);
-                break;
-            case 150:
-                warpPlayer(player, "dantooine", -6999, 11, -5269, null, 0, 0, 0, "", false);
-                break;
-            case 151:
-                warpPlayer(player, "dantooine", 2163, 161, 7548, null, 0, 0, 0, "", false);
-                break;
-            case 152:
-                warpPlayer(player, "dantooine", 442, 5, 4590, null, 0, 0, 0, "", false);
-                break;
-            case 153:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 154:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 155:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 156:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 157:
-                warpPlayer(player, "lok", 423, 2, 5438, null, 0, 0, 0, "", false);
-                break;
-            case 158:
-                warpPlayer(player, "lok", -1816, 12, -3087, null, 0, 0, 0, "", false);
-                break;
-            case 159:
-                warpPlayer(player, "lok", -7590, 0, 3491, null, 0, 0, 0, "", false);
-                break;
-            case 160:
-                warpPlayer(player, "lok", -3840, 0, -3858, null, 0, 0, 0, "", false);
-                break;
-            case 161:
-                warpPlayer(player, "lok", 3320, 0, -4906, null, 0, 0, 0, "", false);
-                break;
-            case 162:
-                warpPlayer(player, "lok", 4578, 0, -1151, null, 0, 0, 0, "", false);
-                break;
-            case 163:
-                warpPlayer(player, "lok", 3820, 0, -505, null, 0, 0, 0, "", false);
-                break;
-            case 164:
-                warpPlayer(player, "lok", -3742, 62, -3500, null, 0, 0, 0, "", false);
-                break;
-            case 165:
-                warpPlayer(player, "lok", 3091, 0, -4638, null, 0, 0, 0, "", false);
-                break;
-            case 166:
-                warpPlayer(player, "lok", -70, 0, 2650, null, 0, 0, 0, "", false);
-                break;
-            case 167:
-                warpPlayer(player, "lok", 3610, 0, 2229, null, 0, 0, 0, "", false);
-                break;
-            case 168:
-                warpPlayer(player, "lok", -3030, 0, -678, null, 0, 0, 0, "", false);
-                break;
-            case 169:
-                warpPlayer(player, "lok", 6453, 66, 3867, null, 0, 0, 0, "", false);
-                break;
-            case 170:
-                warpPlayer(player, "lok", 901, 0, -4192, null, 0, 0, 0, "", false);
-                break;
-            case 171:
-                warpPlayer(player, "lok", 475, 34, 4769, null, 0, 0, 0, "", false);
-                break;
-            case 172:
-                warpPlayer(player, "lok", 627, 12, 5053, null, 0, 0, 0, "", false);
-                break;
-            case 173:
-                warpPlayer(player, "lok", 471, 11, 5057, null, 0, 0, 0, "", false);
-                break;
-            case 174:
-                warpPlayer(player, "lok", 2159, 25, 2324, null, 0, 0, 0, "", false);
-                break;
-            case 175:
-                warpPlayer(player, "lok", 2865, 314, -4753, null, 0, 0, 0, "", false);
-                break;
-            case 176:
-                warpPlayer(player, "lok", -1928, 0, 1697, null, 0, 0, 0, "", false);
-                break;
-            case 177:
-                warpPlayer(player, "lok", -2128, 103, 1164, null, 0, 0, 0, "", false);
-                break;
-            case 178:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 179:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 180:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 181:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 182:
-                warpPlayer(player, "yavin4", 4049, 0, -6217, null, 0, 0, 0, "", false);
-                break;
-            case 183:
-                warpPlayer(player, "yavin4", -6922, 0, -5723, null, 0, 0, 0, "", false);
-                break;
-            case 184:
-                warpPlayer(player, "yavin4", -270, 0, 4895, null, 0, 0, 0, "", false);
-                break;
-            case 185:
-                warpPlayer(player, "yavin4", -6488, 0, -417, null, 0, 0, 0, "", false);
-                break;
-            case 186:
-                warpPlayer(player, "yavin4", -3187, 0, -3123, null, 0, 0, 0, "", false);
-                break;
-            case 187:
-                warpPlayer(player, "yavin4", -875, 0, -2048, null, 0, 0, 0, "", false);
-                break;
-            case 188:
-                warpPlayer(player, "yavin4", 5076, 0, 5537, null, 0, 0, 0, "", false);
-                break;
-            case 189:
-                warpPlayer(player, "yavin4", 517, 0, -650, null, 0, 0, 0, "", false);
-                break;
-            case 190:
-                warpPlayer(player, "yavin4", 5080, 0, 306, null, 0, 0, 0, "", false);
-                break;
-            case 191:
-                warpPlayer(player, "yavin4", -5574, 0, 4901, null, 0, 0, 0, "", false);
-                break;
-            case 192:
-                warpPlayer(player, "yavin4", -7555, 155, -433, null, 0, 0, 0, "", false);
-                break;
-            case 193:
-                warpPlayer(player, "yavin4", -6350, 65, -670, null, 0, 0, 0, "", false);
-                break;
-            case 194:
-                warpPlayer(player, "yavin4", -4156, 65, 5328, null, 0, 0, 0, "", false);
-                break;
-            case 195:
-                warpPlayer(player, "yavin4", 317, 190, -5302, null, 0, 0, 0, "", false);
-                break;
-            case 196:
-                warpPlayer(player, "yavin4", 5900, 695, -4320, null, 0, 0, 0, "", false);
-                break;
-            case 197:
-                warpPlayer(player, "yavin4", 943, 86, -1438, null, 0, 0, 0, "", false);
-                break;
-            case 198:
-                warpPlayer(player, "yavin4", 6495, 10, 4490, null, 0, 0, 0, "", false);
-                break;
-            case 199:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 200:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 201:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 202:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 203:
-                warpPlayer(player, "endor", 3222, 0, -3467, null, 0, 0, 0, "", false);
-                break;
-            case 204:
-                warpPlayer(player, "endor", -970, 0, 1557, null, 0, 0, 0, "", false);
-                break;
-            case 205:
-                warpPlayer(player, "endor", -4676, 0, 4331, null, 0, 0, 0, "", false);
-                break;
-            case 206:
-                warpPlayer(player, "endor", 6053, 0, -2477, null, 0, 0, 0, "", false);
-                break;
-            case 207:
-                warpPlayer(player, "endor", -658, 0, -5076, null, 0, 0, 0, "", false);
-                break;
-            case 208:
-                warpPlayer(player, "endor", 4660, 0, -2424, null, 0, 0, 0, "", false);
-                break;
-            case 209:
-                warpPlayer(player, "endor", -4687, 0, -2274, null, 0, 0, 0, "", false);
-                break;
-            case 210:
-                warpPlayer(player, "endor", 656, 204, 5051, null, 0, 0, 0, "", false);
-                break;
-            case 211:
-                warpPlayer(player, "endor", -1710, 32, -2, null, 0, 0, 0, "", false);
-                break;
-            case 212:
-                warpPlayer(player, "endor", 2250, 0, 3500, null, 0, 0, 0, "", false);
-                break;
-            case 213:
-                warpPlayer(player, "endor", 6000, 0, -2250, null, 0, 0, 0, "", false);
-                break;
-            case 214:
-                warpPlayer(player, "endor", -6900, 0, 600, null, 0, 0, 0, "", false);
-                break;
-            case 215:
-                warpPlayer(player, "endor", -4525, 0, -2317, null, 0, 0, 0, "", false);
-                break;
-            case 216:
-                warpPlayer(player, "endor", 1578, 0, -3271, null, 0, 0, 0, "", false);
-                break;
-            case 217:
-                warpPlayer(player, "endor", 4500, 0, -2300, null, 0, 0, 0, "", false);
-                break;
-            case 218:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 219:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 220:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 221:
-                warpPlayer(player, "dathomir", -85, 0, -1600, null, 0, 0, 0, "", false);
-                break;
-            case 222:
-                warpPlayer(player, "dathomir", 600, 0, 3072, null, 0, 0, 0, "", false);
-                break;
-            case 223:
-                warpPlayer(player, "dathomir", -5775, 511, -6542, null, 0, 0, 0, "", false);
-                break;
-            case 224:
-                warpPlayer(player, "dathomir", 5306, 0, -4145, null, 0, 0, 0, "", false);
-                break;
-            case 225:
-                warpPlayer(player, "dathomir", -3987, 0, -78, null, 0, 0, 0, "", false);
-                break;
-            case 226:
-                warpPlayer(player, "dathomir", -6304, 0, 753, null, 0, 0, 0, "", false);
-                break;
-            case 227:
-                warpPlayer(player, "dathomir", -4434, 0, 574, null, 0, 0, 0, "", false);
-                break;
-            case 228:
-                warpPlayer(player, "dathomir", 5663, 0, 1950, null, 0, 0, 0, "", false);
-                break;
-            case 229:
-                warpPlayer(player, "dathomir", 3017, 0, 1287, null, 0, 0, 0, "", false);
-                break;
-            case 230:
-                warpPlayer(player, "dathomir", 3557, 0, 1548, null, 0, 0, 0, "", false);
-                break;
-            case 231:
-                warpPlayer(player, "dathomir", -2102, 0, 3165, null, 0, 0, 0, "", false);
-                break;
-            case 232:
-                warpPlayer(player, "dathomir", 2545, 0, -1662, null, 0, 0, 0, "", false);
-                break;
-            case 233:
-                warpPlayer(player, "dathomir", 158, 0, 4524, null, 0, 0, 0, "", false);
-                break;
-            case 234:
-                warpPlayer(player, "dathomir", -4204, 25, -2076, null, 0, 0, 0, "", false);
-                break;
-            case 235:
-                warpPlayer(player, "dathomir", -1200, 0, 6250, null, 0, 0, 0, "", false);
-                break;
-            case 236:
-                warpPlayer(player, "dathomir", -4100, 0, -950, null, 0, 0, 0, "", false);
-                break;
-            case 237:
-                warpPlayer(player, "dathomir", -2250, 0, 5000, null, 0, 0, 0, "", false);
-                break;
-            case 238:
-                warpPlayer(player, "dathomir", 5500, 0, 1950, null, 0, 0, 0, "", false);
-                break;
-            case 239:
-                warpPlayer(player, "dathomir", 722, 0, -4773, null, 0, 0, 0, "", false);
-                break;
-            case 240:
-                warpPlayer(player, "dathomir", -2494, 128, 1474, null, 0, 0, 0, "", false);
-                break;
-            case 241:
-                warpPlayer(player, "dathomir", 240, 27, 6720, null, 0, 0, 0, "", false);
-                break;
-            case 242:
-                warpPlayer(player, "dathomir", 3488, 25, 1580, null, 0, 0, 0, "", false);
-                break;
-            case 243:
-                warpPlayer(player, "dathomir", -3735, 54, 4082, null, 0, 0, 0, "", false);
-                break;
-            case 244:
-                warpPlayer(player, "dathomir", -1100, 140, 2570, null, 0, 0, 0, "", false);
-                break;
-            case 245:
-                warpPlayer(player, "dathomir", 6322, 9, 6347, null, 0, 0, 0, "", false);
-                break;
-            case 246:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 247:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 248:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 249:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 250:
-                warpPlayer(player, "talus", 559, 0, -3028, null, 0, 0, 0, "", false);
-                break;
-            case 251:
-                warpPlayer(player, "talus", 4371, 0, 5165, null, 0, 0, 0, "", false);
-                break;
-            case 252:
-                warpPlayer(player, "talus", -2226, 20, 2321, null, 0, 0, 0, "", false);
-                break;
-            case 253:
-                warpPlayer(player, "talus", -4938, 66, -3107, null, 0, 0, 0, "", false);
-                break;
-            case 254:
-                warpPlayer(player, "talus", 5936, 44, 4635, null, 0, 0, 0, "", false);
-                break;
-            case 255:
-                warpPlayer(player, "talus", 5556, 0, -4079, null, 0, 0, 0, "", false);
-                break;
-            case 256:
-                warpPlayer(player, "talus", 4984, 0, -6026, null, 0, 0, 0, "", false);
-                break;
-            case 257:
-                warpPlayer(player, "talus", 2148, 120, -5588, null, 0, 0, 0, "", false);
-                break;
-            case 258:
-                warpPlayer(player, "talus", 3067, 41, 6065, null, 0, 0, 0, "", false);
-                break;
-            case 259:
-                warpPlayer(player, "talus", -5525, 32, -4673, null, 0, 0, 0, "", false);
-                break;
-            case 260:
-                warpPlayer(player, "talus", 1563, 0, -867, null, 0, 0, 0, "", false);
-                break;
-            case 261:
-                warpPlayer(player, "talus", -2595, 0, 3724, null, 0, 0, 0, "", false);
-                break;
-            case 262:
-                warpPlayer(player, "talus", -4016, 0, -4752, null, 0, 0, 0, "", false);
-                break;
-            case 263:
-                warpPlayer(player, "talus", -4425, 0, -1414, null, 0, 0, 0, "", false);
-                break;
-            case 264:
-                warpPlayer(player, "talus", 4285, 0, 1032, null, 0, 0, 0, "", false);
-                break;
-            case 265:
-                warpPlayer(player, "talus", -3800, 0, -6500, null, 0, 0, 0, "", false);
-                break;
-            case 266:
-                warpPlayer(player, "talus", -2419, 138, 3001, null, 0, 0, 0, "", false);
-                break;
-            case 267:
-                warpPlayer(player, "talus", 3100, 67, -3800, null, 0, 0, 0, "", false);
-                break;
-            case 268:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 269:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 270:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 271:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 272:
-                warpPlayer(player, "rori", 5295, 80, 6171, null, 0, 0, 0, "", false);
-                break;
-            case 273:
-                warpPlayer(player, "rori", 5071, 0, 5747, null, 0, 0, 0, "", false);
-                break;
-            case 274:
-                warpPlayer(player, "rori", -5310, 0, -2221, null, 0, 0, 0, "", false);
-                break;
-            case 275:
-                warpPlayer(player, "rori", 3700, 96, -6404, null, 0, 0, 0, "", false);
-                break;
-            case 276:
-                warpPlayer(player, "rori", 900, 0, -4935, null, 0, 0, 0, "", false);
-                break;
-            case 277:
-                warpPlayer(player, "rori", 5451, 0, 5044, null, 0, 0, 0, "", false);
-                break;
-            case 278:
-                warpPlayer(player, "rori", -6003, 0, -1851, null, 0, 0, 0, "", false);
-                break;
-            case 279:
-                warpPlayer(player, "rori", 3570, 0, 5430, null, 0, 0, 0, "", false);
-                break;
-            case 280:
-                warpPlayer(player, "rori", -2073, 0, 3339, null, 0, 0, 0, "", false);
-                break;
-            case 281:
-                warpPlayer(player, "rori", -1107, 76, 4550, null, 0, 0, 0, "", false);
-                break;
-            case 282:
-                warpPlayer(player, "rori", 7348, 78, 105, null, 0, 0, 0, "", false);
-                break;
-            case 283:
-                warpPlayer(player, "rori", 772, 87, -2109, null, 0, 0, 0, "", false);
-                break;
-            case 284:
-                warpPlayer(player, "rori", -1813, 0, -4532, null, 0, 0, 0, "", false);
-                break;
-            case 285:
-                warpPlayer(player, "rori", -4624, 75, 3986, null, 0, 0, 0, "", false);
-                break;
-            case 286:
-                warpPlayer(player, "rori", -3384, 108, -2098, null, 0, 0, 0, "", false);
-                break;
-            case 287:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 288:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 289:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 290:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 291:
-                warpPlayer(player, "mustafar", -2530, 0, 1650, null, 0, 0, 0, "", false);
-                break;
-            case 292:
-                warpPlayer(player, "mustafar", -1850, 0, 820, null, 0, 0, 0, "", false);
-                break;
-            case 293:
-                warpPlayer(player, "mustafar", -6011, 0, 42, null, 0, 0, 0, "", false);
-                break;
-            case 294:
-                warpPlayer(player, "mustafar", -5631, 0, 1031, null, 0, 0, 0, "", false);
-                break;
-            case 295:
-                warpPlayer(player, "mustafar", -4395, 0, 1684, null, 0, 0, 0, "", false);
-                break;
-            case 296:
-                warpPlayer(player, "mustafar", -4331, 0, 3196, null, 0, 0, 0, "", false);
-                break;
-            case 297:
-                warpPlayer(player, "mustafar", -5320, 0, 6150, null, 0, 0, 0, "", false);
-                break;
-            case 298:
-                warpPlayer(player, "mustafar", 152, 0, 4448, null, 0, 0, 0, "", false);
-                break;
-            case 299:
-                warpPlayer(player, "mustafar", -5380, 0, 4440, null, 0, 0, 0, "", false);
-                break;
-            case 300:
-                warpPlayer(player, "mustafar", -2660, 0, 6050, null, 0, 0, 0, "", false);
-                break;
-            case 301:
-                warpPlayer(player, "mustafar", -3466, 0, 5204, null, 0, 0, 0, "", false);
-                break;
-            case 302:
-                warpPlayer(player, "mustafar", -700, 0, 6000, null, 0, 0, 0, "", false);
-                break;
-            case 303:
-                warpPlayer(player, "mustafar", -1708, 0, 2600, null, 0, 0, 0, "", false);
-                break;
-            case 304:
-                warpPlayer(player, "mustafar", -2000, 0, 4200, null, 0, 0, 0, "", false);
-                break;
-            case 305:
-                warpPlayer(player, "mustafar", -2710, 0, 3409, null, 0, 0, 0, "", false);
-                break;
-            case 306:
-                warpPlayer(player, "mustafar", 466, 0, 2000, null, 0, 0, 0, "", false);
-                break;
-            case 307:
-                warpPlayer(player, "mustafar", 175, 0, -200, null, 0, 0, 0, "", false);
-                break;
-            case 308:
-                warpPlayer(player, "mustafar", 4848, 0, 6090, null, 0, 0, 0, "", false);
-                break;
-            case 309:
-                warpPlayer(player, "mustafar", 2100, 0, 5550, null, 0, 0, 0, "", false);
-                break;
-            case 310:
-                warpPlayer(player, "mustafar", 6750, 0, 6950, null, 0, 0, 0, "", false);
-                break;
-            case 311:
-                warpPlayer(player, "mustafar", -6750, 0, -4750, null, 0, 0, 0, "", false);
-                break;
-            case 312:
-                warpPlayer(player, "mustafar", -6750, 0, -5750, null, 0, 0, 0, "", false);
-                break;
-            case 313:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 314:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 315:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 316:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            case 317:
-                warpPlayer(player, "kashyyyk_main", -679, 0, -150, null, 0, 0, 0, "", false);
-                break;
-            case 318:
-                warpPlayer(player, "kashyyyk_main", -557, 0, -115, null, 0, 0, 0, "", false);
-                break;
-            case 319:
-                warpPlayer(player, "kashyyyk_main", -63, 18, 826, null, 0, 0, 0, "", false);
-                break;
-            case 320:
-                warpPlayer(player, "kashyyyk_main", 412, 18, 933, null, 0, 0, 0, "", false);
-                break;
-            case 321:
-                warpPlayer(player, "kashyyyk_main", -762, 17, 239, null, 0, 0, 0, "", false);
-                break;
-            case 322:
-                warpPlayer(player, "kashyyyk_main", 224, 18, -401, null, 0, 0, 0, "", false);
-                break;
-            case 323:
-                warpPlayer(player, "kashyyyk_main", 721, 23, -611, null, 0, 0, 0, "", false);
-                break;
-            case 324:
-                warpPlayer(player, "kashyyyk_main", 340, 32, -173, null, 0, 0, 0, "", false);
-                break;
-            case 325:
-                warpPlayer(player, "planet", 0, 0, 0, null, 0, 0, 0, "", false);
-                break;
-            default:
-                return SCRIPT_CONTINUE;
+        String[] warpOptions = utils.getStringArrayLocalVar(self, "warp.options");
+        Optional<warp_location> wl = WARP_OPTIONS.stream().filter(o -> o.getLocationLabel().equals(warpOptions[idx])).findFirst();
+        if(wl.isPresent()) {
+            warp_location w = wl.get();
+            w.warp(player);
+            WARP_OPTIONS = null;
+        } else {
+            broadcast(player, "The system is unable to complete the transaction.");
+            refreshMenu(
+                    player,
+                    "Select the desired warp location",
+                    GENERIC_TITLE,
+                    WARP_OPTIONS.stream().map(warp_location::getLocationLabel).toArray(String[]::new),
+                    "handleWarpOptions",
+                    false
+            );
         }
-        refreshMenu(player, "Select the desired option", getClusterName() + " Character Builder Terminal", WARP_OPTIONS, "handleWarpOptions", false);
         return SCRIPT_CONTINUE;
     }
 
@@ -10054,41 +9230,43 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         switch (idx)
         {
             case 0:
-                obj_id pInv = utils.getInventoryContainer(player);
-                createObject("object/tangible/terminal/terminal_character_builder.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "You have been given a frog for testing.");
+                broadcast(player, "Use the 'Duplicate' submenu to obtain a tracked terminal..");
                 break;
             case 1:
                 setObjVar(player, "character_builder", 1);
-                sendSystemMessageTestingOnly(player, "setBuilderVars completed.");
+                broadcast(player, "This is deprecated.");
                 break;
             case 2:
                 detachScript(player, "test.qatool"); // prevent it from trying to reattach while attached
                 attachScript(player, "test.qatool");
-                sendSystemMessageTestingOnly(player, "QA Tool Attached");
+                broadcast(player, "QA Tool Attached");
                 break;
             case 3:
                 detachScript(player, "event.event_tool");// prevent it from trying to reattach while attached
                 attachScript(player, "event.event_tool");
-                sendSystemMessageTestingOnly(player, "Event Tool Attached");
+                broadcast(player, "Event Tool Attached");
                 break;
             case 4:
+                detachScript(player, "developer.bubbajoe.player_developer");
+                attachScript(player, "developer.bubbajoe.player_developer");
+                broadcast(player, "You now have access to the /developer command.");
+                break;
+            case 5:
                 detachScript(player, "test.qatool");
                 detachScript(player, "event.event_tool");
                 break;
-            case 5:
-                String outputString = system_process.runAndGetOutput("c:/swg/current/build_java_terminal.bat");
+            case 6:
+                String outputString = system_process.runAndGetOutput("/home/swg/swg-main/utils/build_java.sh");
                 String outputTitle = "Build Terminal";
                 String okbutton = "Exit";
-                int intOutput = utils.stringToInt(okbutton);
-                sui.msgbox(self, player, outputString, intOutput, outputTitle, "noHandler");
+                sui.msgbox(self, player, outputString, sui.OK_CANCEL, outputTitle, "noHandler");
                 break;
             default:
                 cleanScriptVars(player);
@@ -10131,7 +9309,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10139,15 +9317,15 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 grantCommand(player, "meditate");
-                sendSystemMessageTestingOnly(player, "Mediate granted");
+                broadcast(player, "Mediate granted");
                 break;
             case 1:
                 grantCommand(player, "blueGlowie");
-                sendSystemMessageTestingOnly(player, "Blue Glowie granted");
+                broadcast(player, "Blue Glowie granted");
                 break;
             case 2:
                 grantCommand(player, "chroniclerVentriloquism");
-                sendSystemMessageTestingOnly(player, "Chronicler Ventriloquism granted");
+                broadcast(player, "Chronicler Ventriloquism granted");
                 break;
             default:
                 cleanScriptVars(player);
@@ -10180,7 +9358,7 @@ public class terminal_character_builder extends script.base_script
         skill.grantSkill(player, "pilot_rebel_navy_master");
         attachScript(player, "wwallace.space_mining_test");
         obj_id objInventory = utils.getInventoryContainer(player);
-        sendSystemMessageTestingOnly(player, "Granting a mining vessel...and launching you to spaaaace!");
+        broadcast(player, "Granting a mining vessel...and launching you to spaaaace!");
         obj_id weapon1 = createObjectOverloaded("object/tangible/ship/components/weapon/wpn_mining_laser_mk2.iff", objInventory);
         obj_id weapon2 = createObjectOverloaded("object/tangible/ship/components/weapon/wpn_tractor_pulse_gun.iff", objInventory);
         obj_id cargoHold = createObjectOverloaded("object/tangible/ship/components/cargo_hold/crg_starfighter_large.iff", objInventory);
@@ -10228,7 +9406,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10242,7 +9420,7 @@ public class terminal_character_builder extends script.base_script
             case 0:
                 if (factionName == null)
                 {
-                    sendSystemMessageTestingOnly(player, "You must declare a Faction before receiving Points!");
+                    broadcast(player, "You must declare a Faction before receiving Points!");
                     return SCRIPT_OVERRIDE;
                 }
                 int standing = (int) factions.getFactionStanding(player, factionName);
@@ -10252,73 +9430,73 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "You already have a large amount of unspent faction points. Why do you need any more?");
+                    broadcast(player, "You already have a large amount of unspent faction points. Why do you need any more?");
                 }
                 break;
             case 1:
                 if (space_flags.isImperialPilot(player))
                 {
-                    sendSystemMessageTestingOnly(player, "You are an Imperial Pilot!  You must surrender your current space faction before you become a Rebel!");
+                    broadcast(player, "You are an Imperial Pilot!  You must surrender your current space faction before you become a Rebel!");
                     return SCRIPT_OVERRIDE;
                 }
                 if (factionName == null)
                 {
                     pvpSetAlignedFaction(player, (370444368));
                     pvpMakeCovert(player);
-                    sendSystemMessageTestingOnly(player, "Faction Set.  You are now a Covert Rebel!");
+                    broadcast(player, "Faction Set.  You are now a Covert Rebel!");
                 }
                 else if (factionName.equals("Imperial"))
                 {
-                    sendSystemMessageTestingOnly(player, "You are an Imperial!  You must surrender your current faction before you become a Rebel!");
+                    broadcast(player, "You are an Imperial!  You must surrender your current faction before you become a Rebel!");
                 }
                 else if (factionName.equals("Rebel"))
                 {
-                    sendSystemMessageTestingOnly(player, "You are already a Rebel!");
+                    broadcast(player, "You are already a Rebel!");
                 }
                 break;
             case 2:
                 if (space_flags.isRebelPilot(player))
                 {
-                    sendSystemMessageTestingOnly(player, "You are a Rebel Pilot!  You must surrender your current space faction before you become an Imperial!");
+                    broadcast(player, "You are a Rebel Pilot!  You must surrender your current space faction before you become an Imperial!");
                     return SCRIPT_OVERRIDE;
                 }
                 if (factionName == null)
                 {
                     pvpSetAlignedFaction(player, (-615855020));
                     pvpMakeCovert(player);
-                    sendSystemMessageTestingOnly(player, "Faction Set.  You are now a Covert Imperial!");
+                    broadcast(player, "Faction Set.  You are now a Covert Imperial!");
                 }
                 else if (factionName.equals("Rebel"))
                 {
-                    sendSystemMessageTestingOnly(player, "You are a Rebel!  You must surrender your current faction before you become an Imperial!");
+                    broadcast(player, "You are a Rebel!  You must surrender your current faction before you become an Imperial!");
                 }
                 else if (factionName.equals("Imperial"))
                 {
-                    sendSystemMessageTestingOnly(player, "You are already an Imperial!");
+                    broadcast(player, "You are already an Imperial!");
                 }
                 break;
             case 3:
                 if (factionName == null)
                 {
-                    sendSystemMessageTestingOnly(player, "You must declare a Faction before receiving Rank");
+                    broadcast(player, "You must declare a Faction before receiving Rank");
                     return SCRIPT_OVERRIDE;
                 }
                 else
                 {
                     gcw.increaseGcwRatingToNextRank(player);
-                    sendSystemMessageTestingOnly(player, "GCW rating increased");
+                    broadcast(player, "GCW rating increased");
                 }
                 break;
             case 4:
                 if (factionName == null)
                 {
-                    sendSystemMessageTestingOnly(player, "You must declare a Faction before losing Rank");
+                    broadcast(player, "You must declare a Faction before losing Rank");
                     return SCRIPT_OVERRIDE;
                 }
                 else
                 {
                     gcw.decreaseGcwRatingToPreviousRank(player);
-                    sendSystemMessageTestingOnly(player, "GCW rating decreased");
+                    broadcast(player, "GCW rating decreased");
                 }
                 break;
             case 5:
@@ -10331,7 +9509,7 @@ public class terminal_character_builder extends script.base_script
                 factions.setFactionStanding(player, factionName, 0);
                 factions.unequipFactionEquipment(player, false);
                 factions.releaseFactionHirelings(player);
-                sendSystemMessageTestingOnly(player, "You are now Neutral.");
+                broadcast(player, "You are now Neutral.");
                 break;
             default:
                 cleanScriptVars(player);
@@ -10373,7 +9551,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10389,7 +9567,7 @@ public class terminal_character_builder extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "You cannot access that option.");
+                    broadcast(player, "You cannot access that option.");
                 }
                 break;
             case 1:
@@ -10397,7 +9575,7 @@ public class terminal_character_builder extends script.base_script
                 dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
                 if (xpReqs == null || xpReqs.isEmpty())
                 {
-                    sendSystemMessageTestingOnly(player, "Current working skill is invalid.");
+                    broadcast(player, "Current working skill is invalid.");
                     return SCRIPT_CONTINUE;
                 }
                 java.util.Enumeration e = xpReqs.keys();
@@ -10425,12 +9603,12 @@ public class terminal_character_builder extends script.base_script
                 skill.setPlayerStatsForLevel(player, 90);
                 removeObjVar(player, "expertise_reset");
                 removeObjVar(player, "respecsBought");
-                sendSystemMessageTestingOnly(player, "Respecced to level 90 and respecs cleared.");
+                broadcast(player, "Respecced to level 90 and respecs cleared.");
                 cleanScriptVars(player);
                 break;
             case 4:
                 grantChronicleSkills(player, CHRONICLER_SKILLS);
-                sendSystemMessageTestingOnly(player, "Skills granted");
+                broadcast(player, "Skills granted");
                 break;
             default:
                 cleanScriptVars(player);
@@ -10446,7 +9624,7 @@ public class terminal_character_builder extends script.base_script
         int level = utils.stringToInt(text);
         if (level < 1 || level > 100)
         {
-            sendSystemMessageTestingOnly(player, "Invalid level entered!");
+            broadcast(player, "Invalid level entered!");
         }
         else
         {
@@ -10591,7 +9769,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (exists(player) && !outOfRange(self, player, false))
         {
-            sendSystemMessageTestingOnly(player, "Revoking all old skills.");
+            broadcast(player, "Revoking all old skills.");
             revokeAllSkills(player);
             int currentCombatXp = getExperiencePoints(player, "combat_general");
             grantExperiencePoints(player, "combat_general", -currentCombatXp);
@@ -10731,7 +9909,7 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10784,19 +9962,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) < 4)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 4 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 4 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10807,27 +9985,27 @@ public class terminal_character_builder extends script.base_script
                 {
                     jedi.createColorCrystal(pInv, rand(0, 31));
                 }
-                sendSystemMessageTestingOnly(player, "Color Crystals Issued!");
+                broadcast(player, "Color Crystals Issued!");
                 break;
             case 1:
                 static_item.createNewItemFunction("item_tow_lava_crystal_06_01", pInv);
                 static_item.createNewItemFunction("item_echo_base_permafrost_crystal_06_01", pInv);
                 static_item.createNewItemFunction("item_outbreak_undead_blackwing_crystal", pInv);
-                sendSystemMessageTestingOnly(player, "Special Color Crystals Issued!");
+                broadcast(player, "Special Color Crystals Issued!");
                 break;
             case 2:
                 for (int i = 0; i < 5; i++)
                 {
                     static_item.createNewItemFunction("item_power_crystal_04_20", pInv);
                 }
-                sendSystemMessageTestingOnly(player, "Power Crystals Issued!");
+                broadcast(player, "Power Crystals Issued!");
                 break;
             case 3:
                 for (int i = 0; i < 5; i++)
                 {
                     static_item.createNewItemFunction("item_krayt_pearl_04_20", pInv);
                 }
-                sendSystemMessageTestingOnly(player, "Ancient Krayt Pearls Issued!");
+                broadcast(player, "Ancient Krayt Pearls Issued!");
                 break;
             default:
                 cleanScriptVars(player);
@@ -10865,19 +10043,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 4)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 4 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 4 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -10903,7 +10081,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponAttackCost = 100.0f;
                 generateGenerationSabers(0, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
                 jedi.createColorCrystal(pInv, rand(0, 31));
-                sendSystemMessageTestingOnly(player, "Training Saber Issued!");
+                broadcast(player, "Training Saber Issued!");
             }
             break;
             case 1:
@@ -10932,7 +10110,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponAttackCost = 1.0f;
                 generateGenerationSabers(1, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
                 jedi.createColorCrystal(pInv, rand(0, 31));
-                sendSystemMessageTestingOnly(player, "Generation One Sabers Issued!");
+                broadcast(player, "Generation One Sabers Issued!");
             }
             break;
             case 2:
@@ -10961,7 +10139,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponAttackCost = 1.0f;
                 generateGenerationSabers(2, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
                 jedi.createColorCrystal(pInv, rand(0, 31));
-                sendSystemMessageTestingOnly(player, "Generation Two Sabers Issued!");
+                broadcast(player, "Generation Two Sabers Issued!");
             }
             break;
             case 3:
@@ -10990,7 +10168,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponAttackCost = 1.0f;
                 generateGenerationSabers(3, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
                 jedi.createColorCrystal(pInv, rand(0, 31));
-                sendSystemMessageTestingOnly(player, "Generation Three Sabers Issued!");
+                broadcast(player, "Generation Three Sabers Issued!");
             }
             break;
             case 4:
@@ -11019,7 +10197,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponAttackCost = 1.0f;
                 generateGenerationSabers(4, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
                 jedi.createColorCrystal(pInv, rand(0, 31));
-                sendSystemMessageTestingOnly(player, "Generation Four Sabers Issued!");
+                broadcast(player, "Generation Four Sabers Issued!");
             }
             break;
             case 5:
@@ -11047,7 +10225,7 @@ public class terminal_character_builder extends script.base_script
                 float weaponForceCost = 0.0f;
                 float weaponAttackCost = 1.0f;
                 generateGenerationSabers(5, player, pInv, weaponMinDamage, weaponMaxDamage, weaponAttackSpeed, weaponWoundChance, weaponForceCost, weaponAttackCost);
-                sendSystemMessageTestingOnly(player, "Generation Five Sabers Issued!");
+                broadcast(player, "Generation Five Sabers Issued!");
             }
             break;
             default:
@@ -11086,19 +10264,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 2)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full! Please free up at least 2 inventory slots and try again.");
+            broadcast(player, "Your Inventory is Full! Please free up at least 2 inventory slots and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -11106,70 +10284,70 @@ public class terminal_character_builder extends script.base_script
         {
             case 0:
                 static_item.createNewItemFunction("item_jedi_robe_padawan_04_01", pInv);
-                sendSystemMessageTestingOnly(player, "Padawan Robe Issued!");
+                broadcast(player, "Padawan Robe Issued!");
                 break;
             case 1:
                 static_item.createNewItemFunction("item_jedi_robe_light_03_01", pInv);
-                sendSystemMessageTestingOnly(player, "Light Acolyte Robe Issued!");
+                broadcast(player, "Light Acolyte Robe Issued!");
                 break;
             case 2:
                 static_item.createNewItemFunction("item_jedi_robe_dark_03_01", pInv);
-                sendSystemMessageTestingOnly(player, "Dark Acolyte Robe Issued!");
+                broadcast(player, "Dark Acolyte Robe Issued!");
                 break;
             case 3:
                 static_item.createNewItemFunction("item_jedi_robe_light_03_02", pInv);
-                sendSystemMessageTestingOnly(player, "Light Apprentice Robe Issued!");
+                broadcast(player, "Light Apprentice Robe Issued!");
                 break;
             case 4:
                 static_item.createNewItemFunction("item_jedi_robe_dark_03_02", pInv);
-                sendSystemMessageTestingOnly(player, "Dark Apprentice Robe Issued!");
+                broadcast(player, "Dark Apprentice Robe Issued!");
                 break;
             case 5:
                 static_item.createNewItemFunction("item_jedi_robe_light_03_03", pInv);
-                sendSystemMessageTestingOnly(player, "Light Jedi Knight Robe Issued!");
+                broadcast(player, "Light Jedi Knight Robe Issued!");
                 break;
             case 6:
                 static_item.createNewItemFunction("item_jedi_robe_dark_03_03", pInv);
-                sendSystemMessageTestingOnly(player, "Dark Jedi Knight Robe Issued!");
+                broadcast(player, "Dark Jedi Knight Robe Issued!");
                 break;
             case 7:
                 static_item.createNewItemFunction("item_jedi_robe_light_04_04", pInv);
-                sendSystemMessageTestingOnly(player, "Elder Jedi Arbiter Robe Issued!");
+                broadcast(player, "Elder Jedi Arbiter Robe Issued!");
                 break;
             case 8:
                 static_item.createNewItemFunction("item_jedi_robe_dark_04_04", pInv);
-                sendSystemMessageTestingOnly(player, "Elder Jedi Oppressor Robe Issued!");
+                broadcast(player, "Elder Jedi Oppressor Robe Issued!");
                 break;
             case 9:
                 static_item.createNewItemFunction("item_jedi_robe_light_04_05", pInv);
-                sendSystemMessageTestingOnly(player, "Light Jedi Council Robe Issued!");
+                broadcast(player, "Light Jedi Council Robe Issued!");
                 break;
             case 10:
                 static_item.createNewItemFunction("item_jedi_robe_dark_04_05", pInv);
-                sendSystemMessageTestingOnly(player, "Dark Jedi Council Robe Issued!");
+                broadcast(player, "Dark Jedi Council Robe Issued!");
                 break;
             case 11:
                 static_item.createNewItemFunction("item_jedi_robe_06_01", pInv);
-                sendSystemMessageTestingOnly(player, "Brown Jedi Master Cloak Issued!");
+                broadcast(player, "Brown Jedi Master Cloak Issued!");
                 break;
             case 12:
                 static_item.createNewItemFunction("item_jedi_robe_06_02", pInv);
-                sendSystemMessageTestingOnly(player, "Black Jedi Master Cloak Issued!");
+                broadcast(player, "Black Jedi Master Cloak Issued!");
                 break;
             case 13:
                 static_item.createNewItemFunction("item_jedi_robe_06_04", pInv);
-                sendSystemMessageTestingOnly(player, "Cloak of Hate Issued!");
+                broadcast(player, "Cloak of Hate Issued!");
                 break;
             case 14:
                 static_item.createNewItemFunction("item_jedi_robe_06_05", pInv);
-                sendSystemMessageTestingOnly(player, "Shatterpoint Cloak Issued!");
+                broadcast(player, "Shatterpoint Cloak Issued!");
                 break;
             case 15:
                 if (hasCompletedCollectionSlot(player, "jedi_robe_01_07"))
                     modifyCollectionSlotValue(player, "jedi_robe_01_07", -1);
                 if (hasCompletedCollectionSlot(player, "jedi_robe_01_08"))
                     modifyCollectionSlotValue(player, "jedi_robe_01_08", -1);
-                sendSystemMessageTestingOnly(player, "Statue slots in Master Jedi Cloak collection reset!");
+                broadcast(player, "Statue slots in Master Jedi Cloak collection reset!");
             default:
                 cleanScriptVars(player);
                 return SCRIPT_CONTINUE;
@@ -11308,8 +10486,8 @@ public class terminal_character_builder extends script.base_script
         {
             createObject(cyberneticItem, inv, "");
         }
-        sendSystemMessageTestingOnly(player, "Cybernetics issued. Pay a cybernetic Engineer to install the items");
-        sendSystemMessageTestingOnly(player, "Locate the cybernetic engineer on the 2nd floor of a medical center");
+        broadcast(player, "Cybernetics issued. Pay a cybernetic Engineer to install the items");
+        broadcast(player, "Locate the cybernetic engineer on the 2nd floor of a medical center");
         location warpLocation = getLocation(player);
         warpLocation.area = "tatooine";
         warpLocation.x = 1305.0f;
@@ -11381,19 +10559,19 @@ public class terminal_character_builder extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (!isIdValid(pInv))
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
         if (getVolumeFree(pInv) <= 12)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory has less than 12 slots, please make room and try again.");
+            broadcast(player, "Your Inventory has less than 12 slots, please make room and try again.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -11422,7 +10600,7 @@ public class terminal_character_builder extends script.base_script
                     }
                 }
             }
-            sendSystemMessageTestingOnly(player, "Heavy Weapons Pack Issued!");
+            broadcast(player, "Heavy Weapons Pack Issued!");
             break;
             case 1:
 
@@ -11465,7 +10643,7 @@ public class terminal_character_builder extends script.base_script
                 setWorkingSkill(player, skillList[0]);
                 respec.autoLevelPlayer(player, 88, false);
                 skill.recalcPlayerPools(player, true);
-                sendSystemMessageTestingOnly(player, "Level 78 Gear Issued!");
+                broadcast(player, "Level 78 Gear Issued!");
             }
             break;
             case 2:
@@ -11475,14 +10653,14 @@ public class terminal_character_builder extends script.base_script
                 {
                     stealth.createRangerLoot(100, pub27Trap, pInv, 100);
                 }
-                sendSystemMessageTestingOnly(player, "Traps Issued!");
+                broadcast(player, "Traps Issued!");
             }
             break;
             case 3:
 
             {
                 setObjVar(player, "mand.acknowledge", true);
-                sendSystemMessageTestingOnly(player, "Death Watch Bunker Access Granted!");
+                broadcast(player, "Death Watch Bunker Access Granted!");
             }
             break;
             case 4:
@@ -11490,7 +10668,7 @@ public class terminal_character_builder extends script.base_script
                 {
                     static_item.createNewItemFunction(s, pInv);
                 }
-                sendSystemMessageTestingOnly(player, "Spy Gear Issued!");
+                broadcast(player, "Spy Gear Issued!");
                 break;
             default:
                 cleanScriptVars(player);
@@ -11512,12 +10690,12 @@ public class terminal_character_builder extends script.base_script
                     instance.flagPlayerForInstance(player, flag);
                 }
             }
-            sendSystemMessageTestingOnly(player, "All Heroic Instances Flagged");
-            sendSystemMessageTestingOnly(player, "Death Watch Bunker Access Granted!");
+            broadcast(player, "All Heroic Instances Flagged");
+            broadcast(player, "Death Watch Bunker Access Granted!");
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "No Instance Flags Found.");
+            broadcast(player, "No Instance Flags Found.");
         }
     }
 
@@ -11775,12 +10953,12 @@ public class terminal_character_builder extends script.base_script
                 giveShipChassis(player, type, mass, hp);
                 return true;
             }
-            sendSystemMessageTestingOnly(player, "You cannot use the Firespray due to certification requirements. Skill Required is: " + skill);
+            broadcast(player, "You cannot use the Firespray due to certification requirements. Skill Required is: " + skill);
             return false;
         }
         if (!hasSkill(player, skill))
         {
-            sendSystemMessageTestingOnly(player, "You cannot use this ship due to certification requirements. Skill Required is: " + skill);
+            broadcast(player, "You cannot use this ship due to certification requirements. Skill Required is: " + skill);
             return false;
         }
         giveShipChassis(player, type, mass, hp);
@@ -11805,11 +10983,11 @@ public class terminal_character_builder extends script.base_script
         obj_id pcd = space_crafting.createDeedFromBlueprints(player, type, pInv, mass, hp);
         if (!isIdValid(pcd))
         {
-            sendSystemMessageTestingOnly(player, "The ship was not created due to error.");
+            broadcast(player, "The ship was not created due to error.");
             LOG("issueShipChassis", "CHASSIS" + type + " IS BAD");
             return false;
         }
-        sendSystemMessageTestingOnly(player, "Chassis Issued.");
+        broadcast(player, "Chassis Issued.");
         return true;
     }
 
@@ -11880,7 +11058,7 @@ public class terminal_character_builder extends script.base_script
         float floatPercentage = utils.stringToFloat(stringPercentage);
         if (floatPercentage > 1000.0f || floatPercentage < 0.0f)
         {
-            sendSystemMessageTestingOnly(player, "Bad Crafting Percentage.");
+            broadcast(player, "Bad Crafting Percentage.");
             return SCRIPT_OVERRIDE;
         }
         utils.setScriptVar(player, "character_builder.qualityPercentage", floatPercentage);
@@ -11910,7 +11088,7 @@ public class terminal_character_builder extends script.base_script
         String[] schematics = utils.getStringArrayScriptVar(player, "character_builder.schematicsList");
         if (schematics == null || schematics.length <= 0)
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
             cleanScriptVars(player);
             return SCRIPT_OVERRIDE;
         }
@@ -11923,11 +11101,11 @@ public class terminal_character_builder extends script.base_script
         obj_id craftedItem = makeCraftedItem(schematics[idx], craftPercentage, container);
         if (isIdValid(craftedItem))
         {
-            sendSystemMessageTestingOnly(player, "Crafting: " + getName(craftedItem));
+            broadcast(player, "Crafting: " + getName(craftedItem));
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Failed to make: " + schematics[idx]);
+            broadcast(player, "Failed to make: " + schematics[idx]);
         }
         if (utils.hasScriptVar(player, "character_builder.qualityPercentagePID"))
         {
@@ -11953,7 +11131,7 @@ public class terminal_character_builder extends script.base_script
         if (isIdValid(weaponObject))
         {
             setSocketsUp(weaponObject);
-            sendSystemMessageTestingOnly(player, "Weapon Issued!");
+            broadcast(player, "Weapon Issued!");
         }
     }
 
@@ -11963,5 +11141,11 @@ public class terminal_character_builder extends script.base_script
         {
             grantSkill(objPlayer, s);
         }
+    }
+
+    public int OnInitialize(obj_id self)
+    {
+        setName(self, toUpper(GENERIC_TITLE, 0));
+        return SCRIPT_CONTINUE;
     }
 }

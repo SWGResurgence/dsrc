@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class groundquests extends script.base_script
 {
-    public groundquests()
-    {
-    }
     public static final String DISABLED_QUEST_TABLE = "datatables/quest/ground/disabled.iff";
     public static final String DISABLED_QUEST_COLUMN = "disabled_quests";
     public static final String questBaseObjVar = "quest";
@@ -161,6 +158,10 @@ public class groundquests extends script.base_script
     public static final String objvarEntranceWaypoint = "entranceWaypoint";
     public static final String objvarWaypointInActive = "waypointInactive";
     public static final String timeObjVar = "playedTimeEnd";
+    public groundquests()
+    {
+    }
+
     public static String getStringDataEntry(String datatableName, int questId, int taskId, String columnName) throws InterruptedException
     {
         String result = null;
@@ -170,7 +171,7 @@ public class groundquests extends script.base_script
             String errText = "QUEST NAME IS NULL: datatableName: " + datatableName + " - questId:" + questId + " - taskId: " + taskId + " - columnName: " + columnName;
             logScriptDataError(errText);
         }
-        else 
+        else
         {
             String datatable = "datatables/" + datatableName + "/" + questName + ".iff";
             if (isValidTaskId(taskId))
@@ -183,6 +184,7 @@ public class groundquests extends script.base_script
         }
         return result;
     }
+
     public static int getIntDataEntry(String datatableName, int questId, int taskId, String columnName) throws InterruptedException
     {
         int result = -1;
@@ -197,6 +199,7 @@ public class groundquests extends script.base_script
         }
         return result;
     }
+
     public static float getFloatDataEntry(String datatableName, int questId, int taskId, String columnName) throws InterruptedException
     {
         float result = 0.0f;
@@ -211,6 +214,7 @@ public class groundquests extends script.base_script
         }
         return result;
     }
+
     public static boolean getBoolDataEntry(String datatableName, int questId, int taskId, String columnName, boolean defaultValue) throws InterruptedException
     {
         int result = -1;
@@ -229,21 +233,25 @@ public class groundquests extends script.base_script
         }
         return result != 0;
     }
+
     public static String setBaseObjVar(obj_id player, String taskType, String questName, int taskId) throws InterruptedException
     {
         String objvar = questBaseObjVar + dot + taskType + dot + questName + dot + taskId;
         setObjVar(player, objvar + dot + "inProgress", "true");
         return objvar;
     }
+
     public static void clearBaseObjVar(obj_id player, String taskType, String questName, int taskId) throws InterruptedException
     {
         String objvarTask = questBaseObjVar + dot + taskType + dot + questName + dot + taskId;
         removeObjVar(player, objvarTask);
     }
+
     public static String getBaseObjVar(obj_id player, String taskType, String questName, int taskId) throws InterruptedException
     {
         return questBaseObjVar + dot + taskType + dot + questName + dot + taskId;
     }
+
     public static String getTaskTypeObjVar(obj_id player, String taskType) throws InterruptedException
     {
         String objvar = questBaseObjVar + dot + taskType;
@@ -251,15 +259,17 @@ public class groundquests extends script.base_script
         {
             return objvar;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getTaskTypeObjVar(String taskType) throws InterruptedException
     {
         return questBaseObjVar + dot + taskType;
     }
+
     public static void questOutputDebugInfo(obj_id player, int questCrc, int taskId, String taskType, String method, String message) throws InterruptedException
     {
         if (isGod(player) && questGetDebugging())
@@ -267,10 +277,12 @@ public class groundquests extends script.base_script
             debugSpeakMsg(player, "Quest: player[" + player + "], " + taskType + dot + method + ", " + questGetQuestName(questCrc) + ":task" + taskId + " - " + message);
         }
     }
+
     public static void questOutputDebugInfo(obj_id player, String questName, int taskId, String taskType, String method, String message) throws InterruptedException
     {
         questOutputDebugInfo(player, questGetQuestId(questName), taskId, taskType, method, message);
     }
+
     public static void questOutputDebugInfo(obj_id player, String taskType, String method, String message) throws InterruptedException
     {
         if (isGod(player) && questGetDebugging())
@@ -278,6 +290,7 @@ public class groundquests extends script.base_script
             debugSpeakMsg(player, "Quest: player[" + player + "], " + taskType + dot + method + " - " + message);
         }
     }
+
     public static void questOutputDebugLog(String taskType, String method, String message) throws InterruptedException
     {
         if (questGetDebugging())
@@ -285,6 +298,7 @@ public class groundquests extends script.base_script
             LOG("QUEST_DEBUG", taskType + dot + method + " - " + message);
         }
     }
+
     public static void addDestroyNotification(obj_id target, obj_id player) throws InterruptedException
     {
         attachScript(target, "quest.utility.destroy_notification");
@@ -293,6 +307,7 @@ public class groundquests extends script.base_script
         params.put("parameter", "");
         messageTo(target, "addNotification", params, 0.0f, false);
     }
+
     public static void failAllActiveTasksOfType(obj_id player, String taskType) throws InterruptedException
     {
         dictionary tasks = getActiveTasksForTaskType(player, taskType);
@@ -301,53 +316,65 @@ public class groundquests extends script.base_script
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
-                    if (isValidTaskId(taskId)) {
+                for (int taskId : tasksForCurrentQuest)
+                {
+                    if (isValidTaskId(taskId))
+                    {
                         questFailTask(questCrc, taskId, player);
                     }
                 }
             }
         }
     }
+
     public static String getTaskStringDataEntry(int questId, int taskId, String columnName) throws InterruptedException
     {
         return getStringDataEntry("questtask", questId, taskId, columnName);
     }
+
     public static int getTaskIntDataEntry(int questId, int taskId, String columnName) throws InterruptedException
     {
         return getIntDataEntry("questtask", questId, taskId, columnName);
     }
+
     public static float getTaskFloatDataEntry(int questId, int taskId, String columnName) throws InterruptedException
     {
         return getFloatDataEntry("questtask", questId, taskId, columnName);
     }
+
     public static boolean getTaskBoolDataEntry(int questId, int taskId, String columnName, boolean defaultValue) throws InterruptedException
     {
         return getBoolDataEntry("questtask", questId, taskId, columnName, defaultValue);
     }
+
     public static String getQuestStringDataEntry(int questId, String columnName) throws InterruptedException
     {
         return getStringDataEntry("questlist", questId, 0, columnName);
     }
+
     public static int getQuestIntDataEntry(int questId, String columnName) throws InterruptedException
     {
         return getIntDataEntry("questlist", questId, 0, columnName);
     }
+
     public static float getQuestFloatDataEntry(int questId, String columnName) throws InterruptedException
     {
         return getFloatDataEntry("questlist", questId, 0, columnName);
     }
+
     public static boolean getQuestBoolDataEntry(int questId, String columnName, boolean defaultValue) throws InterruptedException
     {
         return getBoolDataEntry("questlist", questId, 0, columnName, defaultValue);
     }
+
     public static boolean getShowSystemMessages(int questCrc, int taskId) throws InterruptedException
     {
         return getTaskIntDataEntry(questCrc, taskId, datatableColumnShowSystemMessages) > 0;
     }
+
     public static void sendGroundQuestSystemMessage(string_id message, int questCrc, int taskId, obj_id player) throws InterruptedException
     {
         String taskTitle = getTaskStringDataEntry(questCrc, taskId, datatableColumnjournalEntryTitle);
@@ -355,6 +382,7 @@ public class groundquests extends script.base_script
         prose.setTO(pp, taskTitle);
         sendQuestSystemMessage(player, pp);
     }
+
     public static void sendTaskCompletedSystemMessage(int questCrc, int taskId, obj_id player) throws InterruptedException
     {
         if (getShowSystemMessages(questCrc, taskId))
@@ -362,6 +390,7 @@ public class groundquests extends script.base_script
             sendGroundQuestSystemMessage(SID_TASK_COMPLETED, questCrc, taskId, player);
         }
     }
+
     public static void sendTaskFailedSystemMessage(int questCrc, int taskId, obj_id player) throws InterruptedException
     {
         if (getShowSystemMessages(questCrc, taskId))
@@ -369,33 +398,40 @@ public class groundquests extends script.base_script
             sendGroundQuestSystemMessage(SID_TASK_FAILED, questCrc, taskId, player);
         }
     }
+
     public static void requestGrantQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         requestGrantQuest(questNum, player, player, true);
     }
+
     public static void requestGrantQuest(obj_id[] players, String questName) throws InterruptedException
     {
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
-            if (!isIdValid(player) || !exists(player)) {
+        for (obj_id player : players)
+        {
+            if (!isIdValid(player) || !exists(player))
+            {
                 continue;
             }
             requestGrantQuest(player, questName);
         }
     }
+
     public static void requestGrantQuest(int questCrc, obj_id player, obj_id npc) throws InterruptedException
     {
         requestGrantQuest(questCrc, player, npc, false);
     }
+
     public static void requestGrantQuest(obj_id player, String questName, boolean showMessage) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         requestGrantQuest(questNum, player, player, showMessage);
     }
+
     public static void requestGrantQuest(int questCrc, obj_id player, obj_id npc, boolean showSystemMessage) throws InterruptedException
     {
         if (utils.isProfession(player, utils.TRADER) || utils.isProfession(player, utils.ENTERTAINER))
@@ -403,25 +439,28 @@ public class groundquests extends script.base_script
             doTraderEntertainerXpWarning(questCrc, player);
         }
         requestActivateQuest(questCrc, player, npc);
-        return;
     }
+
     public static int grantQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         requestGrantQuest(questNum, player, player, true);
         return 1;
     }
+
     public static int grantQuest(int questCrc, obj_id player, obj_id npc) throws InterruptedException
     {
         requestGrantQuest(questCrc, player, npc, false);
         return 1;
     }
+
     public static int grantQuest(obj_id player, String questName, boolean showMessage) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         requestGrantQuest(questNum, player, player, showMessage);
         return 1;
     }
+
     public static int grantQuest(int questCrc, obj_id player, obj_id npc, boolean showSystemMessage) throws InterruptedException
     {
         if (utils.isProfession(player, utils.TRADER) || utils.isProfession(player, utils.ENTERTAINER))
@@ -431,6 +470,7 @@ public class groundquests extends script.base_script
         requestActivateQuest(questCrc, player, npc);
         return 1;
     }
+
     public static void doTraderEntertainerXpWarning(int questCrc, obj_id player) throws InterruptedException
     {
         String xpType = "";
@@ -441,13 +481,14 @@ public class groundquests extends script.base_script
         {
             sendSystemMessage(player, SID_NO_XP_TRADER_ENTERTAINER);
         }
-        return;
     }
+
     public static int grantQuestNoAcceptUI(obj_id player, String questName, boolean showSystemMessage) throws InterruptedException
     {
         int questCrc = getQuestIdFromString(questName);
         return questActivateQuest(questCrc, player, player);
     }
+
     public static boolean isInNamedRegion(obj_id player, String requiredRegion) throws InterruptedException
     {
         if (requiredRegion == null || requiredRegion.length() == 0)
@@ -458,45 +499,55 @@ public class groundquests extends script.base_script
         region[] regions = getRegionsAtPoint(here);
         if (regions != null)
         {
-            for (region region : regions) {
+            for (region region : regions)
+            {
                 String regionWeAreIn = region.getName();
-                if (regionWeAreIn.equals(requiredRegion)) {
+                if (regionWeAreIn.equals(requiredRegion))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static void sendSignal(obj_id player, String signalName) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put("signal", signalName);
         messageTo(player, "questSignal", params, 0, false);
     }
+
     public static void sendSignal(obj_id[] players, String signalName) throws InterruptedException
     {
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
-            if (isIdValid(player) && exists(player)) {
+        for (obj_id player : players)
+        {
+            if (isIdValid(player) && exists(player))
+            {
                 sendSignal(player, signalName);
             }
         }
     }
+
     public static void sendSignals(obj_id player, String[] signalNames) throws InterruptedException
     {
         if (signalNames == null || signalNames.length == 0 || !isIdValid(player))
         {
             return;
         }
-        for (String signalName : signalNames) {
-            if (signalName != null && signalName.length() > 0) {
+        for (String signalName : signalNames)
+        {
+            if (signalName != null && signalName.length() > 0)
+            {
                 sendSignal(player, signalName);
             }
         }
     }
+
     public static boolean isQuestDisabled(String questName) throws InterruptedException
     {
         if (questName.startsWith("quest/"))
@@ -504,79 +555,89 @@ public class groundquests extends script.base_script
             questName = questName.substring(6);
         }
         int disabled = dataTableSearchColumnForString(questName, DISABLED_QUEST_COLUMN, DISABLED_QUEST_TABLE);
-        if (disabled >= 0)
-        {
-            return true;
-        }
-        return false;
+        return disabled >= 0;
     }
+
     public static int getQuestIdFromString(String questName) throws InterruptedException
     {
         if (questName.startsWith("quest/"))
         {
             return questGetQuestId(questName);
         }
-        else 
+        else
         {
             String fullPathQuestName = "quest/" + questName;
             return questGetQuestId(fullPathQuestName);
         }
     }
+
     public static boolean hasCompletedQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questIsQuestComplete(questNum, player);
     }
+
     public static int canActivateQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questCanActivateQuest(questNum, player);
     }
+
     public static void completeQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         requestCompleteQuest(questNum, player);
     }
+
     public static void clearQuest(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         questClearQuest(questNum, player);
     }
+
     public static void clearQuest(obj_id[] players, String questName) throws InterruptedException
     {
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
-            if (!isIdValid(player) || !exists(player)) {
+        for (obj_id player : players)
+        {
+            if (!isIdValid(player) || !exists(player))
+            {
                 continue;
             }
-            if (isQuestActiveOrComplete(player, questName)) {
+            if (isQuestActiveOrComplete(player, questName))
+            {
                 clearQuest(player, questName);
             }
         }
     }
+
     public static boolean isQuestActive(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questIsQuestActive(questNum, player);
     }
+
     public static boolean isQuestActiveOrComplete(obj_id player, String questName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questIsQuestActive(questNum, player) || questIsQuestComplete(questNum, player);
     }
+
     public static boolean hasCompletedTask(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questIsTaskComplete(questNum, taskNum, player);
     }
+
     public static boolean isTaskActive(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         return questIsTaskActive(questNum, taskNum, player);
     }
+
     public static void activateTask(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -585,6 +646,7 @@ public class groundquests extends script.base_script
             questActivateTask(questNum, taskNum, player);
         }
     }
+
     public static void completeTask(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -593,6 +655,7 @@ public class groundquests extends script.base_script
             questCompleteTask(questNum, taskNum, player);
         }
     }
+
     public static void failTask(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -601,6 +664,7 @@ public class groundquests extends script.base_script
             questFailTask(questNum, taskNum, player);
         }
     }
+
     public static void clearTask(obj_id player, String questName, int taskNum) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -609,18 +673,21 @@ public class groundquests extends script.base_script
             questClearQuestTask(questNum, taskNum, player);
         }
     }
+
     public static boolean hasCompletedTask(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         int taskNum = getTaskId(questNum, taskName);
         return questIsTaskComplete(questNum, taskNum, player);
     }
+
     public static boolean isTaskActive(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
         int taskNum = getTaskId(questNum, taskName);
         return questIsTaskActive(questNum, taskNum, player);
     }
+
     public static void activateTask(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -630,6 +697,7 @@ public class groundquests extends script.base_script
             questActivateTask(questNum, taskNum, player);
         }
     }
+
     public static void completeTask(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -639,6 +707,7 @@ public class groundquests extends script.base_script
             questCompleteTask(questNum, taskNum, player);
         }
     }
+
     public static void failTask(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -648,6 +717,7 @@ public class groundquests extends script.base_script
             questFailTask(questNum, taskNum, player);
         }
     }
+
     public static void clearTask(obj_id player, String questName, String taskName) throws InterruptedException
     {
         int questNum = getQuestIdFromString(questName);
@@ -657,6 +727,7 @@ public class groundquests extends script.base_script
             questClearQuestTask(questNum, taskNum, player);
         }
     }
+
     public static int getTaskId(int questCrc, String taskName) throws InterruptedException
     {
         for (int i = 0; i < maxTasksPerQuest; ++i)
@@ -669,10 +740,12 @@ public class groundquests extends script.base_script
         }
         return -1;
     }
+
     public static boolean isValidQuestName(String questName) throws InterruptedException
     {
         return getQuestIdFromString(questName) != INVALID_QUEST;
     }
+
     public static dictionary getActiveTasksForTaskType(obj_id player, String taskType) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -712,11 +785,13 @@ public class groundquests extends script.base_script
         }
         return dict;
     }
+
     public static location getRandom2DLocationAroundPlayer(obj_id player, float minimumDistance, float maximumDistance) throws InterruptedException
     {
         location playerLocation = getLocation(player);
         return getRandom2DLocationAroundLocation(player, 0, 0, minimumDistance, maximumDistance);
     }
+
     public static location getRandom2DLocationAroundLocation(obj_id player, float relativeOffsetX, float relativeOffsetZ, float minimumDistance, float maximumDistance) throws InterruptedException
     {
         boolean onAFloor = isOnAFloor(player);
@@ -734,7 +809,7 @@ public class groundquests extends script.base_script
             {
                 newLocation.x += xDelta;
             }
-            else 
+            else
             {
                 newLocation.x -= xDelta;
             }
@@ -744,7 +819,7 @@ public class groundquests extends script.base_script
                 {
                     newLocation.z += zDelta;
                 }
-                else 
+                else
                 {
                     newLocation.z -= zDelta;
                 }
@@ -754,13 +829,13 @@ public class groundquests extends script.base_script
                     {
                         newLocation.x += xDelta;
                     }
-                    else 
+                    else
                     {
                         newLocation.x -= xDelta;
                     }
                     if (!isValidQuestSpawnPoint(player, newLocation, onAFloor, inACell))
                     {
-                        newLocation = (location)playerLocation.clone();
+                        newLocation = (location) playerLocation.clone();
                     }
                 }
             }
@@ -769,12 +844,13 @@ public class groundquests extends script.base_script
         {
             newLocation.y = getFloorHeightAtRelativePointOnSameFloorAsObject(player, newLocation.x - playerLocation.x, newLocation.z - playerLocation.z);
         }
-        else 
+        else
         {
             newLocation.y = getHeightAtLocation(newLocation.x, newLocation.z);
         }
         return newLocation;
     }
+
     public static boolean isValidQuestSpawnPoint(obj_id player, location newLocation, boolean onAFloor, boolean inACell) throws InterruptedException
     {
         boolean validPoint = true;
@@ -793,9 +869,10 @@ public class groundquests extends script.base_script
         }
         return validPoint;
     }
+
     public static location getRandom2DLocationInRing(location startLocation, float minimumRadius, float maximumRadius) throws InterruptedException
     {
-        location newLocation = (location)startLocation.clone();
+        location newLocation = (location) startLocation.clone();
         float deltaX = rand(minimumRadius, maximumRadius);
         if (rand(1, 2) == 2)
         {
@@ -811,37 +888,37 @@ public class groundquests extends script.base_script
         newLocation.y = getHeightAtLocation(newLocation.x, newLocation.z);
         return newLocation;
     }
+
     public static void setPendingStaticEscortTarget(obj_id player, obj_id newEscortTarget) throws InterruptedException
     {
         setObjVar(player, questBaseObjVar + dot + questAllObjVar + dot + questStaticEscortTargetObjVar, newEscortTarget);
     }
+
     public static boolean isEscortTargetReadyForStaticEscortTask(obj_id escortTarget) throws InterruptedException
     {
-        if (hasObjVar(escortTarget, objvarOnEscort) || hasObjVar(escortTarget, objvarGoingHome))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !hasObjVar(escortTarget, objvarOnEscort) && !hasObjVar(escortTarget, objvarGoingHome);
     }
+
     public static obj_id getPendingStaticEscortTarget(obj_id player) throws InterruptedException
     {
         return getObjIdObjVar(player, questBaseObjVar + dot + questAllObjVar + dot + questStaticEscortTargetObjVar);
     }
+
     public static void clearPendingStaticEscortTarget(obj_id player) throws InterruptedException
     {
         removeObjVar(player, questBaseObjVar + dot + questAllObjVar + dot + questStaticEscortTargetObjVar);
     }
+
     public static boolean isTaskVisible(int questCrc, int taskId) throws InterruptedException
     {
         return groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnVisible) != 0;
     }
+
     public static boolean isQuestVisible(int questCrc) throws InterruptedException
     {
         return getQuestBoolDataEntry(questCrc, dataTableColumnQuestVisible, true);
     }
+
     public static void playJournalUpdatedMusic(int questCrc, int taskId, obj_id player) throws InterruptedException
     {
         if (groundquests.isTaskVisible(questCrc, taskId))
@@ -849,32 +926,39 @@ public class groundquests extends script.base_script
             play2dNonLoopingSound(player, JOURNAL_UPDATED_MUSIC);
         }
     }
+
     public static boolean isValidTaskId(int taskId) throws InterruptedException
     {
         return (taskId >= 0) && (taskId < maxTasksPerQuest);
     }
+
     public static void questStartPerforming(obj_id player, int performType) throws InterruptedException
     {
         dictionary params = new dictionary();
         params.put(PERFORM_TYPE, performType);
         messageTo(player, "startPerform", params, 1, false);
     }
+
     public static void questStopPerforming(obj_id player) throws InterruptedException
     {
         messageTo(player, "stopPerform", null, 1, false);
     }
+
     public static void questStartDance(obj_id player) throws InterruptedException
     {
         questStartPerforming(player, PERFORM_DANCE);
     }
+
     public static void questStartMusic(obj_id player) throws InterruptedException
     {
         questStartPerforming(player, PERFORM_MUSIC);
     }
+
     public static void questStartJuggle(obj_id player) throws InterruptedException
     {
         questStartPerforming(player, PERFORM_JUGGLE);
     }
+
     public static void sendPlacedMoreThanOneInInventorySystemMessage(obj_id player, obj_id objectPlaced, int count) throws InterruptedException
     {
         if (isValidId(objectPlaced))
@@ -887,6 +971,7 @@ public class groundquests extends script.base_script
             sendQuestSystemMessage(player, pp);
         }
     }
+
     public static void sendPlacedInInventorySystemMessage(obj_id player, obj_id objectPlaced, String objectTemplate) throws InterruptedException
     {
         if (isValidId(objectPlaced))
@@ -896,7 +981,7 @@ public class groundquests extends script.base_script
             pp = prose.getPackage(SID_PLACED_IN_INVENTORY, name);
             sendQuestSystemMessage(player, pp);
         }
-        else 
+        else
         {
             if (objectTemplate != null && objectTemplate.length() > 0)
             {
@@ -904,10 +989,12 @@ public class groundquests extends script.base_script
             }
         }
     }
+
     public static void sendPlacedInInventorySystemMessage(obj_id player, obj_id objectPlaced) throws InterruptedException
     {
         sendPlacedInInventorySystemMessage(player, objectPlaced, null);
     }
+
     public static void sendRemovedFromInventorySystemMessage(obj_id player, obj_id objectPlaced, String objectTemplate) throws InterruptedException
     {
         if (isValidId(objectPlaced))
@@ -917,7 +1004,7 @@ public class groundquests extends script.base_script
             pp = prose.getPackage(SID_REMOVED_FROM_INVENTORY, name);
             sendQuestSystemMessage(player, pp);
         }
-        else 
+        else
         {
             if (objectTemplate != null && objectTemplate.length() > 0)
             {
@@ -925,10 +1012,12 @@ public class groundquests extends script.base_script
             }
         }
     }
+
     public static void sendRemovedFromInventorySystemMessage(obj_id player, obj_id objectPlaced) throws InterruptedException
     {
         sendRemovedFromInventorySystemMessage(player, objectPlaced, null);
     }
+
     public static boolean isActionAllowedForQuest(obj_id player, obj_id npc, String actionName) throws InterruptedException
     {
         if (!hasObjVar(npc, QUEST_NAME))
@@ -959,7 +1048,7 @@ public class groundquests extends script.base_script
             baseQuest = questActionName;
             versionQuest = 0;
         }
-        else 
+        else
         {
             baseQuest = questActionName.substring(0, indexQuest);
             versionQuest = utils.stringToInt(questActionName.substring(indexQuest + 1));
@@ -969,7 +1058,7 @@ public class groundquests extends script.base_script
             baseAction = actionName;
             versionAction = 0;
         }
-        else 
+        else
         {
             baseAction = actionName.substring(0, indexAction);
             versionAction = utils.stringToInt(actionName.substring(indexAction + 1));
@@ -979,6 +1068,7 @@ public class groundquests extends script.base_script
         questOutputDebugInfo(player, "groundquests", "isActionAllowedForQuest", "result = " + (result ? "true" : "false"));
         return result;
     }
+
     public static boolean questActionCompleted(obj_id player, obj_id npc, String actionName) throws InterruptedException
     {
         if (isActionAllowedForQuest(player, npc, actionName))
@@ -994,6 +1084,7 @@ public class groundquests extends script.base_script
         }
         return false;
     }
+
     public static void applyQuestPenalty(obj_id player, String factionName, int factionAmount) throws InterruptedException
     {
         if (factionName != null && factionName.length() > 0 && factionAmount > 0)
@@ -1004,10 +1095,12 @@ public class groundquests extends script.base_script
             sendQuestSystemMessage(player, pp);
         }
     }
+
     public static void grantQuestReward(obj_id player, int questCrc, int questLevel, int questTier, String experienceType, int experienceAmount, String factionName, int factionAmount, boolean grantGcwReward, int bankCredits, String item, int itemCount, String weapon, int weaponCount, float weaponSpeed, float weaponDamage, float weaponEfficiency, float weaponElementalValue, String armor, int armorCount, int armorQuality, String[] inclusiveLootNames, int[] inclusiveLootCounts, String exclusiveLootChoiceName, int exclusiveLootChoiceCount, String badgeName, boolean useShowLootBox) throws InterruptedException
     {
         grantQuestReward(player, questCrc, questLevel, questTier, experienceType, experienceAmount, factionName, factionAmount, grantGcwReward, bankCredits, item, itemCount, weapon, weaponCount, weaponSpeed, weaponDamage, weaponEfficiency, weaponElementalValue, armor, armorCount, armorQuality, inclusiveLootNames, inclusiveLootCounts, exclusiveLootChoiceName, exclusiveLootChoiceCount, badgeName, useShowLootBox, 0, 0, null, 0, null, 0, 0);
     }
+
     public static void grantQuestReward(obj_id player, int questCrc, int questLevel, int questTier, String experienceType, int experienceAmount, String factionName, int factionAmount, boolean grantGcwReward, int bankCredits, String item, int itemCount, String weapon, int weaponCount, float weaponSpeed, float weaponDamage, float weaponEfficiency, float weaponElementalValue, String armor, int armorCount, int armorQuality, String[] inclusiveLootNames, int[] inclusiveLootCounts, String exclusiveLootChoiceName, int exclusiveLootChoiceCount, String badgeName, boolean useShowLootBox, int grantGcwOverwriteAmt, int grantGcwSFModifier, String grantGcwRebReward, int grantGcwRebRewardCount, String grantGcwImpReward, int grantGcwImpRewardCount, int grantGcwSFRewardMultip) throws InterruptedException
     {
         if (itemCount == -1)
@@ -1040,7 +1133,7 @@ public class groundquests extends script.base_script
             {
                 xp.grantSocialStyleXp(player, experienceType, experienceAmount);
             }
-            else 
+            else
             {
                 xp.grantUnmodifiedExperience(player, experienceType, experienceAmount, false);
             }
@@ -1270,12 +1363,13 @@ public class groundquests extends script.base_script
                 showLootBox(player, lootItems);
             }
         }
-        return;
     }
+
     public static boolean playerNeedsToRetrieveThisItem(obj_id player, obj_id item) throws InterruptedException
     {
         return playerNeedsToRetrieveThisItem(player, item, "retrieve_item");
     }
+
     public static boolean playerNeedsToRetrieveThisItem(obj_id player, obj_id item, String taskType) throws InterruptedException
     {
         if (isMob(item) && isIncapacitated(item))
@@ -1290,20 +1384,26 @@ public class groundquests extends script.base_script
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
                     String retrieveTemplateName = groundquests.getTaskStringDataEntry(questCrc, taskId, "SERVER_TEMPLATE");
-                    if (retrieveTemplateName != null && itemTemplateName != null && itemTemplateName.equals(retrieveTemplateName)) {
+                    if (itemTemplateName != null && itemTemplateName.equals(retrieveTemplateName))
+                    {
                         needed = true;
                         String objvarRetrievedFull = baseObjVar + dot + "retrieved_items";
-                        if (hasObjVar(player, objvarRetrievedFull)) {
+                        if (hasObjVar(player, objvarRetrievedFull))
+                        {
                             obj_id[] itemsAlreadyRetrieved = getObjIdArrayObjVar(player, objvarRetrievedFull);
-                            for (obj_id itemAlredyRetrieved : itemsAlreadyRetrieved) {
-                                if (item == itemAlredyRetrieved) {
+                            for (obj_id itemAlredyRetrieved : itemsAlreadyRetrieved)
+                            {
+                                if (item == itemAlredyRetrieved)
+                                {
                                     needed = false;
+                                    break;
                                 }
                             }
                         }
@@ -1313,10 +1413,12 @@ public class groundquests extends script.base_script
         }
         return needed;
     }
+
     public static String getRetrieveMenuText(obj_id player, obj_id item) throws InterruptedException
     {
         return getRetrieveMenuText(player, item, "retrieve_item");
     }
+
     public static String getRetrieveMenuText(obj_id player, obj_id item, String taskType) throws InterruptedException
     {
         String menuText = null;
@@ -1328,20 +1430,26 @@ public class groundquests extends script.base_script
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
                     String retrieveTemplateName = groundquests.getTaskStringDataEntry(questCrc, taskId, "SERVER_TEMPLATE");
-                    if (retrieveTemplateName != null && itemTemplateName.equals(retrieveTemplateName)) {
+                    if (itemTemplateName.equals(retrieveTemplateName))
+                    {
                         String tempMenuText = groundquests.getTaskStringDataEntry(questCrc, taskId, "RETRIEVE_MENU_TEXT");
-                        if (tempMenuText != null && tempMenuText.length() > 0) {
-                            if (!menuTextSet) {
+                        if (tempMenuText != null && tempMenuText.length() > 0)
+                        {
+                            if (!menuTextSet)
+                            {
                                 menuText = tempMenuText;
                                 groundquests.questOutputDebugInfo(player, questCrc, taskId, taskType, "getRetrieveMenuText", "Menu text is [" + menuText + "]");
                                 menuTextSet = true;
-                            } else {
+                            }
+                            else
+                            {
                                 groundquests.questOutputDebugInfo(player, questCrc, taskId, taskType, "getRetrieveMenuText", "Item used for multiple quests! Resetting menu to default. [" + itemTemplateName + "]");
                                 menuText = null;
                             }
@@ -1352,10 +1460,12 @@ public class groundquests extends script.base_script
         }
         return menuText;
     }
+
     public static int getQuestCountdownTime(obj_id player, obj_id item) throws InterruptedException
     {
         return getQuestCountdownTime(player, item, "retrieve_item");
     }
+
     public static int getQuestCountdownTime(obj_id player, obj_id item, String taskType) throws InterruptedException
     {
         int countdownTime = 0;
@@ -1366,15 +1476,18 @@ public class groundquests extends script.base_script
             java.util.Enumeration keys = tasks.keys();
             while (keys.hasMoreElements())
             {
-                String questCrcString = (String)keys.nextElement();
+                String questCrcString = (String) keys.nextElement();
                 int questCrc = utils.stringToInt(questCrcString);
                 int[] tasksForCurrentQuest = tasks.getIntArray(questCrcString);
-                for (int taskId : tasksForCurrentQuest) {
+                for (int taskId : tasksForCurrentQuest)
+                {
                     String baseObjVar = groundquests.getBaseObjVar(player, taskType, questGetQuestName(questCrc), taskId);
                     String retrieveTemplateName = groundquests.getTaskStringDataEntry(questCrc, taskId, "SERVER_TEMPLATE");
-                    if (retrieveTemplateName != null && itemTemplateName.equals(retrieveTemplateName)) {
+                    if (itemTemplateName.equals(retrieveTemplateName))
+                    {
                         countdownTime = groundquests.getTaskIntDataEntry(questCrc, taskId, "COUNTDOWN_TIMER");
-                        if (countdownTime < 0) {
+                        if (countdownTime < 0)
+                        {
                             countdownTime = 0;
                         }
                     }
@@ -1383,6 +1496,7 @@ public class groundquests extends script.base_script
         }
         return countdownTime;
     }
+
     public static int getQuestExperienceReward(obj_id player, int questLevel, int questTier, int experienceAmount) throws InterruptedException
     {
         if (questLevel < 1 || questTier < 0)
@@ -1397,16 +1511,16 @@ public class groundquests extends script.base_script
         {
             questTier = 6;
         }
-        final String[] tierColumns = 
-        {
-            dataTableColumnQuestRewardExperienceTeir1,
-            dataTableColumnQuestRewardExperienceTeir2,
-            dataTableColumnQuestRewardExperienceTeir3,
-            dataTableColumnQuestRewardExperienceTeir4,
-            dataTableColumnQuestRewardExperienceTeir5,
-            dataTableColumnQuestRewardExperienceTeir6
-        };
-        int questXp = dataTableGetInt(QUEST_EXPERIENCE_TABLE, "" + questLevel, tierColumns[questTier - 1]);
+        final String[] tierColumns =
+                {
+                        dataTableColumnQuestRewardExperienceTeir1,
+                        dataTableColumnQuestRewardExperienceTeir2,
+                        dataTableColumnQuestRewardExperienceTeir3,
+                        dataTableColumnQuestRewardExperienceTeir4,
+                        dataTableColumnQuestRewardExperienceTeir5,
+                        dataTableColumnQuestRewardExperienceTeir6
+                };
+        int questXp = dataTableGetInt(QUEST_EXPERIENCE_TABLE, String.valueOf(questLevel), tierColumns[questTier - 1]);
         int xpCap = getQuestXpCap(player);
         if (questXp > xpCap)
         {
@@ -1414,6 +1528,7 @@ public class groundquests extends script.base_script
         }
         return questXp;
     }
+
     public static int getQuestXpCap(obj_id player) throws InterruptedException
     {
         int level = getLevel(player);
@@ -1427,6 +1542,7 @@ public class groundquests extends script.base_script
         }
         return xpCap;
     }
+
     public static void createQuestWaypoints(int questCrc, int taskId, obj_id self) throws InterruptedException
     {
         boolean createWaypoint = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnCreateWaypoint) > 0;
@@ -1462,7 +1578,7 @@ public class groundquests extends script.base_script
             {
                 waypoint = createWaypointInDatapadInternal(self, loc, interiorWaypointAppearance, waypointBuildingCellName);
             }
-            else 
+            else
             {
                 waypoint = createWaypointInDatapad(self, loc);
             }
@@ -1476,6 +1592,7 @@ public class groundquests extends script.base_script
             setQuestWaypointActive(waypoint, self, baseObjVar);
         }
     }
+
     public static void setQuestWaypointActive(obj_id waypoint, obj_id player, String baseObjVar) throws InterruptedException
     {
         String objvarFullName = baseObjVar + dot + groundquests.objvarWaypointInActive;
@@ -1493,7 +1610,7 @@ public class groundquests extends script.base_script
                 }
                 setWaypointActive(waypoint, true);
             }
-            else 
+            else
             {
                 if (!hasObjVar(player, objvarFullName))
                 {
@@ -1501,27 +1618,29 @@ public class groundquests extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (hasObjVar(player, objvarFullName))
             {
                 removeObjVar(player, objvarFullName);
             }
         }
-        return;
     }
+
     public static obj_id getObjIdForWaypoint(int questCrc, int taskId, obj_id self) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
         String baseWaypoint = baseObjVar + dot + objvarWaypoint;
         return getObjIdObjVar(self, baseWaypoint);
     }
+
     public static obj_id getObjIdForEntranceWaypoint(int questCrc, int taskId, obj_id self) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
         String doorWaypoint = baseObjVar + dot + objvarEntranceWaypoint;
         return getObjIdObjVar(self, doorWaypoint);
     }
+
     public static void deleteQuestWaypoints(int questCrc, int taskId, boolean isForCTS, obj_id self) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(self, taskType, questGetQuestName(questCrc), taskId);
@@ -1531,7 +1650,7 @@ public class groundquests extends script.base_script
         if (isIdValid(waypoint))
         {
             removeObjVar(self, baseWaypoint);
-            if (isForCTS == false)
+            if (!isForCTS)
             {
                 destroyWaypointInDatapad(waypoint, self);
             }
@@ -1540,12 +1659,13 @@ public class groundquests extends script.base_script
         if (isIdValid(entranceWaypoint))
         {
             removeObjVar(self, doorWaypoint);
-            if (isForCTS == false)
+            if (!isForCTS)
             {
                 destroyWaypointInDatapad(entranceWaypoint, self);
             }
         }
     }
+
     public static void reattachQuestScripts(obj_id self) throws InterruptedException
     {
         obj_var_list scriptList = getObjVarList(self, questBaseObjVar + dot + "script");
@@ -1553,21 +1673,26 @@ public class groundquests extends script.base_script
         {
             String[] scriptNames = scriptList.getAllObjVarNames();
             int numScripts = scriptNames.length;
-            for (String scriptName : scriptNames) {
+            for (String scriptName : scriptNames)
+            {
                 obj_var oneScript = scriptList.getObjVar(scriptName);
-                if (oneScript.getIntData() > 0) {
-                    if (!self.hasScript(scriptName)) {
+                if (oneScript.getIntData() > 0)
+                {
+                    if (!self.hasScript(scriptName))
+                    {
                         attachScript(self, scriptName);
                     }
                 }
             }
         }
     }
+
     public static void refreshQuestWaypoints(int questCrc, int taskId, boolean isForCTS, obj_id self) throws InterruptedException
     {
         deleteQuestWaypoints(questCrc, taskId, isForCTS, self);
         createQuestWaypoints(questCrc, taskId, self);
     }
+
     public static void setGuaranteedSuccessTarget(obj_id player, int questCrc, int taskId, String baseObjVar) throws InterruptedException
     {
         String guaranteedSuccessTargetObjVar = baseObjVar + dot + objvarGuaranteedSuccess_Target;
@@ -1589,7 +1714,7 @@ public class groundquests extends script.base_script
             {
                 target = minNumAttempts;
             }
-            else 
+            else
             {
                 target = rand(minNumAttempts, maxNumAttempts);
             }
@@ -1599,8 +1724,8 @@ public class groundquests extends script.base_script
                 setObjVar(player, guaranteedSuccessTargetObjVar, target);
             }
         }
-        return;
     }
+
     public static boolean checkForGuaranteedSuccess(obj_id player, String baseObjVar) throws InterruptedException
     {
         String guaranteedSuccessTargetObjVar = baseObjVar + dot + objvarGuaranteedSuccess_Target;
@@ -1622,6 +1747,7 @@ public class groundquests extends script.base_script
         }
         return passed;
     }
+
     public static boolean isDoingSmugglerMission(obj_id player) throws InterruptedException
     {
         if (isQuestActive(player, "smuggle_generic_1") || isQuestActive(player, "smuggle_generic_2") || isQuestActive(player, "smuggle_generic_3") || isQuestActive(player, "smuggle_generic_4") || isQuestActive(player, "smuggle_generic_5"))
@@ -1632,12 +1758,9 @@ public class groundquests extends script.base_script
         {
             return true;
         }
-        if (isQuestActive(player, "smuggle_pvp_4") || isQuestActive(player, "smuggle_pvp_5"))
-        {
-            return true;
-        }
-        return false;
+        return isQuestActive(player, "smuggle_pvp_4") || isQuestActive(player, "smuggle_pvp_5");
     }
+
     public static float getPlayerPlayedTimeWhenTimerEnds(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         String baseObjVar = groundquests.getBaseObjVar(player, "base_task", questGetQuestName(questCrc), taskId);
@@ -1647,12 +1770,13 @@ public class groundquests extends script.base_script
         }
         return -1.0f;
     }
+
     public static boolean isTimeRemainingBeforeCompletion(obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         final int remainingTime = getTaskIntDataEntry(questCrc, taskId, dataTableColumnRemainingTime);
         if (remainingTime > 0)
         {
-            final int endTime = (int)getPlayerPlayedTimeWhenTimerEnds(player, questCrc, taskId);
+            final int endTime = (int) getPlayerPlayedTimeWhenTimerEnds(player, questCrc, taskId);
             if (endTime > 0)
             {
                 final int timeLeft = endTime - getPlayerPlayedTime(player) - remainingTime;
@@ -1667,21 +1791,21 @@ public class groundquests extends script.base_script
         }
         return false;
     }
+
     public static boolean gcwActiveDutyCheck(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(self, "questRequireActiveDuty"))
         {
-            if (factions.isOnLeave(player))
-            {
-                return false;
-            }
+            return !factions.isOnLeave(player);
         }
         return true;
     }
+
     public static boolean completeTaskForGroupMembersInRange(obj_id questObj, obj_id player, int questCrc, int taskId) throws InterruptedException
     {
         return completeTaskForGroupMembersInRange(questObj, player, questCrc, taskId, 200.0f);
     }
+
     public static boolean completeTaskForGroupMembersInRange(obj_id questObj, obj_id player, int questCrc, int taskId, float range) throws InterruptedException
     {
         boolean result = false;
@@ -1690,11 +1814,14 @@ public class groundquests extends script.base_script
             return result;
         }
         obj_id[] groupies = getGroupMembersInRange(questObj, player, range);
-        if (groupies != null && groupies.length > 0)
+        if (groupies != null)
         {
-            for (obj_id groupMember : groupies) {
-                if (isIdValid(groupMember)) {
-                    if (questIsTaskActive(questCrc, taskId, groupMember)) {
+            for (obj_id groupMember : groupies)
+            {
+                if (isIdValid(groupMember))
+                {
+                    if (questIsTaskActive(questCrc, taskId, groupMember))
+                    {
                         questCompleteTask(questCrc, taskId, groupMember);
                         result = true;
                     }
@@ -1703,10 +1830,12 @@ public class groundquests extends script.base_script
         }
         return result;
     }
+
     public static obj_id[] getGroupMembersInRange(obj_id questObj, obj_id player) throws InterruptedException
     {
         return getGroupMembersInRange(questObj, player, 200.0f);
     }
+
     public static obj_id[] getGroupMembersInRange(obj_id questObj, obj_id player, float range) throws InterruptedException
     {
         Vector groupMembersInRange = new Vector();
@@ -1720,10 +1849,13 @@ public class groundquests extends script.base_script
         if (groupies != null && groupies.length > 0)
         {
             location controllerLoc = getWorldLocation(questObj);
-            for (obj_id groupMember : groupies) {
-                if (isIdValid(groupMember) && groupMember.isLoaded() && isPlayer(groupMember)) {
+            for (obj_id groupMember : groupies)
+            {
+                if (isIdValid(groupMember) && groupMember.isLoaded() && isPlayer(groupMember))
+                {
                     location groupieLoc = getWorldLocation(groupMember);
-                    if (getDistance(controllerLoc, groupieLoc) <= range) {
+                    if (getDistance(controllerLoc, groupieLoc) <= range)
+                    {
                         utils.addElement(groupMembersInRange, groupMember);
                     }
                 }
@@ -1736,21 +1868,25 @@ public class groundquests extends script.base_script
         }
         return null;
     }
-    
+
     // NOTE this method only works for getting the item count for a selected exclusive reward
     // from a questLIST not a questTASK. This was added to accommodate a specific WOD expansion
     // quest, but it can be expanded later if needed.
-    public static int getExclusiveItemRewardCount(String questName, String itemName) {
-        String datatable = "datatables/questlist/"+questName+".iff";
+    public static int getExclusiveItemRewardCount(String questName, String itemName)
+    {
+        String datatable = "datatables/questlist/" + questName + ".iff";
         dictionary questData = dataTableGetRow(datatable, 0);
         String itemColName = "QUEST_REWARD_EXCLUSIVE_LOOT_NAME";
         String countColName = "QUEST_REWARD_EXCLUSIVE_LOOT_COUNT";
-        for(int i = 1; i <= 10; i++) {
-            if(i == 1) {
-                if(itemName.equals(questData.getString(itemColName))) return questData.getInt(countColName);
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i == 1)
+            {
+                if (itemName.equals(questData.getString(itemColName))) return questData.getInt(countColName);
             }
-            else {
-                if(itemName.equals(questData.getString(itemColName + "_" + i))) return questData.getInt(countColName + "_" + i);
+            else
+            {
+                if (itemName.equals(questData.getString(itemColName + "_" + i))) return questData.getInt(countColName + "_" + i);
             }
         }
         return 1;

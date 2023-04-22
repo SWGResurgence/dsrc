@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class advanced_turret extends script.base_script
 {
-    public advanced_turret()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "turretAggroVolume";
     public static final float DEFAULT_TURRET_RANGE = 64.0f;
     public static final float RANGE_TOO_CLOSE = 10.0f;
@@ -30,75 +27,82 @@ public class advanced_turret extends script.base_script
     public static final int SIZE_MEDIUM = 2;
     public static final int SIZE_LARGE = 3;
     public static final int SIZE_MINI = 4;
+    public advanced_turret()
+    {
+    }
+
     public static obj_id createTurret(location loc, float yaw, int minDamage, int maxDamage, float attackSpeed, float range) throws InterruptedException
     {
         return createTurret(loc, yaw, TYPE_BLOCK, SIZE_SMALL, DAMAGE_ENERGY, minDamage, maxDamage, range, attackSpeed, "");
     }
+
     public static obj_id createTurret(location loc, float yaw, int type, int size, int damageType, int minDamage, int maxDamage, float range, float attackSpeed, String faction) throws InterruptedException
     {
         return createTurret(loc, yaw, TYPE_BLOCK, SIZE_SMALL, DAMAGE_ENERGY, minDamage, maxDamage, 10000, range, attackSpeed, "");
     }
+
     public static obj_id createTurret(location loc, float yaw, int type, int size, int damageType, int minDamage, int maxDamage, int hitpoints, float range, float attackSpeed, String faction) throws InterruptedException
     {
         return createTurret(null, loc, yaw, type, size, damageType, minDamage, maxDamage, hitpoints, range, attackSpeed, faction);
     }
+
     public static obj_id createTurret(obj_id owner, location loc, float yaw, int type, int size, int damageType, int minDamage, int maxDamage, int hitpoints, float range, float attackSpeed, String faction) throws InterruptedException
     {
         String template = "object/installation/turret/gcw/adv_turret";
         switch (type)
         {
             case TYPE_BLOCK:
-            template += "_block";
-            break;
+                template += "_block";
+                break;
             case TYPE_DISH:
-            template += "_dish";
-            break;
+                template += "_dish";
+                break;
             case TYPE_TOWER:
-            template += "_tower";
-            break;
+                template += "_tower";
+                break;
         }
         switch (size)
         {
             case SIZE_MINI:
-            template += "_mini";
-            break;
+                template += "_mini";
+                break;
             case SIZE_SMALL:
-            template += "_sm";
-            break;
-            case SIZE_MEDIUM:
-            if (type == TYPE_DISH)
-            {
                 template += "_sm";
-            }
-            else 
-            {
-                template += "_med";
-            }
-            break;
+                break;
+            case SIZE_MEDIUM:
+                if (type == TYPE_DISH)
+                {
+                    template += "_sm";
+                }
+                else
+                {
+                    template += "_med";
+                }
+                break;
             case SIZE_LARGE:
-            template += "_large";
-            break;
+                template += "_large";
+                break;
         }
         switch (damageType)
         {
             case DAMAGE_ELEMENTAL_HEAT:
-            template += "_heat";
-            break;
+                template += "_heat";
+                break;
             case DAMAGE_ELEMENTAL_COLD:
-            template += "_cold";
-            break;
+                template += "_cold";
+                break;
             case DAMAGE_ELEMENTAL_ACID:
-            template += "_acid";
-            break;
+                template += "_acid";
+                break;
             case DAMAGE_ELEMENTAL_ELECTRICAL:
-            template += "_electricity";
-            break;
+                template += "_electricity";
+                break;
             case DAMAGE_KINETIC:
-            template += "_kinetic";
-            break;
+                template += "_kinetic";
+                break;
             default:
-            template += "_energy";
-            break;
+                template += "_energy";
+                break;
         }
         template += ".iff";
         obj_id turret = createObject(template, loc);
@@ -114,6 +118,7 @@ public class advanced_turret extends script.base_script
         initTurret(turret, faction, damageType, range, minDamage, maxDamage, hitpoints, attackSpeed);
         return turret;
     }
+
     public static void activateTurret(obj_id turret) throws InterruptedException
     {
         LOG("TURRET", "activateTurret " + turret);
@@ -135,6 +140,7 @@ public class advanced_turret extends script.base_script
         dict.put("range", range);
         messageTo(turret, "createTriggerVolume", dict, 0.0f, false);
     }
+
     public static void deactivateTurret(obj_id turret) throws InterruptedException
     {
         LOG("TURRET", "deactivateTurret " + turret);
@@ -146,6 +152,7 @@ public class advanced_turret extends script.base_script
         utils.removeScriptVar(turret, IS_ACTIVE);
         setInvulnerable(turret, true);
     }
+
     public static boolean isActive(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -160,6 +167,7 @@ public class advanced_turret extends script.base_script
         LOG("TURRET", "Turret " + turret + " is not active.");
         return false;
     }
+
     public static void startTrackingTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         LOG("TURRET", "Turret " + turret + " start tracking target " + target);
@@ -174,6 +182,7 @@ public class advanced_turret extends script.base_script
         }
         utils.setScriptVar(turret, IS_ENGAGED, target);
     }
+
     public static void stopTrackingTarget(obj_id turret) throws InterruptedException
     {
         LOG("TURRET", "Turret " + turret + " stop tracking target.");
@@ -183,6 +192,7 @@ public class advanced_turret extends script.base_script
         }
         utils.removeScriptVar(turret, IS_ENGAGED);
     }
+
     public static boolean isEngaged(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -191,6 +201,7 @@ public class advanced_turret extends script.base_script
         }
         return utils.hasScriptVar(turret, IS_ENGAGED);
     }
+
     public static obj_id getCurrentTarget(obj_id turret) throws InterruptedException
     {
         if (!isEngaged(turret))
@@ -199,6 +210,7 @@ public class advanced_turret extends script.base_script
         }
         return utils.getObjIdScriptVar(turret, IS_ENGAGED);
     }
+
     public static obj_id getTurretWeapon(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret) || !exists(turret))
@@ -211,6 +223,7 @@ public class advanced_turret extends script.base_script
         }
         return getObjIdObjVar(turret, MY_WEAPON);
     }
+
     public static void initTurret(obj_id turret, String faction, int damageType, float range, int minDamage, int maxDamage, int hitpoints, float attackSpeed) throws InterruptedException
     {
         detachScript(turret, "systems.turret.turret_ai");
@@ -244,20 +257,20 @@ public class advanced_turret extends script.base_script
             case DAMAGE_ELEMENTAL_ACID:
             case DAMAGE_ELEMENTAL_ELECTRICAL:
             case DAMAGE_ELEMENTAL_HEAT:
-            primaryType = DAMAGE_ENERGY;
-            secondaryType = damageType;
-            primaryMinDamage = 1;
-            primaryMaxDamage = 1;
-            secondaryDamage = (int)(minDamage + maxDamage / 2.0f);
-            break;
+                primaryType = DAMAGE_ENERGY;
+                secondaryType = damageType;
+                primaryMinDamage = 1;
+                primaryMaxDamage = 1;
+                secondaryDamage = (int) (minDamage + maxDamage / 2.0f);
+                break;
             case DAMAGE_KINETIC:
             case DAMAGE_ENERGY:
-            primaryType = damageType;
-            secondaryType = DAMAGE_ELEMENTAL_HEAT;
-            primaryMinDamage = minDamage;
-            primaryMaxDamage = maxDamage;
-            secondaryDamage = 0;
-            break;
+                primaryType = damageType;
+                secondaryType = DAMAGE_ELEMENTAL_HEAT;
+                primaryMinDamage = minDamage;
+                primaryMaxDamage = maxDamage;
+                secondaryDamage = 0;
+                break;
         }
         setWeaponDamageType(objWeapon, primaryType);
         setWeaponElementalType(objWeapon, secondaryType);
@@ -269,6 +282,7 @@ public class advanced_turret extends script.base_script
         setWeaponRangeInfo(objWeapon, ri);
         activateTurret(turret);
     }
+
     public static boolean isValidTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target) || !exists(turret) || !exists(target))
@@ -345,6 +359,7 @@ public class advanced_turret extends script.base_script
         }
         return true;
     }
+
     public static String getBaseFaction(obj_id turret) throws InterruptedException
     {
         obj_id parentBase = getObjIdObjVar(turret, "hq.defense.parent");
@@ -354,6 +369,7 @@ public class advanced_turret extends script.base_script
         }
         return getStringObjVar(parentBase, "faction");
     }
+
     public static void addTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isValidTarget(turret, target))
@@ -366,11 +382,11 @@ public class advanced_turret extends script.base_script
         {
             targets = new Vector();
         }
-        else 
+        else
         {
             targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
         }
-        if (targets != null && targets.indexOf(target) == -1)
+        if (targets != null && !targets.contains(target))
         {
             targets.add(target);
         }
@@ -383,6 +399,7 @@ public class advanced_turret extends script.base_script
             }
         }
     }
+
     public static void addTargets(obj_id turret, obj_id[] newTargets) throws InterruptedException
     {
         Vector targets = null;
@@ -390,12 +407,14 @@ public class advanced_turret extends script.base_script
         {
             targets = new Vector();
         }
-        else 
+        else
         {
             targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
         }
-        for (obj_id newTarget : newTargets) {
-            if (!isValidTarget(turret, newTarget) || targets.indexOf(newTarget) != -1) {
+        for (obj_id newTarget : newTargets)
+        {
+            if (!isValidTarget(turret, newTarget) || targets.contains(newTarget))
+            {
                 doLogging("addTargets", getName(newTarget) + "/" + newTarget + " was invalid or already in my target array");
                 continue;
             }
@@ -410,6 +429,7 @@ public class advanced_turret extends script.base_script
             }
         }
     }
+
     public static void removeTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target))
@@ -435,12 +455,13 @@ public class advanced_turret extends script.base_script
             {
                 utils.removeBatchScriptVar(turret, TARGETS);
             }
-            else 
+            else
             {
                 utils.setBatchScriptVar(turret, TARGETS, targets);
             }
         }
     }
+
     public static boolean handleTurretDamage(obj_id turret, obj_id attacker, obj_id weapon, int dmgAmount) throws InterruptedException
     {
         if (!validateAttacker(turret, attacker))
@@ -468,7 +489,7 @@ public class advanced_turret extends script.base_script
                 {
                     effect = "clienteffect/lair_hvy_damage_fire.cef";
                 }
-                else 
+                else
                 {
                     effect = "clienteffect/lair_med_damage_smoke.cef";
                 }
@@ -478,6 +499,7 @@ public class advanced_turret extends script.base_script
         }
         return true;
     }
+
     public static boolean validateAttacker(obj_id turret, obj_id attacker) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(turret, "turret_master");
@@ -487,6 +509,7 @@ public class advanced_turret extends script.base_script
         }
         return pvpIsEnemy(turret, attacker);
     }
+
     public static void explodeTurret(obj_id turret, obj_id killer) throws InterruptedException
     {
         location death = getLocation(turret);
@@ -494,6 +517,7 @@ public class advanced_turret extends script.base_script
         playClientEffectLoc(turret, "clienteffect/combat_explosion_lair_large.cef", death, 0);
         messageTo(turret, "handleDestroyTurret", null, 2, false);
     }
+
     public static obj_id getGoodTurretTarget(obj_id turret) throws InterruptedException
     {
         obj_id target = getCurrentTarget(turret);
@@ -505,7 +529,7 @@ public class advanced_turret extends script.base_script
             }
             target = null;
         }
-        else 
+        else
         {
             return target;
         }
@@ -526,7 +550,7 @@ public class advanced_turret extends script.base_script
             {
                 break;
             }
-            target = (obj_id)targets.get(rand(0, targets.size() - 1));
+            target = (obj_id) targets.get(rand(0, targets.size() - 1));
             if (!isValidTarget(turret, target) || isDead(target) || isIncapacitated(target) || !canSee(turret, target) || vehicle.isVehicle(target) || stealth.hasInvisibleBuff(target))
             {
                 targets.removeElement(target);
@@ -539,12 +563,13 @@ public class advanced_turret extends script.base_script
             stopTrackingTarget(turret);
             utils.removeBatchScriptVar(turret, TARGETS);
         }
-        else 
+        else
         {
             utils.setBatchScriptVar(turret, TARGETS, targets);
         }
         return target;
     }
+
     public static void attackPulse(obj_id turret) throws InterruptedException
     {
         if (!isActive(turret))
@@ -560,6 +585,7 @@ public class advanced_turret extends script.base_script
         startTrackingTarget(turret, target);
         executeAttackAction(turret, target);
     }
+
     public static void executeAttackAction(obj_id turret, obj_id target) throws InterruptedException
     {
         obj_id weapon = getTurretWeapon(turret);
@@ -571,6 +597,7 @@ public class advanced_turret extends script.base_script
         params.put("target", target);
         messageTo(turret, "turretShot", params, getWeaponAttackSpeed(weapon), false);
     }
+
     public static void doLogging(String section, String message) throws InterruptedException
     {
         LOG("doLogging/advanced_turret.scriptlib/" + section, message);

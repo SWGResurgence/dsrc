@@ -25,7 +25,6 @@ public class city_hire extends script.base_script
         {
             setName(self, "Bio-logical Extraction Unit");
         }
-        setStaticItemName(self, "Bio-logical Extraction Unit");
         setDescriptionStringId(self, DESC);
         return SCRIPT_CONTINUE;
     }
@@ -36,7 +35,6 @@ public class city_hire extends script.base_script
         {
             setName(self, "Bio-logical Extraction Unit");
         }
-        setStaticItemName(self, "Bio-logical Extraction Unit");
         setDescriptionStringId(self, DESC);
         return SCRIPT_CONTINUE;
     }

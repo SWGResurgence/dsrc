@@ -7,6 +7,7 @@ public class food extends script.base_script
     public food()
     {
     }
+
     public static void applyInstantEffect(obj_id target, obj_id item) throws InterruptedException
     {
         if (!hasObjVar(item, "instant"))
@@ -20,7 +21,8 @@ public class food extends script.base_script
         }
         int v1 = getIntObjVar(item, "instant.v1");
         int v2 = getIntObjVar(item, "instant.v2");
-        switch (type) {
+        switch (type)
+        {
             case "burst_run":
                 instantBurstRun(target, item, v1, v2);
                 break;
@@ -41,6 +43,7 @@ public class food extends script.base_script
                 break;
         }
     }
+
     public static void petEatFood(obj_id self, obj_id master, obj_id item, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "pet_food"))
@@ -63,6 +66,7 @@ public class food extends script.base_script
         utils.setScriptVar(self, "pet_food", getGameTime());
         consumable.decrementCharges(item, self);
     }
+
     public static void instantBurstRun(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         utils.setScriptVar(target, "food.burst_run.v1", v1);
@@ -70,11 +74,13 @@ public class food extends script.base_script
         queueCommand(target, (-63103822), null, "", COMMAND_PRIORITY_FRONT);
         sendSystemMessage(target, new string_id("combat_effects", "instant_burst_run"));
     }
+
     public static void instantWookieeRoar(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         utils.setScriptVar(target, "food.wookiee_roar.v1", v1);
         queueCommand(target, (-1223315403), null, "", COMMAND_PRIORITY_IMMEDIATE);
     }
+
     public static void instantSlowDot(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         if (!utils.hasScriptVarTree(target, dot.VAR_DOT))
@@ -94,7 +100,8 @@ public class food extends script.base_script
         String[] dots = dot.getAllDots(target);
         if (dots != null)
         {
-            for (String d : dots) {
+            for (String d : dots)
+            {
                 String varName = dot.VAR_DOT_ROOT + d + dot.VAR_DURATION;
                 int duration = utils.getIntScriptVar(target, varName);
                 duration *= mod;
@@ -105,6 +112,7 @@ public class food extends script.base_script
         prose_package pp = prose.getPackage(new string_id("combat_effects", "slow_dot_done"), v1);
         sendSystemMessageProse(target, pp);
     }
+
     public static void instantCureFire(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         if (!dot.isOnFire(target))
@@ -119,11 +127,13 @@ public class food extends script.base_script
         dot.reduceDotTypeStrength(target, dot.DOT_FIRE, 10000);
         sendSystemMessage(target, new string_id("combat_effects", "fire_cured"));
     }
+
     public static void instantEnhancedRegen(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         utils.setScriptVar(target, "food.enhanced_regen.v1", v1);
         queueCommand(target, (1397846664), null, "", COMMAND_PRIORITY_IMMEDIATE);
     }
+
     public static void instantFoodReduce(obj_id target, obj_id item, int v1, int v2) throws InterruptedException
     {
         player_stomach.addToStomach(target, 0, -1 * v1);

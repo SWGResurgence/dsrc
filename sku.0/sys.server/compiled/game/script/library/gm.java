@@ -6,9 +6,6 @@ import java.util.*;
 
 public class gm extends script.base_script
 {
-    public gm()
-    {
-    }
     public static final String SCRIPT_CMD = "gm.cmd";
     public static final String SCRIPT_HANDLER = "gm.handler";
     public static final String KEYWORD_SELF = "-self";
@@ -36,42 +33,46 @@ public class gm extends script.base_script
     public static final int MA_TO_ACCT = 2;
     public static final String HANDLER_MONEY_PASS = "handleMoneyPass";
     public static final String HANDLER_MONEY_FAIL = "handleMoneyFail";
-    public static final String[] PLAYER_STATE_NAMES = 
+    public static final String[] PLAYER_STATE_NAMES =
+            {
+                    "Cover",
+                    "Combat",
+                    "Peace",
+                    "Aiming",
+                    "Meditate",
+                    "Berserk",
+                    "Feign Death",
+                    "Unused State",
+                    "Unused State",
+                    "Unused State",
+                    "Tumbling",
+                    "Rallied",
+                    "Stunned",
+                    "Blinded",
+                    "Dizzy",
+                    "Intimidated",
+                    "Immobilized",
+                    "Frozen",
+                    "Swimming",
+                    "Sitting",
+                    "Crafting",
+                    "Unused State",
+                    "Masked Scent",
+                    "Poisoned",
+                    "Bleeding",
+                    "Diseased",
+                    "On Fire"
+            };
+    public static final String[] ROADMAP_SKILL_OPTIONS =
+            {
+                    "Select Roadmap",
+                    "Earn Current Skill",
+                    "Set Roadmap Progression"
+            };
+    public gm()
     {
-        "Cover",
-        "Combat",
-        "Peace",
-        "Aiming",
-        "Meditate",
-        "Berserk",
-        "Feign Death",
-        "Unused State",
-        "Unused State",
-        "Unused State",
-        "Tumbling",
-        "Rallied",
-        "Stunned",
-        "Blinded",
-        "Dizzy",
-        "Intimidated",
-        "Immobilized",
-        "Frozen",
-        "Swimming",
-        "Sitting",
-        "Crafting",
-        "Unused State",
-        "Masked Scent",
-        "Poisoned",
-        "Bleeding",
-        "Diseased",
-        "On Fire"
-    };
-    public static final String[] ROADMAP_SKILL_OPTIONS = 
-    {
-        "Select Roadmap",
-        "Earn Current Skill",
-        "Set Roadmap Progression"
-    };
+    }
+
     public static String removeKeyword(String params, String keyword) throws InterruptedException
     {
         if (params == null || params.equals("") || keyword == null || keyword.equals(""))
@@ -103,6 +104,7 @@ public class gm extends script.base_script
         }
         return params;
     }
+
     public static dictionary parseTarget(String params, obj_id target, String cmd) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -121,7 +123,7 @@ public class gm extends script.base_script
                 tmpTarget = self;
             }
         }
-        else 
+        else
         {
             if (tmpParams.contains(KEYWORD_ID))
             {
@@ -131,14 +133,14 @@ public class gm extends script.base_script
                 {
                     tmpTarget = oid;
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "[" + cmd + "] Unable to parse a valid object id!");
                     return null;
                 }
                 tmpParams = d.getString("params");
             }
-            else 
+            else
             {
                 tmpTarget = self;
             }
@@ -152,6 +154,7 @@ public class gm extends script.base_script
         }
         return new dictionary();
     }
+
     public static dictionary parseObjId(String params) throws InterruptedException
     {
         dictionary ret = new dictionary();
@@ -175,7 +178,7 @@ public class gm extends script.base_script
                 String sId = arg.substring(KEYWORD_ID.length());
                 retId = utils.stringToObjId(sId);
             }
-            else 
+            else
             {
                 retString += arg + " ";
             }
@@ -187,6 +190,7 @@ public class gm extends script.base_script
         }
         return ret;
     }
+
     public static void attachHandlerScript(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || !isGod(player))
@@ -198,13 +202,14 @@ public class gm extends script.base_script
             attachScript(player, SCRIPT_HANDLER);
             utils.setScriptVar(player, SCRIPTVAR_MESSAGE_COUNT, 1);
         }
-        else 
+        else
         {
             int cnt = utils.getIntScriptVar(player, SCRIPTVAR_MESSAGE_COUNT);
             cnt++;
             utils.setScriptVar(player, SCRIPTVAR_MESSAGE_COUNT, cnt);
         }
     }
+
     public static void decrementMessageCount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || !isGod(player))
@@ -218,11 +223,12 @@ public class gm extends script.base_script
             utils.removeScriptVar(player, SCRIPTVAR_MESSAGE_COUNT);
             detachScript(player, SCRIPT_HANDLER);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, SCRIPTVAR_MESSAGE_COUNT, cnt);
         }
     }
+
     public static void showSetHueVarUI(obj_id player, obj_id target, dictionary palColData) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || palColData == null || palColData.isEmpty())
@@ -242,7 +248,7 @@ public class gm extends script.base_script
         Enumeration keys = palColData.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)keys.nextElement();
+            String key = (String) keys.nextElement();
             int val = palColData.getInt(key);
             entries = utils.addElement(entries, key + " (value: " + val + ")");
             dta = utils.addElement(dta, key);
@@ -263,6 +269,7 @@ public class gm extends script.base_script
         }
         sendSystemMessageTestingOnly(player, "/setHue: unable to create hue variable ui!");
     }
+
     public static void showSetHueColorUI(obj_id player, obj_id target, String varPath) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || varPath == null || varPath.equals(""))
@@ -282,19 +289,20 @@ public class gm extends script.base_script
             utils.setScriptVar(player, SCRIPTVAR_SETHUE_TARGET, target);
             utils.setScriptVar(player, SCRIPTVAR_SETHUE_DATA, varPath);
             attachHandlerScript(player);
-            return;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "/setHue: unable to create colorize ui!");
         }
     }
+
     public static void cleanupSetHueScriptVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, SCRIPTVAR_SETHUE_PID);
         utils.removeScriptVar(player, SCRIPTVAR_SETHUE_TARGET);
         utils.removeScriptVar(player, SCRIPTVAR_SETHUE_DATA);
     }
+
     public static void showMoneyStatus(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -328,6 +336,7 @@ public class gm extends script.base_script
             }
         }
     }
+
     public static boolean setBalance(obj_id player, int type, String sAmt) throws InterruptedException
     {
         if (!isIdValid(player) || sAmt.equals(""))
@@ -339,13 +348,13 @@ public class gm extends script.base_script
         switch (type)
         {
             case money.MT_CASH:
-            bal = getCashBalance(player);
-            break;
+                bal = getCashBalance(player);
+                break;
             case money.MT_BANK:
-            bal = getBankBalance(player);
-            break;
+                bal = getBankBalance(player);
+                break;
             default:
-            return false;
+                return false;
         }
         int setType = -1;
         int amt = -1;
@@ -367,7 +376,7 @@ public class gm extends script.base_script
             setType = 2;
             amt = utils.stringToInt(sAmt.substring(1));
         }
-        else 
+        else
         {
             amt = utils.stringToInt(sAmt);
             int delta = amt - bal;
@@ -381,7 +390,7 @@ public class gm extends script.base_script
                 setType = 2;
                 amt = -delta;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -396,29 +405,30 @@ public class gm extends script.base_script
         switch (setType)
         {
             case 1:
-            if (type == money.MT_CASH)
-            {
-                d.put("nextAction", MA_WITHDRAW);
-            }
-            transferBankCreditsFromNamedAccount(money.ACCT_CUSTOMER_SERVICE, player, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
-            break;
+                if (type == money.MT_CASH)
+                {
+                    d.put("nextAction", MA_WITHDRAW);
+                }
+                transferBankCreditsFromNamedAccount(money.ACCT_CUSTOMER_SERVICE, player, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
+                break;
             case 2:
-            if (type == money.MT_CASH)
-            {
-                d.put("nextAction", MA_TO_ACCT);
-                depositCashToBank(player, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
-            }
-            else 
-            {
-                transferBankCreditsToNamedAccount(player, money.ACCT_CUSTOMER_SERVICE, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
-            }
-            break;
+                if (type == money.MT_CASH)
+                {
+                    d.put("nextAction", MA_TO_ACCT);
+                    depositCashToBank(player, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
+                }
+                else
+                {
+                    transferBankCreditsToNamedAccount(player, money.ACCT_CUSTOMER_SERVICE, amt, HANDLER_MONEY_PASS, HANDLER_MONEY_FAIL, d);
+                }
+                break;
             default:
-            return false;
+                return false;
         }
         attachHandlerScript(getSelf());
         return true;
     }
+
     public static void showFactionInformation(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -457,10 +467,11 @@ public class gm extends script.base_script
         {
             entries = utils.addElement(entries, "ENEMY FLAGS: none");
         }
-        else 
+        else
         {
             entries = utils.addElement(entries, "ENEMY FLAGS:");
-            for (String enemyFlag : enemyFlags) {
+            for (String enemyFlag : enemyFlags)
+            {
                 String[] efData = split(enemyFlag, ' ');
                 String efaction = factions.getFactionNameByHashCode(utils.stringToInt(efData[1]));
                 entries = utils.addElement(entries, " - id:" + efData[0] + " f:" + efaction + " expires: " + efData[2]);
@@ -498,6 +509,7 @@ public class gm extends script.base_script
             attachHandlerScript(player);
         }
     }
+
     public static void showSetPlayerStateUI(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -513,6 +525,7 @@ public class gm extends script.base_script
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, stateList, "handleSetPlayerStateUI");
         utils.setScriptVar(self, "setPlayerStateGM.pid", pid);
     }
+
     public static String[] getPlayerState(obj_id player) throws InterruptedException
     {
         Vector stateList = new Vector();
@@ -530,7 +543,7 @@ public class gm extends script.base_script
             {
                 stateEntry += "* ON  *";
             }
-            else 
+            else
             {
                 stateEntry += "* OFF *";
             }
@@ -544,6 +557,7 @@ public class gm extends script.base_script
         }
         return _stateList;
     }
+
     public static void cmdResetJedi(obj_id player) throws InterruptedException
     {
         if (isIdNull(player))
@@ -560,34 +574,35 @@ public class gm extends script.base_script
                 numReverts = numReverts + 1;
                 setObjVar(player, "jedi.reverted", numReverts);
             }
-            else 
+            else
             {
                 setObjVar(player, "jedi.reverted", 1);
             }
         }
         setObjVar(player, "jedi.usingSui", 1);
         attachScript(player, "player.player_jedi_conversion");
-        return;
     }
+
     public static String[] getRoadmapList() throws InterruptedException
     {
-        String[] roadmapList = 
-        {
-            "smuggler_1a",
-            "bounty_hunter_1a",
-            "officer_1a",
-            "commando_1a",
-            "force_sensitive_1a",
-            "medic_1a",
-            "spy_1a",
-            "entertainer_1a",
-            "trader_0a",
-            "trader_0b",
-            "trader_0c",
-            "trader_0d"
-        };
+        String[] roadmapList =
+                {
+                        "smuggler_1a",
+                        "bounty_hunter_1a",
+                        "officer_1a",
+                        "commando_1a",
+                        "force_sensitive_1a",
+                        "medic_1a",
+                        "spy_1a",
+                        "entertainer_1a",
+                        "trader_0a",
+                        "trader_0b",
+                        "trader_0c",
+                        "trader_0d"
+                };
         return roadmapList;
     }
+
     public static String[] convertRoadmapNames(String[] list) throws InterruptedException
     {
         String[] newList = new String[list.length];
@@ -605,6 +620,7 @@ public class gm extends script.base_script
         }
         return newList;
     }
+
     public static String[] convertSkillListNames(String[] skillList) throws InterruptedException
     {
         for (int i = 0; i < skillList.length; i++)
@@ -613,6 +629,7 @@ public class gm extends script.base_script
         }
         return skillList;
     }
+
     public static String[] getAllQuests(obj_id player) throws InterruptedException
     {
         if (!isIdNull(player))
@@ -623,14 +640,13 @@ public class gm extends script.base_script
             if (allActive != null)
             {
                 allQuestStringsCombined.add("All Active Quests");
-                for (String s : allActive) {
-                    allQuestStringsCombined.add(s);
-                }
+                Collections.addAll(allQuestStringsCombined, allActive);
             }
             if (allComplete != null)
             {
                 allQuestStringsCombined.add("\nAll Completed Quests");
-                for (String s : allComplete) {
+                for (String s : allComplete)
+                {
                     allQuestStringsCombined.add("*" + s);
                 }
             }
@@ -638,7 +654,7 @@ public class gm extends script.base_script
             {
                 allQuestStringsCombined.add("No Active or Completed Quests to Display.");
             }
-            else 
+            else
             {
                 if (allQuestStringsCombined.size() > 0)
                 {
@@ -650,6 +666,7 @@ public class gm extends script.base_script
         }
         return null;
     }
+
     public static String[] getAllActiveQuests(obj_id player) throws InterruptedException
     {
         int[] activeQuestIds = questGetAllActiveQuestIds(player);
@@ -657,13 +674,18 @@ public class gm extends script.base_script
         {
             HashSet allQuestStringsFound = new HashSet();
             String activeQuestString = "";
-            for (int activeQuestId : activeQuestIds) {
+            for (int activeQuestId : activeQuestIds)
+            {
                 activeQuestString = questGetQuestName(activeQuestId);
-                if (!activeQuestString.equals("")) {
-                    if (activeQuestString.indexOf("quest/") == 0) {
+                if (!activeQuestString.equals(""))
+                {
+                    if (activeQuestString.indexOf("quest/") == 0)
+                    {
                         String groundCodeAndTitle = getGroundQuestStringAndTitle(player, activeQuestString);
                         allQuestStringsFound.add(groundCodeAndTitle);
-                    } else if (activeQuestString.indexOf("spacequest/") == 0) {
+                    }
+                    else if (activeQuestString.indexOf("spacequest/") == 0)
+                    {
                         String spaceCodeAndTitle = getSpaceQuestStringAndTitle(player, activeQuestString);
                         allQuestStringsFound.add(spaceCodeAndTitle);
                     }
@@ -679,6 +701,7 @@ public class gm extends script.base_script
         }
         return null;
     }
+
     public static String[] getAllCompletedQuests(obj_id player) throws InterruptedException
     {
         int[] completedQuestIds = questGetAllCompletedQuestIds(player);
@@ -686,13 +709,18 @@ public class gm extends script.base_script
         {
             HashSet allQuestStringsFound = new HashSet();
             String completedQuestString = "";
-            for (int completedQuestId : completedQuestIds) {
+            for (int completedQuestId : completedQuestIds)
+            {
                 completedQuestString = questGetQuestName(completedQuestId);
-                if (!completedQuestString.equals("")) {
-                    if (completedQuestString.indexOf("quest/") == 0) {
+                if (!completedQuestString.equals(""))
+                {
+                    if (completedQuestString.indexOf("quest/") == 0)
+                    {
                         String groundCodeAndTitle = getGroundQuestStringAndTitle(player, completedQuestString);
                         allQuestStringsFound.add(groundCodeAndTitle);
-                    } else if (completedQuestString.indexOf("spacequest/") == 0) {
+                    }
+                    else if (completedQuestString.indexOf("spacequest/") == 0)
+                    {
                         String spaceCodeAndTitle = getSpaceQuestStringAndTitle(player, completedQuestString);
                         allQuestStringsFound.add(spaceCodeAndTitle);
                     }
@@ -708,6 +736,7 @@ public class gm extends script.base_script
         }
         return null;
     }
+
     public static void createCustomUI(obj_id self, String uiTitle, String combinedString) throws InterruptedException
     {
         int page = createSUIPage("/Script.messageBox", self, self);
@@ -721,6 +750,7 @@ public class gm extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
     }
+
     public static void createDumpTargetUI(obj_id self, String combinedString) throws InterruptedException
     {
         String uiTitle = "Target Data";
@@ -737,6 +767,7 @@ public class gm extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
     }
+
     public static void forceClearQuest(obj_id player, String questName) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, questName) || groundquests.hasCompletedQuest(player, questName))
@@ -744,11 +775,12 @@ public class gm extends script.base_script
             groundquests.clearQuest(player, questName);
             sendSystemMessageTestingOnly(player, "Clear Quest function completed.  The quest removed was " + questName);
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared using this command.");
         }
     }
+
     public static void forceRegrantQuest(obj_id player, String questName) throws InterruptedException
     {
         if (groundquests.isQuestActive(player, questName) || groundquests.hasCompletedQuest(player, questName))
@@ -757,11 +789,12 @@ public class gm extends script.base_script
             groundquests.requestGrantQuest(player, questName, true);
             sendSystemMessageTestingOnly(player, "Regrant Quest function completed.");
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared and granted using this command.");
         }
     }
+
     public static String getGroundQuestStringAndTitle(obj_id player, String questString) throws InterruptedException
     {
         String localizeThis = questString.substring(6);
@@ -769,6 +802,7 @@ public class gm extends script.base_script
         String questTitle = localize(new string_id(questStringLoc, "journal_entry_title"));
         return questString + " - " + questTitle;
     }
+
     public static String getSpaceQuestStringAndTitle(obj_id player, String questString) throws InterruptedException
     {
         int firstSlash = questString.indexOf("/");
@@ -779,6 +813,7 @@ public class gm extends script.base_script
         String questTitle = localize(new string_id(questStringLoc, "title"));
         return spaceQuestString + " - " + questTitle;
     }
+
     public static boolean isInstanceAuthorized(obj_id subject) throws InterruptedException
     {
         return utils.hasScriptVar(subject, INSTANCE_AUTH);

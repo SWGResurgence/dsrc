@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class theater extends script.base_script
 {
-    public theater()
-    {
-    }
     public static final float BASE_ITEM_AREA = 3.0f;
     public static final int PERSIST_TIME = 604800;
     public static final String DICT_MASTER = "master";
@@ -41,20 +38,29 @@ public class theater extends script.base_script
     public static final String HANDLE_THEATER_COMPLETE = "handleTheaterComplete";
     public static final int NUM_TO_SPAWN = 3;
     public static final float DELAY_TO_SPAWN = 0.50f;
+    public theater()
+    {
+    }
+
     public static boolean canSpawnTheaterAtLocation(location loc) throws InterruptedException
     {
         region[] regionList = getRegionsAtPoint(loc);
         if (regionList != null)
         {
-            for (region aRegionList : regionList) {
-                if (aRegionList != null) {
-                    if (aRegionList.getPvPType() == regions.PVP_REGION_TYPE_BATTLEFIELD_PVP) {
+            for (region aRegionList : regionList)
+            {
+                if (aRegionList != null)
+                {
+                    if (aRegionList.getPvPType() == regions.PVP_REGION_TYPE_BATTLEFIELD_PVP)
+                    {
                         return false;
                     }
-                    if (aRegionList.getPvPType() == regions.PVP_REGION_TYPE_BATTLEFIELD_PVE) {
+                    if (aRegionList.getPvPType() == regions.PVP_REGION_TYPE_BATTLEFIELD_PVE)
+                    {
                         return false;
                     }
-                    if (aRegionList.getGeographicalType() == regions.GEO_CITY) {
+                    if (aRegionList.getGeographicalType() == regions.GEO_CITY)
+                    {
                         return false;
                     }
                 }
@@ -62,6 +68,7 @@ public class theater extends script.base_script
         }
         return true;
     }
+
     public static boolean spawn(obj_id target) throws InterruptedException
     {
         if ((target == null) || (target == obj_id.NULL_ID))
@@ -85,15 +92,18 @@ public class theater extends script.base_script
                 return false;
         }
         dictionary d = new dictionary();
-        if ((children != null) && (children.length != 0)) {
+        if ((children != null) && (children.length != 0))
+        {
             obj_id[] buildings = utils.getBuildingsInObjIdList(children);
-            if ((buildings != null) && (buildings.length != 0)) {
+            if ((buildings != null) && (buildings.length != 0))
+            {
                 d.put(DICT_CHILDREN, buildings);
             }
         }
         messageTo(target, HANDLE_THEATER_COMPLETE, d, 2, false);
         return true;
     }
+
     public static obj_id[] spawnRadial(obj_id target) throws InterruptedException
     {
         float fltSize = 0;
@@ -149,10 +159,10 @@ public class theater extends script.base_script
         {
             case PERSIST_ALL:
             case PERSIST_SELF_ONLY:
-            persistObject(target);
-            break;
+                persistObject(target);
+                break;
             default:
-            break;
+                break;
         }
         obj_var ov;
         String name;
@@ -170,7 +180,8 @@ public class theater extends script.base_script
             if (dataTableHasColumn(tbl, name))
             {
                 entries = dataTableGetStringColumn(tbl, name);
-                if ((entries != null) && (entries.length != 0)) {
+                if ((entries != null) && (entries.length != 0))
+                {
                     for (int n = 0; n < amt; n++)
                     {
                         int roll = rand(0, entries.length - 1);
@@ -181,10 +192,12 @@ public class theater extends script.base_script
                             tpf = entries[roll];
                         }
                         spawnLoc = utils.getRandomLocationInRing(myLoc, ringMin, ringMax);
-                        if (spawnLoc != null) {
+                        if (spawnLoc != null)
+                        {
                             goodLoc = locations.getGoodLocationAroundLocation(spawnLoc, iArea, iArea, sArea, sArea);
-                            if (goodLoc != null) {
-                                spawnLoc = (location)goodLoc.clone();
+                            if (goodLoc != null)
+                            {
+                                spawnLoc = (location) goodLoc.clone();
                             }
                             if (spawnLoc.cell == obj_id.NULL_ID)
                             {
@@ -192,24 +205,23 @@ public class theater extends script.base_script
                             }
                             float fltNewSize = getDistance(myLoc, spawnLoc);
                             if (fltNewSize > fltSize)
-							{
-								fltSize = fltNewSize;
-							}
+                            {
+                                fltSize = fltNewSize;
+                            }
                             child = createObject(tpf, spawnLoc);
-                            if ((child != null) && (child != obj_id.NULL_ID)) {
-								setYaw(child, rand(-180, 180));
-								children = utils.addElement(children, child);
-								if (!faction.equals(""))
-								{
-									factions.setFaction(child, faction);
-								}
-								switch (persistFlag)
-								{
-									case PERSIST_ALL:
-									break;
-								}
-								setObjVar(child, VAR_PARENT, target);
-							}
+                            if ((child != null) && (child != obj_id.NULL_ID))
+                            {
+                                setYaw(child, rand(-180, 180));
+                                children = utils.addElement(children, child);
+                                if (!faction.equals(""))
+                                {
+                                    factions.setFaction(child, faction);
+                                }
+                                if (persistFlag == PERSIST_ALL)
+                                {
+                                }
+                                setObjVar(child, VAR_PARENT, target);
+                            }
                         }
                     }
                 }
@@ -220,7 +232,7 @@ public class theater extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             setObjVar(target, VAR_CHILDREN, children);
         }
@@ -228,6 +240,7 @@ public class theater extends script.base_script
         children.toArray(_children);
         return _children;
     }
+
     public static obj_id[] spawnDatatableOffset(obj_id target) throws InterruptedException
     {
         float fltSize = 0;
@@ -249,7 +262,7 @@ public class theater extends script.base_script
         {
             faction = getStringObjVar(target, factions.FACTION);
         }
-        else 
+        else
         {
             faction = utils.getFactionSubString(tbl);
             if (faction == null)
@@ -262,9 +275,9 @@ public class theater extends script.base_script
         {
             case PERSIST_ALL:
             case PERSIST_SELF_ONLY:
-            break;
+                break;
             default:
-            break;
+                break;
         }
         location myLoc = getLocation(target);
         float tYaw = getYaw(target);
@@ -300,8 +313,10 @@ public class theater extends script.base_script
                 fltSize = fltNewSize;
             }
             child = createObject(tpf, here);
-            if (isIdValid(child)) {
-                switch (tpf) {
+            if (isIdValid(child))
+            {
+                switch (tpf)
+                {
                     case "object/tangible/poi/theater/poi_mob_spawner.iff":
                         objMobSpawners = utils.addElement(objMobSpawners, child);
                         break;
@@ -321,10 +336,8 @@ public class theater extends script.base_script
                 {
                     factions.setFaction(child, faction);
                 }
-                switch (persistFlag)
+                if (persistFlag == PERSIST_ALL)
                 {
-                    case PERSIST_ALL:
-                    break;
                 }
                 setObjVar(child, VAR_PARENT, target);
             }
@@ -346,7 +359,7 @@ public class theater extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             setObjVar(target, VAR_CHILDREN, children);
         }
@@ -354,6 +367,7 @@ public class theater extends script.base_script
         children.toArray(_children);
         return _children;
     }
+
     public static void spawnDatatableOffsetQueued(obj_id target, int intIndex) throws InterruptedException
     {
         if ((target == null) || (target == obj_id.NULL_ID))
@@ -374,7 +388,7 @@ public class theater extends script.base_script
         {
             faction = getStringObjVar(target, factions.FACTION);
         }
-        else 
+        else
         {
             faction = utils.getFactionSubString(tbl);
             if (faction == null)
@@ -409,50 +423,59 @@ public class theater extends script.base_script
             for (int i = 0; i < numRows; i++)
             {
                 tpf = strTemplates[i];
-                switch (tpf) {
-                    case "object/tangible/poi/theater/poi_mob_spawner.iff": {
+                switch (tpf)
+                {
+                    case "object/tangible/poi/theater/poi_mob_spawner.iff":
+                    {
                         float dx = fltX[i];
                         float dz = fltZ[i];
                         here = (location) myLoc.clone();
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
-                        if (isIdValid(child)) {
+                        if (isIdValid(child))
+                        {
                             objMobSpawners = utils.addElement(objMobSpawners, child);
                             children = utils.addElement(children, child);
                         }
                         break;
                     }
-                    case "object/tangible/poi/theater/poi_objective_spawner.iff": {
+                    case "object/tangible/poi/theater/poi_objective_spawner.iff":
+                    {
                         float dx = fltX[i];
                         float dz = fltZ[i];
                         here = (location) myLoc.clone();
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
-                        if (isIdValid(child)) {
+                        if (isIdValid(child))
+                        {
                             objObjectiveSpawners = utils.addElement(objObjectiveSpawners, child);
                             children = utils.addElement(children, child);
                         }
                         break;
                     }
-                    case "object/path_waypoint/path_waypoint.iff": {
+                    case "object/path_waypoint/path_waypoint.iff":
+                    {
                         float dx = fltX[i];
                         float dz = fltZ[i];
                         here = (location) myLoc.clone();
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
-                        if (isIdValid(child)) {
+                        if (isIdValid(child))
+                        {
                             objWaypoints = utils.addElement(objWaypoints, child);
                             children = utils.addElement(children, child);
                         }
                         break;
                     }
-                    case "object/tangible/poi/theater/poi_mob_spawner_large.iff": {
+                    case "object/tangible/poi/theater/poi_mob_spawner_large.iff":
+                    {
                         float dx = fltX[i];
                         float dz = fltZ[i];
                         here = (location) myLoc.clone();
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
-                        if (isIdValid(child)) {
+                        if (isIdValid(child))
+                        {
                             objLargeMobSpawners = utils.addElement(objLargeMobSpawners, child);
                             children = utils.addElement(children, child);
                         }
@@ -460,14 +483,16 @@ public class theater extends script.base_script
                     }
                     default:
                         int intStringIndex = tpf.indexOf("corral");
-                        if (intStringIndex > -1) {
+                        if (intStringIndex > -1)
+                        {
                             float dx = fltX[i];
                             float dz = fltZ[i];
                             float yaw = fltYaw[i];
                             here = (location) myLoc.clone();
                             here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                             child = createObject(tpf, here);
-                            if (isIdValid(child)) {
+                            if (isIdValid(child))
+                            {
                                 setYaw(child, yaw + tYaw);
                                 setObjVar(child, VAR_PARENT, target);
                                 children = utils.addElement(children, child);
@@ -500,7 +525,7 @@ public class theater extends script.base_script
             messageTo(target, "continueTheater", dctParams, DELAY_TO_SPAWN, false);
             return;
         }
-        else 
+        else
         {
             Vector children = getResizeableObjIdArrayObjVar(target, VAR_CHILDREN);
             float[] fltX = dataTableGetFloatColumn(tbl, X);
@@ -517,7 +542,7 @@ public class theater extends script.base_script
                     {
                         setObjVar(target, VAR_CHILDREN, children);
                     }
-                    else 
+                    else
                     {
                         if (hasObjVar(target, VAR_CHILDREN))
                         {
@@ -536,16 +561,17 @@ public class theater extends script.base_script
                     float dy = fltY[i];
                     float dz = fltZ[i];
                     float yaw = fltYaw[i];
-                    float fltRadians = (float)Math.toRadians((tYaw * -1.0f));
+                    float fltRadians = (float) Math.toRadians((tYaw * -1.0f));
                     float fltC = (float) StrictMath.cos(fltRadians);
                     float fltS = (float) StrictMath.sin(fltRadians);
-                    location here = (location)myLoc.clone();
+                    location here = (location) myLoc.clone();
                     here.x += (dx * fltC) - (dz * fltS);
                     here.y += dy;
                     here.z += (dx * fltS) + (dz * fltC);
                     obj_id child = createObject(tpf, here);
                     debugSpeakMsg(target, "a child " + child);
-                    if ((child != null) && (child != obj_id.NULL_ID)) {
+                    if ((child != null) && (child != obj_id.NULL_ID))
+                    {
                         setYaw(child, yaw + tYaw);
                         children = utils.addElement(children, child);
                         if (!faction.equals(""))
@@ -561,7 +587,7 @@ public class theater extends script.base_script
             {
                 setObjVar(target, VAR_CHILDREN, children);
             }
-            else 
+            else
             {
                 if (hasObjVar(target, VAR_CHILDREN))
                 {
@@ -573,9 +599,11 @@ public class theater extends script.base_script
         dctParams.put("intIndex", intIndex + NUM_TO_SPAWN);
         messageTo(target, "continueTheater", dctParams, DELAY_TO_SPAWN, false);
     }
+
     public static boolean shouldSpawn(String tpf) throws InterruptedException
     {
-        switch (tpf) {
+        switch (tpf)
+        {
             case "object/tangible/poi/theater/poi_mob_spawner.iff":
             case "object/tangible/poi/theater/poi_objective_spawner.iff":
             case "object/path_waypoint/path_waypoint.iff":
@@ -583,18 +611,21 @@ public class theater extends script.base_script
                 return false;
             default:
                 int intStringIndex = tpf.indexOf("corral");
-                if (intStringIndex > -1) {
+                if (intStringIndex > -1)
+                {
                     return false;
                 }
                 break;
         }
         return true;
     }
+
     public static boolean cleanup(obj_id target) throws InterruptedException
     {
         location locTest = getLocation(target);
         region rgnPathRegion = getRegion(target.toString(), locTest.area);
-        if (rgnPathRegion != null) {
+        if (rgnPathRegion != null)
+        {
             deleteRegion(rgnPathRegion);
         }
         if ((target == obj_id.NULL_ID))
@@ -610,8 +641,10 @@ public class theater extends script.base_script
         {
             return false;
         }
-        for (obj_id child : children) {
-            if ((child != null) && (child != obj_id.NULL_ID)) {
+        for (obj_id child : children)
+        {
+            if ((child != null) && (child != obj_id.NULL_ID))
+            {
                 destroyObject(child);
             }
         }

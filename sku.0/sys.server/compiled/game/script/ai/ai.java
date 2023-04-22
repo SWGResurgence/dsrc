@@ -798,6 +798,18 @@ public class ai extends script.base_script
                 "You have been blessed, my child.",
                 "Uuh, what are you doing?"
         };
+        if (ai_lib.isAiDead(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(performer))
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
         {
             return SCRIPT_CONTINUE;
@@ -889,7 +901,7 @@ public class ai extends script.base_script
         {
             if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
-                chat.chat(self, getRandomArray(EMOTE_DANCE_HUMANOID_RESPONSES));
+                chat.chat(self, getRandomArray(EMOTE_WORSHIP_HUMANOID_RESPONSES));
                 int luckChance = rand(0, 99);
                 if (luckChance >= 50)
                 {

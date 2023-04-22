@@ -7,6 +7,7 @@ public class gmlib extends script.base_script
     public gmlib()
     {
     }
+
     public static String freezePlayer(long playerId) throws InterruptedException
     {
         debugServerConsoleMsg(null, "In freeze");
@@ -19,6 +20,7 @@ public class gmlib extends script.base_script
         setState(target, STATE_FROZEN, true);
         return "frozen?";
     }
+
     public static void unFreezePlayer(long playerId) throws InterruptedException
     {
         obj_id target = obj_id.getObjId(playerId);
@@ -29,6 +31,7 @@ public class gmlib extends script.base_script
         }
         setState(target, STATE_FROZEN, false);
     }
+
     public static void generateStaticItem(obj_id targetid, String item_name) throws InterruptedException
     {
         if (isIdValid(targetid))

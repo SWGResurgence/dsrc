@@ -4,9 +4,6 @@ import script.obj_id;
 
 public class content extends script.base_script
 {
-    public content()
-    {
-    }
     public static final String SECURITY_CLEARANCE_ASTRO = "bdg_content_rsf_clearance_1";
     public static final String SECURITY_CLEARANCE_BINARY = "bdg_content_rsf_clearance_2";
     public static final String SECURITY_CLEARANCE_CHUBA = "bdg_content_rsf_clearance_3";
@@ -16,26 +13,24 @@ public class content extends script.base_script
     public static final String SECURITY_CLEARANCE_GORAX = "bdg_content_rsf_clearance_7";
     public static final String REBEL_PATH_OBJVAR_NAME = "legacy.faction.rebelPath";
     public static final String IMPERIAL_PATH_OBJVAR_NAME = "legacy.faction.imperialPath";
+    public content()
+    {
+    }
+
     public static boolean isCrafter(obj_id player) throws InterruptedException
     {
         String profession = getSkillTemplate(player);
         int crafting = profession.indexOf("trader");
-        if (crafting > -1)
-        {
-            return true;
-        }
-        return false;
+        return crafting > -1;
     }
+
     public static boolean isEntertainer(obj_id player) throws InterruptedException
     {
         String profession = getSkillTemplate(player);
         int entertaining = profession.indexOf("entertainer");
-        if (entertaining > -1)
-        {
-            return true;
-        }
-        return false;
+        return entertaining > -1;
     }
+
     public static void grantRsfSecurityClearance(obj_id player) throws InterruptedException
     {
         if (badge.hasBadge(player, SECURITY_CLEARANCE_GORAX))
@@ -73,8 +68,8 @@ public class content extends script.base_script
             return;
         }
         badge.grantBadge(player, SECURITY_CLEARANCE_ASTRO);
-        return;
     }
+
     public static void grantAllRsfSecurityClearance(obj_id player) throws InterruptedException
     {
         if (!badge.hasBadge(player, "bdg_content_rsf_clearance_1"))
@@ -105,6 +100,5 @@ public class content extends script.base_script
         {
             badge.grantBadge(player, "bdg_content_rsf_clearance_7");
         }
-        return;
     }
 }

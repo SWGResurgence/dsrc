@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class tcg extends script.base_script
 {
-    public tcg()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "tcg_barn";
     public static final String RANCHHAND_CELL_SCRIPT = "systems.tcg.barn_cell";
@@ -31,67 +28,73 @@ public class tcg extends script.base_script
     public static final int MAX_NUM_BARN_PETS = 40;
     public static final int DEFAULT_NUM_BARN_LITE_PETS = 5;
     public static final String[] BEAST_OBJVARS =
-    {
-        "beast",
-        "beastmood",
-        "abilities"
-    };
+            {
+                    "beast",
+                    "beastmood",
+                    "abilities"
+            };
     public static final int MAX_NUMBER_OF_HIGH_SCORES = 5;
     public static final int EST_MAX_SCORE = 626;
     public static final String TABLE_OBJVAR_PREFIX = "minigame_table";
     public static final String TABLE_HIGHSCORE_SLOTS = TABLE_OBJVAR_PREFIX + ".highscores";
     public static final float[] DEFAULT_HIGH_SCORE_MODIFIER =
-    {
-        0.30f,
-        0.31f,
-        0.32f,
-        0.33f,
-        0.34f,
-        0.35f,
-        0.36f
-    };
+            {
+                    0.30f,
+                    0.31f,
+                    0.32f,
+                    0.33f,
+                    0.34f,
+                    0.35f,
+                    0.36f
+            };
     public static final String[] DEFAULT_HIGH_SCORE_LIST =
+            {
+                    "Valara",
+                    "DevH",
+                    "Loche",
+                    "Millbarge",
+                    "Jaskell",
+                    "AdeptStrain",
+                    "Cheeseplus",
+                    "Swede",
+                    "Blixtev",
+                    "DeadMeat",
+                    "CancelAutoRun",
+                    "Dotanuki",
+                    "Tereb",
+                    "Hanse",
+                    "Teesquared",
+                    "Valara",
+                    "DevH",
+                    "Loche",
+                    "Millbarge",
+                    "Jaskell",
+                    "AdeptStrain",
+                    "Cheeseplus",
+                    "Swede",
+                    "Blixtev",
+                    "DeadMeat",
+                    "CancelAutoRun",
+                    "Dotanuki",
+                    "Tereb",
+                    "Hanse",
+                    "Teesquared"
+            };
+    public tcg()
     {
-        "Valara",
-        "DevH",
-        "Loche",
-        "Millbarge",
-        "Jaskell",
-        "AdeptStrain",
-        "Cheeseplus",
-        "Swede",
-        "Blixtev",
-        "DeadMeat",
-        "CancelAutoRun",
-        "Dotanuki",
-        "Tereb",
-        "Hanse",
-        "Teesquared",
-        "Valara",
-        "DevH",
-        "Loche",
-        "Millbarge",
-        "Jaskell",
-        "AdeptStrain",
-        "Cheeseplus",
-        "Swede",
-        "Blixtev",
-        "DeadMeat",
-        "CancelAutoRun",
-        "Dotanuki",
-        "Tereb",
-        "Hanse",
-        "Teesquared"
-    };
+    }
+
     public static boolean isBarnRanchhand(obj_id target) throws InterruptedException
     {
         return hasScript(target, BARN_RANCHHAND_SCRIPT);
     }
+
     public static boolean isBarnStructure(obj_id building) throws InterruptedException
     {
         String template = getTemplateName(building);
         return template.equals(BARN_STRUCTURE_TEMPLATE);
     }
+
     public static void barnStoreBeastPrompt(obj_id player, obj_id ranchhand) throws InterruptedException
     {
         obj_id barn = getTopMostContainer(ranchhand);
@@ -115,9 +118,11 @@ public class tcg extends script.base_script
             Vector vectorBeastNames = new Vector();
             vectorBeastNames.setSize(0);
             String beastName;
-            for (obj_id bcd : initialBcdsList) {
+            for (obj_id bcd : initialBcdsList)
+            {
                 beastName = beast_lib.getBCDBeastName(bcd);
-                if (beastName != null && beastName.length() > 0) {
+                if (beastName != null && beastName.length() > 0)
+                {
                     utils.addElement(vectorBeastNames, toUpper(beastName, 0));
                     utils.addElement(vectorBcdsList, bcd);
                 }
@@ -143,6 +148,7 @@ public class tcg extends script.base_script
             }
         }
     }
+
     public static void barnSelectPlayerBeastSui(obj_id player, obj_id ranchhand, obj_id[] beastControlDevices, String[] beastNames, String promptRef, String promptExtra, String handler) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "barnRanchHand.pid"))
@@ -180,6 +186,7 @@ public class tcg extends script.base_script
             utils.setScriptVar(player, "barnRanchHand." + handler, sortedBeastControlDevices);
         }
     }
+
     public static void barnReclaimBeastPrompt(obj_id player, obj_id barn, obj_id ranchhand) throws InterruptedException
     {
         String[] initialStorageList = getBarnBeastStorageSlots(barn);
@@ -194,14 +201,19 @@ public class tcg extends script.base_script
             Vector vectorBeastNames = new Vector();
             vectorBeastNames.setSize(0);
             String beastName;
-            for (String bcdSlot : initialStorageList) {
+            for (String bcdSlot : initialStorageList)
+            {
                 beastName = "";
-                if (hasObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName")) {
+                if (hasObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName"))
+                {
                     beastName = getStringObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName");
-                } else if (hasObjVar(barn, "barnStorage." + bcdSlot + ".tempName")) {
+                }
+                else if (hasObjVar(barn, "barnStorage." + bcdSlot + ".tempName"))
+                {
                     beastName = getStringObjVar(barn, "barnStorage." + bcdSlot + ".tempName");
                 }
-                if (beastName != null && beastName.length() > 0) {
+                if (beastName != null && beastName.length() > 0)
+                {
                     utils.addElement(vectorBeastNames, toUpper(beastName, 0));
                     utils.addElement(vectorBcdsList, bcdSlot);
                 }
@@ -223,6 +235,7 @@ public class tcg extends script.base_script
             }
         }
     }
+
     public static void barnDisplayBeastPrompt(obj_id player, obj_id barn, obj_id ranchhand) throws InterruptedException
     {
         String[] initialStorageList = getBarnBeastStorageSlots(barn);
@@ -237,19 +250,27 @@ public class tcg extends script.base_script
             Vector vectorBeastNames = new Vector();
             vectorBeastNames.setSize(0);
             String beastName;
-            for (String bcdSlot : initialStorageList) {
+            for (String bcdSlot : initialStorageList)
+            {
                 beastName = "";
-                if (hasObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName")) {
+                if (hasObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName"))
+                {
                     beastName = getStringObjVar(barn, "barnStorage." + bcdSlot + ".beast.beastName");
-                } else if (hasObjVar(barn, "barnStorage." + bcdSlot + ".tempName")) {
+                }
+                else if (hasObjVar(barn, "barnStorage." + bcdSlot + ".tempName"))
+                {
                     beastName = getStringObjVar(barn, "barnStorage." + bcdSlot + ".tempName");
                 }
-                if (hasObjVar(barn, "barnStorage." + bcdSlot + "." + BEAST_ROAMING)) {
+                if (hasObjVar(barn, "barnStorage." + bcdSlot + "." + BEAST_ROAMING))
+                {
                     beastName = beastName + " [Displayed]";
-                } else {
+                }
+                else
+                {
                     beastName = beastName + " [Stored]";
                 }
-                if (beastName.length() > 0) {
+                if (beastName.length() > 0)
+                {
                     utils.addElement(vectorBeastNames, toUpper(beastName, 0));
                     utils.addElement(vectorBcdsList, bcdSlot);
                 }
@@ -267,6 +288,7 @@ public class tcg extends script.base_script
             }
         }
     }
+
     public static void barnSelectStoredBeastSui(obj_id player, obj_id ranchhand, String[] beastControlSlots, String[] beastNames, String promptRef, String promptExtra, String handler) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "barnRanchHand.pid"))
@@ -303,6 +325,7 @@ public class tcg extends script.base_script
             utils.setScriptVar(player, "barnRanchHand." + handler, sortedBeastControlSlots);
         }
     }
+
     public static boolean transferBeastControlDeviceToBarn(obj_id selectedBeastControlDevice, obj_id player, obj_id barn) throws InterruptedException
     {
         String nextAvailableStorageSlot = getNextAvailableBarnStorageSlot(barn, player);
@@ -317,13 +340,19 @@ public class tcg extends script.base_script
                     setObjVar(barn, nextAvailableStorageSlot + ".tempName", beast_lib.getBeastLocalizedName(selectedBeastControlDevice));
                 }
                 obj_var_list beastData;
-                for (String beastObjvar : BEAST_OBJVARS) {
-                    if (hasObjVar(selectedBeastControlDevice, beastObjvar)) {
+                for (String beastObjvar : BEAST_OBJVARS)
+                {
+                    if (hasObjVar(selectedBeastControlDevice, beastObjvar))
+                    {
                         beastData = getObjVarList(selectedBeastControlDevice, beastObjvar);
-                        if (beastData != null) {
+                        if (beastData != null)
+                        {
                             setBCDDataObjVars(player, barn, nextAvailableStorageSlot + "." + beastObjvar + ".", beastData);
-                        } else {
-                            if (hasObjVar(barn, nextAvailableStorageSlot)) {
+                        }
+                        else
+                        {
+                            if (hasObjVar(barn, nextAvailableStorageSlot))
+                            {
                                 removeObjVar(barn, nextAvailableStorageSlot);
                             }
                             CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " could not store a beast in the barn. The BCD was not destroyed. Reason: Beast in datapad had no objvars or objvars were corrupted. Barn: " + barn);
@@ -352,6 +381,7 @@ public class tcg extends script.base_script
         destroyObject(selectedBeastControlDevice);
         return true;
     }
+
     public static obj_id transferBeastControlDeviceFromBarn(String selectedStorageSlot, obj_id player, obj_id barn) throws InterruptedException
     {
         obj_id bcd = obj_id.NULL_ID;
@@ -370,12 +400,17 @@ public class tcg extends script.base_script
                 if (isIdValid(bcd))
                 {
                     obj_var_list beastData;
-                    for (String beastObjvar : BEAST_OBJVARS) {
-                        if (hasObjVar(barn, "barnStorage." + selectedStorageSlot + "." + beastObjvar)) {
+                    for (String beastObjvar : BEAST_OBJVARS)
+                    {
+                        if (hasObjVar(barn, "barnStorage." + selectedStorageSlot + "." + beastObjvar))
+                        {
                             beastData = getObjVarList(barn, "barnStorage." + selectedStorageSlot + "." + beastObjvar);
-                            if (beastData != null) {
+                            if (beastData != null)
+                            {
                                 setBCDDataObjVars(player, bcd, beastObjvar + ".", beastData);
-                            } else {
+                            }
+                            else
+                            {
                                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " did not claim beast BCD from barn. Resason: barnStorage has null or corrupted beast data for: " + selectedStorageSlot + ". Beast Obj Var: " + beastObjvar + ".");
                                 destroyObject(bcd);
                                 return obj_id.NULL_ID;
@@ -411,6 +446,7 @@ public class tcg extends script.base_script
         CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " is about to claim beast BCD: " + bcd + " from barn: " + barn + ".");
         return bcd;
     }
+
     public static void setBCDDataObjVars(obj_id player, obj_id target, String objvarNamePrefix, obj_var_list data) throws InterruptedException
     {
         int numItem = data.getNumItems();
@@ -467,6 +503,7 @@ public class tcg extends script.base_script
             }
         }
     }
+
     public static String getNextAvailableBarnStorageSlot(obj_id barn, obj_id player) throws InterruptedException
     {
         String storageSlot = "";
@@ -516,6 +553,7 @@ public class tcg extends script.base_script
         }
         return storageSlot;
     }
+
     public static String[] getBarnBeastStorageSlots(obj_id barn) throws InterruptedException
     {
         obj_var_list beastData = getObjVarList(barn, "barnStorage");
@@ -531,6 +569,7 @@ public class tcg extends script.base_script
         }
         return null;
     }
+
     public static int getTotalBarnStoredBeastsFromRanchhand(obj_id ranchhand) throws InterruptedException
     {
         int numStoredBeasts = 0;
@@ -544,6 +583,7 @@ public class tcg extends script.base_script
         }
         return numStoredBeasts;
     }
+
     public static int getTotalBarnStoredBeasts(obj_id barn) throws InterruptedException
     {
         int numStoredBeasts = 0;
@@ -557,12 +597,14 @@ public class tcg extends script.base_script
         }
         return numStoredBeasts;
     }
+
     public static obj_id barnDisplayBeast(obj_id ranchhand, String storageSlot, obj_id barn) throws InterruptedException
     {
         location here = getLocation(ranchhand);
         location spawnLocation = spawning.getRandomLocationInCircle(new location(-7.0f, 0.0f, -2.4f, here.area, here.cell), 5.0f);
         return barnDisplayBeast(ranchhand, storageSlot, barn, spawnLocation);
     }
+
     public static obj_id barnDisplayBeast(obj_id ranchhand, String storageSlot, obj_id barn, location where) throws InterruptedException
     {
         String beastType = "";
@@ -606,6 +648,7 @@ public class tcg extends script.base_script
         setObjVar(beast, "noEject", true);
         return beast;
     }
+
     public static void initializeBeastStatsFromBarn(obj_id barn, obj_id beast, String storageSlot, String beastType) throws InterruptedException
     {
         colorBeastUsingBarnData(beast, barn, storageSlot);
@@ -649,7 +692,7 @@ public class tcg extends script.base_script
         }
         for (int i = 0; i < beast_lib.ARRAY_BEAST_INCUBATION_STATS.length; ++i)
         {
-            utils.setScriptVar(beast, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i], (float)incubationBonuses[i]);
+            utils.setScriptVar(beast, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i], (float) incubationBonuses[i]);
         }
         beast_lib.addInnateBeastBonuses(beast, beastType);
         beast_lib.setBeastSkillBonuses(beast);
@@ -663,14 +706,14 @@ public class tcg extends script.base_script
         float incubationArmorBonus = utils.getFloatScriptVar(beast, beast_lib.OBJVAR_INCREASE_ARMOR);
         float incubationDamageBonus = utils.getFloatScriptVar(beast, beast_lib.OBJVAR_INCREASE_DPS);
         float incubationHealthBonus = utils.getFloatScriptVar(beast, beast_lib.OBJVAR_INCREASE_HEALTH);
-        int intMinDamage = (int)beastStatsDict.getInt("MinDmg");
-        int intMaxDamage = (int)beastStatsDict.getInt("MaxDmg");
+        int intMinDamage = beastStatsDict.getInt("MinDmg");
+        int intMaxDamage = beastStatsDict.getInt("MaxDmg");
         intMinDamage = beast_lib.getExpertiseStat(intMinDamage, expertiseDamage, 0.5f);
         intMaxDamage = beast_lib.getExpertiseStat(intMaxDamage, expertiseDamage, 0.5f);
         float floatMinDamage = intMinDamage * (1.0f + incubationDamageBonus / 100.0f);
         float floatMaxDamage = intMaxDamage * (1.0f + incubationDamageBonus / 100.0f);
-        intMinDamage = (int)floatMinDamage;
-        intMaxDamage = (int)floatMaxDamage;
+        intMinDamage = (int) floatMinDamage;
+        intMaxDamage = (int) floatMaxDamage;
         int specialDamagePercent = beast_lib.getExpertiseStat(100, expertiseDamage, 0.5f) - 100;
         if (!hasSkillModModifier(beast, "expertise_damage_line_beast_only"))
         {
@@ -695,7 +738,7 @@ public class tcg extends script.base_script
             weapons.setWeaponData(defaultWeapon);
             utils.setScriptVar(defaultWeapon, "isCreatureWeapon", 1);
         }
-        int beastHealth = (int)(beast_lib.getExpertiseStat(beastStatsDict.getInt("HP"), expertiseHealth, 0.5f) * (1.0f + (incubationHealthBonus * 0.2f) / 100.0f));
+        int beastHealth = (int) (beast_lib.getExpertiseStat(beastStatsDict.getInt("HP"), expertiseHealth, 0.5f) * (1.0f + (incubationHealthBonus * 0.2f) / 100.0f));
         int constitutionBonus = getEnhancedSkillStatisticModifierUncapped(beast, "constitution_modified");
         int staminaBonus = getEnhancedSkillStatisticModifierUncapped(beast, "stamina_modified");
         beastHealth += (constitutionBonus * 8) + (staminaBonus * 2);
@@ -741,8 +784,8 @@ public class tcg extends script.base_script
             setBaseWalkSpeed(beast, runSpeed);
         }
         armor.removeAllArmorData(beast);
-        int intArmor = (int)(beast_lib.getExpertiseStat(beastStatsDict.getInt("Armor"), expertiseArmor, 0.5f) * (1.0f + incubationArmorBonus / 100.0f));
-        intArmor += (int)getSkillStatisticModifier(beast, "expertise_innate_protection_all");
+        int intArmor = (int) (beast_lib.getExpertiseStat(beastStatsDict.getInt("Armor"), expertiseArmor, 0.5f) * (1.0f + incubationArmorBonus / 100.0f));
+        intArmor += getSkillStatisticModifier(beast, "expertise_innate_protection_all");
         utils.setScriptVar(beast, "beast.display.armor", intArmor);
         if (intArmor >= 0)
         {
@@ -751,7 +794,7 @@ public class tcg extends script.base_script
             String armorLevelObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_ARMOR_LEVEL;
             setObjVar(beast, armorLevelObjVar, AL_standard);
             String genProtectionObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION;
-            setObjVar(beast, genProtectionObjVar, (float)intArmor);
+            setObjVar(beast, genProtectionObjVar, (float) intArmor);
             utils.setScriptVar(beast, armor.SCRIPTVAR_CACHED_GENERAL_PROTECTION, intArmor);
         }
         int exp = 0;
@@ -782,19 +825,22 @@ public class tcg extends script.base_script
             beast_lib.removeAttentionPenaltyDebuff(getMaster(beast));
         }
     }
+
     public static boolean isBarnLiteDevice(obj_id object) throws InterruptedException
     {
         return hasObjVar(object, "barnLite.isBarnLite");
     }
+
     public static int getMaxBarnLiteBeasts(obj_id barn_lite_device) throws InterruptedException
     {
         int maxNum = DEFAULT_NUM_BARN_LITE_PETS;
         if (hasObjVar(barn_lite_device, "crafting_components.capacity"))
         {
-            maxNum = (int)getFloatObjVar(barn_lite_device, "crafting_components.capacity");
+            maxNum = (int) getFloatObjVar(barn_lite_device, "crafting_components.capacity");
         }
         return maxNum;
     }
+
     public static boolean grantPackageContents(obj_id objectPacked, obj_id player) throws InterruptedException
     {
         if (!isValidId(objectPacked) || !exists(objectPacked))
@@ -820,12 +866,14 @@ public class tcg extends script.base_script
             return false;
         }
         obj_id unpackedObject;
-        for (String staticObject : staticObjects) {
+        for (String staticObject : staticObjects)
+        {
             unpackedObject = static_item.createNewItemFunction(staticObject, player);
             CustomerServiceLog("tcg", "Packed item: " + objectPacked + " " + getName(objectPacked) + " unpacked: " + unpackedObject + " " + getName(unpackedObject) + " for player: " + player + " " + getName(player) + ".");
         }
         return true;
     }
+
     public static boolean colorBeastUsingBarnData(obj_id beast, obj_id barn, String storageSlot) throws InterruptedException
     {
         if (!isValidId(beast) || !exists(beast))
@@ -915,6 +963,7 @@ public class tcg extends script.base_script
         }
         return true;
     }
+
     public static boolean setRoamingBeastHue(obj_id beast, String palette, int hueIndex) throws InterruptedException
     {
         if (!isValidId(beast) || !exists(beast))
@@ -932,6 +981,7 @@ public class tcg extends script.base_script
         hue.setColor(beast, palette, hueIndex);
         return true;
     }
+
     public static boolean showRoamingBeasts(obj_id barn, obj_id ranchhand) throws InterruptedException
     {
         if (!isValidId(barn) || !exists(barn))
@@ -975,6 +1025,7 @@ public class tcg extends script.base_script
         }
         return true;
     }
+
     public static boolean setupDeathStarFix(obj_id table) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -986,6 +1037,7 @@ public class tcg extends script.base_script
         fixDeathStarScores(table, "death_star", modifier);
         return true;
     }
+
     public static boolean fixDeathStarScores(obj_id table, String layout, float modifier) throws InterruptedException
     {
         if (!isValidId(table) || !exists(table))
@@ -1005,13 +1057,14 @@ public class tcg extends script.base_script
             int randomPosition = rand(0, DEFAULT_HIGH_SCORE_LIST.length - 1);
             String name = DEFAULT_HIGH_SCORE_LIST[randomPosition];
             float score = ((EST_MAX_SCORE * modifier) / i);
-            int scoreInt = (int)score;
+            int scoreInt = (int) score;
             String timeDate = getCalendarTimeStringLocal(getCalendarTime());
             String stringData = scoreInt + "." + name + "." + layout + "." + timeDate;
             setObjVar(table, TABLE_HIGHSCORE_SLOTS + "." + layout + ".slot_" + i, stringData);
         }
         return true;
     }
+
     public static boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

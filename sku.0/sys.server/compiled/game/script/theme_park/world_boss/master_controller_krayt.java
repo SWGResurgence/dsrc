@@ -12,6 +12,7 @@ public class master_controller_krayt extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_KRAYT);
         return SCRIPT_CONTINUE;
     }
 
@@ -61,6 +62,7 @@ public class master_controller_krayt extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(killer));
         }
+        resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }
 

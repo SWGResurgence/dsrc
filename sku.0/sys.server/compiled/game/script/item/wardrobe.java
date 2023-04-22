@@ -14,6 +14,18 @@ public class wardrobe extends script.base_script
     {
     }
 
+    public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
+    {
+        if (isPlayer(transferer) && (getVolumeFree(self) == getTotalVolume(self)))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        else
+        {
+            broadcast(transferer, "This container is too big to be carried full. Try removing some items, then try again.");
+        }
+        return SCRIPT_OVERRIDE;
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!getTemplateName(item).contains("object/tangible/wearables/"))
@@ -25,7 +37,6 @@ public class wardrobe extends script.base_script
         {
             setObjVar(item, "wardrobe.ownedBy", transferer);
         }
-        setName(item, getNewName(item));
         return SCRIPT_CONTINUE;
     }
 
@@ -44,22 +55,10 @@ public class wardrobe extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (!hasScript(item, "systems.armor_rehue.composite_rehue"))
+        if (!hasScript(item, "item.special.recolor"))
         {
-            attachScript(item, "systems.armor_rehue.composite_rehue");
+            attachScript(item, "item.special.recolor");
         }
         return SCRIPT_CONTINUE;
-    }
-
-    public String getNewName(obj_id item) throws InterruptedException
-    {
-        if (static_item.isStaticItem(item))
-        {
-            return static_item.getStaticItemName(item) + " (modified)";
-        }
-        else
-        {
-            return getEncodedName(item) + " (modified)";
-        }
     }
 }

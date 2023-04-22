@@ -7,12 +7,13 @@ import java.util.Vector;
 
 public class magic_item extends script.base_script
 {
-    public magic_item()
-    {
-    }
     public static final float PT_DELTA = 0.15f;
     public static final String TBL_COST = "datatables/magic_item/mod_cost.iff";
     public static final String COL_MAX = "MAX";
+    public magic_item()
+    {
+    }
+
     public static boolean convertToMagicItem(obj_id item, int mobLevel) throws InterruptedException
     {
         LOG("magic_item", "**************** convertToMagicItem: " + getGameTime() + " **************");
@@ -66,39 +67,39 @@ public class magic_item extends script.base_script
             switch (weapon_type)
             {
                 case 0:
-                tbl = "datatables/magic_item/weapon/rifle.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/rifle.iff";
+                    break;
                 case 1:
-                tbl = "datatables/magic_item/weapon/carbine.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/carbine.iff";
+                    break;
                 case 2:
-                tbl = "datatables/magic_item/weapon/pistol.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/pistol.iff";
+                    break;
                 case 3:
-                tbl = "datatables/magic_item/weapon/heavy_ranged.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/heavy_ranged.iff";
+                    break;
                 case 4:
-                tbl = "datatables/magic_item/weapon/1handed_melee.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/1handed_melee.iff";
+                    break;
                 case 5:
-                tbl = "datatables/magic_item/weapon/2handed_melee.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/2handed_melee.iff";
+                    break;
                 case 6:
-                tbl = "datatables/magic_item/weapon/unarmed_melee.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/unarmed_melee.iff";
+                    break;
                 case 7:
-                tbl = "datatables/magic_item/weapon/polearm_melee.iff";
-                break;
+                    tbl = "datatables/magic_item/weapon/polearm_melee.iff";
+                    break;
                 default:
-                LOG("magic_item", "unsupported weapon type: " + weapon_type);
-                return false;
+                    LOG("magic_item", "unsupported weapon type: " + weapon_type);
+                    return false;
             }
         }
         else if (got >= GOT_armor && got <= GOT_armor_foot)
         {
             tbl = "datatables/magic_item/armor/armor.iff";
         }
-        else 
+        else
         {
             LOG("magic_item", "GOT not defined in magic_item.convertToMagicItem()!");
             return false;
@@ -126,7 +127,7 @@ public class magic_item extends script.base_script
             spent = 100;
             LOG("magic_item", "pts[0] = 100");
         }
-        else 
+        else
         {
             int shares = 0;
             for (int i = 0; i < numMods; i++)
@@ -140,13 +141,13 @@ public class magic_item extends script.base_script
                 float pivot = 100.0f - spent;
                 float cntLeft = (numMods - i);
                 LOG("magic_item", "pivot = " + pivot + " cntLeft = " + cntLeft);
-                int wt = (int)pivot;
+                int wt = (int) pivot;
                 if (cntLeft > 1)
                 {
                     float min = pivot / cntLeft;
                     float max = pivot * 2.0f / 3.0f;
                     LOG("magic_item", "min = " + min + " max = " + max);
-                    wt = rand((int)min, (int)max);
+                    wt = rand((int) min, (int) max);
                 }
                 spent += wt;
                 LOG("magic_item", "pts[" + i + "] = " + wt);
@@ -164,7 +165,7 @@ public class magic_item extends script.base_script
                 LOG("magic_item", "mods.length = " + mods.size());
                 int idx = rand(0, mods.size() - 1);
                 LOG("magic_item", "idx = " + idx);
-                String myMod = ((String)mods.get(idx));
+                String myMod = ((String) mods.get(idx));
                 if ((myMod != null) && (!myMod.equals("")))
                 {
                     LOG("magic_item", "attempting to apply mod: " + myMod);
@@ -182,7 +183,7 @@ public class magic_item extends script.base_script
                         LOG("magic_item", "wt = " + tmp);
                         float perc = (tmp) / 100.0f;
                         LOG("magic_item", "perc = " + perc);
-                        int buyPts = (int)(perc * total);
+                        int buyPts = (int) (perc * total);
                         LOG("magic_item", "buyPts = " + buyPts);
                         int modVal = buyPts / cost;
                         LOG("magic_item", "resulting mod value = " + modVal);
@@ -197,7 +198,7 @@ public class magic_item extends script.base_script
                             {
                                 litmus &= setSkillModBonus(item, myMod, -modVal);
                             }
-                            else 
+                            else
                             {
                                 litmus &= setSkillModBonus(item, myMod, modVal);
                             }
@@ -220,15 +221,17 @@ public class magic_item extends script.base_script
         }
         return false;
     }
+
     public static int getBuyPoints(int mobLevel) throws InterruptedException
     {
         if (mobLevel < 1)
         {
             return -1;
         }
-        int ret = (int)(mobLevel * rand(1.0f - PT_DELTA, 1.0f + PT_DELTA));
+        int ret = (int) (mobLevel * rand(1.0f - PT_DELTA, 1.0f + PT_DELTA));
         return ret;
     }
+
     public static int getNumMods(int pivot) throws InterruptedException
     {
         if (pivot < 20)
@@ -245,6 +248,7 @@ public class magic_item extends script.base_script
         }
         return rand(2, 3);
     }
+
     public static int getMagicModCost(String modName) throws InterruptedException
     {
         if ((modName == null) || (modName.equals("")))
@@ -258,6 +262,7 @@ public class magic_item extends script.base_script
         }
         return -1;
     }
+
     public static Vector getAppearanceMagicMods(String tbl, String apr) throws InterruptedException
     {
         if ((tbl == null) || (tbl.equals("")))
@@ -274,8 +279,10 @@ public class magic_item extends script.base_script
             return null;
         }
         String[] mods = new String[0];
-        for (String col : cols) {
-            if (apr.startsWith(col)) {
+        for (String col : cols)
+        {
+            if (apr.startsWith(col))
+            {
                 mods = dataTableGetStringColumnNoDefaults(tbl, col);
             }
         }
@@ -289,6 +296,7 @@ public class magic_item extends script.base_script
         }
         return new Vector(Arrays.asList(mods));
     }
+
     public static obj_id makeGem(obj_id targetContainer, String gemType, int mobLevel) throws InterruptedException
     {
         LOG("magic_item", "**************** makeGem: " + getGameTime() + " **************");
@@ -339,7 +347,7 @@ public class magic_item extends script.base_script
             spent = 100;
             LOG("magic_item", "pts[0] = 100");
         }
-        else 
+        else
         {
             int shares = 0;
             for (int i = 0; i < numMods; i++)
@@ -353,13 +361,13 @@ public class magic_item extends script.base_script
                 float pivot = 100.0f - spent;
                 float cntLeft = (numMods - i);
                 LOG("magic_item", "pivot = " + pivot + " cntLeft = " + cntLeft);
-                int wt = (int)pivot;
+                int wt = (int) pivot;
                 if (cntLeft > 1)
                 {
                     float min = pivot / cntLeft;
                     float max = pivot * 2.0f / 3.0f;
                     LOG("magic_item", "min = " + min + " max = " + max);
-                    wt = rand((int)min, (int)max);
+                    wt = rand((int) min, (int) max);
                 }
                 spent += wt;
                 LOG("magic_item", "pts[" + i + "] = " + wt);
@@ -377,7 +385,7 @@ public class magic_item extends script.base_script
                 LOG("magic_item", "mods.length = " + mods.size());
                 int idx = rand(0, mods.size() - 1);
                 LOG("magic_item", "idx = " + idx);
-                String myMod = (String)mods.elementAt(idx);
+                String myMod = (String) mods.elementAt(idx);
                 if ((myMod != null) && (!myMod.equals("")))
                 {
                     LOG("magic_item", "attempting to apply mod: " + myMod);
@@ -389,7 +397,7 @@ public class magic_item extends script.base_script
                         LOG("magic_item", "wt = " + tmp);
                         float perc = (tmp) / 100.0f;
                         LOG("magic_item", "perc = " + perc);
-                        int buyPts = (int)(perc * total);
+                        int buyPts = (int) (perc * total);
                         LOG("magic_item", "buyPts = " + buyPts);
                         int modVal = buyPts / cost;
                         LOG("magic_item", "resulting mod value = " + modVal);
@@ -424,10 +432,12 @@ public class magic_item extends script.base_script
         }
         return null;
     }
+
     public static obj_id makeGem(obj_id targetContainer, int mobLevel) throws InterruptedException
     {
         return makeGem(targetContainer, "default", mobLevel);
     }
+
     public static String[] getGemMods(String gemType) throws InterruptedException
     {
         if (gemType == null || gemType.equals(""))
@@ -447,8 +457,10 @@ public class magic_item extends script.base_script
         {
             Vector armorMods = new Vector();
             armorMods.setSize(0);
-            for (String allMod : allMods) {
-                if (dataTableGetInt(TBL_COST, allMod, "ARMOR_ATTACHMENT_MODS") != 0) {
+            for (String allMod : allMods)
+            {
+                if (dataTableGetInt(TBL_COST, allMod, "ARMOR_ATTACHMENT_MODS") != 0)
+                {
                     armorMods = utils.addElement(armorMods, allMod);
                 }
             }

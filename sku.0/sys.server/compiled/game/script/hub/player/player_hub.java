@@ -11,6 +11,10 @@ import java.lang.reflect.Array;
 public class player_hub extends script.base_script
 {
 
+    public static String TRACK_TITLE = "Area Track";
+    public static String TRACK_PROMPT = "Current Trackables:";
+    public static float BASE_TRACK_RANGE = 128.0f;
+
     public player_hub()
     {
     }
@@ -58,36 +62,28 @@ public class player_hub extends script.base_script
     {
         obj_id groupObject = group;
         obj_id[] objPlayers = getGroupMemberIds(groupObject);
-        if (objPlayers != null && objPlayers.length > 0)
+        if (objPlayers != null)
         {
             for (obj_id objPlayer : objPlayers)
             {
                 if (objPlayer != self)
                 {
                     pvpSetPersonalEnemyFlag(self, objPlayer);
-                    LOG("PVP",
-                            "[TEF System] " + getFirstName(self) + "has applied a TEF to the group " + groupObject);
+                    LOG("PVP", "[TEF System] " + getFirstName(self) + "has applied a TEF to the group " + groupObject);
                 }
             }
         }
     }
-
-    public static String TRACK_TITLE = "Area Track";
-    public static String TRACK_PROMPT = "Current Trackables:";
-    public static float BASE_TRACK_RANGE = 128.0f;
 
     public int showAreaTrack(obj_id self) throws InterruptedException
     {
         String[] conc_list = null;
         float range = BASE_TRACK_RANGE;
         obj_id[] trackables = getCreaturesInRange(self, range);
-        if (trackables.length > 0)
+        for (obj_id trackable : trackables)
         {
-            for (obj_id trackable : trackables)
-            {
-                int index = Array.getLength(trackables);
-                Array.set(conc_list, index--, getFirstName(trackable));
-            }
+            int index = Array.getLength(trackables);
+            Array.set(conc_list, index--, getFirstName(trackable));
         }
         sui.listbox(self, TRACK_PROMPT, TRACK_TITLE, conc_list);
         return SCRIPT_CONTINUE;
@@ -117,13 +113,10 @@ public class player_hub extends script.base_script
         String[] object_list = null;
         float range = utils.stringToFloat(params);
         obj_id[] searchables = getCreaturesInRange(self, range);
-        if (searchables.length > 0)
+        for (obj_id searchable : searchables)
         {
-            for (obj_id searchable : searchables)
-            {
-                int index = Array.getLength(searchables);
-                Array.set(object_list, index--, getFirstName(searchable));
-            }
+            int index = Array.getLength(searchables);
+            Array.set(object_list, index--, getFirstName(searchable));
         }
         sui.listbox(self, TRACK_PROMPT, TRACK_TITLE, object_list, "handleList");
         return SCRIPT_CONTINUE;

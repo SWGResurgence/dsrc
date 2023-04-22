@@ -140,7 +140,7 @@ public class player_developer extends base_script
                         objvarString += ovName + "\n";
                     }
                 }
-                String objvarPrompt = "Objvars for " + target + ":\n" + objvarString;
+                String objvarPrompt = "ObjVars for " + target + ":\n" + objvarString;
                 int page = createSUIPage("/Script.messageBox", self, self);
                 setSUIProperty(page, "Prompt.lblPrompt", "LocalText", objvarPrompt);
                 setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");

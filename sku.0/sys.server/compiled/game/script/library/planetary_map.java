@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class planetary_map extends script.base_script
 {
-    public planetary_map()
-    {
-    }
     public static final byte NO_FLAG = 0;
     public static final float MAX_CLUMP_DISTANCE = 32.0f;
     public static final String TBL = "datatables/planet_map/map_locations.iff";
@@ -39,6 +36,10 @@ public class planetary_map extends script.base_script
     public static final string_id SID_NO_REGISTERED_LOCS = new string_id("find_display", "no_registered_locs");
     public static final string_id SID_FIND_TITLE = new string_id("base_player", "find_title");
     public static final string_id SID_FIND_PROMPT = new string_id("base_player", "find_prompt");
+    public planetary_map()
+    {
+    }
+
     public static boolean addMapLocation(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -93,14 +94,14 @@ public class planetary_map extends script.base_script
             category = CITY;
             locationName = getCityRegionName(here);
         }
-        else 
+        else
         {
             dictionary row = dataTableGetRow(TBL, template);
             if ((row == null) || (row.isEmpty()))
             {
                 debugServerConsoleMsg(self, "WARNING: map_location -> obj_id " + self + " unable to locate template (" + template + ") in datatable!");
             }
-            else 
+            else
             {
                 locationName = row.getString(COL_NAME);
                 category = row.getString(COL_CATEGORY);
@@ -143,7 +144,7 @@ public class planetary_map extends script.base_script
             {
                 locationName = getStringObjVar(self, player_structure.VAR_SIGN_NAME);
             }
-            else 
+            else
             {
                 int city_id = getCityAtLocation(getLocation(self), 0);
                 if (city_id > 0)
@@ -183,10 +184,11 @@ public class planetary_map extends script.base_script
             {
                 subCategory = "";
             }
-            return addPlanetaryMapLocation(self, locationName, (int)here.x, (int)here.z, category, subCategory, type, (byte)flags);
+            return addPlanetaryMapLocation(self, locationName, (int) here.x, (int) here.z, category, subCategory, type, (byte) flags);
         }
         return false;
     }
+
     public static String getCityRegionName(location here) throws InterruptedException
     {
         if (here == null)
@@ -200,6 +202,7 @@ public class planetary_map extends script.base_script
         }
         return r[0].getName();
     }
+
     public static void removeMapLocation(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -208,6 +211,7 @@ public class planetary_map extends script.base_script
         }
         removePlanetaryMapLocation(self);
     }
+
     public static boolean addCreatureLocation(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -236,16 +240,17 @@ public class planetary_map extends script.base_script
                 }
                 if (cType.equals("junk_dealer"))
                 {
-                    return addPlanetaryMapLocation(self, getEncodedName(self), (int)here.x, (int)here.z, CAT_VENDOR, SUB_VENDOR_JUNK, MLT_STATIC, NO_FLAG);
+                    return addPlanetaryMapLocation(self, getEncodedName(self), (int) here.x, (int) here.z, CAT_VENDOR, SUB_VENDOR_JUNK, MLT_STATIC, NO_FLAG);
                 }
                 else if (cType.startsWith("trainer_"))
                 {
-                    return addPlanetaryMapLocation(self, getEncodedName(self), (int)here.x, (int)here.z, CAT_TRAINER, cType, MLT_STATIC, NO_FLAG);
+                    return addPlanetaryMapLocation(self, getEncodedName(self), (int) here.x, (int) here.z, CAT_TRAINER, cType, MLT_STATIC, NO_FLAG);
                 }
             }
         }
         return false;
     }
+
     public static boolean addTerminalLocation(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -294,24 +299,30 @@ public class planetary_map extends script.base_script
                     if (mapLocs != null && mapLocs.length > 0)
                     {
                         String cardinalString;
-                        for (map_location mapLoc : mapLocs) {
-                            if ((mapLoc.getLocationName()).equals(cityName)) {
+                        for (map_location mapLoc : mapLocs)
+                        {
+                            if ((mapLoc.getLocationName()).equals(cityName))
+                            {
                                 cardinalString = utils.getStringCardinalDirection(new location(mapLoc.getX(), 0, mapLoc.getY()), here, true);
-                                if (cardinalString != null && !cardinalString.equals("")) {
+                                if (cardinalString != null && !cardinalString.equals(""))
+                                {
                                     return addPlanetaryMapLocation(self, getString(utils.unpackString(cityName)) + " (" + cardinalString + ")", (int) here.x, (int) here.z, CAT_TERMINAL, subCat, MLT_STATIC, NO_FLAG);
-                                } else {
+                                }
+                                else
+                                {
                                     break;
                                 }
                             }
                         }
                     }
                 }
-                return addPlanetaryMapLocation(self, getEncodedName(self), (int)here.x, (int)here.z, CAT_TERMINAL, subCat, MLT_STATIC, NO_FLAG);
+                return addPlanetaryMapLocation(self, getEncodedName(self), (int) here.x, (int) here.z, CAT_TERMINAL, subCat, MLT_STATIC, NO_FLAG);
             }
         }
         LOG("planetaryMapLocation", "(" + self + ") has failed to register for an unknown reason!");
         return false;
     }
+
     public static map_location findClosestLocation(obj_id target, map_location[] map_locs) throws InterruptedException
     {
         if (!isIdValid(target) || (map_locs == null) || (map_locs.length == 0))
@@ -320,6 +331,7 @@ public class planetary_map extends script.base_script
         }
         return findClosestLocation(getWorldLocation(target), map_locs);
     }
+
     public static map_location findClosestLocation(location here, map_location[] map_locs) throws InterruptedException
     {
         if ((map_locs == null) || (map_locs.length == 0))
@@ -351,6 +363,7 @@ public class planetary_map extends script.base_script
         }
         return null;
     }
+
     public static map_location findClosestLocation(obj_id target, String category, String subcategory) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -359,6 +372,7 @@ public class planetary_map extends script.base_script
         }
         return findClosestLocation(getWorldLocation(target), category, subcategory);
     }
+
     public static map_location findClosestLocation(location here, String category, String subcategory) throws InterruptedException
     {
         if ((category == null) || (category.equals("")))
@@ -376,6 +390,7 @@ public class planetary_map extends script.base_script
         }
         return findClosestLocation(here, map_locs);
     }
+
     public static int showFindSui() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -397,15 +412,20 @@ public class planetary_map extends script.base_script
 
         String[] subs;
 
-        for (String cat : cats) {
+        for (String cat : cats)
+        {
             subs = getUniquePlanetaryMapCategories(cat);
-            if ((subs != null) && (subs.length > 0)) {
+            if ((subs != null) && (subs.length > 0))
+            {
                 LOG("find", "showFindSui: cat = " + cat + " sub count = " + subs.length);
-                for (String sub : subs) {
+                for (String sub : subs)
+                {
                     entries = utils.addElement(entries, getString(new string_id("map_loc_cat_n", cat)) + ": " + getString(new string_id("map_loc_cat_n", sub)));
                     params = utils.addElement(params, sub);
                 }
-            } else {
+            }
+            else
+            {
                 entries = utils.addElement(entries, "@map_loc_cat_n:" + cat);
                 params = utils.addElement(params, cat);
             }
@@ -422,6 +442,7 @@ public class planetary_map extends script.base_script
         }
         return -1;
     }
+
     public static void closeFindSui() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -431,12 +452,14 @@ public class planetary_map extends script.base_script
             cleanupFindSui();
         }
     }
+
     public static void cleanupFindSui() throws InterruptedException
     {
         obj_id self = getSelf();
         utils.removeScriptVar(self, SCRIPTVAR_FIND_SUI);
         utils.removeBatchScriptVar(self, SCRIPTVAR_FIND_PARAMS);
     }
+
     public static String[] getUniquePlanetaryMapCategories(String category) throws InterruptedException
     {
         String[] cats = getPlanetaryMapCategories(category);
@@ -446,8 +469,10 @@ public class planetary_map extends script.base_script
         }
         Vector unique = new Vector();
         unique.setSize(0);
-        for (String cat : cats) {
-            if (utils.getElementPositionInArray(unique, cat) == -1) {
+        for (String cat : cats)
+        {
+            if (utils.getElementPositionInArray(unique, cat) == -1)
+            {
                 unique = utils.addElement(unique, cat);
             }
         }
@@ -459,6 +484,7 @@ public class planetary_map extends script.base_script
         unique.toArray(_unique);
         return _unique;
     }
+
     public static boolean updateFacilityActive(obj_id facility, boolean isActive) throws InterruptedException
     {
         if (!isIdValid(facility))
@@ -483,11 +509,11 @@ public class planetary_map extends script.base_script
         {
             flags = MLF_ACTIVE;
         }
-        else 
+        else
         {
             flags = MLF_INACTIVE;
         }
         removePlanetaryMapLocation(facility);
-        return addPlanetaryMapLocation(facility, maploc.getLocationName(), (int)maploc.getX(), (int)maploc.getY(), maploc.getCategory(), maploc.getSubCategory(), MLT_STATIC, flags);
+        return addPlanetaryMapLocation(facility, maploc.getLocationName(), (int) maploc.getX(), (int) maploc.getY(), maploc.getCategory(), maploc.getSubCategory(), MLT_STATIC, flags);
     }
 }

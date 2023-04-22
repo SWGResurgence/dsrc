@@ -7,36 +7,37 @@ import java.util.Vector;
 
 public class space_utils extends script.base_script
 {
-    public space_utils()
-    {
-    }
     public static final int POB_LOOT_BOX_CAPACITY = 75;
     public static final string_id SID_NO_SHIP_CERTIFICATION = new string_id("space/space_interaction", "no_ship_certification");
     public static final string_id SID_NO_WORKING_SHIP = new string_id("space/space_interaction", "no_working_ship");
     public static final string_id SID_NO_SHIP = new string_id("space/space_interaction", "no_ship");
     public static final string_id SID_NO_CAN_CONTROL_SHIP_SLOT = new string_id("space/space_interaction", "no_can_control_ship_slot");
-    public static final String[] SHIP_GUNNER_SLOT_NAMES = 
+    public static final String[] SHIP_GUNNER_SLOT_NAMES =
+            {
+                    "ship_gunner0",
+                    "ship_gunner1",
+                    "ship_gunner2",
+                    "ship_gunner3",
+                    "ship_gunner4",
+                    "ship_gunner5",
+                    "ship_gunner6",
+                    "ship_gunner7"
+            };
+    public static final String[] POB_SHIP_GUNNER_SLOT_NAMES =
+            {
+                    "ship_gunner0_pob",
+                    "ship_gunner1_pob",
+                    "ship_gunner2_pob",
+                    "ship_gunner3_pob",
+                    "ship_gunner4_pob",
+                    "ship_gunner5_pob",
+                    "ship_gunner6_pob",
+                    "ship_gunner7_pob"
+            };
+    public space_utils()
     {
-        "ship_gunner0",
-        "ship_gunner1",
-        "ship_gunner2",
-        "ship_gunner3",
-        "ship_gunner4",
-        "ship_gunner5",
-        "ship_gunner6",
-        "ship_gunner7"
-    };
-    public static final String[] POB_SHIP_GUNNER_SLOT_NAMES = 
-    {
-        "ship_gunner0_pob",
-        "ship_gunner1_pob",
-        "ship_gunner2_pob",
-        "ship_gunner3_pob",
-        "ship_gunner4_pob",
-        "ship_gunner5_pob",
-        "ship_gunner6_pob",
-        "ship_gunner7_pob"
-    };
+    }
+
     public static void notifyObject(obj_id objTarget, String strNotificationName, dictionary dctParams) throws InterruptedException
     {
         if (!isIdValid(objTarget))
@@ -58,28 +59,29 @@ public class space_utils extends script.base_script
         try
         {
             int intReturn = script_entry.callMessageHandlers(strNotificationName, objTarget, dctParams);
-        }
-        catch(Throwable err)
+        } catch (Throwable err)
         {
             debugServerConsoleMsg(null, "Unable to call into callMessageHandlers ");
             Thread.dumpStack();
             throw new InterruptedException();
         }
     }
+
     public static void callTrigger(String strTrigger, Object[] params) throws InterruptedException
     {
         try
         {
             script_entry.runScripts(strTrigger, params);
-        }
-        catch(Throwable err)
+        } catch (Throwable err)
         {
             debugServerConsoleMsg(null, "Unable to call into callMessageHandlers ");
             Thread.dumpStack();
             throw new InterruptedException();
         }
     }
-    public static boolean isPlayerControlledShip(obj_id objShip) {
+
+    public static boolean isPlayerControlledShip(obj_id objShip)
+    {
         if (objShip == null)
         {
             return false;
@@ -92,17 +94,21 @@ public class space_utils extends script.base_script
         int intIndex = strTemplate.indexOf("object/ship/player/");
         return intIndex > -1;
     }
-    public static void sendDebugSpam(obj_id objTarget, String strSpam) {
+
+    public static void sendDebugSpam(obj_id objTarget, String strSpam)
+    {
         if (hasScript(objTarget, "space.content_tools.content_generation") || isGod(objTarget))
         {
             sendSystemMessageTestingOnly(objTarget, strSpam);
         }
     }
+
     public static boolean hasShip(obj_id player) throws InterruptedException
     {
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
         return shipControlDevices != null && shipControlDevices.length > 0;
     }
+
     public static boolean isShipUsable(obj_id ship, obj_id player) throws InterruptedException
     {
         string_id failReason;
@@ -119,31 +125,40 @@ public class space_utils extends script.base_script
             }
             failReason = SID_NO_SHIP_CERTIFICATION;
         }
-        else {
+        else
+        {
             failReason = SID_NO_WORKING_SHIP;
         }
         sendSystemMessage(player, failReason);
         return false;
     }
+
     public static obj_id hasUsableShip(obj_id player) throws InterruptedException
     {
         string_id failReason = null;
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
-        if (shipControlDevices != null && shipControlDevices.length > 0)
+        if (shipControlDevices != null)
         {
-            for (obj_id shipControlDevice : shipControlDevices) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
                 obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                if (isIdValid(ship)) {
-                    if (isShipFlyable(ship)) {
-                        if (hasCertificationsForItem(player, ship)) {
+                if (isIdValid(ship))
+                {
+                    if (isShipFlyable(ship))
+                    {
+                        if (hasCertificationsForItem(player, ship))
+                        {
                             return shipControlDevice;
                         }
-                        if (isGod(player)) {
+                        if (isGod(player))
+                        {
                             sendSystemMessageTestingOnly(player, "** Passing certification test due to god mode. **");
                             return shipControlDevice;
                         }
                         failReason = SID_NO_SHIP_CERTIFICATION;
-                    } else if (failReason == null) {
+                    }
+                    else if (failReason == null)
+                    {
                         failReason = SID_NO_WORKING_SHIP;
                     }
                 }
@@ -152,6 +167,7 @@ public class space_utils extends script.base_script
         sendSystemMessage(player, Objects.requireNonNullElse(failReason, SID_NO_SHIP));
         return null;
     }
+
     public static boolean hasShipControlDeviceCertification(obj_id player, obj_id shipControlDevice) throws InterruptedException
     {
         if (isIdValid(shipControlDevice))
@@ -161,28 +177,37 @@ public class space_utils extends script.base_script
         }
         return false;
     }
-    public static boolean isShipFlyable(obj_id objShip) {
-        int[] REQUIRED_COMPONENTS = 
-        {
-            ship_component_type.SCT_reactor,
-            ship_component_type.SCT_engine
-        };
+
+    public static boolean isShipFlyable(obj_id objShip)
+    {
+        int[] REQUIRED_COMPONENTS =
+                {
+                        ship_component_type.SCT_reactor,
+                        ship_component_type.SCT_engine
+                };
         if (!isIdValid(objShip))
         {
             return false;
         }
-        for (int REQUIRED_COMPONENT : REQUIRED_COMPONENTS) {
-            if (isShipSlotInstalled(objShip, REQUIRED_COMPONENT)) {
-                if (isShipComponentDisabled(objShip, REQUIRED_COMPONENT)) {
+        for (int REQUIRED_COMPONENT : REQUIRED_COMPONENTS)
+        {
+            if (isShipSlotInstalled(objShip, REQUIRED_COMPONENT))
+            {
+                if (isShipComponentDisabled(objShip, REQUIRED_COMPONENT))
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
         return true;
     }
-    public static boolean isShipPaintable(obj_id objShip) {
+
+    public static boolean isShipPaintable(obj_id objShip)
+    {
         String chassis = getShipChassisType(objShip);
         return !chassis.equals("player_basic_tiefighter") &&
                 !chassis.equals("player_decimator") &&
@@ -204,7 +229,9 @@ public class space_utils extends script.base_script
                 !chassis.equals("player_havoc") &&
                 !chassis.equals("player_twing");
     }
-    public static boolean isShipTextureable(obj_id objShip) {
+
+    public static boolean isShipTextureable(obj_id objShip)
+    {
         String chassis = getShipChassisType(objShip);
         return !chassis.equals("player_basic_tiefighter") &&
                 !chassis.equals("player_decimator") &&
@@ -226,28 +253,34 @@ public class space_utils extends script.base_script
                 !chassis.equals("player_havoc") &&
                 !chassis.equals("player_twing");
     }
-    public static void sendDelayedSystemMessage(obj_id objPlayer, string_id strSpam, float fltDelay) {
+
+    public static void sendDelayedSystemMessage(obj_id objPlayer, string_id strSpam, float fltDelay)
+    {
         dictionary dctParams = new dictionary();
         dctParams.put("strSpam", strSpam);
         messageTo(objPlayer, "doDelayedSystemMessage", dctParams, fltDelay, false);
     }
-    public static transform getRandomPositionInSphere(transform trStartPosition, float fltMinRadius, float fltMaxRadius, boolean boolRandomizeOrientation) {
+
+    public static transform getRandomPositionInSphere(transform trStartPosition, float fltMinRadius, float fltMaxRadius, boolean boolRandomizeOrientation)
+    {
         float fltDistance = rand(fltMinRadius, fltMaxRadius);
         vector vctOffset = vector.randomUnit().multiply(fltDistance);
         transform transform_w = trStartPosition;
         transform_w = transform_w.move_p(vctOffset);
         if (boolRandomizeOrientation)
         {
-            float randomYaw = rand(0.0f, (float)Math.PI * 2);
-            float randomPitch = rand(0.0f, (float)Math.PI * 2);
-            float randomRoll = rand(0.0f, (float)Math.PI * 2);
+            float randomYaw = rand(0.0f, (float) Math.PI * 2);
+            float randomPitch = rand(0.0f, (float) Math.PI * 2);
+            float randomRoll = rand(0.0f, (float) Math.PI * 2);
             transform_w = transform_w.yaw_l(randomYaw);
             transform_w = transform_w.pitch_l(randomPitch);
             transform_w = transform_w.roll_l(randomRoll);
         }
         return transform_w;
     }
-    public static location getLocationFromTransform(transform trTest) {
+
+    public static location getLocationFromTransform(transform trTest)
+    {
         vector vctPoint = trTest.getPosition_p();
         location locTest = new location();
         locTest.x = vctPoint.x;
@@ -255,27 +288,37 @@ public class space_utils extends script.base_script
         locTest.z = vctPoint.z;
         return locTest;
     }
-    public static transform faceTransformToVector(transform trStart, vector vctPoint) {
+
+    public static transform faceTransformToVector(transform trStart, vector vctPoint)
+    {
         vector vctNewPoint = trStart.rotateTranslate_p2l(vctPoint);
         return trStart.yaw_l(vctNewPoint.theta()).pitch_l(vctNewPoint.phi());
     }
-    public static vector getVector(obj_id objTest) {
+
+    public static vector getVector(obj_id objTest)
+    {
         return getTransform_o2p(objTest).getPosition_p();
     }
-    public static String getCellName(obj_id objBuilding, obj_id objCell) {
+
+    public static String getCellName(obj_id objBuilding, obj_id objCell)
+    {
         String[] strCells = getCellNames(objBuilding);
-        for (String strCell : strCells) {
+        for (String strCell : strCells)
+        {
             obj_id objTest = getCellId(objBuilding, strCell);
-            if (objTest == objCell) {
+            if (objTest == objCell)
+            {
                 return strCell;
             }
         }
         return null;
     }
+
     public static Vector getPlayersInShip(obj_id objObject) throws InterruptedException
     {
         return space_transition.getContainedPlayers(objObject, null);
     }
+
     public static void sendSystemMessageShip(obj_id objShip, string_id strSpam, boolean boolSendToPilot, boolean boolSendToPassengers, boolean boolSendToGunners, boolean boolSendToOperations) throws InterruptedException
     {
         if (boolSendToPilot)
@@ -295,6 +338,7 @@ public class space_utils extends script.base_script
             sendSystemMessageToOperations(objShip, strSpam);
         }
     }
+
     public static void sendSystemMessageShip(obj_id objShip, prose_package pp, boolean boolSendToPilot, boolean boolSendToPassengers, boolean boolSendToGunners, boolean boolSendToOperations) throws InterruptedException
     {
         if (boolSendToPilot)
@@ -314,6 +358,7 @@ public class space_utils extends script.base_script
             sendSystemMessageToOperations(objShip, pp);
         }
     }
+
     public static void tauntShip(obj_id objShip, obj_id objSender, prose_package pp, boolean boolSendToPilot, boolean boolSendToPassengers, boolean boolSendToGunners, boolean boolSendToOperations) throws InterruptedException
     {
         if (boolSendToPilot)
@@ -333,6 +378,7 @@ public class space_utils extends script.base_script
             tauntOperations(objShip, objSender, pp);
         }
     }
+
     public static void tauntShip(obj_id objShip, obj_id objSender, string_id strSpam, boolean boolSendToPilot, boolean boolSendToPassengers, boolean boolSendToGunners, boolean boolSendToOperations) throws InterruptedException
     {
         if (boolSendToPilot)
@@ -352,9 +398,11 @@ public class space_utils extends script.base_script
             tauntOperations(objShip, objSender, strSpam);
         }
     }
+
     public static void tauntPlayer(obj_id objPlayer, obj_id objSender, string_id strSpam) throws InterruptedException
     {
-        if(!isIdValid(objPlayer) || !isIdValid(objSender)){
+        if (!isIdValid(objPlayer) || !isIdValid(objSender))
+        {
             return;
         }
         prose_package proseTest = prose.getPackage(strSpam);
@@ -367,12 +415,13 @@ public class space_utils extends script.base_script
         {
             commPlayers(objSender, strAppearance, null, 6.0f, objPlayer, proseTest);
         }
-        else 
+        else
         {
             commPlayers(objSender, null, null, 6.0f, objPlayer, proseTest);
         }
         space_combat.playCombatTauntSound(objPlayer);
     }
+
     public static void tauntPlayerWithSound(obj_id objPlayer, obj_id objSender, string_id strSpam, String soundEffect) throws InterruptedException
     {
         prose_package proseTest = prose.getPackage(strSpam);
@@ -385,12 +434,13 @@ public class space_utils extends script.base_script
         {
             commPlayers(objSender, strAppearance, null, 6.0f, objPlayer, proseTest);
         }
-        else 
+        else
         {
             commPlayers(objSender, null, null, 6.0f, objPlayer, proseTest);
         }
         playMusic(objPlayer, soundEffect);
     }
+
     public static void tauntPlayer(obj_id objPlayer, obj_id objSender, prose_package pp) throws InterruptedException
     {
         String strAppearance = "";
@@ -402,12 +452,13 @@ public class space_utils extends script.base_script
         {
             commPlayers(objSender, strAppearance, null, 6.0f, objPlayer, pp);
         }
-        else 
+        else
         {
             commPlayers(objSender, null, null, 6.0f, objPlayer, pp);
         }
         space_combat.playCombatTauntSound(objPlayer);
     }
+
     public static void tauntPilot(obj_id objShip, obj_id objSender, string_id strSpam) throws InterruptedException
     {
         if (!isIdValid(objShip))
@@ -428,7 +479,7 @@ public class space_utils extends script.base_script
             {
                 commPlayers(objSender, strAppearance, null, 6.0f, objPilot, proseTest);
             }
-            else 
+            else
             {
                 commPlayers(objSender, null, null, 6.0f, objPilot, proseTest);
             }
@@ -436,6 +487,7 @@ public class space_utils extends script.base_script
             space_combat.playCombatTauntSound(objPilot);
         }
     }
+
     public static void tauntPilot(obj_id objShip, obj_id objSender, prose_package pp) throws InterruptedException
     {
         obj_id objPilot = getPilotId(objShip);
@@ -450,7 +502,7 @@ public class space_utils extends script.base_script
             {
                 commPlayers(objSender, strAppearance, null, 6.0f, objPilot, pp);
             }
-            else 
+            else
             {
                 commPlayers(objSender, null, null, 6.0f, objPilot, pp);
             }
@@ -458,6 +510,7 @@ public class space_utils extends script.base_script
             space_combat.playCombatTauntSound(objPilot);
         }
     }
+
     public static void tauntGunners(obj_id objShip, obj_id objSender, prose_package pp) throws InterruptedException
     {
         Vector objGunners = getGunnersInShip(objShip);
@@ -467,6 +520,7 @@ public class space_utils extends script.base_script
         }
         tauntArray(objSender, objGunners, pp);
     }
+
     public static void tauntGunners(obj_id objShip, obj_id objSender, string_id strSpam) throws InterruptedException
     {
         Vector objGunners = getGunnersInShip(objShip);
@@ -476,6 +530,7 @@ public class space_utils extends script.base_script
         }
         tauntArray(objSender, objGunners, strSpam);
     }
+
     public static void tauntOperations(obj_id objShip, obj_id objSender, prose_package pp) throws InterruptedException
     {
         obj_id objOfficer = getOperationsOfficer(objShip);
@@ -490,13 +545,14 @@ public class space_utils extends script.base_script
             {
                 commPlayers(objSender, strAppearance, null, 6.0f, objOfficer, pp);
             }
-            else 
+            else
             {
                 commPlayers(objSender, null, null, 6.0f, objOfficer, pp);
             }
             space_combat.playCombatTauntSound(objOfficer);
         }
     }
+
     public static void tauntOperations(obj_id objShip, obj_id objSender, string_id strSpam) throws InterruptedException
     {
         obj_id objOfficer = getOperationsOfficer(objShip);
@@ -512,64 +568,80 @@ public class space_utils extends script.base_script
             {
                 commPlayers(objSender, strAppearance, null, 6.0f, objOfficer, proseTest);
             }
-            else 
+            else
             {
                 commPlayers(objSender, null, null, 6.0f, objOfficer, proseTest);
             }
             space_combat.playCombatTauntSound(objOfficer);
         }
     }
+
     public static void tauntPassengers(obj_id objShip, obj_id objSender, prose_package pp) throws InterruptedException
     {
         Vector objPlayers = getPassengers(objShip);
         tauntArray(objSender, objPlayers, pp);
     }
+
     public static void tauntPassengers(obj_id objShip, obj_id objSender, string_id strSpam) throws InterruptedException
     {
         Vector objPlayers = getPassengers(objShip);
         tauntArray(objSender, objPlayers, strSpam);
     }
-    public static void sendSystemMessageToPilot(obj_id objShip, prose_package pp) {
+
+    public static void sendSystemMessageToPilot(obj_id objShip, prose_package pp)
+    {
         obj_id objPilot = getPilotId(objShip);
         if (isIdValid(objPilot))
         {
             sendSystemMessageProse(objPilot, pp);
         }
     }
-    public static void sendSystemMessageToPilot(obj_id objShip, string_id strSpam) {
+
+    public static void sendSystemMessageToPilot(obj_id objShip, string_id strSpam)
+    {
         obj_id objPilot = getPilotId(objShip);
         if (isIdValid(objPilot))
         {
             sendSystemMessage(objPilot, strSpam);
         }
     }
+
     public static void sendSystemMessageToGunners(obj_id objShip, string_id strSpam) throws InterruptedException
     {
         Vector objGunners = getGunnersInShip(objShip);
         sendSystemMessageToArray(objGunners, strSpam);
     }
+
     public static void sendSystemMessageToGunners(obj_id objShip, prose_package pp) throws InterruptedException
     {
         Vector objGunners = getGunnersInShip(objShip);
         sendSystemMessageToArray(objGunners, pp);
     }
-    public static void sendSystemMessageToArray(Vector objArray, string_id strSpam) {
+
+    public static void sendSystemMessageToArray(Vector objArray, string_id strSpam)
+    {
         if (objArray != null && objArray.size() > 0)
         {
-            for (Object anObjArray : objArray) {
+            for (Object anObjArray : objArray)
+            {
                 sendSystemMessage((obj_id) anObjArray, strSpam);
             }
         }
     }
-    public static void sendSystemMessageToArray(Vector objArray, prose_package pp) {
+
+    public static void sendSystemMessageToArray(Vector objArray, prose_package pp)
+    {
         if (objArray != null && objArray.size() > 0)
         {
-            for (Object anObjArray : objArray) {
+            for (Object anObjArray : objArray)
+            {
                 sendSystemMessageProse((obj_id) anObjArray, pp);
             }
         }
     }
-    public static void tauntArray(obj_id objSender, Vector objArray, prose_package pp) {
+
+    public static void tauntArray(obj_id objSender, Vector objArray, prose_package pp)
+    {
         if (objArray != null && objArray.size() > 0)
         {
             String strAppearance = "";
@@ -582,13 +654,14 @@ public class space_utils extends script.base_script
                 obj_id[] temp = new obj_id[objArray.size()];
                 dogfightTauntPlayers(objSender, temp, pp, strAppearance);
             }
-            else 
+            else
             {
                 obj_id[] temp = new obj_id[objArray.size()];
                 dogfightTauntPlayers(objSender, temp, pp);
             }
         }
     }
+
     public static void tauntArray(obj_id objSender, Vector objArray, string_id strSpam) throws InterruptedException
     {
         if (objArray != null && objArray.size() > 0)
@@ -604,23 +677,26 @@ public class space_utils extends script.base_script
                 obj_id[] temp = new obj_id[objArray.size()];
                 dogfightTauntPlayers(objSender, temp, pp, strAppearance);
             }
-            else 
+            else
             {
                 obj_id[] temp = new obj_id[objArray.size()];
                 dogfightTauntPlayers(objSender, temp, pp);
             }
         }
     }
+
     public static void sendSystemMessageToPassengers(obj_id objShip, string_id strSpam) throws InterruptedException
     {
         Vector objPlayers = getPassengers(objShip);
         sendSystemMessageToArray(objPlayers, strSpam);
     }
+
     public static void sendSystemMessageToPassengers(obj_id objShip, prose_package pp) throws InterruptedException
     {
         Vector objPlayers = getPassengers(objShip);
         sendSystemMessageToArray(objPlayers, pp);
     }
+
     public static void sendSystemMessageToOperations(obj_id objShip, string_id strSpam) throws InterruptedException
     {
         obj_id objOfficer = getOperationsOfficer(objShip);
@@ -629,6 +705,7 @@ public class space_utils extends script.base_script
             sendSystemMessage(objOfficer, strSpam);
         }
     }
+
     public static void sendSystemMessageToOperations(obj_id objShip, prose_package pp) throws InterruptedException
     {
         obj_id objOfficer = getOperationsOfficer(objShip);
@@ -637,6 +714,7 @@ public class space_utils extends script.base_script
             sendSystemMessageProse(objOfficer, pp);
         }
     }
+
     public static Vector getGunnersInShip(obj_id objShip) throws InterruptedException
     {
         Vector gunners = new Vector();
@@ -656,14 +734,20 @@ public class space_utils extends script.base_script
                 }
                 return gunners;
             }
-            for (obj_id shipContent : shipContents) {
+            for (obj_id shipContent : shipContents)
+            {
                 obj_id[] cellContents = getContents(shipContent);
-                if (cellContents != null) {
-                    for (obj_id cellContent : cellContents) {
-                        if (isIdValid(cellContent)) {
-                            for (String POB_SHIP_GUNNER_SLOT_NAME : POB_SHIP_GUNNER_SLOT_NAMES) {
+                if (cellContents != null)
+                {
+                    for (obj_id cellContent : cellContents)
+                    {
+                        if (isIdValid(cellContent))
+                        {
+                            for (String POB_SHIP_GUNNER_SLOT_NAME : POB_SHIP_GUNNER_SLOT_NAMES)
+                            {
                                 obj_id gunner = getObjectInSlot(cellContent, POB_SHIP_GUNNER_SLOT_NAME);
-                                if (isIdValid(gunner)) {
+                                if (isIdValid(gunner))
+                                {
                                     gunners = utils.addElement(gunners, gunner);
                                 }
                             }
@@ -674,16 +758,21 @@ public class space_utils extends script.base_script
         }
         return gunners;
     }
-    public static transform randomizeTransformOrientation(transform trTest) {
+
+    public static transform randomizeTransformOrientation(transform trTest)
+    {
         return trTest
-                .yaw_l(rand(-(float)Math.PI,(float)Math.PI))
-                .pitch_l(rand(-(float)Math.PI, (float)Math.PI))
-                .roll_l(rand(-(float)Math.PI, (float)Math.PI));
+                .yaw_l(rand(-(float) Math.PI, (float) Math.PI))
+                .pitch_l(rand(-(float) Math.PI, (float) Math.PI))
+                .roll_l(rand(-(float) Math.PI, (float) Math.PI));
     }
-    public static boolean isShipWithInterior(obj_id objShip) {
+
+    public static boolean isShipWithInterior(obj_id objShip)
+    {
         String[] strCells = getCellNames(objShip);
         return strCells != null && strCells.length != 0;
     }
+
     public static obj_id[] getAllPlayersInShip(obj_id ship) throws InterruptedException
     {
         Vector crew = getGunnersInShip(ship);
@@ -706,8 +795,10 @@ public class space_utils extends script.base_script
         Vector passengers = getPassengers(ship);
         if (passengers != null && passengers.size() > 0)
         {
-            for (Object passenger : passengers) {
-                if (utils.getElementPositionInArray(crew, passenger) == -1) {
+            for (Object passenger : passengers)
+            {
+                if (utils.getElementPositionInArray(crew, passenger) == -1)
+                {
                     utils.addElement(crew, passenger);
                 }
             }
@@ -720,6 +811,7 @@ public class space_utils extends script.base_script
         }
         return _crew;
     }
+
     public static Vector getPassengers(obj_id objShip) throws InterruptedException
     {
         obj_id[] objContents = getContents(objShip);
@@ -727,11 +819,15 @@ public class space_utils extends script.base_script
         {
             Vector objPassengers = new Vector();
             objPassengers.setSize(0);
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 obj_id[] objInteriorContents = getContents(objContent);
-                if (objInteriorContents != null && objInteriorContents.length > 0) {
-                    for (obj_id objInteriorContent : objInteriorContents) {
-                        if (isPlayer(objInteriorContent)) {
+                if (objInteriorContents != null)
+                {
+                    for (obj_id objInteriorContent : objInteriorContents)
+                    {
+                        if (isPlayer(objInteriorContent))
+                        {
                             objPassengers = utils.addElement(objPassengers, objInteriorContent);
                         }
                     }
@@ -741,29 +837,32 @@ public class space_utils extends script.base_script
             {
                 return objPassengers;
             }
-            else 
+            else
             {
                 return null;
             }
         }
-        else 
+        else
         {
             return null;
         }
     }
-    public static float getRandomValueWithDeadZone(float fltStart, float fltMin, float fltMax) {
+
+    public static float getRandomValueWithDeadZone(float fltStart, float fltMin, float fltMax)
+    {
         int intRoll = rand(1, 2);
         if (intRoll == 1)
         {
             float fltValue = rand(fltMin, fltMax);
             return fltStart - fltValue;
         }
-        else 
+        else
         {
             float fltValue = rand(fltMin, fltMax);
             return fltStart + fltValue;
         }
     }
+
     public static location getRandomLocationInSphere(location locStart, float fltMin, float fltMax) throws InterruptedException
     {
         locStart.x = getRandomValueWithDeadZone(locStart.x, fltMin, fltMax);
@@ -771,6 +870,7 @@ public class space_utils extends script.base_script
         locStart.z = getRandomValueWithDeadZone(locStart.z, fltMin, fltMax);
         return locStart;
     }
+
     public static Vector getShipOfficers(obj_id objShip) throws InterruptedException
     {
         if (space_utils.isShipWithInterior(objShip))
@@ -788,7 +888,7 @@ public class space_utils extends script.base_script
             }
             return objOfficers;
         }
-        else 
+        else
         {
             Vector objTest = new Vector();
             objTest.setSize(0);
@@ -796,17 +896,19 @@ public class space_utils extends script.base_script
             return objTest;
         }
     }
+
     public static obj_id getCommandExecutor(obj_id objShip) throws InterruptedException
     {
         if (isShipWithInterior(objShip))
         {
             return getOperationsOfficer(objShip);
         }
-        else 
+        else
         {
             return getPilotId(objShip);
         }
     }
+
     public static obj_id getOperationsOfficer(obj_id objShip) throws InterruptedException
     {
         obj_id objChair = utils.getObjIdScriptVar(objShip, "objOperationsChair");
@@ -814,19 +916,23 @@ public class space_utils extends script.base_script
         {
             return getObjectInSlot(objChair, "ship_operations_pob");
         }
-        else 
+        else
         {
             return getObjectInSlot(objShip, "ship_operations");
         }
     }
+
     public static void destroyShipControlDevices(obj_id player, boolean verbose) throws InterruptedException
     {
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
         if (shipControlDevices != null)
         {
-            for (obj_id shipControlDevice : shipControlDevices) {
-                if (isIdValid(shipControlDevice)) {
-                    if (verbose) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
+                if (isIdValid(shipControlDevice))
+                {
+                    if (verbose)
+                    {
                         obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
                         sendSystemMessageTestingOnly(player, "Destroyed ship, scd=" + shipControlDevice + ", ship=" + ship);
                     }
@@ -835,6 +941,7 @@ public class space_utils extends script.base_script
             }
         }
     }
+
     public static obj_id createShipControlDevice(obj_id player, String shipName, boolean verbose) throws InterruptedException
     {
         obj_id shipControlDevice = null;
@@ -879,13 +986,16 @@ public class space_utils extends script.base_script
         }
         return shipControlDevice;
     }
-    public static String getParkingLocation(obj_id objControlDevice) {
+
+    public static String getParkingLocation(obj_id objControlDevice)
+    {
         if (hasObjVar(objControlDevice, "strParkingLocation"))
         {
             return getStringObjVar(objControlDevice, "strParkingLocation");
         }
         return "";
     }
+
     public static String getProperParkingLocation(obj_id objControlDevice) throws InterruptedException
     {
         String strPort = getParkingLocation(objControlDevice);
@@ -898,7 +1008,7 @@ public class space_utils extends script.base_script
                 {
                     strPlanet = strPlanet.toUpperCase();
                 }
-                else 
+                else
                 {
                     String strFirstLetter = strPlanet.substring(0, 1);
                     strFirstLetter = strFirstLetter.toUpperCase();
@@ -911,9 +1021,12 @@ public class space_utils extends script.base_script
         }
         return "";
     }
-    public static void setLandingLocation(obj_id objControlDevice, String strLocation) {
+
+    public static void setLandingLocation(obj_id objControlDevice, String strLocation)
+    {
         setObjVar(objControlDevice, "strParkingLocation", strLocation);
     }
+
     public static obj_id createObjectTrackItemCount(String strItem, obj_id objContainer) throws InterruptedException
     {
         if (!isIdValid(objContainer) || strItem.equals(""))
@@ -932,7 +1045,7 @@ public class space_utils extends script.base_script
             {
                 return createObject(strItem, objContainer, "");
             }
-            else 
+            else
             {
                 return static_item.createNewItemFunction(strItem, objContainer);
             }
@@ -947,26 +1060,34 @@ public class space_utils extends script.base_script
         }
         return null;
     }
-    public static boolean hasWaypointInDatapad(obj_id player, obj_id waypoint) {
+
+    public static boolean hasWaypointInDatapad(obj_id player, obj_id waypoint)
+    {
         obj_id[] waypoints = getWaypointsInDatapad(player);
-        if (waypoints != null && waypoints.length > 0)
+        if (waypoints != null)
         {
-            for (obj_id waypoint1 : waypoints) {
-                if (waypoint1 == waypoint) {
+            for (obj_id waypoint1 : waypoints)
+            {
+                if (waypoint1 == waypoint)
+                {
                     return true;
                 }
             }
         }
         return false;
     }
-    public static boolean isInStation(obj_id objPlayer) {
+
+    public static boolean isInStation(obj_id objPlayer)
+    {
         int intState = 0;
         intState += getState(objPlayer, STATE_SHIP_GUNNER);
         intState += getState(objPlayer, STATE_SHIP_OPERATIONS);
         intState += getState(objPlayer, STATE_PILOTING_POB_SHIP);
         return intState > 0;
     }
-    public static boolean isShip(obj_id objShip) {
+
+    public static boolean isShip(obj_id objShip)
+    {
         if (!isIdValid(objShip))
         {
             return false;
@@ -974,6 +1095,7 @@ public class space_utils extends script.base_script
         int intGOT = getGameObjectType(objShip);
         return isGameObjectTypeOf(intGOT, GOT_ship);
     }
+
     public static void openCommChannelAfterLoad(obj_id objShip, obj_id objTarget) throws InterruptedException
     {
         obj_id objPilot = getPilotId(objShip);
@@ -983,20 +1105,26 @@ public class space_utils extends script.base_script
             newbieTutorialRequest(objPilot, "clientReady");
         }
     }
-    public static boolean isBasicShip(obj_id objShip) {
+
+    public static boolean isBasicShip(obj_id objShip)
+    {
         String strChassisName = getShipChassisType(objShip);
         int intIndex = strChassisName.indexOf("_basic");
         return intIndex > -1;
     }
-    public static boolean isPrototypeShip(obj_id objShip) {
+
+    public static boolean isPrototypeShip(obj_id objShip)
+    {
         String strChassisName = getShipChassisType(objShip);
         int intIndex = strChassisName.indexOf("_prototype");
         return intIndex > -1;
     }
+
     public static obj_id[] getSpaceGroupMemberIds(obj_id group) throws InterruptedException
     {
         return utils.getLocalGroupMemberIds(group);
     }
+
     public static boolean playerCanControlShipSlot(obj_id ship, obj_id player, boolean sendSystemMessage) throws InterruptedException
     {
         boolean result = true;
@@ -1012,45 +1140,57 @@ public class space_utils extends script.base_script
         }
         return result;
     }
-    public static boolean isPobType(String strType) {
-        String[] TYPES = 
+
+    public static boolean isPobType(String strType)
+    {
+        String[] TYPES =
+                {
+                        "ykl37r",
+                        "yt1300",
+                        "yt2400",
+                        "y8_mining_ship",
+                        "decimator",
+                        "sorosuub_space_yacht",
+                        "gunship_rebel",
+                        "gunship_imperial",
+                        "gunship_neutral"
+                };
+        for (String TYPE : TYPES)
         {
-            "ykl37r",
-            "yt1300",
-            "yt2400",
-            "y8_mining_ship",
-            "decimator",
-            "sorosuub_space_yacht",
-            "gunship_rebel",
-            "gunship_imperial",
-            "gunship_neutral"
-        };
-        for (String TYPE : TYPES) {
             int intIndex = strType.indexOf(TYPE);
-            if (intIndex > -1) {
+            if (intIndex > -1)
+            {
                 return true;
             }
         }
         return false;
     }
-    public static boolean isPobType(obj_id ship) throws InterruptedException {
+
+    public static boolean isPobType(obj_id ship) throws InterruptedException
+    {
         return isIdValid(ship) && isPobType(getTemplateName(ship));
     }
+
     public static boolean isInPobShip(obj_id player) throws InterruptedException
     {
         return isPobType(getContainedBy(player));
     }
-    public static boolean isNestedWithinPobShip(obj_id item) throws InterruptedException {
-        if (!isIdValid(item)) {
+
+    public static boolean isNestedWithinPobShip(obj_id item) throws InterruptedException
+    {
+        if (!isIdValid(item))
+        {
             return false;
         }
         obj_id containedBy = getContainedBy(item);
         return isIdValid(containedBy) && isInPobShip(containedBy);
     }
+
     public static void setNpcToPlayerSpeed(obj_id player, obj_id npc, float speedPercent) throws InterruptedException
     {
         matchEngineSpeed(player, npc, speedPercent, false);
     }
+
     public static void matchEngineSpeed(obj_id player, obj_id npc, float speedPercent, boolean isMission) throws InterruptedException
     {
         obj_id playerShip = space_transition.getContainingShip(player);
@@ -1065,6 +1205,7 @@ public class space_utils extends script.base_script
         }
         setShipEngineSpeedMaximum(npc, modifiedSpeed);
     }
+
     public static boolean isPlayerShipAttackable(obj_id player) throws InterruptedException
     {
         obj_id containing_ship = space_transition.getContainingShip(player);
@@ -1075,11 +1216,13 @@ public class space_utils extends script.base_script
         }
         return true;
     }
+
     public static boolean isHyperspacing(obj_id player) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(player);
         return isIdValid(objShip) && utils.hasScriptVar(objShip, "intHyperspacing");
     }
+
     public static boolean isHyperspaceBlocked(obj_id player) throws InterruptedException
     {
         if (!utils.hasScriptVar(player, "hyperspaceBlock"))
@@ -1098,6 +1241,7 @@ public class space_utils extends script.base_script
         }
         return false;
     }
+
     public static void setHyperspaceBlock(obj_id player, int durationInSeconds, boolean abortActiveHyperspace) throws InterruptedException
     {
         if (abortActiveHyperspace && isHyperspacing(player))
@@ -1109,6 +1253,7 @@ public class space_utils extends script.base_script
             utils.setScriptVar(player, "hyperspaceBlock", getPlayerPlayedTime(player) + durationInSeconds);
         }
     }
+
     public static void clearHyperspaceBlock(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "hyperspaceBlock"))
@@ -1116,6 +1261,7 @@ public class space_utils extends script.base_script
             utils.removeScriptVar(player, "hyperspaceBlock");
         }
     }
+
     public static void setComponentDisabled(obj_id ship, int slotId, boolean disabled) throws InterruptedException
     {
         setShipComponentDisabled(ship, slotId, disabled);
@@ -1124,6 +1270,7 @@ public class space_utils extends script.base_script
             space_combat.normalizeAllComponents(ship);
         }
     }
+
     public static obj_id getPilotForRealsies(obj_id ship) throws InterruptedException
     {
         obj_id pilot = getPilotId(ship);
@@ -1132,23 +1279,30 @@ public class space_utils extends script.base_script
             return pilot;
         }
         obj_id[] players = space_utils.getAllPlayersInShip(ship);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return null;
         }
-        for (obj_id player : players) {
-            if (getOwner(ship) == player) {
+        for (obj_id player : players)
+        {
+            if (getOwner(ship) == player)
+            {
                 return player;
             }
         }
         return null;
     }
-    public static String getSkillRequiredForShip(obj_id deed) throws InterruptedException {
+
+    public static String getSkillRequiredForShip(obj_id deed) throws InterruptedException
+    {
         String type = getStringObjVar(deed, "shiptype");
         return getSkillRequiredForShip(type);
     }
-    public static String getSkillRequiredForShip(String type) {
-        switch(type){
+
+    public static String getSkillRequiredForShip(String type)
+    {
+        switch (type)
+        {
             case "z95":
                 return "@skl_n:pilot_rebel_navy_novice";
             case "ywing":

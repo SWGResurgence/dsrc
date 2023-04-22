@@ -57,20 +57,20 @@ public class craftinglib extends script.base_script
     public static final int STATE_CRITICAL_FAILURE = 8;
     public static final int STATE_CRITICAL_FAILURE_NODESTROY = 9;
     public static final int MAX_SUCCESS_STATE = 9;
-    
-    public static final String[] STATE_NAMES = 
-    {
-        "crit success",
-        "great success",
-        "good success",
-        "mod success",
-        "success",
-        "fail",
-        "mod fail",
-        "big fail",
-        "crit fail",
-        "crit fail (nodestroy)"
-    };
+
+    public static final String[] STATE_NAMES =
+            {
+                    "crit success",
+                    "great success",
+                    "good success",
+                    "mod success",
+                    "success",
+                    "fail",
+                    "mod fail",
+                    "big fail",
+                    "crit fail",
+                    "crit fail (nodestroy)"
+            };
 
     public static final int RESOURCE_BULK = 0;
     public static final int RESOURCE_COLD_RESIST = 1;
@@ -93,21 +93,21 @@ public class craftinglib extends script.base_script
     public static final int SLOT_WEIGHT_SLOT_06 = 105;
     public static final int SLOT_WEIGHT_SLOT_07 = 106;
     public static final int SLOT_WEIGHT_SLOT_08 = 107;
-    public static final String[] RESOURCE_OBJVAR_NAMES = 
-    {
-        "res_bulk",
-        "res_cold_resist",
-        "res_conductivity",
-        "res_decay_resist",
-        "res_heat_resist",
-        "res_flavor",
-        "res_malleability",
-        "res_potential_energy",
-        "res_quality",
-        "res_shock_resistance",
-        "res_toughness",
-        "res_volume"
-    };
+    public static final String[] RESOURCE_OBJVAR_NAMES =
+            {
+                    "res_bulk",
+                    "res_cold_resist",
+                    "res_conductivity",
+                    "res_decay_resist",
+                    "res_heat_resist",
+                    "res_flavor",
+                    "res_malleability",
+                    "res_potential_energy",
+                    "res_quality",
+                    "res_shock_resistance",
+                    "res_toughness",
+                    "res_volume"
+            };
     public static final String TISSUE_SKILL_MODS = "tissue_skill_mods";
     public static final String TISSUE_SKILL_INDEX = "tissue_skill_index";
     public static final String TISSUE_SKILL_VALUE = "tissue_skill_value";
@@ -206,7 +206,7 @@ public class craftinglib extends script.base_script
         {
             resourceAverageMod = 1;
         }
-        else 
+        else
         {
             resourceAverageMod = (averagedAttributeSum - 500) / 200;
         }
@@ -434,7 +434,7 @@ public class craftinglib extends script.base_script
         {
             successState = STATE_MODERATE_FAILURE;
         }
-        else 
+        else
         {
             successState = STATE_BIG_FAILURE;
         }
@@ -460,7 +460,7 @@ public class craftinglib extends script.base_script
         {
             debugServerConsoleMsg(null, "calcSkillDesignAssemblyCheck: success state = " + successState + " (" + STATE_NAMES[successState] + ")");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "calcSkillDesignAssemblyCheck: success state = " + successState);
         }
@@ -476,40 +476,40 @@ public class craftinglib extends script.base_script
         switch (assemblySuccessState)
         {
             case craftinglib.STATE_CRITICAL_SUCCESS:
-            attributeMultiplier = 15;
-            float currentComplexityTemp = craftingValuesDictionary.getFloat("itemCurrentComplexity");
-            currentComplexityTemp -= 1.0f;
-            craftingValuesDictionary.put("itemCurrentComplexity", currentComplexityTemp);
-            break;
+                attributeMultiplier = 15;
+                float currentComplexityTemp = craftingValuesDictionary.getFloat("itemCurrentComplexity");
+                currentComplexityTemp -= 1.0f;
+                craftingValuesDictionary.put("itemCurrentComplexity", currentComplexityTemp);
+                break;
             case craftinglib.STATE_CRITICAL_FAILURE:
             case craftinglib.STATE_CRITICAL_FAILURE_NODESTROY:
-            attributeMultiplier = -4;
-            break;
+                attributeMultiplier = -4;
+                break;
             case craftinglib.STATE_GREAT_SUCCESS:
-            attributeMultiplier = 15;
-            break;
+                attributeMultiplier = 15;
+                break;
             case craftinglib.STATE_GOOD_SUCCESS:
-            attributeMultiplier = 10;
-            break;
+                attributeMultiplier = 10;
+                break;
             case craftinglib.STATE_MODERATE_SUCCESS:
-            attributeMultiplier = 5;
-            break;
+                attributeMultiplier = 5;
+                break;
             case craftinglib.STATE_SUCCESS:
-            attributeMultiplier = 1;
-            break;
+                attributeMultiplier = 1;
+                break;
             case craftinglib.STATE_FAILURE:
-            attributeMultiplier = -1;
-            break;
+                attributeMultiplier = -1;
+                break;
             case craftinglib.STATE_MODERATE_FAILURE:
-            attributeMultiplier = -2;
-            break;
+                attributeMultiplier = -2;
+                break;
             case craftinglib.STATE_BIG_FAILURE:
-            attributeMultiplier = -3;
-            break;
+                attributeMultiplier = -3;
+                break;
             default:
-            debugServerConsoleMsg(null, "Wacky assembly skill success-state detected. No attribute multiplier set");
-            attributeMultiplier = -5;
-            break;
+                debugServerConsoleMsg(null, "Wacky assembly skill success-state detected. No attribute multiplier set");
+                attributeMultiplier = -5;
+                break;
         }
         debugServerConsoleMsg(null, "Crafting assembly skill check gave a " + assemblySuccessState + " result, for a " + attributeMultiplier + " success multiplier");
         craftingValuesDictionary.put("assemblySuccessMultiplier", attributeMultiplier);
@@ -540,147 +540,147 @@ public class craftinglib extends script.base_script
                 case draft_schematic.IT_templateGeneric:
                 case draft_schematic.IT_schematic:
                 case draft_schematic.IT_schematicGeneric:
-                debugServerConsoleMsg(null, "getting components for object " + ingredient);
-                int itemGOT = getGameObjectType(ingredient);
-                if (itemGOT == GOT_resource_container_pseudo)
-                {
-                    debugServerConsoleMsg(null, "got pseudo resource for slot " + ingredientSlots[i].name);
-                    for (int j = 0; j < ingredientSlots[i].ingredients.length; ++j)
+                    debugServerConsoleMsg(null, "getting components for object " + ingredient);
+                    int itemGOT = getGameObjectType(ingredient);
+                    if (itemGOT == GOT_resource_container_pseudo)
                     {
-                        ingredient = ingredientSlots[i].ingredients[j].ingredient;
-                        ingredientCount = ingredientSlots[i].ingredients[j].count;
-                        for (int k = 0; k < NUM_RESOURCE_ATTRIBS; ++k)
+                        debugServerConsoleMsg(null, "got pseudo resource for slot " + ingredientSlots[i].name);
+                        for (int j = 0; j < ingredientSlots[i].ingredients.length; ++j)
                         {
-                            String ovname = COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + RESOURCE_OBJVAR_NAMES[k];
-                            if (hasObjVar(ingredient, ovname))
+                            ingredient = ingredientSlots[i].ingredients[j].ingredient;
+                            ingredientCount = ingredientSlots[i].ingredients[j].count;
+                            for (int k = 0; k < NUM_RESOURCE_ATTRIBS; ++k)
                             {
-                                float resourceAttrib = getIntObjVar(ingredient, ovname);
-                                totalResourceSum[k] += resourceAttrib * ingredientCount;
-                                resourceUnits[k] += ingredientCount;
+                                String ovname = COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + RESOURCE_OBJVAR_NAMES[k];
+                                if (hasObjVar(ingredient, ovname))
+                                {
+                                    float resourceAttrib = getIntObjVar(ingredient, ovname);
+                                    totalResourceSum[k] += resourceAttrib * ingredientCount;
+                                    resourceUnits[k] += ingredientCount;
+                                }
                             }
                         }
+                        continue;
                     }
-                    continue;
-                }
-                obj_var_list component_data = getObjVarList(getSelf(), COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (ingredientSlots[i].name).getAsciiId());
-                if (component_data != null)
-                {
-                    int dataCount = component_data.getNumItems();
-                    debugServerConsoleMsg(null, "got component for slot " + ingredientSlots[i].name + ", count = " + dataCount);
-                    for (int j = 0; j < dataCount; ++j)
+                    obj_var_list component_data = getObjVarList(getSelf(), COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (ingredientSlots[i].name).getAsciiId());
+                    if (component_data != null)
                     {
-                        obj_var ov = component_data.getObjVar(j);
-                        if (ov != null)
+                        int dataCount = component_data.getNumItems();
+                        debugServerConsoleMsg(null, "got component for slot " + ingredientSlots[i].name + ", count = " + dataCount);
+                        for (int j = 0; j < dataCount; ++j)
                         {
-                            Object data = ov.getData();
-                            if (data instanceof Integer)
+                            obj_var ov = component_data.getObjVar(j);
+                            if (ov != null)
                             {
-                                debugServerConsoleMsg(null, "\tsetting component attrib " + ov.getName() + " = " + ov.getIntData());
-                                componentDictionary.put(ov.getName(), ov.getIntData());
-                            }
-                            else if (data instanceof Float)
-                            {
-                                debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getFloatData());
-                                componentDictionary.addFloat(ov.getName(), ov.getFloatData());
-                            }
-                            else if (data instanceof int[])
-                            {
-                                debugServerConsoleMsg(null, "\tsetting component attrib " + ov.getName() + " = " + ov.getIntArrayData());
-                                componentDictionary.put(ov.getName(), ov.getIntArrayData());
-                            }
-                            else if (data instanceof float[])
-                            {
-                                debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getFloatArrayData());
-                                componentDictionary.addFloatArray(ov.getName(), ov.getFloatArrayData());
-                            }
-                            else if (data instanceof String)
-                            {
-                                debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getStringData());
-                                componentDictionary.put(ov.getName(), ov.getStringData());
-                            }
-                            else if (ov instanceof obj_var_list && (ov.getName()).equals(TISSUE_SKILL_MODS))
-                            {
-                                obj_var_list specialObjvars = (obj_var_list)ov;
-                                int[] mod_idx = specialObjvars.getIntArrayObjVar(TISSUE_SKILL_INDEX);
-                                int[] mod_val = specialObjvars.getIntArrayObjVar(TISSUE_SKILL_VALUE);
-                                int[] dict_mod_idx = null;
-                                int[] dict_mod_val = null;
-                                dictionary specialDictionary = (dictionary)(componentDictionary.get(TISSUE_SKILL_MODS));
-                                if (specialDictionary == null)
+                                Object data = ov.getData();
+                                if (data instanceof Integer)
                                 {
-                                    specialDictionary = new dictionary();
-                                    dict_mod_idx = new int[6];
-                                    dict_mod_val = new int[6];
+                                    debugServerConsoleMsg(null, "\tsetting component attrib " + ov.getName() + " = " + ov.getIntData());
+                                    componentDictionary.put(ov.getName(), ov.getIntData());
                                 }
-                                else 
+                                else if (data instanceof Float)
                                 {
-                                    dict_mod_idx = specialDictionary.getIntArray(TISSUE_SKILL_INDEX);
-                                    dict_mod_val = specialDictionary.getIntArray(TISSUE_SKILL_VALUE);
+                                    debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getFloatData());
+                                    componentDictionary.addFloat(ov.getName(), ov.getFloatData());
                                 }
-                                int count = mod_idx.length;
-                                for (int k = 0; k < count; ++k)
+                                else if (data instanceof int[])
                                 {
-                                    for (int l = 0; l < dict_mod_idx.length; ++l)
+                                    debugServerConsoleMsg(null, "\tsetting component attrib " + ov.getName() + " = " + ov.getIntArrayData());
+                                    componentDictionary.put(ov.getName(), ov.getIntArrayData());
+                                }
+                                else if (data instanceof float[])
+                                {
+                                    debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getFloatArrayData());
+                                    componentDictionary.addFloatArray(ov.getName(), ov.getFloatArrayData());
+                                }
+                                else if (data instanceof String)
+                                {
+                                    debugServerConsoleMsg(null, "\tadding component attrib " + ov.getName() + " = " + ov.getStringData());
+                                    componentDictionary.put(ov.getName(), ov.getStringData());
+                                }
+                                else if (ov instanceof obj_var_list && (ov.getName()).equals(TISSUE_SKILL_MODS))
+                                {
+                                    obj_var_list specialObjvars = (obj_var_list)ov;
+                                    int[] mod_idx = specialObjvars.getIntArrayObjVar(TISSUE_SKILL_INDEX);
+                                    int[] mod_val = specialObjvars.getIntArrayObjVar(TISSUE_SKILL_VALUE);
+                                    int[] dict_mod_idx = null;
+                                    int[] dict_mod_val = null;
+                                    dictionary specialDictionary = (dictionary)(componentDictionary.get(TISSUE_SKILL_MODS));
+                                    if (specialDictionary == null)
                                     {
-                                        if (dict_mod_idx[l] == mod_idx[k])
+                                        specialDictionary = new dictionary();
+                                        dict_mod_idx = new int[6];
+                                        dict_mod_val = new int[6];
+                                    }
+                                    else
+                                    {
+                                        dict_mod_idx = specialDictionary.getIntArray(TISSUE_SKILL_INDEX);
+                                        dict_mod_val = specialDictionary.getIntArray(TISSUE_SKILL_VALUE);
+                                    }
+                                    int count = mod_idx.length;
+                                    for (int k = 0; k < count; ++k)
+                                    {
+                                        for (int l = 0; l < dict_mod_idx.length; ++l)
                                         {
-                                            dict_mod_val[l] += mod_val[k];
-                                            debugServerConsoleMsg(null, "\tadding to existing skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
-                                            break;
-                                        }
-                                        else if (dict_mod_idx[l] == 0)
-                                        {
-                                            dict_mod_idx[l] = mod_idx[k];
-                                            dict_mod_val[l] = mod_val[k];
-                                            debugServerConsoleMsg(null, "\tadding new skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
-                                            break;
+                                            if (dict_mod_idx[l] == mod_idx[k])
+                                            {
+                                                dict_mod_val[l] += mod_val[k];
+                                                debugServerConsoleMsg(null, "\tadding to existing skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
+                                                break;
+                                            }
+                                            else if (dict_mod_idx[l] == 0)
+                                            {
+                                                dict_mod_idx[l] = mod_idx[k];
+                                                dict_mod_val[l] = mod_val[k];
+                                                debugServerConsoleMsg(null, "\tadding new skill mod: idx " + dict_mod_idx[l] + " = " + dict_mod_val[l]);
+                                                break;
+                                            }
                                         }
                                     }
+                                    specialDictionary.put(TISSUE_SKILL_INDEX, dict_mod_idx);
+                                    specialDictionary.put(TISSUE_SKILL_VALUE, dict_mod_val);
+                                    componentDictionary.put(TISSUE_SKILL_MODS, specialDictionary);
                                 }
-                                specialDictionary.put(TISSUE_SKILL_INDEX, dict_mod_idx);
-                                specialDictionary.put(TISSUE_SKILL_VALUE, dict_mod_val);
-                                componentDictionary.put(TISSUE_SKILL_MODS, specialDictionary);
-                            }
-                            else 
-                            {
-                                debugServerConsoleMsg(null, "\tcomponent attrib " + ov.getName() + " has unknown data type " + data.getClass());
+                                else
+                                {
+                                    debugServerConsoleMsg(null, "\tcomponent attrib " + ov.getName() + " has unknown data type " + data.getClass());
+                                }
                             }
                         }
                     }
-                }
-                else 
-                {
-                    LOG("crafting", "In Java craftinglib.scriptlib.calcCraftingDesignStageIngredientAttribAverageValues:" + " component object " + ingredient + " does not have the " + COMPONENT_ATTRIBUTE_OBJVAR_NAME + " objvar list attached to it");
-                }
-                break;
+                    else
+                    {
+                        LOG("crafting", "In Java craftinglib.scriptlib.calcCraftingDesignStageIngredientAttribAverageValues:" + " component object " + ingredient + " does not have the " + COMPONENT_ATTRIBUTE_OBJVAR_NAME + " objvar list attached to it");
+                    }
+                    break;
                 case draft_schematic.IT_resourceType:
                 case draft_schematic.IT_resourceClass:
-                if (ingredientSlots[i].ingredients.length > 1)
-                {
-                    debugServerConsoleMsg(null, "ERROR! An amalgam/alloy was detected! Support for amalgams/alloys was ripped out!");
-                }
-                else 
-                {
-                    resource_attribute[] resourceAttribs = getScaledResourceAttributes(ingredient, ingredientSlots[i].ingredientName);
-                    if (resourceAttribs != null)
+                    if (ingredientSlots[i].ingredients.length > 1)
                     {
-                        for (resource_attribute resourceAttrib : resourceAttribs) {
-                            if (resourceAttrib != null && resourceAttrib.getValue() != RESOURCE_NOT_USED) {
-                                for (int k = 0; k < RESOURCE_OBJVAR_NAMES.length; ++k) {
-                                    if (RESOURCE_OBJVAR_NAMES[k].equals(resourceAttrib.getName())) {
-                                        totalResourceSum[k] += resourceAttrib.getValue() * ingredientCount;
-                                        resourceUnits[k] += ingredientCount;
-                                        slotResourceAverage[i][k] = resourceAttrib.getValue();
-                                        break;
+                        debugServerConsoleMsg(null, "ERROR! An amalgam/alloy was detected! Support for amalgams/alloys was ripped out!");
+                    }
+                    else
+                    {
+                        resource_attribute[] resourceAttribs = getScaledResourceAttributes(ingredient, ingredientSlots[i].ingredientName);
+                        if (resourceAttribs != null)
+                        {
+                            for (resource_attribute resourceAttrib : resourceAttribs) {
+                                if (resourceAttrib != null && resourceAttrib.getValue() != RESOURCE_NOT_USED) {
+                                    for (int k = 0; k < RESOURCE_OBJVAR_NAMES.length; ++k) {
+                                        if (RESOURCE_OBJVAR_NAMES[k].equals(resourceAttrib.getName())) {
+                                            totalResourceSum[k] += resourceAttrib.getValue() * ingredientCount;
+                                            resourceUnits[k] += ingredientCount;
+                                            slotResourceAverage[i][k] = resourceAttrib.getValue();
+                                            break;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
         }
         float[] itemTotalResourceAverage = new float[NUM_RESOURCE_ATTRIBS];
@@ -690,7 +690,7 @@ public class craftinglib extends script.base_script
             {
                 itemTotalResourceAverage[i] = totalResourceSum[i] / resourceUnits[i];
             }
-            else 
+            else
             {
                 itemTotalResourceAverage[i] = 0;
             }
@@ -871,7 +871,7 @@ public class craftinglib extends script.base_script
             xpAttrib.currentValue = xpAttrib.minValue;
             debugServerConsoleMsg(null, "craftinglib.scriptlib calcAssemblyPhaseAttributes complexity = " + complexity + ", slots filled = " + numSlotsFilled + ", xp = " + xpAttrib.currentValue);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "craftinglib.scriptlib calcAssemblyPhaseAttributes no xp attrib defined!");
         }
@@ -1173,7 +1173,7 @@ public class craftinglib extends script.base_script
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation food adjustment = " + foodRollAdjust);
         float forceRollAdjust = 0;
-        
+
         {
             int forceBonus = getSkillStatisticModifier(player, "force_experimentation");
             forceRollAdjust = forceBonus * deltaMod;
@@ -1185,7 +1185,7 @@ public class craftinglib extends script.base_script
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation force adjustment = " + forceRollAdjust);
         String expertiseSkill = getCraftingSubskill(craftingSkills);
         float expertiseRollAdjust = 0;
-        
+
         {
             int expertiseBonus = getSkillStatisticModifier(player, "expertise_experimentation_increase_" + expertiseSkill);
             expertiseRollAdjust = expertiseBonus * deltaMod;
@@ -1307,7 +1307,7 @@ public class craftinglib extends script.base_script
                     successState = STATE_MODERATE_FAILURE;
                     successPointScale = -0.5f;
                 }
-                else 
+                else
                 {
                     successState = STATE_BIG_FAILURE;
                     successPointScale = -1.0f;
@@ -1335,7 +1335,7 @@ public class craftinglib extends script.base_script
                 {
                     debugServerConsoleMsg(null, "\tsuccess state = " + successState + "(" + STATE_NAMES[successState] + "), point scale = " + successPointScale);
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(null, "\tsuccess state = " + successState + ", point scale = " + successPointScale);
                 }
@@ -1452,7 +1452,7 @@ public class craftinglib extends script.base_script
                 }
                 validCustomizations++;
             }
-            else 
+            else
             {
                 customizations[i] = null;
             }
@@ -1480,7 +1480,7 @@ public class craftinglib extends script.base_script
                     usedPlayerCustomizations++;
                 }
             }
-            else 
+            else
             {
                 customizations[j] = null;
             }
@@ -1636,7 +1636,7 @@ public class craftinglib extends script.base_script
         {
             category = "weapon";
         }
-        else 
+        else
         {
             category = "armor";
         }

@@ -9,17 +9,19 @@ import script.obj_id;
 
 public class bank extends script.base_script
 {
-    public bank()
-    {
-    }
     public static final String SCRIPT_ME = "structure.municipal.bank";
     public static final String JUNK_DEALER = "junk_dealer";
     public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/bank_terminal.iff";
+    public bank()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "createBankTerminalsAndVendors", null, 9, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createBankTerminalsAndVendors(obj_id self, dictionary params) throws InterruptedException
     {
         location bankLoc = getLocation(self);

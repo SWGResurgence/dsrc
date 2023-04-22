@@ -24,6 +24,7 @@ public class callable extends script.base_script
     public static final int BASE_MAX_STORED_RIDEABLES = 60;
     public static final int ABSOLUTE_MAX_STORED_RIDEABLES = 150;
     public static final String ADDON_MAX_STORED_RIDEABLES_OBJVAR = "rideables.addonMaxStoredRideables";
+
     public static void clog(String text) throws InterruptedException
     {
         if (text != null)
@@ -31,6 +32,7 @@ public class callable extends script.base_script
             LOG("callable beasts", text);
         }
     }
+
     public static int getControlDeviceType(obj_id cd) throws InterruptedException
     {
         if (beast_lib.isValidBCD(cd))
@@ -56,12 +58,13 @@ public class callable extends script.base_script
             case pet_lib.PET_TYPE_AGGRO:
             case pet_lib.PET_TYPE_NPC:
             case pet_lib.PET_TYPE_DROID:
-            return CALLABLE_TYPE_COMBAT_PET;
+                return CALLABLE_TYPE_COMBAT_PET;
             case pet_lib.PET_TYPE_FAMILIAR:
-            return CALLABLE_TYPE_FAMILIAR;
+                return CALLABLE_TYPE_FAMILIAR;
         }
         return CALLABLE_TYPE_UNKNOWN;
     }
+
     public static int getCallableType(obj_id objCallable) throws InterruptedException
     {
         if (!isIdValid(objCallable) || !exists(objCallable))
@@ -90,22 +93,24 @@ public class callable extends script.base_script
         }
         return CALLABLE_TYPE_UNKNOWN;
     }
+
     public static String getCallableTypeObjVar(int type) throws InterruptedException
     {
         switch (type)
         {
             case CALLABLE_TYPE_COMBAT_OTHER:
-            return OBJVAR_CALLABLE_TYPE_COMBAT_OTHER;
+                return OBJVAR_CALLABLE_TYPE_COMBAT_OTHER;
             case CALLABLE_TYPE_COMBAT_PET:
-            return OBJVAR_CALLABLE_TYPE_COMBAT_PET;
+                return OBJVAR_CALLABLE_TYPE_COMBAT_PET;
             case CALLABLE_TYPE_FAMILIAR:
-            return OBJVAR_CALLABLE_TYPE_FAMILIAR;
+                return OBJVAR_CALLABLE_TYPE_FAMILIAR;
             case CALLABLE_TYPE_RIDEABLE:
-            return OBJVAR_CALLABLE_TYPE_RIDEABLE;
+                return OBJVAR_CALLABLE_TYPE_RIDEABLE;
             default:
-            return null;
+                return null;
         }
     }
+
     public static obj_id getCallable(obj_id master, int objCallableType) throws InterruptedException
     {
         if (!beast_lib.isValidPlayer(master))
@@ -127,20 +132,23 @@ public class callable extends script.base_script
         }
         return null;
     }
+
     public static obj_id[] getCallables(obj_id master) throws InterruptedException
     {
         int[] callableTypes =
-        {
-            CALLABLE_TYPE_COMBAT_OTHER,
-            CALLABLE_TYPE_COMBAT_PET,
-            CALLABLE_TYPE_FAMILIAR,
-            CALLABLE_TYPE_RIDEABLE
-        };
+                {
+                        CALLABLE_TYPE_COMBAT_OTHER,
+                        CALLABLE_TYPE_COMBAT_PET,
+                        CALLABLE_TYPE_FAMILIAR,
+                        CALLABLE_TYPE_RIDEABLE
+                };
         Vector callables = new Vector();
         callables.setSize(0);
-        for (int callableType : callableTypes) {
+        for (int callableType : callableTypes)
+        {
             obj_id objCallable = getCallable(master, callableType);
-            if (isIdValid(objCallable) && exists(objCallable)) {
+            if (isIdValid(objCallable) && exists(objCallable))
+            {
                 callables = utils.addElement(callables, objCallable);
             }
         }
@@ -152,6 +160,7 @@ public class callable extends script.base_script
         }
         return _callables;
     }
+
     public static obj_id[] getDatapadCallablesByType(obj_id master, int callableType) throws InterruptedException
     {
         Vector callables = new Vector();
@@ -162,8 +171,10 @@ public class callable extends script.base_script
             return null;
         }
         obj_id[] dataItems = getContents(datapad);
-        for (obj_id dataItem : dataItems) {
-            if (getControlDeviceType(dataItem) == callableType) {
+        for (obj_id dataItem : dataItems)
+        {
+            if (getControlDeviceType(dataItem) == callableType)
+            {
                 callables = utils.addElement(callables, dataItem);
             }
         }
@@ -175,10 +186,12 @@ public class callable extends script.base_script
         }
         return _callables;
     }
+
     public static boolean hasCallable(obj_id master, int objCallableType) throws InterruptedException
     {
         return hasCallable(master, objCallableType, obj_id.NULL_ID);
     }
+
     public static boolean hasCallable(obj_id master, int objCallableType, obj_id beast) throws InterruptedException
     {
         if (!beast_lib.isValidPlayer(master))
@@ -195,29 +208,21 @@ public class callable extends script.base_script
             obj_id objCallable = utils.getObjIdScriptVar(master, strObjVar);
             if (isIdValid(beast))
             {
-                if (isIdValid(objCallable) && exists(objCallable) && beast != objCallable)
-                {
-                    return true;
-                }
+                return isIdValid(objCallable) && exists(objCallable) && beast != objCallable;
             }
             else
             {
-                if (isIdValid(objCallable) && exists(objCallable))
-                {
-                    return true;
-                }
+                return isIdValid(objCallable) && exists(objCallable);
             }
         }
         return false;
     }
+
     public static boolean hasAnyCallable(obj_id master) throws InterruptedException
     {
-        if (hasCallable(master, CALLABLE_TYPE_COMBAT_OTHER) || hasCallable(master, CALLABLE_TYPE_COMBAT_PET) || hasCallable(master, CALLABLE_TYPE_FAMILIAR) || hasCallable(master, CALLABLE_TYPE_RIDEABLE))
-        {
-            return true;
-        }
-        return false;
+        return hasCallable(master, CALLABLE_TYPE_COMBAT_OTHER) || hasCallable(master, CALLABLE_TYPE_COMBAT_PET) || hasCallable(master, CALLABLE_TYPE_FAMILIAR) || hasCallable(master, CALLABLE_TYPE_RIDEABLE);
     }
+
     public static boolean setCallable(obj_id master, obj_id objCallable, int objCallableType) throws InterruptedException
     {
         if (!beast_lib.isValidPlayer(master))
@@ -245,6 +250,7 @@ public class callable extends script.base_script
         utils.setScriptVar(master, strObjVar, objCallable);
         return true;
     }
+
     public static obj_id getCDCallable(obj_id cd) throws InterruptedException
     {
         if (!isIdValid(cd) || !exists(cd))
@@ -261,6 +267,7 @@ public class callable extends script.base_script
         }
         return null;
     }
+
     public static boolean hasCDCallable(obj_id cd) throws InterruptedException
     {
         if (!isIdValid(cd) || !exists(cd))
@@ -270,13 +277,11 @@ public class callable extends script.base_script
         if (utils.hasScriptVar(cd, OBJVAR_CALLABLE_CALLED))
         {
             obj_id objCallable = utils.getObjIdScriptVar(cd, OBJVAR_CALLABLE_CALLED);
-            if (isIdValid(objCallable) && exists(objCallable))
-            {
-                return true;
-            }
+            return isIdValid(objCallable) && exists(objCallable);
         }
         return false;
     }
+
     public static boolean setCDCallable(obj_id cd, obj_id objCallable) throws InterruptedException
     {
         if (!isIdValid(cd) || !exists(cd))
@@ -293,6 +298,7 @@ public class callable extends script.base_script
         }
         return true;
     }
+
     public static obj_id getCallableCD(obj_id objCallable) throws InterruptedException
     {
         if (!isIdValid(objCallable) || !exists(objCallable))
@@ -309,6 +315,7 @@ public class callable extends script.base_script
         }
         return null;
     }
+
     public static boolean hasCallableCD(obj_id objCallable) throws InterruptedException
     {
         if (!isIdValid(objCallable) || !exists(objCallable))
@@ -318,13 +325,11 @@ public class callable extends script.base_script
         if (hasObjVar(objCallable, OBJVAR_CALLABLE_CONTROL_DEVICE))
         {
             obj_id cd = getObjIdObjVar(objCallable, OBJVAR_CALLABLE_CONTROL_DEVICE);
-            if (isIdValid(cd) && exists(cd))
-            {
-                return true;
-            }
+            return isIdValid(cd) && exists(cd);
         }
         return false;
     }
+
     public static boolean setCallableCD(obj_id objCallable, obj_id cd) throws InterruptedException
     {
         if (!isIdValid(cd) || !exists(cd) || !isIdValid(objCallable) || !exists(objCallable))
@@ -334,6 +339,7 @@ public class callable extends script.base_script
         setObjVar(objCallable, OBJVAR_CALLABLE_CONTROL_DEVICE, cd);
         return true;
     }
+
     public static void setCallableLinks(obj_id master, obj_id cd, obj_id objCallable) throws InterruptedException
     {
         setCallable(master, objCallable, getCallableType(objCallable));
@@ -349,6 +355,7 @@ public class callable extends script.base_script
             }
         }
     }
+
     public static void storeCallable(obj_id master, obj_id objCallable) throws InterruptedException
     {
         if (!isIdValid(objCallable) || !exists(objCallable))
@@ -374,6 +381,7 @@ public class callable extends script.base_script
             setCallable(master, null, callableType);
         }
     }
+
     public static void storeCallables(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master) || !exists(master) || !hasAnyCallable(master))
@@ -381,19 +389,22 @@ public class callable extends script.base_script
             return;
         }
         int[] callableTypes =
+                {
+                        CALLABLE_TYPE_COMBAT_OTHER,
+                        CALLABLE_TYPE_COMBAT_PET,
+                        CALLABLE_TYPE_FAMILIAR,
+                        CALLABLE_TYPE_RIDEABLE
+                };
+        for (int callableType : callableTypes)
         {
-            CALLABLE_TYPE_COMBAT_OTHER,
-            CALLABLE_TYPE_COMBAT_PET,
-            CALLABLE_TYPE_FAMILIAR,
-            CALLABLE_TYPE_RIDEABLE
-        };
-        for (int callableType : callableTypes) {
             obj_id objCallable = getCallable(master, callableType);
-            if (isIdValid(objCallable) && exists(objCallable)) {
+            if (isIdValid(objCallable) && exists(objCallable))
+            {
                 storeCallable(master, objCallable);
             }
         }
     }
+
     public static void restoreCallable(obj_id master) throws InterruptedException
     {
         if (!isIdValid(master) || !exists(master) || hasCallable(master, CALLABLE_TYPE_COMBAT_PET) || !utils.hasScriptVar(master, SCRIPTVAR_RIDEABLE_PACKED_CALLABLE))
@@ -407,6 +418,7 @@ public class callable extends script.base_script
         }
         utils.removeScriptVar(master, SCRIPTVAR_RIDEABLE_PACKED_CALLABLE);
     }
+
     public static void killCallable(obj_id objCallable, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(objCallable) || !exists(objCallable))
@@ -429,6 +441,7 @@ public class callable extends script.base_script
             }
         }
     }
+
     public static void killCallables(obj_id master, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(master) || !exists(master) || !hasAnyCallable(master))
@@ -436,19 +449,22 @@ public class callable extends script.base_script
             return;
         }
         int[] callableTypes =
+                {
+                        CALLABLE_TYPE_COMBAT_OTHER,
+                        CALLABLE_TYPE_COMBAT_PET,
+                        CALLABLE_TYPE_FAMILIAR,
+                        CALLABLE_TYPE_RIDEABLE
+                };
+        for (int callableType : callableTypes)
         {
-            CALLABLE_TYPE_COMBAT_OTHER,
-            CALLABLE_TYPE_COMBAT_PET,
-            CALLABLE_TYPE_FAMILIAR,
-            CALLABLE_TYPE_RIDEABLE
-        };
-        for (int callableType : callableTypes) {
             obj_id objCallable = getCallable(master, callableType);
-            if (isIdValid(objCallable) && exists(objCallable)) {
+            if (isIdValid(objCallable) && exists(objCallable))
+            {
                 killCallable(objCallable, killer);
             }
         }
     }
+
     public static int getNumStoredCDByType(obj_id master, int CDType) throws InterruptedException
     {
         if (!isIdValid(master) || !exists(master))
@@ -466,13 +482,16 @@ public class callable extends script.base_script
             return 0;
         }
         int numStored = 0;
-        for (obj_id dataItem : dataItems) {
-            if (getControlDeviceType(dataItem) == CDType) {
+        for (obj_id dataItem : dataItems)
+        {
+            if (getControlDeviceType(dataItem) == CDType)
+            {
                 numStored++;
             }
         }
         return numStored;
     }
+
     public static int getMaxAllowedStoredRideables(obj_id player) throws InterruptedException
     {
         int totalMaxStoredRideables = BASE_MAX_STORED_RIDEABLES;
@@ -488,6 +507,7 @@ public class callable extends script.base_script
         }
         return totalMaxStoredRideables;
     }
+
     public static int getAddonMaxAllowedStoredRideables(obj_id player) throws InterruptedException
     {
         int addonAmount = 0;
@@ -497,19 +517,18 @@ public class callable extends script.base_script
         }
         return addonAmount;
     }
+
     public static boolean hasMaxStoredRideables(obj_id player) throws InterruptedException
     {
         int totalMaxStoredRideables = getMaxAllowedStoredRideables(player);
-        if (getNumStoredCDByType(player, CALLABLE_TYPE_RIDEABLE) >= totalMaxStoredRideables)
-        {
-            return true;
-        }
-        return false;
+        return getNumStoredCDByType(player, CALLABLE_TYPE_RIDEABLE) >= totalMaxStoredRideables;
     }
+
     public static boolean increaseAddonMaxStoredRideables(obj_id player, int amountIncreased) throws InterruptedException
     {
         return increaseAddonMaxStoredRideables(player, amountIncreased, obj_id.NULL_ID);
     }
+
     public static boolean increaseAddonMaxStoredRideables(obj_id player, int amountIncreased, obj_id source) throws InterruptedException
     {
         int currentAddonAmount = getAddonMaxAllowedStoredRideables(player);
@@ -545,12 +564,9 @@ public class callable extends script.base_script
         CustomerServiceLog("max_stored_rideables", successLog);
         return true;
     }
+
     public static boolean hasMaxStoredCombatPets(obj_id master) throws InterruptedException
     {
-        if (getNumStoredCDByType(master, CALLABLE_TYPE_COMBAT_PET) >= MAX_STORED_COMBAT_PETS)
-        {
-            return true;
-        }
-        return false;
+        return getNumStoredCDByType(master, CALLABLE_TYPE_COMBAT_PET) >= MAX_STORED_COMBAT_PETS;
     }
 }

@@ -194,344 +194,344 @@ public class chat extends script.base_script
     public static final String MOOD_HURRIED = "hurried";
     public static final String MOOD_PATIENT = "patient";
     public static final String MOOD_FIRM = "firm";
-	public static final String MOOD_UNDEAD = "undead";
-    public static final String[] BADMOODS = 
-    {
-        MOOD_ANGRY,
-        MOOD_BITTER,
-        MOOD_BLOODTHIRSTY,
-        MOOD_CALLOUS,
-        MOOD_COLD,
-        MOOD_CONDESCENDING,
-        MOOD_CRUDE,
-        MOOD_CRUEL,
-        MOOD_CYNICAL,
-        MOOD_DEFENSIVE,
-        MOOD_DEPRESSED,
-        MOOD_DEVIOUS,
-        MOOD_DISAPPOINTED,
-        MOOD_DISGRUNTLED,
-        MOOD_DISGUSTED,
-        MOOD_DISMAYED,
-        MOOD_DOUBTFUL,
-        MOOD_EVIL,
-        MOOD_EXASPERATED,
-        MOOD_FRUSTRATED,
-        MOOD_GUILTY,
-        MOOD_HOPELESS,
-        MOOD_INDIFFERENT,
-        MOOD_INDIGNANT,
-        MOOD_MEAN,
-        MOOD_MISCHIEVOUS,
-        MOOD_PESSIMISTIC,
-        MOOD_PETULANT,
-        MOOD_POMPOUS,
-        MOOD_RESIGNED,
-        MOOD_RUDE,
-        MOOD_SAD,
-        MOOD_SCOLDING,
-        MOOD_SCORNFUL,
-        MOOD_SMUG,
-        MOOD_SNOBBY,
-        MOOD_SPITEFUL,
-        MOOD_SULLEN,
-        MOOD_UNHAPPY,
-        MOOD_UNWILLING,
-        MOOD_WICKED,
-        MOOD_WORRIED,
-        MOOD_TIRED,
-        MOOD_EXHAUSTED,
-        MOOD_ANNOYED,
-        MOOD_PERTURBED,
-        MOOD_SUFFERING,
-        MOOD_CROTCHETY,
-        MOOD_SURLY,
-        MOOD_GRUMPY,
-        MOOD_EMOTIONLESS,
-        MOOD_GLOOMY,
-        MOOD_AMBIVALENT,
-        MOOD_OBNOXIOUS,
-        MOOD_DISDAINFUL,
-        MOOD_CONTEMPTUOUS,
-        MOOD_WARY,
-        MOOD_MALEVOLENT,
-		MOOD_UNDEAD
-    };
-    public static final String[] GOODMOODS = 
-    {
-        MOOD_AMUSED,
-        MOOD_APPROVING,
-        MOOD_BRAVE,
-        MOOD_CASUAL,
-        MOOD_COMPASSIONATE,
-        MOOD_CONTENT,
-        MOOD_DISCREET,
-        MOOD_DREAMY,
-        MOOD_EARNEST,
-        MOOD_ECSTATIC,
-        MOOD_ENCOURAGING,
-        MOOD_ENTHUSIASTIC,
-        MOOD_EXUBERANT,
-        MOOD_HAPPY,
-        MOOD_INTERESTED,
-        MOOD_JOYFUL,
-        MOOD_LOFTY,
-        MOOD_LOVING,
-        MOOD_OPTIMISTIC,
-        MOOD_PLAYFUL,
-        MOOD_POLITE,
-        MOOD_RELIEVED,
-        MOOD_RESPECTFUL,
-        MOOD_SINCERE,
-        MOOD_THOUGHTFUL,
-        MOOD_TOLERANT,
-        MOOD_WARM,
-        MOOD_FRIENDLY,
-        MOOD_YOUTHFUL,
-        MOOD_ADVENTUROUS,
-        MOOD_CALM,
-        MOOD_ALERT,
-        MOOD_BUBBLY,
-        MOOD_HEROIC,
-        MOOD_NICE,
-        MOOD_CHEERFUL,
-        MOOD_DIGNIFIED,
-        MOOD_PATIENT
-    };
-    public static final String[] ANGRYMOODS = 
-    {
-        MOOD_ANGRY,
-        MOOD_BITTER,
-        MOOD_BLOODTHIRSTY,
-        MOOD_CALLOUS,
-        MOOD_COCKY,
-        MOOD_COLD,
-        MOOD_CRUEL,
-        MOOD_EVIL,
-        MOOD_FANATICAL,
-        MOOD_MEAN,
-        MOOD_PETULANT,
-        MOOD_RUDE,
-        MOOD_SCORNFUL,
-        MOOD_TAUNTING,
-        MOOD_WICKED,
-        MOOD_PERTURBED,
-        MOOD_VENGEFUL,
-        MOOD_ENRAGED,
-        MOOD_OBNOXIOUS,
-        MOOD_CONTEMPTUOUS,
-        MOOD_MALEVOLENT
-    };
-    public static final String[] NEUTRALMOODS = 
-    {
-        MOOD_NONE,
-        MOOD_BORED,
-        MOOD_CASUAL,
-        MOOD_CONTENT,
-        MOOD_INDIFFERENT,
-        MOOD_NEUTRAL,
-        MOOD_SERIOUS,
-        MOOD_THOUGHTFUL,
-        MOOD_INNOCENT,
-        MOOD_SEDATE,
-        MOOD_CALM,
-        MOOD_RELAXED,
-        MOOD_QUIET,
-        MOOD_EMOTIONLESS,
-        MOOD_FIRM
-    };
-    public static final String[] ALLMOODS = 
-    {
-        MOOD_NONE,
-        MOOD_ABSENTMINDED,
-        MOOD_AMAZED,
-        MOOD_AMUSED,
-        MOOD_ANGRY,
-        MOOD_APPROVING,
-        MOOD_BITTER,
-        MOOD_BLOODTHIRSTY,
-        MOOD_BORED,
-        MOOD_BRAVE,
-        MOOD_CALLOUS,
-        MOOD_CAREFUL,
-        MOOD_CARELESS,
-        MOOD_CASUAL,
-        MOOD_CLINICAL,
-        MOOD_COCKY,
-        MOOD_COLD,
-        MOOD_COMPASSIONATE,
-        MOOD_CONDESCENDING,
-        MOOD_CONFIDENT,
-        MOOD_CONFUSED,
-        MOOD_CONTENT,
-        MOOD_COURTLY,
-        MOOD_COY,
-        MOOD_CRUDE,
-        MOOD_CRUEL,
-        MOOD_CURIOUS,
-        MOOD_CYNICAL,
-        MOOD_DEFENSIVE,
-        MOOD_DEPRESSED,
-        MOOD_DEVIOUS,
-        MOOD_DIMWITTED,
-        MOOD_DISAPPOINTED,
-        MOOD_DISCREET,
-        MOOD_DISGRUNTLED,
-        MOOD_DISGUSTED,
-        MOOD_DISMAYED,
-        MOOD_DISORIENTED,
-        MOOD_DISTRACTED,
-        MOOD_DOUBTFUL,
-        MOOD_DRAMATIC,
-        MOOD_DREAMY,
-        MOOD_DRUNK,
-        MOOD_EARNEST,
-        MOOD_ECSTATIC,
-        MOOD_EMBARRASSED,
-        MOOD_EMPHATIC,
-        MOOD_ENCOURAGING,
-        MOOD_ENTHUSIASTIC,
-        MOOD_EVIL,
-        MOOD_EXASPERATED,
-        MOOD_EXUBERANT,
-        MOOD_FANATICAL,
-        MOOD_FORGIVE,
-        MOOD_FRUSTRATED,
-        MOOD_GUILTY,
-        MOOD_HAPPY,
-        MOOD_HONEST,
-        MOOD_HOPEFUL,
-        MOOD_HOPELESS,
-        MOOD_HUMBLE,
-        MOOD_HYSTERICAL,
-        MOOD_IMPLORING,
-        MOOD_INDIFFERENT,
-        MOOD_INDIGNANT,
-        MOOD_INTERESTED,
-        MOOD_JEALOUS,
-        MOOD_JOYFUL,
-        MOOD_LOFTY,
-        MOOD_LOUD,
-        MOOD_LOVING,
-        MOOD_LUSTFUL,
-        MOOD_MEAN,
-        MOOD_MISCHIEVOUS,
-        MOOD_NERVOUS,
-        MOOD_NEUTRAL,
-        MOOD_OFFENDED,
-        MOOD_OPTIMISTIC,
-        MOOD_PEDANTIC,
-        MOOD_PESSIMISTIC,
-        MOOD_PETULANT,
-        MOOD_PHILOSOPHICAL,
-        MOOD_PITYING,
-        MOOD_PLAYFUL,
-        MOOD_POLITE,
-        MOOD_POMPOUS,
-        MOOD_PROUD,
-        MOOD_PROVOCATIVE,
-        MOOD_PUZZLED,
-        MOOD_REGRETFUL,
-        MOOD_RELIEVED,
-        MOOD_RELUCTANT,
-        MOOD_RESIGNED,
-        MOOD_RESPECTFUL,
-        MOOD_ROMANTIC,
-        MOOD_RUDE,
-        MOOD_SAD,
-        MOOD_SARCASTIC,
-        MOOD_SCARED,
-        MOOD_SCOLDING,
-        MOOD_SCORNFUL,
-        MOOD_SERIOUS,
-        MOOD_SHAMELESS,
-        MOOD_SHOCKED,
-        MOOD_SHY,
-        MOOD_SINCERE,
-        MOOD_SLEEPY,
-        MOOD_SLY,
-        MOOD_SMUG,
-        MOOD_SNOBBY,
-        MOOD_SORRY,
-        MOOD_SPITEFUL,
-        MOOD_STUBBORN,
-        MOOD_SULLEN,
-        MOOD_SUSPICIOUS,
-        MOOD_TAUNTING,
-        MOOD_TERRIFIED,
-        MOOD_THANKFUL,
-        MOOD_THOUGHTFUL,
-        MOOD_TOLERANT,
-        MOOD_UNCERTAIN,
-        MOOD_UNHAPPY,
-        MOOD_UNWILLING,
-        MOOD_WARM,
-        MOOD_WHINY,
-        MOOD_WICKED,
-        MOOD_WISTFUL,
-        MOOD_WORRIED,
-        MOOD_TIRED,
-        MOOD_EXHAUSTED,
-        MOOD_FRIENDLY,
-        MOOD_TIMID,
-        MOOD_LAZY,
-        MOOD_SURPRISED,
-        MOOD_INNOCENT,
-        MOOD_WISE,
-        MOOD_YOUTHFUL,
-        MOOD_ADVENTUROUS,
-        MOOD_ANNOYED,
-        MOOD_PERTURBED,
-        MOOD_SEDATE,
-        MOOD_CALM,
-        MOOD_SUFFERING,
-        MOOD_HUNGRY,
-        MOOD_THIRSTY,
-        MOOD_ALERT,
-        MOOD_SHIFTY,
-        MOOD_RELAXED,
-        MOOD_CROTCHETY,
-        MOOD_SURLY,
-        MOOD_PAINFUL,
-        MOOD_WOUNDED,
-        MOOD_BUBBLY,
-        MOOD_HEROIC,
-        MOOD_QUIET,
-        MOOD_REMORSEFUL,
-        MOOD_GRUMPY,
-        MOOD_LOGICAL,
-        MOOD_EMOTIONAL,
-        MOOD_TROUBLED,
-        MOOD_PANICKED,
-        MOOD_NICE,
-        MOOD_CHEERFUL,
-        MOOD_EMOTIONLESS,
-        MOOD_GLOOMY,
-        MOOD_AMBIVALENT,
-        MOOD_ENVIOUS,
-        MOOD_VENGEFUL,
-        MOOD_FEARFUL,
-        MOOD_ENRAGED,
-        MOOD_SHEEPISH,
-        MOOD_OBNOXIOUS,
-        MOOD_FASTIDIOUS,
-        MOOD_SQUEAMISH,
-        MOOD_DAINTY,
-        MOOD_DIGNIFIED,
-        MOOD_HAUGHTY,
-        MOOD_OBSCURE,
-        MOOD_GOOFY,
-        MOOD_SILLY,
-        MOOD_DISDAINFUL,
-        MOOD_CONTEMPTUOUS,
-        MOOD_DIPLOMATIC,
-        MOOD_WARY,
-        MOOD_MALEVOLENT,
-        MOOD_HURRIED,
-        MOOD_PATIENT,
-        MOOD_FIRM,
-		MOOD_UNDEAD
-    };
+    public static final String MOOD_UNDEAD = "undead";
+    public static final String[] BADMOODS =
+            {
+                    MOOD_ANGRY,
+                    MOOD_BITTER,
+                    MOOD_BLOODTHIRSTY,
+                    MOOD_CALLOUS,
+                    MOOD_COLD,
+                    MOOD_CONDESCENDING,
+                    MOOD_CRUDE,
+                    MOOD_CRUEL,
+                    MOOD_CYNICAL,
+                    MOOD_DEFENSIVE,
+                    MOOD_DEPRESSED,
+                    MOOD_DEVIOUS,
+                    MOOD_DISAPPOINTED,
+                    MOOD_DISGRUNTLED,
+                    MOOD_DISGUSTED,
+                    MOOD_DISMAYED,
+                    MOOD_DOUBTFUL,
+                    MOOD_EVIL,
+                    MOOD_EXASPERATED,
+                    MOOD_FRUSTRATED,
+                    MOOD_GUILTY,
+                    MOOD_HOPELESS,
+                    MOOD_INDIFFERENT,
+                    MOOD_INDIGNANT,
+                    MOOD_MEAN,
+                    MOOD_MISCHIEVOUS,
+                    MOOD_PESSIMISTIC,
+                    MOOD_PETULANT,
+                    MOOD_POMPOUS,
+                    MOOD_RESIGNED,
+                    MOOD_RUDE,
+                    MOOD_SAD,
+                    MOOD_SCOLDING,
+                    MOOD_SCORNFUL,
+                    MOOD_SMUG,
+                    MOOD_SNOBBY,
+                    MOOD_SPITEFUL,
+                    MOOD_SULLEN,
+                    MOOD_UNHAPPY,
+                    MOOD_UNWILLING,
+                    MOOD_WICKED,
+                    MOOD_WORRIED,
+                    MOOD_TIRED,
+                    MOOD_EXHAUSTED,
+                    MOOD_ANNOYED,
+                    MOOD_PERTURBED,
+                    MOOD_SUFFERING,
+                    MOOD_CROTCHETY,
+                    MOOD_SURLY,
+                    MOOD_GRUMPY,
+                    MOOD_EMOTIONLESS,
+                    MOOD_GLOOMY,
+                    MOOD_AMBIVALENT,
+                    MOOD_OBNOXIOUS,
+                    MOOD_DISDAINFUL,
+                    MOOD_CONTEMPTUOUS,
+                    MOOD_WARY,
+                    MOOD_MALEVOLENT,
+                    MOOD_UNDEAD
+            };
+    public static final String[] GOODMOODS =
+            {
+                    MOOD_AMUSED,
+                    MOOD_APPROVING,
+                    MOOD_BRAVE,
+                    MOOD_CASUAL,
+                    MOOD_COMPASSIONATE,
+                    MOOD_CONTENT,
+                    MOOD_DISCREET,
+                    MOOD_DREAMY,
+                    MOOD_EARNEST,
+                    MOOD_ECSTATIC,
+                    MOOD_ENCOURAGING,
+                    MOOD_ENTHUSIASTIC,
+                    MOOD_EXUBERANT,
+                    MOOD_HAPPY,
+                    MOOD_INTERESTED,
+                    MOOD_JOYFUL,
+                    MOOD_LOFTY,
+                    MOOD_LOVING,
+                    MOOD_OPTIMISTIC,
+                    MOOD_PLAYFUL,
+                    MOOD_POLITE,
+                    MOOD_RELIEVED,
+                    MOOD_RESPECTFUL,
+                    MOOD_SINCERE,
+                    MOOD_THOUGHTFUL,
+                    MOOD_TOLERANT,
+                    MOOD_WARM,
+                    MOOD_FRIENDLY,
+                    MOOD_YOUTHFUL,
+                    MOOD_ADVENTUROUS,
+                    MOOD_CALM,
+                    MOOD_ALERT,
+                    MOOD_BUBBLY,
+                    MOOD_HEROIC,
+                    MOOD_NICE,
+                    MOOD_CHEERFUL,
+                    MOOD_DIGNIFIED,
+                    MOOD_PATIENT
+            };
+    public static final String[] ANGRYMOODS =
+            {
+                    MOOD_ANGRY,
+                    MOOD_BITTER,
+                    MOOD_BLOODTHIRSTY,
+                    MOOD_CALLOUS,
+                    MOOD_COCKY,
+                    MOOD_COLD,
+                    MOOD_CRUEL,
+                    MOOD_EVIL,
+                    MOOD_FANATICAL,
+                    MOOD_MEAN,
+                    MOOD_PETULANT,
+                    MOOD_RUDE,
+                    MOOD_SCORNFUL,
+                    MOOD_TAUNTING,
+                    MOOD_WICKED,
+                    MOOD_PERTURBED,
+                    MOOD_VENGEFUL,
+                    MOOD_ENRAGED,
+                    MOOD_OBNOXIOUS,
+                    MOOD_CONTEMPTUOUS,
+                    MOOD_MALEVOLENT
+            };
+    public static final String[] NEUTRALMOODS =
+            {
+                    MOOD_NONE,
+                    MOOD_BORED,
+                    MOOD_CASUAL,
+                    MOOD_CONTENT,
+                    MOOD_INDIFFERENT,
+                    MOOD_NEUTRAL,
+                    MOOD_SERIOUS,
+                    MOOD_THOUGHTFUL,
+                    MOOD_INNOCENT,
+                    MOOD_SEDATE,
+                    MOOD_CALM,
+                    MOOD_RELAXED,
+                    MOOD_QUIET,
+                    MOOD_EMOTIONLESS,
+                    MOOD_FIRM
+            };
+    public static final String[] ALLMOODS =
+            {
+                    MOOD_NONE,
+                    MOOD_ABSENTMINDED,
+                    MOOD_AMAZED,
+                    MOOD_AMUSED,
+                    MOOD_ANGRY,
+                    MOOD_APPROVING,
+                    MOOD_BITTER,
+                    MOOD_BLOODTHIRSTY,
+                    MOOD_BORED,
+                    MOOD_BRAVE,
+                    MOOD_CALLOUS,
+                    MOOD_CAREFUL,
+                    MOOD_CARELESS,
+                    MOOD_CASUAL,
+                    MOOD_CLINICAL,
+                    MOOD_COCKY,
+                    MOOD_COLD,
+                    MOOD_COMPASSIONATE,
+                    MOOD_CONDESCENDING,
+                    MOOD_CONFIDENT,
+                    MOOD_CONFUSED,
+                    MOOD_CONTENT,
+                    MOOD_COURTLY,
+                    MOOD_COY,
+                    MOOD_CRUDE,
+                    MOOD_CRUEL,
+                    MOOD_CURIOUS,
+                    MOOD_CYNICAL,
+                    MOOD_DEFENSIVE,
+                    MOOD_DEPRESSED,
+                    MOOD_DEVIOUS,
+                    MOOD_DIMWITTED,
+                    MOOD_DISAPPOINTED,
+                    MOOD_DISCREET,
+                    MOOD_DISGRUNTLED,
+                    MOOD_DISGUSTED,
+                    MOOD_DISMAYED,
+                    MOOD_DISORIENTED,
+                    MOOD_DISTRACTED,
+                    MOOD_DOUBTFUL,
+                    MOOD_DRAMATIC,
+                    MOOD_DREAMY,
+                    MOOD_DRUNK,
+                    MOOD_EARNEST,
+                    MOOD_ECSTATIC,
+                    MOOD_EMBARRASSED,
+                    MOOD_EMPHATIC,
+                    MOOD_ENCOURAGING,
+                    MOOD_ENTHUSIASTIC,
+                    MOOD_EVIL,
+                    MOOD_EXASPERATED,
+                    MOOD_EXUBERANT,
+                    MOOD_FANATICAL,
+                    MOOD_FORGIVE,
+                    MOOD_FRUSTRATED,
+                    MOOD_GUILTY,
+                    MOOD_HAPPY,
+                    MOOD_HONEST,
+                    MOOD_HOPEFUL,
+                    MOOD_HOPELESS,
+                    MOOD_HUMBLE,
+                    MOOD_HYSTERICAL,
+                    MOOD_IMPLORING,
+                    MOOD_INDIFFERENT,
+                    MOOD_INDIGNANT,
+                    MOOD_INTERESTED,
+                    MOOD_JEALOUS,
+                    MOOD_JOYFUL,
+                    MOOD_LOFTY,
+                    MOOD_LOUD,
+                    MOOD_LOVING,
+                    MOOD_LUSTFUL,
+                    MOOD_MEAN,
+                    MOOD_MISCHIEVOUS,
+                    MOOD_NERVOUS,
+                    MOOD_NEUTRAL,
+                    MOOD_OFFENDED,
+                    MOOD_OPTIMISTIC,
+                    MOOD_PEDANTIC,
+                    MOOD_PESSIMISTIC,
+                    MOOD_PETULANT,
+                    MOOD_PHILOSOPHICAL,
+                    MOOD_PITYING,
+                    MOOD_PLAYFUL,
+                    MOOD_POLITE,
+                    MOOD_POMPOUS,
+                    MOOD_PROUD,
+                    MOOD_PROVOCATIVE,
+                    MOOD_PUZZLED,
+                    MOOD_REGRETFUL,
+                    MOOD_RELIEVED,
+                    MOOD_RELUCTANT,
+                    MOOD_RESIGNED,
+                    MOOD_RESPECTFUL,
+                    MOOD_ROMANTIC,
+                    MOOD_RUDE,
+                    MOOD_SAD,
+                    MOOD_SARCASTIC,
+                    MOOD_SCARED,
+                    MOOD_SCOLDING,
+                    MOOD_SCORNFUL,
+                    MOOD_SERIOUS,
+                    MOOD_SHAMELESS,
+                    MOOD_SHOCKED,
+                    MOOD_SHY,
+                    MOOD_SINCERE,
+                    MOOD_SLEEPY,
+                    MOOD_SLY,
+                    MOOD_SMUG,
+                    MOOD_SNOBBY,
+                    MOOD_SORRY,
+                    MOOD_SPITEFUL,
+                    MOOD_STUBBORN,
+                    MOOD_SULLEN,
+                    MOOD_SUSPICIOUS,
+                    MOOD_TAUNTING,
+                    MOOD_TERRIFIED,
+                    MOOD_THANKFUL,
+                    MOOD_THOUGHTFUL,
+                    MOOD_TOLERANT,
+                    MOOD_UNCERTAIN,
+                    MOOD_UNHAPPY,
+                    MOOD_UNWILLING,
+                    MOOD_WARM,
+                    MOOD_WHINY,
+                    MOOD_WICKED,
+                    MOOD_WISTFUL,
+                    MOOD_WORRIED,
+                    MOOD_TIRED,
+                    MOOD_EXHAUSTED,
+                    MOOD_FRIENDLY,
+                    MOOD_TIMID,
+                    MOOD_LAZY,
+                    MOOD_SURPRISED,
+                    MOOD_INNOCENT,
+                    MOOD_WISE,
+                    MOOD_YOUTHFUL,
+                    MOOD_ADVENTUROUS,
+                    MOOD_ANNOYED,
+                    MOOD_PERTURBED,
+                    MOOD_SEDATE,
+                    MOOD_CALM,
+                    MOOD_SUFFERING,
+                    MOOD_HUNGRY,
+                    MOOD_THIRSTY,
+                    MOOD_ALERT,
+                    MOOD_SHIFTY,
+                    MOOD_RELAXED,
+                    MOOD_CROTCHETY,
+                    MOOD_SURLY,
+                    MOOD_PAINFUL,
+                    MOOD_WOUNDED,
+                    MOOD_BUBBLY,
+                    MOOD_HEROIC,
+                    MOOD_QUIET,
+                    MOOD_REMORSEFUL,
+                    MOOD_GRUMPY,
+                    MOOD_LOGICAL,
+                    MOOD_EMOTIONAL,
+                    MOOD_TROUBLED,
+                    MOOD_PANICKED,
+                    MOOD_NICE,
+                    MOOD_CHEERFUL,
+                    MOOD_EMOTIONLESS,
+                    MOOD_GLOOMY,
+                    MOOD_AMBIVALENT,
+                    MOOD_ENVIOUS,
+                    MOOD_VENGEFUL,
+                    MOOD_FEARFUL,
+                    MOOD_ENRAGED,
+                    MOOD_SHEEPISH,
+                    MOOD_OBNOXIOUS,
+                    MOOD_FASTIDIOUS,
+                    MOOD_SQUEAMISH,
+                    MOOD_DAINTY,
+                    MOOD_DIGNIFIED,
+                    MOOD_HAUGHTY,
+                    MOOD_OBSCURE,
+                    MOOD_GOOFY,
+                    MOOD_SILLY,
+                    MOOD_DISDAINFUL,
+                    MOOD_CONTEMPTUOUS,
+                    MOOD_DIPLOMATIC,
+                    MOOD_WARY,
+                    MOOD_MALEVOLENT,
+                    MOOD_HURRIED,
+                    MOOD_PATIENT,
+                    MOOD_FIRM,
+                    MOOD_UNDEAD
+            };
     public static final String CHAT_SAY = "say";
     public static final String CHAT_INTONE = "intone";
     public static final String CHAT_MUMBLE = "mumble";
@@ -633,182 +633,190 @@ public class chat extends script.base_script
     public static final String CHAT_WHISPER = "whisper";
     public static final String CHAT_YELL = "yell";
     public static final String CHAT_SHOUT = "shout";
-    public static final String[] BADTYPES = 
-    {
-        CHAT_SAY,
-        CHAT_INTONE,
-        CHAT_COMPLAIN,
-        CHAT_HUFF,
-        CHAT_VENT,
-        CHAT_BLURT,
-        CHAT_SWEAR
-    };
-    public static final String[] GOODTYPES = 
-    {
-        CHAT_SAY,
-        CHAT_ASSERT,
-        CHAT_DECLARE,
-        CHAT_EXCLAIM,
-        CHAT_PRATTLE,
-        CHAT_STATE,
-        CHAT_UTTER,
-        CHAT_MOUTH,
-        CHAT_GAB,
-        CHAT_GOSSIP,
-        CHAT_BLAB,
-        CHAT_ANNOUNCE,
-        CHAT_JAW,
-        CHAT_JABBER,
-        CHAT_CHAT,
-        CHAT_YACK
-    };
-    public static final String[] ANGRYTYPES = 
-    {
-        CHAT_SAY,
-        CHAT_ASSERT,
-        CHAT_DECLARE,
-        CHAT_DEMAND,
-        CHAT_EXCLAIM,
-        CHAT_HOWL,
-        CHAT_PROCLAIM,
-        CHAT_SCREAM,
-        CHAT_THREATEN,
-        CHAT_COMMAND,
-        CHAT_PRONOUNCE,
-        CHAT_BELLOW,
-        CHAT_VENT,
-        CHAT_BLURT,
-        CHAT_SWEAR,
-        CHAT_YELP,
-        CHAT_YELL,
-        CHAT_SHOUT
-    };
-    public static final String[] NEUTRALTYPES = 
-    {
-        CHAT_SAY,
-        CHAT_INTONE,
-        CHAT_MUMBLE,
-        CHAT_CHATTER,
-        CHAT_DRONE,
-        CHAT_INDICATE,
-        CHAT_NOTE,
-        CHAT_PRATTLE,
-        CHAT_RAMBLE,
-        CHAT_STATE,
-        CHAT_UTTER,
-        CHAT_GAB,
-        CHAT_GOSSIP,
-        CHAT_BLAB,
-        CHAT_CHAT,
-        CHAT_YACK
-    };
-    public static final String[] ALL_CHAT_TYPES = 
-    {
-        CHAT_SAY,
-        CHAT_INTONE,
-        CHAT_MUMBLE,
-        CHAT_BABBLE,
-        CHAT_ASSERT,
-        CHAT_ADD,
-        CHAT_ADMIT,
-        CHAT_ANSWER,
-        CHAT_CAROL,
-        CHAT_CHATTER,
-        CHAT_COMPLAIN,
-        CHAT_COO,
-        CHAT_DECLARE,
-        CHAT_DEMAND,
-        CHAT_DESCRIBE,
-        CHAT_DRAWL,
-        CHAT_DRONE,
-        CHAT_EXCLAIM,
-        CHAT_DECREE,
-        CHAT_EXPLAIN,
-        CHAT_HOWL,
-        CHAT_INDICATE,
-        CHAT_MOAN,
-        CHAT_HUFF,
-        CHAT_PROCLAIM,
-        CHAT_NOTE,
-        CHAT_PLEAD,
-        CHAT_BEG,
-        CHAT_PRATTLE,
-        CHAT_TATTLE,
-        CHAT_QUOTE,
-        CHAT_RAMBLE,
-        CHAT_DRIVEL,
-        CHAT_SING,
-        CHAT_REQUEST,
-        CHAT_RETORT,
-        CHAT_SCREAM,
-        CHAT_STATE,
-        CHAT_STUTTER,
-        CHAT_THREATEN,
-        CHAT_UTTER,
-        CHAT_WAIL,
-        CHAT_WHINE,
-        CHAT_PREACH,
-        CHAT_ARGUE,
-        CHAT_LISP,
-        CHAT_RECITE,
-        CHAT_MOUTH,
-        CHAT_COMMAND,
-        CHAT_PROPHESIZE,
-        CHAT_GAB,
-        CHAT_GOSSIP,
-        CHAT_PRONOUNCE,
-        CHAT_LECTURE,
-        CHAT_BELLOW,
-        CHAT_EULOGIZE,
-        CHAT_BLAB,
-        CHAT_VENT,
-        CHAT_DIVULGE,
-        CHAT_CONFIDE,
-        CHAT_AVOW,
-        CHAT_VOW,
-        CHAT_CONFESS,
-        CHAT_BLURT,
-        CHAT_INTERJECT,
-        CHAT_RIDDLE,
-        CHAT_ANNOUNCE,
-        CHAT_FORETELL,
-        CHAT_SLUR,
-        CHAT_BLEAT,
-        CHAT_DISCLOSE,
-        CHAT_HYPOTHESIZE,
-        CHAT_SWEAR,
-        CHAT_PROMISE,
-        CHAT_PARROT,
-        CHAT_BRAG,
-        CHAT_JAW,
-        CHAT_JABBER,
-        CHAT_CHAT,
-        CHAT_YACK,
-        CHAT_INQUIRE,
-        CHAT_INTERRUPT,
-        CHAT_SUPPOSE,
-        CHAT_JEST,
-        CHAT_YELP,
-        CHAT_SHRILL,
-        CHAT_BOAST,
-        CHAT_CONCEDE,
-        CHAT_CONCLUDE,
-        CHAT_SURMISE,
-        CHAT_THEORIZE,
-        CHAT_CHANT,
-        CHAT_PROPOSE,
-        CHAT_RESPOND,
-        CHAT_DEBATE,
-        CHAT_MUSE,
-        CHAT_EMOTE,
-        CHAT_WHISPER,
-        CHAT_YELL,
-        CHAT_SHOUT
-    };
+    public static final String[] BADTYPES =
+            {
+                    CHAT_SAY,
+                    CHAT_INTONE,
+                    CHAT_COMPLAIN,
+                    CHAT_HUFF,
+                    CHAT_VENT,
+                    CHAT_BLURT,
+                    CHAT_SWEAR
+            };
+    public static final String[] GOODTYPES =
+            {
+                    CHAT_SAY,
+                    CHAT_ASSERT,
+                    CHAT_DECLARE,
+                    CHAT_EXCLAIM,
+                    CHAT_PRATTLE,
+                    CHAT_STATE,
+                    CHAT_UTTER,
+                    CHAT_MOUTH,
+                    CHAT_GAB,
+                    CHAT_GOSSIP,
+                    CHAT_BLAB,
+                    CHAT_ANNOUNCE,
+                    CHAT_JAW,
+                    CHAT_JABBER,
+                    CHAT_CHAT,
+                    CHAT_YACK
+            };
+    public static final String[] ANGRYTYPES =
+            {
+                    CHAT_SAY,
+                    CHAT_ASSERT,
+                    CHAT_DECLARE,
+                    CHAT_DEMAND,
+                    CHAT_EXCLAIM,
+                    CHAT_HOWL,
+                    CHAT_PROCLAIM,
+                    CHAT_SCREAM,
+                    CHAT_THREATEN,
+                    CHAT_COMMAND,
+                    CHAT_PRONOUNCE,
+                    CHAT_BELLOW,
+                    CHAT_VENT,
+                    CHAT_BLURT,
+                    CHAT_SWEAR,
+                    CHAT_YELP,
+                    CHAT_YELL,
+                    CHAT_SHOUT
+            };
+    public static final String[] NEUTRALTYPES =
+            {
+                    CHAT_SAY,
+                    CHAT_INTONE,
+                    CHAT_MUMBLE,
+                    CHAT_CHATTER,
+                    CHAT_DRONE,
+                    CHAT_INDICATE,
+                    CHAT_NOTE,
+                    CHAT_PRATTLE,
+                    CHAT_RAMBLE,
+                    CHAT_STATE,
+                    CHAT_UTTER,
+                    CHAT_GAB,
+                    CHAT_GOSSIP,
+                    CHAT_BLAB,
+                    CHAT_CHAT,
+                    CHAT_YACK
+            };
+    public static final String[] ALL_CHAT_TYPES =
+            {
+                    CHAT_SAY,
+                    CHAT_INTONE,
+                    CHAT_MUMBLE,
+                    CHAT_BABBLE,
+                    CHAT_ASSERT,
+                    CHAT_ADD,
+                    CHAT_ADMIT,
+                    CHAT_ANSWER,
+                    CHAT_CAROL,
+                    CHAT_CHATTER,
+                    CHAT_COMPLAIN,
+                    CHAT_COO,
+                    CHAT_DECLARE,
+                    CHAT_DEMAND,
+                    CHAT_DESCRIBE,
+                    CHAT_DRAWL,
+                    CHAT_DRONE,
+                    CHAT_EXCLAIM,
+                    CHAT_DECREE,
+                    CHAT_EXPLAIN,
+                    CHAT_HOWL,
+                    CHAT_INDICATE,
+                    CHAT_MOAN,
+                    CHAT_HUFF,
+                    CHAT_PROCLAIM,
+                    CHAT_NOTE,
+                    CHAT_PLEAD,
+                    CHAT_BEG,
+                    CHAT_PRATTLE,
+                    CHAT_TATTLE,
+                    CHAT_QUOTE,
+                    CHAT_RAMBLE,
+                    CHAT_DRIVEL,
+                    CHAT_SING,
+                    CHAT_REQUEST,
+                    CHAT_RETORT,
+                    CHAT_SCREAM,
+                    CHAT_STATE,
+                    CHAT_STUTTER,
+                    CHAT_THREATEN,
+                    CHAT_UTTER,
+                    CHAT_WAIL,
+                    CHAT_WHINE,
+                    CHAT_PREACH,
+                    CHAT_ARGUE,
+                    CHAT_LISP,
+                    CHAT_RECITE,
+                    CHAT_MOUTH,
+                    CHAT_COMMAND,
+                    CHAT_PROPHESIZE,
+                    CHAT_GAB,
+                    CHAT_GOSSIP,
+                    CHAT_PRONOUNCE,
+                    CHAT_LECTURE,
+                    CHAT_BELLOW,
+                    CHAT_EULOGIZE,
+                    CHAT_BLAB,
+                    CHAT_VENT,
+                    CHAT_DIVULGE,
+                    CHAT_CONFIDE,
+                    CHAT_AVOW,
+                    CHAT_VOW,
+                    CHAT_CONFESS,
+                    CHAT_BLURT,
+                    CHAT_INTERJECT,
+                    CHAT_RIDDLE,
+                    CHAT_ANNOUNCE,
+                    CHAT_FORETELL,
+                    CHAT_SLUR,
+                    CHAT_BLEAT,
+                    CHAT_DISCLOSE,
+                    CHAT_HYPOTHESIZE,
+                    CHAT_SWEAR,
+                    CHAT_PROMISE,
+                    CHAT_PARROT,
+                    CHAT_BRAG,
+                    CHAT_JAW,
+                    CHAT_JABBER,
+                    CHAT_CHAT,
+                    CHAT_YACK,
+                    CHAT_INQUIRE,
+                    CHAT_INTERRUPT,
+                    CHAT_SUPPOSE,
+                    CHAT_JEST,
+                    CHAT_YELP,
+                    CHAT_SHRILL,
+                    CHAT_BOAST,
+                    CHAT_CONCEDE,
+                    CHAT_CONCLUDE,
+                    CHAT_SURMISE,
+                    CHAT_THEORIZE,
+                    CHAT_CHANT,
+                    CHAT_PROPOSE,
+                    CHAT_RESPOND,
+                    CHAT_DEBATE,
+                    CHAT_MUSE,
+                    CHAT_EMOTE,
+                    CHAT_WHISPER,
+                    CHAT_YELL,
+                    CHAT_SHOUT
+            };
+    public static final int ChatFlag_isPrivate = 0x0001;
+    public static final int ChatFlag_skipTarget = 0x0002;
+    public static final int ChatFlag_skipSource = 0x0004;
+    public static final int ChatFlag_targetOnly = 0x0008;
+    public static final int ChatFlag_targetGroupOnly = 0x0010;
+    public static final int ChatFlag_targetAndSourceGroup = 0x0100;
+
     public static void chat(obj_id npc, String chatType, String moodType, string_id messageId) throws InterruptedException
     {
         _chat(npc, null, chatType, moodType, null, messageId, null);
     }
+
     public static void chat(obj_id npc, String chatType, string_id messageId) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -818,22 +826,27 @@ public class chat extends script.base_script
         }
         _chat(npc, null, chatType, moodType, null, messageId, null);
     }
+
     public static void think(obj_id npc, String text) throws InterruptedException
     {
         _chat(npc, null, CHAT_EMOTE, null, text, null, null);
     }
+
     public static void thinkTo(obj_id npc, obj_id target, String text) throws InterruptedException
     {
         _chat(npc, target, CHAT_EMOTE, null, chat.ChatFlag_targetOnly, text, null, null);
     }
+
     public static void think(obj_id npc, string_id textId) throws InterruptedException
     {
         _chat(npc, null, CHAT_EMOTE, null, null, textId, null);
     }
+
     public static void thinkTo(obj_id npc, obj_id target, string_id messageId) throws InterruptedException
     {
         _chat(npc, target, CHAT_EMOTE, null, chat.ChatFlag_targetOnly, null, messageId, null);
     }
+
     public static void chat(obj_id npc, string_id messageId) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -844,6 +857,7 @@ public class chat extends script.base_script
         String chatType = getChatType(npc);
         _chat(npc, null, chatType, moodType, null, messageId, null);
     }
+
     public static void chat(obj_id npc, obj_id target, string_id messageId, int flags) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -854,6 +868,7 @@ public class chat extends script.base_script
         String chatType = getChatType(npc);
         _chat(npc, target, chatType, moodType, flags, null, messageId, null);
     }
+
     public static void chat(obj_id npc, obj_id target, prose_package pp, int flags) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -865,13 +880,14 @@ public class chat extends script.base_script
         String oob = packOutOfBandProsePackage(null, -1, pp);
         _chat(npc, target, chatType, moodType, flags, null, null, oob);
     }
+
     public static void chat(obj_id npc, obj_id target, string_id messageId) throws InterruptedException
     {
         if (hasObjVar(npc, "convo.appearance"))
         {
             space_utils.tauntPlayer(target, npc, messageId);
         }
-        else 
+        else
         {
             String moodType = getChatMood(npc);
             if (moodType.equals("none"))
@@ -882,13 +898,14 @@ public class chat extends script.base_script
             _chat(npc, target, chatType, moodType, ChatFlag_targetOnly, null, messageId, null);
         }
     }
+
     public static void publicChat(obj_id npc, obj_id target, string_id messageId) throws InterruptedException
     {
         if (hasObjVar(npc, "convo.appearance"))
         {
             space_utils.tauntPlayer(target, npc, messageId);
         }
-        else 
+        else
         {
             String moodType = getChatMood(npc);
             if (moodType.equals("none"))
@@ -899,6 +916,7 @@ public class chat extends script.base_script
             _chat(npc, target, chatType, moodType, 0, null, messageId, null);
         }
     }
+
     public static void chat(obj_id npc, String message) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -909,37 +927,40 @@ public class chat extends script.base_script
         String chatType = getChatType(npc);
         _chat(npc, null, chatType, moodType, message, null, null);
     }
+
     public static void chat(obj_id npc, obj_id target, String chatType, String moodType, prose_package pp) throws InterruptedException
     {
         if (hasObjVar(npc, "convo.appearance"))
         {
             space_utils.tauntPlayer(target, npc, pp);
         }
-        else 
+        else
         {
             String oob = packOutOfBandProsePackage(null, -1, pp);
             _chat(npc, target, chatType, moodType, ChatFlag_targetOnly, null, null, oob);
         }
     }
+
     public static void publicChat(obj_id npc, obj_id target, String chatType, String moodType, prose_package pp) throws InterruptedException
     {
         if (hasObjVar(npc, "convo.appearance"))
         {
             space_utils.tauntPlayer(target, npc, pp);
         }
-        else 
+        else
         {
             String oob = packOutOfBandProsePackage(null, -1, pp);
             _chat(npc, target, chatType, moodType, null, null, oob);
         }
     }
+
     public static void chat(obj_id npc, obj_id target, prose_package pp) throws InterruptedException
     {
         if (hasObjVar(npc, "convo.appearance"))
         {
             space_utils.tauntPlayer(target, npc, pp);
         }
-        else 
+        else
         {
             String moodType = getChatMood(npc);
             if (moodType.equals("none"))
@@ -951,10 +972,12 @@ public class chat extends script.base_script
             _chat(npc, target, chatType, moodType, null, null, oob);
         }
     }
+
     public static void chat(obj_id npc, obj_id target, String chatType, string_id blah, int chatFlag) throws InterruptedException
     {
         _chat(npc, target, chatType, null, chatFlag, null, blah, null);
     }
+
     public static void chat(obj_id npc, obj_id target, String text, int flags) throws InterruptedException
     {
         String moodType = getChatMood(npc);
@@ -965,21 +988,18 @@ public class chat extends script.base_script
         String chatType = getChatType(npc);
         _chat(npc, target, chatType, moodType, flags, text, null, null);
     }
+
     public static void chat(obj_id npc, obj_id target, String chatType, String moodType, int flags, prose_package pp) throws InterruptedException
     {
         String oob = packOutOfBandProsePackage(null, -1, pp);
         _chat(npc, target, chatType, moodType, flags, null, null, oob);
     }
-    public static final int ChatFlag_isPrivate = 0x0001;
-    public static final int ChatFlag_skipTarget = 0x0002;
-    public static final int ChatFlag_skipSource = 0x0004;
-    public static final int ChatFlag_targetOnly = 0x0008;
-    public static final int ChatFlag_targetGroupOnly = 0x0010;
-    public static final int ChatFlag_targetAndSourceGroup = 0x0100;
+
     public static void _chat(obj_id npc, obj_id target, String chatType, String moodType, String text, string_id textId, String oob) throws InterruptedException
     {
         _chat(npc, target, chatType, moodType, 0, text, textId, oob);
     }
+
     public static void _chat(obj_id npc, obj_id target, String chatType, String moodType, int flags, String text, string_id textId, String oob) throws InterruptedException
     {
         StringBuilder sbuf = new StringBuilder();
@@ -987,7 +1007,7 @@ public class chat extends script.base_script
         {
             sbuf.append(chatType);
         }
-        else 
+        else
         {
             sbuf.append('.');
         }
@@ -996,7 +1016,7 @@ public class chat extends script.base_script
         {
             sbuf.append(moodType);
         }
-        else 
+        else
         {
             sbuf.append('.');
         }
@@ -1012,7 +1032,7 @@ public class chat extends script.base_script
             {
                 oob += local_oob;
             }
-            else 
+            else
             {
                 oob = local_oob;
             }
@@ -1031,6 +1051,7 @@ public class chat extends script.base_script
         }
         queueCommand(npc, (-296481545), target, sbuf.toString(), COMMAND_PRIORITY_DEFAULT);
     }
+
     public static void setChatMood(obj_id npc, String chatMood) throws InterruptedException
     {
         if (canHaveChatMood(npc))
@@ -1038,17 +1059,19 @@ public class chat extends script.base_script
             setObjVar(npc, "ai.chatMood", chatMood);
         }
     }
+
     public static String getChatMood(obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "ai.chatMood"))
         {
             return "none";
         }
-        else 
+        else
         {
             return getStringObjVar(npc, "ai.chatMood");
         }
     }
+
     public static void setChatType(obj_id npc, String chatType) throws InterruptedException
     {
         if (canHaveChatMood(npc))
@@ -1056,17 +1079,19 @@ public class chat extends script.base_script
             setObjVar(npc, "ai.chatType", chatType);
         }
     }
+
     public static String getChatType(obj_id npc) throws InterruptedException
     {
         if (!hasObjVar(npc, "ai.chatType"))
         {
             return CHAT_SAY;
         }
-        else 
+        else
         {
             return getStringObjVar(npc, "ai.chatType");
         }
     }
+
     public static void setBadMood(obj_id npc) throws InterruptedException
     {
         if (!canHaveChatMood(npc))
@@ -1076,6 +1101,7 @@ public class chat extends script.base_script
         setObjVar(npc, "ai.chatMood", BADMOODS[rand(0, BADMOODS.length - 1)]);
         setObjVar(npc, "ai.chatType", BADTYPES[rand(0, BADTYPES.length - 1)]);
     }
+
     public static void setGoodMood(obj_id npc) throws InterruptedException
     {
         if (!canHaveChatMood(npc))
@@ -1085,6 +1111,7 @@ public class chat extends script.base_script
         setObjVar(npc, "ai.chatMood", GOODMOODS[rand(0, GOODMOODS.length - 1)]);
         setObjVar(npc, "ai.chatType", GOODTYPES[rand(0, GOODTYPES.length - 1)]);
     }
+
     public static void setAngryMood(obj_id npc) throws InterruptedException
     {
         if (!canHaveChatMood(npc))
@@ -1094,6 +1121,7 @@ public class chat extends script.base_script
         setObjVar(npc, "ai.chatMood", ANGRYMOODS[rand(0, ANGRYMOODS.length - 1)]);
         setObjVar(npc, "ai.chatType", ANGRYTYPES[rand(0, ANGRYTYPES.length - 1)]);
     }
+
     public static void setNeutralMood(obj_id npc) throws InterruptedException
     {
         if (!canHaveChatMood(npc))
@@ -1103,6 +1131,7 @@ public class chat extends script.base_script
         setObjVar(npc, "ai.chatMood", NEUTRALMOODS[rand(0, NEUTRALMOODS.length - 1)]);
         setObjVar(npc, "ai.chatType", NEUTRALTYPES[rand(0, NEUTRALTYPES.length - 1)]);
     }
+
     public static boolean canHaveChatMood(obj_id npc) throws InterruptedException
     {
         if (ai_lib.aiGetNiche(npc) != NICHE_NPC)
@@ -1113,15 +1142,9 @@ public class chat extends script.base_script
         {
             return false;
         }
-        if (hasObjVar(npc, "ai.noChatMood"))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return !hasObjVar(npc, "ai.noChatMood");
     }
+
     public static void setTempAnimationMood(obj_id target, String mood) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1136,6 +1159,7 @@ public class chat extends script.base_script
         setObjVar(target, "temp.animMood", animMood);
         setAnimationMood(target, mood);
     }
+
     public static void resetTempAnimationMood(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))

@@ -7,9 +7,6 @@ import script.string_id;
 
 public class powerup extends script.base_script
 {
-    public powerup()
-    {
-    }
     public static final int DEFAULT_USE_COUNT = 500;
     public static final String VAR_POWERUP_BASE = "powerup";
     public static final String SCRIPT_WEAPON = VAR_POWERUP_BASE + ".weapon";
@@ -35,6 +32,10 @@ public class powerup extends script.base_script
     public static final string_id PROSE_POWERUP_EXPIRE = new string_id(STF, "prose_pup_expire");
     public static final string_id PROSE_ALREADY_POWERED = new string_id(STF, "prose_already_powered");
     public static final string_id PROSE_APPLY_RESTRICTED = new string_id(STF, "prose_apply_restricted");
+    public powerup()
+    {
+    }
+
     public static void getWeaponAttributes(obj_id player, obj_id weapon, String[] names, String[] attribs, boolean forWeapon) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -57,7 +58,8 @@ public class powerup extends script.base_script
             {
                 name = ovl.getObjVar(i).getName();
                 float mod = getFloatObjVar(weapon, powerup.VAR_POWERUP_BASE + "." + name);
-                switch (name) {
+                switch (name)
+                {
                     case "damage":
                         names[idx] = "cat_pup.pup_damage";
                         attribs[idx] = formatter.format(mod);
@@ -90,10 +92,12 @@ public class powerup extends script.base_script
             }
         }
     }
+
     public static boolean hasPowerUpInstalled(obj_id weapon) throws InterruptedException
     {
         return hasObjVar(weapon, VAR_POWERUP_BASE);
     }
+
     public static boolean powerUpDecay(obj_id weapon) throws InterruptedException
     {
         if (!hasPowerUpInstalled(weapon))
@@ -102,6 +106,7 @@ public class powerup extends script.base_script
         }
         return (rand(1, 100) < CHANCE_TO_DECAY);
     }
+
     public static boolean applyPowerup(obj_id player, obj_id powerup, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(powerup) || !isIdValid(target))
@@ -199,7 +204,8 @@ public class powerup extends script.base_script
             {
                 ov = ovl.getObjVar(i);
                 name = ov.getName();
-                switch (name) {
+                switch (name)
+                {
                     case "speed":
                         speedMod = ov.getFloatData();
                         break;
@@ -234,9 +240,9 @@ public class powerup extends script.base_script
         {
             float oldAccuracy = getWeaponAccuracy(target);
             float newAccuracy = oldAccuracy + accuracyMod;
-            LOG("powerup", "oldAccuracy=" + oldAccuracy + ", newAccuracy=" + newAccuracy + ", diff=" + (newAccuracy - ((int)oldAccuracy)));
-            setWeaponAccuracy(target, (int)newAccuracy);
-            setObjVar(target, VAR_POWERUP_ACCURACY, newAccuracy - ((int)oldAccuracy));
+            LOG("powerup", "oldAccuracy=" + oldAccuracy + ", newAccuracy=" + newAccuracy + ", diff=" + (newAccuracy - ((int) oldAccuracy)));
+            setWeaponAccuracy(target, (int) newAccuracy);
+            setObjVar(target, VAR_POWERUP_ACCURACY, newAccuracy - ((int) oldAccuracy));
         }
         if (woundMod != 0)
         {
@@ -249,22 +255,22 @@ public class powerup extends script.base_script
         if (actionMod != 0)
         {
             float oldAction = getWeaponAttackCost(target);
-            float newAction = (float)Math.floor(oldAction + (oldAction * actionMod));
+            float newAction = (float) Math.floor(oldAction + (oldAction * actionMod));
             LOG("powerup", "oldAction=" + oldAction + ", newAction=" + newAction + ", diff=" + (newAction - oldAction));
-            setWeaponAttackCost(target, (int)newAction);
+            setWeaponAttackCost(target, (int) newAction);
             setObjVar(target, VAR_POWERUP_ACTION, newAction - oldAction);
         }
         if (damageMod != 0)
         {
             int oldMinDamage = getWeaponMinDamage(target);
             int oldMaxDamage = getWeaponMaxDamage(target);
-            int newMinDamage = (int)Math.floor(oldMinDamage + (oldMinDamage * damageMod));
+            int newMinDamage = (int) Math.floor(oldMinDamage + (oldMinDamage * damageMod));
             if (newMinDamage < 1)
             {
                 newMinDamage = 1;
             }
-            float delta = (int)(newMinDamage - oldMinDamage);
-            int newMaxDamage = oldMaxDamage + (int)delta;
+            float delta = newMinDamage - oldMinDamage;
+            int newMaxDamage = oldMaxDamage + (int) delta;
             LOG("powerup", "oldMinDamage=" + oldMinDamage + ", newMinDamage=" + newMinDamage + ", delta=" + delta);
             LOG("powerup", "oldMaxDamage=" + oldMaxDamage + ", newMaxDamage=" + newMaxDamage + ", delta=" + delta);
             setWeaponMinDamage(target, newMinDamage);
@@ -275,11 +281,11 @@ public class powerup extends script.base_script
         if (elementalMod != 0)
         {
             float oldEDamage = getWeaponElementalValue(target);
-            float newEDamage = (int)Math.floor(oldEDamage + (oldEDamage * elementalMod));
-            float delta = (int)(newEDamage - oldEDamage);
+            float newEDamage = (int) Math.floor(oldEDamage + (oldEDamage * elementalMod));
+            float delta = (int) (newEDamage - oldEDamage);
             LOG("powerup", "oldEDamage=" + oldEDamage + ", newEDamage=" + newEDamage + ", diff=" + delta);
-            setWeaponElementalValue(target, (int)newEDamage);
-            setObjVar(target, VAR_POWERUP_ELEMENTAL_DAMAGE, newEDamage - ((int)oldEDamage));
+            setWeaponElementalValue(target, (int) newEDamage);
+            setObjVar(target, VAR_POWERUP_ELEMENTAL_DAMAGE, newEDamage - ((int) oldEDamage));
         }
         LOG("powerup", "----------- Done Applying powerup ----------");
         destroyObject(powerup);
@@ -287,6 +293,7 @@ public class powerup extends script.base_script
         sendSystemMessageProse(player, prose.getPackage(PROSE_POWERUP_APPLY, powerup, target));
         return true;
     }
+
     public static boolean cleanupWeaponPowerup(obj_id weapon) throws InterruptedException
     {
         LOG("powerup", "Cleaning Up " + weapon);
@@ -300,7 +307,8 @@ public class powerup extends script.base_script
             {
                 name = ovl.getObjVar(i).getName();
                 varpath = VAR_POWERUP_BASE + "." + name;
-                switch (name) {
+                switch (name)
+                {
                     case "speed":
                         float curSpeed = getWeaponAttackSpeed(weapon);
                         float speedDiff = getFloatObjVar(weapon, varpath);
@@ -343,6 +351,7 @@ public class powerup extends script.base_script
         detachScript(weapon, SCRIPT_WEAPON);
         return true;
     }
+
     public static void decrementUseCounter(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))

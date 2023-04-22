@@ -166,20 +166,20 @@ public class city_furniture extends script.base_script
 
     private boolean canManipulate(obj_id self, obj_id player) throws InterruptedException
     {
+        int city_id = getCityAtLocation(getLocation(player), 0);
         if (isGod(player))
         {
             return true;
         }
-        if (getOwner(self) == player)
+        else if (getOwner(self) == player)
         {
             return true;
         }
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        if (city_id == 0)
+        else if (city_id == 0)
         {
             return false;
         }
-        if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
+        else if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
         {
             return true;
         }
@@ -546,30 +546,26 @@ public class city_furniture extends script.base_script
     {
         //@note: keep these in order of importance, with the most important last
         int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
         if (utils.isNestedWithinAPlayer(self))
         {
             if (hasObjVar(self, "city_id"))
             {
                 return false;
             }
-            if (hasObjVar(player, "city_decorator"))
+            else if (hasObjVar(player, "city_decorator"))
             {
                 return true;
             }
-            if (city.isMilitiaOfCity(player, city_id))
+            else if (city.isMilitiaOfCity(player, city_id))
             {
                 return true;
             }
-            if (isMayor)
+            else if (city.isTheCityMayor(player, city_id))
             {
                 return true;
             }
             return isGod(player);
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
