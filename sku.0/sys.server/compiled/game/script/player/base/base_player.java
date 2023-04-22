@@ -1131,6 +1131,18 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    public int OnDeath(obj_id self, obj_id killer, obj_id corpseId)
+    {
+        String[] DEATH_NOTICE = {
+                " has been killed by ",
+                " was viciously slain by ",
+                " was gallantly sacrificed by ",
+                " was torn to shreds by ",
+                " was brutally murdered by ",
+        };
+        base_class.notifyServerEvents(getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
+        return SCRIPT_CONTINUE;
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         utils.setScriptVar(self, "lastKiller", killer);

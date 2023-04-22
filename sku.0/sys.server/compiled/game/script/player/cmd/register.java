@@ -77,7 +77,7 @@ public class register extends script.base_script
             }
             if (planetary_map.updateFacilityActive(updateTarget, true))
             {
-                if (!hasScript(updateTarget, "planet_map.active_registered"))
+                if (!hasScript(updateTarget, "planet_map.activf_registered"))
                 {
                     attachScript(updateTarget, "planet_map.active_registered");
                 }
@@ -85,7 +85,7 @@ public class register extends script.base_script
                 utils.setBatchScriptVar(updateTarget, "registrants", registrants);
                 sendSystemMessage(self, SID_SUCCESS_REGISTER);
                 utils.setScriptVar(self, "registerWithLocation", updateTarget);
-                notifyServerEvents(getName(self) + " has started enchancement services within " + locations.getCityName(getLocation(self)) + "\n`/wp " + getLocation(self).x + " " + getLocation(self).z + " " + getLocation(self).y + " " + getLocation(self).area + "`");
+                notifyServerEvents(getName(self) + " has started enchancement services within " + locations.getCityName(getLocation(self)) + "\n`/wp " + getLocation(self).x + " " + getLocation(self).y + " " + getLocation(self).z + " " + getLocation(self).area + "`");
             }
         }
         else 
