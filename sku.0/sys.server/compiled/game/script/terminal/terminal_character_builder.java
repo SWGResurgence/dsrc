@@ -169,21 +169,21 @@ public class terminal_character_builder extends script.base_script
     public static final String[] CHARACTER_BUILDER_OPTIONS = {
             toUpper(getClusterName(), 0) + " Focus Testing",
             "Weapons",
-            "Armor",
+            "Armor and Equipment",
             "Skills",
             "Commands",
             "Resources",
             "Credits",
             "Faction",
             "Vehicles and Beasts",
-            "Ships",
+            "Pilots and Ships",
             "Crafting",
             "Structures",
             "Guild Halls",
             "Items",
             "Jedi",
-            "Best Resource",
-            "Flag for Instances",
+            "Best Resources",
+            "Flag for All Instances",
             "Draft Schematics",
             "Buffs",
             "Warps",
@@ -191,10 +191,10 @@ public class terminal_character_builder extends script.base_script
             "Static Items",
             "Pet Abilities",
             "Internal",
-            "Terminal Information"
+            "About"
     };
     public static final String[] BUFF_OPTIONS = {
-            "Apply GOD Buffs"
+            "Generic Buff Set"
     };
     public static final String[] CHRONICLER_SKILLS = {
             "class_chronicles",
@@ -1898,6 +1898,7 @@ public class terminal_character_builder extends script.base_script
         if (isGod(player))
         {
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU1, new string_id("Toggle Access"));
+            mi.addSubMenu(menu, menu_info_types.SERVER_MENU2, new string_id("Duplicate"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -1921,6 +1922,25 @@ public class terminal_character_builder extends script.base_script
             {
                 setObjVar(self, "locked", true);
                 broadcast(player, "You have restricted access to this terminal.");
+            }
+        }
+        if (item == menu_info_types.SERVER_MENU2)
+        {
+            if (isGod(player))
+            {
+                obj_id inventory = utils.getInventoryContainer(player);
+                obj_id duplicate = createObject(getTemplateName(self), inventory, "");
+                if (duplicate == null)
+                {
+                    sendSystemMessage(player, "Unable to duplicate terminal.", null);
+                }
+                else
+                {
+                    setObjVar(duplicate, "noTrade", 1);
+                    attachScript(duplicate, "item.special.nomove");
+                    setObjVar(duplicate, "owner", player);
+                    sendSystemMessage(player, "Terminal duplicated.", null);
+                }
             }
         }
 
@@ -2300,7 +2320,10 @@ public class terminal_character_builder extends script.base_script
             buff.applyBuff((player), "me_buff_melee_gb_1", 7200);
             buff.applyBuff((player), "me_buff_ranged_gb_1", 7200);
             buff.applyBuff((player), "of_buff_def_9", 7200);
-            buff.applyBuff((player), "frogBuff", 7200);
+            if (isGod(player))
+            {
+                buff.applyBuff((player), "frogBuff", 7200); //should not be used for practical testing of combat.
+            }
             buff.applyBuff((player), "of_focus_fire_6", 7200);
             buff.applyBuff((player), "of_tactical_drop_6", 7200);
             buff.applyBuff((player), "banner_buff_commando", 7200);
@@ -2310,7 +2333,7 @@ public class terminal_character_builder extends script.base_script
             buff.applyBuff((player), "banner_buff_spy", 7200);
             buff.applyBuff((player), "banner_buff_bounty_hunter", 7200);
             buff.applyBuff((player), "banner_buff_force_sensitive", 7200);
-            sendSystemMessageTestingOnly(player, "GOD Buffs Granted");
+            sendSystemMessageTestingOnly(player, "Generic Buff Set Applied.");
         }
         else
         {
@@ -7960,15 +7983,6 @@ public class terminal_character_builder extends script.base_script
             playClientEffectLoc(player, RLS_SOUND, getLocation(player), 1.0f);
             return SCRIPT_CONTINUE;
         }
-        else if (message5.equals("frog"))
-        {
-            createObject("object/tangible/terminal/terminal_character_builder.iff", pInv, "");
-            sendSystemMessageTestingOnly(player, GENERIC_TITLE + "Frog Issued.");
-            sendSystemMessageTestingOnly(player, "Note: You can only use this once placed in a house if you are not in god mode.");
-            sendSystemMessageTestingOnly(player, "Once dropped, you cannot pick it back up.");
-            setObjVar(player, "character_builder.object_tool.frog", 1);
-            return SCRIPT_CONTINUE;
-        }
         else if (message5.equals("loot")) // this is hidden so only me and u guys know about it.
         {
             String lootManager = "";
@@ -9218,13 +9232,11 @@ public class terminal_character_builder extends script.base_script
         switch (idx)
         {
             case 0:
-                obj_id pInv = utils.getInventoryContainer(player);
-                createObject("object/tangible/terminal/terminal_character_builder.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "You have been given a frog for testing.");
+                sendSystemMessageTestingOnly(player, "Use the 'Duplicate' submenu to obtain a tracked terminal..");
                 break;
             case 1:
                 setObjVar(player, "character_builder", 1);
-                sendSystemMessageTestingOnly(player, "setBuilderVars completed.");
+                sendSystemMessageTestingOnly(player, "This is deprecated.");
                 break;
             case 2:
                 detachScript(player, "test.qatool"); // prevent it from trying to reattach while attached
@@ -9241,11 +9253,10 @@ public class terminal_character_builder extends script.base_script
                 detachScript(player, "event.event_tool");
                 break;
             case 5:
-                String outputString = system_process.runAndGetOutput("c:/swg/current/build_java_terminal.bat");
+                String outputString = system_process.runAndGetOutput("/home/swg/swg-main/utils/build_java.sh");
                 String outputTitle = "Build Terminal";
                 String okbutton = "Exit";
-                int intOutput = utils.stringToInt(okbutton);
-                sui.msgbox(self, player, outputString, intOutput, outputTitle, "noHandler");
+                sui.msgbox(self, player, outputString, sui.OK_CANCEL, outputTitle, "noHandler");
                 break;
             default:
                 cleanScriptVars(player);
