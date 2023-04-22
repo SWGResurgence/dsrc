@@ -232,11 +232,11 @@ public class city_actor extends script.base_script
         {
             return true;
         }
-        if (city.isMilitiaOfCity(player, city_id))
+        else if (city.isMilitiaOfCity(player, city_id))
         {
             return true;
         }
-        if (isMayor)
+        else if (isMayor)
         {
             return true;
         }
