@@ -11121,4 +11121,10 @@ public class terminal_character_builder extends script.base_script
             grantSkill(objPlayer, s);
         }
     }
+
+    public int OnInitialize(obj_id self)
+    {
+        setName(self, toUpper(GENERIC_TITLE, 0));
+        return SCRIPT_CONTINUE;
+    }
 }
