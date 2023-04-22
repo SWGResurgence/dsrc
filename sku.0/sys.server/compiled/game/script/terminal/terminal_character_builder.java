@@ -192,7 +192,7 @@ public class terminal_character_builder extends script.base_script
             "Static Items",
             "Pet Abilities",
             "Internal",
-            "About"
+            "[About]"
     };
     public static final String[] BUFF_OPTIONS = {
             "Generic Buff Set"
