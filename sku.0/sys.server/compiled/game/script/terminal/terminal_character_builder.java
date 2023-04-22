@@ -8936,7 +8936,7 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Native Hut, Dantooine", "dantooine", -7085, 0, -6149),
                 new warp_location("Large stone fence, Dantooine", "dantooine", -7256, 5, 4321),
                 new warp_location("Stone Arches, Dantooine", "dantooine", -6143, 37, 4675),
-                new warp_location("Jedi Building (Hilltop)", "dantooine", -4492, 70, 1615),
+                new warp_location("Jedi Building (Hilltop), Dantooine", "dantooine", -4492, 70, 1615),
                 new warp_location("Jedi Shrine, Dantooine", "dantooine", -6999, 11, -5269),
                 new warp_location("Jedi Shrine II, Dantooine", "dantooine", 2163, 161, 7548),
                 new warp_location("Jedi ruins, Dantooine", "dantooine", 442, 5, 4590),
