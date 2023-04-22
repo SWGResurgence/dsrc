@@ -46,7 +46,6 @@ public class terminal_character_builder extends script.base_script
                 case "lok":
                 case "endor":
                 case "dathomir":
-                case "dxun":
                 case "talus":
                 case "rori":
                 case "mustafar":
@@ -55,6 +54,8 @@ public class terminal_character_builder extends script.base_script
                     return "Yavin IV";
                 case "kashyyyk_main":
                     return "Kashyyyk";
+                case "dxun":
+                    return toUpper(scene, 0);
                 default:
                     return scene;
             }
@@ -2592,7 +2593,7 @@ public class terminal_character_builder extends script.base_script
 
     public void handleCreditOption(obj_id player) throws InterruptedException
     {
-        if (getCashBalance(player) < 100000000)
+        if (getCashBalance(player) < 100000)
         {
             dictionary d = new dictionary();
             d.put("payoutTarget", player);
@@ -2600,7 +2601,7 @@ public class terminal_character_builder extends script.base_script
         }
         else
         {
-            broadcast(player, "You already have 100,000,000+ credits. Why do you need any more money?");
+            broadcast(player, "You already have 100,000+ credits. Why do you need any more credits?");
         }
         startCharacterBuilder(player);
     }
@@ -2768,6 +2769,9 @@ public class terminal_character_builder extends script.base_script
                     {
                             "corellia",
                             "dantooine",
+                            "dathomir",
+                            "endor",
+                            "dxun",
                             "lok",
                             "naboo",
                             "rori",
@@ -3008,7 +3012,7 @@ public class terminal_character_builder extends script.base_script
     public void handleVehicleOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired vehicle or mount option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
+        refreshMenu(player, "Select the desired vehicle, mount or beast option", getClusterName() + " Character Builder Terminal", VEHICLE_MOUNT_OPTIONS, "handleVehicleOptions", false);
     }
 
     public int handleVehicleOptions(obj_id self, dictionary params) throws InterruptedException
@@ -3440,7 +3444,7 @@ public class terminal_character_builder extends script.base_script
     public void handleShipOption(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
-        refreshMenu(player, "Select the desired ship option", getClusterName() + " Character Builder Terminal", SHIP_OPTIONS, "handleShipOptions", false);
+        refreshMenu(player, "Select the desired JTL related options.", getClusterName() + " Character Builder Terminal", SHIP_OPTIONS, "handleShipOptions", false);
     }
 
     public int handleShipOptions(obj_id self, dictionary params) throws InterruptedException
