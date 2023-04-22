@@ -19,6 +19,13 @@ public class resurgence extends script.base_script
 {
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
+    public static int WORLD_BOSS_PEKO = 0;
+    public static int WORLD_BOSS_KRAYT= 1;
+    public static int WORLD_BOSS_PAX = 2;
+    public static int WORLD_BOSS_GIZMO = 3;
+
+
+
 
     public resurgence()
     {
@@ -533,6 +540,61 @@ public class resurgence extends script.base_script
             {
                 System.out.println("stripPlayer() - possession is invalid. ID: " + possession);
             }
+        }
+    }
+    public static String[] getAttackerList(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = new String[0];
+        if (isIdValid(target))
+        {
+            obj_id[] attackers = getHateList(target);
+            if (attackers != null)
+            {
+                attackerList = new String[attackers.length];
+                for (int i = 0; i < attackers.length; i++)
+                {
+                    if (isPlayer(attackers[i]))
+                    {
+                        attackerList[i] = getName(attackers[i]);
+                    }
+                }
+            }
+        }
+        return attackerList;
+    }
+
+    public static void doWorldBossAnnounce(obj_id target, int worldboss) throws InterruptedException
+    {
+        location here = getLocation(target);
+        switch (worldboss)
+        {
+            case 0:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 1:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 2:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.");
+                break;
+            case 3:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n Gizmo, the Wretched and Accursed Ewok, has been reported to have been seen last on Endor at one of the Lake Villages.");
+                break;
+
+        }
+    }
+    public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = getAttackerList(target);
+        if (attackerList.length > 0)
+        {
+            String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: \n" + toUpper(attackerList[0], 0);
+            for (int i = 1; i < attackerList.length; i++)
+            {
+                msg += "\n" + toUpper(attackerList[i], 0) + "";
+            }
+            msg += "\n\nCongratulations to all!";
+            notifyGalacticFeed(msg);
         }
     }
 
