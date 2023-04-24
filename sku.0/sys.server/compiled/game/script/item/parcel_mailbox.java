@@ -1,7 +1,7 @@
 package script.item;/*
-@Filename: script.item.
+@Filename: script.item.parcel_mailbox
 @Author: BubbaJoeX
-@Purpose: Allows players to send items to other players online (or offline) if the mailboxes are on the same planet..*/
+@Purpose: Allows players to send items to other players online (or offline) if the mailboxes are on the same planet and setup.*/
 
 import script.*;
 import script.library.city;
@@ -18,7 +18,7 @@ class parcel_mailbox extends script.base_script
     public static final String VAR_SETUP = "parcel_mailbox.setup";
     public static final float VAR_MAIL_SPEED_NON_CITY = 300f;
 
-    public static void sendItemMail(obj_id self, obj_id player) throws InterruptedException
+    public void sendItemMail(obj_id self, obj_id player) throws InterruptedException
     {
         sui.inputbox(self, player, "Please enter the non-capitalized name of which you wish to send these items to.", sui.OK_CANCEL, "MAILBOX", sui.INPUT_NORMAL, null, "handleMailTo", null);
     }
@@ -65,41 +65,32 @@ class parcel_mailbox extends script.base_script
 
     public int OnInitialize(obj_id self)
     {
+        setName(self, "Mailbox");
         return SCRIPT_CONTINUE;
     }
 
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
-        if (hasObjVar(self, VAR_OWNER))
+        if (isPlayer(transferer) && (transferer == getObjIdObjVar(self, VAR_OWNER)))
         {
-            if (transferer != getObjIdObjVar(self, VAR_OWNER))
-            {
-                sendSystemMessage(transferer, "You do not have access to this mailbox.", null);
-                return SCRIPT_OVERRIDE;
-            }
-            else if (hasScript(srcContainer, "item.parcel_mailbox"))
-            {
-                return SCRIPT_CONTINUE;
-            }
+            return SCRIPT_CONTINUE;
         }
-        return SCRIPT_CONTINUE;
+        else
+        {
+            return SCRIPT_OVERRIDE;
+        }
     }
 
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
-        if (hasObjVar(self, VAR_OWNER))
+        if (isPlayer(transferer))
         {
-            if (transferer != getObjIdObjVar(self, VAR_OWNER))
-            {
-                sendSystemMessage(transferer, "You do not have access to this mailbox.", null);
-                return SCRIPT_OVERRIDE;
-            }
-            else if (hasScript(srcContainer, "item.parcel_mailbox"))
-            {
-                return SCRIPT_CONTINUE;
-            }
+            return SCRIPT_OVERRIDE;
         }
-        return SCRIPT_CONTINUE;
+        else
+        {
+            return SCRIPT_CONTINUE;
+        }
     }
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -180,6 +171,11 @@ class parcel_mailbox extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id destinationContainer = getObjIdObjVar(getPlanetByName("tatooine"), "mailbox_" + recipientId);
+        if (!isContentsAbleToFitInto(self, destinationContainer))
+        {
+            broadcast(player, "That player's mailbox is full.");
+            return SCRIPT_CONTINUE;
+        }
         if (!isIdValid(destinationContainer))
         {
             broadcast(player, "That player does not have a mailbox on this planet.");
@@ -197,7 +193,6 @@ class parcel_mailbox extends script.base_script
             d.put("recipient", recipientId);
             messageTo(self, "handleDelayedMailTo", d, VAR_MAIL_SPEED_NON_CITY, true);
             broadcast(player, "Your items will be sent to " + getPlayerName(recipientId) + "'s mailbox in 5 minutes.");
-            return SCRIPT_CONTINUE;
         }
         else
         {
@@ -208,8 +203,8 @@ class parcel_mailbox extends script.base_script
                 putIn(item, destinationContainer);
             }
             broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(recipientId) + "'s mailbox.");
-            return SCRIPT_CONTINUE;
         }
+        return SCRIPT_CONTINUE;
     }
 
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
@@ -222,20 +217,20 @@ class parcel_mailbox extends script.base_script
         }
         if (hasObjVar(self, VAR_ADDRESS))
         {
-            names[idx] = utils.packStringId(new string_id("Postal Address"));
+            names[idx] = utils.packStringId(new string_id("Address"));
             attribs[idx] = getStringObjVar(self, VAR_ADDRESS);
             idx++;
         }
         if (hasObjVar(self, VAR_OWNER))
         {
-            names[idx] = utils.packStringId(new string_id("Postal Owner"));
+            names[idx] = utils.packStringId(new string_id("Owner"));
             attribs[idx] = getPlayerName(getObjIdObjVar(self, VAR_OWNER));
             idx++;
         }
         return SCRIPT_CONTINUE;
     }
 
-    public boolean isCityMailbox(obj_id self) throws InterruptedException
+    public boolean isCityMailbox(obj_id self)
     {
         String postalCode = getStringObjVar(self, VAR_ADDRESS);
         return postalCode.endsWith("-C");
@@ -253,5 +248,13 @@ class parcel_mailbox extends script.base_script
         }
         broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(d.getObjId("recipientId")) + ".");
         return SCRIPT_CONTINUE;
+    }
+    public boolean isContentsAbleToFitInto(obj_id containerSelf, obj_id containerDestination)
+    {
+        if (getVolumeFree(containerDestination) >= getFilledVolume(containerSelf))
+        {
+            return true;
+        }
+        return false;
     }
 }
