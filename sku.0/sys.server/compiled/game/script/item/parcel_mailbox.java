@@ -4,7 +4,9 @@ package script.item;/*
 @Purpose: Allows players to send items to other players online (or offline) if the mailboxes are on the same planet..*/
 
 import script.*;
-import script.library.*;
+import script.library.city;
+import script.library.sui;
+import script.library.utils;
 
 import java.util.Random;
 
@@ -14,6 +16,39 @@ class parcel_mailbox extends script.base_script
     public static final String VAR_ADDRESS = "parcel_mailbox.address";
     public static final String VAR_OWNER = "parcel_mailbox.owner";
     public static final String VAR_SETUP = "parcel_mailbox.setup";
+    public static final float VAR_MAIL_SPEED_NON_CITY = 300f;
+
+    public static void sendItemMail(obj_id self, obj_id player) throws InterruptedException
+    {
+        sui.inputbox(self, player, "Please enter the non-capitalized name of which you wish to send these items to.", sui.OK_CANCEL, "MAILBOX", sui.INPUT_NORMAL, null, "handleMailTo", null);
+    }
+
+    public String generatePostalCode(obj_id self) throws InterruptedException
+    {
+        Random rand = new Random();
+        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String digits = "0123456789";
+        StringBuilder sb = new StringBuilder();
+        sb.append("MB-");
+        for (int i = 0; i < 4; i++)
+        {
+            sb.append(letters.charAt(rand.nextInt(letters.length())));
+        }
+        sb.append("-");
+        sb.append(digits.charAt(rand.nextInt(10)));
+        sb.append(digits.charAt(rand.nextInt(10)));
+
+        if (city.isInCity(getLocation(self)))
+        {
+            sb.append("-C");
+        }
+        else
+        {
+            sb.append("-W");
+        }
+        return sb.toString();
+    }
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -32,6 +67,7 @@ class parcel_mailbox extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, VAR_OWNER))
@@ -48,6 +84,7 @@ class parcel_mailbox extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, VAR_OWNER))
@@ -79,6 +116,7 @@ class parcel_mailbox extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU5)
@@ -121,18 +159,13 @@ class parcel_mailbox extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void sendItemMail(obj_id self, obj_id player) throws InterruptedException
-    {
-        sui.inputbox(self, player, "Please enter the non-capitalized name of which you wish to send these items to.", sui.OK_CANCEL, "MAILBOX", sui.INPUT_NORMAL, null, "handleMailTo", null);
-    }
-
     public int handleMailTo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
         String recipient = sui.getInputBoxText(params);
         if (recipient == null || recipient.equals(""))
         {
-            broadcast(player, "You must enter a name.");
+            broadcast(player, "The name you entered is not valid. Try again.");
             return SCRIPT_CONTINUE;
         }
         obj_id recipientId = getPlayerIdFromFirstName(recipient);
@@ -157,21 +190,34 @@ class parcel_mailbox extends script.base_script
             broadcast(player, "You have no items to send.");
             return SCRIPT_CONTINUE;
         }
-        obj_id[] items = getContents(self);
-        int numItems = items.length;
-        for (obj_id item : items)
+        if (!isCityMailbox(self))
         {
-            putIn(item, destinationContainer);
+            dictionary d = new dictionary();
+            d.put("sender", player);
+            d.put("recipient", recipientId);
+            messageTo(self, "handleDelayedMailTo", d, VAR_MAIL_SPEED_NON_CITY, true);
+            broadcast(player, "Your items will be sent to " + getPlayerName(recipientId) + "'s mailbox in 5 minutes.");
+            return SCRIPT_CONTINUE;
         }
-        broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(recipientId) + ".");
-        return SCRIPT_CONTINUE;
+        else
+        {
+            obj_id[] items = getContents(self);
+            int numItems = items.length;
+            for (obj_id item : items)
+            {
+                putIn(item, destinationContainer);
+            }
+            broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(recipientId) + "'s mailbox.");
+            return SCRIPT_CONTINUE;
+        }
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
         if (idx == -1)
         {
-            LOG("Scripting", "idx was negative 1");
+            LOG("Scripting", "idx was negative 1 for mailbox.");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(self, VAR_ADDRESS))
@@ -189,25 +235,23 @@ class parcel_mailbox extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static String generatePostalCode(obj_id self) throws InterruptedException
+    public boolean isCityMailbox(obj_id self) throws InterruptedException
     {
-        Random rand = new Random();
-        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String digits = "0123456789";
-        StringBuilder sb = new StringBuilder();
-        sb.append("MB-");
-        for (int i = 0; i < 4; i++) {
-            sb.append(letters.charAt(rand.nextInt(letters.length())));
-        }
-        sb.append("-");
-        sb.append(digits.charAt(rand.nextInt(10)));
-        sb.append(digits.charAt(rand.nextInt(10)));
+        String postalCode = getStringObjVar(self, VAR_ADDRESS);
+        return postalCode.endsWith("-C");
+    }
 
-        if (city.isInCity(getLocation(self))) {
-            sb.append("-C");
-        } else {
-            sb.append("-W");
+    public int handleDelayedMailTo(obj_id self, dictionary d)
+    {
+        obj_id player = d.getObjId("sender");
+        obj_id[] items = getContents(self);
+        int numItems = items.length;
+        for (obj_id item : items)
+        {
+            obj_id destinationContainer = getObjIdObjVar(getPlanetByName("tatooine"), "mailbox_" + d.getObjId("recipientId"));
+            putIn(item, destinationContainer);
         }
-        return sb.toString();
+        broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(d.getObjId("recipientId")) + ".");
+        return SCRIPT_CONTINUE;
     }
 }
