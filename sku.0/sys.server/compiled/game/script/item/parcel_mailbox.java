@@ -192,7 +192,7 @@ class parcel_mailbox extends script.base_script
             d.put("sender", player);
             d.put("recipient", recipientId);
             messageTo(self, "handleDelayedMailTo", d, VAR_MAIL_SPEED_NON_CITY, true);
-            broadcast(player, "Your items will be sent to " + getPlayerName(recipientId) + "'s mailbox in 5 minutes.");
+            broadcast(player, "Your items will be sent to " + getPlayerName(recipientId) + "'s mailbox in 5 minutes. You can cancel this by retrieving your items from your mailbox.");
         }
         else
         {
@@ -241,6 +241,11 @@ class parcel_mailbox extends script.base_script
         obj_id player = d.getObjId("sender");
         obj_id[] items = getContents(self);
         int numItems = items.length;
+        if (numItems == 0)
+        {
+            broadcast(player, "You have cancelled this delivery.");
+            return SCRIPT_CONTINUE;
+        }
         for (obj_id item : items)
         {
             obj_id destinationContainer = getObjIdObjVar(getPlanetByName("tatooine"), "mailbox_" + d.getObjId("recipientId"));
