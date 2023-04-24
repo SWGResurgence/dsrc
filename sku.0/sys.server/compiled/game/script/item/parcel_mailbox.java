@@ -4,14 +4,16 @@ package script.item;/*
 @Purpose: Allows players to send items to other players online (or offline) if the mailboxes are on the same planet..*/
 
 import script.*;
-import script.library.sui;
-import script.library.utils;
+import script.library.*;
+
+import java.util.Random;
 
 @SuppressWarnings("unused")
 class parcel_mailbox extends script.base_script
 {
-    public String VAR_OWNER = "parcel_mailbox.owner";
-    public String VAR_SETUP = "parcel_mailbox.setup";
+    public static final String VAR_ADDRESS = "parcel_mailbox.address";
+    public static final String VAR_OWNER = "parcel_mailbox.owner";
+    public static final String VAR_SETUP = "parcel_mailbox.setup";
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -88,6 +90,7 @@ class parcel_mailbox extends script.base_script
             }
             if (!hasObjVar(self, VAR_OWNER))
             {
+                setObjVar(self, VAR_ADDRESS, generatePostalCode(self));
                 setObjVar(self, VAR_OWNER, player);
                 setObjVar(self, VAR_SETUP, 1);
                 setObjVar(getPlanetByName("tatooine"), "mailbox_" + player, self);
@@ -163,5 +166,48 @@ class parcel_mailbox extends script.base_script
         broadcast(player, "You have sent " + numItems + " items to " + getPlayerName(recipientId) + ".");
         return SCRIPT_CONTINUE;
     }
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
+    {
+        int idx = utils.getValidAttributeIndex(names);
+        if (idx == -1)
+        {
+            LOG("Scripting", "idx was negative 1");
+            return SCRIPT_CONTINUE;
+        }
+        if (hasObjVar(self, VAR_ADDRESS))
+        {
+            names[idx] = utils.packStringId(new string_id("Postal Address"));
+            attribs[idx] = getStringObjVar(self, VAR_ADDRESS);
+            idx++;
+        }
+        if (hasObjVar(self, VAR_OWNER))
+        {
+            names[idx] = utils.packStringId(new string_id("Postal Owner"));
+            attribs[idx] = getPlayerName(getObjIdObjVar(self, VAR_OWNER));
+            idx++;
+        }
+        return SCRIPT_CONTINUE;
+    }
 
+    public static String generatePostalCode(obj_id self) throws InterruptedException
+    {
+        Random rand = new Random();
+        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String digits = "0123456789";
+        StringBuilder sb = new StringBuilder();
+        sb.append("MB-");
+        for (int i = 0; i < 4; i++) {
+            sb.append(letters.charAt(rand.nextInt(letters.length())));
+        }
+        sb.append("-");
+        sb.append(digits.charAt(rand.nextInt(10)));
+        sb.append(digits.charAt(rand.nextInt(10)));
+
+        if (city.isInCity(getLocation(self))) {
+            sb.append("-C");
+        } else {
+            sb.append("-W");
+        }
+        return sb.toString();
+    }
 }
