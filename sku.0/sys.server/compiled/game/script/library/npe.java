@@ -1260,55 +1260,45 @@ public class npe extends script.base_script
             questClearQuest(quest, player);
         }
     }
-
-    // BEGINNING OF WEAPONS FOR NEW CHARACTERS \\
-
     public static obj_id[] giveProfessionWeapon(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
         if (utils.isProfession(player, utils.SMUGGLER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_pistol_03_01", pInv));                   //Coynite Disruptor Pistol
-            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_03_01", pInv));                 //Blade of the Betrayer
+            theSet.add(static_item.createNewItemFunction("item_npe_smuggler_han_solo_gun", pInv));
         }
         else if (utils.isProfession(player, utils.BOUNTY_HUNTER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_01", pInv));                    //DP-23 Rifle
-            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
+            theSet.add(static_item.createNewItemFunction("weapon_npe_carbine_bh_03_01", pInv));
         }
         else if (utils.isProfession(player, utils.OFFICER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_pistol_03_01", pInv));                   //Coynite Disruptor Pistol
-            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_03_01", pInv));                 //Blade of the Betrayer
+            theSet.add(static_item.createNewItemFunction("item_npe_officer_sidearm", pInv));
         }
         else if (utils.isProfession(player, utils.COMMANDO))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
-            theSet.add(static_item.createNewItemFunction("weapon_tow_heavy_rocket_launcher_05_01", pInv));    //Rocket Launcher
+            theSet.add(static_item.createNewItemFunction("weapon_npe_commando_carbine_03_01", pInv));
         }
         else if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_polearm_02_03", pInv));                      //Jedi Training Staff
-            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_02", pInv));                    //Disrupter Rifle
+            theSet.add(static_item.createNewItemFunction("weapon_polearm_02_03", pInv));
         }
         else if (utils.isProfession(player, utils.MEDIC))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
-            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_02", pInv));                    //Disrupter Rifle
+            theSet.add(static_item.createNewItemFunction("weapon_npe_medic_pistol_03_01", pInv));
         }
         else if (utils.isProfession(player, utils.SPY))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_blasterfist_04_01", pInv));              //Guardian Blaster Fist
-            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
+            theSet.add(static_item.createNewItemFunction("weapon_npe_carbine_spy_03_01", pInv));
         }
         else if (utils.isProfession(player, utils.ENTERTAINER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_blasterfist_04_01", pInv));              //Guardian Blaster Fist
+            theSet.add(static_item.createNewItemFunction("item_npe_dance_prop_l_entertainer_02_01", pInv));
         }
         else if (utils.isProfession(player, utils.TRADER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_01_01", pInv));                 //Mustafar Bandit Sword
+            theSet.add(static_item.createNewItemFunction("item_npe_gen_craft_tool_trader_03_01", pInv));
         }
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
