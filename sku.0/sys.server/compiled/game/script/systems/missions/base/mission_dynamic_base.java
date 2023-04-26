@@ -715,7 +715,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMissionData, "strTargetName", strTargetName);
         setObjVar(objMissionData, "strSpecies", strSpecies);
         float fltVariance = rand(MIN_REWARD_VARIANCE, MAX_REWARD_VARIANCE);
-        fltVariance = fltVariance / 100;
+        fltVariance = fltVariance / 200;
         intDifficulty = intDifficulty + (int) (intDifficulty * fltVariance);
         location locTest = new location();
         String strGoal = "object/tangible/mission/mission_bounty_target.iff";
@@ -724,11 +724,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         int intReward = 0;
         if (intBountyDifficulty > 1)
         {
-            intReward = (intBountyDifficulty * 40) + intDifficulty;
+            intReward = (intBountyDifficulty * 80) + intDifficulty;
         }
         else
         {
-            intReward = 20 + intDifficulty;
+            intReward = 50 + intDifficulty;
         }
         intReward = intReward * BH_MISSION_PAYOUT_BONUS + rand(0, 1000);
         obj_id groupObject = getGroupObject(objCreator);
