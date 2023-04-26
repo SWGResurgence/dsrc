@@ -197,7 +197,7 @@ public class permissions extends script.base_script
                     debugServerConsoleMsg(target, "deleteUserFromPermissionsGroup: updated user tally!");
                     return true;
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "deleteUserFromPermissionsGroup: failed user update!");
                     return false;
@@ -339,7 +339,7 @@ public class permissions extends script.base_script
                 {
                     permissions[index] |= permissionsValue;
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "grantGroupPermission: error returned from setBit!");
                 }
@@ -347,7 +347,7 @@ public class permissions extends script.base_script
                 {
                     setObjVar(target, groupPath + ".permissions", permissions);
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(target, "grantGroupPermission: permissions was being set as null in objvar " + groupPath + ".permissions");
                     return false;
@@ -523,7 +523,7 @@ public class permissions extends script.base_script
                 setObjVar(target, "permissions_list.users." + toString(player), userPermissions);
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -594,7 +594,7 @@ public class permissions extends script.base_script
             {
                 setObjVar(target, "permissions_list.users." + toString(player), userPermissions);
             }
-            else 
+            else
             {
                 removeObjVar(target, "permissions_list.users." + toString(player));
             }
@@ -729,7 +729,7 @@ public class permissions extends script.base_script
                 {
                     return groupMembers.getNumItems();
                 }
-                else 
+                else
                 {
                     return 0;
                 }

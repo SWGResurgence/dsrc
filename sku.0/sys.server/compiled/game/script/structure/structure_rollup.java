@@ -11,6 +11,7 @@ public class structure_rollup extends script.base_script
     public structure_rollup()
     {
     }
+
     public int OnDoStructureRollup(obj_id self, obj_id player, boolean warnOnly) throws InterruptedException
     {
         String structName = player_structure.getStructureName(self);
@@ -27,10 +28,11 @@ public class structure_rollup extends script.base_script
             prose.setStringId(pp, body);
             prose.setTO(pp, getPlayerFullName(player));
             String body_oob = chatMakePersistentMessageOutOfBandBody(null, pp);
-            String subject_str = "@" + subject.toString();
+            String subject_str = "@" + subject;
             body_oob = chatAppendPersistentMessageWaypointData(body_oob, where.area, where.x, where.z, null, structName);
             String[] admins = player_structure.getAdminListNames(self);
-            for (String admin : admins) {
+            for (String admin : admins)
+            {
                 chatSendPersistentMessage("Galactic Housing Authority", admin, subject_str, null, body_oob);
             }
             if (city.isInCity(self))
@@ -61,28 +63,34 @@ public class structure_rollup extends script.base_script
                 setObjVar(self, player_structure.VAR_SIGN_NAME, structName + abandoned);
             }
         }
-        else 
+        else
         {
             if (player_structure.isBuilding(self))
             {
                 obj_id[] players = player_structure.getPlayersInBuilding(self);
                 if (players != null)
                 {
-                    for (obj_id player1 : players) {
+                    for (obj_id player1 : players)
+                    {
                         expelFromBuilding(player1);
                     }
                 }
                 String[] cells = getCellNames(self);
                 if (cells != null)
                 {
-                    for (String cell : cells) {
+                    for (String cell : cells)
+                    {
                         obj_id cellid = getCellId(self, cell);
-                        obj_id contents[] = getContents(cellid);
-                        if (contents != null) {
-                            for (obj_id content : contents) {
-                                if (hasCondition(content, CONDITION_VENDOR)) {
+                        obj_id[] contents = getContents(cellid);
+                        if (contents != null)
+                        {
+                            for (obj_id content : contents)
+                            {
+                                if (hasCondition(content, CONDITION_VENDOR))
+                                {
                                     obj_id owner = getObjIdObjVar(content, "vendor_owner");
-                                    if (!isIdValid(owner)) {
+                                    if (!isIdValid(owner))
+                                    {
                                         owner = getOwner(content);
                                     }
                                     vendor_lib.finalizePackUp(owner, content, player, player_structure.isAbandoned(self));

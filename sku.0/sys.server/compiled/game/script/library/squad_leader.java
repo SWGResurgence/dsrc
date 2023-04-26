@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class squad_leader extends script.base_script
 {
-    public squad_leader()
-    {
-    }
     public static final int MAX_SKILL_VALUE = 20;
     public static final int MIN_SKILL_VALUE = 0;
     public static final int MAX_GROUP_SIZE = 20;
@@ -19,6 +16,10 @@ public class squad_leader extends script.base_script
     public static final string_id SID_SYS_SL = new string_id("squad_leader", "squad_leader_command");
     public static final string_id SID_NOT_IN_A_GROUP = new string_id("squad_leader", "not_in_a_group");
     public static final string_id SID_MESSAGE_PARAMETERS = new string_id("squad_leader", "message_parameters");
+    public squad_leader()
+    {
+    }
+
     public static void sendSquadLeaderCommand(obj_id squadLeader, String command) throws InterruptedException
     {
         obj_id groupId = getGroupObject(squadLeader);
@@ -42,15 +43,17 @@ public class squad_leader extends script.base_script
         }
         if (groupMembers != null)
         {
-            for (obj_id groupMember : groupMembers) {
+            for (obj_id groupMember : groupMembers)
+            {
                 displayCommand(squadLeader, groupMember, command);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(squadLeader, SID_NOT_IN_A_GROUP);
         }
     }
+
     public static boolean sendSquadWaypoint(obj_id officer, location wayLoc) throws InterruptedException
     {
         if (!isIdValid(officer) || !exists(officer))
@@ -62,17 +65,19 @@ public class squad_leader extends script.base_script
         dict.put("wayLoc", wayLoc);
         if (groupMembers != null)
         {
-            for (obj_id groupMember : groupMembers) {
+            for (obj_id groupMember : groupMembers)
+            {
                 messageTo(groupMember, "createOfficerGroupWaypoint", dict, 0, false);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(officer, SID_NOT_IN_A_GROUP);
             return false;
         }
         return true;
     }
+
     public static void displayCommand(obj_id squadLeader, obj_id groupMember, String command) throws InterruptedException
     {
         if (groupMember != null)
@@ -80,6 +85,7 @@ public class squad_leader extends script.base_script
             sendSystemMessageProse(groupMember, prose.getPackage(SID_SYS_SL, getName(squadLeader), command));
         }
     }
+
     public static boolean hasSkillsToSendCommand(obj_id squadLeader, int groupSize) throws InterruptedException
     {
         String skillPointScale = MIN_SKILL_VALUE + ".." + MAX_SKILL_VALUE;
@@ -87,6 +93,7 @@ public class squad_leader extends script.base_script
         int groupPercent = groupSize / MAX_GROUP_SIZE;
         return percent >= groupPercent;
     }
+
     public static obj_id[] getSquadTargets(obj_id self, String requiredSkill) throws InterruptedException
     {
         if (!hasSkill(self, requiredSkill))
@@ -112,6 +119,7 @@ public class squad_leader extends script.base_script
         }
         return groupMembers;
     }
+
     public static boolean setSquadCommandText(String command, String params) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -126,15 +134,18 @@ public class squad_leader extends script.base_script
         setObjVar(self, varName, strString);
         return true;
     }
+
     public static String getSquadCommandText(String command) throws InterruptedException
     {
         obj_id self = getSelf();
         String varName = "combat." + command + "String";
         return getStringObjVar(self, varName);
     }
+
     public static void barkSquadCommand(String command, String defaultText) throws InterruptedException
     {
     }
+
     public static obj_id[] getValidGroupMembers(obj_id self) throws InterruptedException
     {
         obj_id gid = getGroupObject(self);
@@ -145,8 +156,10 @@ public class squad_leader extends script.base_script
         obj_id[] groupMembers = getGroupMemberIds(gid);
         Vector validMembers = new Vector();
         validMembers.setSize(0);
-        for (obj_id groupMember : groupMembers) {
-            if (!(isIdValid(groupMember) && exists(groupMember) && isPlayer(groupMember) && getDistance(self, groupMember) < 64.0f)) {
+        for (obj_id groupMember : groupMembers)
+        {
+            if (!(isIdValid(groupMember) && exists(groupMember) && isPlayer(groupMember) && getDistance(self, groupMember) < 64.0f))
+            {
                 continue;
             }
             validMembers = utils.addElement(validMembers, groupMember);
@@ -159,6 +172,7 @@ public class squad_leader extends script.base_script
         }
         return _validMembers;
     }
+
     public static void validateRallyPoint(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "sl.rallyPoint"))
@@ -172,6 +186,7 @@ public class squad_leader extends script.base_script
             clearRallyPoint(player);
         }
     }
+
     public static void clearRallyPoint(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, "sl.rallyPoint"))
@@ -181,6 +196,7 @@ public class squad_leader extends script.base_script
         destroyWaypointInDatapad(getObjIdObjVar(player, "sl.rallyPoint.id"), player);
         removeObjVar(player, "sl.rallyPoint");
     }
+
     public static int getCalledShotAccuracyBonus(obj_id attacker, obj_id defender) throws InterruptedException
     {
         obj_id gid = getGroupObject(attacker);
@@ -194,6 +210,7 @@ public class squad_leader extends script.base_script
         }
         return utils.getIntScriptVar(defender, "calledShot." + gid + ".accuracy");
     }
+
     public static int getCalledShotDamageBonus(obj_id attacker, obj_id defender) throws InterruptedException
     {
         obj_id gid = getGroupObject(attacker);
@@ -207,6 +224,7 @@ public class squad_leader extends script.base_script
         }
         return utils.getIntScriptVar(defender, "calledShot." + gid + ".damage");
     }
+
     public static void clearCalledShotEffect(obj_id attacker, obj_id defender) throws InterruptedException
     {
         obj_id gid = getGroupObject(attacker);
@@ -220,10 +238,11 @@ public class squad_leader extends script.base_script
         }
         utils.removeScriptVarTree(defender, "calledShot." + gid);
         stopClientEffectObjByLabel(new obj_id[]
-        {
-            defender
-        }, defender, "calledShot." + gid);
+                {
+                        defender
+                }, defender, "calledShot." + gid);
     }
+
     public static float getLeadershipMod(obj_id player) throws InterruptedException
     {
         int skillMod = getEnhancedSkillStatisticModifier(player, "leadership");

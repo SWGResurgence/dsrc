@@ -4,9 +4,6 @@ import script.*;
 
 public class bio_engineer extends script.base_script
 {
-    public bio_engineer()
-    {
-    }
     public static final float DNA_HARVEST_CHECK_FRENZY = 0.3f;
     public static final float DNA_HARVEST_CHECK_ATTACK = 0.7f;
     public static final float CREATURE_MIN_TO_HIT_MOD = -0.25f;
@@ -63,72 +60,72 @@ public class bio_engineer extends script.base_script
     public static final int BIO_COMP_EFFECT_INTIMIDATION = 117;
     public static final int BIO_COMP_EFFECT_WARCRY = 118;
     public static final int BIO_COMP_EFFECT_MASK_SCENT = 119;
-    public static final String[] DNA_COMP_QUALITY_ATTRIB = 
-    {
-        "very_high",
-        "high",
-        "above_average",
-        "average",
-        "below_average",
-        "low",
-        "very_low"
-    };
-    public static final String[] BIO_COMP_EFFECT_FOOD_MODS = 
-    {
-        "duration",
-        "flavor",
-        "health_mod",
-        "con_mod",
-        "action_mod",
-        "stam_mod",
-        "mind_mod",
-        "will_mod"
-    };
-    public static final String[] BIO_COMP_EFFECT_SKILL_MODS = 
-    {
-        "debuffing_efficiency",
-        "augmentation_efficiency",
-        "cure_efficiency",
-        "tame_non_aggro",
-        "tame_aggro",
-        "creature_training",
-        "creature_empathy",
-        "healing_music_shock",
-        "healing_dance_shock",
-        "business_accumen",
-        "camouflage",
-        "creature_harvesting",
-        "surveying",
-        "healing_efficiency",
-        "ranged_defense",
-        "melee_defense",
-        "slope_move",
-        "unarmed_damage",
-        "mask_scent"
-    };
-    public static final int[] CREATURE_SPECIAL_ATTACK_LIST = 
-    {
-        (-1328770430),
-        (1524908377),
-        (-827784351),
-        (830990453),
-        (-2010795594),
-        (847492984),
-        (-38093787),
-        (-225405717),
-        (1245394953),
-        (-1229626420),
-        (1467687391),
-        (540899646)
-    };
-    public static final String[] DNA_TEMPLATE_SLOT_NAMES = 
-    {
-        "aggression_profile",
-        "psychological_profile",
-        "mental_profile",
-        "prowess_profile",
-        "physique_profile"
-    };
+    public static final String[] DNA_COMP_QUALITY_ATTRIB =
+            {
+                    "very_high",
+                    "high",
+                    "above_average",
+                    "average",
+                    "below_average",
+                    "low",
+                    "very_low"
+            };
+    public static final String[] BIO_COMP_EFFECT_FOOD_MODS =
+            {
+                    "duration",
+                    "flavor",
+                    "health_mod",
+                    "con_mod",
+                    "action_mod",
+                    "stam_mod",
+                    "mind_mod",
+                    "will_mod"
+            };
+    public static final String[] BIO_COMP_EFFECT_SKILL_MODS =
+            {
+                    "debuffing_efficiency",
+                    "augmentation_efficiency",
+                    "cure_efficiency",
+                    "tame_non_aggro",
+                    "tame_aggro",
+                    "creature_training",
+                    "creature_empathy",
+                    "healing_music_shock",
+                    "healing_dance_shock",
+                    "business_accumen",
+                    "camouflage",
+                    "creature_harvesting",
+                    "surveying",
+                    "healing_efficiency",
+                    "ranged_defense",
+                    "melee_defense",
+                    "slope_move",
+                    "unarmed_damage",
+                    "mask_scent"
+            };
+    public static final int[] CREATURE_SPECIAL_ATTACK_LIST =
+            {
+                    (-1328770430),
+                    (1524908377),
+                    (-827784351),
+                    (830990453),
+                    (-2010795594),
+                    (847492984),
+                    (-38093787),
+                    (-225405717),
+                    (1245394953),
+                    (-1229626420),
+                    (1467687391),
+                    (540899646)
+            };
+    public static final String[] DNA_TEMPLATE_SLOT_NAMES =
+            {
+                    "aggression_profile",
+                    "psychological_profile",
+                    "mental_profile",
+                    "prowess_profile",
+                    "physique_profile"
+            };
     public static final String CREATURE_DICT_NAME = "creatureName";
     public static final String CREATURE_DICT_MIN_HEALTH = "minHealth";
     public static final String CREATURE_DICT_MAX_HEALTH = "maxHealth";
@@ -214,20 +211,20 @@ public class bio_engineer extends script.base_script
     public static final int CREATURE_ATTRIB_POWER = 9;
     public static final int CREATURE_ATTRIB_QUALITY = 10;
     public static final int CREATURE_ATTRIB_NUM = 11;
-    public static final String[] CREATURE_ATTRIB_OBJVAR_NAMES = 
-    {
-        ATTRIB_DICT_HARDINESS,
-        ATTRIB_DICT_FORTITUDE,
-        ATTRIB_DICT_DEXTERITY,
-        ATTRIB_DICT_ENDURANCE,
-        ATTRIB_DICT_INTELLECT,
-        ATTRIB_DICT_CLEVERNESS,
-        ATTRIB_DICT_DEPENDABILITY,
-        ATTRIB_DICT_COURAGE,
-        ATTRIB_DICT_FIERCENESS,
-        ATTRIB_DICT_POWER,
-        ATTRIB_DICT_QUALITY
-    };
+    public static final String[] CREATURE_ATTRIB_OBJVAR_NAMES =
+            {
+                    ATTRIB_DICT_HARDINESS,
+                    ATTRIB_DICT_FORTITUDE,
+                    ATTRIB_DICT_DEXTERITY,
+                    ATTRIB_DICT_ENDURANCE,
+                    ATTRIB_DICT_INTELLECT,
+                    ATTRIB_DICT_CLEVERNESS,
+                    ATTRIB_DICT_DEPENDABILITY,
+                    ATTRIB_DICT_COURAGE,
+                    ATTRIB_DICT_FIERCENESS,
+                    ATTRIB_DICT_POWER,
+                    ATTRIB_DICT_QUALITY
+            };
     public static final int CREATURE_ATTRIB_WEIGHT_HEALTH = 0;
     public static final int CREATURE_ATTRIB_WEIGHT_CONSTITUTION = 1;
     public static final int CREATURE_ATTRIB_WEIGHT_DEFENSE = 2;
@@ -244,114 +241,114 @@ public class bio_engineer extends script.base_script
     public static final int CREATURE_ATTRIB_WEIGHT_DAMAGE = 13;
     public static final int CREATURE_ATTRIB_WEIGHT_ARMOR = 14;
     public static final int CREATURE_ATTRIB_WEIGHT_COUNT = 15;
-    public static final int[][] CREATURE_ATTRIB_WEIGHTS = 
-    {
-        
-        {
-            CREATURE_ATTRIB_HARDINESS,
-            10,
-            CREATURE_ATTRIB_DEXTERITY,
-            2
-        },
-        
-        {
-            CREATURE_ATTRIB_HARDINESS,
-            10,
-            CREATURE_ATTRIB_FORTITUDE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_DEXTERITY,
-            10,
-            CREATURE_ATTRIB_INTELLECT,
-            2
-        },
-        
-        {
-            CREATURE_ATTRIB_DEXTERITY,
-            10,
-            CREATURE_ATTRIB_ENDURANCE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_INTELLECT,
-            10,
-            CREATURE_ATTRIB_HARDINESS,
-            2
-        },
-        
-        {
-            CREATURE_ATTRIB_INTELLECT,
-            10,
-            CREATURE_ATTRIB_CLEVERNESS,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_ENDURANCE,
-            10,
-            CREATURE_ATTRIB_DEPENDABILITY,
-            2
-        },
-        
-        {
-            CREATURE_ATTRIB_CLEVERNESS,
-            10,
-            CREATURE_ATTRIB_INTELLECT,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_DEPENDABILITY,
-            10,
-            CREATURE_ATTRIB_COURAGE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_DEPENDABILITY,
-            10,
-            CREATURE_ATTRIB_COURAGE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_DEPENDABILITY,
-            10,
-            CREATURE_ATTRIB_ENDURANCE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_FIERCENESS,
-            10,
-            CREATURE_ATTRIB_POWER,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_COURAGE,
-            10,
-            CREATURE_ATTRIB_CLEVERNESS,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_POWER,
-            10,
-            CREATURE_ATTRIB_COURAGE,
-            0
-        },
-        
-        {
-            CREATURE_ATTRIB_FORTITUDE,
-            10,
-            CREATURE_ATTRIB_ENDURANCE,
-            0
-        }
-    };
+    public static final int[][] CREATURE_ATTRIB_WEIGHTS =
+            {
+
+                    {
+                            CREATURE_ATTRIB_HARDINESS,
+                            10,
+                            CREATURE_ATTRIB_DEXTERITY,
+                            2
+                    },
+
+                    {
+                            CREATURE_ATTRIB_HARDINESS,
+                            10,
+                            CREATURE_ATTRIB_FORTITUDE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_DEXTERITY,
+                            10,
+                            CREATURE_ATTRIB_INTELLECT,
+                            2
+                    },
+
+                    {
+                            CREATURE_ATTRIB_DEXTERITY,
+                            10,
+                            CREATURE_ATTRIB_ENDURANCE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_INTELLECT,
+                            10,
+                            CREATURE_ATTRIB_HARDINESS,
+                            2
+                    },
+
+                    {
+                            CREATURE_ATTRIB_INTELLECT,
+                            10,
+                            CREATURE_ATTRIB_CLEVERNESS,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_ENDURANCE,
+                            10,
+                            CREATURE_ATTRIB_DEPENDABILITY,
+                            2
+                    },
+
+                    {
+                            CREATURE_ATTRIB_CLEVERNESS,
+                            10,
+                            CREATURE_ATTRIB_INTELLECT,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_DEPENDABILITY,
+                            10,
+                            CREATURE_ATTRIB_COURAGE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_DEPENDABILITY,
+                            10,
+                            CREATURE_ATTRIB_COURAGE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_DEPENDABILITY,
+                            10,
+                            CREATURE_ATTRIB_ENDURANCE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_FIERCENESS,
+                            10,
+                            CREATURE_ATTRIB_POWER,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_COURAGE,
+                            10,
+                            CREATURE_ATTRIB_CLEVERNESS,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_POWER,
+                            10,
+                            CREATURE_ATTRIB_COURAGE,
+                            0
+                    },
+
+                    {
+                            CREATURE_ATTRIB_FORTITUDE,
+                            10,
+                            CREATURE_ATTRIB_ENDURANCE,
+                            0
+                    }
+            };
     public static final String DNA_V_HIGH_QUALITY_OBJ_TEMPLATE = "object/tangible/component/dna/dna_sample_very_high.iff";
     public static final String DNA_HIGH_QUALITY_OBJ_TEMPLATE = "object/tangible/component/dna/dna_sample_high.iff";
     public static final String DNA_A_AVG_QUALITY_OBJ_TEMPLATE = "object/tangible/component/dna/dna_sample_above_average.iff";
@@ -391,6 +388,10 @@ public class bio_engineer extends script.base_script
     public static final string_id SID_PET_SUI_STATS_FIXED = new string_id("bio_engineer", "pet_sui_stats_fixed");
     public static final string_id SID_PET_SUI_FIX_ERROR = new string_id("bio_engineer", "pet_sui_fix_error");
     public static final String COMPONENT_RESOURCE_ATTRIB_OBJVAR_NAME = "crafting_component_resource_attribs";
+    public bio_engineer()
+    {
+    }
+
     public static boolean harvestCreatureDNA(obj_id player, obj_id creature) throws InterruptedException
     {
         deltadictionary dctScriptVars = player.getScriptVars();
@@ -502,6 +503,7 @@ public class bio_engineer extends script.base_script
         doAnimationAction(player, "heal_other");
         return true;
     }
+
     public static boolean harvestCreatureDeedDNA(obj_id player, obj_id creatureDeed) throws InterruptedException
     {
         deltadictionary dctScriptVars = player.getScriptVars();
@@ -584,6 +586,7 @@ public class bio_engineer extends script.base_script
         messageTo(player, "completeHarvestDNA", null, harvestTime, false);
         return true;
     }
+
     public static boolean completeHarvest(obj_id player) throws InterruptedException
     {
         boolean failed = false;
@@ -611,7 +614,7 @@ public class bio_engineer extends script.base_script
                 creature = creatureDeed;
                 deed = true;
             }
-            else 
+            else
             {
                 failed = true;
             }
@@ -621,7 +624,7 @@ public class bio_engineer extends script.base_script
         {
             targetDiff = getIntObjVar(creatureDeed, "creature_attribs.level");
         }
-        else 
+        else
         {
             targetDiff = getLevel(creature);
         }
@@ -673,7 +676,7 @@ public class bio_engineer extends script.base_script
         {
             failed = true;
         }
-        else 
+        else
         {
             LOG("dna_harvest", "Creature: " + mobType);
             LOG("dna_harvest", "geneProfile: " + creatureProfile);
@@ -682,7 +685,7 @@ public class bio_engineer extends script.base_script
             {
                 creatureStats = getCreatureDeedStats(creature);
             }
-            else 
+            else
             {
                 creatureStats = getCreatureStats(creature);
             }
@@ -718,7 +721,7 @@ public class bio_engineer extends script.base_script
                 }
                 harvestCount++;
                 setObjVar(creature, VAR_DNA_HARVEST_COUNT, harvestCount);
-                survivalCheck = (int)((skillMod - targetDiff) * ((100 - (harvestCount * 10)) / 100.0f) * 2);
+                survivalCheck = (int) ((skillMod - targetDiff) * ((100 - (harvestCount * 10)) / 100.0f) * 2);
                 if (survivalCheck < 0)
                 {
                     survivalCheck = 0;
@@ -735,7 +738,7 @@ public class bio_engineer extends script.base_script
                     {
                         destroyObject(creature);
                     }
-                    else 
+                    else
                     {
                         if (pet_lib.hasMaster(creature))
                         {
@@ -772,7 +775,7 @@ public class bio_engineer extends script.base_script
                 {
                     destroyObject(creature);
                 }
-                else 
+                else
                 {
                     if (pet_lib.hasMaster(creature))
                     {
@@ -805,11 +808,11 @@ public class bio_engineer extends script.base_script
             sendSystemMessage(player, SID_HARVEST_FAILED);
             return false;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_HARVEST_SUCCEED);
             int xpAmount = 0;
-            xpAmount = (int)(StrictMath.pow(targetDiff, 1.2f) * 5.0f) + 50;
+            xpAmount = (int) (StrictMath.pow(targetDiff, 1.2f) * 5.0f) + 50;
             if (xpAmount > 2500)
             {
                 xpAmount = 2500;
@@ -826,6 +829,7 @@ public class bio_engineer extends script.base_script
         }
         return true;
     }
+
     public static boolean quickHarvest(obj_id player, String creatureName) throws InterruptedException
     {
         dictionary creatureDict = dataTableGetRow(create.CREATURE_TABLE, creatureName);
@@ -871,8 +875,8 @@ public class bio_engineer extends script.base_script
         }
         dictionary creatureStats = new dictionary();
         int avgAttrib = dataTableGetInt(create.STAT_BALANCE_TABLE, statLevel - 1, "HP");
-        int minAttrib = minAttrib = (int)(avgAttrib * 0.9f);
-        int maxAttrib = maxAttrib = (int)(avgAttrib * 1.1f);
+        int minAttrib = minAttrib = (int) (avgAttrib * 0.9f);
+        int maxAttrib = maxAttrib = (int) (avgAttrib * 1.1f);
         float minScale = creatureDict.getFloat("minScale");
         float maxScale = creatureDict.getFloat("maxScale");
         float dps = dataTableGetFloat(create.STAT_BALANCE_TABLE, dmgLevel - 1, "damagePerSecond");
@@ -915,6 +919,7 @@ public class bio_engineer extends script.base_script
         sendSystemMessage(player, SID_HARVEST_SUCCEED);
         return true;
     }
+
     public static dictionary getCreatureStats(obj_id creature) throws InterruptedException
     {
         dictionary creatureStats = new dictionary();
@@ -942,12 +947,12 @@ public class bio_engineer extends script.base_script
             creatureStats.put(CREATURE_DICT_RANGED_WEAPON, getStringObjVar(pcd, "creature_attribs." + ATTRIB_DICT_RANGED_WEAPON));
             creatureStats.put(CREATURE_DICT_MAX_SCALE, getFloatObjVar(pcd, "creature_attribs.scale"));
         }
-        else 
+        else
         {
             obj_id primaryWeapon = aiGetPrimaryWeapon(creature);
             creatureStats.put(CREATURE_DICT_TO_HIT, getSkillStatMod(creature, "toHitChance"));
             creatureStats.put(CREATURE_DICT_DEFENSE_VALUE, getSkillStatMod(creature, "ranged_defense"));
-            creatureStats.put(CREATURE_DICT_ARMOR_BASE, (int)getFloatObjVar(creature, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION));
+            creatureStats.put(CREATURE_DICT_ARMOR_BASE, (int) getFloatObjVar(creature, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION));
             creatureStats.put(CREATURE_DICT_MIN_DAMAGE, getWeaponMinDamage(primaryWeapon));
             creatureStats.put(CREATURE_DICT_MAX_DAMAGE, getWeaponMaxDamage(primaryWeapon));
             creatureStats.put(CREATURE_DICT_RANGED_WEAPON, "");
@@ -960,6 +965,7 @@ public class bio_engineer extends script.base_script
         }
         return creatureStats;
     }
+
     public static dictionary getCreatureDeedStats(obj_id creatureDeed) throws InterruptedException
     {
         dictionary creatureStats = new dictionary();
@@ -978,6 +984,7 @@ public class bio_engineer extends script.base_script
         creatureStats.put(CREATURE_DICT_MAX_SCALE, getFloatObjVar(creatureDeed, "creature_attribs.scale"));
         return creatureStats;
     }
+
     public static dictionary calculateDNAAttributes(obj_id player, dictionary creatureStats, dictionary profileDict, int qualityOverride) throws InterruptedException
     {
         String creatureName = creatureStats.getString(CREATURE_DICT_NAME);
@@ -1155,34 +1162,39 @@ public class bio_engineer extends script.base_script
         attributeDict.put(ATTRIB_DICT_RANGED_WEAPON, rangedWeapon);
         return attributeDict;
     }
+
     public static int calcDnaHardiness(int health) throws InterruptedException
     {
         final int minHealth = 50;
         final int maxHealth = 8000;
-        int hardiness = (int)(((float)(health - minHealth) / (maxHealth - minHealth)) * 1000.0f);
+        int hardiness = (int) (((float) (health - minHealth) / (maxHealth - minHealth)) * 1000.0f);
         return hardiness;
     }
+
     public static int calcDnaFortitude(int armorBase) throws InterruptedException
     {
         final int minArmorBase = 0;
         final int maxArmorBase = 6000;
-        int fortitude = (int)(((float)(armorBase - minArmorBase) / (maxArmorBase - minArmorBase)) * 1000.0f);
+        int fortitude = (int) (((float) (armorBase - minArmorBase) / (maxArmorBase - minArmorBase)) * 1000.0f);
         return fortitude;
     }
+
     public static int calcDnaDexterity(float defenseValue) throws InterruptedException
     {
         final int minDefense = 5;
         final int maxDefense = 209;
-        int dexterity = (int)(((defenseValue - minDefense) / (maxDefense - minDefense)) * 1000.0f);
+        int dexterity = (int) (((defenseValue - minDefense) / (maxDefense - minDefense)) * 1000.0f);
         return dexterity;
     }
+
     public static int calcDnaEndurance(float healthRegen) throws InterruptedException
     {
         final float minHealthRegen = 12;
         final float maxHealthRegen = 859;
-        int endurance = (int)(((healthRegen - minHealthRegen) / (maxHealthRegen - minHealthRegen)) * 1000.0f);
+        int endurance = (int) (((healthRegen - minHealthRegen) / (maxHealthRegen - minHealthRegen)) * 1000.0f);
         return endurance;
     }
+
     public static int calcDnaIntellect(float scale) throws InterruptedException
     {
         final float minScale = 0.5f;
@@ -1195,16 +1207,18 @@ public class bio_engineer extends script.base_script
         {
             scale = maxScale;
         }
-        int intellect = (int)(((float)(scale - minScale) / (float)(maxScale - minScale)) * 1000.0f);
+        int intellect = (int) (((scale - minScale) / (maxScale - minScale)) * 1000.0f);
         return intellect;
     }
+
     public static int calcDnaCleverness(float toHit) throws InterruptedException
     {
         final int minToHit = 5;
         final int maxToHit = 209;
-        int cleverness = (int)(((toHit - minToHit) / (maxToHit - minToHit)) * 1000.0f);
+        int cleverness = (int) (((toHit - minToHit) / (maxToHit - minToHit)) * 1000.0f);
         return cleverness;
     }
+
     public static int calcDnaDependability(int level, int niche) throws InterruptedException
     {
         final int minDepend = 1;
@@ -1218,10 +1232,11 @@ public class bio_engineer extends script.base_script
         {
             flevel = maxDepend;
         }
-        int dependability = (int)(((flevel - minDepend) / (maxDepend - minDepend)) * 1000.0f);
+        int dependability = (int) (((flevel - minDepend) / (maxDepend - minDepend)) * 1000.0f);
         LOG("dna_harvest", "Dependability: " + dependability + " [level = " + level + "(" + minDepend + "/" + maxDepend + ")]");
         return dependability;
     }
+
     public static int calcDnaCourage(int level, String meat) throws InterruptedException
     {
         final int minLevel = 1;
@@ -1247,9 +1262,10 @@ public class bio_engineer extends script.base_script
         {
             flevel = maxLevel;
         }
-        int courage = (int)(((flevel - minLevel) / (maxLevel - minLevel)) * 1000.0f);
+        int courage = (int) (((flevel - minLevel) / (maxLevel - minLevel)) * 1000.0f);
         return courage;
     }
+
     public static int calcDnaFierceness(int level, int niche) throws InterruptedException
     {
         final int minFerocity = 1;
@@ -1263,42 +1279,44 @@ public class bio_engineer extends script.base_script
         {
             flevel = maxFerocity;
         }
-        int fierceness = (int)(((float)(flevel - minFerocity) / (maxFerocity - minFerocity)) * 1000.0f);
+        int fierceness = (int) (((flevel - minFerocity) / (maxFerocity - minFerocity)) * 1000.0f);
         return fierceness;
     }
+
     public static int calcDnaPower(int avgDamage) throws InterruptedException
     {
         final int minBaseDamage = 17;
         final int maxBaseDamage = 431;
-        int power = (int)(((float)(avgDamage - minBaseDamage) / (maxBaseDamage - minBaseDamage)) * 1000.0f);
+        int power = (int) (((float) (avgDamage - minBaseDamage) / (maxBaseDamage - minBaseDamage)) * 1000.0f);
         return power;
     }
+
     public static obj_id createDNAComponent(obj_id player, obj_id inventory, dictionary attributeDict) throws InterruptedException
     {
         obj_id DNA_obj = null;
         switch (attributeDict.getInt(ATTRIB_DICT_QUALITY))
         {
             case DNA_V_LOW_QUALITY:
-            DNA_obj = createObject(DNA_V_LOW_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_V_LOW_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_LOW_QUALITY:
-            DNA_obj = createObject(DNA_LOW_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_LOW_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_B_AVG_QUALITY:
-            DNA_obj = createObject(DNA_B_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_B_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_AVG_QUALITY:
-            DNA_obj = createObject(DNA_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_A_AVG_QUALITY:
-            DNA_obj = createObject(DNA_A_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_A_AVG_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_HIGH_QUALITY:
-            DNA_obj = createObject(DNA_HIGH_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_HIGH_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
             case DNA_V_HIGH_QUALITY:
-            DNA_obj = createObject(DNA_V_HIGH_QUALITY_OBJ_TEMPLATE, inventory, "");
-            break;
+                DNA_obj = createObject(DNA_V_HIGH_QUALITY_OBJ_TEMPLATE, inventory, "");
+                break;
         }
         if (DNA_obj != null)
         {
@@ -1319,17 +1337,19 @@ public class bio_engineer extends script.base_script
         }
         return DNA_obj;
     }
+
     public static int grantTemplateCraftingExperience(int level) throws InterruptedException
     {
         return level * 10;
     }
+
     public static int calcCreatureAttrib(int attrib, int[] dnaAttributes) throws InterruptedException
     {
         final int minAttrib = 50;
         final int maxAttrib = 8000;
         int attribRange = maxAttrib - minAttrib;
         float dnaAttrib = (((dnaAttributes[CREATURE_ATTRIB_WEIGHTS[attrib][0]] * CREATURE_ATTRIB_WEIGHTS[attrib][1]) + (dnaAttributes[CREATURE_ATTRIB_WEIGHTS[attrib][2]] * CREATURE_ATTRIB_WEIGHTS[attrib][3])) / (CREATURE_ATTRIB_WEIGHTS[attrib][1] + CREATURE_ATTRIB_WEIGHTS[attrib][3]));
-        int newAttrib = (int)((attribRange * dnaAttrib) / 1000) + minAttrib;
+        int newAttrib = (int) ((attribRange * dnaAttrib) / 1000) + minAttrib;
         LOG("creature_crafting", "Attribute: " + create.MINATTRIBNAMES[attrib]);
         LOG("creature_crafting", "    minVal: " + minAttrib);
         LOG("creature_crafting", "    maxVal: " + maxAttrib);
@@ -1339,6 +1359,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    endVal: " + newAttrib);
         return newAttrib;
     }
+
     public static int calcCreatureToHit(int[] dnaAttributes) throws InterruptedException
     {
         final int minToHit = 5;
@@ -1352,8 +1373,9 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    dnaToHit: " + dnaAttrib);
         LOG("creature_crafting", "    dnaCalc = (((" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][0]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][1] + ") + (" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][2]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][3] + ")) / (" + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][1] + " + " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_TO_HIT][3] + "))");
         LOG("creature_crafting", "    endToHit: " + toHitChance);
-        return (int)toHitChance;
+        return (int) toHitChance;
     }
+
     public static float calcCreatureCritChance(int[] dnaAttributes) throws InterruptedException
     {
         float critChance = 0;
@@ -1365,6 +1387,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    endCrit: " + critChance);
         return critChance;
     }
+
     public static float calcCreatureCritSave(int[] dnaAttributes) throws InterruptedException
     {
         float critSave = 0;
@@ -1376,6 +1399,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    endSave: " + critSave);
         return critSave;
     }
+
     public static float calcCreatureAggroBonus(int[] dnaAttributes) throws InterruptedException
     {
         float aggroBonus = 0;
@@ -1387,6 +1411,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    endAggro: " + aggroBonus);
         return aggroBonus;
     }
+
     public static float calcCreatureStateResist(int[] dnaAttributes) throws InterruptedException
     {
         float stateResist = 0;
@@ -1398,6 +1423,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    endStateResist: " + stateResist);
         return stateResist;
     }
+
     public static float calcCreatureMaxScale(int[] dnaAttributes) throws InterruptedException
     {
         final float minScalef = 0.5f;
@@ -1406,6 +1432,7 @@ public class bio_engineer extends script.base_script
         float maxScale = minScalef + (((maxScalef - minScalef) * dnaAttrib) / 1000);
         return maxScale;
     }
+
     public static int[] calcCreatureDamage(int[] dnaAttributes) throws InterruptedException
     {
         final int minBaseDamage = 17;
@@ -1415,7 +1442,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    minBaseDamage: " + minBaseDamage);
         LOG("creature_crafting", "    maxBaseDamage: " + maxBaseDamage);
         float dnaAttrib = (((dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][0]] * CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][1]) + (dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][2]] * CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][3])) / (CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][1] + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DAMAGE][3]));
-        baseDamage = (int)(minBaseDamage + (((maxBaseDamage - minBaseDamage) * dnaAttrib) / 1000));
+        baseDamage = (int) (minBaseDamage + (((maxBaseDamage - minBaseDamage) * dnaAttrib) / 1000));
         int[] damage = new int[2];
         damage[0] = minBaseDamage;
         damage[1] = maxBaseDamage;
@@ -1426,6 +1453,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    maxDamage:  " + damage[1]);
         return damage;
     }
+
     public static int calcCreatureHealthRegen(int[] dnaAttributes) throws InterruptedException
     {
         final float minHealthRegen = 12.0f;
@@ -1438,8 +1466,9 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    dnaHealthRegen: " + dnaAttrib);
         LOG("creature_crafting", "    dnaCalc = (((" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][0]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][1] + ") + (" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][2]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][3] + ")) / (" + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][1] + " + " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_HEALTH_REGEN][3] + "))");
         LOG("creature_crafting", "    endHealthRegen: " + healthRegen);
-        return (int)healthRegen;
+        return (int) healthRegen;
     }
+
     public static int calcCreatureDefenseValue(int[] dnaAttributes) throws InterruptedException
     {
         final int minDefense = 5;
@@ -1453,8 +1482,9 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    dnaDefense: " + dnaAttrib);
         LOG("creature_crafting", "    dnaCalc = (((" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][0]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][1] + ") + (" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][2]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][3] + ")) / (" + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][1] + " + " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_DEFENSE][3] + "))");
         LOG("creature_crafting", "    endDefenseValue: " + defenseValue);
-        return (int)defenseValue;
+        return (int) defenseValue;
     }
+
     public static int calcCreatureArmor(int[] dnaAttributes) throws InterruptedException
     {
         final int minArmorBase = 0;
@@ -1464,16 +1494,18 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "    minVal: " + minArmorBase);
         LOG("creature_crafting", "    maxVal: " + maxArmorBase);
         float dnaAttrib = (((dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][0]] * CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][1]) + (dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][2]] * CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][3])) / (CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][1] + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][3]));
-        armorBase = (int)(minArmorBase + (((maxArmorBase - minArmorBase) * dnaAttrib) / 1000));
+        armorBase = (int) (minArmorBase + (((maxArmorBase - minArmorBase) * dnaAttrib) / 1000));
         LOG("creature_crafting", "    dnaArmor: " + dnaAttrib);
         LOG("creature_crafting", "    dnaCalc = (((" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][0]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][1] + ") + (" + dnaAttributes[CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][2]] + " * " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][3] + ")) / (" + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][1] + " + " + CREATURE_ATTRIB_WEIGHTS[CREATURE_ATTRIB_WEIGHT_ARMOR][3] + "))");
         LOG("creature_crafting", "    endArmorBase: " + armorBase);
         return armorBase;
     }
+
     public static int calcCreature(int[] dnaAttributes) throws InterruptedException
     {
         return 0;
     }
+
     public static int getCraftedCreatureLevel(dictionary creatureDict) throws InterruptedException
     {
         int statLevel = calcCraftedStatLevel(creatureDict);
@@ -1482,14 +1514,15 @@ public class bio_engineer extends script.base_script
         int toHitLevel = calcToHitLevel(creatureDict);
         if (creatureDict.getInt("BaseLevel") == 0)
         {
-            int tempLevel = (int)((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel)) / 19.0f) + 0.5f);
+            int tempLevel = (int) ((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel)) / 19.0f) + 0.5f);
             creatureDict.put("BaseLevel", tempLevel);
         }
         int armorLevel = calcArmorLevel(creatureDict);
         int defenseLevel = calcDefenseLevel(creatureDict);
-        LOG("creature_balance_calcs", "Level: " + (int)((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f) + " (" + statLevel + "/" + regenLevel + "/" + dmgLevel + "/" + toHitLevel + "/" + defenseLevel + "/" + armorLevel + ")");
-        return (int)((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f);
+        LOG("creature_balance_calcs", "Level: " + (int) ((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f) + " (" + statLevel + "/" + regenLevel + "/" + dmgLevel + "/" + toHitLevel + "/" + defenseLevel + "/" + armorLevel + ")");
+        return (int) ((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f);
     }
+
     public static int getCreatureLevel(dictionary creatureDict) throws InterruptedException
     {
         int statLevel = calcStatLevel(creatureDict);
@@ -1498,9 +1531,10 @@ public class bio_engineer extends script.base_script
         int toHitLevel = calcToHitLevel(creatureDict);
         int armorLevel = calcArmorLevel(creatureDict);
         int defenseLevel = calcDefenseLevel(creatureDict);
-        LOG("creature_balance_calcs", "Level: " + (int)((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (defenseLevel) + (toHitLevel) + (armorLevel * 2)) / 22.0f) + 0.5f) + " (" + statLevel + "/" + regenLevel + "/" + dmgLevel + "/" + toHitLevel + "/" + defenseLevel + "/" + armorLevel + ")");
-        return (int)((((statLevel * 6) + (dmgLevel * 10) + (regenLevel * 2) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f);
+        LOG("creature_balance_calcs", "Level: " + (int) ((((statLevel * 6) + (regenLevel * 2) + (dmgLevel * 10) + (defenseLevel) + (toHitLevel) + (armorLevel * 2)) / 22.0f) + 0.5f) + " (" + statLevel + "/" + regenLevel + "/" + dmgLevel + "/" + toHitLevel + "/" + defenseLevel + "/" + armorLevel + ")");
+        return (int) ((((statLevel * 6) + (dmgLevel * 10) + (regenLevel * 2) + (toHitLevel) + (defenseLevel) + (armorLevel * 2)) / 22.0f) + 0.5f);
     }
+
     public static int calcCraftedStatLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] hitpoints = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "HP");
@@ -1513,6 +1547,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "StatLevel = " + (level + 1) + ": Health - (" + health + ")");
         return (level + 1);
     }
+
     public static int calcStatLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] hitpoints = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "HP");
@@ -1527,10 +1562,12 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "StatLevel = " + (level + 1) + ": Health - (" + minHealth + "-" + maxHealth + ")");
         return (level + 1);
     }
+
     public static int calcDmgLevel(dictionary creatureDict) throws InterruptedException
     {
         return 1;
     }
+
     public static int calcRegenLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] regenList = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "HealthRegen");
@@ -1545,6 +1582,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "RegenLevel = " + level + ": healthRegen - (" + healthRegen + ")");
         return level;
     }
+
     public static int calcToHitLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] toHitList = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "ToHit");
@@ -1559,6 +1597,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "ToHitLevel = " + level + ": ToHit - (" + toHit + ")");
         return level;
     }
+
     public static int calcOldToHitLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] toHitList = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "ToHit");
@@ -1582,7 +1621,7 @@ public class bio_engineer extends script.base_script
             {
                 level = levelRange;
             }
-            else 
+            else
             {
                 level = baseLevel;
             }
@@ -1590,6 +1629,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "ToHitLevel = " + level + ": ToHit - (" + toHit + ")");
         return level;
     }
+
     public static int calcDefenseLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] defenseList = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "Def");
@@ -1604,10 +1644,12 @@ public class bio_engineer extends script.base_script
         LOG("creature_balance_calcs", "DefenseLevel = " + level + ": defenseValue - (" + defenseValue + ")");
         return level;
     }
+
     public static int calcAttackSpeedLevel(dictionary creatureDict) throws InterruptedException
     {
         return 0;
     }
+
     public static int calcArmorLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] baseEffectiveness = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "Armor");
@@ -1631,13 +1673,14 @@ public class bio_engineer extends script.base_script
             {
                 level = levelRange;
             }
-            else 
+            else
             {
                 level = baseLevel;
             }
         }
         return level;
     }
+
     public static int calcOldArmorLevel(dictionary creatureDict) throws InterruptedException
     {
         int[] baseRating = dataTableGetIntColumn("datatables/mob/stat_balance.iff", "BaseArmor");
@@ -1672,7 +1715,7 @@ public class bio_engineer extends script.base_script
             {
                 level = levelRange;
             }
-            else 
+            else
             {
                 level = baseLevel;
             }
@@ -1681,7 +1724,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorKinetic - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) * 3;
         }
-        else 
+        else
         {
             resistanceLevel += armorKinetic * (((armorRating * 25) + (armorEffectiveness / (armorRating + 1))) * 6);
         }
@@ -1689,7 +1732,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorEnergy - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) * 3;
         }
-        else 
+        else
         {
             resistanceLevel += armorEnergy * (((armorRating * 25) + (armorEffectiveness / (armorRating + 1))) * 6);
         }
@@ -1697,7 +1740,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorBlast - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorBlast * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
@@ -1705,7 +1748,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorHeat - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorHeat * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
@@ -1713,7 +1756,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorCold - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorCold * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
@@ -1721,7 +1764,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorElectric - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorElectric * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
@@ -1729,7 +1772,7 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorAcid - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorAcid * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
@@ -1737,22 +1780,25 @@ public class bio_engineer extends script.base_script
         {
             resistanceLevel += Math.max((armorStun - ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)))), 0) / 2.0f;
         }
-        else 
+        else
         {
             resistanceLevel += armorStun * ((armorRating * 25) + (armorEffectiveness / (armorRating + 1)));
         }
-        level += (int)(resistanceLevel / 10.0f);
+        level += (int) (resistanceLevel / 10.0f);
         LOG("creature_balance_calcs", "ArmorLevel = " + level + ": Rating - (" + armorRating + "); Effect - (" + armorEffectiveness + "); Resistances - (" + armorKinetic + ", " + armorEnergy + ", " + armorBlast + ", " + armorHeat + ", " + armorCold + ", " + armorElectric + ", " + armorAcid + ", " + armorStun + ")");
         return level;
     }
+
     public static int calcSpecialAttackLevel(dictionary creatureDict) throws InterruptedException
     {
         return 0;
     }
+
     public static int calcRangedAttackLevel(dictionary creatureDict) throws InterruptedException
     {
         return 0;
     }
+
     public static int getCalcLevelFromPcd(obj_id pcd) throws InterruptedException
     {
         dictionary creatureDict = new dictionary();
@@ -1768,6 +1814,7 @@ public class bio_engineer extends script.base_script
         int calcLevel = getCraftedCreatureLevel(creatureDict);
         return calcLevel;
     }
+
     public static void stripOldStats(obj_id pcd) throws InterruptedException
     {
         if (hasObjVar(pcd, "creature_attribs.armorData"))
@@ -1791,6 +1838,7 @@ public class bio_engineer extends script.base_script
             removeObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[MIND]);
         }
     }
+
     public static boolean validatePcdLevel(obj_id pcd, obj_id player) throws InterruptedException
     {
         int level = getIntObjVar(pcd, "creature_attribs.level");
@@ -1838,13 +1886,14 @@ public class bio_engineer extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             CustomerServiceLog("be_clone_validation", "Invalid Pet Found: " + getName(player) + "(" + player + ") " + getEncodedName(pcd) + "(pcd-" + pcd + ") Level(" + level + ") calcLevel(" + calcLevel + ") H(" + health + ") Dam(" + minDamage + "-" + maxDamage + ") toHit(" + toHit + ") DV(" + defenseValue + ") GP(" + general_protection + ")");
             showBrokenPetDialog(pcd, player);
             return false;
         }
     }
+
     public static int showBrokenPetDialog(obj_id pcd, obj_id player) throws InterruptedException
     {
         int pid = sui.createSUIPage(sui.SUI_MSGBOX, pcd, player, "handlePetFixDialog");
@@ -1852,14 +1901,15 @@ public class bio_engineer extends script.base_script
         setSUIProperty(pid, sui.MSGBOX_TITLE, sui.PROP_TEXT, localize(SID_PET_SUI_TITLE));
         setSUIProperty(pid, sui.MSGBOX_PROMPT, sui.PROP_TEXT, localize(SID_PET_SUI_TEXT));
         sui.msgboxButtonSetup(pid, sui.YES_NO_CANCEL);
-        setSUIProperty(pid, sui.MSGBOX_BTN_REVERT, sui.PROP_TEXT, "@" + SID_PET_SUI_FIX_LEVEL.toString());
-        setSUIProperty(pid, sui.MSGBOX_BTN_OK, sui.PROP_TEXT, "@" + SID_PET_SUI_FIX_STATS.toString());
-        setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, "@" + SID_PET_SUI_ABORT.toString());
+        setSUIProperty(pid, sui.MSGBOX_BTN_REVERT, sui.PROP_TEXT, "@" + SID_PET_SUI_FIX_LEVEL);
+        setSUIProperty(pid, sui.MSGBOX_BTN_OK, sui.PROP_TEXT, "@" + SID_PET_SUI_FIX_STATS);
+        setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, "@" + SID_PET_SUI_ABORT);
         setSUIProperty(pid, sui.MSGBOX_BTN_REVERT, "OnPress", "RevertWasPressed=1\r\nparent.btnOk.press=t");
         subscribeToSUIProperty(pid, sui.MSGBOX_BTN_REVERT, "RevertWasPressed");
         sui.showSUIPage(pid);
         return pid;
     }
+
     public static void adjustBrokenPetLevel(obj_id pcd, obj_id player) throws InterruptedException
     {
         int oldLevel = getIntObjVar(pcd, "creature_attribs.level");
@@ -1883,6 +1933,7 @@ public class bio_engineer extends script.base_script
         sendSystemMessageProse(player, proseMsg);
         CustomerServiceLog("be_clone_validation", "Invalid Pet Fixed: " + getName(player) + "(" + player + ") " + getEncodedName(pcd) + "(pcd-" + pcd + ") oldLevel(" + oldLevel + ") newLevel(" + level + ")");
     }
+
     public static void adjustBrokenPetStats(obj_id pcd, obj_id player) throws InterruptedException
     {
         int level = getIntObjVar(pcd, "creature_attribs.level");
@@ -1893,7 +1944,7 @@ public class bio_engineer extends script.base_script
             return;
         }
         int health = dataTableGetInt("datatables/mob/stat_balance.iff", level - 1, "HP");
-        
+
         int iconst = dataTableGetInt("datatables/mob/stat_balance.iff", level - 1, "HealthRegen");
         float dps = dataTableGetFloat("datatables/mob/stat_balance.iff", level - 1, "damagePerSecond");
         int minDamage = Math.round((dps * 2.0f) * 0.5f);
@@ -1929,15 +1980,19 @@ public class bio_engineer extends script.base_script
         sendSystemMessageProse(player, proseMsg);
         CustomerServiceLog("be_clone_validation", "Invalid Pet Fixed: " + getName(player) + "(" + player + ") " + getEncodedName(pcd) + "(pcd-" + pcd + ") Level(" + level + ") NewStats: H(" + health + ") Dam(" + minDamage + "-" + maxDamage + ") toHit(" + toHit + ") DV(" + defenseValue + ") GP(" + general_protection + ")");
     }
+
     public static boolean validateCreatureSpecialAttack(int attack) throws InterruptedException
     {
-        for (int i1 : CREATURE_SPECIAL_ATTACK_LIST) {
-            if (attack == i1) {
+        for (int i1 : CREATURE_SPECIAL_ATTACK_LIST)
+        {
+            if (attack == i1)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static String convertSampleTypeToCreature(String sampleType) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(sampleType, ":");
@@ -1951,6 +2006,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "Converted Sample: " + sampleType + " to Creature: " + creature);
         return creature;
     }
+
     public static String convertTemplateToCreature(String templateName) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(templateName, "/");
@@ -1965,6 +2021,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "Converted Template: " + templateName + " to Creature: " + creature);
         return creature;
     }
+
     public static int translateDnaSampleAttributes(String attribName, int attribValue, String sampleType, String templateName) throws InterruptedException
     {
         LOG("creature_crafting", "Translating DNA Sample Attribute to DNA Template relative values");
@@ -1990,6 +2047,7 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "DNA Template Attribute Value = " + newValue);
         return newValue;
     }
+
     public static int convertDnaAttributes(String attribName, int attribValue, dictionary sampleCreatureDict, dictionary templateCreatureDict) throws InterruptedException
     {
         int minSampleAttrib = 0;
@@ -2010,7 +2068,7 @@ public class bio_engineer extends script.base_script
                 minTemplateAttrib += templateCreatureDict.getInt(create.MINATTRIBNAMES[i]) * CREATURE_ATTRIB_WEIGHTS[i][1];
                 maxTemplateAttrib += templateCreatureDict.getInt(create.MAXATTRIBNAMES[i]) * CREATURE_ATTRIB_WEIGHTS[i][1];
                 attribWeight += CREATURE_ATTRIB_WEIGHTS[i][1];
-                newAttribValue += ((int)((sampleAttribRange * newAttribValue) / 1000.0f) + minSampleAttrib) * CREATURE_ATTRIB_WEIGHTS[i][1];
+                newAttribValue += ((int) ((sampleAttribRange * newAttribValue) / 1000.0f) + minSampleAttrib) * CREATURE_ATTRIB_WEIGHTS[i][1];
             }
             if (attribName.equals(CREATURE_ATTRIB_OBJVAR_NAMES[CREATURE_ATTRIB_WEIGHTS[i][2]]))
             {
@@ -2020,7 +2078,7 @@ public class bio_engineer extends script.base_script
                 minTemplateAttrib += templateCreatureDict.getInt(create.MINATTRIBNAMES[i]) * CREATURE_ATTRIB_WEIGHTS[i][2];
                 maxTemplateAttrib += templateCreatureDict.getInt(create.MAXATTRIBNAMES[i]) * CREATURE_ATTRIB_WEIGHTS[i][2];
                 attribWeight += CREATURE_ATTRIB_WEIGHTS[i][2];
-                newAttribValue += ((int)((sampleAttribRange * newAttribValue) / 1000.0f) + minSampleAttrib) * CREATURE_ATTRIB_WEIGHTS[i][2];
+                newAttribValue += ((int) ((sampleAttribRange * newAttribValue) / 1000.0f) + minSampleAttrib) * CREATURE_ATTRIB_WEIGHTS[i][2];
             }
         }
         if (attribWeight == 0)
@@ -2043,21 +2101,21 @@ public class bio_engineer extends script.base_script
         LOG("creature_crafting", "Attrib Diff = " + attribDiff);
         if (attribDiff < 0)
         {
-            float diffFactor = 1 + (-(attribDiff + templateAttribRange) / (float)templateAttribRange);
-            newAttribValue = (int)(attribValue / diffFactor);
+            float diffFactor = 1 + (-(attribDiff + templateAttribRange) / (float) templateAttribRange);
+            newAttribValue = (int) (attribValue / diffFactor);
             LOG("creature_crafting", "Diff Factor  = " + diffFactor);
             LOG("creature_crafting", "Attrib Value = " + attribValue);
             LOG("creature_crafting", "New Value    = " + newAttribValue);
         }
-        else 
+        else
         {
-            float diffFactor = 1 + ((attribDiff - templateAttribRange) / (float)templateAttribRange);
+            float diffFactor = 1 + ((attribDiff - templateAttribRange) / (float) templateAttribRange);
             if (diffFactor > 20)
             {
                 diffFactor = 20;
             }
             diffFactor /= 100.0f;
-            newAttribValue = (int)(attribValue * (1 + diffFactor));
+            newAttribValue = (int) (attribValue * (1 + diffFactor));
             LOG("creature_crafting", "Diff Factor  = " + diffFactor);
             LOG("creature_crafting", "Attrib Value = " + attribValue);
             LOG("creature_crafting", "New Value    = " + newAttribValue);

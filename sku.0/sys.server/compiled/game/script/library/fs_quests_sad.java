@@ -4,9 +4,6 @@ import script.obj_id;
 
 public class fs_quests_sad extends script.base_script
 {
-    public fs_quests_sad()
-    {
-    }
     public static final String SAD_OBJVAR_TASK_ACTIVE = "fs_quest_sad.task_active";
     public static final String SAD_OBJVAR_TIMESTAMP = "fs_quest_sad.timestamp";
     public static final String SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP = "fs_quest_sad.taken_since_timestamp";
@@ -14,6 +11,10 @@ public class fs_quests_sad extends script.base_script
     public static final String SAD_OBJVAR_WAYPOINT = "fs_quest_sad.waypoint";
     public static final String SAD_OBJVAR_MASTER_THEATER = "fs_quest_sad.theater";
     public static final String SAD_OBJVAR_KILLABLE = "fs_quest_sad.quantity_killable";
+    public fs_quests_sad()
+    {
+    }
+
     public static int getTimePeriod() throws InterruptedException
     {
         int timePeriod;
@@ -22,12 +23,13 @@ public class fs_quests_sad extends script.base_script
         {
             timePeriod = Integer.parseInt(setting);
         }
-        else 
+        else
         {
             timePeriod = 24 * 60 * 60;
         }
         return timePeriod;
     }
+
     public static boolean hasTask(obj_id player) throws InterruptedException
     {
         for (int i = 0; i < 8; i++)
@@ -39,6 +41,7 @@ public class fs_quests_sad extends script.base_script
         }
         return false;
     }
+
     public static boolean hasTask2(obj_id player) throws InterruptedException
     {
         for (int i = 0; i < 8; i++)
@@ -50,6 +53,7 @@ public class fs_quests_sad extends script.base_script
         }
         return false;
     }
+
     public static boolean hasExceededTaskLimit(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, SAD_OBJVAR_TIMESTAMP))
@@ -57,13 +61,11 @@ public class fs_quests_sad extends script.base_script
             int lastTimestamp = utils.getIntObjVar(player, SAD_OBJVAR_TIMESTAMP);
             int takenSinceTimestamp = utils.getIntObjVar(player, SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP);
             int curTime = getGameTime();
-            if ((curTime - lastTimestamp < getTimePeriod()) && (takenSinceTimestamp >= SAD_MAX_IN_TIME_PERIOD))
-            {
-                return true;
-            }
+            return (curTime - lastTimestamp < getTimePeriod()) && (takenSinceTimestamp >= SAD_MAX_IN_TIME_PERIOD);
         }
         return false;
     }
+
     public static void recordTookTask(obj_id player) throws InterruptedException
     {
         LOG("newquests", "recordTookTask");
@@ -77,38 +79,40 @@ public class fs_quests_sad extends script.base_script
                 utils.setObjVar(player, SAD_OBJVAR_TIMESTAMP, curTime);
                 utils.setObjVar(player, SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP, 1);
             }
-            else 
+            else
             {
                 utils.setObjVar(player, SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP, ++takenSinceTimestamp);
             }
         }
-        else 
+        else
         {
             utils.setObjVar(player, SAD_OBJVAR_TIMESTAMP, curTime);
             utils.setObjVar(player, SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP, 1);
         }
-        return;
     }
+
     public static void recordTaskSuccess(obj_id player) throws InterruptedException
     {
         LOG("newquests", "recordTaskSuccess");
-        return;
     }
+
     public static void recordTaskFailure(obj_id player) throws InterruptedException
     {
         LOG("newquests", "recordTaskFailure");
-        return;
     }
+
     public static boolean hasCompletedAllTasks(obj_id player) throws InterruptedException
     {
         LOG("newquests", "hasCompletedAllTasks");
         return (quests.isComplete("fs_quests_sad_finish", player));
     }
+
     public static boolean hasCompletedAllTasks2(obj_id player) throws InterruptedException
     {
         LOG("newquests", "hasCompletedAllTasks");
         return (quests.isComplete("fs_quests_sad2_finish", player));
     }
+
     public static int getNumberTasksCompleted(obj_id player) throws InterruptedException
     {
         LOG("newquests", "getNumberTasksCompleted");
@@ -144,11 +148,12 @@ public class fs_quests_sad extends script.base_script
         {
             return 0;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getNumberTasksCompleted2(obj_id player) throws InterruptedException
     {
         LOG("newquests", "getNumberTasksCompleted");
@@ -184,23 +189,26 @@ public class fs_quests_sad extends script.base_script
         {
             return 0;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static void performEndOfQuest(obj_id player) throws InterruptedException
     {
         cleanup(player);
         fs_quests.unlockBranch(player, "force_sensitive_combat_prowess_melee_speed");
         fs_quests.setQuestCompleted(player, "force_sensitive_combat_prowess_melee_speed");
     }
+
     public static void performEndOfQuest2(obj_id player) throws InterruptedException
     {
         cleanup(player);
         fs_quests.unlockBranch(player, "force_sensitive_combat_prowess_ranged_defense");
         fs_quests.setQuestCompleted(player, "force_sensitive_combat_prowess_ranged_defense");
     }
+
     public static void cleanup(obj_id player) throws InterruptedException
     {
         int x = 0;

@@ -140,7 +140,7 @@ public class player_developer extends base_script
                         objvarString += ovName + "\n";
                     }
                 }
-                String objvarPrompt = "Objvars for " + target + ":\n" + objvarString;
+                String objvarPrompt = "ObjVars for " + target + ":\n" + objvarString;
                 int page = createSUIPage("/Script.messageBox", self, self);
                 setSUIProperty(page, "Prompt.lblPrompt", "LocalText", objvarPrompt);
                 setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
@@ -1323,7 +1323,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <command> <radius>");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <radius> <command>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1556,25 +1556,6 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("runScript"))
-        {
-            if (!tok.hasMoreTokens())
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer runScript <script name>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                String script = tok.nextToken();
-
-            }
-            return SCRIPT_CONTINUE;
-        }
-        if (cmd.equalsIgnoreCase("slap"))
-        {
-            chat.chat(self, "removed this.");
-            return SCRIPT_CONTINUE;
-        }
         if (cmd.equalsIgnoreCase("gotoName"))
         {
             String parse = tok.nextToken();
@@ -1589,10 +1570,6 @@ public class player_developer extends base_script
                 }
             }
             return SCRIPT_CONTINUE;
-        }
-        if (cmd.equalsIgnoreCase("removeinvuln"))
-        {
-            setInvulnerable(iTarget, false);
         }
         if (cmd.equalsIgnoreCase("makeEnt"))
         {
@@ -1615,9 +1592,18 @@ public class player_developer extends base_script
             ai_lib.setMood(entertainer, "themepark_oola");
             attachScript(entertainer, "bot.entertainer");
         }
-        if (cmd.equalsIgnoreCase("setinvuln"))
+        if (cmd.equalsIgnoreCase("invulnerable"))
         {
-            setInvulnerable(iTarget, true);
+            if (isInvulnerable(target))
+            {
+                setInvulnerable(target, false);
+                sendSystemMessageTestingOnly(self, "Target is no longer invulnerable.");
+            }
+            else
+            {
+                setInvulnerable(target, true);
+                sendSystemMessageTestingOnly(self, "Target is now invulnerable.");
+            }
         }
         if (cmd.equalsIgnoreCase("commPlanet"))
         {
@@ -1675,7 +1661,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("modvehicle"))
+        if (cmd.equalsIgnoreCase("editVehicle"))
         {
             if (tok.countTokens() < 1)
             {
@@ -1695,18 +1681,22 @@ public class player_developer extends base_script
                 sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
             }
         }
-        if (cmd.equalsIgnoreCase("copyOnMe"))
+        if (cmd.equalsIgnoreCase("copy"))
         {
-            String template = getTemplateName(iTarget);
-            sendConsoleCommand("/spawn " + template + " 1 0 0", self);
-            return SCRIPT_CONTINUE;
-        }
-        if (cmd.equalsIgnoreCase("copyInMe"))
-        {
-            String template = getTemplateName(iTarget);
-            obj_id pInv = utils.getInventoryContainer(self);
-            sendConsoleCommand("/object createIn " + template + " " + pInv, self);
-            return SCRIPT_CONTINUE;
+            String subcommand = tok.nextToken();
+            if (subcommand.equalsIgnoreCase("-onto"))
+            {
+                String template = getTemplateName(iTarget);
+                sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equalsIgnoreCase("-into"))
+            {
+                String template = getTemplateName(iTarget);
+                obj_id pInv = utils.getInventoryContainer(self);
+                sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+                return SCRIPT_CONTINUE;
+            }
         }
         if (cmd.equalsIgnoreCase("prepareStaticStrings"))
         {

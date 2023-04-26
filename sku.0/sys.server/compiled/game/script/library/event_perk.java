@@ -7,7 +7,7 @@ import script.string_id;
 
 public class event_perk extends script.base_script
 {
-    public static final String HALLOWEEN = new String("event/halloween");
+    public static final String HALLOWEEN = "event/halloween";
     public static final string_id STEALTHED = new string_id(HALLOWEEN, "stealthed");
     public static final string_id TEN_COINS = new string_id(HALLOWEEN, "ten_coins");
     public static final string_id TWELVE_COINS = new string_id(HALLOWEEN, "twelve_coins");
@@ -16,20 +16,21 @@ public class event_perk extends script.base_script
     public static final string_id STATIC_NPC = new string_id(HALLOWEEN, "static_npc");
     public static final string_id REACHED_LIMIT = new string_id(HALLOWEEN, "reached_limit");
     public static final string_id ZOZ = new string_id(HALLOWEEN, "zozpheratu");
-    public static final String COUNTER = new String("galacticCoinCounter.numberOfCoins");
-    public static final String COUNTER_TIMESTAMP = new String("galacticCoinCounter.timeStamp");
-    public static final String COUNTER_RESTARTTIME = new String("galacticCoinCounter.startTime");
+    public static final String COUNTER = "galacticCoinCounter.numberOfCoins";
+    public static final String COUNTER_TIMESTAMP = "galacticCoinCounter.timeStamp";
+    public static final String COUNTER_RESTARTTIME = "galacticCoinCounter.startTime";
     public static final int COIN_LIMIT = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinLimit"));
     public static final int COIN_AMOUNT_LOW = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinLow"));
     public static final int COIN_AMOUNT_HIGH = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinHigh"));
     public static final int COIN_BONUS_LOW = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinBonusLow"));
     public static final int COIN_BONUS_HIGH = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinBonusHigh"));
     public static final int LOCKOUT_LENGTH = 240;
-    public static final String LIST_VAR = new String("galacticMoonNpcList");
+    public static final String LIST_VAR = "galacticMoonNpcList";
     public static final string_id TOO_SOON = new string_id(HALLOWEEN, "too_soon");
     public static final string_id SHAPECHANGE_SPACE = new string_id("spam", "shapechange_space");
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
     public static final String STF_FILE = "event_perk";
+
     public static boolean canPlaceEventPerkHere(obj_id self, obj_id player, location here) throws InterruptedException
     {
         if (!isIdValid(player) || (here == null))
@@ -73,12 +74,9 @@ public class event_perk extends script.base_script
         {
             return false;
         }
-        if (tooManyPerks(here, player))
-        {
-            return false;
-        }
-        return true;
+        return !tooManyPerks(here, player);
     }
+
     public static boolean tooCloseToSomething(location here, obj_id player, obj_id self) throws InterruptedException
     {
         if (here == null || !isIdValid(player))
@@ -97,12 +95,13 @@ public class event_perk extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STF_FILE, "too_close_something"));
             return true;
         }
     }
+
     public static boolean tooManyPerks(location here, obj_id player) throws InterruptedException
     {
         int numPerkObjects = 0;
@@ -113,21 +112,27 @@ public class event_perk extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
-            for (obj_id item : objs) {
-                if (hasObjVar(item, "event_perk.lifeSpan")) {
+            for (obj_id item : objs)
+            {
+                if (hasObjVar(item, "event_perk.lifeSpan"))
+                {
                     numPerkObjects++;
-                    if (numPerkObjects > 25) {
+                    if (numPerkObjects > 25)
+                    {
                         sendSystemMessage(player, new string_id(STF_FILE, "too_many_perks"));
                         return true;
                     }
                 }
             }
-            for (obj_id item : objNPCs) {
-                if (hasObjVar(item, "event_perk.lifeSpan")) {
+            for (obj_id item : objNPCs)
+            {
+                if (hasObjVar(item, "event_perk.lifeSpan"))
+                {
                     numPerkObjects++;
-                    if (numPerkObjects > 25) {
+                    if (numPerkObjects > 25)
+                    {
                         sendSystemMessage(player, new string_id(STF_FILE, "too_many_perks"));
                         return true;
                     }
@@ -136,6 +141,7 @@ public class event_perk extends script.base_script
         }
         return false;
     }
+
     public static boolean canCallShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasObjVar(self, "event_perk.shuttle.shuttle"))
@@ -143,18 +149,19 @@ public class event_perk extends script.base_script
             sendSystemMessage(player, new string_id(STF_FILE, "already_have_shuttle"));
             return false;
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static void increaseDailyCoinCounter(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, COUNTER))
         {
             setObjVar(player, COUNTER, COIN_AMOUNT_LOW);
         }
-        else 
+        else
         {
             int currentCoinLimit = getIntObjVar(player, COUNTER);
             int newCoinLimit = currentCoinLimit + COIN_AMOUNT_LOW;
@@ -170,6 +177,7 @@ public class event_perk extends script.base_script
             }
         }
     }
+
     public static void playerLaugh(obj_id player) throws InterruptedException
     {
         if (buff.hasBuff(player, "event_halloween_costume_jawa"))
@@ -193,6 +201,7 @@ public class event_perk extends script.base_script
             play2dNonLoopingSound(player, "sound/halloween_toydarian_laugh.snd");
         }
     }
+
     public static void giveTreat(obj_id player, int quality) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -205,7 +214,7 @@ public class event_perk extends script.base_script
                 setCount(halloweenCoins, currentCoins + COIN_AMOUNT_HIGH);
                 increaseDailyCoinCounter(player);
             }
-            else 
+            else
             {
                 obj_id coins = static_item.createNewItemFunction("item_event_halloween_coin", pInv, COIN_AMOUNT_HIGH);
                 increaseDailyCoinCounter(player);
@@ -231,7 +240,7 @@ public class event_perk extends script.base_script
                 setCount(halloweenCoins, currentCoins + COIN_AMOUNT_LOW);
                 increaseDailyCoinCounter(player);
             }
-            else 
+            else
             {
                 obj_id coins = static_item.createNewItemFunction("item_event_halloween_coin", pInv, COIN_AMOUNT_LOW);
                 increaseDailyCoinCounter(player);
@@ -257,6 +266,7 @@ public class event_perk extends script.base_script
             setObjVar(player, event_perk.COUNTER_RESTARTTIME, then);
         }
     }
+
     public static void handlePayout(obj_id player, obj_id npc) throws InterruptedException
     {
         int trickTreatDialogue = rand(1, 5);
@@ -269,7 +279,7 @@ public class event_perk extends script.base_script
             buff.applyBuff(npc, "event_halloween_trick_cooldown");
             giveTreat(player, 1);
         }
-        else 
+        else
         {
             faceTo(npc, player);
             doAnimationAction(npc, "laugh");
@@ -278,36 +288,24 @@ public class event_perk extends script.base_script
             utils.setScriptVar(npc, "readyForTrickFromPlayer." + player, player);
         }
     }
+
     public static boolean newDayOrNot(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, event_perk.COUNTER_TIMESTAMP))
         {
             int now = getCalendarTime();
             int then = getIntObjVar(player, event_perk.COUNTER_TIMESTAMP);
-            if (now > then)
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return now > then;
         }
         if (hasObjVar(player, event_perk.COUNTER_RESTARTTIME))
         {
             int now = getCalendarTime();
             int then = getIntObjVar(player, event_perk.COUNTER_RESTARTTIME);
-            if (now > then)
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return now > then;
         }
         return true;
     }
+
     public static boolean timeStampCheck(obj_id player) throws InterruptedException
     {
         int limit = utils.stringToInt(getConfigSetting("GameServer", "halloweenCoinLimit"));
@@ -315,7 +313,7 @@ public class event_perk extends script.base_script
         {
             limit = event_perk.COIN_LIMIT;
         }
-        if (newDayOrNot(player) == true)
+        if (newDayOrNot(player))
         {
             if (buff.hasBuff(player, "event_halloween_coin_limit"))
             {
@@ -357,7 +355,7 @@ public class event_perk extends script.base_script
             }
             return true;
         }
-        if (newDayOrNot(player) == false)
+        if (!newDayOrNot(player))
         {
             if (hasObjVar(player, event_perk.COUNTER))
             {

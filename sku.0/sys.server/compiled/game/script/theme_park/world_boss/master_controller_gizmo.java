@@ -1,9 +1,6 @@
 package script.theme_park.world_boss;
 
-import script.library.buff;
-import script.library.chat;
-import script.library.pet_lib;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
 
 public class master_controller_gizmo extends script.base_script
@@ -40,6 +37,7 @@ public class master_controller_gizmo extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok, Corrupted by the Darkside of the Force, has been reported to have been last seen on Endor at one of the Lake Villages.");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_GIZMO);
         return SCRIPT_CONTINUE;
     }
 
@@ -53,6 +51,7 @@ public class master_controller_gizmo extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerFullName(killer));
         }
+        resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }
 

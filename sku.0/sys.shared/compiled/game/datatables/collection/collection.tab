@@ -2460,85 +2460,85 @@ device_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_decor			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_fish_tank_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			fish_tank_reward	2495	2503	25	crafted_fish_tank_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			fish_tank_reward	2495	2503	10	crafted_fish_tank_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_hanging_light_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hanging_light_reward	2504	2512	25	crafted_light_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			hanging_light_reward	2504	2512	10	crafted_light_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_hanging_light2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hanging_light2_reward	5073	5081	20	crafted_light2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			hanging_light2_reward	5073	5081	10	crafted_light2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_dwartii_statue_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			dwartii_statue_reward	4911	4919	20	crafted_dwartii_statue_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			dwartii_statue_reward	4911	4919	10	crafted_dwartii_statue_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_beetle_specimen_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			beetle_specimen_reward	4920	4928	20	crafted_beetle_specimen_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			beetle_specimen_reward	4920	4928	10	crafted_beetle_specimen_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_plants			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_plant_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_plant_reward	2513	2521	10	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_plant_reward	2513	2521	5	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_flower_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_flower_reward	2522	2530	10	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_flower_reward	2522	2530	5	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_mannequin			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_ig88_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_ig88_reward	2486	2494	10	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_ig88_reward	2486	2494	5	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_stormtrooper_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_stormtrooper_reward	2540	2548	10	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_stormtrooper_reward	2540	2548	5	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_jewelry			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_nightsister_necklace_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			nightsister_necklace_reward	2549	2557	10	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			nightsister_necklace_reward	2549	2557	5	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_droid_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_dancing_droid_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			dancing_droid_reward	2531	2539	10	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			dancing_droid_reward	2531	2539	5	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_chassis			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_rebel_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_rebel_reward	5118	5126	10	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_rebel_reward	5118	5126	5	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_imperial_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_imperial_reward	5127	5135	10	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_imperial_reward	5127	5135	5	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_neutral_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_neutral_reward	5136	5144	10	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_neutral_reward	5136	5144	5	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_cargo_hold_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_cargo_hold_01_reward	5145	5153	10	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_cargo_hold_01_reward	5145	5153	5	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_couch_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_couch_01_reward	5154	5162	10	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_couch_01_reward	5154	5162	5	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_chair_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_chair_01_reward	5163	5171	10	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_chair_01_reward	5163	5171	5	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk1_reward	4929	4937	10	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk1_reward	4929	4937	5	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk2_reward	4938	4946	10	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk2_reward	4938	4946	5	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk3_reward	4947	4955	10	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk3_reward	4947	4955	5	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk4_reward	4956	4964	10	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk4_reward	4956	4964	5	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk5_reward	4965	4973	10	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk5_reward	4965	4973	5	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk1_reward	4974	4982	10	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk1_reward	4974	4982	5	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk2_reward	4983	4991	10	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk2_reward	4983	4991	5	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk3_reward	4992	5000	10	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk3_reward	4992	5000	5	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk4_reward	5001	5009	10	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk4_reward	5001	5009	5	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk5_reward	5010	5018	10	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk5_reward	5010	5018	5	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk1_reward	5019	5027	10	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk1_reward	5019	5027	5	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk2_reward	5028	5036	10	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk2_reward	5028	5036	5	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk3_reward	5037	5045	10	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk3_reward	5037	5045	5	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk4_reward	5046	5054	10	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk4_reward	5046	5054	5	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk5_reward	5055	5063	10	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk5_reward	5055	5063	5	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk1_reward	5064	5072	10	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk1_reward	5064	5072	5	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk2_reward	5082	5090	10	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk2_reward	5082	5090	5	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk3_reward	5091	5099	10	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk3_reward	5091	5099	5	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk4_reward	5100	5108	10	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk4_reward	5100	5108	5	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk5_reward	5109	5117	10	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk5_reward	5109	5117	5	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_space_helper_monkey_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_01	6747	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_02	6748	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -2953,14 +2953,14 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			buddy_02_04_02	6831	-1	-1		grantIfPreReqMet	buddyCollection									buddy_02_04_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 	prof_entertainer			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			officer_1a	2826	2833	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			medic_1a	2834	2841	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			commando_1a	2842	2849	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			force_sensitive_1a	2850	2857	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			bounty_hunter_1a	2858	2865	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			smuggler_1a	2866	2873	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			spy_1a	2874	2881	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			prof_trader	2882	2889	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			officer_1a	2826	2833	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			medic_1a	2834	2841	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			commando_1a	2842	2849	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			force_sensitive_1a	2850	2857	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			bounty_hunter_1a	2858	2865	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			smuggler_1a	2866	2873	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			spy_1a	2874	2881	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			prof_trader	2882	2889	8																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_fan_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			ent_fan_01	5505	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			ent_fan_02	5506	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3007,11 +3007,11 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			rare_loot_opened_one_2	21837	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			rare_loot_opened_one_3	21841	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rare_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_1	21834	21836	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_1	21834	21836	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_exceptional_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_2	21838	21840	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_2	21838	21840	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_legendary_loot_five		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			rare_loot_opened_five_3	21842	21844	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			rare_loot_opened_five_3	21842	21844	4																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	heroic_sd_taxi_service			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		heroic_sd_taxi_service_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			smuggled_groups	5285	5292	25																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3034,15 +3034,15 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			col_resource_harvest_egg_complete	5573	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	sampling_resources			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_sample		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_mineral_01	5381	5383	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_resource_chemical_01	5387	5389	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_resource_flora_resources_01	5390	5392	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_resource_gas_01	5393	5395	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_resource_water_01	5396	5398	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_resource_energy_renewable_site_limited_geothermal_01	5399	5401	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_mineral_01	5381	5383	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_chemical_01	5387	5389	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_flora_resources_01	5390	5392	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_gas_01	5393	5395	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_water_01	5396	5398	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_energy_renewable_site_limited_geothermal_01	5399	5401	2																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	sampling_pet_collection			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_pet_resource_sampling_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_pet_resource_sampling	5402	5407	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_pet_resource_sampling	5402	5407	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	photo_shop_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_photo_durni_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			photo_durni_activation	5442	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
@@ -3117,45 +3117,45 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_publish_gift_mob	5273	5278	10	kill_chapter_8_fighter_tier1													chapter_collection_activation				sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_publish_gift_mob_bomber	5293	5298	5	kill_chapter_8_bomber_tier1													chapter_collection_activation				sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_rebel_fighter_z95_01	2890	2898	50	kill_reb_z95_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_awing_01	2899	2907	50	kill_awing	kill_awing_ace	kill_reb_awing_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_bwing_01	2908	2916	50	kill_bwing	kill_bwing_average	kill_reb_bwing_tier1	kill_bwing_ace														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_xwing_01	2917	2927	100	kill_reb_xwing_cadet_tier1	kill_reb_xwing_tier1	kill_xwing_ace	kill_xwing_average	kill_xwing_rookie	kill_rebel_agent												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_bomber_ywing_01	2928	2938	100	kill_rebel_raider_bomber	kill_reb_ywing_tier1	kill_ywing_ace	kill_ywing_average	kill_ywing_rookie													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_gunboat_01	2939	2947	25	kill_assaultship	kill_reb_gunboat_tier1	kill_rebel_gunboat	kill_twilight_sun_tier1	kill_reb_gunboat_duty_tier1													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_z95_01	2890	2898	25	kill_reb_z95_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_awing_01	2899	2907	25	kill_awing	kill_awing_ace	kill_reb_awing_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_bwing_01	2908	2916	25	kill_bwing	kill_bwing_average	kill_reb_bwing_tier1	kill_bwing_ace														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_xwing_01	2917	2927	50	kill_reb_xwing_cadet_tier1	kill_reb_xwing_tier1	kill_xwing_ace	kill_xwing_average	kill_xwing_rookie	kill_rebel_agent												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_bomber_ywing_01	2928	2938	50	kill_rebel_raider_bomber	kill_reb_ywing_tier1	kill_ywing_ace	kill_ywing_average	kill_ywing_rookie													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_gunboat_01	2939	2947	12	kill_assaultship	kill_reb_gunboat_tier1	kill_rebel_gunboat	kill_twilight_sun_tier1	kill_reb_gunboat_duty_tier1													sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_rebel_fighter_z95_02	2948	2956	50	kill_reb_z95_tier2	kill_vortex_mission_2_scientist																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_awing_02	2957	2965	50	kill_reb_awing_tier2	kill_tatooine_tier3_2_inspect_awing																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_bwing_02	2966	2974	50	kill_reb_bwing_prototype_tier2	kill_reb_bwing_tier2	kill_tatooine_tier3_2_inspect_bwing	kill_bwing_prototype														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_xwing_02	2975	2985	100	kill_reb_unmaned_xwing_tier2	kill_reb_xwing_leader_tier2	kill_reb_xwing_tier2	kill_tatooine_tier3_2_inspect_xwing	kill_xwing	kill_rebel_boss												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_bomber_ywing_02	2986	2996	100	kill_reb_ywing_tier2	kill_tatooine_tier3_2_inspect_ywing																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_yt1300_02	2997	3005	25	kill_viopa_mission_2_smuggler	kill_vortex_mission_1_finn_darktrin	kill_reb_smuggler_yt1300_tier2	kill_rebel_diplomat_tier2	kill_rebel_spysmuggler_tier2	kill_reb_yt1300_duty_tier2												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_gunboat_02	3006	3014	25	kill_reb_gunboat_tier2	kill_reb_diplomat_tier2	kill_reb_gunboat_duty_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_z95_02	2948	2956	25	kill_reb_z95_tier2	kill_vortex_mission_2_scientist																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_awing_02	2957	2965	25	kill_reb_awing_tier2	kill_tatooine_tier3_2_inspect_awing																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_bwing_02	2966	2974	25	kill_reb_bwing_prototype_tier2	kill_reb_bwing_tier2	kill_tatooine_tier3_2_inspect_bwing	kill_bwing_prototype														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_xwing_02	2975	2985	50	kill_reb_unmaned_xwing_tier2	kill_reb_xwing_leader_tier2	kill_reb_xwing_tier2	kill_tatooine_tier3_2_inspect_xwing	kill_xwing	kill_rebel_boss												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_bomber_ywing_02	2986	2996	50	kill_reb_ywing_tier2	kill_tatooine_tier3_2_inspect_ywing																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_yt1300_02	2997	3005	12	kill_viopa_mission_2_smuggler	kill_vortex_mission_1_finn_darktrin	kill_reb_smuggler_yt1300_tier2	kill_rebel_diplomat_tier2	kill_rebel_spysmuggler_tier2	kill_reb_yt1300_duty_tier2												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_gunboat_02	3006	3014	12	kill_reb_gunboat_tier2	kill_reb_diplomat_tier2	kill_reb_gunboat_duty_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_rebel_fighter_z95_03	3015	3023	50	kill_reb_z95_tier3	kill_rebel_droid_training_boss	kill_rebel_droid_training_ship_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_awing_03	3024	3032	50	kill_reb_awing_tier3	kill_rebel_saboteur_tier3	kill_rebel_raider_fast_attack_tier3	kill_rebel_scout_fighter_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_bwing_03	3033	3041	50	kill_reb_bwing_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_xwing_03	3042	3052	100	kill_reb_xwing_tier3	kill_rebel_agent_tier3	kill_rebel_raider_captain_tier3	kill_rebel_raider_tier3	kill_rebel_trainee_tier3													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_bomber_ywing_03	3053	3063	100	kill_reb_bomber_leader_tier3	kill_reb_ywing_tier3	kill_rebel_raider_bomber_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_yt1300_03	3064	3072	25	kill_rebel_smuggler_tier3	kill_reb_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_gunboat_03	3073	3081	25	kill_rebel_gunboat_tier3	kill_reb_gunboat_tier3	kill_reb_priceofliberty_tier3	kill_rebel_spyfreighter_tier3	kill_rebel_command_vessel_weak_tier2	kill_reb_gunboat_duty_tier3												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_z95_03	3015	3023	25	kill_reb_z95_tier3	kill_rebel_droid_training_boss	kill_rebel_droid_training_ship_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_awing_03	3024	3032	25	kill_reb_awing_tier3	kill_rebel_saboteur_tier3	kill_rebel_raider_fast_attack_tier3	kill_rebel_scout_fighter_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_bwing_03	3033	3041	25	kill_reb_bwing_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_xwing_03	3042	3052	50	kill_reb_xwing_tier3	kill_rebel_agent_tier3	kill_rebel_raider_captain_tier3	kill_rebel_raider_tier3	kill_rebel_trainee_tier3													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_bomber_ywing_03	3053	3063	50	kill_reb_bomber_leader_tier3	kill_reb_ywing_tier3	kill_rebel_raider_bomber_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_yt1300_03	3064	3072	12	kill_rebel_smuggler_tier3	kill_reb_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_gunboat_03	3073	3081	12	kill_rebel_gunboat_tier3	kill_reb_gunboat_tier3	kill_reb_priceofliberty_tier3	kill_rebel_spyfreighter_tier3	kill_rebel_command_vessel_weak_tier2	kill_reb_gunboat_duty_tier3												sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_rebel_fighter_z95_04	3082	3090	50	kill_reb_z95_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_awing_04	3091	3099	50	kill_reb_awing_boss	kill_reb_awing_tier4	kill_rebel_saboteur	kill_reb_yavinspy_tier4	kill_rebel_agent_vortex	kill_rebel_endscout_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_bwing_04	3100	3108	50	kill_reb_bwing_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_xwing_04	3109	3119	100	kill_reb_xwing_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_bomber_ywing_04	3120	3130	100	kill_reb_ywing_tier4	kill_reb_ywingleader_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_yt1300_04	3131	3139	25	kill_reb_spy_yt1300_tier4	kill_yt1300_rebel_freighter	kill_reb_yt1300_duty_tier4															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_gunboat_04	3140	3148	25	kill_reb_gunboat_tier4	kill_rebel_gunboat_tier4	kill_rebel_command_vessel_tier4	kill_reb_diplomat_tier4	kill_reb_gunboat_duty_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_z95_04	3082	3090	25	kill_reb_z95_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_awing_04	3091	3099	25	kill_reb_awing_boss	kill_reb_awing_tier4	kill_rebel_saboteur	kill_reb_yavinspy_tier4	kill_rebel_agent_vortex	kill_rebel_endscout_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_bwing_04	3100	3108	25	kill_reb_bwing_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_xwing_04	3109	3119	50	kill_reb_xwing_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_bomber_ywing_04	3120	3130	50	kill_reb_ywing_tier4	kill_reb_ywingleader_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_yt1300_04	3131	3139	12	kill_reb_spy_yt1300_tier4	kill_yt1300_rebel_freighter	kill_reb_yt1300_duty_tier4															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_gunboat_04	3140	3148	12	kill_reb_gunboat_tier4	kill_rebel_gunboat_tier4	kill_rebel_command_vessel_tier4	kill_reb_diplomat_tier4	kill_reb_gunboat_duty_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_rebel_fighter_z95_05	3149	3157	50	kill_reb_z95_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_awing_05	3158	3166	50	kill_reb_awing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_bwing_05	3167	3175	50	kill_reb_bwing_boss	kill_reb_bwing_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_fighter_xwing_05	3176	3186	100	kill_reb_xwing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_bomber_ywing_05	3187	3197	100	kill_reb_ywing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_yt1300_05	3198	3206	25	kill_rebel_smuggler_tier5	kill_rebel_transport_tier5	kill_reb_yt1300_duty_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_gunboat_05	3207	3215	25	kill_reb_gunboat_tier5	kill_reb_gunboat_duty_tier5	kill_reb_gunboat_kessel_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_capital_ship_05	3216	3224	25	kill_reb_corellian_corvette_tier4	kill_reb_corellian_corvette_collection_01																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_z95_05	3149	3157	25	kill_reb_z95_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_awing_05	3158	3166	25	kill_reb_awing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_bwing_05	3167	3175	25	kill_reb_bwing_boss	kill_reb_bwing_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_fighter_xwing_05	3176	3186	50	kill_reb_xwing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_bomber_ywing_05	3187	3197	50	kill_reb_ywing_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_yt1300_05	3198	3206	12	kill_rebel_smuggler_tier5	kill_rebel_transport_tier5	kill_reb_yt1300_duty_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_gunboat_05	3207	3215	12	kill_reb_gunboat_tier5	kill_reb_gunboat_duty_tier5	kill_reb_gunboat_kessel_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_capital_ship_05	3216	3224	12	kill_reb_corellian_corvette_tier4	kill_reb_corellian_corvette_collection_01																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_rebel_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_rebel_icon_tier1	5310	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_rebel_icon_tier2	5311	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3163,51 +3163,51 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_space_rebel_icon_tier4	5313	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_rebel_icon_tier5	5314	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_imperial_tie_fighter_01	3225	3233	50	kill_escort_tie_basic	kill_tie_rookie	kill_escort_tie_basic_tier1	kill_tie_ace	kill_imp_ss_tie_fighter_tier1	kill_tie_average	kill_tiefighter	kill_imp_tie_fighter_tier1										sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_advanced_01	3234	3242	75	kill_tieadvanced	kill_tieadvanced_average	kill_tieadvanced_ace	kill_escort_tie_advanced	kill_escort_tie_advanced_tier1	kill_imp_tie_advanced_tier1	kill_tieadvanced_inquisitor	kill_tieadvanced_rookie										sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_interceptor_01	3243	3251	50	kill_imp_tie_interceptor_tier1	kill_tieinterceptor_rookie	kill_escort_tie_interceptor	kill_escort_tie_interceptor_tier1	kill_tieinterceptor_average	kill_tieinterceptor_ace	kill_tieinterceptor											sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_bomber_01	3252	3262	75	kill_imp_tie_bomber_tier1	kill_imp_ss_tie_bomber_tier1	kill_player_command_tie_bomber	kill_player_command_tie_bomber_tier1	kill_tiebomber	kill_tiebomber_ace	kill_tiebomber_rookie	kill_tiebomber_average										sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_aggressor_01	3263	3273	50	kill_imp_tie_aggressor_tier1	kill_tieaggressor_ace																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_oppressor_01	3274	3284	50	kill_tieoppressor_ace	kill_imp_tie_oppressor_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_lambda_01	3285	3293	25	kill_imp_lambda_shuttle_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_gunboat_01	3294	3302	25	kill_imp_imperial_gunboat_tier1	kill_imp_imperial_gunboat_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_fighter_01	3225	3233	25	kill_escort_tie_basic	kill_tie_rookie	kill_escort_tie_basic_tier1	kill_tie_ace	kill_imp_ss_tie_fighter_tier1	kill_tie_average	kill_tiefighter	kill_imp_tie_fighter_tier1										sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_advanced_01	3234	3242	40	kill_tieadvanced	kill_tieadvanced_average	kill_tieadvanced_ace	kill_escort_tie_advanced	kill_escort_tie_advanced_tier1	kill_imp_tie_advanced_tier1	kill_tieadvanced_inquisitor	kill_tieadvanced_rookie										sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_interceptor_01	3243	3251	25	kill_imp_tie_interceptor_tier1	kill_tieinterceptor_rookie	kill_escort_tie_interceptor	kill_escort_tie_interceptor_tier1	kill_tieinterceptor_average	kill_tieinterceptor_ace	kill_tieinterceptor											sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_bomber_01	3252	3262	40	kill_imp_tie_bomber_tier1	kill_imp_ss_tie_bomber_tier1	kill_player_command_tie_bomber	kill_player_command_tie_bomber_tier1	kill_tiebomber	kill_tiebomber_ace	kill_tiebomber_rookie	kill_tiebomber_average										sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_aggressor_01	3263	3273	25	kill_imp_tie_aggressor_tier1	kill_tieaggressor_ace																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_oppressor_01	3274	3284	25	kill_tieoppressor_ace	kill_imp_tie_oppressor_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_lambda_01	3285	3293	12	kill_imp_lambda_shuttle_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_gunboat_01	3294	3302	12	kill_imp_imperial_gunboat_tier1	kill_imp_imperial_gunboat_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_imperial_light_tie_02	3303	3311	50	kill_imp_tie_fighter_tier2	kill_escort_tie_basic_tier2	kill_imp_tie_experimental_fighter_tier2	kill_imp_tie_fighter_veteran_tier2	kill_imp_ss_tie_fighter_tier2													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_advanced_02	3312	3320	75	kill_imp_ss_tie_advanced_tier2	kill_imp_tie_advanced_tier2	kill_escort_tie_advanced_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_interceptor_02	3321	3329	50	kill_imp_tie_interceptor_tier2	kill_escort_tie_interceptor_tier2	kill_vortex_mission_4_guard	kill_imperial_cpt_hendrik	kill_imperial_cpt_oolg													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_bomber_02	3330	3340	75	kill_imp_tie_bomber_tier2	kill_imp_ss_tie_bomber_tier2	kill_player_command_tie_bomber_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_aggressor_02	3341	3351	50	kill_imp_tie_aggressor_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_oppressor_02	3352	3360	50	kill_imp_tie_oppressor_tier2	kill_imperial_boss	kill_imperial_cpt_starfire															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_lambda_02	3361	3369	25	kill_imp_lambda_shuttle_tier2	kill_viopa_mission_1_shuttle	kill_viopa_mission_3_shuttle	kill_vortex_mission_1_shuttle	kill_vortex_mission_4_shuttle	kill_yavin_mission_2_shuttle	kill_yavin_mission_3_shuttle											sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_gunboat_02	3370	3378	25	kill_imp_imperial_gunboat_tier2	kill_imp_imperial_gunboat_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_light_tie_02	3303	3311	25	kill_imp_tie_fighter_tier2	kill_escort_tie_basic_tier2	kill_imp_tie_experimental_fighter_tier2	kill_imp_tie_fighter_veteran_tier2	kill_imp_ss_tie_fighter_tier2													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_advanced_02	3312	3320	40	kill_imp_ss_tie_advanced_tier2	kill_imp_tie_advanced_tier2	kill_escort_tie_advanced_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_interceptor_02	3321	3329	25	kill_imp_tie_interceptor_tier2	kill_escort_tie_interceptor_tier2	kill_vortex_mission_4_guard	kill_imperial_cpt_hendrik	kill_imperial_cpt_oolg													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_bomber_02	3330	3340	40	kill_imp_tie_bomber_tier2	kill_imp_ss_tie_bomber_tier2	kill_player_command_tie_bomber_tier2															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_aggressor_02	3341	3351	25	kill_imp_tie_aggressor_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_oppressor_02	3352	3360	25	kill_imp_tie_oppressor_tier2	kill_imperial_boss	kill_imperial_cpt_starfire															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_lambda_02	3361	3369	12	kill_imp_lambda_shuttle_tier2	kill_viopa_mission_1_shuttle	kill_viopa_mission_3_shuttle	kill_vortex_mission_1_shuttle	kill_vortex_mission_4_shuttle	kill_yavin_mission_2_shuttle	kill_yavin_mission_3_shuttle											sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_gunboat_02	3370	3378	12	kill_imp_imperial_gunboat_tier2	kill_imp_imperial_gunboat_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_imperial_light_tie_03	3379	3387	50	kill_escort_tie_basic_tier3	kill_tie_average_tier3	kill_imp_tie_experimental_fighter_tier3	kill_tiefighter_tier3	kill_imp_tie_fighter_tier3	kill_imp_ss_tie_fighter_tier3	kill_ep3_imperial_overseer_fighter	kill_tie_ace_tier3										sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_advanced_03	3388	3396	75	kill_escort_tie_advanced_tier3	kill_imp_tie_advanced_tier3	kill_imp_ss_tie_advanced_tier3	kill_tieadvanced_tier3	kill_tieadvanced_average_tier3	kill_tieadvanced_inquisitor_tier3	kill_tieadvanced_quest_officer_rebel_t3	kill_tieadvanced_rookie_tier3	kill_ep3_imperial_overseer_commander	kill_tieadvanced_ace_tier3								sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_interceptor_03	3397	3405	50	kill_escort_tie_interceptor_tier3	kill_imp_tie_interceptor_tier3	kill_tieinterceptor_average_tier3	kill_tieinterceptor_inquisitor	kill_tieinterceptor_inquisitor_tier3	kill_tieinterceptor_rookie_tier3	kill_tieinterceptor_tier3	kill_ep3_imperial_overseer_interceptor		kill_tieinterceptor_ace_tier3								sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_bomber_03	3406	3416	75	kill_imp_tie_bomber_tier3	kill_imp_ss_tie_bomber_tier3	kill_player_command_tie_bomber_tier3	kill_tiebomber_average_tier3	kill_tiebomber_rookie_tier3	kill_tiebomber_tier3	kill_tiebomber_ace_tier3											sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_aggressor_03	3417	3427	50	kill_imp_tie_aggressor_tier3	kill_tieaggressor_inquisitor_tier3	kill_tieaggressor_ace_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_oppressor_03	3428	3436	50	kill_imp_tie_oppressor_tier3	kill_tieoppressor_ace_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_lambda_03	3437	3445	25	kill_imp_lambda_decoy_shuttle_tier3	kill_imp_lambda_shuttle_tier3	kill_lambdashuttle_rebel_tier3_1_officer	kill_tatooine_tier3_2_b_inquisitor	kill_imp_vip_shuttle_tier3	kill_lambdashuttle	kill_lambdashuttle_advanced_recon	kill_imperial_vip_shuttle	kill_recovery_overseer_shuttle									sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_gunboat_03	3446	3454	25	kill_imp_imperial_gunboat_tier3	kill_imp_imperial_gunboat_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_light_tie_03	3379	3387	25	kill_escort_tie_basic_tier3	kill_tie_average_tier3	kill_imp_tie_experimental_fighter_tier3	kill_tiefighter_tier3	kill_imp_tie_fighter_tier3	kill_imp_ss_tie_fighter_tier3	kill_ep3_imperial_overseer_fighter	kill_tie_ace_tier3										sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_advanced_03	3388	3396	40	kill_escort_tie_advanced_tier3	kill_imp_tie_advanced_tier3	kill_imp_ss_tie_advanced_tier3	kill_tieadvanced_tier3	kill_tieadvanced_average_tier3	kill_tieadvanced_inquisitor_tier3	kill_tieadvanced_quest_officer_rebel_t3	kill_tieadvanced_rookie_tier3	kill_ep3_imperial_overseer_commander	kill_tieadvanced_ace_tier3								sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_interceptor_03	3397	3405	25	kill_escort_tie_interceptor_tier3	kill_imp_tie_interceptor_tier3	kill_tieinterceptor_average_tier3	kill_tieinterceptor_inquisitor	kill_tieinterceptor_inquisitor_tier3	kill_tieinterceptor_rookie_tier3	kill_tieinterceptor_tier3	kill_ep3_imperial_overseer_interceptor		kill_tieinterceptor_ace_tier3								sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_bomber_03	3406	3416	40	kill_imp_tie_bomber_tier3	kill_imp_ss_tie_bomber_tier3	kill_player_command_tie_bomber_tier3	kill_tiebomber_average_tier3	kill_tiebomber_rookie_tier3	kill_tiebomber_tier3	kill_tiebomber_ace_tier3											sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_aggressor_03	3417	3427	25	kill_imp_tie_aggressor_tier3	kill_tieaggressor_inquisitor_tier3	kill_tieaggressor_ace_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_oppressor_03	3428	3436	25	kill_imp_tie_oppressor_tier3	kill_tieoppressor_ace_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_lambda_03	3437	3445	12	kill_imp_lambda_decoy_shuttle_tier3	kill_imp_lambda_shuttle_tier3	kill_lambdashuttle_rebel_tier3_1_officer	kill_tatooine_tier3_2_b_inquisitor	kill_imp_vip_shuttle_tier3	kill_lambdashuttle	kill_lambdashuttle_advanced_recon	kill_imperial_vip_shuttle	kill_recovery_overseer_shuttle									sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_gunboat_03	3446	3454	12	kill_imp_imperial_gunboat_tier3	kill_imp_imperial_gunboat_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_imperial_light_tie_04	3455	3462	50	kill_e3_imp_tie_fighter_tier4	kill_tie_ace_tier4	kill_imperial_engineer	kill_imp_tie_fighter_tier4	kill_imp_ss_tie_fighter_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_advanced_04	3463	3471	75	kill_e3_imp_tie_advanced_tier4	kill_tieadvanced_tier4	kill_tieadvanced_inquisitor_tier4	kill_tieadvanced_ace_tier4	kill_imp_tie_advanced_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_interceptor_04	3472	3480	50	kill_e3_imp_tie_interceptor_tier4	kill_tieinterceptor_inquisitor_tier4	kill_tieinterceptor_inquisitor_guard	kill_tieinterceptor_ace_tier4	kill_imperial_scout	kill_imp_tie_interceptor_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_bomber_04	3481	3491	75	kill_imp_tie_bomber_tier4	kill_imp_ss_tie_bomber_tier4	kill_player_command_tie_bomber_tier4	kill_tiebomber_ace_tier4	kill_tiebomber_tier4	kill_imperial_demolition	kill_imperial_lt_deathfire											sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_aggressor_04	3492	3502	50	kill_tieaggressor_inquisitor_tier4	kill_tieaggressor_inquisitor	kill_tieaggressor_ace_tier4	kill_imp_tie_aggressor_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_oppressor_04	3503	3511	50	kill_tieoppressor_ace_tier4	kill_imperial_worker_ship	kill_imp_tie_oppressor_tier4															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_lambda_04	3512	3520	25	kill_imp_lambda_recon_tier4	kill_imp_lambda_shuttle_tier4	kill_lambdashuttle_inquisition_data_vessel	kill_lambdashuttle_station_commander	kill_imperial_drop_ship_tier4	kill_imp_lambda_inquisitor_shuttle_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_gunboat_04	3521	3529	25	kill_imp_imperial_gunboat_tier4	kill_imperial_gunboat	kill_imperial_gunboat_tier4	kill_imp_imperial_gunboat_duty_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_light_tie_04	3455	3462	25	kill_e3_imp_tie_fighter_tier4	kill_tie_ace_tier4	kill_imperial_engineer	kill_imp_tie_fighter_tier4	kill_imp_ss_tie_fighter_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_advanced_04	3463	3471	40	kill_e3_imp_tie_advanced_tier4	kill_tieadvanced_tier4	kill_tieadvanced_inquisitor_tier4	kill_tieadvanced_ace_tier4	kill_imp_tie_advanced_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_interceptor_04	3472	3480	25	kill_e3_imp_tie_interceptor_tier4	kill_tieinterceptor_inquisitor_tier4	kill_tieinterceptor_inquisitor_guard	kill_tieinterceptor_ace_tier4	kill_imperial_scout	kill_imp_tie_interceptor_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_bomber_04	3481	3491	40	kill_imp_tie_bomber_tier4	kill_imp_ss_tie_bomber_tier4	kill_player_command_tie_bomber_tier4	kill_tiebomber_ace_tier4	kill_tiebomber_tier4	kill_imperial_demolition	kill_imperial_lt_deathfire											sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_aggressor_04	3492	3502	25	kill_tieaggressor_inquisitor_tier4	kill_tieaggressor_inquisitor	kill_tieaggressor_ace_tier4	kill_imp_tie_aggressor_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_oppressor_04	3503	3511	25	kill_tieoppressor_ace_tier4	kill_imperial_worker_ship	kill_imp_tie_oppressor_tier4															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_lambda_04	3512	3520	12	kill_imp_lambda_recon_tier4	kill_imp_lambda_shuttle_tier4	kill_lambdashuttle_inquisition_data_vessel	kill_lambdashuttle_station_commander	kill_imperial_drop_ship_tier4	kill_imp_lambda_inquisitor_shuttle_tier4												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_gunboat_04	3521	3529	12	kill_imp_imperial_gunboat_tier4	kill_imperial_gunboat	kill_imperial_gunboat_tier4	kill_imp_imperial_gunboat_duty_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_imperial_light_tie_05	3530	3538	25	kill_escort_tie_basic_tier5	kill_imp_tie_fighter_tier5	kill_imp_ss_tie_fighter_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_advanced_05	3539	3547	75	kill_escort_tie_advanced_tier5	kill_imp_tie_advanced_tier5	kill_imp_ss_tie_advanced_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_interceptor_05	3548	3556	50	kill_escort_tie_interceptor_tier5	kill_imp_tie_interceptor_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_bomber_05	3557	3567	75	kill_imp_tie_bomber_tier5	kill_imp_ss_tie_bomber_tier5	kill_player_command_tie_bomber_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_aggressor_05	3568	3578	50	kill_imp_tie_aggressor_tier5	kill_tieaggressor_uvqolo																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_tie_oppressor_05	3579	3587	50	kill_imp_tie_oppressor_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_lambda_05	3588	3596	25	kill_imp_lambda_shuttle_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_gunboat_05	3597	3605	25	kill_imp_imperial_gunboat_tier5	kill_imp_imperial_gunboat_duty_tier5	kill_imp_imperial_gunboat_kessel_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_capital_ship_05	3606	3614	25	kill_imp_corellian_corvette_tier4	kill_imp_corellian_corvette_collection_01																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_light_tie_05	3530	3538	12	kill_escort_tie_basic_tier5	kill_imp_tie_fighter_tier5	kill_imp_ss_tie_fighter_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_advanced_05	3539	3547	40	kill_escort_tie_advanced_tier5	kill_imp_tie_advanced_tier5	kill_imp_ss_tie_advanced_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_interceptor_05	3548	3556	25	kill_escort_tie_interceptor_tier5	kill_imp_tie_interceptor_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_bomber_05	3557	3567	40	kill_imp_tie_bomber_tier5	kill_imp_ss_tie_bomber_tier5	kill_player_command_tie_bomber_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_aggressor_05	3568	3578	25	kill_imp_tie_aggressor_tier5	kill_tieaggressor_uvqolo																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_tie_oppressor_05	3579	3587	25	kill_imp_tie_oppressor_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_lambda_05	3588	3596	12	kill_imp_lambda_shuttle_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_gunboat_05	3597	3605	12	kill_imp_imperial_gunboat_tier5	kill_imp_imperial_gunboat_duty_tier5	kill_imp_imperial_gunboat_kessel_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_capital_ship_05	3606	3614	12	kill_imp_corellian_corvette_tier4	kill_imp_corellian_corvette_collection_01																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_imperial_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_imperial_icon_tier1	5315	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_imperial_icon_tier2	5316	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3215,46 +3215,46 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_space_imperial_icon_tier4	5318	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_imperial_icon_tier5	5319	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_blacksun_dune_lizard_01	3615	3623	75	kill_blacksunfighter	kill_blacksunfighter_ace	kill_blacksun_dune_lizard_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kimogila_01	3624	3632	75	kill_blacksun_asetti	kill_blacksun_heavy_fighter_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kihraxz_01	3633	3641	75	kill_blacksun_fighter_s01_tier1	kill_blacksun_fighter_s02_tier1	kill_blacksun_fighter_s03_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_ixiyen_01	3642	3650	75	kill_blacksun_marauder_tier1	kill_blacksun_aggressor_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_rihkxyrk_01	3651	3659	50	kill_blacksun_bomber_s01_tier1	kill_blacksun_bomber_s02_tier1	kill_blacksun_bomber_s03_tier1	kill_bloodrazor_destroyer_tier1	kill_blacksun_bomber_ace_s04_tier1													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_yt1300_01	3660	3668	25	kill_blacksun_yt1300_tier1	kill_yt1300_blacksun	kill_blacksun_yt1300_duty_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_gunboat_01	3669	3677	25	kill_blacksun_gunship_tier1	kill_blacksun_gunship_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_dune_lizard_01	3615	3623	40	kill_blacksunfighter	kill_blacksunfighter_ace	kill_blacksun_dune_lizard_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kimogila_01	3624	3632	40	kill_blacksun_asetti	kill_blacksun_heavy_fighter_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kihraxz_01	3633	3641	40	kill_blacksun_fighter_s01_tier1	kill_blacksun_fighter_s02_tier1	kill_blacksun_fighter_s03_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_ixiyen_01	3642	3650	40	kill_blacksun_marauder_tier1	kill_blacksun_aggressor_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_rihkxyrk_01	3651	3659	25	kill_blacksun_bomber_s01_tier1	kill_blacksun_bomber_s02_tier1	kill_blacksun_bomber_s03_tier1	kill_bloodrazor_destroyer_tier1	kill_blacksun_bomber_ace_s04_tier1													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_yt1300_01	3660	3668	12	kill_blacksun_yt1300_tier1	kill_yt1300_blacksun	kill_blacksun_yt1300_duty_tier1															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_gunboat_01	3669	3677	12	kill_blacksun_gunship_tier1	kill_blacksun_gunship_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_blacksun_dune_lizard_02	3678	3686	75	kill_blacksun_medium_fighter_tier2	kill_blacksun_dune_lizard_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kimogila_02	3687	3695	75	kill_blacksun_heavy_fighter_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kihraxz_02	3696	3704	75	kill_blacksun_ace_s04_tier1	kill_blacksun_fighter_s01_tier2	kill_blacksun_fighter_s02_tier2	kill_blacksun_fighter_s03_tier2	kill_blacksun_fighter_s01_tier2_tatooine													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_ixiyen_02	3705	3713	75	kill_blacksun_vehement_tier2	kill_blacksun_marauder_tier2	kill_blacksun_aggressor_tier2	kill_blacksun_anianti														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_rihkxyrk_02	3714	3722	50	kill_blacksun_bomber_s01_tier2	kill_blacksun_bomber_s02_tier2	kill_blacksun_bomber_s03_tier2	kill_blacksun_starkiller_leader	kill_poi_black_nemesis_bomber_tier2	kill_blacksun_bomber_ace_s04_tier2												sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_yt1300_02	3723	3731	25	kill_blacksun_yt1300_tier2	kill_blacksun_yt1300_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_gunboat_02	3732	3740	25	kill_blacksun_gunship_tier2	kill_blacksun_gunship_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_dune_lizard_02	3678	3686	40	kill_blacksun_medium_fighter_tier2	kill_blacksun_dune_lizard_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kimogila_02	3687	3695	40	kill_blacksun_heavy_fighter_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kihraxz_02	3696	3704	40	kill_blacksun_ace_s04_tier1	kill_blacksun_fighter_s01_tier2	kill_blacksun_fighter_s02_tier2	kill_blacksun_fighter_s03_tier2	kill_blacksun_fighter_s01_tier2_tatooine													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_ixiyen_02	3705	3713	40	kill_blacksun_vehement_tier2	kill_blacksun_marauder_tier2	kill_blacksun_aggressor_tier2	kill_blacksun_anianti														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_rihkxyrk_02	3714	3722	25	kill_blacksun_bomber_s01_tier2	kill_blacksun_bomber_s02_tier2	kill_blacksun_bomber_s03_tier2	kill_blacksun_starkiller_leader	kill_poi_black_nemesis_bomber_tier2	kill_blacksun_bomber_ace_s04_tier2												sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_yt1300_02	3723	3731	12	kill_blacksun_yt1300_tier2	kill_blacksun_yt1300_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_gunboat_02	3732	3740	12	kill_blacksun_gunship_tier2	kill_blacksun_gunship_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_blacksun_dune_lizard_03	3741	3749	75	kill_blacksun_medium_fighter_tier3	kill_blacksun_dune_lizard_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kimogila_03	3750	3758	75	kill_blacksun_heavy_fighter_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kihraxz_03	3759	3767	75	kill_blacksun_ace_s04_tier2	kill_blacksun_fighter_s01_tier3	kill_blacksun_fighter_s02_tier3	kill_blacksun_fighter_s03_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_ixiyen_03	3768	3776	75	kill_blacksun_aggressor_tier3	kill_blacksun_marauder_tier3	kill_blacksun_vehement_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_rihkxyrk_03	3777	3785	50	kill_blacksun_bomber_s01_tier3	kill_blacksun_bomber_s02_tier3	kill_blacksun_bomber_s03_tier3	kill_blacksun_bomber_ace_s04_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_yt1300_03	3786	3794	25	kill_blacksun_yt1300_tier3	kill_blacksun_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_gunboat_03	3795	3803	25	kill_blacksun_gunship_tier3	kill_blacksun_gunship_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_dune_lizard_03	3741	3749	40	kill_blacksun_medium_fighter_tier3	kill_blacksun_dune_lizard_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kimogila_03	3750	3758	40	kill_blacksun_heavy_fighter_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kihraxz_03	3759	3767	40	kill_blacksun_ace_s04_tier2	kill_blacksun_fighter_s01_tier3	kill_blacksun_fighter_s02_tier3	kill_blacksun_fighter_s03_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_ixiyen_03	3768	3776	40	kill_blacksun_aggressor_tier3	kill_blacksun_marauder_tier3	kill_blacksun_vehement_tier3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_rihkxyrk_03	3777	3785	25	kill_blacksun_bomber_s01_tier3	kill_blacksun_bomber_s02_tier3	kill_blacksun_bomber_s03_tier3	kill_blacksun_bomber_ace_s04_tier3														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_yt1300_03	3786	3794	12	kill_blacksun_yt1300_tier3	kill_blacksun_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_gunboat_03	3795	3803	12	kill_blacksun_gunship_tier3	kill_blacksun_gunship_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_blacksun_dune_lizard_04	3804	3812	75	kill_blacksun_medium_fighter_tier4	kill_blacksun_dune_lizard_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kimogila_04	3813	3821	75	kill_blacksun_heavy_fighter_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kihraxz_04	3822	3830	75	kill_blacksun_fighter_s03_tier4	kill_blacksun_ace_s04_tier3	kill_blacksun_beldini_tier3	kill_blacksun_fighter_s01_tier4	kill_blacksun_fighter_s02_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_ixiyen_04	3831	3839	75	kill_blacksun_marauder_tier4	kill_blacksun_aggressor_tier4	kill_blacksun_vehement_tier4	kill_blacksun_asetti_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_rihkxyrk_04	3840	3848	50	kill_blacksun_bomber_s03_tier4	kill_blacksun_bomber_s02_tier4	kill_blacksun_bomber_s01_tier4	kill_blacksun_marauder														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_yt1300_04	3849	3857	25	kill_blacksun_yt1300_tier4	kill_blacksun_yt1300_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_gunboat_04	3858	3866	25	kill_blacksun_gunship_tier4	kill_blacksun_gunship_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_dune_lizard_04	3804	3812	40	kill_blacksun_medium_fighter_tier4	kill_blacksun_dune_lizard_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kimogila_04	3813	3821	40	kill_blacksun_heavy_fighter_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kihraxz_04	3822	3830	40	kill_blacksun_fighter_s03_tier4	kill_blacksun_ace_s04_tier3	kill_blacksun_beldini_tier3	kill_blacksun_fighter_s01_tier4	kill_blacksun_fighter_s02_tier4													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_ixiyen_04	3831	3839	40	kill_blacksun_marauder_tier4	kill_blacksun_aggressor_tier4	kill_blacksun_vehement_tier4	kill_blacksun_asetti_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_rihkxyrk_04	3840	3848	25	kill_blacksun_bomber_s03_tier4	kill_blacksun_bomber_s02_tier4	kill_blacksun_bomber_s01_tier4	kill_blacksun_marauder														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_yt1300_04	3849	3857	12	kill_blacksun_yt1300_tier4	kill_blacksun_yt1300_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_gunboat_04	3858	3866	12	kill_blacksun_gunship_tier4	kill_blacksun_gunship_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_blacksun_dune_lizard_05	3867	3875	75	kill_blacksun_medium_fighter_tier5	kill_blacksun_dune_lizard_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kimogila_05	3876	3884	50	kill_blacksun_heavy_fighter_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_kihraxz_05	3885	3893	75	kill_blacksun_ace_s04_tier4	kill_blacksun_ace_s04_tier5	kill_blacksun_fighter_s01_tier5	kill_blacksun_fighter_s02_tier5	kill_blacksun_fighter_s03_tier5													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_ixiyen_05	3894	3902	75	kill_blacksun_aggressor_tier5	kill_blacksun_marauder_tier5	kill_blacksun_vehement_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_rihkxyrk_05	3903	3911	50	kill_blacksun_bomber_ace_s04_tier5	kill_blacksun_bomber_s01_tier5	kill_blacksun_bomber_s02_tier5	kill_blacksun_bomber_s03_tier5														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_yt1300_05	3912	3920	25	kill_blacksun_yt1300_tier5	kill_blacksun_yt1300_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_gunboat_05	3921	3929	25	kill_blacksun_gunship_tier5	kill_blacksun_gunship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_blacksun_capital_ship_05	3930	3938	25	kill_blacksun_dark_eclipse_tier5	kill_blacksun_warship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_dune_lizard_05	3867	3875	40	kill_blacksun_medium_fighter_tier5	kill_blacksun_dune_lizard_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kimogila_05	3876	3884	25	kill_blacksun_heavy_fighter_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_kihraxz_05	3885	3893	40	kill_blacksun_ace_s04_tier4	kill_blacksun_ace_s04_tier5	kill_blacksun_fighter_s01_tier5	kill_blacksun_fighter_s02_tier5	kill_blacksun_fighter_s03_tier5													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_ixiyen_05	3894	3902	40	kill_blacksun_aggressor_tier5	kill_blacksun_marauder_tier5	kill_blacksun_vehement_tier5															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_rihkxyrk_05	3903	3911	25	kill_blacksun_bomber_ace_s04_tier5	kill_blacksun_bomber_s01_tier5	kill_blacksun_bomber_s02_tier5	kill_blacksun_bomber_s03_tier5														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_yt1300_05	3912	3920	12	kill_blacksun_yt1300_tier5	kill_blacksun_yt1300_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_gunboat_05	3921	3929	12	kill_blacksun_gunship_tier5	kill_blacksun_gunship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_blacksun_capital_ship_05	3930	3938	12	kill_blacksun_dark_eclipse_tier5	kill_blacksun_warship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_blacksun_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_blacksun_icon_tier1	5320	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_blacksun_icon_tier2	5321	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3262,26 +3262,26 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_space_blacksun_icon_tier4	5323	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_blacksun_icon_tier5	5324	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_void_fighter_01	3939	3947	25	kill_void_wing_dune_lizard_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_bomber_01	3948	3956	25	kill_void_wing_bomber_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_yt1300_01	3957	3965	25	kill_void_wing_yt1300_tier1	kill_void_wing_yt1300_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_fighter_01	3939	3947	12	kill_void_wing_dune_lizard_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_bomber_01	3948	3956	12	kill_void_wing_bomber_tier1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_yt1300_01	3957	3965	12	kill_void_wing_yt1300_tier1	kill_void_wing_yt1300_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_void_fighter_02	3966	3974	50	kill_void_wing_dune_lizard_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_bomber_02	3975	3983	50	kill_void_wing_bomber_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_yt1300_02	3984	3992	25	kill_void_wing_yt1300_tier2	kill_void_wing_yt1300_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_fighter_02	3966	3974	25	kill_void_wing_dune_lizard_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_bomber_02	3975	3983	25	kill_void_wing_bomber_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_yt1300_02	3984	3992	12	kill_void_wing_yt1300_tier2	kill_void_wing_yt1300_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_void_fighter_03	3993	4001	75	kill_void_wing_dune_lizard_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_bomber_03	4002	4010	75	kill_void_wing_bomber_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_yt1300_03	4011	4019	25	kill_void_wing_yt1300_tier3	kill_void_wing_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_fighter_03	3993	4001	40	kill_void_wing_dune_lizard_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_bomber_03	4002	4010	40	kill_void_wing_bomber_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_yt1300_03	4011	4019	12	kill_void_wing_yt1300_tier3	kill_void_wing_yt1300_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_void_fighter_04	4020	4028	125	kill_void_wing_dune_lizard_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_bomber_04	4029	4037	125	kill_void_wing_bomber_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_yt1300_04	4038	4046	25	kill_void_wing_yt1300_tier4	kill_void_wing_yt1300_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_fighter_04	4020	4028	62	kill_void_wing_dune_lizard_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_bomber_04	4029	4037	62	kill_void_wing_bomber_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_yt1300_04	4038	4046	12	kill_void_wing_yt1300_tier4	kill_void_wing_yt1300_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_void_fighter_05	4047	4055	150	kill_void_wing_dune_lizard_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_bomber_05	4056	4064	150	kill_void_wing_bomber_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_yt1300_05	4065	4073	25	kill_void_wing_yt1300_tier5	kill_void_wing_yt1300_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_void_capital_ship_05	4074	4082	25	kill_void_wing_capital_ship_tier5	kill_void_wing_capital_ship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_fighter_05	4047	4055	75	kill_void_wing_dune_lizard_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_bomber_05	4056	4064	75	kill_void_wing_bomber_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_yt1300_05	4065	4073	12	kill_void_wing_yt1300_tier5	kill_void_wing_yt1300_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_void_capital_ship_05	4074	4082	12	kill_void_wing_capital_ship_tier5	kill_void_wing_capital_ship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_void_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_void_icon_tier1	5325	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_void_icon_tier2	5326	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3289,35 +3289,35 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_space_void_icon_tier4	5328	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_void_icon_tier5	5299	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_droid_alpha_01	4083	4091	25	kill_rogue_droid_alpha_tier1	kill_rogue_droid_alpha_tier1_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_defender_01	4092	4100	25	kill_rogue_droid_defender	kill_rogue_droid_defender_tier1	kill_rogue_droid_defender_tier1_naboo															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_fighter_01	4101	4109	25	kill_droid_fighter	kill_rogue_droid_fighter	kill_rogue_droid_fighter_tier1	kill_rogue_droid_fighter_tier1_naboo														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_scrapper_01	4110	4118	25	kill_rogue_droid_scrapper	kill_rogue_droid_scrapper_tier1	kill_rogue_droid_scrapper_tier1_naboo															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_guardian_01	4119	4127	25	kill_rogue_droid_tier1_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_alpha_01	4083	4091	12	kill_rogue_droid_alpha_tier1	kill_rogue_droid_alpha_tier1_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_defender_01	4092	4100	12	kill_rogue_droid_defender	kill_rogue_droid_defender_tier1	kill_rogue_droid_defender_tier1_naboo															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_fighter_01	4101	4109	12	kill_droid_fighter	kill_rogue_droid_fighter	kill_rogue_droid_fighter_tier1	kill_rogue_droid_fighter_tier1_naboo														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_scrapper_01	4110	4118	12	kill_rogue_droid_scrapper	kill_rogue_droid_scrapper_tier1	kill_rogue_droid_scrapper_tier1_naboo															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_guardian_01	4119	4127	12	kill_rogue_droid_tier1_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_droid_alpha_02	4128	4136	25	kill_rogue_droid_alpha_tier2	kill_rogue_droid_alpha_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_defender_02	4137	4145	25	kill_rogue_droid_defender_tier2	kill_rogue_droid_defender_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_fighter_02	4146	4154	25	kill_rogue_droid_fighter_tier2	kill_rogue_droid_fighter_tier2_naboo	kill_rogue_droid_boss	kill_rogue_droid_bomber														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_scrapper_02	4155	4163	25	kill_rogue_droid_scrapper_tier2	kill_rogue_droid_scrapper_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_guardian_02	4164	4172	25	kill_rogue_droid_tier2_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_alpha_02	4128	4136	12	kill_rogue_droid_alpha_tier2	kill_rogue_droid_alpha_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_defender_02	4137	4145	12	kill_rogue_droid_defender_tier2	kill_rogue_droid_defender_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_fighter_02	4146	4154	12	kill_rogue_droid_fighter_tier2	kill_rogue_droid_fighter_tier2_naboo	kill_rogue_droid_boss	kill_rogue_droid_bomber														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_scrapper_02	4155	4163	12	kill_rogue_droid_scrapper_tier2	kill_rogue_droid_scrapper_tier2_naboo																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_guardian_02	4164	4172	12	kill_rogue_droid_tier2_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_droid_alpha_03	4173	4181	50	kill_rogue_droid_alpha_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_defender_03	4182	4190	50	kill_rogue_droid_defender_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_fighter_03	4191	4199	50	kill_rogue_droid_fighter_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_scrapper_03	4200	4208	50	kill_rogue_droid_scrapper_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_guardian_03	4209	4217	50	kill_rogue_droid_tier3_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_alpha_03	4173	4181	25	kill_rogue_droid_alpha_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_defender_03	4182	4190	25	kill_rogue_droid_defender_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_fighter_03	4191	4199	25	kill_rogue_droid_fighter_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_scrapper_03	4200	4208	25	kill_rogue_droid_scrapper_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_guardian_03	4209	4217	25	kill_rogue_droid_tier3_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_droid_alpha_04	4218	4226	50	kill_rogue_droid_alpha_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_defender_04	4227	4235	50	kill_rogue_droid_defender_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_fighter_04	4236	4244	50	kill_rogue_droid_fighter_tier4	kill_junk_droid_fighter_boss	kill_junk_droid_scavenger															sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_scrapper_04	4245	4253	50	kill_rogue_droid_scrapper_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_guardian_04	4254	4262	50	kill_rogue_droid_tier4_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_alpha_04	4218	4226	25	kill_rogue_droid_alpha_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_defender_04	4227	4235	25	kill_rogue_droid_defender_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_fighter_04	4236	4244	25	kill_rogue_droid_fighter_tier4	kill_junk_droid_fighter_boss	kill_junk_droid_scavenger															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_scrapper_04	4245	4253	25	kill_rogue_droid_scrapper_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_guardian_04	4254	4262	25	kill_rogue_droid_tier4_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_droid_alpha_05	4263	4271	50	kill_rogue_droid_alpha_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_defender_05	4272	4280	50	kill_rogue_droid_defender_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_fighter_05	4281	4289	50	kill_junk_droid_fighter	kill_rogue_droid_fighter_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_scrapper_05	4290	4298	50	kill_rogue_droid_scrapper_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_droid_guardian_05	4299	4307	50	kill_rogue_droid_tier5_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_alpha_05	4263	4271	25	kill_rogue_droid_alpha_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_defender_05	4272	4280	25	kill_rogue_droid_defender_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_fighter_05	4281	4289	25	kill_junk_droid_fighter	kill_rogue_droid_fighter_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_scrapper_05	4290	4298	25	kill_rogue_droid_scrapper_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_droid_guardian_05	4299	4307	25	kill_rogue_droid_tier5_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_droid_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_droid_icon_tier1	5300	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_droid_icon_tier2	5301	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3325,36 +3325,36 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			kill_space_droid_icon_tier4	5303	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_droid_icon_tier5	5304	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_tier_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_pirate_light_fighter_01	4308	4316	10	kill_hidden_daggers_eliminator_tier1	kill_hiddendaggers_eliminator	kill_hiddendaggers_executioner	kill_hiddendaggers_killer	kill_hiddendaggers_leader	kill_hiddendaggers_slayer	kill_hiddendaggersfighter	kill_hiddendaggersskiff										sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_fighter_01	4317	4325	10	kill_hidden_daggers_enforcer_tier1	kill_hidden_daggers_executioner_tier1	kill_hidden_daggers_nebula_stalker_tier1	kill_hidden_daggers_slayer_tier1	kill_hiddendaggers_nebula_stalker													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_bomber_01	4326	4334	10	kill_hiddendaggersbomber	kill_hiddendaggersgunship	kill_hiddendaggers_bomber_tier1	kill_hidden_daggers_killer_tier1														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_yt1300_01	4335	4343	10	kill_hiddendaggers_smuggler_tier1	kill_hiddendaggers_smuggler_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_gunboat_01	4344	4352	10	kill_hidden_daggers_gunship_tier1	kill_hidden_daggers_gunship_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_light_fighter_01	4308	4316	5	kill_hidden_daggers_eliminator_tier1	kill_hiddendaggers_eliminator	kill_hiddendaggers_executioner	kill_hiddendaggers_killer	kill_hiddendaggers_leader	kill_hiddendaggers_slayer	kill_hiddendaggersfighter	kill_hiddendaggersskiff										sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_fighter_01	4317	4325	5	kill_hidden_daggers_enforcer_tier1	kill_hidden_daggers_executioner_tier1	kill_hidden_daggers_nebula_stalker_tier1	kill_hidden_daggers_slayer_tier1	kill_hiddendaggers_nebula_stalker													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_bomber_01	4326	4334	5	kill_hiddendaggersbomber	kill_hiddendaggersgunship	kill_hiddendaggers_bomber_tier1	kill_hidden_daggers_killer_tier1														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_yt1300_01	4335	4343	5	kill_hiddendaggers_smuggler_tier1	kill_hiddendaggers_smuggler_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_gunboat_01	4344	4352	5	kill_hidden_daggers_gunship_tier1	kill_hidden_daggers_gunship_duty_tier1																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_tier_02		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_pirate_light_fighter_02	5246	5254	20	kill_hidden_daggers_eliminator_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_fighter_02	4353	4361	40	kill_hidden_daggers_enforcer_tier2	kill_hidden_daggers_executioner_tier2	kill_hidden_daggers_nebula_stalker_tier2	kill_hidden_daggers_slayer_tier2														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_bomber_02	4362	4370	40	kill_hiddendaggers_bomber_tier2	kill_hidden_daggers_killer_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_yt1300_02	4371	4379	25	kill_hiddendaggers_smuggler_tier2	kill_hiddendaggers_smuggler_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_gunboat_02	4380	4388	25	kill_hidden_daggers_gunship_tier2	kill_hidden_daggers_gunship_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_light_fighter_02	5246	5254	10	kill_hidden_daggers_eliminator_tier2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_fighter_02	4353	4361	20	kill_hidden_daggers_enforcer_tier2	kill_hidden_daggers_executioner_tier2	kill_hidden_daggers_nebula_stalker_tier2	kill_hidden_daggers_slayer_tier2														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_bomber_02	4362	4370	20	kill_hiddendaggers_bomber_tier2	kill_hidden_daggers_killer_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_yt1300_02	4371	4379	12	kill_hiddendaggers_smuggler_tier2	kill_hiddendaggers_smuggler_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_gunboat_02	4380	4388	12	kill_hidden_daggers_gunship_tier2	kill_hidden_daggers_gunship_duty_tier2																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_tier_03		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_pirate_light_fighter_03	5255	5263	25	kill_hidden_daggers_eliminator_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_fighter_03	4389	4397	75	kill_hidden_daggers_enforcer_tier3	kill_hidden_daggers_executioner_tier3	kill_hidden_daggers_nebula_stalker_tier3	kill_hidden_daggers_slayer_tier3	kill_hiddendaggers_enforcer													sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_bomber_03	4398	4406	75	kill_hiddendaggers_bomber_tier3	kill_hidden_daggers_killer_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_yt1300_03	4407	4415	25	kill_hiddendaggers_smuggler_tier3	kill_hiddendaggers_smuggler_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_gunboat_03	4416	4424	25	kill_hidden_daggers_gunship_tier3	kill_hidden_daggers_gunship_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_light_fighter_03	5255	5263	12	kill_hidden_daggers_eliminator_tier3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_fighter_03	4389	4397	40	kill_hidden_daggers_enforcer_tier3	kill_hidden_daggers_executioner_tier3	kill_hidden_daggers_nebula_stalker_tier3	kill_hidden_daggers_slayer_tier3	kill_hiddendaggers_enforcer													sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_bomber_03	4398	4406	40	kill_hiddendaggers_bomber_tier3	kill_hidden_daggers_killer_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_yt1300_03	4407	4415	12	kill_hiddendaggers_smuggler_tier3	kill_hiddendaggers_smuggler_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_gunboat_03	4416	4424	12	kill_hidden_daggers_gunship_tier3	kill_hidden_daggers_gunship_duty_tier3																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_tier_04		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_pirate_light_fighter_04	4425	4433	25	kill_hidden_daggers_eliminator_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_fighter_04	4434	4442	100	kill_hidden_daggers_enforcer_tier4	kill_hidden_daggers_executioner_tier4	kill_hidden_daggers_nebula_stalker_tier4	kill_hidden_daggers_slayer_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_bomber_04	4443	4451	100	kill_hiddendaggers_bomber_tier4	kill_hidden_daggers_killer_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_yt1300_04	4452	4460	25	kill_hiddendaggers_smuggler_tier4	kill_hiddendaggers_smuggler_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_gunboat_04	4461	4469	25	kill_hidden_daggers_gunship_tier4	kill_hidden_daggers_gunship_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_light_fighter_04	4425	4433	12	kill_hidden_daggers_eliminator_tier4																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_fighter_04	4434	4442	50	kill_hidden_daggers_enforcer_tier4	kill_hidden_daggers_executioner_tier4	kill_hidden_daggers_nebula_stalker_tier4	kill_hidden_daggers_slayer_tier4														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_bomber_04	4443	4451	50	kill_hiddendaggers_bomber_tier4	kill_hidden_daggers_killer_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_yt1300_04	4452	4460	12	kill_hiddendaggers_smuggler_tier4	kill_hiddendaggers_smuggler_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_gunboat_04	4461	4469	12	kill_hidden_daggers_gunship_tier4	kill_hidden_daggers_gunship_duty_tier4																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_tier_05		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_pirate_light_fighter_05	5264	5272	25	kill_hidden_daggers_eliminator_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_fighter_05	4470	4478	100	kill_hidden_daggers_enforcer_tier5	kill_hidden_daggers_executioner_tier5	kill_hidden_daggers_nebula_stalker_tier5	kill_hidden_daggers_slayer_tier5														sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_bomber_05	4479	4487	100	kill_hiddendaggers_bomber_tier5	kill_hidden_daggers_killer_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_yt1300_05	4488	4496	25	kill_hiddendaggers_smuggler_tier5	kill_hiddendaggers_smuggler_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_gunboat_05	4497	4505	25	kill_hidden_daggers_gunship_tier5	kill_hidden_daggers_gunship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_pirate_capital_ship_05	4506	4514	25	kill_hiddendaggers_capital_ship_tier5	kill_hiddendaggers_capital_ship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_light_fighter_05	5264	5272	12	kill_hidden_daggers_eliminator_tier5																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_fighter_05	4470	4478	50	kill_hidden_daggers_enforcer_tier5	kill_hidden_daggers_executioner_tier5	kill_hidden_daggers_nebula_stalker_tier5	kill_hidden_daggers_slayer_tier5														sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_bomber_05	4479	4487	50	kill_hiddendaggers_bomber_tier5	kill_hidden_daggers_killer_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_yt1300_05	4488	4496	12	kill_hiddendaggers_smuggler_tier5	kill_hiddendaggers_smuggler_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_gunboat_05	4497	4505	12	kill_hidden_daggers_gunship_tier5	kill_hidden_daggers_gunship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_pirate_capital_ship_05	4506	4514	12	kill_hiddendaggers_capital_ship_tier5	kill_hiddendaggers_capital_ship_duty_tier5																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_space_pirate_icon_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_space_pirate_icon_tier1	5305	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			kill_space_pirate_icon_tier2	5306	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3412,11 +3412,11 @@ space_book_01				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			convoy_neutral_ace_09	22293	-1	-1	kill_ace_neutral_bossk																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			convoy_neutral_ace_10	22294	-1	-1	kill_ace_neutral_guri																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		space_convoy_rebel_ace_total		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			convoy_rebel_ace_total	22295	22303	10	kill_ace_rebel_luke	kill_ace_rebel_wedge	kill_ace_rebel_tycho_celchu	kill_ace_rebel_arhul_narra	kill_ace_rebel_arvel_crynyd	kill_ace_rebel_jan_ors	kill_ace_rebel_keyan_farlander	kill_ace_rebel_tarrin_datch	kill_ace_rebel_derek_klivian	kill_ace_rebel_pash_cracken								sound/music_acq_miner.snd	gray	0	0						0	0			
+			convoy_rebel_ace_total	22295	22303	5	kill_ace_rebel_luke	kill_ace_rebel_wedge	kill_ace_rebel_tycho_celchu	kill_ace_rebel_arhul_narra	kill_ace_rebel_arvel_crynyd	kill_ace_rebel_jan_ors	kill_ace_rebel_keyan_farlander	kill_ace_rebel_tarrin_datch	kill_ace_rebel_derek_klivian	kill_ace_rebel_pash_cracken								sound/music_acq_miner.snd	gray	0	0						0	0			
 		space_convoy_imperial_ace_total		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			convoy_imperial_ace_total	22304	22312	10	kill_ace_imperial_vader	kill_ace_imperial_mara_jade	kill_ace_imperial_maarek_stele	kill_ace_imperial_turr_phennir	kill_ace_imperial_vindoo_barvel	kill_ace_imperial_cive_rashon	kill_ace_imperial_chiraneau	kill_ace_imperial_ds1814	kill_ace_imperial_soontir_fel	kill_ace_imperial_iran_ryad								sound/music_acq_miner.snd	gray	0	0						0	0			
+			convoy_imperial_ace_total	22304	22312	5	kill_ace_imperial_vader	kill_ace_imperial_mara_jade	kill_ace_imperial_maarek_stele	kill_ace_imperial_turr_phennir	kill_ace_imperial_vindoo_barvel	kill_ace_imperial_cive_rashon	kill_ace_imperial_chiraneau	kill_ace_imperial_ds1814	kill_ace_imperial_soontir_fel	kill_ace_imperial_iran_ryad								sound/music_acq_miner.snd	gray	0	0						0	0			
 		space_convoy_neutral_ace_total		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			convoy_neutral_ace_total	22313	22321	10	kill_ace_neutral_boba_fett	kill_ace_neutral_lando	kill_ace_neutral_nym	kill_ace_neutral_zardra	kill_ace_neutral_dengar	kill_ace_neutral_tyber_zann	kill_ace_neutral_beedo	kill_ace_neutral_4lom	kill_ace_neutral_bossk	kill_ace_neutral_guri								sound/music_acq_miner.snd	gray	0	0						0	0			
+			convoy_neutral_ace_total	22313	22321	5	kill_ace_neutral_boba_fett	kill_ace_neutral_lando	kill_ace_neutral_nym	kill_ace_neutral_zardra	kill_ace_neutral_dengar	kill_ace_neutral_tyber_zann	kill_ace_neutral_beedo	kill_ace_neutral_4lom	kill_ace_neutral_bossk	kill_ace_neutral_guri								sound/music_acq_miner.snd	gray	0	0						0	0			
 space_book_02				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	space_ship_components			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_space_reactor_mark_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4298,11 +4298,11 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_entertainer_demorazlied_troops_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			entertainer_demorazlied_troops_rebel	15107	15110	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_troop_spawn_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			entertainer_troop_spawn_rebel	15572	15576	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			entertainer_troop_spawn_rebel	15572	15576	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_medic_heal_soldier_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			medic_heal_soldier_rebel	6063	6067	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			medic_heal_soldier_rebel	6063	6067	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_smuggler_slice_terminal_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			smuggler_slice_terminal_rebel	15577	15581	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			smuggler_slice_terminal_rebel	15577	15581	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_spy_destroy_patrol_point_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			spy_destroy_patrol_point_rebel	15582	15585	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_combat_defend_barricade_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4316,13 +4316,13 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_combat_destroy_turret_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			combat_destroy_turret_rebel	15602	15605	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_1_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_1_rebel_01	6843	6848	50	kill_gcw_city_imperial_1																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_1_rebel_01	6843	6848	12	kill_gcw_city_imperial_1																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_2_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_2_rebel_01	15606	15611	50	kill_gcw_city_imperial_2																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_2_rebel_01	15606	15611	25	kill_gcw_city_imperial_2																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_3_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_3_rebel_01	15612	15617	50	kill_gcw_city_imperial_3																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_3_rebel_01	15612	15617	25	kill_gcw_city_imperial_3																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_at_st_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_at_st_rebel_01	15618	15622	10	kill_gcw_city_at_st_1	kill_gcw_city_at_st_2	kill_gcw_city_at_st_3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_at_st_rebel_01	15618	15622	5	kill_gcw_city_at_st_1	kill_gcw_city_at_st_2	kill_gcw_city_at_st_3															sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_at_at_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_combat_at_at_rebel_01	6029	-1	-1	kill_gcw_city_atat																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_general_rebel		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4376,11 +4376,11 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_entertainer_demorazlied_troops_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			entertainer_demorazlied_troops_imperial	15687	15690	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_entertainer_troop_spawn_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			entertainer_troop_spawn_imperial	15691	15695	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			entertainer_troop_spawn_imperial	15691	15695	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_medic_heal_soldier_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			medic_heal_soldier_imperial	15696	15700	20																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_smuggler_slice_terminal_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			smuggler_slice_terminal_imperial	15701	15705	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			smuggler_slice_terminal_imperial	15701	15705	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_spy_destroy_patrol_point_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			spy_destroy_patrol_point_imperial	15706	15709	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_combat_defend_barricade_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -4394,13 +4394,13 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_combat_destroy_turret_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			combat_destroy_turret_imperial	15726	15729	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_1_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_1_imperial_01	15730	15735	50	kill_gcw_city_rebel_grunt_assault	kill_gcw_city_rebel_grunt_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_1_imperial_01	15730	15735	25	kill_gcw_city_rebel_grunt_assault	kill_gcw_city_rebel_grunt_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_2_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_2_imperial_01	15736	15741	50	kill_gcw_city_rebel_commando_assault	kill_gcw_city_rebel_commando_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_2_imperial_01	15736	15741	25	kill_gcw_city_rebel_commando_assault	kill_gcw_city_rebel_commando_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_troop_3_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_troop_3_imperial_01	15742	15747	50	kill_gcw_city_rebel_specforce_assault	kill_gcw_city_rebel_specforce_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_troop_3_imperial_01	15742	15747	25	kill_gcw_city_rebel_specforce_assault	kill_gcw_city_rebel_specforce_defense																sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_at_xt_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			kill_combat_at_xt_imperial_01	15748	15753	10	kill_gcw_city_at_xt_1	kill_gcw_city_at_xt_2	kill_gcw_city_at_xt_3															sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_combat_at_xt_imperial_01	15748	15753	5	kill_gcw_city_at_xt_1	kill_gcw_city_at_xt_2	kill_gcw_city_at_xt_3															sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_hailfire_droid_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_combat_hailfire_droid_imperial_01	6247	-1	-1	kill_gcw_city_hailfire_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_combat_general_imperial		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
@@ -5091,8 +5091,8 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_destroy_world_boss_elder_ancient_krayt_dragon	22766	22774	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_elder_ancient_krayt_dragon	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_world_boss_mutant_peko_peko_empress	22775	22783	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_mutant_peko_peko_empress	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_world_boss_paxvizla	22784	22792	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_paxvizla	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
-			relic_destroy_world_boss_gizmo	22844	22852	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_gizmo	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0
-		saga_relic_destroy_multiple_loot		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0
+			relic_destroy_world_boss_gizmo	22844	22852	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_gizmo	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
+		saga_relic_destroy_multiple_loot		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_01	8811	8816	61	UIType:KillLoot	relic_data:3:0:0:0	creature_name:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_02	8817	8822	61	UIType:KillLoot	relic_data:5:0:0:0	social_group:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_loot_nightsister_social	8823	8828	61	UIType:KillLoot	relic_data:88:0:0:0	social_group:nightsister	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
@@ -5563,8 +5563,8 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_destroy_loot_wod_spider_boss_royal_guard	22090	22095	61	UIType:KillLoot	relic_data:90:0:0:0	creature_name:wod_spider_royal_guard	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	22793	22798	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_elder_ancient_krayt_dragon	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_loot_world_boss_mutant_peko_peko_empress	22799	22804	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_mutant_peko_peko_empress	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
-			relic_destroy_loot_world_boss_paxvizla	22805	22810	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_paxvizla	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0
-			relic_destroy_loot_world_boss_gizmo	22853	22859	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_gizmo	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0
+			relic_destroy_loot_world_boss_paxvizla	22805	22810	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_paxvizla	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_loot_world_boss_gizmo	22853	22859	61	UIType:KillLoot	relic_data:100:0:0:0	creature_name:world_boss_gizmo	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_perform		0	-1	-1	task_shared_data:0:0:1:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_perform_anchorhead_tavern	11223	11228	61	UIType:Perform	quest_data:10:0:0:0	duration:120	building_id:1213343	cell_name:livingroom1	what:dance	"waypoint:tatooine,109,52,5358,none,Anchorhead Tavern"											sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_perform_bestine_cantina	11229	11234	61	UIType:Perform	quest_data:10:0:0:0	duration:120	building_id:1028644	cell_name:cantina	what:dance	"waypoint:tatooine,-1356,12,-3692,none,Bestine Cantina"											sound/music_acq_miner.snd	gray	1	0						1	0			

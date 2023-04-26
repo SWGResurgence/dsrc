@@ -7,19 +7,22 @@ import java.util.Vector;
 
 public class expertise extends script.base_script
 {
-    public expertise()
-    {
-    }
     public static final String JEDI_AUTO_ALLOCATION_TABLE = "datatables/expertise/autoallocation_jedi.iff";
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_TITLE = new string_id("expertise_d", "sui_expertise_introduction_title");
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_BODY = new string_id("expertise_d", "sui_expertise_introduction_body");
+    public expertise()
+    {
+    }
+
     public static void cacheExpertiseProcReacList(obj_id player) throws InterruptedException
     {
         String[] skillModList = getSkillStatModListingForPlayer(player);
         Vector expertiseProcReacList = new Vector();
         expertiseProcReacList.setSize(0);
-        for (String s : skillModList) {
-            if ((s.startsWith("expertise_") || s.startsWith("kill_meter_")) && (s.endsWith("_proc") || s.endsWith("_reac"))) {
+        for (String s : skillModList)
+        {
+            if ((s.startsWith("expertise_") || s.startsWith("kill_meter_")) && (s.endsWith("_proc") || s.endsWith("_reac")))
+            {
                 expertiseProcReacList.addElement(s);
             }
         }
@@ -27,7 +30,7 @@ public class expertise extends script.base_script
         {
             utils.setScriptVar(player, "expertiseProcReacList", expertiseProcReacList);
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(player, "expertiseProcReacList"))
             {
@@ -37,6 +40,7 @@ public class expertise extends script.base_script
         proc.buildCurrentProcList(player);
         proc.buildCurrentReacList(player);
     }
+
     public static void autoAllocateExpertiseByLevel(obj_id player, boolean onLevel) throws InterruptedException
     {
         int playerLevel = getLevel(player);
@@ -46,8 +50,8 @@ public class expertise extends script.base_script
             grantSkill(player, "expertise");
             displayIntroductionToExpertise(player);
         }
-        return;
     }
+
     public static void displayIntroductionToExpertise(obj_id player) throws InterruptedException
     {
         String title = utils.packStringId(SID_SUI_EXPERTISE_INTRODUCTION_TITLE);
@@ -61,19 +65,23 @@ public class expertise extends script.base_script
             flushSUIPage(pid);
         }
     }
+
     public static boolean hasExpertiseAllocated(obj_id player) throws InterruptedException
     {
         String[] skillList = getSkillListingForPlayer(player);
         if (skillList != null)
         {
-            for (String s : skillList) {
-                if (s.startsWith("expertise_")) {
+            for (String s : skillList)
+            {
+                if (s.startsWith("expertise_"))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static String[] getExpertiseAllocation(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -89,8 +97,10 @@ public class expertise extends script.base_script
         resizeExpertiseAllocated.setSize(0);
         if (skillList != null)
         {
-            for (String s : skillList) {
-                if (s.startsWith("expertise_")) {
+            for (String s : skillList)
+            {
+                if (s.startsWith("expertise_"))
+                {
                     resizeExpertiseAllocated = utils.addElement(resizeExpertiseAllocated, s);
                 }
             }
@@ -99,6 +109,7 @@ public class expertise extends script.base_script
         resizeExpertiseAllocated.toArray(finalExpertiseAllocated);
         return finalExpertiseAllocated;
     }
+
     public static boolean isProfAllowedSkill(obj_id player, String skillName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -148,14 +159,14 @@ public class expertise extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 CustomerServiceLog("SuspectedCheaterChannel: ", "DualProfessionCheat: Player " + getFirstName(player) + "(" + player + ") attempted to give themselves an expertise they cannot have.");
                 CustomerServiceLog("SuspectedCheaterChannel: ", "DualProfessionCheat: Player " + getFirstName(player) + "(" + player + ") Their profession is " + profession + " and the skill was " + skillName + ".");
                 return false;
             }
         }
-        else 
+        else
         {
             return true;
         }

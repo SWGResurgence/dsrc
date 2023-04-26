@@ -6,9 +6,6 @@ import script.string_id;
 
 public class minefield_util extends script.base_script
 {
-    public minefield_util()
-    {
-    }
     public static final float WARNING_BUFFER = 16.0f;
     public static final float MINE_ACTION_RADIUS = 1.4f;
     public static final float TIME_DELAY = 8.0f;
@@ -57,6 +54,10 @@ public class minefield_util extends script.base_script
     public static final String MINEFIELD_BREACHER_SCRIPT = "structures.general.military.minefields.minefield_breacher";
     public static final String BLAST_PARTICLE_TEMPLATE = "object/static/particle/particle_sm_explosion.iff";
     public static final String WARNING_PARTICLE_TEMPLATE = "object/static/particle/particle_mine_warning.iff";
+    public minefield_util()
+    {
+    }
+
     public static boolean setMarkerData(obj_id marker) throws InterruptedException
     {
         boolean isSet = false;
@@ -71,18 +72,19 @@ public class minefield_util extends script.base_script
         isSet = setObjVar(marker, VAR_WARNING_COUNT, WARNING_COUNT);
         float radius = getFloatObjVar(marker, VAR_WIDTH_OF_FIELD) + WARNING_BUFFER;
         isSet = setObjVar(marker, VAR_WARNING_RADIUS, radius);
-        
+
         if (isSet)
         {
             debugSpeakMsg(marker, "###############ALL data on marker was set successfully#################");
         }
-        else 
+        else
         {
             debugSpeakMsg(marker, "###############ERROR: some data on the minefield marker was not set correctly#################");
         }
 
         return isSet;
     }
+
     public static boolean buildMineField(obj_id marker) throws InterruptedException
     {
         debugSpeakMsg(marker, "#############attempting to lay down mines#################");
@@ -103,14 +105,14 @@ public class minefield_util extends script.base_script
         {
             for (int i = 0; i < numberOfMines; ++i)
             {
-                mineLocations[i] = new location(rand((int)upperLeft.x, (int)lowerRight.x), markerLoc.y, rand((int)lowerRight.z, (int)upperLeft.z), markerLoc.area);
+                mineLocations[i] = new location(rand((int) upperLeft.x, (int) lowerRight.x), markerLoc.y, rand((int) lowerRight.z, (int) upperLeft.z), markerLoc.area);
             }
             isCreated = setObjVar(marker, VAR_MINE_LOCATIONS, mineLocations);
         }
-        else 
+        else
         {
             int totalLength = 2 * length;
-            float separation = (float)totalLength / numberOfMines;
+            float separation = (float) totalLength / numberOfMines;
             float mineSpot = markerLoc.x - length;
             for (int i = 0; i < numberOfMines; ++i)
             {
@@ -121,6 +123,7 @@ public class minefield_util extends script.base_script
         }
         return isCreated;
     }
+
     public static boolean explodeMine(obj_id player, int mineNumber, obj_id marker) throws InterruptedException
     {
         boolean hasExploded = false;
@@ -140,6 +143,7 @@ public class minefield_util extends script.base_script
         sendSystemMessage(player, msg);
         return hasExploded;
     }
+
     public static boolean dealDamage(obj_id player, obj_id marker) throws InterruptedException
     {
         boolean damageDealt = false;
@@ -161,12 +165,15 @@ public class minefield_util extends script.base_script
         }
         return damageDealt;
     }
+
     public static void damageAdjuster(obj_id[] creatures, obj_id whoDoneIt, float damageRadius, int damage, obj_id owner) throws InterruptedException
     {
-        for (obj_id creature : creatures) {
+        for (obj_id creature : creatures)
+        {
             float distance = getDistance(creature, whoDoneIt);
             debugSpeakMsg(whoDoneIt, "#####" + creature + " Distance from detonator: " + distance + "##############");
-            if (creature != whoDoneIt && distance < damageRadius && pvpIsEnemy(owner, creature)) {
+            if (creature != whoDoneIt && distance < damageRadius && pvpIsEnemy(owner, creature))
+            {
                 float percentDamage = 1 - (distance / damageRadius);
                 debugSpeakMsg(creature, "#####" + creature + " Percent Damage: " + percentDamage + "##############");
                 int health = getHealth(creature);
@@ -178,6 +185,7 @@ public class minefield_util extends script.base_script
             }
         }
     }
+
     public static void animatePlayerDamage(obj_id player) throws InterruptedException
     {
         debugSpeakMsg(player, "#########ANIMATION STATUS in animatePlayerDamage(): " + getBooleanObjVar(player, minefield_util.VAR_PLAYER_IS_ANIMATING) + "##########");
@@ -186,6 +194,7 @@ public class minefield_util extends script.base_script
         cbtAnimationResults.id = player;
         doCombatResults("change_posture", cbtAnimationResults, null);
     }
+
     public static void removeBreacherScripts(obj_id marker) throws InterruptedException
     {
         float warningRadius = getFloatObjVar(marker, minefield_util.VAR_WARNING_RADIUS);
@@ -203,6 +212,7 @@ public class minefield_util extends script.base_script
             }
         }
     }
+
     public static boolean cleanUpBlastEffects(obj_id marker) throws InterruptedException
     {
         boolean isClean = false;
@@ -221,6 +231,7 @@ public class minefield_util extends script.base_script
         debugSpeakMsg(marker, "################" + blastRemovedCount + " particle objects were destroyed################");
         return isClean;
     }
+
     public static int numberOfMinesDetected(obj_id player) throws InterruptedException
     {
         int mineCount = NUMBER_OF_MINES;

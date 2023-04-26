@@ -6,9 +6,6 @@ import script.string_id;
 
 public class badge extends script.base_script
 {
-    public badge()
-    {
-    }
     public static final String SFX_REVOKE = "sound/music_gloom_a.snd";
     public static final String STF_COLLECTION_N = "collection_n";
     public static final String BADGE_BOOK = "badge_book";
@@ -16,6 +13,10 @@ public class badge extends script.base_script
     public static final string_id SID_PROSE_REVOKE = new string_id(STF_COLLECTION_N, "prose_revoke");
     public static final string_id SID_PROSE_HASBADGE = new string_id(STF_COLLECTION_N, "prose_hasbadge");
     public static final string_id SID_REWARD_BADGE = new string_id("collection", "reward_badge");
+    public badge()
+    {
+    }
+
     public static boolean grantBadge(obj_id player, String badge) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -63,6 +64,7 @@ public class badge extends script.base_script
         }
         return true;
     }
+
     public static boolean[] grantBadge(obj_id[] players, String badge) throws InterruptedException
     {
         if (players == null || players.length == 0)
@@ -78,6 +80,7 @@ public class badge extends script.base_script
         }
         return returnList;
     }
+
     public static boolean revokeBadge(obj_id player, String badge, boolean tellPlayer) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -124,6 +127,7 @@ public class badge extends script.base_script
         }
         return true;
     }
+
     public static boolean hasBadge(obj_id player, String badge) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -141,6 +145,7 @@ public class badge extends script.base_script
         }
         return hasCompletedCollectionSlot(player, badge);
     }
+
     public static boolean notifyHasBadge(obj_id player, String badge) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -166,6 +171,7 @@ public class badge extends script.base_script
         }
         return false;
     }
+
     public static boolean checkBadgeCount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -179,7 +185,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_500");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_500", true);
             }
@@ -187,7 +193,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_475");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_475", true);
             }
@@ -195,7 +201,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_450");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_450", true);
             }
@@ -203,7 +209,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_425");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_425", true);
             }
@@ -211,7 +217,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_400");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_400", true);
             }
@@ -219,7 +225,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_375");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_375", true);
             }
@@ -227,7 +233,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_350");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_350", true);
             }
@@ -235,7 +241,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_325");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_325", true);
             }
@@ -243,7 +249,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_300");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_300", true);
             }
@@ -251,7 +257,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_275");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_275", true);
             }
@@ -259,7 +265,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_250");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_250", true);
             }
@@ -267,7 +273,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_225");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_225", true);
             }
@@ -275,7 +281,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_200");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_200", true);
             }
@@ -283,7 +289,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_175");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_175", true);
             }
@@ -291,7 +297,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_150");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_150", true);
             }
@@ -299,7 +305,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_125");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_125", true);
             }
@@ -307,7 +313,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_100");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_100", true);
             }
@@ -315,7 +321,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_75");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_75", true);
             }
@@ -323,7 +329,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_50");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_50", true);
             }
@@ -331,7 +337,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_25");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_25", true);
             }
@@ -339,7 +345,7 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_10");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_10", true);
             }
@@ -347,13 +353,14 @@ public class badge extends script.base_script
             {
                 grantBadge(player, "count_5");
             }
-            else 
+            else
             {
                 revokeBadge(player, "count_5", true);
             }
         }
         return true;
     }
+
     public static void grantMasterSkillBadge(obj_id player, String skill) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -369,7 +376,8 @@ public class badge extends script.base_script
             return;
         }
         String badgeId = "";
-        switch (skill) {
+        switch (skill)
+        {
             case "class_forcesensitive_phase4_master":
                 badgeId = "new_prof_jedi_master";
                 break;
@@ -435,40 +443,47 @@ public class badge extends script.base_script
                 break;
             case "class_structures_phase4_master":
                 badgeId = "new_prof_crafting_architect_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_merchant_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_shipwright";
                 break;
             case "class_munitions_phase4_master":
                 badgeId = "new_prof_crafting_armorsmith_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_merchant_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_weaponsmith_master";
                 break;
             case "class_domestics_phase4_master":
                 badgeId = "new_prof_crafting_chef_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_merchant_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_tailor_master";
                 break;
             case "class_engineering_phase4_master":
                 badgeId = "new_prof_crafting_droidengineer_master";
-                if (!hasBadge(player, badgeId)) {
+                if (!hasBadge(player, badgeId))
+                {
                     grantBadge(player, badgeId);
                 }
                 badgeId = "new_prof_crafting_merchant_master";
@@ -513,29 +528,44 @@ public class badge extends script.base_script
                 badgeId = "new_prof_social_musician_master";
                 break;
             case "pilot_neutral_master":
-                if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE)) {
+                if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_TATOOINE))
+                {
                     badgeId = "pilot_neutral_tatooine";
-                } else if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_NABOO))
+                {
                     badgeId = "pilot_neutral_naboo";
-                } else if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_CORELLIA)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.PRIVATEER_CORELLIA))
+                {
                     badgeId = "pilot_neutral_corellia";
                 }
                 break;
             case "pilot_rebel_navy_master":
-                if (space_flags.isSpaceTrack(player, space_flags.REBEL_NABOO)) {
+                if (space_flags.isSpaceTrack(player, space_flags.REBEL_NABOO))
+                {
                     badgeId = "pilot_rebel_navy_naboo";
-                } else if (space_flags.isSpaceTrack(player, space_flags.REBEL_TATOOINE)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.REBEL_TATOOINE))
+                {
                     badgeId = "pilot_rebel_navy_tatooine";
-                } else if (space_flags.isSpaceTrack(player, space_flags.REBEL_CORELLIA)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.REBEL_CORELLIA))
+                {
                     badgeId = "pilot_rebel_navy_corellia";
                 }
                 break;
             case "pilot_imperial_navy_master":
-                if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_NABOO)) {
+                if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_NABOO))
+                {
                     badgeId = "pilot_imperial_navy_naboo";
-                } else if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_TATOOINE)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_TATOOINE))
+                {
                     badgeId = "pilot_imperial_navy_tatooine";
-                } else if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_CORELLIA)) {
+                }
+                else if (space_flags.isSpaceTrack(player, space_flags.IMPERIAL_CORELLIA))
+                {
                     badgeId = "pilot_imperial_navy_corellia";
                 }
                 break;
@@ -547,6 +577,7 @@ public class badge extends script.base_script
             grantBadge(player, badgeId);
         }
     }
+
     public static void grantThemeParkBadges(obj_id player) throws InterruptedException
     {
         if (getIntObjVar(player, "theme_park_imperial") >= 39)
@@ -570,8 +601,8 @@ public class badge extends script.base_script
                 grantBadge(player, "bdg_thm_park_jabba_badge");
             }
         }
-        return;
     }
+
     public static void checkForCombatTargetBadge(obj_id player, String creatureType) throws InterruptedException
     {
         String datatable = "datatables/badge/combat_target_badges.iff";
@@ -585,6 +616,5 @@ public class badge extends script.base_script
                 grantBadge(player, badgeName);
             }
         }
-        return;
     }
 }

@@ -7,9 +7,6 @@ import java.util.*;
 
 public class community_crafting extends script.base_script
 {
-    public community_crafting()
-    {
-    }
     public static final int MAX_PLAYERS_PER_PROJECT = 200;
     public static final float NONCRAFTED_COMPONENT_QUALITY = 0.25f * 0.25f;
     public static final String OBJVAR_COMMUNITY_CRAFTING_BASE = "community_crafting";
@@ -52,6 +49,10 @@ public class community_crafting extends script.base_script
     public static final string_id SID_NOT_MIN_QUALITY = new string_id("crafting", "cc_not_min_quality");
     public static final string_id SID_NOT_VALID_ITEM = new string_id("crafting", "cc_not_valid_item");
     public static final String SCRIPT_COMMUNITY_CRAFTING_PLAYER = "player.player_community_crafting";
+    public community_crafting()
+    {
+    }
+
     public static boolean setMasterSchematic(obj_id craftingTracker, String schematic, boolean trackQuantity, boolean trackQuality, boolean trackSlots, String prizeTable) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -82,7 +83,7 @@ public class community_crafting extends script.base_script
         int[] schematicsCrcs = new int[schematics.size()];
         for (int i = 0; i < schematicsCrcs.length; ++i)
         {
-            schematicsCrcs[i] = getStringCrc((String)schematics.get(i));
+            schematicsCrcs[i] = getStringCrc((String) schematics.get(i));
         }
         setObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_SCHEMATICS, schematicsCrcs);
         setObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_TRACK_QUANTITY, trackQuantity);
@@ -135,8 +136,10 @@ public class community_crafting extends script.base_script
         String[] scripts = schematicData.getScripts();
         if (scripts != null)
         {
-            for (String script : scripts) {
-                if (script != null) {
+            for (String script : scripts)
+            {
+                if (script != null)
+                {
                     attachScript(craftingTracker, script);
                 }
             }
@@ -144,6 +147,7 @@ public class community_crafting extends script.base_script
         setObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_ACTIVE, true);
         return true;
     }
+
     public static boolean setMinimumQuantity(obj_id craftingTracker, int minQuantity) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -165,6 +169,7 @@ public class community_crafting extends script.base_script
         utils.setScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_MIN_QUANTITY, minQuantity);
         return true;
     }
+
     public static boolean setMinimumQuality(obj_id craftingTracker, float minQuality) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -186,6 +191,7 @@ public class community_crafting extends script.base_script
         utils.setScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_MIN_QUALITY, minQuality);
         return true;
     }
+
     public static boolean grantSchematicToPlayer(obj_id craftingTracker, obj_id player) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -213,17 +219,21 @@ public class community_crafting extends script.base_script
             CustomerServiceLog("community_crafting", "WARNING community_crafting.scriptlib: grantSchematicToPlayer craftingTracker " + craftingTracker + "has bad a schematics objvar");
             return false;
         }
-        for (int schematic : schematics) {
-            if (!grantSchematicToPlayer(craftingTracker, player, schematic)) {
+        for (int schematic : schematics)
+        {
+            if (!grantSchematicToPlayer(craftingTracker, player, schematic))
+            {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean grantSchematicToPlayer(obj_id craftingTracker, obj_id player, String schematic) throws InterruptedException
     {
         return grantSchematicToPlayer(craftingTracker, player, getStringCrc(schematic));
     }
+
     public static boolean grantSchematicToPlayer(obj_id craftingTracker, obj_id player, int schematicCrc) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -265,7 +275,7 @@ public class community_crafting extends script.base_script
             }
             playerSchematics = new Vector();
         }
-        else 
+        else
         {
             if (!isPlayerCrafting(craftingTracker, player))
             {
@@ -283,6 +293,7 @@ public class community_crafting extends script.base_script
         setObjVar(player, OBJVAR_COMMUNITY_CRAFTING_PLAYER_SCHEMATICS, playerSchematics);
         return true;
     }
+
     public static boolean addIngredient(obj_id craftingTracker, obj_id player, obj_id ingredient) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -364,25 +375,25 @@ public class community_crafting extends script.base_script
                     switch (slots[i].ingredientType)
                     {
                         case draft_schematic.IT_resourceType:
-                        if (resourceType == getResourceTypeByName(slots[i].ingredientName))
-                        {
-                            matchSlot = i;
-                            i = slots.length;
-                        }
-                        break;
+                            if (resourceType == getResourceTypeByName(slots[i].ingredientName))
+                            {
+                                matchSlot = i;
+                                i = slots.length;
+                            }
+                            break;
                         case draft_schematic.IT_resourceClass:
-                        if (isResourceDerivedFrom(resourceType, slots[i].ingredientName))
-                        {
-                            matchSlot = i;
-                            i = slots.length;
-                        }
-                        break;
+                            if (isResourceDerivedFrom(resourceType, slots[i].ingredientName))
+                            {
+                                matchSlot = i;
+                                i = slots.length;
+                            }
+                            break;
                         default:
-                        break;
+                            break;
                     }
                 }
             }
-            else 
+            else
             {
                 isRealResource = false;
                 int ingredientTemplateCrc = getStringCrc(getTemplateName(ingredient));
@@ -413,13 +424,13 @@ public class community_crafting extends script.base_script
                         {
                             value = attribVar.getIntData();
                         }
-                        else 
+                        else
                         {
-                            value = (int)(attribVar.getFloatData() + 0.5f);
+                            value = (int) (attribVar.getFloatData() + 0.5f);
                         }
                         resourceAttribs[i] = new resource_attribute(craftinglib.RESOURCE_OBJVAR_NAMES[i], value);
                     }
-                    else 
+                    else
                     {
                         resourceAttribs[i] = null;
                     }
@@ -430,23 +441,23 @@ public class community_crafting extends script.base_script
                     {
                         case draft_schematic.IT_template:
                         case draft_schematic.IT_templateGeneric:
-                        if (getStringCrc(slots[i].ingredientName) == ingredientTemplateCrc)
-                        {
-                            matchSlot = i;
-                            i = slots.length;
-                        }
-                        break;
+                            if (getStringCrc(slots[i].ingredientName) == ingredientTemplateCrc)
+                            {
+                                matchSlot = i;
+                                i = slots.length;
+                            }
+                            break;
                         case draft_schematic.IT_schematic:
                         case draft_schematic.IT_schematicGeneric:
-                        int createdIngredientTemplate = getTemplateCrcCreatedFromSchematic(slots[i].ingredientName);
-                        if (createdIngredientTemplate == ingredientTemplateCrc)
-                        {
-                            matchSlot = i;
-                            i = slots.length;
-                        }
-                        break;
+                            int createdIngredientTemplate = getTemplateCrcCreatedFromSchematic(slots[i].ingredientName);
+                            if (createdIngredientTemplate == ingredientTemplateCrc)
+                            {
+                                matchSlot = i;
+                                i = slots.length;
+                            }
+                            break;
                         default:
-                        break;
+                            break;
                     }
                 }
             }
@@ -460,7 +471,7 @@ public class community_crafting extends script.base_script
             {
                 crateCount = getResourceContainerQuantity(ingredient);
             }
-            else 
+            else
             {
                 crateCount = 1;
             }
@@ -483,7 +494,7 @@ public class community_crafting extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             obj_id crafter = getCrafter(ingredient);
             if (isIdValid(crafter))
@@ -507,23 +518,23 @@ public class community_crafting extends script.base_script
                 {
                     case draft_schematic.IT_template:
                     case draft_schematic.IT_templateGeneric:
-                    if (getStringCrc(slots[i].ingredientName) == ingredientTemplateCrc)
-                    {
-                        matchSlot = i;
-                        i = slots.length;
-                    }
-                    break;
+                        if (getStringCrc(slots[i].ingredientName) == ingredientTemplateCrc)
+                        {
+                            matchSlot = i;
+                            i = slots.length;
+                        }
+                        break;
                     case draft_schematic.IT_schematic:
                     case draft_schematic.IT_schematicGeneric:
-                    int createdIngredientTemplate = getTemplateCrcCreatedFromSchematic(slots[i].ingredientName);
-                    if (createdIngredientTemplate == ingredientTemplateCrc)
-                    {
-                        matchSlot = i;
-                        i = slots.length;
-                    }
-                    break;
+                        int createdIngredientTemplate = getTemplateCrcCreatedFromSchematic(slots[i].ingredientName);
+                        if (createdIngredientTemplate == ingredientTemplateCrc)
+                        {
+                            matchSlot = i;
+                            i = slots.length;
+                        }
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
             if (matchSlot < 0)
@@ -592,6 +603,7 @@ public class community_crafting extends script.base_script
         }
         return true;
     }
+
     public static boolean finalizeItem(obj_id craftingTracker, boolean informAllPlayers) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -629,10 +641,12 @@ public class community_crafting extends script.base_script
             String emailBody = "@" + SID_RESULTS_BODY_1 + "\0@" + getNameFromTemplate(schematicData.getObjectTemplateCreated()) + "\0@" + SID_RESULTS_BODY_2;
             for (int i = 0; i < objectAttributes.length; ++i)
             {
-                emailBody += "\0@" + schematicAttribs[i].name + "\0\\>200" + (int)objectAttributes[i] + "\\>000\n";
+                emailBody += "\0@" + schematicAttribs[i].name + "\0\\>200" + (int) objectAttributes[i] + "\\>000\n";
             }
-            for (obj_id player : players) {
-                if (isIdValid(player)) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player))
+                {
                     chatSendPersistentMessage("@" + SID_RESULTS_FROM, getPlayerName(player), "@" + SID_RESULTS_SUBJECT, emailBody, null);
                 }
             }
@@ -702,9 +716,9 @@ public class community_crafting extends script.base_script
                         {
                             if (getPlayerRanking(craftingTracker, playerIds, playerNames, values, false, i))
                             {
-                                if (playerIds.get(0) != null && isIdValid((obj_id)(playerIds.get(0))))
+                                if (playerIds.get(0) != null && isIdValid((obj_id) (playerIds.get(0))))
                                 {
-                                    obj_id winner = (obj_id)(playerIds.get(0));
+                                    obj_id winner = (obj_id) (playerIds.get(0));
                                     if (!winners.contains(winner) && (goodPlayers == null || goodPlayers.contains(winner)))
                                     {
                                         winners.add(winner);
@@ -725,9 +739,9 @@ public class community_crafting extends script.base_script
                         {
                             if (getPlayerRanking(craftingTracker, playerIds, playerNames, values, true, i))
                             {
-                                if (playerIds.get(0) != null && isIdValid((obj_id)(playerIds.get(0))))
+                                if (playerIds.get(0) != null && isIdValid((obj_id) (playerIds.get(0))))
                                 {
-                                    obj_id winner = (obj_id)(playerIds.get(0));
+                                    obj_id winner = (obj_id) (playerIds.get(0));
                                     if (!winners.contains(winner) && (goodPlayers == null || goodPlayers.contains(winner)))
                                     {
                                         winners.add(winner);
@@ -746,20 +760,22 @@ public class community_crafting extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("community_crafting", "WARNING community_crafting.scriptlib: finalizeItem error " + "getting schematic slots from schemtic " + schematicCrc + " on craftingTracker " + craftingTracker);
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("community_crafting", "WARNING community_crafting.scriptlib: finalizeItem prize table " + prizeTable + " contains bad data");
             }
         }
         if (players != null)
         {
-            for (obj_id player : players) {
-                if (isIdValid(player)) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player))
+                {
                     messageTo(player, MSG_HANDLER_END_CRAFTING, null, 1.0f, true);
                 }
             }
@@ -767,10 +783,12 @@ public class community_crafting extends script.base_script
         setObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_ACTIVE, false);
         return true;
     }
+
     public static boolean createItem(obj_id craftingTracker, location pos) throws InterruptedException
     {
         return false;
     }
+
     public static boolean cleanup(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -788,8 +806,10 @@ public class community_crafting extends script.base_script
             String[] scripts = schematicData.getScripts();
             if (scripts != null)
             {
-                for (String script : scripts) {
-                    if (script != null) {
+                for (String script : scripts)
+                {
+                    if (script != null)
+                    {
                         detachScript(craftingTracker, script);
                     }
                 }
@@ -799,6 +819,7 @@ public class community_crafting extends script.base_script
         removeObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_BASE);
         return true;
     }
+
     public static boolean isSessionActive(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -812,6 +833,7 @@ public class community_crafting extends script.base_script
         }
         return getBooleanObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_ACTIVE);
     }
+
     public static int getSchematic(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -830,6 +852,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getIntScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_SCHEMATIC);
     }
+
     public static String[] getSchematicScripts(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -849,6 +872,7 @@ public class community_crafting extends script.base_script
         }
         return null;
     }
+
     public static boolean isPlayerCrafting(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -858,6 +882,7 @@ public class community_crafting extends script.base_script
         }
         return hasObjVar(player, OBJVAR_COMMUNITY_CRAFTING_BASE);
     }
+
     public static boolean isPlayerCrafting(obj_id craftingTracker, obj_id player) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -890,6 +915,7 @@ public class community_crafting extends script.base_script
         }
         return false;
     }
+
     public static int getNumPlayersCrafting(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -910,6 +936,7 @@ public class community_crafting extends script.base_script
         }
         return players.length - 1;
     }
+
     public static int getMaxPlayersPerProject() throws InterruptedException
     {
         int playerLimit = utils.getIntConfigSetting("Quest", "CommunityCraftingLimit");
@@ -920,6 +947,7 @@ public class community_crafting extends script.base_script
         }
         return playerLimit;
     }
+
     public static int getNumIngredientsNeededByPlayer(obj_id craftingTracker, obj_id player) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -970,6 +998,7 @@ public class community_crafting extends script.base_script
         }
         return -1;
     }
+
     public static boolean getIsTrackingQuality(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -982,6 +1011,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getBooleanScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_TRACK_QUALITY);
     }
+
     public static boolean getIsTrackingQuantity(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -994,6 +1024,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getBooleanScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_TRACK_QUANTITY);
     }
+
     public static boolean getIsTrackingSlots(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1006,6 +1037,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getBooleanScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_TRACK_SLOTS);
     }
+
     public static int getNumSlots(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1028,6 +1060,7 @@ public class community_crafting extends script.base_script
         }
         return slots.length;
     }
+
     public static boolean getProjectAttributes(obj_id craftingTracker, Vector names, Vector values) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1083,6 +1116,7 @@ public class community_crafting extends script.base_script
         }
         return true;
     }
+
     public static boolean getPlayerRanking(obj_id craftingTracker, Vector playerIds, Vector playerNames, Vector values, boolean quantity, int slot) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1134,7 +1168,7 @@ public class community_crafting extends script.base_script
                 String slotdot = OBJVAR_COMMUNITY_CRAFTING_SLOTS + "." + (slot - 1);
                 rankings = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, slotdot + OBJVAR_COMMUNITY_CRAFTING_QUANTITY_SUFFIX);
             }
-            else 
+            else
             {
                 rankings = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUANTITY_TOTAL);
             }
@@ -1151,7 +1185,7 @@ public class community_crafting extends script.base_script
             }
             PROFILER_STOP("SORT_FS_VILLAGE_CRAFTERS_QUANTITY");
         }
-        else 
+        else
         {
             float[] rankings;
             int[] amounts;
@@ -1161,7 +1195,7 @@ public class community_crafting extends script.base_script
                 rankings = objvar_mangle.getMangledFloatArrayObjVar(craftingTracker, slotdot + OBJVAR_COMMUNITY_CRAFTING_QUALITY_SUFFIX);
                 amounts = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, slotdot + OBJVAR_COMMUNITY_CRAFTING_QUANTITY_SUFFIX);
             }
-            else 
+            else
             {
                 rankings = objvar_mangle.getMangledFloatArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUALITY_TOTAL);
                 amounts = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUANTITY_TOTAL);
@@ -1177,7 +1211,7 @@ public class community_crafting extends script.base_script
                 {
                     rankings[i] /= amounts[i];
                 }
-                else 
+                else
                 {
                     rankings[i] = 0;
                 }
@@ -1192,6 +1226,7 @@ public class community_crafting extends script.base_script
         }
         return true;
     }
+
     public static boolean isInitializedForCC(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1228,6 +1263,7 @@ public class community_crafting extends script.base_script
         }
         return true;
     }
+
     public static boolean getSchematics(Vector schematics, String schematic) throws InterruptedException
     {
         draft_schematic schematicData = getSchematicData(schematic);
@@ -1243,15 +1279,19 @@ public class community_crafting extends script.base_script
             CustomerServiceLog("community_crafting", "WARNING community_crafting.scriptlib: getSchematics could " + "not find slot info for schematic " + schematic);
             return false;
         }
-        for (draft_schematic.slot slot : slots) {
-            if ((slot.ingredientType == draft_schematic.IT_schematic || slot.ingredientType == draft_schematic.IT_schematicGeneric) && slot.ingredientName != null && !schematics.contains(slot.ingredientName)) {
-                if (!getSchematics(schematics, slot.ingredientName)) {
+        for (draft_schematic.slot slot : slots)
+        {
+            if ((slot.ingredientType == draft_schematic.IT_schematic || slot.ingredientType == draft_schematic.IT_schematicGeneric) && slot.ingredientName != null && !schematics.contains(slot.ingredientName))
+            {
+                if (!getSchematics(schematics, slot.ingredientName))
+                {
                     return false;
                 }
             }
         }
         return true;
     }
+
     public static float getMinimumQuality(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1264,6 +1304,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getFloatScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_MIN_QUALITY);
     }
+
     public static int getMinimumQuantity(obj_id craftingTracker) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1276,6 +1317,7 @@ public class community_crafting extends script.base_script
         }
         return utils.getIntScriptVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_MIN_QUANTITY);
     }
+
     public static boolean addPlayerToSystem(obj_id craftingTracker, obj_id player) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1313,10 +1355,7 @@ public class community_crafting extends script.base_script
         {
             int[] quantities = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUANTITY_TOTAL);
             int[] newQuantities = new int[quantities.length + 1];
-            for (int i = 0; i < quantities.length; ++i)
-            {
-                newQuantities[i] = quantities[i];
-            }
+            System.arraycopy(quantities, 0, newQuantities, 0, quantities.length);
             newQuantities[quantities.length] = 0;
             objvar_mangle.setMangledIntArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUANTITY_TOTAL, newQuantities);
         }
@@ -1324,10 +1363,7 @@ public class community_crafting extends script.base_script
         {
             float[] qualities = objvar_mangle.getMangledFloatArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUALITY_TOTAL);
             float[] newQualities = new float[qualities.length + 1];
-            for (int i = 0; i < qualities.length; ++i)
-            {
-                newQualities[i] = qualities[i];
-            }
+            System.arraycopy(qualities, 0, newQualities, 0, qualities.length);
             newQualities[qualities.length] = 0;
             objvar_mangle.setMangledFloatArrayObjVar(craftingTracker, OBJVAR_COMMUNITY_CRAFTING_PLAYER_QUALITY_TOTAL, newQualities);
         }
@@ -1343,10 +1379,7 @@ public class community_crafting extends script.base_script
                 {
                     int[] quantities = objvar_mangle.getMangledIntArrayObjVar(craftingTracker, slotdotindex + OBJVAR_COMMUNITY_CRAFTING_QUANTITY_SUFFIX);
                     int[] newQuantities = new int[quantities.length + 1];
-                    for (int j = 0; j < quantities.length; ++j)
-                    {
-                        newQuantities[j] = quantities[j];
-                    }
+                    System.arraycopy(quantities, 0, newQuantities, 0, quantities.length);
                     newQuantities[quantities.length] = 0;
                     objvar_mangle.setMangledIntArrayObjVar(craftingTracker, slotdotindex + OBJVAR_COMMUNITY_CRAFTING_QUANTITY_SUFFIX, newQuantities);
                 }
@@ -1354,10 +1387,7 @@ public class community_crafting extends script.base_script
                 {
                     float[] qualities = objvar_mangle.getMangledFloatArrayObjVar(craftingTracker, slotdotindex + OBJVAR_COMMUNITY_CRAFTING_QUALITY_SUFFIX);
                     float[] newQualities = new float[qualities.length + 1];
-                    for (int j = 0; j < qualities.length; ++j)
-                    {
-                        newQualities[j] = qualities[j];
-                    }
+                    System.arraycopy(qualities, 0, newQualities, 0, qualities.length);
                     newQualities[qualities.length] = 0;
                     objvar_mangle.setMangledFloatArrayObjVar(craftingTracker, slotdotindex + OBJVAR_COMMUNITY_CRAFTING_QUALITY_SUFFIX, newQualities);
                 }
@@ -1368,6 +1398,7 @@ public class community_crafting extends script.base_script
         CustomerServiceLog("community_crafting", "community_crafting.scriptlib: total players = " + players.size());
         return true;
     }
+
     public static int getCraftingPlayerIndex(obj_id craftingTracker, obj_id player) throws InterruptedException
     {
         if (!isIdValid(craftingTracker))
@@ -1400,6 +1431,7 @@ public class community_crafting extends script.base_script
         }
         return -1;
     }
+
     public static float computeResourceAttributeQuality(resource_attribute[] resourceAttribs, draft_schematic schematicData, resource_weight[] resourceWeights, float[] objectAttributes) throws InterruptedException
     {
         if (resourceAttribs == null)
@@ -1437,20 +1469,26 @@ public class community_crafting extends script.base_script
                 continue;
             }
             String attribName = (attribs[i].name).getAsciiId();
-            for (resource_weight resourceWeight : resourceWeights) {
-                if (attribName.equals(resourceWeight.attribName)) {
+            for (resource_weight resourceWeight : resourceWeights)
+            {
+                if (attribName.equals(resourceWeight.attribName))
+                {
                     float totalWeight = 0;
                     int weightCount = 0;
                     resource_weight.weight[] weights = resourceWeight.weights;
-                    for (resource_weight.weight weight : weights) {
-                        for (resource_attribute resourceAttrib : resourceAttribs) {
-                            if (resourceAttrib != null && (resourceAttrib.getName()).equals(craftinglib.RESOURCE_OBJVAR_NAMES[weight.resource])) {
+                    for (resource_weight.weight weight : weights)
+                    {
+                        for (resource_attribute resourceAttrib : resourceAttribs)
+                        {
+                            if (resourceAttrib != null && (resourceAttrib.getName()).equals(craftinglib.RESOURCE_OBJVAR_NAMES[weight.resource]))
+                            {
                                 totalWeight += resourceAttrib.getValue() * weight.weight;
                                 weightCount += weight.weight;
                             }
                         }
                     }
-                    if (weightCount > 0) {
+                    if (weightCount > 0)
+                    {
                         totalWeight /= weightCount;
                         totalWeight /= 1000.0f;
                         totalWeight = totalWeight * totalWeight;
@@ -1467,6 +1505,7 @@ public class community_crafting extends script.base_script
         }
         return -1;
     }
+
     public static float computeComponentAttributeQuality(obj_id component, draft_schematic schematicData, float[] objectAttributes) throws InterruptedException
     {
         if (!isIdValid(component))
@@ -1524,9 +1563,12 @@ public class community_crafting extends script.base_script
                 float maxValue = 1000.0f;
                 if (componentSchematicAttribs != null)
                 {
-                    for (draft_schematic.attribute componentSchematicAttrib : componentSchematicAttribs) {
-                        if (((attribs[i].name).getAsciiId()).equals((componentSchematicAttrib.name).getAsciiId())) {
-                            if (componentSchematicAttrib.maxValue > componentSchematicAttrib.minValue) {
+                    for (draft_schematic.attribute componentSchematicAttrib : componentSchematicAttribs)
+                    {
+                        if (((attribs[i].name).getAsciiId()).equals((componentSchematicAttrib.name).getAsciiId()))
+                        {
+                            if (componentSchematicAttrib.maxValue > componentSchematicAttrib.minValue)
+                            {
                                 minValue = componentSchematicAttrib.minValue;
                                 maxValue = componentSchematicAttrib.maxValue;
                             }
@@ -1541,7 +1583,7 @@ public class community_crafting extends script.base_script
                     totalQuality += value;
                     ++attribsFound;
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("community_crafting", "WARNING community_crafting.scriptlib: computeComponentAttributeQuality " + "has invalid value " + value + ", range = " + minValue + "-" + maxValue);
                 }
@@ -1553,6 +1595,7 @@ public class community_crafting extends script.base_script
         }
         return -1;
     }
+
     @SuppressWarnings("deprecation")
     public static resource_weight[] getResourceWeightsFromScripts(obj_id object) throws InterruptedException
     {
@@ -1568,63 +1611,78 @@ public class community_crafting extends script.base_script
         }
         try
         {
-            for (String script : scripts) {
+            for (String script : scripts)
+            {
                 script_class_loader loader = script_class_loader.getClassLoader(script);
-                if (loader == null) {
+                if (loader == null)
+                {
                     return null;
                 }
                 Class cls = loader.getMyClass();
-                if (cls == null) {
+                if (cls == null)
+                {
                     return null;
                 }
                 Object obj = loader.getMyObject();
-                if (obj == null) {
+                if (obj == null)
+                {
                     return null;
                 }
                 Hashtable methods = loader.getMyMethods();
-                if (methods == null) {
+                if (methods == null)
+                {
                     return null;
                 }
                 Method method = (Method) methods.get(FUNCTION_NAME);
-                if (method == null) {
-                    try {
+                if (method == null)
+                {
+                    try
+                    {
                         method = cls.getDeclaredMethod(FUNCTION_NAME);
-                        if (method != null) {
-                            if (!method.isAccessible()) {
+                        if (method != null)
+                        {
+                            if (!method.isAccessible())
+                            {
                                 method.setAccessible(true);
                             }
                         }
-                    } catch (NoSuchMethodException err) {
+                    } catch (NoSuchMethodException err)
+                    {
                         method = script_class_loader.NO_METHOD;
                     }
-                    if (method != null) {
+                    if (method != null)
+                    {
                         methods.put(method, method);
                     }
                 }
-                if (method != null && method != script_class_loader.NO_METHOD) {
+                if (method != null && method != script_class_loader.NO_METHOD)
+                {
                     Object[] args = new Object[0];
                     Object result = method.invoke(obj, args);
-                    if (result != null && result instanceof resource_weight[]) {
+                    if (result != null && result instanceof resource_weight[])
+                    {
                         return (resource_weight[]) result;
                     }
                 }
             }
-        }
-        catch(Exception err)
+        } catch (Exception err)
         {
         }
         return null;
     }
+
     public static void doubleSort(int[] values, obj_id[] ids) throws InterruptedException
     {
         quickSort(values, ids, 0, values.length - 1);
         insertionSort(values, ids, 0, values.length - 1);
     }
+
     public static void doubleSort(float[] values, obj_id[] ids) throws InterruptedException
     {
         quickSort(values, ids, 0, values.length - 1);
         insertionSort(values, ids, 0, values.length - 1);
     }
+
     public static void quickSort(int[] values, obj_id[] ids, int lo, int hi) throws InterruptedException
     {
         final int M = 4;
@@ -1649,8 +1707,8 @@ public class community_crafting extends script.base_script
             int v = values[j];
             for (; ; )
             {
-                while (values[++i] > v);
-                while (values[--j] < v);
+                while (values[++i] > v) ;
+                while (values[--j] < v) ;
                 if (j < i)
                 {
                     break;
@@ -1662,6 +1720,7 @@ public class community_crafting extends script.base_script
             quickSort(values, ids, i + 1, hi);
         }
     }
+
     public static void insertionSort(int[] values, obj_id[] ids, int lo, int hi) throws InterruptedException
     {
         for (int i = lo + 1; i <= hi; i++)
@@ -1679,6 +1738,7 @@ public class community_crafting extends script.base_script
             ids[j] = w;
         }
     }
+
     public static void swap(int[] values, obj_id[] ids, int i, int j) throws InterruptedException
     {
         int T = values[i];
@@ -1688,6 +1748,7 @@ public class community_crafting extends script.base_script
         ids[i] = ids[j];
         ids[j] = t;
     }
+
     public static void quickSort(float[] values, obj_id[] ids, int lo, int hi) throws InterruptedException
     {
         final int M = 4;
@@ -1712,8 +1773,8 @@ public class community_crafting extends script.base_script
             float v = values[j];
             for (; ; )
             {
-                while (values[++i] > v);
-                while (values[--j] < v);
+                while (values[++i] > v) ;
+                while (values[--j] < v) ;
                 if (j < i)
                 {
                     break;
@@ -1725,6 +1786,7 @@ public class community_crafting extends script.base_script
             quickSort(values, ids, i + 1, hi);
         }
     }
+
     public static void insertionSort(float[] values, obj_id[] ids, int lo, int hi) throws InterruptedException
     {
         for (int i = lo + 1; i <= hi; i++)
@@ -1742,6 +1804,7 @@ public class community_crafting extends script.base_script
             ids[j] = w;
         }
     }
+
     public static void swap(float[] values, obj_id[] ids, int i, int j) throws InterruptedException
     {
         float T = values[i];

@@ -12,7 +12,7 @@ public class sarlacc_furniture_terminal extends script.base_script
     }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "sarlacc";
-    public static final string_id SID_MENU_FEED = new string_id("sarlacc_minigame", "mnu_feed");
+    public static final string_id SID_MENU_FEED = new string_id("Feed Sarlacc");
     public static final string_id SID_MENU_REWARD = new string_id("sarlacc_minigame", "mnu_reward");
     public static final string_id SID_SIFT_SARLACC_BOX = new string_id("sarlacc_minigame", "must_sift_sarlacc_box");
     public static final string_id SID_SARLACC_FED = new string_id("sarlacc_minigame", "sarlacc_fed");
@@ -26,7 +26,7 @@ public class sarlacc_furniture_terminal extends script.base_script
     public static final string_id SID_ITEM_NOT_VALID = new string_id("sarlacc_minigame", "item_not_valid");
     public static final string_id SID_OUT_OF_RANGE = new string_id("sarlacc_minigame", "out_of_range");
     public static final string_id SID_QUEST_ITEM = new string_id("sarlacc_minigame", "item_quest_item");
-    public static final string_id SID_MENU_GOD_FEED = new string_id("sarlacc_minigame", "use_cs_tool");
+    public static final string_id SID_MENU_GOD_FEED = new string_id("[GodMode] Feed Sarlacc");
     public static final string_id SID_GOD_FEED_MESSAGE = new string_id("sarlacc_minigame", "god_feed_message");
     public static final string_id SID_GOD_FEED_NO_FOOD = new string_id("sarlacc_minigame", "god_no_food_message");
     public static final string_id SID_FEEDING_DUE_TO_GODMODE = new string_id("sarlacc_minigame", "fed_due_to_godmode");
@@ -843,7 +843,8 @@ public class sarlacc_furniture_terminal extends script.base_script
             String name = getAssignedName(edibleItems[i]);
             if (name.isEmpty() || name == null)
             {
-                name = getString(getNameStringId(edibleItems[i]));
+                dictionary itemData = static_item.getMasterItemDictionary(getStaticItemName(edibleItems[i]));
+                name = itemData.getString("string_name");
             }
             edibleMenu[i] = name;
         }

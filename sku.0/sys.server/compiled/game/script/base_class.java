@@ -8,6 +8,7 @@ package script;
 import script.library.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -2164,53 +2165,48 @@ public class base_class
     private static native void _debugServerConsoleMsg(long object, String msg);
 
     /**
-     * Prints a message to a specified webhook url with its payload.
-     * Please note that discord throttles webhooks severely. Use for community like applications only.
-     *
-     * @param object
-     *         the object sending the message (may be null)
-     * @param msg
-     *         the message to print
-     * @param avatarUri
-     *         the image url to use.
-     */
-
-    public static void pushWebhook(String channel, String msg, String avatarUri)
-    {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
-        String avatar_pic = avatarUri;
-        String gally = getGalaxyName();
-        DiscordWebhook webhook = new DiscordWebhook(apiKey);
-        webhook.setContent(msg);
-        webhook.setAvatarUrl(avatar_pic);
-        webhook.setUsername("SKYNET: " + gally);
-        try {
-            webhook.execute();
-        } catch (IOException io) {
-            io.printStackTrace();
-        }*/
-    }
-
-    /**
-     * Discord Log but no avatar, just text.
+     * Send a webhook to the discord channel informing of an action..
      * @param msg     What to send
      */
-
-    public static void pushWebhookTiny(String msg)
+    public static void notifyGalacticFeed(String msg)
     {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
-        String gally = getGalaxyName();
+        String apiKey = "https://discord.com/api/webhooks/1099397946887389245/aTbLp6LtIsyges8UYhkd27guDpMHVWShrf2ZbIBSPzV8sXUIIoxHqTj72eMGf5bLckN_";
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
-        webhook.setUsername("SKYNET: " + gally);
-        webhook.setTts(true);
         try {
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
         }
-        */
+    }
+    public static void notifyServerEvents(String msg)
+    {
+        String apiKey = "https://discord.com/api/webhooks/1099398513093267486/zuORNBBP7K3zpJctIqjXRakWc3FNM2TIrvJiwVMUqIkSizHv4-YXLQFE1ek87XgD2k4p";
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
 
+    /**
+     * On the fly webhook functionality. Be sure to reference the apiKey inside a datatable or as a local var.
+     * @param msg     What to send
+     */
+    public static void pushWebhookByApiKey(String apiKey, String msg, String username, boolean useTTS)
+    {
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setUsername(username);
+        webhook.setTts(useTTS);
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
     public static void debugServerConsoleMsg(obj_id object, String msg)
@@ -2506,7 +2502,6 @@ public class base_class
     public static native long queryPerformanceCounter();
 
     public static native long queryPerformanceCounterFrequency();
-
     /**
      * @}
      * @defgroup triggerVolumeMethods Trigger volume methods

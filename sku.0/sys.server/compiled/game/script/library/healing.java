@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class healing extends script.base_script
 {
-    public healing()
-    {
-    }
     public static final int VAR_ITEM_REUSE_TIME = 20;
     public static final int ITEM_CHANNEL_HEAL_TICKS = 5;
     public static final String VAR_ENHANCER_EFFICIENCY = "healing.enhancement";
@@ -196,29 +193,33 @@ public class healing extends script.base_script
     public static final string_id SID_DROID_REPAIR_DAMAGE_OTHER = new string_id("healing", "droid_repair_damage_other");
     public static final String RESPONSE_TEXT = "datatables/healing/healing_response.iff";
     public static final String PP_FILE_LOC = "healing_response";
-    public static final int[] COMBAT_STATES = 
+    public static final int[] COMBAT_STATES =
+            {
+                    STATE_DIZZY,
+                    STATE_BLINDED,
+                    STATE_STUNNED,
+                    STATE_INTIMIDATED
+            };
+    public static final string_id[] SID_PERFORM_CURE_STATE_SUCCESS =
+            {
+                    new string_id("healing", "perform_cure_state_dizzy_success"),
+                    new string_id("healing", "perform_cure_state_blinded_success"),
+                    new string_id("healing", "perform_cure_state_stunned_success"),
+                    new string_id("healing", "perform_cure_state_intimidated_success")
+            };
+    public static final String[] ATTRIBUTES =
+            {
+                    "HEALTH",
+                    "CONSTITUTION",
+                    "ACTION",
+                    "STAMINA",
+                    "MIND",
+                    "WILLPOWER"
+            };
+    public healing()
     {
-        STATE_DIZZY,
-        STATE_BLINDED,
-        STATE_STUNNED,
-        STATE_INTIMIDATED
-    };
-    public static final string_id[] SID_PERFORM_CURE_STATE_SUCCESS = 
-    {
-        new string_id("healing", "perform_cure_state_dizzy_success"),
-        new string_id("healing", "perform_cure_state_blinded_success"),
-        new string_id("healing", "perform_cure_state_stunned_success"),
-        new string_id("healing", "perform_cure_state_intimidated_success")
-    };
-    public static final String[] ATTRIBUTES = 
-    {
-        "HEALTH",
-        "CONSTITUTION",
-        "ACTION",
-        "STAMINA",
-        "MIND",
-        "WILLPOWER"
-    };
+    }
+
     public static boolean performHealDamage(attacker_data attackerData, defender_data[] defenderData, combat_data action_data) throws InterruptedException
     {
         if ((action_data.dotIntensity > 0) && (action_data.dotDuration > 0))
@@ -241,27 +242,34 @@ public class healing extends script.base_script
         {
             playParticleOnMedic = true;
         }
-        for (defender_data defenderDatum : defenderData) {
-            if (!isIdValid(defenderDatum.id) || !exists(defenderDatum.id) || !isMob(defenderDatum.id) || isDead(defenderDatum.id)) {
+        for (defender_data defenderDatum : defenderData)
+        {
+            if (!isIdValid(defenderDatum.id) || !exists(defenderDatum.id) || !isMob(defenderDatum.id) || isDead(defenderDatum.id))
+            {
                 continue;
             }
-            if (!isValidHealTarget(medic, defenderDatum.id)) {
+            if (!isValidHealTarget(medic, defenderDatum.id))
+            {
                 continue;
             }
             toHeal = getHealingAfterReductions(medic, defenderDatum.id, toHeal);
             toHeal = getTargetHealingBonus(medic, defenderDatum.id, toHeal);
-            if (luck.isLucky(defenderDatum.id, 0.005f)) {
+            if (luck.isLucky(defenderDatum.id, 0.005f))
+            {
                 float bonus = toHeal * 0.2f;
-                if (bonus < 1) {
+                if (bonus < 1)
+                {
                     bonus = 1;
                 }
                 toHeal += bonus;
             }
             int hBefore = getAttrib(defenderDatum.id, action_data.attribute);
             boolean success = healDamage(defenderDatum.id, action_data.attribute, toHeal);
-            if (success) {
+            if (success)
+            {
                 int delta = getAttrib(defenderDatum.id, action_data.attribute) - hBefore;
-                if (delta <= 0) {
+                if (delta <= 0)
+                {
                     continue;
                 }
                 totalDelta += delta;
@@ -275,45 +283,60 @@ public class healing extends script.base_script
                 pp = prose.setDI(pp, delta);
                 pp = prose.setTO(pp, ATTRIBUTES[action_data.attribute]);
                 showFlyTextPrivateProseWithFlags(defenderDatum.id, defenderDatum.id, pp, 2.0f, colors.SEAGREEN, FLY_TEXT_FLAG_IS_HEAL);
-                if (medic != defenderDatum.id) {
+                if (medic != defenderDatum.id)
+                {
                     showFlyTextPrivateProseWithFlags(defenderDatum.id, medic, pp, 2.0f, colors.SEAGREEN, FLY_TEXT_FLAG_IS_HEAL);
                 }
                 float hateMod = action_data.hateDamageModifier;
                 int healingAgroMod = getEnhancedSkillStatisticModifierUncapped(medic, "expertise_agro_healing");
                 float agroReductionFact = 1.0f - (healingAgroMod / 100.0f);
                 float modifiedHate = (delta * agroReductionFact) / HEALING_AGGRO_REDUCER;
-                if (isPlayer(medic)) {
+                if (isPlayer(medic))
+                {
                     _addMedicalHate(medic, defenderDatum.id, (int) modifiedHate, hateMod);
                 }
                 pvpHelpPerformed(medic, defenderDatum.id);
                 applyDefenderHealBuffs(medic, defenderDatum.id, action_data);
                 applyMedicHealBuffs(medic, action_data);
                 location loc = getLocation(defenderDatum.id);
-                if (useTempParticle) {
+                if (useTempParticle)
+                {
                     obj_id[] players = getAllPlayers(loc, 64);
-                    if (players != null) {
-                        for (obj_id player : players) {
-                            if (stealth.hasInvisibleBuff(player)) {
+                    if (players != null)
+                    {
+                        for (obj_id player : players)
+                        {
+                            if (stealth.hasInvisibleBuff(player))
+                            {
                                 continue;
                             }
-                            if (actionName.startsWith("me_bacta_bomb")) {
+                            if (actionName.startsWith("me_bacta_bomb"))
+                            {
                                 playClientEffectLoc(player, "clienteffect/bacta_bomb.cef", loc, 0);
                             }
-                            if (actionName.startsWith("me_bacta_grenade")) {
+                            if (actionName.startsWith("me_bacta_grenade"))
+                            {
                                 playClientEffectLoc(player, "clienteffect/bacta_grenade.cef", loc, 0);
                             }
                         }
                     }
-                } else if (playParticleOnMedic) {
-                    if (!stealth.hasInvisibleBuff(medic)) {
+                }
+                else if (playParticleOnMedic)
+                {
+                    if (!stealth.hasInvisibleBuff(medic))
+                    {
                         playClientEffectObj(medic, "appearance/pt_heal.prt", medic, "");
                     }
-                } else {
-                    if (!stealth.hasInvisibleBuff(defenderDatum.id)) {
+                }
+                else
+                {
+                    if (!stealth.hasInvisibleBuff(defenderDatum.id))
+                    {
                         playHealDamageEffect(loc);
                     }
                 }
-                if (delta == 0 && actionName.contains("_sh_")) {
+                if (delta == 0 && actionName.contains("_sh_"))
+                {
                     CustomerServiceLog("Heal-Fail", "%TU received a success from heal damage but healed for a delta of 0 on heal: " + actionName, medic);
                 }
             }
@@ -326,6 +349,7 @@ public class healing extends script.base_script
         pvp.bfCreditForHealing(medic, totalDelta);
         return total_success;
     }
+
     public static boolean applyDefenderHealBuffs(obj_id medic, obj_id defender, combat_data actionData) throws InterruptedException
     {
         String actionName = actionData.actionName;
@@ -348,6 +372,7 @@ public class healing extends script.base_script
         combat.combatLog(medic, defender, "applyDefenderHealBuffs", "Applying defender buff - " + buffName);
         return buff.applyBuff(defender, buffName, buffDuration, buffStrength);
     }
+
     public static boolean applyMedicHealBuffs(obj_id medic, combat_data actionData) throws InterruptedException
     {
         String actionName = actionData.actionName;
@@ -366,6 +391,7 @@ public class healing extends script.base_script
         combat.combatLog(medic, null, "applyMedicHealBuffs", "Applying medic buff - " + buffName);
         return buff.applyBuff(medic, buffName, buffDuration, buffStrength);
     }
+
     public static boolean performHealOverTime(attacker_data attackerData, defender_data[] defenderData, combat_data action_data) throws InterruptedException
     {
         obj_id medic = attackerData.id;
@@ -376,9 +402,11 @@ public class healing extends script.base_script
         duration += getEnhancedSkillStatisticModifierUncapped(medic, "expertise_hot_duration_" + specialLine);
         perTick = getExpertiseModifiedHealing(medic, perTick, action_data);
         maxHeal = getExpertiseModifiedHealing(medic, maxHeal, action_data);
-        int tickLength = (int)(duration / (((float)maxHeal) / perTick));
-        for (defender_data defenderDatum : defenderData) {
-            if (isDead(defenderDatum.id) || !isValidHealTarget(defenderDatum.id)) {
+        int tickLength = (int) (duration / (((float) maxHeal) / perTick));
+        for (defender_data defenderDatum : defenderData)
+        {
+            if (isDead(defenderDatum.id) || !isValidHealTarget(defenderDatum.id))
+            {
                 continue;
             }
             perTick = getHealingAfterReductions(medic, defenderDatum.id, perTick);
@@ -390,6 +418,7 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static int getExpertiseModifiedHealing(obj_id medic, int toHeal, combat_data action_data) throws InterruptedException
     {
         String specialLine = action_data.specialLine;
@@ -401,38 +430,45 @@ public class healing extends script.base_script
         }
         float toHealFloat = toHeal;
         toHealFloat = toHealFloat * (1 + (expertiseHealingBonus / 100));
-        toHeal = (int)toHealFloat;
+        toHeal = (int) toHealFloat;
         return toHeal;
     }
+
     public static int getHealingAfterReductions(obj_id medic, obj_id target, int toHeal) throws InterruptedException
     {
         int healingReduction = getEnhancedSkillStatisticModifierUncapped(target, "expertise_healing_reduction");
         float redux = healingReduction / (healingReduction + 50.0f);
-        toHeal = (int)(toHeal - (toHeal * redux));
+        toHeal = (int) (toHeal - (toHeal * redux));
         return toHeal;
     }
+
     public static int getTargetHealingBonus(obj_id medic, obj_id target, int toHeal) throws InterruptedException
     {
         int healingBonus = getEnhancedSkillStatisticModifierUncapped(target, "expertise_target_healing_bonus");
-        toHeal = (int)(toHeal * (1.0f + (healingBonus / 100.0f)));
+        toHeal = (int) (toHeal * (1.0f + (healingBonus / 100.0f)));
         return toHeal;
     }
+
     public static boolean canUseAbility(obj_id medic, combat_data actionData) throws InterruptedException
     {
         return true;
     }
+
     public static boolean useHealDamageItem(obj_id user, obj_id item) throws InterruptedException
     {
         return useHealDamageItem(user, user, item);
     }
+
     public static boolean useHealDamageItem(obj_id user, obj_id item, int attrib) throws InterruptedException
     {
         return useHealDamageItem(user, user, item, attrib);
     }
+
     public static boolean useHealDamageItem(obj_id user, obj_id target, obj_id item) throws InterruptedException
     {
         return useHealDamageItem(user, target, item, HEALTH);
     }
+
     public static boolean useHealDamageItem(obj_id user, obj_id target, obj_id item, int attrib) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(user))
@@ -504,10 +540,12 @@ public class healing extends script.base_script
         }
         return (delta > 0);
     }
+
     public static boolean useChannelHealItem(obj_id user, obj_id item) throws InterruptedException
     {
         return useChannelHealItem(user, item, HEALTH);
     }
+
     public static boolean useChannelHealItem(obj_id user, obj_id item, int attrib) throws InterruptedException
     {
         if (!isIdValid(user))
@@ -546,6 +584,7 @@ public class healing extends script.base_script
         decrementCount(item);
         return true;
     }
+
     public static boolean useHealPetItem(obj_id user, obj_id pet, obj_id item) throws InterruptedException
     {
         if (!isIdValid(user))
@@ -615,6 +654,7 @@ public class healing extends script.base_script
         }
         return (delta > 0);
     }
+
     public static boolean canDoBeastHeal(obj_id user, obj_id pet) throws InterruptedException
     {
         obj_id beast = beast_lib.getBeastOnPlayer(user);
@@ -646,12 +686,9 @@ public class healing extends script.base_script
             sendMedicalSpam(user, SID_ITEM_NO_DAMAGE, COMBAT_RESULT_MEDICAL);
             return false;
         }
-        if (!isValidHealTarget(pet))
-        {
-            return false;
-        }
-        return true;
+        return isValidHealTarget(pet);
     }
+
     public static boolean doBeastHeal(obj_id user, obj_id pet, int toHeal) throws InterruptedException
     {
         if (!canDoBeastHeal(user, pet))
@@ -671,6 +708,7 @@ public class healing extends script.base_script
         }
         return (delta > 0);
     }
+
     public static boolean performRevivePlayer(attacker_data attackerData, defender_data[] defenderData, combat_data actionData, boolean weak) throws InterruptedException
     {
         obj_id medic = attackerData.id;
@@ -681,21 +719,27 @@ public class healing extends script.base_script
         }
         return _performRevivePlayer(medic, targets, null, actionData, weak);
     }
+
     public static boolean _performRevivePlayer(obj_id medic, obj_id[] targets, obj_id enhancer, combat_data action_data, boolean weak) throws InterruptedException
     {
         boolean hasRevivedPlayer = false;
-        for (obj_id target : targets) {
-            if (!isPlayer(target)) {
+        for (obj_id target : targets)
+        {
+            if (!isPlayer(target))
+            {
                 continue;
             }
-            if (!hasObjVar(target, pclib.VAR_BEEN_COUPDEGRACED)) {
+            if (!hasObjVar(target, pclib.VAR_BEEN_COUPDEGRACED))
+            {
                 continue;
             }
-            if (!utils.hasScriptVar(target, "pvp_death") && action_data.actionName.equals("me_rv_pvp_area")) {
+            if (!utils.hasScriptVar(target, "pvp_death") && action_data.actionName.equals("me_rv_pvp_area"))
+            {
                 continue;
             }
             int stamp = getIntObjVar(target, pclib.VAR_DEATHBLOW_STAMP);
-            if (getGameTime() > (stamp + REVIVE_TIMER)) {
+            if (getGameTime() > (stamp + REVIVE_TIMER))
+            {
                 prose_package pp = new prose_package();
                 pp = prose.setStringId(pp, SID_PERFORM_REVIVE_TOO_LONG);
                 pp = prose.setTT(pp, medic);
@@ -703,7 +747,8 @@ public class healing extends script.base_script
                 sendMedicalSpam(medic, target, pp, true, true, false, COMBAT_RESULT_MEDICAL);
                 continue;
             }
-            if (!pvpCanHelp(medic, target)) {
+            if (!pvpCanHelp(medic, target))
+            {
                 prose_package pp = new prose_package();
                 pp = prose.setStringId(pp, new string_id("spam", "revive_no_help_pvp"));
                 pp = prose.setTO(pp, target);
@@ -712,9 +757,12 @@ public class healing extends script.base_script
             }
             dictionary params = new dictionary();
             params.put("medic", medic);
-            if (weak) {
+            if (weak)
+            {
                 params.put("weak", 1);
-            } else {
+            }
+            else
+            {
                 params.put("weak", 0);
             }
             pvpHelpPerformed(medic, target);
@@ -727,10 +775,12 @@ public class healing extends script.base_script
         }
         return hasRevivedPlayer;
     }
+
     public static void _addMedicalHate(obj_id medic, obj_id target, int hate) throws InterruptedException
     {
         _addMedicalHate(medic, target, hate, 1.0f);
     }
+
     public static void _addMedicalHate(obj_id medic, obj_id target, int hate, float hateMod) throws InterruptedException
     {
         obj_id[] hateList = getHateList(target);
@@ -744,17 +794,21 @@ public class healing extends script.base_script
         }
         float hateValue = hate;
         hateValue *= hateMod;
-        for (obj_id obj_id : hateList) {
-            if (!isIdValid(obj_id) || !isTangible(obj_id)) {
+        for (obj_id obj_id : hateList)
+        {
+            if (!isIdValid(obj_id) || !isTangible(obj_id))
+            {
                 continue;
             }
-            if (medic == obj_id) {
+            if (medic == obj_id)
+            {
                 continue;
             }
             addHate(obj_id, medic, hateValue);
             addHate(medic, obj_id, 0.0f);
         }
     }
+
     public static float _getEnhancerModifier(obj_id enhancer, float cap) throws InterruptedException
     {
         if (!isIdValid(enhancer))
@@ -770,13 +824,14 @@ public class healing extends script.base_script
         {
             enhancement = getFloatObjVar(enhancer, VAR_ENHANCER_EFFICIENCY);
         }
-        else 
+        else
         {
             return 0.0f;
         }
         float mod = ((enhancement / 1000.0f) * cap);
         return mod;
     }
+
     public static float _getSkillModModifier(obj_id medic, String skill_mod, float coeff) throws InterruptedException
     {
         if (coeff <= 0.0f)
@@ -788,9 +843,10 @@ public class healing extends script.base_script
         {
             return 0.0f;
         }
-        float mod = 1.0f - (1.0f * (1.0f / ((skill + (1.0f / coeff)) * coeff)));
+        float mod = 1.0f - ((1.0f / ((skill + (1.0f / coeff)) * coeff)));
         return mod;
     }
+
     public static float _getMedicalDroidModifier(obj_id medic) throws InterruptedException
     {
         float droidMod = 0.0f;
@@ -801,10 +857,12 @@ public class healing extends script.base_script
         }
         return droidMod;
     }
+
     public static float _getShockWoundModifier(obj_id target) throws InterruptedException
     {
         return 1.0f;
     }
+
     public static void _healingActionFollowUp(obj_id medic, obj_id target, int delta, int type) throws InterruptedException
     {
         int[] dArray = new int[1];
@@ -815,7 +873,7 @@ public class healing extends script.base_script
             {
                 grantHealingExperience(dArray, medic, target, HEAL_TYPE_MEDICAL_DAMAGE);
             }
-            else 
+            else
             {
                 grantHealingExperience(dArray, medic, target, HEAL_TYPE_MEDICAL_WOUND);
             }
@@ -825,14 +883,17 @@ public class healing extends script.base_script
             }
         }
     }
+
     public static Vector getCombatStates(obj_id target) throws InterruptedException
     {
         Vector vStates = new Vector();
         return vStates;
     }
+
     public static boolean isDotted(obj_id target, String dot_type) throws InterruptedException
     {
-        switch (dot_type) {
+        switch (dot_type)
+        {
             case dot.DOT_BLEEDING:
                 return dot.isBleeding(target);
             case dot.DOT_POISON:
@@ -848,10 +909,12 @@ public class healing extends script.base_script
         }
         return false;
     }
+
     public static void startHealOverTime(obj_id target, float duration, float tick, int healPerTick) throws InterruptedException
     {
         startHealOverTime(obj_id.NULL_ID, target, "", duration, tick, healPerTick, false);
     }
+
     public static void startHealOverTime(obj_id medic, obj_id target, String actionName, float duration, float tick, int healPerTick, boolean combatFollowUp) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -897,7 +960,7 @@ public class healing extends script.base_script
         {
             d.put("combat", 1);
         }
-        else 
+        else
         {
             d.put("combat", 0);
         }
@@ -906,23 +969,21 @@ public class healing extends script.base_script
         {
             buff.applyBuff(target, "trandoshan_ability_1");
         }
-        else 
+        else
         {
             buff.applyBuff(target, "healOverTime");
         }
     }
+
     public static boolean isAwake(obj_id target) throws InterruptedException
     {
         if (isIncapacitated(target))
         {
             return false;
         }
-        if (isDead(target))
-        {
-            return false;
-        }
-        return true;
+        return !isDead(target);
     }
+
     public static boolean validateTarget(obj_id target, int targetCheck) throws InterruptedException
     {
         final int NONE = -1;
@@ -944,29 +1005,30 @@ public class healing extends script.base_script
         switch (targetCheck)
         {
             case MOB:
-            return isMob(target) && !vehicle.isVehicle(target);
+                return isMob(target) && !vehicle.isVehicle(target);
             case CREATURE:
-            return ai_lib.isMonster(target);
+                return ai_lib.isMonster(target);
             case NPC:
-            return ai_lib.isNpc(target);
+                return ai_lib.isNpc(target);
             case DROID:
-            return ai_lib.isDroid(target);
+                return ai_lib.isDroid(target);
             case PVP:
-            return pvpCanAttack(getSelf(), target);
+                return pvpCanAttack(getSelf(), target);
             case JEDI:
-            if (isPlayer(target))
-            {
-                return isJedi(target);
-            }
-            else 
-            {
-                return jedi.isLightsaber(getCurrentWeapon(target));
-            }
+                if (isPlayer(target))
+                {
+                    return isJedi(target);
+                }
+                else
+                {
+                    return jedi.isLightsaber(getCurrentWeapon(target));
+                }
             case DEAD:
-            return isDead(target);
+                return isDead(target);
         }
         return true;
     }
+
     public static boolean fullHeal(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || (!isPlayer(player)))
@@ -978,6 +1040,7 @@ public class healing extends script.base_script
         addAttribModifier(player, maxAttribs[HEALTH].getType(), maxAttribs[HEALTH].getValue(), 0, 0, MOD_POOL);
         return true;
     }
+
     public static boolean fullHealEveryone(obj_id creature) throws InterruptedException
     {
         if (!isIdValid(creature))
@@ -989,10 +1052,12 @@ public class healing extends script.base_script
         addAttribModifier(creature, maxAttribs[HEALTH].getType(), maxAttribs[HEALTH].getValue(), 0, 0, MOD_POOL);
         return true;
     }
+
     public static boolean healDamage(obj_id player, int amt) throws InterruptedException
     {
         return healDamage(player, HEALTH, amt);
     }
+
     public static boolean healDamage(obj_id player, int attrib, int amt) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1001,6 +1066,7 @@ public class healing extends script.base_script
         }
         return addAttribModifier(player, attrib, amt, 0, 0, MOD_POOL);
     }
+
     public static int healDamage(obj_id source, obj_id target, int attrib, int amount) throws InterruptedException
     {
         if (!isIdValid(source) || !isIdValid(target) || amount <= 0)
@@ -1016,6 +1082,7 @@ public class healing extends script.base_script
         }
         return delta;
     }
+
     public static boolean healClone(obj_id player, boolean woundPlayer) throws InterruptedException
     {
         if (!isIdValid(player) || (!isPlayer(player)))
@@ -1047,11 +1114,11 @@ public class healing extends script.base_script
             case (-15259513):
             case (-1186872851):
             case (2130374697):
-            adventurePlanet = false;
-            break;
+                adventurePlanet = false;
+                break;
             default:
-            adventurePlanet = true;
-            break;
+                adventurePlanet = true;
+                break;
         }
         float woundReduction = 0.0f;
         if (woundPlayer && !adventurePlanet)
@@ -1068,7 +1135,7 @@ public class healing extends script.base_script
         int attribValue = maxAttribs[HEALTH].getValue();
         float fltTest = attribValue;
         fltTest *= fltThreshold;
-        int intMaxWounds = (int)fltTest;
+        int intMaxWounds = (int) fltTest;
         if (intMaxWounds > 0)
         {
             setAttrib(player, HEALTH, attribValue);
@@ -1082,40 +1149,46 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean healClone(obj_id player) throws InterruptedException
     {
         return healClone(player, true);
     }
+
     public static void sendMedicalSpam(obj_id medic, string_id message, int spam_type) throws InterruptedException
     {
         sendCombatSpamMessage(medic, message, spam_type);
     }
+
     public static void sendMedicalSpam(obj_id medic, obj_id target, string_id message, boolean to_attacker, boolean to_defender, boolean to_others, int spam_type) throws InterruptedException
     {
         if (medic == target)
         {
             sendCombatSpamMessage(medic, target, message, to_attacker, false, to_others, spam_type);
         }
-        else 
+        else
         {
             sendCombatSpamMessage(medic, target, message, to_attacker, to_defender, to_others, spam_type);
         }
     }
+
     public static void sendMedicalSpam(obj_id medic, prose_package pp, int spam_type) throws InterruptedException
     {
         sendCombatSpamMessageProse(medic, pp, spam_type);
     }
+
     public static void sendMedicalSpam(obj_id medic, obj_id target, prose_package pp, boolean to_attacker, boolean to_defender, boolean to_others, int spam_type) throws InterruptedException
     {
         if (medic == target)
         {
             sendCombatSpamMessageProse(medic, target, pp, to_attacker, false, to_others, spam_type);
         }
-        else 
+        else
         {
             sendCombatSpamMessageProse(medic, target, pp, to_attacker, to_defender, to_others, spam_type);
         }
     }
+
     public static String[] assembleHealingMessage(int attrib, int delta, obj_id doctor, obj_id target, int heal_type) throws InterruptedException
     {
         int[] attribsArray = new int[1];
@@ -1124,10 +1197,12 @@ public class healing extends script.base_script
         deltaArray[0] = delta;
         return assembleHealingMessage(attribsArray, deltaArray, doctor, target, null, heal_type);
     }
+
     public static String[] assembleHealingMessage(int[] attribsArray, int[] deltaArray, obj_id doctor, obj_id target, obj_id medicine) throws InterruptedException
     {
         return assembleHealingMessage(attribsArray, deltaArray, doctor, target, medicine, 1);
     }
+
     public static String[] assembleHealingMessage(int[] attribsArray, int[] deltaArray, obj_id doctor, obj_id target, obj_id medicine, int heal_type) throws InterruptedException
     {
         Vector attribs = new Vector();
@@ -1188,7 +1263,7 @@ public class healing extends script.base_script
                     {
                         responseType = 1;
                     }
-                    else 
+                    else
                     {
                         responseType = 2;
                     }
@@ -1199,7 +1274,7 @@ public class healing extends script.base_script
                     {
                         responseType = 3;
                     }
-                    else 
+                    else
                     {
                         responseType = 4;
                     }
@@ -1210,12 +1285,12 @@ public class healing extends script.base_script
                     {
                         responseType = 5;
                     }
-                    else 
+                    else
                     {
                         responseType = 6;
                     }
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -1230,7 +1305,7 @@ public class healing extends script.base_script
                     {
                         responseType = 7;
                     }
-                    else 
+                    else
                     {
                         responseType = 8;
                     }
@@ -1241,7 +1316,7 @@ public class healing extends script.base_script
                     {
                         responseType = 9;
                     }
-                    else 
+                    else
                     {
                         responseType = 10;
                     }
@@ -1252,12 +1327,12 @@ public class healing extends script.base_script
                     {
                         responseType = 11;
                     }
-                    else 
+                    else
                     {
                         responseType = 12;
                     }
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -1272,12 +1347,12 @@ public class healing extends script.base_script
                     {
                         responseType = 13;
                     }
-                    else 
+                    else
                     {
                         responseType = 14;
                     }
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -1293,7 +1368,7 @@ public class healing extends script.base_script
                     {
                         responseType = 15;
                     }
-                    else 
+                    else
                     {
                         responseType = 16;
                     }
@@ -1304,7 +1379,7 @@ public class healing extends script.base_script
                     {
                         responseType = 19;
                     }
-                    else 
+                    else
                     {
                         responseType = 20;
                     }
@@ -1315,7 +1390,7 @@ public class healing extends script.base_script
                     {
                         responseType = 21;
                     }
-                    else 
+                    else
                     {
                         responseType = 22;
                     }
@@ -1326,7 +1401,7 @@ public class healing extends script.base_script
                     {
                         responseType = 25;
                     }
-                    else 
+                    else
                     {
                         responseType = 26;
                     }
@@ -1337,7 +1412,7 @@ public class healing extends script.base_script
                     {
                         responseType = 27;
                     }
-                    else 
+                    else
                     {
                         responseType = 28;
                     }
@@ -1348,7 +1423,7 @@ public class healing extends script.base_script
                     {
                         responseType = 31;
                     }
-                    else 
+                    else
                     {
                         responseType = 32;
                     }
@@ -1372,15 +1447,15 @@ public class healing extends script.base_script
         prose_package otherpp3 = null;
         String oob;
         String otherOob;
-        String[] message = 
-        {
-            null,
-            null
-        };
+        String[] message =
+                {
+                        null,
+                        null
+                };
         switch (responseType)
         {
             case 1:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1397,7 +1472,7 @@ public class healing extends script.base_script
                 break;
             }
             case 2:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1417,7 +1492,7 @@ public class healing extends script.base_script
                 break;
             }
             case 3:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1434,7 +1509,7 @@ public class healing extends script.base_script
                 break;
             }
             case 4:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1454,7 +1529,7 @@ public class healing extends script.base_script
                 break;
             }
             case 5:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1471,7 +1546,7 @@ public class healing extends script.base_script
                 break;
             }
             case 6:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1491,7 +1566,7 @@ public class healing extends script.base_script
                 break;
             }
             case 7:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1515,7 +1590,7 @@ public class healing extends script.base_script
                 break;
             }
             case 8:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1545,7 +1620,7 @@ public class healing extends script.base_script
                 break;
             }
             case 9:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1569,7 +1644,7 @@ public class healing extends script.base_script
                 break;
             }
             case 10:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1599,7 +1674,7 @@ public class healing extends script.base_script
                 break;
             }
             case 11:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1623,7 +1698,7 @@ public class healing extends script.base_script
                 break;
             }
             case 12:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1653,7 +1728,7 @@ public class healing extends script.base_script
                 break;
             }
             case 13:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1684,7 +1759,7 @@ public class healing extends script.base_script
                 break;
             }
             case 14:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1724,7 +1799,7 @@ public class healing extends script.base_script
                 break;
             }
             case 15:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1741,7 +1816,7 @@ public class healing extends script.base_script
                 break;
             }
             case 16:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1761,7 +1836,7 @@ public class healing extends script.base_script
                 break;
             }
             case 19:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1778,7 +1853,7 @@ public class healing extends script.base_script
                 break;
             }
             case 20:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1798,7 +1873,7 @@ public class healing extends script.base_script
                 break;
             }
             case 21:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1815,7 +1890,7 @@ public class healing extends script.base_script
                 break;
             }
             case 22:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1835,7 +1910,7 @@ public class healing extends script.base_script
                 break;
             }
             case 25:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1852,7 +1927,7 @@ public class healing extends script.base_script
                 break;
             }
             case 26:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1872,7 +1947,7 @@ public class healing extends script.base_script
                 break;
             }
             case 27:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1889,7 +1964,7 @@ public class healing extends script.base_script
                 break;
             }
             case 28:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1909,7 +1984,7 @@ public class healing extends script.base_script
                 break;
             }
             case 31:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1926,7 +2001,7 @@ public class healing extends script.base_script
                 break;
             }
             case 32:
-            
+
             {
                 for (int i = 0; i < attribs.size(); i++)
                 {
@@ -1948,10 +2023,12 @@ public class healing extends script.base_script
         }
         return message;
     }
+
     public static boolean grantHealingExperience(int[] healed_damage, obj_id player, String heal_type) throws InterruptedException
     {
         return grantHealingExperience(healed_damage, player, null, heal_type);
     }
+
     public static boolean grantHealingExperience(int[] healed_damage, obj_id player, obj_id target, String heal_type) throws InterruptedException
     {
         if (healed_damage == null || !isIdValid(player) || heal_type == null)
@@ -1962,10 +2039,12 @@ public class healing extends script.base_script
         int total_healed = 0;
         String exp_type;
         boolean directGrant = false;
-        for (int i1 : healed_damage) {
+        for (int i1 : healed_damage)
+        {
             total_healed = total_healed + i1;
         }
-        switch (heal_type) {
+        switch (heal_type)
+        {
             case HEAL_TYPE_MEDICAL_DAMAGE:
                 experience = total_healed;
                 exp_type = xp.MEDICAL;
@@ -2032,24 +2111,27 @@ public class healing extends script.base_script
         {
             xp.grantCombatStyleXp(player, exp_type, experience);
         }
-        else 
+        else
         {
             assignHealingCombatCredit(player, target, exp_type, experience);
         }
         return true;
     }
+
     public static boolean grantHealingExperience(int healed_damage, obj_id player, String heal_type) throws InterruptedException
     {
         return grantHealingExperience(healed_damage, player, null, heal_type);
     }
+
     public static boolean grantHealingExperience(int healed_damage, obj_id player, obj_id target, String heal_type) throws InterruptedException
     {
-        int[] damage_array = 
-        {
-            healed_damage
-        };
+        int[] damage_array =
+                {
+                        healed_damage
+                };
         return grantHealingExperience(damage_array, player, target, heal_type);
     }
+
     public static boolean assignHealingCombatCredit(obj_id player, obj_id target, String xp_type, int amount) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(player))
@@ -2061,42 +2143,36 @@ public class healing extends script.base_script
         {
             return false;
         }
-        for (obj_id obj_id : hateList) {
+        for (obj_id obj_id : hateList)
+        {
             xp.updateCombatXpList(obj_id, player, xp_type, amount);
         }
         return true;
     }
+
     public static boolean isDamaged(obj_id player) throws InterruptedException
     {
         return isDamaged(player, HEALTH);
     }
+
     public static boolean isDamaged(obj_id player, int attrib) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return false;
         }
-        if (getAttrib(player, attrib) != getWoundedMaxAttrib(player, attrib))
-        {
-            return true;
-        }
-        return false;
+        return getAttrib(player, attrib) != getWoundedMaxAttrib(player, attrib);
     }
+
     public static boolean isWounded(obj_id player, int wound_type) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return false;
         }
-        if (getMaxAttrib(player, HEALTH) == getWoundedMaxAttrib(player, HEALTH))
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        return getMaxAttrib(player, HEALTH) != getWoundedMaxAttrib(player, HEALTH);
     }
+
     public static boolean performDotRemoval(obj_id medic, obj_id target, String heal_type, obj_id med_obj) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2158,7 +2234,7 @@ public class healing extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             valid_targets = new obj_id[1];
             valid_targets[0] = target;
@@ -2171,94 +2247,127 @@ public class healing extends script.base_script
         boolean cure_success = false;
         float removal_skill;
         String dot_type;
-        for (obj_id valid_target : valid_targets) {
-            switch (heal_type) {
+        for (obj_id valid_target : valid_targets)
+        {
+            switch (heal_type)
+            {
                 case HEAL_TYPE_MEDICAL_FIRSTAID:
                     removal_skill = getEnhancedSkillStatisticModifier(medic, "healing_injury_treatment") * 3.0f;
                     dot_type = dot.DOT_BLEEDING;
-                    if (dot.isBleeding(valid_target)) {
-                        if (medic != valid_target) {
+                    if (dot.isBleeding(valid_target))
+                    {
+                        if (medic != valid_target)
+                        {
                             prose_package ppApplyFirstAid = prose.getPackage(SID_YOU_APPLY_FIRST_AID);
                             prose.setTT(ppApplyFirstAid, valid_target);
                             sendMedicalSpam(medic, ppApplyFirstAid, COMBAT_RESULT_MEDICAL);
                             prose_package ppAppliesFirstAid = prose.getPackage(SID_APPLIES_FIRST_AID);
                             prose.setTT(ppAppliesFirstAid, medic);
                             sendMedicalSpam(medic, ppAppliesFirstAid, COMBAT_RESULT_MEDICAL);
-                        } else {
+                        }
+                        else
+                        {
                             sendMedicalSpam(medic, SID_APPLY_FIRST_AID_SELF, COMBAT_RESULT_MEDICAL);
                         }
                     }
                     break;
-                case HEAL_TYPE_MEDICAL_CURE_POISON: {
-                    if (!isIdValid(med_obj)) {
+                case HEAL_TYPE_MEDICAL_CURE_POISON:
+                {
+                    if (!isIdValid(med_obj))
+                    {
                         return false;
                     }
                     int cure_power = getDotPower(med_obj);
-                    if (isAreaMedicine(med_obj)) {
+                    if (isAreaMedicine(med_obj))
+                    {
                         removal_skill = cure_power;
-                    } else {
+                    }
+                    else
+                    {
                         removal_skill = cure_power * (1.0f + getEnhancedSkillStatisticModifier(medic, "healing_wound_treatment") / 100.0f);
                     }
                     dot_type = dot.DOT_POISON;
-                    if (dot.isPoisoned(valid_target)) {
-                        if (medic != valid_target) {
+                    if (dot.isPoisoned(valid_target))
+                    {
+                        if (medic != valid_target)
+                        {
                             prose_package ppApplyPoisonAntidote = prose.getPackage(SID_APPLY_POISON_ANTIDOTE);
                             prose.setTT(ppApplyPoisonAntidote, valid_target);
                             sendMedicalSpam(medic, ppApplyPoisonAntidote, COMBAT_RESULT_MEDICAL);
                             prose_package ppAppliesPoisonAntidote = prose.getPackage(SID_APPLIES_POISON_ANTIDOTE);
                             prose.setTT(ppAppliesPoisonAntidote, medic);
                             sendMedicalSpam(valid_target, ppAppliesPoisonAntidote, COMBAT_RESULT_MEDICAL);
-                        } else {
+                        }
+                        else
+                        {
                             sendMedicalSpam(medic, SID_APPLY_POISON_ANTIDOTE_SELF, COMBAT_RESULT_MEDICAL);
                         }
                     }
                     break;
                 }
-                case HEAL_TYPE_MEDICAL_CURE_FIRE: {
-                    if (!isIdValid(med_obj)) {
+                case HEAL_TYPE_MEDICAL_CURE_FIRE:
+                {
+                    if (!isIdValid(med_obj))
+                    {
                         return false;
                     }
                     int cure_power = getDotPower(med_obj);
-                    if (isAreaMedicine(med_obj)) {
+                    if (isAreaMedicine(med_obj))
+                    {
                         removal_skill = cure_power;
-                    } else {
+                    }
+                    else
+                    {
                         removal_skill = cure_power * (1.0f + getEnhancedSkillStatisticModifier(medic, "healing_wound_treatment") / 100.0f);
                     }
                     dot_type = dot.DOT_FIRE;
-                    if (dot.isOnFire(valid_target)) {
-                        if (medic != valid_target) {
+                    if (dot.isOnFire(valid_target))
+                    {
+                        if (medic != valid_target)
+                        {
                             prose_package ppAttemptSuppress = prose.getPackage(SID_ATTEMPT_SUPPRESS_FLAMES);
                             prose.setTT(ppAttemptSuppress, valid_target);
                             sendMedicalSpam(medic, ppAttemptSuppress, COMBAT_RESULT_MEDICAL);
                             prose_package ppCoversBlanket = prose.getPackage(SID_COVERS_YOU_BLANKET);
                             prose.setTT(ppCoversBlanket, medic);
                             sendMedicalSpam(valid_target, ppCoversBlanket, COMBAT_RESULT_MEDICAL);
-                        } else {
+                        }
+                        else
+                        {
                             sendMedicalSpam(medic, SID_COVERS_BLANKET_SELF, COMBAT_RESULT_MEDICAL);
                         }
                     }
                     break;
                 }
-                case HEAL_TYPE_MEDICAL_CURE_DISEASE: {
-                    if (!isIdValid(med_obj)) {
+                case HEAL_TYPE_MEDICAL_CURE_DISEASE:
+                {
+                    if (!isIdValid(med_obj))
+                    {
                         return false;
                     }
                     int cure_power = getDotPower(med_obj);
-                    if (isAreaMedicine(med_obj)) {
+                    if (isAreaMedicine(med_obj))
+                    {
                         removal_skill = cure_power;
-                    } else {
+                    }
+                    else
+                    {
                         removal_skill = cure_power * (1.0f + getEnhancedSkillStatisticModifier(medic, "healing_wound_treatment") / 100.0f);
                     }
                     dot_type = dot.DOT_DISEASE;
-                    if (dot.isDiseased(valid_target)) {
-                        if (medic != valid_target) {
+                    if (dot.isDiseased(valid_target))
+                    {
+                        if (medic != valid_target)
+                        {
                             prose_package ppApplyDiseaseAntidote = prose.getPackage(SID_APPLY_DISEASE_ANTIDOTE);
                             prose.setTT(ppApplyDiseaseAntidote, valid_target);
                             sendMedicalSpam(medic, ppApplyDiseaseAntidote, COMBAT_RESULT_MEDICAL);
                             prose_package ppAppliesDiseaseAntidote = prose.getPackage(SID_APPLIES_DISEASE_ANTIDOTE);
                             prose.setTT(ppAppliesDiseaseAntidote, medic);
                             sendMedicalSpam(valid_target, ppAppliesDiseaseAntidote, COMBAT_RESULT_MEDICAL);
-                        } else {
+                        }
+                        else
+                        {
                             sendMedicalSpam(medic, SID_APPLY_DISEASE_ANTIDOTE_SELF, COMBAT_RESULT_MEDICAL);
                         }
                     }
@@ -2268,14 +2377,18 @@ public class healing extends script.base_script
                     return false;
             }
             int poison_reduced = dot.reduceDotTypeStrength(valid_target, dot_type, (int) removal_skill);
-            if (poison_reduced != -1) {
-                if (isPlayer(valid_target)) {
-                    if (isIdValid(med_obj) && isAreaMedicine(med_obj)) {
+            if (poison_reduced != -1)
+            {
+                if (isPlayer(valid_target))
+                {
+                    if (isIdValid(med_obj) && isAreaMedicine(med_obj))
+                    {
                         poison_reduced *= 0.3f;
                     }
                     grantHealingExperience(poison_reduced, medic, valid_target, heal_type);
                 }
-                if (medic != valid_target) {
+                if (medic != valid_target)
+                {
                     pvpHelpPerformed(medic, valid_target);
                 }
                 cure_success = true;
@@ -2283,6 +2396,7 @@ public class healing extends script.base_script
         }
         return cure_success;
     }
+
     public static boolean performDotApplication(obj_id medic, obj_id target, String heal_type, obj_id med_obj) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2342,7 +2456,7 @@ public class healing extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             valid_targets = new obj_id[1];
             valid_targets[0] = target;
@@ -2362,7 +2476,7 @@ public class healing extends script.base_script
         {
             dot_type = dot_type = dot.DOT_DISEASE;
         }
-        else 
+        else
         {
             return false;
         }
@@ -2370,42 +2484,56 @@ public class healing extends script.base_script
         {
             return false;
         }
-        for (obj_id valid_target : valid_targets) {
-            if (heal_type.equals(HEAL_TYPE_MEDICAL_APPLY_POISON)) {
+        for (obj_id valid_target : valid_targets)
+        {
+            if (heal_type.equals(HEAL_TYPE_MEDICAL_APPLY_POISON))
+            {
                 prose_package pp_self = prose.getPackage(SID_APPLY_POISON_SELF, valid_target);
                 prose_package pp_other = prose.getPackage(SID_APPLY_POISON_OTHER, medic, valid_target);
                 sendMedicalSpam(medic, pp_self, COMBAT_RESULT_DEBUFF);
                 sendMedicalSpam(valid_target, pp_other, COMBAT_RESULT_DEBUFF);
-            } else if (heal_type.equals(HEAL_TYPE_MEDICAL_APPLY_DISEASE)) {
+            }
+            else if (heal_type.equals(HEAL_TYPE_MEDICAL_APPLY_DISEASE))
+            {
                 prose_package pp_self = prose.getPackage(SID_APPLY_DISEASE_SELF, valid_target);
                 prose_package pp_other = prose.getPackage(SID_APPLY_DISEASE_OTHER, medic, valid_target);
                 sendMedicalSpam(medic, pp_self, COMBAT_RESULT_DEBUFF);
                 sendMedicalSpam(valid_target, pp_other, COMBAT_RESULT_DEBUFF);
             }
-            if (isPlayer(valid_target)) {
-                if (factions.pvpDoAllowedAttackCheck(medic, valid_target)) {
+            if (isPlayer(valid_target))
+            {
+                if (factions.pvpDoAllowedAttackCheck(medic, valid_target))
+                {
                     pvpAttackPerformed(medic, valid_target);
                 }
             }
-            if (dot.applyDotEffect(valid_target, medic, dot_type, dot_id, attribute, dot_potency, (int) strength, duration)) {
-                if (!isPlayer(valid_target)) {
+            if (dot.applyDotEffect(valid_target, medic, dot_type, dot_id, attribute, dot_potency, (int) strength, duration))
+            {
+                if (!isPlayer(valid_target))
+                {
                     grantHealingExperience((int) strength, medic, valid_target, heal_type);
-                    if (!ai_lib.isInCombat(valid_target)) {
+                    if (!ai_lib.isInCombat(valid_target))
+                    {
                         dictionary d = new dictionary();
                         d.put("attacker", medic);
                         messageTo(target, "handleDefenderCombatAction", d, 0.0f, true);
                     }
-                } else {
+                }
+                else
+                {
                     obj_id[] defenders = new obj_id[1];
                     defenders[0] = valid_target;
                     int[] results = new int[1];
                     results[0] = 1;
                     callDefenderCombatAction(defenders, results, medic, getCurrentWeapon(medic));
-                    if (factions.pvpDoAllowedAttackCheck(medic, valid_target)) {
+                    if (factions.pvpDoAllowedAttackCheck(medic, valid_target))
+                    {
                         pvpAttackPerformed(medic, valid_target);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 prose_package pp = prose.getPackage(dot.SID_DOT_RESISTED, valid_target);
                 sendMedicalSpam(medic, pp, COMBAT_RESULT_GENERIC);
                 sendMedicalSpam(valid_target, SID_RESIST_DOT_OTHER, COMBAT_RESULT_GENERIC);
@@ -2413,30 +2541,37 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean performFirstAid(obj_id medic, obj_id target) throws InterruptedException
     {
         return performDotRemoval(medic, target, HEAL_TYPE_MEDICAL_FIRSTAID, null);
     }
+
     public static boolean performCurePoison(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performDotRemoval(medic, target, HEAL_TYPE_MEDICAL_CURE_POISON, med_obj);
     }
+
     public static boolean performCureFire(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performDotRemoval(medic, target, HEAL_TYPE_MEDICAL_CURE_FIRE, med_obj);
     }
+
     public static boolean performCureDisease(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performDotRemoval(medic, target, HEAL_TYPE_MEDICAL_CURE_DISEASE, med_obj);
     }
+
     public static boolean performApplyPosion(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performDotApplication(medic, target, HEAL_TYPE_MEDICAL_APPLY_POISON, med_obj);
     }
+
     public static boolean performApplyDisease(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performDotApplication(medic, target, HEAL_TYPE_MEDICAL_APPLY_DISEASE, med_obj);
     }
+
     public static obj_id getRevivePack(obj_id medic) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2444,11 +2579,14 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] contents = utils.getFilteredPlayerContents(medic);
-        if ((contents != null) && (contents.length > 0))
+        if (contents != null)
         {
-            for (obj_id item : contents) {
-                if (isIdValid(item)) {
-                    if (isRevivePack(item)) {
+            for (obj_id item : contents)
+            {
+                if (isIdValid(item))
+                {
+                    if (isRevivePack(item))
+                    {
                         return item;
                     }
                 }
@@ -2456,22 +2594,21 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static boolean isRevivePack(obj_id pack) throws InterruptedException
     {
         return isRevivePack(pack, "");
     }
+
     public static boolean isRevivePack(obj_id pack, String prefix) throws InterruptedException
     {
         if (!isIdValid(pack))
         {
             return false;
         }
-        if (getIntObjVar(pack, prefix + consumable.VAR_CONSUMABLE_MED_TYPE) == consumable.MT_REVIVE_PLAYER)
-        {
-            return true;
-        }
-        return false;
+        return getIntObjVar(pack, prefix + consumable.VAR_CONSUMABLE_MED_TYPE) == consumable.MT_REVIVE_PLAYER;
     }
+
     public static boolean resuscitatePlayer(obj_id medic, obj_id target, obj_id pack) throws InterruptedException
     {
         if (!isIdValid(medic) || !isIdValid(target))
@@ -2535,17 +2672,22 @@ public class healing extends script.base_script
         {
             applyHealingCost(medic, HEAL_TYPE_MEDICAL_REVIVE, 1.0f);
             int[] att = new int[WILLPOWER + 1];
-            for (attrib_mod attrib_mod : am) {
+            for (attrib_mod attrib_mod : am)
+            {
                 int attrib = attrib_mod.getAttribute();
                 float attack = attrib_mod.getAttack();
                 float decay = attrib_mod.getDecay();
                 int val = attrib_mod.getValue();
-                if (attack == AM_HEAL_WOUND) {
+                if (attack == AM_HEAL_WOUND)
+                {
                     val *= 2.5;
-                } else if (decay == MOD_POOL) {
+                }
+                else if (decay == MOD_POOL)
+                {
                     val /= 4;
                 }
-                if (val > 0) {
+                if (val > 0)
+                {
                     att[attrib] += val;
                 }
             }
@@ -2556,10 +2698,12 @@ public class healing extends script.base_script
         }
         return false;
     }
+
     public static boolean resuscitatePlayer(obj_id medic, obj_id target) throws InterruptedException
     {
         return resuscitatePlayer(medic, target, null);
     }
+
     public static float getDragPlayerRange(obj_id medic) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2577,6 +2721,7 @@ public class healing extends script.base_script
         }
         return -1.0f;
     }
+
     public static boolean playRangedAnimation(obj_id medic, obj_id target, obj_id med_obj, String[] animation) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2613,7 +2758,7 @@ public class healing extends script.base_script
         {
             strPlaybackName += "_medium";
         }
-        else 
+        else
         {
             strPlaybackName += "_far";
         }
@@ -2621,7 +2766,7 @@ public class healing extends script.base_script
         {
             strPlaybackName += "_" + animation[0];
         }
-        else 
+        else
         {
             strPlaybackName += "_" + animation[1];
         }
@@ -2636,6 +2781,7 @@ public class healing extends script.base_script
         doCombatResults(strPlaybackName, cbtAttackerResults, cbtDefenderResults);
         return true;
     }
+
     public static void playHealDamageEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2645,14 +2791,16 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
-                if (isIdValid(player) && exists(player) && !stealth.hasInvisibleBuff(player)) {
+            for (obj_id player : players)
+            {
+                if (isIdValid(player) && exists(player) && !stealth.hasInvisibleBuff(player))
+                {
                     playClientEffectLoc(player, "appearance/pt_heal_2.prt", loc, 0);
                 }
             }
         }
-        return;
     }
+
     public static void playHealWoundEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2662,12 +2810,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/healing_healwound.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playHealStateEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2677,12 +2826,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/healing_healstate.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playHealEnhanceEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2692,12 +2842,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/healing_healenhance.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playApplyPoisonEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2707,12 +2858,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/dot_apply_poison.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playApplyAreaPoisonEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2722,12 +2874,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/dot_apply_area_poison.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playApplyDiseaseEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2737,12 +2890,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/dot_apply_disease.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static void playApplyAreaDiseaseEffect(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -2752,12 +2906,13 @@ public class healing extends script.base_script
         obj_id[] players = getAllPlayers(loc, VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectLoc(player, "clienteffect/dot_apply_area_disease.cef", loc, 0);
             }
         }
-        return;
     }
+
     public static boolean canDiagnose(obj_id medic, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -2785,7 +2940,7 @@ public class healing extends script.base_script
                 sendMedicalSpam(medic, SID_TEND_WOUNDS_INVALID_TARGET, COMBAT_RESULT_MEDICAL);
                 return false;
             }
-            else 
+            else
             {
                 if (!factions.pvpDoAllowedHelpCheck(medic, target))
                 {
@@ -2793,7 +2948,7 @@ public class healing extends script.base_script
                     sendMedicalSpam(medic, SID_PVP_NO_HELP, COMBAT_RESULT_MEDICAL);
                     return false;
                 }
-                else 
+                else
                 {
                     if (!isPlayer(target))
                     {
@@ -2803,23 +2958,24 @@ public class healing extends script.base_script
                             sendMedicalSpam(medic, SID_TEND_WOUNDS_INVALID_TARGET, COMBAT_RESULT_MEDICAL);
                             return false;
                         }
-                        else 
+                        else
                         {
                             return true;
                         }
                     }
-                    else 
+                    else
                     {
                         return true;
                     }
                 }
             }
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public static void addHealingKillCredit(obj_id medic, obj_id target, int[] delta) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2837,7 +2993,8 @@ public class healing extends script.base_script
         if (group.inSameGroup(medic, target) && getState(target, STATE_COMBAT) == 1)
         {
             int total = 0;
-            for (int i1 : delta) {
+            for (int i1 : delta)
+            {
                 total += i1;
             }
             if (total > 0)
@@ -2856,6 +3013,7 @@ public class healing extends script.base_script
             }
         }
     }
+
     public static obj_id findDroidWoundMed(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2868,18 +3026,24 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        if (inv_contents == null || inv_contents.length == 0)
+        if (inv_contents == null)
         {
             return null;
         }
-        for (obj_id inv_content : inv_contents) {
-            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_MODS)) {
-                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_DROID_MED)) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_MODS))
+            {
+                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_DROID_MED))
+                {
                     attrib_mod[] mod_array = getAttribModArrayObjVar(inv_content, consumable.VAR_CONSUMABLE_MODS);
-                    if (mod_array != null) {
-                        for (attrib_mod attrib_mod : mod_array) {
+                    if (mod_array != null)
+                    {
+                        for (attrib_mod attrib_mod : mod_array)
+                        {
                             float attack = attrib_mod.getAttack();
-                            if (attack == AM_HEAL_WOUND) {
+                            if (attack == AM_HEAL_WOUND)
+                            {
                                 return inv_content;
                             }
                         }
@@ -2889,6 +3053,7 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static obj_id findDroidDamageMed(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2901,14 +3066,18 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        if (inv_contents == null || inv_contents.length == 0)
+        if (inv_contents == null)
         {
             return null;
         }
-        for (obj_id inv_content : inv_contents) {
-            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_BASE)) {
-                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_DROID_MED)) {
-                    if (hasObjVar(inv_content, "consumable.energy")) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_BASE))
+            {
+                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_DROID_MED))
+                {
+                    if (hasObjVar(inv_content, "consumable.energy"))
+                    {
                         return inv_content;
                     }
                 }
@@ -2916,6 +3085,7 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static int[] distributeHAMWoundHealingPoints(obj_id patient, int total) throws InterruptedException
     {
         int[] toHeal = new int[3];
@@ -2924,6 +3094,7 @@ public class healing extends script.base_script
         toHeal[2] = 0;
         return toHeal;
     }
+
     public static int[] distributeHAMDamageHealingPoints(obj_id patient, int total) throws InterruptedException
     {
         int[] toHeal = new int[3];
@@ -2932,24 +3103,19 @@ public class healing extends script.base_script
         toHeal[2] = 0;
         return toHeal;
     }
+
     public static boolean isDroidWounded(obj_id patient) throws InterruptedException
     {
         int hWound = (getMaxAttrib(patient, HEALTH) - getWoundedMaxAttrib(patient, HEALTH));
-        if (hWound > 0)
-        {
-            return true;
-        }
-        return false;
+        return hWound > 0;
     }
+
     public static boolean isDroidDamaged(obj_id patient) throws InterruptedException
     {
         int hDamage = (getWoundedMaxAttrib(patient, HEALTH) - getAttrib(patient, HEALTH));
-        if (hDamage > 0)
-        {
-            return true;
-        }
-        return false;
+        return hDamage > 0;
     }
+
     public static boolean performDroidRepair(obj_id medic, obj_id target, obj_id med_obj, boolean pay_cost) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -2992,10 +3158,10 @@ public class healing extends script.base_script
             }
             int health_after = getAttrib(target, HEALTH);
             int totalHealed = health_after - health_before;
-            int[] delta = 
-            {
-                totalHealed
-            };
+            int[] delta =
+                    {
+                            totalHealed
+                    };
             obj_id target_master = getMaster(target);
             prose_package pp_self;
             prose_package pp_other;
@@ -3004,7 +3170,7 @@ public class healing extends script.base_script
                 pp_self = prose.getPackage(SID_DROID_REPAIR_DAMAGE_SELF, getEncodedName(target), totalHealed);
                 pp_other = prose.getPackage(SID_DROID_REPAIR_DAMAGE_OTHER, getFirstName(medic), getEncodedName(target), totalHealed);
             }
-            else 
+            else
             {
                 pp_self = prose.getPackage(SID_DROID_REPAIR_WOUND_SELF, getEncodedName(target), totalHealed);
                 pp_other = prose.getPackage(SID_DROID_REPAIR_WOUND_OTHER, getFirstName(medic), getEncodedName(target), totalHealed);
@@ -3026,6 +3192,7 @@ public class healing extends script.base_script
         }
         return false;
     }
+
     public static obj_id findStimpackDispensorDroid(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3035,14 +3202,21 @@ public class healing extends script.base_script
         obj_id[] creatures = getCreaturesInRange(getLocation(player), VAR_STIMPACK_DROID_RADIUS);
         if (creatures != null)
         {
-            for (obj_id creature : creatures) {
-                if (pet_lib.isDroidPet(creature)) {
-                    if (hasObjVar(creature, "module_data.stimpack_capacity")) {
-                        if (getIntObjVar(creature, "module_data.stimpack_supply") > 0) {
-                            if (!utils.hasScriptVar(creature, "module_data.stimpack_recharging")) {
+            for (obj_id creature : creatures)
+            {
+                if (pet_lib.isDroidPet(creature))
+                {
+                    if (hasObjVar(creature, "module_data.stimpack_capacity"))
+                    {
+                        if (getIntObjVar(creature, "module_data.stimpack_supply") > 0)
+                        {
+                            if (!utils.hasScriptVar(creature, "module_data.stimpack_recharging"))
+                            {
                                 obj_id master = getMaster(creature);
-                                if (isIdValid(master)) {
-                                    if ((master == player) || group.inSameGroup(master, player)) {
+                                if (isIdValid(master))
+                                {
+                                    if ((master == player) || group.inSameGroup(master, player))
+                                    {
                                         return creature;
                                     }
                                 }
@@ -3054,29 +3228,26 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static boolean isMedicine(obj_id object) throws InterruptedException
     {
         return isMedicine(object, "");
     }
+
     public static boolean isMedicine(obj_id object, String prefix) throws InterruptedException
     {
         if (!isIdValid(object))
         {
             return false;
         }
-        if (hasObjVar(object, prefix + consumable.VAR_CONSUMABLE_MEDICINE))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(object, prefix + consumable.VAR_CONSUMABLE_MEDICINE);
     }
+
     public static boolean isRangedMedicine(obj_id object) throws InterruptedException
     {
         return isRangedMedicine(object, "", false);
     }
+
     public static boolean isRangedMedicine(obj_id object, String prefix, boolean inDocBag) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -3088,44 +3259,30 @@ public class healing extends script.base_script
             if (hasObjVar(object, prefix + "healing.dot_info"))
             {
                 int[] healingInfo = getIntArrayObjVar(object, prefix + "healing.dot_info");
-                if (healingInfo[0] > 0)
-                {
-                    return true;
-                }
+                return healingInfo[0] > 0;
             }
             return false;
         }
-        else 
+        else
         {
-            if (hasObjVar(object, VAR_HEALING_RANGE))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return hasObjVar(object, VAR_HEALING_RANGE);
         }
     }
+
     public static boolean isAreaMedicine(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
         {
             return false;
         }
-        if (hasObjVar(object, VAR_HEALING_AREA))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(object, VAR_HEALING_AREA);
     }
+
     public static boolean isHealDamageMedicine(obj_id medicine) throws InterruptedException
     {
         return isHealDamageMedicine(medicine, "");
     }
+
     public static boolean isHealDamageMedicine(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3137,40 +3294,40 @@ public class healing extends script.base_script
         {
             return false;
         }
-        for (attrib_mod attrib_mod : mod_array) {
+        for (attrib_mod attrib_mod : mod_array)
+        {
             int attribute = attrib_mod.getAttribute();
             float decay = attrib_mod.getDecay();
-            if ((attribute != HEALTH) && (attribute != ACTION) && (attribute != MIND)) {
+            if ((attribute != HEALTH) && (attribute != ACTION) && (attribute != MIND))
+            {
             }
-            if (decay != MOD_POOL) {
+            if (decay != MOD_POOL)
+            {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean isHealStateMedicine(obj_id medicine) throws InterruptedException
     {
         return isHealStateMedicine(medicine, "");
     }
+
     public static boolean isHealStateMedicine(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
         {
             return false;
         }
-        if (hasObjVar(medicine, prefix + VAR_HEALING_STATE))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(medicine, prefix + VAR_HEALING_STATE);
     }
+
     public static boolean isBuffMedicine(obj_id medicine) throws InterruptedException
     {
         return isBuffMedicine(medicine, "");
     }
+
     public static boolean isBuffMedicine(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3186,44 +3343,35 @@ public class healing extends script.base_script
         {
             return false;
         }
-        for (attrib_mod attrib_mod : mod_array) {
+        for (attrib_mod attrib_mod : mod_array)
+        {
             float duration = attrib_mod.getDuration();
-            if (duration < 1.0f) {
+            if (duration < 1.0f)
+            {
                 return false;
             }
         }
         return true;
     }
+
     public static boolean isCureDotMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
         {
             return false;
         }
-        if (hasObjVar(medicine, VAR_HEALING_CURE_DOT))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(medicine, VAR_HEALING_CURE_DOT);
     }
+
     public static boolean isApplyDotMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
         {
             return false;
         }
-        if (hasObjVar(medicine, VAR_HEALING_APPLY_DOT))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(medicine, VAR_HEALING_APPLY_DOT);
     }
+
     public static boolean isCurePoisonMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3233,20 +3381,14 @@ public class healing extends script.base_script
         if (hasObjVar(medicine, VAR_HEALING_CURE_DOT))
         {
             String type = getStringObjVar(medicine, VAR_HEALING_CURE_DOT);
-            if (type.equals(dot.DOT_POISON))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return type.equals(dot.DOT_POISON);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isCureFireMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3256,20 +3398,14 @@ public class healing extends script.base_script
         if (hasObjVar(medicine, VAR_HEALING_CURE_DOT))
         {
             String type = getStringObjVar(medicine, VAR_HEALING_CURE_DOT);
-            if (type.equals(dot.DOT_FIRE))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return type.equals(dot.DOT_FIRE);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isCureDiseaseMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3279,20 +3415,14 @@ public class healing extends script.base_script
         if (hasObjVar(medicine, VAR_HEALING_CURE_DOT))
         {
             String type = getStringObjVar(medicine, VAR_HEALING_CURE_DOT);
-            if (type.equals(dot.DOT_DISEASE))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return type.equals(dot.DOT_DISEASE);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isApplyPoisonMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3302,20 +3432,14 @@ public class healing extends script.base_script
         if (hasObjVar(medicine, VAR_HEALING_APPLY_DOT))
         {
             String type = getStringObjVar(medicine, VAR_HEALING_APPLY_DOT);
-            if (type.equals(dot.DOT_POISON))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return type.equals(dot.DOT_POISON);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isApplyDiseaseMedicine(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3325,20 +3449,14 @@ public class healing extends script.base_script
         if (hasObjVar(medicine, VAR_HEALING_APPLY_DOT))
         {
             String type = getStringObjVar(medicine, VAR_HEALING_APPLY_DOT);
-            if (type.equals(dot.DOT_DISEASE))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return type.equals(dot.DOT_DISEASE);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static int getHealingRange(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3349,11 +3467,12 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_RANGE);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static int getHealingArea(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3364,15 +3483,17 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_AREA);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static String getHealingState(obj_id medicine) throws InterruptedException
     {
         return getHealingState(medicine, "");
     }
+
     public static String getHealingState(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3383,15 +3504,17 @@ public class healing extends script.base_script
         {
             return getStringObjVar(medicine, prefix + VAR_HEALING_STATE);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getCureDot(obj_id medicine) throws InterruptedException
     {
         return getCureDot(medicine, "");
     }
+
     public static String getCureDot(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3402,15 +3525,17 @@ public class healing extends script.base_script
         {
             return getStringObjVar(medicine, prefix + VAR_HEALING_CURE_DOT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getApplyDot(obj_id medicine) throws InterruptedException
     {
         return getApplyDot(medicine, "");
     }
+
     public static String getApplyDot(obj_id medicine, String prefix) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3421,11 +3546,12 @@ public class healing extends script.base_script
         {
             return getStringObjVar(medicine, prefix + VAR_HEALING_APPLY_DOT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getDotPower(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3436,11 +3562,12 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_DOT_POWER);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getDotPotency(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3451,11 +3578,12 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_DOT_POTENCY);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static String getDotId(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3466,11 +3594,12 @@ public class healing extends script.base_script
         {
             return getStringObjVar(medicine, VAR_HEALING_DOT_ID);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getDotAttribute(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3481,11 +3610,12 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_DOT_ATTRIBUTE);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getDotDuration(obj_id medicine) throws InterruptedException
     {
         if (!isIdValid(medicine))
@@ -3496,18 +3626,20 @@ public class healing extends script.base_script
         {
             return getIntObjVar(medicine, VAR_HEALING_DOT_DURATION);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static float getHealingMultiplier(obj_id player, obj_id item, String type) throws InterruptedException
     {
         float healing_skill = 0.0f;
         boolean medical_type = false;
         boolean entertainer_type = false;
         float random_factor = rand(50, 150);
-        switch (type) {
+        switch (type)
+        {
             case HEAL_TYPE_MEDICAL_DAMAGE:
             case HEAL_TYPE_MEDICAL_QUICK_HEAL:
             case HEAL_TYPE_MEDICAL_TEND_DAMAGE:
@@ -3560,7 +3692,7 @@ public class healing extends script.base_script
         {
             multiplier = (1 + healing_skill / 100) * (random_factor / 100) * medicalDroidModifier;
         }
-        else 
+        else
         {
             multiplier = (1 + healing_skill / 100) * (random_factor / 100);
         }
@@ -3582,6 +3714,7 @@ public class healing extends script.base_script
         }
         return multiplier;
     }
+
     public static float getHealingMultiplier(obj_id player, obj_id item) throws InterruptedException
     {
         if (isHealDamageMedicine(item))
@@ -3592,11 +3725,12 @@ public class healing extends script.base_script
         {
             return getHealingMultiplier(player, item, HEAL_TYPE_MEDICAL_BUFF);
         }
-        else 
+        else
         {
             return getHealingMultiplier(player, item, HEAL_TYPE_MEDICAL_WOUND);
         }
     }
+
     public static boolean hasEnhancement(obj_id player, int attribute) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3604,15 +3738,9 @@ public class healing extends script.base_script
             return true;
         }
         String buff_name = "medical_enhance_" + (attributeToString(attribute)).toLowerCase();
-        if (hasAttribModifier(player, buff_name) || hasSkillModModifier(player, buff_name))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasAttribModifier(player, buff_name) || hasSkillModModifier(player, buff_name);
     }
+
     public static int getHealEnhanceValue(obj_id player, int attribute) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3621,10 +3749,12 @@ public class healing extends script.base_script
         }
         String buff_name = "medical_enhance_" + (attributeToString(attribute)).toLowerCase();
         attrib_mod[] all_am = getAttribModifiers(player, attribute);
-        if (all_am != null && all_am.length > 0)
+        if (all_am != null)
         {
-            for (attrib_mod attrib_mod : all_am) {
-                if ((attrib_mod.getName()).equals(buff_name)) {
+            for (attrib_mod attrib_mod : all_am)
+            {
+                if ((attrib_mod.getName()).equals(buff_name))
+                {
                     return attrib_mod.getValue();
                 }
             }
@@ -3635,6 +3765,7 @@ public class healing extends script.base_script
         }
         return 0;
     }
+
     public static float applyShockWoundModifier(float multiplier, obj_id player) throws InterruptedException
     {
         float shock = getShockWound(player);
@@ -3642,7 +3773,7 @@ public class healing extends script.base_script
         {
             return multiplier;
         }
-        else 
+        else
         {
             float shock_mult = (1250.0f - shock) / 1000.0f;
             if (shock_mult > 1.0f)
@@ -3661,23 +3792,31 @@ public class healing extends script.base_script
             return multiplier;
         }
     }
+
     public static attrib_mod[] modifyMedicineAttributes(attrib_mod[] am, float multiplier) throws InterruptedException
     {
         Vector am_new = new Vector();
         am_new.setSize(0);
-        for (attrib_mod attrib_mod : am) {
+        for (attrib_mod attrib_mod : am)
+        {
             attrib_mod tmp;
             int mod_value;
-            if (attrib_mod.getAttack() == AM_HEAL_WOUND) {
+            if (attrib_mod.getAttack() == AM_HEAL_WOUND)
+            {
                 mod_value = (int) (attrib_mod.getValue() * multiplier);
                 tmp = utils.createHealWoundAttribMod(attrib_mod.getAttribute(), mod_value);
                 am_new = utils.addElement(am_new, tmp);
-            } else {
-                if (attrib_mod.getDecay() == MOD_POOL) {
+            }
+            else
+            {
+                if (attrib_mod.getDecay() == MOD_POOL)
+                {
                     mod_value = (int) (attrib_mod.getValue() * multiplier);
                     tmp = utils.createHealDamageAttribMod(attrib_mod.getAttribute(), mod_value);
                     am_new = utils.addElement(am_new, tmp);
-                } else {
+                }
+                else
+                {
                     mod_value = (int) (attrib_mod.getValue() * multiplier);
                     tmp = new attrib_mod(attrib_mod.getAttribute(), mod_value, attrib_mod.getDuration(), VAR_BUFF_MOD_ATTACK, VAR_BUFF_MOD_DECAY);
                     am_new = utils.addElement(am_new, tmp);
@@ -3692,6 +3831,7 @@ public class healing extends script.base_script
         }
         return _am_new;
     }
+
     public static boolean canHealDamage(obj_id player, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3716,7 +3856,7 @@ public class healing extends script.base_script
                     prose.setTO(ppNoTime, time_str);
                     sendMedicalSpam(player, ppNoTime, COMBAT_RESULT_MEDICAL);
                 }
-                else 
+                else
                 {
                     sendMedicalSpam(player, SID_YOU_MUST_WAIT, COMBAT_RESULT_MEDICAL);
                 }
@@ -3734,10 +3874,12 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean canHealDamage(obj_id player) throws InterruptedException
     {
         return canHealDamage(player, true);
     }
+
     public static boolean canHealWound(obj_id player, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3760,7 +3902,7 @@ public class healing extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             obj_id camp = camping.getCurrentCamp(player);
             if (!isIdValid(camp))
@@ -3793,7 +3935,7 @@ public class healing extends script.base_script
                     prose.setTO(ppNoTime, time_str);
                     sendMedicalSpam(player, ppNoTime, COMBAT_RESULT_MEDICAL);
                 }
-                else 
+                else
                 {
                     sendMedicalSpam(player, SID_MUST_WAIT_TO_HEAL_OR_ENHANCE, COMBAT_RESULT_MEDICAL);
                 }
@@ -3811,10 +3953,12 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean canHealWound(obj_id player) throws InterruptedException
     {
         return canHealWound(player, true);
     }
+
     public static boolean canPayHealingCost(obj_id player, String heal_type, float modifier) throws InterruptedException
     {
         if (!isIdValid(player) || heal_type == null || heal_type.equals(""))
@@ -3827,7 +3971,8 @@ public class healing extends script.base_script
         }
         int mind = getAttrib(player, MIND);
         int cost = 0;
-        switch (heal_type) {
+        switch (heal_type)
+        {
             case HEAL_TYPE_MEDICAL_DAMAGE:
                 cost = VAR_HEALDAMAGE_COST;
                 break;
@@ -3876,16 +4021,10 @@ public class healing extends script.base_script
             default:
                 return false;
         }
-        cost = (int)(cost * modifier);
-        if (mind < cost)
-        {
-            return false;
-        }
-        else 
-        {
-            return true;
-        }
+        cost = (int) (cost * modifier);
+        return mind >= cost;
     }
+
     public static float setCanHealDamage(obj_id player, int roundtime) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3901,12 +4040,13 @@ public class healing extends script.base_script
         {
             setObjVar(player, VAR_HEALING_CAN_HEALDAMAGE, 0);
         }
-        else 
+        else
         {
-            setObjVar(player, VAR_HEALING_CAN_HEALDAMAGE, getGameTime() + (int)newroundtime);
+            setObjVar(player, VAR_HEALING_CAN_HEALDAMAGE, getGameTime() + (int) newroundtime);
         }
         return newroundtime;
     }
+
     public static boolean setCanHealWound(obj_id player, int roundtime) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -3921,12 +4061,13 @@ public class healing extends script.base_script
         {
             setObjVar(player, VAR_HEALING_CAN_HEALWOUND, 0);
         }
-        else 
+        else
         {
             setObjVar(player, VAR_HEALING_CAN_HEALWOUND, getGameTime() + roundtime);
         }
         return true;
     }
+
     public static obj_id findHealDamageMedicine(obj_id player, obj_id target) throws InterruptedException
     {
         obj_id med_obj = null;
@@ -3983,7 +4124,7 @@ public class healing extends script.base_script
                                     {
                                         med_obj = inv_contents[i];
                                     }
-                                    else 
+                                    else
                                     {
                                         utils.setScriptVar(player, SCRIPT_VAR_DAMAGE_MED, inv_contents[i]);
                                         utils.removeScriptVar(player, "healing.prefix");
@@ -3993,13 +4134,13 @@ public class healing extends script.base_script
                                         }
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     if (!isRangedMedicine(inv_contents[i], prefix, set_prefix))
                                     {
                                         med_obj = inv_contents[i];
                                     }
-                                    else 
+                                    else
                                     {
                                         utils.setScriptVar(player, SCRIPT_VAR_RANGED_MED, inv_contents[i]);
                                         utils.removeScriptVar(player, "healing.prefix");
@@ -4021,7 +4162,7 @@ public class healing extends script.base_script
             {
                 med_obj = utils.getObjIdScriptVar(player, SCRIPT_VAR_RANGED_MED);
             }
-            else 
+            else
             {
                 if (utils.hasScriptVar(player, SCRIPT_VAR_DAMAGE_MED))
                 {
@@ -4042,10 +4183,12 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static obj_id findHealDamageMedicine(obj_id player) throws InterruptedException
     {
         return findHealDamageMedicine(player, null);
     }
+
     public static obj_id findHealWoundMedicine(obj_id player, int wound_type) throws InterruptedException
     {
         obj_id med_obj = null;
@@ -4093,11 +4236,14 @@ public class healing extends script.base_script
                             attrib_mod[] mod_array = getAttribModArrayObjVar(inv_contents[i], prefix + consumable.VAR_CONSUMABLE_MODS);
                             if (mod_array != null)
                             {
-                                for (attrib_mod attrib_mod : mod_array) {
+                                for (attrib_mod attrib_mod : mod_array)
+                                {
                                     int attribute = attrib_mod.getAttribute();
                                     float attack = attrib_mod.getAttack();
-                                    if ((attribute == wound_type) && (attack == AM_HEAL_WOUND)) {
+                                    if ((attribute == wound_type) && (attack == AM_HEAL_WOUND))
+                                    {
                                         med_obj = inv_contents[i];
+                                        break;
                                     }
                                 }
                             }
@@ -4115,6 +4261,7 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static obj_id findHealStateMedicine(obj_id player, int state_type) throws InterruptedException
     {
         obj_id med_obj = null;
@@ -4176,6 +4323,7 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static obj_id findBuffMedicine(obj_id player, int buff_type) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -4225,10 +4373,13 @@ public class healing extends script.base_script
                         attrib_mod[] mod_array = getAttribModArrayObjVar(inv_contents[i], prefix + consumable.VAR_CONSUMABLE_MODS);
                         if (mod_array != null)
                         {
-                            for (attrib_mod attrib_mod : mod_array) {
+                            for (attrib_mod attrib_mod : mod_array)
+                            {
                                 int attribute = attrib_mod.getAttribute();
-                                if (attribute == buff_type) {
+                                if (attribute == buff_type)
+                                {
                                     med_obj = inv_contents[i];
+                                    break;
                                 }
                             }
                         }
@@ -4245,6 +4396,7 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static obj_id findCureDotMedicine(obj_id player, String dot_type) throws InterruptedException
     {
         obj_id med_obj = null;
@@ -4302,6 +4454,7 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static obj_id findApplyDotMedicine(obj_id player, String dot_type) throws InterruptedException
     {
         obj_id med_obj = null;
@@ -4359,22 +4512,27 @@ public class healing extends script.base_script
         }
         return med_obj;
     }
+
     public static boolean hasCombatState(obj_id player, int state_type) throws InterruptedException
     {
         return false;
     }
+
     public static int findLargestWoundHeal(obj_id patient, obj_id doctor) throws InterruptedException
     {
         return -1;
     }
+
     public static int findLargestTendWound(obj_id patient) throws InterruptedException
     {
         return -1;
     }
+
     public static int findWorstState(obj_id patient, obj_id doctor) throws InterruptedException
     {
         return -1;
     }
+
     public static int stringToAttribute(String attribute_str) throws InterruptedException
     {
         int attribute_int = -1;
@@ -4412,25 +4570,27 @@ public class healing extends script.base_script
         }
         return attribute_int;
     }
+
     public static String attributeToString(int attribute_int) throws InterruptedException
     {
         if ((attribute_int < 0) || (attribute_int >= NUM_ATTRIBUTES + 2))
         {
             return null;
         }
-        String[] names = 
-        {
-            "HEALTH",
-            "CONSTITUTION",
-            "ACTION",
-            "STAMINA",
-            "MIND",
-            "WILLPOWER",
-            "POISON",
-            "DISEASE"
-        };
+        String[] names =
+                {
+                        "HEALTH",
+                        "CONSTITUTION",
+                        "ACTION",
+                        "STAMINA",
+                        "MIND",
+                        "WILLPOWER",
+                        "POISON",
+                        "DISEASE"
+                };
         return names[attribute_int];
     }
+
     public static int stringToState(String state_str) throws InterruptedException
     {
         state_str = state_str.toUpperCase();
@@ -4453,21 +4613,23 @@ public class healing extends script.base_script
         }
         return state_int;
     }
+
     public static String stateTypeToString(int state_type) throws InterruptedException
     {
         if ((state_type < 12) || (state_type > 15))
         {
             return null;
         }
-        String[] names = 
-        {
-            "STUNNED",
-            "BLINDED",
-            "DIZZY",
-            "INTIMIDATED"
-        };
+        String[] names =
+                {
+                        "STUNNED",
+                        "BLINDED",
+                        "DIZZY",
+                        "INTIMIDATED"
+                };
         return names[state_type - 12];
     }
+
     public static boolean performMedicalHealDamage(obj_id medic, obj_id target, obj_id med_obj, boolean pay_cost) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -4502,14 +4664,14 @@ public class healing extends script.base_script
             }
             int health_after = getAttrib(target, HEALTH);
             int health_delta = health_after - health_before;
-            int[] attribs = 
-            {
-                HEALTH
-            };
-            int[] delta = 
-            {
-                health_delta
-            };
+            int[] attribs =
+                    {
+                            HEALTH
+                    };
+            int[] delta =
+                    {
+                            health_delta
+                    };
             String[] heal_message = assembleHealingMessage(attribs, delta, medic, target, med_obj);
             if (heal_message != null)
             {
@@ -4532,10 +4694,12 @@ public class healing extends script.base_script
         }
         return false;
     }
+
     public static boolean performMedicalHealDamage(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return performMedicalHealDamage(medic, target, med_obj, true);
     }
+
     public static obj_id[] getHealableTargetsInArea(obj_id medic, location loc, int radius) throws InterruptedException
     {
         if (loc == null)
@@ -4545,13 +4709,19 @@ public class healing extends script.base_script
         obj_id[] objects = getCreaturesInRange(loc, radius);
         Vector healable_targets = new Vector();
         healable_targets.setSize(0);
-        for (obj_id object : objects) {
-            if (!isPlayer(object)) {
-                if (pet_lib.isCreaturePet(object)) {
+        for (obj_id object : objects)
+        {
+            if (!isPlayer(object))
+            {
+                if (pet_lib.isCreaturePet(object))
+                {
                     healable_targets = utils.addElement(healable_targets, object);
                 }
-            } else {
-                if (factions.pvpDoAllowedHelpCheck(medic, object)) {
+            }
+            else
+            {
+                if (factions.pvpDoAllowedHelpCheck(medic, object))
+                {
                     healable_targets = utils.addElement(healable_targets, object);
                 }
             }
@@ -4560,7 +4730,7 @@ public class healing extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id[] _healable_targets = new obj_id[0];
             if (healable_targets != null)
@@ -4571,6 +4741,7 @@ public class healing extends script.base_script
             return _healable_targets;
         }
     }
+
     public static obj_id[] getAttackableTargetsInArea(obj_id medic, location loc, int radius) throws InterruptedException
     {
         if (loc == null)
@@ -4580,11 +4751,16 @@ public class healing extends script.base_script
         obj_id[] objects = getCreaturesInRange(loc, radius);
         Vector attackable_targets = new Vector();
         attackable_targets.setSize(0);
-        for (obj_id object : objects) {
-            if (isMob(object)) {
-                if (factions.pvpDoAllowedAttackCheck(medic, object)) {
-                    if (!isIncapacitated(object) && !isDead(object)) {
-                        if (!pet_lib.isVehiclePet(object) && !ai_lib.isAndroid(object) && ai_lib.aiGetNiche(object) != NICHE_DROID && ai_lib.aiGetNiche(object) != NICHE_VEHICLE && !vehicle.isDriveableVehicle(object)) {
+        for (obj_id object : objects)
+        {
+            if (isMob(object))
+            {
+                if (factions.pvpDoAllowedAttackCheck(medic, object))
+                {
+                    if (!isIncapacitated(object) && !isDead(object))
+                    {
+                        if (!pet_lib.isVehiclePet(object) && !ai_lib.isAndroid(object) && ai_lib.aiGetNiche(object) != NICHE_DROID && ai_lib.aiGetNiche(object) != NICHE_VEHICLE && !vehicle.isDriveableVehicle(object))
+                        {
                             attackable_targets = utils.addElement(attackable_targets, object);
                         }
                     }
@@ -4595,7 +4771,7 @@ public class healing extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id[] _attackable_targets = new obj_id[0];
             if (attackable_targets != null)
@@ -4606,6 +4782,7 @@ public class healing extends script.base_script
             return _attackable_targets;
         }
     }
+
     public static boolean applyHealingCost(obj_id player, String heal_type, float modifier) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -4618,7 +4795,8 @@ public class healing extends script.base_script
         }
         int mind = getAttrib(player, MIND);
         int cost = 0;
-        switch (heal_type) {
+        switch (heal_type)
+        {
             case HEAL_TYPE_MEDICAL_DAMAGE:
                 cost = VAR_HEALDAMAGE_COST;
                 break;
@@ -4667,17 +4845,19 @@ public class healing extends script.base_script
             default:
                 return false;
         }
-        cost = (int)(cost * modifier);
+        cost = (int) (cost * modifier);
         if (mind < cost)
         {
             return false;
         }
         return drainAttributes(player, 0, cost);
     }
+
     public static boolean performHealState(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         return false;
     }
+
     public static boolean performHealEnhance(obj_id medic, obj_id target, obj_id med_obj) throws InterruptedException
     {
         if (medic == null || medic == obj_id.NULL_ID)
@@ -4701,10 +4881,10 @@ public class healing extends script.base_script
         if (consumable.consumeItem(medic, target, med_obj))
         {
             applyHealingCost(medic, HEAL_TYPE_MEDICAL_BUFF, 1.0f);
-            int[] attribute = 
-            {
-                HEALTH
-            };
+            int[] attribute =
+                    {
+                            HEALTH
+                    };
             int duration = 0;
             String attribute_string = "";
             String objvar_name = "";
@@ -4766,7 +4946,7 @@ public class healing extends script.base_script
                         LOG("LOG_CHANNEL", medic + " ->You enhance " + getFirstName(target) + "'s " + attribute_string + " by " + net_buff_amount + ".");
                         LOG("LOG_CHANNEL", target + " ->" + getFirstName(medic) + " enhances your " + attribute_string + " by " + net_buff_amount + ".");
                     }
-                    else 
+                    else
                     {
                         prose_package ppReapplyTarget = prose.getPackage(SID_REAPPLY_ENHANCEMENT_TARGET);
                         prose.setTT(ppReapplyTarget, target);
@@ -4781,7 +4961,7 @@ public class healing extends script.base_script
                     }
                     pvpHelpPerformed(medic, target);
                 }
-                else 
+                else
                 {
                     prose_package ppReapplySelf = prose.getPackage(SID_REAPPLY_ENHANCEMENT_SELF);
                     prose.setTO(ppReapplySelf, attribute_string_id);
@@ -4801,6 +4981,7 @@ public class healing extends script.base_script
         }
         return false;
     }
+
     public static boolean addHealingBuffIcon(obj_id target, int attribute, float duration) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -4810,28 +4991,29 @@ public class healing extends script.base_script
         switch (attribute)
         {
             case HEALTH:
-            addBuffIcon(target, "medical_enhance_health", duration);
-            break;
+                addBuffIcon(target, "medical_enhance_health", duration);
+                break;
             case CONSTITUTION:
-            addBuffIcon(target, "medical_enhance_constitution", duration);
-            break;
+                addBuffIcon(target, "medical_enhance_constitution", duration);
+                break;
             case ACTION:
-            addBuffIcon(target, "medical_enhance_action", duration);
-            break;
+                addBuffIcon(target, "medical_enhance_action", duration);
+                break;
             case STAMINA:
-            addBuffIcon(target, "medical_enhance_stamina", duration);
-            break;
+                addBuffIcon(target, "medical_enhance_stamina", duration);
+                break;
             case MIND:
-            addBuffIcon(target, "performance_enhance_dance_mind", duration);
-            break;
+                addBuffIcon(target, "performance_enhance_dance_mind", duration);
+                break;
             case WILLPOWER:
-            addBuffIcon(target, "performance_enhance_music_willpower", duration);
-            break;
+                addBuffIcon(target, "performance_enhance_music_willpower", duration);
+                break;
             default:
-            return false;
+                return false;
         }
         return true;
     }
+
     public static obj_id findPetDamageMed(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -4844,14 +5026,18 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        if (inv_contents == null || inv_contents.length == 0)
+        if (inv_contents == null)
         {
             return null;
         }
-        for (obj_id inv_content : inv_contents) {
-            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_MODS)) {
-                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_PET_MED)) {
-                    if (healing.isHealDamageMedicine(inv_content)) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_MODS))
+            {
+                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_PET_MED))
+                {
+                    if (healing.isHealDamageMedicine(inv_content))
+                    {
                         return inv_content;
                     }
                 }
@@ -4859,6 +5045,7 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static obj_id findPetVitalityMed(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -4871,14 +5058,18 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        if (inv_contents == null || inv_contents.length == 0)
+        if (inv_contents == null)
         {
             return null;
         }
-        for (obj_id inv_content : inv_contents) {
-            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_BASE)) {
-                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_PET_MED)) {
-                    if (hasObjVar(inv_content, "consumable.strength")) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_BASE))
+            {
+                if (hasObjVar(inv_content, consumable.VAR_CONSUMABLE_PET_MED))
+                {
+                    if (hasObjVar(inv_content, "consumable.strength"))
+                    {
                         return inv_content;
                     }
                 }
@@ -4886,6 +5077,7 @@ public class healing extends script.base_script
         }
         return null;
     }
+
     public static boolean performTendWoundsFromTool(obj_id medic, obj_id target, int attribute, obj_id medikit) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -4914,7 +5106,7 @@ public class healing extends script.base_script
             {
                 sendMedicalSpam(medic, SID_NO_WOUNDS_OF_TYPE_SELF, COMBAT_RESULT_MEDICAL);
             }
-            else 
+            else
             {
                 prose_package ppNoWounds = prose.getPackage(SID_NO_WOUNDS_OF_TYPE_TARGET);
                 prose.setTT(ppNoWounds, target);
@@ -4926,11 +5118,11 @@ public class healing extends script.base_script
         if (hasObjVar(medikit, "medikit.quality"))
         {
             int medikitQuality = getIntObjVar(medikit, "medikit.quality");
-            int medikitQualModScratch = (int)(((100 - medikitQuality) / 2) + 50.5);
+            int medikitQualModScratch = (int) (((100 - medikitQuality) / 2) + 50.5);
             float medikitQualMod = (medikitQualModScratch) / 100.0f;
             healingCostMod = medikitQualMod;
         }
-        else 
+        else
         {
             healingCostMod = 0.9f;
         }
@@ -4947,7 +5139,7 @@ public class healing extends script.base_script
         }
         int attrib_before = getWoundedMaxAttrib(target, HEALTH);
         float mult = getHealingMultiplier(medic, null, HEAL_TYPE_MEDICAL_TEND_WOUND);
-        int heal_power = (int)(VAR_TEND_WOUND_BASE_POWER * mult);
+        int heal_power = (int) (VAR_TEND_WOUND_BASE_POWER * mult);
         int attrib_after = getWoundedMaxAttrib(target, HEALTH);
         int attrib_delta = attrib_after - attrib_before;
         String attribute_string = (attributeToString(HEALTH)).toLowerCase();
@@ -4968,7 +5160,7 @@ public class healing extends script.base_script
             grantHealingExperience(attrib_delta, medic, target, HEAL_TYPE_MEDICAL_TEND_WOUND);
             pvpHelpPerformed(medic, target);
         }
-        else 
+        else
         {
             prose_package ppHealAttribSelf = prose.getPackage(SID_HEAL_ATTRIB_SELF);
             prose.setTO(ppHealAttribSelf, attribute_string_id);
@@ -4978,6 +5170,7 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean performQuickHealTool(obj_id medic, obj_id target, boolean tend_damage, obj_id medikit) throws InterruptedException
     {
         if (!isIdValid(medic))
@@ -5000,11 +5193,11 @@ public class healing extends script.base_script
         if (hasObjVar(medikit, "medikit.quality"))
         {
             int medikitQuality = getIntObjVar(medikit, "medikit.quality");
-            int medikitQualModScratch = (int)(((100 - medikitQuality) / 2) + 50.5);
+            int medikitQualModScratch = (int) (((100 - medikitQuality) / 2) + 50.5);
             float medikitQualMod = (medikitQualModScratch) / 100.0f;
             healingCostMod = medikitQualMod;
         }
-        else 
+        else
         {
             healingCostMod = 0.9f;
         }
@@ -5022,7 +5215,7 @@ public class healing extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!applyHealingCost(medic, HEAL_TYPE_MEDICAL_QUICK_HEAL, healingCostMod))
             {
@@ -5033,7 +5226,7 @@ public class healing extends script.base_script
         if (tend_damage)
         {
         }
-        else 
+        else
         {
         }
         int health_before = getAttrib(target, HEALTH);
@@ -5042,31 +5235,31 @@ public class healing extends script.base_script
         {
             mult = getHealingMultiplier(medic, null, HEAL_TYPE_MEDICAL_TEND_DAMAGE);
         }
-        else 
+        else
         {
             mult = getHealingMultiplier(medic, null, HEAL_TYPE_MEDICAL_QUICK_HEAL);
         }
         int heal_power;
         if (tend_damage)
         {
-            heal_power = (int)(VAR_TEND_DAMAGE_BASE_POWER * mult);
+            heal_power = (int) (VAR_TEND_DAMAGE_BASE_POWER * mult);
         }
-        else 
+        else
         {
-            heal_power = (int)(VAR_QUICK_HEAL_BASE_POWER * mult);
+            heal_power = (int) (VAR_QUICK_HEAL_BASE_POWER * mult);
         }
         attrib_mod am = utils.createHealDamageAttribMod(HEALTH, heal_power);
         utils.addAttribMod(target, am);
         int health_after = getAttrib(target, HEALTH);
         int health_delta = health_after - health_before;
-        int[] attribs = 
-        {
-            HEALTH
-        };
-        int[] delta = 
-        {
-            health_delta
-        };
+        int[] attribs =
+                {
+                        HEALTH
+                };
+        int[] delta =
+                {
+                        health_delta
+                };
         String[] heal_message = assembleHealingMessage(attribs, delta, medic, target, null);
         if (heal_message != null)
         {
@@ -5082,7 +5275,7 @@ public class healing extends script.base_script
             {
                 grantHealingExperience(delta, medic, target, HEAL_TYPE_MEDICAL_TEND_DAMAGE);
             }
-            else 
+            else
             {
                 grantHealingExperience(delta, medic, target, HEAL_TYPE_MEDICAL_QUICK_HEAL);
             }
@@ -5092,6 +5285,7 @@ public class healing extends script.base_script
         }
         return true;
     }
+
     public static boolean isAdvancedTool(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -5103,12 +5297,9 @@ public class healing extends script.base_script
         {
             return false;
         }
-        if (fullPath.contains("medikit_tool_advanced"))
-        {
-            return true;
-        }
-        return false;
+        return fullPath.contains("medikit_tool_advanced");
     }
+
     public static boolean hasCertification(obj_id objPlayer, obj_id objMedikit) throws InterruptedException
     {
         if (isAdvancedTool(objMedikit))
@@ -5116,39 +5307,31 @@ public class healing extends script.base_script
             if (hasObjVar(objMedikit, "medikit.strCertUsed"))
             {
                 String strCommand = getStringObjVar(objMedikit, "medikit.strCertUsed");
-                if (!hasCommand(objPlayer, strCommand))
-                {
-                    return false;
-                }
+                return hasCommand(objPlayer, strCommand);
             }
-            else 
+            else
             {
                 string_id strName = getNameStringId(objMedikit);
                 if (strName != null)
                 {
                     String strAscii = strName.getAsciiId();
                     String strCert = "cert_" + strAscii;
-                    if (!hasCommand(objPlayer, strCert))
-                    {
-                        return false;
-                    }
+                    return hasCommand(objPlayer, strCert);
                 }
             }
         }
         return true;
     }
+
     public static boolean isMedikit(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
         {
             return false;
         }
-        if (hasObjVar(object, "medikit.isMedikit"))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(object, "medikit.isMedikit");
     }
+
     public static obj_id findMedikit(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -5161,37 +5344,38 @@ public class healing extends script.base_script
             return null;
         }
         obj_id[] inv_contents = utils.getContents(inventory, false);
-        if (inv_contents == null || inv_contents.length == 0)
+        if (inv_contents == null)
         {
             return null;
         }
-        for (obj_id inv_content : inv_contents) {
-            if (isMedikit(inv_content)) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (isMedikit(inv_content))
+            {
                 return inv_content;
             }
         }
         return null;
     }
+
     public static void doHealingAnimationAndEffect(obj_id user, obj_id target) throws InterruptedException
     {
         if (user == target)
         {
             doAnimationAction(user, "heal_self");
         }
-        else 
+        else
         {
             doAnimationAction(user, "heal_other");
         }
         playClientEffectObj(user, "appearance/pt_heal.prt", target, "");
     }
+
     public static boolean isValidHealTarget(obj_id target) throws InterruptedException
     {
-        if (!isIdValid(target) || !exists(target) || isInvulnerable(target) || ai_lib.isDroid(target) || ai_lib.isAndroid(target) || pet_lib.getPetType(target) == pet_lib.PET_TYPE_FAMILIAR)
-        {
-            return false;
-        }
-        return true;
+        return isIdValid(target) && exists(target) && !isInvulnerable(target) && !ai_lib.isDroid(target) && !ai_lib.isAndroid(target) && pet_lib.getPetType(target) != pet_lib.PET_TYPE_FAMILIAR;
     }
+
     public static boolean isValidHealTarget(obj_id healer, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target) || isInvulnerable(target) || pet_lib.getPetType(target) == pet_lib.PET_TYPE_FAMILIAR)
@@ -5202,16 +5386,14 @@ public class healing extends script.base_script
         {
             return true;
         }
-        if (ai_lib.isDroid(target) || ai_lib.isAndroid(target))
-        {
-            return false;
-        }
-        return true;
+        return !ai_lib.isDroid(target) && !ai_lib.isAndroid(target);
     }
+
     public static void applyLifeSiphonHeal(obj_id attacker, obj_id defender, int damage, float percentToHeal, String actionName) throws InterruptedException
     {
         applyLifeSiphonHeal(attacker, defender, damage, percentToHeal, actionName, false);
     }
+
     public static void applyLifeSiphonHeal(obj_id attacker, obj_id defender, int damage, float percentToHeal, String actionName, boolean healMaster) throws InterruptedException
     {
         if (percentToHeal > 0)
@@ -5272,6 +5454,7 @@ public class healing extends script.base_script
             }
         }
     }
+
     public static int doDiminishingReturns(int toHeal, obj_id medic) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -5306,7 +5489,7 @@ public class healing extends script.base_script
         healTotalFloat -= reductionThreshold;
         diminishedAmount = healTotalFloat / (100.0f + (healTotalFloat / 45.0f)) / 100.0f;
         toHealFloat = toHealFloat * (1.0f - diminishedAmount);
-        toHeal = (int)toHealFloat;
+        toHeal = (int) toHealFloat;
         utils.setScriptVar(medic, "healing.diminishing_returns.last_heal_time", rightNow);
         utils.setScriptVar(medic, "healing.diminishing_returns.heal_total", toHeal + healTotal);
         float healNerfRatio = toHealFloat / originalHeal;
@@ -5318,7 +5501,7 @@ public class healing extends script.base_script
         {
             buff.applyBuff(medic, "heal_diminishing_returns_3");
         }
-        else 
+        else
         {
             buff.applyBuff(medic, "heal_diminishing_returns_4");
         }

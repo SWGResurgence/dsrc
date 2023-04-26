@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class pgc_quests extends script.base_script
 {
-    public pgc_quests()
-    {
-    }
     public static final int CHRONICLE_HOLOCRON_VERSION = 0;
     public static final int CHRONICLE_CREATION_XP_BASE = 99;
     public static final int CHRONICLE_SHARED_XP_BASE = 4;
@@ -50,22 +47,22 @@ public class pgc_quests extends script.base_script
     public static final String SAGA_GOTO_LOCATION = "saga_relic_goto_location";
     public static final String SAGA_RETRIEVE_ITEM = "saga_relic_retrieve_item";
     public static final String SAGA_PVP_OBJECTIVE = "saga_relic_pvp_objective";
-    public static final String[] CREDIT_FOR_KILL_TASKS = 
-    {
-        SAGA_DESTROY_MULTIPLE,
-        SAGA_DESTROY_MULTIPLE_LOOT
-    };
-    public static final String[] ALL_PGC_COLLECTION_TASK_NAMES = 
-    {
-        SAGA_DESTROY_MULTIPLE,
-        SAGA_DESTROY_MULTIPLE_LOOT,
-        SAGA_PERFORM,
-        SAGA_CRAFT_ITEM,
-        SAGA_COMM_MESSAGE,
-        SAGA_GOTO_LOCATION,
-        SAGA_RETRIEVE_ITEM,
-        SAGA_PVP_OBJECTIVE
-    };
+    public static final String[] CREDIT_FOR_KILL_TASKS =
+            {
+                    SAGA_DESTROY_MULTIPLE,
+                    SAGA_DESTROY_MULTIPLE_LOOT
+            };
+    public static final String[] ALL_PGC_COLLECTION_TASK_NAMES =
+            {
+                    SAGA_DESTROY_MULTIPLE,
+                    SAGA_DESTROY_MULTIPLE_LOOT,
+                    SAGA_PERFORM,
+                    SAGA_CRAFT_ITEM,
+                    SAGA_COMM_MESSAGE,
+                    SAGA_GOTO_LOCATION,
+                    SAGA_RETRIEVE_ITEM,
+                    SAGA_PVP_OBJECTIVE
+            };
     public static final String PGC_CASH_ITEM_TEMPLATE = "object/tangible/saga_system/pgc_loot_cash.iff";
     public static final String PGC_RELIC_SLOT_GOTO_GENERIC_LOC = "relic_goto_global_generic";
     public static final String PGC_RELIC_OBJ_GOTO_GENERIC_LOC = "saga_relic_goto_global_generic";
@@ -126,6 +123,10 @@ public class pgc_quests extends script.base_script
     public static final int PGC_NUM_QUESTS_YOU_COMPLETED_HIGH_QUALITY_INDEX = 11;
     public static final float PGC_MIN_MID_QUALITY_QUEST_WEIGHT = 15.0f;
     public static final float PGC_MIN_HIGH_QUALITY_QUEST_WEIGHT = 30.0f;
+    public pgc_quests()
+    {
+    }
+
     public static boolean activateQuestHolocron(obj_id questHolocron, obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
@@ -141,6 +142,7 @@ public class pgc_quests extends script.base_script
         }
         return false;
     }
+
     public static boolean clearQuestHolocron(obj_id questControlDevice, obj_id player) throws InterruptedException
     {
         obj_id questHolocron = getQuestHolocronFromQCD(questControlDevice);
@@ -157,41 +159,40 @@ public class pgc_quests extends script.base_script
         }
         return false;
     }
+
     public static boolean isPgcQuestObject(obj_id object) throws InterruptedException
     {
         int gameObjectType = getGameObjectType(object);
-        if (gameObjectType == GOT_chronicles_quest_holocron || gameObjectType == GOT_chronicles_quest_holocron_recipe)
-        {
-            return true;
-        }
-        return false;
+        return gameObjectType == GOT_chronicles_quest_holocron || gameObjectType == GOT_chronicles_quest_holocron_recipe;
     }
+
     public static boolean isPgcRelicObject(obj_id object) throws InterruptedException
     {
         int gameObjectType = getGameObjectType(object);
-        if (gameObjectType == GOT_chronicles_relic)
-        {
-            return true;
-        }
-        return false;
+        return gameObjectType == GOT_chronicles_relic;
     }
+
     public static boolean isSharedPlayerQuestObject(obj_id questHolocron) throws InterruptedException
     {
         return hasObjVar(questHolocron, PCG_QUEST_SHARED_HOLOCRON_OBJVAR);
     }
+
     public static obj_id getQuestHolocronFromQCD(obj_id questControlDevice) throws InterruptedException
     {
         obj_id[] questItems = getContents(questControlDevice);
-        if (questItems != null && questItems.length > 0)
+        if (questItems != null)
         {
-            for (obj_id questItem : questItems) {
-                if (isPgcQuestObject(questItem)) {
+            for (obj_id questItem : questItems)
+            {
+                if (isPgcQuestObject(questItem))
+                {
                     return questItem;
                 }
             }
         }
         return obj_id.NULL_ID;
     }
+
     public static boolean canSharePgcQuest(obj_id questHolocron) throws InterruptedException
     {
         if (isPlayerQuestRecipe(questHolocron))
@@ -202,18 +203,16 @@ public class pgc_quests extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(questHolocron, pgc_quests.PCG_QUEST_CAN_SHARE_OBJVAR))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(questHolocron, pgc_quests.PCG_QUEST_CAN_SHARE_OBJVAR);
     }
+
     public static dictionary recreateSharedTaskDictionary(obj_id questHolocron) throws InterruptedException
     {
         dictionary webster = recreateQuestTaskDictionary(questHolocron);
         webster.put("isShared", true);
         return webster;
     }
+
     public static dictionary recreateQuestTaskDictionary(obj_id questHolocron) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -240,13 +239,16 @@ public class pgc_quests extends script.base_script
                         String relicType = pgc_quests.getTaskType(questHolocron, phaseString, taskString);
                         String[] relicData = getCollectionSlotCategoryInfo(relicName);
                         String taskData = "";
-                        switch (relicType) {
-                            case pgc_quests.SAGA_DESTROY_MULTIPLE: {
+                        switch (relicType)
+                        {
+                            case pgc_quests.SAGA_DESTROY_MULTIPLE:
+                            {
                                 int count = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "count", relicData);
                                 taskData += "5~" + relicName + "~" + taskTitle + "~" + taskDescription + "~unneededDummyData~" + count;
                                 break;
                             }
-                            case pgc_quests.SAGA_DESTROY_MULTIPLE_LOOT: {
+                            case pgc_quests.SAGA_DESTROY_MULTIPLE_LOOT:
+                            {
                                 int count = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "count", relicData);
                                 String message = pgc_quests.getStringPgcTaskData(questHolocron, baseObjVar, "message", relicData);
                                 int dropRate = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "drop_rate", relicData);
@@ -256,57 +258,66 @@ public class pgc_quests extends script.base_script
                             case pgc_quests.SAGA_PERFORM:
                                 taskData += "6~" + relicName + "~" + taskTitle + "~" + taskDescription + "~unneededDummyData~unneededDummyData~unneededDummyData";
                                 break;
-                            case pgc_quests.SAGA_CRAFT_ITEM: {
+                            case pgc_quests.SAGA_CRAFT_ITEM:
+                            {
                                 int count = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "count", relicData);
                                 taskData += "5~" + relicName + "~" + taskTitle + "~" + taskDescription + "~unneededDummyData~" + count;
                                 break;
                             }
-                            case pgc_quests.SAGA_COMM_MESSAGE: {
+                            case pgc_quests.SAGA_COMM_MESSAGE:
+                            {
                                 String message = pgc_quests.getStringPgcTaskData(questHolocron, baseObjVar, "message", relicData);
                                 taskData += "5~" + relicName + "~" + taskTitle + "~" + taskDescription + "~unneededDummyData~" + message;
                                 break;
                             }
                             case pgc_quests.SAGA_GOTO_LOCATION:
                                 dictionary waypointData = getWaypointObjVarTaskData(questHolocron, baseObjVar, "waypoint");
-                                if (waypointData == null || waypointData.isEmpty()) {
+                                if (waypointData == null || waypointData.isEmpty())
+                                {
                                     waypointData = getWaypointRelicData("waypoint", relicData);
                                 }
                                 String waypointDataString = "";
-                                if (waypointData == null || waypointData.isEmpty()) {
+                                if (waypointData == null || waypointData.isEmpty())
+                                {
                                     waypointDataString += "0:0:0:tatooine:Unknown";
-                                } else {
+                                }
+                                else
+                                {
                                     location waypointLoc = waypointData.getLocation("waypointLoc");
                                     String waypointName = waypointData.getString("waypointName");
                                     waypointDataString += waypointLoc.x + ":" + waypointLoc.y + ":" + waypointLoc.z + ":" + waypointLoc.area + ":" + waypointName;
                                 }
                                 taskData += "4~" + relicName + "~" + taskTitle + "~" + taskDescription + "~" + waypointDataString;
                                 break;
-                            case pgc_quests.SAGA_RETRIEVE_ITEM: {
+                            case pgc_quests.SAGA_RETRIEVE_ITEM:
+                            {
                                 int count = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "count", relicData);
                                 taskData += "5~" + relicName + "~" + taskTitle + "~" + taskDescription + "~unneededDummyData~" + count;
                                 break;
                             }
-                            case pgc_quests.SAGA_PVP_OBJECTIVE: {
+                            case pgc_quests.SAGA_PVP_OBJECTIVE:
+                            {
                                 int count = pgc_quests.getIntPgcTaskData(questHolocron, baseObjVar, "count", relicData);
                                 taskData += "5~" + relicName + "~" + taskTitle + "~" + taskDescription + "~" + count + "~unneededDummyData";
                                 break;
                             }
                         }
-                        webster.put("" + i, taskData);
+                        webster.put(String.valueOf(i), taskData);
                     }
-                    else 
+                    else
                     {
                         break;
                     }
                 }
             }
-            else 
+            else
             {
                 break;
             }
         }
         return webster;
     }
+
     public static boolean handleChroniclesRelicCosts(obj_id player, dictionary taskDictionary) throws InterruptedException
     {
         int numTasks = taskDictionary.getInt("totalTasks");
@@ -324,25 +335,26 @@ public class pgc_quests extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             java.util.Enumeration keys = relicNames.keys();
             while (keys.hasMoreElements())
             {
-                String relicName = (String)(keys.nextElement());
+                String relicName = (String) (keys.nextElement());
                 int relicCount = relicNames.getInt(relicName);
                 modifyCollectionSlotValue(player, relicName, relicCount * (-1));
             }
         }
         return true;
     }
+
     public static boolean canCoverAllChroniclesRelicCosts(obj_id player, dictionary relicNames, int numTasks) throws InterruptedException
     {
         boolean result = true;
         java.util.Enumeration keys = relicNames.keys();
         while (keys.hasMoreElements())
         {
-            String relicName = (String)(keys.nextElement());
+            String relicName = (String) (keys.nextElement());
             int relicCount = relicNames.getInt(relicName);
             long relicSlotValue = getCollectionSlotValue(player, relicName);
             if (relicSlotValue < relicCount + 1)
@@ -352,12 +364,13 @@ public class pgc_quests extends script.base_script
         }
         return result;
     }
+
     public static dictionary getRelicCount(dictionary taskDictionary, int numTasks) throws InterruptedException
     {
         dictionary relicNames = new dictionary();
         for (int i = 0; i < numTasks; i++)
         {
-            String taskName = "" + i;
+            String taskName = String.valueOf(i);
             String taskData = taskDictionary.getString(taskName);
             String[] parse = split(taskData, '~');
             String relicName = parse[1];
@@ -370,14 +383,17 @@ public class pgc_quests extends script.base_script
         }
         return relicNames;
     }
+
     public static String getQuestName(obj_id questHolocron) throws InterruptedException
     {
         return getPlayerQuestTitle(questHolocron);
     }
+
     public static String getQuestDescription(obj_id questHolocron) throws InterruptedException
     {
         return getPlayerQuestDescription(questHolocron);
     }
+
     public static String getTaskName(obj_id questHolocron, int phaseNum, int taskNum) throws InterruptedException
     {
         String phaseString = getPhaseObjVarString(phaseNum);
@@ -385,11 +401,13 @@ public class pgc_quests extends script.base_script
         int taskIndex = getIntObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_index");
         return getPlayerQuestTaskTitle(questHolocron, taskIndex);
     }
+
     public static String getTaskName(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         int taskIndex = getIntObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_index");
         return getPlayerQuestTaskTitle(questHolocron, taskIndex);
     }
+
     public static String getTaskDescription(obj_id questHolocron, int phaseNum, int taskNum) throws InterruptedException
     {
         String phaseString = getPhaseObjVarString(phaseNum);
@@ -397,25 +415,30 @@ public class pgc_quests extends script.base_script
         int taskIndex = getIntObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_index");
         return getPlayerQuestTaskDescription(questHolocron, taskIndex);
     }
+
     public static String getTaskDescription(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         int taskIndex = getIntObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_index");
         return getPlayerQuestTaskDescription(questHolocron, taskIndex);
     }
+
     public static String getTaskType(obj_id questHolocron, int phaseNum, int taskNum) throws InterruptedException
     {
         String phaseString = getPhaseObjVarString(phaseNum);
         String taskString = getTaskObjVarString(taskNum);
         return getStringObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_type");
     }
+
     public static String getTaskType(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         return getStringObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_type");
     }
+
     public static String getRelicName(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         return getStringObjVarTaskData(questHolocron, getPgcBaseObjVar(phaseString, taskString), "task_relic");
     }
+
     public static String useFilteredQuestText(String text) throws InterruptedException
     {
         if (TEXT_FILTER_DISABLED)
@@ -424,6 +447,7 @@ public class pgc_quests extends script.base_script
         }
         return filterText(text);
     }
+
     public static int getMaxChronicleQuestTasks(obj_id player) throws InterruptedException
     {
         int maxTasksSkillmod = getEnhancedSkillStatisticModifierUncapped(player, pgc_quests.PGC_SKILLMOD_MAX_TASKS);
@@ -437,17 +461,21 @@ public class pgc_quests extends script.base_script
         }
         return maxTasksSkillmod;
     }
+
     public static boolean passedQuestHolocronProfanityCheck(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         return true;
     }
+
     public static int getTaskLevel(String[] relicData) throws InterruptedException
     {
         int level = 1;
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA))
+                {
                     String[] parse = split(relicCategory, ':');
                     level = utils.stringToInt(parse[CATERGORY_RELIC_DATA_LEVEL_INDEX]);
                 }
@@ -455,16 +483,20 @@ public class pgc_quests extends script.base_script
         }
         return level;
     }
+
     public static String getTaskGroupSetting(String[] relicData) throws InterruptedException
     {
         String groupSetting = "solo";
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA))
+                {
                     String[] parse = split(relicCategory, ':');
                     int data = utils.stringToInt(parse[CATERGORY_RELIC_DATA_GROUP_INDEX]);
-                    if (data >= 1) {
+                    if (data >= 1)
+                    {
                         groupSetting = "group";
                     }
                 }
@@ -472,16 +504,20 @@ public class pgc_quests extends script.base_script
         }
         return groupSetting;
     }
+
     public static int getTaskDifficultySetting(String[] relicData) throws InterruptedException
     {
         int difficultySetting = 0;
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA))
+                {
                     String[] parse = split(relicCategory, ':');
                     int data = utils.stringToInt(parse[CATERGORY_RELIC_DATA_GROUP_INDEX]);
-                    if (data > -1) {
+                    if (data > -1)
+                    {
                         difficultySetting = data;
                     }
                 }
@@ -489,16 +525,20 @@ public class pgc_quests extends script.base_script
         }
         return difficultySetting;
     }
+
     public static boolean getTaskKashyyykSetting(String[] relicData) throws InterruptedException
     {
         boolean requiresKashyyyk = false;
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA))
+                {
                     String[] parse = split(relicCategory, ':');
                     int data = utils.stringToInt(parse[CATERGORY_RELIC_DATA_KASHYYYK_INDEX]);
-                    if (data == 1) {
+                    if (data == 1)
+                    {
                         requiresKashyyyk = true;
                     }
                 }
@@ -506,16 +546,20 @@ public class pgc_quests extends script.base_script
         }
         return requiresKashyyyk;
     }
+
     public static boolean getTaskMustafarSetting(String[] relicData) throws InterruptedException
     {
         boolean requiresMustafar = false;
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(CATEGORY_NAME_RELIC_DATA))
+                {
                     String[] parse = split(relicCategory, ':');
                     int data = utils.stringToInt(parse[CATERGORY_RELIC_DATA_MUSTAFAR_INDEX]);
-                    if (data == 1) {
+                    if (data == 1)
+                    {
                         requiresMustafar = true;
                     }
                 }
@@ -523,10 +567,12 @@ public class pgc_quests extends script.base_script
         }
         return requiresMustafar;
     }
+
     public static obj_id getQuestPlayer(obj_id questHolocron) throws InterruptedException
     {
         return utils.getContainingPlayer(questHolocron);
     }
+
     public static int getNumActiveQuests(obj_id player) throws InterruptedException
     {
         obj_id[] activeHolocrons = getActivateQuestHolocrons(player);
@@ -536,10 +582,12 @@ public class pgc_quests extends script.base_script
         }
         return activeHolocrons.length;
     }
+
     public static boolean hasMaxActivatedQuests(obj_id player) throws InterruptedException
     {
         return getNumActiveQuests(player) >= PGC_QUEST_MAX_NUM_QUESTS;
     }
+
     public static obj_id[] getActivateQuestHolocrons(obj_id player) throws InterruptedException
     {
         Vector dynamicQuestHolocronList = new Vector();
@@ -548,14 +596,19 @@ public class pgc_quests extends script.base_script
         if (isIdValid(datapad))
         {
             obj_id[] dataItems = getContents(datapad);
-            if (dataItems != null && dataItems.length > 0)
+            if (dataItems != null)
             {
-                for (obj_id dataItem : dataItems) {
-                    if (isIdValid(dataItem) && (getTemplateName(dataItem)).equals(PGC_QUEST_CONTROL_DEVICE_TEMPLATE)) {
+                for (obj_id dataItem : dataItems)
+                {
+                    if (isIdValid(dataItem) && (getTemplateName(dataItem)).equals(PGC_QUEST_CONTROL_DEVICE_TEMPLATE))
+                    {
                         obj_id[] questObjects = getContents(dataItem);
-                        for (obj_id questObject : questObjects) {
-                            if (isIdValid(questObject)) {
-                                if (isPgcQuestObject(questObject)) {
+                        for (obj_id questObject : questObjects)
+                        {
+                            if (isIdValid(questObject))
+                            {
+                                if (isPgcQuestObject(questObject))
+                                {
                                     utils.addElement(dynamicQuestHolocronList, questObject);
                                 }
                             }
@@ -570,6 +623,7 @@ public class pgc_quests extends script.base_script
         }
         return null;
     }
+
     public static String getTaskObjVarString(int taskNum) throws InterruptedException
     {
         String taskString = "task_0" + taskNum;
@@ -579,10 +633,12 @@ public class pgc_quests extends script.base_script
         }
         return taskString;
     }
+
     public static String getPgcBaseObjVar(String phaseString, String taskString) throws InterruptedException
     {
         return phaseString + "." + taskString;
     }
+
     public static boolean phaseHasActiveTaskOfType(obj_id questHolocron, String taskType, String phaseString) throws InterruptedException
     {
         for (int i = 0; i < PGC_QUEST_MAX_NUM_TASKS_PER_PHASE; i++)
@@ -600,13 +656,14 @@ public class pgc_quests extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 break;
             }
         }
         return false;
     }
+
     public static boolean phaseHasActiveTask(obj_id questHolocron, String phaseString) throws InterruptedException
     {
         for (int i = 0; i < PGC_QUEST_MAX_NUM_TASKS_PER_PHASE; i++)
@@ -620,13 +677,14 @@ public class pgc_quests extends script.base_script
                     return true;
                 }
             }
-            else 
+            else
             {
                 break;
             }
         }
         return false;
     }
+
     public static String getActiveTaskTaskType(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         String taskType = "";
@@ -637,6 +695,7 @@ public class pgc_quests extends script.base_script
         }
         return taskType;
     }
+
     public static int incrementTaskCounter(obj_id questHolocron, String baseObjVar) throws InterruptedException
     {
         int currentCount = 1;
@@ -650,11 +709,13 @@ public class pgc_quests extends script.base_script
         setObjVar(questHolocron, currentCountObjVar, currentCount);
         return currentCount;
     }
+
     public static boolean isTaskComplete(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         String baseObjVar = getPgcBaseObjVar(phaseString, taskString);
         return hasObjVar(questHolocron, baseObjVar + ".task_complete");
     }
+
     public static int getActivePhaseNum(obj_id questHolocron) throws InterruptedException
     {
         int phaseNum = 0;
@@ -664,6 +725,7 @@ public class pgc_quests extends script.base_script
         }
         return phaseNum;
     }
+
     public static String getPhaseObjVarString(int phaseNum) throws InterruptedException
     {
         String phaseString = "phase_0" + phaseNum;
@@ -673,12 +735,14 @@ public class pgc_quests extends script.base_script
         }
         return phaseString;
     }
+
     public static String getActivePhaseObjVarString(obj_id questHolocron) throws InterruptedException
     {
         int phaseNum = getActivePhaseNum(questHolocron);
         String phaseString = getPhaseObjVarString(phaseNum);
         return phaseString;
     }
+
     public static void setTaskComplete(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         String completedTaskBaseObjVar = getPgcBaseObjVar(phaseString, taskString);
@@ -702,15 +766,15 @@ public class pgc_quests extends script.base_script
                         setPlayerQuestTaskStatus(questHolocron, activatedTaskIndex, PQ_TASK_ACTIVE);
                         handleTaskActived(questHolocron, phaseNum, i);
                     }
-                    else 
+                    else
                     {
                         break;
                     }
                 }
             }
         }
-        return;
     }
+
     public static void removePlayerQuestWaypoint(obj_id questHolocron, String baseObjVar) throws InterruptedException
     {
         String activeWaypointObjVar = baseObjVar + ".waypointActive";
@@ -725,6 +789,7 @@ public class pgc_quests extends script.base_script
             }
         }
     }
+
     public static void activatePlayerQuestWaypointFromHolocron(obj_id questHolocron, String baseObjVar) throws InterruptedException
     {
         String activeWaypointObjVar = baseObjVar + ".waypointActive";
@@ -735,6 +800,7 @@ public class pgc_quests extends script.base_script
             activatePlayerQuestWaypoint(player, waypoint);
         }
     }
+
     public static void activatePlayerQuestWaypoint(obj_id player, obj_id waypoint) throws InterruptedException
     {
         if (isIdValid(waypoint) && isIdValid(player))
@@ -749,6 +815,7 @@ public class pgc_quests extends script.base_script
             }
         }
     }
+
     public static int incrementActivePhaseNum(obj_id questHolocron) throws InterruptedException
     {
         int phaseNum = getActivePhaseNum(questHolocron) + 1;
@@ -756,13 +823,14 @@ public class pgc_quests extends script.base_script
         {
             setObjVar(questHolocron, pgc_quests.PCG_QUEST_CUR_QUEST_PHASE_OBJVAR, phaseNum);
         }
-        else 
+        else
         {
             setQuestComplete(questHolocron);
             phaseNum = -1;
         }
         return phaseNum;
     }
+
     public static void checkForPhaseComplete(obj_id questHolocron, String phaseString) throws InterruptedException
     {
         if (!phaseHasActiveTask(questHolocron, phaseString))
@@ -774,8 +842,8 @@ public class pgc_quests extends script.base_script
                 return;
             }
         }
-        return;
     }
+
     public static void handlePhaseActived(obj_id questHolocron, int phaseNum) throws InterruptedException
     {
         String phaseString = getPhaseObjVarString(phaseNum);
@@ -787,13 +855,13 @@ public class pgc_quests extends script.base_script
             {
                 handleTaskActived(questHolocron, phaseNum, i);
             }
-            else 
+            else
             {
                 break;
             }
         }
-        return;
     }
+
     public static void handleTaskActived(obj_id questHolocron, int phaseNum, int taskNum) throws InterruptedException
     {
         String phaseString = getPhaseObjVarString(phaseNum);
@@ -852,8 +920,8 @@ public class pgc_quests extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static float getDestroyTaskWeight(int taskLevel, int taskDifficulty, int taskCounterMax) throws InterruptedException
     {
         float weight = 1.0f;
@@ -876,9 +944,10 @@ public class pgc_quests extends script.base_script
             counterMod = 2;
         }
         int difficultyMod = counterMod + taskDifficulty + 1;
-        weight = (float)(levelMod + difficultyMod) / 2;
+        weight = (float) (levelMod + difficultyMod) / 2;
         return weight;
     }
+
     public static float getDestroyLootTaskWeight(int taskLevel, int taskDifficulty, int taskCounterMax, int dropRate) throws InterruptedException
     {
         float weight = 1.0f;
@@ -888,7 +957,7 @@ public class pgc_quests extends script.base_script
             levelMod = 5;
         }
         float dropRateFraction = dropRate / 100;
-        int percentageBasedTaskCounter = (int)(taskCounterMax / dropRateFraction);
+        int percentageBasedTaskCounter = (int) (taskCounterMax / dropRateFraction);
         int counterMod = 0;
         if (taskDifficulty == 2)
         {
@@ -903,9 +972,10 @@ public class pgc_quests extends script.base_script
             counterMod = 2;
         }
         int difficultyMod = counterMod + taskDifficulty + 1;
-        weight = (float)(levelMod + difficultyMod) / 2;
+        weight = (float) (levelMod + difficultyMod) / 2;
         return weight;
     }
+
     public static float getPerformTaskWeight(int taskLevel) throws InterruptedException
     {
         float weight = 1.0f;
@@ -917,6 +987,7 @@ public class pgc_quests extends script.base_script
         weight = levelMod;
         return weight;
     }
+
     public static float getCraftingTaskWeight(int taskLevel, int taskCounterMax) throws InterruptedException
     {
         float weight = 1.0f;
@@ -938,19 +1009,22 @@ public class pgc_quests extends script.base_script
         {
             counterMod = 5;
         }
-        weight = (float)(levelMod + counterMod) / 2;
+        weight = (float) (levelMod + counterMod) / 2;
         return weight;
     }
+
     public static float getCommTaskWeight(int taskLevel) throws InterruptedException
     {
         float weight = 0.0f;
         return weight;
     }
+
     public static float getGoToTaskWeight(int taskLevel) throws InterruptedException
     {
         float weight = 0.5f;
         return weight;
     }
+
     public static float getRetrieveTaskWeight(int taskLevel, int taskCounterMax) throws InterruptedException
     {
         float weight = 1.0f;
@@ -968,9 +1042,10 @@ public class pgc_quests extends script.base_script
         {
             counterMod = 3;
         }
-        weight = (float)(levelMod + counterMod) / 2;
+        weight = (float) (levelMod + counterMod) / 2;
         return weight;
     }
+
     public static float getPvpTaskWeight(int taskLevel, int taskCounterMax) throws InterruptedException
     {
         float weight = 1.0f;
@@ -988,9 +1063,10 @@ public class pgc_quests extends script.base_script
         {
             counterMod = 3;
         }
-        weight = (float)(levelMod + counterMod) / 2;
+        weight = (float) (levelMod + counterMod) / 2;
         return weight;
     }
+
     public static float calculateQuestWeight(float[] taskWeightArray) throws InterruptedException
     {
         int numTasks = taskWeightArray.length;
@@ -1012,6 +1088,7 @@ public class pgc_quests extends script.base_script
         questWeight = questWeight;
         return questWeight;
     }
+
     public static float calculateTaskTypeDiversity(dictionary taskTypes, int numTasks) throws InterruptedException
     {
         float questTaskTypeDiversity = 0;
@@ -1022,6 +1099,7 @@ public class pgc_quests extends script.base_script
         }
         return questTaskTypeDiversity;
     }
+
     public static float calculateRelicDiversity(dictionary relicNames, int numTasks) throws InterruptedException
     {
         float questRelicDiversity = 0;
@@ -1046,16 +1124,18 @@ public class pgc_quests extends script.base_script
         }
         return questRelicDiversity;
     }
+
     public static int calculateHolocronCreationChroniclesXp(float questWeight, float questRelicDiversity, float questTaskTypeDiversity) throws InterruptedException
     {
         if (questWeight < 1.0f)
         {
             questWeight = 1.0f;
         }
-        int xp = (int)(CHRONICLE_CREATION_XP_BASE * questWeight * questRelicDiversity);
+        int xp = (int) (CHRONICLE_CREATION_XP_BASE * questWeight * questRelicDiversity);
         xp += xp * questTaskTypeDiversity * 0.01;
         return xp;
     }
+
     public static int calculateHolocronQuestCompletedChroniclesXp(obj_id questHolocron, int rating) throws InterruptedException
     {
         float questWeight = getFloatObjVar(questHolocron, pgc_quests.PCG_QUEST_WEIGHT_OBJVAR);
@@ -1065,11 +1145,12 @@ public class pgc_quests extends script.base_script
         {
             questWeight = 1.0f;
         }
-        int xp = (int)(CHRONICLE_SHARED_XP_BASE * questWeight * questRelicDiversity);
+        int xp = (int) (CHRONICLE_SHARED_XP_BASE * questWeight * questRelicDiversity);
         xp += xp * questTaskTypeDiversity * 0.01;
         xp += xp * (rating / 2.5) * 0.03;
         return xp;
     }
+
     public static int grantChronicleXp(obj_id player, int xpAmount) throws InterruptedException
     {
         String[] chronicleSkills = skill_template.getSkillTemplateSkillsByTemplateName(pgc_quests.PGC_CHRONICLES_XP_TYPE);
@@ -1087,6 +1168,7 @@ public class pgc_quests extends script.base_script
         }
         return xpAmount;
     }
+
     public static int getConfigModifiedChroniclesXPAmount(int xpAmount) throws InterruptedException
     {
         String configMod_string = getConfigSetting("GameServer", "chroniclesXpModifier");
@@ -1100,6 +1182,7 @@ public class pgc_quests extends script.base_script
         }
         return xpAmount;
     }
+
     public static void checkForGainedChroniclesLevel(obj_id player) throws InterruptedException
     {
         String[] chronicleSkills = skill_template.getSkillTemplateSkillsByTemplateName(pgc_quests.PGC_CHRONICLES_XP_TYPE);
@@ -1114,7 +1197,7 @@ public class pgc_quests extends script.base_script
                 {
                     currentChronicleSkill = chronicleSkills[i];
                 }
-                else 
+                else
                 {
                     nextChronicleSkill = chronicleSkills[i];
                     nextChronicleSkillIndex = i;
@@ -1140,8 +1223,8 @@ public class pgc_quests extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static void reportChronicleXPRequiredForNextSkill(obj_id player, String skillName) throws InterruptedException
     {
         if (isGod(player) && questGetDebugging())
@@ -1152,15 +1235,15 @@ public class pgc_quests extends script.base_script
                 java.util.Enumeration e = xpReqs.keys();
                 while (e.hasMoreElements())
                 {
-                    String xpType = (String)(e.nextElement());
+                    String xpType = (String) (e.nextElement());
                     int xpCost = xpReqs.getInt(xpType);
                     int curXP = getExperiencePoints(player, xpType);
                     sendSystemMessage(player, "[God Mode] For xpType = " + xpType + ", player has " + curXP + " of " + xpCost, "");
                 }
             }
         }
-        return;
     }
+
     public static boolean grantChroniclesRoadmapItem(obj_id player, String skillName, int skillIndex) throws InterruptedException
     {
         boolean success = false;
@@ -1194,21 +1277,31 @@ public class pgc_quests extends script.base_script
                 }
                 Vector allNewObjectsResizable = new Vector();
                 allNewObjectsResizable.setSize(0);
-                for (String item : items) {
+                for (String item : items)
+                {
                     obj_id newItem = null;
-                    if (item.endsWith(".iff")) {
+                    if (item.endsWith(".iff"))
+                    {
                         newItem = createObjectInInventoryAllowOverload(item, player);
-                    } else {
+                    }
+                    else
+                    {
                         newItem = static_item.createNewItemFunction(item, player);
                     }
-                    if (!isIdValid(newItem)) {
+                    if (!isIdValid(newItem))
+                    {
                         LOG("roadmap", "ERROR - Could not create roadmap item (" + item + ")");
-                    } else {
+                    }
+                    else
+                    {
                         utils.addElement(allNewObjectsResizable, newItem);
                         String newItemName = "";
-                        if (static_item.isStaticItem(newItem)) {
+                        if (static_item.isStaticItem(newItem))
+                        {
                             newItemName = getStaticItemName(newItem);
-                        } else {
+                        }
+                        else
+                        {
                             newItemName = getTemplateName(newItem);
                         }
                         pgc_quests.logProgression(player, obj_id.NULL_ID, "Chronicles Roadmap Reward Granted! Item granted to " + player + ": " + newItem + " (" + newItemName + ").");
@@ -1230,7 +1323,7 @@ public class pgc_quests extends script.base_script
                     success = true;
                 }
             }
-            else 
+            else
             {
                 if (isGod(player))
                 {
@@ -1241,6 +1334,7 @@ public class pgc_quests extends script.base_script
         }
         return success;
     }
+
     public static void setQuestComplete(obj_id questHolocron) throws InterruptedException
     {
         obj_id questControlDevice = getContainedBy(questHolocron);
@@ -1255,7 +1349,7 @@ public class pgc_quests extends script.base_script
                     {
                         resetQuestHolocron(questHolocron, player);
                     }
-                    else 
+                    else
                     {
                         setObjVar(questHolocron, PCG_QUEST_COMPLETE_OBJVAR, player);
                         setOwner(questHolocron, player);
@@ -1265,7 +1359,7 @@ public class pgc_quests extends script.base_script
                             setObjVar(questHolocron, pgc_quests.PCG_QUEST_WAS_RATED_OBJVAR, -1);
                             sendDirtyObjectMenuNotification(questHolocron);
                         }
-                        else 
+                        else
                         {
                             showQuestRatingUI(questHolocron, player);
                         }
@@ -1321,6 +1415,7 @@ public class pgc_quests extends script.base_script
             }
         }
     }
+
     public static void grantPgcNonChroniclesQuestXp(obj_id player, obj_id questHolocron) throws InterruptedException
     {
         int questLevel = getIntObjVar(questHolocron, pgc_quests.PCG_QUEST_LEVEL_OBJVAR);
@@ -1328,8 +1423,8 @@ public class pgc_quests extends script.base_script
         int questCreatorStationId = getIntObjVar(questHolocron, PCG_QUEST_CREATOR_STATIONID_OBJVAR);
         float questWeight = getFloatObjVar(questHolocron, PCG_QUEST_WEIGHT_OBJVAR);
         pgc_quests.grantPgcNonChroniclesQuestXp(player, questLevel, questWeight, questCreatorObjId, questCreatorStationId);
-        return;
     }
+
     public static void grantPgcNonChroniclesQuestXp(obj_id player, int questLevel, float questWeight, obj_id questCreatorObjId, int questCreatorStationId) throws InterruptedException
     {
         float xpWeight = questWeight * 0.5f;
@@ -1341,7 +1436,7 @@ public class pgc_quests extends script.base_script
         {
             xpWeight = 25.0f;
         }
-        int xpAmount = (int)(groundquests.getQuestExperienceReward(player, questLevel, 1, 0) * xpWeight);
+        int xpAmount = (int) (groundquests.getQuestExperienceReward(player, questLevel, 1, 0) * xpWeight);
         int playerStationId = getPlayerStationId(player);
         if (playerStationId == questCreatorStationId)
         {
@@ -1359,14 +1454,14 @@ public class pgc_quests extends script.base_script
             xpAmount = xp.grantSocialStyleXp(player, xp.QUEST_SOCIAL, xpAmount);
             xpType = xp.QUEST_SOCIAL;
         }
-        else 
+        else
         {
             xpAmount = xp.grantCombatStyleXp(player, xp.QUEST_COMBAT, xpAmount);
             xpType = xp.QUEST_COMBAT;
         }
         xp.displayXpFlyText(player, player, xpAmount);
-        return;
     }
+
     public static void showPgcXpGrantedMessage(obj_id player, String xpType, int xpAmount) throws InterruptedException
     {
         float grpMod = 1.0f;
@@ -1380,8 +1475,8 @@ public class pgc_quests extends script.base_script
         {
             sendQuestSystemMessage(player, pp);
         }
-        return;
     }
+
     public static int getNumQuestCompleteChroniclerRewardTokens(obj_id questHolocron) throws InterruptedException
     {
         obj_id questCreatorObjId = getObjIdObjVar(questHolocron, PCG_QUEST_CREATOR_ID_OBJVAR);
@@ -1389,7 +1484,7 @@ public class pgc_quests extends script.base_script
         float questWeight = getFloatObjVar(questHolocron, PCG_QUEST_WEIGHT_OBJVAR);
         float relicTypeDiversity = getFloatObjVar(questHolocron, PCG_QUEST_RELIC_DIVERSITY);
         int count = 1;
-        count = (int)((float)(count + (questWeight * relicTypeDiversity)) * CHRONICLE_SILVER_TOKENS_FOR_CHRONICLER_MOD);
+        count = (int) ((count + (questWeight * relicTypeDiversity)) * CHRONICLE_SILVER_TOKENS_FOR_CHRONICLER_MOD);
         String tokenNumMod_string = getConfigSetting("GameServer", "chroniclesChroniclerSilverTokenNumModifier");
         if (tokenNumMod_string != null && tokenNumMod_string.length() > 0)
         {
@@ -1401,6 +1496,7 @@ public class pgc_quests extends script.base_script
         }
         return count;
     }
+
     public static int getNumQuestCompleteQuestorRewardTokens(obj_id player, obj_id questHolocron) throws InterruptedException
     {
         if (isCompletingYourOwnChronicleQuest(player, questHolocron))
@@ -1410,7 +1506,7 @@ public class pgc_quests extends script.base_script
         float questWeight = getFloatObjVar(questHolocron, PCG_QUEST_WEIGHT_OBJVAR);
         float relicTypeDiversity = getFloatObjVar(questHolocron, PCG_QUEST_RELIC_DIVERSITY);
         int count = 1;
-        count = (int)((float)(count + (questWeight * relicTypeDiversity)) * CHRONICLE_SILVER_TOKENS_FOR_QUESTOR_MOD);
+        count = (int) ((count + (questWeight * relicTypeDiversity)) * CHRONICLE_SILVER_TOKENS_FOR_QUESTOR_MOD);
         String tokenNumMod_string = getConfigSetting("GameServer", "chroniclesQuestorSilverTokenNumModifier");
         if (tokenNumMod_string != null && tokenNumMod_string.length() > 0)
         {
@@ -1422,14 +1518,17 @@ public class pgc_quests extends script.base_script
         }
         return count;
     }
+
     public static obj_id grantSilverChroniclesRewardTokens(obj_id player, int count) throws InterruptedException
     {
         return grantChroniclesRewardTokens(player, count, PGC_CHRONICLES_SILVER_TOKEN);
     }
+
     public static obj_id grantGoldChroniclesRewardTokens(obj_id player, int count) throws InterruptedException
     {
         return grantChroniclesRewardTokens(player, count, PGC_CHRONICLES_GOLD_TOKEN);
     }
+
     public static obj_id grantChroniclesRewardTokens(obj_id player, int count, String tokenType) throws InterruptedException
     {
         obj_id token = obj_id.NULL_ID;
@@ -1449,16 +1548,14 @@ public class pgc_quests extends script.base_script
         }
         return token;
     }
+
     public static boolean isCompletingYourOwnChronicleQuest(obj_id player, obj_id questHolocron) throws InterruptedException
     {
         int questCreatorStationId = getIntObjVar(questHolocron, PCG_QUEST_CREATOR_STATIONID_OBJVAR);
         int playerStationId = getPlayerStationId(player);
-        if (playerStationId == questCreatorStationId)
-        {
-            return true;
-        }
-        return false;
+        return playerStationId == questCreatorStationId;
     }
+
     public static void sendPlacedInInventorySystemMessage(obj_id player, obj_id objectPlaced, int count) throws InterruptedException
     {
         if (isValidId(objectPlaced))
@@ -1470,6 +1567,7 @@ public class pgc_quests extends script.base_script
             sendSystemMessageProse(player, pp);
         }
     }
+
     public static void sendPlacedInInventorySystemMessage(obj_id player, obj_id objectPlaced) throws InterruptedException
     {
         if (isValidId(objectPlaced))
@@ -1480,24 +1578,27 @@ public class pgc_quests extends script.base_script
             sendQuestSystemMessage(player, pp);
         }
     }
+
     public static void showQuestRatingUI(obj_id questHolocron, obj_id player) throws InterruptedException
     {
         String questName = getQuestName(questHolocron);
         openRatingWindow(player, "Chronicle Rating", "Please rate this quest: " + questName);
         utils.setScriptVar(player, "chronicles.rating_a_holocron", questHolocron);
-        return;
     }
+
     public static float getCurrentPgcRating(int ratingTotal, int ratingCount) throws InterruptedException
     {
-        return getCurrentPgcRating((float)ratingTotal, ratingCount);
+        return getCurrentPgcRating((float) ratingTotal, ratingCount);
     }
+
     public static float getCurrentPgcRating(float ratingTotal, float ratingCount) throws InterruptedException
     {
         float tempNumber = (ratingTotal / ratingCount) * 10;
-        int result = (int)Math.round(tempNumber);
-        float finalValue = (float)result / 10;
+        int result = Math.round(tempNumber);
+        float finalValue = (float) result / 10;
         return finalValue;
     }
+
     public static void showChroniclerRatingTable(obj_id player, String name, obj_id[] chroniclers) throws InterruptedException
     {
         if (chroniclers != null && chroniclers.length > 0)
@@ -1520,18 +1621,18 @@ public class pgc_quests extends script.base_script
                     int lastRatedTime = chroniclerRating[PGC_INFO_INDEX_MOST_RECENT_RATING_TIME];
                     if (ratingTotal > 0)
                     {
-                        data[i][1] = "" + pgc_quests.getCurrentPgcRating(ratingTotal, ratingCount);
-                        data[i][2] = "" + ratingCount;
+                        data[i][1] = String.valueOf(pgc_quests.getCurrentPgcRating(ratingTotal, ratingCount));
+                        data[i][2] = String.valueOf(ratingCount);
                         data[i][3] = utils.formatTimeVerbose(getCalendarTime() - lastRatedTime);
                     }
-                    else 
+                    else
                     {
                         data[i][1] = "" + 0.0;
                         data[i][2] = "" + 0;
                         data[i][3] = "Not Yet Rated";
                     }
                 }
-                else 
+                else
                 {
                     data[i][1] = "" + 0.0;
                     data[i][2] = "" + 0;
@@ -1539,28 +1640,28 @@ public class pgc_quests extends script.base_script
                 }
             }
             String title = name + " Chronicle Ratings";
-            String[] colTitles = 
-            {
-                "Chronicler Name",
-                "Rating",
-                "Number of Times Rated",
-                "Time Since Last Rating"
-            };
-            String[] colTypes = 
-            {
-                "text",
-                "float",
-                "integer",
-                "text"
-            };
+            String[] colTitles =
+                    {
+                            "Chronicler Name",
+                            "Rating",
+                            "Number of Times Rated",
+                            "Time Since Last Rating"
+                    };
+            String[] colTypes =
+                    {
+                            "text",
+                            "float",
+                            "integer",
+                            "text"
+                    };
             int id = sui.table(player, player, sui.OK_CANCEL, title, "tableHandler", null, colTitles, colTypes, data, true, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("saga_system", "pgc_rating_chronicler_not_found"));
         }
-        return;
     }
+
     public static boolean isEligiblePgcReward(obj_id rewardItem) throws InterruptedException
     {
         if (!canTrade(rewardItem))
@@ -1591,12 +1692,9 @@ public class pgc_quests extends script.base_script
                 return false;
             }
         }
-        if (jedi.isCrystalTuned(rewardItem))
-        {
-            return false;
-        }
-        return true;
+        return !jedi.isCrystalTuned(rewardItem);
     }
+
     public static void setQuestAbandoned(obj_id questControlDevice, obj_id player) throws InterruptedException
     {
         String questName = "Unknown";
@@ -1618,8 +1716,8 @@ public class pgc_quests extends script.base_script
             pgc_quests.logQuest(player, questHolocron, "Quest Abandoned after " + timeToCompleteQuest + " time active.");
             destroyObject(questControlDevice);
         }
-        return;
     }
+
     public static void initializeQuestTasksStatus(obj_id questHolocron, int numTasks) throws InterruptedException
     {
         for (int q = 0; q < numTasks; q++)
@@ -1632,6 +1730,7 @@ public class pgc_quests extends script.base_script
             setPlayerQuestTaskStatus(questHolocron, q, status);
         }
     }
+
     public static void resetQuestHolocron(obj_id questHolocron, obj_id player) throws InterruptedException
     {
         if (hasObjVar(questHolocron, PCG_QUEST_COMPLETE_OBJVAR))
@@ -1662,21 +1761,21 @@ public class pgc_quests extends script.base_script
                         setPlayerQuestTaskStatus(questHolocron, taskIndex, pgc_quests.PQ_TASK_COMPLETE);
                         removePlayerQuestWaypoint(questHolocron, baseObjVar);
                     }
-                    else 
+                    else
                     {
                         break;
                     }
                 }
             }
-            else 
+            else
             {
                 break;
             }
         }
         setObjVar(questHolocron, pgc_quests.PCG_QUEST_CUR_QUEST_PHASE_OBJVAR, 0);
         messageTo(questHolocron, "handleQuestHolocronInitializeTaskStatus", null, 1, false);
-        return;
     }
+
     public static void addRelicToQuestBuilder(obj_id player, obj_id relic, boolean addEntireStack) throws InterruptedException
     {
         if (!utils.isNestedWithin(relic, player))
@@ -1716,7 +1815,7 @@ public class pgc_quests extends script.base_script
                         if (relicSlotValue <= 0 && i == 1)
                         {
                         }
-                        else 
+                        else
                         {
                             decrementCount(relic);
                             actualCount += 1;
@@ -1727,7 +1826,7 @@ public class pgc_quests extends script.base_script
                             break;
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("saga_system", "relic_report_consume_item_fail"));
                         pgc_quests.logRelic(player, obj_id.NULL_ID, "Chronicle Relic " + staticItemName + "(slot: " + slotName + ") had bad data and was unable to be add to their relic collection (" + collectionName + ").");
@@ -1740,19 +1839,19 @@ public class pgc_quests extends script.base_script
                 sendSystemMessageProse(player, pp);
                 pgc_quests.logRelic(player, obj_id.NULL_ID, "Player added Chronicle Relic " + staticItemName + "(slot: " + slotName + " x " + actualCount + ") to their relic collection (" + collectionName + ").");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("saga_system", "relic_count_at_max"));
                 pgc_quests.logRelic(player, obj_id.NULL_ID, "Player attempted to add " + staticItemName + "(slot: " + slotName + ") to their relic collection (" + collectionName + "), but that relic is already at max amount.");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("saga_system", "relic_count_at_max"));
             pgc_quests.logRelic(player, obj_id.NULL_ID, "Player attempted to add " + staticItemName + "(slot: " + slotName + ") to their relic collection, but they have already maxed out every single available relic of this type, " + collectionName + ".");
         }
-        return;
     }
+
     public static boolean canUseRelic(obj_id player, obj_id relic, String slotName, String collectionName, boolean isVerbose) throws InterruptedException
     {
         int relicQualitySkillmod = getEnhancedSkillStatisticModifierUncapped(player, pgc_quests.PGC_SKILLMOD_RELIC_QUALITY);
@@ -1768,7 +1867,7 @@ public class pgc_quests extends script.base_script
                     pgc_quests.logRelic(player, obj_id.NULL_ID, "Player attempted to add " + staticItemName + "(slot: " + slotName + ") to their relic collection (" + collectionName + "), but they were not high enough level (player tier = " + relicQualitySkillmod + "; relic tier = " + relic_tier + ").");
                     return false;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, "[GOD_MODE] Bypassing relic quality check, which you failed...", "");
                 }
@@ -1776,6 +1875,7 @@ public class pgc_quests extends script.base_script
         }
         return true;
     }
+
     public static String getStringPgcTaskData(obj_id questHolocron, String baseObjVar, String category, String[] relicData) throws InterruptedException
     {
         String taskData = getStringObjVarTaskData(questHolocron, baseObjVar, category);
@@ -1785,6 +1885,7 @@ public class pgc_quests extends script.base_script
         }
         return taskData;
     }
+
     public static String getStringObjVarTaskData(obj_id questHolocron, String baseObjVar, String category) throws InterruptedException
     {
         String taskData = "";
@@ -1795,10 +1896,12 @@ public class pgc_quests extends script.base_script
         }
         return taskData;
     }
+
     public static String getStringRelicData(String category, String[] relicData) throws InterruptedException
     {
         return parseRelicData(category, relicData);
     }
+
     public static int getIntPgcTaskData(obj_id questHolocron, String baseObjVar, String category, String[] relicData) throws InterruptedException
     {
         int taskData = getIntObjVarTaskData(questHolocron, baseObjVar, category);
@@ -1808,6 +1911,7 @@ public class pgc_quests extends script.base_script
         }
         return taskData;
     }
+
     public static int getIntObjVarTaskData(obj_id questHolocron, String baseObjVar, String category) throws InterruptedException
     {
         int taskData = -1;
@@ -1818,10 +1922,12 @@ public class pgc_quests extends script.base_script
         }
         return taskData;
     }
+
     public static int getIntRelicData(String category, String[] relicData) throws InterruptedException
     {
         return utils.stringToInt(parseRelicData(category, relicData));
     }
+
     public static dictionary getWaypointObjVarTaskData(obj_id questHolocron, String baseObjVar, String category) throws InterruptedException
     {
         String waypointLocObjVar = baseObjVar + "." + category;
@@ -1844,17 +1950,22 @@ public class pgc_quests extends script.base_script
         }
         return null;
     }
+
     public static dictionary getWaypointRelicData(String category, String[] relicData) throws InterruptedException
     {
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(category)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(category))
+                {
                     String[] parse = split(relicCategory, ':');
                     String baseData = parse[1];
-                    if (baseData != null && baseData.length() > 0) {
+                    if (baseData != null && baseData.length() > 0)
+                    {
                         String[] waypointParse = split(baseData, ',');
-                        if (waypointParse.length == 6) {
+                        if (waypointParse.length == 6)
+                        {
                             String planet = waypointParse[0];
                             float x = utils.stringToFloat(waypointParse[1]);
                             float y = utils.stringToFloat(waypointParse[2]);
@@ -1873,26 +1984,32 @@ public class pgc_quests extends script.base_script
         }
         return null;
     }
+
     public static obj_id getObjIdRelicData(String category, String[] relicData) throws InterruptedException
     {
         return utils.stringToObjId(parseRelicData(category, relicData));
     }
+
     public static string_id getStringIdRelicData(String category, String[] relicData) throws InterruptedException
     {
         String stringData = parseRelicData(category, relicData);
         String[] parse = split(stringData, ',');
         return new string_id(parse[0], parse[1]);
     }
+
     public static String parseRelicData(String category, String[] relicData) throws InterruptedException
     {
         String data = "";
-        if (relicData != null && relicData.length > 0)
+        if (relicData != null)
         {
-            for (String relicCategory : relicData) {
-                if (relicCategory.startsWith(category)) {
+            for (String relicCategory : relicData)
+            {
+                if (relicCategory.startsWith(category))
+                {
                     String[] parse = split(relicCategory, ':');
                     data = parse[1];
-                    if (parse.length > 2) {
+                    if (parse.length > 2)
+                    {
                         data += "," + parse[2];
                     }
                     break;
@@ -1901,6 +2018,7 @@ public class pgc_quests extends script.base_script
         }
         return data;
     }
+
     public static void checkForKillTaskCredit(obj_id questHolocron, String taskType, String phaseString, String taskString, dictionary params) throws InterruptedException
     {
         obj_id player = getQuestPlayer(questHolocron);
@@ -1926,11 +2044,14 @@ public class pgc_quests extends script.base_script
         if (targetCreatureNamesList != null && killedCreatureType != null)
         {
             String[] targetCreatureNamesArray = split(targetCreatureNamesList, ',');
-            if (targetCreatureNamesArray != null && targetCreatureNamesArray.length > 0)
+            if (targetCreatureNamesArray != null)
             {
-                for (String targetCreatureName : targetCreatureNamesArray) {
-                    if (killedCreatureType.equals(targetCreatureName)) {
+                for (String targetCreatureName : targetCreatureNamesArray)
+                {
+                    if (killedCreatureType.equals(targetCreatureName))
+                    {
                         creatureAcceptable = true;
+                        break;
                     }
                 }
             }
@@ -1938,11 +2059,14 @@ public class pgc_quests extends script.base_script
         if (targetSocialGroupList != null && killedCreatureSocialGroup != null)
         {
             String[] socialGroupsNamesArray = split(targetSocialGroupList, ',');
-            if (socialGroupsNamesArray != null && socialGroupsNamesArray.length > 0)
+            if (socialGroupsNamesArray != null)
             {
-                for (String targetSocialGroup : socialGroupsNamesArray) {
-                    if (killedCreatureSocialGroup.equals(targetSocialGroup)) {
+                for (String targetSocialGroup : socialGroupsNamesArray)
+                {
+                    if (killedCreatureSocialGroup.equals(targetSocialGroup))
+                    {
                         creatureAcceptable = true;
+                        break;
                     }
                 }
             }
@@ -1958,8 +2082,8 @@ public class pgc_quests extends script.base_script
                 handleDestroyMultipleLootKill(questHolocron, phaseString, taskString, targetCount, relicData);
             }
         }
-        return;
     }
+
     public static void handleDestroyMultipleKill(obj_id questHolocron, String phaseString, String taskString, int targetCount) throws InterruptedException
     {
         String baseObjVar = getPgcBaseObjVar(phaseString, taskString);
@@ -1974,8 +2098,8 @@ public class pgc_quests extends script.base_script
         {
             setTaskComplete(questHolocron, phaseString, taskString);
         }
-        return;
     }
+
     public static void handleDestroyMultipleLootKill(obj_id questHolocron, String phaseString, String taskString, int targetCount, String[] relicData) throws InterruptedException
     {
         obj_id player = getQuestPlayer(questHolocron);
@@ -1991,7 +2115,7 @@ public class pgc_quests extends script.base_script
                 {
                     sendSystemMessage(player, message_string, "");
                 }
-                else 
+                else
                 {
                     string_id message_sid = getStringIdRelicData("message", relicData);
                     sendSystemMessage(player, message_sid);
@@ -2003,13 +2127,13 @@ public class pgc_quests extends script.base_script
                     setTaskComplete(questHolocron, phaseString, taskString);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, getQuestName(questHolocron) + ": Nothing Found.", "");
             }
         }
-        return;
     }
+
     public static void handlePvpPlayerKillCredit(obj_id questHolocron, String taskType, String phaseString, String taskString, dictionary params) throws InterruptedException
     {
         obj_id player = getQuestPlayer(questHolocron);
@@ -2033,8 +2157,8 @@ public class pgc_quests extends script.base_script
                 setTaskComplete(questHolocron, phaseString, taskString);
             }
         }
-        return;
     }
+
     public static void handleCommMessageTaskActivated(obj_id questHolocron, String phaseString, String taskString) throws InterruptedException
     {
         obj_id player = getQuestPlayer(questHolocron);
@@ -2051,7 +2175,7 @@ public class pgc_quests extends script.base_script
                 pp = prose.getPackage(message_base, player, player);
                 prose.setTO(pp, message_string);
             }
-            else 
+            else
             {
                 pp.stringId = getStringIdRelicData("message", relicData);
             }
@@ -2065,7 +2189,7 @@ public class pgc_quests extends script.base_script
             {
                 showChroniclesMessageBox(player, questHolocron, pp, phaseString, taskString);
             }
-            else 
+            else
             {
                 commPlayerQuest(questHolocron, player, pp, appearance);
                 dictionary webster = new dictionary();
@@ -2074,8 +2198,8 @@ public class pgc_quests extends script.base_script
                 messageTo(questHolocron, "handleCommMessageTaskCompletion", webster, COMM_TASK_COMPLETION_DELAY, false);
             }
         }
-        return;
     }
+
     public static void showChroniclesMessageBox(obj_id player, obj_id questHolocron, prose_package pp, String phaseString, String taskString) throws InterruptedException
     {
         String messageBoxTitle = getTaskName(questHolocron, phaseString, taskString);
@@ -2096,16 +2220,18 @@ public class pgc_quests extends script.base_script
         sui.showSUIPage(pageId);
         utils.setScriptVar(questHolocron, getPhaseStringVarName(pageId, "message_box"), phaseString);
         utils.setScriptVar(questHolocron, getTaskStringVarName(pageId, "message_box"), taskString);
-        return;
     }
+
     public static String getPhaseStringVarName(int pageId, String taskType) throws InterruptedException
     {
         return taskType + ".phaseString." + pageId;
     }
+
     public static String getTaskStringVarName(int pageId, String taskType) throws InterruptedException
     {
         return taskType + ".taskString." + pageId;
     }
+
     public static void handleGoToLocationTaskActivated(obj_id questHolocron, String phaseString, String taskString, location targetLoc) throws InterruptedException
     {
         obj_id player = getQuestPlayer(questHolocron);
@@ -2121,8 +2247,8 @@ public class pgc_quests extends script.base_script
             webster.put("locationTargetName", relicName);
             messageTo(player, "playerQuestSetLocationTarget", webster, 1, false);
         }
-        return;
     }
+
     public static void log(obj_id player, obj_id questHolocron, String category, String text) throws InterruptedException
     {
         if (category.length() > 0 && text.length() > 0)
@@ -2152,22 +2278,27 @@ public class pgc_quests extends script.base_script
             CustomerServiceLog(category, playerInfo + questInfo + text);
         }
     }
+
     public static void logProgression(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         log(player, questHolocron, "chronicles_progression", text);
     }
+
     public static void logReward(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         log(player, questHolocron, "chronicles_reward", text);
     }
+
     public static void logQuest(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         log(player, questHolocron, "chronicles_quest", text);
     }
+
     public static void logRelic(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         log(player, questHolocron, "chronicles_relic", text);
     }
+
     public static void logRating(obj_id player, obj_id questHolocron, String text) throws InterruptedException
     {
         log(player, questHolocron, "chronicles_rating", text);

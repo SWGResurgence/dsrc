@@ -137,6 +137,7 @@ public class vendor_lib extends script.base_script
     public static final string_id SID_GREETER_PACK_UP_SUCCESS = new string_id("player_structure", "greeter_packup_success");
     public static final string_id SID_GREETER_PACK_UP_FAILURE = new string_id("player_structure", "greeter_packup_failure");
     public static final string_id SID_MUST_BE_IN_VALID_LOCATION = new string_id("player_structure", "must_be_valid_location");
+
     public static boolean payMaintenance(obj_id player, obj_id vendor, int amt) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -155,6 +156,7 @@ public class vendor_lib extends script.base_script
         params.put(money.DICT_MSG_PAYER, "1");
         return money.requestPayment(player, vendor, amt, "handleVendorPayment", params, true);
     }
+
     public static boolean withdrawMaintenance(obj_id player, obj_id vendor, int amt) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -174,6 +176,7 @@ public class vendor_lib extends script.base_script
         d.put("amount", amt);
         return transferBankCreditsTo(vendor, player, amt, "msgVendorWithdrawSuccess", "msgVendorWithdrawFail", d);
     }
+
     public static int decrementMaintenancePool(obj_id vendor, int amt) throws InterruptedException
     {
         if (vendor == null || vendor == obj_id.NULL_ID)
@@ -194,11 +197,12 @@ public class vendor_lib extends script.base_script
             CustomerServiceLog("vendor", "Vendor decrement maintenance pool.  Vendor " + vendor + " Amount: " + amt);
             return pool - amt;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int damageVendor(obj_id vendor, int amt) throws InterruptedException
     {
         if (vendor == null || vendor == obj_id.NULL_ID)
@@ -224,12 +228,13 @@ public class vendor_lib extends script.base_script
             }
             setObjVar(inv, "vendor_deactivated", 1);
         }
-        else 
+        else
         {
             setObjVar(vendor, VAR_CONDITION, condition);
         }
         return condition;
     }
+
     public static int repairVendor(obj_id vendor, int amt) throws InterruptedException
     {
         if (vendor == null || vendor == obj_id.NULL_ID)
@@ -260,26 +265,32 @@ public class vendor_lib extends script.base_script
         }
         return condition;
     }
+
     public static int getMaintenanceRate(obj_id vendor) throws InterruptedException
     {
         return getIntObjVar(vendor, VAR_MAINTENANCE_RATE);
     }
+
     public static int getMaintenancePool(obj_id vendor) throws InterruptedException
     {
         return getBankBalance(vendor);
     }
+
     public static int getDecayRate(obj_id vendor) throws InterruptedException
     {
         return getIntObjVar(vendor, VAR_DECAY_RATE);
     }
+
     public static int getVendorCondition(obj_id vendor) throws InterruptedException
     {
         return getIntObjVar(vendor, VAR_CONDITION);
     }
+
     public static int getMaxCondition(obj_id vendor) throws InterruptedException
     {
         return getIntObjVar(vendor, VAR_MAX_CONDITION);
     }
+
     public static void finalizePackUp(obj_id player, obj_id vendor, obj_id packer, boolean isAbandoned) throws InterruptedException
     {
         obj_id vcd;
@@ -290,7 +301,7 @@ public class vendor_lib extends script.base_script
         {
             datapad = utils.getPlayerDatapad(player);
         }
-        else 
+        else
         {
             datapad = utils.getPlayerDatapad(packer);
         }
@@ -328,10 +339,12 @@ public class vendor_lib extends script.base_script
         }
         CustomerServiceLog("vendorpackup", "Player " + getPlayerName(packer) + " (" + packer + ") packed vendor (" + vendor + ",abandoned=" + isAbandoned + ") owned by player " + getPlayerName(player) + " (" + player + ") into device (" + vcd + ")");
     }
+
     public static boolean isVendorPackUpEnabled() throws InterruptedException
     {
         return utils.checkConfigFlag("GameServer", "allowPlayersToPackVendors");
     }
+
     public static obj_id getAuctionContainer(obj_id vendor) throws InterruptedException
     {
         obj_id container = utils.getInventoryContainer(vendor);
@@ -341,10 +354,12 @@ public class vendor_lib extends script.base_script
         }
         return container;
     }
+
     public static boolean isNpcVendor(obj_id vendor) throws InterruptedException
     {
         return getAuctionContainer(vendor) != vendor;
     }
+
     public static String[] getAllGreeterDatatableColumnNames(obj_id object, String datatablePath) throws InterruptedException
     {
         blog("vendor_lib.getAllGreeterDatatableColumnNames:init");
@@ -373,8 +388,10 @@ public class vendor_lib extends script.base_script
         blog("vendor_lib.getAllGreeterDatatableColumnNames: prevalidation completed");
         Vector greeterColNames = new Vector();
         greeterColNames.setSize(0);
-        for (String aPreParsedColList : preParsedColList) {
-            if (aPreParsedColList.startsWith("greeter")) {
+        for (String aPreParsedColList : preParsedColList)
+        {
+            if (aPreParsedColList.startsWith("greeter"))
+            {
                 greeterColNames = utils.addElement(greeterColNames, aPreParsedColList);
             }
         }
@@ -388,6 +405,7 @@ public class vendor_lib extends script.base_script
         greeterColNames.toArray(_greeterColNames);
         return _greeterColNames;
     }
+
     public static boolean buildNpcInPlayerStructure(obj_id controller, obj_id player, String npcType, boolean newGreeter) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -407,6 +425,7 @@ public class vendor_lib extends script.base_script
         }
         return buildNpcInPlayerStructure(controller, player, npcType, null, newGreeter);
     }
+
     public static boolean buildNpcInPlayerStructure(obj_id controller, obj_id owner, String npcType, location where, boolean newGreeter) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -444,9 +463,9 @@ public class vendor_lib extends script.base_script
         {
             loc = getLocation(owner);
         }
-        else 
+        else
         {
-            loc = (location)where.clone();
+            loc = (location) where.clone();
         }
         if (loc == null)
         {
@@ -528,6 +547,7 @@ public class vendor_lib extends script.base_script
         CustomerServiceLog("tcg", "TCG Greeter: " + greeterObj + " of type: " + greeterSelection + " was placed at location: " + loc + " by owner: " + owner + ".");
         return true;
     }
+
     public static boolean validateNpcPlacementInStructure(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -549,6 +569,7 @@ public class vendor_lib extends script.base_script
         }
         return player_structure.isAdmin(structure, player);
     }
+
     public static boolean validateNonVendorInStructure(obj_id nonVendor) throws InterruptedException
     {
         if (!isValidId(nonVendor) || !exists(nonVendor))
@@ -562,6 +583,7 @@ public class vendor_lib extends script.base_script
         }
         return !(!player_structure.isPlayerStructure(structure) || player_structure.isCivic(structure));
     }
+
     public static String getGreeterNonVendorCreatureType(obj_id object, String greeterOrNonVendorType) throws InterruptedException
     {
         blog("vendor_lib.getGreeterNonVendorCreatureType init");
@@ -597,6 +619,7 @@ public class vendor_lib extends script.base_script
         blog("vendor_lib.getGreeterNonVendorCreatureType greeterOrNonVendorType NOT found");
         return null;
     }
+
     public static boolean isSpecialVendor(obj_id object) throws InterruptedException
     {
         if (!isValidId(object) || !exists(object))
@@ -609,6 +632,7 @@ public class vendor_lib extends script.base_script
         }
         return getBooleanObjVar(object, vendor_lib.SPECIAL_VENDOR_IDENTIFIER);
     }
+
     public static obj_id setObjectOwner(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -631,6 +655,7 @@ public class vendor_lib extends script.base_script
         }
         return owner;
     }
+
     public static obj_id getObjectOwner(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -648,6 +673,7 @@ public class vendor_lib extends script.base_script
         }
         return owner;
     }
+
     public static boolean isControllerOrChildInValidLocation(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -661,6 +687,7 @@ public class vendor_lib extends script.base_script
         }
         return player_structure.isPlayerStructure(structure);
     }
+
     public static boolean isObjectInSameCellAsController(obj_id controller, obj_id object) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -692,6 +719,7 @@ public class vendor_lib extends script.base_script
         }
         return controllerLoc.cell == objLocation.cell;
     }
+
     public static boolean recreateObject(obj_id controller, obj_id player) throws InterruptedException
     {
         blog("vendor_lib.recreateObject init");
@@ -725,6 +753,7 @@ public class vendor_lib extends script.base_script
         blog("vendor_lib.recreateObjectAtLocation placing greeter via buildNpcInPlayerStructure at CONTROLLER location");
         return buildNpcInPlayerStructure(controller, player, npcType, where, false);
     }
+
     public static boolean recreateObjectAtLocation(obj_id controller, obj_id owner, location loc) throws InterruptedException
     {
         blog("vendor_lib.recreateObjectAtLocation init");
@@ -764,6 +793,7 @@ public class vendor_lib extends script.base_script
         blog("vendor_lib.recreateObjectAtLocation placing greeter via buildNpcInPlayerStructure at greeter location");
         return buildNpcInPlayerStructure(controller, owner, npcType, loc, false);
     }
+
     public static boolean controllerContainmentCheck(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -786,6 +816,7 @@ public class vendor_lib extends script.base_script
         location here = getLocation(controller);
         return getContainedBy(controller) == here.cell;
     }
+
     public static boolean removeObjectFromController(obj_id controller, obj_id greeter) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -807,6 +838,7 @@ public class vendor_lib extends script.base_script
         removeObjVar(controller, "unmoveable");
         return true;
     }
+
     public static boolean updateGreeterFunctionality(obj_id greeter) throws InterruptedException
     {
         blog("vendor_lib.updateGreeterFunctionality init");
@@ -829,6 +861,7 @@ public class vendor_lib extends script.base_script
         }
         return true;
     }
+
     public static boolean colorizeGreeterFromWidget(obj_id player, obj_id greeter, String params) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -865,6 +898,7 @@ public class vendor_lib extends script.base_script
         utils.removeScriptVar(player, vendor_lib.GREETER_PLAYTERCOLOR_SCRVAR);
         return true;
     }
+
     public static boolean colorizeGreeterFromController(obj_id controller, obj_id greeter) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -890,6 +924,7 @@ public class vendor_lib extends script.base_script
         }
         return true;
     }
+
     public static boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

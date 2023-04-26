@@ -6,67 +6,77 @@ import java.util.Vector;
 
 public class space_battlefield extends script.base_script
 {
-    public space_battlefield()
-    {
-    }
     public static final float RESET_TIME = 90;
     public static final int STATE_IMPERIAL = 1;
     public static final int STATE_REBEL = 0;
     public static final int PHASE_ESCORT = 0;
     public static final int PHASE_CONTROL = 1;
     public static final int PHASE_DESTROY = 2;
-    public static final int[] PHASE_DURATIONS = 
-    {
-        9600,
-        9600,
-        -1
-    };
+    public static final int[] PHASE_DURATIONS =
+            {
+                    9600,
+                    9600,
+                    -1
+            };
     public static final int POINTS_PER_TRANSPORT = 100;
     public static final int POINTS_PER_KILL = 1;
     public static final int POINTS_FOR_STARDESTROYER = 100000;
+    public space_battlefield()
+    {
+    }
+
     public static void battlefieldCompleted(obj_id objManager, int intCompletionId) throws InterruptedException
     {
         CustomerServiceLog("battlefield", "Battlefield Completed and resetting with id " + intCompletionId);
         obj_id[] objShips = getObjectsInRange(getLocation(objManager), 320000);
-        for (obj_id objShip : objShips) {
-            if (!space_utils.isPlayerControlledShip(objShip)) {
-                if (hasObjVar(objShip, "ship.shipName")) {
-                    if (!hasObjVar(objShip, "intNoCleanup")) {
+        for (obj_id objShip : objShips)
+        {
+            if (!space_utils.isPlayerControlledShip(objShip))
+            {
+                if (hasObjVar(objShip, "ship.shipName"))
+                {
+                    if (!hasObjVar(objShip, "intNoCleanup"))
+                    {
                         float fltTime = rand(1, 120);
                         messageTo(objShip, "destroySelf", null, fltTime, false);
                     }
                 }
-            } else {
+            }
+            else
+            {
             }
         }
-        return;
     }
+
     public static void resetSpaceBattlefield(obj_id objManager) throws InterruptedException
     {
         LOG("space", "RESETTING");
         utils.removeScriptVar(objManager, "intResetting");
-        obj_id objSpaceStations[] = getAllObjectsWithScript(getLocation(objManager), 320000, "space.battlefields.battlefield_station");
+        obj_id[] objSpaceStations = getAllObjectsWithScript(getLocation(objManager), 320000, "space.battlefields.battlefield_station");
         if (objSpaceStations != null)
         {
-            for (obj_id objSpaceStation : objSpaceStations) {
+            for (obj_id objSpaceStation : objSpaceStations)
+            {
                 setObjVar(objSpaceStation, "intCleaningUp", 1);
                 detachScript(objSpaceStation, "space.battlefields.battlefield_spawner");
                 detachScript(objSpaceStation, "space.content_tools.spawner");
                 destroyObject(objSpaceStation);
             }
         }
-        obj_id objDestroyers[] = getAllObjectsWithScript(getLocation(objManager), 320000, "space.battlefields.battlefield_star_destroyer");
+        obj_id[] objDestroyers = getAllObjectsWithScript(getLocation(objManager), 320000, "space.battlefields.battlefield_star_destroyer");
         if (objDestroyers != null)
         {
-            for (obj_id objDestroyer : objDestroyers) {
+            for (obj_id objDestroyer : objDestroyers)
+            {
                 setObjVar(objDestroyer, "intCleaningUp", 1);
                 destroyObject(objDestroyer);
             }
         }
-        obj_id objStationEggs[] = getAllObjectsWithObjVar(getLocation(objManager), 320000, "intStationRespawner");
+        obj_id[] objStationEggs = getAllObjectsWithObjVar(getLocation(objManager), 320000, "intStationRespawner");
         if (objStationEggs != null)
         {
-            for (obj_id objStationEgg : objStationEggs) {
+            for (obj_id objStationEgg : objStationEggs)
+            {
                 String strObjVars = utils.getStringLocalVar(objStationEgg, "strObjVars");
                 String strScripts = utils.getStringLocalVar(objStationEgg, "strScripts");
                 String strTemplate = utils.getStringLocalVar(objStationEgg, "strTemplate");
@@ -76,18 +86,24 @@ public class space_battlefield extends script.base_script
                 LOG("space", "MADE STATION " + objStation);
                 setPackedObjvars(objStation, strObjVars);
                 space_create.setupShipFromObjVars(objStation);
-                if (hasObjVar(objStation, "intCleaningUp")) {
+                if (hasObjVar(objStation, "intCleaningUp"))
+                {
                     removeObjVar(objStation, "intCleaningUp");
                 }
-                if (!strScripts.equals("")) {
+                if (!strScripts.equals(""))
+                {
                     String[] strScriptArray = split(strScripts, ',');
-                    for (String s : strScriptArray) {
+                    for (String s : strScriptArray)
+                    {
                         String script = s;
-                        if (script.contains("script.")) {
+                        if (script.contains("script."))
+                        {
                             script = script.substring(7);
                         }
-                        if (!script.equals("")) {
-                            if (!hasScript(objStation, script)) {
+                        if (!script.equals(""))
+                        {
+                            if (!hasScript(objStation, script))
+                            {
                                 attachScript(objStation, script);
                             }
                         }
@@ -97,7 +113,7 @@ public class space_battlefield extends script.base_script
                 destroyObject(objStationEgg);
             }
         }
-        else 
+        else
         {
             LOG("space", "NO EGGS");
         }
@@ -106,14 +122,15 @@ public class space_battlefield extends script.base_script
         LOG("space", "RESETTING on " + objManager);
         messageTo(objManager, "nextPhase", dctParams, 1, false);
         resetCounters();
-        return;
     }
+
     public static void doBattleFieldTransition(obj_id objShip, obj_id objStation) throws InterruptedException
     {
         LOG("space", "Transition 1");
         String strName = getStringObjVar(objStation, "strName");
         doBattleFieldTransition(objShip, objStation, strName);
     }
+
     public static void doBattleFieldTransition(obj_id objShip, obj_id objStation, String strOverloadName) throws InterruptedException
     {
         LOG("space", "Transition 2");
@@ -141,7 +158,7 @@ public class space_battlefield extends script.base_script
                 locTest = space_utils.getLocationFromTransform(trTest);
                 setObjVar(objShip, "battlefield.locRespawnLocation", locTest);
             }
-            else 
+            else
             {
                 setObjVar(objShip, "battlefield.locRespawnLocation", getLocation(objShip));
             }
@@ -158,12 +175,12 @@ public class space_battlefield extends script.base_script
             CustomerServiceLog("battlefield", "%TU " + objShip + " is Entering the Deep Space zone from station at " + getLocation(objStation), getOwner(objShip));
             warpPlayer(getPilotId(objShip), strArea, locTest.x, locTest.y, locTest.z, null, locTest.x, locTest.y, locTest.z);
         }
-        else 
+        else
         {
             LOG("space", "Can't transition");
         }
-        return;
     }
+
     public static void doKesselTransition(obj_id objShip, obj_id objStation) throws InterruptedException
     {
         if (space_utils.isBasicShip(objShip))
@@ -191,8 +208,8 @@ public class space_battlefield extends script.base_script
         locTest.z = locTest.z + rand(-200, 200);
         locTest.area = "space_light1";
         warpPlayer(getPilotId(objShip), locTest.area, locTest.x, locTest.y, locTest.z, null, locTest.x, locTest.y, locTest.z);
-        return;
     }
+
     public static void doBattleFieldCommandTransition(obj_id objShip, obj_id player, String zone, String factionEntry) throws InterruptedException
     {
         String strX = "fltX";
@@ -215,7 +232,7 @@ public class space_battlefield extends script.base_script
             locTest = space_utils.getLocationFromTransform(trTest);
             setObjVar(objShip, "battlefield.locRespawnLocation", locTest);
         }
-        else 
+        else
         {
             setObjVar(objShip, "battlefield.locRespawnLocation", getLocation(objShip));
         }
@@ -229,20 +246,21 @@ public class space_battlefield extends script.base_script
         locTest.z = locTest.z + rand(-200, 200);
         locTest.area = zone;
         warpPlayer(getPilotId(objShip), zone, locTest.x, locTest.y, locTest.z, null, locTest.x, locTest.y, locTest.z);
-        return;
     }
+
     public static boolean isInBattlefield(obj_id objShip) throws InterruptedException
     {
         return isSpaceBattlefieldZone();
     }
+
     public static void cleanupBattlefieldMember(obj_id objShip) throws InterruptedException
     {
         setObjVar(objShip, "locEntryLocation", getLocation(objShip));
         location locEntryLocation = getLocationObjVar(objShip, "locEntryLocation");
         removeObjVar(objShip, "locEntryLocation");
         setLocation(objShip, locEntryLocation);
-        return;
     }
+
     public static boolean canTransitionToBattlefield(obj_id objShip, obj_id objStation) throws InterruptedException
     {
         if (space_utils.isBasicShip(objShip))
@@ -262,7 +280,7 @@ public class space_battlefield extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             LOG("testing", "badFaction");
             Vector objPlayers = space_transition.getContainedPlayers(objShip, null);
@@ -271,7 +289,7 @@ public class space_battlefield extends script.base_script
                 string_id strSpam = new string_id("space/space_battlefields", "not_correct_faction_group");
                 space_utils.sendSystemMessageShip(objShip, strSpam, true, false, false, false);
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("space/space_battlefields", "not_correct_faction_single");
                 space_utils.sendSystemMessageShip(objShip, strSpam, true, false, false, false);
@@ -279,10 +297,12 @@ public class space_battlefield extends script.base_script
         }
         return false;
     }
+
     public static boolean isCorrectFactionForStation(obj_id objShip, obj_id objStation) throws InterruptedException
     {
         return true;
     }
+
     public static int canAffordPrestigePointCost(obj_id objShip, obj_id objStation, String strType) throws InterruptedException
     {
         String strName = getStringObjVar(objStation, "strName");
@@ -295,11 +315,12 @@ public class space_battlefield extends script.base_script
         {
             return intTotalCost * -1;
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static int canAffordPrestigePointCost(obj_id objShip, obj_id objStation) throws InterruptedException
     {
         String strName = getStringObjVar(objStation, "strName");
@@ -307,6 +328,7 @@ public class space_battlefield extends script.base_script
         String strType = dctStationInfo.getString("strPrestigeType");
         return canAffordPrestigePointCost(objShip, objStation, strType);
     }
+
     public static int getPrestigeCostForTransition(obj_id objPlayer, obj_id objStation) throws InterruptedException
     {
         obj_id objShip = getPilotedShip(objPlayer);
@@ -315,10 +337,12 @@ public class space_battlefield extends script.base_script
         int intPointCost = dctStationInfo.getInt("intPointCost");
         return intPointCost;
     }
+
     public static int getPrestigeCostForTransition(obj_id objShip, obj_id objStation, int intPointCost) throws InterruptedException
     {
         return intPointCost;
     }
+
     public static boolean isInRebelShip(obj_id objPlayer) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(objPlayer);
@@ -327,20 +351,14 @@ public class space_battlefield extends script.base_script
             return false;
         }
         int intTest = shipGetSpaceFaction(objShip);
-        if (intTest == (370444368))
-        {
-            return true;
-        }
-        return false;
+        return intTest == (370444368);
     }
+
     public static boolean isInNeutralShip(obj_id objPlayer) throws InterruptedException
     {
-        if (!isInImperialShip(objPlayer) && (!isInRebelShip(objPlayer)))
-        {
-            return true;
-        }
-        return false;
+        return !isInImperialShip(objPlayer) && (!isInRebelShip(objPlayer));
     }
+
     public static boolean isInImperialShip(obj_id objPlayer) throws InterruptedException
     {
         obj_id objShip = space_transition.getContainingShip(objPlayer);
@@ -357,10 +375,12 @@ public class space_battlefield extends script.base_script
         LOG("testing", "Returning ");
         return false;
     }
+
     public static obj_id getManagerObject() throws InterruptedException
     {
         return getNamedObject("content_manager");
     }
+
     public static void sendNextPhaseNotification(obj_id self) throws InterruptedException
     {
         int intPhase = getIntObjVar(self, "intPhase");
@@ -385,15 +405,15 @@ public class space_battlefield extends script.base_script
                 LOG("space", "Notifying of nerxtphase");
                 return;
             }
-            else 
+            else
             {
                 dictionary dctParams = new dictionary();
                 LOG("space", "notifying of next phase with delay " + (intDuration - intDifference));
                 messageTo(self, "nextPhase", dctParams, intDuration - intDifference, false);
             }
         }
-        return;
     }
+
     public static void doDestroyerPhase(obj_id objManager) throws InterruptedException
     {
         obj_id[] objStations = getAllObjectsWithScript(getLocation(objManager), 320000, "space.battlefields.battlefield_station");
@@ -422,14 +442,13 @@ public class space_battlefield extends script.base_script
         space_combat.setupCapitalShipFromTurretDefinition(objStarDestroyer, "star_destroyer");
         setObjVar(objStarDestroyer, "intNoCleanup", 1);
         CustomerServiceLog("battlefield", objStarDestroyer + " :Star Destroyer Spawned!");
-        return;
     }
+
     public static void resetCounters() throws InterruptedException
     {
         obj_id objContentManager = space_battlefield.getManagerObject();
         removeObjVar(objContentManager, "intImperialEscortsCompleted");
         removeObjVar(objContentManager, "intRebelEscortsCompleted");
         removeObjVar(objContentManager, "intImperialShipCount");
-        return;
     }
 }

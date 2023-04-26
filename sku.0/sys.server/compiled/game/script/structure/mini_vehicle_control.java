@@ -7,15 +7,18 @@ import script.obj_id;
 
 public class mini_vehicle_control extends script.base_script
 {
+    public static final String VEHICLE_ID = "mini_vehicle.vehicle";
+
     public mini_vehicle_control()
     {
     }
-    public static final String VEHICLE_ID = "mini_vehicle.vehicle";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkVehicleId", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -24,6 +27,7 @@ public class mini_vehicle_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -32,6 +36,7 @@ public class mini_vehicle_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkVehicleId(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(getObjIdObjVar(self, VEHICLE_ID)))
@@ -40,6 +45,7 @@ public class mini_vehicle_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerMiniVehicleReceived(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) && !exists(self))
@@ -71,6 +77,7 @@ public class mini_vehicle_control extends script.base_script
         broadcastMessage("handleActivateVehicle", new dictionary());
         return SCRIPT_CONTINUE;
     }
+
     public int handlerMiniVehicleLost(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) && !exists(self))

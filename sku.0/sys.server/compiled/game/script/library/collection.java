@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class collection extends script.base_script
 {
-    public collection()
-    {
-    }
     public static final String COLLECTION_REWARD_TABLE = "datatables/collection/rewards.iff";
     public static final String COLLECTION_TABLE = "datatables/collection/collection.iff";
     public static final String COLLECTION_NPC_TABLE = "datatables/collection/collection_npc.iff";
@@ -71,21 +68,25 @@ public class collection extends script.base_script
     public static final string_id SID_NOT_CLOSE_ENOUGH = new string_id("collection", "not_close_enough");
     public static final string_id SID_ALREADY_HAVE_SLOT = new string_id("collection", "already_have_slot");
     public static final string_id SID_REPORT_CONSUME_ITEM_FAIL = new string_id("collection", "report_consume_item_fail");
-    public static final String[] ICE_CREAM_BUFF_ARRAY = 
-    {
-        "item_ice_cream_buff_debuff_01_01",
-        "item_ice_cream_buff_forage_buff_01_01",
-        "item_ice_cream_buff_health_01_01",
-        "item_ice_cream_buff_action_01_01",
-        "item_ice_cream_buff_xp_bonus_01_01",
-        "item_ice_cream_buff_remove_weakened_01_01",
-        "item_ice_cream_buff_remove_debuff_01_01",
-        "item_ice_cream_buff_action_reduction_01_01"
-    };
+    public static final String[] ICE_CREAM_BUFF_ARRAY =
+            {
+                    "item_ice_cream_buff_debuff_01_01",
+                    "item_ice_cream_buff_forage_buff_01_01",
+                    "item_ice_cream_buff_health_01_01",
+                    "item_ice_cream_buff_action_01_01",
+                    "item_ice_cream_buff_xp_bonus_01_01",
+                    "item_ice_cream_buff_remove_weakened_01_01",
+                    "item_ice_cream_buff_remove_debuff_01_01",
+                    "item_ice_cream_buff_action_reduction_01_01"
+            };
     public static final String FRYER_BUFF_TYPE = "ice_cream_category";
     public static final int ICE_CREAM_ALL_PLAYERS = 0;
     public static final int ICE_CREAM_DOMESTICS_ONLY = 1;
     public static final int MAX_RANGE_TO_COLLECT = 5;
+    public collection()
+    {
+    }
+
     public static void blog(String identifier, String text) throws InterruptedException
     {
         if (LOGGING_ENABLED)
@@ -93,6 +94,7 @@ public class collection extends script.base_script
             LOG(identifier, text);
         }
     }
+
     public static boolean grantCollectionReward(obj_id player, String collectionName, boolean canResetCollection) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -128,12 +130,17 @@ public class collection extends script.base_script
         {
             String[] badges = split(slotName, ',');
             blog("COLLECTIONS", "badges.length: " + badges.length + " badges[0]: " + badges[0]);
-            for (String b : badges) {
+            for (String b : badges)
+            {
                 String[] info = getCollectionSlotInfo(b);
-                if ((info != null) || (info.length == COLLECTION_INFO_ARRAY_SIZE) || (info[COLLECTION_INFO_INDEX_BOOK] != null)) {
-                    if (info[COLLECTION_INFO_INDEX_BOOK].equals("badge_book")) {
+                if ((info != null) || (info.length == COLLECTION_INFO_ARRAY_SIZE) || (info[COLLECTION_INFO_INDEX_BOOK] != null))
+                {
+                    if (info[COLLECTION_INFO_INDEX_BOOK].equals("badge_book"))
+                    {
                         badge.grantBadge(player, b);
-                    } else {
+                    }
+                    else
+                    {
                         modifyCollectionSlotValue(player, b, 1);
                     }
                 }
@@ -148,7 +155,7 @@ public class collection extends script.base_script
             spaceType = true;
             xpAmount = xp.grantCollectionSpaceXP(player, collectionName);
         }
-        else 
+        else
         {
             xpAmount = xp.grantCollectionXP(player, collectionName);
         }
@@ -161,7 +168,7 @@ public class collection extends script.base_script
             {
                 xp.grant(player, xp.SPACE_COMBAT_GENERAL, xpAmount, true);
             }
-            else 
+            else
             {
                 xp.grantXpByTemplate(player, xpAmount);
             }
@@ -170,9 +177,11 @@ public class collection extends script.base_script
         if (quest != null && !quest.equals(""))
         {
             String[] quests = split(quest, ',');
-            for (String quest1 : quests) {
+            for (String quest1 : quests)
+            {
                 int result = groundquests.grantQuestNoAcceptUI(player, quest1, false);
-                if (result > 0) {
+                if (result > 0)
+                {
                     logQuestError(player, quest, result);
                 }
             }
@@ -209,23 +218,30 @@ public class collection extends script.base_script
                     setCount(itemId, itemIncrement);
                 }
             }
-            else 
+            else
             {
-                for (String item1 : items) {
-                    if (static_item.isStaticItem(item1)) {
+                for (String item1 : items)
+                {
+                    if (static_item.isStaticItem(item1))
+                    {
                         itemId = createStaticItemWithMessage(player, item1, collectionName, pp);
-                        if (!isValidId(itemId)) {
-                            return false;
-                        }
-                        utils.addElement(allNewObjectsResizable, itemId);
-                    } else {
-                        itemId = createTemplateItemWithMessage(player, item1, collectionName, pp);
-                        if (!isValidId(itemId)) {
+                        if (!isValidId(itemId))
+                        {
                             return false;
                         }
                         utils.addElement(allNewObjectsResizable, itemId);
                     }
-                    if (itemIncrement > 1 && hasScript(itemId, AUTO_STACK_SCRIPT)) {
+                    else
+                    {
+                        itemId = createTemplateItemWithMessage(player, item1, collectionName, pp);
+                        if (!isValidId(itemId))
+                        {
+                            return false;
+                        }
+                        utils.addElement(allNewObjectsResizable, itemId);
+                    }
+                    if (itemIncrement > 1 && hasScript(itemId, AUTO_STACK_SCRIPT))
+                    {
                         setCount(itemId, itemIncrement);
                     }
                 }
@@ -237,7 +253,8 @@ public class collection extends script.base_script
         if (command != null && !command.equals(""))
         {
             String[] commands = split(command, ',');
-            for (String command1 : commands) {
+            for (String command1 : commands)
+            {
                 grantCommand(player, command1);
                 CustomerServiceLog("CollectionComplete: ", "Player " + getFirstName(player) + "(" + player + ") has completed " + collectionName + " and was granted Command: " + command + ".");
             }
@@ -247,9 +264,11 @@ public class collection extends script.base_script
             int skillModAmount = dict.getInt("skill_mod_amount");
             int skillModMax = dict.getInt("skill_mod_max");
             String[] skillMods = split(skillMod, ',');
-            for (String skillMod1 : skillMods) {
+            for (String skillMod1 : skillMods)
+            {
                 int currentSkillModAmount = getSkillStatMod(player, skillMod1);
-                if (currentSkillModAmount < skillModMax || skillModMax == -1) {
+                if (currentSkillModAmount < skillModMax || skillModMax == -1)
+                {
                     prose.setStringId(pp, SID_REWARD_SKILL_MOD);
                     prose.setDI(pp, skillModAmount);
                     prose.setTT(pp, new string_id("stat_n", skillMod1));
@@ -264,12 +283,13 @@ public class collection extends script.base_script
             groundquests.sendSignal(player, questSignal);
             CustomerServiceLog("CollectionComplete: ", "Player " + getFirstName(player) + "(" + player + ") has completed " + collectionName + " and was granted QuestSignal " + questSignal + ".");
         }
-        if (canResetCollection == true)
+        if (canResetCollection)
         {
             removeCompletedCollection(player, collectionName);
         }
         return true;
     }
+
     public static boolean updateCraftingSlot(obj_id player, String template) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -302,15 +322,18 @@ public class collection extends script.base_script
         {
             return false;
         }
-        for (String slotName : slotNames) {
-            if (hasCompletedCollectionSlot(player, slotName)) {
+        for (String slotName : slotNames)
+        {
+            if (hasCompletedCollectionSlot(player, slotName))
+            {
                 continue;
             }
             String[] collectionInfo = getCollectionSlotInfo(slotName);
             String collectionName = collectionInfo[COLLECTION_INFO_INDEX_COLLECTION];
             modifyCollectionSlotValue(player, slotName, 1);
             blog("COLLECTIONS", "Updating allslotName " + slotName);
-            if (hasCompletedCollectionSlot(player, slotName)) {
+            if (hasCompletedCollectionSlot(player, slotName))
+            {
                 continue;
             }
             prose_package pp = new prose_package();
@@ -321,6 +344,7 @@ public class collection extends script.base_script
         }
         return true;
     }
+
     public static boolean checkState(obj_id player) throws InterruptedException
     {
         if (getState(player, STATE_COMBAT) == 1)
@@ -340,6 +364,7 @@ public class collection extends script.base_script
         }
         return true;
     }
+
     public static boolean checkDistance(obj_id clickObj, obj_id player, int maxDist) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -357,12 +382,9 @@ public class collection extends script.base_script
             return false;
         }
         float dist = utils.getDistance2D(objLoc, playerLoc);
-        if (dist > maxDist || dist < 0)
-        {
-            return false;
-        }
-        return true;
+        return !(dist > maxDist) && !(dist < 0);
     }
+
     public static boolean giveAreaMobsHate(obj_id collectible, obj_id player) throws InterruptedException
     {
         if (hasObjVar(collectible, "collection.aggro"))
@@ -392,22 +414,28 @@ public class collection extends script.base_script
             return false;
         }
         blog("collection", "length of mobs: " + allMobsCombat.length);
-        for (obj_id obj_id : allMobsCombat) {
-            if (obj_id == player) {
+        for (obj_id obj_id : allMobsCombat)
+        {
+            if (obj_id == player)
+            {
                 continue;
             }
-            if (hasObjVar(obj_id, "ignoreCollector")) {
+            if (hasObjVar(obj_id, "ignoreCollector"))
+            {
                 continue;
             }
-            if (isInvulnerable(obj_id)) {
+            if (isInvulnerable(obj_id))
+            {
                 continue;
             }
-            if (pvpCanAttack(obj_id, player)) {
+            if (pvpCanAttack(obj_id, player))
+            {
                 startCombat(obj_id, player);
             }
         }
         return true;
     }
+
     public static void showNpcCollections(obj_id player, obj_id npc, String columnName) throws InterruptedException
     {
         if (sui.hasPid(player, COL_NPC_PID))
@@ -449,6 +477,7 @@ public class collection extends script.base_script
         int pid = sui.listbox(npc, player, COL_NPC_PROMPT, sui.OK_CANCEL, COL_NPC_TITLE, SUIcollectionNames, "handleCollectionNpc", true);
         sui.setPid(player, pid, COL_NPC_PID);
     }
+
     public static void findAndGrantSlot(obj_id player, obj_id npc, String selectedCollection) throws InterruptedException
     {
         String collectionColumn = "";
@@ -457,7 +486,7 @@ public class collection extends script.base_script
         {
             collectionColumn = getStringObjVar(npc, "collection.columnName");
         }
-        else 
+        else
         {
             return;
         }
@@ -472,6 +501,7 @@ public class collection extends script.base_script
             }
         }
     }
+
     public static boolean checkMaxActive(obj_id player, obj_id npc, String columnName) throws InterruptedException
     {
         HashSet active_collection = new HashSet();
@@ -499,12 +529,9 @@ public class collection extends script.base_script
         }
         String[] activeCollections = new String[active_collection.size()];
         active_collection.toArray(activeCollections);
-        if (activeCollections.length >= 2)
-        {
-            return true;
-        }
-        return false;
+        return activeCollections.length >= 2;
     }
+
     public static boolean npcHasMoreCollections(obj_id player, obj_id npc, String columnName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -544,12 +571,9 @@ public class collection extends script.base_script
         }
         String[] activeOrComplete = new String[playerCollections.size()];
         playerCollections.toArray(activeOrComplete);
-        if (activeOrComplete.length == allCollections.length)
-        {
-            return false;
-        }
-        return true;
+        return activeOrComplete.length != allCollections.length;
     }
+
     public static String[] getAllCollectionsForItem(obj_id collectible) throws InterruptedException
     {
         if (!isIdValid(collectible) || !exists(collectible))
@@ -558,10 +582,12 @@ public class collection extends script.base_script
         }
         String[] baseSlotNames = split(getStringObjVar(collectible, OBJVAR_SLOT_NAME), '|');
         Vector collectionNames = new Vector();
-        for (String baseSlotName : baseSlotNames) {
+        for (String baseSlotName : baseSlotNames)
+        {
             String[] splitSlotNames = split(baseSlotName, ':');
             collection.blog("COLLECTIONS", "splitSlotNames.length " + splitSlotNames.length);
-            for (int j = 0; j < splitSlotNames.length; j += 2) {
+            for (int j = 0; j < splitSlotNames.length; j += 2)
+            {
                 collectionNames.add(splitSlotNames[j]);
             }
         }
@@ -569,6 +595,7 @@ public class collection extends script.base_script
         collectionNames.toArray(availableCollections);
         return availableCollections;
     }
+
     public static String[] getAllSlotsForItem(obj_id collectible) throws InterruptedException
     {
         if (!isIdValid(collectible) || !exists(collectible))
@@ -577,10 +604,12 @@ public class collection extends script.base_script
         }
         String[] baseSlotNames = split(getStringObjVar(collectible, OBJVAR_SLOT_NAME), '|');
         Vector slotNames = new Vector();
-        for (String baseSlotName : baseSlotNames) {
+        for (String baseSlotName : baseSlotNames)
+        {
             String[] splitSlotNames = split(baseSlotName, ':');
             collection.blog("COLLECTIONS", "splitSlotNames.length " + splitSlotNames.length);
-            for (int j = 0; j < splitSlotNames.length; j += 2) {
+            for (int j = 0; j < splitSlotNames.length; j += 2)
+            {
                 slotNames.add(splitSlotNames[j + 1]);
             }
         }
@@ -588,6 +617,7 @@ public class collection extends script.base_script
         slotNames.toArray(availableSlots);
         return availableSlots;
     }
+
     public static String[] getAllAvailableCollectionsForItem(obj_id player, obj_id collectible) throws InterruptedException
     {
         if (!isIdValid(collectible) || !exists(collectible))
@@ -596,14 +626,19 @@ public class collection extends script.base_script
         }
         String[] baseSlotNames = split(getStringObjVar(collectible, OBJVAR_SLOT_NAME), '|');
         Vector collectionNames = new Vector();
-        for (String baseSlotName : baseSlotNames) {
+        for (String baseSlotName : baseSlotNames)
+        {
             String[] splitSlotNames = split(baseSlotName, ':');
             collection.blog("COLLECTIONS", "splitSlotNames.length " + splitSlotNames.length);
-            for (int j = 0; j < splitSlotNames.length; j += 2) {
+            for (int j = 0; j < splitSlotNames.length; j += 2)
+            {
                 collection.blog("COLLECTIONS", "splitSlotNames[" + j + "] " + splitSlotNames[j]);
-                if (!hasCompletedCollection(player, splitSlotNames[j])) {
-                    if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1])) {
-                        if (hasCompletedCollectionSlotPrereq(player, splitSlotNames[j + 1])) {
+                if (!hasCompletedCollection(player, splitSlotNames[j]))
+                {
+                    if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1]))
+                    {
+                        if (hasCompletedCollectionSlotPrereq(player, splitSlotNames[j + 1]))
+                        {
                             collectionNames.add(splitSlotNames[j]);
                         }
                     }
@@ -614,6 +649,7 @@ public class collection extends script.base_script
         collectionNames.toArray(availableCollections);
         return availableCollections;
     }
+
     public static String[] getAllAvailableSlotsForItem(obj_id player, obj_id collectible) throws InterruptedException
     {
         if (!isIdValid(collectible) || !exists(collectible))
@@ -622,14 +658,19 @@ public class collection extends script.base_script
         }
         String[] baseSlotNames = split(getStringObjVar(collectible, OBJVAR_SLOT_NAME), '|');
         Vector slotNames = new Vector();
-        for (String baseSlotName : baseSlotNames) {
+        for (String baseSlotName : baseSlotNames)
+        {
             String[] splitSlotNames = split(baseSlotName, ':');
             collection.blog("COLLECTIONS", "splitSlotNames.length " + splitSlotNames.length);
-            for (int j = 0; j < splitSlotNames.length; j += 2) {
+            for (int j = 0; j < splitSlotNames.length; j += 2)
+            {
                 collection.blog("COLLECTIONS", "splitSlotNames[" + j + "] " + splitSlotNames[j]);
-                if (!hasCompletedCollection(player, splitSlotNames[j])) {
-                    if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1])) {
-                        if (hasCompletedCollectionSlotPrereq(player, splitSlotNames[j + 1])) {
+                if (!hasCompletedCollection(player, splitSlotNames[j]))
+                {
+                    if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1]))
+                    {
+                        if (hasCompletedCollectionSlotPrereq(player, splitSlotNames[j + 1]))
+                        {
                             slotNames.add(splitSlotNames[j + 1]);
                         }
                     }
@@ -640,6 +681,7 @@ public class collection extends script.base_script
         slotNames.toArray(availableSlots);
         return availableSlots;
     }
+
     public static boolean removeCollectionForRealsies(obj_id player, String collectionName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -651,13 +693,15 @@ public class collection extends script.base_script
             return false;
         }
         String[] slotsInCollection = getAllCollectionSlotsInCollection(collectionName);
-        for (String s : slotsInCollection) {
+        for (String s : slotsInCollection)
+        {
             long collectionSlotValue = getCollectionSlotValue(player, s) * -1;
             modifyCollectionSlotValue(player, s, collectionSlotValue);
         }
         sendSystemMessage(player, COLLECTION_CLEARED);
         return true;
     }
+
     public static boolean revokeThenGrantCollection(obj_id player, String collectionName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -669,7 +713,8 @@ public class collection extends script.base_script
             return false;
         }
         String[] slotsInCollection = getAllCollectionSlotsInCollection(collectionName);
-        for (String s : slotsInCollection) {
+        for (String s : slotsInCollection)
+        {
             long collectionSlotNegativeValue = getCollectionSlotValue(player, s) * -1;
             long collectionSlotPostiveValue = getCollectionSlotValue(player, s);
             modifyCollectionSlotValue(player, s, collectionSlotNegativeValue);
@@ -678,6 +723,7 @@ public class collection extends script.base_script
         sendSystemMessageTestingOnly(player, "Collection Revoked and Regranted.");
         return true;
     }
+
     public static boolean removeCollection(obj_id player, String collectionName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -694,7 +740,8 @@ public class collection extends script.base_script
             return false;
         }
         String[] slotsInCollection = getAllCollectionSlotsInCollection(collectionName);
-        for (String s : slotsInCollection) {
+        for (String s : slotsInCollection)
+        {
             long collectionSlotValue = getCollectionSlotValue(player, s) * -1;
             modifyCollectionSlotValue(player, s, collectionSlotValue);
         }
@@ -702,6 +749,7 @@ public class collection extends script.base_script
         CustomerServiceLog("Collection: ", "Player " + getFirstName(player) + "(" + player + ") has voluntarily reset their collection: " + collectionName);
         return true;
     }
+
     public static boolean removeCompletedCollection(obj_id player, String collectionName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -717,7 +765,8 @@ public class collection extends script.base_script
             return false;
         }
         String[] slotsInCollection = getAllCollectionSlotsInCollection(collectionName);
-        for (String s : slotsInCollection) {
+        for (String s : slotsInCollection)
+        {
             long collectionSlotValue = getCollectionSlotValue(player, s) * -1;
             modifyCollectionSlotValue(player, s, collectionSlotValue);
         }
@@ -728,6 +777,7 @@ public class collection extends script.base_script
         CustomerServiceLog("Collection: ", "Player " + getFirstName(player) + "(" + player + ") has voluntarily reset their collection: " + collectionName);
         return true;
     }
+
     public static void showNpcCollectionsRemoval(obj_id player, obj_id npc, String columnName) throws InterruptedException
     {
         if (sui.hasPid(player, COL_NPC_PID))
@@ -757,6 +807,7 @@ public class collection extends script.base_script
         int pid = sui.listbox(npc, player, SUI_DELETE_PROMPT, sui.OK_CANCEL, SUI_DELETE_TITLE, SUIcollectionNames, "handleCollectionRemoval", true);
         sui.setPid(player, pid, COL_NPC_PID);
     }
+
     public static boolean npcHasCollectionsToRemove(obj_id player, obj_id npc, String columnName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -792,25 +843,25 @@ public class collection extends script.base_script
         }
         String[] activeCollections = new String[active_collection.size()];
         active_collection.toArray(activeCollections);
-        if (activeCollections.length > 0)
-        {
-            return true;
-        }
-        return false;
+        return activeCollections.length > 0;
     }
+
     public static boolean spaceGetCreditForKills(obj_id player, String[] slotNames) throws InterruptedException
     {
         if (slotNames == null || slotNames.length <= 0)
         {
             return false;
         }
-        for (String slotName : slotNames) {
-            if (!hasCompletedCollectionSlot(player, slotName)) {
+        for (String slotName : slotNames)
+        {
+            if (!hasCompletedCollectionSlot(player, slotName))
+            {
                 modifyCollectionSlotValue(player, slotName, 1);
             }
         }
         return true;
     }
+
     public static boolean logQuestError(obj_id player, String quest, int result) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -862,6 +913,7 @@ public class collection extends script.base_script
         blog("collection", "Quest Error: " + s);
         return true;
     }
+
     public static boolean entertainerBuffCollection(obj_id buffedPlayerId, obj_id bufferId, float duration) throws InterruptedException
     {
         if (!isIdValid(buffedPlayerId) || !isIdValid(bufferId))
@@ -898,57 +950,70 @@ public class collection extends script.base_script
             sendSystemMessage(bufferId, new string_id("collection", "update_entertainer"));
             return true;
         }
-        else 
+        else
         {
             sendSystemMessage(bufferId, new string_id("collection", "time_too_short"));
             return false;
         }
     }
+
     public static boolean entertainerToken(obj_id buffedPlayerId, obj_id bufferId, float duration) throws InterruptedException
-	{
+    {
         obj_id structure = getTopMostContainer(bufferId);
-        if (!isIdValid(buffedPlayerId) || !isIdValid(bufferId)) {
+        if (!isIdValid(buffedPlayerId) || !isIdValid(bufferId))
+        {
             return false;
         }
-        if ((getLevel(bufferId) < 85) || (getLevel(buffedPlayerId) < 85)){
+        if ((getLevel(bufferId) < 85) || (getLevel(buffedPlayerId) < 85))
+        {
             return false;
         }
-        if (!hasObjVar(structure, "intSpawnBartender")){
+        if (!hasObjVar(structure, "intSpawnBartender"))
+        {
             return false;
         }
-        if (charactersAreSamePlayer(buffedPlayerId, bufferId)){
+        if (charactersAreSamePlayer(buffedPlayerId, bufferId))
+        {
             sendSystemMessageTestingOnly(bufferId, "You will not get a token from yourself.");
             return false;
         }
         String buffedPlayerTemplate = getSkillTemplate(buffedPlayerId);
-        if (buffedPlayerTemplate.startsWith("trader")) {
+        if (buffedPlayerTemplate.startsWith("trader"))
+        {
             buffedPlayerTemplate = "prof_trader";
         }
-        if (buffedPlayerTemplate.startsWith("entertainer")) {
+        if (buffedPlayerTemplate.startsWith("entertainer"))
+        {
             return false;
         }
         int enttokenChance = rand(1, 100);
-        int debuffTracker = rand(1,5);
-        if(isGod(bufferId)){
+        int debuffTracker = rand(1, 5);
+        if (isGod(bufferId))
+        {
             enttokenChance = 100;
         }
-        if (enttokenChance < ENT_TOKEN_ROLL_CHANCE) {
-            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_"+debuffTracker);
+        if (enttokenChance < ENT_TOKEN_ROLL_CHANCE)
+        {
+            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_" + debuffTracker);
             return false;
         }
-        if (duration >= 7200.00) {
-            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_"+debuffTracker);
+        if (duration >= 7200.00)
+        {
+            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_" + debuffTracker);
             //if(isGod(bufferId)){
-              //  sendSystemMessageTestingOnly(bufferId, "You have recieved buff version " + "tok_ent_invis_buff_tracker_"+debuffTracker);
+            //  sendSystemMessageTestingOnly(bufferId, "You have recieved buff version " + "tok_ent_invis_buff_tracker_"+debuffTracker);
             //}
-            static_item.createNewItemFunction("item_entertainer_token_01_01", bufferId, 1-1);
+            static_item.createNewItemFunction("item_entertainer_token_01_01", bufferId, 0);
             sendSystemMessageTestingOnly(bufferId, "You have received a token in appreciation for your performance.");
             return true;
-        } else {
+        }
+        else
+        {
             sendSystemMessage(bufferId, new string_id("collection", "time_too_short"));
             return false;
         }
     }
+
     public static boolean pilotSmuggleTimeCheck(obj_id pilot, obj_id groupMember, obj_id ship, String strChassisType) throws InterruptedException
     {
         if (buff.hasBuff(groupMember, "col_sd_invis_buff_tracker"))
@@ -995,7 +1060,7 @@ public class collection extends script.base_script
                 }
                 return false;
             }
-            else 
+            else
             {
                 nextTimeEligible = currentTime + REQUIRED_TIME_LAPSE;
                 setObjVar(groupMember, COL_HEROIC_SD_SMUGGLE_OBJVAR, nextTimeEligible);
@@ -1008,7 +1073,7 @@ public class collection extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             nextTimeEligible = currentTime + REQUIRED_TIME_LAPSE;
             setObjVar(groupMember, COL_HEROIC_SD_SMUGGLE_OBJVAR, nextTimeEligible);
@@ -1022,10 +1087,12 @@ public class collection extends script.base_script
         }
         return false;
     }
+
     public static boolean collectionResource(obj_id player, String restype) throws InterruptedException
     {
         return collectionResource(player, restype, 0);
     }
+
     public static boolean collectionResource(obj_id player, String restype, int modifier) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1111,6 +1178,7 @@ public class collection extends script.base_script
         sendSystemMessage(player, new string_id("collection", resourceMessage));
         return true;
     }
+
     public static boolean getRandomCollectionItemShowLootBox(obj_id player, obj_id container, String loot_table, String loot_column) throws InterruptedException
     {
         if (!isIdValid(container) || !isIdValid(player))
@@ -1130,11 +1198,12 @@ public class collection extends script.base_script
             return false;
         }
         CustomerServiceLog("CollectionLootChannel", "getRandomCollectionItem - Player: " + player + " Name: " + getName(player) + " Has triggered the creation of a collection object from the collection system. The object: " + collectionItem + " Name: " + getName(collectionItem) + " has been placed in the container: " + container);
-        obj_id objArrray[] = new obj_id[1];
+        obj_id[] objArrray = new obj_id[1];
         objArrray[0] = collectionItem;
         showLootBox(player, objArrray);
         return true;
     }
+
     public static boolean getRandomCollectionItem(obj_id player, obj_id container, String loot_table, String loot_column) throws InterruptedException
     {
         if (!isIdValid(container) || !isIdValid(player))
@@ -1156,6 +1225,7 @@ public class collection extends script.base_script
         CustomerServiceLog("CollectionLootChannel", "getRandomCollectionItem - Player: " + player + " Name: " + getName(player) + " Has triggered the creation of a collection object from the collection system. The object: " + collectionItem + " Name: " + getName(collectionItem) + " has been placed in the container: " + container);
         return true;
     }
+
     public static obj_id grantRandomCollectionItem(obj_id player, String loot_table, String loot_column) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -1179,7 +1249,7 @@ public class collection extends script.base_script
             CustomerServiceLog("CollectionLootChannel: ", "grantRandomCollectionItem - BrokenLoot: inValid object was created for player " + player + " Name: " + getName(player));
             return obj_id.NULL_ID;
         }
-        else 
+        else
         {
             CustomerServiceLog("CollectionLootChannel", "grantRandomCollectionItem - Player: " + player + " Name: " + getName(player) + " Has received a random collection object from the collection system. The object: " + collectionItem + " Name: " + getName(collectionItem) + " has been placed in the player inventory: " + playerInv);
             prose_package pp = new prose_package();
@@ -1189,6 +1259,7 @@ public class collection extends script.base_script
         }
         return collectionItem;
     }
+
     public static boolean gcwBaseControlCheck(obj_id factionObject, obj_id player) throws InterruptedException
     {
         String playerFaction = factions.getFaction(player);
@@ -1206,7 +1277,7 @@ public class collection extends script.base_script
                 utils.setScriptVar(factionObject, "collection.gcwSlotName", "col_gcw_insurgency_" + planet + "_imperial");
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -1218,16 +1289,17 @@ public class collection extends script.base_script
                 utils.setScriptVar(factionObject, "collection.gcwSlotName", "col_gcw_insurgency_" + planet + "_rebel");
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean canCollectCollectible(obj_id player, obj_id collectible) throws InterruptedException
     {
         if (!isValidId(collectible) || !isValidId(player))
@@ -1281,6 +1353,7 @@ public class collection extends script.base_script
         }
         return true;
     }
+
     public static boolean rewardPlayerCollectionSlot(obj_id player, obj_id collectible) throws InterruptedException
     {
         if (!isValidId(collectible) || !isValidId(player))
@@ -1338,7 +1411,7 @@ public class collection extends script.base_script
         {
             CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectible + ")" + " was consumed into a collection, for player " + getFirstName(player) + "(" + player + ").");
         }
-        else 
+        else
         {
             CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectible + ")" + " was NOT consumed into a collection, for player " + getFirstName(player) + "(" + player + ").");
             sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -1346,6 +1419,7 @@ public class collection extends script.base_script
         }
         return true;
     }
+
     public static obj_id getRandomItem(obj_id player, String[] items, String collectionName, prose_package pp) throws InterruptedException
     {
         int randomChoice = rand(0, items.length - 1);
@@ -1356,6 +1430,7 @@ public class collection extends script.base_script
         }
         return createTemplateItemWithMessage(player, itemToGrant, collectionName, pp);
     }
+
     public static obj_id getWeightedRandomItem(obj_id player, String[] items, String collectionName, prose_package pp) throws InterruptedException
     {
         int randomChoice = 0;
@@ -1370,7 +1445,7 @@ public class collection extends script.base_script
             {
                 continue;
             }
-            else 
+            else
             {
                 break;
             }
@@ -1381,6 +1456,7 @@ public class collection extends script.base_script
         }
         return createTemplateItemWithMessage(player, items[randomChoice], collectionName, pp);
     }
+
     public static obj_id createStaticItemWithMessage(obj_id player, String staticItem, String collectionName, prose_package pp) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player) || staticItem == null || staticItem.equals(""))
@@ -1400,6 +1476,7 @@ public class collection extends script.base_script
         CustomerServiceLog("CollectionComplete: ", "Player " + getFirstName(player) + "(" + player + ") has completed " + collectionName + " and was granted Item: " + staticItem + "(" + itemId + ")" + ".");
         return itemId;
     }
+
     public static obj_id createTemplateItemWithMessage(obj_id player, String templateItem, String collectionName, prose_package pp) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player) || templateItem == null || templateItem.equals(""))
@@ -1423,6 +1500,7 @@ public class collection extends script.base_script
         sendSystemMessageProse(player, pp);
         return itemId;
     }
+
     public static void giveNewbieCommWindow(obj_id player, obj_id object) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(object))
@@ -1444,36 +1522,36 @@ public class collection extends script.base_script
             switch (number)
             {
                 case 1:
-                prose.setStringId(pp, new string_id("collection", "newbie_comm_message_2"));
-                commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 10.0f, player, pp);
-                number++;
-                utils.setScriptVar(player, "newbie_comm_series", number);
-                break;
+                    prose.setStringId(pp, new string_id("collection", "newbie_comm_message_2"));
+                    commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 10.0f, player, pp);
+                    number++;
+                    utils.setScriptVar(player, "newbie_comm_series", number);
+                    break;
                 case 2:
-                prose.setStringId(pp, new string_id("collection", "newbie_comm_message_3"));
-                commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 15.0f, player, pp);
-                number++;
-                utils.setScriptVar(player, "newbie_comm_series", number);
-                break;
+                    prose.setStringId(pp, new string_id("collection", "newbie_comm_message_3"));
+                    commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 15.0f, player, pp);
+                    number++;
+                    utils.setScriptVar(player, "newbie_comm_series", number);
+                    break;
                 case 3:
-                prose.setStringId(pp, new string_id("collection", "newbie_comm_message_4"));
-                commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 12.0f, player, pp);
-                number++;
-                utils.setScriptVar(player, "newbie_comm_series", number);
-                break;
+                    prose.setStringId(pp, new string_id("collection", "newbie_comm_message_4"));
+                    commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 12.0f, player, pp);
+                    number++;
+                    utils.setScriptVar(player, "newbie_comm_series", number);
+                    break;
                 default:
-                break;
+                    break;
             }
         }
-        else 
+        else
         {
             prose_package pp = new prose_package();
             prose.setStringId(pp, new string_id("collection", "newbie_comm_message"));
             commPlayers(object, "object/mobile/r2.iff", "sound/dro_r2_3_danger.snd", 10.0f, player, pp);
             utils.setScriptVar(player, "newbie_comm_series", 1);
         }
-        return;
     }
+
     public static void grantQuestBasedCollections(String questString, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isPlayer(player))
@@ -1490,7 +1568,7 @@ public class collection extends script.base_script
         {
             collectionFaction = "imperialCollection";
         }
-        else 
+        else
         {
             collectionFaction = "neutralCollection";
         }
@@ -1507,6 +1585,5 @@ public class collection extends script.base_script
         {
             modifyCollectionSlotValue(player, collectionName, 1);
         }
-        return;
     }
 }

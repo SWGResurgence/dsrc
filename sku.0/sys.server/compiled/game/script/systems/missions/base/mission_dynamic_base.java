@@ -24,6 +24,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     public static final int MISSION_DIFFICULTY_HARD = 3;
     public static final int MISSION_BOUNTY_DIFFICULTY_JEDI = 4;
     public static final int MISSION_DIFFICULTY_BOSS = 5;
+    //public static final int MISSION_MULTIPLIER = utils.getIntConfigSetting("GameServer", "missionCreditBonus");
+    public static final int MISSION_MULTIPLIER = 2;
     public static final int STRING_ID_QUANTITY = 5;
     public static final String[] PLAYER_SPECIES =
             {
@@ -713,7 +715,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMissionData, "strTargetName", strTargetName);
         setObjVar(objMissionData, "strSpecies", strSpecies);
         float fltVariance = rand(MIN_REWARD_VARIANCE, MAX_REWARD_VARIANCE);
-        fltVariance = fltVariance / 100;
+        fltVariance = fltVariance / 200;
         intDifficulty = intDifficulty + (int) (intDifficulty * fltVariance);
         location locTest = new location();
         String strGoal = "object/tangible/mission/mission_bounty_target.iff";
@@ -722,11 +724,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         int intReward = 0;
         if (intBountyDifficulty > 1)
         {
-            intReward = (intBountyDifficulty * 40) + intDifficulty;
+            intReward = (intBountyDifficulty * 80) + intDifficulty;
         }
         else
         {
-            intReward = 20 + intDifficulty;
+            intReward = 50 + intDifficulty;
         }
         intReward = intReward * BH_MISSION_PAYOUT_BONUS + rand(0, 1000);
         obj_id groupObject = getGroupObject(objCreator);
@@ -2956,7 +2958,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         float fltRewardPercentage = (fltDistance - minRangeReward) / (maxRangeReward - minRangeReward);
         int intRewardDifference = intMaxReward - intMinReward;
         int intReward = intMinReward + (int) (intRewardDifference * fltRewardPercentage);
-        return intReward;
+        return (intReward * MISSION_MULTIPLIER);
     }
 
     public void persistAndRegisterObject(obj_id objObject, obj_id objMission) throws InterruptedException

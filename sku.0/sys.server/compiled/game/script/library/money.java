@@ -7,9 +7,6 @@ import script.string_id;
 
 public class money extends script.base_script
 {
-    public money()
-    {
-    }
     public static final String SCRIPT_PAY_ACTOR = "money.pay.actor";
     public static final String SCRIPT_ACCT_PAY = "money.acct_pay.target";
     public static final String VAR_MONEY_BASE = "money";
@@ -20,12 +17,12 @@ public class money extends script.base_script
     public static final int MT_BANK = 1;
     public static final int MT_TOTAL = 2;
     public static final int MT_MAX = 3;
-    public static final String[] MT_NAME = 
-    {
-        "cash",
-        "bank",
-        "total"
-    };
+    public static final String[] MT_NAME =
+            {
+                    "cash",
+                    "bank",
+                    "total"
+            };
     public static final String HANDLER_NONE = "noHandler";
     public static final String HANDLER_BANK_SUCCESS = "handleBankSuccess";
     public static final String HANDLER_BANK_UNKNOWN_ERROR = "handleBankUnknownError";
@@ -137,6 +134,10 @@ public class money extends script.base_script
     public static final int MILLION = 1000000;
     public static final int BILLION = 1000000000;
     public static final int HUNDRED_MILLION = 100000000;
+    public money()
+    {
+    }
+
     public static boolean deposit(obj_id player, int amt) throws InterruptedException
     {
         if (player != null && amt != 0)
@@ -154,6 +155,7 @@ public class money extends script.base_script
         debugServerConsoleMsg(null, "ERROR in money.scriptlib:deposit - player == null!");
         return false;
     }
+
     public static boolean withdraw(obj_id player, int amt) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -162,6 +164,7 @@ public class money extends script.base_script
         d.put(DICT_BANK_ACTION, BA_WITHDRAW);
         return withdrawCashFromBank(player, amt, HANDLER_BANK_SUCCESS, HANDLER_BANK_WITHDRAW_ERROR, d);
     }
+
     public static boolean cashTo(obj_id player, obj_id target, int amt) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -170,6 +173,7 @@ public class money extends script.base_script
         d.put(DICT_AMOUNT, amt);
         return transferCashTo(player, target, amt, HANDLER_BANK_SUCCESS, HANDLER_CREDIT_TRANSFER_ERROR, d);
     }
+
     public static boolean bankTo(obj_id player, obj_id target, int amt) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -178,6 +182,7 @@ public class money extends script.base_script
         d.put(DICT_AMOUNT, amt);
         return transferBankCreditsTo(player, target, amt, HANDLER_BANK_SUCCESS, HANDLER_BANK_TRANSFER_ERROR, d);
     }
+
     public static boolean bankTo(String acct, obj_id target, int amt) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -189,6 +194,7 @@ public class money extends script.base_script
         utils.moneyInMetric(target, acct, amt);
         return boolReturn;
     }
+
     public static boolean bankTo(obj_id player, String acct, int amt) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -199,6 +205,7 @@ public class money extends script.base_script
         utils.moneyOutMetric(player, acct, amt);
         return boolReturn;
     }
+
     public static boolean bankTo(obj_id player, String acct, int amt, dictionary dctParams) throws InterruptedException
     {
         dctParams.put(DICT_PLAYER_ID, player);
@@ -223,9 +230,9 @@ public class money extends script.base_script
             sendSystemMessageTestingOnly(objSender, "Amt is " + amt);
             if (dctParams != null)
             {
-                sendSystemMessageTestingOnly(objSender, "Params " + dctParams.toString());
+                sendSystemMessageTestingOnly(objSender, "Params " + dctParams);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(objSender, "Params NULL!");
             }
@@ -233,6 +240,7 @@ public class money extends script.base_script
         utils.moneyOutMetric(player, acct, amt);
         return boolReturn;
     }
+
     public static boolean hasFunds(obj_id player, int type, int amt) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -243,27 +251,21 @@ public class money extends script.base_script
         switch (type)
         {
             case MT_CASH:
-            bal = getCashBalance(player);
-            break;
+                bal = getCashBalance(player);
+                break;
             case MT_BANK:
-            bal = getBankBalance(player);
-            break;
+                bal = getBankBalance(player);
+                break;
             case MT_TOTAL:
-            bal = getTotalMoney(player);
-            break;
+                bal = getTotalMoney(player);
+                break;
             default:
-            debugSpeakMsg(player, "money:hasFunds was passed an out of bounds money type");
-            return false;
+                debugSpeakMsg(player, "money:hasFunds was passed an out of bounds money type");
+                return false;
         }
-        if (bal >= amt)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return bal >= amt;
     }
+
     public static boolean covertDeposit(obj_id player, int amt, String returnHandler, dictionary oldparams) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -282,6 +284,7 @@ public class money extends script.base_script
         LOG("money", player + " is attempting to covert deposit " + amt + " credits");
         return depositCashToBank(player, amt, HANDLER_COVERT_SUCCESS, HANDLER_COVERT_ERROR, params);
     }
+
     public static boolean requestPayment(obj_id payer, obj_id target, int amt, String returnHandler, dictionary oldparams, boolean notifySuccess) throws InterruptedException
     {
         if (!isIdValid(payer) || !payer.isLoaded() || !isIdValid(target) || amt < 1)
@@ -316,10 +319,12 @@ public class money extends script.base_script
         }
         return messageTo(payer, HANDLER_PAYMENT_REQUEST, params, 0, isObjectPersisted(payer));
     }
+
     public static boolean requestPayment(obj_id payer, obj_id target, int amt, String returnHandler, dictionary params) throws InterruptedException
     {
         return requestPayment(payer, target, amt, returnHandler, params, true);
     }
+
     public static boolean requestPayment(obj_id payer, String acct, int amt, String returnHandler, dictionary oldparams, boolean notifySuccess) throws InterruptedException
     {
         if (!isIdValid(payer) || !payer.isLoaded() || acct == null || acct.equals("") || amt < 1)
@@ -360,10 +365,12 @@ public class money extends script.base_script
         }
         return messageTo(payer, HANDLER_PAYMENT_REQUEST, params, 0, isObjectPersisted(payer));
     }
+
     public static boolean requestPayment(obj_id payer, String acct, int amt, String returnHandler, dictionary params) throws InterruptedException
     {
         return requestPayment(payer, acct, amt, returnHandler, params, true);
     }
+
     public static boolean pay(obj_id self, obj_id target, int amt, String returnHandler, dictionary oldparams, boolean notifySuccess) throws InterruptedException
     {
         if (!isIdValid(self) || !self.isLoaded() || target == null || amt < 1)
@@ -409,17 +416,19 @@ public class money extends script.base_script
         {
             return transferBankCreditsTo(self, target, amt, HANDLER_PAY_PASS, HANDLER_PAY_FAIL, params);
         }
-        else 
+        else
         {
             int diff = amt - bank;
             incrementPayTally(self, diff);
             return covertDeposit(self, diff, HANDLER_PAY_DEPOSIT, params);
         }
     }
+
     public static boolean pay(obj_id self, obj_id target, int amt, String returnHandler, dictionary params) throws InterruptedException
     {
         return pay(self, target, amt, returnHandler, params, true);
     }
+
     public static boolean pay(obj_id self, String acct, int amt, String returnHandler, dictionary oldparams, boolean notifySuccess) throws InterruptedException
     {
         if (!isIdValid(self) || !self.isLoaded() || acct == null || acct.equals("") || amt < 1)
@@ -466,7 +475,7 @@ public class money extends script.base_script
             utils.moneyOutMetric(self, acct, amt);
             return boolReturn;
         }
-        else 
+        else
         {
             LOG("money", "PAY: " + self + " NSF bank credits to xfer " + amt + " credits to acct: " + acct + " -> covert deposit");
             int diff = amt - bank;
@@ -474,10 +483,12 @@ public class money extends script.base_script
             return covertDeposit(self, diff, HANDLER_PAY_DEPOSIT, params);
         }
     }
+
     public static boolean pay(obj_id self, String acct, int amt, String returnHandler, dictionary params) throws InterruptedException
     {
         return pay(self, acct, amt, returnHandler, params, true);
     }
+
     public static void incrementPayTally(obj_id self, int amt) throws InterruptedException
     {
         if (!isIdValid(self) || amt < 1)
@@ -487,6 +498,7 @@ public class money extends script.base_script
         int tally = getIntObjVar(self, VAR_PAY_TALLY);
         setObjVar(self, VAR_PAY_TALLY, tally + amt);
     }
+
     public static void decrementPayTally(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || params == null || params.isEmpty())
@@ -500,11 +512,12 @@ public class money extends script.base_script
         {
             removeObjVar(self, VAR_PAY_TALLY);
         }
-        else 
+        else
         {
             setObjVar(self, VAR_PAY_TALLY, tally);
         }
     }
+
     public static boolean systemPayout(String acct, obj_id target, int amt, String returnHandler, dictionary oldparams) throws InterruptedException
     {
         if ((acct == null) || (acct.equals("")))
@@ -547,6 +560,7 @@ public class money extends script.base_script
         utils.moneyInMetric(target, acct, amt);
         return boolReturn;
     }
+
     public static boolean bankSuccess(obj_id player, dictionary params) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -566,14 +580,14 @@ public class money extends script.base_script
             switch (bankAction)
             {
                 case BA_DEPOSIT:
-                pp = prose.getPackage(PROSE_DEPOSIT_SUCCESS, amt);
-                break;
+                    pp = prose.getPackage(PROSE_DEPOSIT_SUCCESS, amt);
+                    break;
                 case BA_WITHDRAW:
-                pp = prose.getPackage(PROSE_WITHDRAW_SUCCESS, amt);
-                break;
+                    pp = prose.getPackage(PROSE_WITHDRAW_SUCCESS, amt);
+                    break;
                 case BA_TRANSFER:
-                pp = prose.getPackage(PROSE_TRANSFER_SUCCESS, amt);
-                break;
+                    pp = prose.getPackage(PROSE_TRANSFER_SUCCESS, amt);
+                    break;
             }
         }
         if (pp == null)
@@ -584,10 +598,12 @@ public class money extends script.base_script
         sendSystemMessageProse(player, pp);
         return true;
     }
+
     public static boolean bankSuccess(obj_id player) throws InterruptedException
     {
         return bankSuccess(player, null);
     }
+
     public static boolean bankError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -597,6 +613,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_BANK_ERROR);
         return true;
     }
+
     public static boolean bankWithdrawError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -606,6 +623,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_BANK_WITHDRAW_ERROR);
         return true;
     }
+
     public static boolean bankDepositError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -615,6 +633,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_BANK_DEPOSIT_ERROR);
         return true;
     }
+
     public static boolean bankTransferError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -624,6 +643,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_BANK_TRANSFER_ERROR);
         return true;
     }
+
     public static boolean cashTransferError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -633,6 +653,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_CASH_TRANSFER_ERROR);
         return true;
     }
+
     public static boolean nullTransactionError(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -642,6 +663,7 @@ public class money extends script.base_script
         sendSystemMessage(player, SID_NULL_TRANSACTION_ERROR);
         return true;
     }
+
     public static boolean requestLootAdd(obj_id creature, int amt) throws InterruptedException
     {
         if (!isIdValid(creature) || !isMob(creature) || isPlayer(creature))
@@ -652,6 +674,7 @@ public class money extends script.base_script
         d.put(DICT_AMOUNT, amt);
         return messageTo(creature, HANDLER_REQUEST_LOOT_ADD, d, 0, false);
     }
+
     public static boolean addCreatureLoot(obj_id creature, int amt) throws InterruptedException
     {
         if (!isIdValid(creature) || !isMob(creature) || isPlayer(creature) || amt <= 0)
@@ -664,6 +687,7 @@ public class money extends script.base_script
         utils.moneyInMetric(creature, ACCT_NPC_LOOT, amt);
         return boolReturn;
     }
+
     public static int getReturnCode(dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -673,7 +697,7 @@ public class money extends script.base_script
         java.util.Enumeration e = params.keys();
         while (e.hasMoreElements())
         {
-            String key = (String)e.nextElement();
+            String key = (String) e.nextElement();
             if (key.equals(DICT_CODE))
             {
                 return params.getInt(key);
@@ -681,6 +705,7 @@ public class money extends script.base_script
         }
         return -1;
     }
+
     public static void clearTotalPlayerCredits(obj_id player, String acct) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || acct == null || acct.equals(""))

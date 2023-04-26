@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class performance extends script.base_script
 {
-    public performance()
-    {
-    }
     public static final String DATATABLE_PERFORMANCE = "datatables/performance/performance.iff";
     public static final String DATATABLE_COL_HEAL_WOUND = "healMindWound";
     public static final String DATATABLE_COL_HEAL_SHOCK = "healShockWound";
@@ -101,52 +98,52 @@ public class performance extends script.base_script
     public static final int CURE_CLONING_SICKNESS_XP = 50;
     public static final float PERFORM_XP_GROUP_MOD = 0.33f;
     public static final float INSPIRATION_BONUS = 0.10f;
-    public static final String[] APPLAUSE_POSTIVE = 
-    {
-        "applaud",
-        "bang",
-        "cheer",
-        "clap",
-        "congratulate",
-        "encourage",
-        "softclap",
-        "tiphat"
-    };
-    public static final String[] APPLAUSE_NEGATIVE = 
-    {
-        "bored",
-        "fidget",
-        "frown",
-        "gag",
-        "groan",
-        "hiss",
-        "nausea",
-        "puke",
-        "raspberry",
-        "shake",
-        "wince",
-        "zone"
-    };
-    public static final String[] INSPIRATION_BUFF_ENTERTAINER = 
-    {
-        "general_inspiration",
-        "artisan_inspiration",
-        "entertainer_inspiration"
-    };
-    public static final String[] INSPIRATION_BUFF_DANCER = 
-    {
-        "architect_inspiration",
-        "chef_inspiration",
-        "tailor_inspiration",
-        "merchant_inspiration"
-    };
-    public static final String[] INSPIRATION_BUFF_MUSICIAN = 
-    {
-        "droidengineer_inspiration",
-        "weaponsmith_inspiration",
-        "shipwright_inspiration",
-        "armorsmith_inspiration"
-    };
+    public static final String[] APPLAUSE_POSTIVE =
+            {
+                    "applaud",
+                    "bang",
+                    "cheer",
+                    "clap",
+                    "congratulate",
+                    "encourage",
+                    "softclap",
+                    "tiphat"
+            };
+    public static final String[] APPLAUSE_NEGATIVE =
+            {
+                    "bored",
+                    "fidget",
+                    "frown",
+                    "gag",
+                    "groan",
+                    "hiss",
+                    "nausea",
+                    "puke",
+                    "raspberry",
+                    "shake",
+                    "wince",
+                    "zone"
+            };
+    public static final String[] INSPIRATION_BUFF_ENTERTAINER =
+            {
+                    "general_inspiration",
+                    "artisan_inspiration",
+                    "entertainer_inspiration"
+            };
+    public static final String[] INSPIRATION_BUFF_DANCER =
+            {
+                    "architect_inspiration",
+                    "chef_inspiration",
+                    "tailor_inspiration",
+                    "merchant_inspiration"
+            };
+    public static final String[] INSPIRATION_BUFF_MUSICIAN =
+            {
+                    "droidengineer_inspiration",
+                    "weaponsmith_inspiration",
+                    "shipwright_inspiration",
+                    "armorsmith_inspiration"
+            };
     public static final int PERFORMANCE_EFFECT_DAZZLE = 1;
     public static final int PERFORMANCE_EFFECT_DISTRACT = 2;
     public static final int PERFORMANCE_EFFECT_SPOT_LIGHT = 3;
@@ -334,6 +331,10 @@ public class performance extends script.base_script
     public static final string_id SID_PERFORM_CC_QUERY_TITLE = new string_id("performance", "cc_query_t");
     public static final string_id BUFF_TIME_FAILED = new string_id("performance", "buff_time_failed");
     public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
+    public performance()
+    {
+    }
+
     public static void stopInspiration(obj_id actor) throws InterruptedException
     {
         int inspireBuffCrc = buff.getBuffOnTargetFromGroup(actor, "inspiration");
@@ -344,6 +345,7 @@ public class performance extends script.base_script
             utils.removeScriptVar(actor, "performance.inspireMaxReached");
         }
     }
+
     public static void stopListen(obj_id actor) throws InterruptedException
     {
         obj_id watchTarget = getPerformanceWatchTarget(actor);
@@ -372,6 +374,7 @@ public class performance extends script.base_script
         utils.removeScriptVar(actor, VAR_PERFROM_ALREADY_PAID);
         utils.removeScriptVar(actor, VAR_PERFORM_INSPIRATION);
     }
+
     public static void listen(obj_id actor, obj_id target) throws InterruptedException
     {
         session.logActivity(actor, session.ACTIVITY_BEEN_ENTERTAINED);
@@ -404,7 +407,7 @@ public class performance extends script.base_script
                 sendSystemMessage(actor, new string_id("performance", "deny_cant_pay_cover"));
                 utils.setScriptVar(actor, performance.VAR_PERFORM_PAY_WAIT, 0);
             }
-            else 
+            else
             {
                 int charge = utils.getIntScriptVar(target, performance.VAR_PERFORM_COVERCHARGE);
                 utils.setScriptVar(actor, performance.VAR_PERFORM_PAY_WAIT, charge);
@@ -440,10 +443,12 @@ public class performance extends script.base_script
                 webster.put("listener", actor);
                 messageTo(target, "handleNewPlayerEntertainerAction", webster, 1, false);
                 obj_id[] bandMembers = getBandMembers(target);
-                if (bandMembers != null && bandMembers.length > 0)
+                if (bandMembers != null)
                 {
-                    for (obj_id bandMate : bandMembers) {
-                        if (isIdValid(bandMate)) {
+                    for (obj_id bandMate : bandMembers)
+                    {
+                        if (isIdValid(bandMate))
+                        {
                             messageTo(bandMate, "handleNewPlayerEntertainerAction", webster, 1, false);
                         }
                     }
@@ -455,6 +460,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, target, SID_MUSIC_LISTEN_SELF);
         }
     }
+
     public static void stopWatch(obj_id actor) throws InterruptedException
     {
         obj_id watchTarget = getPerformanceWatchTarget(actor);
@@ -483,6 +489,7 @@ public class performance extends script.base_script
         utils.removeScriptVar(actor, VAR_PERFROM_ALREADY_PAID);
         utils.removeScriptVar(actor, VAR_PERFORM_INSPIRATION);
     }
+
     public static void watch(obj_id actor, obj_id target) throws InterruptedException
     {
         session.logActivity(actor, session.ACTIVITY_BEEN_ENTERTAINED);
@@ -514,7 +521,7 @@ public class performance extends script.base_script
                 sendSystemMessage(actor, new string_id("performance", "deny_cant_pay_cover"));
                 utils.setScriptVar(actor, performance.VAR_PERFORM_PAY_WAIT, 0);
             }
-            else 
+            else
             {
                 int charge = utils.getIntScriptVar(target, performance.VAR_PERFORM_COVERCHARGE);
                 utils.setScriptVar(actor, performance.VAR_PERFORM_PAY_WAIT, charge);
@@ -553,6 +560,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, target, SID_DANCE_WATCH_SELF);
         }
     }
+
     public static void covercharge(obj_id actor, int amount) throws InterruptedException
     {
         if (!hasCommand(actor, "covercharge"))
@@ -565,8 +573,8 @@ public class performance extends script.base_script
         pp = prose.setStringId(pp, SID_CC_START_CHARGE);
         pp = prose.setDI(pp, amount);
         sendSystemMessageProse(actor, pp);
-        return;
     }
+
     public static void startEntertainingPlayer(obj_id actor) throws InterruptedException
     {
         setAnimationMood(actor, "entertained");
@@ -577,11 +585,13 @@ public class performance extends script.base_script
             messageTo(beastBCD, "ownerEntertained", null, 1, false);
         }
     }
+
     public static void stopEntertainingPlayer(obj_id actor) throws InterruptedException
     {
         setAnimationMood(actor, "default");
         detachScript(actor, PERFORMANCE_ENTERTAINED_SCRIPT);
     }
+
     public static boolean checkPlayerEntertained(obj_id actor, String performanceCheck) throws InterruptedException
     {
         LOG("performance_entertained", "Checking to see if still being entertained");
@@ -599,7 +609,7 @@ public class performance extends script.base_script
                         entertained = true;
                     }
                 }
-                else 
+                else
                 {
                     performance.performanceMessageToSelf(actor, dancer, performance.SID_DANCE_WATCH_OUT_OF_RANGE);
                     performance.stopWatch(actor);
@@ -619,7 +629,7 @@ public class performance extends script.base_script
                         entertained = true;
                     }
                 }
-                else 
+                else
                 {
                     performance.performanceMessageToSelf(actor, musician, performance.SID_MUSIC_LISTEN_OUT_OF_RANGE);
                     performance.stopListen(actor);
@@ -633,6 +643,7 @@ public class performance extends script.base_script
         }
         return entertained;
     }
+
     public static int lookupPerformanceIndex(int typeHash, String performanceName, int instrumentNumber) throws InterruptedException
     {
         String lowerPerformanceName = toLower(performanceName);
@@ -655,11 +666,13 @@ public class performance extends script.base_script
         }
         return 0;
     }
+
     public static boolean checkPerformanceType(int typeHash, int performanceIndex) throws InterruptedException
     {
         int rowTypeHash = dataTableGetInt(DATATABLE_PERFORMANCE, performanceIndex - 1, "type");
         return (rowTypeHash == typeHash);
     }
+
     public static int findMatchingPerformanceIndex(int leaderPerformanceType, int instrumentNumber) throws InterruptedException
     {
         if (leaderPerformanceType == 0)
@@ -686,6 +699,7 @@ public class performance extends script.base_script
         }
         return 0;
     }
+
     public static int findMatchingDroidPerformanceIndex(int leaderType, obj_id droid) throws InterruptedException
     {
         if (!pet_lib.isDroidPet(droid))
@@ -697,35 +711,36 @@ public class performance extends script.base_script
             return 0;
         }
         int[] tracks = getIntArrayObjVar(droid, "module_data.playback.tracks");
-        for (int track : tracks) {
+        for (int track : tracks)
+        {
             int index = track;
             index--;
             int instrument = dataTableGetInt(DATATABLE_PERFORMANCE, index, "instrumentAudioId");
             int match = findMatchingPerformanceIndex(leaderType, instrument);
-            if ((match != 0) && (match == track)) {
+            if ((match != 0) && (match == track))
+            {
                 return match;
             }
         }
         return 0;
     }
+
     public static int getInstrumentFromPerformanceType(int type) throws InterruptedException
     {
         type--;
         int instrument = dataTableGetInt(DATATABLE_PERFORMANCE, type, "instrumentAudioId");
         return instrument;
     }
+
     public static boolean isHologramPerformer(obj_id who) throws InterruptedException
     {
         if (isPlayer(who))
         {
             return false;
         }
-        if (utils.hasScriptVar(who, "hologram_performer"))
-        {
-            return true;
-        }
-        return false;
+        return utils.hasScriptVar(who, "hologram_performer");
     }
+
     public static obj_id[] getDanceMembers(obj_id who) throws InterruptedException
     {
         if (!isIdValid(who) || !exists(who))
@@ -744,11 +759,14 @@ public class performance extends script.base_script
         }
         Vector validatedMembers = new Vector();
         validatedMembers.setSize(0);
-        for (obj_id member : members) {
-            if (!isIdValid(member) || !exists(member)) {
+        for (obj_id member : members)
+        {
+            if (!isIdValid(member) || !exists(member))
+            {
                 continue;
             }
-            if (!isPlayer(member) || getDistance(who, member) > 64 || isIncapacitated(member) || isDead(member) || !utils.isProfession(member, utils.ENTERTAINER)) {
+            if (!isPlayer(member) || getDistance(who, member) > 64 || isIncapacitated(member) || isDead(member) || !utils.isProfession(member, utils.ENTERTAINER))
+            {
                 continue;
             }
             utils.addElement(validatedMembers, member);
@@ -761,6 +779,7 @@ public class performance extends script.base_script
         }
         return _validatedMembers;
     }
+
     public static obj_id[] getBandMembers(obj_id who) throws InterruptedException
     {
         obj_id group = getGroupObject(who);
@@ -770,8 +789,10 @@ public class performance extends script.base_script
             if (members != null)
             {
                 int count = 0;
-                for (obj_id member1 : members) {
-                    if (isPlayer(member1) || isHologramPerformer(member1) || (pet_lib.isDroidPet(member1) && hasObjVar(member1, "module_data.playback"))) {
+                for (obj_id member1 : members)
+                {
+                    if (isPlayer(member1) || isHologramPerformer(member1) || (pet_lib.isDroidPet(member1) && hasObjVar(member1, "module_data.playback")))
+                    {
                         ++count;
                     }
                 }
@@ -779,8 +800,10 @@ public class performance extends script.base_script
                 {
                     obj_id[] ret = new obj_id[count];
                     count = 0;
-                    for (obj_id member : members) {
-                        if (isPlayer(member) || isHologramPerformer(member) || (pet_lib.isDroidPet(member) && hasObjVar(member, "module_data.playback"))) {
+                    for (obj_id member : members)
+                    {
+                        if (isPlayer(member) || isHologramPerformer(member) || (pet_lib.isDroidPet(member) && hasObjVar(member, "module_data.playback")))
+                        {
                             ret[count] = member;
                             ++count;
                         }
@@ -798,6 +821,7 @@ public class performance extends script.base_script
         }
         return null;
     }
+
     public static void startPlaying(obj_id actor, int performanceIndex, int performanceStartTime, int instrumentNumber) throws InterruptedException
     {
         dictionary params;
@@ -821,6 +845,7 @@ public class performance extends script.base_script
         params.put("sequence", 0);
         messageTo(actor, "OnPulse", params, PERFORMANCE_HEARTBEAT_TIME, false);
     }
+
     public static void stopPlaying(obj_id actor) throws InterruptedException
     {
         makeOthersStopListening(actor);
@@ -849,6 +874,7 @@ public class performance extends script.base_script
             stopInspiration(actor);
         }
     }
+
     public static void startMusic(obj_id actor, String songName, int instrumentNumber) throws InterruptedException
     {
         session.logActivity(actor, session.ACTIVITY_ENTERTAINED);
@@ -864,7 +890,7 @@ public class performance extends script.base_script
                         removeObjVar(actor, performance.VAR_PERFORM);
                     }
                 }
-                else 
+                else
                 {
                     performanceMessageToSelf(actor, null, SID_ALREADY_PERFORMING_SELF);
                     return;
@@ -878,7 +904,7 @@ public class performance extends script.base_script
                     obj_id master = getMaster(actor);
                     performanceMessageToSelf(master, null, SID_MUSIC_HOLOGRAM_NO_INSTRUMENT);
                 }
-                else 
+                else
                 {
                     performanceMessageToSelf(actor, null, SID_MUSIC_NO_INSTRUMENT);
                 }
@@ -894,18 +920,25 @@ public class performance extends script.base_script
         int performanceIndex = 0;
         int performanceStartTime = 0;
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (player == actor) {
+        for (obj_id player : bandMembers)
+        {
+            if (player == actor)
+            {
                 continue;
             }
-            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+            {
                 continue;
             }
             int memberPerformanceIndex = getPerformanceType(player);
-            if (memberPerformanceIndex != 0) {
-                if (!pet_lib.isDroidPet(actor)) {
+            if (memberPerformanceIndex != 0)
+            {
+                if (!pet_lib.isDroidPet(actor))
+                {
                     performanceIndex = findMatchingPerformanceIndex(memberPerformanceIndex, instrumentNumber);
-                } else {
+                }
+                else
+                {
                     performanceIndex = findMatchingDroidPerformanceIndex(memberPerformanceIndex, actor);
                 }
                 performanceStartTime = getPerformanceStartTime(player);
@@ -932,7 +965,7 @@ public class performance extends script.base_script
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_INVALID_SONG);
             }
-            else 
+            else
             {
                 performanceMessageToMaster(actor, null, SID_MUSIC_TRACK_NOT_AVAILABLE);
             }
@@ -953,7 +986,7 @@ public class performance extends script.base_script
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_LACK_SKILL_SONG_BAND);
             }
-            else 
+            else
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_LACK_SKILL_SONG_SELF);
             }
@@ -970,13 +1003,13 @@ public class performance extends script.base_script
             webster.put("playingMusic", 1);
             messageTo(actor, "handleNewPlayerEntertainerAction", webster, 1, false);
         }
-        if (!!pet_lib.isDroidPet(actor) && !isHologramPerformer(actor))
+        if (pet_lib.isDroidPet(actor) && !isHologramPerformer(actor))
         {
             if (activeBandSong)
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_JOIN_BAND_SELF);
             }
-            else 
+            else
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_START_SELF);
             }
@@ -984,10 +1017,12 @@ public class performance extends script.base_script
             performanceMessageToBandListeners(actor, null, SID_MUSIC_START_OTHER);
         }
     }
+
     public static void startMusic(obj_id actor, String songName) throws InterruptedException
     {
         startMusic(actor, songName, 0);
     }
+
     public static void startBand(obj_id actor, String songName, int instrumentNumber) throws InterruptedException
     {
         if (!pet_lib.isDroidPet(actor))
@@ -1000,7 +1035,7 @@ public class performance extends script.base_script
                     obj_id master = getMaster(actor);
                     performanceMessageToSelf(master, null, SID_MUSIC_HOLOGRAM_NO_INSTRUMENT);
                 }
-                else 
+                else
                 {
                     performanceMessageToSelf(actor, null, SID_MUSIC_NO_INSTRUMENT);
                 }
@@ -1016,12 +1051,15 @@ public class performance extends script.base_script
         int performanceIndex = 0;
         int performanceStartTime = 0;
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+        for (obj_id player : bandMembers)
+        {
+            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+            {
                 continue;
             }
             int memberPerformanceIndex = getPerformanceType(player);
-            if (memberPerformanceIndex != 0) {
+            if (memberPerformanceIndex != 0)
+            {
                 performanceIndex = findMatchingPerformanceIndex(memberPerformanceIndex, instrumentNumber);
                 performanceStartTime = getPerformanceStartTime(player);
                 activeSong = true;
@@ -1061,7 +1099,7 @@ public class performance extends script.base_script
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_LACK_SKILL_SONG_BAND);
             }
-            else 
+            else
             {
                 performanceMessageToSelf(actor, null, SID_MUSIC_LACK_SKILL_SONG_SELF);
             }
@@ -1075,60 +1113,86 @@ public class performance extends script.base_script
             messageTo(actor, "handleNewPlayerEntertainerAction", webster, 1, false);
         }
         boolean bandMemberLackSkill = false;
-        for (obj_id player : bandMembers) {
-            if (player == actor) {
+        for (obj_id player : bandMembers)
+        {
+            if (player == actor)
+            {
                 continue;
             }
-            if (!isPlayer(player) && !pet_lib.isDroidPet(player) && !isHologramPerformer(player)) {
+            if (!isPlayer(player) && !pet_lib.isDroidPet(player) && !isHologramPerformer(player))
+            {
                 continue;
             }
-            if (getPerformanceType(player) != 0) {
-                if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT) && !hasScript(actor, DANCE_HEARTBEAT_SCRIPT)) {
+            if (getPerformanceType(player) != 0)
+            {
+                if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT) && !hasScript(actor, DANCE_HEARTBEAT_SCRIPT))
+                {
                     stopPlaying(actor);
-                    if (hasObjVar(actor, performance.VAR_PERFORM)) {
+                    if (hasObjVar(actor, performance.VAR_PERFORM))
+                    {
                         removeObjVar(actor, performance.VAR_PERFORM);
                     }
-                } else {
+                }
+                else
+                {
                     continue;
                 }
             }
-            if (getDistance(actor, player) > PERFORMANCE_BAND_MEMBER_RANGE) {
+            if (getDistance(actor, player) > PERFORMANCE_BAND_MEMBER_RANGE)
+            {
                 continue;
             }
             int memberInstrumentNumber = 0;
-            if (!pet_lib.isDroidPet(player)) {
+            if (!pet_lib.isDroidPet(player))
+            {
                 memberInstrumentNumber = getInstrumentAudioId(player);
-                if (memberInstrumentNumber == 0) {
+                if (memberInstrumentNumber == 0)
+                {
                     continue;
                 }
             }
             int memberPerformanceIndex = 0;
-            if (!pet_lib.isDroidPet(player)) {
+            if (!pet_lib.isDroidPet(player))
+            {
                 memberPerformanceIndex = findMatchingPerformanceIndex(performanceIndex, memberInstrumentNumber);
-            } else {
+            }
+            else
+            {
                 memberPerformanceIndex = findMatchingDroidPerformanceIndex(performanceIndex, player);
             }
-            if (memberPerformanceIndex != 0) {
-                if (!notShapechanged(actor)) {
+            if (memberPerformanceIndex != 0)
+            {
+                if (!notShapechanged(actor))
+                {
                     continue;
                 }
-                if (!pet_lib.isDroidPet(player) && !canUseInstrument(player, memberPerformanceIndex)) {
+                if (!pet_lib.isDroidPet(player) && !canUseInstrument(player, memberPerformanceIndex))
+                {
                     performanceMessageToSelf(player, null, SID_MUSIC_LACK_SKILL_INSTRUMENT);
                     continue;
                 }
-                if (!pet_lib.isDroidPet(player)) {
-                    if (canPerformSong(player, memberPerformanceIndex)) {
+                if (!pet_lib.isDroidPet(player))
+                {
+                    if (canPerformSong(player, memberPerformanceIndex))
+                    {
                         startPlaying(player, memberPerformanceIndex, performanceStartTime, memberInstrumentNumber);
-                    } else {
+                    }
+                    else
+                    {
                         performanceMessageToSelf(player, null, SID_MUSIC_LACK_SKILL_SONG_BAND);
                         bandMemberLackSkill = true;
                     }
-                } else {
+                }
+                else
+                {
                     memberInstrumentNumber = getInstrumentFromPerformanceType(memberPerformanceIndex);
                     startPlaying(player, memberPerformanceIndex, performanceStartTime, memberInstrumentNumber);
                 }
-            } else {
-                if (pet_lib.isDroidPet(player)) {
+            }
+            else
+            {
+                if (pet_lib.isDroidPet(player))
+                {
                     performanceMessageToMaster(player, null, SID_MUSIC_TRACK_NOT_AVAILABLE);
                 }
             }
@@ -1138,7 +1202,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_MUSIC_BAND_JOIN_SONG_SELF);
             performanceMessageToSelf(actor, null, SID_MUSIC_BAND_JOIN_SONG_MEMBERS);
         }
-        else 
+        else
         {
             performanceMessageToSelf(actor, null, SID_MUSIC_START_BAND_SELF);
             performanceMessageToBand(actor, null, SID_MUSIC_START_BAND_MEMBERS);
@@ -1149,27 +1213,33 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_MUSIC_LACK_SKILL_BAND_MEMBER);
         }
     }
+
     public static void startBand(obj_id actor, String songName) throws InterruptedException
     {
         startBand(actor, songName, 0);
     }
+
     public static void startTroupe(obj_id actor, String danceName) throws InterruptedException
     {
         boolean activeDance = false;
         int performanceIndex = 0;
         int performanceStartTime = 0;
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (hasScript(player, DANCE_HEARTBEAT_SCRIPT)) {
+        for (obj_id player : bandMembers)
+        {
+            if (hasScript(player, DANCE_HEARTBEAT_SCRIPT))
+            {
                 stopDance(player);
             }
         }
-        for (obj_id player : bandMembers) {
+        for (obj_id player : bandMembers)
+        {
             danceName = utils.getStringScriptVar(player, VAR_CURRENT_DANCE);
             utils.removeScriptVar(player, VAR_CURRENT_DANCE);
             startDance(player, danceName);
         }
     }
+
     public static void stopMusic(obj_id actor) throws InterruptedException
     {
         if (hasScript(actor, DANCE_HEARTBEAT_SCRIPT))
@@ -1184,7 +1254,7 @@ public class performance extends script.base_script
             attachScript(actor, POST_PERFORMANCE);
             messageTo(actor, "OnClearOutro", null, PERFORMANCE_OUTRO_ROUNDTIME, false);
         }
-        else 
+        else
         {
             stopPlaying(actor);
             if (hasObjVar(actor, performance.VAR_PERFORM))
@@ -1198,6 +1268,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_MUSIC_NOT_PERFORMING);
         }
     }
+
     public static void stopMusicNow(obj_id actor) throws InterruptedException
     {
         if (hasScript(actor, MUSIC_HEARTBEAT_SCRIPT))
@@ -1211,6 +1282,7 @@ public class performance extends script.base_script
         }
         stopPlaying(actor);
     }
+
     public static void stopBand(obj_id actor) throws InterruptedException
     {
         obj_id[] bandMembers = getBandMembers(actor);
@@ -1219,13 +1291,18 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_MUSIC_PREPARE_STOP_BAND_SELF);
             performanceMessageToBand(actor, null, SID_MUSIC_PREPARE_STOP_BAND_MEMBERS);
             boolean bandStop = false;
-            for (obj_id player : bandMembers) {
-                if (hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+            for (obj_id player : bandMembers)
+            {
+                if (hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+                {
                     specialFlourish(player, SPECIAL_FLOURISH_OUTRO);
                     dictionary params = new dictionary();
-                    if (player == actor) {
+                    if (player == actor)
+                    {
                         params.put("leader", 1);
-                    } else {
+                    }
+                    else
+                    {
                         params.put("leader", 0);
                     }
                     setObjVar(player, VAR_PERFORM_OUTRO, 1);
@@ -1235,6 +1312,7 @@ public class performance extends script.base_script
             }
         }
     }
+
     public static void changeMusic(obj_id actor, String songName, int instrumentNumber) throws InterruptedException
     {
         if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT))
@@ -1255,15 +1333,19 @@ public class performance extends script.base_script
         }
         boolean activeBandSong = false;
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (player == actor) {
+        for (obj_id player : bandMembers)
+        {
+            if (player == actor)
+            {
                 continue;
             }
-            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+            {
                 continue;
             }
             int memberPerformanceIndex = getPerformanceType(player);
-            if (memberPerformanceIndex != 0) {
+            if (memberPerformanceIndex != 0)
+            {
                 activeBandSong = true;
                 break;
             }
@@ -1304,10 +1386,12 @@ public class performance extends script.base_script
         d.put("commandType", HOLOGRAM_COMMAND_CHANGE_SONG);
         broadcastMessage("handleHologramPerformanceCommand", d);
     }
+
     public static void changeMusic(obj_id actor, String songName) throws InterruptedException
     {
         changeMusic(actor, songName, 0);
     }
+
     public static void changeBandMusic(obj_id actor, String songName, int instrumentNumber) throws InterruptedException
     {
         if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT))
@@ -1353,55 +1437,74 @@ public class performance extends script.base_script
         setPerformanceType(actor, performanceIndex);
         queueCommand(actor, (181882275), null, "1", COMMAND_PRIORITY_IMMEDIATE);
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (player == actor) {
+        for (obj_id player : bandMembers)
+        {
+            if (player == actor)
+            {
                 continue;
             }
-            if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT)) {
+            if (!hasScript(actor, MUSIC_HEARTBEAT_SCRIPT))
+            {
                 continue;
             }
-            if (!pet_lib.isDroidPet(player)) {
+            if (!pet_lib.isDroidPet(player))
+            {
                 int memberInstrumentNumber = getInstrumentAudioId(player);
-                if (memberInstrumentNumber == 0) {
+                if (memberInstrumentNumber == 0)
+                {
                     continue;
                 }
                 int memberPerformanceIndex = findMatchingPerformanceIndex(performanceIndex, memberInstrumentNumber);
-                if (!notShapechanged(actor)) {
+                if (!notShapechanged(actor))
+                {
                     stopMusicNow(player);
                 }
-                if (memberPerformanceIndex != 0 && canPerformSong(player, memberPerformanceIndex)) {
-                    if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+                if (memberPerformanceIndex != 0 && canPerformSong(player, memberPerformanceIndex))
+                {
+                    if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+                    {
                         startPlaying(player, memberPerformanceIndex, 1, memberInstrumentNumber);
                     }
                     setPerformanceType(player, memberPerformanceIndex);
                     queueCommand(player, (181882275), null, "1", COMMAND_PRIORITY_IMMEDIATE);
-                } else {
+                }
+                else
+                {
                     performanceMessageToSelf(player, null, SID_MUSIC_LACK_SKILL_SONG_BAND);
                     stopMusicNow(player);
                 }
-                if (!canUseInstrument(player, memberInstrumentNumber)) {
+                if (!canUseInstrument(player, memberInstrumentNumber))
+                {
                     performanceMessageToSelf(player, null, SID_MUSIC_LACK_SKILL_INSTRUMENT);
                     stopMusicNow(player);
                 }
-            } else {
+            }
+            else
+            {
                 int memberPerformanceIndex = findMatchingDroidPerformanceIndex(performanceIndex, player);
-                if (memberPerformanceIndex != 0) {
+                if (memberPerformanceIndex != 0)
+                {
                     setPerformanceType(player, memberPerformanceIndex);
-                } else {
+                }
+                else
+                {
                     performanceMessageToMaster(player, null, SID_MUSIC_TRACK_NOT_AVAILABLE);
                     stopMusicNow(player);
                 }
             }
         }
     }
+
     public static void changeBandMusic(obj_id actor, String songName) throws InterruptedException
     {
         changeBandMusic(actor, songName, 0);
     }
+
     public static void startDance(obj_id actor, String danceName) throws InterruptedException
     {
         startDance(actor, danceName, true);
     }
+
     public static void startDance(obj_id actor, String danceName, boolean displayDances) throws InterruptedException
     {
         session.logActivity(actor, session.ACTIVITY_ENTERTAINED);
@@ -1464,6 +1567,7 @@ public class performance extends script.base_script
         params.put("sequence", 0);
         messageTo(actor, "OnPulse", params, PERFORMANCE_HEARTBEAT_TIME, false);
     }
+
     public static void stopDance(obj_id actor) throws InterruptedException
     {
         int type = getPerformanceType(actor);
@@ -1501,7 +1605,7 @@ public class performance extends script.base_script
             setPerformanceType(actor, 0);
             setPerformanceStartTime(actor, 0);
         }
-        else 
+        else
         {
             if (hasObjVar(actor, performance.VAR_PERFORM))
             {
@@ -1514,28 +1618,36 @@ public class performance extends script.base_script
             stopInspiration(actor);
         }
     }
+
     public static void makeOthersStopWatching(obj_id actor) throws InterruptedException
     {
         obj_id[] watcherToStop = getPerformanceWatchersInRange(actor, PERFORMANCE_HEAL_RANGE);
-        for (obj_id obj_id : watcherToStop) {
-            if (obj_id != actor) {
+        for (obj_id obj_id : watcherToStop)
+        {
+            if (obj_id != actor)
+            {
                 queueCommand(obj_id, (1716628890), null, "", COMMAND_PRIORITY_DEFAULT);
             }
         }
     }
+
     public static void makeOthersStopListening(obj_id actor) throws InterruptedException
     {
         obj_id[] watcherToStop = getPerformanceListenersInRange(actor, PERFORMANCE_HEAL_RANGE);
-        for (obj_id obj_id : watcherToStop) {
-            if (obj_id != actor) {
+        for (obj_id obj_id : watcherToStop)
+        {
+            if (obj_id != actor)
+            {
                 queueCommand(obj_id, (-1025190704), null, "", COMMAND_PRIORITY_DEFAULT);
             }
         }
     }
+
     public static void changeDance(obj_id actor, String danceName) throws InterruptedException
     {
         changeDance(actor, danceName, true);
     }
+
     public static void changeDance(obj_id actor, String danceName, boolean displayDances) throws InterruptedException
     {
         if (danceName.length() < 1)
@@ -1569,6 +1681,7 @@ public class performance extends script.base_script
         d.put("commandType", HOLOGRAM_COMMAND_CHANGE_DANCE);
         broadcastMessage("handleHologramPerformanceCommand", d);
     }
+
     public static void joinBand(obj_id actor) throws InterruptedException
     {
         if (getPerformanceType(actor) == 0)
@@ -1580,15 +1693,19 @@ public class performance extends script.base_script
         int performanceStartTime = 0;
         int instrumentNumber = getInstrumentAudioId(actor);
         obj_id[] bandMembers = getBandMembers(actor);
-        for (obj_id player : bandMembers) {
-            if (player == actor) {
+        for (obj_id player : bandMembers)
+        {
+            if (player == actor)
+            {
                 continue;
             }
-            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT)) {
+            if (!hasScript(player, MUSIC_HEARTBEAT_SCRIPT))
+            {
                 continue;
             }
             int memberPerformanceIndex = getPerformanceType(player);
-            if (memberPerformanceIndex != 0) {
+            if (memberPerformanceIndex != 0)
+            {
                 performanceIndex = findMatchingPerformanceIndex(memberPerformanceIndex, instrumentNumber);
                 performanceStartTime = getPerformanceStartTime(player);
                 activeBandSong = true;
@@ -1601,14 +1718,14 @@ public class performance extends script.base_script
             {
                 setPerformanceStartTime(actor, performanceStartTime);
             }
-            else 
+            else
             {
                 stopPlaying(actor);
                 performanceMessageToSelf(actor, null, SID_MUSIC_JOIN_BAND_STOP);
             }
         }
-        return;
     }
+
     public static void sendNpcsEntertainmentMessage(obj_id actor, String message, String perf_type) throws InterruptedException
     {
         int count = 0;
@@ -1618,12 +1735,16 @@ public class performance extends script.base_script
             dictionary params = new dictionary();
             params.put("entertainer", actor);
             params.put("perf_type", perf_type);
-            for (obj_id npc : npcs) {
-                if (hasScript(npc, "ai.ai")) {
-                    if (!utils.hasScriptVar(npc, "ai.listeningTo")) {
+            for (obj_id npc : npcs)
+            {
+                if (hasScript(npc, "ai.ai"))
+                {
+                    if (!utils.hasScriptVar(npc, "ai.listeningTo"))
+                    {
                         messageTo(npc, message, params, 0, false);
                         count++;
-                        if (count > 4) {
+                        if (count > 4)
+                        {
                             return;
                         }
                     }
@@ -1631,6 +1752,7 @@ public class performance extends script.base_script
             }
         }
     }
+
     public static void flourish(obj_id actor, int index) throws InterruptedException
     {
         if (getPerformanceType(actor) == 0)
@@ -1656,7 +1778,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_FLOURISH_WAIT_SELF);
             return;
         }
-        else 
+        else
         {
             setObjVar(actor, VAR_PERFORM_FLOURISH, 1);
             dictionary params = new dictionary();
@@ -1683,7 +1805,7 @@ public class performance extends script.base_script
         {
             performanceMessageToSelf(actor, null, SID_FLOURISH_PERFORM);
         }
-        else 
+        else
         {
             performanceMessageToSelf(actor, null, SID_FLOURISH_TOO_TIRED);
             return;
@@ -1714,6 +1836,7 @@ public class performance extends script.base_script
         params.put("mistakeChance", getPerformanceMistakeChance(actor));
         messageTo(actor, "OnFlourish", params, 0.0f, false);
     }
+
     public static void specialFlourish(obj_id actor, int index) throws InterruptedException
     {
         if (getPerformanceType(actor) == 0)
@@ -1725,6 +1848,7 @@ public class performance extends script.base_script
         params.put("flourishIndex", index);
         messageTo(actor, "OnSpecialFlourish", params, 0.0f, false);
     }
+
     public static void bandFlourish(obj_id actor, int index, String instrument) throws InterruptedException
     {
         if (getPerformanceType(actor) == 0)
@@ -1744,7 +1868,7 @@ public class performance extends script.base_script
             {
                 instrumentNum = lookupInstrumentNumber(actor, instrument);
             }
-            else 
+            else
             {
                 instrumentNum = getInstrumentFromPerformanceType(getPerformanceType(actor));
             }
@@ -1758,16 +1882,22 @@ public class performance extends script.base_script
             if (isIdValid(group))
             {
                 obj_id[] members = getGroupMemberIds(group);
-                for (obj_id member : members) {
-                    if (!pet_lib.isDroidPet(member)) {
+                for (obj_id member : members)
+                {
+                    if (!pet_lib.isDroidPet(member))
+                    {
                         LOG("performance_music", "My instrument is " + getInstrumentAudioId(member));
-                        if (hasScript(member, MUSIC_HEARTBEAT_SCRIPT) && (getInstrumentAudioId(member) == instrumentNum)) {
+                        if (hasScript(member, MUSIC_HEARTBEAT_SCRIPT) && (getInstrumentAudioId(member) == instrumentNum))
+                        {
                             band_members[band_size] = member;
                             ++band_size;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         int instrumentID = getInstrumentFromPerformanceType(getPerformanceType(member));
-                        if (hasScript(member, MUSIC_HEARTBEAT_SCRIPT) && (instrumentID == instrumentNum)) {
+                        if (hasScript(member, MUSIC_HEARTBEAT_SCRIPT) && (instrumentID == instrumentNum))
+                        {
                             band_members[band_size] = member;
                             ++band_size;
                         }
@@ -1790,7 +1920,7 @@ public class performance extends script.base_script
             {
                 heartbeat_script = JUGGLE_HEARTBEAT_SCRIPT;
             }
-            else 
+            else
             {
                 performanceMessageToSelf(actor, null, SID_FLOURISH_NOT_PERFORMING);
                 return;
@@ -1799,8 +1929,10 @@ public class performance extends script.base_script
             if (isIdValid(group))
             {
                 obj_id[] members = getGroupMemberIds(group);
-                for (obj_id member : members) {
-                    if (hasScript(member, heartbeat_script)) {
+                for (obj_id member : members)
+                {
+                    if (hasScript(member, heartbeat_script))
+                    {
                         band_members[band_size] = member;
                         ++band_size;
                     }
@@ -1823,7 +1955,7 @@ public class performance extends script.base_script
                 performanceMessageToSelf(player, null, SID_FLOURISH_WAIT_SELF);
                 continue;
             }
-            else 
+            else
             {
                 setObjVar(player, VAR_PERFORM_FLOURISH, 1);
                 dictionary params = new dictionary();
@@ -1833,7 +1965,7 @@ public class performance extends script.base_script
             {
                 performanceMessageToSelf(player, null, SID_FLOURISH_PERFORM);
             }
-            else 
+            else
             {
                 performanceMessageToSelf(player, null, SID_FLOURISH_TOO_TIRED);
                 continue;
@@ -1842,14 +1974,14 @@ public class performance extends script.base_script
             {
                 int flourish_count = getIntObjVar(player, VAR_PERFORM_FLOURISH_COUNT);
                 flourish_count++;
-                int flourish_max = (int)(10 / getPerformanceLoopDuration(getPerformanceType(player)));
+                int flourish_max = (int) (10 / getPerformanceLoopDuration(getPerformanceType(player)));
                 if (flourish_count > flourish_max)
                 {
                     flourish_count = flourish_max;
                 }
                 setObjVar(player, VAR_PERFORM_FLOURISH_COUNT, flourish_count);
             }
-            else 
+            else
             {
                 performanceMessageToPerson(player, actor, actor, SID_FLOURISH_PERFORM_BAND_MEMBER);
             }
@@ -1861,7 +1993,7 @@ public class performance extends script.base_script
             {
                 specialFlourish(player, index);
             }
-            else 
+            else
             {
                 params.put("performanceIndex", getPerformanceType(player));
                 params.put("flourishIndex", index);
@@ -1871,10 +2003,11 @@ public class performance extends script.base_script
             }
         }
     }
+
     public static int lookupInstrumentNumber(obj_id actor, String instrument) throws InterruptedException
     {
         int instrumentCount = dataTableGetNumRows(DATATABLE_INSTRUMENT);
-        String instrumentName[] = dataTableGetStringColumn(DATATABLE_INSTRUMENT, DATATABLE_COL_VISIBLE_NAME);
+        String[] instrumentName = dataTableGetStringColumn(DATATABLE_INSTRUMENT, DATATABLE_COL_VISIBLE_NAME);
         for (int i = 0; i < instrumentCount; i++)
         {
             if (instrumentName[i].startsWith(instrument))
@@ -1885,6 +2018,7 @@ public class performance extends script.base_script
         performanceMessageToSelf(actor, null, SID_FLOURISH_INSTRUMENT_UNKNOWN);
         return 0;
     }
+
     public static void effect(obj_id actor, int effectId, int effectLevel) throws InterruptedException
     {
         if (effectLevel < 1)
@@ -1912,50 +2046,60 @@ public class performance extends script.base_script
         params.put("effectLevel", effectLevel);
         messageTo(actor, "OnEffect", params, 0.0f, false);
     }
+
     public static void playEffectTarget(obj_id self, obj_id target, String effectName, string_id effectString) throws InterruptedException
     {
         performanceMessageToSelf(self, null, effectString);
         playClientEffectObj(self, effectName, target, "");
     }
+
     public static void playEffectLoc(obj_id self, location loc, String effectName, string_id effectString) throws InterruptedException
     {
         performanceMessageToSelf(self, null, effectString);
         playClientEffectLoc(self, effectName, loc, 0.0f);
     }
+
     public static int getEffectIndex(int effectId, int effectLevel) throws InterruptedException
     {
         return ((effectId - 1) * 3) + (effectLevel - 1);
     }
+
     public static boolean getEffectPerformReq(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return (dataTableGetInt(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_REQ_PERFORM) == 1);
     }
+
     public static String getEffectPerformanceType(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return dataTableGetString(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_PERFORM_TYPE);
     }
+
     public static int getEffectPerformSkillLevel(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return dataTableGetInt(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_REQ_SKILL_VAL);
     }
+
     public static float getEffectDuration(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return dataTableGetFloat(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_DURATION);
     }
+
     public static int getEffectActionCost(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return dataTableGetInt(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_ACTION_COST);
     }
+
     public static int getEffectTargetType(int effectId, int effectLevel) throws InterruptedException
     {
         int effectIndex = getEffectIndex(effectId, effectLevel);
         return dataTableGetInt(DATATABLE_PERFORMANCE_EFFECT, effectIndex, DATATABLE_COL_EFFECT_TARGET_TYPE);
     }
+
     public static int checkEffectLevel(obj_id actor, int effectId, int effectLevel) throws InterruptedException
     {
         boolean sendMessage = true;
@@ -1995,6 +2139,7 @@ public class performance extends script.base_script
         }
         return effectLevel;
     }
+
     public static void performanceMessageToPerson(obj_id person, obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -2009,6 +2154,7 @@ public class performance extends script.base_script
         }
         sendSystemMessageProse(person, pp);
     }
+
     public static void performanceMessageToMaster(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         if (!pet_lib.isDroidPet(actor))
@@ -2021,44 +2167,54 @@ public class performance extends script.base_script
             performanceMessageToPerson(master, actor, target, message);
         }
     }
+
     public static void performanceMessageToSelf(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         performanceMessageToPerson(actor, actor, target, message);
     }
+
     public static void performanceMessageToArray(obj_id[] people, obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         if (people != null)
         {
-            for (obj_id person : people) {
-                if (person != actor) {
+            for (obj_id person : people)
+            {
+                if (person != actor)
+                {
                     performanceMessageToPerson(person, actor, target, message);
                 }
             }
         }
     }
+
     public static void performanceMessageToBand(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         obj_id[] members = getBandMembers(actor);
         performanceMessageToArray(members, actor, target, message);
     }
+
     public static void performanceMessageToBandListeners(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         obj_id[] members = getBandMembers(actor);
         if (members != null)
         {
-            for (obj_id member : members) {
+            for (obj_id member : members)
+            {
                 performanceMessageToListeners(member, target, message);
             }
         }
     }
+
     public static void performanceMessageToListeners(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         performanceMessageToArray(getPerformanceListenersInRange(actor, PERFORMANCE_HEAL_RANGE), actor, target, message);
     }
+
     public static void performanceMessageToWatchers(obj_id actor, obj_id target, string_id message) throws InterruptedException
     {
         performanceMessageToArray(getPerformanceWatchersInRange(actor, PERFORMANCE_HEAL_RANGE), actor, target, message);
     }
+
     public static int getPerformanceHealWoundMod(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2067,6 +2223,7 @@ public class performance extends script.base_script
         }
         return dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, "healMindWound");
     }
+
     public static int getPerformanceHealShockMod(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2075,6 +2232,7 @@ public class performance extends script.base_script
         }
         return dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_HEAL_SHOCK);
     }
+
     public static int getPerformanceActionCost(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2083,6 +2241,7 @@ public class performance extends script.base_script
         }
         return dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_ACTION_COST);
     }
+
     public static float getPerformanceLoopDuration(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2091,6 +2250,7 @@ public class performance extends script.base_script
         }
         return dataTableGetFloat(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_LOOP_DURATION);
     }
+
     public static int getPerformanceBaseXp(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2099,6 +2259,7 @@ public class performance extends script.base_script
         }
         return dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_BASE_XP);
     }
+
     public static int getFlourishXpMod(int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2107,6 +2268,7 @@ public class performance extends script.base_script
         }
         return dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_FLOURISH_XP_MOD);
     }
+
     public static boolean performanceHeal(obj_id actor, String perf_type, float modifier) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2131,7 +2293,7 @@ public class performance extends script.base_script
         {
             audience = getPerformanceListenersInRange(actor, PERFORMANCE_INSPIRE_RANGE);
         }
-        else 
+        else
         {
             return false;
         }
@@ -2145,50 +2307,66 @@ public class performance extends script.base_script
         pt.stringId = new string_id("spam", "cured_clonesick");
         prose_package pa = new prose_package();
         pa.stringId = new string_id("spam", "cured_clonesick_actor");
-        for (obj_id obj_id1 : audience) {
-            if (!isIdValid(obj_id1) || !exists(obj_id1)) {
+        for (obj_id obj_id1 : audience)
+        {
+            if (!isIdValid(obj_id1) || !exists(obj_id1))
+            {
                 continue;
             }
-            if (checkDenyService(actor, obj_id1)) {
+            if (checkDenyService(actor, obj_id1))
+            {
                 continue;
             }
-            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_PAY_WAIT)) {
+            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_PAY_WAIT))
+            {
                 continue;
             }
-            if (buff.hasBuff(obj_id1, "cloning_sickness")) {
+            if (buff.hasBuff(obj_id1, "cloning_sickness"))
+            {
                 buff.removeBuff(obj_id1, "cloning_sickness");
                 playClientEffectObj(obj_id1, "appearance/pt_heal.prt", obj_id1, "");
-                if (!utils.hasScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID)) {
+                if (!utils.hasScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID))
+                {
                     int charge = utils.getIntScriptVar(obj_id1, performance.VAR_PERFORM_PAY_AGREE);
-                    if (charge > 0) {
+                    if (charge > 0)
+                    {
                         money.systemPayout(money.ACCT_PERFORM_ESCROW, actor, charge, "handlePayment", null);
                         utils.setScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID, 1);
                     }
                 }
-                if (obj_id1 != actor) {
+                if (obj_id1 != actor)
+                {
                     sendSystemMessageProse(obj_id1, pt);
                 }
                 pa.target.set(obj_id1);
                 sendSystemMessageProse(actor, pa);
                 audienceMod++;
             }
-            if (buff.hasBuff(obj_id1, "gcw_fatigue")) {
-                if (groundquests.isQuestActive(actor, "gcw_entertain_fatigue") && factions.isSameFactionorFactionHelper(actor, obj_id1)) {
+            if (buff.hasBuff(obj_id1, "gcw_fatigue"))
+            {
+                if (groundquests.isQuestActive(actor, "gcw_entertain_fatigue") && factions.isSameFactionorFactionHelper(actor, obj_id1))
+                {
                     pt.stringId = new string_id("spam", "cured_fatigue");
                     pa.stringId = new string_id("spam", "cured_fatigued_actor");
                     int stackSize = (int) buff.getBuffStackCount(obj_id1, "gcw_fatigue");
-                    if (stackSize <= 0) {
+                    if (stackSize <= 0)
+                    {
                         continue;
-                    } else if (stackSize <= 5) {
+                    }
+                    else if (stackSize <= 5)
+                    {
                         buff.removeBuff(obj_id1, "gcw_fatigue");
-                    } else if (stackSize > 5) {
+                    }
+                    else if (stackSize > 5)
+                    {
                         stackSize = stackSize - 5;
                         buff.removeBuff(obj_id1, "gcw_fatigue");
                         buff.applyBuffWithStackCount(obj_id1, "gcw_fatigue", stackSize);
                     }
                     groundquests.sendSignal(actor, "cureFatigue");
                     obj_id cityEggId = gcw.getInvasionSequencerNearby(actor);
-                    if (isValidId(cityEggId)) {
+                    if (isValidId(cityEggId))
+                    {
                         trial.addNonInstanceFactionParticipant(actor, cityEggId);
                     }
                     prose_package gcw_fatigue_pt = new prose_package();
@@ -2197,14 +2375,17 @@ public class performance extends script.base_script
                     prose_package gcw_fatigue_pa = new prose_package();
                     pa.stringId = new string_id("spam", "cured_fatigued_actor");
                     playClientEffectObj(obj_id1, "appearance/pt_heal.prt", obj_id1, "");
-                    if (!utils.hasScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID)) {
+                    if (!utils.hasScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID))
+                    {
                         int charge = utils.getIntScriptVar(obj_id1, performance.VAR_PERFORM_PAY_AGREE);
-                        if (charge > 0) {
+                        if (charge > 0)
+                        {
                             money.systemPayout(money.ACCT_PERFORM_ESCROW, actor, charge, "handlePayment", null);
                             utils.setScriptVar(obj_id1, VAR_PERFROM_ALREADY_PAID, 1);
                         }
                     }
-                    if (obj_id1 != actor) {
+                    if (obj_id1 != actor)
+                    {
                         sendSystemMessageProse(obj_id1, pt);
                     }
                     pa.target.set(obj_id1);
@@ -2215,11 +2396,13 @@ public class performance extends script.base_script
         }
         int experience = (CURE_CLONING_SICKNESS_XP * audienceMod);
         obj_id[] band = getBandMembers(actor);
-        for (obj_id obj_id : band) {
+        for (obj_id obj_id : band)
+        {
             xp.grantSocialStyleXp(obj_id, xp.ENTERTAINER, experience);
         }
         return true;
     }
+
     public static float inspireGetMaxDuration(obj_id actor) throws InterruptedException
     {
         int can_heal = canPerformanceHeal(actor);
@@ -2251,6 +2434,7 @@ public class performance extends script.base_script
         }
         return maxDuration;
     }
+
     public static boolean inspire(obj_id actor, String perf_type) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2275,7 +2459,7 @@ public class performance extends script.base_script
         {
             audience = getPerformanceListenersInRange(actor, PERFORMANCE_INSPIRE_RANGE);
         }
-        else 
+        else
         {
             return false;
         }
@@ -2285,39 +2469,50 @@ public class performance extends script.base_script
         }
         float maxDuration = inspireGetMaxDuration(actor);
         int audienceMod = 0;
-        for (obj_id obj_id1 : audience) {
-            if (obj_id1 == actor) {
+        for (obj_id obj_id1 : audience)
+        {
+            if (obj_id1 == actor)
+            {
                 continue;
             }
-            if (checkDenyService(actor, obj_id1)) {
+            if (checkDenyService(actor, obj_id1))
+            {
                 continue;
             }
-            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_PAY_WAIT)) {
+            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_PAY_WAIT))
+            {
                 continue;
             }
             float inspirationScriptVarVal = 0.0f;
-            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_INSPIRATION)) {
+            if (utils.hasScriptVar(obj_id1, VAR_PERFORM_INSPIRATION))
+            {
                 inspirationScriptVarVal = utils.getFloatScriptVar(obj_id1, VAR_PERFORM_INSPIRATION);
             }
-            if (inspirationScriptVarVal == maxDuration) {
+            if (inspirationScriptVarVal == maxDuration)
+            {
                 continue;
             }
             int inspireBuffCrc = buff.getBuffOnTargetFromGroup(obj_id1, "inspiration");
             float expertisePerTickBonusTime = getEnhancedSkillStatisticModifierUncapped(actor, "expertise_en_inspire_pulse_duration_increase") * 60;
             float perTickMinutesAdded = expertisePerTickBonusTime + INSPIRATION_BUFF_SEGMENT;
             int city_id = city.checkCity(actor, false);
-            if (city_id > 0 && (city.cityHasSpec(city_id, city.SF_SPEC_ENTERTAINER))) {
+            if (city_id > 0 && (city.cityHasSpec(city_id, city.SF_SPEC_ENTERTAINER)))
+            {
                 perTickMinutesAdded += 180;
             }
             inspirationScriptVarVal += perTickMinutesAdded;
-            if (inspirationScriptVarVal > maxDuration) {
+            if (inspirationScriptVarVal > maxDuration)
+            {
                 inspirationScriptVarVal = maxDuration;
-                if (!utils.hasScriptVar(obj_id1, "performance.inspireMaxReached")) {
+                if (!utils.hasScriptVar(obj_id1, "performance.inspireMaxReached"))
+                {
                     showFlyTextPrivate(obj_id1, obj_id1, new string_id("performance", "buff_maxtime"), 0.66f, colors.LIGHTPINK.getR(), colors.LIGHTPINK.getG(), colors.LIGHTPINK.getB(), true);
                     showFlyTextPrivate(obj_id1, actor, new string_id("performance", "buff_maxtime"), 0.66f, colors.LIGHTPINK.getR(), colors.LIGHTPINK.getG(), colors.LIGHTPINK.getB(), true);
                     utils.setScriptVar(obj_id1, "performance.inspireMaxReached", 1);
                 }
-            } else {
+            }
+            else
+            {
                 prose_package pp = new prose_package();
                 pp = prose.setStringId(pp, new string_id("spam", "buff_duration_tick_not_hardcoded"));
                 pp = prose.setTO(pp, getFormattedInspirationDuration(inspirationScriptVarVal));
@@ -2330,27 +2525,34 @@ public class performance extends script.base_script
         }
         int experience = (PERFORM_XP_INSPIRATION * audienceMod);
         obj_id[] band = getBandMembers(actor);
-        for (obj_id obj_id : band) {
+        for (obj_id obj_id : band)
+        {
             xp.grantSocialStyleXp(obj_id, xp.ENTERTAINER, experience);
         }
         return true;
     }
-    private static String getFormattedInspirationDuration(float time) {
+
+    private static String getFormattedInspirationDuration(float time)
+    {
         String formattedTime = "";
         time /= 60;
-        if (time >= 60) {
-            int hours = (int)time / 60;
+        if (time >= 60)
+        {
+            int hours = (int) time / 60;
             formattedTime = hours + " hour" + (hours > 1 ? "s" : "");
         }
-        if (time % 60 != 0) {
-            formattedTime += (!formattedTime.isEmpty() ? ", " : "") + ((int)(time % 60)) + " minutes";
+        if (time % 60 != 0)
+        {
+            formattedTime += (!formattedTime.isEmpty() ? ", " : "") + ((int) (time % 60)) + " minutes";
         }
         return formattedTime;
     }
+
     public static boolean performanceTargetedBuffFlourish(obj_id actor, String perf_type, float modifier) throws InterruptedException
     {
         return true;
     }
+
     public static boolean performanceSetPerformanceBuffTarget(obj_id actor, String target) throws InterruptedException
     {
         obj_id targetId = null;
@@ -2361,6 +2563,7 @@ public class performance extends script.base_script
         }
         return performanceSetPerformanceBuffTarget(actor, targetId);
     }
+
     public static boolean performanceSetPerformanceBuffTarget(obj_id actor, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -2373,14 +2576,17 @@ public class performance extends script.base_script
         performanceMessageToPerson(target, actor, target, SID_BUFF_SET_TARGET_OTHER);
         return true;
     }
+
     public static boolean applyPerformanceActionCost(obj_id actor, float modifier) throws InterruptedException
     {
         return true;
     }
+
     public static float getPerformanceMistakeChance(obj_id actor) throws InterruptedException
     {
         return 0.0f;
     }
+
     public static boolean hasInspirationInstrumentUseBuff(obj_id actor, String instrument) throws InterruptedException
     {
         int col = 0;
@@ -2392,7 +2598,7 @@ public class performance extends script.base_script
         {
             col = 1;
         }
-        else 
+        else
         {
             return false;
         }
@@ -2403,6 +2609,7 @@ public class performance extends script.base_script
         }
         return hasCommand(actor, required);
     }
+
     public static boolean hasInspirationDancePropUseBuff(obj_id actor, String prop) throws InterruptedException
     {
         int col = 0;
@@ -2414,7 +2621,7 @@ public class performance extends script.base_script
         {
             col = 1;
         }
-        else 
+        else
         {
             return false;
         }
@@ -2429,6 +2636,7 @@ public class performance extends script.base_script
         }
         return hasCommand(actor, required);
     }
+
     public static boolean notShapechanged(obj_id actor) throws InterruptedException
     {
         int shapechange = buff.getBuffOnTargetFromGroup(actor, "shapechange");
@@ -2439,6 +2647,7 @@ public class performance extends script.base_script
         }
         return true;
     }
+
     public static boolean canDoPerformance(obj_id actor, int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2452,7 +2661,7 @@ public class performance extends script.base_script
             {
                 return canDoPerformance(master, perf_index);
             }
-            else 
+            else
             {
                 return false;
             }
@@ -2460,12 +2669,9 @@ public class performance extends script.base_script
         String req_skill_mod = dataTableGetString(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_REQ_SKILL);
         int req_skill_value = dataTableGetInt(DATATABLE_PERFORMANCE, perf_index - 1, DATATABLE_COL_REQ_SKILL_VALUE);
         int player_skill_mod = getSkillStatMod(actor, req_skill_mod);
-        if (player_skill_mod < req_skill_value)
-        {
-            return false;
-        }
-        return true;
+        return player_skill_mod >= req_skill_value;
     }
+
     public static boolean canUseInstrument(obj_id actor, int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2479,7 +2685,7 @@ public class performance extends script.base_script
             {
                 return canUseInstrument(master, perf_index);
             }
-            else 
+            else
             {
                 return false;
             }
@@ -2491,12 +2697,9 @@ public class performance extends script.base_script
         }
         String[] splitAbility = split(req_ability, '_');
         req_ability = splitAbility[0];
-        if (hasCommand(actor, req_ability) || hasInspirationInstrumentUseBuff(actor, req_ability))
-        {
-            return true;
-        }
-        return false;
+        return hasCommand(actor, req_ability) || hasInspirationInstrumentUseBuff(actor, req_ability);
     }
+
     public static boolean canPerformSong(obj_id actor, int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2510,7 +2713,7 @@ public class performance extends script.base_script
             {
                 return canPerformSong(master, perf_index);
             }
-            else 
+            else
             {
                 return false;
             }
@@ -2532,12 +2735,9 @@ public class performance extends script.base_script
                 return false;
             }
         }
-        if (!hasCommand(actor, req_ability))
-        {
-            return false;
-        }
-        return true;
+        return hasCommand(actor, req_ability);
     }
+
     public static boolean canPerformDance(obj_id actor, int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2551,7 +2751,7 @@ public class performance extends script.base_script
             {
                 return canPerformDance(master, perf_index);
             }
-            else 
+            else
             {
                 return false;
             }
@@ -2566,12 +2766,9 @@ public class performance extends script.base_script
         {
             return false;
         }
-        if (!hasCommand(actor, req_ability))
-        {
-            return false;
-        }
-        return true;
+        return hasCommand(actor, req_ability);
     }
+
     public static boolean canPerformJuggle(obj_id actor, int perf_index) throws InterruptedException
     {
         if (perf_index == 0)
@@ -2588,12 +2785,9 @@ public class performance extends script.base_script
         {
             return false;
         }
-        if (!hasCommand(actor, req_ability))
-        {
-            return false;
-        }
-        return true;
+        return hasCommand(actor, req_ability);
     }
+
     public static boolean isValidDanceProp(obj_id object) throws InterruptedException
     {
         if (!isValidId(object))
@@ -2603,6 +2797,7 @@ public class performance extends script.base_script
         String template = getTemplateName(object);
         return isGameObjectTypeOf(object, GOT_misc_instrument) && template.startsWith("object/tangible/dance_prop/");
     }
+
     public static boolean isDancePropCertified(obj_id player, obj_id object) throws InterruptedException
     {
         if (!isValidDanceProp(object))
@@ -2619,12 +2814,9 @@ public class performance extends script.base_script
         {
             return true;
         }
-        else if (hasInspirationDancePropUseBuff(player, command))
-        {
-            return true;
-        }
-        return false;
+        else return hasInspirationDancePropUseBuff(player, command);
     }
+
     public static int calcPerformanceXp(obj_id actor) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2647,14 +2839,18 @@ public class performance extends script.base_script
         if (isIdValid(group))
         {
             obj_id[] members = getGroupMemberIds(group);
-            for (obj_id member : members) {
-                if (pet_lib.isDroidPet(member) || isHologramPerformer(member)) {
+            for (obj_id member : members)
+            {
+                if (pet_lib.isDroidPet(member) || isHologramPerformer(member))
+                {
                     continue;
                 }
-                if (getDistance(actor, member) > PERFORMANCE_BAND_MEMBER_RANGE) {
+                if (getDistance(actor, member) > PERFORMANCE_BAND_MEMBER_RANGE)
+                {
                     continue;
                 }
-                if (member != actor && (hasScript(member, DANCE_HEARTBEAT_SCRIPT) || hasScript(member, MUSIC_HEARTBEAT_SCRIPT) || hasScript(member, JUGGLE_HEARTBEAT_SCRIPT))) {
+                if (member != actor && (hasScript(member, DANCE_HEARTBEAT_SCRIPT) || hasScript(member, MUSIC_HEARTBEAT_SCRIPT) || hasScript(member, JUGGLE_HEARTBEAT_SCRIPT)))
+                {
                     band_members[band_size] = member;
                     ++band_size;
                 }
@@ -2676,7 +2872,7 @@ public class performance extends script.base_script
         setObjVar(actor, performance.VAR_PERFORM_FLOURISH_COUNT, 0);
         setObjVar(actor, performance.VAR_PERFORM_FLOURISH_TOTAL, 0);
         LOG("entertainer_xp", "Flourish Count = " + flourish_count);
-        int flourishDec = (int)(flourish_xp / 6.0f);
+        int flourishDec = (int) (flourish_xp / 6.0f);
         flourish_xp *= flourish_count;
         int old_flourish_xp = getIntObjVar(actor, VAR_PERFORM_FLOURISH_XP);
         if (old_flourish_xp > flourish_xp)
@@ -2694,18 +2890,19 @@ public class performance extends script.base_script
         setObjVar(actor, VAR_PERFORM_FLOURISH_XP, flourish_xp);
         int xp_amount = base_xp + flourish_xp;
         LOG("entertainer_xp", "XP Amount = " + xp_amount + ", (Base XP: " + base_xp + " + (Flourish XP: " + flourish_xp + "))");
-        float band_mod = ((band_size - 1) / ((float)PERFORM_XP_GROUP_MAX)) * PERFORM_XP_GROUP_MOD;
+        float band_mod = ((band_size - 1) / ((float) PERFORM_XP_GROUP_MAX)) * PERFORM_XP_GROUP_MOD;
         float applause_mod = applause_count / 100.0f;
         LOG("entertainer_xp", "Band Mod = " + band_mod);
         LOG("entertainer_xp", "Applaues Mod = " + applause_mod);
         float audience_mod = audience_size / 50.0f;
         LOG("entertainer_xp", "Audience Mod = " + audience_mod);
         float xp_mod = 1.0f + band_mod + audience_mod + applause_mod;
-        xp_amount = (int)(xp_amount * xp_mod);
+        xp_amount = (int) (xp_amount * xp_mod);
         LOG("entertainer_xp", "XP Mod = " + xp_mod);
         LOG("entertainer_xp", "Total XP = " + xp_amount);
         return xp_amount;
     }
+
     public static obj_id[] getBandAudienceInRange(obj_id[] band_members, int band_size, float range) throws InterruptedException
     {
         Vector audience = new Vector();
@@ -2719,16 +2916,20 @@ public class performance extends script.base_script
                 {
                     member_audience = getPerformanceWatchersInRange(band_members[i], range);
                 }
-                else 
+                else
                 {
                     member_audience = getPerformanceListenersInRange(band_members[i], range);
                 }
-                if (member_audience != null && member_audience.length > 0)
+                if (member_audience != null)
                 {
-                    for (obj_id obj_id : member_audience) {
-                        if (!utils.isElementInArray(audience, obj_id)) {
-                            if (isIdValid(obj_id)) {
-                                if (!checkDenyService(band_members[i], obj_id)) {
+                    for (obj_id obj_id : member_audience)
+                    {
+                        if (!utils.isElementInArray(audience, obj_id))
+                        {
+                            if (isIdValid(obj_id))
+                            {
+                                if (!checkDenyService(band_members[i], obj_id))
+                                {
                                     utils.addElement(audience, obj_id);
                                 }
                             }
@@ -2745,17 +2946,19 @@ public class performance extends script.base_script
         }
         return _audience;
     }
+
     public static void denyService(obj_id player, obj_id target) throws InterruptedException
     {
         if (checkDenyService(player, target))
         {
             removeDenyService(player, target);
         }
-        else 
+        else
         {
             addDenyService(player, target);
         }
     }
+
     public static void addDenyService(obj_id player, obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, VAR_PERFORM_PAY_AGREE))
@@ -2778,6 +2981,7 @@ public class performance extends script.base_script
         performanceMessageToSelf(player, target, SID_DENY_SERVICE_ADD_SELF);
         performanceMessageToPerson(target, player, target, SID_DENY_SERVICE_ADD_OTHER);
     }
+
     public static void removeDenyService(obj_id player, obj_id target) throws InterruptedException
     {
         Vector denyServiceList = utils.getResizeableObjIdBatchScriptVar(player, "performance.denyService");
@@ -2790,13 +2994,14 @@ public class performance extends script.base_script
         {
             utils.removeBatchScriptVar(player, "performance.denyService");
         }
-        else 
+        else
         {
             utils.setBatchScriptVar(player, "performance.denyService", denyServiceList);
         }
         performanceMessageToSelf(player, target, SID_DENY_SERVICE_REMOVE_SELF);
         performanceMessageToPerson(target, player, target, SID_DENY_SERVICE_REMOVE_OTHER);
     }
+
     public static boolean checkDenyService(obj_id player, obj_id target) throws InterruptedException
     {
         Vector denyServiceList = utils.getResizeableObjIdBatchScriptVar(player, "performance.denyService");
@@ -2806,6 +3011,7 @@ public class performance extends script.base_script
         }
         return utils.isElementInArray(denyServiceList, target);
     }
+
     public static boolean displayAvailableMusic(obj_id actor, boolean band, boolean changeMusic) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2858,6 +3064,7 @@ public class performance extends script.base_script
         }
         return false;
     }
+
     public static boolean displayAvailableDances(obj_id actor, boolean changeDance) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2901,6 +3108,7 @@ public class performance extends script.base_script
         }
         return false;
     }
+
     public static boolean displayAvailableJuggles(obj_id actor, boolean changeJuggle) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -2948,6 +3156,7 @@ public class performance extends script.base_script
         }
         return false;
     }
+
     public static int canPerformanceHeal(obj_id actor) throws InterruptedException
     {
         if (pet_lib.isDroidPet(actor) || isHologramPerformer(actor))
@@ -2977,26 +3186,25 @@ public class performance extends script.base_script
         {
             return 2;
         }
-        int improv = (int)getSkillStatisticModifier(actor, "expertise_en_improv");
+        int improv = getSkillStatisticModifier(actor, "expertise_en_improv");
         if (improv == 1)
         {
             return 3;
         }
         return 0;
     }
+
     public static boolean isInRightBuilding(obj_id objPlayer, obj_id objBuilding) throws InterruptedException
     {
         location locTest = getLocation(objPlayer);
         if (isIdValid(locTest.cell))
         {
             obj_id objOwner = getTopMostContainer(locTest.cell);
-            if (objBuilding == objOwner)
-            {
-                return true;
-            }
+            return objBuilding == objOwner;
         }
         return false;
     }
+
     public static void checkAndIncrementEntertainerMissions(obj_id objPlayer, String strType) throws InterruptedException
     {
         if (hasObjVar(objPlayer, "newbie_handoff.mission.gig"))
@@ -3029,7 +3237,7 @@ public class performance extends script.base_script
                     {
                         intStartTime = getIntObjVar(objMissions[intI], "intStartTime");
                     }
-                    else 
+                    else
                     {
                         setObjVar(objMissions[intI], "intStartTime", intStartTime);
                         return;
@@ -3045,6 +3253,7 @@ public class performance extends script.base_script
             intI = intI + 1;
         }
     }
+
     public static void stopEntertainerMissionTracking(obj_id objPlayer, String strType) throws InterruptedException
     {
         if (hasObjVar(objPlayer, "newbie_handoff.mission.gig"))
@@ -3081,6 +3290,7 @@ public class performance extends script.base_script
             intI++;
         }
     }
+
     public static void incrementNewbieHandoffEntertainerMissions(obj_id player, String type) throws InterruptedException
     {
         String missionType = getStringObjVar(player, "newbie_handoff.mission.gig.type");
@@ -3099,7 +3309,7 @@ public class performance extends script.base_script
                     start = getIntObjVar(player, "newbie_handoff.mission.gig.start");
                     LOG("newbie_gig_mission", "Getting mission start time " + start);
                 }
-                else 
+                else
                 {
                     setObjVar(player, "newbie_handoff.mission.gig.start", start);
                     LOG("newbie_gig_mission", "Initializing mission start time " + start);
@@ -3114,6 +3324,7 @@ public class performance extends script.base_script
             }
         }
     }
+
     public static void stopNewbieHandoffEntertainerMissionTracking(obj_id player, String type) throws InterruptedException
     {
         if (hasObjVar(player, "newbie_handoff.mission.gig.start"))
@@ -3122,6 +3333,7 @@ public class performance extends script.base_script
             removeObjVar(player, "newbie_handoff.mission.gig.start");
         }
     }
+
     public static void startJuggling(obj_id actor, String juggleName) throws InterruptedException
     {
         if (juggleName == null || juggleName.length() < 1)
@@ -3166,6 +3378,7 @@ public class performance extends script.base_script
         params.put("sequence", 0);
         messageTo(actor, "OnPulse", params, PERFORMANCE_HEARTBEAT_TIME, false);
     }
+
     public static void stopJuggling(obj_id actor) throws InterruptedException
     {
         if (hasScript(actor, JUGGLE_HEARTBEAT_SCRIPT))
@@ -3180,7 +3393,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_JUGGLE_STOP_SELF);
             performanceMessageToWatchers(actor, null, SID_JUGGLE_STOP_OTHER);
         }
-        else 
+        else
         {
             if (hasObjVar(actor, performance.VAR_PERFORM))
             {
@@ -3189,6 +3402,7 @@ public class performance extends script.base_script
             performanceMessageToSelf(actor, null, SID_JUGGLE_NOT_PERFORMING);
         }
     }
+
     public static void changeJuggle(obj_id actor, String juggleName) throws InterruptedException
     {
         if (juggleName == null || juggleName.length() < 1)
@@ -3219,6 +3433,7 @@ public class performance extends script.base_script
         setPerformanceType(actor, performanceIndex);
         queueCommand(actor, (-1219480501), null, "1", COMMAND_PRIORITY_IMMEDIATE);
     }
+
     public static void openInspireMenu(obj_id self, obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(self, VAR_BUFF_SUI))
@@ -3232,7 +3447,8 @@ public class performance extends script.base_script
         }
         Vector dsrc = new Vector();
         Vector list = new Vector();
-        for (String s1 : INSPIRATION_BUFF_ENTERTAINER) {
+        for (String s1 : INSPIRATION_BUFF_ENTERTAINER)
+        {
             dsrc.addElement("@performance:" + s1);
             list.addElement(s1);
         }
@@ -3245,7 +3461,8 @@ public class performance extends script.base_script
                 sendSystemMessage(self, new string_id("performance", "insp_buff_must_watch"));
                 return;
             }
-            for (String s : INSPIRATION_BUFF_DANCER) {
+            for (String s : INSPIRATION_BUFF_DANCER)
+            {
                 dsrc.addElement("@performance:" + s);
                 list.addElement(s);
             }
@@ -3258,12 +3475,13 @@ public class performance extends script.base_script
                 sendSystemMessage(self, new string_id("performance", "insp_buff_must_listen"));
                 return;
             }
-            for (String s : INSPIRATION_BUFF_MUSICIAN) {
+            for (String s : INSPIRATION_BUFF_MUSICIAN)
+            {
                 dsrc.addElement("@performance:" + s);
                 list.addElement(s);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id("performance", "insp_buff_must_perform"));
             return;
@@ -3280,6 +3498,7 @@ public class performance extends script.base_script
             utils.setScriptVar(self, VAR_BUFF_SUI, pid);
         }
     }
+
     public static boolean hasMaxHolo(obj_id actor) throws InterruptedException
     {
         if (isGod(actor))
@@ -3293,16 +3512,14 @@ public class performance extends script.base_script
         if (utils.hasScriptVar(actor, "currentHolo"))
         {
             int holoPets = utils.getIntScriptVar(actor, "currentHolo");
-            int holoMod = (int)getSkillStatisticModifier(actor, "expertise_en_holographic_additional_backup");
+            int holoMod = getSkillStatisticModifier(actor, "expertise_en_holographic_additional_backup");
             int maxHoloAllowed = 1;
             maxHoloAllowed += holoMod;
-            if (holoPets >= maxHoloAllowed)
-            {
-                return true;
-            }
+            return holoPets >= maxHoloAllowed;
         }
         return false;
     }
+
     public static void holographicCleanup(obj_id actor) throws InterruptedException
     {
         obj_id holoDelete = null;
@@ -3336,8 +3553,8 @@ public class performance extends script.base_script
         utils.removeScriptVar(actor, "holoId2");
         utils.removeScriptVar(actor, "holoId3");
         sendSystemMessage(actor, new string_id("spam", "holo_despawned"));
-        return;
     }
+
     public static boolean createHolographicBackup(obj_id actor) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -3369,32 +3586,32 @@ public class performance extends script.base_script
         switch (species)
         {
             case SPECIES_RODIAN:
-            speciesString = "rodian";
-            break;
+                speciesString = "rodian";
+                break;
             case SPECIES_TRANDOSHAN:
-            speciesString = "trandoshan";
-            break;
+                speciesString = "trandoshan";
+                break;
             case SPECIES_MON_CALAMARI:
-            speciesString = "moncal";
-            break;
+                speciesString = "moncal";
+                break;
             case SPECIES_WOOKIEE:
-            speciesString = "wookiee";
-            break;
+                speciesString = "wookiee";
+                break;
             case SPECIES_BOTHAN:
-            speciesString = "bothan";
-            break;
+                speciesString = "bothan";
+                break;
             case SPECIES_TWILEK:
-            speciesString = "twilek";
-            break;
+                speciesString = "twilek";
+                break;
             case SPECIES_ZABRAK:
-            speciesString = "zabrak";
-            break;
+                speciesString = "zabrak";
+                break;
             case SPECIES_ITHORIAN:
-            speciesString = "ithorian";
-            break;
+                speciesString = "ithorian";
+                break;
             case SPECIES_SULLUSTAN:
-            speciesString = "sullustan";
-            break;
+                speciesString = "sullustan";
+                break;
         }
         if (gender == Gender.FEMALE)
         {
@@ -3411,7 +3628,7 @@ public class performance extends script.base_script
                 holoPets = holoPets + 1;
                 utils.setScriptVar(actor, "currentHolo", holoPets);
             }
-            else 
+            else
             {
                 utils.setScriptVar(actor, "currentHolo", holoPets);
             }
@@ -3428,13 +3645,15 @@ public class performance extends script.base_script
             setName(hologram, "Hologram");
             setInvulnerable(hologram, true);
             custom_var[] var_list = getAllCustomVars(actor);
-            if (var_list != null && var_list.length > 0)
+            if (var_list != null)
             {
-                for (custom_var custom_var : var_list) {
+                for (custom_var custom_var : var_list)
+                {
                     ranged_int_custom_var ricv = (ranged_int_custom_var) custom_var;
                     String var = ricv.getVarName();
                     int value = ricv.getValue();
-                    if (value != 0) {
+                    if (value != 0)
+                    {
                         setRangedIntCustomVarValue(hologram, var, value);
                     }
                 }
@@ -3442,15 +3661,20 @@ public class performance extends script.base_script
             setPalcolorCustomVarClosestColor(hologram, "/shared_owner/index_color_skin", 255, 255, 255, 255);
             obj_id[] contents = getAllWornItems(actor, false);
             utils.setObjVar(hologram, "hologram_performer", 1);
-            if (contents != null && contents.length > 0)
+            if (contents != null)
             {
-                for (obj_id content : contents) {
-                    if (isIdValid(content)) {
-                        if (getContainerType(content) == 0) {
-                            if (getGameObjectType(content) == GOT_misc_appearance_only_invisible) {
+                for (obj_id content : contents)
+                {
+                    if (isIdValid(content))
+                    {
+                        if (getContainerType(content) == 0)
+                        {
+                            if (getGameObjectType(content) == GOT_misc_appearance_only_invisible)
+                            {
                                 continue;
                             }
-                            if (!(getTemplateName(content)).endsWith("player.iff")) {
+                            if (!(getTemplateName(content)).endsWith("player.iff"))
+                            {
                                 createObject(getTemplateName(content), hologram, "");
                             }
                         }

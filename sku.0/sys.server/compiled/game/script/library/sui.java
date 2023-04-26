@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class sui extends script.base_script
 {
-    public sui()
-    {
-    }
     public static final int MAX_INPUT_LENGTH = 255;
     public static final String DEFAULT_TITLE = "@base_player:swg";
     public static final String OWNER = "owner";
@@ -99,8 +96,8 @@ public class sui extends script.base_script
     public static final String LISTBOX_TITLE = LISTBOX_PAGE_CAPTION + ".lblTitle";
     public static final String LISTBOX_PROMPT = LISTBOX_PAGE_PROMPT + ".lblPrompt";
     public static final String LISTBOX_LIST = LISTBOX_PAGE_LIST + ".lstList";
-    public static final String LISTBOX_DATASOURCE = LISTBOX_PAGE_LIST + ".dataList";
     public static final String LISTBOX_SELECTEDROW = LISTBOX_LIST + "." + PROP_SELECTEDROW;
+    public static final String LISTBOX_DATASOURCE = LISTBOX_PAGE_LIST + ".dataList";
     public static final String LISTBOX_PROP_OTHER_PRESSED = "otherPressed";
     public static final String SUI_TRANSFER = "Script.transfer";
     public static final String TRANSFER_PAGE_PROMPT = "Prompt";
@@ -112,14 +109,14 @@ public class sui extends script.base_script
     public static final String TRANSFER_TITLE = TRANSFER_PAGE_CAPTION + ".lblTitle";
     public static final String TRANSFER_PROMPT = TRANSFER_PAGE_PROMPT + ".lblPrompt";
     public static final String TRANSFER_INPUT_FROM = TRANSFER_PAGE_TRANSACTION + ".txtInputFrom";
+    public static final String TRANSFER_INPUT_FROM_TEXT = TRANSFER_INPUT_FROM + "." + PROP_TEXT;
     public static final String TRANSFER_INPUT_TO = TRANSFER_PAGE_TRANSACTION + ".txtInputTo";
+    public static final String TRANSFER_INPUT_TO_TEXT = TRANSFER_INPUT_TO + "." + PROP_TEXT;
     public static final String TRANSFER_FROM = TRANSFER_PAGE_TRANSACTION + ".lblStartingFrom";
     public static final String TRANSFER_TO = TRANSFER_PAGE_TRANSACTION + ".lblStartingTo";
     public static final String TRANSFER_FROM_TEXT = TRANSFER_PAGE_TRANSACTION + ".lblFrom";
     public static final String TRANSFER_TO_TEXT = TRANSFER_PAGE_TRANSACTION + ".lblTo";
     public static final String TRANSFER_SLIDER = TRANSFER_PAGE_TRANSACTION + ".slider";
-    public static final String TRANSFER_INPUT_FROM_TEXT = TRANSFER_INPUT_FROM + "." + PROP_TEXT;
-    public static final String TRANSFER_INPUT_TO_TEXT = TRANSFER_INPUT_TO + "." + PROP_TEXT;
     public static final String PROP_CONVERSION_RATIO_FROM = "ConversionRatioFrom";
     public static final String PROP_CONVERSION_RATIO_TO = "ConversionRatioTo";
     public static final String MSG_BANK_TITLE = "@base_player:bank_title";
@@ -177,6 +174,10 @@ public class sui extends script.base_script
     public static final String TABLE_BTN_EXPORT = "btnExport";
     public static final String TABLE_PROP_OTHER_PRESSED = "otherPressed";
     public static final String TABLE_PROP_EXPORT_PRESSED = "exportPressed";
+    public sui()
+    {
+    }
+
     public static int msgbox(obj_id target, string_id sid_prompt, dictionary params) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -196,10 +197,12 @@ public class sui extends script.base_script
         showSUIPage(pid);
         return pid;
     }
+
     public static int msgbox(obj_id target, string_id sid_prompt) throws InterruptedException
     {
         return msgbox(target, sid_prompt, null);
     }
+
     public static int countdownTimerSUI(obj_id owner, obj_id target, String type, string_id sid_prompt, int current_time, int total_time, String suiHandler) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target))
@@ -266,6 +269,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int smartCountdownTimerSUI(obj_id owner, obj_id target, String type, string_id sid_prompt, int current_time, int total_time, String suiHandler, float range, int flags) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target))
@@ -336,7 +340,7 @@ public class sui extends script.base_script
             setSUIAssociatedObject(pid, owner);
             setSUIMaxRangeToObject(pid, range);
         }
-        else 
+        else
         {
             setSUIAssociatedLocation(pid, owner);
             setSUIMaxRangeToObject(pid, range);
@@ -360,6 +364,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static boolean updateCountdownTimerSUI(int pid, string_id sid_prompt, int current_time, int total_time) throws InterruptedException
     {
         if (sid_prompt == null)
@@ -397,6 +402,7 @@ public class sui extends script.base_script
         }
         return flushSUIPage(pid);
     }
+
     public static boolean setPageProperties(int pid, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -425,11 +431,11 @@ public class sui extends script.base_script
                     {
                         if (val instanceof string_id)
                         {
-                            sVal = utils.packStringId((string_id)(val));
+                            sVal = utils.packStringId((string_id) (val));
                         }
                         else if (val instanceof String)
                         {
-                            sVal = (String)(val);
+                            sVal = (String) (val);
                         }
                         if (sVal != null)
                         {
@@ -441,6 +447,7 @@ public class sui extends script.base_script
         }
         return true;
     }
+
     public static boolean setPageTitle(int pid, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -453,11 +460,11 @@ public class sui extends script.base_script
         {
             if (tmp instanceof string_id)
             {
-                title = utils.packStringId((string_id)(tmp));
+                title = utils.packStringId((string_id) (tmp));
             }
             else if (tmp instanceof String)
             {
-                title = (String)(tmp);
+                title = (String) (tmp);
             }
             if (title != null)
             {
@@ -467,6 +474,7 @@ public class sui extends script.base_script
         }
         return false;
     }
+
     public static boolean setPageButtons(int pid, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -476,6 +484,7 @@ public class sui extends script.base_script
         setButtonStyle(pid, params.getInt(BUTTONS));
         return true;
     }
+
     public static void setButtonStyle(int pid, int btns) throws InterruptedException
     {
         switch (btns)
@@ -528,16 +537,19 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static void hideBtnCancel(int pid) throws InterruptedException
     {
         setSUIProperty(pid, BTN_CANCEL, "Enabled", "False");
         setSUIProperty(pid, BTN_CANCEL, "Visible", "False");
     }
+
     public static void hideBtnRevert(int pid) throws InterruptedException
     {
         setSUIProperty(pid, BTN_REVERT, "Enabled", "False");
         setSUIProperty(pid, BTN_REVERT, "Visible", "False");
     }
+
     public static boolean trackSUI(obj_id target, int pid, dictionary params) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -561,6 +573,7 @@ public class sui extends script.base_script
         }
         return trackSUI(target, pid, owner, handler);
     }
+
     public static boolean trackSUI(obj_id target, int pid, obj_id owner, String handler) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(owner) || (handler == null) || (handler.equals("")))
@@ -572,6 +585,7 @@ public class sui extends script.base_script
         utils.setScriptVar(target, path + ".handler", handler);
         return true;
     }
+
     public static int msgbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, int style, String suiHandler) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target))
@@ -601,6 +615,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static void msgboxButtonSetup(int pid, int buttons) throws InterruptedException
     {
         switch (buttons)
@@ -648,68 +663,84 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static void msgboxHideBtnLeft(int pid) throws InterruptedException
     {
         setSUIProperty(pid, MSGBOX_BTN_REVERT, "Enabled", "False");
         setSUIProperty(pid, MSGBOX_BTN_REVERT, "Visible", "False");
     }
+
     public static void msgboxHideBtnMiddle(int pid) throws InterruptedException
     {
         setSUIProperty(pid, MSGBOX_BTN_CANCEL, "Enabled", "False");
         setSUIProperty(pid, MSGBOX_BTN_CANCEL, "Visible", "False");
     }
+
     public static int msgbox(obj_id owner, obj_id target, String prompt, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, String prompt, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, String prompt) throws InterruptedException
     {
         return msgbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, "noHandler");
     }
+
     public static int msgbox(obj_id owner, String prompt) throws InterruptedException
     {
         return msgbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, "noHandler");
     }
+
     public static int msgbox(obj_id owner, obj_id target, String prompt, int buttons, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, buttons, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, buttons, box_title, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, prose_package prompt, int buttons, String box_title, int style, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, "\0" + packOutOfBandProsePackage(null, prompt), buttons, box_title, style, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, prose_package prompt, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, prose_package prompt, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, prose_package prompt) throws InterruptedException
     {
         return msgbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, "noHandler");
     }
+
     public static int msgbox(obj_id owner, prose_package prompt) throws InterruptedException
     {
         return msgbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, MSG_NORMAL, "noHandler");
     }
+
     public static int msgbox(obj_id owner, obj_id target, prose_package prompt, int buttons, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, buttons, DEFAULT_TITLE, MSG_NORMAL, suiHandler);
     }
+
     public static int msgbox(obj_id owner, obj_id target, prose_package prompt, int buttons, String box_title, String suiHandler) throws InterruptedException
     {
         return msgbox(owner, target, prompt, buttons, box_title, MSG_NORMAL, suiHandler);
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, int style, String[] dsrc, String suiHandler, dictionary params) throws InterruptedException
     {
         if (dsrc == null)
@@ -764,7 +795,7 @@ public class sui extends script.base_script
             int ubound = dsrc.length;
             for (int i = 0; i < ubound; i++)
             {
-                addSUIDataItem(pid, INPUTBOX_DATASOURCE, "" + i);
+                addSUIDataItem(pid, INPUTBOX_DATASOURCE, String.valueOf(i));
                 setSUIProperty(pid, INPUTBOX_DATASOURCE + "." + i, PROP_TEXT, dsrc[i]);
             }
         }
@@ -775,7 +806,7 @@ public class sui extends script.base_script
             java.util.Enumeration keys = params.keys();
             while (keys.hasMoreElements())
             {
-                String key = (String)(keys.nextElement());
+                String key = (String) (keys.nextElement());
                 String val = params.getString(key);
                 LOG("sui", "inputbox set params: key = " + key + " val = " + val);
                 java.util.StringTokenizer st = new java.util.StringTokenizer(key, "-");
@@ -797,6 +828,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, String box_title, String suiHandler, int maxLength, boolean filtered, String defaultText) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target))
@@ -822,7 +854,8 @@ public class sui extends script.base_script
             cleanupFilteredInputbox(owner, target);
         }
         dictionary params = null;
-        if (maxLength >= 1) {
+        if (maxLength >= 1)
+        {
             params = new dictionary();
             params.put(INPUTBOX_INPUT + "-MaxLength", maxLength);
         }
@@ -857,14 +890,17 @@ public class sui extends script.base_script
         }
         return -1;
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, String box_title, String suiHandler, String defaultText) throws InterruptedException
     {
         return inputbox(owner, target, prompt, box_title, suiHandler, 32, true, defaultText);
     }
+
     public static int filteredInputbox(obj_id owner, obj_id target, String prompt, String box_title, String suiHandler, String defaultText) throws InterruptedException
     {
         return inputbox(owner, target, prompt, box_title, suiHandler, defaultText);
     }
+
     public static void trackFilteredInputbox(obj_id owner, obj_id player, int pid, String suiHandler, String defaultText) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(player))
@@ -886,6 +922,7 @@ public class sui extends script.base_script
         }
         utils.setScriptVar(owner, VAR_FILTER_COUNT, utils.getIntScriptVar(owner, VAR_FILTER_COUNT) + 1);
     }
+
     public static void cleanupFilteredInputbox(obj_id owner, obj_id player) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(player))
@@ -905,31 +942,37 @@ public class sui extends script.base_script
             utils.removeScriptVar(owner, VAR_FILTER_COUNT);
             detachScript(owner, SCRIPT_FILTER_OWNER);
         }
-        else 
+        else
         {
             utils.setScriptVar(owner, VAR_FILTER_COUNT, cnt);
         }
     }
+
     public static String getInputBoxText(dictionary params) throws InterruptedException
     {
         return params.getString(INPUTBOX_INPUT + "." + PROP_LOCALTEXT);
     }
+
     public static String getInputBoxTitle(dictionary params) throws InterruptedException
     {
         return params.getString(INPUTBOX_TITLE + "." + PROP_TEXT);
     }
+
     public static String getInputBoxPrompt(dictionary params) throws InterruptedException
     {
         return params.getString(INPUTBOX_PROMPT + "." + PROP_TEXT);
     }
+
     public static int getInputBoxMaxLength(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(INPUTBOX_INPUT + ".MaxLength"));
     }
+
     public static String getComboBoxText(dictionary params) throws InterruptedException
     {
         return params.getString(INPUTBOX_COMBO + "." + PROP_SELECTEDTEXT);
     }
+
     public static void inputboxButtonSetup(int pid, int buttons) throws InterruptedException
     {
         switch (buttons)
@@ -945,11 +988,13 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static void inputboxHideBtnMiddle(int pid) throws InterruptedException
     {
         setSUIProperty(pid, INPUTBOX_BTN_CANCEL, "Enabled", "False");
         setSUIProperty(pid, INPUTBOX_BTN_CANCEL, "Visible", "False");
     }
+
     public static void inputboxStyleSetup(int pid, int style) throws InterruptedException
     {
         switch (style)
@@ -969,38 +1014,47 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, int style, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, target, prompt, buttons, box_title, style, dsrc, suiHandler, null);
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_NORMAL, null, suiHandler);
     }
+
     public static int inputbox(obj_id owner, String prompt, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_NORMAL, null, suiHandler);
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt) throws InterruptedException
     {
         return inputbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_NORMAL, null, "noHandler");
     }
+
     public static int inputbox(obj_id owner, String prompt) throws InterruptedException
     {
         return inputbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_NORMAL, null, "noHandler");
     }
+
     public static int inputbox(obj_id owner, obj_id target, String prompt, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_COMBO, dsrc, suiHandler);
     }
+
     public static int combobox(obj_id owner, obj_id target, String prompt, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, target, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_COMBO, dsrc, suiHandler);
     }
+
     public static int combobox(obj_id owner, String prompt, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return inputbox(owner, owner, prompt, OK_ONLY, DEFAULT_TITLE, INPUT_COMBO, dsrc, suiHandler);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, prose_package[] dsrc, String suiHandler, boolean show, boolean truncate) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target) || suiHandler == null || suiHandler.equals("") || dsrc == null || dsrc.length == 0)
@@ -1059,12 +1113,12 @@ public class sui extends script.base_script
             clearSUIDataSource(pid, LISTBOX_DATASOURCE);
             int ubound = dsrc.length;
             for (int i = 0; i < ubound; i++)
-			{
-				addSUIDataItem(pid, LISTBOX_DATASOURCE, "" + i);
-				String oob = "";
-				oob = packOutOfBandProsePackage(oob, -1, dsrc[i]);
-				setSUIPropertyOOB(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, oob);
-			}
+            {
+                addSUIDataItem(pid, LISTBOX_DATASOURCE, String.valueOf(i));
+                String oob = "";
+                oob = packOutOfBandProsePackage(oob, -1, dsrc[i]);
+                setSUIPropertyOOB(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, oob);
+            }
             subscribeToSUIProperty(pid, LISTBOX_LIST, PROP_SELECTEDROW);
             subscribeToSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT);
             if (show)
@@ -1078,6 +1132,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, String[] dsrc, String suiHandler, boolean show, boolean truncate) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target) || suiHandler == null || suiHandler.equals("") || dsrc == null || dsrc.length == 0)
@@ -1136,10 +1191,10 @@ public class sui extends script.base_script
             clearSUIDataSource(pid, LISTBOX_DATASOURCE);
             int ubound = dsrc.length;
             for (int i = 0; i < ubound; i++)
-			{
-				addSUIDataItem(pid, LISTBOX_DATASOURCE, "" + i);
-				setSUIProperty(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, dsrc[i]);
-			}
+            {
+                addSUIDataItem(pid, LISTBOX_DATASOURCE, String.valueOf(i));
+                setSUIProperty(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, dsrc[i]);
+            }
             subscribeToSUIProperty(pid, LISTBOX_LIST, PROP_SELECTEDROW);
             subscribeToSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT);
             if (show)
@@ -1153,6 +1208,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int emptylistbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, String suiHandler, boolean show) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target) || suiHandler == null || suiHandler.equals(""))
@@ -1191,18 +1247,22 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int getListboxSelectedRow(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(LISTBOX_LIST + "." + PROP_SELECTEDROW));
     }
+
     public static String getListboxSelectedRowText(dictionary params) throws InterruptedException
     {
         return params.getString(LISTBOX_LIST + "." + PROP_SELECTEDTEXT);
     }
+
     public static String getListboxTitle(dictionary params) throws InterruptedException
     {
         return params.getString(LISTBOX_LIST + "." + PROP_TEXT);
     }
+
     public static void listboxButtonSetup(int pid, int buttons) throws InterruptedException
     {
         switch (buttons)
@@ -1267,25 +1327,30 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static void listboxHideBtnMiddle(int pid) throws InterruptedException
     {
         setSUIProperty(pid, LISTBOX_BTN_CANCEL, "Enabled", "False");
         setSUIProperty(pid, LISTBOX_BTN_CANCEL, "Visible", "False");
     }
+
     public static void listboxUseOtherButton(int pid, String caption) throws InterruptedException
     {
         setSUIProperty(pid, LISTBOX_BTN_OTHER, PROP_VISIBLE, "true");
         setSUIProperty(pid, LISTBOX_BTN_OTHER, PROP_TEXT, caption);
         subscribeToSUIProperty(pid, "this", LISTBOX_PROP_OTHER_PRESSED);
     }
+
     public static boolean getListboxOtherButtonPressed(dictionary params) throws InterruptedException
     {
         return Boolean.valueOf(params.getString("this." + LISTBOX_PROP_OTHER_PRESSED));
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, String[] dsrc, String suiHandler, boolean show) throws InterruptedException
     {
         return listbox(owner, target, prompt, buttons, box_title, dsrc, suiHandler, show, true);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, Vector dsrc, String suiHandler, boolean show) throws InterruptedException
     {
         if (dsrc == null)
@@ -1296,6 +1361,7 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, buttons, box_title, dsrcArray, suiHandler, show, true);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, Vector dsrc, String suiHandler, boolean show, boolean truncate) throws InterruptedException
     {
         if (dsrc == null)
@@ -1306,10 +1372,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, buttons, box_title, dsrcArray, suiHandler, show, truncate);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return listbox(owner, target, prompt, buttons, box_title, dsrc, suiHandler, true, true);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, int buttons, String box_title, Vector dsrc, String suiHandler) throws InterruptedException
     {
         if (dsrc == null)
@@ -1320,10 +1388,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, buttons, box_title, dsrcArray, suiHandler, true, true);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return listbox(owner, target, prompt, OK_ONLY, "", dsrc, suiHandler);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, Vector dsrc, String suiHandler) throws InterruptedException
     {
         if (dsrc == null)
@@ -1334,10 +1404,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, OK_ONLY, "", dsrcArray, suiHandler);
     }
+
     public static int listbox(obj_id owner, String prompt, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return listbox(owner, owner, prompt, OK_ONLY, "", dsrc, suiHandler);
     }
+
     public static int listbox(obj_id owner, String prompt, Vector dsrc, String suiHandler) throws InterruptedException
     {
         if (dsrc == null)
@@ -1348,10 +1420,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, owner, prompt, OK_ONLY, "", dsrcArray, suiHandler);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String[] dsrc) throws InterruptedException
     {
         return listbox(owner, target, prompt, OK_ONLY, "", dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, Vector dsrc) throws InterruptedException
     {
         if (dsrc == null)
@@ -1362,10 +1436,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, OK_ONLY, "", dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, String[] dsrc) throws InterruptedException
     {
         return listbox(owner, owner, prompt, OK_ONLY, "", dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, Vector dsrc) throws InterruptedException
     {
         if (dsrc == null)
@@ -1376,10 +1452,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, owner, prompt, OK_ONLY, "", dsrcArray, "noHandler");
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String title, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return listbox(owner, target, prompt, OK_ONLY, title, dsrc, suiHandler);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String title, Vector dsrc, String suiHandler) throws InterruptedException
     {
         if (dsrc == null)
@@ -1390,10 +1468,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, OK_ONLY, title, dsrcArray, suiHandler);
     }
+
     public static int listbox(obj_id owner, String prompt, String title, String[] dsrc, String suiHandler) throws InterruptedException
     {
         return listbox(owner, owner, prompt, OK_ONLY, title, dsrc, suiHandler);
     }
+
     public static int listbox(obj_id owner, String prompt, String title, Vector dsrc, String suiHandler) throws InterruptedException
     {
         if (dsrc == null)
@@ -1404,10 +1484,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, owner, prompt, OK_ONLY, title, dsrcArray, suiHandler);
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String title, String[] dsrc) throws InterruptedException
     {
         return listbox(owner, target, prompt, OK_ONLY, title, dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, obj_id target, String prompt, String title, Vector dsrc) throws InterruptedException
     {
         if (dsrc == null)
@@ -1418,10 +1500,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, target, prompt, OK_ONLY, title, dsrcArray, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, String title, String[] dsrc) throws InterruptedException
     {
         return listbox(owner, owner, prompt, OK_ONLY, title, dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, String title, Vector dsrc) throws InterruptedException
     {
         if (dsrc == null)
@@ -1432,10 +1516,12 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, owner, prompt, OK_ONLY, title, dsrcArray, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, String title, int btn, String[] dsrc) throws InterruptedException
     {
         return listbox(owner, owner, prompt, btn, title, dsrc, "noHandler");
     }
+
     public static int listbox(obj_id owner, String prompt, String title, int btn, Vector dsrc) throws InterruptedException
     {
         if (dsrc == null)
@@ -1446,6 +1532,7 @@ public class sui extends script.base_script
         dsrc.toArray(dsrcArray);
         return listbox(owner, owner, prompt, btn, title, dsrcArray, "noHandler");
     }
+
     public static int transfer(obj_id owner, obj_id target, String prompt, String box_title, String lblFrom, int inputFrom, String lblTo, int inputTo, String suiHandler, int conversionFrom, int conversionTo) throws InterruptedException
     {
         if ((owner == null) || (target == null) || (suiHandler.equals("")) || conversionFrom <= 0 || conversionTo <= 0)
@@ -1476,18 +1563,22 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int transfer(obj_id owner, obj_id target, String prompt, String box_title, String lblFrom, int inputFrom, String lblTo, int inputTo, String suiHandler) throws InterruptedException
     {
         return transfer(owner, target, prompt, box_title, lblFrom, inputFrom, lblTo, inputTo, suiHandler, 1, 1);
     }
+
     public static int getTransferInputTo(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(TRANSFER_INPUT_TO + "." + PROP_TEXT));
     }
+
     public static int getTransferInputFrom(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(TRANSFER_INPUT_FROM + "." + PROP_TEXT));
     }
+
     public static int bank(obj_id player) throws InterruptedException
     {
         if (player == null)
@@ -1498,6 +1589,7 @@ public class sui extends script.base_script
         int bank = getBankBalance(player);
         return transfer(player, player, MSG_BANK_PROMPT, MSG_BANK_TITLE, "Cash", cash, "Bank", bank, HANDLER_DEPOSIT_WITHDRAW);
     }
+
     public static int colorize(obj_id owner, obj_id player, obj_id target, String customizationVar, String handler) throws InterruptedException
     {
         if ((player == null) || (target == null) || (customizationVar.equals("")))
@@ -1522,6 +1614,7 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int getColorPickerIndex(dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1530,36 +1623,41 @@ public class sui extends script.base_script
         }
         return utils.stringToInt(params.getString(COLORPICKER_COLORPICKER + "." + PROP_SELECTEDINDEX));
     }
+
     public static String getButtonPressed(dictionary params) throws InterruptedException
     {
         return params.getString(PROP_BUTTONPRESSED);
     }
+
     public static int getIntButtonPressed(dictionary params) throws InterruptedException
     {
         String bp = params.getString(PROP_BUTTONPRESSED);
-        if ((bp != null) && (!bp.equals(""))) {
+        if ((bp != null) && (!bp.equals("")))
+        {
             if (bp.equals(OK))
-			{
-				if (params.containsKey("this.otherPressed"))
-				{
-					if ((params.getString("this.otherPressed")).equals("true"))
-					{
-						return BP_REVERT;
-					}
-				}
-				return BP_OK;
-			}
-			else if (bp.equals(REVERT))
-			{
-				return BP_REVERT;
-			}
+            {
+                if (params.containsKey("this.otherPressed"))
+                {
+                    if ((params.getString("this.otherPressed")).equals("true"))
+                    {
+                        return BP_REVERT;
+                    }
+                }
+                return BP_OK;
+            }
+            else if (bp.equals(REVERT))
+            {
+                return BP_REVERT;
+            }
         }
         return BP_CANCEL;
     }
+
     public static obj_id getPlayerId(dictionary params) throws InterruptedException
     {
         return params.getObjId("player");
     }
+
     public static boolean setSUIObjVars(obj_id target, int pid, dictionary params) throws InterruptedException
     {
         java.util.Enumeration keys = params.keys();
@@ -1577,7 +1675,7 @@ public class sui extends script.base_script
             }
             else if (value instanceof int[])
             {
-                int[] v = (int[])value;
+                int[] v = (int[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1590,7 +1688,7 @@ public class sui extends script.base_script
             }
             else if (value instanceof float[])
             {
-                float[] v = (float[])value;
+                float[] v = (float[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1598,12 +1696,12 @@ public class sui extends script.base_script
             }
             else if (value instanceof String)
             {
-                String v = (String)value;
+                String v = (String) value;
                 setObjVar(target, "sui." + pid + "." + key, v);
             }
             else if (value instanceof String[])
             {
-                String[] v = (String[])value;
+                String[] v = (String[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1611,12 +1709,12 @@ public class sui extends script.base_script
             }
             else if (value instanceof obj_id)
             {
-                obj_id v = (obj_id)value;
+                obj_id v = (obj_id) value;
                 setObjVar(target, "sui." + pid + "." + key, v);
             }
             else if (value instanceof obj_id[])
             {
-                obj_id[] v = (obj_id[])value;
+                obj_id[] v = (obj_id[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1624,12 +1722,12 @@ public class sui extends script.base_script
             }
             else if (value instanceof location)
             {
-                location v = (location)value;
+                location v = (location) value;
                 setObjVar(target, "sui." + pid + "." + key, v);
             }
             else if (value instanceof location[])
             {
-                location[] v = (location[])value;
+                location[] v = (location[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1637,12 +1735,12 @@ public class sui extends script.base_script
             }
             else if (value instanceof string_id)
             {
-                string_id v = (string_id)value;
+                string_id v = (string_id) value;
                 setObjVar(target, "sui." + pid + "." + key, v);
             }
             else if (value instanceof string_id[])
             {
-                string_id[] v = (string_id[])value;
+                string_id[] v = (string_id[]) value;
                 if (v.length > 0)
                 {
                     setObjVar(target, "sui." + pid + "." + key, v);
@@ -1651,10 +1749,12 @@ public class sui extends script.base_script
         }
         return true;
     }
+
     public static void clearSUIObjVar(obj_id target, int pid) throws InterruptedException
     {
         removeObjVar(target, "sui." + pid);
     }
+
     public static void closeSUI(obj_id target, int pid) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1665,6 +1765,7 @@ public class sui extends script.base_script
         params.put("pid", pid);
         messageTo(target, "handleCloseSui", params, 0, false);
     }
+
     public static void setAssociateRange(obj_id player, int pid, obj_id target, float range) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1690,10 +1791,12 @@ public class sui extends script.base_script
         setSUIAssociatedObject(pid, target);
         setSUIMaxRangeToObject(pid, range);
     }
+
     public static void setAssociateRange(obj_id player, int pid, obj_id target) throws InterruptedException
     {
         setAssociateRange(player, pid, target, 16.0f);
     }
+
     public static void setAssociateRange(obj_id player, int pid, obj_id target, String key) throws InterruptedException
     {
         float range = 16.0f;
@@ -1704,10 +1807,12 @@ public class sui extends script.base_script
         }
         setAssociateRange(player, pid, target, range);
     }
+
     public static void setAutosaveProperty(int pid, boolean autosave) throws InterruptedException
     {
         setSUIProperty(pid, THIS, PROP_AUTOSAVE, autosave ? "true" : "false");
     }
+
     public static void setSizeProperty(int pid, int width, int height) throws InterruptedException
     {
         if (width < 0)
@@ -1722,20 +1827,26 @@ public class sui extends script.base_script
         }
         setSUIProperty(pid, THIS, PROP_SIZE, width + "," + height);
     }
+
     public static void setLocationProperty(int pid, int x, int y) throws InterruptedException
     {
         setSUIProperty(pid, THIS, PROP_LOCATION, x + "," + y);
     }
+
     public static void setSoundProperty(int pid, String sound) throws InterruptedException
     {
         setSUIProperty(pid, THIS, PROP_SOUND, sound == null ? "" : sound);
     }
-    public static boolean hasPid(obj_id player, String pidName) throws InterruptedException {
-        if (!isIdValid(player) || !exists(player)) {
+
+    public static boolean hasPid(obj_id player, String pidName) throws InterruptedException
+    {
+        if (!isIdValid(player) || !exists(player))
+        {
             return false;
         }
         return !(pidName == null || pidName.equals("")) && utils.hasScriptVar(player, "pid." + pidName);
     }
+
     public static void setPid(obj_id player, int pid, String pidName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -1752,6 +1863,7 @@ public class sui extends script.base_script
         }
         utils.setScriptVar(player, "pid." + pidName, pid);
     }
+
     public static void removePid(obj_id player, String pidName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -1764,6 +1876,7 @@ public class sui extends script.base_script
         }
         utils.removeScriptVar(player, "pid." + pidName);
     }
+
     public static int getPid(obj_id player, String pidName) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -1776,6 +1889,7 @@ public class sui extends script.base_script
         }
         return utils.getIntScriptVar(player, "pid." + pidName);
     }
+
     public static boolean outOfRange(obj_id object, obj_id player, float range, boolean message) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -1798,30 +1912,37 @@ public class sui extends script.base_script
         }
         return true;
     }
+
     public static String colorGreen() throws InterruptedException
     {
         return "\\#99FF33";
     }
+
     public static String colorRed() throws InterruptedException
     {
         return "\\#FF3300";
     }
+
     public static String colorOrange() throws InterruptedException
     {
         return "\\#FFCC66";
     }
+
     public static String colorWhite() throws InterruptedException
     {
         return "\\#FFFFFF";
     }
+
     public static String colorBlue() throws InterruptedException
     {
         return "\\#0099FF";
     }
+
     public static String newLine() throws InterruptedException
     {
         return newLine(1);
     }
+
     public static String newLine(int n) throws InterruptedException
     {
         String returnString = "";
@@ -1831,6 +1952,7 @@ public class sui extends script.base_script
         }
         return returnString;
     }
+
     public static int table(obj_id owner, obj_id target, int buttons, String box_title, String suiHandler, String prompt, String[] columnNames, String[] columnTypes, String[][] tableData, boolean rowMajor, boolean allowExport) throws InterruptedException
     {
         if (!isIdValid(owner) || !isIdValid(target))
@@ -1854,7 +1976,7 @@ public class sui extends script.base_script
             {
                 setSUIProperty(pid, TABLE_PROMPT, "Visible", "False");
             }
-            else 
+            else
             {
                 setSUIProperty(pid, TABLE_PROMPT_TEXT, PROP_TEXT, prompt);
             }
@@ -1868,7 +1990,7 @@ public class sui extends script.base_script
                     for (int i = 0; i < ubound; i++)
                     {
                         String key = columnNames[i];
-                        addSUIDataSource(pid, TABLE_DATASOURCE, "" + i);
+                        addSUIDataSource(pid, TABLE_DATASOURCE, String.valueOf(i));
                         setSUIProperty(pid, TABLE_DATASOURCE + "." + i, PROP_LABEL, key);
                         setSUIProperty(pid, TABLE_DATASOURCE + "." + i, PROP_TYPE, columnTypes[i]);
                         for (int k = 0; k < tableData[i].length; ++k)
@@ -1878,13 +2000,13 @@ public class sui extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     int ubound = columnNames.length;
                     for (int i = 0; i < ubound; i++)
                     {
                         String key = columnNames[i];
-                        addSUIDataSource(pid, TABLE_DATASOURCE, "" + i);
+                        addSUIDataSource(pid, TABLE_DATASOURCE, String.valueOf(i));
                         setSUIProperty(pid, TABLE_DATASOURCE + "." + i, PROP_LABEL, key);
                         setSUIProperty(pid, TABLE_DATASOURCE + "." + i, PROP_TYPE, columnTypes[i]);
                     }
@@ -1908,22 +2030,27 @@ public class sui extends script.base_script
         }
         return pid;
     }
+
     public static int tableColumnMajor(obj_id owner, obj_id target, int buttons, String box_title, String suiHandler, String prompt, String[] columnNames, String[] columnTypes, String[][] tableData) throws InterruptedException
     {
         return table(owner, target, buttons, box_title, suiHandler, prompt, columnNames, columnTypes, tableData, false, false);
     }
+
     public static int tableColumnMajor(obj_id owner, obj_id target, int buttons, String box_title, String suiHandler, String prompt, String[] columnNames, String[] columnTypes, String[][] tableData, boolean allowExport) throws InterruptedException
     {
         return table(owner, target, buttons, box_title, suiHandler, prompt, columnNames, columnTypes, tableData, false, allowExport);
     }
+
     public static int tableRowMajor(obj_id owner, obj_id target, int buttons, String box_title, String suiHandler, String prompt, String[] columnNames, String[] columnTypes, String[][] tableData) throws InterruptedException
     {
         return table(owner, target, buttons, box_title, suiHandler, prompt, columnNames, columnTypes, tableData, true, false);
     }
+
     public static int tableRowMajor(obj_id owner, obj_id target, int buttons, String box_title, String suiHandler, String prompt, String[] columnNames, String[] columnTypes, String[][] tableData, boolean allowExport) throws InterruptedException
     {
         return table(owner, target, buttons, box_title, suiHandler, prompt, columnNames, columnTypes, tableData, true, allowExport);
     }
+
     public static void tableButtonSetup(int pid, int buttons) throws InterruptedException
     {
         switch (buttons)
@@ -1978,40 +2105,47 @@ public class sui extends script.base_script
                 break;
         }
     }
+
     public static void TableHideBtnMiddle(int pid) throws InterruptedException
     {
         setSUIProperty(pid, TABLE_BTN_CANCEL, "Enabled", "False");
         setSUIProperty(pid, TABLE_BTN_CANCEL, "Visible", "False");
     }
+
     public static void TableUseOtherButton(int pid, String caption) throws InterruptedException
     {
         setSUIProperty(pid, TABLE_BTN_OTHER, PROP_VISIBLE, "true");
         setSUIProperty(pid, TABLE_BTN_OTHER, PROP_TEXT, caption);
         subscribeToSUIProperty(pid, "this", TABLE_PROP_OTHER_PRESSED);
     }
+
     public static void TableAllowExport(int pid, boolean allow) throws InterruptedException
     {
         if (allow)
         {
             setSUIProperty(pid, TABLE_BTN_EXPORT, PROP_VISIBLE, "true");
         }
-        else 
+        else
         {
             setSUIProperty(pid, TABLE_BTN_EXPORT, PROP_VISIBLE, "false");
         }
     }
+
     public static int getTableSelectedRow(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(TABLE_TABLE + "." + PROP_SELECTEDROW));
     }
+
     public static int getTableLogicalIndex(dictionary params) throws InterruptedException
     {
         return utils.stringToInt(params.getString(TABLE_TABLE + "." + PROP_LOGICALINDEX));
     }
+
     public static String getEventType(dictionary params) throws InterruptedException
     {
         return params.getString("eventType");
     }
+
     public static void cancelCountdownTimer(obj_id self, int event) throws InterruptedException
     {
         if (!hasObjVar(self, sui.COUNTDOWNTIMER_SUI_VAR))
@@ -2041,6 +2175,7 @@ public class sui extends script.base_script
         detachScript(self, sui.COUNTDOWNTIMER_PLAYER_SCRIPT);
         forceCloseSUIPage(pid);
     }
+
     public static boolean hasEventFlag(obj_id self, int flag) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, sui.COUNTDOWNTIMER_FLAGS_VAR))

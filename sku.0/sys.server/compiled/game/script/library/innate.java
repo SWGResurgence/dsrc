@@ -5,9 +5,6 @@ import script.string_id;
 
 public class innate extends script.base_script
 {
-    public innate()
-    {
-    }
     public static final int ONE_HOUR = 3600;
     public static final int TWO_HOURS = ONE_HOUR * 2;
     public static final float DURATION_REGEN = 300.0f;
@@ -37,30 +34,37 @@ public class innate extends script.base_script
     public static final string_id SID_ROAR_ACTIVE = new string_id(STF, "roar_active");
     public static final string_id SID_VIT_ACTIVE = new string_id(STF, "vit_active");
     public static final string_id SID_EQUIL_ACTIVE = new string_id(STF, "equil_active");
-    public static final String[] INNATE_CMD = 
-    {
-        EQUIL,
-        REGEN,
-        ROAR,
-        VIT
-    };
+    public static final String[] INNATE_CMD =
+            {
+                    EQUIL,
+                    REGEN,
+                    ROAR,
+                    VIT
+            };
     public static final int AMR_ERROR = -1;
     public static final int AMR_CONTINUE = 0;
     public static final int AMR_OVERRIDE = 1;
     public static final int AMR_AMPLIFY = 2;
+    public innate()
+    {
+    }
+
     public static String parseInnateCommand(String txt) throws InterruptedException
     {
         if ((txt == null) || (txt.equals("")))
         {
             return null;
         }
-        for (String s : INNATE_CMD) {
-            if (s.startsWith(txt)) {
+        for (String s : INNATE_CMD)
+        {
+            if (s.startsWith(txt))
+            {
                 return s;
             }
         }
         return null;
     }
+
     public static boolean regeneration() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -75,6 +79,7 @@ public class innate extends script.base_script
         }
         return false;
     }
+
     public static boolean vitalize() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -89,6 +94,7 @@ public class innate extends script.base_script
         }
         return false;
     }
+
     public static boolean equilibrium() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -96,6 +102,7 @@ public class innate extends script.base_script
         sendCombatSpamMessage(self, SID_EQUIL_ACTIVE, COMBAT_RESULT_GENERIC);
         return true;
     }
+
     public static void equalizeEffect(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -109,6 +116,7 @@ public class innate extends script.base_script
         addAttribModifier(player, HEALTH, (-1 * VALUE_EQUALIZE_AMOUNT), 0, 0, MOD_POOL);
         addAttribModifier(player, ACTION, VALUE_EQUALIZE_AMOUNT, 0, 0, MOD_POOL);
     }
+
     public static int doAntiModCheck(obj_id target, String skill_mod) throws InterruptedException
     {
         if (!isIdValid(target) || (skill_mod == null) || (skill_mod.equals("")))

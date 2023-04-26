@@ -4,9 +4,6 @@ import script.*;
 
 public class space_content extends script.base_script
 {
-    public space_content()
-    {
-    }
     public static final String LAUNCH_LOCATION_DATATABLE_NAME = "datatables/space_zones/launch_locations.iff";
     public static final String LAUNCH_LOCATION_COLUMN_POINTNAME = "pointName";
     public static final String LAUNCH_LOCATION_COLUMN_GROUND_SCENE = "groundScene";
@@ -15,6 +12,10 @@ public class space_content extends script.base_script
     public static final String LAUNCH_LOCATION_COLUMN_GROUND_Z = "groundZ";
     public static final string_id SID_BAD_TRAVEL_POINT = new string_id("space/space_interaction", "bad_travel_point");
     public static final string_id SID_NO_HOMING_BEACON = new string_id("space/space_interaction", "no_homing_beacon");
+    public space_content()
+    {
+    }
+
     public static void landPlayer(obj_id objPlayer, obj_id objStation, String strDestination) throws InterruptedException
     {
         float fltDistance = getDistance(objStation, space_transition.getContainingShip(objPlayer));
@@ -30,9 +31,8 @@ public class space_content extends script.base_script
             prose_package ppBadTravelPoint = prose.getPackage(SID_BAD_TRAVEL_POINT);
             prose.setTO(ppBadTravelPoint, strDestination);
             sendSystemMessageProse(objPlayer, ppBadTravelPoint);
-            return;
         }
-        else 
+        else
         {
             obj_id objShip = space_transition.getContainingShip(objPlayer);
             if (isIdValid(objShip))
@@ -46,13 +46,14 @@ public class space_content extends script.base_script
             float groundX = dataTableGetFloat(LAUNCH_LOCATION_DATATABLE_NAME, row, LAUNCH_LOCATION_COLUMN_GROUND_X);
             float groundY = dataTableGetFloat(LAUNCH_LOCATION_DATATABLE_NAME, row, LAUNCH_LOCATION_COLUMN_GROUND_Y);
             float groundZ = dataTableGetFloat(LAUNCH_LOCATION_DATATABLE_NAME, row, LAUNCH_LOCATION_COLUMN_GROUND_Z);
-            float theta = rand() * (2.0f * (float)Math.PI);
+            float theta = rand() * (2.0f * (float) Math.PI);
             float radius = 2.0f + rand() * 3.0f;
             groundX += radius * StrictMath.cos(theta);
             groundZ += radius * StrictMath.sin(theta);
             warpPlayer(objPlayer, groundScene, groundX, groundY, groundZ, null, groundX, groundY, groundZ);
         }
     }
+
     public static String getPlanetForLaunchLocation(String pointName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(pointName, LAUNCH_LOCATION_COLUMN_POINTNAME, LAUNCH_LOCATION_DATATABLE_NAME);
@@ -63,6 +64,7 @@ public class space_content extends script.base_script
         }
         return ret;
     }
+
     public static void notifySpawner(obj_id objObject) throws InterruptedException
     {
         if (!isIdValid(objObject))
@@ -84,6 +86,7 @@ public class space_content extends script.base_script
             space_utils.notifyObject(objParent, "childDestroyed", null);
         }
     }
+
     public static void landPlayerHoming(obj_id objPlayer, obj_id objStation) throws InterruptedException
     {
         float fltDistance = getDistance(objStation, space_transition.getContainingShip(objPlayer));
@@ -96,9 +99,8 @@ public class space_content extends script.base_script
         if (!hasObjVar(objPlayer, "homingBeacon.planet") && !hasObjVar(objPlayer, "homingBeacon.houseLoc"))
         {
             sendSystemMessage(objPlayer, SID_NO_HOMING_BEACON);
-            return;
         }
-        else 
+        else
         {
             obj_id objShip = space_transition.getContainingShip(objPlayer);
             if (isIdValid(objShip))

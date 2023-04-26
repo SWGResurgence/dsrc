@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class create extends script.base_script
 {
-    public create()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STAT_BALANCE_TABLE = "datatables/mob/stat_balance.iff";
     public static final String VEHICLE_TABLE = "datatables/vehicle/vehicle_template.iff";
@@ -21,24 +18,28 @@ public class create extends script.base_script
     public static final float MELEE_SPEED_MOD = 1.25f;
     public static final float MELEE_HP_MOD = 1.15f;
     public static final String INITIALIZE_CREATURE_DO_NOT_SCALE_OBJVAR = "create_doNotRescale";
-    public static final String[] MINATTRIBNAMES = 
+    public static final String[] MINATTRIBNAMES =
+            {
+                    "minHealth",
+                    "minConstitution",
+                    "minAction",
+                    "minStamina",
+                    "minMind",
+                    "minWillpower"
+            };
+    public static final String[] MAXATTRIBNAMES =
+            {
+                    "maxHealth",
+                    "maxConstitution",
+                    "maxAction",
+                    "maxStamina",
+                    "maxMind",
+                    "maxWillpower"
+            };
+    public create()
     {
-        "minHealth",
-        "minConstitution",
-        "minAction",
-        "minStamina",
-        "minMind",
-        "minWillpower"
-    };
-    public static final String[] MAXATTRIBNAMES = 
-    {
-        "maxHealth",
-        "maxConstitution",
-        "maxAction",
-        "maxStamina",
-        "maxMind",
-        "maxWillpower"
-    };
+    }
+
     public static obj_id staticObject(String objectName, location spawnLocation) throws InterruptedException
     {
         if (objectName == null)
@@ -55,10 +56,12 @@ public class create extends script.base_script
         }
         return creature;
     }
+
     public static obj_id object(String objectName, location spawnLocation) throws InterruptedException
     {
         return object(objectName, spawnLocation, -1);
     }
+
     public static obj_id object(String objectName, location spawnLocation, int level) throws InterruptedException
     {
         if (objectName == null)
@@ -68,18 +71,22 @@ public class create extends script.base_script
         }
         return create.object(objectName, spawnLocation, level, true);
     }
+
     public static obj_id object(String objectName, location spawnLocation, boolean withAi) throws InterruptedException
     {
         return object(objectName, spawnLocation, -1, withAi);
     }
+
     public static obj_id object(String objectName, location spawnLocation, int level, boolean withAi) throws InterruptedException
     {
         return create.object(objectName, spawnLocation, level, withAi, false);
     }
+
     public static obj_id object(String objectName, location spawnLocation, boolean withAi, boolean isPet) throws InterruptedException
     {
         return object(objectName, spawnLocation, -1, withAi, isPet);
     }
+
     public static obj_id object(String objectName, location spawnLocation, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (objectName == null)
@@ -97,7 +104,7 @@ public class create extends script.base_script
             }
             return creature;
         }
-        else 
+        else
         {
             obj_id creature = createCreature(objectName, spawnLocation, level, withAi, isPet);
             if (isIdValid(creature))
@@ -107,6 +114,7 @@ public class create extends script.base_script
             return creature;
         }
     }
+
     public static obj_id object(String objectName, obj_id objContainer, boolean withAi, boolean isPet) throws InterruptedException
     {
         obj_id creature = object(objectName, objContainer, -1, withAi, isPet);
@@ -116,6 +124,7 @@ public class create extends script.base_script
         }
         return creature;
     }
+
     public static obj_id object(String objectName, obj_id objContainer, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (objectName == null)
@@ -133,7 +142,7 @@ public class create extends script.base_script
             }
             return creature;
         }
-        else 
+        else
         {
             obj_id creature = createCreature(objectName, objContainer, level, withAi, isPet);
             if (isIdValid(creature))
@@ -143,10 +152,12 @@ public class create extends script.base_script
             return creature;
         }
     }
+
     public static obj_id object(String objectName, float xOffset, float zOffset) throws InterruptedException
     {
         return object(objectName, xOffset, zOffset, -1);
     }
+
     public static obj_id object(String objectName, float xOffset, float zOffset, int level) throws InterruptedException
     {
         if (objectName == null)
@@ -159,6 +170,7 @@ public class create extends script.base_script
         spawnLoc.z += zOffset;
         return create.object(objectName, spawnLoc, level);
     }
+
     public static obj_id themeParkObject(String objectName, float xOffset, float zOffset, String destroyHandlerName, float destroyMessageDelay) throws InterruptedException
     {
         if (objectName == null)
@@ -170,6 +182,7 @@ public class create extends script.base_script
         addDestroyMessage(newObject, destroyHandlerName, destroyMessageDelay, getSelf());
         return newObject;
     }
+
     public static obj_id themeParkObject(String objectName, float xOffset, float zOffset) throws InterruptedException
     {
         if (objectName == null)
@@ -185,10 +198,12 @@ public class create extends script.base_script
         ai_lib.setDefaultCalmBehavior(newObject, ai_lib.BEHAVIOR_SENTINEL);
         return newObject;
     }
+
     public static obj_id createNpc(String creatureName, String templateName, location spawnLocation) throws InterruptedException
     {
         return createNpc(creatureName, templateName, spawnLocation, -1);
     }
+
     public static obj_id createNpc(String creatureName, String templateName, location spawnLocation, int level) throws InterruptedException
     {
         if (creatureName == null)
@@ -219,7 +234,7 @@ public class create extends script.base_script
                 }
                 templateName = templateList[rand(0, templateList.length - 1)];
             }
-            else 
+            else
             {
                 String[] templateList = dataTableGetStringColumnNoDefaults(NPC_CUSTOMIZATION_PREFIX + templateName + ".iff", rand(0, 1));
                 if (templateList.length < 1 || templateList == null)
@@ -232,10 +247,12 @@ public class create extends script.base_script
         }
         return createCreature(creatureName, templateName, spawnLocation, creatureDict, level, true);
     }
+
     public static obj_id createNpc(String creatureName, String templateName, float xOffset, float zOffset) throws InterruptedException
     {
         return createNpc(creatureName, templateName, xOffset, zOffset, -1);
     }
+
     public static obj_id createNpc(String creatureName, String templateName, float xOffset, float zOffset, int level) throws InterruptedException
     {
         if (creatureName == null)
@@ -253,18 +270,22 @@ public class create extends script.base_script
         spawnLoc.z += zOffset;
         return create.createNpc(creatureName, templateName, spawnLoc, level);
     }
+
     public static obj_id createCreature(String creatureName, location spawnLocation, boolean withAi) throws InterruptedException
     {
         return createCreature(creatureName, spawnLocation, -1, withAi);
     }
+
     public static obj_id createCreature(String creatureName, location spawnLocation, int level, boolean withAi) throws InterruptedException
     {
         return create.createCreature(creatureName, spawnLocation, level, withAi, false);
     }
+
     public static obj_id createCreature(String creatureName, location spawnLocation, boolean withAi, boolean isPet) throws InterruptedException
     {
         return createCreature(creatureName, spawnLocation, -1, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, location spawnLocation, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (creatureName == null)
@@ -297,7 +318,7 @@ public class create extends script.base_script
                 }
                 templateName = templateList[rand(0, templateList.length - 1)];
             }
-            else 
+            else
             {
                 String[] templateList = dataTableGetStringColumnNoDefaults(NPC_CUSTOMIZATION_PREFIX + templateName + ".iff", rand(0, 1));
                 if (templateList == null)
@@ -317,10 +338,12 @@ public class create extends script.base_script
         }
         return createCreature(creatureName, templateName, spawnLocation, creatureDict, level, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, obj_id objContainer, boolean withAi, boolean isPet) throws InterruptedException
     {
         return createCreature(creatureName, objContainer, -1, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, obj_id objContainer, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (creatureName == null)
@@ -353,7 +376,7 @@ public class create extends script.base_script
                 }
                 templateName = templateList[rand(0, templateList.length - 1)];
             }
-            else 
+            else
             {
                 String[] templateList = dataTableGetStringColumnNoDefaults(NPC_CUSTOMIZATION_PREFIX + templateName + ".iff", rand(0, 1));
                 if (templateList == null)
@@ -373,18 +396,22 @@ public class create extends script.base_script
         }
         return createCreature(creatureName, templateName, objContainer, creatureDict, level, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, String templateName, location spawnLocation, dictionary creatureDict, boolean withAi) throws InterruptedException
     {
         return createCreature(creatureName, templateName, spawnLocation, creatureDict, -1, withAi);
     }
+
     public static obj_id createCreature(String creatureName, String templateName, location spawnLocation, dictionary creatureDict, int level, boolean withAi) throws InterruptedException
     {
         return createCreature(creatureName, templateName, spawnLocation, creatureDict, level, withAi, false);
     }
+
     public static obj_id createCreature(String creatureName, String templateName, location spawnLocation, dictionary creatureDict, boolean withAi, boolean isPet) throws InterruptedException
     {
         return createCreature(creatureName, templateName, spawnLocation, creatureDict, -1, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, String templateName, location spawnLocation, dictionary creatureDict, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (templateName.equals("") || templateName == null)
@@ -404,7 +431,7 @@ public class create extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             utils.setScriptVar(creature, "spawnedBy", getSelf());
         }
@@ -422,10 +449,12 @@ public class create extends script.base_script
         attachCreatureScripts(creature, creatureDict.getString("scripts"), withAi);
         return creature;
     }
+
     public static obj_id createCreature(String creatureName, String templateName, obj_id objContainer, dictionary creatureDict, boolean withAi, boolean isPet) throws InterruptedException
     {
         return createCreature(creatureName, templateName, objContainer, creatureDict, -1, withAi, isPet);
     }
+
     public static obj_id createCreature(String creatureName, String templateName, obj_id objContainer, dictionary creatureDict, int level, boolean withAi, boolean isPet) throws InterruptedException
     {
         if (templateName.equals("") || templateName == null)
@@ -445,7 +474,7 @@ public class create extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             utils.setScriptVar(creature, "spawnedBy", getSelf());
         }
@@ -463,10 +492,12 @@ public class create extends script.base_script
         attachCreatureScripts(creature, creatureDict.getString("scripts"), withAi);
         return creature;
     }
+
     public static void initializeCreature(obj_id creature, String creatureName, dictionary creatureDict) throws InterruptedException
     {
         initializeCreature(creature, creatureName, creatureDict, -1);
     }
+
     public static void initializeCreature(obj_id creature, String creatureName, dictionary creatureDict, int level) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(creature), "debug_ai", ("########## create::initializeCreature() BEGIN ai(" + creature + ") creatureName(" + creatureName + ") ##########"));
@@ -495,7 +526,8 @@ public class create extends script.base_script
             ranged_int_custom_var[] c = hue.getPalcolorVars(creature);
             if (c != null)
             {
-                for (ranged_int_custom_var ranged_int_custom_var : c) {
+                for (ranged_int_custom_var ranged_int_custom_var : c)
+                {
                     ranged_int_custom_var.setValue(huevar);
                 }
             }
@@ -528,7 +560,7 @@ public class create extends script.base_script
             toHitLevel = level;
             armorLevel = level;
         }
-        else 
+        else
         {
             level = calcCreatureLevel(statLevel, dmgLevel, toHitLevel, armorLevel);
         }
@@ -581,7 +613,7 @@ public class create extends script.base_script
             utils.setScriptVar(defaultWeapon, "isCreatureWeapon", 1);
             setObjVar(defaultWeapon, "isCreatureWeapon", 1);
         }
-        
+
         {
             if (aiHasPrimaryWeapon(creature))
             {
@@ -604,7 +636,7 @@ public class create extends script.base_script
                 setObjVar(primaryWeapon, "isCreatureWeapon", 1);
             }
         }
-        
+
         {
             if (aiHasSecondaryWeapon(creature))
             {
@@ -635,15 +667,15 @@ public class create extends script.base_script
             hpMod = MELEE_HP_MOD;
         }
         int avgAttribHealth = dataTableGetInt(STAT_BALANCE_TABLE, statLevel - 1, diffClassName + "HP");
-        int minAttribHealth = minAttribHealth = (int)(avgAttribHealth * 0.9f);
-        int maxAttribHealth = maxAttribHealth = (int)(avgAttribHealth * 1.1f);
+        int minAttribHealth = minAttribHealth = (int) (avgAttribHealth * 0.9f);
+        int maxAttribHealth = maxAttribHealth = (int) (avgAttribHealth * 1.1f);
         float newAttribValueHealth = rand(minAttribHealth, maxAttribHealth);
         newAttribValueHealth *= hpMod;
-        setMaxAttrib(creature, HEALTH, (int)newAttribValueHealth);
-        setAttrib(creature, HEALTH, (int)newAttribValueHealth);
+        setMaxAttrib(creature, HEALTH, (int) newAttribValueHealth);
+        setAttrib(creature, HEALTH, (int) newAttribValueHealth);
         int avgAttribAction = dataTableGetInt(STAT_BALANCE_TABLE, statLevel - 1, diffClassName + "Action");
-        int minAttribAction = minAttribAction = (int)(avgAttribAction * 0.9f);
-        int maxAttribAction = maxAttribAction = (int)(avgAttribAction * 1.1f);
+        int minAttribAction = minAttribAction = (int) (avgAttribAction * 0.9f);
+        int maxAttribAction = maxAttribAction = (int) (avgAttribAction * 1.1f);
         int newAttribValueAction = rand(minAttribAction, maxAttribAction);
         setMaxAttrib(creature, ACTION, newAttribValueAction);
         setAttrib(creature, ACTION, newAttribValueAction);
@@ -659,14 +691,14 @@ public class create extends script.base_script
         float combatRegen = dataTableGetFloat(STAT_BALANCE_TABLE, statLevel - 1, diffClassName + "CombatRegen");
         int xpValue = xp.getLevelBasedXP(level);
         setObjVar(creature, "combat.intCombatXP", xpValue);
-        
+
         {
             float runSpeed = ai_lib.AI_MAX_MOVEMENT_SPEED * aiGetMovementSpeedPercent(creature);
             runSpeed *= speedMod;
             float walkSpeed = 2.0f;
             setBaseRunSpeed(creature, runSpeed);
             setBaseWalkSpeed(creature, walkSpeed);
-            
+
             {
                 if (getBaseWalkSpeed(creature) > runSpeed)
                 {
@@ -704,25 +736,25 @@ public class create extends script.base_script
         switch (niche)
         {
             case NICHE_HERBIVORE:
-            setAttributeAttained(creature, attrib.HERBIVORE);
-            setAttributeInterested(creature, attrib.CARNIVORE);
-            break;
+                setAttributeAttained(creature, attrib.HERBIVORE);
+                setAttributeInterested(creature, attrib.CARNIVORE);
+                break;
             case NICHE_CARNIVORE:
             case NICHE_PREDATOR:
-            setAttributeAttained(creature, attrib.CARNIVORE);
-            setAttributeInterested(creature, attrib.HERBIVORE);
-            setAttributeInterested(creature, attrib.NPC);
-            break;
+                setAttributeAttained(creature, attrib.CARNIVORE);
+                setAttributeInterested(creature, attrib.HERBIVORE);
+                setAttributeInterested(creature, attrib.NPC);
+                break;
             case NICHE_NPC:
-            setAttributeAttained(creature, attrib.NPC);
-            setAttributeInterested(creature, attrib.CARNIVORE);
-            setUpFactionalEnemyAttribs(creature, faction);
-            break;
+                setAttributeAttained(creature, attrib.NPC);
+                setAttributeInterested(creature, attrib.CARNIVORE);
+                setUpFactionalEnemyAttribs(creature, faction);
+                break;
             case NICHE_ANDROID:
-            setAttributeAttained(creature, attrib.NPC);
-            setAttributeInterested(creature, attrib.CARNIVORE);
-            setUpFactionalEnemyAttribs(creature, faction);
-            break;
+                setAttributeAttained(creature, attrib.NPC);
+                setAttributeInterested(creature, attrib.CARNIVORE);
+                setUpFactionalEnemyAttribs(creature, faction);
+                break;
         }
         String strLootTable = creatureDict.getString("lootTable");
         int intRolls = creatureDict.getInt("intLootRolls");
@@ -764,6 +796,7 @@ public class create extends script.base_script
         }
         LOGC(aiLoggingEnabled(creature), "debug_ai", ("########## create::initializeCreature() END ai(" + creature + ") creatureName(" + creatureName + ") ##########"));
     }
+
     public static int calcCreatureLevel(String creatureName) throws InterruptedException
     {
         dictionary creatureDict = utils.dataTableGetRow(CREATURE_TABLE, creatureName);
@@ -774,6 +807,7 @@ public class create extends script.base_script
         }
         return calcCreatureLevel(creatureDict);
     }
+
     public static int calcCreatureLevel(dictionary creatureDict) throws InterruptedException
     {
         int baseLevel = creatureDict.getInt("BaseLevel");
@@ -799,15 +833,17 @@ public class create extends script.base_script
         }
         return calcCreatureLevel(statLevel, dmgLevel, toHitLevel, armorLevel);
     }
+
     public static int calcCreatureLevel(int statLevel, int dmgLevel, int toHitLevel, int armorLevel) throws InterruptedException
     {
         int level = 0;
-        
+
         {
-            level = (int)(((statLevel * 6) + (dmgLevel * 6) + (toHitLevel * 2) + (armorLevel * 4)) / 18.0f);
+            level = (int) (((statLevel * 6) + (dmgLevel * 6) + (toHitLevel * 2) + (armorLevel * 4)) / 18.0f);
         }
         return level;
     }
+
     public static void attachCreatureScripts(obj_id creature, String scriptList, boolean withAi) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableAI") != null)
@@ -825,10 +861,12 @@ public class create extends script.base_script
             return;
         }
         String[] scriptArray = split(scriptList, ',');
-        for (String s : scriptArray) {
+        for (String s : scriptArray)
+        {
             attachScript(creature, s);
         }
     }
+
     public static boolean initializeArmor(obj_id creature, dictionary creatureDict) throws InterruptedException
     {
         int armorLevel = creatureDict.getInt("BaseLevel") + creatureDict.getInt("ArmorLevelModifier");
@@ -849,6 +887,7 @@ public class create extends script.base_script
         int armorRating = dataTableGetInt(STAT_BALANCE_TABLE, armorLevel - 1, diffClassName + "Armor");
         return initializeArmor(creature, creatureDict, armorRating);
     }
+
     public static boolean initializeArmor(obj_id creature, dictionary creatureDict, int armorRating) throws InterruptedException
     {
         int[] armorData = new int[10];
@@ -864,6 +903,7 @@ public class create extends script.base_script
         armorData[9] = creatureDict.getInt("armorStun");
         return initializeArmor(creature, armorData);
     }
+
     public static boolean initializeArmor(obj_id creature, int[] armorData) throws InterruptedException
     {
         int armorRating = armorData[0];
@@ -884,24 +924,26 @@ public class create extends script.base_script
         String armorLevelObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_ARMOR_LEVEL;
         setObjVar(creature, armorLevelObjVar, AL_standard);
         String genProtectionObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION;
-        setObjVar(creature, genProtectionObjVar, (float)armorEffectiveness);
+        setObjVar(creature, genProtectionObjVar, (float) armorEffectiveness);
         utils.setScriptVar(creature, armor.SCRIPTVAR_CACHED_GENERAL_PROTECTION, armorEffectiveness);
         return success;
     }
+
     public static void setCreatureObjVars(obj_id creature, String objVarList) throws InterruptedException
     {
         utils.setObjVarsList(creature, objVarList);
     }
+
     public static String getLairDifficulty(int intMinDifficulty, int intMaxDifficulty, int intPlayerDifficulty) throws InterruptedException
     {
-        final String[] LAIR_DIFFICULTIES = 
-        {
-            "veryEasy",
-            "easy",
-            "medium",
-            "hard",
-            "veryHard"
-        };
+        final String[] LAIR_DIFFICULTIES =
+                {
+                        "veryEasy",
+                        "easy",
+                        "medium",
+                        "hard",
+                        "veryHard"
+                };
         int intDifference = intMaxDifficulty - intMinDifficulty;
         intPlayerDifficulty = intPlayerDifficulty - intMinDifficulty;
         if (intDifference == 0)
@@ -910,7 +952,7 @@ public class create extends script.base_script
         }
         float fltPercent = (intPlayerDifficulty / intDifference);
         fltPercent = fltPercent * 100;
-        int intIndex = (int)(fltPercent / 20);
+        int intIndex = (int) (fltPercent / 20);
         intIndex = intIndex - 1;
         if (intIndex < 0)
         {
@@ -922,10 +964,11 @@ public class create extends script.base_script
         }
         return LAIR_DIFFICULTIES[intIndex];
     }
+
     public static void grantAllAbilities(obj_id npc) throws InterruptedException
     {
-        return;
     }
+
     public static void attachCombatScripts(obj_id npc) throws InterruptedException
     {
         if (!hasScript(npc, "ai.creature_combat"))
@@ -954,6 +997,7 @@ public class create extends script.base_script
             }
         }
     }
+
     public static void applySkillStatisticModifiers(obj_id creature, int toHitChance, int defenseValue) throws InterruptedException
     {
         applySkillStatisticModifier(creature, "rifle_accuracy", toHitChance);
@@ -973,6 +1017,7 @@ public class create extends script.base_script
         applySkillStatisticModifier(creature, "ranged_defense", defenseValue);
         applySkillStatisticModifier(creature, "melee_defense", defenseValue);
     }
+
     public static void applyCreatureImmunities(obj_id creature, dictionary creatureDict) throws InterruptedException
     {
         int rootImmune = creatureDict.getInt("rootImmune");
@@ -1012,6 +1057,7 @@ public class create extends script.base_script
             factions.setIgnorePlayer(creature);
         }
     }
+
     public static void addDestroyMessage(obj_id creature, String handlerName, float delay, obj_id recipient) throws InterruptedException
     {
         if (!isIdValid(creature))
@@ -1044,6 +1090,7 @@ public class create extends script.base_script
             setObjVar(creature, "destroyMessageList.recipients", destroyMessageRecipients);
         }
     }
+
     public static void randomlyNameCreature(obj_id npc, String creatureName) throws InterruptedException
     {
         String templateName = getTemplateName(npc);
@@ -1078,6 +1125,7 @@ public class create extends script.base_script
         setName(npc, "");
         setName(npc, nameId);
     }
+
     public static void setTitle(obj_id npc, String creatureName) throws InterruptedException
     {
         string_id nameId = new string_id(CREATURE_NAME_FILE, creatureName);
@@ -1102,11 +1150,12 @@ public class create extends script.base_script
             setName(npc, "");
             setName(npc, nameId);
         }
-        else 
+        else
         {
             setName(npc, oldName + " (" + getString(nameId) + ")");
         }
     }
+
     public static void nameStormTrooper(obj_id npc) throws InterruptedException
     {
         int designation = rand(1, 5);
@@ -1114,27 +1163,29 @@ public class create extends script.base_script
         switch (designation)
         {
             case 1:
-            StName = "TK-";
-            break;
+                StName = "TK-";
+                break;
             case 2:
-            StName = "GK-";
-            break;
+                StName = "GK-";
+                break;
             case 3:
-            StName = "RK-";
-            break;
+                StName = "RK-";
+                break;
             case 4:
-            StName = "LK-";
-            break;
+                StName = "LK-";
+                break;
             case 5:
-            StName = "VK-";
-            break;
+                StName = "VK-";
+                break;
         }
         setName(npc, StName + rand(1, 820));
     }
+
     public static void nameImperialPilot(obj_id npc) throws InterruptedException
     {
         setName(npc, "DS-" + rand(1, 820));
     }
+
     public static void nameScoutTrooper(obj_id npc) throws InterruptedException
     {
         int designation = rand(1, 5);
@@ -1142,23 +1193,24 @@ public class create extends script.base_script
         switch (designation)
         {
             case 1:
-            StName = "SX-";
-            break;
+                StName = "SX-";
+                break;
             case 2:
-            StName = "GX-";
-            break;
+                StName = "GX-";
+                break;
             case 3:
-            StName = "VX-";
-            break;
+                StName = "VX-";
+                break;
             case 4:
-            StName = "CX-";
-            break;
+                StName = "CX-";
+                break;
             case 5:
-            StName = "NX-";
-            break;
+                StName = "NX-";
+                break;
         }
         setName(npc, StName + rand(1, 820));
     }
+
     public static void nameDarkTrooper(obj_id npc) throws InterruptedException
     {
         int designation = rand(1, 5);
@@ -1166,23 +1218,24 @@ public class create extends script.base_script
         switch (designation)
         {
             case 1:
-            StName = "JLB-";
-            break;
+                StName = "JLB-";
+                break;
             case 2:
-            StName = "RAR-";
-            break;
+                StName = "RAR-";
+                break;
             case 3:
-            StName = "KNP-";
-            break;
+                StName = "KNP-";
+                break;
             case 4:
-            StName = "BCP-";
-            break;
+                StName = "BCP-";
+                break;
             case 5:
-            StName = "RTZ-";
-            break;
+                StName = "RTZ-";
+                break;
         }
         setName(npc, StName + rand(10, 99));
     }
+
     public static void nameSwampTrooper(obj_id npc) throws InterruptedException
     {
         int designation = rand(1, 5);
@@ -1190,23 +1243,24 @@ public class create extends script.base_script
         switch (designation)
         {
             case 1:
-            StName = "GL-";
-            break;
+                StName = "GL-";
+                break;
             case 2:
-            StName = "TL-";
-            break;
+                StName = "TL-";
+                break;
             case 3:
-            StName = "RL-";
-            break;
+                StName = "RL-";
+                break;
             case 4:
-            StName = "NL-";
-            break;
+                StName = "NL-";
+                break;
             case 5:
-            StName = "CL-";
-            break;
+                StName = "CL-";
+                break;
         }
         setName(npc, StName + rand(1, 820));
     }
+
     public static boolean setFactionRecruiter(obj_id npc, String faction) throws InterruptedException
     {
         if (npc == null || npc == obj_id.NULL_ID)
@@ -1221,6 +1275,7 @@ public class create extends script.base_script
         attachScript(npc, "npc.faction_recruiter.faction_recruiter");
         return true;
     }
+
     public static void setUpFactionalEnemyAttribs(obj_id npc, String pvpFaction) throws InterruptedException
     {
         if (pvpFaction == null)
@@ -1234,10 +1289,10 @@ public class create extends script.base_script
         setAttributeAttained(npc, attrib.NPC);
         setAttributeInterested(npc, attrib.NPC);
     }
+
     public static void cleanOffBioLink(obj_id weapon) throws InterruptedException
     {
         detachScript(weapon, BIOLINK_SCRIPT);
         removeObjVar(weapon, "biolink");
-        return;
     }
 }

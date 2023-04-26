@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class group extends script.base_script
 {
-    public group()
-    {
-    }
     public static final String SCRIPT_GROUP_OBJECT = "grouping.group_object";
     public static final String SCRIPT_GROUP_MEMBER = "grouping.group_member";
     public static final String GROUP_STF = "group";
@@ -37,6 +34,10 @@ public class group extends script.base_script
     public static final int MASTER_LOOTER = 1;
     public static final int LOTTERY = 2;
     public static final int RANDOM = 3;
+    public group()
+    {
+    }
+
     public static String getGroupChatRoomName(obj_id gid) throws InterruptedException
     {
         if (!isIdValid(gid))
@@ -45,12 +46,14 @@ public class group extends script.base_script
         }
         return (getGameChatCode() + "." + getGalaxyName() + ".group." + gid + ".GroupChat");
     }
+
     public static void sendGroupChatMessage(obj_id gid, prose_package msg) throws InterruptedException
     {
         String oobPP = packOutOfBandProsePackage(null, msg);
         String gRoom = getGroupChatRoomName(gid);
         chatSendToRoom(gRoom, null, oobPP);
     }
+
     public static boolean isGroupObject(obj_id gid) throws InterruptedException
     {
         if (isIdValid(gid))
@@ -59,6 +62,7 @@ public class group extends script.base_script
         }
         return false;
     }
+
     public static boolean isGrouped(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -67,6 +71,7 @@ public class group extends script.base_script
         }
         return false;
     }
+
     public static boolean inSameGroup(obj_id target1, obj_id target2) throws InterruptedException
     {
         if (!isIdValid(target1) || !isIdValid(target2))
@@ -137,6 +142,7 @@ public class group extends script.base_script
         }
         return (gid1 == gid2);
     }
+
     public static obj_id getLeader(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -157,6 +163,7 @@ public class group extends script.base_script
         }
         return null;
     }
+
     public static boolean isLeader(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -169,6 +176,7 @@ public class group extends script.base_script
         }
         return false;
     }
+
     public static void changeLeader(obj_id self) throws InterruptedException
     {
         obj_id groupid = getGroupObject(self);
@@ -193,11 +201,13 @@ public class group extends script.base_script
             }
         }
     }
+
     public static void leaveGroup(obj_id player) throws InterruptedException
     {
         changeLeader(player);
         queueCommand(player, (1348589140), player, "", COMMAND_PRIORITY_FRONT);
     }
+
     public static boolean isMixedFactionGroup(obj_id groupId) throws InterruptedException
     {
         if (!isIdValid(groupId))
@@ -208,20 +218,25 @@ public class group extends script.base_script
         if (members != null && members.length > 0)
         {
             int faction = factions.FACTION_FLAG_UNKNOWN;
-            for (obj_id member : members) {
-                if (!isIdValid(member) || !exists(member)) {
+            for (obj_id member : members)
+            {
+                if (!isIdValid(member) || !exists(member))
+                {
                     continue;
                 }
-                if (faction == factions.FACTION_FLAG_UNKNOWN) {
+                if (faction == factions.FACTION_FLAG_UNKNOWN)
+                {
                     faction = factions.getFactionFlag(member);
                 }
-                if (faction != factions.getFactionFlag(member)) {
+                if (faction != factions.getFactionFlag(member))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static String getCreatureGroupName(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -234,6 +249,7 @@ public class group extends script.base_script
         }
         return null;
     }
+
     public static Vector getPCMembersInRange(obj_id actor, float range) throws InterruptedException
     {
         if (!isIdValid(actor) || !exists(actor) || !actor.isLoaded())
@@ -251,10 +267,13 @@ public class group extends script.base_script
         if (members != null && members.length > 0)
         {
             location here = getWorldLocation(actor);
-            for (obj_id member : members) {
-                if (isIdValid(member) && member.isLoaded() && isPlayer(member)) {
+            for (obj_id member : members)
+            {
+                if (isIdValid(member) && member.isLoaded() && isPlayer(member))
+                {
                     location there = getWorldLocation(member);
-                    if (getDistance(here, there) <= range) {
+                    if (getDistance(here, there) <= range)
+                    {
                         targets = utils.addElement(targets, member);
                     }
                 }
@@ -262,18 +281,22 @@ public class group extends script.base_script
         }
         return targets;
     }
+
     public static Vector getPCMembersInRange() throws InterruptedException
     {
         return getPCMembersInRange(getSelf());
     }
+
     public static Vector getPCMembersInRange(float range) throws InterruptedException
     {
         return getPCMembersInRange(getSelf(), range);
     }
+
     public static Vector getPCMembersInRange(obj_id actor) throws InterruptedException
     {
         return getPCMembersInRange(actor, 200.0f);
     }
+
     public static void notifyCoinLoot(obj_id gid, obj_id actor, obj_id target, int amt) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor) || !isIdValid(target))
@@ -287,6 +310,7 @@ public class group extends script.base_script
         prose_package ppCoinLoot = prose.getPackage(PROSE_NOTIFY_COIN_LOOT_INT, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), null, null, null, amt, 0.0f);
         sendGroupChatMessage(gid, ppCoinLoot);
     }
+
     public static void notifyCoinLootFail(obj_id gid, obj_id actor, obj_id target, int amt) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor) || !isIdValid(target))
@@ -302,6 +326,7 @@ public class group extends script.base_script
         sendGroupChatMessage(gid, ppPartialCoinLoot);
         sendSystemMessageProse(actor, ppPartialCoinLoot);
     }
+
     public static void notifyItemLoot(obj_id gid, obj_id actor, obj_id target, obj_id item) throws InterruptedException
     {
         if (!isIdValid(gid))
@@ -322,10 +347,12 @@ public class group extends script.base_script
         }
         prose_package ppSingleLoot = prose.getPackage(PROSE_NOTIFY_SINGLE_LOOT, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), item, getAssignedName(item), getNameStringId(item), 0, 0.0f);
         obj_id[] objMembersWhoExist = utils.getLocalGroupMemberIds(gid);
-        for (obj_id obj_id : objMembersWhoExist) {
+        for (obj_id obj_id : objMembersWhoExist)
+        {
             sendSystemMessageProse(obj_id, ppSingleLoot);
         }
     }
+
     public static void notifyItemLoot(obj_id gid, obj_id actor, obj_id target, obj_id[] items, int leftCount) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor) || !isIdValid(target))
@@ -342,7 +369,8 @@ public class group extends script.base_script
             int cnt = items.length;
             prose_package ppItemLoot = prose.getPackage(PROSE_NOTIFY_ITEM_LOOT, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), null, null, null, cnt, 0.0f);
             sendSystemMessageProse(gid, ppItemLoot);
-            for (obj_id item : items) {
+            for (obj_id item : items)
+            {
                 notifyItemLoot(gid, actor, target, item);
             }
         }
@@ -352,10 +380,12 @@ public class group extends script.base_script
             sendSystemMessageProse(gid, ppNoLoot);
         }
     }
+
     public static void notifyItemLoot(obj_id gid, obj_id actor, obj_id target, obj_id[] items) throws InterruptedException
     {
         notifyItemLoot(gid, actor, target, items, 0);
     }
+
     public static void notifyHarvest(obj_id gid, obj_id actor, obj_id target, String rType, int amt) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor) || !isIdValid(target))
@@ -373,6 +403,7 @@ public class group extends script.base_script
         prose_package ppHarvest = prose.getPackage(PROSE_NOTIFY_HARVEST_CORPSE, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), null, rType, null, amt, 0.0f);
         sendGroupChatMessage(gid, ppHarvest);
     }
+
     public static void notifyIncapacitation(obj_id gid, obj_id actor) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor))
@@ -382,6 +413,7 @@ public class group extends script.base_script
         prose_package ppIncap = prose.getPackage(PROSE_NOTIFY_INCAP, actor, getName(actor), null, null, null, null, null, null, null, 0, 0.0f);
         sendGroupChatMessage(gid, ppIncap);
     }
+
     public static void notifyDeath(obj_id gid, obj_id actor) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor))
@@ -391,6 +423,7 @@ public class group extends script.base_script
         prose_package ppDeath = prose.getPackage(PROSE_NOTIFY_DEATH, null, getAssignedName(actor), null, null, null, null, null, null, null, 0, 0.0f);
         sendGroupChatMessage(gid, ppDeath);
     }
+
     public static void notifyCloned(obj_id gid, obj_id actor) throws InterruptedException
     {
         if (!isIdValid(gid) || !isIdValid(actor))
@@ -411,6 +444,7 @@ public class group extends script.base_script
         prose_package ppCloned = prose.getPackage(PROSE_NOTIFY_CLONED, actor, getName(actor), null, null, null, null, null, null, null, 0, 0.0f);
         sendGroupChatMessage(gid, ppCloned);
     }
+
     public static void splitCoins(int amt, dictionary params) throws InterruptedException
     {
         obj_id actor = getSelf();
@@ -431,13 +465,15 @@ public class group extends script.base_script
         Vector targets = getPCMembersInRange(SPLIT_RANGE);
         if (targets != null && targets.size() > 0)
         {
-            int dividend = (int)(amt / targets.size());
+            int dividend = amt / targets.size();
             params.put("target", actor);
             params.put("amt", dividend);
             if (isDepositSafe(targets, dividend))
             {
-                for (Object target : targets) {
-                    if (((obj_id) target) != actor) {
+                for (Object target : targets)
+                {
+                    if (target != actor)
+                    {
                         messageTo(((obj_id) target), "handleRequestSplitShare", params, 0, false);
                         totalDividends += dividend;
                     }
@@ -451,9 +487,11 @@ public class group extends script.base_script
                 obj_id[] lowMoney = getUnsafeMoney(targets, dividend);
                 if (lowMoney.length > 0 && lowMoney != null)
                 {
-                    for (obj_id obj_id : lowMoney) {
+                    for (obj_id obj_id : lowMoney)
+                    {
                         toPay = getSafeDifference(obj_id, dividend);
-                        if (obj_id != actor) {
+                        if (obj_id != actor)
+                        {
                             params.put("amt", toPay);
                             messageTo(obj_id, "handleRequestSplitShare", params, 0, false);
                             totalDividends += toPay;
@@ -464,7 +502,7 @@ public class group extends script.base_script
                 int remainder = 0;
                 if (safeMoney.length > 0)
                 {
-                    remainder = (int)(placeHolder / safeMoney.length);
+                    remainder = placeHolder / safeMoney.length;
                 }
                 else
                 {
@@ -473,8 +511,10 @@ public class group extends script.base_script
                 params.put("amt", remainder);
                 if (safeMoney.length > 0 && safeMoney != null)
                 {
-                    for (obj_id obj_id : safeMoney) {
-                        if (obj_id != actor) {
+                    for (obj_id obj_id : safeMoney)
+                    {
+                        if (obj_id != actor)
+                        {
                             messageTo(obj_id, "handleRequestSplitShares", params, 0, false);
                             totalDividends += remainder;
                         }
@@ -485,10 +525,12 @@ public class group extends script.base_script
         prose_package ppSplit = prose.getPackage(PROSE_SPLIT_COINS_SELF, null, Integer.toString(amt), null, null, Integer.toString(amt - totalDividends), null, null, null, null, 0, 0.0f);
         sendSystemMessageProse(actor, ppSplit);
     }
+
     public static void splitCoins(int amt) throws InterruptedException
     {
         splitCoins(amt, null);
     }
+
     public static void splitBank(int amt, dictionary params) throws InterruptedException
     {
         obj_id actor = getSelf();
@@ -508,17 +550,21 @@ public class group extends script.base_script
         Vector targets = getPCMembersInRange(SPLIT_RANGE);
         if (targets != null && targets.size() > 0)
         {
-            int dividend = (int)(amt / targets.size());
+            int dividend = amt / targets.size();
             params.put("target", actor);
             params.put("amt", dividend);
             if (isDepositSafe(targets, dividend))
             {
                 if (targets != null && targets.size() > 0)
                 {
-                    for (Object target : targets) {
-                        if (((obj_id) target) != actor) {
+                    for (Object target : targets)
+                    {
+                        if (target != actor)
+                        {
                             messageTo(((obj_id) target), "handleRequestPayoutShare", params, 0, false);
-                        } else {
+                        }
+                        else
+                        {
                             messageTo(actor, HANDLER_SPLIT_SUCCESS, params, 0, false);
                         }
                     }
@@ -534,7 +580,7 @@ public class group extends script.base_script
                 {
                     for (int i = 0; i < lowMoney.length; i++)
                     {
-                        toPay = getSafeDifference(((obj_id)targets.get(i)), dividend);
+                        toPay = getSafeDifference(((obj_id) targets.get(i)), dividend);
                         if (lowMoney[i] != actor)
                         {
                             params.put("amt", toPay);
@@ -546,18 +592,20 @@ public class group extends script.base_script
                 int remainder = 0;
                 if (safeMoney.length > 0)
                 {
-                    remainder = (int)placeHolder / safeMoney.length;
+                    remainder = placeHolder / safeMoney.length;
                 }
                 else
                 {
-                    remainder = (int)placeHolder;
+                    remainder = placeHolder;
                 }
                 params.put("amt", remainder);
                 messageTo(actor, HANDLER_SPLIT_SUCCESS, params, 0, false);
-                if (safeMoney != null && safeMoney.length > 0)
+                if (safeMoney != null)
                 {
-                    for (obj_id obj_id : safeMoney) {
-                        if (obj_id != actor) {
+                    for (obj_id obj_id : safeMoney)
+                    {
+                        if (obj_id != actor)
+                        {
                             messageTo(obj_id, "handleRequestPayoutShare", params, 0, false);
                         }
                     }
@@ -565,20 +613,24 @@ public class group extends script.base_script
             }
         }
     }
+
     public static void splitBank(int amt) throws InterruptedException
     {
         splitBank(amt, null);
     }
+
     public static boolean isDepositSafe(Vector members, int money) throws InterruptedException
     {
         return true;
     }
+
     public static obj_id[] getSafeMoney(Vector members, int money) throws InterruptedException
     {
         Vector returnArray = new Vector();
         returnArray.setSize(0);
-        for (Object member : members) {
-            utils.addElement(returnArray, ((obj_id) member));
+        for (Object member : members)
+        {
+            utils.addElement(returnArray, member);
         }
         obj_id[] _returnArray = new obj_id[0];
         if (returnArray != null)
@@ -588,12 +640,14 @@ public class group extends script.base_script
         }
         return _returnArray;
     }
+
     public static obj_id[] getUnsafeMoney(Vector members, int money) throws InterruptedException
     {
         Vector returnArray = new Vector();
         returnArray.setSize(0);
-        for (Object member : members) {
-            utils.addElement(returnArray, ((obj_id) member));
+        for (Object member : members)
+        {
+            utils.addElement(returnArray, member);
         }
         obj_id[] _returnArray = new obj_id[0];
         if (returnArray != null)
@@ -603,26 +657,32 @@ public class group extends script.base_script
         }
         return _returnArray;
     }
+
     public static int getSafeDifference(obj_id members, int money) throws InterruptedException
     {
         return money;
     }
+
     public static boolean systemPayoutToGroup(String acct, obj_id player, int amt, String reason, String returnHandler, dictionary params) throws InterruptedException
     {
         return systemPayoutToGroupInternal(acct, player, amt, reason, null, returnHandler, 0.0f, params);
     }
+
     public static boolean systemPayoutToGroup(String acct, obj_id player, int amt, string_id reasonId, String returnHandler, dictionary params) throws InterruptedException
     {
         return systemPayoutToGroupInternal(acct, player, amt, null, reasonId, returnHandler, 0.0f, params);
     }
+
     public static boolean systemPayoutToGroup(String acct, obj_id player, int amt, string_id reasonId, String returnHandler, float divisor, dictionary params) throws InterruptedException
     {
         return systemPayoutToGroupInternal(acct, player, amt, null, reasonId, returnHandler, divisor, params);
     }
+
     public static boolean systemPayoutToGroupInternal(String acct, obj_id player, int amt, String reason, string_id reasonId, String returnHandler, float divisor, dictionary params) throws InterruptedException
     {
         return systemPayoutToGroupInternal(acct, player, amt, null, reasonId, returnHandler, divisor, params, obj_id.NULL_ID);
     }
+
     public static boolean systemPayoutToGroupInternal(String acct, obj_id player, int amt, String reason, string_id reasonId, String returnHandler, float divisor, dictionary params, obj_id objMissionData) throws InterruptedException
     {
         if (acct == null || acct.equals(""))
@@ -676,11 +736,13 @@ public class group extends script.base_script
             else
             {
                 obj_id[] gmembers = group.getGroupMemberIds(gid);
-                if (gmembers != null && gmembers.length > 0)
+                if (gmembers != null)
                 {
-                    for (obj_id gmember : gmembers) {
+                    for (obj_id gmember : gmembers)
+                    {
                         sendSystemMessage(gmember, reasonId);
-                        if (!allReceived) {
+                        if (!allReceived)
+                        {
                             sendSystemMessage(gmember, partialPayment);
                         }
                     }
@@ -689,10 +751,12 @@ public class group extends script.base_script
         }
         return true;
     }
+
     public static boolean distributeMoneyToGroup(obj_id player, int amt, float range, String acct, float divisorInput, dictionary params) throws InterruptedException
     {
         return distributeMoneyToGroup(player, amt, range, acct, divisorInput, params, obj_id.NULL_ID);
     }
+
     public static boolean distributeMoneyToGroup(obj_id player, int amt, float range, String acct, float divisorInput, dictionary params, obj_id objMissionData) throws InterruptedException
     {
         if (amt < 1)
@@ -724,19 +788,20 @@ public class group extends script.base_script
                 {
                     if (targets.size() > 1)
                     {
-                        divisor = missions.alterMissionPayoutDivisor(((obj_id)targets.get(i)), divisor, missionLevel);
+                        divisor = missions.alterMissionPayoutDivisor(((obj_id) targets.get(i)), divisor, missionLevel);
                     }
-                    missions.incrementDaily(((obj_id)targets.get(i)));
+                    missions.incrementDaily(((obj_id) targets.get(i)));
                     ppString = PROSE_SPLIT_COINS_MISSION;
                 }
-                int payout = amt / ((int)divisor);
-                transferBankCreditsFromNamedAccount(acct, ((obj_id)targets.get(i)), payout, "succ", "noHandler", params);
+                int payout = amt / ((int) divisor);
+                transferBankCreditsFromNamedAccount(acct, ((obj_id) targets.get(i)), payout, "succ", "noHandler", params);
                 prose_package ppSplit = prose.getPackage(ppString, null, Integer.toString(amt), null, null, Integer.toString(payout), null, null, null, null, 0, 0.0f);
-                sendSystemMessageProse(((obj_id)targets.get(i)), ppSplit);
+                sendSystemMessageProse(((obj_id) targets.get(i)), ppSplit);
             }
         }
         return (targets.size() >= getGroupSize(groupObject));
     }
+
     public static void destroyGroupWaypoint(obj_id player) throws InterruptedException
     {
         obj_id groupWaypoint = getObjIdObjVar(player, "groupWaypoint");
@@ -746,6 +811,7 @@ public class group extends script.base_script
             removeObjVar(player, "groupWaypoint");
         }
     }
+
     public static boolean distributeMissionXpToGroup(obj_id player, float range, obj_id objMissionData) throws InterruptedException
     {
         obj_id groupObject = getGroupObject(player);
@@ -761,8 +827,10 @@ public class group extends script.base_script
         Vector targets = getPCMembersInRange(player, range);
         if (targets != null && targets.size() > 0)
         {
-            for (Object target : targets) {
-                if (missions.isDestroyMission(objMissionData) && missions.canEarnDailyMissionXp(((obj_id) target))) {
+            for (Object target : targets)
+            {
+                if (missions.isDestroyMission(objMissionData) && missions.canEarnDailyMissionXp(((obj_id) target)))
+                {
                     xp.grantMissionXp(((obj_id) target), missionLevel);
                 }
             }

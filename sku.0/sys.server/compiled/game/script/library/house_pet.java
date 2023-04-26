@@ -5,9 +5,6 @@ import script.obj_id;
 
 public class house_pet extends script.base_script
 {
-    public house_pet()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "massiff_pet";
     public static final String SARLACC_LOOT_TABLE = "datatables/loot/sarlacc_cts_housepet_loot.iff";
@@ -40,19 +37,19 @@ public class house_pet extends script.base_script
     public static final int SARLACC_HUNGRY = 1;
     public static final int SARLACC_STARVING = 2;
     public static final int SARLACC_DEATH = 3;
-    public static final String[] SARLACC_PHASES = 
-    {
-        "phase_fed",
-        "phase_hungry",
-        "phase_starving",
-        "phase_death"
-    };
-    public static final String[] MASSIFF_PHASES = 
-    {
-        "phase_fed",
-        "phase_hungry",
-        "dirt_nap"
-    };
+    public static final String[] SARLACC_PHASES =
+            {
+                    "phase_fed",
+                    "phase_hungry",
+                    "phase_starving",
+                    "phase_death"
+            };
+    public static final String[] MASSIFF_PHASES =
+            {
+                    "phase_fed",
+                    "phase_hungry",
+                    "dirt_nap"
+            };
     public static final String SARLACC_PREFIX = "sarlacc_minigame";
     public static final String SARLACC_BORN = SARLACC_PREFIX + ".born_time";
     public static final String EDIBLES_PREFIX = SARLACC_PREFIX + ".edibles";
@@ -91,27 +88,27 @@ public class house_pet extends script.base_script
     public static final String PET_SOUND_LABEL = "petSoundLabel";
     public static final String HOUSE_PET_MENU_PID = HOUSEPET_PREFIX + "housePetMenuPID";
     public static final String MASSIFF_SCRIPT = "systems.tcg.tcg_massif_creature";
-    public static final String[] ALL_MASSIF_ANIMATIONS = 
-    {
-        "alert",
-        "ashamed",
-        "confused",
-        "drink",
-        "eat",
-        "fidget",
-        "happy",
-        "look",
-        "look_left",
-        "look_right",
-        "nervous",
-        "scratch",
-        "sniff",
-        "stretch",
-        "threaten",
-        "trick_1",
-        "trick_2",
-        "vocalize"
-    };
+    public static final String[] ALL_MASSIF_ANIMATIONS =
+            {
+                    "alert",
+                    "ashamed",
+                    "confused",
+                    "drink",
+                    "eat",
+                    "fidget",
+                    "happy",
+                    "look",
+                    "look_left",
+                    "look_right",
+                    "nervous",
+                    "scratch",
+                    "sniff",
+                    "stretch",
+                    "threaten",
+                    "trick_1",
+                    "trick_2",
+                    "vocalize"
+            };
     public static final String MASSIF_ANIMATION_ALERT = "alert";
     public static final String MASSIF_ANIMATION_ASHAMED = "ashamed";
     public static final String MASSIF_ANIMATION_CONFUSED = "confused";
@@ -130,14 +127,14 @@ public class house_pet extends script.base_script
     public static final String MASSIF_ANIMATION_TRICK1 = "trick_1";
     public static final String MASSIF_ANIMATION_TRICK2 = "trick_2";
     public static final String MASSIF_ANIMATION_VOCALIZE = "vocalize";
-    public static final String[] ALL_MASSIF_STATES = 
-    {
-        "none",
-        "sleeping",
-        "lying",
-        "sitting_ground",
-        "test"
-    };
+    public static final String[] ALL_MASSIF_STATES =
+            {
+                    "none",
+                    "sleeping",
+                    "lying",
+                    "sitting_ground",
+                    "test"
+            };
     public static final int SARLACC_VERSION = 2;
     public static final String SARLACC_VERSION_VAR = SARLACC_PREFIX + ".sarlacc_version";
     public static final String SARLACC_FREE_CHANCE = SARLACC_PREFIX + ".used_free_chance";
@@ -194,6 +191,10 @@ public class house_pet extends script.base_script
     public static final String NUNA_HUNGRY_EMOTE = "appearance/pt_nuna_hungry_emote.prt";
     public static final String SCURRIER_HUNGRY_EMOTE = "appearance/pt_scurrier_hungry_emote.prt";
     public static final String MASSIFF_POO_STATIC_ITEM = "item_tcg_nuna_rotten_egg_02_01";
+    public house_pet()
+    {
+    }
+
     public static boolean setObjectOwner(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -212,6 +213,7 @@ public class house_pet extends script.base_script
         setOwner(controller, owner);
         return true;
     }
+
     public static obj_id getObjectOwner(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -228,6 +230,7 @@ public class house_pet extends script.base_script
         }
         return owner;
     }
+
     public static obj_id recreateSarlaccObjectAtLocationFromObjVar(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -262,6 +265,7 @@ public class house_pet extends script.base_script
         }
         return housePetObj;
     }
+
     public static boolean recreateObjectFromObjVar(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -285,6 +289,7 @@ public class house_pet extends script.base_script
         }
         return buildHousePetInPlayerStructure(controller, mobileTemplate, where);
     }
+
     public static boolean buildHousePetInPlayerStructure(obj_id controller, String mobileTemplate, location spawnLoc) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -317,10 +322,12 @@ public class house_pet extends script.base_script
         }
         return true;
     }
+
     public static boolean validateNpcPlacementInStructure(obj_id object) throws InterruptedException
     {
         return validateNpcPlacementInStructure(object, obj_id.NULL_ID);
     }
+
     public static boolean validateNpcPlacementInStructure(obj_id object, obj_id operator) throws InterruptedException
     {
         if (!isValidId(object) || !exists(object))
@@ -344,16 +351,14 @@ public class house_pet extends script.base_script
         {
             return true;
         }
-        if (player_structure.isAdmin(structure, operator))
-        {
-            return true;
-        }
-        return false;
+        return player_structure.isAdmin(structure, operator);
     }
+
     public static boolean cleanUpHousePet(obj_id housePet) throws InterruptedException
     {
         return cleanUpHousePet(obj_id.NULL_ID, housePet);
     }
+
     public static boolean cleanUpHousePet(obj_id controller, obj_id housePet) throws InterruptedException
     {
         if (!isValidId(housePet) || !exists(housePet))
@@ -372,6 +377,7 @@ public class house_pet extends script.base_script
         }
         return true;
     }
+
     public static int getUpdateWeekly(obj_id controller) throws InterruptedException
     {
         if (hasObjVar(controller, house_pet.SARLACC_FAST_UPDATE_RATE))
@@ -386,11 +392,12 @@ public class house_pet extends script.base_script
         {
             return house_pet.MASSIFF_GOD_DAILY_WEEK;
         }
-        else 
+        else
         {
             return house_pet.SARLACC_UPDATE_WEEK;
         }
     }
+
     public static int getUpdateDaily(obj_id controller) throws InterruptedException
     {
         if (hasObjVar(controller, house_pet.SARLACC_FAST_UPDATE_RATE))
@@ -405,11 +412,12 @@ public class house_pet extends script.base_script
         {
             return house_pet.MASSIFF_GOD_DAILY_DAY;
         }
-        else 
+        else
         {
             return house_pet.SARLACC_UPDATE_DAY;
         }
     }
+
     public static boolean stopPlayingMusic(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, MUSIC_RANGE))
@@ -431,14 +439,17 @@ public class house_pet extends script.base_script
         {
             return false;
         }
-        for (obj_id player : playersList) {
-            if (!isIdValid(player)) {
+        for (obj_id player : playersList)
+        {
+            if (!isIdValid(player))
+            {
                 continue;
             }
             stopClientEffectObjByLabel(player, self, PET_SOUND_LABEL);
         }
         return true;
     }
+
     public static boolean isInAPlayerHouse(obj_id device) throws InterruptedException
     {
         if (!isValidId(device) || !exists(device))
@@ -454,11 +465,7 @@ public class house_pet extends script.base_script
         if (isIdValid(ship))
         {
             String templateName = getTemplateName(ship);
-            if (space_utils.isPobType(templateName))
-            {
-                return true;
-            }
-            return false;
+            return space_utils.isPobType(templateName);
         }
         obj_id house = getTopMostContainer(device);
         if (isIdValid(house) && !player_structure.isBuilding(house))
@@ -469,12 +476,9 @@ public class house_pet extends script.base_script
         {
             return false;
         }
-        if (utils.isInHouseCellSpace(device))
-        {
-            return true;
-        }
-        return false;
+        return utils.isInHouseCellSpace(device);
     }
+
     public static boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

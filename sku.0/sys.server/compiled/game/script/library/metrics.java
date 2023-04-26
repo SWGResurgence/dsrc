@@ -7,12 +7,13 @@ import java.util.Vector;
 
 public class metrics extends script.base_script
 {
-    public metrics()
-    {
-    }
     public static final String CONFIG_BUFF_METRICS = "logBuffMetrics";
     public static final String CONFIG_WEAPON_METRICS = "logWeaponMetrics";
     public static final String CONFIG_ARMOR_METRICS = "logArmorMetrics";
+    public metrics()
+    {
+    }
+
     public static boolean checkConfigSetting(String configString) throws InterruptedException
     {
         String enabled = toLower(getConfigSetting("GameServer", configString));
@@ -20,12 +21,9 @@ public class metrics extends script.base_script
         {
             return false;
         }
-        if (enabled.equals("true") || enabled.equals("1"))
-        {
-            return true;
-        }
-        return false;
+        return enabled.equals("true") || enabled.equals("1");
     }
+
     public static void logBuffStatus(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -37,12 +35,12 @@ public class metrics extends script.base_script
             return;
         }
         String logMsg = "Buff Metric: %TU buff status: ";
-        String[] attrib = 
-        {
-            "H:",
-            "A:",
-            "M:"
-        };
+        String[] attrib =
+                {
+                        "H:",
+                        "A:",
+                        "M:"
+                };
         for (int i = 0; i < 3; i++)
         {
             logMsg += attrib[i];
@@ -54,7 +52,7 @@ public class metrics extends script.base_script
                 {
                     logMsg += ",";
                 }
-                else 
+                else
                 {
                     logMsg += " ";
                 }
@@ -62,6 +60,7 @@ public class metrics extends script.base_script
         }
         CustomerServiceLog("metrics", logMsg, target);
     }
+
     public static void logWeaponStatus(obj_id player, obj_id weapon) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -146,6 +145,7 @@ public class metrics extends script.base_script
         logMsg += "Accuracy (" + weaponData.accuracy + ")";
         CustomerServiceLog("metrics", logMsg, player);
     }
+
     public static void logArmorStatus(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -157,29 +157,39 @@ public class metrics extends script.base_script
             return;
         }
         obj_id[] inv = getWornItems(player);
-        if (inv == null || inv.length == 0)
+        if (inv == null)
         {
             return;
         }
-        for (obj_id obj_id : inv) {
+        for (obj_id obj_id : inv)
+        {
             int got = getGameObjectType(obj_id);
-            if (isGameObjectTypeOf(got, GOT_armor)) {
+            if (isGameObjectTypeOf(got, GOT_armor))
+            {
                 int oldHp = utils.getIntScriptVar(obj_id, "metrics.armorHp");
                 int curHp = getHitpoints(obj_id);
                 int maxHp = getMaxHitpoints(obj_id);
-                if (oldHp == maxHp && curHp < maxHp) {
+                if (oldHp == maxHp && curHp < maxHp)
+                {
                     logArmorPiece(player, obj_id);
-                } else if (oldHp >= (maxHp / 4) * 3 && curHp < (maxHp / 4) * 3) {
+                }
+                else if (oldHp >= (maxHp / 4) * 3 && curHp < (maxHp / 4) * 3)
+                {
                     logArmorPiece(player, obj_id);
-                } else if (oldHp >= maxHp / 2 && curHp < maxHp / 2) {
+                }
+                else if (oldHp >= maxHp / 2 && curHp < maxHp / 2)
+                {
                     logArmorPiece(player, obj_id);
-                } else if (oldHp >= maxHp / 4 && curHp < maxHp / 4) {
+                }
+                else if (oldHp >= maxHp / 4 && curHp < maxHp / 4)
+                {
                     logArmorPiece(player, obj_id);
                 }
                 utils.setScriptVar(obj_id, "metrics.armorHp", curHp);
             }
         }
     }
+
     public static void logArmorPiece(obj_id player, obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -197,41 +207,44 @@ public class metrics extends script.base_script
         logMsg += "Eff (" + eff + "), ";
         CustomerServiceLog("metrics", logMsg, player);
     }
+
     public static obj_id[] getWornItems(obj_id player) throws InterruptedException
     {
-        final String[] wornSlots = 
-        {
-            "shoes",
-            "pants1",
-            "pants2",
-            "utility_belt",
-            "chest1",
-            "chest2",
-            "chest3_l",
-            "chest3_r",
-            "back",
-            "cloak",
-            "bicep_l",
-            "bicep_r",
-            "bracer_upper_l",
-            "bracer_upper_r",
-            "bracer_lower_l",
-            "bracer_lower_r",
-            "wrist_l",
-            "wrist_r",
-            "gloves",
-            "ring_l",
-            "ring_r",
-            "neck",
-            "hat",
-            "eyes",
-            "earring_l",
-            "earring_r"
-        };
+        final String[] wornSlots =
+                {
+                        "shoes",
+                        "pants1",
+                        "pants2",
+                        "utility_belt",
+                        "chest1",
+                        "chest2",
+                        "chest3_l",
+                        "chest3_r",
+                        "back",
+                        "cloak",
+                        "bicep_l",
+                        "bicep_r",
+                        "bracer_upper_l",
+                        "bracer_upper_r",
+                        "bracer_lower_l",
+                        "bracer_lower_r",
+                        "wrist_l",
+                        "wrist_r",
+                        "gloves",
+                        "ring_l",
+                        "ring_r",
+                        "neck",
+                        "hat",
+                        "eyes",
+                        "earring_l",
+                        "earring_r"
+                };
         Vector inv = new Vector();
-        for (String wornSlot : wornSlots) {
+        for (String wornSlot : wornSlots)
+        {
             obj_id item = getObjectInSlot(player, wornSlot);
-            if (isIdValid(item) && !utils.isElementInArray(inv, item)) {
+            if (isIdValid(item) && !utils.isElementInArray(inv, item))
+            {
                 inv = utils.addElement(inv, item);
             }
         }
@@ -243,6 +256,7 @@ public class metrics extends script.base_script
         }
         return _inv;
     }
+
     public static void doKillMetrics(obj_id killCredit, obj_id target) throws InterruptedException
     {
         String killLog = "";
@@ -252,31 +266,32 @@ public class metrics extends script.base_script
         int combatTime = curTime - utils.getIntScriptVar(target, xp.VAR_COMBAT_TIMESTAMP);
         int numHits = utils.getIntScriptVar(target, xp.VAR_DAMAGE_COUNT);
         int dmgTotal = utils.getIntScriptVar(target, xp.VAR_DAMAGE_TALLY);
-        int avgHit = (int)((float)dmgTotal / numHits);
+        int avgHit = (int) ((float) dmgTotal / numHits);
         killLog = "kill;" + curTime + ";" + target + ";" + targetName + ";" + targetLevel + ";" + combatTime + ";" + numHits + ";" + avgHit;
         if (group.isGroupObject(killCredit))
         {
             killLog += ";group;" + skill.getGroupLevel(killCredit);
             obj_id[] members = getGroupMemberIds(killCredit);
-            for (obj_id member : members) {
+            for (obj_id member : members)
+            {
                 String playerName = getEncodedName(member);
                 int playerLevel = getLevel(member);
                 int dmgAmount = utils.getIntScriptVar(target, xp.VAR_ATTACKER_LIST + "." + member + ".damage");
-                float dmgPercent = (float) ((int) ((float) dmgAmount / dmgTotal * 10000) / 100.0f);
+                float dmgPercent = (int) ((float) dmgAmount / dmgTotal * 10000) / 100.0f;
                 killLog += ";" + member + ";" + playerName + ";" + playerLevel + ";" + dmgAmount + ";" + dmgPercent;
             }
         }
-        else 
+        else
         {
             String playerName = getEncodedName(killCredit);
             int playerLevel = getLevel(killCredit);
             int dmgAmount = utils.getIntScriptVar(target, xp.VAR_ATTACKER_LIST + "." + killCredit + ".damage");
-            float dmgPercent = (float)((int)((float)dmgAmount / dmgTotal * 10000) / 100.0f);
+            float dmgPercent = (int) ((float) dmgAmount / dmgTotal * 10000) / 100.0f;
             killLog += ";solo;" + killCredit + ";" + playerName + ";" + playerLevel + ";" + dmgAmount + ";" + dmgPercent;
         }
         logBalance(killLog);
-        return;
     }
+
     public static void doXpRateMetrics(obj_id player, String xpType, int xpAmount) throws InterruptedException
     {
         int curTime = getGameTime();
@@ -293,13 +308,14 @@ public class metrics extends script.base_script
         float xpRate = 0;
         if (startTime != curTime)
         {
-            xpRate = (float)((int)(xpTotal / ((curTime - startTime) / 3600.0f) * 100.0f) / 100.0f);
+            xpRate = (int) (xpTotal / ((curTime - startTime) / 3600.0f) * 100.0f) / 100.0f;
         }
         String xpRateLog = "xpRate;" + curTime + ";" + player + ";" + playerName + ";" + playerLevel + ";" + lastTime + ";" + xpType + ";" + xpTotal + ";" + xpRate;
         logBalance(xpRateLog);
         utils.setScriptVar(player, "xpRateMetrics." + xpType + ".timestamp", curTime);
         utils.setScriptVar(player, "xpRateMetrics." + xpType + ".amount", xpTotal);
     }
+
     public static void doQuestMetrics(obj_id player, int questId, int level, int tier, String xpType, int xpAmount) throws InterruptedException
     {
         int curTime = getGameTime();

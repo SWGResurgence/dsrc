@@ -1127,7 +1127,7 @@ public class player_travel extends script.base_script
             sendSystemMessage(player, SID_NO_PICKUP_IN_TOWN);
             return false;
         }
-        region geoCities[] = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
+        region geoCities[] = getRegionsWithMunicipalAtPoint(here, regions.MUNI_TRUE);
         if (geoCities != null && geoCities.length > 0)
         {
             sendSystemMessage(player, SID_INVALID_PICKUP_LOC);
@@ -1220,6 +1220,7 @@ public class player_travel extends script.base_script
         utils.setScriptVar(player, "instantTravelShip.pickupCraft", pickupCraft);
         utils.setScriptVar(pickupCraft, "playerOwner", player);
         messageTo(pickupCraft, "initializeInstaTravelShip", null, 1, false);
+        faceTo(pickupCraft, player);
         buff.applyBuff(player, ITV_PICKUP_BUFF);
         return true;
     }

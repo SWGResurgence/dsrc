@@ -798,6 +798,18 @@ public class ai extends script.base_script
                 "You have been blessed, my child.",
                 "Uuh, what are you doing?"
         };
+        if (ai_lib.isAiDead(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(performer))
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
         {
             return SCRIPT_CONTINUE;
@@ -889,7 +901,7 @@ public class ai extends script.base_script
         {
             if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
-                chat.chat(self, getRandomArray(EMOTE_DANCE_HUMANOID_RESPONSES));
+                chat.chat(self, getRandomArray(EMOTE_WORSHIP_HUMANOID_RESPONSES));
                 int luckChance = rand(0, 99);
                 if (luckChance >= 50)
                 {
@@ -2620,7 +2632,34 @@ public class ai extends script.base_script
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
-        if (getTemplateName(item).equals(TOOL))
+        if (hasScript(item, "item.loot_roll_item"))//loot roll item
+        {
+            if (isHeroicMob(self))
+            {
+                if (hasObjVar(item, "loot_roll.charges"))
+                {
+                    int currentCharges = getIntObjVar(self, "loot.numItems");
+                    int totalCharges = currentCharges + getIntObjVar(item, "loot_roll.charges");
+                    setObjVar(self, "loot.numItems", totalCharges);
+                    broadcast(giver, "You have added " + getIntObjVar(item, "loot_roll.charges") + " to the loot roll.");
+                    destroyObject(item);
+                }
+                else
+                {
+                    broadcast(giver, "This item is not properly configured. Please configure before use.");
+                    putIn(item, utils.getInventoryContainer(giver), giver);
+                    return SCRIPT_CONTINUE;
+                }
+            }
+            else
+            {
+                broadcast(giver, "This creature does not qualify for additional loot rolls.");
+                putIn(item, utils.getInventoryContainer(giver), giver);
+                return SCRIPT_CONTINUE;
+            }
+
+        }
+        if (getTemplateName(item).equals(TOOL)) // city actors
         {
             if (!hasObjVar(item, "actorMade"))
             {
@@ -2751,6 +2790,15 @@ public class ai extends script.base_script
             messageTo(self, "removeMeatlumpRecruitmentScriptVar", null, 82800, false);
         }
         return SCRIPT_CONTINUE;
+    }
+
+    private boolean isHeroicMob(obj_id self)
+    {
+        if (getCreatureName(self).startsWith("heroic_"))
+        {
+            return true;
+        }
+        return false;
     }
 
     public int removeMeatlumpRecruitmentScriptVar(obj_id self, dictionary params) throws InterruptedException

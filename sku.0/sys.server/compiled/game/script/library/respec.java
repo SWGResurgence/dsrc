@@ -8,29 +8,29 @@ public class respec extends script.base_script
 {
     public static final String EXPERTISE_VERSION_TABLE = "datatables/expertise/respec_version.iff";
     public static final String EXPERTISE_VERSION_OBJVAR = "professionExpertiseVersion";
-	public static final String BEAST_MASTER_EXPERTISE_VERSION_OBJVAR = "beastMasterExpertiseVersion";
+    public static final String BEAST_MASTER_EXPERTISE_VERSION_OBJVAR = "beastMasterExpertiseVersion";
     public static final int RESPEC_PRICE_MULTIPLIER = 10000;
     public static final int[] RESPEC_COST = new int[]
-    {
-    0,				  // Free
-    25000,			// 25K
-		50000,			// 50K				
-		100000,			// 100K
-		150000,			// 150K
-		250000,			// 250K
-		500000,			// 500K
-		1000000,		// 1MIL	
-		2500000,		// 2.5MIL
-		5000000,		// 5MIL	
-		10000000,		// 10MIL
-		15000000,		// 15MIL
-		20000000,		// 20MIL
-		25000000,		// 25MIL
-		50000000,		// 50MIL
-		75000000,		// 75MIL
-		100000000,	// 100MIL
-		
-    };
+            {
+                    0,                  // Free
+                    25000,            // 25K
+                    50000,            // 50K
+                    100000,            // 100K
+                    150000,            // 150K
+                    250000,            // 250K
+                    500000,            // 500K
+                    1000000,        // 1MIL
+                    2500000,        // 2.5MIL
+                    5000000,        // 5MIL
+                    10000000,        // 10MIL
+                    15000000,        // 15MIL
+                    20000000,        // 20MIL
+                    25000000,        // 25MIL
+                    50000000,        // 50MIL
+                    75000000,        // 75MIL
+                    100000000,    // 100MIL
+
+            };
     public static final String OBJVAR_RESPEC_TOKEN = "respecToken.token";
     public static final String OBJVAR_RESPEC_TOKEN_USED = "respecToken.tokenUsed";
     public static final String OBJVAR_RESPEC_ROOT = "respec";
@@ -51,6 +51,7 @@ public class respec extends script.base_script
     public static final int PROF_LEVEL_COMBAT = 0;
     public static final int PROF_LEVEL_ENT = 1;
     public static final int PROF_LEVEL_TRADER = 2;
+
     public static void startClickRespec(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, "respecToken"))
@@ -74,15 +75,17 @@ public class respec extends script.base_script
         {
             playUiEffect(player, "showMediator=ws_professiontemplateselect");
         }
-        else 
+        else
         {
             attachScript(player, "systems.respec.click_combat_respec");
         }
     }
+
     public static void startNpcRespec(obj_id player, obj_id npcGrantingRespec) throws InterruptedException
     {
         startNpcRespec(player, npcGrantingRespec, false);
     }
+
     public static void startNpcRespec(obj_id player, obj_id npcGrantingRespec, boolean isFree) throws InterruptedException
     {
         if (hasObjVar(player, "clickRespec.tokenId"))
@@ -102,11 +105,12 @@ public class respec extends script.base_script
         {
             playUiEffect(player, "showMediator=ws_professiontemplateselect");
         }
-        else 
+        else
         {
             attachScript(player, "systems.respec.click_combat_respec");
         }
     }
+
     public static void handleNpcRespec(obj_id player, String skillTemplateName) throws InterruptedException
     {
         String oldTemplate = getStringObjVar(player, "npcRespec.oldTemplate");
@@ -193,11 +197,12 @@ public class respec extends script.base_script
         {
             messageTo(player, "applySmugglingBonuses", null, 1.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "removeSmugglingBonuses", null, 1.0f, false);
         }
     }
+
     public static void earnProfessionSkillsViaNpc(obj_id player, String skillTemplateName, boolean withItems, int level) throws InterruptedException
     {
         setObjVar(player, "npcRespec.granting", 1);
@@ -213,7 +218,7 @@ public class respec extends script.base_script
         {
             autoLevelPlayer(player, level, true);
         }
-        else 
+        else
         {
             if (skillTemplateName.startsWith("trader") && hasObjVar(player, "traderPct"))
             {
@@ -256,7 +261,7 @@ public class respec extends script.base_script
                     }
                     setPercentageCompletion(player, skillTemplateName, pct, withItems);
                 }
-                else 
+                else
                 {
                     grantProfessionSkills(player, skillTemplateName, workingSkill, withItems);
                 }
@@ -287,6 +292,7 @@ public class respec extends script.base_script
         }
         utils.setScriptVar(player, "respec.conceal", 1);
     }
+
     public static int getRespecCost(obj_id player) throws InterruptedException
     {
         int numBought = 0;
@@ -305,18 +311,20 @@ public class respec extends script.base_script
         }
         return ((RESPEC_COST[RESPEC_COST.length - 1]) / respecMod);
     }
+
     public static int[] getProfessionLevelArray(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, PROF_LEVEL_ARRAY))
         {
             return new int[]{
-                -1,
-                -1,
-                -1
+                    -1,
+                    -1,
+                    -1
             };
         }
         return getIntArrayObjVar(player, PROF_LEVEL_ARRAY);
     }
+
     public static int getCombatLevel(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, PROF_LEVEL_ARRAY))
@@ -326,6 +334,7 @@ public class respec extends script.base_script
         int[] profLevels = getProfessionLevelArray(player);
         return profLevels[PROF_LEVEL_COMBAT];
     }
+
     public static int getEntertainerLevel(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, PROF_LEVEL_ARRAY))
@@ -335,6 +344,7 @@ public class respec extends script.base_script
         int[] profLevels = getProfessionLevelArray(player);
         return profLevels[PROF_LEVEL_ENT];
     }
+
     public static int getTraderLevel(obj_id player) throws InterruptedException
     {
         if (!hasObjVar(player, PROF_LEVEL_ARRAY))
@@ -344,6 +354,7 @@ public class respec extends script.base_script
         int[] profLevels = getProfessionLevelArray(player);
         return profLevels[PROF_LEVEL_TRADER];
     }
+
     public static void setProfessionLevel(obj_id player, int profType, int level) throws InterruptedException
     {
         int[] profLevelArray = getProfessionLevelArray(player);
@@ -354,10 +365,12 @@ public class respec extends script.base_script
         }
         setObjVar(player, PROF_LEVEL_ARRAY, profLevelArray);
     }
+
     public static void setProfessionLevelArray(obj_id player, int[] profLevelArray) throws InterruptedException
     {
         setObjVar(player, PROF_LEVEL_ARRAY, profLevelArray);
     }
+
     public static void handleNpcRealloc(obj_id player) throws InterruptedException
     {
         int cost = getReallocationCost(player);
@@ -394,11 +407,12 @@ public class respec extends script.base_script
         {
             messageTo(player, "applySmugglingBonuses", null, 1.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "removeSmugglingBonuses", null, 1.0f, false);
         }
     }
+
     public static int getReallocationCost(obj_id player) throws InterruptedException
     {
         if (!hasFreeReallocation(player))
@@ -408,10 +422,12 @@ public class respec extends script.base_script
         }
         return 0;
     }
+
     public static boolean hasFreeReallocation(obj_id player) throws InterruptedException
     {
         return 0 <= numFreeAllocations(player);
     }
+
     public static int numFreeAllocations(obj_id player) throws InterruptedException
     {
         int numBought = 0;
@@ -421,6 +437,7 @@ public class respec extends script.base_script
         }
         return (5 - numBought);
     }
+
     public static int getOldCombatLevel(obj_id player) throws InterruptedException
     {
         logCharacterSkills(player);
@@ -435,27 +452,34 @@ public class respec extends script.base_script
             Enumeration e;
             String xpType;
 
-            for (String aSkillList : skillList) {
+            for (String aSkillList : skillList)
+            {
                 xpReqs = getSkillPrerequisiteExperience(aSkillList);
-                if ((xpReqs == null) || (xpReqs.isEmpty())) {
+                if ((xpReqs == null) || (xpReqs.isEmpty()))
+                {
                     continue;
                 }
                 e = xpReqs.keys();
                 xpType = (String) (e.nextElement());
                 int xpCost = xpReqs.getInt(xpType);
                 int idx = utils.getElementPositionInArray(xpTypes, xpType);
-                if (idx > -1) {
+                if (idx > -1)
+                {
                     totalXp += (xpCost * xpMults[idx]);
                 }
             }
         }
         int[] levelList = dataTableGetIntColumn("datatables/player/old_player_level.iff", "xp_required");
-        if ((levelList != null) && (levelList.length != 0))
+        if (levelList != null)
         {
-            for (int xpAmountForLevel : levelList) {
-                if (xpAmountForLevel <= totalXp) {
+            for (int xpAmountForLevel : levelList)
+            {
+                if (xpAmountForLevel <= totalXp)
+                {
                     level++;
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -467,11 +491,13 @@ public class respec extends script.base_script
         CustomerServiceLog("click_respec", "Player %TU :: *** Combat Level = " + level + " ***", player);
         return level;
     }
+
     public static void logCharacterSkills(obj_id player) throws InterruptedException
     {
         CustomerServiceLog("click_respec", "Player %TU :: *** Skill List ***", player);
         String[] skillList = getSkillListingForPlayer(player);
-        for (String aSkillList : skillList) {
+        for (String aSkillList : skillList)
+        {
             CustomerServiceLog("click_respec", "Player %TU :: " + aSkillList, player);
         }
         CustomerServiceLog("click_respec", "Player %TU :: *** Experience List ***", player);
@@ -485,6 +511,7 @@ public class respec extends script.base_script
             CustomerServiceLog("click_respec", "Player %TU :: " + xpType + " = " + xpCost, player);
         }
     }
+
     public static boolean autoLevelPlayer(obj_id player, int level, boolean withItems) throws InterruptedException
     {
         int oldXpAmount = getCurrentXpTotal(player);
@@ -508,18 +535,24 @@ public class respec extends script.base_script
         if (newXpAmount > oldXpAmount)
         {
             setWorkingSkill(player, skillList[0]);
-            for (String skill : skillList) {
+            for (String skill : skillList)
+            {
                 int skillCost = getSkillXpCost(player, skill);
-                if (skillCost <= newXpAmount) {
+                if (skillCost <= newXpAmount)
+                {
                     newXpAmount -= skillCost;
-                    if (!hasSkill(player, skill)) {
+                    if (!hasSkill(player, skill))
+                    {
                         grantSkill(player, skill);
-                        if (withItems) {
+                        if (withItems)
+                        {
                             skill_template.grantRoadmapItem(player);
                         }
                     }
                     setWorkingSkill(player, skill_template.getNextWorkingSkill(player));
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -544,7 +577,7 @@ public class respec extends script.base_script
                     xpDiff -= skillCost;
                     revokeSkillSilent(player, skillList[i]);
                 }
-                else 
+                else
                 {
                     grantExperiencePoints(player, xp_type, -xpDiff);
                     setWorkingSkill(player, skillList[i]);
@@ -554,6 +587,7 @@ public class respec extends script.base_script
         }
         return true;
     }
+
     public static int getSkillXpCost(obj_id player, String skillName) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player) || skillName == null || skillName.equals(""))
@@ -566,9 +600,10 @@ public class respec extends script.base_script
             return 0;
         }
         java.util.Enumeration e = xpReqs.keys();
-        String xpType = (String)(e.nextElement());
+        String xpType = (String) (e.nextElement());
         return xpReqs.getInt(xpType);
     }
+
     public static int getCurrentXpTotal(obj_id player) throws InterruptedException
     {
         int totalXp = 0;
@@ -588,14 +623,17 @@ public class respec extends script.base_script
         {
             xp_type = "crafting";
         }
-        for (String aSkillList : skillList) {
-            if (hasSkill(player, aSkillList)) {
+        for (String aSkillList : skillList)
+        {
+            if (hasSkill(player, aSkillList))
+            {
                 totalXp += getSkillXpCost(player, aSkillList);
             }
         }
         totalXp += getExperiencePoints(player, xp_type);
         return totalXp;
     }
+
     public static void earnProfessionSkills(obj_id player, String skillTemplateName, boolean withItems) throws InterruptedException
     {
         setObjVar(player, "clickRespec.granting", 1);
@@ -650,12 +688,12 @@ public class respec extends script.base_script
                     }
                     setPercentageCompletion(player, skillTemplateName, pct, withItems);
                 }
-                else 
+                else
                 {
                     grantProfessionSkills(player, skillTemplateName, workingSkill, withItems);
                 }
             }
-            else 
+            else
             {
                 respec.autoLevelPlayer(player, combatLevel, withItems);
             }
@@ -679,13 +717,14 @@ public class respec extends script.base_script
         {
             messageTo(player, "applySmugglingBonuses", null, 1.0f, false);
         }
-        else 
+        else
         {
             messageTo(player, "removeSmugglingBonuses", null, 1.0f, false);
         }
         String msg = "OBJECT_RESPEC: %TU has completed a respec via respec object. New combat level is " + getLevel(player) + "; new skill template is " + getSkillTemplate(player);
         trace.log("respec", msg, player, trace.TL_CS_LOG);
     }
+
     public static void grantProfessionSkills(obj_id player, String skillTemplateName, String workingSkill, boolean withItems) throws InterruptedException
     {
         if (workingSkill != null && workingSkill.equals("master"))
@@ -695,74 +734,79 @@ public class respec extends script.base_script
         String templateSkills = dataTableGetString(skill_template.TEMPLATE_TABLE, skillTemplateName, "template");
         String[] skillList = split(templateSkills, ',');
         setWorkingSkill(player, skillList[0]);
-        for (String aSkillList : skillList) {
-            if (workingSkill != null && aSkillList.equals(workingSkill)) {
+        for (String aSkillList : skillList)
+        {
+            if (aSkillList.equals(workingSkill))
+            {
                 break;
             }
             grantSkill(player, aSkillList);
-            if (withItems) {
+            if (withItems)
+            {
                 skill_template.grantRoadmapItem(player);
             }
             setWorkingSkill(player, skill_template.getNextWorkingSkill(player));
         }
     }
+
     public static void revokeAllSkillsAndExperience(obj_id player) throws InterruptedException
     {
         int curXp = 0;
-        String[] xpTypes = 
+        String[] xpTypes =
+                {
+                        xp.COMBAT_GENERAL,
+                        xp.COMBAT_MELEESPECIALIZE_UNARMED,
+                        xp.COMBAT_MELEESPECIALIZE_ONEHAND,
+                        xp.COMBAT_MELEESPECIALIZE_TWOHAND,
+                        xp.COMBAT_MELEESPECIALIZE_POLEARM,
+                        xp.COMBAT_RANGEDSPECIALIZE_RIFLE,
+                        xp.COMBAT_RANGEDSPECIALIZE_PISTOL,
+                        xp.COMBAT_RANGEDSPECIALIZE_CARBINE,
+                        xp.COMBAT_RANGEDSPECIALIZE_HEAVY,
+                        xp.COMBAT_THROWN,
+                        xp.COMBAT_GRENADE,
+                        xp.JEDI_GENERAL,
+                        xp.COMBAT_JEDI_ONEHANDLIGHTSABER,
+                        xp.COMBAT_JEDI_TWOHANDLIGHTSABER,
+                        xp.COMBAT_JEDI_POLEARMLIGHTSABER,
+                        xp.COMBAT_JEDI_FORCE_POWER,
+                        xp.SCOUT,
+                        xp.TRAPPING,
+                        xp.BOUNTYHUNTER,
+                        xp.SMUGGLER,
+                        xp.SQUADLEADER,
+                        xp.CREATUREHANDLER,
+                        xp.SLICING,
+                        xp.MEDICAL,
+                        xp.COMBATMEDIC,
+                        xp.BIO_ENGINEER,
+                        xp.BIO_ENGINEER_DNA_HARVESTING,
+                        xp.MERCHANT,
+                        xp.CRAFTING_GENERAL,
+                        xp.CRAFTING_FOOD_GENERAL,
+                        xp.CRAFTING_MEDICINE_GENERAL,
+                        xp.CRAFTING_CLOTHING_ARMOR,
+                        xp.CRAFTING_CLOTHING_GENERAL,
+                        xp.CRAFTING_WEAPONS_GENERAL,
+                        xp.CRAFTING_WEAPONS_MELEE,
+                        xp.CRAFTING_WEAPONS_RANGED,
+                        xp.CRAFTING_WEAPONS_MUNITION,
+                        xp.CRAFTING_STRUCTURE_GENERAL,
+                        xp.CRAFTING_DROID_GENERAL,
+                        xp.ENTERTAINER,
+                        xp.MUSIC,
+                        xp.DANCE,
+                        xp.IMAGEDESIGNER,
+                        force_rank.FRS_XP,
+                        "fs_combat",
+                        "fs_reflex",
+                        "fs_crafting",
+                        "fs_senses",
+                        "entertainer",
+                        "crafting"
+                };
+        for (String xpType : xpTypes)
         {
-            xp.COMBAT_GENERAL,
-            xp.COMBAT_MELEESPECIALIZE_UNARMED,
-            xp.COMBAT_MELEESPECIALIZE_ONEHAND,
-            xp.COMBAT_MELEESPECIALIZE_TWOHAND,
-            xp.COMBAT_MELEESPECIALIZE_POLEARM,
-            xp.COMBAT_RANGEDSPECIALIZE_RIFLE,
-            xp.COMBAT_RANGEDSPECIALIZE_PISTOL,
-            xp.COMBAT_RANGEDSPECIALIZE_CARBINE,
-            xp.COMBAT_RANGEDSPECIALIZE_HEAVY,
-            xp.COMBAT_THROWN,
-            xp.COMBAT_GRENADE,
-            xp.JEDI_GENERAL,
-            xp.COMBAT_JEDI_ONEHANDLIGHTSABER,
-            xp.COMBAT_JEDI_TWOHANDLIGHTSABER,
-            xp.COMBAT_JEDI_POLEARMLIGHTSABER,
-            xp.COMBAT_JEDI_FORCE_POWER,
-            xp.SCOUT,
-            xp.TRAPPING,
-            xp.BOUNTYHUNTER,
-            xp.SMUGGLER,
-            xp.SQUADLEADER,
-            xp.CREATUREHANDLER,
-            xp.SLICING,
-            xp.MEDICAL,
-            xp.COMBATMEDIC,
-            xp.BIO_ENGINEER,
-            xp.BIO_ENGINEER_DNA_HARVESTING,
-            xp.MERCHANT,
-            xp.CRAFTING_GENERAL,
-            xp.CRAFTING_FOOD_GENERAL,
-            xp.CRAFTING_MEDICINE_GENERAL,
-            xp.CRAFTING_CLOTHING_ARMOR,
-            xp.CRAFTING_CLOTHING_GENERAL,
-            xp.CRAFTING_WEAPONS_GENERAL,
-            xp.CRAFTING_WEAPONS_MELEE,
-            xp.CRAFTING_WEAPONS_RANGED,
-            xp.CRAFTING_WEAPONS_MUNITION,
-            xp.CRAFTING_STRUCTURE_GENERAL,
-            xp.CRAFTING_DROID_GENERAL,
-            xp.ENTERTAINER,
-            xp.MUSIC,
-            xp.DANCE,
-            xp.IMAGEDESIGNER,
-            force_rank.FRS_XP,
-            "fs_combat",
-            "fs_reflex",
-            "fs_crafting",
-            "fs_senses",
-            "entertainer",
-            "crafting"
-        };
-        for (String xpType : xpTypes) {
             curXp = getExperiencePoints(player, xpType);
             grantExperiencePoints(player, xpType, -curXp);
         }
@@ -772,8 +816,10 @@ public class respec extends script.base_script
         {
             while (skillList.length > 0 && attempts > 0)
             {
-                for (String skillName : skillList) {
-                    if (!skillName.startsWith("costume") && !skillName.startsWith("class_chronicles") && !skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("social_politician_") && !skillName.startsWith("pilot_") && !skillName.startsWith("swg_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("pvp_") && !skillName.startsWith("internal_expertise_") && !skillName.equals("expertise")) {
+                for (String skillName : skillList)
+                {
+                    if (!skillName.startsWith("costume") && !skillName.startsWith("class_chronicles") && !skillName.startsWith("species_") && !skillName.startsWith("social_language_") && !skillName.startsWith("social_politician_") && !skillName.startsWith("pilot_") && !skillName.startsWith("swg_") && !skillName.startsWith("utility_") && !skillName.startsWith("common_") && !skillName.startsWith("pvp_") && !skillName.startsWith("internal_expertise_") && !skillName.equals("expertise"))
+                    {
                         skill.revokeSkillSilent(player, skillName);
                     }
                 }
@@ -787,6 +833,7 @@ public class respec extends script.base_script
             messageTo(mission, "abortMission", null, 0, false);
         }
     }
+
     public static void contentPathHandoff(obj_id self) throws InterruptedException
     {
         location origin = getLocation(self);
@@ -816,18 +863,18 @@ public class respec extends script.base_script
             {
                 detachScript(self, "npe.handoff_to_tatooine");
             }
-            else 
+            else
             {
                 groundquests.requestGrantQuest(self, questNewbieStartBH);
             }
         }
-        else 
+        else
         {
             if (groundquests.hasCompletedQuest(self, questNewbieStart) || groundquests.isQuestActive(self, questNewbieStart))
             {
                 detachScript(self, "npe.handoff_to_tatooine");
             }
-            else 
+            else
             {
                 groundquests.requestGrantQuest(self, questNewbieStart);
             }
@@ -839,6 +886,7 @@ public class respec extends script.base_script
         static_item.createNewItemFunction("item_npe_uniform_crate_01_01", objInv);
         npe.giveProfessionWeapon(self);
     }
+
     public static float getPercentageCompletion(obj_id self, String template) throws InterruptedException
     {
         if (template == null || template.equals(""))
@@ -855,14 +903,16 @@ public class respec extends script.base_script
                 return 0.0f;
             }
             int oldSkillCount = 0;
-            for (String anOldSkillList : oldSkillList) {
-                if (hasSkill(self, anOldSkillList)) {
+            for (String anOldSkillList : oldSkillList)
+            {
+                if (hasSkill(self, anOldSkillList))
+                {
                     oldSkillCount++;
                 }
             }
-            oldSkillPct = (float)oldSkillCount / oldSkillList.length;
+            oldSkillPct = (float) oldSkillCount / oldSkillList.length;
         }
-        else 
+        else
         {
             float level = getLevel(self);
             oldSkillPct = level / 90.0f;
@@ -873,11 +923,12 @@ public class respec extends script.base_script
         }
         return oldSkillPct;
     }
+
     public static boolean setPercentageCompletion(obj_id self, String skillTemplateName, float pct, boolean withItems) throws InterruptedException
     {
         String newSkills = dataTableGetString(skill_template.TEMPLATE_TABLE, skillTemplateName, "template");
         String[] newSkillList = split(newSkills, ',');
-        int newSkillCount = (int)Math.floor(pct * newSkillList.length);
+        int newSkillCount = (int) Math.floor(pct * newSkillList.length);
         if (newSkillCount < 1)
         {
             newSkillCount = 1;
@@ -897,6 +948,7 @@ public class respec extends script.base_script
         }
         return true;
     }
+
     public static boolean isHigherWorkingSkill(String newSkill, String oldSkill, String skillTemplate) throws InterruptedException
     {
         if (newSkill == null || newSkill.equals(""))
@@ -928,6 +980,7 @@ public class respec extends script.base_script
         }
         return (newIdx > oldIdx);
     }
+
     public static String getHigherWorkingSkill(String newSkill, String oldSkill, String skillTemplate) throws InterruptedException
     {
         if (newSkill == null || newSkill.equals(""))
@@ -967,6 +1020,7 @@ public class respec extends script.base_script
         }
         return oldSkill;
     }
+
     public static boolean setRespecVersion(obj_id player) throws InterruptedException
     {
         String skillTemplate = getSkillTemplate(player);
@@ -1003,6 +1057,7 @@ public class respec extends script.base_script
         setObjVar(player, EXPERTISE_VERSION_OBJVAR, version);
         return true;
     }
+
     public static int getRespecVersion(obj_id player) throws InterruptedException
     {
         String skillTemplate = getSkillTemplate(player);
@@ -1037,6 +1092,7 @@ public class respec extends script.base_script
         }
         return dataTableGetInt(EXPERTISE_VERSION_TABLE, row, "version");
     }
+
     public static boolean checkRespecDecay(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -1062,7 +1118,7 @@ public class respec extends script.base_script
                 removeObjVar(player, "respecsBought");
                 CustomerServiceLog("respec_decay", "Player %TU :: had their respec counter decay to 0. This means the objvar was removed. They had no reset timer, so we set the decay timer on them to expire on the first next month.", player);
             }
-            else 
+            else
             {
                 prose.setDI(pp, currentRespecsBought);
                 sui.msgbox(player, pp);
@@ -1072,7 +1128,7 @@ public class respec extends script.base_script
             setRespecDecayObjVar(player);
             return true;
         }
-        else 
+        else
         {
             int timeTillNextDecayOnPlayer = getIntObjVar(player, OBJVAR_RESPEC_DECAY_TIME);
             int now = getCalendarTime();
@@ -1087,7 +1143,7 @@ public class respec extends script.base_script
                     removeObjVar(player, "respecsBought");
                     CustomerServiceLog("respec_decay", "Player %TU :: had their respec counter decay to 0. This means the objvar was removed. We reset the decay timer on them to expire on the first next month.", player);
                 }
-                else 
+                else
                 {
                     prose.setDI(pp, currentRespecsBought);
                     sui.msgbox(player, pp);
@@ -1100,6 +1156,7 @@ public class respec extends script.base_script
             return false;
         }
     }
+
     public static boolean setRespecDecayObjVar(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))

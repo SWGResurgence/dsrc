@@ -3,6 +3,7 @@ s[none]	i[0]	i[0]	i[0]	i[0]	s	c
 item_krayt_dragon_skull_itv		75				ITV: Polished Krayt Dragon Skull
 item_tcg_loot_reward_series5_atat_head_itv		75				ITV: AT-AT Head
 item_tcg_loot_reward_series5_xj6_air_speeder		15				Vehicle Deed: XJ6 Air Speeder
+item_loot_roll_bonus	250000000	50				Holographic Item Synthesizer
 rare_loot_chest_quality_1		1				Rare Loot Chest
 rare_loot_chest_quality_2		3				Exceptional Loot Chest
 rare_loot_chest_quality_3		5				Legendary Loot Chest

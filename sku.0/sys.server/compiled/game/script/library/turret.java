@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class turret extends script.base_script
 {
-    public turret()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final float ALERT_VOLUME_SIZE = 120.0f;
     public static final float FACTION_TURRET_RANGE = 96.0f;
@@ -24,6 +21,10 @@ public class turret extends script.base_script
     public static final String SCRIPTVAR_TARGETS = VAR_TURRET_BASE + ".targetList";
     public static final String OBJVAR_CAN_ATTACK = "turret.validTargetObjVar";
     public static final String OBJVAR_TURRET_FRIEND = "turret.isFriend";
+    public turret()
+    {
+    }
+
     public static void activateTurret(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -39,6 +40,7 @@ public class turret extends script.base_script
         }
         setObjVar(turret, VAR_IS_ACTIVE, true);
     }
+
     public static void deactivateTurret(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -47,9 +49,12 @@ public class turret extends script.base_script
         }
         removeObjVar(turret, VAR_IS_ACTIVE);
     }
-    public static boolean isActive(obj_id turret) throws InterruptedException {
+
+    public static boolean isActive(obj_id turret) throws InterruptedException
+    {
         return isIdValid(turret) && hasObjVar(turret, VAR_IS_ACTIVE);
     }
+
     public static void engageTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target))
@@ -64,6 +69,7 @@ public class turret extends script.base_script
         utils.setScriptVar(turret, SCRIPTVAR_ENGAGED, target);
         setCombatTarget(turret, target);
     }
+
     public static void disengage(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -74,6 +80,7 @@ public class turret extends script.base_script
         utils.removeScriptVar(turret, SCRIPTVAR_ENGAGED);
         setCombatTarget(turret, null);
     }
+
     public static boolean isEngaged(obj_id turret) throws InterruptedException
     {
         if (!isIdValid(turret))
@@ -86,47 +93,65 @@ public class turret extends script.base_script
         }
         return utils.hasScriptVar(turret, SCRIPTVAR_ENGAGED);
     }
-    public static boolean createWeapon(obj_id turret) throws InterruptedException {
-        if (!isIdValid(turret)) {
+
+    public static boolean createWeapon(obj_id turret) throws InterruptedException
+    {
+        if (!isIdValid(turret))
+        {
             return false;
         }
-        if (hasObjVar(turret, "objWeapon")) {
+        if (hasObjVar(turret, "objWeapon"))
+        {
             return false;
         }
         String strWeaponTemplate;
-        if (hasObjVar(turret, "strWeaponTemplate")) {
+        if (hasObjVar(turret, "strWeaponTemplate"))
+        {
             strWeaponTemplate = getStringObjVar(turret, "strWeaponTemplate");
-        } else {
+        }
+        else
+        {
             strWeaponTemplate = "object/weapon/ranged/turret/turret_block_large.iff";
         }
         obj_id objWeapon = createObject(strWeaponTemplate, turret, "");
         return isIdValid(objWeapon) && setObjVar(turret, "objWeapon", objWeapon);
     }
-    public static boolean isValidTargetGeneric(obj_id turret, obj_id target) throws InterruptedException {
-        if (!isIdValid(turret) || !isIdValid(target)) {
+
+    public static boolean isValidTargetGeneric(obj_id turret, obj_id target) throws InterruptedException
+    {
+        if (!isIdValid(turret) || !isIdValid(target))
+        {
             return false;
         }
-        if (target == turret) {
+        if (target == turret)
+        {
             return false;
         }
         location there = getLocation(target);
         location here = getLocation(turret);
-        if (!isIdValid(here.cell)) {
-            if (there == null || isIdValid(there.cell)) {
+        if (!isIdValid(here.cell))
+        {
+            if (there == null || isIdValid(there.cell))
+            {
                 return false;
             }
-        } else {
-            if (there.cell != here.cell) {
+        }
+        else
+        {
+            if (there.cell != here.cell)
+            {
                 return false;
             }
         }
         float dist = getDistance(getLocation(turret), getLocation(target));
         return dist <= TURRET_RANGE + 1 && canGenericTurretAttackTarget(target);
     }
+
     public static boolean isGenericTurret(obj_id turret) throws InterruptedException
     {
         return hasObjVar(turret, VAR_IS_GENERIC);
     }
+
     public static boolean canGenericTurretAttackTarget(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -145,6 +170,7 @@ public class turret extends script.base_script
         String objvar = getStringObjVar(self, OBJVAR_CAN_ATTACK);
         return hasObjVar(target, objvar) || objvar.equals("all") || (objvar.equals("allPlayers") && isPlayer(target));
     }
+
     public static boolean isValidTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target))
@@ -164,7 +190,7 @@ public class turret extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (there.cell != here.cell)
             {
@@ -185,11 +211,12 @@ public class turret extends script.base_script
         {
             return pvpCanAttack(turret, target);
         }
-        else 
+        else
         {
             return pvpIsEnemy(turret, target);
         }
     }
+
     public static void addTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target))
@@ -207,7 +234,7 @@ public class turret extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             if (!isValidTargetGeneric(turret, target))
             {
@@ -224,7 +251,7 @@ public class turret extends script.base_script
             Vector targets = utils.addElement(null, target);
             utils.setBatchScriptVar(turret, SCRIPTVAR_TARGETS, targets);
         }
-        else 
+        else
         {
             Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
             if (targets != null && targets.size() > 0)
@@ -242,6 +269,7 @@ public class turret extends script.base_script
             messageTo(turret, "handleTurretAttack", null, 1, false);
         }
     }
+
     public static void addTargets(obj_id turret, obj_id[] target) throws InterruptedException
     {
         if (!isIdValid(turret) || (target == null) || (target.length == 0))
@@ -249,8 +277,10 @@ public class turret extends script.base_script
             return;
         }
         Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
-        for (obj_id aTarget : target) {
-            if (isValidTarget(turret, aTarget) && !utils.isElementInArray(targets, target)) {
+        for (obj_id aTarget : target)
+        {
+            if (isValidTarget(turret, aTarget) && !utils.isElementInArray(targets, target))
+            {
                 targets = utils.addElement(targets, aTarget);
             }
         }
@@ -264,6 +294,7 @@ public class turret extends script.base_script
             messageTo(turret, "handleTurretAttack", null, 1, false);
         }
     }
+
     public static void removeTarget(obj_id turret, obj_id target) throws InterruptedException
     {
         if (!isIdValid(turret) || !isIdValid(target))

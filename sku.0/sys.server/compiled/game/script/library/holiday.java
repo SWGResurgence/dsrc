@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class holiday extends script.base_script
 {
-    public holiday()
-    {
-    }
     public static final String PLANET_VAR_EVENT_PREFIX = "event";
     public static final String PLANET_VAR_SCORE = ".score";
     public static final String PLANET_VAR_EMPIRE_DAY = ".empire_day";
@@ -241,206 +238,211 @@ public class holiday extends script.base_script
     public static final String LOVEDAY_CUPID_ELEMENT_NAME = "loveday_cupid_spawner_";
     public static final String LOVEDAY_CUPID_SPAWNER_CITY_VAR = "loveday_city";
     public static final String GETTING_CUPID_SPAWNER_IDS = "manager_gettingCupidSpawnerIds";
-    public static final String[] LOVEDAY_LOCATIONS = 
-    {
-        "endor",
-        "kaadara",
-        "tyrena"
-    };
+    public static final String[] LOVEDAY_LOCATIONS =
+            {
+                    "endor",
+                    "kaadara",
+                    "tyrena"
+            };
     public static final String ROMANCE_TRAITS_TABLE = "datatables/event/loveday/playing_cupid.iff";
-    public static final String[] MATCHMAKING_COMPANIONS = 
+    public static final String[] MATCHMAKING_COMPANIONS =
+            {
+                    "loveday_romance_seeker_familiar_male_01",
+                    "loveday_romance_seeker_familiar_male_02",
+                    "loveday_romance_seeker_familiar_male_03",
+                    "loveday_romance_seeker_familiar_male_04",
+                    "loveday_romance_seeker_familiar_female_01",
+                    "loveday_romance_seeker_familiar_female_02",
+                    "loveday_romance_seeker_familiar_female_03",
+                    "loveday_romance_seeker_familiar_female_04"
+            };
+    public static final String[] MATCHMAKING_COMPANIONS_SLOTS =
+            {
+                    "loveday_2023_matched_jeffrey",
+                    "loveday_2023_matched_matthew",
+                    "loveday_2023_matched_gerald",
+                    "loveday_2023_matched_daniel",
+                    "loveday_2023_matched_caroline",
+                    "loveday_2023_matched_francine",
+                    "loveday_2023_matched_julia",
+                    "loveday_2023_matched_ellen"
+            };
+    public static final String[] ALL_IMPERIAL_CRATE_TEMPLATES =
+            {
+                    "object/tangible/holiday/empire_day/e11_gas_cartridge_crate.iff",
+                    "object/tangible/holiday/empire_day/imperial_second_lieutenant_rank_crate.iff",
+                    "object/tangible/holiday/empire_day/improved_mouse_droid_arm_crate.iff",
+                    "object/tangible/holiday/empire_day/command_console_comscan_subcomponent_crate.iff"
+            };
+    public static final String[] ALL_REBEL_CRATE_TEMPLATES =
+            {
+                    "object/tangible/holiday/empire_day/aa1n_vebrobrain_protocol_droid_component_crate.iff",
+                    "object/tangible/holiday/empire_day/rebel_trooper_field_rations_crate.iff",
+                    "object/tangible/holiday/empire_day/crew_carrier_steering_mechanism_crate.iff",
+                    "object/tangible/holiday/empire_day/dh17_gas_cartridge_crate.iff"
+            };
+    public static final String[] ALL_IMPERIAL_QUESTS =
+            {
+                    EMPIREDAYQUEST_IMP_CRASHSITE_01_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_02_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_03_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_04_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_05_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_06_DOMESTICS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_01_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_02_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_03_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_04_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_05_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_06_ENG,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_01_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_02_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_03_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_04_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_05_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_06_MUNITIONS,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_01_STRUC,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_02_STRUC,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_03_STRUC,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_04_STRUC,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_05_STRUC,
+                    EMPIREDAYQUEST_IMP_CRASHSITE_06_STRUC
+            };
+    public static final String[] ALL_REBEL_QUESTS =
+            {
+                    EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_02_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_03_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_04_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_05_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_01_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_02_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_03_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_04_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_05_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_06_ENG,
+                    EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_02_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_03_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_04_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_05_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS,
+                    EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC,
+                    EMPIREDAYQUEST_REB_CRASHSITE_02_STRUC,
+                    EMPIREDAYQUEST_REB_CRASHSITE_03_STRUC,
+                    EMPIREDAYQUEST_REB_CRASHSITE_04_STRUC,
+                    EMPIREDAYQUEST_REB_CRASHSITE_05_STRUC,
+                    EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC
+            };
+    public static final String[] ALL_IMPERIAL_QUEST_TEMPLATES =
+            {
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[1],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[2],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[0],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3],
+                    ALL_IMPERIAL_CRATE_TEMPLATES[3]
+            };
+    public static final String[] ALL_REBEL_QUEST_TEMPLATES =
+            {
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[1],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[0],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[3],
+                    ALL_REBEL_CRATE_TEMPLATES[2],
+                    ALL_REBEL_CRATE_TEMPLATES[2],
+                    ALL_REBEL_CRATE_TEMPLATES[2],
+                    ALL_REBEL_CRATE_TEMPLATES[2],
+                    ALL_REBEL_CRATE_TEMPLATES[2],
+                    ALL_REBEL_CRATE_TEMPLATES[2]
+            };
+    public static final String[] ALL_REBEL_ENTERTAINER_QUESTS =
+            {
+                    EMPIREDAYQUEST_REB_ENTERTAINER_01,
+                    EMPIREDAYQUEST_REB_ENTERTAINER_02,
+                    EMPIREDAYQUEST_REB_ENTERTAINER_03,
+                    EMPIREDAYQUEST_REB_ENTERTAINER_04,
+                    EMPIREDAYQUEST_REB_ENTERTAINER_05,
+                    EMPIREDAYQUEST_REB_ENTERTAINER_06
+            };
+    public static final String[] ALL_IMPERIAL_ENTERTAINER_QUESTS =
+            {
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_01,
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_02,
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_03,
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_04,
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_05,
+                    EMPIREDAYQUEST_IMP_ENTERTAINER_06
+            };
+    public static final String[] DEFAULT_HIGH_SCORE_LIST =
+            {
+                    "DevH",
+                    "Loche",
+                    "Milbarge",
+                    "Jaskell",
+                    "AdeptStrain",
+                    "DeadMeat",
+                    "CancelAutoRun",
+                    "Dotanuki",
+                    "Tereb",
+                    "Hanse",
+                    "Teesquared",
+                    "DevH",
+                    "Loche",
+                    "Milbarge",
+                    "Jaskell",
+                    "AdeptStrain",
+                    "Swede",
+                    "Blixtev",
+                    "DeadMeat",
+                    "CancelAutoRun",
+                    "Dotanuki",
+                    "Tereb",
+                    "Hanse",
+                    "Teesquared"
+            };
+    public holiday()
     {
-        "loveday_romance_seeker_familiar_male_01",
-        "loveday_romance_seeker_familiar_male_02",
-        "loveday_romance_seeker_familiar_male_03",
-        "loveday_romance_seeker_familiar_male_04",
-        "loveday_romance_seeker_familiar_female_01",
-        "loveday_romance_seeker_familiar_female_02",
-        "loveday_romance_seeker_familiar_female_03",
-        "loveday_romance_seeker_familiar_female_04"
-    };
-    public static final String[] MATCHMAKING_COMPANIONS_SLOTS = 
-    {
-        "loveday_2023_matched_jeffrey",
-        "loveday_2023_matched_matthew",
-        "loveday_2023_matched_gerald",
-        "loveday_2023_matched_daniel",
-        "loveday_2023_matched_caroline",
-        "loveday_2023_matched_francine",
-        "loveday_2023_matched_julia",
-        "loveday_2023_matched_ellen"
-    };
-    public static final String[] ALL_IMPERIAL_CRATE_TEMPLATES = 
-    {
-        "object/tangible/holiday/empire_day/e11_gas_cartridge_crate.iff",
-        "object/tangible/holiday/empire_day/imperial_second_lieutenant_rank_crate.iff",
-        "object/tangible/holiday/empire_day/improved_mouse_droid_arm_crate.iff",
-        "object/tangible/holiday/empire_day/command_console_comscan_subcomponent_crate.iff"
-    };
-    public static final String[] ALL_REBEL_CRATE_TEMPLATES = 
-    {
-        "object/tangible/holiday/empire_day/aa1n_vebrobrain_protocol_droid_component_crate.iff",
-        "object/tangible/holiday/empire_day/rebel_trooper_field_rations_crate.iff",
-        "object/tangible/holiday/empire_day/crew_carrier_steering_mechanism_crate.iff",
-        "object/tangible/holiday/empire_day/dh17_gas_cartridge_crate.iff"
-    };
-    public static final String[] ALL_IMPERIAL_QUESTS = 
-    {
-        EMPIREDAYQUEST_IMP_CRASHSITE_01_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_02_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_03_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_04_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_05_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_06_DOMESTICS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_01_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_02_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_03_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_04_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_05_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_06_ENG,
-        EMPIREDAYQUEST_IMP_CRASHSITE_01_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_02_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_03_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_04_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_05_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_06_MUNITIONS,
-        EMPIREDAYQUEST_IMP_CRASHSITE_01_STRUC,
-        EMPIREDAYQUEST_IMP_CRASHSITE_02_STRUC,
-        EMPIREDAYQUEST_IMP_CRASHSITE_03_STRUC,
-        EMPIREDAYQUEST_IMP_CRASHSITE_04_STRUC,
-        EMPIREDAYQUEST_IMP_CRASHSITE_05_STRUC,
-        EMPIREDAYQUEST_IMP_CRASHSITE_06_STRUC
-    };
-    public static final String[] ALL_REBEL_QUESTS = 
-    {
-        EMPIREDAYQUEST_REB_CRASHSITE_01_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_02_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_03_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_04_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_05_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_06_DOMESTICS,
-        EMPIREDAYQUEST_REB_CRASHSITE_01_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_02_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_03_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_04_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_05_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_06_ENG,
-        EMPIREDAYQUEST_REB_CRASHSITE_01_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_02_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_03_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_04_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_05_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_06_MUNITIONS,
-        EMPIREDAYQUEST_REB_CRASHSITE_01_STRUC,
-        EMPIREDAYQUEST_REB_CRASHSITE_02_STRUC,
-        EMPIREDAYQUEST_REB_CRASHSITE_03_STRUC,
-        EMPIREDAYQUEST_REB_CRASHSITE_04_STRUC,
-        EMPIREDAYQUEST_REB_CRASHSITE_05_STRUC,
-        EMPIREDAYQUEST_REB_CRASHSITE_06_STRUC
-    };
-    public static final String[] ALL_IMPERIAL_QUEST_TEMPLATES = 
-    {
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[1],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[2],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[0],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3],
-        ALL_IMPERIAL_CRATE_TEMPLATES[3]
-    };
-    public static final String[] ALL_REBEL_QUEST_TEMPLATES = 
-    {
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[1],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[0],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[3],
-        ALL_REBEL_CRATE_TEMPLATES[2],
-        ALL_REBEL_CRATE_TEMPLATES[2],
-        ALL_REBEL_CRATE_TEMPLATES[2],
-        ALL_REBEL_CRATE_TEMPLATES[2],
-        ALL_REBEL_CRATE_TEMPLATES[2],
-        ALL_REBEL_CRATE_TEMPLATES[2]
-    };
-    public static final String[] ALL_REBEL_ENTERTAINER_QUESTS = 
-    {
-        EMPIREDAYQUEST_REB_ENTERTAINER_01,
-        EMPIREDAYQUEST_REB_ENTERTAINER_02,
-        EMPIREDAYQUEST_REB_ENTERTAINER_03,
-        EMPIREDAYQUEST_REB_ENTERTAINER_04,
-        EMPIREDAYQUEST_REB_ENTERTAINER_05,
-        EMPIREDAYQUEST_REB_ENTERTAINER_06
-    };
-    public static final String[] ALL_IMPERIAL_ENTERTAINER_QUESTS = 
-    {
-        EMPIREDAYQUEST_IMP_ENTERTAINER_01,
-        EMPIREDAYQUEST_IMP_ENTERTAINER_02,
-        EMPIREDAYQUEST_IMP_ENTERTAINER_03,
-        EMPIREDAYQUEST_IMP_ENTERTAINER_04,
-        EMPIREDAYQUEST_IMP_ENTERTAINER_05,
-        EMPIREDAYQUEST_IMP_ENTERTAINER_06
-    };
-    public static final String[] DEFAULT_HIGH_SCORE_LIST = 
-    {
-        "DevH",
-        "Loche",
-        "Milbarge",
-        "Jaskell",
-        "AdeptStrain",
-        "DeadMeat",
-        "CancelAutoRun",
-        "Dotanuki",
-        "Tereb",
-        "Hanse",
-        "Teesquared",
-        "DevH",
-        "Loche",
-        "Milbarge",
-        "Jaskell",
-        "AdeptStrain",
-        "Swede",
-        "Blixtev",
-        "DeadMeat",
-        "CancelAutoRun",
-        "Dotanuki",
-        "Tereb",
-        "Hanse",
-        "Teesquared"
-    };
+    }
+
     public static boolean hasLovedayRomanceSeekerCompanion(obj_id player) throws InterruptedException
     {
         return isIdValid(getLovedayRomanceSeekerCompanionControlDevice(player));
     }
+
     public static obj_id getLovedayRomanceSeekerCompanionControlDevice(obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
@@ -449,9 +451,12 @@ public class holiday extends script.base_script
             obj_id[] dataItems = getContents(datapad);
             if (dataItems != null || dataItems.length > 0)
             {
-                for (obj_id dataItem : dataItems) {
-                    if (hasObjVar(dataItem, "pet.creatureName")) {
-                        if ((getStringObjVar(dataItem, "pet.creatureName")).startsWith("loveday_romance_seeker_familiar")) {
+                for (obj_id dataItem : dataItems)
+                {
+                    if (hasObjVar(dataItem, "pet.creatureName"))
+                    {
+                        if ((getStringObjVar(dataItem, "pet.creatureName")).startsWith("loveday_romance_seeker_familiar"))
+                        {
                             return dataItem;
                         }
                     }
@@ -460,6 +465,7 @@ public class holiday extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public static boolean grantLovedayRomanceSeekerCompanion(obj_id player) throws InterruptedException
     {
         if (!hasLovedayRomanceSeekerCompanion(player))
@@ -486,6 +492,7 @@ public class holiday extends script.base_script
         }
         return false;
     }
+
     public static void checkForAndGrantLovedayMatchmakingSlot(obj_id player, String companionType) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -505,19 +512,21 @@ public class holiday extends script.base_script
                 modifyCollectionSlotValue(player, companionSlotName, 1);
             }
         }
-        return;
     }
+
     public static int getNumRomanticTraitsSets() throws InterruptedException
     {
         int numRows = dataTableGetNumRows(ROMANCE_TRAITS_TABLE);
         return numRows;
     }
+
     public static int getRomanticTraitsSet() throws InterruptedException
     {
         int numSets = getNumRomanticTraitsSets();
         int chosenSet = rand(0, numSets - 1);
         return chosenSet;
     }
+
     public static void setRomanticTraits(obj_id npc, int chosenSet) throws InterruptedException
     {
         dictionary traits = dataTableGetRow(ROMANCE_TRAITS_TABLE, chosenSet);
@@ -527,8 +536,8 @@ public class holiday extends script.base_script
         setObjVar(npc, "playingCupid.trait_03", traits.getString("trait_03"));
         setObjVar(npc, "playingCupid.trait_04", traits.getString("trait_04"));
         setObjVar(npc, "playingCupid.trait_05", traits.getString("trait_05"));
-        return;
     }
+
     public static boolean playEmpireDayFireWorksAndFlyBys(obj_id masterObject, int faction) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "emperor_statue.playFireWorksAndFlyBys: Function initialized.");
@@ -577,7 +586,7 @@ public class holiday extends script.base_script
             messageTo(masterObject, "launchRandomTieFighterFlyBy", null, 6, false);
             messageTo(masterObject, "launchRandomTieFighterFlyBy", null, 10, false);
         }
-        else 
+        else
         {
             messageTo(masterObject, "launchRandomRebelShipFlyBy", null, 4, false);
             messageTo(masterObject, "launchRandomRebelShipFlyBy", null, 8, false);
@@ -588,6 +597,7 @@ public class holiday extends script.base_script
         }
         return true;
     }
+
     public static String getEmpireDayEligibility(obj_id player, int faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -604,7 +614,7 @@ public class holiday extends script.base_script
             {
                 return "You are eligible for the Champion of Empire Day badge from Darth Vader.";
             }
-            else 
+            else
             {
                 return "You are eligible for the Champion of Remembrance Day badge from Princess Leia.";
             }
@@ -613,11 +623,12 @@ public class holiday extends script.base_script
         {
             return "You are NOT eligible for the Champion of Empire Day badge from Darth Vader.";
         }
-        else 
+        else
         {
             return "You are NOT eligible for the Champion of Remembrance Day badge from Princess Leia.";
         }
     }
+
     public static boolean isEmpireDayPlayerEligible(obj_id player, int faction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -637,12 +648,9 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        if (isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && isInWorldCell(player))
-        {
-            return true;
-        }
-        return false;
+        return isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && isInWorldCell(player);
     }
+
     public static obj_id[] getEmpireDayWinningPlayers(obj_id holidayObject, Vector eligiblePlayers) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: init");
@@ -671,7 +679,8 @@ public class holiday extends script.base_script
         if (originalListSize <= maxEmpireDayWinners)
         {
             //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: There is less than " + maxEmpireDayWinners + " or exactly " + maxEmpireDayWinners + " winning players");
-            for (Object eligiblePlayer : eligiblePlayers) {
+            for (Object eligiblePlayer : eligiblePlayers)
+            {
                 //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Player " + getPlayerName(((obj_id) eligiblePlayer)) + "(" + ((obj_id) eligiblePlayer) + ") was selected for badge.");
             }
             obj_id[] _eligiblePlayers = new obj_id[0];
@@ -693,7 +702,7 @@ public class holiday extends script.base_script
             {
                 continue;
             }
-            obj_id playerId = ((obj_id)eligiblePlayers.get(randomWinner));
+            obj_id playerId = ((obj_id) eligiblePlayers.get(randomWinner));
             if (!isIdValid(playerId))
             {
                 continue;
@@ -721,10 +730,12 @@ public class holiday extends script.base_script
         }
         return _winningPlayers;
     }
+
     public static String currentYearObjVar() throws InterruptedException
     {
         return EMPIRE_DAY_RECEIVED_VII;
     }
+
     public static boolean grantEmpireDayGift(obj_id player, int faction) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -743,7 +754,7 @@ public class holiday extends script.base_script
             //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
             eventGiftTwo = REBEL_REMEMBRANCE_DAY_GIFT;
         }
-        else 
+        else
         {
             //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
             eventGiftTwo = IMPERIAL_EMPIRE_DAY_GIFT;
@@ -771,13 +782,14 @@ public class holiday extends script.base_script
         {
             sendSystemMessage(player, GIFT_GRANTED);
         }
-        else 
+        else
         {
             sendSystemMessage(player, GIFT_GRANTED_REBEL);
         }
         //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has received " + faction + " gifts: " + eventGiftOne + " and " + eventGiftTwo);
         return true;
     }
+
     public static int getEmoteBeligerence(String emote) throws InterruptedException
     {
         if (emote == null || emote.length() <= 0)
@@ -806,11 +818,12 @@ public class holiday extends script.base_script
         {
             return 0;
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static obj_id getEmpireDayWaypointObjectObjId(obj_id object, String waypoint, float range) throws InterruptedException
     {
         if (!isIdValid(object) || !exists(object))
@@ -831,9 +844,12 @@ public class holiday extends script.base_script
             return null;
         }
         obj_id[] objects = getObjectsInRange(loc, range);
-        for (obj_id object1 : objects) {
-            if (isIdValid(object1)) {
-                if (hasObjVar(object1, waypoint)) {
+        for (obj_id object1 : objects)
+        {
+            if (isIdValid(object1))
+            {
+                if (hasObjVar(object1, waypoint))
+                {
                     obj_id waypointObjId = object1;
                     return waypointObjId;
                 }
@@ -841,13 +857,17 @@ public class holiday extends script.base_script
         }
         return null;
     }
+
     public static obj_id masterObjectObjId(obj_id self) throws InterruptedException
     {
         location loc = getLocation(self);
         obj_id[] objects = getObjectsInRange(loc, OBJECT_NEAR_CHECK_RANGE_100M);
-        for (obj_id object : objects) {
-            if (isIdValid(object)) {
-                if (hasObjVar(object, "emperorsday.master")) {
+        for (obj_id object : objects)
+        {
+            if (isIdValid(object))
+            {
+                if (hasObjVar(object, "emperorsday.master"))
+                {
                     obj_id masterObjId = object;
                     return masterObjId;
                 }
@@ -855,6 +875,7 @@ public class holiday extends script.base_script
         }
         return null;
     }
+
     public static boolean giveCeremonyAreaMobsHate(obj_id player, float range) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -879,20 +900,25 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        for (obj_id obj_id : allMobsCombat) {
-            if (obj_id == player) {
+        for (obj_id obj_id : allMobsCombat)
+        {
+            if (obj_id == player)
+            {
                 continue;
             }
-            if (isInvulnerable(obj_id)) {
+            if (isInvulnerable(obj_id))
+            {
                 continue;
             }
-            if (!pvpCanAttack(obj_id, player)) {
+            if (!pvpCanAttack(obj_id, player))
+            {
                 continue;
             }
             startCombat(obj_id, player);
         }
         return true;
     }
+
     public static boolean grantEmperorDayBadge(obj_id player, obj_id celeb, obj_id[] listOfWinners, int faction) throws InterruptedException
     {
         obj_id masterObject = holiday.masterObjectObjId(celeb);
@@ -953,6 +979,7 @@ public class holiday extends script.base_script
         messageTo(masterObject, "hanHappy", null, 2.0f, false);
         return true;
     }
+
     public static boolean slapPlayerDownForBeingRude(obj_id npcObject, obj_id playerToBeIncapped) throws InterruptedException
     {
         if (!isValidId(npcObject) && !exists(npcObject))
@@ -970,6 +997,7 @@ public class holiday extends script.base_script
         messageTo(npcObject, "playerKnockedOut", eDict, 0, false);
         return true;
     }
+
     public static boolean replaceEventObject(obj_id eventObject, obj_id player, String objectTemplate) throws InterruptedException
     {
         if (!isValidId(eventObject) || !exists(eventObject))
@@ -1034,6 +1062,7 @@ public class holiday extends script.base_script
         trial.cleanupObject(eventObject);
         return true;
     }
+
     public static boolean rewardEmpireDayPlayer(obj_id player, int playerFaction, String parentBuffName, String childBuffName, String collectionSlot, String eventName) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " is attempting to increment the childcounter buff: " + childBuffName + ".");
@@ -1143,7 +1172,7 @@ public class holiday extends script.base_script
             play2dNonLoopingSound(player, groundquests.MUSIC_QUEST_COMPLETED);
             //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " no longer has required parent buff: " + parentBuffName + "  so they cannot receive the counter buff: " + childBuffName + ".");
         }
-        else 
+        else
         {
             if (eventType.startsWith(BUFF_COMBATANT_GROUP))
             {
@@ -1184,6 +1213,7 @@ public class holiday extends script.base_script
         }
         return true;
     }
+
     public static boolean setEventLockOutTimeStamp(obj_id player, String eventLockOut) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1205,6 +1235,7 @@ public class holiday extends script.base_script
         setObjVar(player, eventLockOut, then);
         return true;
     }
+
     public static boolean checkEventLockOutRemoval(obj_id player, String eventLockTimer, String eventLockFlag) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1251,6 +1282,7 @@ public class holiday extends script.base_script
         }
         return false;
     }
+
     public static String getTimeRemainingBeforeLockoutRemoved(obj_id player, String eventLockOut) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1278,6 +1310,7 @@ public class holiday extends script.base_script
         int timeLeft = (then - now);
         return "you have " + utils.formatTimeVerbose(timeLeft) + " left before you are available for that task";
     }
+
     public static boolean getEventTokens(obj_id player, String tokenStaticItem, int amount) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1306,7 +1339,7 @@ public class holiday extends script.base_script
             setObjVar(player, PLAYER_EMPIRE_DAY_SCORE, getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE) + amount);
             //CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received their very first event points of " + amount + ". Now the player has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
         }
-        else 
+        else
         {
             setObjVar(player, PLAYER_EMPIRE_DAY_SCORE, getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE) + amount);
             //CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received " + amount + " points and now has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
@@ -1315,16 +1348,18 @@ public class holiday extends script.base_script
         {
             sendSystemMessage(player, SID_TOKEN_REWARDED);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_TOKENS_REWARDED);
         }
         return true;
     }
+
     public static int getEmpireDayLockoutDelay() throws InterruptedException
     {
         return secondsUntilNextDailyTime(DAILY_TIME, 0, 0);
     }
+
     public static boolean createEventLeaderBoardUI(obj_id player, String title, String combinedString) throws InterruptedException
     {
         if (!isValidId(player) || !isValidId(player))
@@ -1360,6 +1395,7 @@ public class holiday extends script.base_script
         flushSUIPage(pid);
         return true;
     }
+
     public static void closeOldWindow(obj_id player) throws InterruptedException
     {
         int pid = sui.getPid(player, LEADERSUI_PID_NAME);
@@ -1369,6 +1405,7 @@ public class holiday extends script.base_script
             sui.removePid(player, LEADERSUI_PID_NAME);
         }
     }
+
     public static String getEventHighScores(obj_id planet, String scoreObjVar, boolean faction) throws InterruptedException
     {
         if (!isValidId(planet) || !exists(planet))
@@ -1389,7 +1426,7 @@ public class holiday extends script.base_script
                 data += "\\^005" + i + ". \\%015" + name + " \\%015" + score + "\n";
             }
         }
-        else 
+        else
         {
             data += sui.colorBlue() + "IMPERIAL\n" + sui.colorWhite();
             for (int i = 1; i <= MAX_NUMBER_OF_PLANET_HIGH_SCORES; i++)
@@ -1409,6 +1446,7 @@ public class holiday extends script.base_script
         }
         return data;
     }
+
     public static boolean setEmpireDayLeaderScores(obj_id planet, obj_id player, String scoreObjVar, int newScore, String playerName, int faction) throws InterruptedException
     {
         //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: scoreObjVar: " + scoreObjVar + " score: " + newScore);
@@ -1486,7 +1524,7 @@ public class holiday extends script.base_script
             {
                 existingScore = getIntObjVar(planet, scoreObjVar + ".slot_" + i + holiday.PLANET_VAR_PLAYER_FACTION_IMP + holiday.PLANET_VAR_PLAYER_SCORE);
             }
-            else 
+            else
             {
                 existingScore = getIntObjVar(planet, scoreObjVar + ".slot_" + i + holiday.PLANET_VAR_PLAYER_FACTION_REB + holiday.PLANET_VAR_PLAYER_SCORE);
             }
@@ -1495,7 +1533,7 @@ public class holiday extends script.base_script
                 //CustomerServiceLog("holidayEventScore", newScore + " is greater than " + existingScore);
                 newHsSlot = i;
             }
-            else 
+            else
             {
                 break;
             }
@@ -1518,6 +1556,7 @@ public class holiday extends script.base_script
         setObjVar(planet, scoreObjVar + ".slot_" + newHsSlot + postAppendName, playerName);
         return true;
     }
+
     public static boolean removeAllCompletedQuestsForDeathTroopers(obj_id player) throws InterruptedException
     {
         if (groundquests.isQuestActiveOrComplete(player, "outbreak_live_conversion_neutral"))
