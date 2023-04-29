@@ -8,7 +8,7 @@ objectName = "frn_n"  "streetlamp_custom"
 
 detailedDescription = "frn_d"  "streetlamp_custom"
 
-appearanceFilename = "appearance/mun_all_imprv_streetlamp_m_s01.apt"
+appearanceFilename = "appearance/frn_all_glow_lantern_s3.apt"
 
 clientDataFile = "clientdata/borrie/light/purple/pale_lilac_4m.cdf"
 
