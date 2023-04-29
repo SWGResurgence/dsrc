@@ -1,1 +1,0 @@
-for /F "tokens=*" %%A in (D:/shared_lights.txt) do more D:\sharedLightsTemplate.tpf > %%A

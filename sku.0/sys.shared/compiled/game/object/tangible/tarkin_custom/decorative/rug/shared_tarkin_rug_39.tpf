@@ -11,7 +11,7 @@ objectName = "item_n"  "rug"
 
 detailedDescription = "item_d"  "rug"
 
-appearanceFilename = "appearance/tarkin_rug_#.apt"
+appearanceFilename = "appearance/tarkin_rug_39.apt"
 
 portalLayoutFilename = ""
 
