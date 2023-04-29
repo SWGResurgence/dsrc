@@ -1,0 +1,4 @@
+heroic_echo_atat	heroic_echo_atst
+s	s
+dungeon/echo_base_drops:heroic_echo_atat	dungeon/echo_base_drops:heroic_echo_atat
+crafting_loot/weapon_components:wp_comp_heroic	crafting_loot/weapon_components:wp_comp_heroic
