@@ -99,10 +99,10 @@ public class entertainer extends script.base_script
 
     public int triggerBuff(obj_id self, obj_id target) throws InterruptedException
     {
-        buff.applyBuff(target, "buildabuff_inspiration", buffDuration);
         utils.setScriptVar(target, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
         utils.setScriptVar(target, "performance.buildabuff.buffComponentValues", buffComponentValues);
         utils.setScriptVar(target, "performance.buildabuff.player", target);
+        buff.applyBuff(target, "buildabuff_inspiration", buffDuration);
         return SCRIPT_CONTINUE;
     }
 }
