@@ -142,11 +142,11 @@ public class player_resurgence extends script.base_script
             setObjVar(tatooine, "avatarCount", playerCount);
         }
     }
-    public int cmdDungeonFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    public int cmdContentFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /dungeonFinder status");
+            sendSystemMessageTestingOnly(self, "[syntax] /showContent status");
         }
         else
         {
@@ -154,34 +154,36 @@ public class player_resurgence extends script.base_script
             String command = st.nextToken();
             if (command.equals("status"))
             {
-                listAllDungeonStatuses(self);
+                listAllContentStatuses(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
 
-    public int listAllDungeonStatuses(obj_id self)
+    public int listAllContentStatuses(obj_id self)
     {
-        String prompt;
-        prompt = "Content\n";
+        String prompt = null;
+        prompt += "Current Status of Content\n";
         prompt += "\n";
-        prompt = "\tCommon\n";
-        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n";
-        prompt = "\tWorld Bosses\n";
+        prompt += "\tCollections\n";
+        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n\n";
+        prompt += "\tWorld Bosses\n";
         prompt += "\t\tElder Ancient Krayt Dragon: " + getDungeonStatus("world_boss.krayt") + "\n";
         prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus("world_boss.peko") + "\n";
         prompt += "\t\tDarth Gizmo: " + getDungeonStatus("world_boss.gizmo") + "\n";
         prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
-        prompt = "\tDungeons\n";
+        prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n";
+        prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n";
+        prompt += "\tDungeons\n";
         prompt += "\t\tGeonosian Biolab\n";
         prompt += "\t\t\tAcklay: " + getDungeonStatus("dungeon.geo_madbio.acklay") + "\n";
         prompt += "\t\t\tReek: " + getDungeonStatus("dungeon.geo_madbio.reek") + "\n";
-        prompt += "\t\t\tNexu: " + getDungeonStatus("dungeon.geo_madbio.nexu") + "\n";
+        prompt += "\t\t\tNexu: " + getDungeonStatus("dungeon.geo_madbio.nexu") + "\n\n";
         prompt += "\t\tDeath Watch Bunker\n";
-        prompt += "\t\t\tDeath Watch Overlord: " + getDungeonStatus("dungeon.death_watch_bunker.overlord") + "\n";
+        prompt += "\t\t\tDeath Watch Overlord: " + getDungeonStatus("dungeon.death_watch_bunker.overlord") + "\n\n";
         prompt += "\tDynamic Dungeons\n";
         prompt += "\t\tCzerka Hideout: " + getDungeonStatus("dynamic_dungeon.czerka") + "\n";
-        prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus("dynamic_dungeon.caverns") + "\n";
+        prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus("dynamic_dungeon.caverns") + "\n\n";
 
         int page = createSUIPage("/Script.messageBox", self, self);
         setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
@@ -302,9 +304,8 @@ public class player_resurgence extends script.base_script
             if (command.equals("wearMe"))
             {
                 obj_id[] equipments = getAllWornItems(self, true);
-                for (int i = 0; i < equipments.length; i++)
+                for (obj_id equipment : equipments)
                 {
-                    obj_id equipment = equipments[i];
                     if (isIdValid(equipment))
                     {
                         String template = getTemplateName(equipment);
