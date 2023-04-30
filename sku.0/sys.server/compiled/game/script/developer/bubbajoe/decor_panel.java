@@ -7,10 +7,9 @@ package script.developer.bubbajoe;/*
 import script.library.sui;
 import script.obj_id;
 import script.location;
-import script.menu_info_types;
-import script.menu_info_data;
 import script.dictionary;
 
+@SuppressWarnings("unused")
 public class decor_panel extends script.base_script
 {
     public String PID = "dp.pid";
@@ -82,35 +81,35 @@ public class decor_panel extends script.base_script
         flushSUIPage(pid);
     }
 
-    public void handleMoveNorth(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveNorth(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
         location loc = getLocation(target);
         loc.z += currentMovementAmount(params);
         setLocation(target, loc);
     }
-    public void handleMoveEast(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveEast(obj_id self, dictionary params)
     {
         obj_id target = getTarget(self);
         location loc = getLocation(target);
         loc.x += currentMovementAmount(params);
         setLocation(target, loc);
     }
-    public void handleMoveSouth(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveSouth(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
         location loc = getLocation(target);
         loc.z -= currentMovementAmount(params);
         setLocation(target, loc);
     }
-    public void handleMoveWest(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveWest(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
         location loc = getLocation(target);
         loc.x -= currentMovementAmount(params);
         setLocation(target, loc);
     }
-    public void handleMoveUp(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveUp(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
         location loc = getLocation(target);
@@ -118,7 +117,7 @@ public class decor_panel extends script.base_script
         setLocation(target, loc);
     }
 
-    public void handleMoveDown(obj_id self, dictionary params) throws InterruptedException
+    public void handleMoveDown(obj_id self, dictionary params)
     {
         obj_id target = getIntendedTarget(self);
         location loc = getLocation(target);
