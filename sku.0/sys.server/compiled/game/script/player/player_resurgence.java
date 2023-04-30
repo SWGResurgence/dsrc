@@ -45,7 +45,7 @@ public class player_resurgence extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!hasObjVar(tatooine, "avatarCount"))
         {
-            setObjVar(tatooine, "avatarCount", 0);
+            setObjVar(tatooine, "avatarCount", 1);
         }
         int playerCount = getIntObjVar(tatooine, "avatarCount");
         playerCount += count;
@@ -57,7 +57,7 @@ public class player_resurgence extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!hasObjVar(tatooine, "avatarCount"))
         {
-            setObjVar(tatooine, "avatarCount", 0);
+            setObjVar(tatooine, "avatarCount", 1);
         }
         int playerCount = getIntObjVar(tatooine, "avatarCount");
         playerCount -= count;
@@ -222,14 +222,14 @@ public class player_resurgence extends script.base_script
             }
             if (command.equals("wearMe"))
             {
-                obj_id[] equipments = getAllWornItems(target, true);
+                obj_id[] equipments = getAllWornItems(self, true);
                 for (int i = 0; i < equipments.length; i++)
                 {
                     obj_id equipment = equipments[i];
                     if (isIdValid(equipment))
                     {
                         String template = getTemplateName(equipment);
-                        obj_id newEquipment = createObject(template, self, "");
+                        obj_id newEquipment = createObject(template, target, "");
                         if (isIdValid(newEquipment))
                         {
                             equip(newEquipment, target);

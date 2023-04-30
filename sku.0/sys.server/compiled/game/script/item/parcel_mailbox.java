@@ -225,7 +225,6 @@ class parcel_mailbox extends script.base_script
         {
             names[idx] = utils.packStringId(new string_id("Owner"));
             attribs[idx] = getPlayerName(getObjIdObjVar(self, VAR_OWNER));
-            idx++;
         }
         return SCRIPT_CONTINUE;
     }
@@ -256,10 +255,6 @@ class parcel_mailbox extends script.base_script
     }
     public boolean isContentsAbleToFitInto(obj_id containerSelf, obj_id containerDestination)
     {
-        if (getVolumeFree(containerDestination) >= getFilledVolume(containerSelf))
-        {
-            return true;
-        }
-        return false;
+        return getVolumeFree(containerDestination) >= getFilledVolume(containerSelf);
     }
 }

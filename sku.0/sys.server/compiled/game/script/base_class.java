@@ -2170,25 +2170,29 @@ public class base_class
      */
     public static void notifyGalacticFeed(String msg)
     {
-        String apiKey = "https://discord.com/api/webhooks/1099397946887389245/aTbLp6LtIsyges8UYhkd27guDpMHVWShrf2ZbIBSPzV8sXUIIoxHqTj72eMGf5bLckN_";
+        //disabled until i can update d4j
+        /*String apiKey = "https://discord.com/api/webhooks/1099397946887389245/aTbLp6LtIsyges8UYhkd27guDpMHVWShrf2ZbIBSPzV8sXUIIoxHqTj72eMGf5bLckN_";
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
         try {
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }
+        }*/
+        sendSystemMessageGalaxyTestingOnly(msg);
     }
     public static void notifyServerEvents(String msg)
     {
-        String apiKey = "https://discord.com/api/webhooks/1099398513093267486/zuORNBBP7K3zpJctIqjXRakWc3FNM2TIrvJiwVMUqIkSizHv4-YXLQFE1ek87XgD2k4p";
+        ///disabled until i can update d4j
+        /*String apiKey = "https://discord.com/api/webhooks/1099398513093267486/zuORNBBP7K3zpJctIqjXRakWc3FNM2TIrvJiwVMUqIkSizHv4-YXLQFE1ek87XgD2k4p";
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
         try {
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }
+        }*/
+        sendSystemMessageGalaxyTestingOnly(msg);
     }
 
     /**

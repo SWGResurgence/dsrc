@@ -159,7 +159,7 @@ public class master_controller_paxvizla extends script.base_script
         }
         for (obj_id iTarget : targets)
         {
-            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", self, "");
+            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
             reduceHealth(iTarget, rand(1200, 3000));
             reduceAction(iTarget, rand(1200, 3000));
         }

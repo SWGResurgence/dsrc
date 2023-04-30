@@ -1140,7 +1140,7 @@ public class base_player extends script.base_script
                 " was torn to shreds by ",
                 " was brutally murdered by ",
         };
-        base_class.notifyServerEvents(getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
+        LOG("gaglog", getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
         return SCRIPT_CONTINUE;
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
@@ -1392,7 +1392,7 @@ public class base_player extends script.base_script
             String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
             String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
             String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
-            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
+            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "4" + white + "\n";
             String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
             String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
             String features = gold + "Key Features:\n";
