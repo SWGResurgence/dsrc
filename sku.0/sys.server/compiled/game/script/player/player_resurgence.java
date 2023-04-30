@@ -4,8 +4,7 @@ package script.player;/*
 @Purpose: This script is used for Resurgence specific functions.
 */
 
-import script.library.ai_lib;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
 import script.location;
 import script.menu_info_types;
@@ -18,6 +17,7 @@ import static script.library.factions.setFaction;
 
 public class player_resurgence extends script.base_script
 {
+    public boolean requireEntBuffRecycle = true;
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -28,11 +28,84 @@ public class player_resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnLogin(obj_id self)
+    public int OnLogin(obj_id self) throws InterruptedException
     {
+        if (hasObjVar(self, "saved_performance"))
+        {
+            restoreEntertainerBuffs(self);
+        }
+        showServerInfo(self);
         incrementPlayerCount(self);
         return SCRIPT_CONTINUE;
     }
+
+    public void showServerInfo(obj_id self)
+    {
+        if (!hasObjVar(self, "resurgence_welcome_onetimer"))
+        {
+            String red = " \\#FF0000";
+            String gold = " \\#FFD700";
+            String orange = " \\#FFA500";
+            String tan = " \\#D2B48C";
+            String white = " \\#FFFFFF";
+            String blue = " \\#0000FF";
+            String teal = " \\#008080";
+            String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
+            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
+            String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
+            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "4" + white + "\n";
+            String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
+            String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
+            String features = gold + "Key Features:\n";
+            String feature1 = gold + "* " + white + "Instant " + orange + "Level 90" + white + "Token." + "\n";
+            String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
+            String feature3 = gold + "* " + white + "20 Housing Lots.\n";
+            String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
+            String feature5 = gold + "* " + white + "A Veteran Reward Vendor to obtain old rewards.\n";
+            String feature6 = gold + "* " + white + "Rare Loot System (RLS).\n";
+            String feature7 = gold + "* " + white + "World Boss System.\n";
+            String feature8 = gold + "* " + white + "New Planet: Dxun\n";
+            String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
+            String feature10 = tan + "* " + white + "More yet to come...\n";
+            String nl = "\n\\#.";
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
+            String title = colors_hex.Gold("Welcome to Apotheosis") + "\\#.";
+            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", welcome);
+            setSUIProperty(page, "Prompt.lblPrompt", "TextAlignmentVertical'", "Center");
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
+            setSUIProperty(page, "bg.caption.lblTitle", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
+            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
+            setSUIProperty(page, "btnCancel", "Visible", "true");
+            setSUIProperty(page, "btnRevert", "Visible", "false");
+            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
+            //saveTextOnClient(self, "server_welcome.txt", welcome);
+            showSUIPage(page);
+            flushSUIPage(page);
+            setObjVar(self, "resurgence_welcome_onetimer", 1);
+        }
+    }
+
+    public void restoreEntertainerBuffs(obj_id self) throws InterruptedException
+    {
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buffComponentKeys"));
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buffComponentValues"));
+        utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.bufferId"));
+        float buffTime = getFloatObjVar(self, "saved_performance.buildabuff.buffTime");
+        buff.applyBuff(self, "buildabuff_inspiration", buffTime);
+        if (requireEntBuffRecycle)
+        {
+            removeObjVar(self, "saved_performance");
+            debugConsoleMsg(self, "Your entertainment buff package has been restored.");
+        }
+        else
+        {
+            debugConsoleMsg(self, "Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package.");
+        }
+    }
+
     public int OnLogout(obj_id self)
     {
         decrementPlayerCount(self);
@@ -47,9 +120,12 @@ public class player_resurgence extends script.base_script
         {
             setObjVar(tatooine, "avatarCount", 1);
         }
-        int playerCount = getIntObjVar(tatooine, "avatarCount");
-        playerCount += count;
-        setObjVar(tatooine, "avatarCount", playerCount);
+        else
+        {
+            int playerCount = getIntObjVar(tatooine, "avatarCount");
+            playerCount += count;
+            setObjVar(tatooine, "avatarCount", playerCount);
+        }
     }
     public void decrementPlayerCount(obj_id self)
     {
@@ -59,9 +135,12 @@ public class player_resurgence extends script.base_script
         {
             setObjVar(tatooine, "avatarCount", 1);
         }
-        int playerCount = getIntObjVar(tatooine, "avatarCount");
-        playerCount -= count;
-        setObjVar(tatooine, "avatarCount", playerCount);
+        else
+        {
+            int playerCount = getIntObjVar(tatooine, "avatarCount");
+            playerCount -= count;
+            setObjVar(tatooine, "avatarCount", playerCount);
+        }
     }
     public int cmdDungeonFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {

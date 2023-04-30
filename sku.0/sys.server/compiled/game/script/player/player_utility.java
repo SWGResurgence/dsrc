@@ -119,6 +119,10 @@ public class player_utility extends script.base_script
         {
             attachScript(self, "player.player_money");
         }
+        if (!hasScript(self, "player.player_resurgence"))
+        {
+            attachScript(self, "player.player_resurgence");
+        }
         return SCRIPT_CONTINUE;
     }
     public int OnWaypointDestroyed(obj_id self, obj_id waypoint) throws InterruptedException
