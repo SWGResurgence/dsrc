@@ -4,6 +4,6 @@
 
 @class object_template 3
 
-sharedTemplate = "object/tangible/tarkin_custom/decorative/lights/shared_chocolate_4m.iff"
+sharedTemplate = "object/tangible/tarkin_custom/decorative/lights/orange/shared_chocolate_4m.iff"
 
 scripts = ["systems.city.city_furniture"]
