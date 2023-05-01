@@ -107,6 +107,10 @@ public class magic_light extends script.base_script
     public void handleMainColor(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
         String mainColor = MCOLOR_MAGIC_LIGHT[idx];
         setObjVar(self, DATATABLE_MAIN_COLOR_COL, mainColor);
         String subcolorTable = DATATABLE_MAGIC_LIGHT_PREFIX + MCOLOR_MAGIC_LIGHT[idx] + DATATABLE_MAGIC_LIGHT_SUFFIX;
@@ -116,7 +120,15 @@ public class magic_light extends script.base_script
 
     public void handleSubColor(obj_id self, dictionary params) throws InterruptedException
     {
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
         int idx = sui.getListboxSelectedRow(params);
+        if (idx < 0)
+        {
+            idx = 0;
+        }
         String subColor = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, DATATABLE_SUB_COLOR_COL)[idx];
         String subColorString = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, "description")[idx];
         setObjVar(self, DATATABLE_SUB_COLOR_DETAIL, subColorString);
@@ -126,6 +138,10 @@ public class magic_light extends script.base_script
 
     public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
         int idx = sui.getListboxSelectedRow(params);
         String rangeSelection = RANGES_MAGIC_LIGHT[idx];
         switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
