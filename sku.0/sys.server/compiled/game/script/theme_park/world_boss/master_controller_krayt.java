@@ -66,7 +66,7 @@ public class master_controller_krayt extends script.base_script
         int health = getHealth(self);
         int maxHealth = getMaxHealth(self);
         int percentHealth = (health * 100) / maxHealth;
-        if (attacker == self) //this is a self damage check
+        if (attacker == self)
         {
             return SCRIPT_CONTINUE;
         }
