@@ -119,7 +119,7 @@ public class magic_light extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         String subColor = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, DATATABLE_SUB_COLOR_COL)[idx];
         String subColorString = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, "description")[idx];
-        setObjVar(self, DATATABLE_SUB_COLOR_DETAIL, subColorString)
+        setObjVar(self, DATATABLE_SUB_COLOR_DETAIL, subColorString);
         setObjVar(self, DATATABLE_SUB_COLOR_COL, subColor);
         sui.listbox(self, sui.getPlayerId(params), "Select the range for this light.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", RANGES_MAGIC_LIGHT, "handleColorRange", true, false);
     }
