@@ -2201,7 +2201,7 @@ public class base_class
      */
     public static void pushWebhookByApiKey(String apiKey, String msg, String username, boolean useTTS)
     {
-        String gally = getGalaxyName();
+        /*String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
         webhook.setUsername(username);
@@ -2210,7 +2210,7 @@ public class base_class
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }
+        }*/
     }
 
     public static void debugServerConsoleMsg(obj_id object, String msg)

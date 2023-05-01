@@ -1790,22 +1790,6 @@ public class player_developer extends base_script
         }
     }
 
-    public void sendWebhook(String url, String message)
-    {
-        if (url == null || url.equals(""))
-        {
-            return;
-        }
-        if (message == null || message.equals(""))
-        {
-            return;
-        }
-        DiscordWebhook webhook = new DiscordWebhook(url);
-        webhook.setContent(message);
-        webhook.setAvatarUrl("https://i.imgur.com/WO53VrH.png");
-        webhook.setTts(true);
-        webhook.setUsername("Newsnet Reporter");
-    }
 
     public int handleShellOutput(obj_id self, dictionary params)
     {
