@@ -18,10 +18,13 @@ public class master_controller_gizmo extends script.base_script
             "Meechoo aem ta troo Pubbza doh ta Tyrzok!",
     };
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.gizmo", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -29,14 +32,16 @@ public class master_controller_gizmo extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.gizmo", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok, Corrupted by the Darkside of the Force, has been reported to have been last seen on Endor at one of the Lake Villages.");
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_GIZMO);
         return SCRIPT_CONTINUE;
     }

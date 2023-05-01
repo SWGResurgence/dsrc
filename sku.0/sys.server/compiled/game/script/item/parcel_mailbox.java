@@ -51,6 +51,7 @@ class parcel_mailbox extends script.base_script
 
     public int OnAttach(obj_id self)
     {
+        setName(self, "Mailbox");
         return SCRIPT_CONTINUE;
     }
 
@@ -99,7 +100,7 @@ class parcel_mailbox extends script.base_script
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU5, new string_id("Initialize Mailbox"));
         }
-        if (player == getObjIdObjVar(self, VAR_OWNER) && getFilledVolume(self) > 0)
+        else if (player == getObjIdObjVar(self, VAR_OWNER) && getFilledVolume(self) > 0 && hasObjVar(self, VAR_SETUP))
         {
             int mailRadial = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Mail Menu"));
             mi.addSubMenu(mailRadial, menu_info_types.SERVER_MENU2, new string_id("Send Parcels"));
@@ -128,7 +129,7 @@ class parcel_mailbox extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (hasObjVar(self, VAR_OWNER))
+        else if (hasObjVar(self, VAR_OWNER))
         {
             if (player == getObjIdObjVar(self, VAR_OWNER))
             {

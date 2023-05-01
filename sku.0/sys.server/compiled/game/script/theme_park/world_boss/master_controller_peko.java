@@ -18,15 +18,17 @@ public class master_controller_peko extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PEKO);
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -34,7 +36,10 @@ public class master_controller_peko extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Inactive");
         return SCRIPT_CONTINUE;
     }
