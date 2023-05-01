@@ -21,10 +21,13 @@ public class master_controller_donkdonk_binks extends script.base_script
             "Stopen da doo-doo, yousa cannot defeat mesa in combat!",
     };
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -32,7 +35,10 @@ public class master_controller_donkdonk_binks extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks", "Inactive");
         return SCRIPT_CONTINUE;
     }

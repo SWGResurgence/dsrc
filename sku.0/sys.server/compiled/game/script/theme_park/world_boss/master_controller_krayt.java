@@ -11,15 +11,17 @@ public class master_controller_krayt extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_KRAYT);
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -27,23 +29,11 @@ public class master_controller_krayt extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Inactive");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (!isIdValid(self))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        createStomachContents(self, corpseInventory);
         return SCRIPT_CONTINUE;
     }
 
@@ -63,6 +53,11 @@ public class master_controller_krayt extends script.base_script
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerFullName(killer));
         }
         resurgence.doWorldBossDeathMsg(self);
+        obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
+        for (obj_id anAttacker : attackerList)
+        {
+            createStomachContents(self, utils.getInventoryContainer(anAttacker));
+        }
         return SCRIPT_CONTINUE;
     }
 
@@ -71,7 +66,7 @@ public class master_controller_krayt extends script.base_script
         int health = getHealth(self);
         int maxHealth = getMaxHealth(self);
         int percentHealth = (health * 100) / maxHealth;
-        if (attacker == self) //this is a self damage check
+        if (attacker == self)
         {
             return SCRIPT_CONTINUE;
         }
@@ -111,37 +106,18 @@ public class master_controller_krayt extends script.base_script
 
     public void createStomachContents(obj_id self, obj_id container) throws InterruptedException
     {
-        obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
-        int JUNK_COUNT = getAllPlayers(getLocation(self), 64.0f).length * 4;
-        if (container == null)
-        {
-            return;
-        }
-        if (!isIdValid(self))
-        {
-            return;
-        }
-        if (!isIdValid(container))
-        {
-            return;
-        }
         String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
         String column = "note";
+        int JUNK_COUNT = 5;
         for (int i = 0; i < JUNK_COUNT; i++)
         {
-            obj_id player = attackerList[rand(0, attackerList.length - 1)];
-            //Add 1 in the junk table index to make sure we don't hit the "none" row.
             String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE)), column);
-            /*if (junk.contains("heroic_") || junk.contains("_heroic_") || junk.contains("meatlump"))
-            {
-                --JUNK_COUNT;
-                return;
-            }*/
-            obj_id junkItem = static_item.createNewItemFunction(junk, utils.getInventoryContainer(player));
+            obj_id junkItem = static_item.createNewItemFunction(junk, container);
             if (isIdValid(junkItem))
             {
                 setCount(junkItem, rand(1, 3));
             }
         }
+
     }
 }

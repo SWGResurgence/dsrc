@@ -18,6 +18,7 @@ import static script.library.factions.setFaction;
 public class player_resurgence extends script.base_script
 {
     public boolean requireEntBuffRecycle = true;
+    public boolean restoredContent = false;
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -144,25 +145,13 @@ public class player_resurgence extends script.base_script
     }
     public int cmdContentFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
-        {
-            sendSystemMessageTestingOnly(self, "[syntax] /showContent status");
-        }
-        else
-        {
-            StringTokenizer st = new StringTokenizer(params);
-            String command = st.nextToken();
-            if (command.equals("status"))
-            {
-                listAllContentStatuses(self);
-            }
-        }
+        listAllContentStatuses(self);
         return SCRIPT_CONTINUE;
     }
 
-    public int listAllContentStatuses(obj_id self)
+    public int listAllContentStatuses(obj_id self) throws InterruptedException
     {
-        String prompt = null;
+        String prompt = "";
         prompt += "Current Status of Content\n";
         prompt += "\n";
         prompt += "\tCollections\n";
@@ -181,18 +170,22 @@ public class player_resurgence extends script.base_script
         prompt += "\t\t\tNexu: " + getDungeonStatus("dungeon.geo_madbio.nexu") + "\n\n";
         prompt += "\t\tDeath Watch Bunker\n";
         prompt += "\t\t\tDeath Watch Overlord: " + getDungeonStatus("dungeon.death_watch_bunker.overlord") + "\n\n";
-        prompt += "\tDynamic Dungeons\n";
-        prompt += "\t\tCzerka Hideout: " + getDungeonStatus("dynamic_dungeon.czerka") + "\n";
-        prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus("dynamic_dungeon.caverns") + "\n\n";
+        if (restoredContent)
+        {
+            prompt += "\tDynamic Dungeons\n";
+            prompt += "\t\tCzerka Hideout: " + getDungeonStatus("dynamic_dungeon.czerka") + "\n";
+            prompt += "\t\tMos Eisley Caverns: " + getDungeonStatus("dynamic_dungeon.caverns") + "\n\n";
+        }
 
-        int page = createSUIPage("/Script.messageBox", self, self);
-        setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
-        setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-        setSUIProperty(page, "bg.caption.lblTitle", "Text", "Dungeon Finder: " + getClusterName());
-        setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
-        setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
+        String finalPrompt = prompt;
+        int page = sui.msgbox(self, self, finalPrompt);
+        setSUIProperty(page, sui.MSGBOX_PROMPT, "Text", finalPrompt);
+        setSUIProperty(page, sui.MSGBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+        setSUIProperty(page, sui.MSGBOX_TITLE, "Text", "Content Listings: " + getClusterName());
+        setSUIProperty(page, sui.MSGBOX_PROMPT, "Editable", "false");
+        setSUIProperty(page, sui.MSGBOX_PROMPT, "GetsInput", "false");
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "%btnOk%", "noHandler");
-        setSUIProperty(page, "btnCancel", "Visible", "true");
+        setSUIProperty(page, "btnCancel", "Visible", "false");
         setSUIProperty(page, "btnRevert", "Visible", "false");
         setSUIProperty(page, "btnOk", "Visible", "false");
         showSUIPage(page);
@@ -205,7 +198,7 @@ public class player_resurgence extends script.base_script
         String dungeonStatus = getStringObjVar(tatooine, "dungeon_finder." + dungeonName);
         if (dungeonStatus == null || dungeonStatus.equals(""))
         {
-            dungeonStatus = "Unknown";
+            dungeonStatus = "\\#FFFF00Unknown\\#.";
         }
         if (dungeonStatus.equals("Inactive"))
         {
