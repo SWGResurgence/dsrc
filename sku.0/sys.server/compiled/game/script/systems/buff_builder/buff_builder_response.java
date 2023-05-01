@@ -65,7 +65,7 @@ public class buff_builder_response extends script.base_script
             return SCRIPT_CONTINUE;
         }
         if (rand(1, 3) == 1) {
-            int intPay = rand(250000, 750000);
+            int intPay = rand(25000, 75000);
             if (ENT_TIP_PAYOUT_BONUS > 1) {
                 intPay = intPay * ENT_TIP_PAYOUT_BONUS;
             }
@@ -83,6 +83,10 @@ public class buff_builder_response extends script.base_script
             utils.setScriptVar(recipientId, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
             utils.setScriptVar(recipientId, "performance.buildabuff.buffComponentValues", buffComponentValues);
             utils.setScriptVar(recipientId, "performance.buildabuff.bufferId", bufferId);
+            //This is a hacky way to save the performance data for the recipient if it gets lost from a crash or forced logout.
+            setObjVar(recipientId, "saved_performance.buildabuff.bufferId", bufferId);
+            setObjVar(recipientId, "saved_performance.buildabuff.recipientId", recipientId);
+            setObjVar(recipientId, "saved_performance.buildabuff.buffComponentValues", buffComponentValues);
             float currentBuffTime = 30.0f;
             if (utils.hasScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION)) {
                 currentBuffTime = utils.getFloatScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION);
@@ -94,6 +98,8 @@ public class buff_builder_response extends script.base_script
                 currentBuffTime = performance.inspireGetMaxDuration(bufferId);
             }
             buff.applyBuff(recipientId, "buildabuff_inspiration", currentBuffTime);
+            setObjVar(recipientId, "saved_performance.buildabuff.buffTime", currentBuffTime);
+            setObjVar(recipientId, "saved_performance.buildabuff.buffTimeGame", getGameTime());
             if (utils.hasScriptVar(recipientId, "performance.inspireMaxReached")) {
                 utils.removeScriptVar(recipientId, "performance.inspireMaxReached");
             }

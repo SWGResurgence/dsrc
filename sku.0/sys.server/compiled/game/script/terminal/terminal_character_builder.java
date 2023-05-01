@@ -8082,7 +8082,7 @@ public class terminal_character_builder extends script.base_script
             obj_id suit = static_item.createNewItemFunction("item_god_craftingsuit_06_01", pInv);
             if (isIdValid(suit))
             {
-                broadcast(player, "Blix's Ultra Crafting Suit Issued, May you see nothing but Amazing Crafts!");
+                broadcast(player, "Bubba's Uber Crafting Suit issued.");
             }
         }
         else

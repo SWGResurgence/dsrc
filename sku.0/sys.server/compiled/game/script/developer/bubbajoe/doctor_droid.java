@@ -9,16 +9,11 @@ import script.library.*;
 
 public class doctor_droid extends script.base_script
 {
-    public int OnAttach(obj_id self)
-    {
-        createTriggerVolume("healDroid", 3.0f, true);
-        setName(self, colors_hex.HEADER + colors_hex.ORCHID + "FX-7 Medical Droid");
-        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
-        return SCRIPT_CONTINUE;
-    }
-
     public int OnInitialize(obj_id self)
     {
+        createTriggerVolume("healDroid", 3.0f, true);
+        setName(self, colors_hex.HEADER + colors_hex.ORANGE + "FX-7 Medical Droid");
+        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
         return SCRIPT_CONTINUE;
     }
 
@@ -45,7 +40,7 @@ public class doctor_droid extends script.base_script
                 int cooldown = getIntObjVar(breacher, "healDroid.cooldown");
                 if (getGameTime() < cooldown)
                 {
-                    chat.chat(self, "<This service droid indicates his power levels are low, therefore unable to provide medical assistance at this time.>");
+                    broadcast(breacher, "You must wait " + ((cooldown - getGameTime()) / 60) + " minutes before receiving another enhancement of this calliber.");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -59,7 +54,7 @@ public class doctor_droid extends script.base_script
             buff.applyBuff(breacher,"me_buff_precision_3", 3600, 225);
             buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600, 225);
             buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600, 225);
-            chat.chat(self, convertToBinary("You have been healed and recieved low-grade enhancements."));
+            chat.chat(self, convertToBinary("You have been healed and received a low-grade enhancements"));
             setObjVar(breacher, "healDroid.cooldown", getGameTime() + cooldownTime);
         }
         return SCRIPT_CONTINUE;

@@ -93,17 +93,16 @@ public class magic_light extends script.base_script
     {
         int idx = sui.getListboxSelectedRow(params);
         String[] mainColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_MAIN_COLOR_COL);
-        String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
         String mainColor = mainColors[idx];
         setObjVar(self, "mainColor", mainColor);
-        sui.listbox(self, sui.getPlayerId(params), "Select the sub color you wish to transform for this lightsource..", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subColors, "handleSubAndFinalizeColor", true, false);
+        String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
+        sui.listbox(self, sui.getPlayerId(params), "Select the sub color you wish to transform for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subColors, "handleSubAndFinalizeColor", true, false);
         return SCRIPT_CONTINUE;
     }
 
     public int handleSubColor(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
-        String[] mainColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_MAIN_COLOR_COL);
         String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
         String subColor = subColors[idx];
         setObjVar(self, "subColor", subColor);

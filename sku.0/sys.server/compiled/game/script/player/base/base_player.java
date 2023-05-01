@@ -359,6 +359,10 @@ public class base_player extends script.base_script
     {
         return "\\#00FFFF " + str + "\\#FFFFFF";
     }
+    public static String green (String str)
+    {
+        return "\\#00FF00 " + str + "\\#FFFFFF";
+    }
 
     public static String construction(String str)
     {
@@ -1140,7 +1144,7 @@ public class base_player extends script.base_script
                 " was torn to shreds by ",
                 " was brutally murdered by ",
         };
-        base_class.notifyServerEvents(getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
+        LOG("gaglog", getName(self) + DEATH_NOTICE[rand(0, DEATH_NOTICE.length)] + getName(killer));
         return SCRIPT_CONTINUE;
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
@@ -1376,55 +1380,7 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if (hasScript(self, "name.name"))
-        {
-            detachScript(self, "name.name");
-        }
         location loginLoc = getLocation(self);
-        if (!hasObjVar(self, "resurgence_welcome_onetimer"))
-        {
-            String red = " \\#FF0000";
-            String gold = " \\#FFD700";
-            String tan = " \\#D2B48C";
-            String white = " \\#FFFFFF";
-            String blue = " \\#0000FF";
-            String teal = " \\#008080";
-            String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
-            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
-            String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
-            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
-            String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
-            String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
-            String features = gold + "Key Features:\n";
-            String feature1 = gold + "* " + white + "Instant " + teal + "Level 90" + white + "Token." + "\n";
-            String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
-            String feature3 = gold + "* " + white + "20 Housing Lots.\n";
-            String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
-            String feature5 = gold + "* " + white + "A Veteran Reward Vendor to obtain old rewards.\n";
-            String feature6 = gold + "* " + white + "Rare Loot System (RLS).\n";
-            String feature7 = gold + "* " + white + "World Boss System.\n";
-            String feature8 = gold + "* " + white + "New Planet: Dxun\n";
-            String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
-            String feature10 = tan + "* " + white + "More yet to come...\n";
-            String nl = "\n\\#.";
-            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
-            String title = gold("Welcome to Apotheosis!");
-            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
-            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", welcome);
-            setSUIProperty(page, "Prompt.lblPrompt", "TextAlignmentVertical'", "Center");
-            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
-            setSUIProperty(page, "bg.caption.lblTitle", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
-            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
-            setSUIProperty(page, "btnCancel", "Visible", "true");
-            setSUIProperty(page, "btnRevert", "Visible", "false");
-            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
-            saveTextOnClient(self, "server_welcome.txt", welcome);
-            showSUIPage(page);
-            flushSUIPage(page);
-            setObjVar(self, "resurgence_welcome_onetimer", 1);
-        }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
         {
@@ -13167,12 +13123,12 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU33)
         {
-            String prompt = gold(" ------------------  Account ------------------ ") + "\n";
+            String prompt = gold("  ------------------   Account  ------------------ ") + "\n";
             prompt += "Username: " + getPlayerAccountUsername(self) + "\n";
+            prompt += "Station ID" + getPlayerStationId(self) + "\n";
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
             prompt += "NetworkId: " + self + "\n";
-            prompt += "Location: " + getLocation(self) + "\n";
-            //prompt += "Location (/loc): " + getLocation(self).toClipboardFormat() + "\n";
+            prompt += "Location (/loc): " + getLocation(self).toClipboardFormat() + "\n";
             prompt += "Creation Date: " + getPlayerBirthDate(self) + "\n";
             prompt += "Housing Lots: " + getMaxHousingLots() + "\n";
             prompt += " ------------------ " + gold("Avatar") + " ------------------ " + "\n";
@@ -13181,7 +13137,6 @@ public class base_player extends script.base_script
             prompt += "Scale: " + getScale(self) + "\n";
             prompt += "Race: " + getRace(self) + "\n";
             prompt += "Mood: " + getAnimationMood(self) + "\n";
-            prompt += "Race: " + getSpecies(self) + "\n";
             prompt += " ------------------ " + gold("Player") + " ------------------ " + "\n";
             prompt += "Health: " + getAttrib(self, HEALTH) + "\n";
             prompt += "Action: " + getAttrib(self, ACTION) + "\n";
@@ -13212,7 +13167,6 @@ public class base_player extends script.base_script
             {
                 prompt += "Neutral, unaligned.\n";
             }
-
             prompt += " ------------------ " + gold("Group") + " ------------------ " + "\n";
             if (!group.isGrouped(self))
             {
@@ -13247,7 +13201,7 @@ public class base_player extends script.base_script
                     }
                 }
             }
-            prompt += " ------------------ " + gold("Skills") + " ------------------ " + "\n";
+            prompt += " ------------------ " + gold("Skills") + " ------------------  " + "\n";
             String[] skillList = getSkillListingForPlayer(self);
             for (int i = 0; i < skillList.length; i++)
             {
@@ -13312,7 +13266,7 @@ public class base_player extends script.base_script
                 }
                 else if (getTemplateName(content).contains("character_builder"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + construction(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + "\n\t [Template: [" +  getTemplateName(content) + "] " + green(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.portamedic"))
                 {
