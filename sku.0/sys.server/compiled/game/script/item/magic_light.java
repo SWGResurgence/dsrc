@@ -5,7 +5,9 @@ package script.item;/*
 */
 
 import script.*;
+import script.library.cts;
 import script.library.sui;
+import script.library.utils;
 
 public class magic_light extends script.base_script
 {
@@ -35,6 +37,34 @@ public class magic_light extends script.base_script
             "yellow",
     };
 
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
+    {
+        int idx = utils.getValidAttributeIndex(names);
+        if (hasObjVar(self, OBJVAR_CLAIMED_BY))
+        {
+            names[idx] = utils.packStringId(new string_id("Owned by"));
+            attribs[idx] = getPlayerFullName(getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+            idx++;
+        }
+        if (hasObjVar(self, "range"))
+        {
+            names[idx] = utils.packStringId(new string_id("Light range"));
+            attribs[idx] = getStringObjVar(self, "range");
+            idx++;
+        }
+        if (hasObjVar(self, "root_color"))
+        {
+            names[idx] = utils.packStringId(new string_id("Color"));
+            attribs[idx] = getStringObjVar(self, "root_color");
+            idx++;
+        }
+        if (hasObjVar(self, "color"))
+        {
+            names[idx] = utils.packStringId(new string_id("Color shade"));
+            attribs[idx] = getStringObjVar(self, "color");
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnAttach(obj_id self)
     {
         setName(self, "Wim Magwit's Luminous Lamp");
@@ -103,7 +133,6 @@ public class magic_light extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-
     public void handleMainColor(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -117,7 +146,6 @@ public class magic_light extends script.base_script
         String[] subcolorList = dataTableGetStringColumn(subcolorTable, "description");
         sui.listbox(self, sui.getPlayerId(params), "Select the sub color for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subcolorList, "handleSubColor", true, false);
     }
-
     public void handleSubColor(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
@@ -135,7 +163,6 @@ public class magic_light extends script.base_script
         setObjVar(self, DATATABLE_SUB_COLOR_COL, subColor);
         sui.listbox(self, sui.getPlayerId(params), "Select the range for this light.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", RANGES_MAGIC_LIGHT, "handleColorRange", true, false);
     }
-
     public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
@@ -145,8 +172,8 @@ public class magic_light extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         String rangeSelection = RANGES_MAGIC_LIGHT[idx];
         switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
+        setObjVar(self, "range", rangeSelection);
     }
-
     public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection)
     {
         location loc = getLocation(self);
@@ -157,14 +184,8 @@ public class magic_light extends script.base_script
         attachScript(newLight, SCRIPT_MAGIC_LIGHT);
         setYaw(newLight, yaw);
         setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
-        setHeight(newLight, loc.y);
+        setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+        setLocation(newLight, loc);
         destroyObject(self);
-    }
-
-    public void setHeight(obj_id source, float targetY)
-    {
-        location loc = getLocation(source);
-        loc.y = targetY;
-        setLocation(source, loc);
     }
 }
