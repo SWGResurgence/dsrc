@@ -6,6 +6,9 @@ item_tow_cystal_buff_drained_05_01	Buffs: Lair Crystal
 item_power_crystal_04_21	Buffs: Perfect Power Crystal
 item_force_crystal_04_02	Buffs: Synapse Focus Crystal
 rare_loot_chest_quality_3	Chest: Legendary Chest
+item_color_crystal_02_17	Crystal: Gallia's Intuition
+item_color_crystal_02_18	Crystal: Prowess of Plo Koon
+item_color_crystal_02_15	Crystal: Ulric's Redemption
 object/tangible/veteran_reward/structure_storage_increase_deed.iff	Deed: A Deed For Increased Building Storage
 item_vet_reward_resource_fabricator	Deed: Resource Fabricator
 item_vet_reward_resource_industrial_replicator	Deed: Resource Industrial Replicator
