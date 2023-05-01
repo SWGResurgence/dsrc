@@ -11,15 +11,17 @@ public class master_controller_krayt extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_KRAYT);
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -27,7 +29,10 @@ public class master_controller_krayt extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Inactive");
         return SCRIPT_CONTINUE;
     }

@@ -12,12 +12,10 @@ import script.library.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class player_developer extends base_script
 {
-    //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
-    public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
     public player_developer()
     {
     }
@@ -25,7 +23,7 @@ public class player_developer extends base_script
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
     {
         obj_id iTarget = getIntendedTarget(self);
-        java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
+        StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
         {
@@ -413,7 +411,6 @@ public class player_developer extends base_script
             attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
             setObjVar(augment, "attribute.bonus.0", 300);
             setObjVar(augment, "attribute.bonus.2", 300);
-            setName(augment, "Melee Weapon Augmentation");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("scale"))
