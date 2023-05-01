@@ -129,7 +129,7 @@ class parcel_mailbox extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (hasObjVar(self, VAR_OWNER))
+        else if (hasObjVar(self, VAR_OWNER))
         {
             if (player == getObjIdObjVar(self, VAR_OWNER))
             {
