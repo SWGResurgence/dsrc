@@ -17,6 +17,8 @@ public class resurgence_first_anniversary extends base_script
         HashSet theSet = new HashSet();
         theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
         theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
         theSet.add(static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 50));
         theSet.add(static_item.createNewItemFunction("item_painting_resurgence_rebel_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_painting_resurgence_imperial_01_01", pInv));
