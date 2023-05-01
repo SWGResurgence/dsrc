@@ -157,6 +157,14 @@ public class magic_light extends script.base_script
         attachScript(newLight, SCRIPT_MAGIC_LIGHT);
         setYaw(newLight, yaw);
         setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
+        setHeight(newLight, loc.y);
         destroyObject(self);
+    }
+
+    public void setHeight(obj_id source, float targetY)
+    {
+        location loc = getLocation(source);
+        loc.y = targetY;
+        setLocation(source, loc);
     }
 }
