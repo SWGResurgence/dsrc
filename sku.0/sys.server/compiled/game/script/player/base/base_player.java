@@ -13286,6 +13286,7 @@ public class base_player extends script.base_script
                 }
             }
             prompt += " ------------------ " + gold("End of Inventory") + " ------------------ " + "\n";
+            prompt.replaceAll("@dummy_string_table", "");
             String title = gold("CSR DATAPAD");
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
