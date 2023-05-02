@@ -44,13 +44,10 @@ public class player_resurgence extends script.base_script
     {
         if (!hasObjVar(self, "resurgence_welcome_onetimer"))
         {
-            String red = " \\#FF0000";
             String gold = " \\#FFD700";
             String orange = " \\#FFA500";
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
-            String blue = " \\#0000FF";
-            String teal = " \\#008080";
             String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
             String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
             String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
@@ -59,17 +56,18 @@ public class player_resurgence extends script.base_script
             String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
             String features = gold + "Key Features:\n";
             String feature1 = gold + "* " + white + "Instant " + orange + "Level 90" + white + "Token." + "\n";
-            String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
-            String feature3 = gold + "* " + white + "20 Housing Lots.\n";
-            String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
-            String feature5 = gold + "* " + white + "A Veteran Reward Vendor to obtain old rewards.\n";
-            String feature6 = gold + "* " + white + "Rare Loot System (RLS).\n";
-            String feature7 = gold + "* " + white + "World Boss System.\n";
-            String feature8 = gold + "* " + white + "New Planet: Dxun\n";
-            String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
-            String feature10 = tan + "* " + white + "More yet to come...\n";
+            String feature2 = gold + "* " + white + "One set of Heroic Jewelry.\n";
+            String feature3 = gold + "* " + white + "10 Daily Terminal Missions with a x26 multiplier.\n";
+            String feature4 = gold + "* " + white + "20 Housing Lots.\n";
+            String feature5 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
+            String feature6 = gold + "* " + white + "Veteran Reward Vendor to obtain old rewards.\n";
+            String feature7 = gold + "* " + white + "Rare Loot System (RLS).\n";
+            String feature8 = gold + "* " + white + "World Boss System.\n";
+            String feature9 = gold + "* " + white + "New Planet: Dxun\n";
+            String feature10 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
+            String feature11 = tan + "* " + white + "More yet to come...\n";
             String nl = "\n\\#.";
-            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10 + feature11;
             String title = colors_hex.Gold("Welcome to Apotheosis") + "\\#.";
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", welcome);

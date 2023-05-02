@@ -22,7 +22,7 @@ public class player_developer extends base_script
 
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
     {
-        obj_id iTarget = getIntendedTarget(self);
+        obj_id iTarget = getTarget(self);
         StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
@@ -86,7 +86,7 @@ public class player_developer extends base_script
             if (clipboard.equals("location"))
             {
                 // TODO: 4/10/2023 location to clipboard
-                String locationString = null;// = getLocation(self).toClipboardFormat();
+                String locationString = getLocation(self).toClipboardFormat();
                 int page = createSUIPage("/Script.messageBox", self, self);
                 setSUIProperty(page, "Prompt.lblPrompt", "LocalText", "");
                 setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
@@ -1842,7 +1842,12 @@ public class player_developer extends base_script
     {
         if(hasObjVar(self, "live_qa"))
         {
-            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
+            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
+            sendConsoleCommand( "/object hide " + self + " " + 0, self);
+            sendConsoleCommand( "/drawNetworkIds 0", self);
+            sendConsoleCommand( "/ui debugExamine 0", self);
+            sendConsoleCommand( "/ui debugClipboardExamine 0", self);
+            sendConsoleCommand( "/ui allowTargetAnything 0", self);
             sendConsoleCommand( "/object hide " + self + " " + 0, self);
             sendConsoleCommand( "/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
             sendConsoleCommand( "/setGodMode 0", self);

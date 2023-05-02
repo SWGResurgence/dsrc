@@ -771,7 +771,7 @@ public class ai extends script.base_script
         String[] EMOTE_PET_HUMANOID_RESPONSES = {
                 "I don't like that.",
                 "Please don't touch me.",
-                "In some places we'd be betrothed",
+                "In some places we'd be betrothed.",
                 "Ew, your ugly."
         };
         String[] EMOTE_SLAP_HUMANOID_RESPONSES = {
@@ -833,6 +833,13 @@ public class ai extends script.base_script
             ai_lib.follow(self, performer, 1.0f, 12.0f);
             return SCRIPT_CONTINUE;
         }
+        else if (emote.startsWith("halt"))
+        {
+            showFlyText(self, new string_id("!!!"), 12.0f, colors.WHITE);
+            ai.stop(self);
+            stopCombat(self);
+            return SCRIPT_CONTINUE;
+        }
         else if (emote.startsWith("shoo") || emote.startsWith("dismiss"))
         {
             showFlyText(self, new string_id("- ! -"), 12.0f, colors.RED);
@@ -872,7 +879,6 @@ public class ai extends script.base_script
             if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 chat.chat(self, getRandomArray(EMOTE_BMOC_HUMANOID_RESPONSES));
-                startCombat(self, performer);
             }
             else
             {

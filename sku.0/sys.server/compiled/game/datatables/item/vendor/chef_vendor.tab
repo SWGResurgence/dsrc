@@ -1,14 +1,20 @@
 item	cash	limit	note
 s	i	i[0]	c
-item_roadmap_food_dessert_deneelian_fizz_pudding_01_02	2500		Deneelian Fizz Pudding
-item_roadmap_food_dessert_pyollian_cake_01_02	4000		Pyollian Cake
-item_roadmap_food_dessert_smugglers_delight_01_02	100		Smuggler's Delight
-item_roadmap_food_dish_thakitillo_01_02	100		Thakitillo
-item_roadmap_food_dish_trimpian_01_02	2500		Trimpian
-item_roadmap_food_dish_veghash_01_02	1000		Veghash
 item_roadmap_food_drink_accarragm_01_02	1500		Accarragm
 item_roadmap_food_drink_bespin_port_01_02	5000		Bespin Port
+item_roadmap_food_dish_bivoli_tempari_01_02	2500		Bivoli Tempari
 item_roadmap_food_drink_breath_of_heaven_01_02	1500		Breath of Heaven
+item_roadmap_food_dessert_cavaellin_creams_01_02	500		Cavaellin Creams
+item_roadmap_food_dessert_chandad_01_02	500		Chandad
+item_roadmap_food_dessert_deneelian_fizz_pudding_01_02	2500		Deneelian Fizz Pudding
 item_roadmap_food_drink_flameout_01_02	1500		Flameout
 item_roadmap_food_drink_ithorian_mist_01_02	100		Ithorian Mist
 item_roadmap_food_drink_mandalorian_wine_01_02	100		Mandalorian Wine
+item_roadmap_food_dessert_pyollian_cake_01_02	4000		Pyollian Cake
+item_roadmap_food_dish_rakririan_burnout_sauce_01_02	1500		Rakririan Burnout Sauce
+item_roadmap_food_dessert_smugglers_delight_01_02	100		Smuggler's Delight
+item_roadmap_food_drink_starshine_surprise_01_02	1000		Starshine Surprise
+item_roadmap_food_dish_thakitillo_01_02	100		Thakitillo
+item_roadmap_food_dish_trimpian_01_02	2500		Trimpian
+item_roadmap_food_dish_veghash_01_02	1000		Veghash
+item_roadmap_food_dish_vercupti_of_agazza_boleruuee_01_02	2500		Vercupti
