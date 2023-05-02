@@ -2939,7 +2939,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         int intReward = 20 + (int) (fltReward);
         intReward = intReward + rand(-10, 10);
-        return intReward;
+        return (intReward * MISSION_MULTIPLIER);
     }
 
     public int getDestroyReward(int intMinReward, int intMaxReward, float fltDistance) throws InterruptedException
@@ -3618,7 +3618,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             setObjVar(objMissionData, "originalGroupSize", 1);
         }
-        intReward = intReward + rand(-10, 10);
+        intReward = (intReward * MISSION_MULTIPLIER) + rand(-10, 10);
         setMissionReward(objMissionData, intReward);
         dictionary dctParams = new dictionary();
         convertDynamicContextualizationToThemePark(objMissionData, strFileName, intRoll);
