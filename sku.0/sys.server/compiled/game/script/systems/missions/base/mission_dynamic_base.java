@@ -24,8 +24,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     public static final int MISSION_DIFFICULTY_HARD = 3;
     public static final int MISSION_BOUNTY_DIFFICULTY_JEDI = 4;
     public static final int MISSION_DIFFICULTY_BOSS = 5;
-    //public static final int MISSION_MULTIPLIER = utils.getIntConfigSetting("GameServer", "missionCreditBonus");
-    public static final int MISSION_MULTIPLIER = 2;
+    public static final int MISSION_MULTIPLIER = utils.getIntConfigSetting("GameServer", "missionCreditBonus");
     public static final int STRING_ID_QUANTITY = 5;
     public static final String[] PLAYER_SPECIES =
             {
