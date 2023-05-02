@@ -18,6 +18,7 @@ public class trader_care_package_cities extends script.base_script
         HashSet theSet = new HashSet<>();
 
         createObject("object/tangible/deed/guild_deed/cityhall_naboo_deed.iff", pInv, "");
+        createObject("object/tangible/deed/city_deed/bank_naboo_deed.iff", pInv, "");
         createObject("object/tangible/deed/player_house_deed/naboo_house_small_deed.iff", pInv, "");
         createObject("object/tangible/deed/player_house_deed/naboo_house_small_deed.iff", pInv, "");
         createObject("object/tangible/deed/player_house_deed/naboo_house_small_deed.iff", pInv, "");
