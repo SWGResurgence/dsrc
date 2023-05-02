@@ -1420,7 +1420,7 @@ public class player_structure extends script.base_script
         {
             maint += tax;
         }
-        return maint;
+        return maint + rand(104, 242);
     }
 
     public static int getBaseMaintenanceRate(obj_id structure) throws InterruptedException
