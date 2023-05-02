@@ -19,6 +19,8 @@ public class resurgence_first_anniversary extends base_script
         theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
         theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
         theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500));
         theSet.add(static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 50));
         theSet.add(static_item.createNewItemFunction("item_resurgence_bunker_deed_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_tcg_loot_reward_series6_cloud_car_itv", pInv));
