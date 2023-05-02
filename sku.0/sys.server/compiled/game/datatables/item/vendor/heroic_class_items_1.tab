@@ -153,6 +153,7 @@ item_ring_set_spy_dps_01_01			1	1	4		5		spy
 item_ring_set_spy_utility_a_01_01		1		1	4		5		spy
 item_ring_set_spy_utility_b_01_01		1	1		4		5		spy
 item_ring_set_trader_01_01			2	2	2		8		trader
+item_color_crystal_02_29		2	2	2	2	2			Crystal: Sundrider's Destiny
 item_tcg_loot_reward_series1_organa_speeder		16	16	16	16	16			HJ-2 Organa Airspeeder
 item_tcg_loot_reward_series8_bespin_lamp_off		8	8	8	8	8			Cloud City Lamp
 item_tcg_loot_reward_series8_bespin_shelves		8	8	8	8	8			Cloud City Shelves
