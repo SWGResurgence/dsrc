@@ -39,7 +39,7 @@ public class trader_care_package_cities extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE)
         {
-            sui.listbox(self, player, "Select a which planet you'd like for a City Hall Deed, and four Small House Deed", sui.OK_CANCEL, "Trader Care Package: Cities", PLANETS, "handleTargetLock", true, false);
+            sui.listbox(self, player, "Select a which planet you'd like for a City Hall Deed, and four Small House Deeds", sui.OK_CANCEL, "Trader Care Package: Cities", PLANETS, "handleTargetLock", true, false);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
