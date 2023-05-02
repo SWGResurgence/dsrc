@@ -167,11 +167,11 @@ public final class location implements Comparable, Serializable
 
     public String toClipboardFormat()
     {
-        return "/wp " + area + " " + x + " " +  z + " " +  y + " " + "orange " + "Waypoint";
+        return "/wp " + area + " " + x + " " +  y + " " +  z + " " + "orange " + "Waypoint";
     }
-    public String toClipboardFormat(String name)
+    public String toClipboardFormat(String color)
     {
-        return "/wp " + area + " " + x + " " + z + " " + y + " " + "orange " + name;
+        return "/wp " + area + " " + x + " " + y + " " + z + " " + "orange " + color;
     }
 
     /**

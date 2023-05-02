@@ -265,11 +265,11 @@ public class force_shrine extends script.base_script
                 sendSystemMessage(player, NOT_JEDI);
                 return;
             }
-            if (jedi.hasAnyUltraCloak(player))
+            /*if (jedi.hasAnyUltraCloak(player))
             {
                 sendSystemMessage(player, ALREADY_HAVE);
                 return;
-            }
+            }*/
             if (getVolumeFree(pInv) <= 0)
             {
                 sendSystemMessage(player, FULL_INVENTORY);

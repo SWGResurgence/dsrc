@@ -24,6 +24,8 @@ public class resurgence extends script.base_script
     public static int WORLD_BOSS_KRAYT= 1;
     public static int WORLD_BOSS_PAX = 2;
     public static int WORLD_BOSS_GIZMO = 3;
+    public static int WORLD_BOSS_DONKDONK = 3;
+    public static int WORLD_BOSS_AURRA = 3;
 
 
 
@@ -580,10 +582,16 @@ public class resurgence extends script.base_script
                 notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 2:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
                 break;
             case 3:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n Gizmo, the Wretched and Accursed Ewok, has been reported to have been seen last on Endor at one of the Lake Villages.");
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 4:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wanted criminal, Donk-Donk Binks, has been reported to have been seen near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 5:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
                 break;
 
         }
@@ -593,12 +601,12 @@ public class resurgence extends script.base_script
         String[] attackerList = getAttackerList(target);
         if (attackerList.length > 0)
         {
-            String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: \n" + toUpper(attackerList[0], 0);
+            String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
             for (int i = 1; i < attackerList.length; i++)
             {
-                msg += "\n" + toUpper(attackerList[i], 0);
+                msg += ", " + toUpper(attackerList[i], 0);
             }
-            msg += "\n\nCongratulations to all!";
+            msg += ". Congratulations to all!";
             notifyGalacticFeed(msg);
         }
     }

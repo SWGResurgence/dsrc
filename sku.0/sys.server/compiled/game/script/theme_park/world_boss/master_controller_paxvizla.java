@@ -18,10 +18,13 @@ public class master_controller_paxvizla extends script.base_script
             "I am Mand'alor!",
     };
 
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+    public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.pax", "Active");
         return SCRIPT_CONTINUE;
     }
@@ -29,14 +32,16 @@ public class master_controller_paxvizla extends script.base_script
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.pax", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been last seen on Dxun at the Abandoned Mandalorian Outpost.");
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PAX);
         return SCRIPT_CONTINUE;
     }
@@ -159,7 +164,7 @@ public class master_controller_paxvizla extends script.base_script
         }
         for (obj_id iTarget : targets)
         {
-            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", self, "");
+            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
             reduceHealth(iTarget, rand(1200, 3000));
             reduceAction(iTarget, rand(1200, 3000));
         }

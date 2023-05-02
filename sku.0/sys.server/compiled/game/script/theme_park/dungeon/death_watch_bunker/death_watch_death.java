@@ -15,9 +15,12 @@ public class death_watch_death extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String creatureName = ai_lib.getCreatureName(self);
-        if (creatureName.equalsIgnoreCase("mand_bunker_dthwatch_gold"))
+        if (creatureName.equals("mand_bunker_dthwatch_gold"))
         {
-            removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
+            if (hasObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord"))
+            {
+                removeObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord");
+            }
             setObjVar(getPlanetByName("tatooine"), "dungeon_finder.dungeon.death_watch_bunker.overlord", "Active");
         }
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
