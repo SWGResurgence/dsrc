@@ -16,12 +16,14 @@ public class city_decor_converter extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "City Decor Converter");
+        attachScript(self, "item.special.nomove");
         return SCRIPT_CONTINUE;
     }
 
     public int OnInitalize(obj_id self) throws InterruptedException
     {
         setName(self, "City Decor Converter");
+        attachScript(self, "item.special.nomove");
         return SCRIPT_CONTINUE;
     }
     //@Converts a story teller object to a city decor object
