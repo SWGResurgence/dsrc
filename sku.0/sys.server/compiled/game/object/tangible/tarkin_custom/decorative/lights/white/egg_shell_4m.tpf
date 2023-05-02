@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/tangible/tarkin_custom/decorative/lights/white/shared_egg_shell_4m.iff"
 
-scripts = ["systems.city.city_furniture"]
+scripts = ["item.magic_light"]

@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/tangible/tarkin_custom/decorative/lights/purple/shared_periwinkle_2m.iff"
 
-scripts = ["systems.city.city_furniture"]
+scripts = ["item.magic_light"]
