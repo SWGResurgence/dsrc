@@ -1842,7 +1842,12 @@ public class player_developer extends base_script
     {
         if(hasObjVar(self, "live_qa"))
         {
-            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
+            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
+            sendConsoleCommand( "/object hide " + self + " " + 0, self);
+            sendConsoleCommand( "/drawNetworkIds 0", self);
+            sendConsoleCommand( "/ui debugExamine 0", self);
+            sendConsoleCommand( "/ui debugClipboardExamine 0", self);
+            sendConsoleCommand( "/ui allowTargetAnything 0", self);
             sendConsoleCommand( "/object hide " + self + " " + 0, self);
             sendConsoleCommand( "/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
             sendConsoleCommand( "/setGodMode 0", self);
