@@ -19,6 +19,7 @@ public class trader_care_package extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
 
+        theSet.add(static_item.createNewItemFunction("item_trader_care_package_cities_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_trader_care_package_generators_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_trader_care_package_harvesters_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_trader_care_package_Factories_01_01", pInv));

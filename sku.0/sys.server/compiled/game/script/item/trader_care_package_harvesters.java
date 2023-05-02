@@ -19,6 +19,41 @@ public class trader_care_package_harvesters extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
 
+        obj_id mineral = createObject("object/tangible/deed/harvester_deed/ore_harvester_deed_elite.iff", pInv, "");
+        if (isIdValid(mineral))
+        {
+            setObjVar(mineral, "player_structure.deed.maxExtractionRate", 25);
+            setObjVar(mineral, "player_structure.deed.currentExtractionRate", 25);
+        }
+
+        obj_id flora = createObject("object/tangible/deed/harvester_deed/flora_harvester_deed_elite.iff", pInv, "");
+        if (isIdValid(flora))
+        {
+            setObjVar(mineral, "player_structure.deed.maxExtractionRate", 25);
+            setObjVar(mineral, "player_structure.deed.currentExtractionRate", 25);
+        }
+
+        obj_id gas = createObject("object/tangible/deed/harvester_deed/gas_harvester_deed_elite.iff", pInv, "");
+        if (isIdValid(gas))
+        {
+            setObjVar(mineral, "player_structure.deed.maxExtractionRate", 25);
+            setObjVar(mineral, "player_structure.deed.currentExtractionRate", 25);
+        }
+
+        obj_id chemical = createObject("object/tangible/deed/harvester_deed/liquid_harvester_deed_elite.iff", pInv, "");
+        if (isIdValid(chemical))
+        {
+            setObjVar(mineral, "player_structure.deed.maxExtractionRate", 25);
+            setObjVar(mineral, "player_structure.deed.currentExtractionRate", 25);
+        }
+
+        obj_id moisture = createObject("object/tangible/deed/harvester_deed/moisture_harvester_deed_elite.iff", pInv, "");
+        if (isIdValid(moisture))
+        {
+            setObjVar(mineral, "player_structure.deed.maxExtractionRate", 25);
+            setObjVar(mineral, "player_structure.deed.currentExtractionRate", 25);
+        }
+
         theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_02", pInv));
         theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_02", pInv));
