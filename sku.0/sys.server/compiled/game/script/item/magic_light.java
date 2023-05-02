@@ -5,14 +5,18 @@ package script.item;/*
 */
 
 import script.*;
+import script.library.cts;
 import script.library.sui;
+import script.library.utils;
 
 public class magic_light extends script.base_script
 {
     public static final String SCRIPT_MAGIC_LIGHT = "item.magic_light";
-    public static final String DATATABLE_MAGIC_LIGHT = "datatables/furniture/lights.iff";
+    public static final String DATATABLE_MAGIC_LIGHT_PREFIX = "datatables/furniture/";
+    public static final String DATATABLE_MAGIC_LIGHT_SUFFIX = ".iff";
     public static final String DATATABLE_MAIN_COLOR_COL = "root_color";
-    public static final String DATATABLE_SUB_COLOR_COL = "sub_color";
+    public static final String DATATABLE_SUB_COLOR_COL = "color";
+    public static final String DATATABLE_SUB_COLOR_DETAIL = "description";
     public static final String OBJVAR_CLAIMED_BY = "claimedBy";
     public static String[] RANGES_MAGIC_LIGHT = {
             "2m",
@@ -20,8 +24,51 @@ public class magic_light extends script.base_script
             "8m",
             "16m",
     };
+    public static String[] MCOLOR_MAGIC_LIGHT = {
+            "blue",
+            "cyan",
+            "gray",
+            "green",
+            "orange",
+            "pink",
+            "purple",
+            "red",
+            "white",
+            "yellow",
+    };
+
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
+    {
+        int idx = utils.getValidAttributeIndex(names);
+        if (hasObjVar(self, OBJVAR_CLAIMED_BY))
+        {
+            names[idx] = utils.packStringId(new string_id("Owned by"));
+            attribs[idx] = getPlayerFullName(getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+            idx++;
+        }
+        if (hasObjVar(self, "range"))
+        {
+            names[idx] = utils.packStringId(new string_id("Light range"));
+            attribs[idx] = getStringObjVar(self, "range");
+            idx++;
+        }
+        if (hasObjVar(self, "root_color"))
+        {
+            names[idx] = utils.packStringId(new string_id("Color"));
+            attribs[idx] = getStringObjVar(self, "root_color");
+            idx++;
+        }
+        if (hasObjVar(self, "color"))
+        {
+            names[idx] = utils.packStringId(new string_id("Color shade"));
+            attribs[idx] = getStringObjVar(self, "color");
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnAttach(obj_id self)
     {
+        setName(self, "Wim Magwit's Luminous Lamp");
+        setDescriptionStringId(self, unlocalized("This lamp can be configured to emit a variety of colors at 4 static ranges."));
         return SCRIPT_CONTINUE;
     }
 
@@ -73,9 +120,7 @@ public class magic_light extends script.base_script
         {
             if (player == getObjIdObjVar(self, OBJVAR_CLAIMED_BY))
             {
-                String[] mainColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_MAIN_COLOR_COL);
-                String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
-                sui.listbox(self, player, "Select the base color for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", mainColors, "handleMainColor", true, false);
+                sui.listbox(self, player, "Select the base color for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", MCOLOR_MAGIC_LIGHT, "handleMainColor", true, false);
             }
         }
         if (item == menu_info_types.SERVER_MENU12)
@@ -88,49 +133,59 @@ public class magic_light extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-
-    public int handleMainColor(obj_id self, dictionary params) throws InterruptedException
+    public void handleMainColor(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
-        String[] mainColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_MAIN_COLOR_COL);
-        String mainColor = mainColors[idx];
-        setObjVar(self, "mainColor", mainColor);
-        String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
-        sui.listbox(self, sui.getPlayerId(params), "Select the sub color you wish to transform for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subColors, "handleSubAndFinalizeColor", true, false);
-        return SCRIPT_CONTINUE;
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
+        String mainColor = MCOLOR_MAGIC_LIGHT[idx];
+        setObjVar(self, DATATABLE_MAIN_COLOR_COL, mainColor);
+        String subcolorTable = DATATABLE_MAGIC_LIGHT_PREFIX + MCOLOR_MAGIC_LIGHT[idx] + DATATABLE_MAGIC_LIGHT_SUFFIX;
+        String[] subcolorList = dataTableGetStringColumn(subcolorTable, "description");
+        sui.listbox(self, sui.getPlayerId(params), "Select the sub color for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", subcolorList, "handleSubColor", true, false);
     }
-
-    public int handleSubColor(obj_id self, dictionary params) throws InterruptedException
+    public void handleSubColor(obj_id self, dictionary params) throws InterruptedException
     {
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
         int idx = sui.getListboxSelectedRow(params);
-        String[] subColors = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT, DATATABLE_SUB_COLOR_COL);
-        String subColor = subColors[idx];
-        setObjVar(self, "subColor", subColor);
-        sui.listbox(self, sui.getPlayerId(params), "Select the range you'd like for this lightsource.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", RANGES_MAGIC_LIGHT, "handleRangeAndFinalize", true, false);
-        return SCRIPT_CONTINUE;
+        if (idx < 0)
+        {
+            idx = 0;
+        }
+        String subColor = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, DATATABLE_SUB_COLOR_COL)[idx];
+        String subColorString = dataTableGetStringColumn(DATATABLE_MAGIC_LIGHT_PREFIX + getStringObjVar(self, DATATABLE_MAIN_COLOR_COL) + DATATABLE_MAGIC_LIGHT_SUFFIX, "description")[idx];
+        setObjVar(self, DATATABLE_SUB_COLOR_DETAIL, subColorString);
+        setObjVar(self, DATATABLE_SUB_COLOR_COL, subColor);
+        sui.listbox(self, sui.getPlayerId(params), "Select the range for this light.", sui.OK_CANCEL, "Wim Magwit's Luminous Lamp", RANGES_MAGIC_LIGHT, "handleColorRange", true, false);
     }
-
-    public int handleRangeAndFinalize(obj_id self, dictionary params) throws InterruptedException
+    public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
+        if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
+        {
+            return;
+        }
         int idx = sui.getListboxSelectedRow(params);
-        String range = RANGES_MAGIC_LIGHT[idx];
-        String mainColor = getStringObjVar(self, "mainColor");
-        String subColor = getStringObjVar(self, "subColor");
-        setObjVar(self, "range", range);
-        switchTemplate(self, mainColor, subColor, range);
-        return SCRIPT_CONTINUE;
+        String rangeSelection = RANGES_MAGIC_LIGHT[idx];
+        switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
+        setObjVar(self, "range", rangeSelection);
     }
-
     public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection)
     {
         location loc = getLocation(self);
         float yaw = getYaw(self);
         float[] rotation = getQuaternion(self);
-        String template  = "object/tangible/tarkin_custom/decorative/lights/" + color + "_" + subcolor + "_" + rangeSelection + ".iff";
+        String template  = "object/tangible/tarkin_custom/decorative/lights/" + color + "/" + subcolor + "_" + rangeSelection + ".iff";
         obj_id newLight = createObject(template, loc);
         attachScript(newLight, SCRIPT_MAGIC_LIGHT);
         setYaw(newLight, yaw);
         setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
+        setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+        setLocation(newLight, loc);
         destroyObject(self);
     }
 }
