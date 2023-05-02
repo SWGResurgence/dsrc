@@ -5,6 +5,7 @@ package script.bot;/*
 */
 
 import script.*;
+import script.ai.ai;
 import script.library.*;
 
 public class entertainer extends script.base_script
@@ -64,6 +65,7 @@ public class entertainer extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Watch Performance"));
+        ai.stop(self);
         return SCRIPT_CONTINUE;
     }
 
@@ -93,11 +95,11 @@ public class entertainer extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        triggerBuff(self, player);
+        triggerBuff(player);
         return SCRIPT_CONTINUE;
     }
 
-    public int triggerBuff(obj_id self, obj_id target) throws InterruptedException
+    public int triggerBuff(obj_id target) throws InterruptedException
     {
         utils.setScriptVar(target, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
         utils.setScriptVar(target, "performance.buildabuff.buffComponentValues", buffComponentValues);
