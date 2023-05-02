@@ -14,7 +14,7 @@ public class trader_care_package_cities extends script.base_script
             "Naboo",
             "Tatooine"
     };
-    public static obj_id[] grantTraderCarePackageCities(obj_id player, String planet) throws InterruptedException
+    public static void grantTraderCarePackageCities(obj_id player, String planet) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet<>();
@@ -28,7 +28,6 @@ public class trader_care_package_cities extends script.base_script
         obj_id[] items= new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
-        return items;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
@@ -39,7 +38,7 @@ public class trader_care_package_cities extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE)
         {
-            sui.listbox(self, player, "Select a which planet you'd like for a City Hall Deed, and four Small House Deeds", sui.OK_CANCEL, "Trader Care Package: Cities", PLANETS, "handleTargetLock", true, false);
+            sui.listbox(self, player, "Select a which planet you'd like for a City Hall Deed, and four Small House Deeds", sui.OK_CANCEL, "Trader Care Package: Cities", PLANETS, "handleCarePackageCities", true, false);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -53,8 +52,7 @@ public class trader_care_package_cities extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String planet = PLANETS[idx];
-        planet.toLowerCase();
-        grantTraderCarePackageCities(player, planet);
+        grantTraderCarePackageCities(player, planet.toLowerCase());
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
