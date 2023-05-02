@@ -13,6 +13,17 @@ public class city_decor_converter extends script.base_script
     {
     }
 
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        setName(self, "City Decor Converter");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnInitalize(obj_id self) throws InterruptedException
+    {
+        setName(self, "City Decor Converter");
+        return SCRIPT_CONTINUE;
+    }
     //@Converts a story teller object to a city decor object
     public static void createPropObject(obj_id self, obj_id token) throws InterruptedException
     {

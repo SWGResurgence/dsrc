@@ -164,17 +164,17 @@ object/building/player/city/cityhall_tatooine.iff	object/building/player/constru
 object/building/player/city/cityhall_naboo.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1		1				0	0	0	1000		1		private_place_cityhall	100	place_cityhall	4							
 																							object/tangible/terminal/terminal_player_structure.iff	-16.78	2	7.9	mayoroffice	180	
 																							object/tangible/terminal/terminal_city_vote.iff	0.25	2	-9.65	grandhall	0	
-																							object/tangible/container/general/city_decor_converter.iff	-1.1	2	9.7	grandhall	10	
+																							object/tangible/container/general/city_decor_converter.iff	0.60	2	-9.65	grandhall	0
 																							object/tangible/terminal/terminal_city.iff	17.07	2	-8.7	library	0	
 object/building/player/city/cityhall_naboo_b.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1		1				0	0	0	1000		1		private_place_cityhall	100	place_cityhall	4							
 																							object/tangible/terminal/terminal_player_structure.iff	-16.78	2	7.9	mayoroffice	180	
 																							object/tangible/terminal/terminal_city_vote.iff	0.25	2	-9.65	grandhall	0	
 																							object/tangible/terminal/terminal_city.iff	17.07	2	-8.7	library	0	
-																							object/tangible/container/general/city_decor_converter.iff	-1.1	2	9.7	grandhall	10	
+																							object/tangible/container/general/city_decor_converter.iff	0.60	2	-9.65	grandhall	0
 object/building/player/city/cityhall_corellia.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1		1				0	0	0	1000		1		private_place_cityhall	100	place_cityhall	4							
 																							object/tangible/terminal/terminal_player_structure.iff	-16.78	2	7.9	mayoroffice	180	
 																							object/tangible/terminal/terminal_city_vote.iff	0.25	2	-9.65	grandhall	0	
-																							object/tangible/container/general/city_decor_converter.iff	-1.1	2	9.7	grandhall	10	
+																							object/tangible/container/general/city_decor_converter.iff	0.60	2	-9.65	grandhall	0
 																							object/tangible/terminal/terminal_city.iff	17.07	2	-8.7	library	0	
 object/building/player/city/bank_tatooine.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1	1	4					0	0	1000		1		private_place_bank	100	place_bank	4							
 																							object/tangible/terminal/terminal_bank.iff	-1	-0.25	0	WORLD_DELTA	90	
