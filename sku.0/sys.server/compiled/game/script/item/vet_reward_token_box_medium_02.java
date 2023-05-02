@@ -17,7 +17,7 @@ public class vet_reward_token_box_medium_02 extends script.base_script
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
-        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 100));
+        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 200));
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
