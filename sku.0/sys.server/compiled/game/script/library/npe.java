@@ -628,6 +628,7 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_force_sensitive_boots_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_backpack_01_02", pInv));
             theSet.add(static_item.createNewItemFunction("item_lightsaber_tool_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_color_crystal_02_00", pInv));
             theSet.add(static_item.createNewItemFunction("item_color_crystal_02_02", pInv));
