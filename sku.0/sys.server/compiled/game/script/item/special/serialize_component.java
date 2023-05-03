@@ -7,6 +7,7 @@ public class serialize_component extends script.base_script
     public serialize_component()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         boolean success = true;
@@ -18,6 +19,7 @@ public class serialize_component extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         boolean success = true;

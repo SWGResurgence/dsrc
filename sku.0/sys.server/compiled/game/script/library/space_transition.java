@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class space_transition extends script.base_script
 {
-    public space_transition()
-    {
-    }
     public static final boolean debugSpaceTransition = true;
     public static final String DATATABLE_SHIP_START_LOCATIONS = "datatables/ship/ship_start_locations.iff";
     public static final String COLUMN_TEMPLATE = "template";
@@ -25,6 +22,10 @@ public class space_transition extends script.base_script
     public static final String SHIP_PILOT_SLOT_NAME = "ship_pilot";
     public static final string_id SID_PVP_NOW_OVERT = new string_id("space/space_interaction", "pvp_now_overt");
     public static final string_id SID_PVP_NOW_NEUTRAL = new string_id("space/space_interaction", "pvp_now_neutral");
+    public space_transition()
+    {
+    }
+
     public static void handlePotentialSceneChange(obj_id player) throws InterruptedException
     {
         if (utils.hasLocalVar(player, "loggingOut"))
@@ -67,7 +68,7 @@ public class space_transition extends script.base_script
                         {
                             launchedShipStartIndex = 0;
                         }
-                        location loc = ((location)startLocations.get(launchedShipStartIndex % startLocations.size()));
+                        location loc = ((location) startLocations.get(launchedShipStartIndex % startLocations.size()));
                         if (loc.cell == null)
                         {
                             boolean success = equip(player, launchedShip, loc.area);
@@ -137,7 +138,8 @@ public class space_transition extends script.base_script
                 }
                 String scripts = "";
                 String[] scriptArray = getScriptList(player);
-                for (String s : scriptArray) {
+                for (String s : scriptArray)
+                {
                     scripts += (s + "|");
                 }
                 LOG("space_transition", "Detailed player info: objvars: " + getPackedObjvars(player) + " scripts: " + scripts);
@@ -157,6 +159,7 @@ public class space_transition extends script.base_script
             }
         }
     }
+
     public static void handleLogout(obj_id player) throws InterruptedException
     {
         obj_id containingShip = getContainingShip(player);
@@ -186,21 +189,20 @@ public class space_transition extends script.base_script
             }
         }
     }
+
     public static boolean shouldSendToGroundOnLogout() throws InterruptedException
     {
         String s = getConfigSetting("ScriptFlags", "sendToGroundOnLogout");
-        if (s != null && (s.equals("false") || s.equals("0") || s.equals("off")))
-        {
-            return false;
-        }
-        return true;
+        return s == null || (!s.equals("false") && !s.equals("0") && !s.equals("off"));
     }
+
     public static void setLaunchInfo(obj_id player, obj_id ship, int startLocationIndex, location groundLoc) throws InterruptedException
     {
         setObjVar(player, "space.launch.worldLoc", groundLoc);
         setObjVar(player, "space.launch.ship", ship);
         setObjVar(player, "space.launch.startIndex", startLocationIndex);
     }
+
     public static obj_id getContainingShip(obj_id obj) throws InterruptedException
     {
         obj_id containedBy = getContainedBy(obj);
@@ -214,10 +216,12 @@ public class space_transition extends script.base_script
         }
         return null;
     }
+
     public static obj_id[] findShipControlDevicesForPlayer(obj_id player) throws InterruptedException
     {
         return findShipControlDevicesForPlayer(player, false);
     }
+
     public static obj_id[] findShipControlDevicesForPlayer(obj_id player, boolean checkHangar) throws InterruptedException
     {
         obj_id datapad = utils.getDatapad(player);
@@ -232,18 +236,22 @@ public class space_transition extends script.base_script
             if (datapadContents != null)
             {
                 int count = 0;
-                for (obj_id datapadContent1 : datapadContents) {
-                    if (isIdValid(datapadContent1) && getGameObjectType(datapadContent1) == GOT_data_ship_control_device) {
+                for (obj_id datapadContent1 : datapadContents)
+                {
+                    if (isIdValid(datapadContent1) && getGameObjectType(datapadContent1) == GOT_data_ship_control_device)
+                    {
                         ++count;
                     }
                 }
                 if (checkHangar && isIdValid(playerHangar))
                 {
                     obj_id[] hangarContents = getContents(playerHangar);
-                    if (hangarContents != null && hangarContents.length > 0)
+                    if (hangarContents != null)
                     {
-                        for (obj_id hangarContent : hangarContents) {
-                            if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device) {
+                        for (obj_id hangarContent : hangarContents)
+                        {
+                            if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device)
+                            {
                                 ++count;
                             }
                         }
@@ -253,18 +261,22 @@ public class space_transition extends script.base_script
                 {
                     obj_id[] shipControlDevices = new obj_id[count];
                     count = 0;
-                    for (obj_id datapadContent : datapadContents) {
-                        if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_ship_control_device) {
+                    for (obj_id datapadContent : datapadContents)
+                    {
+                        if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_ship_control_device)
+                        {
                             shipControlDevices[count++] = datapadContent;
                         }
                     }
                     if (checkHangar && isIdValid(playerHangar))
                     {
                         obj_id[] hangarContents = getContents(playerHangar);
-                        if (hangarContents != null && hangarContents.length > 0)
+                        if (hangarContents != null)
                         {
-                            for (obj_id hangarContent : hangarContents) {
-                                if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device) {
+                            for (obj_id hangarContent : hangarContents)
+                            {
+                                if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device)
+                                {
                                     shipControlDevices[count++] = hangarContent;
                                 }
                             }
@@ -276,6 +288,7 @@ public class space_transition extends script.base_script
         }
         return null;
     }
+
     public static obj_id[] findShipControlDevicesInHangarSlot(obj_id player) throws InterruptedException
     {
         obj_id playerHangarSlot = utils.getPlayerHangar(player);
@@ -285,8 +298,10 @@ public class space_transition extends script.base_script
             if (hangarContents != null && hangarContents.length > 0)
             {
                 int count = 0;
-                for (obj_id hangarContent1 : hangarContents) {
-                    if (isIdValid(hangarContent1) && getGameObjectType(hangarContent1) == GOT_data_ship_control_device) {
+                for (obj_id hangarContent1 : hangarContents)
+                {
+                    if (isIdValid(hangarContent1) && getGameObjectType(hangarContent1) == GOT_data_ship_control_device)
+                    {
                         ++count;
                     }
                 }
@@ -294,8 +309,10 @@ public class space_transition extends script.base_script
                 {
                     obj_id[] shipHangarSlotControlDevices = new obj_id[count];
                     count = 0;
-                    for (obj_id hangarContent : hangarContents) {
-                        if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device) {
+                    for (obj_id hangarContent : hangarContents)
+                    {
+                        if (isIdValid(hangarContent) && getGameObjectType(hangarContent) == GOT_data_ship_control_device)
+                        {
                             shipHangarSlotControlDevices[count++] = hangarContent;
                         }
                     }
@@ -305,6 +322,7 @@ public class space_transition extends script.base_script
         }
         return null;
     }
+
     public static obj_id findEmptyShipControlDeviceForShip(obj_id player, obj_id ship) throws InterruptedException
     {
         if (hasObjVar(ship, "shipControlDevice"))
@@ -316,20 +334,24 @@ public class space_transition extends script.base_script
             return findEmptyShipControlDeviceForPlayer(player);
         }
     }
+
     public static obj_id findEmptyShipControlDeviceForPlayer(obj_id player) throws InterruptedException
     {
         obj_id[] shipControlDevices = findShipControlDevicesForPlayer(player);
         if (shipControlDevices != null)
         {
-            for (obj_id shipControlDevice : shipControlDevices) {
+            for (obj_id shipControlDevice : shipControlDevices)
+            {
                 obj_id[] contents = getContents(shipControlDevice);
-                if (contents == null || contents.length == 0) {
+                if (contents == null || contents.length == 0)
+                {
                     return shipControlDevice;
                 }
             }
         }
         return null;
     }
+
     public static obj_id getShipFromShipControlDevice(obj_id shipControlDevice) throws InterruptedException
     {
         obj_id[] contents = getContents(shipControlDevice);
@@ -339,6 +361,7 @@ public class space_transition extends script.base_script
         }
         return null;
     }
+
     public static int countShipControlDevicesForPlayer(obj_id player) throws InterruptedException
     {
         int count = -1;
@@ -349,8 +372,10 @@ public class space_transition extends script.base_script
             if (datapadContents != null)
             {
                 count = 0;
-                for (obj_id datapadContent : datapadContents) {
-                    if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_ship_control_device) {
+                for (obj_id datapadContent : datapadContents)
+                {
+                    if (isIdValid(datapadContent) && getGameObjectType(datapadContent) == GOT_data_ship_control_device)
+                    {
                         ++count;
                     }
                 }
@@ -358,6 +383,7 @@ public class space_transition extends script.base_script
         }
         return count;
     }
+
     public static boolean isPlayerBelowShipLimit(obj_id player, obj_id destinationContainer) throws InterruptedException
     {
         if ((getTemplateName(destinationContainer)).equals("object/tangible/datapad/character_hangar_datapad.iff"))
@@ -369,6 +395,7 @@ public class space_transition extends script.base_script
             return isPlayerBelowShipLimit(player);
         }
     }
+
     public static boolean isPlayerBelowShipLimit(obj_id player) throws InterruptedException
     {
         int count = countShipControlDevicesForPlayer(player);
@@ -381,12 +408,9 @@ public class space_transition extends script.base_script
         {
             return false;
         }
-        if (count >= limit)
-        {
-            return false;
-        }
-        return true;
+        return count < limit;
     }
+
     public static obj_id findPilotSlotObjectForShip(obj_id pilot, obj_id ship) throws InterruptedException
     {
         if (canPutInSlot(pilot, ship, SHIP_PILOT_SLOT_NAME) == CEC_SUCCESS)
@@ -396,11 +420,15 @@ public class space_transition extends script.base_script
         obj_id[] cells = getContents(ship);
         if (cells != null)
         {
-            for (obj_id cell : cells) {
+            for (obj_id cell : cells)
+            {
                 obj_id[] contents = getContents(cell);
-                if (contents != null) {
-                    for (obj_id content : contents) {
-                        if (canPutInSlot(pilot, content, POB_SHIP_PILOT_SLOT_NAME) == CEC_SUCCESS) {
+                if (contents != null)
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (canPutInSlot(pilot, content, POB_SHIP_PILOT_SLOT_NAME) == CEC_SUCCESS)
+                        {
                             return content;
                         }
                     }
@@ -409,10 +437,12 @@ public class space_transition extends script.base_script
         }
         return null;
     }
+
     public static Vector getContainedPlayers(obj_id obj) throws InterruptedException
     {
         return getContainedPlayers(obj, null);
     }
+
     public static Vector getContainedPlayers(obj_id obj, Vector players) throws InterruptedException
     {
         if (isPlayer(obj))
@@ -422,12 +452,14 @@ public class space_transition extends script.base_script
         obj_id[] contents = getContents(obj);
         if (contents != null)
         {
-            for (obj_id content : contents) {
+            for (obj_id content : contents)
+            {
                 players = getContainedPlayers(content, players);
             }
         }
         return players;
     }
+
     public static void packShip(obj_id ship) throws InterruptedException
     {
         if (getTopMostContainer(ship) != ship)
@@ -450,24 +482,32 @@ public class space_transition extends script.base_script
         Vector players = getContainedPlayers(ship, null);
         if (players != null)
         {
-            for (Object player1 : players) {
+            for (Object player1 : players)
+            {
                 obj_id player = ((obj_id) player1);
                 setState(player, STATE_SITTING_ON_CHAIR, false);
                 int posture = getPosture(player);
-                if (posture == POSTURE_SITTING || posture == POSTURE_PRONE) {
+                if (posture == POSTURE_SITTING || posture == POSTURE_PRONE)
+                {
                     setPostureClientImmediate(player, POSTURE_UPRIGHT);
                 }
                 revokeDroidCommands(player);
-                if (debugSpaceTransition) {
+                if (debugSpaceTransition)
+                {
                     LOG("space_transition", "packShip dealing with contained player " + player);
                 }
-                if (player == pilot) {
+                if (player == pilot)
+                {
                     unpilotShip(pilot);
                 }
-                if (inSpace && player != owner) {
+                if (inSpace && player != owner)
+                {
                     teleportPlayerToLaunchLoc(player);
-                } else {
-                    if (teleportFixup) {
+                }
+                else
+                {
+                    if (teleportFixup)
+                    {
                         copyObjVar(ship, player, "teleportFixup");
                         LIVE_LOG("TeleportFixup", "Copying teleportFixup objVar from " + ship + " to " + player);
                     }
@@ -508,10 +548,12 @@ public class space_transition extends script.base_script
                 if (isGameObjectTypeOf(ship, GOT_ship_fighter) && space_utils.isShipWithInterior(ship))
                 {
                     obj_id[] shipContents = getAllObjectsInPob(ship);
-                    if (shipContents != null && shipContents.length > 0)
+                    if (shipContents != null)
                     {
-                        for (obj_id shipContent : shipContents) {
-                            if (isIdValid(shipContent)) {
+                        for (obj_id shipContent : shipContents)
+                        {
+                            if (isIdValid(shipContent))
+                            {
                                 messageTo(shipContent, "OnPack", null, 1.0f, false);
                             }
                         }
@@ -526,6 +568,7 @@ public class space_transition extends script.base_script
         }
         destroyObject(ship);
     }
+
     public static obj_id[] getAllObjectsInPob(obj_id pob) throws InterruptedException
     {
         obj_id[] cells = getCellIds(pob);
@@ -535,10 +578,13 @@ public class space_transition extends script.base_script
         }
         Vector objects = new Vector();
         objects.setSize(0);
-        for (obj_id cell : cells) {
+        for (obj_id cell : cells)
+        {
             obj_id[] contents = getContents(cell);
-            if (contents != null && contents.length > 0) {
-                for (obj_id content : contents) {
+            if (contents != null)
+            {
+                for (obj_id content : contents)
+                {
                     utils.addElement(objects, content);
                 }
             }
@@ -555,6 +601,7 @@ public class space_transition extends script.base_script
         }
         return returnList;
     }
+
     public static void setShipName(obj_id ship, obj_id player, obj_id shipControlDevice) throws InterruptedException
     {
         String strName = getAssignedName(shipControlDevice);
@@ -568,6 +615,7 @@ public class space_transition extends script.base_script
             setName(ship, getName(player) + " (" + strName + ")");
         }
     }
+
     public static boolean unpackShipForPlayer(obj_id player, obj_id ship) throws InterruptedException
     {
         obj_id shipControlDevice = getContainedBy(ship);
@@ -637,10 +685,12 @@ public class space_transition extends script.base_script
                     }
                 }
                 obj_id[] shipContents = trial.getAllObjectsInDungeon(ship);
-                if (shipContents != null && shipContents.length > 0)
+                if (shipContents != null)
                 {
-                    for (obj_id shipContent : shipContents) {
-                        if (isIdValid(shipContent)) {
+                    for (obj_id shipContent : shipContents)
+                    {
+                        if (isIdValid(shipContent))
+                        {
                             messageTo(shipContent, "OnShipUnpack", null, 1.0f, false);
                         }
                     }
@@ -656,6 +706,7 @@ public class space_transition extends script.base_script
         }
         return false;
     }
+
     public static boolean inNovaOrionBattle(obj_id player) throws InterruptedException
     {
         location here = getLocation(player);
@@ -663,14 +714,12 @@ public class space_transition extends script.base_script
         {
             if (hasCompletedCollectionSlot(player, "orion_rank_01_04") || hasCompletedCollectionSlot(player, "nova_rank_01_04"))
             {
-                if (!hasCompletedCollectionSlot(player, "orion_rank_01_05") && !hasCompletedCollectionSlot(player, "nova_rank_01_05"))
-                {
-                    return true;
-                }
+                return !hasCompletedCollectionSlot(player, "orion_rank_01_05") && !hasCompletedCollectionSlot(player, "nova_rank_01_05");
             }
         }
         return false;
     }
+
     public static int getPreOverridePlayerSpaceFaction(obj_id player) throws InterruptedException
     {
         obj_id ship = getContainingShip(player);
@@ -722,6 +771,7 @@ public class space_transition extends script.base_script
         }
         return (676821884);
     }
+
     public static int getPlayerSpaceFaction(obj_id player) throws InterruptedException
     {
         obj_id ship = getContainingShip(player);
@@ -827,30 +877,36 @@ public class space_transition extends script.base_script
         shipSetSpaceFactionAllies(ship, alliedFactions);
         return (676821884);
     }
+
     public static void grantDroidCommands(obj_id objPlayer) throws InterruptedException
     {
         String[] strDroidCommands = space_combat.getProgrammedDroidCommands(objPlayer);
-        if (strDroidCommands != null && strDroidCommands.length > 0)
+        if (strDroidCommands != null)
         {
-            for (String strDroidCommand : strDroidCommands) {
+            for (String strDroidCommand : strDroidCommands)
+            {
                 grantCommand(objPlayer, "droid+" + strDroidCommand);
             }
         }
     }
+
     public static void revokeDroidCommands(obj_id objPlayer) throws InterruptedException
     {
         String[] strDroidCommands = space_combat.getProgrammedDroidCommands(objPlayer);
-        if (strDroidCommands != null && strDroidCommands.length > 0)
+        if (strDroidCommands != null)
         {
-            for (String strDroidCommand : strDroidCommands) {
+            for (String strDroidCommand : strDroidCommands)
+            {
                 revokeCommand(objPlayer, "droid+" + strDroidCommand);
             }
         }
     }
+
     public static void teleportPlayerToLaunchLoc(obj_id player) throws InterruptedException
     {
         teleportPlayerToLaunchLoc(player, false);
     }
+
     public static void teleportPlayerToLaunchLoc(obj_id player, boolean hyperspace) throws InterruptedException
     {
         location worldLaunchLoc = getLocationObjVar(player, "space.launch.worldLoc");
@@ -866,7 +922,7 @@ public class space_transition extends script.base_script
             sendSystemMessageTestingOnly(player, "You do not have a launch location. This usually means that you didn't use the launch terminal. Please do so.");
             worldLaunchLoc = new location(5.0f, 195.0f, 5.0f, "tatooine");
         }
-        float theta = rand() * (2.0f * (float)Math.PI);
+        float theta = rand() * (2.0f * (float) Math.PI);
         float radius = 2.0f + rand() * 3.0f;
         worldLaunchLoc.x += radius * StrictMath.cos(theta);
         worldLaunchLoc.z += radius * StrictMath.sin(theta);
@@ -879,6 +935,7 @@ public class space_transition extends script.base_script
             warpPlayer(player, worldLaunchLoc.area, worldLaunchLoc.x, worldLaunchLoc.y, worldLaunchLoc.z, null, worldLaunchLoc.x, worldLaunchLoc.y, worldLaunchLoc.z, null, false);
         }
     }
+
     public static location getShipBoardingDestination(obj_id objShip) throws InterruptedException
     {
         transform[] trEntrances = utils.getTransformArrayScriptVar(objShip, "locEntrance");
@@ -902,6 +959,7 @@ public class space_transition extends script.base_script
         locDestination.cell = objCells[intTest];
         return locDestination;
     }
+
     public static boolean isShipBoardable(obj_id objPlayer, obj_id objShip) throws InterruptedException
     {
         obj_id objPlayerShip = getPilotedShip(objPlayer);
@@ -926,6 +984,7 @@ public class space_transition extends script.base_script
         }
         return true;
     }
+
     public static Vector getShipStartLocations(obj_id ship) throws InterruptedException
     {
         Vector startLocations = null;
@@ -976,6 +1035,7 @@ public class space_transition extends script.base_script
         }
         return startLocations;
     }
+
     public static void updateLaunchWaypoint(obj_id objPlayer, location locTest, String strName) throws InterruptedException
     {
         obj_id objLaunchWaypoint = null;
@@ -1005,6 +1065,7 @@ public class space_transition extends script.base_script
             setWaypointName(objLaunchWaypoint, utils.packStringId(strSpam));
         }
     }
+
     public static void updateShipFaction(obj_id ship, obj_id player) throws InterruptedException
     {
         int spaceFaction = 0;
@@ -1020,6 +1081,7 @@ public class space_transition extends script.base_script
             updatePVPStatus(ship);
         }
     }
+
     public static void setPlayerOvert(long player) throws InterruptedException
     {
         final obj_id playerObjId = obj_id.getObjId(player);
@@ -1028,6 +1090,7 @@ public class space_transition extends script.base_script
             setPlayerOvert(playerObjId);
         }
     }
+
     public static void setPlayerOvert(obj_id player) throws InterruptedException
     {
         obj_id objShip = getContainingShip(player);
@@ -1036,8 +1099,8 @@ public class space_transition extends script.base_script
             setObjVar(objShip, "spaceFaction.overt", 1);
             messageTo(objShip, "checkSpacePVPStatus", null, 30, false);
         }
-        return;
     }
+
     public static void setPlayerOvert(obj_id player, int overrideFaction) throws InterruptedException
     {
         obj_id ship = getContainingShip(player);
@@ -1045,6 +1108,7 @@ public class space_transition extends script.base_script
         shipSetSpaceFaction(ship, overrideFaction);
         setPlayerOvert(player);
     }
+
     public static void clearOvertStatus(long objShip) throws InterruptedException
     {
         final obj_id objShipObjId = obj_id.getObjId(objShip);
@@ -1053,6 +1117,7 @@ public class space_transition extends script.base_script
             clearOvertStatus(objShipObjId);
         }
     }
+
     public static void clearOvertStatus(obj_id objShip) throws InterruptedException
     {
         if (isIdValid(objShip))
@@ -1066,6 +1131,7 @@ public class space_transition extends script.base_script
             space_utils.notifyObject(objShip, "checkSpacePVPStatus", null);
         }
     }
+
     public static void updatePVPStatus(obj_id objShip) throws InterruptedException
     {
         if (hasObjVar(objShip, "spaceFaction.FactionOverride"))
@@ -1100,6 +1166,7 @@ public class space_transition extends script.base_script
             pvpMakeNeutral(objShip);
         }
     }
+
     public static void doAIImmunityCheck(obj_id objShip) throws InterruptedException
     {
         String strChassisType = getShipChassisType(objShip);
@@ -1121,6 +1188,7 @@ public class space_transition extends script.base_script
             sendSystemMessageTestingOnly(getOwner(objShip), "aiIgnore[ON]: AI will no longer aggro you or fight back.");
         }*/
     }
+
     public static void adjustShipTeleportFixupInSpaceScene(obj_id ship) throws InterruptedException
     {
         if (hasObjVar(ship, "teleportFixup"))
@@ -1134,6 +1202,7 @@ public class space_transition extends script.base_script
             }
         }
     }
+
     public static int getNextStartIndex(Vector shipStartLocations, int lastStartIndex) throws InterruptedException
     {
         int startIndex = lastStartIndex + 1;
@@ -1141,7 +1210,7 @@ public class space_transition extends script.base_script
         {
             for (startIndex = 1; startIndex <= shipStartLocations.size(); ++startIndex)
             {
-                if (((location)shipStartLocations.get(startIndex - 1)).cell != null)
+                if (((location) shipStartLocations.get(startIndex - 1)).cell != null)
                 {
                     break;
                 }
@@ -1149,6 +1218,7 @@ public class space_transition extends script.base_script
         }
         return startIndex;
     }
+
     public static void launch(obj_id player, obj_id ship, obj_id[] passengers, location warpLocation, location groundLoc) throws InterruptedException
     {
         Vector passengersToWarp = utils.addElement(null, player);
@@ -1160,15 +1230,21 @@ public class space_transition extends script.base_script
             {
                 int startIndex = 0;
                 location playerLoc = getLocation(player);
-                for (obj_id passenger : passengers) {
-                    if (passenger != player) {
-                        if (features.isSpaceEdition(passenger)) {
+                for (obj_id passenger : passengers)
+                {
+                    if (passenger != player)
+                    {
+                        if (features.isSpaceEdition(passenger))
+                        {
                             startIndex = space_transition.getNextStartIndex(shipStartLocations, startIndex);
-                            if (startIndex <= shipStartLocations.size()) {
+                            if (startIndex <= shipStartLocations.size())
+                            {
                                 passengersToWarp = utils.addElement(passengersToWarp, passenger);
                                 passengerStartIndexes = utils.addElement(passengerStartIndexes, startIndex);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             string_id strSpam = new string_id("space/space_interaction", "no_space_expansion");
                             sendSystemMessage(passenger, strSpam);
                         }
@@ -1178,12 +1254,13 @@ public class space_transition extends script.base_script
         }
         for (int i = 0; i < passengersToWarp.size(); ++i)
         {
-            obj_id passenger = ((obj_id)passengersToWarp.get(i));
+            obj_id passenger = ((obj_id) passengersToWarp.get(i));
             int passengerStartIndex = (Integer) passengerStartIndexes.get(i);
             space_transition.setLaunchInfo(passenger, ship, passengerStartIndex, groundLoc);
             warpPlayer(passenger, warpLocation.area, warpLocation.x, warpLocation.y, warpLocation.z, null, warpLocation.x, warpLocation.y, warpLocation.z);
         }
     }
+
     public static void exitCapitalShip(obj_id objPlayer, transform trTest) throws InterruptedException
     {
         obj_id objContainingShip = space_transition.getContainingShip(objPlayer);
@@ -1202,6 +1279,7 @@ public class space_transition extends script.base_script
         dctParams.put("trTest", trTest);
         messageTo(objPlayer, "doDelayedPilot", dctParams, 1.0f, false);
     }
+
     public static void enterCapitalShip(obj_id objPlayer, transform trTest, obj_id objCell) throws InterruptedException
     {
         space_transition.packShip(space_transition.getContainingShip(objPlayer));

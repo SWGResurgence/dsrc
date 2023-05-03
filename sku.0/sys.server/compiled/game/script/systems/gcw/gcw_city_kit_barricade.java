@@ -10,19 +10,23 @@ public class gcw_city_kit_barricade extends script.systems.gcw.gcw_city_kit
     public gcw_city_kit_barricade()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Barricade Construction Site");
         utils.setScriptVar(pylon, "gcw.name", "Barricade Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_barricade");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)

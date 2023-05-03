@@ -11,21 +11,25 @@ import script.region;
 
 public class uber_lair extends script.theme_park.poi.base
 {
+    public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+
     public uber_lair()
     {
     }
-    public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         initializePoi(self);
         messageTo(self, "handleNpcLairDecay", null, 604800.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         initializePoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public void initializePoi(obj_id poiBaseObject) throws InterruptedException
     {
         LOG("uber", "INITIALIZEPOI FUNCTION");
@@ -37,11 +41,13 @@ public class uber_lair extends script.theme_park.poi.base
         }
         createTheater(poiBaseObject, lairType);
     }
+
     public int handleTargetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         poiComplete(POI_SUCCESS);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("uber", "HANDLETHEATERCOMPLETE MESSAGEHANDLER ");
@@ -56,7 +62,8 @@ public class uber_lair extends script.theme_park.poi.base
             obj_id[] objChildren = getObjIdArrayObjVar(objTheater, "theater.children");
             if (objChildren != null)
             {
-                for (obj_id objChild : objChildren) {
+                for (obj_id objChild : objChildren)
+                {
                     factions.setFaction(objChild, strFaction);
                 }
             }
@@ -67,6 +74,7 @@ public class uber_lair extends script.theme_park.poi.base
         messageTo(self, "spawnMobiles", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public void createTheater(obj_id poiBaseObject, String lairType) throws InterruptedException
     {
         LOG("uber", "CREATE THEATER FUNCTION");
@@ -105,6 +113,7 @@ public class uber_lair extends script.theme_park.poi.base
             }
         }
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String strName = getStringObjVar(self, "uberlair.strRegionName");
@@ -119,15 +128,17 @@ public class uber_lair extends script.theme_park.poi.base
         deleteRegion(rgnOverLoadRegion);
         return SCRIPT_CONTINUE;
     }
+
     public int mobDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         location locSpawnLocation = params.getLocation("locSpawnLocation");
         String strType = params.getString("strType");
         String strScript = params.getString("strScript");
-        LOG("uber", "params is " + params.toString());
+        LOG("uber", "params is " + params);
         uberlair.respawnMobile(self, locSpawnLocation, strType, strScript);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnMobiles(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("uber", "SPAWN_NPC_LAIR_MOBILS MESSAGEHANDLER");
@@ -136,6 +147,7 @@ public class uber_lair extends script.theme_park.poi.base
         uberlair.spawnNpcLairMobiles(self, objMobSpawners);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnFormations(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("uber", "SPAWN_formations MESSAGEHANDLER");

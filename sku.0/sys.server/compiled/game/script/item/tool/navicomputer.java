@@ -8,10 +8,12 @@ import script.string_id;
 
 public class navicomputer extends script.base_script
 {
+    public static final String CREATURE_NAME_FILE = "item_n";
+
     public navicomputer()
     {
     }
-    public static final String CREATURE_NAME_FILE = "item_n";
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -37,6 +39,7 @@ public class navicomputer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -59,6 +62,7 @@ public class navicomputer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -92,17 +96,18 @@ public class navicomputer extends script.base_script
                 string_id strSpam3 = new string_id("space/space_interaction", "already_active_navicomp3");
                 sendSystemMessage(player, strSpam);
             }
-            else 
+            else
             {
                 initializeNavicomputer(player, self);
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "NAVICOMPUTER.OnObjectMenuSelect ***************** FAIL AT POINT D ");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -122,15 +127,18 @@ public class navicomputer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id objSource, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public void initializeNavicomputer(obj_id player, obj_id navicomp) throws InterruptedException
     {
         createNavicomputerControlDevice(player, navicomp);
         return;
     }
+
     public void createNavicomputerControlDevice(obj_id player, obj_id navicomp) throws InterruptedException
     {
         if (!isIdValid(navicomp))
@@ -163,7 +171,7 @@ public class navicomputer extends script.base_script
             sendSystemMessage(player, strSpam);
             return;
         }
-        else 
+        else
         {
             setOwner(itemControlDevice, player);
             string_id nameId = new string_id(create.CREATURE_NAME_FILE, itemName);
@@ -180,6 +188,7 @@ public class navicomputer extends script.base_script
         }
         return;
     }
+
     public void initNavicompDatapad(obj_id itemControlDevice, obj_id navicomp, obj_id player) throws InterruptedException
     {
         obj_id dpad = getObjectInSlot(itemControlDevice, "datapad");
@@ -196,6 +205,7 @@ public class navicomputer extends script.base_script
             }
         }
     }
+
     public boolean verifyNoOtherInitializedNavicomps(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -208,13 +218,16 @@ public class navicomputer extends script.base_script
             return false;
         }
         obj_id[] dpadContents = getContents(datapad);
-        for (obj_id dpadContent : dpadContents) {
-            if (hasObjVar(dpadContent, "item.current")) {
+        for (obj_id dpadContent : dpadContents)
+        {
+            if (hasObjVar(dpadContent, "item.current"))
+            {
                 return false;
             }
         }
         return true;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isIdValid(destContainer))
@@ -239,6 +252,7 @@ public class navicomputer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canBeTransferred(obj_id navicomp, obj_id newMaster, obj_id transferer) throws InterruptedException
     {
         if (space_combat.isAnInitializedNavicomp(navicomp))

@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class scenario extends script.base_script
 {
-    public scenario()
-    {
-    }
     public static final String MEDIATOR = "mediator";
     public static final String ANTAGONIST = "antagonist";
     public static final String VAR_SCENARIO_BASE = "scenario";
@@ -83,6 +80,10 @@ public class scenario extends script.base_script
     public static final int ONLINE = 1;
     public static final String DEFAULT_CONVO = "poi/default";
     public static final String VAR_UNLOAD_NUKE = "nukeOnUnload";
+    public scenario()
+    {
+    }
+
     public static boolean initScenario(obj_id master, String tbl) throws InterruptedException
     {
         if (!isIdValid(master) || tbl == null || tbl.equals(""))
@@ -103,6 +104,7 @@ public class scenario extends script.base_script
         setObjVar(master, VAR_SCENARIO_CONVO, params.getString(COL_CONVO));
         return messageTo(master, HANDLER_INIT_SCENARIO, params, 2, true);
     }
+
     public static boolean createTeam(obj_id master, String team_name, String team_faction) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -123,6 +125,7 @@ public class scenario extends script.base_script
         setObjVarList(master, team_path + ".kill_credits");
         return true;
     }
+
     public static boolean setTeamFaction(obj_id master, String team_name, String team_faction) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -143,15 +146,18 @@ public class scenario extends script.base_script
         if (team_members != null && team_members.size() > 0)
         {
             obj_id target;
-            for (Object team_member : team_members) {
+            for (Object team_member : team_members)
+            {
                 target = ((obj_id) team_member);
-                if (isIdValid(target)) {
+                if (isIdValid(target))
+                {
                     factions.setFaction(target, team_faction);
                 }
             }
         }
         return setObjVar(master, team_path + ".faction", team_faction);
     }
+
     public static String getTeamFaction(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -164,6 +170,7 @@ public class scenario extends script.base_script
         }
         return getStringObjVar(master, VAR_TEAM + "." + team_name + ".faction");
     }
+
     public static obj_id createTeamNpc(obj_id master, String team_name, String type, String ident, location here) throws InterruptedException
     {
         if (!isIdValid(master) || here == null || type == null || type.equals(""))
@@ -186,7 +193,7 @@ public class scenario extends script.base_script
             {
                 ident = team_name + "_0";
             }
-            else 
+            else
             {
                 ident = team_name + team_members.size();
             }
@@ -216,6 +223,7 @@ public class scenario extends script.base_script
         faceTo(npc, master);
         return npc;
     }
+
     public static String getTeamName(obj_id actor) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -226,7 +234,7 @@ public class scenario extends script.base_script
         {
             return getStringObjVar(actor, VAR_TEAM);
         }
-        else 
+        else
         {
             obj_id master = poi.getBaseObject(getSelf());
             if ((master == null) || (master == obj_id.NULL_ID))
@@ -256,6 +264,7 @@ public class scenario extends script.base_script
         }
         return null;
     }
+
     public static boolean isActorAlive(obj_id actor) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -277,6 +286,7 @@ public class scenario extends script.base_script
         }
         return false;
     }
+
     public static boolean setActorDead(obj_id actor, obj_id[] killers) throws InterruptedException
     {
         if (!isIdValid(actor))
@@ -303,7 +313,7 @@ public class scenario extends script.base_script
                 member_alive.set(idx, 0);
                 setObjVar(master, VAR_TEAM + "." + team_name + ".member_alive", member_alive);
             }
-            else 
+            else
             {
                 return false;
             }
@@ -312,10 +322,12 @@ public class scenario extends script.base_script
         }
         return false;
     }
+
     public static boolean setActorDead(obj_id actor) throws InterruptedException
     {
         return setActorDead(actor, null);
     }
+
     public static obj_id[] getTeamMembers(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -328,10 +340,12 @@ public class scenario extends script.base_script
         }
         return getObjIdArrayObjVar(master, VAR_TEAM + "." + team_name + ".members");
     }
+
     public static obj_id[] getTeamMembers(String team_name) throws InterruptedException
     {
         return getTeamMembers(poi.getBaseObject(getSelf()), team_name);
     }
+
     public static obj_id[] getAliveTeamMembers(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -361,6 +375,7 @@ public class scenario extends script.base_script
         }
         return _members;
     }
+
     public static obj_id[] getDeadTeamMembers(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -390,6 +405,7 @@ public class scenario extends script.base_script
         }
         return _members;
     }
+
     public static int getAliveTeamMemberCount(obj_id master, String team_name) throws InterruptedException
     {
         obj_id[] members = getAliveTeamMembers(master, team_name);
@@ -399,6 +415,7 @@ public class scenario extends script.base_script
         }
         return members.length;
     }
+
     public static int getDeadTeamMemberCount(obj_id master, String team_name) throws InterruptedException
     {
         obj_id[] members = getDeadTeamMembers(master, team_name);
@@ -408,6 +425,7 @@ public class scenario extends script.base_script
         }
         return members.length;
     }
+
     public static obj_id getRandomTeamMember(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -426,6 +444,7 @@ public class scenario extends script.base_script
         int idx = rand(0, members.length - 1);
         return members[idx];
     }
+
     public static obj_id getRandomAliveTeamMember(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -444,6 +463,7 @@ public class scenario extends script.base_script
         int idx = rand(0, members.length - 1);
         return members[idx];
     }
+
     public static int getTeamCount(obj_id master, String team_name) throws InterruptedException
     {
         if (!isIdValid(master) || team_name == null || team_name.equals(""))
@@ -461,6 +481,7 @@ public class scenario extends script.base_script
         }
         return team_members.length;
     }
+
     public static int findTeamMember(Vector team, obj_id member) throws InterruptedException
     {
         for (int i = 0; i < team.size(); i++)
@@ -472,6 +493,7 @@ public class scenario extends script.base_script
         }
         return -1;
     }
+
     public static boolean grantKillCredit(obj_id master, String team_name, obj_id[] killers) throws InterruptedException
     {
         if ((master == null) || (master == obj_id.NULL_ID))
@@ -488,11 +510,13 @@ public class scenario extends script.base_script
         }
         String creditPath = VAR_TEAM + "." + team_name + ".kill_credits";
         String path;
-        for (obj_id killer : killers) {
+        for (obj_id killer : killers)
+        {
             LOG("SCENARIO", "granting kill credit to " + getName(killer) + " " + team_name);
             path = creditPath + "." + killer;
             int cnt = 0;
-            if (hasObjVar(master, path)) {
+            if (hasObjVar(master, path))
+            {
                 cnt = getIntObjVar(master, path);
             }
             cnt++;
@@ -500,6 +524,7 @@ public class scenario extends script.base_script
         }
         return true;
     }
+
     public static boolean hasKillCredit(obj_id master, String team_name, obj_id killer) throws InterruptedException
     {
         if ((master == null) || (master == obj_id.NULL_ID))
@@ -517,6 +542,7 @@ public class scenario extends script.base_script
         String creditPath = VAR_TEAM + "." + team_name + ".kill_credits." + killer;
         return hasObjVar(master, creditPath);
     }
+
     public static String getConvo() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -531,6 +557,7 @@ public class scenario extends script.base_script
         }
         return "";
     }
+
     public static boolean say(obj_id npc, String convo, String base_id, boolean doAct) throws InterruptedException
     {
         if ((npc == null) || (npc == obj_id.NULL_ID) || (convo.equals("")) || (base_id.equals("")))
@@ -559,18 +586,22 @@ public class scenario extends script.base_script
         }
         return true;
     }
+
     public static boolean say(obj_id npc, String convo, String base_id) throws InterruptedException
     {
         return say(npc, convo, base_id, true);
     }
+
     public static boolean sayNoAct(obj_id npc, String convo, String base_id) throws InterruptedException
     {
         return say(npc, convo, base_id, false);
     }
+
     public static boolean brainfart(obj_id npc) throws InterruptedException
     {
         return say(npc, DEFAULT_CONVO, "brainfart_" + rand(1, 10));
     }
+
     public static boolean complete(obj_id poiMaster) throws InterruptedException
     {
         if (poiMaster == null)
@@ -581,17 +612,24 @@ public class scenario extends script.base_script
         poi.complete(poiMaster);
         return true;
     }
-    public static boolean complete() throws InterruptedException {
+
+    public static boolean complete() throws InterruptedException
+    {
         obj_id master = poi.getBaseObject(getSelf());
         return !((master == null) || (master == obj_id.NULL_ID)) && complete(master);
     }
-    public static boolean isComplete(obj_id poiMaster) throws InterruptedException {
+
+    public static boolean isComplete(obj_id poiMaster) throws InterruptedException
+    {
         return poiMaster != null && getBooleanObjVar(poiMaster, VAR_SCENARIO_COMPLETE);
     }
-    public static boolean isComplete() throws InterruptedException {
+
+    public static boolean isComplete() throws InterruptedException
+    {
         obj_id master = poi.getBaseObject(getSelf());
         return !((master == null) || (master == obj_id.NULL_ID)) && isComplete(master);
     }
+
     public static boolean setPlayerProgress(obj_id player, int progress) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -606,6 +644,7 @@ public class scenario extends script.base_script
         String path = VAR_SCENARIO_PLAYERS + "." + player;
         return setObjVar(master, path, progress);
     }
+
     public static boolean clearPlayerProgress(obj_id player) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -621,6 +660,7 @@ public class scenario extends script.base_script
         removeObjVar(master, path);
         return true;
     }
+
     public static int getPlayerProgress(obj_id player) throws InterruptedException
     {
         if ((player == null) || (!isPlayer(player)))
@@ -635,6 +675,7 @@ public class scenario extends script.base_script
         String path = VAR_SCENARIO_PLAYERS + "." + player;
         return getIntObjVar(master, path);
     }
+
     public static obj_id[] getActorsWithNamePrefix(obj_id poiMaster, String prefix) throws InterruptedException
     {
         if ((poiMaster == null) || (prefix.equals("")))
@@ -661,7 +702,8 @@ public class scenario extends script.base_script
                         if (ovName.startsWith(prefix))
                         {
                             tmp = getObjIdObjVar(poiMaster, "poi.stringList." + ovName);
-                            if ((tmp != null) && (tmp != obj_id.NULL_ID)) {
+                            if ((tmp != null) && (tmp != obj_id.NULL_ID))
+                            {
                                 actors = utils.addElement(actors, tmp);
                             }
                         }
@@ -673,7 +715,7 @@ public class scenario extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id[] _actors = new obj_id[0];
             _actors = new obj_id[actors.size()];
@@ -681,6 +723,7 @@ public class scenario extends script.base_script
             return _actors;
         }
     }
+
     public static boolean cleanup(obj_id poiMaster) throws InterruptedException
     {
         if (poiMaster == null)
@@ -690,6 +733,7 @@ public class scenario extends script.base_script
         destroyObject(poiMaster);
         return true;
     }
+
     public static dictionary getRandomScenario(String tbl) throws InterruptedException
     {
         if (tbl.equals(""))
@@ -708,7 +752,7 @@ public class scenario extends script.base_script
             {
                 idx = 0;
             }
-            else 
+            else
             {
                 idx = rand(0, numRows - 1);
             }
@@ -721,6 +765,7 @@ public class scenario extends script.base_script
         }
         return null;
     }
+
     public static boolean requestAddTargetLocation(obj_id target, String locName, location pathLoc, float r) throws InterruptedException
     {
         if ((target == null) || (locName.equals("")) || (pathLoc == null) || (r < 0))
@@ -733,6 +778,7 @@ public class scenario extends script.base_script
         d.put(DICT_RADIUS, r);
         return messageTo(target, HANDLER_ADD_TARGET_LOCATION, d, 0, isObjectPersisted(target));
     }
+
     public static boolean actorIncapacitated(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -745,14 +791,16 @@ public class scenario extends script.base_script
             return false;
         }
         obj_id[] primaryKillers = getObjIdArrayObjVar(self, VAR_PRIMARY_KILLERS);
-        if ((primaryKillers != null) && (primaryKillers.length != 0)) {
+        if ((primaryKillers != null) && (primaryKillers.length != 0))
+        {
             obj_id pk;
             obj_id groupId;
             obj_id[] members;
             for (int i = 0; i < primaryKillers.length; i++)
             {
                 pk = primaryKillers[i];
-                if ((pk != null) && (pk != obj_id.NULL_ID)) {
+                if ((pk != null) && (pk != obj_id.NULL_ID))
+                {
                     if (isPlayer(pk))
                     {
                         groupId = getGroupObject(pk);
@@ -777,7 +825,8 @@ public class scenario extends script.base_script
                         if (group.isGroupObject(pk))
                         {
                             members = getGroupMemberIds(pk);
-                            if ((members != null) && (members.length != 0)) {
+                            if ((members != null) && (members.length != 0))
+                            {
                                 for (int n = 0; i < members.length; i++)
                                 {
                                     poi.grantCredit(self, members[n]);
@@ -799,24 +848,29 @@ public class scenario extends script.base_script
         }
         return false;
     }
+
     public static void groupAttack(obj_id self, obj_id target) throws InterruptedException
     {
         startCombat(self, target);
     }
+
     public static void groupFace(obj_id self, obj_id target, String prefix) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(self);
         if (isIdValid(poiMaster))
         {
             obj_id[] members = getActorsWithNamePrefix(poiMaster, prefix);
-            if ((members != null) && (members.length != 0)) {
-                for (obj_id member : members) {
+            if (members != null)
+            {
+                for (obj_id member : members)
+                {
                     faceTo(member, target);
                 }
             }
         }
         faceTo(self, target);
     }
+
     public static void groupFollow(obj_id leader, obj_id formTarget, String prefix) throws InterruptedException
     {
         obj_id poiMaster = poi.getBaseObject(leader);
@@ -824,12 +878,17 @@ public class scenario extends script.base_script
         {
             int formation = rand(0, 1);
             obj_id[] members = getActorsWithNamePrefix(poiMaster, prefix);
-            if ((members != null) && (members.length != 0)) {
+            if ((members != null) && (members.length != 0))
+            {
                 int pos = 1;
-                for (obj_id member : members) {
-                    if ((member == leader) && (leader != formTarget)) {
+                for (obj_id member : members)
+                {
+                    if ((member == leader) && (leader != formTarget))
+                    {
                         ai_lib.aiFollow(leader, formTarget);
-                    } else {
+                    }
+                    else
+                    {
                         ai_lib.followInFormation(member, leader, formation, pos);
                         pos++;
                     }

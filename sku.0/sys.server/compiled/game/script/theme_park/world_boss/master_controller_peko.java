@@ -18,14 +18,36 @@ public class master_controller_peko extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PEKO);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnInitialize(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Active");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnDestroy(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id[] allPlayersNearby = getAllPlayers(getLocation(self), 128.0f);
-        if (allPlayersNearby != null && allPlayersNearby.length > 0)
+        if (allPlayersNearby != null)
         {
             for (obj_id nearby : allPlayersNearby)
             {
@@ -53,6 +75,7 @@ public class master_controller_peko extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(getMaster(killer)));
         }
+        resurgence.doWorldBossDeathMsg(self);
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;
     }
@@ -97,7 +120,7 @@ public class master_controller_peko extends script.base_script
                 chat.chat(self, SQUAWK_MSGS[rand(0, SQUAWK_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " caused the Peko-Peko Empress to become enraged to try to know everyone's weapon out of their hands.");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " caused the Peko-Peko Empress to become enraged to try to know everyone's weapon out of their hands.");
                 }
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
@@ -122,7 +145,7 @@ public class master_controller_peko extends script.base_script
     public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
         playClientEffectObj(targets, "clienteffect/cr_bodyfall_huge.cef", self, "");
-        if (targets == null || targets.length == 0)
+        if (targets == null)
         {
             return;
         }

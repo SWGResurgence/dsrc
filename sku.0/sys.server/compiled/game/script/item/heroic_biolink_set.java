@@ -39,6 +39,7 @@ public class heroic_biolink_set extends base_script
             "Tragedy Set",
             "Tinkers Set"
     };
+
     public heroic_biolink_set()
     {
     }

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
-    public gcw()
-    {
-    }
     public static final int RESTUS_COMM_BONUS = utils.getIntConfigSetting("GameServer", "restussCommBonus");
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
@@ -71,63 +68,63 @@ public class gcw extends script.base_script
     public static final int GCW_POINT_TYPE_ENTERTAINING = 8;
     public static final int GCW_POINT_TYPE_MAX = 9;
     public static final String[] validScenes =
-    {
-        "tatooine",
-        "corellia",
-        "dantooine",
-        "dathomir",
-        "endor",
-        "lok",
-        "naboo",
-        "rori",
-        "talus",
-        "yavin4",
-        "space_tatooine",
-        "space_corellia",
-        "space_dantooine",
-        "space_dathomir",
-        "space_endor",
-        "space_lok",
-        "space_naboo",
-        "space_yavin4",
-        "dxun",
-        "space_dxun"
-    };
+            {
+                    "tatooine",
+                    "corellia",
+                    "dantooine",
+                    "dathomir",
+                    "endor",
+                    "lok",
+                    "naboo",
+                    "rori",
+                    "talus",
+                    "yavin4",
+                    "space_tatooine",
+                    "space_corellia",
+                    "space_dantooine",
+                    "space_dathomir",
+                    "space_endor",
+                    "space_lok",
+                    "space_naboo",
+                    "space_yavin4",
+                    "dxun",
+                    "space_dxun"
+            };
     public static final String[] defaultRegions =
-    {
-        "gcw_region_tatooine_13",
-        "gcw_region_corellia_13",
-        "gcw_region_dantooine_16",
-        "gcw_region_dathomir_13",
-        "gcw_region_endor_15",
-        "gcw_region_lok_13",
-        "gcw_region_naboo_13",
-        "gcw_region_rori_13",
-        "gcw_region_talus_16",
-        "gcw_region_yavin4_17",
-        "gcw_region_tatooine_12",
-        "gcw_region_corellia_14",
-        "gcw_region_dantooine_17",
-        "gcw_region_dathomir_12",
-        "gcw_region_endor_16",
-        "gcw_region_lok_14",
-        "gcw_region_naboo_14",
-        "gcw_region_yavin4_18",
-        "gcw_region_dxun_15",
-        "gcw_region_dxun_16"
-    };
+            {
+                    "gcw_region_tatooine_13",
+                    "gcw_region_corellia_13",
+                    "gcw_region_dantooine_16",
+                    "gcw_region_dathomir_13",
+                    "gcw_region_endor_15",
+                    "gcw_region_lok_13",
+                    "gcw_region_naboo_13",
+                    "gcw_region_rori_13",
+                    "gcw_region_talus_16",
+                    "gcw_region_yavin4_17",
+                    "gcw_region_tatooine_12",
+                    "gcw_region_corellia_14",
+                    "gcw_region_dantooine_17",
+                    "gcw_region_dathomir_12",
+                    "gcw_region_endor_16",
+                    "gcw_region_lok_14",
+                    "gcw_region_naboo_14",
+                    "gcw_region_yavin4_18",
+                    "gcw_region_dxun_15",
+                    "gcw_region_dxun_16"
+            };
     public static final String[] pointTypes =
-    {
-        "pve",
-        "pvp",
-        "pvp_battlefield",
-        "pvp",
-        "space_pve",
-        "space_pvp",
-        "pve",
-        "trading",
-        "entertaining"
-    };
+            {
+                    "pve",
+                    "pvp",
+                    "pvp_battlefield",
+                    "pvp",
+                    "space_pve",
+                    "space_pvp",
+                    "pve",
+                    "trading",
+                    "entertaining"
+            };
     public static final float COLLECTION_DAMAGE_RATIO_MIN = 0.41f;
     public static final String PVP_PUSHBACK_REGION = "pvp_pushback";
     public static final String PVP_BATTLEFIELD_REGION = "pvp_battlefield";
@@ -259,6 +256,15 @@ public class gcw extends script.base_script
     public static final String GCW_TUTORIAL_FLAG = "gcw_tutorial_flag.has_received_tutorial";
     public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
     public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+    public static final int PHASE_5 = 259200;
+    public static final int PHASE_4 = 86400;
+    public static final int PHASE_3 = 28800;
+    public static final int PHASE_2 = 14400;
+
+    public gcw()
+    {
+    }
+
     public static void assignScanInterests(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc) || isPlayer(npc) || pet_lib.isPet(npc))
@@ -277,12 +283,14 @@ public class gcw extends script.base_script
         if (regionNames != null && regionNames.length > 0)
         {
             region[] r = getRegionsWithSpawnableAtPoint(here, regions.SPAWN_TRUE);
-            if (r != null && r.length > 0)
+            if (r != null)
             {
-                for (region region : r) {
+                for (region region : r)
+                {
                     String rName = region.getName();
                     int idx = utils.getElementPositionInArray(regionNames, rName);
-                    if (idx > -1) {
+                    if (idx > -1)
+                    {
                         spawnWeight = dataTableGetInt(tbl, idx, "WEIGHT");
                         break;
                     }
@@ -322,6 +330,7 @@ public class gcw extends script.base_script
         }
         utils.setScriptVar(npc, SCRIPTVAR_SCAN_INTEREST, interests);
     }
+
     public static float scan(obj_id scanner, obj_id target) throws InterruptedException
     {
         if (!isIdValid(scanner) || !isIdValid(target))
@@ -335,6 +344,7 @@ public class gcw extends script.base_script
         }
         return getContrabandRating(target, interests);
     }
+
     public static boolean isContrabandItem(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -343,6 +353,7 @@ public class gcw extends script.base_script
         }
         return (getContrabandRating(item, INTEREST_CONTRABAND) > 0.0f);
     }
+
     public static float getContrabandRating(obj_id target, int interests) throws InterruptedException
     {
         if (!isIdValid(target) || interests == 0)
@@ -436,12 +447,14 @@ public class gcw extends script.base_script
         }
         return 0.0f;
     }
+
     public static float getContrabandRating(obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();
         int interests = utils.getIntScriptVar(self, SCRIPTVAR_SCAN_INTEREST);
         return getContrabandRating(target, interests);
     }
+
     public static boolean isSpice(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -450,6 +463,7 @@ public class gcw extends script.base_script
         }
         return (getGameObjectType(target) == GOT_misc_food && hasScript(target, "item.comestible.spice"));
     }
+
     public static boolean isSlicedEquipment(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -459,6 +473,7 @@ public class gcw extends script.base_script
         int got = getGameObjectType(target);
         return (hasObjVar(target, "slicing.hack") && (isGameObjectTypeOf(got, GOT_weapon) || isGameObjectTypeOf(got, GOT_armor)));
     }
+
     public static boolean isNonImperialFactionItem(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -475,6 +490,7 @@ public class gcw extends script.base_script
         }
         return false;
     }
+
     public static void harass(obj_id npc, obj_id target) throws InterruptedException
     {
         if (!isIdValid(npc))
@@ -497,6 +513,7 @@ public class gcw extends script.base_script
             messageTo(npc, "handleCheckpointMode", null, 1.0f, false);
         }
     }
+
     public static boolean spawnViaLambda(location loc, String tbl, String column, dictionary params) throws InterruptedException
     {
         if (loc == null || tbl == null || tbl.equals("") || column == null || column.equals(""))
@@ -506,6 +523,7 @@ public class gcw extends script.base_script
         String[] spawnNames = dataTableGetStringColumn(tbl, column);
         return createLambdaDropship(loc, spawnNames, params);
     }
+
     public static boolean spawnViaLambda(location loc, String tbl, int col, dictionary params) throws InterruptedException
     {
         if (loc == null || tbl == null || tbl.equals("") || col < 0)
@@ -515,6 +533,7 @@ public class gcw extends script.base_script
         String[] spawnNames = dataTableGetStringColumn(tbl, col);
         return createLambdaDropship(loc, spawnNames, params);
     }
+
     public static boolean createLambdaDropship(location loc, String[] spawnNames, dictionary params) throws InterruptedException
     {
         if (loc == null || spawnNames == null || spawnNames.length == 0)
@@ -539,6 +558,7 @@ public class gcw extends script.base_script
         }
         return true;
     }
+
     public static boolean spawnViaLambdaPerGeo(location loc, dictionary params) throws InterruptedException
     {
         if (loc == null)
@@ -548,6 +568,7 @@ public class gcw extends script.base_script
         String[] spawnNames = getGeoSpawnNames(loc);
         return createLambdaDropship(loc, spawnNames, params);
     }
+
     public static String[] getGeoSpawnNames(location loc, boolean allowHeavy) throws InterruptedException
     {
         if (loc == null)
@@ -564,13 +585,19 @@ public class gcw extends script.base_script
         {
             tbl = "datatables/imperial_presence/geo/general_heavy.iff";
         }
-        for (region region : r) {
+        for (region region : r)
+        {
             int geoType = region.getGeographicalType();
-            if (geoType == regions.GEO_DESERT || geoType == regions.GEO_OASIS || geoType == regions.GEO_WASTELAND) {
+            if (geoType == regions.GEO_DESERT || geoType == regions.GEO_OASIS || geoType == regions.GEO_WASTELAND)
+            {
                 tbl = "datatables/imperial_presence/geo/desert.iff";
-            } else if (geoType == regions.GEO_FOREST || geoType == regions.GEO_JUNGLE) {
+            }
+            else if (geoType == regions.GEO_FOREST || geoType == regions.GEO_JUNGLE)
+            {
                 tbl = "datatables/imperial_presence/geo/forest.iff";
-            } else if (geoType == regions.GEO_SWAMP) {
+            }
+            else if (geoType == regions.GEO_SWAMP)
+            {
                 tbl = "datatables/imperial_presence/geo/swamp.iff";
             }
         }
@@ -581,14 +608,17 @@ public class gcw extends script.base_script
         }
         return dataTableGetStringColumn(tbl, rand(0, numCol - 1));
     }
+
     public static String[] getGeoSpawnNames(location loc) throws InterruptedException
     {
         return getGeoSpawnNames(loc, false);
     }
+
     public static obj_id getGCWMasterObject(obj_id objObject) throws InterruptedException
     {
         return getGCWMasterObject(getLocation(objObject));
     }
+
     public static obj_id getGCWMasterObject(location locTest) throws InterruptedException
     {
         String strPlanet = locTest.area;
@@ -603,14 +633,14 @@ public class gcw extends script.base_script
         try
         {
             lngId = Long.valueOf(strObjId);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             LOG("gcw", "Bad object id format for " + strPlanet);
             return null;
         }
         return obj_id.getObjId(lngId.longValue());
     }
+
     public static void changeGCWScore(location locTest, int intValue, String strFaction) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -619,6 +649,7 @@ public class gcw extends script.base_script
         obj_id objParent = getGCWMasterObject(locTest);
         messageTo(objParent, "updateGCWScore", dctParams, 0, true);
     }
+
     public static void incrementGCWScore(obj_id objObject) throws InterruptedException
     {
         location locTest = getLocation(objObject);
@@ -626,6 +657,7 @@ public class gcw extends script.base_script
         String strFaction = getStringObjVar(objObject, "faction");
         changeGCWScore(locTest, intScoreChange, strFaction);
     }
+
     public static void decrementGCWScore(obj_id objObject) throws InterruptedException
     {
         location locTest = getLocation(objObject);
@@ -634,6 +666,7 @@ public class gcw extends script.base_script
         String strFaction = getStringObjVar(objObject, "faction");
         changeGCWScore(locTest, intScoreChange, strFaction);
     }
+
     public static boolean canPlaceFactionBaseByPlanet(obj_id player, obj_id deed, String planet) throws InterruptedException
     {
         if (isGcwRestrictedSceneName(planet))
@@ -642,10 +675,12 @@ public class gcw extends script.base_script
         }
         return canPlaceFactionBaseByScore(player, deed, planet);
     }
+
     public static boolean canPlaceFactionBaseByScore(obj_id player, obj_id deed, String planet) throws InterruptedException
     {
         return (getCurrentPlanetaryFactionBaseCountPlanet(planet) < getCurrentPlanetaryFactionBaseMaxPlanet(planet));
     }
+
     public static int getCurrentPlanetaryFactionBaseCountPlanet(String planet) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(planet);
@@ -655,6 +690,7 @@ public class gcw extends script.base_script
         }
         return getRebelBaseCount(planetId) + getImperialBaseCount(planetId);
     }
+
     public static int getCurrentPlanetaryFactionBaseMaxPlanet(String planet) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(planet);
@@ -669,14 +705,17 @@ public class gcw extends script.base_script
         int row = dataTableSearchColumnForString(planet, "planet", TABLE_PLAYER_BASE_CAP);
         return (row == -1 ? -1 : dataTableGetInt(TABLE_PLAYER_BASE_CAP, planet, "base_max"));
     }
+
     public static int getImperialBaseCount(obj_id planet) throws InterruptedException
     {
         return (utils.hasScriptVar(planet, GCW_BASE_COUNT_IMPERIAL) ? utils.getIntScriptVar(planet, GCW_BASE_COUNT_IMPERIAL) : 0);
     }
+
     public static int getRebelBaseCount(obj_id planet) throws InterruptedException
     {
         return (utils.hasScriptVar(planet, GCW_BASE_COUNT_REBEL) ? utils.getIntScriptVar(planet, GCW_BASE_COUNT_REBEL) : 0);
     }
+
     public static void modifyPlanetaryBaseCount(obj_id base, int faction, int delta) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(getLocation(base).area);
@@ -690,31 +729,35 @@ public class gcw extends script.base_script
         dict.put("delta", delta);
         messageTo(planetRegister, "alterBaseCount", dict, 0, false);
     }
+
     public static boolean isGcwRestrictedSceneName(String scene) throws InterruptedException
     {
         String[] restrictedScene =
+                {
+                        "kashyyyk_main",
+                        "kashyyyk_north_dungeons",
+                        "kashyyyk_pob_dungeons",
+                        "kashyyyk_south_dungeons",
+                        "kashyyyk_rryatt_trail",
+                        "kashyyyk_hunting",
+                        "space_light1",
+                        "space_heavy1",
+                        "dathomir",
+                        "yavin4",
+                        "endor",
+                        "mustafar",
+                        "dxun"
+                };
+        for (String s : restrictedScene)
         {
-            "kashyyyk_main",
-            "kashyyyk_north_dungeons",
-            "kashyyyk_pob_dungeons",
-            "kashyyyk_south_dungeons",
-            "kashyyyk_rryatt_trail",
-            "kashyyyk_hunting",
-            "space_light1",
-            "space_heavy1",
-            "dathomir",
-            "yavin4",
-            "endor",
-            "mustafar",
-            "dxun"
-        };
-        for (String s : restrictedScene) {
-            if (s.equals(scene)) {
+            if (s.equals(scene))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static dictionary getGCWDictionary(obj_id self) throws InterruptedException
     {
         int intImperialControlScore = getIntObjVar(self, "Imperial.controlScore");
@@ -726,6 +769,7 @@ public class gcw extends script.base_script
         dctParams.put("intRebelControlScore", intRebelControlScore);
         return dctParams;
     }
+
     public static float getImperialRatio(obj_id objNPC) throws InterruptedException
     {
         float fltImperialControlScore = getIntObjVar(objNPC, "Imperial.controlScore");
@@ -740,6 +784,7 @@ public class gcw extends script.base_script
         }
         return fltImperialControlScore / fltRebelControlScore;
     }
+
     public static float getRebelRatio(obj_id objNPC) throws InterruptedException
     {
         float fltImperialControlScore = getIntObjVar(objNPC, "Imperial.controlScore");
@@ -756,6 +801,7 @@ public class gcw extends script.base_script
         LOG("gcw", "Imperial score is " + fltImperialControlScore);
         return fltRebelControlScore / fltImperialControlScore;
     }
+
     public static void incrementGCWStanding(obj_id killer, obj_id target) throws InterruptedException
     {
         //obj_id self = killer;
@@ -789,6 +835,7 @@ public class gcw extends script.base_script
         dctParams.put("intScore", intScore);
         messageTo(killer, "updateGCWStanding", dctParams, 0, false);
     }
+
     public static void checkAndUpdateGCWStanding(obj_id self, int intAddedPoints) throws InterruptedException
     {
         String area = getLocation(self).area;
@@ -826,15 +873,18 @@ public class gcw extends script.base_script
         }
         setObjVar(self, "gcw.intKillScore", intCurrentScore);
     }
+
     public static obj_id getPub30StaticBaseControllerId(obj_id subject) throws InterruptedException
     {
         return getFirstObjectWithScript(getLocation(trial.getTop(subject)), 500.0f, "systems.gcw.static_base.master");
     }
+
     public static int getPub30StaticBaseControllingFaction(obj_id subject) throws InterruptedException
     {
         obj_id controller = getPub30StaticBaseControllerId(subject);
         return getIntObjVar(controller, "gcw.static_base.base_status");
     }
+
     public static int getPub30StaticBaseTimeSinceLastCapture(obj_id subject) throws InterruptedException
     {
         obj_id controller = getPub30StaticBaseControllerId(subject);
@@ -847,15 +897,13 @@ public class gcw extends script.base_script
             return getIntObjVar(controller, "gcw.static_base.last_capture");
         }
     }
+
     public static void setPub30StaticBaseTimeSinceLastCapture(obj_id subject, int time) throws InterruptedException
     {
         obj_id controller = getPub30StaticBaseControllerId(subject);
         setObjVar(controller, "gcw.static_base.last_capture", time);
     }
-    public static final int PHASE_5 = 259200;
-    public static final int PHASE_4 = 86400;
-    public static final int PHASE_3 = 28800;
-    public static final int PHASE_2 = 14400;
+
     public static int getPub30StaticBaseCapturePhase(obj_id subject) throws InterruptedException
     {
         int lastCapture = getPub30StaticBaseTimeSinceLastCapture(subject);
@@ -882,6 +930,7 @@ public class gcw extends script.base_script
         }
         return 1;
     }
+
     public static int getPub30TimeToNextPhaseInt(obj_id subject) throws InterruptedException
     {
         int lastCapture = getPub30StaticBaseTimeSinceLastCapture(subject);
@@ -889,22 +938,24 @@ public class gcw extends script.base_script
         switch (inPhase)
         {
             case 1:
-            return (PHASE_2 + lastCapture) - getGameTime();
+                return (PHASE_2 + lastCapture) - getGameTime();
             case 2:
-            return (PHASE_3 + lastCapture) - getGameTime();
+                return (PHASE_3 + lastCapture) - getGameTime();
             case 3:
-            return (PHASE_4 + lastCapture) - getGameTime();
+                return (PHASE_4 + lastCapture) - getGameTime();
             case 4:
-            return (PHASE_5 + lastCapture) - getGameTime();
+                return (PHASE_5 + lastCapture) - getGameTime();
             default:
-            return -1;
+                return -1;
         }
     }
+
     public static String getPub30TimeToNextPhaseString(obj_id subject) throws InterruptedException
     {
         int timeToNext = getPub30TimeToNextPhaseInt(subject);
         return utils.formatTimeVerbose(timeToNext);
     }
+
     public static int advancePub30StaticBaseCapturePhase(obj_id subject) throws InterruptedException
     {
         int currentPhase = getPub30StaticBaseCapturePhase(subject);
@@ -916,25 +967,26 @@ public class gcw extends script.base_script
         switch (currentPhase)
         {
             case 1:
-            newTime = getGameTime() - PHASE_2;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 2;
+                newTime = getGameTime() - PHASE_2;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 2;
             case 2:
-            newTime = getGameTime() - PHASE_3;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 3;
+                newTime = getGameTime() - PHASE_3;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 3;
             case 3:
-            newTime = getGameTime() - PHASE_4;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 4;
+                newTime = getGameTime() - PHASE_4;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 4;
             case 4:
-            newTime = getGameTime() - PHASE_5;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 5;
+                newTime = getGameTime() - PHASE_5;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 5;
             default:
-            return -1;
+                return -1;
         }
     }
+
     public static int regressPub30StaticBaseCapturePhase(obj_id subject) throws InterruptedException
     {
         int currentPhase = getPub30StaticBaseCapturePhase(subject);
@@ -946,29 +998,31 @@ public class gcw extends script.base_script
         switch (currentPhase)
         {
             case 2:
-            newTime = getGameTime();
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 1;
+                newTime = getGameTime();
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 1;
             case 3:
-            newTime = getGameTime() - PHASE_2;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 2;
+                newTime = getGameTime() - PHASE_2;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 2;
             case 4:
-            newTime = getGameTime() - PHASE_3;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 3;
+                newTime = getGameTime() - PHASE_3;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 3;
             case 5:
-            newTime = getGameTime() - PHASE_4;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 4;
+                newTime = getGameTime() - PHASE_4;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 4;
             default:
-            return -1;
+                return -1;
         }
     }
+
     public static void clearCreditForKills(obj_id player) throws InterruptedException
     {
         utils.removeBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
     }
+
     public static int findAttackerInArray(Vector attackList, obj_id attacker) throws InterruptedException
     {
         if (attackList == null || attackList.size() == 0)
@@ -977,7 +1031,7 @@ public class gcw extends script.base_script
         }
         for (int i = 0; i < attackList.size(); i++)
         {
-            String[] splitEntry = split(((String)attackList.get(i)), '-');
+            String[] splitEntry = split(((String) attackList.get(i)), '-');
             obj_id idAtPoint = utils.stringToObjId(splitEntry[0]);
             if (idAtPoint == attacker)
             {
@@ -986,25 +1040,30 @@ public class gcw extends script.base_script
         }
         return -1;
     }
+
     public static int getDamageFromAttacker(Vector attackList, obj_id attacker) throws InterruptedException
     {
         if (attackList == null || attackList.size() == 0)
         {
             return 0;
         }
-        for (Object o : attackList) {
+        for (Object o : attackList)
+        {
             String[] splitEntry = split(((String) o), '-');
             obj_id idAtPoint = utils.stringToObjId(splitEntry[0]);
-            if (idAtPoint == attacker) {
+            if (idAtPoint == attacker)
+            {
                 return utils.stringToInt(splitEntry[1]);
             }
         }
         return 0;
     }
+
     public static String packAttackerDamage(obj_id attacker, int damage) throws InterruptedException
     {
-        return ("" + attacker + "-" + damage);
+        return (attacker + "-" + damage);
     }
+
     public static boolean releaseGcwPointCredit(obj_id player) throws InterruptedException
     {
         obj_id[] gcwEnemiesList = new obj_id[0];
@@ -1023,11 +1082,14 @@ public class gcw extends script.base_script
         if (gcwEnemiesList != null && gcwEnemiesList.length > 0)
         {
             removeDayOldEntries(player);
-            for (obj_id obj_id : gcwEnemiesList) {
-                if (!isIdValid(obj_id) || !exists(obj_id) || !verifyPvpRegionStatus(obj_id)) {
+            for (obj_id obj_id : gcwEnemiesList)
+            {
+                if (!isIdValid(obj_id) || !exists(obj_id) || !verifyPvpRegionStatus(obj_id))
+                {
                     continue;
                 }
-                if ((float) getLevel(player) / getLevel(obj_id) >= MIN_PVP_LEVEL_RATIO_LIMIT && ((isImperialPlayer && factions.isRebel(obj_id)) || (factions.isImperial(obj_id) && isRebelPlayer))) {
+                if ((float) getLevel(player) / getLevel(obj_id) >= MIN_PVP_LEVEL_RATIO_LIMIT && ((isImperialPlayer && factions.isRebel(obj_id)) || (factions.isImperial(obj_id) && isRebelPlayer)))
+                {
                     int points = distributeIndividualContribution(player, obj_id, 0, GCW_POINT_TYPE_GROUND_PVP);
                     pvpModifyCurrentPvpKills(obj_id, 1);
                     incrementKillMeter(obj_id, 1);
@@ -1038,16 +1100,19 @@ public class gcw extends script.base_script
             {
                 return false;
             }
-            for (Object o : attackerList) {
+            for (Object o : attackerList)
+            {
                 String[] parseKiller = split(((String) o), '-');
                 obj_id killer = utils.stringToObjId(parseKiller[0]);
-                if (beast_lib.isBeast(killer) || pet_lib.isPet(killer)) {
+                if (beast_lib.isBeast(killer) || pet_lib.isPet(killer))
+                {
                     killer = getMaster(killer);
                 }
                 double vLev = getLevel(player);
                 double kLev = getLevel(killer);
                 boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
-                if (isOfLevel && killer != landedDeathBlow) {
+                if (isOfLevel && killer != landedDeathBlow)
+                {
                     pvp.bfCreditForAssist(killer);
                     gcwInvasionCreditForAssist(killer);
                 }
@@ -1061,20 +1126,24 @@ public class gcw extends script.base_script
             return false;
         }
         int totalDamage = 0;
-        for (Object o1 : attackerList) {
+        for (Object o1 : attackerList)
+        {
             String[] damageSplit = split(((String) o1), '-');
             totalDamage += utils.stringToInt(damageSplit[1]);
         }
         removeDayOldEntries(player);
-        for (Object o : attackerList) {
+        for (Object o : attackerList)
+        {
             String[] parseKiller = split(((String) o), '-');
             obj_id killer = utils.stringToObjId(parseKiller[0]);
             double vLev = getLevel(player);
             double kLev = getLevel(killer);
             boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
-            if (isOfLevel) {
+            if (isOfLevel)
+            {
                 int points = distributeIndividualContribution(player, ((String) o), totalDamage, GCW_POINT_TYPE_GROUND_PVP);
-                if (isIdValid(killer) && exists(killer)) {
+                if (isIdValid(killer) && exists(killer))
+                {
                     pvpModifyCurrentPvpKills(killer, 1);
                     incrementKillMeter(killer, 1);
                     giveRestussCommendation(killer, player, attackerList.size());
@@ -1087,15 +1156,20 @@ public class gcw extends script.base_script
 
     // RESTUSS PVP COMMENDATION SYSTEM - BEGIN \\
 
-    private static void giveRestussCommendation(obj_id killer, obj_id victim, int splitSize) throws InterruptedException {
+    private static void giveRestussCommendation(obj_id killer, obj_id victim, int splitSize) throws InterruptedException
+    {
         region[] regionList = getRegionsAtPoint(getLocation(killer));
-        if (regionList != null && regionList.length > 0) {
-            for (region thisRegion : regionList) {
-                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME)) {
+        if (regionList != null)
+        {
+            for (region thisRegion : regionList)
+            {
+                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME))
+                {
                     int commCount = pvpGetCurrentGcwRank(victim) - 1;
                     String pFac = factions.getFaction(killer);
                     obj_id inventory = utils.getInventoryContainer(killer);
-                    if (commCount > 0) {
+                    if (commCount > 0)
+                    {
                         commCount /= splitSize + 1;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
                         sendSystemMessageTestingOnly(killer, "You have recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
@@ -1119,15 +1193,19 @@ public class gcw extends script.base_script
             messageTo(pvpRegionController, "diedInPvpRegion", dict, 1, false);
         }
     }
+
     public static boolean isAlreadyInArray(String[] orderedList, String attackerEntry) throws InterruptedException
     {
-        for (String s : orderedList) {
-            if (s.equals(attackerEntry)) {
+        for (String s : orderedList)
+        {
+            if (s.equals(attackerEntry))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static int distributeIndividualContribution(obj_id victim, String playerString, int totalDamage, int point_type) throws InterruptedException
     {
         String[] parse = split(playerString, '-');
@@ -1138,6 +1216,7 @@ public class gcw extends script.base_script
         }
         return distributeIndividualContribution(victim, killer, totalDamage, point_type);
     }
+
     public static int distributeIndividualContribution(obj_id victim, obj_id enemy, int totalDamage, int point_type) throws InterruptedException
     {
         if (!isIdValid(victim) || !exists(victim) || !isIdValid(enemy) || !exists(enemy))
@@ -1146,7 +1225,7 @@ public class gcw extends script.base_script
         }
         int targetRank = pvpGetCurrentGcwRank(enemy);
         int selfRank = pvpGetCurrentGcwRank(victim);
-        int finalReward = (int)((targetRank + selfRank) * (GCW_PLAYER_PVP_MODIFIER) / 10);
+        int finalReward = (targetRank + selfRank) * (GCW_PLAYER_PVP_MODIFIER) / 10;
         if (finalReward < 0)
         {
             return 0;
@@ -1154,7 +1233,7 @@ public class gcw extends script.base_script
         boolean inRegion = verifyPvpRegionStatus(enemy);
         if (inRegion)
         {
-            finalReward += (int)(finalReward * 0.5f);
+            finalReward += (int) (finalReward * 0.5f);
         }
         loot.rollRandomFactionalCollectible(victim, enemy, selfRank);
         obj_id relic = loot.chroniclesPvpLootDrop(enemy);
@@ -1167,6 +1246,7 @@ public class gcw extends script.base_script
         messageTo(enemy, "recivedGcwCreditForKill", webster, 0.0f, false);
         return finalReward;
     }
+
     public static int addToDailyGcwPointAllotment(obj_id victim, obj_id killer, int gcwPoint) throws InterruptedException
     {
         Vector dailyKills = new Vector();
@@ -1178,7 +1258,7 @@ public class gcw extends script.base_script
         }
         int targetRank = pvpGetCurrentGcwRank(killer);
         int selfRank = pvpGetCurrentGcwRank(victim);
-        int maxInterval = (int)(targetRank + selfRank) * GCW_PLAYER_PVP_MODIFIER;
+        int maxInterval = (targetRank + selfRank) * GCW_PLAYER_PVP_MODIFIER;
         int positionInArray = findAttackerInArray(dailyKills, killer);
         if (positionInArray == -1)
         {
@@ -1191,8 +1271,8 @@ public class gcw extends script.base_script
         }
         else
         {
-            int accruedPoints = getAccruedPoints(((String)dailyKills.get(positionInArray)));
-            int timeAtFirstAward = getTimeOfFirstAward(((String)dailyKills.get(positionInArray)));
+            int accruedPoints = getAccruedPoints(((String) dailyKills.get(positionInArray)));
+            int timeAtFirstAward = getTimeOfFirstAward(((String) dailyKills.get(positionInArray)));
             gcwPoint = Math.min(gcwPoint, maxInterval);
             if (getGameTime() > timeAtFirstAward + 86400)
             {
@@ -1204,11 +1284,11 @@ public class gcw extends script.base_script
                 accruedPoints++;
                 if (accruedPoints > 4)
                 {
-                    gcwPoint = (int)(gcwPoint * 0.5f);
+                    gcwPoint = (int) (gcwPoint * 0.5f);
                 }
                 else
                 {
-                    gcwPoint = (int)(gcwPoint * (float)((10.0f - (accruedPoints - 1.0f)) / 10.0f));
+                    gcwPoint = (int) (gcwPoint * ((10.0f - (accruedPoints - 1.0f)) / 10.0f));
                 }
             }
             String newEntry = packKillerDailyPoints(killer, accruedPoints, timeAtFirstAward);
@@ -1217,6 +1297,7 @@ public class gcw extends script.base_script
         utils.setResizeableBatchObjVar(victim, LIST_DAILY_KILL_VALUES, dailyKills);
         return gcwPoint;
     }
+
     public static void removeDayOldEntries(obj_id player) throws InterruptedException
     {
         if (!utils.hasResizeableStringBatchObjVar(player, LIST_DAILY_KILL_VALUES))
@@ -1228,7 +1309,7 @@ public class gcw extends script.base_script
         int dayPast = getGameTime() - 86400;
         for (int i = 0; i < dailyList.size(); i++)
         {
-            String[] parse = split(((String)dailyList.get(i)), '-');
+            String[] parse = split(((String) dailyList.get(i)), '-');
             int timeHack = utils.stringToInt(parse[2]);
             if (dayPast > timeHack)
             {
@@ -1237,70 +1318,84 @@ public class gcw extends script.base_script
         }
         utils.setResizeableBatchObjVar(player, LIST_DAILY_KILL_VALUES, dailyList);
     }
+
     public static String packKillerDailyPoints(obj_id player, int gcwPoint, int time) throws InterruptedException
     {
-        return ("" + player + "-" + gcwPoint + "-" + time);
+        return (player + "-" + gcwPoint + "-" + time);
     }
+
     public static int getTimeOfFirstAward(String killRecord) throws InterruptedException
     {
         String[] parse = split(killRecord, '-');
         return utils.stringToInt(parse[2]);
     }
+
     public static int getAccruedPoints(Vector attackList, obj_id attacker) throws InterruptedException
     {
         if (attackList == null || attackList.size() == 0)
         {
             return 0;
         }
-        for (Object o : attackList) {
+        for (Object o : attackList)
+        {
             String[] splitEntry = split(((String) o), '-');
             obj_id idAtPoint = utils.stringToObjId(splitEntry[0]);
-            if (idAtPoint == attacker) {
+            if (idAtPoint == attacker)
+            {
                 return utils.stringToInt(splitEntry[1]);
             }
         }
         return 0;
     }
+
     public static int getAccruedPoints(String killRecord) throws InterruptedException
     {
         String[] parse = split(killRecord, '-');
         return utils.stringToInt(parse[1]);
     }
+
     public static void grantModifiedGcwPoints(obj_id victim, obj_id[] attackers, boolean pvpKill, int point_type, String information) throws InterruptedException
     {
         if (!isIdValid(victim))
         {
             return;
         }
-        if (attackers == null || attackers.length == 0)
+        if (attackers == null)
         {
             return;
         }
-        for (obj_id attacker : attackers) {
-            if (isIdValid(attacker) && exists(attacker) && getDistance(victim, attacker) < 120.0f) {
+        for (obj_id attacker : attackers)
+        {
+            if (isIdValid(attacker) && exists(attacker) && getDistance(victim, attacker) < 120.0f)
+            {
                 grantModifiedGcwPoints(victim, attacker, pvpKill, point_type, information);
             }
         }
     }
+
     public static void grantModifiedGcwPoints(obj_id attacker, int pointValue, int point_type, String information) throws InterruptedException
     {
         pointValue = getModifiedGcwPointValue(attacker, pointValue);
         _grantGcwPoints(null, attacker, pointValue, false, point_type, information);
     }
+
     public static void grantModifiedGcwPoints(obj_id victim, obj_id attacker, boolean pvpKill, int point_type, String information) throws InterruptedException
     {
         int pointValue = getNpcKillCredit(victim, attacker);
         grantModifiedGcwPoints(victim, attacker, pointValue, pvpKill, point_type, information);
     }
+
     public static void grantModifiedGcwPoints(obj_id victim, obj_id attacker, int pointValue, boolean pvpKill, int point_type, String information) throws InterruptedException
     {
         pointValue = getModifiedGcwPointValue(attacker, pointValue);
         _grantGcwPoints(victim, attacker, pointValue, pvpKill, point_type, information);
     }
+
     public static void grantUnmodifiedGcwPoints(obj_id attacker, int pointValue) throws InterruptedException
     {
         _grantGcwPoints(null, attacker, pointValue, false, -1, "");
     }
+
     public static void _grantGcwPoints(obj_id victim, obj_id attacker, int pointValue, boolean pvpKill, int pointType, String information) throws InterruptedException
     {
         if (!isIdValid(attacker) || !exists(attacker) || pointValue < 1 || pet_lib.isPet(victim))
@@ -1330,34 +1425,36 @@ public class gcw extends script.base_script
         gcwInvasionCreditForGCW(attacker, pointValue);
         grantGcwPointsToRegion(attacker, pointValue, pointType);
     }
+
     public static void doGcwPointCsLogging(obj_id player, int pointValue, int pointType, String information) throws InterruptedException
     {
         switch (pointType)
         {
             case GCW_POINT_TYPE_GROUND_PVE:
-            CustomerServiceLog("GCW_points_ground_pve", "%TU has acquired " + pointValue + " points for defeating " + information + " in pve action", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pve", "%TU has acquired " + pointValue + " points for defeating " + information + " in pve action", player);
+                break;
             case GCW_POINT_TYPE_GROUND_PVP:
-            CustomerServiceLog("GCW_points_ground_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in combat", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in combat", player);
+                break;
             case GCW_POINT_TYPE_GROUND_PVP_REGION:
-            CustomerServiceLog("GCW_points_ground_pvp_region", "%TU has acquired " + pointValue + " points in the " + information + " battlefield region.", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pvp_region", "%TU has acquired " + pointValue + " points in the " + information + " battlefield region.", player);
+                break;
             case GCW_POINT_TYPE_BASE_BUSTING:
-            CustomerServiceLog("GCW_points_player_base_busting", "%TU has acquired " + pointValue + " points for destroying " + information, player);
-            break;
+                CustomerServiceLog("GCW_points_player_base_busting", "%TU has acquired " + pointValue + " points for destroying " + information, player);
+                break;
             case GCW_POINT_TYPE_SPACE_PVE:
-            CustomerServiceLog("GCW_points_space_pve", "%TU has acquired " + pointValue + " points for destroying " + information, player);
-            break;
+                CustomerServiceLog("GCW_points_space_pve", "%TU has acquired " + pointValue + " points for destroying " + information, player);
+                break;
             case GCW_POINT_TYPE_SPACE_PVP:
-            CustomerServiceLog("GCW_points_space_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in space combat", player);
-            break;
+                CustomerServiceLog("GCW_points_space_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in space combat", player);
+                break;
             case GCW_POINT_TYPE_GROUND_QUEST:
-            CustomerServiceLog("GCW_points_ground_quest", "%TU has acquired " + pointValue + " points for completing the " + information + " groundquest", player);
+                CustomerServiceLog("GCW_points_ground_quest", "%TU has acquired " + pointValue + " points for completing the " + information + " groundquest", player);
             default:
-            break;
+                break;
         }
     }
+
     public static String getGcwCategory(int pointType) throws InterruptedException
     {
         if (pointType < 0 || pointType >= GCW_POINT_TYPE_MAX)
@@ -1366,11 +1463,13 @@ public class gcw extends script.base_script
         }
         String pointCategory = pointTypes[pointType];
         String scene = getCurrentSceneName();
-        if(!Arrays.asList(validScenes).contains(scene)) {
+        if (!Arrays.asList(validScenes).contains(scene))
+        {
             return null;
         }
         return scene + "_" + pointCategory;
     }
+
     public static String getGcwRegion(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -1379,14 +1478,17 @@ public class gcw extends script.base_script
         }
         region[] regionList = getRegionsAtPoint(getLocation(target));
         String regionName = "";
-        if (regionList != null && regionList.length > 0)
+        if (regionList != null)
         {
-            for (region currentRegion : regionList) {
-                if (currentRegion == null) {
+            for (region currentRegion : regionList)
+            {
+                if (currentRegion == null)
+                {
                     continue;
                 }
                 String currentRegionName = currentRegion.getName();
-                if (currentRegionName != null && currentRegionName.length() > 0 && currentRegionName.startsWith("gcw_region")) {
+                if (currentRegionName != null && currentRegionName.length() > 0 && currentRegionName.startsWith("gcw_region"))
+                {
                     regionName = currentRegionName;
                     break;
                 }
@@ -1403,6 +1505,7 @@ public class gcw extends script.base_script
         }
         return regionName;
     }
+
     public static void grantGcwPointsToRegion(obj_id player, int pointValue, int pointType) throws InterruptedException
     {
         if (!isIdValid(player) || pointValue < 0 || pointType < 0 || pointType >= GCW_POINT_TYPE_MAX)
@@ -1428,6 +1531,7 @@ public class gcw extends script.base_script
             LOG("gcw_region_points", "Rebel gain.  regionName: " + regionName + " category: " + category + " pointValue: " + pointValue);
         }
     }
+
     public static int getImperialPercentileByRegion(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -1441,10 +1545,12 @@ public class gcw extends script.base_script
         }
         return getGcwImperialScorePercentile(category);
     }
+
     public static int getRebelPercentileByRegion(obj_id target) throws InterruptedException
     {
         return 100 - getImperialPercentileByRegion(target);
     }
+
     public static String getRegionFactionOwner(obj_id target) throws InterruptedException
     {
         String category = getGcwRegion(target);
@@ -1463,6 +1569,7 @@ public class gcw extends script.base_script
         }
         return null;
     }
+
     public static boolean verifyPvpRegionStatus(obj_id player) throws InterruptedException
     {
         obj_id region_controller = getPvpRegionControllerIdByPlayer(player);
@@ -1473,6 +1580,7 @@ public class gcw extends script.base_script
         utils.setScriptVar(player, PVP_REGION_ACTIVITY_PERFORMED, true);
         return true;
     }
+
     public static int getNpcKillCredit(obj_id npc, obj_id player) throws InterruptedException
     {
         if (isPlayer(npc) || pet_lib.isPet(npc))
@@ -1506,15 +1614,16 @@ public class gcw extends script.base_script
         switch (difficultyClass)
         {
             case 0:
-            return NORMAL_GCW_VALUE;
+                return NORMAL_GCW_VALUE;
             case 1:
-            return ELITE_GCW_VALUE;
+                return ELITE_GCW_VALUE;
             case 2:
-            return BOSS_GCW_VALUE;
+                return BOSS_GCW_VALUE;
             default:
-            return 0;
+                return 0;
         }
     }
+
     public static int getModifiedGcwPointValue(obj_id player, int passedValue) throws InterruptedException
     {
         float mod = 1.0f;
@@ -1534,19 +1643,22 @@ public class gcw extends script.base_script
         {
             mod += 0.1f;
         }
-        return (int)(mod * passedValue);
+        return (int) (mod * passedValue);
     }
+
     public static void registerPvpRegionControllerWithPlanet(obj_id controlObject, String regionName) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(getLocation(controlObject).area);
         utils.setScriptVar(planetId, REGION_CONTROLLER + "." + regionName, controlObject);
     }
+
     public static obj_id getPvpRegionControllerIdByName(obj_id player, String regionName) throws InterruptedException
     {
         obj_id planetId = getPlanetByName(getLocation(player).area);
         String packedRegion = REGION_CONTROLLER + "." + regionName;
         return utils.hasScriptVar(planetId, packedRegion) ? utils.getObjIdScriptVar(planetId, packedRegion) : null;
     }
+
     public static obj_id getPvpRegionControllerIdByPlayer(obj_id player) throws InterruptedException
     {
         region[] regionList = getRegionsAtPoint(getLocation(player));
@@ -1556,15 +1668,18 @@ public class gcw extends script.base_script
         {
             return null;
         }
-        for (region region : regionList) {
+        for (region region : regionList)
+        {
             String regionName = region.getName();
             String packedRegion = REGION_CONTROLLER + "." + regionName;
-            if (utils.hasScriptVar(planetId, packedRegion)) {
+            if (utils.hasScriptVar(planetId, packedRegion))
+            {
                 regionController = utils.getObjIdScriptVar(planetId, packedRegion);
             }
         }
         return regionController;
     }
+
     public static void notifyPvpRegionControllerOfPlayerEnter(obj_id controllerId, obj_id player) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -1572,6 +1687,7 @@ public class gcw extends script.base_script
         messageTo(controllerId, "newPlayerNotify", dict, 0, false);
         doLogging("GCW_points_ground_pvp", "notifyPvpRegionControllerOfPlayerEnter" + getName(player) + "/" + player + " has entered the region. Notifying controller object " + controllerId);
     }
+
     public static void makeBattlefieldRegion(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller))
@@ -1595,6 +1711,7 @@ public class gcw extends script.base_script
         }
         doLogging("GCW_points_ground_pvp", "makeBattlefieldRegion registerPvpRegionControllerWithPlanet failed");
     }
+
     public static void makePushbackRegion(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller))
@@ -1618,26 +1735,37 @@ public class gcw extends script.base_script
         }
         doLogging("GCW_points_ground_pvp", "makePushbackRegion registerPvpRegionControllerWithPlanet failed");
     }
+
     public static obj_id getPushbackControllerByPlayer(obj_id player) throws InterruptedException
     {
         return getPvpRegionControllerIdByPlayer(player);
     }
+
     public static void grantSpacePvpKillCredit(obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         Vector validAttackers = new Vector();
         validAttackers.setSize(0);
-        for (obj_id attacker : attackers) {
-            if (factions.isImperial(defender)) {
-                if (factions.isRebel(attacker) && validateSpaceTier(defender, attacker)) {
+        for (obj_id attacker : attackers)
+        {
+            if (factions.isImperial(defender))
+            {
+                if (factions.isRebel(attacker) && validateSpaceTier(defender, attacker))
+                {
                     utils.addElement(validAttackers, attacker);
-                } else {
+                }
+                else
+                {
                     LOG("doLogging", "Faction or tier error");
                 }
             }
-            if (factions.isRebel(defender)) {
-                if (factions.isImperial(attacker) && validateSpaceTier(defender, attacker)) {
+            if (factions.isRebel(defender))
+            {
+                if (factions.isImperial(attacker) && validateSpaceTier(defender, attacker))
+                {
                     utils.addElement(validAttackers, attacker);
-                } else {
+                }
+                else
+                {
                     LOG("doLogging", "Faction or tier error");
                 }
             }
@@ -1648,11 +1776,12 @@ public class gcw extends script.base_script
         }
         for (int k = 0; k < validAttackers.size(); k++)
         {
-            String packedAttacker = "" + ((obj_id)validAttackers.get(k)) + "-" + 1;
+            String packedAttacker = validAttackers.get(k) + "-" + 1;
             int reward = distributeIndividualContribution(defender, packedAttacker, validAttackers.size(), GCW_POINT_TYPE_SPACE_PVP);
-            pvpModifyCurrentPvpKills(((obj_id)validAttackers.get(k)), 1);
+            pvpModifyCurrentPvpKills(((obj_id) validAttackers.get(k)), 1);
         }
     }
+
     public static boolean validateSpaceTier(obj_id defender, obj_id attacker) throws InterruptedException
     {
         int defLevel = space_flags.getPilotTier(defender);
@@ -1660,40 +1789,48 @@ public class gcw extends script.base_script
         switch (defLevel)
         {
             case 0:
-            return false;
+                return false;
             case 1:
-            if (atkLevel > 2)
-            {
-                return false;
-            }
+                if (atkLevel > 2)
+                {
+                    return false;
+                }
             case 2:
-            if (atkLevel > 3)
-            {
-                return false;
-            }
+                if (atkLevel > 3)
+                {
+                    return false;
+                }
             case 3:
-            break;
+                break;
             case 4:
-            break;
+                break;
             case 5:
-            break;
+                break;
         }
         return true;
     }
+
     public static int getSpaceKillCredit(int player_level, String targetTier)
     {
-        if(targetTier.startsWith("tier")) {
+        if (targetTier.startsWith("tier"))
+        {
             int target_level = Integer.parseInt(targetTier.replace("tier", ""));
-            if (player_level - target_level == 1) {
+            if (player_level - target_level == 1)
+            {
                 return Double.valueOf(SPACE_GCW_VALUE * (player_level / 2.0f)).intValue();
-            } else if (player_level == target_level) {
+            }
+            else if (player_level == target_level)
+            {
                 return Double.valueOf(SPACE_GCW_VALUE * player_level).intValue();
-            } else if (player_level < target_level) {
+            }
+            else if (player_level < target_level)
+            {
                 return Double.valueOf(SPACE_GCW_VALUE * (player_level + 0.5)).intValue();
             }
         }
         return 0;
     }
+
     public static void grantBaseDestructionPoints(obj_id base) throws InterruptedException
     {
         obj_id[] interiorPlayers = trial.getPlayersInDungeon(base);
@@ -1706,46 +1843,64 @@ public class gcw extends script.base_script
         }
         Vector filteredList = new Vector();
         filteredList.setSize(0);
-        if (interiorPlayers != null && interiorPlayers.length > 0)
+        if (interiorPlayers != null)
         {
-            for (obj_id interiorPlayer : interiorPlayers) {
-                if (isIdValid(interiorPlayer) && exists(interiorPlayer)) {
+            for (obj_id interiorPlayer : interiorPlayers)
+            {
+                if (isIdValid(interiorPlayer) && exists(interiorPlayer))
+                {
                     String playerFac = factions.getFaction(interiorPlayer);
-                    if (playerFac == null) {
+                    if (playerFac == null)
+                    {
                         continue;
                     }
-                    if (baseFac.equals("Rebel") && playerFac.equals("Imperial")) {
+                    if (baseFac.equals("Rebel") && playerFac.equals("Imperial"))
+                    {
                         utils.addElement(filteredList, interiorPlayer);
                     }
-                    if (baseFac.equals("Imperial") && playerFac.equals("Rebel")) {
+                    if (baseFac.equals("Imperial") && playerFac.equals("Rebel"))
+                    {
                         utils.addElement(filteredList, interiorPlayer);
                     }
                 }
             }
         }
-        if (exteriorPlayers != null && exteriorPlayers.length > 0)
+        if (exteriorPlayers != null)
         {
-            for (obj_id exteriorPlayer : exteriorPlayers) {
-                if (isIdValid(exteriorPlayer) && exists(exteriorPlayer)) {
+            for (obj_id exteriorPlayer : exteriorPlayers)
+            {
+                if (isIdValid(exteriorPlayer) && exists(exteriorPlayer))
+                {
                     String playerFac = factions.getFaction(exteriorPlayer);
-                    if (playerFac == null) {
+                    if (playerFac == null)
+                    {
                         continue;
                     }
-                    if (baseFac.equals("Rebel") && playerFac.equals("Imperial")) {
-                        if (filteredList.size() > 0) {
-                            if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1) {
+                    if (baseFac.equals("Rebel") && playerFac.equals("Imperial"))
+                    {
+                        if (filteredList.size() > 0)
+                        {
+                            if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1)
+                            {
                                 utils.addElement(filteredList, exteriorPlayer);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             utils.addElement(filteredList, exteriorPlayer);
                         }
                     }
-                    if (baseFac.equals("Imperial") && playerFac.equals("Rebel")) {
-                        if (filteredList.size() > 0) {
-                            if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1) {
+                    if (baseFac.equals("Imperial") && playerFac.equals("Rebel"))
+                    {
+                        if (filteredList.size() > 0)
+                        {
+                            if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1)
+                            {
                                 utils.addElement(filteredList, exteriorPlayer);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             utils.addElement(filteredList, exteriorPlayer);
                         }
                     }
@@ -1771,10 +1926,12 @@ public class gcw extends script.base_script
             CustomerServiceLog("GCW_points_player_base_busting", "There are no valid players in the filtered list");
             return;
         }
-        for (Object o : filteredList) {
+        for (Object o : filteredList)
+        {
             grantModifiedGcwPoints(((obj_id) o), value, gcw.GCW_POINT_TYPE_BASE_BUSTING, template);
         }
     }
+
     public static int getGcwGroundQuestAward(obj_id player, int quest_tier) throws InterruptedException
     {
         if (!factions.isImperial(player) && !factions.isRebel(player))
@@ -1789,67 +1946,75 @@ public class gcw extends script.base_script
         float groundQuestGcwValue = tierValue * 5000;
         float capDeltaBonus = rankCapBase / rankCap;
         groundQuestGcwValue *= capDeltaBonus;
-        return (int)groundQuestGcwValue;
+        return (int) groundQuestGcwValue;
     }
+
     private static void triggerOnPvpRankingChanged(obj_id player, int oldRank, int newRank)
     {
-        Object [] params = new Object[] {
+        Object[] params = new Object[]{
                 player,
                 oldRank,
                 newRank
         };
         script_entry.runScripts("OnPvpRankingChanged", params);
     }
+
     public static void increaseGcwRatingToNextRank(obj_id player)
     {
         int MAX_GCW_RANK = 12;
         int rank = Math.min(pvpGetCurrentGcwRank(player), MAX_GCW_RANK);
-        if(rank < MAX_GCW_RANK) {
+        if (rank < MAX_GCW_RANK)
+        {
             String gcwRankTable = "datatables/gcw/gcw_rank.iff";
             int maxRating = dataTableGetInt(gcwRankTable, rank - 1, "MaxRating");
             ctsUseOnlySetGcwInfo(player, pvpGetCurrentGcwPoints(player), maxRating + 1, pvpGetCurrentPvpKills(player), pvpGetLifetimeGcwPoints(player), pvpGetMaxGcwImperialRating(player), pvpGetMaxGcwRebelRating(player), pvpGetLifetimePvpKills(player), pvpGetNextGcwRatingCalcTime(player));
             triggerOnPvpRankingChanged(player, rank, rank + 1);
         }
     }
+
     public static void decreaseGcwRatingToPreviousRank(obj_id player)
     {
         int rank = Math.max(pvpGetCurrentGcwRank(player), 0);
-        if(rank > 0) {
+        if (rank > 0)
+        {
             String gcwRankTable = "datatables/gcw/gcw_rank.iff";
             int minRating = dataTableGetInt(gcwRankTable, rank - 1, "MinRating");
             ctsUseOnlySetGcwInfo(player, pvpGetCurrentGcwPoints(player), minRating - 1, pvpGetCurrentPvpKills(player), pvpGetLifetimeGcwPoints(player), pvpGetMaxGcwImperialRating(player), pvpGetMaxGcwRebelRating(player), pvpGetLifetimePvpKills(player), pvpGetNextGcwRatingCalcTime(player));
             triggerOnPvpRankingChanged(player, rank, rank - 1);
         }
     }
+
     public static float getGroundQuestTierBonus(int quest_tier) throws InterruptedException
     {
         float tierValue = 0.0f;
         switch (quest_tier)
         {
             case 1:
-            tierValue = 0.03f;
-            break;
+                tierValue = 0.03f;
+                break;
             case 2:
-            tierValue = 0.039f;
-            break;
+                tierValue = 0.039f;
+                break;
             case 3:
-            tierValue = 0.047f;
-            break;
+                tierValue = 0.047f;
+                break;
             case 4:
-            tierValue = 0.054f;
-            break;
+                tierValue = 0.054f;
+                break;
             case 5:
-            tierValue = 0.06f;
-            break;
+                tierValue = 0.06f;
+                break;
             default:
-            break;
+                break;
         }
         return tierValue;
     }
+
     public static void doLogging(String section, String message) throws InterruptedException
     {
         CustomerServiceLog(section, message);
     }
+
     public static region getPvPRegion(obj_id controller) throws InterruptedException
     {
         region[] regions = getRegionsAtPoint(getLocation(controller));
@@ -1858,13 +2023,16 @@ public class gcw extends script.base_script
             return null;
         }
         region pvpRegion = null;
-        for (region region : regions) {
-            if (isNotifyRegion(region)) {
+        for (region region : regions)
+        {
+            if (isNotifyRegion(region))
+            {
                 pvpRegion = region;
             }
         }
         return pvpRegion;
     }
+
     public static void getRegionToRegister(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller))
@@ -1883,10 +2051,12 @@ public class gcw extends script.base_script
             registerPvpRegionControllerWithPlanet(controller, regionName);
         }
     }
+
     public static boolean isPlayerValidOnBattlefield(obj_id player, obj_id controller) throws InterruptedException
     {
         return true;
     }
+
     public static String getBattlefieldRegionName(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller))
@@ -1900,6 +2070,7 @@ public class gcw extends script.base_script
         }
         return PVP_BATTLEFIELD_REGION + "_" + loc.x + "_" + loc.z;
     }
+
     public static String getPushbackRegionName(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller))
@@ -1913,6 +2084,7 @@ public class gcw extends script.base_script
         }
         return PVP_PUSHBACK_REGION + "_" + loc.x + "_" + loc.z;
     }
+
     public static boolean canEntertainGcwNonPlayingCharacter(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1939,12 +2111,9 @@ public class gcw extends script.base_script
             sendSystemMessage(player, SID_YOU_NEED_ENTERTAINMENT_QUEST);
             return false;
         }
-        if (buff.hasBuff(npc, GCW_NPC_ENTERTAINED_BUFF))
-        {
-            return false;
-        }
-        return true;
+        return !buff.hasBuff(npc, GCW_NPC_ENTERTAINED_BUFF);
     }
+
     public static boolean setEntertainGcwNonPlayerCharacter(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1974,6 +2143,7 @@ public class gcw extends script.base_script
         sui.setPid(player, pid, ENTERTAIN_GCW_TROOPS_PID);
         return true;
     }
+
     public static boolean canGcwObjectBeRepaired(obj_id object) throws InterruptedException
     {
         LOG("gcw_patrol_point", "canGcwObjectBeRepaired");
@@ -2007,6 +2177,7 @@ public class gcw extends script.base_script
         LOG("gcw_patrol_point", "canGcwObjectBeRepaired passed all validation");
         return true;
     }
+
     public static boolean useGcwObjectForQuest(obj_id player, obj_id gcwObject, String questName) throws InterruptedException
     {
         LOG("gcw_patrol_point", "useGcwObjectForQuest init");
@@ -2029,10 +2200,12 @@ public class gcw extends script.base_script
             timeToRepair = GCW_FATIGUE_TIMER_MAX;
         }
         int pid = -1;
-        switch (questName) {
+        switch (questName)
+        {
             case GCW_SPY_PATROL_DESTROY_QUEST:
                 timeToRepair = 5;
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleOpposingFactionDestroyQuest");
@@ -2042,7 +2215,8 @@ public class gcw extends script.base_script
                 break;
             case GCW_SPY_PATROL_SCOUT_QUEST:
                 timeToRepair = 5;
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleOpposingFactionScoutQuest");
@@ -2051,7 +2225,8 @@ public class gcw extends script.base_script
                 sui.setPid(player, pid, gcw.SPY_SCOUT_PID);
                 break;
             case GCW_REPAIR_PATROL_QUEST:
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleTraderRepairQuest");
@@ -2062,7 +2237,8 @@ public class gcw extends script.base_script
                 sui.setPid(player, pid, gcw.TRADER_REPAIR_PID);
                 break;
             case GCW_REPAIR_TURRET_QUEST:
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleTraderRepairQuest");
@@ -2073,7 +2249,8 @@ public class gcw extends script.base_script
                 sui.setPid(player, pid, gcw.TRADER_REPAIR_PID);
                 break;
             case GCW_REPAIR_BARRICADE_QUEST:
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleTraderRepairQuest");
@@ -2084,7 +2261,8 @@ public class gcw extends script.base_script
                 sui.setPid(player, pid, gcw.TRADER_REPAIR_PID);
                 break;
             case GCW_REPAIR_VEHICLE_PATROL_QUEST:
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleTraderRepairQuest");
@@ -2095,7 +2273,8 @@ public class gcw extends script.base_script
                 sui.setPid(player, pid, gcw.TRADER_REPAIR_PID);
                 break;
             case GCW_MEDIC_HEAL_QUEST:
-                if (isGod(player)) {
+                if (isGod(player))
+                {
                     timeToRepair = 3;
                 }
                 LOG("gcw_patrol_point", "useGcwObjectForQuest sending to messageHandler handleTraderRepairQuest");
@@ -2108,6 +2287,7 @@ public class gcw extends script.base_script
         }
         return pid >= 0;
     }
+
     public static boolean repairGcwObject(obj_id object, obj_id player, int resourceCount) throws InterruptedException
     {
         if (!isValidId(object) || !exists(object))
@@ -2145,18 +2325,19 @@ public class gcw extends script.base_script
                 return false;
             }
             double subtract = resourceCount * 0.2f;
-            if ((int)subtract <= 0)
+            if ((int) subtract <= 0)
             {
                 return false;
             }
-            setMaxHitpoints(object, maxHp - (int)subtract);
-            setHitpoints(object, currentHp + (int)(resourceCount * 0.8f));
+            setMaxHitpoints(object, maxHp - (int) subtract);
+            setHitpoints(object, currentHp + (int) (resourceCount * 0.8f));
         }
         int repairCount = getIntObjVar(object, GCW_OBJECT_REPAIR_COUNT);
         setObjVar(object, GCW_OBJECT_REPAIR_COUNT, repairCount + 1);
         messageTo(object, "repairComplete", null, 1.0f, false);
         return true;
     }
+
     public static void playQuestIconParticle(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -2167,6 +2348,7 @@ public class gcw extends script.base_script
         utils.setScriptVar(self, "iconMessageTime", playIconTime);
         messageTo(self, "playQuestIcon", params, 1.0f, false);
     }
+
     public static void playQuestIconHandler(obj_id self, dictionary params) throws InterruptedException
     {
         int playIconTime = utils.getIntScriptVar(self, "iconMessageTime");
@@ -2194,6 +2376,7 @@ public class gcw extends script.base_script
             messageTo(self, "playQuestIcon", params, 6.0f, false);
         }
     }
+
     public static boolean signalAllParticipantsForDamage(obj_id victimObject, String questName, String signalHasName, String signalSendName) throws InterruptedException
     {
         LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage init");
@@ -2220,18 +2403,22 @@ public class gcw extends script.base_script
             return false;
         }
         LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage attackerList.length: " + attackerList.length);
-        for (obj_id obj_id : attackerList) {
+        for (obj_id obj_id : attackerList)
+        {
             LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage attackerList[i]: " + obj_id);
-            if (!isValidId(obj_id)) {
+            if (!isValidId(obj_id))
+            {
                 continue;
             }
             trial.addNonInstanceFactionParticipant(obj_id, victimObject);
             LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage attackerList[i]: " + obj_id + " is a valid OID");
-            if (!groundquests.isQuestActive(obj_id, questName)) {
+            if (!groundquests.isQuestActive(obj_id, questName))
+            {
                 continue;
             }
             LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage attackerList[i]: " + obj_id + " has quest active!");
-            if (!groundquests.isTaskActive(obj_id, questName, signalHasName)) {
+            if (!groundquests.isTaskActive(obj_id, questName, signalHasName))
+            {
                 continue;
             }
             LOG("signalAllParticipantsForDamage", "signalAllParticipantsForDamage signal being sent to: " + obj_id);
@@ -2240,6 +2427,7 @@ public class gcw extends script.base_script
         }
         return true;
     }
+
     public static boolean hasConstructionOrRepairTool(obj_id player, obj_id object) throws InterruptedException
     {
         LOG("gcw_patrol_point", "hasConstructionOrRepairTool 1");
@@ -2284,6 +2472,7 @@ public class gcw extends script.base_script
         LOG("gcw_patrol_point", "hasConstructionOrRepairTool 8");
         return utils.playerHasItemByTemplateInInventoryOrEquipped(player, desiredTemplate);
     }
+
     public static boolean useConstructionOrRepairTool(obj_id player, obj_id object) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2335,6 +2524,7 @@ public class gcw extends script.base_script
         gcwInvasionCreditForCrafting(player);
         return decrementCount(toolObject);
     }
+
     public static int getGcwCityInvasionPhase(obj_id childObject) throws InterruptedException
     {
         if (!isValidId(childObject) || !exists(childObject))
@@ -2356,6 +2546,7 @@ public class gcw extends script.base_script
         }
         return GCW_CITY_PHASE_UNKNOWN;
     }
+
     public static boolean playerSystemMessageResourceNeeded(obj_id player, obj_id object, boolean construction) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2410,9 +2601,10 @@ public class gcw extends script.base_script
         sendSystemMessageProse(player, pp);
         return true;
     }
+
     public static int getFatigueTimerMod(obj_id player) throws InterruptedException
     {
-        int fatigueStack = (int)buff.getBuffStackCount(player, BUFF_PLAYER_FATIGUE);
+        int fatigueStack = (int) buff.getBuffStackCount(player, BUFF_PLAYER_FATIGUE);
         int fatigueMod = 0;
         if (fatigueStack > 0)
         {
@@ -2420,6 +2612,7 @@ public class gcw extends script.base_script
         }
         return fatigueMod;
     }
+
     public static obj_id getInvasionSequencerNearby(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
@@ -2443,6 +2636,7 @@ public class gcw extends script.base_script
         }
         return null;
     }
+
     public static String getCityFromTable(obj_id self) throws InterruptedException
     {
         String cityName = "";
@@ -2451,7 +2645,8 @@ public class gcw extends script.base_script
         {
             return null;
         }
-        switch (datatable) {
+        switch (datatable)
+        {
             case DEARIC_CITY_TABLE:
                 return CITY_DEARIC;
             case KEREN_CITY_TABLE:
@@ -2461,6 +2656,7 @@ public class gcw extends script.base_script
         }
         return null;
     }
+
     public static boolean awardGcwInvasionParticipants(Vector participantList, int factionFlag, int gcwTokenAmt, int gcwPointAmt, dictionary finalAnnouncementParams) throws InterruptedException
     {
         if (participantList == null || participantList.size() <= 0)
@@ -2484,7 +2680,8 @@ public class gcw extends script.base_script
         {
             tokenStaticName = GCW_IMPERIAL_TOKEN;
         }
-        else {
+        else
+        {
             tokenStaticName = GCW_REBEL_TOKEN;
         }
         float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "gcwTokenBonus"));
@@ -2492,34 +2689,41 @@ public class gcw extends script.base_script
         {
             gcwTokenAmt *= multiplier;
         }
-        for (Object o : participantList) {
-            if (!isValidId(((obj_id) o)) || !exists(((obj_id) o))) {
-                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player OID is invalid or doesn't exist. Probably due to the player exiting the battle field, traveling or moving to another server process (crossing server boundary).");
+        for (Object o : participantList)
+        {
+            if (!isValidId(((obj_id) o)) || !exists(((obj_id) o)))
+            {
+                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + o + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player OID is invalid or doesn't exist. Probably due to the player exiting the battle field, traveling or moving to another server process (crossing server boundary).");
                 continue;
             }
-            if (!isPlayerConnected(((obj_id) o))) {
-                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player is NOT CURRENTLY CONNECTED.");
+            if (!isPlayerConnected(((obj_id) o)))
+            {
+                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + o + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player is NOT CURRENTLY CONNECTED.");
                 continue;
             }
             grantUnmodifiedGcwPoints(((obj_id) o), gcwPointAmt);
-            if (tokenStaticName == null || tokenStaticName.length() <= 0) {
-                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because the token string name is INVALID. This is probably due to an edge case where the player changed their faction status to be neutral.");
+            if (tokenStaticName == null || tokenStaticName.length() <= 0)
+            {
+                CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + o + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because the token string name is INVALID. This is probably due to an edge case where the player changed their faction status to be neutral.");
                 continue;
             }
             obj_id playerInv = getObjectInSlot(((obj_id) o), utils.SLOT_INVENTORY);
-            if (isValidId(playerInv)) {
+            if (isValidId(playerInv))
+            {
                 obj_id lootCreated = static_item.createNewItemFunction(tokenStaticName, playerInv, gcwTokenAmt);
                 lootList[0] = lootCreated;
                 showLootBox(((obj_id) o), lootList);
                 groundquests.sendPlacedMoreThanOneInInventorySystemMessage(((obj_id) o), lootCreated, gcwTokenAmt);
-                if (finalAnnouncementParams != null) {
+                if (finalAnnouncementParams != null)
+                {
                     messageTo(((obj_id) o), "playIconicGCWWrapUpMessage", finalAnnouncementParams, 13, false);
                 }
-                CustomerServiceLog("gcw_city_invasion", "GCW CITY SYSTEM HAS REWARDED PLAYER: " + ((obj_id) o) + " with " + gcwTokenAmt + " " + tokenStaticName + " static item tokens for PARTICIPATING IN A GCW CITY CONFLICT.");
+                CustomerServiceLog("gcw_city_invasion", "GCW CITY SYSTEM HAS REWARDED PLAYER: " + o + " with " + gcwTokenAmt + " " + tokenStaticName + " static item tokens for PARTICIPATING IN A GCW CITY CONFLICT.");
             }
         }
         return true;
     }
+
     public static boolean invasionIsValidAndEngaged() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -2532,12 +2736,9 @@ public class gcw extends script.base_script
         {
             return false;
         }
-        if (!utils.hasScriptVar(sequencer, "gcw.invasionRunning"))
-        {
-            return false;
-        }
-        return true;
+        return utils.hasScriptVar(sequencer, "gcw.invasionRunning");
     }
+
     public static void gcwSetCredits(obj_id who, int playerGCW, int playerPvpKills, int playerKills, int playerAssists, int playerCraftedItems, int playerDestroyedItems) throws InterruptedException
     {
         if (!isIdValid(who) || !exists(who) || !isPlayer(who))
@@ -2587,6 +2788,7 @@ public class gcw extends script.base_script
         }
         gcw_score.setPlayerGcwData(who, playerName, playerFaction, playerProfession, playerLevel, playerGCW, playerPvpKills, playerKills, playerAssists, playerCraftedItems, playerDestroyedItems);
     }
+
     public static void gcwInvasionCreditForGCW(obj_id who, int gcw) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2595,6 +2797,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, gcw, 0, 0, 0, 0, 0);
     }
+
     public static void gcwInvasionCreditForPVPKill(obj_id who) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2603,6 +2806,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, 0, 1, 0, 0, 0, 0);
     }
+
     public static void gcwInvasionCreditForKill(obj_id who) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2611,6 +2815,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, 0, 0, 1, 0, 0, 0);
     }
+
     public static void gcwInvasionCreditForAssist(obj_id who) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2619,6 +2824,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, 0, 0, 0, 1, 0, 0);
     }
+
     public static void gcwInvasionCreditForCrafting(obj_id who) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2627,6 +2833,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, 0, 0, 0, 0, 1, 0);
     }
+
     public static void gcwInvasionCreditForDestroy(obj_id who) throws InterruptedException
     {
         if (!invasionIsValidAndEngaged())
@@ -2635,6 +2842,7 @@ public class gcw extends script.base_script
         }
         gcwSetCredits(who, 0, 0, 0, 0, 0, 1);
     }
+
     public static String getFormattedInvasionTime(obj_id self, int phase) throws InterruptedException
     {
         obj_id planet = getPlanetByName("tatooine");
@@ -2667,6 +2875,7 @@ public class gcw extends script.base_script
         }
         return "";
     }
+
     public static int gcwGetTimeToInvasion() throws InterruptedException
     {
         String timeConfig = getConfigSetting("GameServer", "gcwInvasionCycleTime");
@@ -2685,6 +2894,7 @@ public class gcw extends script.base_script
         }
         return time;
     }
+
     public static int gcwGetInvasionMaximumRunning() throws InterruptedException
     {
         String maxConfig = getConfigSetting("GameServer", "gcwInvasionCityMaximumRunning");
@@ -2695,6 +2905,7 @@ public class gcw extends script.base_script
         }
         return utils.stringToInt(maxConfig);
     }
+
     public static boolean gcwIsInvasionCityOn(String city) throws InterruptedException
     {
         if (city == null || city.length() <= 0)
@@ -2702,17 +2913,19 @@ public class gcw extends script.base_script
             return false;
         }
         String cityConfig = getConfigSetting("GameServer", "gcwcity" + city);
-        if (cityConfig == null || (!cityConfig.equals("1") && !cityConfig.toLowerCase().equals("true")))
+        if (cityConfig == null || (!cityConfig.equals("1") && !cityConfig.equalsIgnoreCase("true")))
         {
             CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not configured to run a city invasion. Function returning False.");
             return false;
         }
-        if (city.equalsIgnoreCase("dearic") && utils.checkConfigFlag("GameServer", "lifeday")) {
+        if (city.equalsIgnoreCase("dearic") && utils.checkConfigFlag("GameServer", "lifeday"))
+        {
             CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not running because life day is turned on.");
             return false;
         }
         return true;
     }
+
     public static int gcwGetNextInvasionHour(String cityName) throws InterruptedException
     {
         int activeCityCount = gcwGetActiveCityCount();
@@ -2723,69 +2936,78 @@ public class gcw extends script.base_script
         // loop through possible cycles to find when the city will be next active.
         int checkCycle = currentCycle;
         int checkHour = currentHour;
-        for(int i = 0; i < activeCityCount; i++){
+        for (int i = 0; i < activeCityCount; i++)
+        {
             checkCycle++;
             checkHour = checkHour + invasionInterval;
-            if(checkCycle >= activeCityCount) checkCycle = 0;
-            if(gcwHasInvasionInCycle(cityName, checkCycle)) {
+            if (checkCycle >= activeCityCount) checkCycle = 0;
+            if (gcwHasInvasionInCycle(cityName, checkCycle))
+            {
                 break;
             }
         }
         int nextHour = checkHour;
 
-        if(nextHour > 23)
+        if (nextHour > 23)
             nextHour = nextHour - 24;
         return nextHour;
     }
+
     public static boolean gcwHasInvasionInCycle(String cityName, int cycle) throws InterruptedException
     {
 
         // if the max is set to 0 then nothing should happen.
         int maxRunning = gcwGetInvasionMaximumRunning();
-        if(maxRunning == 0){
-            LOG("gcwlog","maxrunning is 0");
+        if (maxRunning == 0)
+        {
+            LOG("gcwlog", "maxrunning is 0");
             return false;
         }
 
         // if the total active cities is 0 or if the cycle is larger that the cities that are active
         // then nothing should happen.
         String[] activeCities = gcwGetActiveCities();
-        if(activeCities.length == 0 || cycle >= activeCities.length)
+        if (activeCities.length == 0 || cycle >= activeCities.length)
         {
-            LOG("gcwlog","no active cities or cycle is bigger than active cities.  Active city length is " + activeCities.length + " and cycle is " + cycle);
+            LOG("gcwlog", "no active cities or cycle is bigger than active cities.  Active city length is " + activeCities.length + " and cycle is " + cycle);
             return false;
         }
 
         int cityIndex = -1;
-        for(int i = 0; i < activeCities.length; i++){
-            if(activeCities[i].equals(cityName)){
+        for (int i = 0; i < activeCities.length; i++)
+        {
+            if (activeCities[i].equals(cityName))
+            {
                 cityIndex = i;
                 break;
             }
         }
         // if the city in question was not found in the active cities then nothing should happen.
-        if(cityIndex == -1)
+        if (cityIndex == -1)
         {
-            LOG("gcwlog","hmmm... " + cityName + " wasn't found in active cities...");
+            LOG("gcwlog", "hmmm... " + cityName + " wasn't found in active cities...");
             return false;
         }
 
         // make sure total active cities is capped at total available to be active.
-        if(maxRunning > activeCities.length)
+        if (maxRunning > activeCities.length)
             maxRunning = INVASION_CITIES.length;
 
-        LOG("gcwlog","Checking if city (" + cityName + ") is active in cycle (" + cycle + ") with active city count of (" + activeCities.length + ") and max running (" + maxRunning + ") with city index of (" + cityIndex + ").");
+        LOG("gcwlog", "Checking if city (" + cityName + ") is active in cycle (" + cycle + ") with active city count of (" + activeCities.length + ") and max running (" + maxRunning + ") with city index of (" + cityIndex + ").");
 
-        switch(activeCities.length){
+        switch (activeCities.length)
+        {
             case 1:
                 return true;
             case 2:
-                if(maxRunning == 1){
+                if (maxRunning == 1)
+                {
                     return cityIndex == cycle;
                 }
                 return true;
             case 3:
-                switch(maxRunning){
+                switch (maxRunning)
+                {
                     case 1:
                         return cityIndex == cycle;
                     case 2:
@@ -2877,21 +3099,26 @@ public class gcw extends script.base_script
         return false;
         */
     }
+
     public static String[] gcwGetActiveCities() throws InterruptedException
     {
         Vector<String> activeCities = new Vector<>();
-        for (String cityName : INVASION_CITIES){
+        for (String cityName : INVASION_CITIES)
+        {
             String value = getConfigSetting("GameServer", "gcwcity" + cityName);
-            if (value != null && (value.equals("1") || value.toLowerCase().equals("true"))) {
+            if (value != null && (value.equals("1") || value.equalsIgnoreCase("true")))
+            {
                 activeCities.add(cityName);
             }
         }
         return activeCities.toArray(new String[activeCities.size()]);
     }
+
     public static int gcwGetActiveCityCount() throws InterruptedException
     {
         return gcwGetActiveCities().length;
     }
+
     public static int gcwCalculateInvasionCycle() throws InterruptedException
     {
         int invasionInterval = gcwGetTimeToInvasion();  // from config setting.
@@ -2905,6 +3132,7 @@ public class gcw extends script.base_script
         int hour = convertedCalendarTime[1];
         return ((hour / invasionInterval) % totalActiveCities);
     }
+
     // GMT
     // Returns seconds until the next invasion
     public static int gcwGetNextInvasionTime(String cityName) throws InterruptedException
@@ -2966,6 +3194,7 @@ public class gcw extends script.base_script
         LOG("gcwlog", "cityName: " + cityName + " nextInterval: " + invasionOnNextInterval + " nextHour: " + nextHour);
         return secondsUntilNextDailyTime(nextHour, 0, 0);
     }
+
     public static boolean gcwTutorialCheck(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2980,6 +3209,7 @@ public class gcw extends script.base_script
         setObjVar(player, GCW_TUTORIAL_FLAG, 1);
         return true;
     }
+
     public static boolean gcwCityHelpText(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))

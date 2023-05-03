@@ -7,13 +7,14 @@ import java.util.Vector;
 
 public class stimpack_dispensor extends script.base_script
 {
-    public stimpack_dispensor()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_STIMPACK_LIST = "droid_module.stimpack_list";
     public static final String SCRIPT_VAR_STIMPACK_DROID = "droid_module.stimpack_droid";
     public static final String SCRIPT_VAR_STIMPACK_SUI = "droid_module.stimpack_sui";
+    public stimpack_dispensor()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -43,6 +44,7 @@ public class stimpack_dispensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_ITEM_OPTIONS && item != menu_info_types.SERVER_HEAL_WOUND_HEALTH)
@@ -98,8 +100,10 @@ public class stimpack_dispensor extends script.base_script
             dsrc.setSize(0);
             if (items != null)
             {
-                for (obj_id item1 : items) {
-                    if ((getTemplateName(item1)).equals("object/tangible/medicine/instant_stimpack/stimpack_a.iff")) {
+                for (obj_id item1 : items)
+                {
+                    if ((getTemplateName(item1)).equals("object/tangible/medicine/instant_stimpack/stimpack_a.iff"))
+                    {
                         stim_a = utils.addElement(stim_a, item1);
                         int power = getIntObjVar(item1, "healing.power");
                         int charges = getCount(item1);
@@ -124,6 +128,7 @@ public class stimpack_dispensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -169,6 +174,7 @@ public class stimpack_dispensor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgStimpackDispensorRecharged(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "module_data.stimpack_recharging");

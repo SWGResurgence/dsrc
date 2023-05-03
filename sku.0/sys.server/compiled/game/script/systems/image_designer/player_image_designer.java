@@ -32,12 +32,14 @@ public class player_image_designer extends script.base_script
     public static final float IMAGE_DESIGN_RANGE = 30.0f;
     public static int id_status = 0;
     public static int id_accept = 0;
+
     public int OnImageDesignCanceled(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, VAR_IMAGE_DESIGN_CONFIRM);
         detachScript(self, SCRIPT_IMAGE_DESIGNER_RESPONSE);
         return SCRIPT_CONTINUE;
     }
+
     public int imageDesignRequestStart(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_image_designer::imageDesignRequestStart");
@@ -60,7 +62,7 @@ public class player_image_designer extends script.base_script
             {
                 design_target = target;
             }
-            else 
+            else
             {
                 design_target = self;
             }
@@ -128,9 +130,9 @@ public class player_image_designer extends script.base_script
         String holoEmote = "";
         if (hasScript(design_target, SCRIPT_HOLO_EMOTE))
         {
-            
+
         }
-        
+
         {
             holoEmote = utils.getStringObjVar(design_target, "holoemote");
         }

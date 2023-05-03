@@ -10,6 +10,7 @@ public class factional_dungeon_grandparent extends script.base_script
     public factional_dungeon_grandparent()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String strType = getStringObjVar(self, "type");
@@ -19,18 +20,19 @@ public class factional_dungeon_grandparent extends script.base_script
             {
                 setObjVar(self, "strFaction", strType);
             }
-            else 
+            else
             {
                 setObjVar(self, "strFaction", "Rebel");
             }
         }
-        else 
+        else
         {
             setObjVar(self, "strFaction", "Rebel");
         }
         messageTo(self, "bootStrap", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int bootStrap(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "objParent"))
@@ -42,7 +44,7 @@ public class factional_dungeon_grandparent extends script.base_script
                 setObjVar(self, "objParent", objParents[0]);
                 setObjVar(objParents[0], "intPoints", getIntObjVar(self, "intPoints"));
             }
-            else 
+            else
             {
                 location locTest = getLocation(self);
                 locTest.x = locTest.x + 1;

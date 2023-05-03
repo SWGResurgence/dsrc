@@ -24,10 +24,12 @@ public class city_furniture extends script.base_script
     public static final string_id SID_MOVE_DOWN = new string_id("Move Down");
     public static final string_id SID_MOVE_TO_ME = new string_id("Move Decoration to Self");
     public static final string_id SID_MOVE_TO_Y = new string_id("Move Decoration to Ground");
+    public static final string_id SID_FACE_ME = new string_id("Face Decoration to Self");
     public static final string_id SID_NAME = new string_id("Set Decoration Name");
     public static final string_id NO_SKILL_DECO = new string_id("You do not have the skill to place this decoration.");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
+
     public city_furniture()
     {
     }
@@ -130,6 +132,7 @@ public class city_furniture extends script.base_script
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU19, SID_MOVE_TO_Y);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU40, SID_FACE_ME);
                 if (!utils.isNestedWithinAPlayer(player))
                 {
                     if (canManipulate(self, player))
@@ -163,20 +166,20 @@ public class city_furniture extends script.base_script
 
     private boolean canManipulate(obj_id self, obj_id player) throws InterruptedException
     {
+        int city_id = getCityAtLocation(getLocation(player), 0);
         if (isGod(player))
         {
             return true;
         }
-        if (getOwner(self) == player)
+        else if (getOwner(self) == player)
         {
             return true;
         }
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        if (city_id == 0)
+        else if (city_id == 0)
         {
             return false;
         }
-        if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
+        else if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
         {
             return true;
         }
@@ -275,12 +278,16 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU18)
         {
-            int pid =sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+            int pid = sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
             sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         }
         else if (item == menu_info_types.SERVER_MENU18)
         {
             snapToGround(self);
+        }
+        else if (item == menu_info_types.SERVER_MENU40)
+        {
+            faceTo(self, player);
         }
         return SCRIPT_CONTINUE;
     }
@@ -316,7 +323,7 @@ public class city_furniture extends script.base_script
     public void snapToGround(obj_id self)
     {
         location loc = getLocation(self);
-        location groundLoc = new location( loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
+        location groundLoc = new location(loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
         setLocation(self, groundLoc);
     }
 
@@ -539,30 +546,26 @@ public class city_furniture extends script.base_script
     {
         //@note: keep these in order of importance, with the most important last
         int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
         if (utils.isNestedWithinAPlayer(self))
         {
             if (hasObjVar(self, "city_id"))
             {
                 return false;
             }
-            if (hasObjVar(player, "city_decorator"))
+            else if (hasObjVar(player, "city_decorator"))
             {
                 return true;
             }
-            if (city.isMilitiaOfCity(player, city_id))
+            else if (city.isMilitiaOfCity(player, city_id))
             {
                 return true;
             }
-            if (isMayor)
+            else if (city.isTheCityMayor(player, city_id))
             {
                 return true;
             }
             return isGod(player);
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }

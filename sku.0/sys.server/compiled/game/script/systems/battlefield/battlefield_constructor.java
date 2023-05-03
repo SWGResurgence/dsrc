@@ -8,10 +8,12 @@ import script.string_id;
 
 public class battlefield_constructor extends script.base_script
 {
+    public static final string_id SID_BUILD_STRUCTURE = new string_id("battlefield", "build_structure");
+
     public battlefield_constructor()
     {
     }
-    public static final string_id SID_BUILD_STRUCTURE = new string_id("battlefield", "build_structure");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (battlefield.isSameBattlefieldFaction(player, self))
@@ -20,6 +22,7 @@ public class battlefield_constructor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_TRAVEL_OPTIONS)

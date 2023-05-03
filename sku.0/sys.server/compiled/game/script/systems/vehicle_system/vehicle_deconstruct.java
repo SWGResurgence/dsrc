@@ -11,10 +11,12 @@ import script.obj_id;
 
 public class vehicle_deconstruct extends script.base_script
 {
+    public static final String PID_NAME = "vehicleDeconstruct";
+
     public vehicle_deconstruct()
     {
     }
-    public static final String PID_NAME = "vehicleDeconstruct";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id dPad = utils.getPlayerDatapad(player);
@@ -39,6 +41,7 @@ public class vehicle_deconstruct extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU5, vehicle.SID_VEHICLE_TO_SCHEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU5)
@@ -67,6 +70,7 @@ public class vehicle_deconstruct extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConvertSchemSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -132,7 +136,7 @@ public class vehicle_deconstruct extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String response = sui.getInputBoxText(params);
-        if (!(response.toLowerCase()).equals("deconstruct"))
+        if (!(response).equalsIgnoreCase("deconstruct"))
         {
             forceCloseSUIPage(pid);
             sui.removePid(player, PID_NAME);
@@ -148,7 +152,7 @@ public class vehicle_deconstruct extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, vehicle.SID_CONVERT_CONVERT_FAIL);
             CustomerServiceLog("vehicle_conversion", "Player " + getFirstName(player) + "(" + player + ") attempted to convert their old vehicle(" + self + ") to a new schematic, and it failed.");

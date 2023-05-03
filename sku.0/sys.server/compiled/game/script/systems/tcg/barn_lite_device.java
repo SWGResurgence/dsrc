@@ -5,26 +5,29 @@ import script.library.*;
 
 public class barn_lite_device extends script.base_script
 {
-    public barn_lite_device()
-    {
-    }
     public static final int MENU_ROOT_OPTION = menu_info_types.SERVER_MENU1;
     public static final int MENU_STORE_BEAST_OPTION = menu_info_types.SERVER_MENU2;
     public static final int MENU_RECLAIM_BEAST_OPTION = menu_info_types.SERVER_MENU3;
     public static final int MENU_DISPLAY_BEAST_OPTION = menu_info_types.SERVER_MENU4;
     public static final int MENU_REBOOT_DEVICE_OPTION = menu_info_types.SERVER_MENU5;
     public static final int MENU_TESTING_DEACTIVATE_OPTION = menu_info_types.SERVER_MENU6;
+    public barn_lite_device()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupBarnLiteDevice", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupBarnLiteDevice", null, 2, false);
         messageTo(self, "showRoamingBeastsSoon", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setupBarnLiteDevice(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "barnLite.isBarnLite"))
@@ -48,16 +51,19 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnPack(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "setupBarnLiteDevice", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnShipUnpack(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "setupBarnLiteDevice", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -71,6 +77,7 @@ public class barn_lite_device extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
@@ -86,7 +93,7 @@ public class barn_lite_device extends script.base_script
                     }
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     if (utils.hasScriptVar(building, "barnLite.hasBarnLiteDevice"))
                     {
@@ -121,13 +128,14 @@ public class barn_lite_device extends script.base_script
                     return SCRIPT_OVERRIDE;
                 }
             }
-            else 
+            else
             {
                 utils.setScriptVar(building, "barnLite.hasBarnLiteDevice", self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int totalStoredBeasts = tcg.getTotalBarnStoredBeasts(self);
@@ -159,6 +167,7 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id biolink = getBioLink(self);
@@ -183,7 +192,7 @@ public class barn_lite_device extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("tcg", "barn_lite_device_full"));
                 }
-                else 
+                else
                 {
                     tcg.barnStoreBeastPrompt(player, self);
                 }
@@ -194,7 +203,7 @@ public class barn_lite_device extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("tcg", "barn_lite_player_full"));
                 }
-                else 
+                else
                 {
                     tcg.barnReclaimBeastPrompt(player, self, self);
                 }
@@ -228,7 +237,7 @@ public class barn_lite_device extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("tcg", "barn_lite_player_full"));
                 }
-                else 
+                else
                 {
                     tcg.barnReclaimBeastPrompt(player, self, self);
                 }
@@ -251,7 +260,7 @@ public class barn_lite_device extends script.base_script
                                     sendSystemMessage(player, new string_id("tcg", "barn_lite_actived"));
                                     sendDirtyObjectMenuNotification(self);
                                 }
-                                else 
+                                else
                                 {
                                     obj_id activeBarnLite = utils.getObjIdScriptVar(building, "barnLite.hasBarnLiteDevice");
                                     if (!isIdValid(activeBarnLite))
@@ -264,7 +273,7 @@ public class barn_lite_device extends script.base_script
                                     {
                                         sendSystemMessage(player, new string_id("tcg", "barn_lite_already_active"));
                                     }
-                                    else 
+                                    else
                                     {
                                         sendSystemMessage(player, new string_id("tcg", "barn_lite_already_one_in_building"));
                                     }
@@ -277,6 +286,7 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canUseInActiveBarnLite(obj_id self, obj_id player) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -293,10 +303,7 @@ public class barn_lite_device extends script.base_script
                         if (isIdValid(buildingOwner) && buildingOwner == player)
                         {
                             obj_id myOwner = getOwner(self);
-                            if (isIdValid(myOwner) && myOwner == player)
-                            {
-                                return true;
-                            }
+                            return isIdValid(myOwner) && myOwner == player;
                         }
                     }
                 }
@@ -304,6 +311,7 @@ public class barn_lite_device extends script.base_script
         }
         return false;
     }
+
     public boolean canUseActiveBarnLite(obj_id self, obj_id player) throws InterruptedException
     {
         if (canUseInActiveBarnLite(self, player))
@@ -314,15 +322,13 @@ public class barn_lite_device extends script.base_script
                 if (utils.hasScriptVar(building, "barnLite.hasBarnLiteDevice"))
                 {
                     obj_id currentBarnLiteDevice = utils.getObjIdScriptVar(building, "barnLite.hasBarnLiteDevice");
-                    if (currentBarnLiteDevice == self)
-                    {
-                        return true;
-                    }
+                    return currentBarnLiteDevice == self;
                 }
             }
         }
         return false;
     }
+
     public int handleBarnBeastStorage(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -338,13 +344,13 @@ public class barn_lite_device extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_lite_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -376,7 +382,7 @@ public class barn_lite_device extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_transfer_failed_invalid"));
                         }
@@ -394,6 +400,7 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBarnBeastReclaim(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -409,13 +416,13 @@ public class barn_lite_device extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_lite_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -457,7 +464,7 @@ public class barn_lite_device extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_transfer_failed_invalid"));
                         }
@@ -475,6 +482,7 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBarnBeastDisplay(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -490,13 +498,13 @@ public class barn_lite_device extends script.base_script
             {
                 sendSystemMessage(player, new string_id("tcg", "barn_ranchhand_not_in_same_cell"));
             }
-            else 
+            else
             {
                 int button = sui.getIntButtonPressed(params);
                 if (button == sui.BP_CANCEL)
                 {
                 }
-                else 
+                else
                 {
                     int beast_selected = sui.getListboxSelectedRow(params);
                     if (beast_selected > -1)
@@ -514,13 +522,15 @@ public class barn_lite_device extends script.base_script
                                     {
                                         storeDisplayedBeast(self, player, selectedBeastStorageSlot);
                                     }
-                                    else 
+                                    else
                                     {
                                         String[] storageList = tcg.getBarnBeastStorageSlots(self);
                                         if (storageList != null || storageList.length > 0)
                                         {
-                                            for (String bcdSlot : storageList) {
-                                                if (hasObjVar(self, "barnStorage." + bcdSlot + "." + tcg.BEAST_ROAMING)) {
+                                            for (String bcdSlot : storageList)
+                                            {
+                                                if (hasObjVar(self, "barnStorage." + bcdSlot + "." + tcg.BEAST_ROAMING))
+                                                {
                                                     storeDisplayedBeast(self, player, bcdSlot);
                                                 }
                                             }
@@ -534,7 +544,7 @@ public class barn_lite_device extends script.base_script
                                             CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " has created a roaming/displayed representation of their barn beast: " + beastToDisplay + " in barn: " + self + " located at: " + getLocation(self) + ".");
                                             message = new string_id("tcg", "barn_lite_beast_display_success");
                                         }
-                                        else 
+                                        else
                                         {
                                             CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " has FAILED to create a roaming/displayed representation of their barn beast slot: " + selectedBeastStorageSlot + " in barn: " + self + " located at: " + getLocation(self) + ".");
                                             message = new string_id("tcg", "barn_lite_beast_display_failed");
@@ -546,7 +556,7 @@ public class barn_lite_device extends script.base_script
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("tcg", "barn_beast_display_failed_invalid"));
                         }
@@ -564,6 +574,7 @@ public class barn_lite_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void storeDisplayedBeast(obj_id self, obj_id player, String bcdSlot) throws InterruptedException
     {
         string_id message = new string_id("tcg", "barn_beast_display_storage_failed");
@@ -582,7 +593,7 @@ public class barn_lite_device extends script.base_script
                 removeObjVar(self, "barnStorage." + bcdSlot + "." + tcg.BEAST_ROAMING);
                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " stored a barn beast " + (displayedBeast) + " that used to be roaming/displayed but for some reason is no longer valid.  The issue was corrected and the beast can now roam/be displayed roaming. Beast Storage Device: " + self + " located at: " + getLocation(self) + ".");
             }
-            else 
+            else
             {
                 removeObjVar(self, "barnStorage." + bcdSlot + "." + tcg.BEAST_ROAMING);
                 CustomerServiceLog("playerStructure", "Player: " + player + " " + getPlayerName(player) + " could not store a roming displayed barn beast. The beast OID was invalid in the beast storage device: " + self + " located at: " + getLocation(self) + ".");
@@ -594,6 +605,7 @@ public class barn_lite_device extends script.base_script
         }
         return;
     }
+
     public String getPetNameForDisplayMessage(obj_id self, String bcdSlot) throws InterruptedException
     {
         String petName = "Unknown";
@@ -607,6 +619,7 @@ public class barn_lite_device extends script.base_script
         }
         return petName;
     }
+
     public int showRoamingBeastsSoon(obj_id self, dictionary params) throws InterruptedException
     {
         tcg.showRoamingBeasts(self, self);

@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class jedi extends script.base_script
 {
-    public jedi()
-    {
-    }
     public static final String JEDI_ACTIONS_FILE = "datatables/jedi/jedi_actions.iff";
     public static final String JEDI_RANK_DATA = "datatables/jedi/jedi_rank_data.iff";
     public static final String JEDI_CRYSTAL_COLOR_TABLE = "datatables/jedi/crystal_color_damage.iff";
@@ -81,16 +78,20 @@ public class jedi extends script.base_script
     public static final string_id SID_WILL_ATTEMPT_NEXT_TIME = new string_id("jedi_spam", "will_attempt_next_time");
     public static final string_id SID_ALL_PEARLS_RESTORED = new string_id("jedi_spam", "all_pearls_restored");
     public static final string_id SID_LOST_JEDI_XP = new string_id("jedi_spam", "lost_jedi_xp");
-    public static final String[] JEDI_ENEMY_FACTIONS = 
-    {
-        factions.FACTION_IMPERIAL
-    };
-    public static final String[] JEDI_NEUTRAL_FACTIONS = 
-    {
-        factions.FACTION_NEUTRAL
-    };
+    public static final String[] JEDI_ENEMY_FACTIONS =
+            {
+                    factions.FACTION_IMPERIAL
+            };
+    public static final String[] JEDI_NEUTRAL_FACTIONS =
+            {
+                    factions.FACTION_NEUTRAL
+            };
     public static final float ENEMY_VISIBILITY_MULTIPLIER = 1.0f;
     public static final float NEUTRAL_VISIBILITY_MULTIPLIER = 0.5f;
+    public jedi()
+    {
+    }
+
     public static int getJediActionVisibilityValue(obj_id objPlayer, int intActionVisibility, int intActionRange) throws InterruptedException
     {
         float fltActionRange = intActionRange;
@@ -100,58 +101,77 @@ public class jedi extends script.base_script
         obj_id[] objPlayers = getPlayerCreaturesInRange(objPlayer, fltActionRange);
         if ((objNPCs != null) && (objNPCs.length > 0))
         {
-            for (obj_id objNPC : objNPCs) {
-                if (ai_lib.isNpc(objNPC) || ai_lib.isAndroid(objNPC)) {
+            for (obj_id objNPC : objNPCs)
+            {
+                if (ai_lib.isNpc(objNPC) || ai_lib.isAndroid(objNPC))
+                {
                     String strFaction = factions.getFaction(objNPC);
-                    if (strFaction != null) {
+                    if (strFaction != null)
+                    {
                         int intIndex = utils.getElementPositionInArray(JEDI_ENEMY_FACTIONS, strFaction);
-                        if (intIndex > -1) {
+                        if (intIndex > -1)
+                        {
                             float fltTempVisibility = fltBaseVisibility * ENEMY_VISIBILITY_MULTIPLIER;
-                            if (fltTempVisibility > fltActualVisibility) {
-                                fltActualVisibility = fltTempVisibility;
-                            }
-                        } else {
-                            float fltTempVisibility = fltBaseVisibility * NEUTRAL_VISIBILITY_MULTIPLIER;
-                            if (fltTempVisibility > fltActualVisibility) {
+                            if (fltTempVisibility > fltActualVisibility)
+                            {
                                 fltActualVisibility = fltTempVisibility;
                             }
                         }
-                    } else {
+                        else
+                        {
+                            float fltTempVisibility = fltBaseVisibility * NEUTRAL_VISIBILITY_MULTIPLIER;
+                            if (fltTempVisibility > fltActualVisibility)
+                            {
+                                fltActualVisibility = fltTempVisibility;
+                            }
+                        }
+                    }
+                    else
+                    {
                         float fltTempVisibility = fltBaseVisibility * 0.25f;
-                        if (fltTempVisibility > fltActualVisibility) {
+                        if (fltTempVisibility > fltActualVisibility)
+                        {
                             fltActualVisibility = fltTempVisibility;
                         }
                     }
                 }
             }
         }
-        else 
+        else
         {
         }
         if (objPlayers != null && objPlayers.length > 0)
         {
-            for (obj_id objPlayer1 : objPlayers) {
-                if ((!group.inSameGroup(objPlayer, objPlayer1)) && (objPlayer1 != objPlayer) && (!isGod(objPlayer1))) {
-                    if (factions.pvpDoAllowedAttackCheck(objPlayer, objPlayer1)) {
+            for (obj_id objPlayer1 : objPlayers)
+            {
+                if ((!group.inSameGroup(objPlayer, objPlayer1)) && (objPlayer1 != objPlayer) && (!isGod(objPlayer1)))
+                {
+                    if (factions.pvpDoAllowedAttackCheck(objPlayer, objPlayer1))
+                    {
                         fltActualVisibility += (fltBaseVisibility * ENEMY_VISIBILITY_MULTIPLIER);
-                    } else if (factions.isNeutral(objPlayer1)) {
+                    }
+                    else if (factions.isNeutral(objPlayer1))
+                    {
                         fltActualVisibility += (fltBaseVisibility * NEUTRAL_VISIBILITY_MULTIPLIER);
-                    } else {
+                    }
+                    else
+                    {
                         fltActualVisibility += (fltBaseVisibility * 0.25f);
                     }
                 }
             }
         }
-        else 
+        else
         {
         }
-        int intActualVisibility = (int)fltActualVisibility;
+        int intActualVisibility = (int) fltActualVisibility;
         return intActualVisibility;
     }
+
     public static void jediActionPerformed(obj_id objPlayer, int intActionVisibility, int intActionRadius) throws InterruptedException
     {
-        return;
     }
+
     public static void setJediVisibilityTimeStamp(obj_id self) throws InterruptedException
     {
         final int JEDI_BOUNTY_TIMER = 60 * 60 * 24 * 7;
@@ -159,14 +179,15 @@ public class jedi extends script.base_script
         intTimeStamp = intTimeStamp + JEDI_BOUNTY_TIMER;
         setObjVar(self, "jedi.intVisibilityTime", intTimeStamp);
     }
+
     public static void checkJediPenalties(obj_id objPlayer, int intVisiblity) throws InterruptedException
     {
         if (intVisiblity < NO_BOUNTY_VISIBLITY_THRESHOLD)
         {
             clearJediBounties(objPlayer);
         }
-        return;
     }
+
     public static void doJediTEF(obj_id objPlayer) throws InterruptedException
     {
         String strTest = factions.getFaction(objPlayer);
@@ -184,11 +205,12 @@ public class jedi extends script.base_script
         {
             pvpSetFactionEnemyFlag(objPlayer, (370444368));
         }
-        else 
+        else
         {
             pvpSetFactionEnemyFlag(objPlayer, (-615855020));
         }
     }
+
     public static void clearJediBounties(obj_id objPlayer) throws InterruptedException
     {
         obj_id[] hunters = getJediBounties(objPlayer);
@@ -196,14 +218,17 @@ public class jedi extends script.base_script
         {
             dictionary params = new dictionary();
             params.put("target", objPlayer);
-            for (obj_id hunter : hunters) {
-                if (isIdValid(hunter)) {
+            for (obj_id hunter : hunters)
+            {
+                if (isIdValid(hunter))
+                {
                     messageTo(hunter, "bountyIncomplete", params, 1.0f, true);
                 }
             }
             removeAllJediBounties(objPlayer);
         }
     }
+
     public static boolean hasForcePower(obj_id objPlayer, int intForcePowerCost) throws InterruptedException
     {
         int intCurrentPower = getForcePower(objPlayer);
@@ -211,17 +236,19 @@ public class jedi extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             string_id strSpam = new string_id("jedi_spam", "no_force_power");
             sendSystemMessage(objPlayer, strSpam);
             return false;
         }
     }
+
     public static boolean drainForcePower(obj_id objPlayer, int intForcePowerCost) throws InterruptedException
     {
         return drainForcePower(objPlayer, intForcePowerCost, true);
     }
+
     public static boolean drainForcePower(obj_id objPlayer, int intForcePowerCost, boolean verbose) throws InterruptedException
     {
         if (utils.checkConfigFlag("ScriptFlags", "e3Demo"))
@@ -235,7 +262,7 @@ public class jedi extends script.base_script
             alterForcePower(objPlayer, intActualCost);
             return true;
         }
-        else 
+        else
         {
             if (verbose)
             {
@@ -245,6 +272,7 @@ public class jedi extends script.base_script
             return false;
         }
     }
+
     public static void grantJediXP(obj_id objPlayer, int intForcePowerCost) throws InterruptedException
     {
         location locTest = getLocation(objPlayer);
@@ -253,19 +281,20 @@ public class jedi extends script.base_script
         {
             if (hasScript(objBuilding, "structure.permanent_structure"))
             {
-                return;
             }
         }
     }
+
     public static void doJediNonCombatAnimation(obj_id objPlayer, obj_id objTarget, dictionary dctJediInfo) throws InterruptedException
     {
         if (objTarget != null)
         {
         }
-        else 
+        else
         {
         }
     }
+
     public static boolean isJediTrainerForPlayer(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         if (!isJedi(objPlayer))
@@ -281,45 +310,47 @@ public class jedi extends script.base_script
         locNPCLocation.y = 0;
         locTrainerLocation.y = 0;
         float fltDistance = getDistance(locTrainerLocation, locNPCLocation);
-        if (fltDistance != -1 && fltDistance < 3)
-        {
-            return true;
-        }
-        return false;
+        return fltDistance != -1 && fltDistance < 3;
     }
+
     public static boolean isLightsaber(obj_id objWeapon) throws InterruptedException
     {
         return isLightsaber(getWeaponType(objWeapon));
     }
+
     public static boolean isLightsaber(int intWeaponType) throws InterruptedException
     {
         switch (intWeaponType)
         {
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return true;
+                return true;
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return true;
+                return true;
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return true;
+                return true;
         }
         return false;
     }
+
     public static int getJediAlignment(obj_id objJedi) throws InterruptedException
     {
         return getSkillStatisticModifier(objJedi, "private_jedi_alignment");
     }
+
     public static float getJediAlignmentModifier(obj_id objPlayer, dictionary dctJediInfo) throws InterruptedException
     {
         return 1.0f;
     }
+
     public static int modifyForcePower(obj_id objPlayer, int intForcePowerToDrain, dictionary dctJediInfo) throws InterruptedException
     {
         float fltAlignmentModifier = getJediAlignmentModifier(objPlayer, dctJediInfo);
         float fltForcePower = intForcePowerToDrain;
         fltForcePower = fltForcePower - (fltForcePower * (1.0f - fltAlignmentModifier));
-        intForcePowerToDrain = (int)fltForcePower;
+        intForcePowerToDrain = (int) fltForcePower;
         return intForcePowerToDrain;
     }
+
     public static float getJediActionTime(obj_id player, dictionary actionData) throws InterruptedException
     {
         float timeDelay = actionData.getFloat("baseTimeMod");
@@ -328,7 +359,7 @@ public class jedi extends script.base_script
         {
             timeDelay += rankMod * actionData.getFloat("darkTimeBonus");
         }
-        else 
+        else
         {
             rankMod = getEnhancedSkillStatisticModifier(player, "light_jedi_power");
             if (rankMod > 0)
@@ -338,6 +369,7 @@ public class jedi extends script.base_script
         }
         return timeDelay;
     }
+
     public static float getJediDamageModifier(obj_id player, dictionary actionData) throws InterruptedException
     {
         float damageMod = actionData.getFloat("baseDamageMod");
@@ -346,7 +378,7 @@ public class jedi extends script.base_script
         {
             damageMod += rankMod * actionData.getFloat("darkDamageMod");
         }
-        else 
+        else
         {
             rankMod = getEnhancedSkillStatisticModifier(player, "light_jedi_power");
             if (rankMod > 0)
@@ -356,6 +388,7 @@ public class jedi extends script.base_script
         }
         return damageMod;
     }
+
     public static void recalculateForcePower(obj_id player) throws InterruptedException
     {
         int maxPower = getSkillStatisticModifier(player, "jedi_force_power_max");
@@ -398,8 +431,8 @@ public class jedi extends script.base_script
         regenRate /= regenPenalty;
         setMaxForcePower(player, maxPower);
         setForcePowerRegenRate(player, regenRate);
-        return;
     }
+
     public static boolean postponeGrantJedi() throws InterruptedException
     {
         String enabled = toLower(getConfigSetting("GameServer", "postponeJediGrant"));
@@ -407,12 +440,9 @@ public class jedi extends script.base_script
         {
             return false;
         }
-        if (enabled.equals("true") || enabled.equals("1"))
-        {
-            return true;
-        }
-        return false;
+        return enabled.equals("true") || enabled.equals("1");
     }
+
     public static boolean doNonCombatActionPrecheck(obj_id player, obj_id target, dictionary actionData) throws InterruptedException
     {
         int forceCost = actionData.getInt("intJediPowerCost");
@@ -430,18 +460,15 @@ public class jedi extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             return false;
         }
         forceCost = jedi.getModifiedForceCost(player, forceCost, actionData.getString("actionName"));
         actionData.put("intJediPowerCost", forceCost);
-        if (!jedi.hasForcePower(player, forceCost))
-        {
-            return false;
-        }
-        return true;
+        return jedi.hasForcePower(player, forceCost);
     }
+
     public static obj_id getCorrectFriendlyTarget(obj_id player, obj_id target, dictionary actionData) throws InterruptedException
     {
         float range = actionData.getFloat("fltRange");
@@ -454,13 +481,13 @@ public class jedi extends script.base_script
         {
             newTarget = player;
         }
-        else 
+        else
         {
             if (!factions.pvpDoAllowedHelpCheck(player, target))
             {
                 newTarget = getLookAtTarget(player);
             }
-            else 
+            else
             {
                 newTarget = target;
             }
@@ -482,10 +509,12 @@ public class jedi extends script.base_script
         }
         return newTarget;
     }
+
     public static void playJediActionEffect(obj_id objPlayer, obj_id objTarget, dictionary actionData) throws InterruptedException
     {
         playJediActionEffect(objPlayer, objTarget, actionData, false);
     }
+
     public static void playJediActionEffect(obj_id objPlayer, obj_id objTarget, dictionary actionData, boolean labelEffect) throws InterruptedException
     {
         String combatAnim = actionData.getString("combatActionAnimation");
@@ -503,14 +532,14 @@ public class jedi extends script.base_script
                 {
                     playClientEffectObj(objPlayer, clientEffect, objPlayer, "", null, actionData.getString("actionName"));
                 }
-                else 
+                else
                 {
                     playClientEffectObj(objPlayer, clientEffect, objPlayer, "");
                 }
             }
             return;
         }
-        else 
+        else
         {
             if (combatAnim != null && !combatAnim.equals(""))
             {
@@ -533,8 +562,8 @@ public class jedi extends script.base_script
                 messageTo(objTarget, "playDelayedClientEffect", dctParams, 8.0f, false);
             }
         }
-        return;
     }
+
     public static boolean performJediBuffCommand(obj_id player, obj_id target, dictionary actionData) throws InterruptedException
     {
         String actionName = actionData.getString("actionName");
@@ -558,7 +587,7 @@ public class jedi extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             final int MAX_STACK = 5;
             String newBuffName = "";
@@ -570,7 +599,7 @@ public class jedi extends script.base_script
                     buffName = newBuffName;
                     break;
                 }
-                else 
+                else
                 {
                     if (i == MAX_STACK)
                     {
@@ -583,7 +612,7 @@ public class jedi extends script.base_script
         }
         int minHeal = actionData.getInt("intMinHealthHeal");
         int maxHeal = actionData.getInt("intMaxHealthHeal");
-        int duration = (int)actionData.getFloat("buffDuration");
+        int duration = (int) actionData.getFloat("buffDuration");
         if (minHeal > 0 && maxHeal > 0 && buff.hasBuff(target, buffName))
         {
             sendSystemMessage(player, new string_id("jedi_spam", "force_buff_present"));
@@ -604,6 +633,7 @@ public class jedi extends script.base_script
         }
         return true;
     }
+
     public static boolean doBuffAction(obj_id self, obj_id target, String actionName) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(self, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -658,12 +688,13 @@ public class jedi extends script.base_script
             }
             jedi.grantJediXP(self, xpOverride);
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     public static boolean doForceRun(obj_id self, obj_id target, String actionName) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(self, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -712,12 +743,13 @@ public class jedi extends script.base_script
             jedi.drainForcePower(self, forceCost);
             messageTo(self, "handleForceRunCost", null, 10, true);
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     public static boolean regainConsciousness(obj_id self, obj_id target, String actionName) throws InterruptedException
     {
         actionName = combat.getBestAction(self, actionName);
@@ -766,6 +798,7 @@ public class jedi extends script.base_script
         jedi.grantJediXP(self, xpOverride);
         return true;
     }
+
     public static boolean transferForce(obj_id self, obj_id target, String actionName) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(self, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -833,6 +866,7 @@ public class jedi extends script.base_script
         jedi.grantJediXP(self, xpOverride);
         return true;
     }
+
     public static boolean channelForce(obj_id self, obj_id target, String actionName) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(self, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -862,15 +896,15 @@ public class jedi extends script.base_script
         }
         int minHealth = actionData.getInt("intMinHealthHeal");
         int maxHealth = actionData.getInt("intMaxHealthHeal");
-        int minAction = (int)(getMaxAttrib(self, ACTION) * (actionData.getInt("intMinActionHeal") / 100.0f));
-        int maxAction = (int)(getMaxAttrib(self, ACTION) * (actionData.getInt("intMaxActionHeal") / 100.0f));
+        int minAction = (int) (getMaxAttrib(self, ACTION) * (actionData.getInt("intMinActionHeal") / 100.0f));
+        int maxAction = (int) (getMaxAttrib(self, ACTION) * (actionData.getInt("intMaxActionHeal") / 100.0f));
         attribute[] curAttribs = getAttribs(self);
         if (curAttribs[HEALTH].getValue() < maxHealth || !combat.canDrainCombatActionAttributes(self, new int[]
-        {
-            0,
-            maxAction,
-            0
-        }))
+                {
+                        0,
+                        maxAction,
+                        0
+                }))
         {
             sendSystemMessage(self, new string_id("jedi_spam", "channel_ham_too_low"));
             return false;
@@ -885,11 +919,11 @@ public class jedi extends script.base_script
         float duration = actionData.getFloat("buffDuration") * 60;
         addAttribModifier(self, HEALTH, (rand(minHealth, maxHealth) * -1), 0, 0, duration);
         combat.drainCombatActionAttributes(self, new int[]
-        {
-            0,
-            rand(minAction, maxAction),
-            0
-        });
+                {
+                        0,
+                        rand(minAction, maxAction),
+                        0
+                });
         int visValue = actionData.getInt("intVisibilityValue");
         int visRange = actionData.getInt("intVisibilityRange");
         jedi.jediActionPerformed(self, visValue, visRange);
@@ -902,6 +936,7 @@ public class jedi extends script.base_script
         jedi.grantJediXP(self, xpOverride);
         return true;
     }
+
     public static boolean forceMeditate(obj_id self, String actionName) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(self, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -961,6 +996,7 @@ public class jedi extends script.base_script
         jedi.grantJediXP(self, xpOverride);
         return true;
     }
+
     public static void stopForceMeditate(obj_id self) throws InterruptedException
     {
         if (getState(self, STATE_MEDITATE) == 1)
@@ -973,9 +1009,10 @@ public class jedi extends script.base_script
         buff.removeBuff(self, "forceMeditate");
         recalculateForcePower(self);
     }
+
     public static void applyFeedbackDamage(obj_id player, obj_id target, float damage) throws InterruptedException
     {
-        damage *= 1.0f - (combat.convertProtectionToPercent(jedi.applyForceShield(target, (int)damage)));
+        damage *= 1.0f - (combat.convertProtectionToPercent(jedi.applyForceShield(target, (int) damage)));
         int defense = getEnhancedSkillStatisticModifier(target, "force_defense");
         if (defense > 0)
         {
@@ -985,14 +1022,15 @@ public class jedi extends script.base_script
         {
             return;
         }
-        addAttribModifier(target, HEALTH, (int)damage * -1, 0.0f, 0.0f, MOD_POOL);
+        addAttribModifier(target, HEALTH, (int) damage * -1, 0.0f, 0.0f, MOD_POOL);
         prose_package pp = new prose_package();
         pp.stringId = new string_id("cbt_spam", "forcefeedback_hit");
         pp.actor.set(player);
         pp.target.set(target);
-        pp.digitInteger = (int)damage;
+        pp.digitInteger = (int) damage;
         combat.sendCombatSpamMessageProse(player, target, pp, true, true, true, COMBAT_RESULT_HIT);
     }
+
     public static int applyForceShield(obj_id defender, int damage) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(defender, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -1017,18 +1055,19 @@ public class jedi extends script.base_script
         if (actionData != null)
         {
             forceShield = getEnhancedSkillStatisticModifier(defender, "force_shield") * 100.0f;
-            int forceCost = (int)(damage * getModifiedExtraForceCost(defender, actionData.getFloat("extraForceCost"), actionData.getString("actionName")));
+            int forceCost = (int) (damage * getModifiedExtraForceCost(defender, actionData.getFloat("extraForceCost"), actionData.getString("actionName")));
             if (!jedi.drainForcePower(defender, forceCost))
             {
                 buff.removeBuff(defender, actionData.getString("actionName"));
             }
-            else 
+            else
             {
                 playClientEffectObj(defender, "clienteffect/pl_force_shield_hit.cef", defender, "");
             }
         }
-        return (int)forceShield;
+        return (int) forceShield;
     }
+
     public static int applyForceArmor(obj_id defender, int damage) throws InterruptedException
     {
         int armorCount = utils.getIntScriptVar(defender, armor.SCRIPTVAR_ARMOR_COUNT);
@@ -1053,18 +1092,19 @@ public class jedi extends script.base_script
         if (actionData != null)
         {
             forceArmor = getEnhancedSkillStatisticModifier(defender, "force_armor") * 100.0f;
-            int forceCost = (int)(damage * getModifiedExtraForceCost(defender, actionData.getFloat("extraForceCost"), actionData.getString("actionName")));
+            int forceCost = (int) (damage * getModifiedExtraForceCost(defender, actionData.getFloat("extraForceCost"), actionData.getString("actionName")));
             if (!jedi.drainForcePower(defender, forceCost))
             {
                 buff.removeBuff(defender, actionData.getString("actionName"));
             }
-            else 
+            else
             {
                 playClientEffectObj(defender, "clienteffect/pl_force_armor_hit.cef", defender, "");
             }
         }
-        return (int)forceArmor;
+        return (int) forceArmor;
     }
+
     public static void performJediReactiveDefense(obj_id attacker, obj_id defender, weapon_data weaponData, hit_result hitData, dictionary actionData) throws InterruptedException
     {
         if (weaponData.weaponType == combat.WEAPON_TYPE_FORCE_POWER && getEnhancedSkillStatisticModifier(defender, "force_absorb") > 0)
@@ -1074,17 +1114,17 @@ public class jedi extends script.base_script
             {
                 forceAbsorb = getModifiedExtraForceCost(defender, dataTableGetFloat(JEDI_ACTIONS_FILE, "forceAbsorb", "extraForceCost"), "forceAbsorb");
             }
-            else 
+            else
             {
                 forceAbsorb = getModifiedExtraForceCost(defender, dataTableGetFloat(JEDI_ACTIONS_FILE, "forceAbsorb_1", "extraForceCost"), "forceAbsorb_1");
             }
             int forceCost = combat.getForceCost(attacker, weaponData, actionData);
             forceAbsorb *= forceCost;
-            alterForcePower(defender, (int)forceAbsorb);
+            alterForcePower(defender, (int) forceAbsorb);
             prose_package pp = new prose_package();
             pp.stringId = new string_id("cbt_spam", "forceabsorb_hit");
             pp.actor.set(defender);
-            pp.digitInteger = (int)forceAbsorb;
+            pp.digitInteger = (int) forceAbsorb;
             combat.sendCombatSpamMessageProse(defender, pp, COMBAT_RESULT_HIT);
             dictionary data = new dictionary();
             data.put("effect", "clienteffect/pl_force_absorb_hit.cef");
@@ -1102,6 +1142,7 @@ public class jedi extends script.base_script
             messageTo(attacker, "playDelayedClientEffect", data, 1, false);
         }
     }
+
     public static boolean isAvoidIncap(obj_id player) throws InterruptedException
     {
         if (buff.hasBuff(player, "avoidIncapacitation"))
@@ -1124,12 +1165,9 @@ public class jedi extends script.base_script
         {
             return true;
         }
-        if (buff.hasBuff(player, "avoidIncapacitation_5"))
-        {
-            return true;
-        }
-        return false;
+        return buff.hasBuff(player, "avoidIncapacitation_5");
     }
+
     public static int getModifiedForceCost(obj_id self, int baseForce, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1139,17 +1177,18 @@ public class jedi extends script.base_script
             {
                 int force_manipulation = getSkillStatisticModifier(self, "force_manipulation_light");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "forceModLight");
-                return baseForce + (int)((force_manipulation * rank_mod) + 0.5);
+                return baseForce + (int) ((force_manipulation * rank_mod) + 0.5);
             }
             else if (hasSkill(self, "force_rank_dark_novice"))
             {
                 int force_manipulation = getSkillStatisticModifier(self, "force_manipulation_dark");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "forceModDark");
-                return baseForce + (int)((force_manipulation * rank_mod) + 0.5);
+                return baseForce + (int) ((force_manipulation * rank_mod) + 0.5);
             }
         }
         return baseForce;
     }
+
     public static int getModifiedMinDamage(obj_id self, int baseDamage, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1159,17 +1198,18 @@ public class jedi extends script.base_script
             {
                 int force_power = getSkillStatisticModifier(self, "force_power_light");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "minDmgModLight");
-                return baseDamage + (int)((force_power * rank_mod) + 0.5);
+                return baseDamage + (int) ((force_power * rank_mod) + 0.5);
             }
             else if (hasSkill(self, "force_rank_dark_novice"))
             {
                 int force_power = getSkillStatisticModifier(self, "force_power_dark");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "minDmgModDark");
-                return baseDamage + (int)((force_power * rank_mod) + 0.5);
+                return baseDamage + (int) ((force_power * rank_mod) + 0.5);
             }
         }
         return baseDamage;
     }
+
     public static int getModifiedMaxDamage(obj_id self, int baseDamage, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1179,17 +1219,18 @@ public class jedi extends script.base_script
             {
                 int force_power = getSkillStatisticModifier(self, "force_power_light");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "maxDmgModLight");
-                return baseDamage + (int)((force_power * rank_mod) + 0.5);
+                return baseDamage + (int) ((force_power * rank_mod) + 0.5);
             }
             else if (hasSkill(self, "force_rank_dark_novice"))
             {
                 int force_power = getSkillStatisticModifier(self, "force_power_dark");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "maxDmgModDark");
-                return baseDamage + (int)((force_power * rank_mod) + 0.5);
+                return baseDamage + (int) ((force_power * rank_mod) + 0.5);
             }
         }
         return baseDamage;
     }
+
     public static float getModifiedActionSpeed(obj_id self, float baseSpeed, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1210,6 +1251,7 @@ public class jedi extends script.base_script
         }
         return baseSpeed;
     }
+
     public static float getModifiedExtraForceCost(obj_id self, float baseForce, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1230,6 +1272,7 @@ public class jedi extends script.base_script
         }
         return baseForce;
     }
+
     public static int getModifiedBuffAmount(obj_id self, int baseAmount, int modNum, String actionName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(actionName, 0, JEDI_RANK_DATA);
@@ -1239,20 +1282,22 @@ public class jedi extends script.base_script
             {
                 int force_control = getSkillStatisticModifier(self, "force_control_light");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "buffModLight" + modNum);
-                return baseAmount + (int)((force_control * rank_mod) + 0.5);
+                return baseAmount + (int) ((force_control * rank_mod) + 0.5);
             }
             else if (hasSkill(self, "force_rank_dark_novice"))
             {
                 int force_control = getSkillStatisticModifier(self, "force_control_dark");
                 float rank_mod = dataTableGetFloat(JEDI_RANK_DATA, row, "buffModDark" + modNum);
-                return baseAmount + (int)((force_control * rank_mod) + 0.5);
+                return baseAmount + (int) ((force_control * rank_mod) + 0.5);
             }
         }
         return baseAmount;
     }
+
     public static void jediSaberPearlRestore(obj_id player) throws InterruptedException
     {
     }
+
     public static int getMaxJediDeaths(obj_id objPlayer) throws InterruptedException
     {
         if (hasSkill(objPlayer, "jedi_light_side_master_novice") || hasSkill(objPlayer, "jedi_dark_side_master_novice"))
@@ -1265,23 +1310,27 @@ public class jedi extends script.base_script
         }
         return MAX_JEDI_DEATHS_PADAWAN;
     }
+
     public static void jediDeathExperienceLoss(obj_id player) throws InterruptedException
     {
         jediDeathExperienceLoss(player, 1.0f);
     }
+
     public static void jediDeathExperienceLoss(obj_id player, float modifier) throws InterruptedException
     {
         final int JEDI_MIN_XP_CAP = -10000000;
         final float XP_LOSS_PERCENTAGE = -0.05f;
-        final String[] JEDI_XP_TYPES = 
+        final String[] JEDI_XP_TYPES =
+                {
+                        "jedi_general"
+                };
+        for (String jedi_xp_type : JEDI_XP_TYPES)
         {
-            "jedi_general"
-        };
-        for (String jedi_xp_type : JEDI_XP_TYPES) {
             int xpCap = getExperienceCap(player, jedi_xp_type);
             int xpLoss = (int) (xpCap * XP_LOSS_PERCENTAGE * modifier);
             int curXp = getExperiencePoints(player, "jedi_general");
-            if (curXp + xpLoss < JEDI_MIN_XP_CAP) {
+            if (curXp + xpLoss < JEDI_MIN_XP_CAP)
+            {
                 xpLoss = JEDI_MIN_XP_CAP - curXp;
             }
             grantExperiencePoints(player, jedi_xp_type, xpLoss);
@@ -1290,6 +1339,7 @@ public class jedi extends script.base_script
             sendSystemMessageProse(player, ppLostXP);
         }
     }
+
     public static float getSaberForceCost(obj_id saber) throws InterruptedException
     {
         float forceCost = 0;
@@ -1297,7 +1347,7 @@ public class jedi extends script.base_script
         {
             forceCost = getFloatObjVar(saber, VAR_SABER_BASE + "." + VAR_FORCE);
         }
-        else 
+        else
         {
             forceCost = getFloatObjVar(saber, "crafting_components.forceCost");
         }
@@ -1307,18 +1357,16 @@ public class jedi extends script.base_script
         }
         return forceCost;
     }
+
     public static boolean isCrystalTuned(obj_id crystal) throws InterruptedException
     {
         if (!isIdValid(crystal) || !exists(crystal))
         {
             return false;
         }
-        if (hasObjVar(crystal, VAR_CRYSTAL_OWNER))
-        {
-            return true;
-        }
-        return false;
+        return hasObjVar(crystal, VAR_CRYSTAL_OWNER);
     }
+
     public static boolean isCrystalOwner(obj_id player, obj_id crystal) throws InterruptedException
     {
         if (!isCrystalTuned(crystal))
@@ -1326,12 +1374,9 @@ public class jedi extends script.base_script
             return false;
         }
         obj_id owner = getObjIdObjVar(crystal, VAR_CRYSTAL_OWNER_ID);
-        if (owner == player)
-        {
-            return true;
-        }
-        return false;
+        return owner == player;
     }
+
     public static boolean doesCrystalMatchSaber(obj_id saber, obj_id crystal) throws InterruptedException
     {
         if (!isCrystalTuned(crystal))
@@ -1341,16 +1386,13 @@ public class jedi extends script.base_script
         obj_id saberOwner = getCrafter(saber);
         if (static_item.isStaticItem(saber))
         {
-            
+
         }
         saberOwner = utils.getContainingPlayer(saber);
         obj_id owner = getObjIdObjVar(crystal, VAR_CRYSTAL_OWNER_ID);
-        if (owner == saberOwner)
-        {
-            return true;
-        }
-        return false;
+        return owner == saberOwner;
     }
+
     public static void resetSaberStats(obj_id saber) throws InterruptedException
     {
         if (!hasObjVar(saber, VAR_SABER_DEFAULT_STATS))
@@ -1360,16 +1402,19 @@ public class jedi extends script.base_script
         initSaberBaseStats(saber);
         obj_id inv = getObjectInSlot(saber, "saber_inv");
         obj_id[] contents = getContents(inv);
-        if (contents == null || contents.length == 0)
+        if (contents == null)
         {
             return;
         }
-        for (obj_id content : contents) {
-            if (!isDisabled(content)) {
+        for (obj_id content : contents)
+        {
+            if (!isDisabled(content))
+            {
                 addCrystalStats(saber, content);
             }
         }
     }
+
     public static void initSaberBaseStats(obj_id saber) throws InterruptedException
     {
         int minDmg = getIntObjVar(saber, VAR_SABER_DEFAULT_STATS + "." + VAR_MIN_DMG);
@@ -1389,6 +1434,7 @@ public class jedi extends script.base_script
         int eDamageAmount = getIntObjVar(saber, VAR_SABER_DEFAULT_STATS + "." + VAR_ELEMENTAL_DAM_AMNT);
         setWeaponElementalValue(saber, eDamageAmount);
     }
+
     public static void setSaberColorCrystalDamage(obj_id saber) throws InterruptedException
     {
         int color = getIntObjVar(saber, VAR_SABER_BASE + "." + VAR_COLOR);
@@ -1402,15 +1448,16 @@ public class jedi extends script.base_script
         int damageType = dataTableGetInt(JEDI_CRYSTAL_COLOR_TABLE, colorRow, "elemental_type");
         float damageAmt = dataTableGetFloat(JEDI_CRYSTAL_COLOR_TABLE, colorRow, "damage_amount");
         setWeaponElementalType(saber, damageType);
-        setWeaponElementalValue(saber, (int)((getWeaponMaxDamage(saber) * damageAmt) + 1));
+        setWeaponElementalValue(saber, (int) ((getWeaponMaxDamage(saber) * damageAmt) + 1));
     }
+
     public static void setSaberColor(obj_id saber, int color, int shader) throws InterruptedException
     {
         String varName = "private/index_color_blade";
         custom_var myVar = getCustomVarByName(saber, varName);
         if (myVar != null && myVar.isPalColor())
         {
-            palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+            palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
             if (pcVar != null)
             {
                 pcVar.setValue(color);
@@ -1421,7 +1468,7 @@ public class jedi extends script.base_script
         custom_var shaderVar = getCustomVarByName(saber, shaderName);
         if (shaderVar != null)
         {
-            ranged_int_custom_var riVar = (ranged_int_custom_var)shaderVar;
+            ranged_int_custom_var riVar = (ranged_int_custom_var) shaderVar;
             if (riVar != null)
             {
                 riVar.setValue(shader);
@@ -1429,6 +1476,7 @@ public class jedi extends script.base_script
             }
         }
     }
+
     public static void addCrystalStats(obj_id saber, obj_id crystal) throws InterruptedException
     {
         obj_var_list ovl = getObjVarList(crystal, VAR_CRYSTAL_STATS);
@@ -1440,13 +1488,15 @@ public class jedi extends script.base_script
                 obj_var ov = ovl.getObjVar(i);
                 String name = ov.getName();
                 LOG("saber_test", "Processing Crystal Stat: " + name);
-                switch (name) {
+                switch (name)
+                {
                     case VAR_MIN_DMG:
                         int minDmg = getWeaponMinDamage(saber);
                         LOG("saber_test", "Old Min Damage = " + minDmg);
                         minDmg += getIntObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_MIN_DMG);
                         LOG("saber_test", "New Min Damage = " + minDmg);
-                        if (!setWeaponMinDamage(saber, minDmg)) {
+                        if (!setWeaponMinDamage(saber, minDmg))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Min Damage");
                         }
                         break;
@@ -1498,6 +1548,7 @@ public class jedi extends script.base_script
         setSaberColorCrystalDamage(saber);
         weapons.setWeaponData(saber);
     }
+
     public static void removeCrystalStats(obj_id saber, obj_id crystal) throws InterruptedException
     {
         obj_var_list ovl = getObjVarList(crystal, VAR_CRYSTAL_STATS);
@@ -1509,13 +1560,15 @@ public class jedi extends script.base_script
                 obj_var ov = ovl.getObjVar(i);
                 String name = ov.getName();
                 LOG("saber_test", "Processing Crystal Stat: " + name);
-                switch (name) {
+                switch (name)
+                {
                     case VAR_MIN_DMG:
                         int minDmg = getWeaponMinDamage(saber);
                         LOG("saber_test", "Old Min Damage = " + minDmg);
                         minDmg -= getIntObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_MIN_DMG);
                         LOG("saber_test", "New Min Damage = " + minDmg);
-                        if (!setWeaponMinDamage(saber, minDmg)) {
+                        if (!setWeaponMinDamage(saber, minDmg))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Min Damage");
                         }
                         break;
@@ -1524,7 +1577,8 @@ public class jedi extends script.base_script
                         LOG("saber_test", "Old Max Damage = " + maxDmg);
                         maxDmg -= getIntObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_MAX_DMG);
                         LOG("saber_test", "New Max Damage = " + maxDmg);
-                        if (!setWeaponMaxDamage(saber, maxDmg)) {
+                        if (!setWeaponMaxDamage(saber, maxDmg))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Max Damage");
                         }
                         break;
@@ -1533,7 +1587,8 @@ public class jedi extends script.base_script
                         LOG("saber_test", "Old Speed = " + speed);
                         speed -= getFloatObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_SPEED);
                         LOG("saber_test", "New Speed = " + speed);
-                        if (!setWeaponAttackSpeed(saber, speed)) {
+                        if (!setWeaponAttackSpeed(saber, speed))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Speed");
                         }
                         break;
@@ -1542,7 +1597,8 @@ public class jedi extends script.base_script
                         LOG("saber_test", "Old Wound = " + wound);
                         wound -= getFloatObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_WOUND);
                         LOG("saber_test", "New Wound = " + wound);
-                        if (!setWeaponWoundChance(saber, wound)) {
+                        if (!setWeaponWoundChance(saber, wound))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Wound");
                         }
                         break;
@@ -1551,7 +1607,8 @@ public class jedi extends script.base_script
                         LOG("saber_test", "Old Radius = " + radius);
                         radius -= getFloatObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_RADIUS);
                         LOG("saber_test", "New Radius = " + radius);
-                        if (!setWeaponDamageRadius(saber, radius)) {
+                        if (!setWeaponDamageRadius(saber, radius))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Radius");
                         }
                         break;
@@ -1560,7 +1617,8 @@ public class jedi extends script.base_script
                         LOG("saber_test", "Old Attack Cost = " + cost);
                         cost -= getIntObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_ATTACK_COST);
                         LOG("saber_test", "New Attack Cost = " + cost);
-                        if (!setWeaponAttackCost(saber, cost)) {
+                        if (!setWeaponAttackCost(saber, cost))
+                        {
                             LOG("saber_test", "ERROR: Failed Setting Attack Cost");
                         }
                         break;
@@ -1582,80 +1640,104 @@ public class jedi extends script.base_script
         setSaberColorCrystalDamage(saber);
         weapons.setWeaponData(saber);
     }
+
     public static boolean isColorCrystal(obj_id crystal) throws InterruptedException
     {
         return (hasObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_COLOR));
     }
+
     public static boolean hasColorCrystal(obj_id saber) throws InterruptedException
     {
         return (hasObjVar(saber, VAR_SABER_BASE + "." + VAR_COLOR));
     }
+
     public static boolean validateCrystalCount(obj_id saber) throws InterruptedException
     {
         obj_id inv = getObjectInSlot(saber, "saber_inv");
         obj_id[] contents = getContents(inv);
         return (contents.length <= MAX_CRYSTAL_COUNT);
     }
+
     public static int getCrystalQuality(int level) throws InterruptedException
     {
-        if (level < 40) {
+        if (level < 40)
+        {
             return CRYSTAL_POOR;
-        } else if (level < 70) {
+        }
+        else if (level < 70)
+        {
             return CRYSTAL_FAIR;
-        } else if (level < 100) {
+        }
+        else if (level < 100)
+        {
             return CRYSTAL_GOOD;
-        } else if (level < 140) {
+        }
+        else if (level < 140)
+        {
             return CRYSTAL_QUALITY;
-        } else if (level < 220) {
+        }
+        else if (level < 220)
+        {
             return CRYSTAL_SELECT;
-        } else if (level < 330) {
+        }
+        else if (level < 330)
+        {
             return CRYSTAL_PREMIUM;
-        } else if (level < 490) {
+        }
+        else if (level < 490)
+        {
             return CRYSTAL_FLAWLESS;
-        } else {
+        }
+        else
+        {
             return CRYSTAL_PERFECT;
         }
     }
+
     public static int getStaticCrystalQuality(int level) throws InterruptedException
     {
         switch (level)
         {
             case 0:
-            return CRYSTAL_POOR;
+                return CRYSTAL_POOR;
             case 1:
-            return CRYSTAL_FAIR;
+                return CRYSTAL_FAIR;
             case 2:
-            return CRYSTAL_GOOD;
+                return CRYSTAL_GOOD;
             case 3:
-            return CRYSTAL_QUALITY;
+                return CRYSTAL_QUALITY;
             case 4:
-            return CRYSTAL_SELECT;
+                return CRYSTAL_SELECT;
             case 5:
-            return CRYSTAL_PREMIUM;
+                return CRYSTAL_PREMIUM;
             case 6:
-            return CRYSTAL_FLAWLESS;
+                return CRYSTAL_FLAWLESS;
             case 7:
-            return CRYSTAL_PERFECT;
+                return CRYSTAL_PERFECT;
             default:
-            return CRYSTAL_GOOD;
+                return CRYSTAL_GOOD;
         }
     }
+
     public static boolean forceCreateColorCrystal(obj_id player, int color) throws InterruptedException
     {
         obj_id crystal = createObjectInInventoryAllowOverload(TEMPLATE_FORCE_CRYSTAL, player);
         setAsColorCrystal(crystal, color);
         return isIdValid(crystal);
     }
+
     public static boolean createColorCrystal(obj_id inventory, int color) throws InterruptedException
     {
         obj_id crystal = static_item.createNewItemFunction(mapOldColorToNewColor(color), inventory);
         return isIdValid(crystal);
     }
+
     public static boolean createPowerCrystal(obj_id inventory, int level) throws InterruptedException
     {
         obj_id crystal = static_item.createNewItemFunction(mapOldPowerCrystalLevelToNew(level), inventory);
         return isIdValid(crystal);
     }
+
     public static void setAsColorCrystal(obj_id crystal, int color, int hp, int hpMax) throws InterruptedException
     {
         if (isIdValid(crystal))
@@ -1665,6 +1747,7 @@ public class jedi extends script.base_script
             setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_HP_MAX, hpMax);
         }
     }
+
     public static void setAsColorCrystal(obj_id crystal, int color) throws InterruptedException
     {
         if (isIdValid(crystal))
@@ -1672,13 +1755,14 @@ public class jedi extends script.base_script
             custom_var myVar = getCustomVarByName(crystal, "private/index_color_1");
             if (myVar != null && myVar.isPalColor())
             {
-                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                 pcVar.setValue(color);
             }
             setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_COLOR, color);
             setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_LEVEL, -1);
         }
     }
+
     public static void setAsPowerCrystal(obj_id crystal, int level, int hp, int hpMax) throws InterruptedException
     {
         if (isIdValid(crystal))
@@ -1688,6 +1772,7 @@ public class jedi extends script.base_script
             setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_HP_MAX, hpMax);
         }
     }
+
     public static void setAsPowerCrystal(obj_id crystal, int level) throws InterruptedException
     {
         if (isIdValid(crystal))
@@ -1695,13 +1780,14 @@ public class jedi extends script.base_script
             custom_var myVar = getCustomVarByName(crystal, "private/index_color_1");
             if (myVar != null && myVar.isPalColor())
             {
-                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                 pcVar.setValue(31);
                 setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_COLOR, -1);
             }
             setObjVar(crystal, jedi.VAR_CRYSTAL_STATS + "." + jedi.VAR_LEVEL, level);
         }
     }
+
     public static boolean checkRobePermission(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -1715,10 +1801,13 @@ public class jedi extends script.base_script
             LOG("jedi", "library.jedi.robeRemove -- " + player + "'s contents are null.");
             return false;
         }
-        for (obj_id item : items) {
-            if (hasObjVar(item, VAR_JEDI_SKILL)) {
+        for (obj_id item : items)
+        {
+            if (hasObjVar(item, VAR_JEDI_SKILL))
+            {
                 String jediSkill = getStringObjVar(item, VAR_JEDI_SKILL);
-                if (!hasSkill(player, jediSkill)) {
+                if (!hasSkill(player, jediSkill))
+                {
                     obj_id inv = getObjectInSlot(player, "inventory");
                     putInOverloaded(item, inv);
                 }
@@ -1726,17 +1815,18 @@ public class jedi extends script.base_script
         }
         return true;
     }
+
     public static void setupJediTrainer(obj_id self) throws InterruptedException
     {
-        final String[] TRAINER_TYPES = 
-        {
-            "trainer_brawler",
-            "trainer_artisan",
-            "trainer_scout",
-            "trainer_marksman",
-            "trainer_entertainer",
-            "trainer_medic"
-        };
+        final String[] TRAINER_TYPES =
+                {
+                        "trainer_brawler",
+                        "trainer_artisan",
+                        "trainer_scout",
+                        "trainer_marksman",
+                        "trainer_entertainer",
+                        "trainer_medic"
+                };
         location locTest = getLocation(self);
         if (locTest.area.equals("tutorial"))
         {
@@ -1748,11 +1838,13 @@ public class jedi extends script.base_script
         Vector mapLocations = new Vector();
         mapLocations.setSize(0);
         location testloc = new location();
-        for (map_location rawMapLocation : rawMapLocations) {
+        for (map_location rawMapLocation : rawMapLocations)
+        {
             testloc.x = rawMapLocation.getX();
             testloc.z = rawMapLocation.getY();
             testloc.area = getLocation(self).area;
-            if (getCityAtLocation(testloc, 0) > 0) {
+            if (getCityAtLocation(testloc, 0) > 0)
+            {
                 continue;
             }
             mapLocations = utils.addElement(mapLocations, rawMapLocation);
@@ -1766,12 +1858,12 @@ public class jedi extends script.base_script
         int intRoll = rand(0, mapLocations.size() - 1);
         location locHome = getLocation(self);
         locTest = new location();
-        locTest.x = ((map_location)mapLocations.get(intRoll)).getX();
-        locTest.z = ((map_location)mapLocations.get(intRoll)).getY();
+        locTest.x = ((map_location) mapLocations.get(intRoll)).getX();
+        locTest.z = ((map_location) mapLocations.get(intRoll)).getY();
         locTest.area = locHome.area;
         setObjVar(self, "jedi.locTrainerLocation", locTest);
-        return;
     }
+
     public static void clickyCombatPearlFix(obj_id item) throws InterruptedException
     {
         float damage = 0.0f;
@@ -1782,7 +1874,7 @@ public class jedi extends script.base_script
         {
             damage = getFloatObjVar(item, "crafting_components.minDamage");
         }
-        else 
+        else
         {
             damage = (getIntObjVar(item, VAR_CRYSTAL_STATS + "." + VAR_MAX_DMG));
         }
@@ -1843,7 +1935,7 @@ public class jedi extends script.base_script
                 CustomerServiceLog("jedi_saber", "Converting Old Tuned Pearl (" + item + ") - Damage:" + damage + " - to a new Static Item Pearl - " + itemName);
                 return;
             }
-            else 
+            else
             {
                 int level = getIntObjVar(item, VAR_CRYSTAL_STATS + "." + VAR_LEVEL);
                 if (level > 0)
@@ -1896,7 +1988,7 @@ public class jedi extends script.base_script
                     CustomerServiceLog("jedi_saber", "Converting Old Untuned Pearl (" + item + ") - Level:" + level + " - to a new Static Item Pearl - " + itemName);
                     return;
                 }
-                else 
+                else
                 {
                     itemName = "item_krayt_pearl_04_09";
                     jediComponentStatSetter(null, item, itemName);
@@ -1916,7 +2008,7 @@ public class jedi extends script.base_script
                 CustomerServiceLog("jedi_saber", "Converting Old Tuned Lance Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
                 return;
             }
-            else 
+            else
             {
                 jediComponentStatSetter(null, item, colorName);
                 CustomerServiceLog("jedi_saber", "Converting Old Untuned Lance Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
@@ -1936,14 +2028,14 @@ public class jedi extends script.base_script
                     CustomerServiceLog("jedi_saber", "Converting Old Tuned Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
                     return;
                 }
-                else 
+                else
                 {
                     jediComponentStatSetter(null, item, colorName);
                     CustomerServiceLog("jedi_saber", "Converting Old Untuned Color Crystal (" + item + ") - OLD COLOR:" + color + " - to a new Static Item Color Crystal - " + colorName);
                     return;
                 }
             }
-            else 
+            else
             {
                 if (tunedCrystal)
                 {
@@ -2000,7 +2092,7 @@ public class jedi extends script.base_script
                     CustomerServiceLog("jedi_saber", "Converting Old Tuned Power Crystal (" + item + ") - Damage:" + damage + " - to a new Static Item Power Crystal - " + itemName);
                     return;
                 }
-                else 
+                else
                 {
                     int level = getIntObjVar(item, VAR_CRYSTAL_STATS + "." + VAR_LEVEL);
                     if (level > 0)
@@ -2010,7 +2102,7 @@ public class jedi extends script.base_script
                         CustomerServiceLog("jedi_saber", "Converting Old Untuned Power Crystal (" + item + ") - Level:" + level + " - to a new Static Item Crystal - " + itemName);
                         return;
                     }
-                    else 
+                    else
                     {
                         itemName = "item_power_crystal_04_09";
                         jediComponentStatSetter(null, item, itemName);
@@ -2020,8 +2112,8 @@ public class jedi extends script.base_script
                 }
             }
         }
-        return;
     }
+
     public static void jediComponentStatSetter(obj_id owner, obj_id item, String itemName) throws InterruptedException
     {
         if (itemName != null && !itemName.equals(""))
@@ -2042,59 +2134,62 @@ public class jedi extends script.base_script
             LOG("jedi_saber", "Converted old Pearl or Crystal to " + itemName);
             static_item.initializeObject(item, itemData);
         }
-        else 
+        else
         {
             CustomerServiceLog("jedi_saber", "Could not convert item(" + item + ") Bad itemName passed in" + itemName);
         }
-        return;
     }
+
     public static String mapOldColorToNewColor(obj_id item) throws InterruptedException
     {
         return mapOldColorToNewColor(getIntObjVar(item, VAR_CRYSTAL_STATS + "." + VAR_COLOR));
     }
+
     public static String mapOldColorToNewColor(int color) throws InterruptedException
     {
-        String colorMap[] = 
-        {
-            "item_color_crystal_02_00",
-            "item_color_crystal_02_01",
-            "item_color_crystal_02_02",
-            "item_color_crystal_02_03",
-            "item_color_crystal_02_04",
-            "item_color_crystal_02_05",
-            "item_color_crystal_02_06",
-            "item_color_crystal_02_07",
-            "item_color_crystal_02_08",
-            "item_color_crystal_02_09",
-            "item_color_crystal_02_10",
-            "item_color_crystal_02_11",
-            "item_color_crystal_02_12",
-            "item_color_crystal_02_13",
-            "item_color_crystal_02_14",
-            "item_color_crystal_02_15",
-            "item_color_crystal_02_16",
-            "item_color_crystal_02_17",
-            "item_color_crystal_02_18",
-            "item_color_crystal_02_19",
-            "item_color_crystal_02_20",
-            "item_color_crystal_02_21",
-            "item_color_crystal_02_22",
-            "item_color_crystal_02_23",
-            "item_color_crystal_02_24",
-            "item_color_crystal_02_25",
-            "item_color_crystal_02_26",
-            "item_color_crystal_02_27",
-            "item_color_crystal_02_28",
-            "item_color_crystal_02_29",
-            "item_color_crystal_02_30",
-            "item_color_crystal_02_32",
-            "item_color_crystal_02_33",
-            "item_color_crystal_02_34",
-            "item_color_crystal_02_35",
-            "item_staff_color_crystal_01_01"
-        };
+        String[] colorMap =
+                {
+                        "item_color_crystal_02_00",
+                        "item_color_crystal_02_01",
+                        "item_color_crystal_02_02",
+                        "item_color_crystal_02_03",
+                        "item_color_crystal_02_04",
+                        "item_color_crystal_02_05",
+                        "item_color_crystal_02_06",
+                        "item_color_crystal_02_07",
+                        "item_color_crystal_02_08",
+                        "item_color_crystal_02_09",
+                        "item_color_crystal_02_10",
+                        "item_color_crystal_02_11",
+                        "item_color_crystal_02_12",
+                        "item_color_crystal_02_13",
+                        "item_color_crystal_02_14",
+                        "item_color_crystal_02_15",
+                        "item_color_crystal_02_16",
+                        "item_color_crystal_02_17",
+                        "item_color_crystal_02_18",
+                        "item_color_crystal_02_19",
+                        "item_color_crystal_02_20",
+                        "item_color_crystal_02_21",
+                        "item_color_crystal_02_22",
+                        "item_color_crystal_02_23",
+                        "item_color_crystal_02_24",
+                        "item_color_crystal_02_25",
+                        "item_color_crystal_02_26",
+                        "item_color_crystal_02_27",
+                        "item_color_crystal_02_28",
+                        "item_color_crystal_02_29",
+                        "item_color_crystal_02_30",
+                        "item_color_crystal_02_32",
+                        "item_color_crystal_02_33",
+                        "item_color_crystal_02_34",
+                        "item_color_crystal_02_35",
+                        "item_color_crystal_02_36",
+                        "item_staff_color_crystal_01_01"
+                };
         return colorMap[color];
     }
+
     public static String mapOldPowerCrystalLevelToNew(int level) throws InterruptedException
     {
         if (level < 40)
@@ -2141,11 +2236,12 @@ public class jedi extends script.base_script
         {
             return "item_power_crystal_04_18";
         }
-        else 
+        else
         {
             return "item_power_crystal_04_13";
         }
     }
+
     public static void initializeCrystal(obj_id crystal, int level) throws InterruptedException
     {
         if (hasObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_LEVEL))
@@ -2165,7 +2261,7 @@ public class jedi extends script.base_script
             setMaxHitpoints(crystal, hpMax);
             removeObjVar(crystal, VAR_CRYSTAL_STATS + "." + VAR_HP_MAX);
         }
-        else 
+        else
         {
             final int min = 650;
             final int max = 1250;
@@ -2200,39 +2296,34 @@ public class jedi extends script.base_script
                 custom_var myVar = getCustomVarByName(crystal, "private/index_color_1");
                 if (myVar.isPalColor())
                 {
-                    palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                    palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                     pcVar.setValue(color);
                 }
             }
-            else 
+            else
             {
                 custom_var myVar = getCustomVarByName(crystal, "private/index_color_1");
                 if (myVar.isPalColor())
                 {
-                    palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                    palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
                     pcVar.setValue(31);
                 }
             }
         }
     }
+
     public static boolean isForceSensitive(obj_id player) throws InterruptedException
     {
         String classTemplate = getSkillTemplate(player);
-        if (classTemplate != null && classTemplate.startsWith("force"))
-        {
-            return true;
-        }
-        return false;
+        return classTemplate != null && classTemplate.startsWith("force");
     }
+
     public static boolean isForceSensitiveLevelRequired(obj_id player, int requiredLevel) throws InterruptedException
     {
         int playerLevel = getLevel(player);
-        if (isForceSensitive(player) && playerLevel >= requiredLevel)
-        {
-            return true;
-        }
-        return false;
+        return isForceSensitive(player) && playerLevel >= requiredLevel;
     }
+
     public static boolean hasAnyUltraCloak(obj_id player) throws InterruptedException
     {
         if (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_LIGHT_HOOD_UP))
@@ -2263,10 +2354,6 @@ public class jedi extends script.base_script
         {
             return true;
         }
-        if (utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN))
-        {
-            return true;
-        }
-        return false;
+        return utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN);
     }
 }

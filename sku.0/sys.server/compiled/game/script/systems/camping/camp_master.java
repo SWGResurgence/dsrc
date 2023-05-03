@@ -5,31 +5,28 @@ import script.library.*;
 
 public class camp_master extends script.base_script
 {
-    public camp_master()
-    {
-    }
     public static final String TOTAL_XP = "total_xp";
     public static final int CAMP_TICK_XP = 25;
-    public static final int XP_MAX[] = 
-    {
-        0,
-        350,
-        600,
-        800,
-        1000,
-        1100,
-        1200
-    };
-    public static final float XP_MULT[] = 
-    {
-            0.0f,
-            1.0f,
-        1.1f,
-        1.2f,
-        1.3f,
-        1.4f,
-        1.5f
-    };
+    public static final int[] XP_MAX =
+            {
+                    0,
+                    350,
+                    600,
+                    800,
+                    1000,
+                    1100,
+                    1200
+            };
+    public static final float[] XP_MULT =
+            {
+                    0.0f,
+                    1.0f,
+                    1.1f,
+                    1.2f,
+                    1.3f,
+                    1.4f,
+                    1.5f
+            };
     public static final String IGNORE_RESTORE_MESSAGE = "ignoreRestoreMsg";
     public static final String VAR_CAMP_CAMPFIRE = "campfire";
     public static final String TEMPLATE_LOGS_FRESH = "object/static/structure/general/campfire_fresh.iff";
@@ -43,6 +40,10 @@ public class camp_master extends script.base_script
     public static final int HEALING_PULSE_MAX = 300;
     public static final int WOUND_HEAL = 5;
     public static final int SHOCK_HEAL = 1;
+    public camp_master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, camping.VAR_BEEN_INITIALIZED, true);
@@ -63,23 +64,26 @@ public class camp_master extends script.base_script
         messageTo(self, "OnHealingLoop", null, pulse, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id item = getObjIdObjVar(self, VAR_CAMP_CAMPFIRE);
         if ((item == null) || (item == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             destroyObject(item);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int theaterFinished(obj_id self, dictionary params) throws InterruptedException
     {
         notifyChildren(self, "handleCampPrep");
         return SCRIPT_CONTINUE;
     }
+
     public void notifyChildren(obj_id self, String msg) throws InterruptedException
     {
         dictionary outparams = new dictionary();
@@ -89,17 +93,22 @@ public class camp_master extends script.base_script
         {
             return;
         }
-        else 
+        else
         {
             int j = 0;
-            for (obj_id child : children) {
-                if ((child == null) || (child == obj_id.NULL_ID)) {
-                } else {
+            for (obj_id child : children)
+            {
+                if ((child == null) || (child == obj_id.NULL_ID))
+                {
+                }
+                else
+                {
                     messageTo(child, msg, outparams, 0, false);
                 }
             }
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, camping.VAR_BEEN_INITIALIZED))
@@ -108,11 +117,13 @@ public class camp_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         camping.nukeCamp(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (who == self)
@@ -127,13 +138,14 @@ public class camp_master extends script.base_script
                 sendSystemMessage(who, camping.SID_CAMP_ENTER);
                 sendSystemMessage(who, SID_SYS_CAMP_HEAL);
             }
-            else 
+            else
             {
                 addCampMember(self, owner, who);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void addCampMember(obj_id self, obj_id owner, obj_id who) throws InterruptedException
     {
         if (who == owner)
@@ -158,6 +170,7 @@ public class camp_master extends script.base_script
         occ++;
         setObjVar(self, "occ_count", occ);
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (who == self)
@@ -171,7 +184,7 @@ public class camp_master extends script.base_script
             {
                 sendSystemMessage(who, camping.SID_CAMP_EXIT);
             }
-            else 
+            else
             {
                 if (who == owner)
                 {
@@ -187,18 +200,23 @@ public class camp_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHealingLoop(obj_id self, dictionary params) throws InterruptedException
     {
         int campPower = getIntObjVar(self, camping.VAR_CAMP_POWER);
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), camping.getCampSize(self));
         if (players != null)
         {
-            for (obj_id player : players) {
-                for (int j = 0; j < NUM_ATTRIBUTES; j++) {
-                    if (healing.isWounded(player, j)) {
+            for (obj_id player : players)
+            {
+                for (int j = 0; j < NUM_ATTRIBUTES; j++)
+                {
+                    if (healing.isWounded(player, j))
+                    {
                         int xpAmt = getIntObjVar(self, camping.VAR_CAMP_XP);
                         int xpMax = XP_MAX[campPower];
-                        if (xpAmt < xpMax) {
+                        if (xpAmt < xpMax)
+                        {
                             int toGrant = CAMP_TICK_XP;
                             xpAmt += toGrant;
                             setObjVar(self, camping.VAR_CAMP_XP, xpAmt);
@@ -218,6 +236,7 @@ public class camp_master extends script.base_script
         messageTo(self, "OnHealingLoop", null, pulse, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetStatus(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -228,27 +247,28 @@ public class camp_master extends script.base_script
         switch (status)
         {
             case camping.STATUS_NEW:
-            setCampfire(self, TEMPLATE_LOGS_FRESH);
-            break;
+                setCampfire(self, TEMPLATE_LOGS_FRESH);
+                break;
             case camping.STATUS_CREATION:
-            break;
+                break;
             case camping.STATUS_MAINTAIN:
-            setCampfire(self, TEMPLATE_LOGS_FRESH);
-            break;
+                setCampfire(self, TEMPLATE_LOGS_FRESH);
+                break;
             case camping.STATUS_ABANDONED:
             default:
-            setCampfire(self, TEMPLATE_LOGS_SMOLDERING);
-            break;
+                setCampfire(self, TEMPLATE_LOGS_SMOLDERING);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setCampfire(obj_id self, String tpf) throws InterruptedException
     {
         obj_id item = getObjIdObjVar(self, VAR_CAMP_CAMPFIRE);
         if ((item == null) || (item == obj_id.NULL_ID))
         {
         }
-        else 
+        else
         {
             String itemTemplate = getTemplateName(item);
             if (itemTemplate.equals(tpf))
@@ -261,6 +281,7 @@ public class camp_master extends script.base_script
         item = createObject(tpf, here);
         setObjVar(self, VAR_CAMP_CAMPFIRE, item);
     }
+
     public int handleCampCreationHeartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, camping.VAR_OWNER))
@@ -286,6 +307,7 @@ public class camp_master extends script.base_script
         camping.sendCampCreationComplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCampComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, camping.VAR_OWNER))
@@ -313,6 +335,7 @@ public class camp_master extends script.base_script
         camping.sendCampMaintenanceHeartbeat(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCampMaintenanceHeartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, camping.VAR_OWNER))
@@ -369,7 +392,7 @@ public class camp_master extends script.base_script
             int xpMax = XP_MAX[campPower];
             if (xpAmt < xpMax)
             {
-                int toGrant = (int)(CAMP_TICK_XP * campOcc * XP_MULT[campPower]);
+                int toGrant = (int) (CAMP_TICK_XP * campOcc * XP_MULT[campPower]);
                 xpAmt += toGrant;
                 setObjVar(self, camping.VAR_CAMP_XP, xpAmt);
             }
@@ -377,6 +400,7 @@ public class camp_master extends script.base_script
         camping.sendCampMaintenanceHeartbeat(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCampRestoreHeartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, camping.VAR_OWNER))
@@ -395,7 +419,7 @@ public class camp_master extends script.base_script
             camping.nukeCamp(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (camping.isOwnerInVicinity(self))
             {
@@ -403,7 +427,7 @@ public class camp_master extends script.base_script
                 camping.sendCampMaintenanceHeartbeat(self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(owner, SID_SYS_ABANDONED_CAMP);
                 camping.clearCampOwner(self);
@@ -415,6 +439,7 @@ public class camp_master extends script.base_script
             }
         }
     }
+
     public int handleNuke(obj_id self, dictionary params) throws InterruptedException
     {
         camping.nukeCamp(self);

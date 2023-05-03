@@ -10,6 +10,7 @@ public class camp_battle_theater extends script.base_script
     public camp_battle_theater()
     {
     }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         location here = getLocation(self);

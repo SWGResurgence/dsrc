@@ -5,9 +5,6 @@ import script.library.*;
 
 public class npc_controller extends script.base_script
 {
-    public npc_controller()
-    {
-    }
     public static final float MIN_NPC_DISTANCE = 6.0f;
     public static final String INVENTORY_SCRIPT = "systems.storyteller.npc_inventory_controller";
     public static final int OPEN_NPC_MENU = menu_info_types.SERVER_MENU1;
@@ -18,6 +15,10 @@ public class npc_controller extends script.base_script
     public static final int REMOVE_EFFECT_MENU = menu_info_types.SERVER_MENU6;
     public static final int NPC_OPTIONS_ROOT_MENU = menu_info_types.SERVER_MENU7;
     public static final int EQUIP_UNEQUIP_WEAPON_MENU = menu_info_types.SERVER_MENU8;
+    public npc_controller()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "storytellerCreationTime", getGameTime());
@@ -27,11 +28,13 @@ public class npc_controller extends script.base_script
         setNpcCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleStorytellerPropInitialize", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerPropInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "eventTeamCleaupOverride") && !utils.hasScriptVar(self, "storytellerOnAttachFired"))
@@ -43,13 +46,13 @@ public class npc_controller extends script.base_script
                 {
                     messageTo(self, "cleanupProp", null, 1, false);
                 }
-                else 
+                else
                 {
                     npcSetup(self);
                     messageTo(self, "prepCleanupProp", null, getStandardCleanupTime(self) - (getGameTime() - storytellerCreationTime), false);
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, "storytellerCreationTime", getGameTime());
                 npcSetup(self);
@@ -58,6 +61,7 @@ public class npc_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id myStorytellerId = getObjIdObjVar(self, "storytellerid");
@@ -98,6 +102,7 @@ public class npc_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -137,7 +142,7 @@ public class npc_controller extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("storyteller", "npc_combat_in_combat"));
                 }
-                else 
+                else
                 {
                     setInvulnerable(self, true);
                 }
@@ -148,13 +153,13 @@ public class npc_controller extends script.base_script
                 {
                     sendSystemMessage(player, new string_id("storyteller", "npc_combat_in_combat"));
                 }
-                else 
+                else
                 {
                     if (aiUsingPrimaryWeapon(self) || aiUsingSecondaryWeapon(self))
                     {
                         aiUnEquipWeapons(self);
                     }
-                    else 
+                    else
                     {
                         if (!equipWeapon(self))
                         {
@@ -170,11 +175,13 @@ public class npc_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveStorytellerPersistedEffect(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.removeStorytellerPersistedEffect(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerNpcLevelSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -184,7 +191,7 @@ public class npc_controller extends script.base_script
         {
             sendSystemMessage(player, new string_id("storyteller", "npc_combat_level_invalid"));
         }
-        else 
+        else
         {
             String creatureName = getCreatureName(self);
             dictionary creatureDict = utils.dataTableGetRow(create.CREATURE_TABLE, creatureName);
@@ -195,6 +202,7 @@ public class npc_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void master_storyteller_npc_inventory(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(npc);
@@ -208,6 +216,7 @@ public class npc_controller extends script.base_script
             }
         }
     }
+
     public int handleEditingNpcInventory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id npc = params.getObjId("npc");
@@ -221,13 +230,14 @@ public class npc_controller extends script.base_script
                     queueCommand(self, (822776054), npcInventory, "", COMMAND_PRIORITY_IMMEDIATE);
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "handleEditingNpcInventory", params, 15, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void npcSetup(obj_id self) throws InterruptedException
     {
         if (aiHasPrimaryWeapon(self))
@@ -241,6 +251,7 @@ public class npc_controller extends script.base_script
         clearNpcInventoryOwnership(self);
         return;
     }
+
     public void clearNpcInventoryOwnership(obj_id self) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -259,6 +270,7 @@ public class npc_controller extends script.base_script
         }
         return;
     }
+
     public boolean equipWeapon(obj_id self) throws InterruptedException
     {
         if (aiHasPrimaryWeapon(self))
@@ -269,18 +281,16 @@ public class npc_controller extends script.base_script
         {
             aiEquipSecondaryWeapon(self);
         }
-        if (aiUsingPrimaryWeapon(self) || aiUsingSecondaryWeapon(self))
-        {
-            return true;
-        }
-        return false;
+        return aiUsingPrimaryWeapon(self) || aiUsingSecondaryWeapon(self);
     }
+
     public void setNpcCleanup(obj_id self) throws InterruptedException
     {
         int cleanup_time = getStandardCleanupTime(self);
         messageTo(self, "prepCleanupProp", null, cleanup_time, false);
         return;
     }
+
     public int getStandardCleanupTime(obj_id prop_controller) throws InterruptedException
     {
         int cleanup_time = storyteller.DEFAULT_NPC_CLEANUP_TIME;
@@ -297,16 +307,19 @@ public class npc_controller extends script.base_script
         }
         return cleanup_time;
     }
+
     public int cleanupProp(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prepCleanupProp(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.confirmCleanuptime(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -346,6 +359,7 @@ public class npc_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleBlueprintElevation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -355,15 +369,18 @@ public class npc_controller extends script.base_script
         storyteller.handleBlueprintObjectElevation(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "readyToLoot", true);
         return SCRIPT_CONTINUE;
     }
+
     public void checkBonusCleanupTime(obj_id prop_controller) throws InterruptedException
     {
         storyteller.calculateNpcBonusExistTime(prop_controller);
     }
+
     public int st_receivedCityResponse(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.setBonusExistTime(self);

@@ -11,6 +11,7 @@ public class spawning extends script.base_script
     public spawning()
     {
     }
+
     public static void activateSpawnerHack(obj_id objPlayer) throws InterruptedException
     {
         obj_id[] objSpawners = getAllObjectsWithObjVar(getLocation(objPlayer), 24000, "intSpawnSystem");
@@ -20,12 +21,14 @@ public class spawning extends script.base_script
         }
         messageTo(objSpawners[rand(0, objSpawners.length - 1)], "doSpawnEvent", null, 0, false);
     }
+
     public static location getRandomLocationInCircle(location locTest, float fltSize) throws InterruptedException
     {
         locTest.x = locTest.x + rand(-1 * fltSize, fltSize);
         locTest.z = locTest.z + rand(-1 * fltSize, fltSize);
         return locTest;
     }
+
     public static location getRandomLocationAtDistance(location locTest, float fltSize) throws InterruptedException
     {
         int position = 1;
@@ -38,19 +41,21 @@ public class spawning extends script.base_script
             locTest.x = locTest.x + rand(-1 * fltSize, fltSize);
             locTest.z = locTest.z + fltSize * position;
         }
-        else 
+        else
         {
             locTest.x = locTest.x + fltSize * position;
             locTest.z = locTest.z + rand(-1 * fltSize, fltSize);
         }
         return locTest;
     }
+
     public static location getLocationWithOffset(location locTest, float fltX, float fltZ) throws InterruptedException
     {
         locTest.x = locTest.x + fltX;
         locTest.z = locTest.z + fltZ;
         return locTest;
     }
+
     public static location[] getDatapadWaypoints(obj_id objPlayer) throws InterruptedException
     {
         obj_id[] objWaypoints = getWaypointsInDatapad(objPlayer);
@@ -65,6 +70,7 @@ public class spawning extends script.base_script
         }
         return locWaypoints;
     }
+
     public static void setAllAttribs(obj_id self, obj_id target, int[] attribs) throws InterruptedException
     {
         for (int attrib : attribs)
@@ -72,12 +78,14 @@ public class spawning extends script.base_script
             setAttrib(target, attrib, getAttrib(self, attrib));
         }
     }
+
     public static boolean checkSpawnCount(obj_id self) throws InterruptedException
     {
         int intSpawnCount = getIntObjVar(self, "intSpawnCount");
         int intCurrentSpawnCount = utils.getIntScriptVar(self, "intCurrentSpawnCount");
         return intCurrentSpawnCount < intSpawnCount;
     }
+
     public static void incrementSpawnCount(obj_id self) throws InterruptedException
     {
         int intCurrentSpawnCount = utils.getIntScriptVar(self, "intCurrentSpawnCount");
@@ -88,25 +96,30 @@ public class spawning extends script.base_script
             utils.setScriptVar(self, "intCurrentSpawnCount", intCurrentSpawnCount);
         }
     }
+
     public static void addToSpawnDebugList(obj_id self, obj_id spawned) throws InterruptedException
     {
-        if(!utils.inDebugMode()) return;
+        if (!utils.inDebugMode()) return;
         Vector debugSpawnList;
         if (utils.hasScriptVar(self, "debugSpawnList"))
         {
             debugSpawnList = utils.getResizeableObjIdArrayScriptVar(self, "debugSpawnList");
             debugSpawnList = utils.addElement(debugSpawnList, spawned);
-        } else {
+        }
+        else
+        {
             debugSpawnList = utils.addElement(new Vector(), spawned);
         }
         utils.setScriptVar(self, "debugSpawnList", debugSpawnList);
     }
+
     public static Vector getAllObjectsWithObjVar(location locTest, String strObjVarName) throws InterruptedException
     {
         Vector objArray = new Vector();
         objArray.setSize(0);
         return objArray;
     }
+
     public static Vector getObjectsWithObjVar(obj_id objParent, String strObjVarName, Vector objArray) throws InterruptedException
     {
         if (hasObjVar(objParent, strObjVarName))
@@ -114,24 +127,29 @@ public class spawning extends script.base_script
             objArray = utils.addElement(objArray, objParent);
         }
         obj_id[] objContents = getContents(objParent);
-        if ((objContents != null) && (objContents.length > 0))
+        if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 getObjectsWithObjVar(objContent, strObjVarName, objArray);
             }
         }
         return objArray;
     }
+
     public static obj_id[] getAllContents(obj_id objObject) throws InterruptedException
     {
         Vector objContents = new Vector();
         objContents.setSize(0);
         obj_id[] objCells = getContents(objObject);
         obj_id[] objTestContents;
-        for (obj_id objCell : objCells) {
+        for (obj_id objCell : objCells)
+        {
             objTestContents = getContents(objCell);
-            if ((objTestContents != null) && (objTestContents.length > 0)) {
-                for (obj_id objTestContent : objTestContents) {
+            if (objTestContents != null)
+            {
+                for (obj_id objTestContent : objTestContents)
+                {
                     objContents = utils.addElement(objContents, objTestContent);
                 }
             }
@@ -144,6 +162,7 @@ public class spawning extends script.base_script
         }
         return _objContents;
     }
+
     public static void planetSpawnersCreatureDied(obj_id spawner, obj_id deadGuy) throws InterruptedException
     {
         if (!isIdValid(spawner))
@@ -174,6 +193,7 @@ public class spawning extends script.base_script
         }
         utils.setScriptVar(spawner, "myCreations", spawnedList);
     }
+
     public static obj_id createSpawnInLegacyCell(obj_id dungeon, location creatureLocation, String creatureName) throws InterruptedException
     {
         if (!isValidId(dungeon))
@@ -201,6 +221,7 @@ public class spawning extends script.base_script
         create.addDestroyMessage(creature, creatureName + "Dead", 300.0f, dungeon);
         return creature;
     }
+
     public static boolean spawnObjectsInDungeonFromTable(obj_id dungeon, String planet, String table) throws InterruptedException
     {
         if (!isValidId(dungeon))
@@ -266,8 +287,10 @@ public class spawning extends script.base_script
             if (script != null && script.length() > 0)
             {
                 scripts = split(script, ',');
-                for (String script1 : scripts) {
-                    if (!hasScript(objectCreated, script1)) {
+                for (String script1 : scripts)
+                {
+                    if (!hasScript(objectCreated, script1))
+                    {
                         attachScript(objectCreated, script1);
                     }
                 }

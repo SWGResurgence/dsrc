@@ -19,14 +19,16 @@ public class neural_recon_network_system extends script.base_script
     public static final string_id SID_NO_LOCKOUT_FOR_INSTANCE = new string_id("spam", "no_lockout_for_instance");
     public static final string_id SID_INSTANCE_WAS_RESET = new string_id("spam", "instance_was_reset");
     public static final string_id SID_INSTANCE_GENERIC_ERROR = new string_id("spam", "instance_generic_error");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         //if (utils.isNestedWithinAPlayer(self))
         //{
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
+        mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
         //}
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -37,17 +39,17 @@ public class neural_recon_network_system extends script.base_script
                 int pid = sui.getPid(player, PID_NAME);
                 forceCloseSUIPage(pid);
             }
-			//ADDED for time management
-			int currentGameTime = getCalendarTime();
-			if(hasObjVar(self, "used.timestamp"))
-			{
-				int lastUsed = getIntObjVar(self, "used.timestamp");
-				if(currentGameTime < (lastUsed + 172800))
-				{
-					broadcast(player, "You cannot use this yet!");
-					return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
-				}
-			}
+            //ADDED for time management
+            int currentGameTime = getCalendarTime();
+            if (hasObjVar(self, "used.timestamp"))
+            {
+                int lastUsed = getIntObjVar(self, "used.timestamp");
+                if (currentGameTime < (lastUsed + 172800))
+                {
+                    broadcast(player, "You cannot use this yet!");
+                    return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
+                }
+            }
             obj_var_list varListinstance = getObjVarList(player, instance.PLAYER_INSTANCE);
             if (varListinstance == null)
             {
@@ -74,30 +76,32 @@ public class neural_recon_network_system extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
-		if (idx == -1)
-			return SCRIPT_CONTINUE;
+        if (idx == -1)
+            return SCRIPT_CONTINUE;
 
-		if (hasObjVar(self, "used.timestamp"))
-		{
-			int timeStamp = getIntObjVar(self, "used.timestamp");
-			int rightNow = getCalendarTime();
-			if(rightNow < (timeStamp + 172800))
-			{
-				int dieTime = (timeStamp + 172800) - rightNow;
-				names[idx] = "storyteller_time_remaining";
-				attribs[idx] = utils.formatTimeVerbose(dieTime);
-				idx++;
-				if (idx >= names.length)
-					return SCRIPT_CONTINUE;
+        if (hasObjVar(self, "used.timestamp"))
+        {
+            int timeStamp = getIntObjVar(self, "used.timestamp");
+            int rightNow = getCalendarTime();
+            if (rightNow < (timeStamp + 172800))
+            {
+                int dieTime = (timeStamp + 172800) - rightNow;
+                names[idx] = "storyteller_time_remaining";
+                attribs[idx] = utils.formatTimeVerbose(dieTime);
+                idx++;
+                if (idx >= names.length)
+                    return SCRIPT_CONTINUE;
 
-			}
-		}
+            }
+        }
 
-	return SCRIPT_CONTINUE;
+        return SCRIPT_CONTINUE;
     }
+
     public int onInstanceResetItemResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -113,18 +117,18 @@ public class neural_recon_network_system extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-		//ADDED for time management
-		int currentGameTime = getCalendarTime();
-		if(hasObjVar(self, "used.timestamp"))
-		{
-			int lastUsed = getIntObjVar(self, "used.timestamp");
-			if(currentGameTime < (lastUsed + 172800))
-			{
-				//TODO: add message here to tell player it aint time yet
+        //ADDED for time management
+        int currentGameTime = getCalendarTime();
+        if (hasObjVar(self, "used.timestamp"))
+        {
+            int lastUsed = getIntObjVar(self, "used.timestamp");
+            if (currentGameTime < (lastUsed + 172800))
+            {
+                //TODO: add message here to tell player it aint time yet
                 broadcast(player, "You cannot use this yet!");
-				return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
-			}
-		}
+                return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
+            }
+        }
         int bp = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         if (bp == sui.BP_CANCEL || idx == -1)
@@ -172,6 +176,7 @@ public class neural_recon_network_system extends script.base_script
         sui.setPid(player, newPid, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handlerConfirmResetInstance(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -187,18 +192,18 @@ public class neural_recon_network_system extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-		//ADDED for time management
-		int currentGameTime = getCalendarTime();
-		if(hasObjVar(self, "used.timestamp"))
-		{
-			int lastUsed = getIntObjVar(self, "used.timestamp");
-			if(currentGameTime < (lastUsed + 172800))
-			{
-				//TODO: add message here to tell player it aint time yet
+        //ADDED for time management
+        int currentGameTime = getCalendarTime();
+        if (hasObjVar(self, "used.timestamp"))
+        {
+            int lastUsed = getIntObjVar(self, "used.timestamp");
+            if (currentGameTime < (lastUsed + 172800))
+            {
+                //TODO: add message here to tell player it aint time yet
                 broadcast(player, "You cannot use this yet!");
-				return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
-			}
-		}
+                return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
+            }
+        }
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_CANCEL)
         {
@@ -259,12 +264,12 @@ public class neural_recon_network_system extends script.base_script
         prose.setStringId(pp, SID_INSTANCE_WAS_RESET);
         prose.setTU(pp, "@instance:" + instanceToRemove);
         sendSystemMessageProse(player, pp);
-		if(hasObjVar(self, "used.timestamp"))
-		{
-			removeObjVar(self, "used.timestamp");
+        if (hasObjVar(self, "used.timestamp"))
+        {
+            removeObjVar(self, "used.timestamp");
 
-		}
-		setObjVar(self, "used.timestamp", getCalendarTime());
+        }
+        setObjVar(self, "used.timestamp", getCalendarTime());
         //destroyObject(self);
         return SCRIPT_CONTINUE;
     }

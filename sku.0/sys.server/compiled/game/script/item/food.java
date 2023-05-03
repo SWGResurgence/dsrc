@@ -8,9 +8,6 @@ import script.*;
 
 public class food extends script.base_script
 {
-    public food()
-    {
-    }
     public static final string_id SID_PET_ONLY = new string_id("base_player", "food_pet_only");
     public static final string_id SID_TOO_FULL = new string_id("base_player", "food_too_full");
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
@@ -25,10 +22,15 @@ public class food extends script.base_script
     public static final float BURST_RUN_V1_VALUES = 0.33f;
     public static final float BURST_RUN_V2_VALUES = 0.66f;
     public static final float INCREASE_HUNGER_VALUE = 15.0f;
-    public static final String[] CLICKY_COMBAT_REMOVED_BUFFS = 
+    public static final String[] CLICKY_COMBAT_REMOVED_BUFFS =
+            {
+                    "none"
+            };
+
+    public food()
     {
-        "none"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String templateName = getTemplateName(self);
@@ -38,6 +40,7 @@ public class food extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String buff_name = getStringObjVar(self, "buff_name");
@@ -62,7 +65,7 @@ public class food extends script.base_script
         names[idx] = "duration";
         float duration = buff.getDuration(buff_name);
         duration *= dur;
-        String durString = formatTime((int)duration);
+        String durString = formatTime((int) duration);
         attribs[idx] = durString + "\n";
         attribs[idx] += "\n" + "The duration of the buff from this item can be increased cumulatively by eating more of the same food " + "as long as the resulting duration does not exceed 2 hours. \n\n" + "Note that the value of primary buffed modifier of the last one eaten will be the one used by the buff.";
         idx++;
@@ -75,7 +78,7 @@ public class food extends script.base_script
         {
             eff = getFloatObjVar(self, "effectiveness");
         }
-        
+
         {
             names[idx] = "effect";
             attribs[idx] = " ";
@@ -99,7 +102,8 @@ public class food extends script.base_script
                         value *= eff;
                     }
                     attribs[idx] = Float.toString(value);
-                    switch (buff_name) {
+                    switch (buff_name)
+                    {
                         case "drink_ruby_bliel":
                             names[idx] = "food_stimpack_roundtime";
                             attribs[idx] = "30";
@@ -131,14 +135,14 @@ public class food extends script.base_script
                             break;
                     }
                 }
-                else 
+                else
                 {
                     param = param.toLowerCase();
                     param = "food_" + param;
                     names[idx] = param;
                     if (i == 1)
                     {
-                        value = (int)(value * eff);
+                        value = (int) (value * eff);
                     }
                     if (value >= 0)
                     {
@@ -159,6 +163,7 @@ public class food extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -173,6 +178,7 @@ public class food extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -189,6 +195,7 @@ public class food extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void comedere(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -210,7 +217,7 @@ public class food extends script.base_script
             filling[0] = 0;
             filling[1] = 0;
         }
-        else 
+        else
         {
             filling[0] = 0;
             filling[1] = 0;
@@ -270,13 +277,13 @@ public class food extends script.base_script
                 case SPECIES_MON_CALAMARI:
                 case SPECIES_RODIAN:
                 case SPECIES_TRANDOSHAN:
-                snd += "reptile_";
-                break;
+                    snd += "reptile_";
+                    break;
                 case SPECIES_WOOKIEE:
-                snd += "wookiee_";
-                break;
+                    snd += "wookiee_";
+                    break;
                 default:
-                snd += "human_";
+                    snd += "human_";
             }
             String genderTemplate = getTemplateName(player);
             if (genderTemplate.contains("_female"))
@@ -294,12 +301,13 @@ public class food extends script.base_script
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 setCount(self, count);
             }
         }
     }
+
     public boolean instantFoodBurstRunEffect(obj_id target, float costReduction, float cooldownReduction, float dur, float eff) throws InterruptedException
     {
         if (buff.hasBuff(target, "burstRun"))
@@ -321,12 +329,9 @@ public class food extends script.base_script
         cooldownReduction = 1.0f - cooldownReduction;
         utils.setScriptVar(target, "food.burst_run.cost", costReduction);
         utils.setScriptVar(target, "food.burst_run.cooldown", cooldownReduction);
-        if (!queueCommand(target, (-63103822), null, "", COMMAND_PRIORITY_FRONT))
-        {
-            return false;
-        }
-        return true;
+        return queueCommand(target, (-63103822), null, "", COMMAND_PRIORITY_FRONT);
     }
+
     public boolean instantCurePoisonEffect(obj_id target) throws InterruptedException
     {
         if (!dot.isPoisoned(target))
@@ -339,12 +344,9 @@ public class food extends script.base_script
             return false;
         }
         int i = rand(0, (dot_ids.length - 1));
-        if (!dot.removeDotEffect(target, dot_ids[i]))
-        {
-            return false;
-        }
-        return true;
+        return dot.removeDotEffect(target, dot_ids[i]);
     }
+
     public boolean instantCureDiseaseEffect(obj_id target) throws InterruptedException
     {
         if (!dot.isDiseased(target))
@@ -357,25 +359,19 @@ public class food extends script.base_script
             return false;
         }
         int i = rand(0, (dot_ids.length - 1));
-        if (!dot.removeDotEffect(target, dot_ids[i]))
-        {
-            return false;
-        }
-        return true;
+        return dot.removeDotEffect(target, dot_ids[i]);
     }
+
     public boolean instantHungryEffect(obj_id target, float eff) throws InterruptedException
     {
-        int hunger = (int)(INCREASE_HUNGER_VALUE * eff);
+        int hunger = (int) (INCREASE_HUNGER_VALUE * eff);
         if (player_stomach.getStomach(target, 0) <= 0)
         {
             return false;
         }
-        if (!player_stomach.addToStomach(target, 0, (-1 * hunger)))
-        {
-            return false;
-        }
-        return true;
+        return player_stomach.addToStomach(target, 0, (-1 * hunger));
     }
+
     public String formatTime(int seconds) throws InterruptedException
     {
         String result = "";
@@ -402,10 +398,13 @@ public class food extends script.base_script
         result += seconds;
         return result;
     }
+
     public boolean isClickyCombatNerfed(String buff_name) throws InterruptedException
     {
-        for (String clickyCombatRemovedBuff : CLICKY_COMBAT_REMOVED_BUFFS) {
-            if (buff_name.equals(clickyCombatRemovedBuff)) {
+        for (String clickyCombatRemovedBuff : CLICKY_COMBAT_REMOVED_BUFFS)
+        {
+            if (buff_name.equals(clickyCombatRemovedBuff))
+            {
                 return true;
             }
         }

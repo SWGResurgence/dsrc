@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class collection_use_object_on_object extends script.base_script
 {
-    public collection_use_object_on_object()
-    {
-    }
     public static final string_id SID_INVALID_TARGET = new string_id("collection", "invalid_target");
     public static final string_id NOT_WHILE_INCAPPED = new string_id("quest/ground/util/quest_giver_object", "not_while_incapped");
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
@@ -16,6 +13,10 @@ public class collection_use_object_on_object extends script.base_script
     public static final string_id OBJECT_DESTROYED = new string_id("collection", "object_destroyed");
     public static final String OBJECT_KEY = "quest.object_key";
     public static final String COLLECTION_OBJECT_TABLE = "datatables/collection/use_object_on_object.iff";
+    public collection_use_object_on_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!canManipulate(player, self, true, true, 15, true))
@@ -33,6 +34,7 @@ public class collection_use_object_on_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -64,13 +66,14 @@ public class collection_use_object_on_object extends script.base_script
         {
             sendSystemMessage(player, SID_INVALID_TARGET);
         }
-        else 
+        else
         {
             setObjVar(self, "owner", player);
             checkValidTarget(player, intended, self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkValidTarget(obj_id player, obj_id target, obj_id self) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -174,16 +177,20 @@ public class collection_use_object_on_object extends script.base_script
         if (collectonSlot != null && collectonSlot.length() > 0)
         {
             String[] allSlots = split(collectonSlot, ',');
-            for (String allSlot : allSlots) {
-                if (!hasCompletedCollectionSlotPrereq(player, allSlot)) {
+            for (String allSlot : allSlots)
+            {
+                if (!hasCompletedCollectionSlotPrereq(player, allSlot))
+                {
                     break;
                 }
-                if (hasCompletedCollectionSlot(player, allSlot)) {
+                if (hasCompletedCollectionSlot(player, allSlot))
+                {
                     continue;
                 }
                 modifyCollectionSlotValue(player, allSlot, 1);
                 String handleTarget = collectionDataDict.getString("handleTarget");
-                if (handleTarget != null && handleTarget.length() > 0) {
+                if (handleTarget != null && handleTarget.length() > 0)
+                {
                     messageTo(target, handleTarget, null, 0, false);
                 }
                 break;
@@ -191,6 +198,7 @@ public class collection_use_object_on_object extends script.base_script
         }
         return true;
     }
+
     public int handleDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "owner"))

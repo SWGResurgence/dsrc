@@ -13,11 +13,13 @@ public class mob_spawner extends script.base_script
     public mob_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         String strPlanet = getLocation(self).area;
@@ -44,7 +46,7 @@ public class mob_spawner extends script.base_script
             }
             utils.setScriptVar(self, "strSpawnList", strSpawnList);
         }
-        else 
+        else
         {
             String[] strSpawnList = new String[1];
             strSpawnList[0] = dctSpawnInfo.getString("strMob");
@@ -67,7 +69,7 @@ public class mob_spawner extends script.base_script
         {
             utils.setScriptVar(self, "strName", "");
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "strName", strName);
         }
@@ -76,6 +78,7 @@ public class mob_spawner extends script.base_script
         makeMob(self);
         return SCRIPT_CONTINUE;
     }
+
     public void makeMob(obj_id self) throws InterruptedException
     {
         location locTest = getLocation(self);
@@ -91,8 +94,7 @@ public class mob_spawner extends script.base_script
         try
         {
             objNPC = create.object(strMob, getLocation(self));
-        }
-        catch(Throwable err)
+        } catch (Throwable err)
         {
             spawnFailed = true;
         }
@@ -100,7 +102,7 @@ public class mob_spawner extends script.base_script
         {
             locTest.x = locTest.x + 1;
             obj_id objTest = createObject("object/tangible/gravestone/gravestone01.iff", locTest);
-            setName(objTest, "For " + self.toString() + " Bad NPC Type of type " + strMob + " on planet " + strPlanet);
+            setName(objTest, "For " + self + " Bad NPC Type of type " + strMob + " on planet " + strPlanet);
             return;
         }
         setYaw(objNPC, getYaw(self));
@@ -111,9 +113,12 @@ public class mob_spawner extends script.base_script
         }
         if ((strScripts != null) && (strScripts.length > 0))
         {
-            for (String strScript : strScripts) {
-                if (!strScript.equals("")) {
-                    if (!hasScript(objNPC, strScript)) {
+            for (String strScript : strScripts)
+            {
+                if (!strScript.equals(""))
+                {
+                    if (!hasScript(objNPC, strScript))
+                    {
                         attachScript(objNPC, strScript);
                     }
                 }
@@ -123,6 +128,7 @@ public class mob_spawner extends script.base_script
         utils.setScriptVar(objNPC, "objParent", self);
         utils.setScriptVar(objNPC, "fltRespawnTime", rand(fltMinSpawnTime, fltMaxSpawnTime));
     }
+
     public int respawnMob(obj_id self, dictionary params) throws InterruptedException
     {
         makeMob(self);

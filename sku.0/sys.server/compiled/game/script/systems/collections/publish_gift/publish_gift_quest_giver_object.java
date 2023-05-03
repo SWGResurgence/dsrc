@@ -5,9 +5,6 @@ import script.library.*;
 
 public class publish_gift_quest_giver_object extends script.base_script
 {
-    public publish_gift_quest_giver_object()
-    {
-    }
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest_teleport");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -22,11 +19,16 @@ public class publish_gift_quest_giver_object extends script.base_script
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");
     public static final String PID_NAME = "getCollectionGiftsHasCompletedQuests";
     public static final String QUEST_NAME = "chapter7_publish_gift_activation";
+    public publish_gift_quest_giver_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menuOption = mi.addRootMenu(menu_info_types.ITEM_USE, RADIAL_INSPECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -79,7 +81,7 @@ public class publish_gift_quest_giver_object extends script.base_script
                 int pid = sui.msgbox(self, player, prompt, sui.YES_NO, title, "handleGrantPublishGiftFromComlink");
                 sui.setPid(player, pid, PID_NAME);
             }
-            else 
+            else
             {
                 string_id sid_offerText = SUI_TITLE;
                 String title = utils.packStringId(sid_offerText);
@@ -98,6 +100,7 @@ public class publish_gift_quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrantPublishGiftFromComlink(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -120,6 +123,7 @@ public class publish_gift_quest_giver_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -143,19 +147,21 @@ public class publish_gift_quest_giver_object extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            callShuttle(self, player);
-            break;
+                callShuttle(self, player);
+                break;
             case sui.BP_CANCEL:
-            sendSystemMessage(player, DECLINED_QUEST);
-            break;
+                sendSystemMessage(player, DECLINED_QUEST);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroySelf(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.special.nodestroy");
         destroyObject(self);
     }
+
     public boolean wildLocation(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -185,6 +191,7 @@ public class publish_gift_quest_giver_object extends script.base_script
         }
         return true;
     }
+
     public boolean callShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))

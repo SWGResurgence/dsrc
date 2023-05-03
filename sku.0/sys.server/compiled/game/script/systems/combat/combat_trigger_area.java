@@ -9,20 +9,22 @@ public class combat_trigger_area extends script.base_script
     public combat_trigger_area()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String buffName = utils.getStringScriptVar(self, "triggerBuff");
         String prtName = utils.getStringScriptVar(self, "triggerPrt");
         obj_id owner = utils.getObjIdScriptVar(self, "objOwner");
-        obj_id[] singleGroupMember = 
-        {
-            owner
-        };
+        obj_id[] singleGroupMember =
+                {
+                        owner
+                };
         int expireTime = utils.getIntScriptVar(self, "triggerDuration");
         createTriggerVolume("trigger_" + buffName + "_" + owner, combat.EGG_AURA_TRIGGER_MIN_RANGE, true);
         setAttributeInterested(self, attrib.ALL);
@@ -33,13 +35,14 @@ public class combat_trigger_area extends script.base_script
             obj_id[] groupMembers = getGroupMemberIds(groupId);
             playClientEffectLoc(groupMembers, prtName, getLocation(self), 0.0f, buffName + "_" + prtName + "_" + owner);
         }
-        else 
+        else
         {
             playClientEffectLoc(singleGroupMember, prtName, getLocation(self), 0.0f, buffName + "_" + prtName + "_" + owner);
         }
         messageTo(self, "cleanUpTriggerBuff", null, expireTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         String buffName = utils.getStringScriptVar(self, "triggerBuff");
@@ -54,6 +57,7 @@ public class combat_trigger_area extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         String buffName = utils.getStringScriptVar(self, "triggerBuff");
@@ -68,20 +72,24 @@ public class combat_trigger_area extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpTriggerBuff(obj_id self, dictionary params) throws InterruptedException
     {
         String buffName = utils.getStringScriptVar(self, "triggerBuff");
         String prtName = utils.getStringScriptVar(self, "triggerPrt");
         obj_id owner = utils.getObjIdScriptVar(self, "objOwner");
         String triggerName = "trigger_" + buffName + "_" + owner;
-        obj_id[] singleGroupMember = 
-        {
-            owner
-        };
+        obj_id[] singleGroupMember =
+                {
+                        owner
+                };
         obj_id[] contents = getTriggerVolumeContents(self, triggerName);
-        for (obj_id content : contents) {
-            if (buff.hasBuff(content, buffName)) {
-                if (self == buff.getBuffCaster(content, buffName)) {
+        for (obj_id content : contents)
+        {
+            if (buff.hasBuff(content, buffName))
+            {
+                if (self == buff.getBuffCaster(content, buffName))
+                {
                     buff.removeBuff(content, buffName);
                 }
             }
@@ -92,7 +100,7 @@ public class combat_trigger_area extends script.base_script
             obj_id[] groupMembers = getGroupMemberIds(groupId);
             stopClientEffectObjByLabel(groupMembers, self, buffName + "_" + prtName + "_" + owner, false);
         }
-        else 
+        else
         {
             stopClientEffectObjByLabel(singleGroupMember, self, buffName + "_" + prtName + "_" + owner, false);
         }

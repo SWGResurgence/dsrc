@@ -10,15 +10,18 @@ public class gcw_city_kit_vehicle extends script.systems.gcw.gcw_city_kit
     public gcw_city_kit_vehicle()
     {
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Vehicle Construction Site");
         utils.setScriptVar(pylon, "gcw.name", "Vehicle Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_vehicle");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)

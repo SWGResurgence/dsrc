@@ -5,18 +5,22 @@ import script.library.*;
 
 public class gcw_smuggler_device extends script.base_script
 {
+    public static final String PARENT = "parent";
+
     public gcw_smuggler_device()
     {
     }
-    public static final String PARENT = "parent";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, PARENT))
@@ -56,6 +60,7 @@ public class gcw_smuggler_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_smuggler_functionality", "OnObjectMenuSelect");
@@ -111,21 +116,25 @@ public class gcw_smuggler_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyGCWTower(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDestroyTower(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDestroyTower(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDestroyTower(obj_id self, obj_id killer) throws InterruptedException
     {
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 0);

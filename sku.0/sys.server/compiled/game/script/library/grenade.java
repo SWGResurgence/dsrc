@@ -6,11 +6,12 @@ import script.string_id;
 
 public class grenade extends script.base_script
 {
+    public static final string_id SID_THROW_DELAY = new string_id("grenade", "throw_delay");
+    public static final string_id SID_THROW_CLASS_DELAY = new string_id("grenade", "throw_class_delay");
     public grenade()
     {
     }
-    public static final string_id SID_THROW_DELAY = new string_id("grenade", "throw_delay");
-    public static final string_id SID_THROW_CLASS_DELAY = new string_id("grenade", "throw_class_delay");
+
     public static boolean canThrowGrenade(obj_id thrower, obj_id grenade, boolean verbose) throws InterruptedException
     {
         if (!combat.hasCertification(thrower, grenade, verbose))
@@ -20,11 +21,13 @@ public class grenade extends script.base_script
         }
         return true;
     }
+
     public static boolean hasThrownGrenade(obj_id thrower, obj_id grenade) throws InterruptedException
     {
         String grenadeEffectClass = getStringObjVar(grenade, "effect_class");
         return true;
     }
+
     public static effect_data applyGrenadeEffects(obj_id defender, obj_id grenade, float range) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "APPLYING GRENADE EFFECTS ON " + getName(defender) + "(" + defender + ")" + " WITH " + getName(grenade) + "(" + grenade + ")");
@@ -33,7 +36,8 @@ public class grenade extends script.base_script
         resultData.posture = currentPosture;
         String grenadeEffectClass = getStringObjVar(grenade, "effect_class");
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying grenade effects of class [" + grenadeEffectClass + "] to " + defender);
-        switch (grenadeEffectClass) {
+        switch (grenadeEffectClass)
+        {
             case "fragmentation":
                 resultData = applyFragmentationEffects(defender, grenade, range, resultData);
                 break;
@@ -64,11 +68,13 @@ public class grenade extends script.base_script
         }
         return resultData;
     }
+
     public static effect_data applyFragmentationEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying fragmentation effects.");
         return resultData;
     }
+
     public static effect_data applyCryobanEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying cryoban effects.");
@@ -92,6 +98,7 @@ public class grenade extends script.base_script
         addSkillModModifier(defender, "cryobanSlow", "combat_slow", slowIntensity, slowDuration, false, true);
         return resultData;
     }
+
     public static effect_data applyGlopEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying glop effects.");
@@ -109,6 +116,7 @@ public class grenade extends script.base_script
         resultData.stateChance = getIntObjVar(grenade, "blindChance");
         return resultData;
     }
+
     public static effect_data applyImperialDetonatorEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying imperial detonator effects.");
@@ -121,6 +129,7 @@ public class grenade extends script.base_script
         resultData.posture = POSTURE_KNOCKED_DOWN;
         return resultData;
     }
+
     public static effect_data applyProtonEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying proton effects.");
@@ -145,6 +154,7 @@ public class grenade extends script.base_script
         dot.applyBleedingEffect(defender, grenade, "protonBurn", HEALTH, burnIntensity, burnDuration);
         return resultData;
     }
+
     public static effect_data applyThermalDetonatorEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying thermal detonator effects.");
@@ -158,6 +168,7 @@ public class grenade extends script.base_script
         dot.applyFireEffect(defender, grenade, "thermalBurn", burnIntensity, burnDuration);
         return resultData;
     }
+
     public static effect_data applyBugBombEffects(obj_id defender, obj_id grenade, float range, effect_data resultData) throws InterruptedException
     {
         combat.combatLog(grenade, defender, "applyGrenadeEffects", "Applying bug bomb effects.");

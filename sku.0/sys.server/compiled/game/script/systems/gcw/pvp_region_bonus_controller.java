@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class pvp_region_bonus_controller extends script.base_script
 {
-    public pvp_region_bonus_controller()
-    {
-    }
     public static final float CYCLE_HEARTBEAT = 30.0f;
     public static final float CYCLE_MAX_RUN = 600.0f;
     public static final String PVP_AREA_RECORD = "gcw_pvp_region.activity_list";
@@ -21,16 +18,22 @@ public class pvp_region_bonus_controller extends script.base_script
     public static final String CYCLE_ITTERATION = "gcw_pvp_region.cycle_itteration";
     public static final String GCW_REGION_DATA = "gcw_pvp_region";
     public static final String LAST_CYCLE = "gcw_pvp_region.lastCycle";
+    public pvp_region_bonus_controller()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         gcw.getRegionToRegister(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         gcw.getRegionToRegister(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isCycleActive(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, CYCLE_STATUS))
@@ -39,7 +42,7 @@ public class pvp_region_bonus_controller extends script.base_script
             {
                 return false;
             }
-            else 
+            else
             {
                 return utils.getBooleanScriptVar(self, CYCLE_STATUS);
             }
@@ -47,6 +50,7 @@ public class pvp_region_bonus_controller extends script.base_script
         utils.setScriptVar(self, CYCLE_STATUS, false);
         return false;
     }
+
     public void setCycleActiveState(obj_id self, boolean state) throws InterruptedException
     {
         if (state)
@@ -55,12 +59,14 @@ public class pvp_region_bonus_controller extends script.base_script
         }
         utils.setScriptVar(self, CYCLE_STATUS, state);
     }
+
     public void clearCycleData(obj_id self) throws InterruptedException
     {
         utils.removeScriptVarTree(self, GCW_REGION_DATA);
         setCycleActiveState(self, false);
         trial.bumpSession(self);
     }
+
     public int getCycleItteration(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, CYCLE_ITTERATION))
@@ -70,6 +76,7 @@ public class pvp_region_bonus_controller extends script.base_script
         utils.setScriptVar(self, CYCLE_ITTERATION, 0);
         return 0;
     }
+
     public int itterateCycle(obj_id self) throws InterruptedException
     {
         int current = getCycleItteration(self);
@@ -77,6 +84,7 @@ public class pvp_region_bonus_controller extends script.base_script
         utils.setScriptVar(self, CYCLE_ITTERATION, newValue);
         return newValue;
     }
+
     public int cycleUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -95,6 +103,7 @@ public class pvp_region_bonus_controller extends script.base_script
         messageTo(self, "cycleUpdate", trial.getSessionDict(self), CYCLE_HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int diedInPvpRegion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -109,13 +118,14 @@ public class pvp_region_bonus_controller extends script.base_script
         {
             recordList = addPlayerToList(player, recordList, 0, 1);
         }
-        else 
+        else
         {
             recordList = incrementDeathsByPlayer(player, recordList);
         }
         utils.setBatchScriptVar(self, PVP_AREA_RECORD, recordList);
         return SCRIPT_CONTINUE;
     }
+
     public int getFactionCount(Vector recordList, String passedFaction) throws InterruptedException
     {
         if (recordList == null || recordList.size() == 0)
@@ -123,15 +133,18 @@ public class pvp_region_bonus_controller extends script.base_script
             return 0;
         }
         int factionCount = 0;
-        for (Object o : recordList) {
+        for (Object o : recordList)
+        {
             String[] parse = split(((String) o), '-');
             String faction = parse[1];
-            if (faction.equals(passedFaction)) {
+            if (faction.equals(passedFaction))
+            {
                 factionCount++;
             }
         }
         return factionCount;
     }
+
     public int getTotalDeathCount(Vector recordList) throws InterruptedException
     {
         if (recordList == null || recordList.size() == 0)
@@ -139,13 +152,15 @@ public class pvp_region_bonus_controller extends script.base_script
             return 0;
         }
         int deathCount = 0;
-        for (Object o : recordList) {
+        for (Object o : recordList)
+        {
             String[] parse = split(((String) o), '-');
             int playerDeath = utils.stringToInt(parse[3]);
             deathCount += playerDeath;
         }
         return deathCount;
     }
+
     public Vector addPlayerToList(obj_id player, Vector recordList, int uniqueHits, int deaths) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isPlayer(player) || recordList == null)
@@ -165,6 +180,7 @@ public class pvp_region_bonus_controller extends script.base_script
         doLogging("xx", "Adding element to array: " + newEntry);
         return recordList;
     }
+
     public String getPlayerDataFromList(obj_id player, Vector recordList) throws InterruptedException
     {
         String listEntry = null;
@@ -172,15 +188,18 @@ public class pvp_region_bonus_controller extends script.base_script
         {
             return null;
         }
-        for (Object o : recordList) {
+        for (Object o : recordList)
+        {
             String[] parse = split(((String) o), '-');
             obj_id listId = utils.stringToObjId(parse[0]);
-            if (listId == player) {
+            if (listId == player)
+            {
                 listEntry = ((String) o);
             }
         }
         return listEntry;
     }
+
     public int getPositionInArrayByPlayer(obj_id player, Vector recordList) throws InterruptedException
     {
         if (recordList.size() == 0)
@@ -190,7 +209,7 @@ public class pvp_region_bonus_controller extends script.base_script
         int position = -1;
         for (int i = 0; i < recordList.size(); i++)
         {
-            String[] parse = split(((String)recordList.get(i)), '-');
+            String[] parse = split(((String) recordList.get(i)), '-');
             obj_id listId = utils.stringToObjId(parse[0]);
             if (listId == player)
             {
@@ -199,21 +218,23 @@ public class pvp_region_bonus_controller extends script.base_script
         }
         return position;
     }
+
     public Vector incrementUpdateHitsByPlayer(obj_id player, Vector recordList) throws InterruptedException
     {
         int playerData = getPositionInArrayByPlayer(player, recordList);
-        String[] parse = split(((String)recordList.get(playerData)), '-');
+        String[] parse = split(((String) recordList.get(playerData)), '-');
         int uniqueHits = utils.stringToInt(parse[2]);
         uniqueHits += 1;
         String updatedData = "" + parse[0] + "-" + parse[1] + "-" + uniqueHits + "-" + parse[3];
-        doLogging("incrementUpdateHitsByPlayer", "Updating Data: " + ((String)recordList.get(playerData)) + " to " + updatedData);
+        doLogging("incrementUpdateHitsByPlayer", "Updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;
     }
+
     public Vector incrementDeathsByPlayer(obj_id player, Vector recordList) throws InterruptedException
     {
         int playerData = getPositionInArrayByPlayer(player, recordList);
-        String[] parse = split(((String)recordList.get(playerData)), '-');
+        String[] parse = split(((String) recordList.get(playerData)), '-');
         int deaths = utils.stringToInt(parse[3]);
         deaths += 1;
         if (deaths > gcw.MAX_DEATH_BY_PLAYER)
@@ -221,10 +242,11 @@ public class pvp_region_bonus_controller extends script.base_script
             deaths = gcw.MAX_DEATH_BY_PLAYER;
         }
         String updatedData = "" + parse[0] + "-" + parse[1] + "-" + parse[2] + "-" + deaths;
-        doLogging("incrementDeathsByPlayer", "updating Data: " + ((String)recordList.get(playerData)) + " to " + updatedData);
+        doLogging("incrementDeathsByPlayer", "updating Data: " + recordList.get(playerData) + " to " + updatedData);
         recordList.set(playerData, updatedData);
         return recordList;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
     }

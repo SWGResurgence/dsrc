@@ -4,21 +4,24 @@ import script.*;
 
 public class power_generator_photo_bio_deed extends script.base_script
 {
+    public static final String VERSION = "v1.00.00";
+
     public power_generator_photo_bio_deed()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "unUsed", 1);
         if (hasObjVar(self, "unUsed"))
         {
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -28,6 +31,7 @@ public class power_generator_photo_bio_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -35,13 +39,13 @@ public class power_generator_photo_bio_deed extends script.base_script
             if (hasObjVar(self, "usedUp"))
             {
             }
-            else 
+            else
             {
                 location locTest;
                 locTest = new location(getLocation(player));
                 locTest.x = locTest.x + 5;
                 locTest.z = locTest.z + 5;
-                String harvesterTemplate = new String("object/installation/generators/power_generator_photo_bio_style_1.iff");
+                String harvesterTemplate = "object/installation/generators/power_generator_photo_bio_style_1.iff";
                 obj_id harvesterObject = createObject(harvesterTemplate, locTest);
                 setObjVar(self, "usedUp", 1);
                 int testInteger;
@@ -49,7 +53,7 @@ public class power_generator_photo_bio_deed extends script.base_script
                 {
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     destroyObject(self);
                 }

@@ -10,20 +10,24 @@ import java.util.Vector;
 
 public class credit_for_kills extends script.base_script
 {
+    public static final String VERSION = "v1.00.00";
+
     public credit_for_kills()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         xp.setupCreditForKills();
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         xp.cleanupCreditForKills();
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         xp.assessCombatResults(self);
@@ -36,6 +40,7 @@ public class credit_for_kills extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         xp.assessCombatResults(self);
@@ -43,6 +48,7 @@ public class credit_for_kills extends script.base_script
         xp.applyHealingCredit(self);
         return SCRIPT_CONTINUE;
     }
+
     public int addEnemyHealer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)

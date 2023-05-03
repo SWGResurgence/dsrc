@@ -9,11 +9,13 @@ public class recruiter extends script.base_script
     public recruiter()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpawnRecruiter", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id recruiter = getObjIdObjVar(self, "recruiter");
@@ -23,6 +25,7 @@ public class recruiter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnRecruiter(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, "theater.parent");
@@ -55,7 +58,7 @@ public class recruiter extends script.base_script
             return SCRIPT_CONTINUE;
         }
         setYaw(recruiter, yaw);
-        int items = (int)getFloatObjVar(parent, "modules." + faction);
+        int items = (int) getFloatObjVar(parent, "modules." + faction);
         setObjVar(recruiter, "item_limit", items);
         setObjVar(self, "recruiter", recruiter);
         return SCRIPT_CONTINUE;

@@ -9,4 +9,4 @@
 objectName = "wearables_name" "armor_rebel_pathfinder_belt"
 detailedDescription = "wearables_detail" "armor_rebel_pathfinder_belt"
 appearanceFilename = "appearance/armor_rebel_pathfinder_utility_belt_m.sat"
-
+gameObjectType = GOT_armor_misc

@@ -5,9 +5,6 @@ import script.library.utils;
 
 public class collection_camera extends script.base_script
 {
-    public collection_camera()
-    {
-    }
     public static final string_id SID_USE_CAMERA = new string_id("collection", "use_camera");
     public static final string_id SID_PICTURE_TAKEN = new string_id("collection", "picture_taken");
     public static final string_id SID_INVALID_TARGET = new string_id("collection", "invalid_target");
@@ -18,6 +15,10 @@ public class collection_camera extends script.base_script
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");
     public static final string_id CREATURE_IS_DEAD = new string_id("collection", "creature_is_dead");
     public static final String PHOTO_COLLECTION = "col_photo_durni_01";
+    public collection_camera()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id myCamera = self;
@@ -27,6 +28,7 @@ public class collection_camera extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -51,12 +53,13 @@ public class collection_camera extends script.base_script
         {
             sendSystemMessage(player, SID_INVALID_TARGET);
         }
-        else 
+        else
         {
             checkValidCreature(player, intended);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean checkValidCreature(obj_id player, obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, "picture_taken_debuff"))
@@ -74,40 +77,53 @@ public class collection_camera extends script.base_script
             return false;
         }
         String creatureName = getCreatureName(target);
-        switch (creatureName) {
+        switch (creatureName)
+        {
             case "durni":
-                if (!hasCompletedCollectionSlot(player, "photo_durni_01")) {
+                if (!hasCompletedCollectionSlot(player, "photo_durni_01"))
+                {
                     modifyCollectionSlotValue(player, "photo_durni_01", 1);
                     tagTheCreature(player, target);
                     return true;
-                } else {
+                }
+                else
+                {
                     photoSlotComplete(player);
                     return false;
                 }
             case "corellia_durni_fiendish":
-                if (!hasCompletedCollectionSlot(player, "photo_durni_fiendish_01")) {
+                if (!hasCompletedCollectionSlot(player, "photo_durni_fiendish_01"))
+                {
                     modifyCollectionSlotValue(player, "photo_durni_fiendish_01", 1);
                     tagTheCreature(player, target);
                     return true;
-                } else {
+                }
+                else
+                {
                     photoSlotComplete(player);
                     return false;
                 }
             case "crazed_durni":
-                if (!hasCompletedCollectionSlot(player, "photo_crazed_durni_01")) {
+                if (!hasCompletedCollectionSlot(player, "photo_crazed_durni_01"))
+                {
                     modifyCollectionSlotValue(player, "photo_crazed_durni_01", 1);
                     tagTheCreature(player, target);
                     return true;
-                } else {
+                }
+                else
+                {
                     photoSlotComplete(player);
                     return false;
                 }
             case "durni_vehement_warrior":
-                if (!hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01")) {
+                if (!hasCompletedCollectionSlot(player, "photo_durni_vehement_warrior_01"))
+                {
                     modifyCollectionSlotValue(player, "photo_durni_vehement_warrior_01", 1);
                     tagTheCreature(player, target);
                     return true;
-                } else {
+                }
+                else
+                {
                     photoSlotComplete(player);
                     return false;
                 }
@@ -116,6 +132,7 @@ public class collection_camera extends script.base_script
                 return false;
         }
     }
+
     public void tagTheCreature(obj_id player, obj_id photoTarget) throws InterruptedException
     {
         String pictureParticle = "appearance/pt_durni_camera.prt";
@@ -126,6 +143,7 @@ public class collection_camera extends script.base_script
         utils.setScriptVar(photoTarget, "picture_taken_debuff", "active");
         messageTo(photoTarget, "clearCollectionCameraParticle", dict, 300, false);
     }
+
     public void photoSlotComplete(obj_id player) throws InterruptedException
     {
         sendSystemMessage(player, SID_PHOTO_SLOT_COMPLETE);

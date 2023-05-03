@@ -8,14 +8,15 @@ import java.util.Vector;
 
 public class skill_template extends script.base_script
 {
-    public skill_template()
-    {
-    }
     public static final float NON_TEMPLATE_XP_RATIO = 1.0f;
     public static final float QUEST_XP_RATIO = 1.0f;
     public static final String NO_TEMPLATE_STARTING = "new_character_no_skill";
     public static final String TEMPLATE_TABLE = "datatables/skill_template/skill_template.iff";
     public static final String ITEM_REWARD_TABLE = "datatables/roadmap/item_rewards.iff";
+    public skill_template()
+    {
+    }
+
     public static String[] getSkillTemplateSkillsByTemplateName(String templateName) throws InterruptedException
     {
         if (templateName == null || templateName.length() <= 0)
@@ -29,6 +30,7 @@ public class skill_template extends script.base_script
         }
         return split(template, ',');
     }
+
     public static String[] getSkillTemplateSkills(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -38,10 +40,12 @@ public class skill_template extends script.base_script
         String templateName = getSkillTemplate(player);
         return getSkillTemplateSkillsByTemplateName(templateName);
     }
+
     public static boolean isValidWorkingSkill(String skillName) throws InterruptedException
     {
         return !(skillName == null || skillName.equals(""));
     }
+
     public static String getNextWorkingSkill(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -67,6 +71,7 @@ public class skill_template extends script.base_script
         }
         return template[idx];
     }
+
     public static String getTemplateSkillXpType(obj_id player, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -99,7 +104,7 @@ public class skill_template extends script.base_script
                 utils.removeScriptVar(player, "skillTemplate.loop");
                 return null;
             }
-            else 
+            else
             {
                 setWorkingSkill(player, skillName);
             }
@@ -113,7 +118,7 @@ public class skill_template extends script.base_script
                     sendSystemMessage(player, new string_id("base_player", "skill_template_old_xp_nag"));
                 }
             }
-            else 
+            else
             {
                 skillName = getNextWorkingSkill(player);
                 if (isValidWorkingSkill(skillName))
@@ -138,6 +143,7 @@ public class skill_template extends script.base_script
         utils.removeScriptVar(player, "skillTemplate.loop");
         return templateCombatXpType;
     }
+
     public static String getSkillExperienceType(String skillName) throws InterruptedException
     {
         dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
@@ -146,8 +152,9 @@ public class skill_template extends script.base_script
             return null;
         }
         java.util.Enumeration e = xpReqs.keys();
-        return (String)(e.nextElement());
+        return (String) (e.nextElement());
     }
+
     public static boolean isQualifiedForWorkingSkill(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -169,10 +176,11 @@ public class skill_template extends script.base_script
             return true;
         }
         java.util.Enumeration e = xpReqs.keys();
-        String xpType = (String)(e.nextElement());
+        String xpType = (String) (e.nextElement());
         int xpCost = xpReqs.getInt(xpType);
         return getExperiencePoints(player, xpType) >= xpCost;
     }
+
     public static boolean earnWorkingSkill(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -192,20 +200,24 @@ public class skill_template extends script.base_script
         }
         return false;
     }
+
     public static void validateWorkingSkill(obj_id player) throws InterruptedException
     {
         String[] skillList = getSkillTemplateSkills(player);
-        if (skillList == null || skillList.length == 0)
+        if (skillList == null)
         {
             return;
         }
-        for (String aSkillList : skillList) {
-            if (!hasSkill(player, aSkillList)) {
+        for (String aSkillList : skillList)
+        {
+            if (!hasSkill(player, aSkillList))
+            {
                 setWorkingSkill(player, aSkillList);
                 break;
             }
         }
     }
+
     public static boolean grantRoadmapItem(obj_id player) throws InterruptedException
     {
         String skillName = getWorkingSkill(player);
@@ -232,16 +244,23 @@ public class skill_template extends script.base_script
         allNewObjectsResizable.setSize(0);
         boolean success = true;
         obj_id newItem;
-        for (String item : items) {
-            if (item.endsWith(".iff")) {
+        for (String item : items)
+        {
+            if (item.endsWith(".iff"))
+            {
                 newItem = createObjectInInventoryAllowOverload(item, player);
-            } else {
+            }
+            else
+            {
                 newItem = static_item.createNewItemFunction(item, player);
             }
-            if (!isIdValid(newItem)) {
+            if (!isIdValid(newItem))
+            {
                 LOG("roadmap", "ERROR - Could not create roadmap item (" + item + ")");
                 success = false;
-            } else {
+            }
+            else
+            {
                 utils.addElement(allNewObjectsResizable, newItem);
             }
         }
@@ -252,6 +271,7 @@ public class skill_template extends script.base_script
         showLootBox(player, allNewObjects);
         return success;
     }
+
     public static String getRoadmapItemDesc(String skillTemplate, String workingSkill) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(skillTemplate, 0, ITEM_REWARD_TABLE);
@@ -279,6 +299,7 @@ public class skill_template extends script.base_script
         }
         return "";
     }
+
     public static String getRoadmapItem(obj_id player, String skillTemplate, String workingSkill) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(skillTemplate, 0, ITEM_REWARD_TABLE);

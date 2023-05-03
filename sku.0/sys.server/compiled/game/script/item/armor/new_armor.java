@@ -11,30 +11,31 @@ import script.string_id;
 
 public class new_armor extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.#");
+    public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");
+    public static final String[] SID_SPECIAL_TOOLTIP_PROTECTIONS =
+            {
+                    "armor_eff_kinetic",
+                    "armor_eff_energy",
+                    "armor_eff_elemental_heat",
+                    "armor_eff_elemental_cold",
+                    "armor_eff_elemental_acid",
+                    "armor_eff_elemental_electrical"
+            };
+    public static final String[] SPECIAL_PROTECTIONS =
+            {
+                    "kinetic",
+                    "energy",
+                    "heat",
+                    "cold",
+                    "acid",
+                    "electricity"
+            };
+    public static final String APPEARANCE_TBL = "datatables/appearance/appearance_table.iff";
     public new_armor()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.#");
-    public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");
-    public static final String[] SID_SPECIAL_TOOLTIP_PROTECTIONS = 
-    {
-        "armor_eff_kinetic",
-        "armor_eff_energy",
-        "armor_eff_elemental_heat",
-        "armor_eff_elemental_cold",
-        "armor_eff_elemental_acid",
-        "armor_eff_elemental_electrical"
-    };
-    public static final String[] SPECIAL_PROTECTIONS = 
-    {
-        "kinetic",
-        "energy",
-        "heat",
-        "cold",
-        "acid",
-        "electricity"
-    };
-    public static final String APPEARANCE_TBL = "datatables/appearance/appearance_table.iff";
+
     public String getSpeciesName(String speciesName) throws InterruptedException
     {
         String species = "";
@@ -49,14 +50,15 @@ public class new_armor extends script.base_script
         }
         return species;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int ourType = getGameObjectType(self);
 
-        if (!isGameObjectTypeOf(ourType, GOT_armor) && !isGameObjectTypeOf(ourType, GOT_component_armor) 
-		&& !isGameObjectTypeOf(ourType, GOT_component_new_armor) && !isGameObjectTypeOf(ourType, GOT_cybernetic) 
-		&& !isGameObjectTypeOf(ourType, GOT_cybernetic_arm) && !isGameObjectTypeOf(ourType, GOT_cybernetic_legs) 
-		&& !isGameObjectTypeOf(ourType, GOT_cybernetic_torso))
+        if (!isGameObjectTypeOf(ourType, GOT_armor) && !isGameObjectTypeOf(ourType, GOT_component_armor)
+                && !isGameObjectTypeOf(ourType, GOT_component_new_armor) && !isGameObjectTypeOf(ourType, GOT_cybernetic)
+                && !isGameObjectTypeOf(ourType, GOT_cybernetic_arm) && !isGameObjectTypeOf(ourType, GOT_cybernetic_legs)
+                && !isGameObjectTypeOf(ourType, GOT_cybernetic_torso))
         {
             debugServerConsoleMsg(self, "!!!!Removing armor script!!!!!");
             debugServerConsoleMsg(self, "--- This is probably bad... removing because game object type of item () doesn't match one of the exceptions: ");
@@ -65,10 +67,11 @@ public class new_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         getProtections(self);
-        
+
         {
             java.util.HashSet speciesRequirementsSet = new java.util.HashSet();
             String armorSharedObjectTemplateName = getSharedObjectTemplateName(self);
@@ -83,13 +86,13 @@ public class new_armor extends script.base_script
                     java.util.Enumeration speciesNames = appearanceRestrictions.keys();
                     while (speciesNames.hasMoreElements())
                     {
-                        String species = (String)(speciesNames.nextElement());
+                        String species = (String) (speciesNames.nextElement());
                         if (!species.equals("Object Template Name"))
                         {
                             Object speciesAppearance = appearanceRestrictions.get(species);
                             if (speciesAppearance != null && (speciesAppearance instanceof String))
                             {
-                                String speciesAppearanceNameString = ((String)speciesAppearance);
+                                String speciesAppearanceNameString = ((String) speciesAppearance);
                                 if (!speciesAppearanceNameString.equals(":block"))
                                 {
                                     speciesRequirementsSet.add(getSpeciesName(species));
@@ -100,7 +103,8 @@ public class new_armor extends script.base_script
                 }
             }
             String speciesRequirements = "";
-            for (Object o : speciesRequirementsSet) {
+            for (Object o : speciesRequirementsSet)
+            {
                 speciesRequirements += o;
                 speciesRequirements += " ";
             }
@@ -117,15 +121,12 @@ public class new_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
-        if (isPlayer(destContainer) || isAPlayerAppearanceInventoryContainer(destContainer))
+        if (isPlayer(destContainer))
         {
             obj_id player = destContainer;
-            if (isAPlayerAppearanceInventoryContainer(destContainer))
-            {
-                player = getContainedBy(destContainer);
-            }
             if (!armor.isArmorCertified(player, self) || (utils.isMando(self) && !utils.hasSpecialSkills(player)))
             {
                 prose_package pp = new prose_package();
@@ -135,8 +136,17 @@ public class new_armor extends script.base_script
                 return SCRIPT_OVERRIDE;
             }
         }
+        else if (isAPlayerAppearanceInventoryContainer(destContainer))
+        {
+            obj_id player = destContainer;
+            if (isAPlayerAppearanceInventoryContainer(destContainer)) {
+                player = getContainedBy(destContainer);
+                return SCRIPT_CONTINUE;
+            }
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player;
@@ -148,13 +158,14 @@ public class new_armor extends script.base_script
         {
             player = sourceContainer;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         armor.recalculateArmorForPlayer(player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (player == null || names == null || attribs == null || names.length != attribs.length)
@@ -201,42 +212,46 @@ public class new_armor extends script.base_script
             if (catName != null && free < names.length)
             {
                 names[free] = armor.SID_ARMOR_CATEGORY;
-                attribs[free++] = (String)catName;
+                attribs[free++] = (String) catName;
                 names[free] = "tooltip.armor_category";
-                attribs[free++] = (String)catName;
+                attribs[free++] = (String) catName;
             }
         }
         if (hasObjVar(self, "attribute.bonus.0"))
         {
             names[free] = "health_bonus";
             attribs[free++] = "+" + getIntObjVar(self, "attribute.bonus.0");
-            
+
         }
-        String[][] entries = 
-        {
-            
-            {
-                "kinetic",
-                "energy"
-            },
-            
-            {
-                "heat",
-                "cold",
-                "acid",
-                "electricity"
-            }
-        };
+        String[][] entries =
+                {
+
+                        {
+                                "kinetic",
+                                "energy"
+                        },
+
+                        {
+                                "heat",
+                                "cold",
+                                "acid",
+                                "electricity"
+                        }
+                };
         int realArmorType = getGameObjectType(self);
         if (realArmorType == GOT_armor_hand || realArmorType == GOT_armor_foot)
         {
             return SCRIPT_CONTINUE;
         }
-        for (String[] entry : entries) {
-            for (String s : entry) {
-                if (free < names.length) {
+        for (String[] entry : entries)
+        {
+            for (String s : entry)
+            {
+                if (free < names.length)
+                {
                     float value = general_protection + 0.5f;
-                    if (protections != null) {
+                    if (protections != null)
+                    {
                         value += protections.getFloat(s);
                     }
                     names[free] = (String) (armor.SPECIAL_PROTECTION_MAP.get(s));
@@ -244,7 +259,7 @@ public class new_armor extends script.base_script
                 }
             }
         }
-        
+
         {
             for (int i = 0; i < SPECIAL_PROTECTIONS.length; ++i)
             {
@@ -254,7 +269,7 @@ public class new_armor extends script.base_script
                 {
                     value += protections.getFloat(SPECIAL_PROTECTIONS[i]);
                 }
-                attribs[free++] = Integer.toString((int)value);
+                attribs[free++] = Integer.toString((int) value);
             }
         }
         if (armorType == GOT_armor_psg)
@@ -292,17 +307,20 @@ public class new_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int delayedEquip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         equip(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int checkArmorData(obj_id self, dictionary params) throws InterruptedException
     {
         String template = getTemplateName(self);
-        if(template == null){
-            LOG("DESIGNER_FATAL","Unable to check armor data for item (" + self + ") because it doesn't have a template!");
+        if (template == null)
+        {
+            LOG("DESIGNER_FATAL", "Unable to check armor data for item (" + self + ") because it doesn't have a template!");
             return SCRIPT_CONTINUE;
         }
         String name = null;
@@ -323,39 +341,41 @@ public class new_armor extends script.base_script
         {
             if (!isGameObjectTypeOf(self, GOT_armor_foot) && !isGameObjectTypeOf(self, GOT_armor_hand))
             {
-                final String[] ARMOR_SET = 
-                {
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_leggings.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_helmet.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_gloves.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_chest_plate.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bracer_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bracer_l.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_boots.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bicep_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bicep_l.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_leggings.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_helmet.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_gloves.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_chest_plate.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bracer_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bracer_l.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_boots.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bicep_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bicep_l.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_leggings.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_helmet.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_gloves.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_chest_plate.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bracer_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bracer_l.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_boots.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bicep_r.iff",
-                    "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bicep_l.iff"
-                };
+                final String[] ARMOR_SET =
+                        {
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_leggings.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_helmet.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_gloves.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_chest_plate.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bracer_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bracer_l.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_boots.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bicep_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_imperial_s01_bicep_l.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_leggings.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_helmet.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_gloves.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_chest_plate.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bracer_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bracer_l.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_boots.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bicep_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_rebel_s01_bicep_l.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_leggings.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_helmet.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_gloves.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_chest_plate.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bracer_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bracer_l.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_boots.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bicep_r.iff",
+                                "object/tangible/wearables/armor/clone_trooper/armor_clone_trooper_neutral_s01_bicep_l.iff"
+                        };
                 final String objectTemplateName = getTemplateName(self);
-                for (String s : ARMOR_SET) {
-                    if (objectTemplateName.equals(s)) {
+                for (String s : ARMOR_SET)
+                {
+                    if (objectTemplateName.equals(s))
+                    {
                         armor.setArmorDataPercent(self, 2, 1, 0.94f, 0.95f);
                         break;
                     }
@@ -364,6 +384,7 @@ public class new_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void getProtections(obj_id self) throws InterruptedException
     {
         int armorType = getGameObjectType(self);

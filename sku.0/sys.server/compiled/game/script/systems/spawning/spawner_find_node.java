@@ -5,15 +5,18 @@ import script.obj_id;
 
 public class spawner_find_node extends script.base_script
 {
+    public static final int DEFAULT_SEARCH_RADIUS = 100;
+
     public spawner_find_node()
     {
     }
-    public static final int DEFAULT_SEARCH_RADIUS = 100;
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "findNode", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int findNode(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "spawner_find_node.findNode() Master Object: " + self + " is looking for its node");

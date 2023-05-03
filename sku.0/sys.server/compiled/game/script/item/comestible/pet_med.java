@@ -5,9 +5,6 @@ import script.library.*;
 
 public class pet_med extends script.base_script
 {
-    public pet_med()
-    {
-    }
     public static final String SCRIPT_PET_MED = "item.comestible.pet_med";
     public static final string_id SID_TARGET_NOT_CREATURE = new string_id("error_message", "target_not_creature");
     public static final string_id SID_TARGETTING_ERROR = new string_id("error_message", "targetting_error");
@@ -15,6 +12,10 @@ public class pet_med extends script.base_script
     public static final string_id SID_CANNOT_DO_THAT_NOW = new string_id("pet/pet_menu", "cannot_do_that_now");
     public static final string_id SID_DO_NOT_HEAL = new string_id("pet/pet_menu", "do_not_heal");
     public static final string_id SID_NOTHING_TO_HEAL = new string_id("pet/pet_menu", "nothing_to_heal");
+    public pet_med()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "OnObjectMenuRequest");
@@ -31,12 +32,13 @@ public class pet_med extends script.base_script
                 mid2.setServerNotify(true);
             }
         }
-        else 
+        else
         {
             detachScript(self, SCRIPT_PET_MED);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "item ->" + item);
@@ -48,13 +50,13 @@ public class pet_med extends script.base_script
                 sendSystemMessage(player, SID_TARGET_NOT_CREATURE);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (hasObjVar(self, "consumable.strength"))
                 {
                     performPetHealVitality(player, target, self);
                 }
-                else 
+                else
                 {
                     performPetHealDamage(player, target, self);
                 }
@@ -62,6 +64,7 @@ public class pet_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         attrib_mod[] am = getAttribModArrayObjVar(self, consumable.VAR_CONSUMABLE_MODS);
@@ -80,9 +83,10 @@ public class pet_med extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
-            for (attrib_mod attrib_mod : am) {
+            for (attrib_mod attrib_mod : am)
+            {
                 int attrib = attrib_mod.getAttribute();
                 int val = attrib_mod.getValue();
                 float atk = attrib_mod.getAttack();
@@ -90,13 +94,15 @@ public class pet_med extends script.base_script
                 names[idx] = "examine_heal_damage_" + consumable.STAT_NAME[attrib];
                 attribs[idx] = Integer.toString(val);
                 idx++;
-                if (idx >= names.length) {
+                if (idx >= names.length)
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int healPetDamage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -104,7 +110,7 @@ public class pet_med extends script.base_script
             sendSystemMessage(self, SID_TARGET_NOT_CREATURE);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id pet_med = healing.findPetDamageMed(self);
             if (!isIdValid(pet_med))
@@ -116,6 +122,7 @@ public class pet_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean performPetHealDamage(obj_id player, obj_id target, obj_id pet_med) throws InterruptedException
     {
         int useTime = utils.getIntScriptVar(player, "pet_med.useTime");
@@ -152,6 +159,7 @@ public class pet_med extends script.base_script
         }
         return false;
     }
+
     public int healPetVitality(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -159,7 +167,7 @@ public class pet_med extends script.base_script
             sendSystemMessage(self, SID_TARGET_NOT_CREATURE);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id pet_med = healing.findPetVitalityMed(self);
             if (!isIdValid(pet_med))
@@ -171,6 +179,7 @@ public class pet_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean performPetHealVitality(obj_id player, obj_id target, obj_id pet_med) throws InterruptedException
     {
         if (!pet_lib.isCreaturePet(target))

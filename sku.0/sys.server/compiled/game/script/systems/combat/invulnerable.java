@@ -8,9 +8,11 @@ public class invulnerable extends script.base_script
     public invulnerable()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(text);
@@ -28,7 +30,7 @@ public class invulnerable extends script.base_script
             {
                 target = tmp;
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }

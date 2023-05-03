@@ -9,6 +9,7 @@ public class mission_messagehandler extends script.base_script
     public mission_messagehandler()
     {
     }
+
     public int addListener(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objListener = params.getObjId("objListener");
@@ -20,7 +21,7 @@ public class mission_messagehandler extends script.base_script
             setObjVar(self, "objListeners", objListeners);
             params.put("boolListenerStatus", true);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "listener objVar found");
             obj_id[] objListeners = getObjIdArrayObjVar(self, "objListeners");
@@ -40,7 +41,7 @@ public class mission_messagehandler extends script.base_script
                 setObjVar(self, "objListeners", objNewListeners);
                 params.put("boolListenerStatus", true);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "Already in Array");
                 params.put("boolListenerStatus", false);
@@ -49,13 +50,14 @@ public class mission_messagehandler extends script.base_script
         messageTo(self, "listener_Attached", params, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int removeListener(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "objListeners"))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id objListener = params.getObjId("objListener");
             obj_id[] objListeners = getObjIdArrayObjVar(self, "objListeners");
@@ -68,7 +70,7 @@ public class mission_messagehandler extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     debugServerConsoleMsg(self, "objListeners.length = " + objListeners.length);
                     int intI = 0;
@@ -88,7 +90,7 @@ public class mission_messagehandler extends script.base_script
                     {
                         setObjVar(self, "objListeners", objNewListeners);
                     }
-                    else 
+                    else
                     {
                         if (hasObjVar(self, "objListeners"))
                         {

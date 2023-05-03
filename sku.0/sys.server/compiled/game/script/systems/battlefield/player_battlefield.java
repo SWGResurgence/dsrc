@@ -10,14 +10,17 @@ import java.util.Vector;
 
 public class player_battlefield extends script.base_script
 {
+    public static final String VAR_PLACED_STRUCTURE = "battlefield.placed_structure";
+
     public player_battlefield()
     {
     }
-    public static final String VAR_PLACED_STRUCTURE = "battlefield.placed_structure";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::OnLogout");
@@ -30,6 +33,7 @@ public class player_battlefield extends script.base_script
         battlefield.expelPlayerFromBattlefield(self, master_object);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, battlefield.VAR_BATTLEFIELD))
@@ -42,6 +46,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPlaceStructure(obj_id self, obj_id player, obj_id deed, location position, int rotation) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::OnPlaceStructure");
@@ -113,6 +118,7 @@ public class player_battlefield extends script.base_script
         battlefield.startBuildingConstruction(master_object, player, position, rotation, stats);
         return SCRIPT_OVERRIDE;
     }
+
     public int msgBattlefieldFactionSelected(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgBattlefieldFactionSelected");
@@ -156,7 +162,7 @@ public class player_battlefield extends script.base_script
                         battlefield.addPlayerToTeam(self, selected_faction, master_object);
                     }
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", self + " ->That faction has been eliminated from the battle.");
                     sendSystemMessageTestingOnly(self, "That faction has been eliminated from the battle.");
@@ -165,6 +171,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgEndBattlefieldGame(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgEndBattlefieldGame -- " + self);
@@ -189,9 +196,11 @@ public class player_battlefield extends script.base_script
                         obj_id[] waypoint_list = getObjIdArrayObjVar(self, battlefield.VAR_WAYPOINTS);
                         if (waypoint_list != null)
                         {
-                            for (obj_id obj_id : waypoint_list) {
+                            for (obj_id obj_id : waypoint_list)
+                            {
                                 LOG("LOG_CHANNEL", "player_battlefield::msgEndBattlefieldGame -- waypoint " + obj_id + "removed.");
-                                if (isIdValid(obj_id)) {
+                                if (isIdValid(obj_id))
+                                {
                                     destroyWaypointInDatapad(obj_id, self);
                                 }
                             }
@@ -200,7 +209,7 @@ public class player_battlefield extends script.base_script
                     removeObjVar(self, battlefield.VAR_BATTLEFIELD);
                 }
             }
-            else 
+            else
             {
                 String chatroom = params.getString("chatroom");
                 chatExitRoom(chatroom);
@@ -216,6 +225,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgJoinBattlefieldChat(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgJoinBattlefieldChat");
@@ -224,6 +234,7 @@ public class player_battlefield extends script.base_script
         LOG("LOG_CHANNEL", self + " ->Joining chatroom: " + chat_room);
         return SCRIPT_CONTINUE;
     }
+
     public int msgExitBattlefieldChat(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgExitBattlefieldChat");
@@ -232,6 +243,7 @@ public class player_battlefield extends script.base_script
         LOG("LOG_CHANNEL", self + " ->Exiting chatroom: " + chat_room);
         return SCRIPT_CONTINUE;
     }
+
     public int msgBattlefieldDeath(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgBattlefieldDeath");
@@ -248,7 +260,7 @@ public class player_battlefield extends script.base_script
                 LOG("LOG_CHANNEL", self + " ->You are about to be resuscitated! You may not return to the battlefield until the current battle has ended.");
                 sendSystemMessageTestingOnly(self, "You are about to be resuscitated! You may not return to the battlefield until the current battle has ended.");
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", self + " ->You are about to be revived!");
                 sendSystemMessageTestingOnly(self, "You are about to be revived!");
@@ -261,6 +273,7 @@ public class player_battlefield extends script.base_script
         pclib.resurrectPlayer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgRemoveBattlefieldScript(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgRemoveBattlefieldScript");
@@ -281,6 +294,7 @@ public class player_battlefield extends script.base_script
         cleanPlayer(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgBuildStructureSelected(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgBuildStructureSelected");
@@ -331,6 +345,7 @@ public class player_battlefield extends script.base_script
         enterClientStructurePlacementMode(self, self, template);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGrantFactionStanding(obj_id self, dictionary params) throws InterruptedException
     {
         String faction = params.getString("faction");
@@ -357,6 +372,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgAddBattlefieldWaypoint(obj_id self, dictionary params) throws InterruptedException
     {
         region bf = battlefield.getBattlefield(self);
@@ -372,6 +388,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSelectFactionPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgSelectFactionPrompt -- " + self);
@@ -386,6 +403,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgVerifyFactionPrompt(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::msgVerifyFactionPrompt -- " + self);
@@ -399,6 +417,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgBattlefieldStatus(obj_id self, dictionary params) throws InterruptedException
     {
         region bf = battlefield.getBattlefield(self);
@@ -411,13 +430,14 @@ public class player_battlefield extends script.base_script
             {
                 sendSystemMessageTestingOnly(self, "Cannot found the battlefield. Cancelling refresh.");
             }
-            else 
+            else
             {
                 queueCommand(self, (-567736575), null, "", COMMAND_PRIORITY_DEFAULT);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int battlefieldStatus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::BattlefieldStatus");
@@ -448,7 +468,7 @@ public class player_battlefield extends script.base_script
                 LOG("LOG_CHANNEL", self + " ->The battlefield must be active in order to get statistics.");
                 sendSystemMessageTestingOnly(self, "The battlefield must be active in order to get statistics.");
             }
-            else 
+            else
             {
                 master_object = battlefield.getMasterObjectFromRegion(bf);
                 dictionary stat_params = new dictionary();
@@ -472,7 +492,7 @@ public class player_battlefield extends script.base_script
         {
             pvp_type_str = "Player vs Player";
         }
-        else 
+        else
         {
             pvp_type_str = "Player vs Environment";
         }
@@ -488,12 +508,13 @@ public class player_battlefield extends script.base_script
             time = battlefield.getGameTimeRemaining(bf);
             time_starting = "ending in";
             String[] factions_allowed = battlefield.getFactionsAllowed(bf);
-            for (String s : factions_allowed) {
+            for (String s : factions_allowed)
+            {
                 obj_id[] faction_team = battlefield.getFactionTeam(bf, s);
                 num_factions = utils.addElement(num_factions, s + " Team: " + faction_team.length);
             }
         }
-        else 
+        else
         {
             int next_game = battlefield.getNextGameTime(bf);
             if (next_game == -9999)
@@ -502,7 +523,7 @@ public class player_battlefield extends script.base_script
                 time = -9999;
                 time_starting = "";
             }
-            else 
+            else
             {
                 status = "Inactive";
                 time = (next_game - getGameTime());
@@ -515,7 +536,7 @@ public class player_battlefield extends script.base_script
             int[] conv_time = player_structure.convertSecondsTime(time);
             time_message = player_structure.assembleTimeRemaining(conv_time);
         }
-        else 
+        else
         {
             time_message = "0 seconds.";
         }
@@ -528,7 +549,7 @@ public class player_battlefield extends script.base_script
         {
             dsrc = utils.addElement(dsrc, "Status: " + status);
         }
-        else 
+        else
         {
             dsrc = utils.addElement(dsrc, "Status: " + status + " (" + time_starting + " " + time_message + ")");
         }
@@ -541,6 +562,7 @@ public class player_battlefield extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int placeBattlefieldStructure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::placeBattlefieldStructure");
@@ -587,6 +609,7 @@ public class player_battlefield extends script.base_script
         sui.listbox(self, self, prompt, sui.OK_CANCEL, "Battlefield Constructor", dsrc, "msgBuildStructureSelected");
         return SCRIPT_CONTINUE;
     }
+
     public int purchaseReinforcement(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::purchaseReinforcement");
@@ -627,13 +650,14 @@ public class player_battlefield extends script.base_script
             LOG("LOG_CHANNEL", self + " ->Reinforcement request denied.");
             sendSystemMessageTestingOnly(self, "Reinforcement request denied.");
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", self + " ->Your reinforcements have arrived.");
             sendSystemMessageTestingOnly(self, "Your reinforcements have arrived.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairBattlefieldStructure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_battlefield::repairBattlefieldStructure");
@@ -666,6 +690,7 @@ public class player_battlefield extends script.base_script
         battlefield.repairBattlefieldStructure(master_object, self, target);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanPlayer(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -677,9 +702,11 @@ public class player_battlefield extends script.base_script
             obj_id[] waypoint_list = getObjIdArrayObjVar(player, battlefield.VAR_WAYPOINTS);
             if (waypoint_list != null)
             {
-                for (obj_id waypoint : waypoint_list) {
+                for (obj_id waypoint : waypoint_list)
+                {
                     LOG("LOG_CHANNEL", "player_battlefield::cleanPlayer -- waypoint " + waypoint + "removed.");
-                    if (isIdValid(waypoint)) {
+                    if (isIdValid(waypoint))
+                    {
                         destroyWaypointInDatapad(waypoint, player);
                     }
                 }

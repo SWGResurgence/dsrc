@@ -10,9 +10,6 @@ import java.util.HashSet;
 
 public class fryer extends script.base_script
 {
-    public fryer()
-    {
-    }
     public static final int NO_DECAY = 100;
     public static final int MAX_DECAY = 6;
     public static final int BASIC_BUFF_ROWS = 3;
@@ -31,6 +28,10 @@ public class fryer extends script.base_script
     public static final String FORAGE_BUFF = "item_ice_cream_buff_forage_buff_01_01";
     public static final String PID_NAME = "fryer_repair";
     public static final int DOMESTICS_ONLY_BUFF = 7;
+    public fryer()
+    {
+    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if ((getTemplateName(item)).startsWith("object/tangible/component/food/component_fryer_repair_tool.iff"))
@@ -42,9 +43,9 @@ public class fryer extends script.base_script
         double ingredientCRC = 0;
         if (utils.hasScriptVar(self, "ingredientCRC"))
         {
-            
+
         }
-        
+
         {
             ingredientCRC = utils.getDoubleScriptVar(self, "ingredientCRC");
             blog("OnReceivedItem - found a pre-existing CRC. It was: " + ingredientCRC);
@@ -55,6 +56,7 @@ public class fryer extends script.base_script
         utils.setScriptVar(self, "ingredientCRC", ingredientCRC);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         blog("OnLostItem - entered");
@@ -65,12 +67,13 @@ public class fryer extends script.base_script
         {
             utils.setScriptVar(self, "ingredientCRC", 0);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "ingredientCRC", ingredientCRC);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id fryer = self;
@@ -93,6 +96,7 @@ public class fryer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("OnObjectMenuSelect - entered");
@@ -125,7 +129,7 @@ public class fryer extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
-            obj_id clients[] = new obj_id[1];
+            obj_id[] clients = new obj_id[1];
             clients[0] = player;
             blog("OnObjectMenuSelect - chose menu option 1");
             blog("OnObjectMenuSelect - activating the assembly tool");
@@ -138,7 +142,7 @@ public class fryer extends script.base_script
                 decayFryer(fryer, player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 blog("OnObjectMenuSelect - obj_id we got back was invalid: " + newItem);
                 playClientEffectObj(clients, "sound/item_electronics_break.snd", player, "");
@@ -150,6 +154,7 @@ public class fryer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -163,6 +168,7 @@ public class fryer extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public obj_id activateFryer(obj_id fryer, obj_id objPlayer) throws InterruptedException
     {
         blog("activateFryer - entered");
@@ -210,7 +216,7 @@ public class fryer extends script.base_script
             blog("activateFryer - CRC FOUND # " + itemCRCs[i]);
             blog("activateFryer - CRC LOOKING FOR " + ingredientCRC);
             dictionary correctRow = dataTableGetRow(ITEM_COMBINATION_TABLE, i);
-            obj_id contents[] = getContents(fryer);
+            obj_id[] contents = getContents(fryer);
             obj_id generatedItem = createEdible(fryer, objPlayer, i);
             if (!isIdValid(generatedItem))
             {
@@ -239,6 +245,7 @@ public class fryer extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public double[] makeItemCRCArray() throws InterruptedException
     {
         blog("makeItemCRCArray - entered");
@@ -259,6 +266,7 @@ public class fryer extends script.base_script
         }
         return crcs;
     }
+
     public obj_id createEdible(obj_id fryer, obj_id player, int row) throws InterruptedException
     {
         if (!isValidId(fryer) || !isValidId(player))
@@ -293,7 +301,7 @@ public class fryer extends script.base_script
                     boolean success = setFourthIngredient(fryer, generatedItem, row);
                     return generatedItem;
                 }
-                else 
+                else
                 {
                     blog("setBuffTypeOnEdible - The player getSkillTemplate: " + getSkillTemplate(player));
                     if ((getSkillTemplate(player)).startsWith("trader_0a"))
@@ -314,6 +322,7 @@ public class fryer extends script.base_script
         generatedItem = static_item.createNewItemFunction(collection.ICE_CREAM_BUFF_ARRAY[0], player);
         return generatedItem;
     }
+
     public boolean setFourthIngredient(obj_id fryer, obj_id generatedItem, int row) throws InterruptedException
     {
         if (!isValidId(fryer) || !isValidId(generatedItem))
@@ -327,6 +336,7 @@ public class fryer extends script.base_script
         setObjVar(generatedItem, "special_ingredient", fourthComponent);
         return true;
     }
+
     public String[] getRandomRowNumbersWithoutDuplicates(obj_id fryer) throws InterruptedException
     {
         if (!isValidId(fryer))
@@ -346,6 +356,7 @@ public class fryer extends script.base_script
         blog("getRandomRowNumbersWithoutDuplicates - sending list of random numbers with length of: " + allNumbers.length);
         return allNumbers;
     }
+
     public boolean burnRandomRecipes(obj_id fryer) throws InterruptedException
     {
         if (!isValidId(fryer))
@@ -379,6 +390,7 @@ public class fryer extends script.base_script
         }
         return true;
     }
+
     public double calcCurrentContentsCRC(obj_id fryer) throws InterruptedException
     {
         if (!isValidId(fryer))
@@ -387,7 +399,7 @@ public class fryer extends script.base_script
         }
         blog("calcCurrentContentsCRC - entered");
         double ingredientCRC = 0;
-        obj_id contents[] = getContents(fryer);
+        obj_id[] contents = getContents(fryer);
         blog("calcCurrentContentsCRC - Got contents of the assembly tool. There are this many things: ->: " + contents.length);
         for (int i = 0; i < contents.length; i++)
         {
@@ -396,6 +408,7 @@ public class fryer extends script.base_script
         }
         return ingredientCRC;
     }
+
     public boolean decayFryer(obj_id fryer, obj_id user) throws InterruptedException
     {
         if (!isValidId(fryer))
@@ -443,6 +456,7 @@ public class fryer extends script.base_script
         }
         return false;
     }
+
     public boolean repairFryerPopup(obj_id fryer, obj_id repairTool, obj_id player) throws InterruptedException
     {
         if (!isValidId(fryer) || !isValidId(repairTool) || !isValidId(player))
@@ -459,6 +473,7 @@ public class fryer extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public int repairFryer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fryer = self;
@@ -503,6 +518,7 @@ public class fryer extends script.base_script
         destroyObject(repairTool);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String message) throws InterruptedException
     {
         return true;

@@ -6,23 +6,28 @@ import script.library.weapons;
 
 public class crafting_new_weapon_final extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v0.00.00";
+
     public crafting_new_weapon_final()
     {
     }
-    public static final String VERSION = "v0.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         obj_var_list componentData = getObjVarList(getSelf(), craftinglib.COMPONENT_ATTRIBUTE_INTERNAL_OBJVAR_NAME);
         String[] componentDataNames = componentData.getAllObjVarNames();
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (((itemAttribute.name).getAsciiId()).equals("appearanceBonusLow")) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (((itemAttribute.name).getAsciiId()).equals("appearanceBonusLow"))
+            {
                 float appBonus = itemAttribute.currentValue;
                 CustomerServiceLog("new_weapon_crafting", "appearanceBonusLow pre-division on prototype " + prototype + "(" + getTemplateName(prototype) + ") is " + appBonus);
                 appBonus /= weapons.NEW_COMPONENT_MODIFIER;
                 CustomerServiceLog("new_weapon_crafting", "setting appearanceBonusLow on prototype " + prototype + "(" + getTemplateName(prototype) + ") to " + appBonus);
                 setObjVar(prototype, weapons.OBJVAR_MODIFIER_APPEARANCE_BONUS_MIN, appBonus);
             }
-            if (((itemAttribute.name).getAsciiId()).equals("appearanceBonusHigh")) {
+            if (((itemAttribute.name).getAsciiId()).equals("appearanceBonusHigh"))
+            {
                 float appBonus = itemAttribute.currentValue;
                 CustomerServiceLog("new_weapon_crafting", "appearanceBonusHigh pre-division on prototype " + prototype + "(" + getTemplateName(prototype) + ") is " + appBonus);
                 appBonus /= weapons.NEW_COMPONENT_MODIFIER;
@@ -32,6 +37,7 @@ public class crafting_new_weapon_final extends script.systems.crafting.crafting_
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -50,13 +56,18 @@ public class crafting_new_weapon_final extends script.systems.crafting.crafting_
         int elementalValue = 0;
         int accuracy = 0;
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                switch (((itemAttribute.name).getAsciiId())) {
-                    case "minDamage": {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                switch (((itemAttribute.name).getAsciiId()))
+                {
+                    case "minDamage":
+                    {
                         float craftedBonus = weapons.getWeaponCoreQualityMin(prototype);
                         CustomerServiceLog("new_weapon_crafting", "craftedBonus preComponentBonusMin on prototype " + prototype + "(" + getTemplateName(prototype) + ") " + craftedBonus);
                         craftedBonus += weapons.getWeaponComponentBonusesMinDamage(prototype);
@@ -70,7 +81,8 @@ public class crafting_new_weapon_final extends script.systems.crafting.crafting_
                         setWeaponMinDamage(prototype, (int) minDamage);
                         break;
                     }
-                    case "maxDamage": {
+                    case "maxDamage":
+                    {
                         float craftedBonus = weapons.getWeaponCoreQualityMax(prototype);
                         CustomerServiceLog("new_weapon_crafting", "craftedBonus preComponentBonusMax on prototype " + prototype + "(" + getTemplateName(prototype) + ") " + craftedBonus);
                         craftedBonus += weapons.getWeaponComponentBonusesMaxDamage(prototype);
@@ -107,25 +119,31 @@ public class crafting_new_weapon_final extends script.systems.crafting.crafting_
                         CustomerServiceLog("new_weapon_crafting", "tableElementalType for prototype " + prototype + "(" + getTemplateName(prototype) + ") " + tableElementalType);
                         elementalType = (int) weapons.getNewWeaponElementalType(prototype);
                         CustomerServiceLog("new_weapon_crafting", "elementalType on prototype " + prototype + "(" + getTemplateName(prototype) + ") " + elementalType);
-                        if (tableElementalType != -1) {
+                        if (tableElementalType != -1)
+                        {
                             CustomerServiceLog("new_weapon_crafting", "tableElementalType is defiened, so we take it over what is passed in from components on prototype " + prototype + "(" + getTemplateName(prototype) + ")");
                             elementalType = tableElementalType;
                         }
                         break;
-                    case "elementalValue": {
+                    case "elementalValue":
+                    {
                         float craftedBonus = weapons.getNewWeaponElementalValue(prototype);
                         CustomerServiceLog("new_weapon_crafting", "craftedBonus for elementalValue on prototype " + prototype + "(" + getTemplateName(prototype) + ") " + craftedBonus);
                         int tableValue = weapons.getNewWeaponTableElementalValue(prototype, weaponCoreDat);
                         CustomerServiceLog("new_weapon_crafting", "tableElementalValue for prototype " + prototype + "(" + getTemplateName(prototype) + ") " + tableValue);
                         elementalValue = (int) (tableValue * craftedBonus);
-                        if (elementalValue > 0) {
+                        if (elementalValue > 0)
+                        {
                             CustomerServiceLog("new_weapon_crafting", "elementalValue on prototype " + prototype + "(" + getTemplateName(prototype) + ") before Appearance bonus " + elementalValue);
                             int elementalAppearanceBonusValue = weapons.getElementalAppearanceBonus(prototype);
                             CustomerServiceLog("new_weapon_crafting", "elementalAppearanceBonusValue on prototype " + prototype + "(" + getTemplateName(prototype) + ") is " + elementalAppearanceBonusValue);
-                            if (elementalAppearanceBonusValue < 0) {
+                            if (elementalAppearanceBonusValue < 0)
+                            {
                                 elementalValue -= elementalValue * elementalAppearanceBonusValue * -1 / 100;
                                 CustomerServiceLog("new_weapon_crafting", "elementalAppearanceBonusValue on prototype " + prototype + "(" + getTemplateName(prototype) + ") was a negative number. So we now reduce the elementalValue (" + elementalValue + ") by that number(" + elementalAppearanceBonusValue + ") in percentage form. This results in elementalValue being " + elementalValue);
-                            } else {
+                            }
+                            else
+                            {
                                 elementalValue += elementalAppearanceBonusValue;
                                 CustomerServiceLog("new_weapon_crafting", "elementalAppearanceBonusValue was a postive number so elementalValue on prototype " + prototype + "(" + getTemplateName(prototype) + ") after Appearance bonus is " + elementalValue);
                             }
@@ -150,7 +168,7 @@ public class crafting_new_weapon_final extends script.systems.crafting.crafting_
             setWeaponElementalType(prototype, elementalType);
             setWeaponElementalValue(prototype, elementalValue);
         }
-        else 
+        else
         {
             setWeaponElementalType(prototype, -1);
             setWeaponElementalValue(prototype, 0);

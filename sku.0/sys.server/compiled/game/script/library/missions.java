@@ -8,9 +8,6 @@ import java.time.LocalTime;
 
 public class missions extends script.base_script
 {
-    public missions()
-    {
-    }
     public static final int STATE_DYNAMIC_PICKUP = 1;
     public static final int STATE_DYNAMIC_DROPOFF = 2;
     public static final int STATE_DYNAMIC_START = 3;
@@ -26,8 +23,8 @@ public class missions extends script.base_script
     public static final int BH_STAT_MAX = 4;
     public static final int BOUNTY_FLAG_NONE = 0;
     public static final int BOUNTY_FLAG_SMUGGLER = 1;
-    public static final int DAILY_MISSION_XP_REWARD_DEFAULT = 10;
-    public static final int DAILY_MISSION_CASH_REWARD = 15;
+    public static final int DAILY_MISSION_XP_REWARD_DEFAULT = 20;
+    public static final int DAILY_MISSION_CASH_REWARD = 20;
     public static final int DAILY_MISSION_XP_SANITY = 5;
     public static final int DAILY_MISSION_XP_LOW = 9;
     public static final int DAILY_MISSION_XP_MEDIUM = 14;
@@ -35,14 +32,20 @@ public class missions extends script.base_script
     public static final String DAILY_MISSION_OBJVAR = "missions.daily";
     public static final String DAILY_MISSION_CLOCK_OBJVAR = "missions.dailyClock";
     public static final string_id DAILY_REWARD_XP = new string_id("base_player", "prose_mission_xp_amount");
+    public missions()
+    {
+    }
+
     public static int getDailyMissionXpLimit() throws InterruptedException
     {
         String config = getConfigSetting("Custom", "dailyMissionXpLimit");
-        if (config != null && config.length() > 0) {
+        if (config != null && config.length() > 0)
+        {
             return utils.stringToInt(config);
         }
         return DAILY_MISSION_XP_REWARD_DEFAULT;
     }
+
     public static void sendBountyFail(obj_id hunter, obj_id target) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -50,6 +53,7 @@ public class missions extends script.base_script
         setObjVar(hunter, "intState", STATE_MISSION_COMPLETE);
         messageTo(hunter, "bountyFailure", params, 0, true);
     }
+
     public static void sendBountySuccess(obj_id hunter, obj_id target) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -57,6 +61,7 @@ public class missions extends script.base_script
         setObjVar(hunter, "intState", STATE_MISSION_COMPLETE);
         messageTo(hunter, "bountySuccess", params, 0, true);
     }
+
     public static void sendBountyIncomplete(obj_id hunter, obj_id target) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -64,6 +69,7 @@ public class missions extends script.base_script
         setObjVar(hunter, "intState", STATE_MISSION_COMPLETE);
         messageTo(hunter, "bountyIncomplete", params, 0, true);
     }
+
     public static void increaseBountyJediKillTracking(obj_id objPlayer, int stat) throws InterruptedException
     {
         if (stat <= missions.BH_STAT_MIN || stat >= missions.BH_STAT_MAX)
@@ -83,6 +89,7 @@ public class missions extends script.base_script
         killData[stat]++;
         setObjVar(objPlayer, "bounty_hunter.jedi_kill_tracker", killData);
     }
+
     public static int getPlayerDailyCount(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -95,6 +102,7 @@ public class missions extends script.base_script
         }
         return getIntObjVar(player, DAILY_MISSION_OBJVAR);
     }
+
     public static void incrementDaily(obj_id player) throws InterruptedException
     {
         int missionData = getPlayerDailyCount(player);
@@ -108,6 +116,7 @@ public class missions extends script.base_script
         missionData++;
         setObjVar(player, DAILY_MISSION_OBJVAR, missionData);
     }
+
     public static boolean canEarnDailyMissionXp(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -123,12 +132,9 @@ public class missions extends script.base_script
         {
             return false;
         }
-        if (dailyData < getDailyMissionXpLimit())
-        {
-            return true;
-        }
-        return false;
+        return dailyData < getDailyMissionXpLimit();
     }
+
     public static float alterMissionPayoutDivisor(obj_id player, float divisor, int missionLevel) throws InterruptedException
     {
         int playerLevel = getLevel(player);
@@ -144,10 +150,11 @@ public class missions extends script.base_script
         }
         if (levelDelta >= 10)
         {
-            divisor += (float)levelDelta / 2;
+            divisor += (float) levelDelta / 2;
         }
         return divisor;
     }
+
     public static float alterMissionPayoutDivisorDaily(obj_id player, float divisor) throws InterruptedException
     {
         int missionsCompleted = getPlayerDailyCount(player);
@@ -157,10 +164,12 @@ public class missions extends script.base_script
         }
         return divisor;
     }
+
     public static float alterMissionPayoutDivisorDaily(obj_id player) throws InterruptedException
     {
         return alterMissionPayoutDivisorDaily(player, 1.0f);
     }
+
     public static void initializeDailyOnLogin(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, DAILY_MISSION_CLOCK_OBJVAR))
@@ -171,7 +180,7 @@ public class missions extends script.base_script
             {
                 clearDailyObjVars(player);
             }
-            else 
+            else
             {
                 int secondsUntil = alarmTimeObjVar - currentTime;
                 messageTo(player, "handleDailyMissionReset", null, secondsUntil, false);
@@ -189,11 +198,13 @@ public class missions extends script.base_script
             }
         }
     }
+
     public static void clearDailyObjVars(obj_id player) throws InterruptedException
     {
         setObjVar(player, DAILY_MISSION_OBJVAR, 0);
         removeObjVar(player, DAILY_MISSION_CLOCK_OBJVAR);
     }
+
     public static boolean isDestroyMission(obj_id objMissionData) throws InterruptedException
     {
         if (!isIdValid(objMissionData))
@@ -201,10 +212,6 @@ public class missions extends script.base_script
             return false;
         }
         String strTest = getMissionType(objMissionData);
-        if (strTest.equals("destroy"))
-        {
-            return true;
-        }
-        return false;
+        return strTest.equals("destroy");
     }
 }

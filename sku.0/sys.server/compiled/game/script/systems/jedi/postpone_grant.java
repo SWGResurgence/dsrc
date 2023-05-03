@@ -7,6 +7,7 @@ public class postpone_grant extends script.base_script
     public postpone_grant()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "jedi.postponeGrant"))

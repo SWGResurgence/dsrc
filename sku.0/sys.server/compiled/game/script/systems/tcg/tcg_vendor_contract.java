@@ -25,6 +25,7 @@ public class tcg_vendor_contract extends script.base_script
     public static final String OWNER_OID = "owner";
     public static final String CONTRACT_PREFIX = "vendor_contract";
     public static final String NON_TRADER_AGREEMENT = CONTRACT_PREFIX + ".non_trader_agreement";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("tcg_vendor_contract.OnObjectMenuRequest: Init.");
@@ -41,12 +42,13 @@ public class tcg_vendor_contract extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("tcg_vendor_contract.OnObjectMenuSelect: Init.");
@@ -104,6 +106,7 @@ public class tcg_vendor_contract extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgConfirmNonTraderVendorUse(obj_id self, dictionary params) throws InterruptedException
     {
         blog("tcg_vendor_contract.msgConfirmNonTraderVendorUse: Init.");
@@ -128,6 +131,7 @@ public class tcg_vendor_contract extends script.base_script
         sendSystemMessage(player, SID_NONVENDOR_PLACEMENT_INSTRUCT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleNonVendorAppearanceSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("tcg_vendor_contract.handleNonVendorAppearanceSelection: Init.");
@@ -188,6 +192,7 @@ public class tcg_vendor_contract extends script.base_script
         sui.inputbox(self, player, utils.packStringId(SID_NAME_NON_VENDOR_D), sui.OK_CANCEL, utils.packStringId(SID_NAME_NON_VENDOR_T), sui.INPUT_NORMAL, null, "handleSetNonVendorName", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetNonVendorName(obj_id self, dictionary params) throws InterruptedException
     {
         blog("tcg_vendor_contract.handleSetNonVendorName: init");
@@ -230,6 +235,7 @@ public class tcg_vendor_contract extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getNonVendorData(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -343,6 +349,7 @@ public class tcg_vendor_contract extends script.base_script
         sui.listbox(self, player, utils.packStringId(SID_NONVENDOR_APPEARANCE_TYPE_D), sui.OK_CANCEL, utils.packStringId(SID_NONVENDOR_APPEARANCE_TYPE_T), appearanceStrings, "handleNonVendorAppearanceSelection", true);
         return true;
     }
+
     public boolean giveTcgTraderSkillMod(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -377,7 +384,7 @@ public class tcg_vendor_contract extends script.base_script
             java.util.Enumeration keys = dict.keys();
             while (keys.hasMoreElements())
             {
-                skillModName = (String)keys.nextElement();
+                skillModName = (String) keys.nextElement();
                 skillModValue = dict.getInt(skillModName);
             }
         }
@@ -413,6 +420,7 @@ public class tcg_vendor_contract extends script.base_script
         }
         return true;
     }
+
     public boolean removeVars(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -423,6 +431,7 @@ public class tcg_vendor_contract extends script.base_script
         blog("tcg_vendor_contract.removeVars: removed NONVENDOR_VAR_PREFIX Vars ");
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

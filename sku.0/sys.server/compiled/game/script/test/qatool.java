@@ -257,7 +257,7 @@ public class qatool extends script.base_script
         "player.player_gm",
         "gm.cmd",
         "e3demo.e3_demoer",
-        "player.yavin_e3",
+        "developer.soe.e3demo.yavin_e3",
         "space.content_tools.missiontest",
         "space.content_tools.content_generation",
         "quest.utility.quest_test",
@@ -944,7 +944,8 @@ public class qatool extends script.base_script
     }
     public int cmdQaTool(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10){
+        if (!isGod(self) || getGodLevel(self) < 10)
+        {
             detachScript(self, "test.qatool");
             return SCRIPT_CONTINUE;
         }
@@ -2697,8 +2698,11 @@ public class qatool extends script.base_script
                 else 
                 {
                     dictionary troubleRow = dataTableGetRow(MASTER_ITEM_TABLE, i);
-                    sendSystemMessageTestingOnly(self, "Code String Found: " + troubleRow.getString("name"));
-                    sendSystemMessageTestingOnly(self, "This tool cannot be used until this code string is fixed");
+                    if(hasObjVar(self, "showTroubledStrings"))
+                    {
+                        sendSystemMessageTestingOnly(self, "Code String Found: " + troubleRow.getString("name"));
+                        sendSystemMessageTestingOnly(self, "This tool cannot be used until this code string is fixed");
+                    }
                 }
             }
             else 

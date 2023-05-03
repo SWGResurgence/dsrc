@@ -7,15 +7,16 @@ import script.library.utils;
 
 public class collection_gcw extends script.base_script
 {
-    public collection_gcw()
-    {
-    }
     public static final String PID_NAME = "gcw_consume";
     public static final string_id SID_GCW_CONSUME_PROMPT = new string_id("collection", "consume_gcw_prompt");
     public static final string_id SID_GCW_CONSUME_TITLE = new string_id("collection", "consume_gcw_title");
     public static final string_id SID_GCW_CONSUME_ITEM = new string_id("collection", "consume_gcw_item");
     public static final string_id WRONG_FACTION = new string_id("collection", "wrong_faction");
     public static final string_id USED_ITEM = new string_id("collection", "gcw_point_item_used");
+    public collection_gcw()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id gcw_item = self;
@@ -30,6 +31,7 @@ public class collection_gcw extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -67,7 +69,7 @@ public class collection_gcw extends script.base_script
                 sui.setPid(player, pid, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, WRONG_FACTION);
                 return SCRIPT_CONTINUE;
@@ -75,6 +77,7 @@ public class collection_gcw extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiGrantGcwPoints(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id gcw_item = self;
@@ -108,12 +111,12 @@ public class collection_gcw extends script.base_script
             {
                 CustomerServiceLog("CollectionLootChannel", playerName + "(" + player + ") has acquired " + gcw_amount + " GCW points by consuming a GCW Collection Reward (" + gcw_item + ") was deleted(consumed) *by design*.");
             }
-            else 
+            else
             {
                 CustomerServiceLog("CollectionLootChannel", playerName + "(" + player + ") has acquired " + gcw_amount + " GCW points by consuming a GCW Collection Reward (" + gcw_item + ") was NOT DELETED!!! CONTACT SWG DESIGN(jmichener@soe.sony.com)");
             }
         }
-        else 
+        else
         {
             String playerName = getPlayerName(player);
             CustomerServiceLog("CollectionLootChannel: ", "BrokenLoot: " + gcw_item + " did not give " + playerName + "(" + player + ") GCW Points due to a bad objvar");

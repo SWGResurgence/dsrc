@@ -7,6 +7,7 @@ public class mission_assasin_tracker extends script.systems.missions.base.missio
     public mission_assasin_tracker()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.EXAMINE);
@@ -21,6 +22,7 @@ public class mission_assasin_tracker extends script.systems.missions.base.missio
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

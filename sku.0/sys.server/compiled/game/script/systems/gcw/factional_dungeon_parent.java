@@ -11,12 +11,13 @@ import java.util.Vector;
 
 public class factional_dungeon_parent extends script.base_script
 {
-    public factional_dungeon_parent()
-    {
-    }
     public static final int OBJECTIVE_RESPAWN_TIME = 28800;
     public static final String IMPERIAL_TO_REBEL_FILENAME = "datatables/poi/imperial_rebel_lookup/imperial_to_rebel.iff";
     public static final String REBEL_TO_IMPERIAL_FILENAME = "datatables/poi/imperial_rebel_lookup/rebel_to_imperial.iff";
+    public factional_dungeon_parent()
+    {
+    }
+
     public int resetDungeon(obj_id self, dictionary params) throws InterruptedException
     {
         String strFaction = getStringObjVar(self, "strFaction");
@@ -31,16 +32,24 @@ public class factional_dungeon_parent extends script.base_script
         Vector fltYaw = new Vector();
         fltYaw.setSize(0);
         obj_id[] objSpawners = getFactionalDungeonSpawners(self);
-        for (obj_id objSpawner : objSpawners) {
-            if (hasObjVar(objSpawner, "intBanner")) {
+        for (obj_id objSpawner : objSpawners)
+        {
+            if (hasObjVar(objSpawner, "intBanner"))
+            {
                 String strOldFaction = getStringObjVar(objSpawner, "type");
-                if (!strOldFaction.equals(strFaction)) {
+                if (!strOldFaction.equals(strFaction))
+                {
                     messageTo(objSpawner, "swapFlag", null, 0, true);
                 }
-            } else if (hasObjVar(objSpawner, "intTerminal")) {
-                if (hasObjVar(self, "intCompleted")) {
+            }
+            else if (hasObjVar(objSpawner, "intTerminal"))
+            {
+                if (hasObjVar(self, "intCompleted"))
+                {
                     destroyObject(objSpawner);
-                } else {
+                }
+                else
+                {
                     objTerminals = utils.addElement(objTerminals, objSpawner);
                     strTerminals = utils.addElement(strTerminals, getTemplateName(objSpawner));
                     locTerminals = utils.addElement(locTerminals, getLocation(objSpawner));
@@ -49,7 +58,9 @@ public class factional_dungeon_parent extends script.base_script
                     setObjVar(objSpawner, "objParent", self);
                     factions.setFaction(objSpawner, strFaction, false);
                 }
-            } else {
+            }
+            else
+            {
                 changeMobs(objSpawner, strFaction);
             }
         }
@@ -66,6 +77,7 @@ public class factional_dungeon_parent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setupTerminals(obj_id self) throws InterruptedException
     {
         obj_id[] objTerminals = getObjIdArrayObjVar(self, "objTerminals");
@@ -78,7 +90,8 @@ public class factional_dungeon_parent extends script.base_script
         for (int intI = 0; intI < objTerminals.length; intI++)
         {
             String strTest = strTerminals[intI];
-            switch (strTest) {
+            switch (strTest)
+            {
                 case "object/tangible/gcw/uplink_terminal.iff":
                     objChildTerminals[0] = objTerminals[intI];
                     break;
@@ -95,6 +108,7 @@ public class factional_dungeon_parent extends script.base_script
         }
         setObjVar(self, hq.VAR_OBJECTIVE_ID, objChildTerminals);
     }
+
     public int objectiveCompleted(obj_id self, dictionary params) throws InterruptedException
     {
         String strRebel = factions.FACTION_REBEL;
@@ -121,16 +135,23 @@ public class factional_dungeon_parent extends script.base_script
                 factions.setFaction(self, factions.FACTION_IMPERIAL, false);
             }
             obj_id[] objSpawners = getFactionalDungeonSpawners(self);
-            for (obj_id objSpawner : objSpawners) {
-                if (hasObjVar(objSpawner, "intBanner")) {
+            for (obj_id objSpawner : objSpawners)
+            {
+                if (hasObjVar(objSpawner, "intBanner"))
+                {
                     messageTo(objSpawner, "swapFlag", null, 0, true);
-                } else if (hasObjVar(objSpawner, "intTerminal")) {
-                } else {
+                }
+                else if (hasObjVar(objSpawner, "intTerminal"))
+                {
+                }
+                else
+                {
                     swapMobs(objSpawner, strFaction);
                 }
             }
             obj_id[] objTerminals = getObjIdArrayObjVar(self, "objTerminals");
-            for (obj_id objTerminal : objTerminals) {
+            for (obj_id objTerminal : objTerminals)
+            {
                 destroyObject(objTerminal);
             }
             messageTo(self, "respawnObjective", null, OBJECTIVE_RESPAWN_TIME, true);
@@ -138,6 +159,7 @@ public class factional_dungeon_parent extends script.base_script
         removeObjVar(self, "hq");
         return SCRIPT_CONTINUE;
     }
+
     public int respawnObjective(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "intCompleted");
@@ -161,20 +183,27 @@ public class factional_dungeon_parent extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getFactionalDungeonSpawners(obj_id objParent) throws InterruptedException
     {
         Vector objSpawners = new Vector();
         objSpawners.setSize(0);
         obj_id[] objObjects = getAllObjectsWithObjVar(getLocation(objParent), 250, "type");
-        for (obj_id objObject : objObjects) {
+        for (obj_id objObject : objObjects)
+        {
             obj_id[] objContents = getContents(objObject);
-            if (objContents != null) {
-                for (obj_id objContent : objContents) {
-                    if (hasObjVar(objContent, "type")) {
+            if (objContents != null)
+            {
+                for (obj_id objContent : objContents)
+                {
+                    if (hasObjVar(objContent, "type"))
+                    {
                         objSpawners = utils.addElement(objSpawners, objContent);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 objSpawners = utils.addElement(objSpawners, objObject);
             }
         }
@@ -186,6 +215,7 @@ public class factional_dungeon_parent extends script.base_script
         }
         return _objSpawners;
     }
+
     public void swapMobs(obj_id objSpawner, String strFaction) throws InterruptedException
     {
         if (!isIdValid(objSpawner) || strFaction == null || strFaction.equals(""))
@@ -221,6 +251,7 @@ public class factional_dungeon_parent extends script.base_script
         }
         return;
     }
+
     public void changeMobs(obj_id objSpawner, String strFaction) throws InterruptedException
     {
         String strType = getStringObjVar(objSpawner, "type");
@@ -239,7 +270,7 @@ public class factional_dungeon_parent extends script.base_script
                 swapMobs(objSpawner, factions.FACTION_IMPERIAL);
             }
         }
-        else 
+        else
         {
             if (!strFaction.equals(strRebel))
             {
@@ -247,6 +278,7 @@ public class factional_dungeon_parent extends script.base_script
             }
         }
     }
+
     public void validateMobs(obj_id objSpawner, String strType, String strFaction) throws InterruptedException
     {
         String strImperial = factions.FACTION_IMPERIAL;
@@ -268,6 +300,7 @@ public class factional_dungeon_parent extends script.base_script
             }
         }
     }
+
     public int checkSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objSpawner = params.getObjId("objSpawner");
@@ -276,6 +309,7 @@ public class factional_dungeon_parent extends script.base_script
         validateMobs(objSpawner, strType, strFaction);
         return SCRIPT_CONTINUE;
     }
+
     public int checkBanner(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objSpawner = params.getObjId("objSpawner");

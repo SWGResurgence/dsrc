@@ -4,12 +4,10 @@ package script.event.wheres_watto;/*
 @Purpose: Watto conversation. DO NOT spawn more than one watto per galaxy. Rotate through the planets.
 */
 
-import script.library.*;
 import script.*;
+import script.library.*;
 
-import java.util.StringTokenizer;
-
-@SuppressWarnings({"unused", "deprecated"})
+@SuppressWarnings({"unused", "unchecked", "deprecation"})
 public class wheres_watto extends script.base_script
 {
     public static String c_stringFile = "conversation/wheres_watto";
@@ -359,27 +357,20 @@ public class wheres_watto extends script.base_script
     {
         hideFromClient(self, false);
     }
+
     //@deprecation note: pls update to Calendar.*() methods
     public boolean isJanuary() throws InterruptedException
     {
         java.util.Date date = new java.util.Date();
         int month = date.getMonth();
-        if (month == 0)
-        {
-            return true;
-        }
-        return false;
+        return month == 0;
     }
 
     public boolean isDecember() throws InterruptedException
     {
         java.util.Date date = new java.util.Date();
         int month = date.getMonth();
-        if (month == 11)
-        {
-            return true;
-        }
-        return false;
+        return month == 11;
     }
 
     public String quadrantName(obj_id npc) throws InterruptedException
@@ -410,11 +401,13 @@ public class wheres_watto extends script.base_script
         }
         return toUpper(quadrant);
     }
+
     private void startBark(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ROSYBROWN + "[Event]\\#.Watto has been spotted on " + toUpper(getCurrentSceneName(), 0) + " (" + toUpper(quadrantName(self)) + ")");
         messageTo(self, "continueBark", null, 1200.0f, false);
     }
+
     public int continueBark(obj_id self, dictionary params) throws InterruptedException
     {
         playClientEffectObj(self, "clienteffect/halloween_fog_machine.cef", self, "", null, "halloweenFog");

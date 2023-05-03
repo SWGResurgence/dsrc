@@ -7,16 +7,18 @@ import java.util.Arrays;
 
 public class holopet_emitter extends script.base_script
 {
-    public holopet_emitter()
-    {
-    }
     public static final string_id NOT_IN_INVENTORY = new string_id("spam", "not_in_inventory");
     public static final float HEARTBEAT = 600.0f;
     public static final String PID_NAME = "holo-pet";
+    public holopet_emitter()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -41,6 +43,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -72,7 +75,7 @@ public class holopet_emitter extends script.base_script
             {
                 mid.setLabel(new string_id("publish_gift/holopet", "menu_turn_off"));
             }
-            else 
+            else
             {
                 mid.setLabel(new string_id("publish_gift/holopet", "menu_turn_on"));
             }
@@ -86,6 +89,7 @@ public class holopet_emitter extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU3, new string_id("publish_gift/holopet", "menu_name_pet"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);
@@ -129,7 +133,7 @@ public class holopet_emitter extends script.base_script
             {
                 turnOff(self, player);
             }
-            else 
+            else
             {
                 turnOn(self, player, "");
             }
@@ -149,6 +153,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isTurnedOn(self))
@@ -157,6 +162,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isTurnedOn(self))
@@ -165,6 +171,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -184,7 +191,7 @@ public class holopet_emitter extends script.base_script
                 CustomerServiceLog("publish_gift", "Player: " + getName(transferer) + " OID: " + transferer + " has picked up " + getName(self) + " OID: " + self + " from house:" + house);
             }
         }
-        else 
+        else
         {
             obj_id house = getTopMostContainer(destContainer);
             if (isIdValid(house) && player_structure.isBuilding(house))
@@ -202,6 +209,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void turnOn(obj_id self, obj_id player, String type) throws InterruptedException
     {
         if (type.equals(""))
@@ -214,7 +222,7 @@ public class holopet_emitter extends script.base_script
                 }
                 return;
             }
-            else 
+            else
             {
                 type = getStringObjVar(self, "holopet_loaded");
             }
@@ -233,7 +241,7 @@ public class holopet_emitter extends script.base_script
         {
             holopetDataDict = getBeastHolopetData(type, self);
         }
-        else 
+        else
         {
             holopetDataDict = getVeteranRewardHolopetData(type);
         }
@@ -255,7 +263,7 @@ public class holopet_emitter extends script.base_script
         location newLoc = new location();
         for (int i = 0; i < 50; i++)
         {
-            newLoc = (location)myLoc.clone();
+            newLoc = (location) myLoc.clone();
             newLoc = utils.getRandomAwayLocation(newLoc, 1.0f, 1.5f);
             if (isValidInteriorLocation(newLoc))
             {
@@ -263,7 +271,7 @@ public class holopet_emitter extends script.base_script
             }
             else if (i == 49)
             {
-                newLoc = (location)myLoc.clone();
+                newLoc = (location) myLoc.clone();
             }
         }
         obj_id pet = createObject(template, newLoc);
@@ -284,12 +292,12 @@ public class holopet_emitter extends script.base_script
                 {
                     setName(pet, custom_name);
                 }
-                else 
+                else
                 {
                     setDefaultHolopetName(pet, name, holobeastName);
                 }
             }
-            else 
+            else
             {
                 setDefaultHolopetName(pet, name, holobeastName);
             }
@@ -310,6 +318,7 @@ public class holopet_emitter extends script.base_script
             messageTo(self, "handleHologramHeartbeat", d, HEARTBEAT, false);
         }
     }
+
     public dictionary getBeastHolopetData(String type, obj_id self) throws InterruptedException
     {
         String template = "";
@@ -334,6 +343,7 @@ public class holopet_emitter extends script.base_script
         holobeastDataDict.put("hologramQuality", hologramQuality);
         return holobeastDataDict;
     }
+
     public dictionary getVeteranRewardHolopetData(String type) throws InterruptedException
     {
         String template = "";
@@ -341,7 +351,8 @@ public class holopet_emitter extends script.base_script
         float scale = 1.0f;
         float speed = 1.01f;
         int hologramQuality = HOLOGRAM_TYPE1_QUALITY3;
-        switch (type) {
+        switch (type)
+        {
             case "rancor":
                 template = "object/mobile/hologram/rancor.iff";
                 name = new string_id("publish_gift/holopet", "rancor_name");
@@ -422,18 +433,20 @@ public class holopet_emitter extends script.base_script
         vetDataDict.put("hologramQuality", hologramQuality);
         return vetDataDict;
     }
+
     public void setDefaultHolopetName(obj_id pet, string_id name, String holobeastName) throws InterruptedException
     {
         if (holobeastName != null && holobeastName.length() > 0)
         {
             setName(pet, holobeastName);
         }
-        else 
+        else
         {
             setName(pet, name);
         }
         return;
     }
+
     public void turnOff(obj_id self, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(self, "holopet_active"))
@@ -457,18 +470,20 @@ public class holopet_emitter extends script.base_script
         {
             CustomerServiceLog("holo-pet", "holo-pet was TURNED OFF due to the Holo-Pet Emitter (" + self + ") " + "destroyed by the 'Destroy All Items In House' Call at " + realTime);
         }
-        else 
+        else
         {
             CustomerServiceLog("holo-pet", "a holo-pet emitter has been TURNED OFF, but the players ObjId was null, most likely this was done at house packup, at " + realTime);
         }
         clearCondition(self, CONDITION_ON);
     }
+
     public void showNamePetSui(obj_id self, obj_id player) throws InterruptedException
     {
         String title = "@publish_gift/holopet:sui_name_pet_title";
         String prompt = "@publish_gift/holopet:sui_name_pet_prompt";
         int pid = sui.inputbox(self, player, prompt, title, "handleNamePet", 20, false, "");
     }
+
     public boolean isTurnedOn(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "holopet_active"))
@@ -476,12 +491,9 @@ public class holopet_emitter extends script.base_script
             return false;
         }
         obj_id pet = getObjIdObjVar(self, "holopet_active");
-        if (!isIdValid(pet) || !exists(pet))
-        {
-            return false;
-        }
-        return true;
+        return isIdValid(pet) && exists(pet);
     }
+
     public boolean unloadDataCube(obj_id self, obj_id player, boolean verbose) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -508,7 +520,7 @@ public class holopet_emitter extends script.base_script
                 removeObjVar(self, beast_lib.OBJVAR_BEAST_ENGINEER);
             }
         }
-        else 
+        else
         {
             String loaded_cube = "item_holopet_";
             loaded_cube += loadedHolopetType;
@@ -548,6 +560,7 @@ public class holopet_emitter extends script.base_script
         }
         return false;
     }
+
     public void displayLoadDataCubeSui(obj_id self, obj_id player) throws InterruptedException
     {
         if (sui.hasPid(player, PID_NAME))
@@ -575,10 +588,14 @@ public class holopet_emitter extends script.base_script
                 tempName = localize(new string_id(parse[0], parse[1]));
             }
             String[] splitName = split(tempName, ' ');
-            for (String s : splitName) {
-                if (!s.startsWith("Holo-")) {
+            for (String s : splitName)
+            {
+                if (!s.startsWith("Holo-"))
+                {
                     sortedType += s;
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -602,7 +619,7 @@ public class holopet_emitter extends script.base_script
             {
                 cube_names[i] = getName(final_data_cubes[i]);
             }
-            else 
+            else
             {
                 cube_names[i] = "@" + getName(final_data_cubes[i]);
             }
@@ -617,7 +634,7 @@ public class holopet_emitter extends script.base_script
             {
                 prompt += beast_lib.localizedHoloBeastBaseName(loadedCubeType) + "Holo-beast Data Cube";
             }
-            else 
+            else
             {
                 String loaded_cube = "item_holopet_";
                 loaded_cube += loadedCubeType;
@@ -636,6 +653,7 @@ public class holopet_emitter extends script.base_script
             utils.setScriptVar(player, "data_cubes", final_data_cubes);
         }
     }
+
     public int handleNamePet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -679,6 +697,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLoadDataCube(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -785,7 +804,7 @@ public class holopet_emitter extends script.base_script
         {
             pp = prose.setStringId(pp, new string_id("publish_gift/holopet", "data_cube_loaded_an"));
         }
-        else 
+        else
         {
             pp = prose.setStringId(pp, new string_id("publish_gift/holopet", "data_cube_loaded"));
         }
@@ -793,7 +812,7 @@ public class holopet_emitter extends script.base_script
         {
             pp = prose.setTT(pp, getName(data_cubes[idx]));
         }
-        else 
+        else
         {
             pp = prose.setTT(pp, "@" + getName(data_cubes[idx]));
         }
@@ -807,6 +826,7 @@ public class holopet_emitter extends script.base_script
         sui.removePid(player, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int handleActivateHolograms(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "holopet_active") && !isTurnedOn(self))
@@ -815,6 +835,7 @@ public class holopet_emitter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleHologramHeartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "holopet_msgId"))
@@ -861,7 +882,7 @@ public class holopet_emitter extends script.base_script
                 {
                     doAnimationAction(pet, "trick_1");
                 }
-                else 
+                else
                 {
                     doAnimationAction(pet, "trick_2");
                 }
@@ -872,6 +893,7 @@ public class holopet_emitter extends script.base_script
         messageTo(self, "handleHologramHeartbeat", d, HEARTBEAT, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);

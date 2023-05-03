@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class harvest_module extends script.base_script
 {
-    public harvest_module()
-    {
-    }
     public static final String STF = "pet/droid_modules";
     public static final String AUTO_HARVEST = "droidAutoHarvest";
     public static final float MAX_HARVEST_DISTANCE = 256.0f;
@@ -50,6 +47,10 @@ public class harvest_module extends script.base_script
     public static final string_id SID_SET_INTEREST_BONE = new string_id(STF, "set_interest_bone");
     public static final string_id SET_INTEREST_SUI_D = new string_id(STF, "set_interest_d");
     public static final string_id SET_INTEREST_SUI_T = new string_id(STF, "set_interest_t");
+    public harvest_module()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id controlDevice = callable.getCallableCD(self);
@@ -67,6 +68,7 @@ public class harvest_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(player))
@@ -89,6 +91,7 @@ public class harvest_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(player))
@@ -118,6 +121,7 @@ public class harvest_module extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doTargetHarvest(obj_id self, dictionary params) throws InterruptedException
     {
         setOnHarvestRun(self, true);
@@ -169,7 +173,7 @@ public class harvest_module extends script.base_script
         {
             harvestInterest = getIntObjVar(droid, HARVEST_INTEREST);
         }
-        else 
+        else
         {
             setObjVar(droid, HARVEST_INTEREST, harvestInterest);
         }
@@ -188,17 +192,20 @@ public class harvest_module extends script.base_script
         pathTo(droid, targetLoc);
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "runHarvestRoutineOverride", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int runHarvestRoutineOverride(obj_id self, dictionary params) throws InterruptedException
     {
         setOnHarvestRun(self, false);
         messageTo(self, "runHarvestRoutine", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int runHarvestRoutine(obj_id self, dictionary params) throws InterruptedException
     {
         if (!autoHarvestEnabled(self) || onHarvestRun(self) || ai_lib.isInCombat(self) || pet_lib.isLowOnPower(self))
@@ -215,37 +222,40 @@ public class harvest_module extends script.base_script
             }
             while (0 < toHarvest.size())
             {
-                if (isIdValid(((obj_id)toHarvest.get(0))) && exists(((obj_id)toHarvest.get(0))) && canSee(self, ((obj_id)toHarvest.get(0))) && hasObjVar(((obj_id)toHarvest.get(0)), corpse.VAR_HAS_RESOURCE) && !utils.hasScriptVar(((obj_id)toHarvest.get(0)), "harvestedBy." + getMaster(self)))
+                if (isIdValid(((obj_id) toHarvest.get(0))) && exists(((obj_id) toHarvest.get(0))) && canSee(self, ((obj_id) toHarvest.get(0))) && hasObjVar(((obj_id) toHarvest.get(0)), corpse.VAR_HAS_RESOURCE) && !utils.hasScriptVar(((obj_id) toHarvest.get(0)), "harvestedBy." + getMaster(self)))
                 {
                     dictionary dict = new dictionary();
                     dict.put("droid", self);
                     dict.put("player", pet_lib.getMaster(self));
-                    dict.put("target", ((obj_id)toHarvest.get(0)));
-                    utils.removeElement(toHarvest, ((obj_id)toHarvest.get(0)));
+                    dict.put("target", toHarvest.get(0));
+                    utils.removeElement(toHarvest, ((obj_id) toHarvest.get(0)));
                     messageTo(self, "doTargetHarvest", dict, 0.0f, false);
                     break;
                 }
-                utils.removeElement(toHarvest, ((obj_id)toHarvest.get(0)));
+                utils.removeElement(toHarvest, ((obj_id) toHarvest.get(0)));
             }
             if (toHarvest != null && toHarvest.size() > 0)
             {
                 utils.setScriptVar(self, pet_lib.DROID_HARVEST_ARRAY, toHarvest);
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, pet_lib.DROID_HARVEST_ARRAY);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean onHarvestRun(obj_id droid) throws InterruptedException
     {
-        return utils.hasScriptVar(droid, "droid_harvest.isActive") ? utils.getBooleanScriptVar(droid, "droid_harvest.isActive") : false;
+        return utils.hasScriptVar(droid, "droid_harvest.isActive") && utils.getBooleanScriptVar(droid, "droid_harvest.isActive");
     }
+
     public void setOnHarvestRun(obj_id droid, boolean state) throws InterruptedException
     {
         utils.setScriptVar(droid, "droid_harvest.isActive", state);
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         obj_id droid = getSelf();
@@ -290,7 +300,7 @@ public class harvest_module extends script.base_script
             {
                 harvestCreature(droid, player, target, INTEREST_BONE);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_TARGET_TYPE_NOT_FOUND);
             }
@@ -302,13 +312,14 @@ public class harvest_module extends script.base_script
             setOnHarvestRun(droid, false);
             messageTo(self, "runHarvestRoutine", null, 0.0f, false);
         }
-        else 
+        else
         {
             setOnHarvestRun(droid, false);
             ai_lib.aiFollow(droid, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setHarvestInterest(obj_id self, obj_id player) throws InterruptedException
     {
         String[] harvestInterest = new String[4];
@@ -318,6 +329,7 @@ public class harvest_module extends script.base_script
         harvestInterest[3] = "@" + SID_SET_INTEREST_BONE;
         sui.listbox(self, player, "@" + SET_INTEREST_SUI_D, sui.OK_CANCEL, "@" + SET_INTEREST_SUI_T, harvestInterest, "handleSetHarvestInterest", true);
     }
+
     public int handleSetHarvestInterest(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -356,6 +368,7 @@ public class harvest_module extends script.base_script
         copyObjVar(self, controlDevice, HARVEST_INTEREST);
         return SCRIPT_CONTINUE;
     }
+
     public void toggleAutoHarvest(obj_id droid) throws InterruptedException
     {
         boolean autoHarvest = autoHarvestEnabled(droid);
@@ -364,7 +377,7 @@ public class harvest_module extends script.base_script
             sendSystemMessage(getMaster(droid), SID_DISABLE_AUTO_HARVEST);
             setObjVar(droid, AUTO_HARVEST, false);
         }
-        else 
+        else
         {
             sendSystemMessage(getMaster(droid), SID_ENABLE_AUTO_HARVEST);
             setObjVar(droid, AUTO_HARVEST, true);
@@ -372,10 +385,12 @@ public class harvest_module extends script.base_script
         obj_id controlDevice = callable.getCallableCD(droid);
         copyObjVar(droid, controlDevice, AUTO_HARVEST);
     }
+
     public boolean autoHarvestEnabled(obj_id self) throws InterruptedException
     {
-        return hasObjVar(self, AUTO_HARVEST) ? getBooleanObjVar(self, AUTO_HARVEST) : false;
+        return hasObjVar(self, AUTO_HARVEST) && getBooleanObjVar(self, AUTO_HARVEST);
     }
+
     public boolean harvestRandom(obj_id droid, obj_id player, obj_id corpse, int interest, int[] hasResource) throws InterruptedException
     {
         if (interest != INTEREST_RANDOM)
@@ -405,12 +420,9 @@ public class harvest_module extends script.base_script
         }
         int j = rand(0, i);
         int type = randType[j];
-        if (!harvestCreature(droid, player, corpse, type))
-        {
-            return false;
-        }
-        return true;
+        return harvestCreature(droid, player, corpse, type);
     }
+
     public boolean harvestCreature(obj_id droid, obj_id player, obj_id target, int interest) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -463,11 +475,7 @@ public class harvest_module extends script.base_script
             setOnHarvestRun(droid, false);
             return false;
         }
-        boolean baby = false;
-        if (hasScript(target, "ai.pet_advance"))
-        {
-            baby = true;
-        }
+        boolean baby = hasScript(target, "ai.pet_advance");
         int harvestXP = 0;
         int successCount = 0;
         int amt = 0;
@@ -492,7 +500,7 @@ public class harvest_module extends script.base_script
         {
             return false;
         }
-        amt = (int)(StrictMath.pow(ai_lib.getLevel(target), 1.69) * 0.4f + 2.0f);
+        amt = (int) (StrictMath.pow(ai_lib.getLevel(target), 1.69) * 0.4f + 2.0f);
         if (amt < 1)
         {
             amt = 1;
@@ -502,7 +510,7 @@ public class harvest_module extends script.base_script
             amt = 700;
         }
         amt += amt * bonusHarvest;
-        amt = (int)(amt * skillEfficiency);
+        amt = (int) (amt * skillEfficiency);
         if (baby)
         {
             amt *= 0.1;
@@ -511,8 +519,10 @@ public class harvest_module extends script.base_script
         {
             boolean petsOnly = true;
             obj_id[] groupMembers = getGroupMemberIds(getGroupObject(player));
-            for (obj_id groupMember : groupMembers) {
-                if (!hasScript(groupMember, "ai.pet") && groupMember != player) {
+            for (obj_id groupMember : groupMembers)
+            {
+                if (!hasScript(groupMember, "ai.pet") && groupMember != player)
+                {
                     petsOnly = false;
                 }
             }
@@ -555,6 +565,7 @@ public class harvest_module extends script.base_script
         messageTo(target, corpse.HANDLER_CORPSE_EMPTY, null, 1.0f, isObjectPersisted(target));
         return true;
     }
+
     public int calculateDroidBonus(int droidSkillMod) throws InterruptedException
     {
         double remainder = 0;
@@ -568,29 +579,30 @@ public class harvest_module extends script.base_script
             remainder = droidSkillMod - tier1;
             bonusSkill = 20.0f;
         }
-        else 
+        else
         {
-            return (int)(20.0f * (droidSkillMod / tier1));
+            return (int) (20.0f * (droidSkillMod / tier1));
         }
         if (remainder > tier2)
         {
             remainder = remainder - tier2;
             bonusSkill = 25.0f;
         }
-        else 
+        else
         {
-            return (int)(15.0f + (5.0f * (remainder / tier2)));
+            return (int) (15.0f + (5.0f * (remainder / tier2)));
         }
         if (remainder == tier3)
         {
             bonusSkill = 25.0f;
         }
-        else 
+        else
         {
-            return (int)(25.0f + (5.0f * (remainder / tier3)));
+            return (int) (25.0f + (5.0f * (remainder / tier3)));
         }
-        return (int)bonusSkill;
+        return (int) bonusSkill;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         LOG("doLogging/harvest_module/" + section, message);

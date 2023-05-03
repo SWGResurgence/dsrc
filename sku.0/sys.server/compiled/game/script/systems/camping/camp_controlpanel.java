@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class camp_controlpanel extends script.base_script
 {
-    public camp_controlpanel()
-    {
-    }
     public static final float FIELD_COST_MULTIPLER = 1.15f;
     public static final string_id SID_MNU_DISBAND = new string_id("camp", "mnu_disband");
     public static final string_id SID_MNU_STATUS = new string_id("camp", "mnu_status");
@@ -31,6 +28,10 @@ public class camp_controlpanel extends script.base_script
     public static final string_id SID_SUI_CAMP_STATUS_TOT_VIS = new string_id("camp", "sui_camp_status_tot_vis");
     public static final string_id SID_SUI_CAMP_STATUS_CUR_VIS = new string_id("camp", "sui_camp_status_cur_vis");
     public static final string_id SID_SUI_CAMP_STATUS_HEAL = new string_id("camp", "sui_camp_status_heal");
+    public camp_controlpanel()
+    {
+    }
+
     public int handleCampPrep(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -42,6 +43,7 @@ public class camp_controlpanel extends script.base_script
         setName(self, getEncodedName(master));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "master");
@@ -57,7 +59,7 @@ public class camp_controlpanel extends script.base_script
         else if (owner == obj_id.NULL_ID)
         {
         }
-        else 
+        else
         {
             if (owner == player)
             {
@@ -81,6 +83,7 @@ public class camp_controlpanel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "master");
@@ -95,7 +98,7 @@ public class camp_controlpanel extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (owner == player)
                 {
@@ -113,7 +116,7 @@ public class camp_controlpanel extends script.base_script
         else if (item == menu_info_types.SERVER_CAMP_ASSUME_OWNERSHIP)
         {
         }
-        else 
+        else
         {
             int mFac = pvpGetAlignedFaction(master);
             if (mFac != 0)
@@ -138,11 +141,13 @@ public class camp_controlpanel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgFactionItemPurchaseSelected(obj_id self, dictionary params) throws InterruptedException
     {
         faction_perk.factionItemPurchased(params, FIELD_COST_MULTIPLER);
         return SCRIPT_CONTINUE;
     }
+
     public void showStatus(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id master = getObjIdObjVar(self, "master");
@@ -172,6 +177,7 @@ public class camp_controlpanel extends script.base_script
         dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppHealMod));
         sui.listbox(player, utils.packStringId(SID_SUI_CAMP_STATUS_PROMPT), utils.packStringId(SID_SUI_CAMP_STATUS_TITLE), sui.OK_CANCEL, dsrc);
     }
+
     public void sendWaypoint(obj_id self, obj_id player) throws InterruptedException
     {
         if (!group.isGrouped(player))
@@ -182,17 +188,22 @@ public class camp_controlpanel extends script.base_script
         location point = getLocation(self);
         obj_id group = getGroupObject(player);
         obj_id[] members = getGroupMemberIds(group);
-        for (obj_id member : members) {
-            if (isIdValid(member)) {
-                if (member == player) {
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                if (member == player)
+                {
                     sendSystemMessage(player, SID_WAYPOINT_SENT);
                     continue;
                 }
                 obj_id waypoint = getCampWaypoint(member);
-                if (!isIdValid(waypoint)) {
+                if (!isIdValid(waypoint))
+                {
                     waypoint = createWaypointInDatapad(member, point);
                 }
-                if (isIdValid(waypoint)) {
+                if (isIdValid(waypoint))
+                {
                     setWaypointActive(waypoint, true);
                     setWaypointLocation(waypoint, point);
                     setName(waypoint, "Camp Location");
@@ -202,15 +213,18 @@ public class camp_controlpanel extends script.base_script
             }
         }
     }
+
     public obj_id getCampWaypoint(obj_id other) throws InterruptedException
     {
         obj_id datapad = getObjectInSlot(other, "datapad");
         obj_id[] data = getContents(datapad);
         if (data != null)
         {
-            for (obj_id datum : data) {
+            for (obj_id datum : data)
+            {
                 String waypointName = getName(datum);
-                if (waypointName.equals("Camp Location")) {
+                if (waypointName.equals("Camp Location"))
+                {
                     return datum;
                 }
             }

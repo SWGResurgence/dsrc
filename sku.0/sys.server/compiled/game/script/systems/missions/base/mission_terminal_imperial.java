@@ -10,11 +10,13 @@ public class mission_terminal_imperial extends script.base_script
     public mission_terminal_imperial()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strFaction", factions.FACTION_IMPERIAL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         float fltDistance = getDistance(player, self);

@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class base extends script.base_script
 {
-    public base()
-    {
-    }
     public static final String OBJVAR_SKILL_BUFF_NAME = "skill_buff.name";
     public static final String OBJVAR_SKILL_BUFF_SKILL1 = "skill_buff.skill1";
     public static final String OBJVAR_SKILL_BUFF_AMOUNT1 = "skill_buff.amount1";
@@ -16,11 +13,16 @@ public class base extends script.base_script
     public static final String OBJVAR_SKILL_BUFF_SKILL2 = "skill_buff.skill2";
     public static final String OBJVAR_SKILL_BUFF_AMOUNT2 = "skill_buff.amount2";
     public static final String OBJVAR_SKILL_BUFF_LENGTH2 = "skill_buff.length2";
+    public base()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 5);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "skill_buff.name"))
@@ -29,7 +31,8 @@ public class base extends script.base_script
         }
         String name = getStringObjVar(self, "skill_buff.name");
         String newName = "";
-        switch (name) {
+        switch (name)
+        {
             case "skill_buff_carbine_accuracy":
                 newName = "fs_carbine_acc";
                 break;
@@ -107,11 +110,13 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenuOrServerNotify(menu_info_types.ITEM_USE, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -125,6 +130,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -139,8 +145,8 @@ public class base extends script.base_script
         String buff_name = getStringObjVar(self, "buff_name");
         int buff_crc = getStringCrc(buff_name);
         String skill = buff.getEffectParam(buff_name, 1);
-        int value = (int)buff.getEffectValue(buff_name, 1);
-        int duration = (int)buff.getDuration(buff_name);
+        int value = (int) buff.getEffectValue(buff_name, 1);
+        int duration = (int) buff.getDuration(buff_name);
         string_id skill_name = new string_id("stat_n", skill);
         names[idx] = "skill_modifier_name";
         attribs[idx] = utils.packStringId(skill_name);
@@ -165,6 +171,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void consumeSkillBuffItem(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -192,6 +199,7 @@ public class base extends script.base_script
         }
         return;
     }
+
     public int handleUseSkillBuff(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("skill_buff", "handleUseSkillBuff");
@@ -234,6 +242,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String formatTime(int seconds) throws InterruptedException
     {
         String result = "";

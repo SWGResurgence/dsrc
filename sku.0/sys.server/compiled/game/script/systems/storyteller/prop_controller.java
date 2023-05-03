@@ -10,6 +10,7 @@ public class prop_controller extends script.base_script
     public prop_controller()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "storytellerCreationTime", getGameTime());
@@ -18,11 +19,13 @@ public class prop_controller extends script.base_script
         checkBonusCleanupTime(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleStorytellerPropInitialize", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(getContainedBy(destContainer)))
@@ -31,6 +34,7 @@ public class prop_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerPropInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "eventTeamCleaupOverride") && !utils.hasScriptVar(self, "storytellerOnAttachFired"))
@@ -42,12 +46,12 @@ public class prop_controller extends script.base_script
                 {
                     messageTo(self, "cleanupProp", null, 1, false);
                 }
-                else 
+                else
                 {
                     messageTo(self, "prepCleanupProp", null, getStandardCleanupTime(self) - (getGameTime() - storytellerCreationTime), false);
                 }
             }
-            else 
+            else
             {
                 setObjVar(self, "storytellerCreationTime", getGameTime());
                 messageTo(self, "startPropSetup", null, 1, false);
@@ -55,11 +59,13 @@ public class prop_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startPropSetup(obj_id self, dictionary params) throws InterruptedException
     {
         setupProp();
         return SCRIPT_CONTINUE;
     }
+
     public void setupProp() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -70,6 +76,7 @@ public class prop_controller extends script.base_script
         }
         return;
     }
+
     public int getStandardCleanupTime(obj_id prop_controller) throws InterruptedException
     {
         if (hasObjVar(prop_controller, "storytellerCleanUpTime"))
@@ -79,16 +86,19 @@ public class prop_controller extends script.base_script
         }
         return storyteller.DEFAULT_PROP_CLEANUP_TIME;
     }
+
     public int cleanupProp(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int prepCleanupProp(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.confirmCleanuptime(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id myStorytellerId = getObjIdObjVar(self, "storytellerid");
@@ -102,6 +112,7 @@ public class prop_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id myStorytellerId = getObjIdObjVar(self, "storytellerid");
@@ -118,11 +129,13 @@ public class prop_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveStorytellerPersistedEffect(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.removeStorytellerPersistedEffect(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -162,6 +175,7 @@ public class prop_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -171,15 +185,18 @@ public class prop_controller extends script.base_script
         messageTo(self, "cleanupProp", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "playingEffect");
         return SCRIPT_CONTINUE;
     }
+
     public int handleBlueprintElevation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -189,10 +206,12 @@ public class prop_controller extends script.base_script
         storyteller.handleBlueprintObjectElevation(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public void checkBonusCleanupTime(obj_id prop_controller) throws InterruptedException
     {
         storyteller.calculatePropBonusExistTime(prop_controller);
     }
+
     public int st_receivedCityResponse(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.setBonusExistTime(self);

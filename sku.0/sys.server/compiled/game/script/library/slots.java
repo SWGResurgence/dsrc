@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class slots extends script.base_script
 {
-    public slots()
-    {
-    }
     public static final String BACK = "back";
     public static final String BICEP_L = "bicep_l";
     public static final String BICEP_R = "bicep_r";
@@ -36,35 +33,39 @@ public class slots extends script.base_script
     public static final String UTILITY_BELT = "utility_belt";
     public static final String WRIST_L = "wrist_l";
     public static final String WRIST_R = "wrist_r";
-    public static final String[] EQ_SLOTS = 
+    public static final String[] EQ_SLOTS =
+            {
+                    BACK,
+                    BICEP_L,
+                    BICEP_R,
+                    BRACER_L,
+                    BRACER_R,
+                    CHEST1,
+                    CHEST2,
+                    CHEST3,
+                    CLOAK,
+                    EARRING_L,
+                    EARRING_R,
+                    EYES,
+                    GLOVES,
+                    HAT,
+                    HOLD_L,
+                    HOLD_R,
+                    MOUTH,
+                    NECK,
+                    PANTS1,
+                    PANTS2,
+                    RING_L,
+                    RING_R,
+                    SHOES,
+                    UTILITY_BELT,
+                    WRIST_L,
+                    WRIST_R
+            };
+    public slots()
     {
-        BACK,
-        BICEP_L,
-        BICEP_R,
-        BRACER_L,
-        BRACER_R,
-        CHEST1,
-        CHEST2,
-        CHEST3,
-        CLOAK,
-        EARRING_L,
-        EARRING_R,
-        EYES,
-        GLOVES,
-        HAT,
-        HOLD_L,
-        HOLD_R,
-        MOUTH,
-        NECK,
-        PANTS1,
-        PANTS2,
-        RING_L,
-        RING_R,
-        SHOES,
-        UTILITY_BELT,
-        WRIST_L,
-        WRIST_R
-    };
+    }
+
     public static String[] getOccupiedSlots(obj_id target, String[] slots) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -78,9 +79,11 @@ public class slots extends script.base_script
         Vector ret = new Vector();
         ret.setSize(0);
         obj_id item;
-        for (String name : slots) {
+        for (String name : slots)
+        {
             item = getObjectInSlot(target, name);
-            if (isIdValid(item)) {
+            if (isIdValid(item))
+            {
                 ret = utils.addElement(ret, name);
             }
         }
@@ -93,6 +96,7 @@ public class slots extends script.base_script
         ret.toArray(_ret);
         return _ret;
     }
+
     public static String[] getOccupiedEqSlots(obj_id target) throws InterruptedException
     {
         return getOccupiedSlots(target, EQ_SLOTS);

@@ -9,6 +9,7 @@ public class scavenger_droid extends script.base_script
     public scavenger_droid()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))
@@ -18,18 +19,18 @@ public class scavenger_droid extends script.base_script
         }
         setObjVar(self, "event_perk.scavenger.initialized", 0);
         setObjVar(self, "event_perk.scavenger.item_count", 1);
-        String[] itemTemplateList = 
-        {
-            "Default"
-        };
-        String[] itemNameList = 
-        {
-            "Default"
-        };
-        int[] nameTypeList = 
-        {
-            0
-        };
+        String[] itemTemplateList =
+                {
+                        "Default"
+                };
+        String[] itemNameList =
+                {
+                        "Default"
+                };
+        int[] nameTypeList =
+                {
+                        0
+                };
         setObjVar(self, "event_perk.scavenger.item_template_list", itemTemplateList);
         setObjVar(self, "event_perk.scavenger.item_name_list", itemNameList);
         setObjVar(self, "event_perk.scavenger.name_type_list", nameTypeList);
@@ -37,6 +38,7 @@ public class scavenger_droid extends script.base_script
         setObjVar(self, "event_perk.scavenger.top_score", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))
@@ -51,6 +53,7 @@ public class scavenger_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.scavenger.initialized");
@@ -70,8 +73,10 @@ public class scavenger_droid extends script.base_script
             String itemName = getName(item);
             if (itemTemplateList != null || itemTemplateList.length != 0)
             {
-                for (String s : itemTemplateList) {
-                    if (s.equals(itemTemplate)) {
+                for (String s : itemTemplateList)
+                {
+                    if (s.equals(itemTemplate))
+                    {
                         sendSystemMessage(player, new string_id("event_perk", "scavenger_already_added"));
                         return SCRIPT_CONTINUE;
                     }
@@ -86,7 +91,7 @@ public class scavenger_droid extends script.base_script
             {
                 newNameTypeList[itemCount] = 1;
             }
-            else 
+            else
             {
                 newNameTypeList[itemCount] = 0;
             }
@@ -105,7 +110,7 @@ public class scavenger_droid extends script.base_script
             {
                 sendSystemMessage(player, itemName, null);
             }
-            else 
+            else
             {
                 string_id itemNameSID = parseNameToStringId(itemName, player);
                 sendSystemMessage(player, itemNameSID);
@@ -134,7 +139,7 @@ public class scavenger_droid extends script.base_script
                 sendSystemMessage(player, new string_id("event_perk", "scavenger_you_showed_me"));
                 sendSystemMessage(player, itemName, null);
             }
-            else 
+            else
             {
                 string_id itemNameSID = parseNameToStringId(itemName, player);
                 sendSystemMessage(player, new string_id("event_perk", "scavenger_you_showed_me"));
@@ -159,6 +164,7 @@ public class scavenger_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.scavenger.initialized");
@@ -182,6 +188,7 @@ public class scavenger_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.scavenger.initialized");
@@ -281,6 +288,7 @@ public class scavenger_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int updateMasterScoreCard(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -296,7 +304,7 @@ public class scavenger_droid extends script.base_script
             float gameStartTime = getFloatObjVar(self, "event_perk.scavenger.game_start_time");
             float rawTimeToWin = rightNow - gameStartTime;
             float timeToWinMinutesFloat = rawTimeToWin / 60;
-            int timeToWinMinutes = (int)timeToWinMinutesFloat;
+            int timeToWinMinutes = (int) timeToWinMinutesFloat;
             setObjVar(self, "event_perk.scavenger.winner_time", timeToWinMinutes);
             setObjVar(self, "event_perk.scavenger.initialized", 2);
             setObjVar(self, "event_perk.scavenger.leader_name", playerName);
@@ -320,6 +328,7 @@ public class scavenger_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public string_id parseNameToStringId(String itemName, obj_id player) throws InterruptedException
     {
         String[] parsedString = split(itemName, ':');
@@ -330,13 +339,14 @@ public class scavenger_droid extends script.base_script
             String reference = parsedString[1];
             itemNameSID = new string_id(stfFile, reference);
         }
-        else 
+        else
         {
             String stfFile = parsedString[0];
             itemNameSID = new string_id(stfFile, " ");
         }
         return itemNameSID;
     }
+
     public int showSetupInstructions(obj_id pcd, obj_id player) throws InterruptedException
     {
         string_id textMsg = new string_id("event_perk", "scavenger_setup_instruction");
@@ -351,6 +361,7 @@ public class scavenger_droid extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public int showGameInstructions(obj_id pcd, obj_id player) throws InterruptedException
     {
         string_id textMsg = new string_id("event_perk", "scavenger_game_instruction");
@@ -365,33 +376,36 @@ public class scavenger_droid extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public void resetList(obj_id self, obj_id player) throws InterruptedException
     {
         setObjVar(self, "event_perk.scavenger.item_count", 1);
-        String[] itemTemplateList = 
-        {
-            "Default"
-        };
-        String[] itemNameList = 
-        {
-            "Default"
-        };
-        int[] nameTypeList = 
-        {
-            0
-        };
+        String[] itemTemplateList =
+                {
+                        "Default"
+                };
+        String[] itemNameList =
+                {
+                        "Default"
+                };
+        int[] nameTypeList =
+                {
+                        0
+                };
         setObjVar(self, "event_perk.scavenger.item_template_list", itemTemplateList);
         setObjVar(self, "event_perk.scavenger.item_name_list", itemNameList);
         setObjVar(self, "event_perk.scavenger.name_type_list", nameTypeList);
         sendSystemMessage(player, new string_id("event_perk", "scavenger_list_reset_msg"));
         return;
     }
+
     public void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
         if (objPlayers != null && objPlayers.length > 0)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id("event_perk", messageId));
             }
         }

@@ -12,18 +12,19 @@ import java.util.Vector;
 
 public class destroy_objective extends script.base_script
 {
-    public destroy_objective()
-    {
-    }
     public static final String VAR_WARNING_LEVEL = "battlefield.warning_level";
     public static final String VAR_FACTION = "battlefield.faction";
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");
+    public destroy_objective()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.destroy_objective::OnAttach -- " + self);
         if (hasObjVar(self, battlefield.VAR_VALUE1))
         {
-            int hitpoints = (int)getFloatObjVar(self, battlefield.VAR_VALUE1);
+            int hitpoints = (int) getFloatObjVar(self, battlefield.VAR_VALUE1);
             setMaxHitpoints(self, hitpoints);
             setHitpoints(self, hitpoints);
         }
@@ -32,7 +33,7 @@ public class destroy_objective extends script.base_script
             int repair_cost = getIntObjVar(self, battlefield.VAR_VALUE2);
             setObjVar(self, battlefield.VAR_REPAIR_COST, repair_cost);
         }
-        else 
+        else
         {
             setObjVar(self, battlefield.VAR_REPAIR_COST, 10);
         }
@@ -43,6 +44,7 @@ public class destroy_objective extends script.base_script
         setObjVar(self, VAR_FACTION, faction_id);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "destroy_objective::OnCombatDamaged");
@@ -57,7 +59,7 @@ public class destroy_objective extends script.base_script
         }
         int hitpoints = getHitpoints(self);
         int max_hitpoints = getMaxHitpoints(self);
-        float percent_hp = (float)hitpoints / max_hitpoints;
+        float percent_hp = (float) hitpoints / max_hitpoints;
         if (percent_hp < 0.5)
         {
             if (warning_level == 0)
@@ -84,6 +86,7 @@ public class destroy_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "destroy_objective::OnObjectDisabled");
@@ -109,14 +112,14 @@ public class destroy_objective extends script.base_script
             params.put("faction", faction);
             messageTo(master_object, "msgEliminateFaction", params, 0.0f, true);
         }
-        else 
+        else
         {
             int idx = utils.getElementPositionInArray(destroy_objs, self);
             if (idx == -1)
             {
                 LOG("LOG_CHANNEL", "battlefield.destroy_objective::OnObjectDisabled -- cannot find " + self + " in objective list.");
             }
-            else 
+            else
             {
                 destroy_objs = utils.removeElementAt(destroy_objs, idx);
                 setObjVar(master_object, objVar_name, destroy_objs);

@@ -127,25 +127,25 @@ public class player_structure extends script.base_script
     public static final String HOUSE_PACKUP_DAILY_TALLY_OBJVAR = "dailyHousePackup";
     public static final String HOUSE_PACKUP_DAILY_TIMER_OBJVAR = "maxHousePackupTimer";
     public static final string_id SID_LOCKOUT_MESSAGE = new string_id("player_structure", "house_lockout_remaining");
-    public static final String[] SIGN_TYPE = 
-    {
-        "object/tangible/sign/player/house_address.iff",
-        "object/tangible/sign/player/shop_sign_s01.iff",
-        "object/tangible/sign/player/shop_sign_s02.iff",
-        "object/tangible/sign/player/shop_sign_s03.iff",
-        "object/tangible/sign/player/shop_sign_s04.iff",
-        "object/tangible/sign/player/house_address_naboo.iff",
-        "object/tangible/sign/player/house_address_corellia.iff",
-        "object/tangible/sign/player/house_address_tatooine.iff"
-    };
-    public static final string_id[] SIGN_NAMES = 
-    {
-        new string_id("player_structure", "house_address"),
-        new string_id("player_structure", "shop_sign1"),
-        new string_id("player_structure", "shop_sign2"),
-        new string_id("player_structure", "shop_sign3"),
-        new string_id("player_structure", "shop_sign4")
-    };
+    public static final String[] SIGN_TYPE =
+            {
+                    "object/tangible/sign/player/house_address.iff",
+                    "object/tangible/sign/player/shop_sign_s01.iff",
+                    "object/tangible/sign/player/shop_sign_s02.iff",
+                    "object/tangible/sign/player/shop_sign_s03.iff",
+                    "object/tangible/sign/player/shop_sign_s04.iff",
+                    "object/tangible/sign/player/house_address_naboo.iff",
+                    "object/tangible/sign/player/house_address_corellia.iff",
+                    "object/tangible/sign/player/house_address_tatooine.iff"
+            };
+    public static final string_id[] SIGN_NAMES =
+            {
+                    new string_id("player_structure", "house_address"),
+                    new string_id("player_structure", "shop_sign1"),
+                    new string_id("player_structure", "shop_sign2"),
+                    new string_id("player_structure", "shop_sign3"),
+                    new string_id("player_structure", "shop_sign4")
+            };
     public static final String MODIFIED_HOUSE_SIGN = "structure.modifiedSign";
     public static final String MODIFIED_HOUSE_SIGN_MODEL = "structure.modifiedSignModel";
     public static final String SPECIAL_SIGN = "structure.special_sign.hasSpecialSign";
@@ -224,6 +224,7 @@ public class player_structure extends script.base_script
     public static final string_id SID_GENERIC_CITY_PACKUP_ERROR = new string_id("city/city", "city_packup_generic_fail");
     public static final string_id SID_MAYOR_PROTECTED = new string_id("city/city", "city_packup_mayor_protected");
     public static final String VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT = "player_structure.admin_all_characters";
+
     public static obj_id createPlayerStructure(String template, obj_id owner, location loc, int rotation, dictionary deed_info) throws InterruptedException
     {
         if (template == null)
@@ -274,6 +275,7 @@ public class player_structure extends script.base_script
         }
         return structure;
     }
+
     public static obj_id createTemporaryStructure(obj_id deed, obj_id owner, location loc, int rot, float placementHeight) throws InterruptedException
     {
         if (!isIdValid(deed) || !exists(deed) || deed == null || deed == obj_id.NULL_ID)
@@ -432,6 +434,7 @@ public class player_structure extends script.base_script
         messageTo(structure, "OnBuildingComplete", params, 5.0f, true);
         return structure;
     }
+
     public static boolean createStructureObjects(obj_id structure, int rotation) throws InterruptedException
     {
         if (structure == obj_id.NULL_ID)
@@ -444,7 +447,7 @@ public class player_structure extends script.base_script
         {
             numItems = dataTableGetNumRows(PLAYER_STRUCTURE_DATATABLE);
         }
-        else 
+        else
         {
             return false;
         }
@@ -512,14 +515,14 @@ public class player_structure extends script.base_script
                         setOwner(object, structure);
                     }
                 }
-                else 
+                else
                 {
                     CELL_ID = getCellId(structure, CELL_NAME);
                     if (CELL_ID == null || CELL_ID == obj_id.NULL_ID)
                     {
                         continue;
                     }
-                    else 
+                    else
                     {
                         spot = new location(X, Y, Z, sceneName, CELL_ID);
                         object = createObjectInCell(TEMPLATE, structure, CELL_NAME, spot);
@@ -537,19 +540,20 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        else 
+        else
         {
             if (base_object_list.size() > 0)
             {
                 setObjVar(structure, VAR_BASE_OBJECT, base_object_list);
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
         }
     }
+
     public static boolean initializeStructure(obj_id structure, obj_id owner, dictionary deed_info) throws InterruptedException
     {
         if (structure == obj_id.NULL_ID)
@@ -576,7 +580,8 @@ public class player_structure extends script.base_script
         int city_cost = 0;
         float power_rate = getBasePowerRate(structure);
         int idx = getStructureTableIndex(template);
-        if (idx != -1) {
+        if (idx != -1)
+        {
             decay_rate = dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, idx, DATATABLE_COL_DECAY_RATE);
             condition = dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, idx, DATATABLE_COL_CONDITION);
             civic = dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, idx, DATATABLE_COL_CIVIC);
@@ -631,7 +636,7 @@ public class player_structure extends script.base_script
                 {
                     setPowerValue(structure, deed_info.getFloat("power"));
                 }
-                else 
+                else
                 {
                     setPowerValue(structure, 0.0f);
                 }
@@ -653,8 +658,8 @@ public class player_structure extends script.base_script
             int maxExtraction = deed_info.getInt("max_extraction");
             if (expertiseExtractionIncrease > 0)
             {
-                currentExtraction += (int)(currentExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
-                maxExtraction += (int)(maxExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
+                currentExtraction += (int) (currentExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
+                maxExtraction += (int) (maxExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
             }
             if (currentExtraction > HARVESTER_MAX_EXTRACTION_RATE)
             {
@@ -664,8 +669,8 @@ public class player_structure extends script.base_script
             {
                 maxExtraction = HARVESTER_MAX_EXTRACTION_RATE;
             }
-			setObjVar(structure, "current_extraction", currentExtraction);
-			setObjVar(structure, "max_extraction", maxExtraction);
+            setObjVar(structure, "current_extraction", currentExtraction);
+            setObjVar(structure, "max_extraction", maxExtraction);
             setCurrentExtractionRate(structure, currentExtraction);
             setMaxExtractionRate(structure, maxExtraction);
         }
@@ -678,7 +683,7 @@ public class player_structure extends script.base_script
                 int expertiseHopperIncrease = getSkillStatisticModifier(owner, "expertise_havester_storage_increase");
                 if (expertiseHopperIncrease > 0)
                 {
-                    max_hopper += (int)(max_hopper * expertiseHopperIncrease / 100.0f);
+                    max_hopper += (int) (max_hopper * expertiseHopperIncrease / 100.0f);
                 }
             }
             if (max_hopper > HARVESTER_MAX_HOPPER_SIZE)
@@ -727,6 +732,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static float getBasePowerRate(obj_id structure) throws InterruptedException
     {
         int idx = getStructureTableIndex(getTemplateName(structure));
@@ -741,6 +747,7 @@ public class player_structure extends script.base_script
         }
         return power_rate;
     }
+
     public static float expertiseModifyPowerRate(obj_id structure, obj_id owner, float power_rate) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -764,7 +771,7 @@ public class player_structure extends script.base_script
                 expertisePowerReduction = getIntObjVar(structure, VAR_POWER_MOD_HARVESTER);
             }
         }
-        else 
+        else
         {
             if (got == GOT_installation_factory)
             {
@@ -779,10 +786,11 @@ public class player_structure extends script.base_script
         }
         if (expertisePowerReduction > 0)
         {
-            power_rate -= (int)(power_rate * expertisePowerReduction / 100.0f);
+            power_rate -= (int) (power_rate * expertisePowerReduction / 100.0f);
         }
         return power_rate;
     }
+
     public static boolean addStructure(obj_id structure, String template, String structure_name, location structure_location, obj_id player, String player_name, boolean struct_loaded, boolean player_loaded) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -830,7 +838,7 @@ public class player_structure extends script.base_script
                         }
                         if (structure_location != null)
                         {
-                            setObjVar(player, "lotOverlimit.structure_location", localize(new string_id("planet_n", structure_location.area)) + " (" + (int)structure_location.x + ", " + (int)structure_location.z + ")");
+                            setObjVar(player, "lotOverlimit.structure_location", localize(new string_id("planet_n", structure_location.area)) + " (" + (int) structure_location.x + ", " + (int) structure_location.z + ")");
                         }
                         setObjVar(player, "lotOverlimit.violation_time", getCalendarTime());
                     }
@@ -850,6 +858,7 @@ public class player_structure extends script.base_script
         city.addStructureToCity(structure);
         return true;
     }
+
     public static boolean addStructure(obj_id structure, obj_id player) throws InterruptedException
     {
         return addStructure(
@@ -863,6 +872,7 @@ public class player_structure extends script.base_script
                 true
         );
     }
+
     public static boolean removeStructure(obj_id structure, String template, obj_id player, String player_name, boolean struct_loaded, boolean player_loaded) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -917,10 +927,12 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean removeStructure(obj_id structure, obj_id player) throws InterruptedException
     {
         return removeStructure(structure, getTemplateName(structure), player, getPlayerName(player), true, true);
     }
+
     public static boolean updateStructureVersion(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -942,10 +954,11 @@ public class player_structure extends script.base_script
             yaw = yaw + 360.0f;
         }
         updateStructureData(structure);
-        createStructureObjects(structure, (int)(yaw + 1) / 90);
+        createStructureObjects(structure, (int) (yaw + 1) / 90);
         createStructureSign(structure);
         return true;
     }
+
     public static boolean updateStructureData(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -982,6 +995,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean canPlaceStructure(obj_id player, String template, location loc, obj_id deed) throws InterruptedException
     {
         int template_idx = getStructureTableIndex(template);
@@ -1029,7 +1043,7 @@ public class player_structure extends script.base_script
                         sendSystemMessage(player, new string_id(STF_FILE, "cannot_use_deed_here"));
                         return false;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(player, "God-Mode Placement Override: Structure is not native to this planet!");
                     }
@@ -1069,9 +1083,11 @@ public class player_structure extends script.base_script
             String planet_name = getCurrentSceneName();
             int[] city_ids = getAllCityIds();
             location city_loc;
-            for (int city_id : city_ids) {
+            for (int city_id : city_ids)
+            {
                 city_loc = cityGetLocation(city_id);
-                if (city_loc.area.equals(planet_name)) {
+                if (city_loc.area.equals(planet_name))
+                {
                     cities_on_planet++;
                 }
             }
@@ -1138,10 +1154,12 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean canPlaceStructure(obj_id player, String template) throws InterruptedException
     {
         return canPlaceStructure(player, template, getLocation(player), null);
     }
+
     public static boolean canOwnStructure(String template, obj_id player, boolean allowOverLotLimitIfPlayerHouse) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1169,7 +1187,8 @@ public class player_structure extends script.base_script
             }
             if ((lots + lots_needed) > max_lots)
             {
-                if (!allowOverLotLimitIfPlayerHouse || (template.indexOf("object/building/player/player_house_") != 0)) {
+                if (!allowOverLotLimitIfPlayerHouse || (template.indexOf("object/building/player/player_house_") != 0))
+                {
                     sendSystemMessageProse(player, prose.getPackage(new string_id(STF_FILE, "not_enough_lots"), lots_needed));
                     return false;
                 }
@@ -1197,7 +1216,7 @@ public class player_structure extends script.base_script
                 {
                     sendSystemMessage(player, new string_id(STF_FILE, "no_skill"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id(STF_FILE, msg));
                 }
@@ -1206,6 +1225,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean canOwnStructure(obj_id structure, obj_id player) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1214,6 +1234,7 @@ public class player_structure extends script.base_script
         }
         return canOwnStructure(getTemplateName(structure), player, false);
     }
+
     public static String getFootprintTemplate(String template) throws InterruptedException
     {
         if (template == null || template.equals(""))
@@ -1228,6 +1249,7 @@ public class player_structure extends script.base_script
         }
         return fp_template;
     }
+
     public static boolean canPlaceObject(obj_id structure, obj_id player) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1245,6 +1267,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean isInAdminRange(obj_id structure, obj_id player) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1268,23 +1291,25 @@ public class player_structure extends script.base_script
         {
             return true;
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STF_FILE, "too_far"));
             return false;
         }
     }
+
     public static float getInstallationRange(obj_id structure) throws InterruptedException
     {
         if (isCivic(structure))
         {
             return CIVIC_INSTALLATION_RANGE;
         }
-        else 
+        else
         {
             return INSTALLATION_RANGE;
         }
     }
+
     public static String getDeedTemplate(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_TEMPLATE))
@@ -1297,10 +1322,12 @@ public class player_structure extends script.base_script
         }
         return getStringObjVar(deed, VAR_DEED_TEMPLATE);
     }
+
     public static int getDeedTemplateCrc(obj_id deed) throws InterruptedException
     {
         return getIntObjVar(deed, VAR_DEED_TEMPLATE_CRC);
     }
+
     public static boolean setDeedTemplate(obj_id deed, String template) throws InterruptedException
     {
         if (!isIdValid(deed) || template == null || template.equals(""))
@@ -1310,6 +1337,7 @@ public class player_structure extends script.base_script
         removeObjVar(deed, VAR_DEED_TEMPLATE);
         return setObjVar(deed, VAR_DEED_TEMPLATE_CRC, getObjectTemplateCrc(template));
     }
+
     public static int getDeedBuildTime(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_BUILDTIME))
@@ -1318,6 +1346,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(deed, VAR_DEED_BUILDTIME);
     }
+
     public static String getDeedScene(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_SCENE))
@@ -1326,6 +1355,7 @@ public class player_structure extends script.base_script
         }
         return getStringObjVar(deed, VAR_DEED_SCENE);
     }
+
     public static int getDeedMaxExtraction(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_MAX_EXTRACTION))
@@ -1334,6 +1364,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(deed, VAR_DEED_MAX_EXTRACTION);
     }
+
     public static int getDeedCurrentExtraction(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_CURRENT_EXTRACTION))
@@ -1342,6 +1373,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(deed, VAR_DEED_CURRENT_EXTRACTION);
     }
+
     public static int getDeedMaxHopper(obj_id deed) throws InterruptedException
     {
         if (!hasObjVar(deed, VAR_DEED_MAX_HOPPER))
@@ -1350,14 +1382,17 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(deed, VAR_DEED_MAX_HOPPER);
     }
+
     public static String getStructureOwner(obj_id structure) throws InterruptedException
     {
         return getPlayerName(getOwner(structure));
     }
+
     public static obj_id getStructureOwnerObjId(obj_id structure) throws InterruptedException
     {
         return getOwner(structure);
     }
+
     public static int getMaintenanceRate(obj_id structure) throws InterruptedException
     {
         if (getIntObjVar(structure, VAR_CIVIC) == 1)
@@ -1385,16 +1420,19 @@ public class player_structure extends script.base_script
         {
             maint += tax;
         }
-        return maint;
+        return maint + rand(104, 242);
     }
+
     public static int getBaseMaintenanceRate(obj_id structure) throws InterruptedException
     {
         return dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, getStructureTableIndex(getTemplateName(structure)), DATATABLE_COL_MAINT_RATE);
     }
+
     public static int getRedeedCost(obj_id structure) throws InterruptedException
     {
         return dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, getStructureTableIndex(getTemplateName(structure)), DATATABLE_COL_REDEED_COST);
     }
+
     public static float getMaintenanceMerchantMod(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1403,6 +1441,7 @@ public class player_structure extends script.base_script
         }
         return getFloatObjVar(structure, VAR_MAINTENANCE_MOD_MERCHANT);
     }
+
     public static float getMaintenanceFactoryMod(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1411,6 +1450,7 @@ public class player_structure extends script.base_script
         }
         return getFloatObjVar(structure, VAR_MAINTENANCE_MOD_FACTORY);
     }
+
     public static float getMaintenanceHarvesterMod(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1419,6 +1459,7 @@ public class player_structure extends script.base_script
         }
         return getFloatObjVar(structure, VAR_MAINTENANCE_MOD_HARVESTER);
     }
+
     public static int getMaintenancePropertyTax(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1432,22 +1473,27 @@ public class player_structure extends script.base_script
         }
         return 0;
     }
+
     public static int getMaintenancePool(obj_id structure) throws InterruptedException
     {
         return getBankBalance(structure);
     }
+
     public static int getDecayRate(obj_id structure) throws InterruptedException
     {
         return getIntObjVar(structure, VAR_DECAY_RATE);
     }
+
     public static int getStructureCondition(obj_id structure) throws InterruptedException
     {
         return getHitpoints(structure);
     }
+
     public static int getMaxCondition(obj_id structure) throws InterruptedException
     {
         return getMaxHitpoints(structure);
     }
+
     public static int getMaxExtraction(obj_id structure) throws InterruptedException
     {
         if (!hasObjVar(structure, VAR_MAX_EXTRACTION))
@@ -1456,6 +1502,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(structure, VAR_MAX_EXTRACTION);
     }
+
     public static int getCurrentExtraction(obj_id structure) throws InterruptedException
     {
         if (!hasObjVar(structure, VAR_CURRENT_EXTRACTION))
@@ -1464,6 +1511,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(structure, VAR_CURRENT_EXTRACTION);
     }
+
     public static int getMaxHopper(obj_id structure) throws InterruptedException
     {
         if (!hasObjVar(structure, VAR_MAX_HOPPER))
@@ -1472,10 +1520,12 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(structure, VAR_MAX_HOPPER);
     }
+
     public static int getStructureVersion(obj_id structure) throws InterruptedException
     {
         return getIntObjVar(structure, VAR_VERSION);
     }
+
     public static obj_id getResidence(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1484,6 +1534,7 @@ public class player_structure extends script.base_script
         }
         return getHouseId(player);
     }
+
     public static int getStructureNumItems(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1492,6 +1543,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(structure, "itemLimit");
     }
+
     public static obj_id[] getStructureBaseObjects(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1500,6 +1552,7 @@ public class player_structure extends script.base_script
         }
         return getObjIdArrayObjVar(structure, VAR_BASE_OBJECT);
     }
+
     public static String[] getEntryList(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1509,30 +1562,31 @@ public class player_structure extends script.base_script
         String[] fullEntryList = permissionsGetAllowed(structure);
         List<String> cleanEntryList = new ArrayList<>();
 
-        for(String entry : fullEntryList)
+        for (String entry : fullEntryList)
         {
-            if(entry.startsWith("guild:"))
+            if (entry.startsWith("guild:"))
             {
-                cleanEntryList.add("guild:"+entry.substring(6));
+                cleanEntryList.add("guild:" + entry.substring(6));
                 continue;
             }
-            if(entry.startsWith("city:"))
+            if (entry.startsWith("city:"))
             {
-                cleanEntryList.add("city:"+entry.substring(5));
+                cleanEntryList.add("city:" + entry.substring(5));
                 continue;
             }
-            if(entry.startsWith("faction:"))
+            if (entry.startsWith("faction:"))
             {
-                cleanEntryList.add("faction:"+entry.substring(8));
+                cleanEntryList.add("faction:" + entry.substring(8));
                 continue;
             }
-            if(!entry.startsWith("account:")) // do not show account: entries to players
+            if (!entry.startsWith("account:")) // do not show account: entries to players
             {
                 cleanEntryList.add(entry);
             }
         }
         return cleanEntryList.toArray(new String[0]);
     }
+
     public static String[] getCompleteEntryList(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1541,18 +1595,17 @@ public class player_structure extends script.base_script
         }
         return permissionsGetAllowed(structure);
     }
+
     public static boolean isNameOnEntryList(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         String[] entry_list = getCompleteEntryList(structure);
         if (entry_list != null)
         {
-            if (isNameOnPermissionList(entry_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnPermissionList(entry_list, player_or_guild_name);
         }
         return false;
     }
+
     public static String[] getBanList(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1561,18 +1614,17 @@ public class player_structure extends script.base_script
         }
         return permissionsGetBanned(structure);
     }
+
     public static boolean isNameOnBanList(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         String[] ban_list = getBanList(structure);
         if (ban_list != null)
         {
-            if (isNameOnPermissionList(ban_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnPermissionList(ban_list, player_or_guild_name);
         }
         return false;
     }
+
     public static String[] getAdminListRaw(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1581,15 +1633,17 @@ public class player_structure extends script.base_script
         }
         return getStringArrayObjVar(structure, VAR_ADMIN_LIST);
     }
+
     public static String[] getAdminListNames(obj_id structure) throws InterruptedException
     {
         return convertRawListToNames(getAdminListRaw(structure));
     }
+
     public static boolean isNameOnAdminList(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
-        if(isAdminToAccountEnabled(structure))
+        if (isAdminToAccountEnabled(structure))
         {
-            if(getPlayerStationId(getPlayerIdFromFirstName(player_or_guild_name)) == getPlayerStationId(getOwner(structure)))
+            if (getPlayerStationId(getPlayerIdFromFirstName(player_or_guild_name)) == getPlayerStationId(getOwner(structure)))
             {
                 return true;
             }
@@ -1601,6 +1655,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean adminListAddName(obj_id structure, String nameToAdd) throws InterruptedException
     {
         if (isIdValid(structure))
@@ -1621,6 +1676,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean adminListRemoveName(obj_id structure, String nameToRemove) throws InterruptedException
     {
         if (isIdValid(structure))
@@ -1632,7 +1688,7 @@ public class player_structure extends script.base_script
                 {
                     removeObjVar(structure, VAR_ADMIN_LIST);
                 }
-                else 
+                else
                 {
                     setObjVar(structure, VAR_ADMIN_LIST, adminList);
                 }
@@ -1641,6 +1697,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static String[] getVendorList(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1649,6 +1706,7 @@ public class player_structure extends script.base_script
         }
         return new String[0];
     }
+
     public static String[] getHopperListRaw(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -1657,22 +1715,22 @@ public class player_structure extends script.base_script
         }
         return getStringArrayObjVar(structure, VAR_HOPPER_LIST);
     }
+
     public static String[] getHopperListNames(obj_id structure) throws InterruptedException
     {
         return convertRawListToNames(getHopperListRaw(structure));
     }
+
     public static boolean isNameOnHopperList(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         String[] hopper_list = getHopperListRaw(structure);
         if (hopper_list != null)
         {
-            if (isNameOnRawList(hopper_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnRawList(hopper_list, player_or_guild_name);
         }
         return false;
     }
+
     public static boolean hopperListAddName(obj_id structure, String nameToAdd) throws InterruptedException
     {
         if (isIdValid(structure))
@@ -1693,6 +1751,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean hopperListRemoveName(obj_id structure, String nameToRemove) throws InterruptedException
     {
         if (isIdValid(structure))
@@ -1704,7 +1763,7 @@ public class player_structure extends script.base_script
                 {
                     removeObjVar(structure, VAR_HOPPER_LIST);
                 }
-                else 
+                else
                 {
                     setObjVar(structure, VAR_HOPPER_LIST, hopperList);
                 }
@@ -1713,6 +1772,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static obj_id getStructure(obj_id object) throws InterruptedException
     {
         location loc = getLocation(object);
@@ -1738,18 +1798,25 @@ public class player_structure extends script.base_script
                     }
                     obj_id[] base_objects;
 
-                    for (obj_id item : items) {
-                        if (isInstallation(item)) {
-                            if (isAdmin(item, object)) {
+                    for (obj_id item : items)
+                    {
+                        if (isInstallation(item))
+                        {
+                            if (isAdmin(item, object))
+                            {
                                 base_objects = getObjIdArrayObjVar(item, "player_structure.base_objects");
-                                if (base_objects != null && base_objects.length > 0) {
-                                    for (obj_id base_object : base_objects) {
-                                        if (base_object == target) {
+                                if (base_objects != null)
+                                {
+                                    for (obj_id base_object : base_objects)
+                                    {
+                                        if (base_object == target)
+                                        {
                                             return item;
                                         }
                                     }
                                 }
-                                if ((!isIdValid(structure)) || ((getLocation(item)).distance(loc) < (getLocation(structure)).distance(loc))) {
+                                if ((!isIdValid(structure)) || ((getLocation(item)).distance(loc) < (getLocation(structure)).distance(loc)))
+                                {
                                     structure = item;
                                 }
                             }
@@ -1760,6 +1827,7 @@ public class player_structure extends script.base_script
         }
         return structure;
     }
+
     public static obj_id[] getObjectsInBuilding(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1776,10 +1844,13 @@ public class player_structure extends script.base_script
         if (cells != null)
         {
             obj_id[] cell_contents;
-            for (obj_id cell : cells) {
-                if (isIdValid(cell)) {
+            for (obj_id cell : cells)
+            {
+                if (isIdValid(cell))
+                {
                     cell_contents = getContents(cell);
-                    if (cell_contents.length > 0) {
+                    if (cell_contents.length > 0)
+                    {
                         objects = utils.concatArrays(objects, cell_contents);
                     }
                 }
@@ -1793,6 +1864,7 @@ public class player_structure extends script.base_script
         }
         return _objects;
     }
+
     public static obj_id[] getPlayersInBuilding(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1806,10 +1878,12 @@ public class player_structure extends script.base_script
         Vector players = new Vector();
         players.setSize(0);
         obj_id[] objects = getObjectsInBuilding(structure);
-        if (objects != null && objects.length > 0)
+        if (objects != null)
         {
-            for (obj_id object : objects) {
-                if (isIdValid(object) && isPlayer(object)) {
+            for (obj_id object : objects)
+            {
+                if (isIdValid(object) && isPlayer(object))
+                {
                     players = utils.addElement(players, object);
                 }
             }
@@ -1822,6 +1896,7 @@ public class player_structure extends script.base_script
         }
         return _players;
     }
+
     public static obj_id[] getPlayersNearInstallation(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -1835,15 +1910,19 @@ public class player_structure extends script.base_script
 
         if (items != null)
         {
-            for (obj_id item : items) {
-                if (isPlayer(item)) {
+            for (obj_id item : items)
+            {
+                if (isPlayer(item))
+                {
                     players = utils.addElement(players, item);
                 }
             }
-            if (players != null) {
+            if (players != null)
+            {
                 _players = new obj_id[players.size()];
             }
-            else{
+            else
+            {
                 players = new Vector();
                 players.setSize(0);
             }
@@ -1852,6 +1931,7 @@ public class player_structure extends script.base_script
         players.toArray(_players);
         return _players;
     }
+
     public static void confirmNoReclaimPlacement(obj_id deedOrScd, obj_id player, String template) throws InterruptedException
     {
         if (utils.hasScriptVar(deedOrScd, "noreclaim.pid"))
@@ -1871,6 +1951,7 @@ public class player_structure extends script.base_script
             utils.setScriptVar(deedOrScd, "noreclaim.deedOrScd", deedOrScd);
         }
     }
+
     public static boolean tryQueueStructurePlacement(obj_id deedOrScd, obj_id player) throws InterruptedException
     {
         String template = player_structure.getDeedTemplate(deedOrScd);
@@ -1894,6 +1975,7 @@ public class player_structure extends script.base_script
         queueCommand(player, (123886506), deedOrScd, "", COMMAND_PRIORITY_DEFAULT);
         return true;
     }
+
     public static boolean tryEnterPlacementMode(obj_id deedOrScd, obj_id player) throws InterruptedException
     {
         if (!isIdValid(deedOrScd))
@@ -1926,10 +2008,12 @@ public class player_structure extends script.base_script
         enterClientStructurePlacementMode(player, deedOrScd, fp_template);
         return true;
     }
+
     public static boolean canPackBuilding(obj_id player, obj_id structure) throws InterruptedException
     {
         return !isCivic(structure) && !isHarvester(structure) && !isGenerator(structure) && isOwner(structure, player);
     }
+
     public static void packBuilding(obj_id player, obj_id structure) throws InterruptedException
     {
         utils.setScriptVar(player, "packup.structure", structure);
@@ -1948,6 +2032,7 @@ public class player_structure extends script.base_script
         }
         utils.setScriptVar(player, "packup.suiconfirm", sui.msgbox(player, player, utils.packStringId(new string_id("sui", stringId)), sui.YES_NO, "msgConfirmHousePackup"));
     }
+
     public static void finalizePackUp(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("player_structure.finalizePackUp init.");
@@ -1998,7 +2083,8 @@ public class player_structure extends script.base_script
         if (players != null)
         {
             blog("player_structure.finalizePackUp Players are in the building that is about to be packed.");
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 expelFromBuilding(player1);
             }
         }
@@ -2006,19 +2092,25 @@ public class player_structure extends script.base_script
         if (cells != null)
         {
             obj_id owner;
-            obj_id contents[];
-            for (String cell : cells) {
+            obj_id[] contents;
+            for (String cell : cells)
+            {
                 contents = getContents(getCellId(structure, cell));
-                if (contents != null) {
-                    for (obj_id content : contents) {
-                        if (hasCondition(content, CONDITION_VENDOR)) {
+                if (contents != null)
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasCondition(content, CONDITION_VENDOR))
+                        {
                             owner = getObjIdObjVar(content, "vendor_owner");
-                            if (!isIdValid(owner)) {
+                            if (!isIdValid(owner))
+                            {
                                 owner = getOwner(content);
                             }
                             vendor_lib.finalizePackUp(owner, content, player, isAbandoned);
                         }
-                        if (isIdValid(content)) {
+                        if (isIdValid(content))
+                        {
                             messageTo(content, "OnPack", null, 1.0f, false);
                         }
                     }
@@ -2076,6 +2168,7 @@ public class player_structure extends script.base_script
         }
         CustomerServiceLog("housepackup", "Player/Owner " + getPlayerName(player) + " (" + player + ") packed structure (" + structure + ",abandoned=" + isAbandoned + "," + where.toString() + " into device (" + scd + ")");
     }
+
     public static void finalizeAbandonedStructurePackUp(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("player_structure.finalizeAbandonedStructurePackUp init.");
@@ -2117,6 +2210,7 @@ public class player_structure extends script.base_script
         messageTo(player, "callAirStrikePackAbandonedStructure", params, 0, false);
         CustomerServiceLog("housepackup", "Player " + getPlayerName(player) + " (" + player + ") is ABOUT to pack abandoned structure (" + structure + ",abandoned=" + true + "," + where.toString() + ") owned by player " + getPlayerName(structure_owner) + " (" + structure_owner + ")");
     }
+
     public static void confirmCityAbandonedAndPack(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -2249,6 +2343,7 @@ public class player_structure extends script.base_script
         params.put("player", player);
         messageTo(player, "packUpCityAbandonedStructure", params, 1.0f, false);
     }
+
     public static void finalizeCityPackUp(obj_id player, obj_id structure) throws InterruptedException
     {
         LOG("sissynoid", "Entered: finalizeCityPackUp");
@@ -2315,6 +2410,7 @@ public class player_structure extends script.base_script
         messageTo(structure, "cityMoveStructureToSCD", params, 1.0f, false);
         LOG("sissynoid", "Calling cityMoveStructureToSCD - Finally starting the packup procedure.");
     }
+
     public static int getPlayerPackUpMeritPoints(obj_id player) throws InterruptedException
     {
         int noMerit = 0;
@@ -2338,10 +2434,12 @@ public class player_structure extends script.base_script
         }
         return currentAmountAvailable;
     }
+
     public static boolean housePackingPointDecrease(obj_id player) throws InterruptedException
     {
         return housePackingPointDecrease(player, 1);
     }
+
     public static boolean housePackingPointDecrease(obj_id player, int changeAmount) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -2381,10 +2479,12 @@ public class player_structure extends script.base_script
         setObjVar(player, HOUSE_PACKUP_ARRAY_OBJVAR, housePackingTally);
         return true;
     }
+
     public static boolean housePackingPointIncrease(obj_id player) throws InterruptedException
     {
         return housePackingPointIncrease(player, 1);
     }
+
     public static boolean housePackingPointIncrease(obj_id player, int changeAmount) throws InterruptedException
     {
         blog("player_structure.housePackingPointIncrease init - changeAmount: " + changeAmount);
@@ -2425,7 +2525,7 @@ public class player_structure extends script.base_script
             blog("housePackingPointIncrease - resetting time to next packup: " + resetTime);
             setObjVar(player, HOUSE_PACKUP_DAILY_TIMER_OBJVAR, resetTime);
         }
-        else 
+        else
         {
             int tally = getIntObjVar(player, HOUSE_PACKUP_DAILY_TALLY_OBJVAR);
             tally += changeAmount;
@@ -2457,10 +2557,12 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean hasBeenDeclaredResidence(obj_id structure) throws InterruptedException
     {
         return hasObjVar(structure, VAR_RESIDENCE_BUILDING);
     }
+
     public static obj_id getResidentPlayer(obj_id structure) throws InterruptedException
     {
         if (!hasBeenDeclaredResidence(structure))
@@ -2469,6 +2571,7 @@ public class player_structure extends script.base_script
         }
         return getObjIdObjVar(structure, VAR_RESIDENCE_BUILDING);
     }
+
     public static boolean replacePackedStructure(obj_id scd, obj_id owner, location loc, int rot, float placementHeight) throws InterruptedException
     {
         obj_id[] contents = getContents(scd);
@@ -2495,7 +2598,7 @@ public class player_structure extends script.base_script
             obj_id lotOverlimitStructure = getObjIdObjVar(owner, "lotOverlimit.structure_id");
             if (isIdValid(lotOverlimitStructure) && (lotOverlimitStructure == house))
             {
-                setObjVar(owner, "lotOverlimit.structure_location", localize(new string_id("planet_n", loc.area)) + " (" + (int)loc.x + ", " + (int)loc.z + ")");
+                setObjVar(owner, "lotOverlimit.structure_location", localize(new string_id("planet_n", loc.area)) + " (" + (int) loc.x + ", " + (int) loc.z + ")");
             }
         }
         if (hasObjVar(house, "packed_house.fix_contained_scene_ids"))
@@ -2526,25 +2629,32 @@ public class player_structure extends script.base_script
         city.addStructureToCity(house);
         trace.log("housepackup", "%TU unpacked their house (" + house + ") from structure control device ( " + scd + ") to new location " + loc.toString(), owner, trace.TL_CS_LOG);
         obj_id[] houseContents = trial.getAllObjectsInDungeon(house);
-        if(houseContents != null) {
-            for (obj_id houseContent : houseContents) {
+        if (houseContents != null)
+        {
+            for (obj_id houseContent : houseContents)
+            {
                 messageTo(houseContent, "OnUnpack", null, 1.0f, false);
             }
         }
         return true;
     }
+
     public static boolean hasVendors(obj_id structure) throws InterruptedException
     {
         String[] cells = getCellNames(structure);
         if (cells != null)
         {
-            obj_id contents[];
+            obj_id[] contents;
 
-            for (String cell : cells) {
+            for (String cell : cells)
+            {
                 contents = getContents(getCellId(structure, cell));
-                if (contents != null) {
-                    for (obj_id content : contents) {
-                        if (hasCondition(content, CONDITION_VENDOR)) {
+                if (contents != null)
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasCondition(content, CONDITION_VENDOR))
+                        {
                             return true;
                         }
                     }
@@ -2553,17 +2663,22 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean isBuilding(obj_id object) throws InterruptedException
     {
         return isGameObjectTypeOf(getGameObjectType(object), GOT_building);
     }
+
     public static boolean isBuildingName(String objectTemplateName) throws InterruptedException
     {
         return objectTemplateName.contains("building");
     }
-    public static boolean isInstallation(obj_id object) throws InterruptedException {
+
+    public static boolean isInstallation(obj_id object) throws InterruptedException
+    {
         return !(object == null || object == obj_id.NULL_ID) && isGameObjectTypeOf(getGameObjectType(object), GOT_installation);
     }
+
     public static boolean isGuildHall(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -2581,30 +2696,42 @@ public class player_structure extends script.base_script
         String templateName = getTemplateName(object);
         return templateName.indexOf("guildhall") > 0 || templateName.indexOf("player_mustafar_house_lg") > 0 || templateName.indexOf("player_house_mustafar_lg") > 0;
     }
-    public static boolean isCivic(obj_id object) throws InterruptedException {
+
+    public static boolean isCivic(obj_id object) throws InterruptedException
+    {
         return isIdValid(object) && exists(object) && getIntObjVar(object, VAR_CIVIC) == 1;
     }
-    public static boolean isAbandoned(obj_id object) throws InterruptedException {
+
+    public static boolean isAbandoned(obj_id object) throws InterruptedException
+    {
         return isIdValid(object) && (getIntObjVar(object, VAR_ABANDONED) == PLAYER_STRUCTURE_ABANDONED);
     }
+
     public static void setAbandoned(obj_id object) throws InterruptedException
     {
         setObjVar(object, VAR_ABANDONED, PLAYER_STRUCTURE_ABANDONED);
     }
-    public static boolean isPreAbandoned(obj_id object) throws InterruptedException {
+
+    public static boolean isPreAbandoned(obj_id object) throws InterruptedException
+    {
         return isIdValid(object) && (getIntObjVar(object, VAR_ABANDONED) == PLAYER_STRUCTURE_PRE_ABANDONED);
     }
+
     public static void setPreAbandoned(obj_id object) throws InterruptedException
     {
         setObjVar(object, VAR_ABANDONED, PLAYER_STRUCTURE_PRE_ABANDONED);
     }
+
     public static void setStructureAsNotAbandoned(obj_id object) throws InterruptedException
     {
         removeObjVar(object, VAR_ABANDONED);
     }
-    public static boolean isCityAbandoned(obj_id object) throws InterruptedException {
+
+    public static boolean isCityAbandoned(obj_id object) throws InterruptedException
+    {
         return isIdValid(object) && hasObjVar(object, VAR_CITY_ABANDONED);
     }
+
     public static void setCityAbandoned(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -2613,6 +2740,7 @@ public class player_structure extends script.base_script
         }
         setObjVar(object, VAR_CITY_ABANDONED, PLAYER_STRUCTURE_CITY_ABANDONED);
     }
+
     public static void removeCityAbandoned(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -2625,9 +2753,12 @@ public class player_structure extends script.base_script
             removeObjVar(object, VAR_CITY_ABANDONED);
         }
     }
-    public static boolean isCityPackupAuthoritative(obj_id player, obj_id structure) throws InterruptedException {
+
+    public static boolean isCityPackupAuthoritative(obj_id player, obj_id structure) throws InterruptedException
+    {
         return !(!player.isLoaded() || !player.isAuthoritative()) && !(!structure.isLoaded() || !structure.isAuthoritative());
     }
+
     public static void removeCityAbandonedTagFromHouse(obj_id structure) throws InterruptedException
     {
         LOG("sissynoid", "Removing Zoning Violation Text.");
@@ -2650,12 +2781,14 @@ public class player_structure extends script.base_script
             return;
         }
         obj_id signId = getObjIdObjVar(structure, "player_structure.sign.id");
-        if(!isValidId(signId)){
+        if (!isValidId(signId))
+        {
             LOG("playerStructure", "Structure (" + structure + ") at location [" + getLocation(structure).toString() + "] has an invalid value for player_structure.sign.id.");
             return;
         }
         String signText = getName(signId);
-        if(signText == null){
+        if (signText == null)
+        {
             LOG("playerStructure", "WARNING: Structure (" + structure + ") at location [" + getLocation(structure).toString() + "] has a sign (" + signId + "), but the sign name could not be retrieved.");
             return;
         }
@@ -2667,6 +2800,7 @@ public class player_structure extends script.base_script
             LOG("sissynoid", "Removed Zoning Violation - New Text: " + signText);
         }
     }
+
     public static void updateCityAbandonedFactoryName(obj_id factory) throws InterruptedException
     {
         if (player_structure.isFactory(factory))
@@ -2677,20 +2811,21 @@ public class player_structure extends script.base_script
             {
                 setObjVar(factory, "player_structure.name.original", assignedName == null ? "" : assignedName);
             }
-            else 
+            else
             {
                 if (assignedName != null && assignedName.contains(player_structure.CITY_ABANDONED_TEXT))
                 {
                     assignedName = getStringObjVar(factory, "player_structure.name.original");
                 }
-                else 
+                else
                 {
                     setObjVar(factory, "player_structure.name.original", assignedName == null ? "" : assignedName);
                 }
             }
             if (assignedName == null || assignedName.length() == 0)
             {
-                switch (getTemplateName(factory)) {
+                switch (getTemplateName(factory))
+                {
                     case "object/installation/manufacture/food_factory.iff":
                         assignedName = "Food and Chemical Factory";
                         break;
@@ -2711,9 +2846,12 @@ public class player_structure extends script.base_script
             setName(factory, assignedName + player_structure.CITY_ABANDONED_TEXT);
         }
     }
-    public static boolean isCommercial(obj_id object) throws InterruptedException {
+
+    public static boolean isCommercial(obj_id object) throws InterruptedException
+    {
         return isIdValid(object) && !isCivic(object) && getStructureCityRank(object) > 0;
     }
+
     public static int getStructureCityRank(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -2722,6 +2860,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(object, VAR_CITY_RANK);
     }
+
     public static int getStructureCityCost(obj_id object) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -2730,6 +2869,7 @@ public class player_structure extends script.base_script
         }
         return getIntObjVar(object, VAR_CITY_COST);
     }
+
     public static boolean isCivicTemplate(String template) throws InterruptedException
     {
         String[] structures = dataTableGetStringColumn(PLAYER_STRUCTURE_DATATABLE, "STRUCTURE");
@@ -2742,6 +2882,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean isShuttleportTemplate(String template) throws InterruptedException
     {
         String[] structures = dataTableGetStringColumn(PLAYER_STRUCTURE_DATATABLE, "STRUCTURE");
@@ -2754,6 +2895,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean isCloneTemplate(String template) throws InterruptedException
     {
         String[] structures = dataTableGetStringColumn(PLAYER_STRUCTURE_DATATABLE, "STRUCTURE");
@@ -2766,6 +2908,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean isGarageTemplate(String template) throws InterruptedException
     {
         String[] structures = dataTableGetStringColumn(PLAYER_STRUCTURE_DATATABLE, "GARAGE");
@@ -2778,15 +2921,22 @@ public class player_structure extends script.base_script
         }
         return false;
     }
-    public static boolean isFactory(obj_id object) throws InterruptedException {
+
+    public static boolean isFactory(obj_id object) throws InterruptedException
+    {
         return !(object == null || object == obj_id.NULL_ID) && getGameObjectType(object) == GOT_installation_factory;
     }
-    public static boolean isHarvester(obj_id object) throws InterruptedException {
+
+    public static boolean isHarvester(obj_id object) throws InterruptedException
+    {
         return !(object == null || object == obj_id.NULL_ID) && getGameObjectType(object) == GOT_installation_harvester;
     }
-    public static boolean isGenerator(obj_id object) throws InterruptedException {
+
+    public static boolean isGenerator(obj_id object) throws InterruptedException
+    {
         return !(object == null || object == obj_id.NULL_ID) && getGameObjectType(object) == GOT_installation_generator;
     }
+
     public static boolean isAdmin(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2796,13 +2946,11 @@ public class player_structure extends script.base_script
         String[] admin_list = getAdminListRaw(structure);
         if (admin_list != null)
         {
-            if (isNameOnRawList(admin_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnRawList(admin_list, player_or_guild_name);
         }
         return false;
     }
+
     public static boolean isAdmin(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2830,14 +2978,16 @@ public class player_structure extends script.base_script
         }
         return admin;
     }
+
     public static boolean isAdminByAccountFlag(obj_id structure, obj_id player) throws InterruptedException
     {
-        if(hasObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT))
+        if (hasObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT))
         {
             return (getPlayerStationId(getOwner(structure)) == getPlayerStationId(player));
         }
         return false;
     }
+
     public static boolean isVendor(obj_id structure, String player_name) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -2847,17 +2997,22 @@ public class player_structure extends script.base_script
         String[] vendor_list = getVendorList(structure);
         if (vendor_list != null)
         {
-            for (String vendor : vendor_list) {
-                if (player_name.toUpperCase().equals(vendor.toUpperCase())) {
+            for (String vendor : vendor_list)
+            {
+                if (player_name.equalsIgnoreCase(vendor))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
-    public static boolean isVendor(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean isVendor(obj_id structure, obj_id player) throws InterruptedException
+    {
         return isIdValid(player) && isVendor(structure, getPlayerName(player));
     }
+
     public static boolean canEnter(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2867,16 +3022,16 @@ public class player_structure extends script.base_script
         String[] entry_list = getCompleteEntryList(structure);
         if (entry_list != null)
         {
-            if (isNameOnPermissionList(entry_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnPermissionList(entry_list, player_or_guild_name);
         }
         return false;
     }
-    public static boolean canEnter(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean canEnter(obj_id structure, obj_id player) throws InterruptedException
+    {
         return isIdValid(player) && canEnter(structure, getPlayerName(player));
     }
+
     public static boolean canHopper(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2886,16 +3041,16 @@ public class player_structure extends script.base_script
         String[] hopper_list = getHopperListRaw(structure);
         if (hopper_list != null)
         {
-            if (isNameOnRawList(hopper_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnRawList(hopper_list, player_or_guild_name);
         }
         return false;
     }
-    public static boolean canHopper(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean canHopper(obj_id structure, obj_id player) throws InterruptedException
+    {
         return isIdValid(player) && canHopper(structure, getPlayerName(player));
     }
+
     public static boolean isBanned(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2905,25 +3060,31 @@ public class player_structure extends script.base_script
         String[] ban_list = getBanList(structure);
         if (ban_list != null)
         {
-            if (isNameOnPermissionList(ban_list, player_or_guild_name))
-            {
-                return true;
-            }
+            return isNameOnPermissionList(ban_list, player_or_guild_name);
         }
         return false;
     }
-    public static boolean isBanned(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean isBanned(obj_id structure, obj_id player) throws InterruptedException
+    {
         return isIdValid(player) && isBanned(structure, getPlayerName(player));
     }
-    public static boolean isOwner(obj_id structure, String player_name) throws InterruptedException {
-        return !(structure == null || structure == obj_id.NULL_ID) && (getStructureOwner(structure).toUpperCase()).equals(player_name.toUpperCase());
+
+    public static boolean isOwner(obj_id structure, String player_name) throws InterruptedException
+    {
+        return !(structure == null || structure == obj_id.NULL_ID) && (getStructureOwner(structure)).equalsIgnoreCase(player_name);
     }
-    public static boolean isOwner(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean isOwner(obj_id structure, obj_id player) throws InterruptedException
+    {
         return !(player == null || player == obj_id.NULL_ID) && (isGod(player) || getOwner(structure) == player);
     }
-    public static boolean isResidence(obj_id structure, obj_id player) throws InterruptedException {
+
+    public static boolean isResidence(obj_id structure, obj_id player) throws InterruptedException
+    {
         return !(structure == null || structure == obj_id.NULL_ID) && !(player == null || player == obj_id.NULL_ID) && getResidence(player) == structure;
     }
+
     public static boolean applyManagementMods(obj_id structure, dictionary mods) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -2948,6 +3109,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean applyManagementMods(obj_id structure, obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -2974,6 +3136,7 @@ public class player_structure extends script.base_script
         }
         return applyManagementMods(structure, mods);
     }
+
     public static boolean applyManagementMods(obj_id structure, int mods) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -2988,22 +3151,32 @@ public class player_structure extends script.base_script
         mods_dict.put("maintenance_mod", mods);
         return applyManagementMods(structure, mods_dict);
     }
+
     public static boolean removeManagementMods(obj_id structure) throws InterruptedException
     {
         return true;
     }
-    public static boolean isGuildIdOnRawList(String[] nameList, int guildId) throws InterruptedException {
+
+    public static boolean isGuildIdOnRawList(String[] nameList, int guildId) throws InterruptedException
+    {
         return (nameList != null) && (guildId != 0) && (utils.getElementPositionInArray(nameList, "guild:" + guildId) != -1);
     }
-    public static boolean isGuildNameOnRawList(String[] nameList, String guildNameToFind) throws InterruptedException {
+
+    public static boolean isGuildNameOnRawList(String[] nameList, String guildNameToFind) throws InterruptedException
+    {
         return guildNameToFind != null && isGuildIdOnRawList(nameList, findGuild((guildNameToFind.trim()).toLowerCase()));
     }
-    public static boolean isPlayerObjIdOnRawList(String[] nameList, obj_id playerObjId) throws InterruptedException {
+
+    public static boolean isPlayerObjIdOnRawList(String[] nameList, obj_id playerObjId) throws InterruptedException
+    {
         return (nameList != null) && isIdValid(playerObjId) && (utils.getElementPositionInArray(nameList, playerObjId.toString()) != -1);
     }
-    public static boolean isPlayerNameOnRawList(String[] nameList, String playerNameToFind) throws InterruptedException {
+
+    public static boolean isPlayerNameOnRawList(String[] nameList, String playerNameToFind) throws InterruptedException
+    {
         return playerNameToFind != null && isPlayerObjIdOnRawList(nameList, getPlayerIdFromFirstName((playerNameToFind.trim()).toLowerCase()));
     }
+
     public static boolean isNameOnRawList(String[] nameList, String nameToFind) throws InterruptedException
     {
         if (nameToFind != null)
@@ -3012,13 +3185,14 @@ public class player_structure extends script.base_script
             {
                 return isGuildNameOnRawList(nameList, ((nameToFind.substring(6)).toLowerCase()).trim());
             }
-            else 
+            else
             {
                 return isPlayerNameOnRawList(nameList, nameToFind);
             }
         }
         return false;
     }
+
     public static boolean isNameOnPermissionList(String[] permissionList, String nameToFind) throws InterruptedException
     {
         if ((permissionList != null) && (nameToFind != null))
@@ -3028,26 +3202,35 @@ public class player_structure extends script.base_script
                 String guildName = ((nameToFind.substring(6)).toLowerCase()).trim();
                 int guildId = findGuild(guildName);
                 String permissionListGuildName;
-                for (String aPermissionList : permissionList) {
-                    if ((aPermissionList.toLowerCase()).contains("guild:")) {
+                for (String aPermissionList : permissionList)
+                {
+                    if ((aPermissionList.toLowerCase()).contains("guild:"))
+                    {
                         permissionListGuildName = ((aPermissionList.substring(6)).toLowerCase()).trim();
-                        if (guildId == 0) {
-                            if (guildName.equals(permissionListGuildName)) {
+                        if (guildId == 0)
+                        {
+                            if (guildName.equals(permissionListGuildName))
+                            {
                                 return true;
                             }
-                        } else {
-                            if (guildId == findGuild(permissionListGuildName)) {
+                        }
+                        else
+                        {
+                            if (guildId == findGuild(permissionListGuildName))
+                            {
                                 return true;
                             }
                         }
                     }
                 }
             }
-            else 
+            else
             {
                 String playerName = (nameToFind.toLowerCase()).trim();
-                for (String aPermissionList : permissionList) {
-                    if (((aPermissionList.toLowerCase()).trim()).equals(playerName)) {
+                for (String aPermissionList : permissionList)
+                {
+                    if (((aPermissionList.toLowerCase()).trim()).equals(playerName))
+                    {
                         return true;
                     }
                 }
@@ -3055,6 +3238,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean addGuildIdToRawList(Vector nameList, int guildId) throws InterruptedException
     {
         if (guildId != 0)
@@ -3073,9 +3257,12 @@ public class player_structure extends script.base_script
         }
         return false;
     }
-    public static boolean addGuildNameToRawList(Vector nameList, String guildNameToAdd) throws InterruptedException {
+
+    public static boolean addGuildNameToRawList(Vector nameList, String guildNameToAdd) throws InterruptedException
+    {
         return guildNameToAdd != null && addGuildIdToRawList(nameList, findGuild((guildNameToAdd.trim()).toLowerCase()));
     }
+
     public static boolean addPlayerObjIdToRawList(Vector nameList, obj_id playerObjId) throws InterruptedException
     {
         if (isIdValid(playerObjId))
@@ -3093,9 +3280,12 @@ public class player_structure extends script.base_script
         }
         return false;
     }
-    public static boolean addPlayerNameToRawList(Vector nameList, String playerNameToAdd) throws InterruptedException {
+
+    public static boolean addPlayerNameToRawList(Vector nameList, String playerNameToAdd) throws InterruptedException
+    {
         return playerNameToAdd != null && addPlayerObjIdToRawList(nameList, getPlayerIdFromFirstName((playerNameToAdd.trim()).toLowerCase()));
     }
+
     public static boolean addNameToRawList(Vector nameList, String nameToAdd) throws InterruptedException
     {
         if (nameToAdd != null)
@@ -3104,13 +3294,14 @@ public class player_structure extends script.base_script
             {
                 return addGuildNameToRawList(nameList, ((nameToAdd.substring(6)).toLowerCase()).trim());
             }
-            else 
+            else
             {
                 return addPlayerNameToRawList(nameList, nameToAdd);
             }
         }
         return false;
     }
+
     public static boolean removeGuildIdFromRawList(Vector nameList, int guildId) throws InterruptedException
     {
         if ((nameList != null) && (guildId != 0))
@@ -3124,9 +3315,12 @@ public class player_structure extends script.base_script
         }
         return false;
     }
-    public static boolean removeGuildNameFromRawList(Vector nameList, String guildNameToRemove) throws InterruptedException {
+
+    public static boolean removeGuildNameFromRawList(Vector nameList, String guildNameToRemove) throws InterruptedException
+    {
         return guildNameToRemove != null && removeGuildIdFromRawList(nameList, findGuild((guildNameToRemove.trim()).toLowerCase()));
     }
+
     public static boolean removePlayerObjIdFromRawList(Vector nameList, obj_id playerObjId) throws InterruptedException
     {
         if ((nameList != null) && isIdValid(playerObjId))
@@ -3140,9 +3334,12 @@ public class player_structure extends script.base_script
         }
         return false;
     }
-    public static boolean removePlayerNameFromRawList(Vector nameList, String playerNameToRemove) throws InterruptedException {
+
+    public static boolean removePlayerNameFromRawList(Vector nameList, String playerNameToRemove) throws InterruptedException
+    {
         return playerNameToRemove != null && removePlayerObjIdFromRawList(nameList, getPlayerIdFromFirstName((playerNameToRemove.trim()).toLowerCase()));
     }
+
     public static boolean removeNameFromRawList(Vector nameList, String nameToRemove) throws InterruptedException
     {
         if (nameToRemove != null)
@@ -3151,13 +3348,14 @@ public class player_structure extends script.base_script
             {
                 return removeGuildNameFromRawList(nameList, ((nameToRemove.substring(6)).toLowerCase()).trim());
             }
-            else 
+            else
             {
                 return removePlayerNameFromRawList(nameList, nameToRemove);
             }
         }
         return false;
     }
+
     public static String[] convertRawListToNames(String[] nameListToConvert) throws InterruptedException
     {
         Vector converted_list = new Vector();
@@ -3169,22 +3367,31 @@ public class player_structure extends script.base_script
             String player_full_name;
             StringTokenizer st;
 
-            for (String aNameListToConvert : nameListToConvert) {
-                if ((aNameListToConvert.toLowerCase()).contains("guild:")) {
+            for (String aNameListToConvert : nameListToConvert)
+            {
+                if ((aNameListToConvert.toLowerCase()).contains("guild:"))
+                {
                     guildId = utils.stringToInt(((aNameListToConvert.substring(6)).toLowerCase()).trim());
-                    if (guildId > 0) {
+                    if (guildId > 0)
+                    {
                         String guildAbbrev = guildGetAbbrev(guildId);
-                        if ((guildAbbrev != null) && (!guildAbbrev.equals(""))) {
+                        if ((guildAbbrev != null) && (!guildAbbrev.equals("")))
+                        {
                             converted_list.add("Guild: " + guildAbbrev);
                         }
                     }
-                } else {
+                }
+                else
+                {
                     player = utils.stringToObjId(aNameListToConvert);
-                    if (isIdValid(player)) {
+                    if (isIdValid(player))
+                    {
                         player_full_name = getPlayerFullName(player);
-                        if (player_full_name != null) {
+                        if (player_full_name != null)
+                        {
                             st = new StringTokenizer(player_full_name);
-                            if (st.hasMoreTokens()) {
+                            if (st.hasMoreTokens())
+                            {
                                 converted_list.add(st.nextToken());
                             }
                         }
@@ -3196,6 +3403,7 @@ public class player_structure extends script.base_script
         converted_list.toArray(_converted_list);
         return _converted_list;
     }
+
     public static boolean modifyList(obj_id structure, String player_or_guild_name, obj_id admin, String objvar, boolean verbose) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -3222,7 +3430,8 @@ public class player_structure extends script.base_script
             return false;
         }
         boolean is_name_on_list = false;
-        switch (objvar) {
+        switch (objvar)
+        {
             case VAR_ENTER_LIST:
                 is_name_on_list = isNameOnEntryList(structure, player_or_guild_name);
                 break;
@@ -3242,7 +3451,8 @@ public class player_structure extends script.base_script
         {
             {
                 String[] listOfNames = new String[0];
-                switch (objvar) {
+                switch (objvar)
+                {
                     case VAR_ENTER_LIST:
                         listOfNames = getEntryList(structure);
                         break;
@@ -3281,7 +3491,7 @@ public class player_structure extends script.base_script
                     return false;
                 }
                 // If adding a guild, make sure it exists
-                if(player_or_guild_name.contains("guild:"))
+                if (player_or_guild_name.contains("guild:"))
                 {
                     if (findGuild(((player_or_guild_name.substring(6)).toLowerCase()).trim()) == 0)
                     {
@@ -3294,9 +3504,9 @@ public class player_structure extends script.base_script
                 }
 
                 // If adding a city, make sure it exists
-                if(player_or_guild_name.contains("city:"))
+                if (player_or_guild_name.contains("city:"))
                 {
-                    if(findCityByName(player_or_guild_name.substring(5).toLowerCase().trim()) == 0)
+                    if (findCityByName(player_or_guild_name.substring(5).toLowerCase().trim()) == 0)
                     {
                         if (verbose && isIdValid(admin))
                         {
@@ -3307,12 +3517,12 @@ public class player_structure extends script.base_script
                 }
 
                 // If adding a faction, make sure it's actually a faction
-                if(player_or_guild_name.contains("faction:"))
+                if (player_or_guild_name.contains("faction:"))
                 {
-                    if(!player_or_guild_name.equalsIgnoreCase("faction:imperial") &&
+                    if (!player_or_guild_name.equalsIgnoreCase("faction:imperial") &&
                             !player_or_guild_name.equalsIgnoreCase("faction:rebel"))
                     {
-                        if(verbose && isIdValid(admin))
+                        if (verbose && isIdValid(admin))
                         {
                             sendSystemMessageTestingOnly(admin, "Invalid entry. You must enter either \"faction:imperial\" or \"faction:rebel\"");
                         }
@@ -3321,7 +3531,7 @@ public class player_structure extends script.base_script
                     else
                     {
                         // replace the value with the hash code for processing in SRC
-                        if(player_or_guild_name.toLowerCase().contains("imperial"))
+                        if (player_or_guild_name.toLowerCase().contains("imperial"))
                         {
                             player_or_guild_name = "faction:" + FACTION_HASH_IMPERIAL;
                         }
@@ -3333,7 +3543,7 @@ public class player_structure extends script.base_script
                 }
             }
             // Just trying to add a regular name
-            else 
+            else
             {
                 if (!isIdValid(utils.stringToObjId(player_or_guild_name)))
                 {
@@ -3348,8 +3558,9 @@ public class player_structure extends script.base_script
                     }
                 }
             }
-            
-            switch (objvar) {
+
+            switch (objvar)
+            {
                 case VAR_ENTER_LIST:
                     permissionsAddAllowed(structure, player_or_guild_name);
                     break;
@@ -3366,13 +3577,13 @@ public class player_structure extends script.base_script
             // Success message back to player
             if (verbose && isIdValid(admin))
             {
-                if(player_or_guild_name.contains("faction:"))
+                if (player_or_guild_name.contains("faction:"))
                 {
                     player_or_guild_name = player_or_guild_name.contains(String.valueOf(FACTION_HASH_IMPERIAL)) ? "The Imperial Faction" : "The Rebel Faction";
                 }
                 sendListChangeMessage(admin, player_or_guild_name, true);
             }
-            
+
             if (objvar.equals(VAR_ADMIN_LIST))
             {
                 if (isBuilding(structure))
@@ -3409,12 +3620,12 @@ public class player_structure extends script.base_script
             }
         }
         // We are REMOVING an entry from the list
-        else 
+        else
         {
             // need to do special handling for faction/account here because of how it's stored
-            if(player_or_guild_name.contains("faction:"))
+            if (player_or_guild_name.contains("faction:"))
             {
-                if(player_or_guild_name.toLowerCase().contains("imperial"))
+                if (player_or_guild_name.toLowerCase().contains("imperial"))
                 {
                     player_or_guild_name = "faction:" + FACTION_HASH_IMPERIAL;
                 }
@@ -3423,7 +3634,8 @@ public class player_structure extends script.base_script
                     player_or_guild_name = "faction:" + FACTION_HASH_REBEL;
                 }
             }
-            switch (objvar) {
+            switch (objvar)
+            {
                 case VAR_ENTER_LIST:
                     permissionsRemoveAllowed(structure, player_or_guild_name);
                     break;
@@ -3440,7 +3652,7 @@ public class player_structure extends script.base_script
             if (verbose && isIdValid(admin))
             {
                 // reverse what we just did for displaying it back in a system message
-                if(player_or_guild_name.contains("faction:"))
+                if (player_or_guild_name.contains("faction:"))
                 {
                     player_or_guild_name = player_or_guild_name.contains(String.valueOf(FACTION_HASH_IMPERIAL)) ? "The Imperial Faction" : "The Rebel Faction";
                 }
@@ -3449,9 +3661,12 @@ public class player_structure extends script.base_script
         }
         return true;
     }
-    public static boolean modifyEntryList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException {
+
+    public static boolean modifyEntryList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException
+    {
         return isIdValid(player) && modifyEntryList(structure, getPlayerName(player), admin);
     }
+
     public static boolean modifyEntryList(obj_id structure, String player_or_guild_name, obj_id admin) throws InterruptedException
     {
         if (!isBuilding(structure))
@@ -3467,7 +3682,7 @@ public class player_structure extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (isBanned(structure, player_or_guild_name))
             {
@@ -3477,6 +3692,7 @@ public class player_structure extends script.base_script
         }
         return modifyList(structure, player_or_guild_name, admin, VAR_ENTER_LIST, true);
     }
+
     public static boolean modifyBanList(obj_id structure, String player_or_guild_name, obj_id admin) throws InterruptedException
     {
         if (!isBuilding(structure))
@@ -3496,6 +3712,7 @@ public class player_structure extends script.base_script
         }
         return modifyList(structure, player_or_guild_name, admin, VAR_BAN_LIST, true);
     }
+
     public static boolean modifyBanList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException
     {
         if (isIdValid(player))
@@ -3514,15 +3731,17 @@ public class player_structure extends script.base_script
             }
             return result;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean modifyAdminList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException
     {
         return modifyAdminList(structure, getPlayerName(player), admin);
     }
+
     public static boolean modifyAdminList(obj_id structure, String player_or_guild_name, obj_id admin) throws InterruptedException
     {
         if (player_or_guild_name.equals(getPlayerName(admin)))
@@ -3542,18 +3761,22 @@ public class player_structure extends script.base_script
         }
         return modifyList(structure, player_or_guild_name, admin, VAR_ADMIN_LIST, true);
     }
+
     public static boolean modifyVendorList(obj_id structure, String player_name, obj_id admin) throws InterruptedException
     {
         return false;
     }
+
     public static boolean modifyVendorList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException
     {
         return modifyVendorList(structure, getPlayerName(player), admin);
     }
+
     public static boolean modifyHopperList(obj_id structure, obj_id player, obj_id admin) throws InterruptedException
     {
         return modifyHopperList(structure, getPlayerName(player), admin);
     }
+
     public static boolean modifyHopperList(obj_id structure, String player_or_guild_name, obj_id admin) throws InterruptedException
     {
         if (!isInstallation(structure))
@@ -3569,7 +3792,7 @@ public class player_structure extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (isBanned(structure, player_or_guild_name))
             {
@@ -3579,6 +3802,7 @@ public class player_structure extends script.base_script
         }
         return modifyList(structure, player_or_guild_name, admin, VAR_HOPPER_LIST, true);
     }
+
     public static int getStructureTableIndex(String template) throws InterruptedException
     {
         if (template == null || template.equals(""))
@@ -3592,6 +3816,7 @@ public class player_structure extends script.base_script
         }
         return idx;
     }
+
     public static obj_id addStructureWaypoint(obj_id player, location loc, String name, obj_id structure) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_structure.addStructureWaypoint -- " + name);
@@ -3619,7 +3844,7 @@ public class player_structure extends script.base_script
         {
             setObjVar(structure, VAR_WAYPOINT_STRUCTURE, waypoint);
         }
-        else 
+        else
         {
             dictionary params = new dictionary();
             params.put("waypoint", waypoint);
@@ -3627,6 +3852,7 @@ public class player_structure extends script.base_script
         }
         return waypoint;
     }
+
     public static boolean payMaintenance(obj_id player, obj_id structure, int amt) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(structure))
@@ -3643,6 +3869,7 @@ public class player_structure extends script.base_script
         }
         return money.pay(player, structure, amt, "handlePayment", null);
     }
+
     public static boolean withdrawMaintenance(obj_id player, obj_id structure, int amt) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(structure))
@@ -3660,6 +3887,7 @@ public class player_structure extends script.base_script
         CustomerServiceLog("playerStructure", "%TU has initiated a withdraw of " + amt + " from structure " + structure + ".", player, null);
         return transferBankCreditsTo(structure, player, amt, "msgPAWithdrawSuccess", "msgPAWithdrawFail", d);
     }
+
     public static int decrementMaintenancePool(obj_id structure, int amt) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "disableStructureFees") != null)
@@ -3695,7 +3923,7 @@ public class player_structure extends script.base_script
                 return pool;
             }
         }
-        else 
+        else
         {
             if (money.bankTo(structure, money.ACCT_STRUCTURE_MAINTENANCE, amt))
             {
@@ -3705,6 +3933,7 @@ public class player_structure extends script.base_script
         }
         return -1;
     }
+
     public static int damageStructure(obj_id structure, int amt, boolean boolCondemn) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -3724,7 +3953,7 @@ public class player_structure extends script.base_script
             {
                 destroyObject(structure);
             }
-            else 
+            else
             {
                 if (isBuilding(structure) || isFactory(structure))
                 {
@@ -3738,16 +3967,18 @@ public class player_structure extends script.base_script
                 destroyStructure(structure);
             }
         }
-        else 
+        else
         {
             setInvulnerableHitpoints(structure, condition);
         }
         return condition;
     }
+
     public static int damageStructure(obj_id structure, int amt) throws InterruptedException
     {
         return damageStructure(structure, amt, false);
     }
+
     public static int repairStructure(obj_id structure, int amt) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -3774,6 +4005,7 @@ public class player_structure extends script.base_script
         }
         return condition;
     }
+
     public static boolean initiateRepairCheck(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -3787,7 +4019,7 @@ public class player_structure extends script.base_script
             int damage = max_condition - condition;
             int maint_pool = getBankBalance(structure);
             float per_point_cost = getBaseMaintenanceRate(structure) / 3.0f;
-            int repair_cost = (int)(damage * per_point_cost);
+            int repair_cost = (int) (damage * per_point_cost);
             int amt_paid = 0;
             int amt_repaired = 0;
             if (maint_pool >= per_point_cost)
@@ -3796,12 +4028,12 @@ public class player_structure extends script.base_script
                 LOG("LOG_CHANNEL", "cond ->" + condition);
                 if (maint_pool < repair_cost)
                 {
-                    amt_repaired = (int)(maint_pool / per_point_cost);
+                    amt_repaired = (int) (maint_pool / per_point_cost);
                     amt_paid = maint_pool;
                 }
-                else 
+                else
                 {
-                    amt_paid = (int)(damage * per_point_cost);
+                    amt_paid = (int) (damage * per_point_cost);
                     amt_repaired = damage;
                 }
                 int result = decrementMaintenancePool(structure, amt_paid);
@@ -3811,7 +4043,7 @@ public class player_structure extends script.base_script
                     condition = repairStructure(structure, amt_repaired);
                     LOG("LOG_CHANNEL", "2cond ->" + condition);
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", "permanent_structure::OnMaintenanceLoop -- unable to pay repair costs.");
                 }
@@ -3819,6 +4051,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean sendMaintenanceMail(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -3853,6 +4086,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static int destroyStructure(obj_id structure, obj_id containerForDeed, boolean reclaim, boolean overloaded) throws InterruptedException
     {
         if (!isValidId(structure) || !exists(structure))
@@ -3864,11 +4098,7 @@ public class player_structure extends script.base_script
         obj_id self = getSelf();
         String sname = getStructureName(structure);
         CustomerServiceLog("playerStructure", "Initiating destroy for structure " + structure + " (Template: " + template + " Name: " + sname + "). Owner is " + getStructureOwner(structure) + " (" + owner + ") Location: " + getLocation(structure) + " Reclaim: " + reclaim);
-        boolean bGetSelfPowered = false;
-        if (hasObjVar(structure, "selfpowered"))
-        {
-            bGetSelfPowered = true;
-        }
+        boolean bGetSelfPowered = hasObjVar(structure, "selfpowered");
         if (reclaim)
         {
             obj_id deed = null;
@@ -3903,7 +4133,7 @@ public class player_structure extends script.base_script
                 isStaticItemDeed = true;
                 CustomerServiceLog("playerStructure", "DestroyStructure -- Owner has TCG STRUCTURE: " + structure + " and has the correct static item: " + staticItemDeed + ". Owner is %TU. destroyStructure initiated by %TT", owner, self);
             }
-            else 
+            else
             {
                 deed = overloaded ? createObjectOverloaded(deed_template, containerForDeed) : createObject(deed_template, containerForDeed, "");
             }
@@ -3919,7 +4149,8 @@ public class player_structure extends script.base_script
                 String deed_scene = getDeedScene(structure);
                 if (deed_scene != null)
                 {
-                    switch (deed_scene) {
+                    switch (deed_scene)
+                    {
                         case "tatooine":
                             deed_scene = "tatooine,lok,dantooine";
                             break;
@@ -3984,7 +4215,7 @@ public class player_structure extends script.base_script
             {
                 veteranRewardDeedToReturn = SELFPOWERED_DEED_ELITE;
             }
-            else 
+            else
             {
                 veteranRewardDeedToReturn = SELFPOWERED_DEED;
             }
@@ -3992,7 +4223,7 @@ public class player_structure extends script.base_script
             {
                 createObjectOverloaded(veteranRewardDeedToReturn, containerForDeed);
             }
-            else 
+            else
             {
                 createObject(veteranRewardDeedToReturn, containerForDeed, "");
             }
@@ -4003,7 +4234,8 @@ public class player_structure extends script.base_script
             obj_id[] players = getPlayersInBuilding(structure);
             if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     expelFromBuilding(player);
                 }
             }
@@ -4026,13 +4258,18 @@ public class player_structure extends script.base_script
             {
                 obj_id[] contents;
                 obj_id vendorOwner;
-                for (String cell : cells) {
+                for (String cell : cells)
+                {
                     contents = getContents(getCellId(structure, cell));
-                    if (contents != null) {
-                        for (obj_id content : contents) {
-                            if (hasCondition(content, CONDITION_VENDOR)) {
+                    if (contents != null)
+                    {
+                        for (obj_id content : contents)
+                        {
+                            if (hasCondition(content, CONDITION_VENDOR))
+                            {
                                 vendorOwner = getObjIdObjVar(content, "vendor_owner");
-                                if (!isIdValid(vendorOwner)) {
+                                if (!isIdValid(vendorOwner))
+                                {
                                     vendorOwner = getOwner(content);
                                 }
                                 vendor_lib.finalizePackUp(vendorOwner, content, self, false);
@@ -4045,10 +4282,12 @@ public class player_structure extends script.base_script
         destroyObject(structure);
         return bGetSelfPowered ? DESTROY_RESULT_SUCCESS_SELFPOWERED : DESTROY_RESULT_SUCCESS;
     }
+
     public static boolean destroyStructure(obj_id structure, boolean reclaim) throws InterruptedException
     {
         return destroyStructure(structure, reclaim, false);
     }
+
     public static boolean destroyStructure(obj_id structure, boolean reclaim, boolean overrideOwner) throws InterruptedException
     {
         obj_id owner = overrideOwner ? getSelf() : getStructureOwnerObjId(structure);
@@ -4089,10 +4328,12 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean destroyStructure(obj_id structure) throws InterruptedException
     {
         return destroyStructure(structure, false);
     }
+
     public static boolean destroyBaseObjects(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -4104,13 +4345,16 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        for (obj_id base_object : base_objects) {
-            if (isIdValid(base_object)) {
+        for (obj_id base_object : base_objects)
+        {
+            if (isIdValid(base_object))
+            {
                 destroyObject(base_object);
             }
         }
         return true;
     }
+
     public static boolean validateBaseObjects(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -4122,12 +4366,17 @@ public class player_structure extends script.base_script
         if (base_objects != null)
         {
             obj_id container;
-            for (obj_id base_object : base_objects) {
-                if (!isIdValid(base_object) || !base_object.isLoaded()) {
+            for (obj_id base_object : base_objects)
+            {
+                if (!isIdValid(base_object) || !base_object.isLoaded())
+                {
                     create_objects = true;
-                } else {
+                }
+                else
+                {
                     container = getTopMostContainer(base_object);
-                    if (container == null || structure != container) {
+                    if (container == null || structure != container)
+                    {
                         create_objects = true;
                     }
                 }
@@ -4141,10 +4390,11 @@ public class player_structure extends script.base_script
             {
                 yaw = yaw + 360.0f;
             }
-            createStructureObjects(structure, (int)(yaw + 1) / 90);
+            createStructureObjects(structure, (int) (yaw + 1) / 90);
         }
         return true;
     }
+
     public static int[] convertSecondsTime(int time) throws InterruptedException
     {
         if (time < 1)
@@ -4154,7 +4404,7 @@ public class player_structure extends script.base_script
         if (time == Integer.MAX_VALUE)
         {
             return new int[]{
-                Integer.MAX_VALUE
+                    Integer.MAX_VALUE
             };
         }
         int mod_day = time % 86400;
@@ -4164,12 +4414,13 @@ public class player_structure extends script.base_script
         int minutes = mod_hour / 60;
         int seconds = mod_hour % 60;
         return new int[]{
-            days,
-            hours,
-            minutes,
-            seconds
+                days,
+                hours,
+                minutes,
+                seconds
         };
     }
+
     public static String assembleTimeRemaining(int[] time_values) throws InterruptedException
     {
         if (time_values == null || time_values.length == 0 || time_values.length > 4)
@@ -4180,16 +4431,18 @@ public class player_structure extends script.base_script
         {
             return "3550+ weeks";
         }
-        String[] time_strings = 
-        {
-            "day",
-            "hour",
-            "minute",
-            "second"
-        };
+        String[] time_strings =
+                {
+                        "day",
+                        "hour",
+                        "minute",
+                        "second"
+                };
         int num_times = 0;
-        for (int time_value : time_values) {
-            if (time_value != 0) {
+        for (int time_value : time_values)
+        {
+            if (time_value != 0)
+            {
                 num_times++;
             }
         }
@@ -4214,12 +4467,12 @@ public class player_structure extends script.base_script
                     {
                         sb.append(", and ");
                     }
-                    else 
+                    else
                     {
                         sb.append(" and ");
                     }
                 }
-                else 
+                else
                 {
                     sb.append(", ");
                 }
@@ -4228,6 +4481,7 @@ public class player_structure extends script.base_script
         }
         return sb.toString();
     }
+
     public static boolean convertPermissionsLists(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -4247,13 +4501,13 @@ public class player_structure extends script.base_script
                     {
                         setObjVar(structure, VAR_ADMIN_LIST, new_admin_list);
                     }
-                    else 
+                    else
                     {
                         removeObjVar(structure, VAR_ADMIN_LIST);
                     }
                 }
             }
-            else 
+            else
             {
                 String[] admin_list_as_strings = getStringArrayObjVar(structure, VAR_ADMIN_LIST);
                 if (admin_list_as_strings != null)
@@ -4265,7 +4519,7 @@ public class player_structure extends script.base_script
                         {
                             setObjVar(structure, VAR_ADMIN_LIST, new_admin_list);
                         }
-                        else 
+                        else
                         {
                             removeObjVar(structure, VAR_ADMIN_LIST);
                         }
@@ -4282,13 +4536,13 @@ public class player_structure extends script.base_script
                     {
                         setObjVar(structure, VAR_HOPPER_LIST, new_hopper_list);
                     }
-                    else 
+                    else
                     {
                         removeObjVar(structure, VAR_HOPPER_LIST);
                     }
                 }
             }
-            else 
+            else
             {
                 String[] hopper_list_as_strings = getStringArrayObjVar(structure, VAR_HOPPER_LIST);
                 if (hopper_list_as_strings != null)
@@ -4300,7 +4554,7 @@ public class player_structure extends script.base_script
                         {
                             setObjVar(structure, VAR_HOPPER_LIST, new_hopper_list);
                         }
-                        else 
+                        else
                         {
                             removeObjVar(structure, VAR_HOPPER_LIST);
                         }
@@ -4311,6 +4565,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static String[] convertObjIdPermissionList(obj_id[] objId_list) throws InterruptedException
     {
         if (objId_list == null || objId_list.length < 1)
@@ -4320,8 +4575,10 @@ public class player_structure extends script.base_script
         }
         Vector new_name_list = new Vector();
         new_name_list.setSize(0);
-        for (obj_id objId : objId_list) {
-            if (!addPlayerObjIdToRawList(new_name_list, objId)) {
+        for (obj_id objId : objId_list)
+        {
+            if (!addPlayerObjIdToRawList(new_name_list, objId))
+            {
                 LOG("player_structure", "player_structure.convertObjIdPermissionList -- invalid object ID " + objId.toString());
             }
         }
@@ -4332,11 +4589,12 @@ public class player_structure extends script.base_script
             new_name_list.toArray(_new_name_list);
             return _new_name_list;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String[] convertStringPermissionList(String[] name_list) throws InterruptedException
     {
         if (name_list == null || name_list.length < 1)
@@ -4346,8 +4604,10 @@ public class player_structure extends script.base_script
         }
         Vector new_name_list = new Vector();
         new_name_list.setSize(0);
-        for (String name : name_list) {
-            if (!addNameToRawList(new_name_list, name)) {
+        for (String name : name_list)
+        {
+            if (!addNameToRawList(new_name_list, name))
+            {
                 LOG("player_structure", "player_structure.convertStringPermissionList -- couldn't convert the name " + name);
             }
         }
@@ -4357,11 +4617,12 @@ public class player_structure extends script.base_script
             new_name_list.toArray(_new_name_list);
             return _new_name_list;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static float[] transformDeltaWorldCoord(float X, float Z, int rotation) throws InterruptedException
     {
         float x = X;
@@ -4381,13 +4642,14 @@ public class player_structure extends script.base_script
             case 3:
                 X = -z;
                 Z = x;
-            break;
+                break;
         }
         return new float[]{
-            X,
-            Z
+                X,
+                Z
         };
     }
+
     public static location transformDeltaWorldCoord(location here, float dx, float dz, float yaw) throws InterruptedException
     {
         yaw = yaw % 360.0f;
@@ -4399,20 +4661,25 @@ public class player_structure extends script.base_script
         float[] xz = transformDeltaWorldCoord(dx, dz, rotation);
         if (xz != null && xz.length == 2)
         {
-            location there = (location)here.clone();
+            location there = (location) here.clone();
             there.x += xz[0];
             there.z += xz[1];
             return there;
         }
         return null;
     }
-    public static boolean hasSign(obj_id structure) throws InterruptedException {
+
+    public static boolean hasSign(obj_id structure) throws InterruptedException
+    {
         return isIdValid(structure) && hasObjVar(structure, VAR_SIGN_ID);
     }
-    public static boolean isPackedUp(obj_id structure) throws InterruptedException {
+
+    public static boolean isPackedUp(obj_id structure) throws InterruptedException
+    {
         obj_id container = getContainedBy(structure);
         return isIdValid(container) && getTemplateName(container).equals("object/intangible/house/generic_house_control_device.iff");
     }
+
     public static obj_id createStructureSign(obj_id structure, float sYaw) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -4430,11 +4697,15 @@ public class player_structure extends script.base_script
             destroyStructureSign(structure);
             location here = getLocation(structure);
             obj_id[] nc;
-            for (String aSIGN_TYPE : SIGN_TYPE) {
+            for (String aSIGN_TYPE : SIGN_TYPE)
+            {
                 nc = getAllObjectsWithTemplate(here, 64.0f, aSIGN_TYPE);
-                if (nc != null && nc.length > 0) {
-                    for (obj_id aNc : nc) {
-                        if (isObjectPersisted(aNc) && !utils.hasScriptVar(aNc, "player_structure.parent")) {
+                if (nc != null)
+                {
+                    for (obj_id aNc : nc)
+                    {
+                        if (isObjectPersisted(aNc) && !utils.hasScriptVar(aNc, "player_structure.parent"))
+                        {
                             CustomerServiceLog("sign_destruction", "destroying sign " + aNc + " whose name is '" + getName(aNc) + "'");
                             destroyObject(aNc);
                         }
@@ -4455,7 +4726,7 @@ public class player_structure extends script.base_script
                 {
                     signName = utils.getStringName(structure);
                 }
-                else 
+                else
                 {
                     String[] admins = getAdminListNames(structure);
                     if ((admins != null) && (admins.length != 0))
@@ -4499,12 +4770,12 @@ public class player_structure extends script.base_script
                             {
                                 signName = admin_name + "'s Garage";
                             }
-                            else 
+                            else
                             {
                                 signName = admin_name + "'s House";
                             }
                         }
-                        else 
+                        else
                         {
                             if (structureTemplate.contains("guild"))
                             {
@@ -4880,12 +5151,12 @@ public class player_structure extends script.base_script
                         }
                     }
                 }
-                location spawn = (location)there.clone();
+                location spawn = (location) there.clone();
                 if (sYaw != 0.0f)
                 {
                     location newspawn = transformDeltaWorldCoord(here, x, z, sYaw);
                     newspawn.y = there.y;
-                    spawn = (location)newspawn.clone();
+                    spawn = (location) newspawn.clone();
                 }
                 if ((signTemplate != null) && (!signTemplate.equals("")))
                 {
@@ -4955,8 +5226,10 @@ public class player_structure extends script.base_script
                         {
                             Vector thisStructure = new Vector();
                             thisStructure.setSize(0);
-                            for (String struct : allStructures) {
-                                if (structureTemplate.equals(struct)) {
+                            for (String struct : allStructures)
+                            {
+                                if (structureTemplate.equals(struct))
+                                {
                                     thisStructure = utils.addElement(thisStructure, struct);
                                 }
                             }
@@ -4969,6 +5242,7 @@ public class player_structure extends script.base_script
         }
         return null;
     }
+
     public static obj_id createStructureSign(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -4977,6 +5251,7 @@ public class player_structure extends script.base_script
         }
         return createStructureSign(structure, (Math.round(getYaw(structure))));
     }
+
     public static void destroyStructureSign(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -4990,6 +5265,7 @@ public class player_structure extends script.base_script
         }
         removeObjVar(structure, VAR_SIGN_ID);
     }
+
     public static float powerInstallation(obj_id bldg, obj_id energon) throws InterruptedException
     {
         if (!isIdValid(bldg) || !isIdValid(energon))
@@ -5020,6 +5296,7 @@ public class player_structure extends script.base_script
         }
         return -1.0f;
     }
+
     public static float powerInstallation(obj_id bldg, int amt) throws InterruptedException
     {
         if (!isIdValid(bldg) || (amt <= 0.0f))
@@ -5029,6 +5306,7 @@ public class player_structure extends script.base_script
         incrementPowerValue(bldg, amt);
         return getPowerValue(bldg);
     }
+
     public static void validateHarvestedResources(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5075,13 +5353,13 @@ public class player_structure extends script.base_script
                                 {
                                     setObjVar(structure, "resource." + newId, amt);
                                 }
-                                else 
+                                else
                                 {
                                     CustomerServiceLog("trade", "bad resouce found in installation #" + structure + " and the system was unable to find a suitable replacement!");
                                     CustomerServiceLog("trade", "installation #" + structure + " report: bad resource id = " + ovName + " amt = " + Math.round(amt));
                                 }
                             }
-                            else 
+                            else
                             {
                                 CustomerServiceLog("trade", "bad resouce found in installation #" + structure + " and the system was unable to determine a suitable resource type for replacement!");
                                 CustomerServiceLog("trade", "installation #" + structure + " report: bad resource id = " + ovName + " amt = " + Math.round(amt));
@@ -5094,6 +5372,7 @@ public class player_structure extends script.base_script
         }
         utils.setScriptVar(structure, "validatedResources", true);
     }
+
     public static String getHarvesterMasterResource(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5153,12 +5432,17 @@ public class player_structure extends script.base_script
         }
         return null;
     }
-    public static boolean canReclaimDeed(obj_id structure) throws InterruptedException {
+
+    public static boolean canReclaimDeed(obj_id structure) throws InterruptedException
+    {
         return isIdValid(structure) && canReclaimDeed(getTemplateName(structure));
     }
-    public static boolean canReclaimDeed(String structureTemplate) throws InterruptedException {
+
+    public static boolean canReclaimDeed(String structureTemplate) throws InterruptedException
+    {
         return !(structureTemplate == null || structureTemplate.equals("")) && dataTableGetInt(PLAYER_STRUCTURE_DATATABLE, structureTemplate, "CAN_RECLAIM") == 1;
     }
+
     public static void showChangeSignSui(obj_id structure, obj_id player) throws InterruptedException
     {
         if (!isIdValid(structure) || !isIdValid(player))
@@ -5178,7 +5462,7 @@ public class player_structure extends script.base_script
             {
                 entries = utils.addElement(entries, utils.packStringId(SIGN_NAMES[i]));
             }
-            else 
+            else
             {
                 break;
             }
@@ -5188,6 +5472,7 @@ public class player_structure extends script.base_script
             sui.listbox(structure, player, "@player_structure:changesign_prompt", sui.OK_CANCEL, "@player_structure:changesign_title", entries, "handleChangeSignSui");
         }
     }
+
     public static String getStructureName(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5204,33 +5489,37 @@ public class player_structure extends script.base_script
         }
         return utils.getStringName(structure);
     }
+
     public static boolean canPlaceGarage(location loc, float range, String template) throws InterruptedException
     {
         if (1 == dataTableGetInt(player_structure.PLAYER_STRUCTURE_DATATABLE, template, "GARAGE"))
         {
-            if (getFirstObjectWithTemplate(loc, range, template) != null)
-            {
-                return false;
-            }
+            return getFirstObjectWithTemplate(loc, range, template) == null;
         }
         return true;
     }
+
     public static boolean hasMaintenanceDroid(obj_id player) throws InterruptedException
     {
-        for (obj_id datapad : getContents(utils.getPlayerDatapad(player))) {
-            if (hasObjVar(datapad, "module_data.struct_maint")) {
+        for (obj_id datapad : getContents(utils.getPlayerDatapad(player)))
+        {
+            if (hasObjVar(datapad, "module_data.struct_maint"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static obj_id[] getMaintenanceDroids(obj_id player) throws InterruptedException
     {
         Vector droids = new Vector();
         droids.setSize(0);
         obj_id[] datapads = getContents(utils.getPlayerDatapad(player));
-        for (obj_id datapad : datapads) {
-            if (hasObjVar(datapad, "module_data.struct_maint")) {
+        for (obj_id datapad : datapads)
+        {
+            if (hasObjVar(datapad, "module_data.struct_maint"))
+            {
                 droids = utils.addElement(droids, datapad);
             }
         }
@@ -5242,6 +5531,7 @@ public class player_structure extends script.base_script
         }
         return _droids;
     }
+
     public static void flagConverted(String template, obj_id structure) throws InterruptedException
     {
         if (template.contains("_guildhall_"))
@@ -5263,6 +5553,7 @@ public class player_structure extends script.base_script
             }
         }
     }
+
     public static int convertLotCosts(obj_id structure, String template, int struct_lots) throws InterruptedException
     {
         if (!hasObjVar(structure, "newBuilding") || !hasObjVar(structure, "newBuildPartTwo"))
@@ -5273,7 +5564,7 @@ public class player_structure extends script.base_script
                 {
                     struct_lots = 9;
                 }
-                else 
+                else
                 {
                     struct_lots = 7;
                 }
@@ -5292,6 +5583,7 @@ public class player_structure extends script.base_script
         }
         return struct_lots;
     }
+
     public static void doOldToNewLotConversion(obj_id player, obj_id structure) throws InterruptedException
     {
         if (!isOwner(structure, player))
@@ -5309,7 +5601,7 @@ public class player_structure extends script.base_script
                     setObjVar(structure, "newBuilding", true);
                     setObjVar(structure, "newBuildPartTwo", true);
                 }
-                else 
+                else
                 {
                     adjustLotCount(getPlayerObject(player), -2);
                     setObjVar(structure, "newBuilding", true);
@@ -5349,6 +5641,7 @@ public class player_structure extends script.base_script
             }
         }
     }
+
     public static void adjustLotsForOfflinePlayer(obj_id owner, obj_id structure) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -5364,7 +5657,7 @@ public class player_structure extends script.base_script
                     setObjVar(structure, "newBuildPartTwo", true);
                     messageTo(owner, "handleAdjustLotCount", params, 0, true);
                 }
-                else 
+                else
                 {
                     params.put("lotAdjust", -2);
                     setObjVar(structure, "newBuilding", true);
@@ -5410,6 +5703,7 @@ public class player_structure extends script.base_script
             }
         }
     }
+
     public static void doCondemnedSui(obj_id objStructure, obj_id objItem) throws InterruptedException
     {
         obj_id objOwner = getStructureOwnerObjId(objStructure);
@@ -5433,7 +5727,7 @@ public class player_structure extends script.base_script
                         showSUIPage(pid);
                     }
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id(STF_FILE, "structure_condemned_owner_no_credits");
                     prose_package pp = new prose_package();
@@ -5442,22 +5736,25 @@ public class player_structure extends script.base_script
                     sendSystemMessageProse(objItem, pp);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(objItem, new string_id(STF_FILE, "structure_condemned_not_owner"));
             }
         }
     }
+
     public static int getStructureRepairCost(obj_id structure) throws InterruptedException
     {
         int damage = getMaxCondition(structure) - getStructureCondition(structure);
         float per_point_cost = getBaseMaintenanceRate(structure) / 3.0f;
-        return (int)(damage * per_point_cost);
+        return (int) (damage * per_point_cost);
     }
+
     public static boolean isStructureCondemned(obj_id objStructure) throws InterruptedException
     {
         return hasObjVar(objStructure, "player_structure.condemned");
     }
+
     public static void sendCondemnedMail(obj_id objStructure) throws InterruptedException
     {
         location loc = getLocation(objStructure);
@@ -5471,6 +5768,7 @@ public class player_structure extends script.base_script
 
         utils.sendMail(new string_id(STF_FILE, "structure_condemned_subject"), pp, getPlayerName(getOwner(objStructure)), "@player_structure:management");
     }
+
     public static int getMaintenanceHeartbeat() throws InterruptedException
     {
         final int MAINTENANCE_HEARTBEAT = 1800;
@@ -5485,6 +5783,7 @@ public class player_structure extends script.base_script
         }
         return MAINTENANCE_HEARTBEAT;
     }
+
     public static void sendOutOfMaintenanceMail(obj_id objStructure) throws InterruptedException
     {
         location loc = getLocation(objStructure);
@@ -5497,18 +5796,22 @@ public class player_structure extends script.base_script
 
         utils.sendMail(new string_id(STF_FILE, "structure_maintenance_empty_subject"), pp, getPlayerName(getOwner(objStructure)), "@player_structure:management");
     }
+
     public static boolean isFactionPerkBase(String objectTemplateName) throws InterruptedException
     {
         return objectTemplateName.contains("object/building/faction_perk/hq/");
     }
+
     public static boolean isFactionPerkBaseDeed(obj_id objDeed) throws InterruptedException
     {
         return isFactionPerkBaseDeed(getTemplateName(objDeed));
     }
+
     public static boolean isFactionPerkBaseDeed(String deedObjectTemplateName) throws InterruptedException
     {
         return deedObjectTemplateName.contains("object/tangible/deed/faction_perk/hq/");
     }
+
     public static boolean canPlaceFactionPerkDeed(obj_id objDeed, obj_id objPlayer) throws InterruptedException
     {
         final float CHECK_RANGE = 600.0f;
@@ -5524,6 +5827,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static int validateHopperSize(obj_id structureObject) throws InterruptedException
     {
         if (!isIdValid(structureObject))
@@ -5551,7 +5855,7 @@ public class player_structure extends script.base_script
         {
             objvar_hopper = getIntObjVar(structureObject, VAR_DEED_MAX_HOPPER);
         }
-        else 
+        else
         {
             objvar_hopper = (minHopper + maxHopper) / 2;
             return objvar_hopper;
@@ -5566,6 +5870,7 @@ public class player_structure extends script.base_script
         }
         return objvar_hopper;
     }
+
     public static boolean doesUnmarkedStructureQualifyForHousePackup(obj_id structure) throws InterruptedException
     {
         if (!isBuilding(structure) && !isInstallation(structure))
@@ -5583,6 +5888,7 @@ public class player_structure extends script.base_script
         String templateName = getTemplateName(structure);
         return !(templateName == null || isFactionPerkBase(templateName));
     }
+
     public static boolean needsPreAbandonCheck(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5599,6 +5905,7 @@ public class player_structure extends script.base_script
         }
         return doesUnmarkedStructureQualifyForHousePackup(structure);
     }
+
     public static boolean needsAbandonCheck(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5615,6 +5922,7 @@ public class player_structure extends script.base_script
         }
         return doesUnmarkedStructureQualifyForHousePackup(structure);
     }
+
     public static boolean needsCityAbandonCheck(obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure))
@@ -5639,6 +5947,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static String getStructureInfo(obj_id structure) throws InterruptedException
     {
         final String yes = "Y|";
@@ -5663,7 +5972,7 @@ public class player_structure extends script.base_script
         {
             result += getIntObjVar(structure, VAR_CIVIC) + "|";
         }
-        else 
+        else
         {
             result += blank;
         }
@@ -5671,7 +5980,7 @@ public class player_structure extends script.base_script
         {
             result += getIntObjVar(structure, VAR_ABANDONED);
         }
-        else 
+        else
         {
             result += blank;
         }
@@ -5679,24 +5988,23 @@ public class player_structure extends script.base_script
         {
             result += getIntObjVar(structure, VAR_LAST_MAINTANENCE) + "|";
         }
-        else 
+        else
         {
             result += blank;
         }
         return result;
     }
+
     public static boolean isEliteHarvester(obj_id structure) throws InterruptedException
     {
         if (isIdValid(structure))
         {
             String templateName = getTemplateName(structure);
-            if (templateName.endsWith("_style_4.iff") || templateName.endsWith("_elite.iff"))
-            {
-                return true;
-            }
+            return templateName.endsWith("_style_4.iff") || templateName.endsWith("_elite.iff");
         }
         return false;
     }
+
     public static boolean canShowPackOption(obj_id player, obj_id structure) throws InterruptedException
     {
         if (!isIdValid(structure) || !isIdValid(player))
@@ -5713,6 +6021,7 @@ public class player_structure extends script.base_script
         }
         return isCommoditiesServerAvailable();
     }
+
     public static boolean canPlayerPackAbandonedStructure(obj_id player, obj_id structure) throws InterruptedException
     {
         if (!canShowPackOption(player, structure))
@@ -5729,6 +6038,7 @@ public class player_structure extends script.base_script
         }
         return !(!structure.isLoaded() || !structure.isAuthoritative());
     }
+
     public static boolean canPackStructureWithVendors(obj_id player, obj_id structure) throws InterruptedException
     {
         final boolean hasVendors = hasVendors(structure);
@@ -5744,6 +6054,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static void packAbandonedBuilding(obj_id player, obj_id structure, dictionary params) throws InterruptedException
     {
         if (hasObjVar(player, HOUSE_PACKUP_DAILY_TIMER_OBJVAR))
@@ -5799,7 +6110,7 @@ public class player_structure extends script.base_script
             messageTo(player, "handleFailedStructurePackup", null, 0, false);
             messageTo(player, "handlePlayerStructurePackupLockoutRemoval", null, 0, false);
         }
-        else 
+        else
         {
             blog("player_structure.packAbandonedBuilding I HAVER FALLEN THROUGH THE NORMAL CONDITIONS!!!!");
             removeObjVar(player, HOUSE_PACKUP_DAILY_TIMER_OBJVAR);
@@ -5807,6 +6118,7 @@ public class player_structure extends script.base_script
             messageTo(structure, "packAbandonedBuilding", params, 4, false);
         }
     }
+
     public static boolean canPackMoreToday(obj_id player) throws InterruptedException
     {
         blog("canPackMoreToday - Init.");
@@ -5855,6 +6167,7 @@ public class player_structure extends script.base_script
         blog("canPackMoreToday - timer has not expired.");
         return false;
     }
+
     public static boolean isPlayerGatedFromHousePackUp(obj_id player) throws InterruptedException
     {
         blog("player_structure.isPlayerGatedFromHousePackUp init");
@@ -5873,7 +6186,7 @@ public class player_structure extends script.base_script
         else if (playerLockedOut && canPackMore)
         {
             blog("player_structure.isPlayerLockedOutOfHousePackup PLAYER HAS BEEN LOCKED OUT");
-            int timeNeeded = utils.getIntScriptVar(player, SCRIPTVAR_HOUSE_PACKUP_LOCKOUT_TIME) + (int)HOUSE_PACKUP_LOCKOUT_TIMER;
+            int timeNeeded = utils.getIntScriptVar(player, SCRIPTVAR_HOUSE_PACKUP_LOCKOUT_TIME) + (int) HOUSE_PACKUP_LOCKOUT_TIMER;
             int timeNow = getGameTime();
             blog("player_structure.isPlayerLockedOutOfHousePackup timeNeeded: " + timeNeeded);
             blog("player_structure.isPlayerLockedOutOfHousePackup timeNow: " + timeNow);
@@ -5890,7 +6203,8 @@ public class player_structure extends script.base_script
             pp = prose.setTO(pp, utils.formatTimeVerbose(timeDiff));
             sendSystemMessageProse(player, pp);
         }
-        else {
+        else
+        {
             blog("player_structure.isPlayerGatedFromHousePackUp - !canPackMoreToday(player)");
             if (!hasObjVar(player, HOUSE_PACKUP_DAILY_TIMER_OBJVAR))
             {
@@ -5910,6 +6224,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static boolean isPlayerLockedOutOfHousePackup(obj_id player) throws InterruptedException
     {
         blog("player_structure.isPlayerLockedOutOfHousePackup init");
@@ -5924,6 +6239,7 @@ public class player_structure extends script.base_script
         blog("player_structure.isPlayerLockedOutOfHousePackup FALSE........FALSE on LOCKOUT");
         return false;
     }
+
     public static int getTotalIncreasedStorageAmountStructure(obj_id structure) throws InterruptedException
     {
         if (isIdValid(structure))
@@ -5935,12 +6251,14 @@ public class player_structure extends script.base_script
         }
         return 0;
     }
+
     public static boolean validSafeStorageRemoval(obj_id structure, int decreaseAmount) throws InterruptedException
     {
         int baseItemLimit = getPobBaseItemLimit(structure);
         int projectedAmount = baseItemLimit + (getTotalIncreasedStorageAmountStructure(structure) - decreaseAmount);
         return !((player_structure.getStructureNumItems(structure) > projectedAmount) || (projectedAmount < baseItemLimit));
     }
+
     public static boolean incrementStorageAmount(obj_id player, obj_id structure, obj_id deed, int increaseAmount) throws InterruptedException
     {
         if (isIdValid(structure) && increaseAmount > 0)
@@ -5964,6 +6282,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean decrementStorageAmount(obj_id player, obj_id structure, obj_id terminal, int selectedRedeedTypeIndex) throws InterruptedException
     {
         if (isIdValid(structure) && isIdValid(terminal))
@@ -5998,7 +6317,7 @@ public class player_structure extends script.base_script
                 setObjVar(structure, OBJVAR_STRUCTURE_STORAGE_INCREASE, newStrucStorage);
                 return true;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("player_structure", "storage_item_cannot_remove"));
                 player_structure.displayAvailableNonGenericStorageTypes(player, terminal, structure);
@@ -6006,18 +6325,22 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean isNonGenericLootItem(obj_id deed) throws InterruptedException
     {
         return hasObjVar(deed, "nonGenericStorageItem");
     }
+
     public static boolean alreadyHasNonGenericStorageIncreaseOfType(obj_id structure, obj_id deed) throws InterruptedException
     {
         return hasObjVar(structure, NON_GENERIC_STORAGE_ITEM_OBJVAR + "." + getStaticItemName(deed));
     }
+
     public static void setNonGenericStorageIncreaseOfTypeObjVar(obj_id structure, obj_id deed, int increaseAmount) throws InterruptedException
     {
         setObjVar(structure, NON_GENERIC_STORAGE_ITEM_OBJVAR + "." + getStaticItemName(deed), increaseAmount);
     }
+
     public static void removeNonGenericStorageIncreaseOfTypeObjVar(obj_id structure, String type) throws InterruptedException
     {
         String nonGenericStorageTypeObjVar = NON_GENERIC_STORAGE_ITEM_OBJVAR + "." + type;
@@ -6026,6 +6349,7 @@ public class player_structure extends script.base_script
             removeObjVar(structure, nonGenericStorageTypeObjVar);
         }
     }
+
     public static void displayAvailableNonGenericStorageTypes(obj_id player, obj_id terminal, obj_id structure) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "structureStorageRedeedPid"))
@@ -6039,12 +6363,12 @@ public class player_structure extends script.base_script
             {
                 handleStorageReclaimConfirmation(player, terminal);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("sui", "storage_item_count_over_base"));
             }
         }
-        else 
+        else
         {
             String[] storageTypeNamesArrayStrings = new String[storageTypeNamesArrayRef.length];
             for (int i = 0; i < storageTypeNamesArrayRef.length; i++)
@@ -6060,7 +6384,7 @@ public class player_structure extends script.base_script
                 {
                     storageTypeNamesArrayStrings[i] = utils.packStringId(new string_id("static_item_n", nonGenericStorateType));
                 }
-                else 
+                else
                 {
                     String greyedOut = utils.packStringId(new string_id("static_item_n", nonGenericStorateType));
                     string_id contrastText_sid = new string_id("faction_recruiter", "rank_list_empty");
@@ -6081,6 +6405,7 @@ public class player_structure extends script.base_script
         }
         utils.setBatchScriptVar(terminal, "storageTypeNamesRef", storageTypeNamesArrayRef);
     }
+
     public static String[] getStorageTypeNamesArray(obj_id structure) throws InterruptedException
     {
         Vector storageIncreaseTypes = new Vector();
@@ -6118,6 +6443,7 @@ public class player_structure extends script.base_script
         }
         return _storageIncreaseTypes;
     }
+
     public static boolean handleStorageReclaimConfirmation(obj_id player, obj_id terminal) throws InterruptedException
     {
         sui.msgbox(
@@ -6130,9 +6456,12 @@ public class player_structure extends script.base_script
         );
         return false;
     }
-    public static boolean canRotateFurnitureInPitchRollAxes(obj_id player) throws InterruptedException {
+
+    public static boolean canRotateFurnitureInPitchRollAxes(obj_id player) throws InterruptedException
+    {
         return isIdValid(player) && hasCompletedCollection(player, "force_shui_tier_02");
     }
+
     public static boolean isPlayerStructure(obj_id target) throws InterruptedException
     {
         if (!isValidId(target) || !exists(target))
@@ -6158,6 +6487,7 @@ public class player_structure extends script.base_script
         }
         return isGameObjectTypeOf(target, GOT_building_player);
     }
+
     public static boolean hasSpecialSignSkillMod(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("player_structure.hasSpecialSignSkillMod: init");
@@ -6188,6 +6518,7 @@ public class player_structure extends script.base_script
         }
         return false;
     }
+
     public static boolean getSpecialSignList(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("player_structure.getSpecialSignList: init");
@@ -6248,6 +6579,7 @@ public class player_structure extends script.base_script
         utils.setScriptVar(player, VAR_SPECIAL_SIGN_NAMES, signName);
         return true;
     }
+
     public static boolean removeSpecialSign(obj_id player, obj_id structure, boolean revertMessage) throws InterruptedException
     {
         blog("player_structure.removeSpecialSign - init");
@@ -6275,11 +6607,7 @@ public class player_structure extends script.base_script
             return false;
         }
         blog("player_structure.removeSpecialSign - validation completed");
-        boolean ownerOnlyRecovery = false;
-        if (hasObjVar(structure, SPECIAL_SIGN_OWNER_ONLY) && getBooleanObjVar(structure, SPECIAL_SIGN_OWNER_ONLY))
-        {
-            ownerOnlyRecovery = true;
-        }
+        boolean ownerOnlyRecovery = hasObjVar(structure, SPECIAL_SIGN_OWNER_ONLY) && getBooleanObjVar(structure, SPECIAL_SIGN_OWNER_ONLY);
         String signTemplateRecovery = getStringObjVar(structure, SPECIAL_SIGN_TEMPLATE);
         int signTypeRecovery = 0;
         if (hasObjVar(structure, VAR_SIGN_TYPE))
@@ -6329,6 +6657,7 @@ public class player_structure extends script.base_script
         CustomerServiceLog("playerStructure", "Player: " + player + " removed special sign from structure: " + structure + ". During the destroy process the skillmod: " + skillmod + " was reimbursed.");
         return true;
     }
+
     public static boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))
@@ -6337,6 +6666,7 @@ public class player_structure extends script.base_script
         }
         return true;
     }
+
     public static void revertCustomSign(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("revertCustomSign - revertCustomSign init");
@@ -6363,12 +6693,12 @@ public class player_structure extends script.base_script
             {
                 CustomerServiceLog("playerStructure", "Player: " + player + " attempted to remove their old Galactic Moon Festival Sign: " + customSign + " from structure: " + structure + " but it failed to update to the new special sign system.  The player was reimbursed with the old sign object: " + sign + ".");
             }
-            else 
+            else
             {
                 CustomerServiceLog("playerStructure", "Player: " + player + " attempted to remove their old Galactic Moon Festival Sign: " + customSign + " from structure: " + structure + " but it failed to update to the new special sign system.  The player was reimbursed with the old sign object: " + sign + ".");
             }
         }
-        else 
+        else
         {
             blog("revertCustomSign - customSign: SUCCESS: " + newSign);
             obj_id sign = static_item.createNewItemFunction(newSign, player);
@@ -6378,7 +6708,7 @@ public class player_structure extends script.base_script
                 CustomerServiceLog("playerStructure", "Player: " + player + " remove their old Galactic Moon Festival Sign: " + customSign + " from structure: " + structure + " and received a new skillmod sign object: " + sign + ".");
                 sendSystemMessage(player, SID_HALLOWEEN_SIGN_UPDATED);
             }
-            else 
+            else
             {
                 blog("revertCustomSign - customSign: Object COULD NOT BE CREATED");
                 CustomerServiceLog("playerStructure", "Player: " + player + " attempted to remove their old Galactic Moon Festival Sign: " + customSign + " from structure: " + structure + " but it failed to update to the new special sign system.  The player was reimbursed with the old sign object: " + sign + ".");
@@ -6387,12 +6717,14 @@ public class player_structure extends script.base_script
         removeObjVar(structure, player_structure.MODIFIED_HOUSE_SIGN_MODEL);
         player_structure.createStructureSign(structure);
     }
+
     public static void initializeFindAllItemsInHouse(obj_id self, obj_id player) throws InterruptedException
     {
         cleanupFindItemScriptVars(player);
         cleanupFindItemScriptVars(self);
         showFindItemsListboxPage(self, player, 0);
     }
+
     public static void initializeItemSearchInHouse(obj_id self, obj_id player) throws InterruptedException
     {
         int pid = sui.inputbox(
@@ -6400,7 +6732,7 @@ public class player_structure extends script.base_script
                 player,
                 getString(new string_id("player_structure", "find_items_search_keyword_prompt")),
                 sui.OK_CANCEL,
-                utils.packStringId(new string_id("player_structure","find_items_search_keyword_title")),
+                utils.packStringId(new string_id("player_structure", "find_items_search_keyword_title")),
                 sui.INPUT_NORMAL,
                 null,
                 "handlePlayerStructureSearchItemsGetKeyword"
@@ -6411,6 +6743,7 @@ public class player_structure extends script.base_script
             utils.setScriptVar(player, "findItems.pid", pid);
         }
     }
+
     public static void showFindItemsListboxPage(obj_id self, obj_id player, int startingIndex) throws InterruptedException
     {
         cleanupFindItemScriptVars(player);
@@ -6435,20 +6768,21 @@ public class player_structure extends script.base_script
 
             for (int i = startingIndex; i <= endingIndex; i++)
             {
-                item = ((obj_id)myItemsInBuilding.get(i));
+                item = ((obj_id) myItemsInBuilding.get(i));
                 itemsPageNamesList[j] = getEncodedName(item);
                 itemsPageList[j] = item;
                 ++j;
             }
             showFindItemsListboxSui(self, player, startingIndex, totalNumItems, itemsPageList, itemsPageNamesList);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("player_structure", "find_items_no_items_found"));
             cleanupFindItemScriptVars(player);
             cleanupFindItemScriptVars(self);
         }
     }
+
     public static void repeatFindItemsListboxPage(obj_id self, obj_id player, int startingIndex, int totalNumItems, obj_id[] itemsPageList) throws InterruptedException
     {
         cleanupFindItemScriptVars(player);
@@ -6460,6 +6794,7 @@ public class player_structure extends script.base_script
         }
         showFindItemsListboxSui(self, player, startingIndex, totalNumItems, itemsPageList, itemsPageNamesList);
     }
+
     public static void showFindItemsListboxSui(obj_id self, obj_id player, int startingIndex, int totalNumItems, obj_id[] itemsPageList, String[] itemsPageNamesList) throws InterruptedException
     {
         String prompt = utils.packStringId(new string_id("player_structure", "find_items_prompt"));
@@ -6478,7 +6813,7 @@ public class player_structure extends script.base_script
             {
                 sui.listboxUseOtherButton(pid, "Change Page");
             }
-            else 
+            else
             {
                 sui.listboxUseOtherButton(pid, "Refresh Page");
             }
@@ -6490,6 +6825,7 @@ public class player_structure extends script.base_script
             utils.setScriptVar(self, "findItems.itemsPageList", itemsPageList);
         }
     }
+
     public static Vector getMyItemsInBuilding(obj_id player) throws InterruptedException
     {
         Vector myItemsInBuilding = new Vector();
@@ -6505,26 +6841,28 @@ public class player_structure extends script.base_script
                 if ((isIdValid(buildingOwner) && player == buildingOwner) || isGod(player))
                 {
                     obj_id[] cellList = getContents(building);
-                    if (cellList != null && cellList.length > 0)
+                    if (cellList != null)
                     {
-                        for (obj_id buildingCell : cellList) {
-                            if ((getTemplateName(buildingCell)).equals(structure.TEMPLATE_CELL)) {
+                        for (obj_id buildingCell : cellList)
+                        {
+                            if ((getTemplateName(buildingCell)).equals(structure.TEMPLATE_CELL))
+                            {
                                 addPlayerItemsFromContainerToList(buildingCell, player, myItemsInBuilding);
                             }
                         }
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("player_structure", "find_items_not_building_owner"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("player_structure", "find_items_not_in_a_cell"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("player_structure", "find_items_not_in_a_building"));
         }
@@ -6534,6 +6872,7 @@ public class player_structure extends script.base_script
         }
         return null;
     }
+
     public static void addPlayerItemsFromContainerToList(obj_id container, obj_id player, Vector myItemsInBuilding) throws InterruptedException
     {
         obj_id[] contents = getContents(container);
@@ -6543,33 +6882,44 @@ public class player_structure extends script.base_script
             obj_id ship;
             obj_id lootBox;
 
-            for (obj_id thing : contents) {
-                if (isIdValid(thing)) {
+            for (obj_id thing : contents)
+            {
+                if (isIdValid(thing))
+                {
                     isValidPlayerOwnedObject = !(player != getOwner(thing) && !isGod(player));
-                    if (!isObjectPersisted(thing)) {
+                    if (!isObjectPersisted(thing))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isPlayer(thing)) {
+                    if (isPlayer(thing))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isMob(thing)) {
+                    if (isMob(thing))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
                     ship = space_transition.getContainingShip(thing);
-                    if (isIdValid(ship)) {
+                    if (isIdValid(ship))
+                    {
                         lootBox = obj_id.NULL_ID;
-                        if (hasObjVar(ship, "objLootBox")) {
+                        if (hasObjVar(ship, "objLootBox"))
+                        {
                             lootBox = getObjIdObjVar(ship, "objLootBox");
                         }
-                        if (isIdValid(lootBox) && lootBox == thing) {
+                        if (isIdValid(lootBox) && lootBox == thing)
+                        {
                             isValidPlayerOwnedObject = false;
                         }
                     }
-                    if (hasCondition(thing, CONDITION_VENDOR)) {
+                    if (hasCondition(thing, CONDITION_VENDOR))
+                    {
                         isValidPlayerOwnedObject = false;
                     }
-                    if (isValidPlayerOwnedObject) {
-                        if (getContainerType(thing) != 0 && getGameObjectType(thing) != GOT_misc_factory_crate) {
+                    if (isValidPlayerOwnedObject)
+                    {
+                        if (getContainerType(thing) != 0 && getGameObjectType(thing) != GOT_misc_factory_crate)
+                        {
                             addPlayerItemsFromContainerToList(thing, player, myItemsInBuilding);
                         }
                         utils.addElement(myItemsInBuilding, thing);
@@ -6578,6 +6928,7 @@ public class player_structure extends script.base_script
             }
         }
     }
+
     public static boolean moveItemInBuildingToPlayer(obj_id player, obj_id selectedItem) throws InterruptedException
     {
         location here = getLocation(player);
@@ -6609,44 +6960,45 @@ public class player_structure extends script.base_script
                                 setLocation(topNonCellContainer, here);
                                 return true;
                             }
-                            else 
+                            else
                             {
                                 sendSystemMessage(player, new string_id("player_structure", "find_items_failed_not_in_same_building"));
                             }
                         }
-                        else 
+                        else
                         {
                             if (utils.isNestedWithin(selectedItem, player))
                             {
                                 sendSystemMessage(player, new string_id("player_structure", "find_items_failed_nested_within_you"));
                             }
-                            else 
+                            else
                             {
                                 sendSystemMessage(player, new string_id("player_structure", "find_items_failed_nested_within_other_player"));
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("player_structure", "find_items_failed_no_longer_exists"));
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("player_structure", "find_items_failed_not_owner"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("player_structure", "find_items_failed_uncontained_cell"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("player_structure", "find_items_failed_not_outside"));
         }
         return false;
     }
+
     public static obj_id getTopNonCellContainer(obj_id item) throws InterruptedException
     {
         obj_id container = getContainedBy(item);
@@ -6658,15 +7010,17 @@ public class player_structure extends script.base_script
         {
             return item;
         }
-        else 
+        else
         {
             return getTopNonCellContainer(container);
         }
     }
+
     public static void cleanupFindItemScriptVars(obj_id target) throws InterruptedException
     {
         utils.removeScriptVarTree(target, "findItems");
     }
+
     public static void handleFindItemsListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -6730,7 +7084,7 @@ public class player_structure extends script.base_script
                         sui.showSUIPage(pid);
                     }
                 }
-                else 
+                else
                 {
                     if (pid > -1)
                     {
@@ -6747,7 +7101,7 @@ public class player_structure extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 repeatFindItemsListboxPage(self, player, startingIndex, totalNumItems, itemsPageList);
             }
@@ -6771,6 +7125,7 @@ public class player_structure extends script.base_script
         cleanupFindItemScriptVars(player);
         cleanupFindItemScriptVars(self);
     }
+
     public static void handleFindItemsChangePageResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -6800,7 +7155,7 @@ public class player_structure extends script.base_script
         {
             startingIndex = startingIndex - 50;
         }
-        else 
+        else
         {
             startingIndex = startingIndex + 50;
         }
@@ -6812,6 +7167,7 @@ public class player_structure extends script.base_script
         cleanupFindItemScriptVars(self);
         showFindItemsListboxPage(self, player, startingIndex);
     }
+
     public static void handleSearchItemsGetKeyword(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -6846,25 +7202,31 @@ public class player_structure extends script.base_script
         String name;
         string_id sidName;
 
-        for (Object myItem : myItemsInBuilding) {
+        for (Object myItem : myItemsInBuilding)
+        {
             thing = ((obj_id) myItem);
             name = getAssignedName(thing);
-            if (name == null || name.length() < 1) {
+            if (name == null || name.length() < 1)
+            {
                 sidName = getNameStringId(thing);
-                if (sidName != null && !sidName.isEmpty()) {
-                    sidName = utils.unpackString("@" + sidName.toString());
+                if (sidName != null && !sidName.isEmpty())
+                {
+                    sidName = utils.unpackString("@" + sidName);
                     name = getString(sidName);
-                    if (name.startsWith("@")) {
+                    if (name.startsWith("@"))
+                    {
                         CustomerServiceLog("findItemInStructure", "Server localization for this item failed: " + getTemplateName(thing) + " (" + thing + ").");
                     }
                 }
             }
-            if (toLower(name).contains(keyword)) {
+            if (toLower(name).contains(keyword))
+            {
                 utils.addElement(keywordMatchedIds, thing);
                 utils.addElement(keywordMatchedNames, name);
                 ++numMatches;
             }
-            if (numMatches >= 50) {
+            if (numMatches >= 50)
+            {
                 prompt = utils.packStringId(new string_id("player_structure", "find_items_search_list_too_long_prompt"));
                 break;
             }
@@ -6880,6 +7242,7 @@ public class player_structure extends script.base_script
         }
         showSearchItemsListboxSui(self, player, utils.toStaticObjIdArray(keywordMatchedIds), utils.toStaticStringArray(keywordMatchedNames), prompt);
     }
+
     public static void repeatSearchItemsKeywordList(obj_id self, obj_id player, obj_id[] matchingItemsList) throws InterruptedException
     {
         cleanupFindItemScriptVars(player);
@@ -6896,6 +7259,7 @@ public class player_structure extends script.base_script
         }
         showSearchItemsListboxSui(self, player, matchingItemsList, matchingItemsNamesList, prompt);
     }
+
     public static void showSearchItemsListboxSui(obj_id self, obj_id player, obj_id[] matchingItemsList, String[] matchingItemsNamesList, String prompt) throws InterruptedException
     {
         int pid = sui.listbox(
@@ -6915,6 +7279,7 @@ public class player_structure extends script.base_script
             utils.setScriptVar(self, "findItems.searchList", matchingItemsList);
         }
     }
+
     public static void handleSearchItemsSelectedResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -6958,6 +7323,7 @@ public class player_structure extends script.base_script
         cleanupFindItemScriptVars(player);
         cleanupFindItemScriptVars(self);
     }
+
     public static void removeStructureFromMaintenance(obj_id droid, obj_id pcd, int indexOfStructure) throws InterruptedException
     {
         if (!isIdValid(pcd))
@@ -6989,7 +7355,7 @@ public class player_structure extends script.base_script
             {
                 new_struct_list[i] = struct_list[i];
             }
-            else 
+            else
             {
                 new_struct_list[i - 1] = struct_list[i];
                 if (hasObjVar(pcd, "module_data.maint_list.loc_" + i))
@@ -7000,7 +7366,7 @@ public class player_structure extends script.base_script
                     }
                     setObjVar(pcd, "module_data.maint_list.loc_" + (i - 1), getLocationObjVar(pcd, "module_data.maint_list.loc_" + i));
                 }
-                else 
+                else
                 {
                     if (isIdValid(droid))
                     {
@@ -7016,6 +7382,7 @@ public class player_structure extends script.base_script
         }
         setObjVar(pcd, "module_data.maint_list.ids", new_struct_list);
     }
+
     public static void sendListChangeMessage(obj_id to, String type, boolean isAdd)
     {
         sendSystemMessageTestingOnly(to, type + (isAdd ? " was added to " : " was removed from ") + "the list successfully");
@@ -7034,23 +7401,23 @@ public class player_structure extends script.base_script
 
     public static void addAccountToAdminList(obj_id structure, obj_id player) throws InterruptedException
     {
-        if(!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
+        if (!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
         {
             return;
         }
         setObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT, getPlayerStationId(player));
-        permissionsAddAllowed(structure, "account:"+getPlayerStationId(player));
+        permissionsAddAllowed(structure, "account:" + getPlayerStationId(player));
         sendSystemMessageTestingOnly(player, "All characters on your account will now have entry and admin access to this structure. You can remove this access any time from the Structure Permissions menu.");
     }
 
     public static void removeAccountFromAdminList(obj_id structure, obj_id player) throws InterruptedException
     {
-        if(!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
+        if (!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
         {
             return;
         }
         removeObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT);
-        permissionsRemoveAllowed(structure, "account:"+getPlayerStationId(player));
+        permissionsRemoveAllowed(structure, "account:" + getPlayerStationId(player));
         sendSystemMessageTestingOnly(player, "All characters on your account will no longer have entry or admin access to this structure. You will need to separately add your characters to the list if you wish for them to gain access.");
     }
 }

@@ -7,14 +7,15 @@ import java.util.Vector;
 
 public class objective_power_regulator extends script.faction_perk.hq.objective_object
 {
-    public objective_power_regulator()
-    {
-    }
     public static final string_id MNU_SET_OVERLOAD = new string_id("hq", "mnu_set_overload");
     public static final int NUM_SWITCHES = 7;
     public static final String VAR_SWITCH_BASE = "hq.objective.switch";
     public static final String VAR_SWITCH_START = VAR_SWITCH_BASE + ".start";
     public static final String VAR_SWITCH_RULES = VAR_SWITCH_BASE + ".rules";
+    public objective_power_regulator()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "type", "terminal");
@@ -22,11 +23,13 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         randomizeSwitches(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_SET_OVERLOAD);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
@@ -60,7 +63,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
@@ -72,6 +75,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setForOverload(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(player))
@@ -105,7 +109,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         {
             states = utils.getBooleanArrayScriptVar(self, scriptvar_state);
         }
-        else 
+        else
         {
             states = utils.getBooleanArrayScriptVar(self, VAR_SWITCH_START);
         }
@@ -122,7 +126,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
             {
                 entry += "ON";
             }
-            else 
+            else
             {
                 entry += "OFF";
             }
@@ -138,6 +142,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
             utils.setScriptVar(self, scriptvar_state, states);
         }
     }
+
     public int handleOverloadSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -176,7 +181,8 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         }
         utils.setScriptVar(self, scriptvar_state, states);
         boolean litmus = true;
-        for (boolean state : states) {
+        for (boolean state : states)
+        {
             litmus &= state;
         }
         if (litmus)
@@ -186,12 +192,13 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
             xp.grant(player, "combat_rangedspecialize_heavy", 1000);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setForOverload(self, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void randomizeSwitches(obj_id self) throws InterruptedException
     {
         int[] rules = createSwitchRules();
@@ -208,6 +215,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         }
         utils.setScriptVar(self, VAR_SWITCH_START, states);
     }
+
     public int[] createSwitchRules() throws InterruptedException
     {
         int[] rules = new int[NUM_SWITCHES];
@@ -217,6 +225,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         }
         return rules;
     }
+
     public boolean[] flipSwitch(boolean[] states, int[] rules, int idx) throws InterruptedException
     {
         if (states == null || states.length == 0)
@@ -227,23 +236,9 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         {
             return null;
         }
-        if (states[idx])
-        {
-            states[idx] = false;
-        }
-        else 
-        {
-            states[idx] = true;
-        }
+        states[idx] = !states[idx];
         int affected = rules[idx];
-        if (states[affected])
-        {
-            states[affected] = false;
-        }
-        else 
-        {
-            states[affected] = true;
-        }
+        states[affected] = !states[affected];
         return states;
     }
 }

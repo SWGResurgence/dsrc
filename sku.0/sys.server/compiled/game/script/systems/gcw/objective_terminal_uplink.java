@@ -7,19 +7,21 @@ import java.util.Vector;
 
 public class objective_terminal_uplink extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_uplink()
-    {
-    }
     public static final string_id MNU_JAM = new string_id("hq", "mnu_jam");
     public static final String VAR_FREQ = "hq.objective.freq";
     public static final int STAGE_NONE = 0;
     public static final int STAGE_BAND = 1;
     public static final int STAGE_FREQ = 2;
+    public objective_terminal_uplink()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_JAM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "type", "terminal");
@@ -27,6 +29,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         setObjVar(self, VAR_FREQ, rand(1, 99));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
@@ -60,7 +63,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
@@ -74,7 +77,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 sendSystemMessageTestingOnly(player, "You resume scanning for baseline carrier signals...");
                 playJammingGame(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "You begin scanning for baseline carrier signals...");
                 dictionary d = new dictionary();
@@ -84,6 +87,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return SCRIPT_CONTINUE;
     }
+
     public void playJammingGame(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id objParent = getObjIdObjVar(self, "objParent");
@@ -124,7 +128,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             stage = STAGE_BAND;
             opt = opt = utils.concatArrays(null, getFreshArray());
         }
-        else 
+        else
         {
         }
         String title = "JAMMING...";
@@ -132,19 +136,21 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         switch (stage)
         {
             case STAGE_FREQ:
-            prompt += "channel ";
-            break;
+                prompt += "channel ";
+                break;
             case STAGE_BAND:
             default:
-            prompt += "band ";
-            break;
+                prompt += "band ";
+                break;
         }
         prompt += " that you wish to search.";
         Vector entries = new Vector();
         entries.setSize(0);
-        for (Object o : opt) {
+        for (Object o : opt)
+        {
             String entry = "";
-            switch (stage) {
+            switch (stage)
+            {
                 case STAGE_FREQ:
                     entry = "Channel #";
                     break;
@@ -164,6 +170,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             utils.setScriptVar(self, scriptvar_stage, stage);
         }
     }
+
     public int[] getFreshArray() throws InterruptedException
     {
         int[] ret = new int[10];
@@ -173,6 +180,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return ret;
     }
+
     public int handleJammingGame(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -201,12 +209,12 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         switch (stage)
         {
             case STAGE_FREQ:
-            correct = freq % 10;
-            break;
+                correct = freq % 10;
+                break;
             case STAGE_BAND:
             default:
-            correct = freq / 10;
-            break;
+                correct = freq / 10;
+                break;
         }
         float delay = 5.0f;
         String text = null;
@@ -216,30 +224,30 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             switch (stage)
             {
                 case STAGE_FREQ:
-                sendSystemMessageTestingOnly(player, "You isolate the carrier signal to Channel #" + Integer.toString(correct + 1));
-                sendSystemMessageTestingOnly(player, "Initializing jamming sequence...");
-                dictionary d = new dictionary();
-                d.put("player", player);
-                int cyclemod = getSkillStatMod(player, "droid_find_chance");
-                cyclemod *= rand(0.67f, 1.33f);
-                float cyclemultiplier = (100.0f - cyclemod) / 100.0f;
-                int cycleCount = Math.round(10.0f * cyclemultiplier);
-                if (cycleCount < 0)
-                {
-                    cycleCount = 0;
-                }
-                d.put("cnt", cycleCount);
-                messageTo(self, "handleJammingInProgress", d, 3.0f, false);
-                return SCRIPT_CONTINUE;
+                    sendSystemMessageTestingOnly(player, "You isolate the carrier signal to Channel #" + (correct + 1));
+                    sendSystemMessageTestingOnly(player, "Initializing jamming sequence...");
+                    dictionary d = new dictionary();
+                    d.put("player", player);
+                    int cyclemod = getSkillStatMod(player, "droid_find_chance");
+                    cyclemod *= rand(0.67f, 1.33f);
+                    float cyclemultiplier = (100.0f - cyclemod) / 100.0f;
+                    int cycleCount = Math.round(10.0f * cyclemultiplier);
+                    if (cycleCount < 0)
+                    {
+                        cycleCount = 0;
+                    }
+                    d.put("cnt", cycleCount);
+                    messageTo(self, "handleJammingInProgress", d, 3.0f, false);
+                    return SCRIPT_CONTINUE;
                 case STAGE_BAND:
                 default:
-                opt = utils.concatArrays(null, getFreshArray());
-                stage = STAGE_FREQ;
-                sendSystemMessageTestingOnly(player, "You narrow the carrier signal down to Band #" + Integer.toString(correct + 1));
-                break;
+                    opt = utils.concatArrays(null, getFreshArray());
+                    stage = STAGE_FREQ;
+                    sendSystemMessageTestingOnly(player, "You narrow the carrier signal down to Band #" + (correct + 1));
+                    break;
             }
         }
-        else 
+        else
         {
             int findmod = getSkillStatMod(player, "droid_find_chance");
             int roll = rand(1, 150);
@@ -247,7 +255,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             {
                 text = "You lose concentration and become lost in a sea of white noise...";
             }
-            else 
+            else
             {
                 if (findmod > roll)
                 {
@@ -255,18 +263,18 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                     {
                         text = "You feel like you need to search higher...";
                     }
-                    else 
+                    else
                     {
                         text = "You feel like you need to search lower...";
                     }
                 }
-                else 
+                else
                 {
                     if (correct > (Integer) opt.get(idx))
                     {
                         text = "You feel like you need to search lower...";
                     }
-                    else 
+                    else
                     {
                         text = "You feel like you need to search higher...";
                     }
@@ -292,6 +300,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         messageTo(self, "handleJammingGameDelay", d, delay, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJammingGameDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -306,10 +315,12 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectiveDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleStartDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -320,6 +331,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         playJammingGame(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleJammingInProgress(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -341,7 +353,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             xp.grant(player, xp.BOUNTYHUNTER, 1000);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "Jamming in progress...");
             params.put("cnt", cnt);

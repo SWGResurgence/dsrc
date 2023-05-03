@@ -6,6 +6,9 @@ package script.event.gjpud;/*
 */
 
 import script.*;
+import script.library.static_item;
+import script.library.trial;
+import script.library.utils;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -23,17 +26,19 @@ public class junk extends script.base_script
 
     public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi )
     {
-        if (isGod(player))
-        {
-            int main = mi.addRootMenu( menu_info_types.ITEM_USE, new string_id( "event/gjpud", "gjpud_menu" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU1, new string_id( "event/gjpud", "gjpud_spawn" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU2, new string_id( "event/gjpud", "gjpud_destroy" ));
-        }
+        mi.addRootMenu( menu_info_types.ITEM_USE, new string_id("Collect"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException
     {
-
+        if (item == menu_info_types.ITEM_USE)
+        {
+            int currentSmashed = getIntObjVar(player, "gjpud.total");
+            setObjVar(player, "gjpud.total", currentSmashed + 1);
+            broadcast(player, "You have collected a piece of scrap.");
+            destroyObject(self);
+            static_item.createNewItemFunction(trial.GJPUD_ITEM, utils.getInventoryContainer(player));
+        }
         return SCRIPT_CONTINUE;
     }
 }

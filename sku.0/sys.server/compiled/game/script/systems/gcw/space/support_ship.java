@@ -30,8 +30,9 @@ public class support_ship extends script.space.combat.combat_ship {
                 }
                 LOG("space_gcw", "Ship \"" + playerShip + "\" (" + playerShip + ") has qualified for space battle " + battleId + " by destroying a support ship.");
                 setObjVar(spawner, "space_gcw.pob.participant." + battleId + "." + playerShip, space_utils.getAllPlayersInShip(playerShip));
-            } else if (getShipChassisType(playerShip).startsWith("player_gunship")) {
+            }  else if (getShipChassisType(playerShip).startsWith("player_gunship")) {
                 if (battleType.equals(battle_spawner.BATTLE_TYPE_PVP)) {
+                	
                     if (!(pvpGetType(playerShip) == PVPTYPE_DECLARED))
                         return SCRIPT_CONTINUE;
                 }

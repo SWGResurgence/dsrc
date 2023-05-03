@@ -9,6 +9,7 @@ public class publish29 extends script.base_script
     public publish29()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -19,6 +20,7 @@ public class publish29 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id containingPlayer = utils.getContainingPlayer(self);
@@ -38,6 +40,7 @@ public class publish29 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void unrollMe(obj_id self, obj_id player) throws InterruptedException
     {
         int which_one = rand(1, 3);
@@ -45,14 +48,14 @@ public class publish29 extends script.base_script
         switch (which_one)
         {
             case 1:
-            poster = "item_publish_gift_29_corellia_04_01";
-            break;
+                poster = "item_publish_gift_29_corellia_04_01";
+                break;
             case 2:
-            poster = "item_publish_gift_29_ryatt_04_01";
-            break;
+                poster = "item_publish_gift_29_ryatt_04_01";
+                break;
             case 3:
-            poster = "item_publish_gift_29_mustafar_04_01";
-            break;
+                poster = "item_publish_gift_29_mustafar_04_01";
+                break;
         }
         obj_id item = static_item.createNewItemFunction(poster, player);
         if (isIdValid(item))

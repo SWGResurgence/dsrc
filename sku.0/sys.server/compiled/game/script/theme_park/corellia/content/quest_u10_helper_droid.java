@@ -66,7 +66,7 @@ public class quest_u10_helper_droid extends script.base_script
         }
         if (rand(8, 9) == 9)
         {
-            String randomChat = HELPER_DROID_QUOTES[rand(0, HELPER_DROID_QUOTES.length)];
+            String randomChat = HELPER_DROID_QUOTES[rand(0, HELPER_DROID_QUOTES.length - 1)];
             String droidType = getCreatureName(self);
             if (droidType.equals("quest_u10_helper_droid_queen"))
             {

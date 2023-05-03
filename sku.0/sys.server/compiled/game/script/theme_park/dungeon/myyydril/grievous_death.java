@@ -51,6 +51,10 @@ public class grievous_death extends script.base_script
             static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
             static_item.createNewItemFunction("item_city_actor_deed", corpseInventory);
         }
+        if (x < 6)
+        {
+            static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
+        }
         String starfighter = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
         String cybernetic = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
         createObject(starfighter, corpseInventory, "" );

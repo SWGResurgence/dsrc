@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class vehicle_customizer extends script.base_script
 {
-    public vehicle_customizer()
-    {
-    }
     public static final String SCRIPTVAR_PID = "vehicletool.pid";
     public static final String SCRIPTVAR_PLAYER = "vehicletool.player";
     public static final String SCRIPTVAR_TARGET = "vehicletool.target";
@@ -31,11 +28,16 @@ public class vehicle_customizer extends script.base_script
     public static final string_id PROSE_FAIL = new string_id(STF, "prose_fail");
     public static final string_id PROSE_FAIL_OWNER = new string_id(STF, "prose_fail_owner");
     public static final String TBL = "datatables/item/vehicle_customizer/indices.iff";
+    public vehicle_customizer()
+    {
+    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         cleanupCustomizationMenu();
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -49,6 +51,7 @@ public class vehicle_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -61,6 +64,7 @@ public class vehicle_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCustomizeVehicle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target))
@@ -100,7 +104,7 @@ public class vehicle_customizer extends script.base_script
         Enumeration keys = row.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)keys.nextElement();
+            String key = (String) keys.nextElement();
             if (!key.equals("TEMPLATE"))
             {
                 String var = row.getString(key);
@@ -129,6 +133,7 @@ public class vehicle_customizer extends script.base_script
         sendSystemMessageProse(target, ppNoCustomization);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanupCustomizationMenu(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -139,6 +144,7 @@ public class vehicle_customizer extends script.base_script
             clearTrackingScriptVars(self);
         }
     }
+
     public void cleanupCustomizationMenu() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -151,6 +157,7 @@ public class vehicle_customizer extends script.base_script
             }
         }
     }
+
     public void clearTrackingScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_PID);
@@ -158,6 +165,7 @@ public class vehicle_customizer extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_TARGET);
         utils.removeScriptVar(self, SCRIPTVAR_OPT);
     }
+
     public int handleSelectionSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_PLAYER);
@@ -196,6 +204,7 @@ public class vehicle_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, SCRIPTVAR_PLAYER);
@@ -238,6 +247,7 @@ public class vehicle_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int customizationSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())
@@ -264,6 +274,7 @@ public class vehicle_customizer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int customizationFailed(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null && !params.isEmpty())

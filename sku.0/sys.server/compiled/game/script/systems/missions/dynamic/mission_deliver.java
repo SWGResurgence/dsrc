@@ -11,6 +11,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
     public mission_deliver()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -19,15 +20,18 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendDeliverIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Setting up mission data in mission object for DELIVER mission");
@@ -44,6 +48,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         activateMissionWaypoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public int deliverSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -56,6 +61,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         }
         return SCRIPT_CONTINUE;
     }
+
     public int deliverFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -64,6 +70,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int deliverIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -73,6 +80,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);
@@ -85,6 +93,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         destroyObject(objWaypoint);
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -92,6 +101,7 @@ public class mission_deliver extends script.systems.missions.base.mission_dynami
         dctParams.put("objMission", self);
         return SCRIPT_CONTINUE;
     }
+
     public int pickup_event(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

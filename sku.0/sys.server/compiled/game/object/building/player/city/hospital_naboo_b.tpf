@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/building/player/city/shared_hospital_naboo_b.iff"
 
-scripts =+["structure.municipal.hospital"]
+scripts =+["structure.municipal.hospital", "structure.buffs.city_buffs.hospital_city_buff"]
 
 objvars =+["healing.canhealwound"=1, "safeLogout"=1]
 

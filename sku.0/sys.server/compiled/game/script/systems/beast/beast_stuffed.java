@@ -8,6 +8,7 @@ public class beast_stuffed extends script.base_script
     public beast_stuffed()
     {
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

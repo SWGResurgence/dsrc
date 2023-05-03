@@ -9,12 +9,13 @@ import script.string_id;
 
 public class trap_noise_maker extends script.item.trap.trap_base
 {
-    public trap_noise_maker()
-    {
-    }
     public static final int TRAP_DIFF = 15;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_noise_maker_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_noise_maker_effect_no");
+    public trap_noise_maker()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -25,6 +26,7 @@ public class trap_noise_maker extends script.item.trap.trap_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapHit(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -56,7 +58,7 @@ public class trap_noise_maker extends script.item.trap.trap_base
                 startCombat(target, player);
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isInCombat(target))
             {

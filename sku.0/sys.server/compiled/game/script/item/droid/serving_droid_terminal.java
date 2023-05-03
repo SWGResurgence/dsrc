@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class serving_droid_terminal extends script.base_script
 {
-    public serving_droid_terminal()
-    {
-    }
     public static final String DROIDTEMPLATE = "object/creature/npc/droid/serving_droid.iff";
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id TERMINAL_NAME = new string_id(MENU_FILE, "serving_droid_terminal_custom_name");
@@ -25,6 +22,10 @@ public class serving_droid_terminal extends script.base_script
     public static final String DROID_ID = "droid.id";
     public static final String DROID_NAMED = "droid.named";
     public static final String PLAYER = "droid.user";
+    public serving_droid_terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id terminal = self;
@@ -43,6 +44,7 @@ public class serving_droid_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id terminal = self;
@@ -54,6 +56,7 @@ public class serving_droid_terminal extends script.base_script
         destroyObject(droid);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id terminal = self;
@@ -79,6 +82,7 @@ public class serving_droid_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id terminal = self;
@@ -103,12 +107,13 @@ public class serving_droid_terminal extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, DESTROY);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SUMMON);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id terminal = self;
@@ -155,12 +160,13 @@ public class serving_droid_terminal extends script.base_script
                 removeObjVar(terminal, DROID_ID);
             }
         }
-        else 
+        else
         {
             messageTo(terminal, "destroyDroid", null, 1, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyDroid(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id terminal = self;
@@ -192,6 +198,7 @@ public class serving_droid_terminal extends script.base_script
         sendConsoleMessage(player, "Droid retired.");
         return SCRIPT_CONTINUE;
     }
+
     public boolean nameTerminal(obj_id terminal) throws InterruptedException
     {
         if (!isValidId(terminal))
@@ -204,6 +211,7 @@ public class serving_droid_terminal extends script.base_script
         setObjVar(terminal, DROID_NAMED, true);
         return true;
     }
+
     public boolean setDroidVars(obj_id terminal, obj_id droid) throws InterruptedException
     {
         if (!isValidId(terminal) || !exists(terminal))
@@ -223,6 +231,7 @@ public class serving_droid_terminal extends script.base_script
         setName(droid, getName(user) + localize(ASTROMECH_NAME));
         return true;
     }
+
     public boolean createDroid(obj_id terminal, obj_id player) throws InterruptedException
     {
         if (!isValidId(terminal) || !exists(terminal))
@@ -257,12 +266,12 @@ public class serving_droid_terminal extends script.base_script
             {
                 startLocation = getLocation(terminal);
             }
-            else 
+            else
             {
                 startLocation = getLocation(player);
             }
         }
-        else 
+        else
         {
             boolean validList = validLocationList(terminal, patrolLoc);
             if (!validList)
@@ -292,6 +301,7 @@ public class serving_droid_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean recreateDroid(obj_id terminal) throws InterruptedException
     {
         obj_id anotherDroid = getObjIdObjVar(terminal, DROID_ID);
@@ -342,14 +352,17 @@ public class serving_droid_terminal extends script.base_script
         }
         return true;
     }
+
     public boolean validLocationList(obj_id terminal, location[] patrolLocations) throws InterruptedException
     {
         if (patrolLocations == null)
         {
             return false;
         }
-        for (location patrolLocation : patrolLocations) {
-            if (!isValidId(patrolLocation.cell)) {
+        for (location patrolLocation : patrolLocations)
+        {
+            if (!isValidId(patrolLocation.cell))
+            {
                 removeObjVar(terminal, OBJVAR_DROID_PATROL_POINTS);
                 return false;
             }

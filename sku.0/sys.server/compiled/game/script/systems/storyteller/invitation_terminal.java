@@ -7,15 +7,18 @@ import script.library.utils;
 
 public class invitation_terminal extends script.base_script
 {
+    public static final String JUKEBOX_SCRIPT = "systems.event_perk.jukebox";
+
     public invitation_terminal()
     {
     }
-    public static final String JUKEBOX_SCRIPT = "systems.event_perk.jukebox";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeStorytellerInvitationTerminal", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeStorytellerInvitationTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "storytellerName"))
@@ -25,12 +28,14 @@ public class invitation_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id menuTxt = new string_id("storyteller", "invitation_terminal_menu");
         mi.addRootMenu(menu_info_types.ITEM_USE, menuTxt);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -41,6 +46,7 @@ public class invitation_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int terminalStoryInviteSui(obj_id storytellerPlayer, String storytellerName, obj_id player, obj_id terminal) throws InterruptedException
     {
         String title = utils.packStringId(new string_id("storyteller", "sui_invite_title"));
@@ -50,11 +56,12 @@ public class invitation_terminal extends script.base_script
         int pid = sui.msgbox(terminal, player, msg, 2, title, sui.YES_NO, "terminalStoryInviteHandler");
         return pid;
     }
+
     public int terminalStoryInviteHandler(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id storytellerId = getObjIdObjVar(self, "storytellerid");
         String storytellerName = getStringObjVar(self, "storytellerName");
-        
+
         obj_id player = sui.getPlayerId(params);
         int btn = sui.getIntButtonPressed(params);
         if (!isIdValid(player))

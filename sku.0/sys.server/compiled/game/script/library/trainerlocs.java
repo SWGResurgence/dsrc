@@ -9,6 +9,7 @@ public class trainerlocs extends script.base_script
     public trainerlocs()
     {
     }
+
     public static obj_id getTrehlaKeeloLocation(obj_id player, String profession, String track) throws InterruptedException
     {
         location targetLoc = new location();
@@ -26,14 +27,17 @@ public class trainerlocs extends script.base_script
         setWaypointName(wayp, waypName);
         return wayp;
     }
+
     public static obj_id getTrainerLocationWaypoint(obj_id player, String profession, String track) throws InterruptedException
     {
         location targetLoc = new location();
         targetLoc.area = track;
         String waypName;
-        switch (track) {
+        switch (track)
+        {
             case "naboo":
-                switch (profession) {
+                switch (profession)
+                {
                     case "imperial":
                         targetLoc.x = 5182.0f;
                         targetLoc.y = -192.0f;
@@ -55,7 +59,8 @@ public class trainerlocs extends script.base_script
                 }
                 break;
             case "corellia":
-                switch (profession) {
+                switch (profession)
+                {
                     case "imperial":
                         targetLoc.x = -2184.0f;
                         targetLoc.y = 20.0f;
@@ -78,7 +83,8 @@ public class trainerlocs extends script.base_script
                 }
                 break;
             default:
-                switch (profession) {
+                switch (profession)
+                {
                     case "imperial":
                         targetLoc.x = -1132.0f;
                         targetLoc.y = 13.32f;

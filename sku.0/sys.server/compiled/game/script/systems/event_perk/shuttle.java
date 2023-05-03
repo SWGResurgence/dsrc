@@ -6,10 +6,12 @@ import script.string_id;
 
 public class shuttle extends script.base_script
 {
+    public static final String STF_FILE = "event_perk";
+
     public shuttle()
     {
     }
-    public static final String STF_FILE = "event_perk";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -20,6 +22,7 @@ public class shuttle extends script.base_script
         messageTo(self, "cleanUp", null, dieTime, true);
         return SCRIPT_CONTINUE;
     }
+
     public int landShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleType = getIntObjVar(self, "event_perk.shuttle.shuttleType");
@@ -44,11 +47,13 @@ public class shuttle extends script.base_script
         sendSystemMessage(owner, new string_id(STF_FILE, "shuttle_is_landing"));
         return SCRIPT_CONTINUE;
     }
+
     public int readyTakeOff(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "event_perk.shuttle.readyTakeOff", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int takeOff(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleType = getIntObjVar(self, "event_perk.shuttle.shuttleType");
@@ -73,6 +78,7 @@ public class shuttle extends script.base_script
         sendSystemMessage(owner, new string_id(STF_FILE, "shuttle_is_leaving"));
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");
@@ -82,6 +88,7 @@ public class shuttle extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -94,6 +101,7 @@ public class shuttle extends script.base_script
         }
         return;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         checkTimeLimit(self);

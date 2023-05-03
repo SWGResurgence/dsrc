@@ -36,9 +36,9 @@ public class qa_helper extends script.base_script
     }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
-        if (hasScript(self, "player.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
+        if (hasScript(self, "developer.soe.e3demo.yavin_e3") && utils.getBooleanScriptVar(self, SCRIPTVAR_MOB + ".recordDamage") && utils.getObjIdScriptVar(attacker, "spawnedBy") == self)
         {
-            sendSystemMessageTestingOnly(self, "Damage numbers will not be accurate due to player.yavin_e3 script attached to your character");
+            sendSystemMessageTestingOnly(self, "Damage numbers will not be accurate due to developer.soe.e3demo.yavin_e3 script attached to your character");
         }
         else 
         {

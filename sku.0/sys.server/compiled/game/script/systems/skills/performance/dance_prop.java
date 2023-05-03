@@ -8,9 +8,6 @@ import script.string_id;
 
 public class dance_prop extends script.base_script
 {
-    public dance_prop()
-    {
-    }
     public static final string_id SID_NO_PROP_SKILL = new string_id("error_message", "prop_no_prop_skill");
     public static final string_id SID_NO_DUAL_SKILL = new string_id("error_message", "prop_no_dual_skill");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("error_message", "prop_not_in_combat");
@@ -18,6 +15,10 @@ public class dance_prop extends script.base_script
     public static final String TEMPLATE_COLUMN = "template";
     public static final String COMMAND_COLUMN = "command";
     public static final String HAND_COLUMN = "hand";
+    public dance_prop()
+    {
+    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isIdValid(destContainer) || !isPlayer(destContainer))

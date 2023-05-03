@@ -13,11 +13,13 @@ public class enclave_data_handler extends script.base_script
     public enclave_data_handler()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, force_rank.SCRIPT_DATA_HANDLER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String enclave_name, int request_id, String[] element_name_list, dictionary[] enclave_data, int lock_key) throws InterruptedException
     {
         LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- " + request_id);
@@ -37,7 +39,7 @@ public class enclave_data_handler extends script.base_script
             }
             utils.removeScriptVar(self, force_rank.SCRIPT_VAR_DATA_REQUEST + request_id);
         }
-        else 
+        else
         {
             LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- cannot find a data_mode for request_id " + request_id + " on " + self);
             releaseClusterWideDataLock(manage_name, lock_key);
@@ -71,7 +73,7 @@ public class enclave_data_handler extends script.base_script
         switch (data_mode)
         {
             case 1:
-            
+
             {
                 int params = utils.stringToInt(str_params);
                 dictionary d = new dictionary();
@@ -87,7 +89,7 @@ public class enclave_data_handler extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     Vector rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                     if (rank_list != null)
@@ -100,7 +102,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 2:
-            
+
             {
                 Vector board_names = new Vector();
                 board_names.setSize(0);
@@ -128,7 +130,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 3:
-            
+
             {
                 if (!isPlayer(self))
                 {
@@ -224,7 +226,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 4:
-            
+
             {
                 if (!isPlayer(self))
                 {
@@ -255,7 +257,7 @@ public class enclave_data_handler extends script.base_script
                 {
                     next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                 }
-                else 
+                else
                 {
                     next_rank = new Vector();
                 }
@@ -278,7 +280,7 @@ public class enclave_data_handler extends script.base_script
                     releaseClusterWideDataLock(manage_name, lock_key);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     String rank_key = force_rank.VAR_RANK_BASE + player_rank + "-" + current_idx;
                     enclave_data[0].put(rank_key, force_rank.EMPTY_SLOT);
@@ -308,7 +310,7 @@ public class enclave_data_handler extends script.base_script
                         String rank_key = force_rank.VAR_RANK_BASE + params + "-" + next_rank.size();
                         enclave_data[0].put(rank_key, player_name);
                     }
-                    else 
+                    else
                     {
                         String rank_key = force_rank.VAR_RANK_BASE + params + "-" + empty_idx;
                         enclave_data[0].put(rank_key, player_name);
@@ -323,7 +325,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 5:
-            
+
             {
                 java.util.StringTokenizer st = new java.util.StringTokenizer(str_params, " ");
                 if (st.countTokens() < 2)
@@ -361,7 +363,7 @@ public class enclave_data_handler extends script.base_script
                 {
                     next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                 }
-                else 
+                else
                 {
                     next_rank = new Vector();
                 }
@@ -384,7 +386,7 @@ public class enclave_data_handler extends script.base_script
                     releaseClusterWideDataLock(manage_name, lock_key);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     String rank_key = force_rank.VAR_RANK_BASE + player_rank + "-" + current_idx;
                     enclave_data[0].put(rank_key, force_rank.EMPTY_SLOT);
@@ -413,7 +415,7 @@ public class enclave_data_handler extends script.base_script
                         String rank_key = force_rank.VAR_RANK_BASE + params + "-" + next_rank.size();
                         enclave_data[0].put(rank_key, player_name);
                     }
-                    else 
+                    else
                     {
                         String rank_key = force_rank.VAR_RANK_BASE + params + "-" + empty_idx;
                         enclave_data[0].put(rank_key, player_name);
@@ -430,14 +432,14 @@ public class enclave_data_handler extends script.base_script
                 {
                     LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- unable to find an obj_id for " + player_name);
                 }
-                else 
+                else
                 {
                     messageTo(player, handler, update_data, 0.0f, false);
                 }
                 break;
             }
             case 6:
-            
+
             {
                 if (enclave_data[0].containsKey(force_rank.VAR_ENCLAVE))
                 {
@@ -445,14 +447,14 @@ public class enclave_data_handler extends script.base_script
                     d.put("enclave", enclave_data[0].getObjId(force_rank.VAR_ENCLAVE));
                     messageTo(self, handler, d, 0.0f, false);
                 }
-                else 
+                else
                 {
                     LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- unable to find obj_id of " + element_name_list[0]);
                 }
                 break;
             }
             case 7:
-            
+
             {
                 int player_rating = utils.stringToInt(str_params);
                 if (player_rating < 0)
@@ -469,7 +471,7 @@ public class enclave_data_handler extends script.base_script
                     releaseClusterWideDataLock(manage_name, lock_key);
                     d.put("success", true);
                 }
-                else 
+                else
                 {
                     d.put("success", false);
                 }
@@ -477,7 +479,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 8:
-            
+
             {
                 LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- sending message to " + self);
                 removeClusterWideData(force_rank.CLUSTER_DATA_NAME, element_name_list[0], lock_key);
@@ -486,7 +488,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             case 9:
-            
+
             {
                 String player_name = getFirstName(self);
                 int rank = force_rank.getForceRank(self);
@@ -519,7 +521,7 @@ public class enclave_data_handler extends script.base_script
                 break;
             }
             default:
-            
+
             {
                 LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- invalid data_mode value of " + data_mode + " on " + self);
                 releaseClusterWideDataLock(manage_name, lock_key);

@@ -5,10 +5,12 @@ import script.library.utils;
 
 public class metal_recycler extends script.base_script
 {
+    public static final String STF = "recycler_messages";
+
     public metal_recycler()
     {
     }
-    public static final String STF = "recycler_messages";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id player, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -52,7 +54,7 @@ public class metal_recycler extends script.base_script
                     sendSystemMessage(player, noRecycleType);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     string_id success = new string_id(STF, "success");
                     sendSystemMessage(player, success);
@@ -62,7 +64,7 @@ public class metal_recycler extends script.base_script
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 string_id hide = new string_id(STF, "only_" + currentSet);
                 sendSystemMessage(player, hide);
@@ -70,13 +72,14 @@ public class metal_recycler extends script.base_script
                 return SCRIPT_OVERRIDE;
             }
         }
-        else 
+        else
         {
             string_id noResource = new string_id(STF, "no_resource");
             sendSystemMessage(player, noResource);
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id choose = new string_id(STF, "choose_type");
@@ -88,7 +91,7 @@ public class metal_recycler extends script.base_script
         {
             mnuOptions = mi.addRootMenu(menu_info_types.SERVER_MENU1, choose);
         }
-        else 
+        else
         {
             mnuOptions = mid.getId();
         }
@@ -99,6 +102,7 @@ public class metal_recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -111,6 +115,7 @@ public class metal_recycler extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyResource(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id item = params.getObjId("item");

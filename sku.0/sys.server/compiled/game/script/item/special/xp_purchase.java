@@ -5,9 +5,6 @@ import script.library.*;
 
 public class xp_purchase extends script.base_script
 {
-    public xp_purchase()
-    {
-    }
     public static final string_id SID_MENU_LEARN = new string_id("item/xp_purchase", "menu_learn");
     public static final string_id SID_MSG_NO_MIN_SKILL = new string_id("item/xp_purchase", "msg_no_min_skill");
     public static final string_id SID_MSG_NO_XP = new string_id("item/xp_purchase", "msg_no_xp");
@@ -20,6 +17,10 @@ public class xp_purchase extends script.base_script
     public static final string_id SUI_PROMPT2 = new string_id("item/xp_purchase", "sui_prompt2");
     public static final String SUI_TITLE = "@item/xp_purchase:sui_title";
     public static final int MENU_TYPE = menu_info_types.SERVER_MENU10;
+    public xp_purchase()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -34,12 +35,13 @@ public class xp_purchase extends script.base_script
         {
             mi.addRootMenu(MENU_TYPE, SID_MENU_LEARN);
         }
-        else 
+        else
         {
             CustomerServiceLog("item", "XP Purchase Item, " + getName(self) + " (" + self + "), is not configured correctly upon use by %TU", player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -56,6 +58,7 @@ public class xp_purchase extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isItemConfigured(self))
@@ -86,6 +89,7 @@ public class xp_purchase extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isItemConfigured(obj_id item) throws InterruptedException
     {
         boolean configured = true;
@@ -95,65 +99,72 @@ public class xp_purchase extends script.base_script
         configured &= hasObjVar(item, "grant_name");
         return configured;
     }
+
     public String getXpType(obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "xp_type"))
         {
             return getStringObjVar(item, "xp_type");
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public int getXpAmount(obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "xp_amt"))
         {
             return getIntObjVar(item, "xp_amt");
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public String getGrantType(obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "grant_type"))
         {
             return getStringObjVar(item, "grant_type");
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public String getGrantName(obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "grant_name"))
         {
             return getStringObjVar(item, "grant_name");
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public boolean hasMinSkill(obj_id item) throws InterruptedException
     {
         return hasObjVar(item, "min_skill");
     }
+
     public String getMinSkillName(obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "min_skill"))
         {
             return getStringObjVar(item, "min_skill");
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public boolean canLearn(obj_id self, obj_id player, String type, String name) throws InterruptedException
     {
         if (type.equals("schematic"))
@@ -162,20 +173,15 @@ public class xp_purchase extends script.base_script
             {
                 return true;
             }
-            if (hasSchematic(player, name))
-            {
-                return false;
-            }
+            return !hasSchematic(player, name);
         }
         else if (type.equals("command"))
         {
-            if (hasCommand(player, name))
-            {
-                return false;
-            }
+            return !hasCommand(player, name);
         }
         return true;
     }
+
     public void learn(obj_id self, obj_id player) throws InterruptedException
     {
         if (hasMinSkill(self))
@@ -234,6 +240,7 @@ public class xp_purchase extends script.base_script
             utils.setScriptVar(player, "xp_purchase_sui", pid);
         }
     }
+
     public int handleLearn(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -300,7 +307,7 @@ public class xp_purchase extends script.base_script
                     temp_schematic.grant(player, name, uses);
                     sendSystemMessage(player, SID_MSG_LEARNED_SCHEMATIC);
                 }
-                else 
+                else
                 {
                     grantSchematic(player, name);
                     sendSystemMessage(player, SID_MSG_LEARNED_SCHEMATIC);

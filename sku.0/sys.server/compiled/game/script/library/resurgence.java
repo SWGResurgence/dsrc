@@ -13,10 +13,22 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class resurgence extends script.base_script
 {
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
+    public static int WORLD_BOSS_PEKO = 0;
+    public static int WORLD_BOSS_KRAYT= 1;
+    public static int WORLD_BOSS_PAX = 2;
+    public static int WORLD_BOSS_GIZMO = 3;
+    public static int WORLD_BOSS_DONKDONK = 3;
+    public static int WORLD_BOSS_AURRA = 3;
+
+
+
 
     public resurgence()
     {
@@ -30,14 +42,14 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void sendToOrigin(obj_id self) throws InterruptedException
+    public static void sendToOrigin(obj_id self)
     {
         location loc = getLocation(self);
         obj_id planet = getPlanetByName(loc.area);
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
     }
 
-    public static void listAllPumpkins(obj_id self) throws InterruptedException
+    public static void listAllPumpkins(obj_id self)
     {
         obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(self), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
         if (allPumpkins == null || allPumpkins.length == 0)
@@ -51,7 +63,7 @@ public class resurgence extends script.base_script
         }
     }
 
-    public static int moveAllPlayers(obj_id self, dictionary params) throws InterruptedException
+    public static int moveAllPlayers(obj_id self, dictionary params)
     {
         String planet = params.getString("planet");
         float x = params.getFloat("x");
@@ -70,7 +82,7 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle) throws InterruptedException
+    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle)
     {
 
         location loc = getLocation(target);
@@ -87,7 +99,7 @@ public class resurgence extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static void renameItems(obj_id self, obj_id target, String name) throws InterruptedException
+    public static void renameItems(obj_id self, obj_id target, String name)
     {
         obj_id[] items = getInventoryAndEquipment(target);
         if (items == null || items.length == 0)
@@ -99,22 +111,6 @@ public class resurgence extends script.base_script
         {
             setName(item, name);
         }
-    }
-
-    public static void applyGMNameTag(obj_id self, obj_id target) throws InterruptedException
-    {
-        if (!isIdValid(target) || !exists(target))
-        {
-            debugServerConsoleMsg(self, "applyGMNameTag() - target is not a valid object.");
-        }
-        if (!isPlayer(target))
-        {
-            debugServerConsoleMsg(self, "applyGMNameTag() - target is not a player.");
-        }
-        String name = getName(target);
-        String gmName = name + " *GM*";
-        setName(target, gmName);
-        debugServerConsoleMsg(self, "applyGMNameTag() - GM filter tag applied.");
     }
 
     public static void createCreatureGrid(obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException
@@ -150,38 +146,58 @@ public class resurgence extends script.base_script
         }
     }
 
-    public static void setRainbowName(obj_id self, obj_id target) throws InterruptedException
+    public static String setRainbowName(obj_id target) throws InterruptedException
     {
         String name = getName(target);
-        debugServerConsoleMsg(self, "setRainbowName(" + name + ") - rainbow name applied.");
+        String rainbowName = "";
+        for (int i = 0; i < name.length(); i++)
+        {
+            Random obj = new Random();
+            int rand_num = obj.nextInt(0xffffff + 1);
+            rainbowName += "\\#" + rand_num  + name.charAt(i);
+        }
+        return rainbowName;
     }
 
-    public static void relax(obj_id self, obj_id target) throws InterruptedException
+    public static void relax(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
         {
-            debugServerConsoleMsg(self, "relax() - target is not a valid object.");
+            debugServerConsoleMsg(target, "relax() - target is not a valid object.");
         }
         if (!isPlayer(target))
         {
-            debugServerConsoleMsg(self, "relax() - target is not a player.");
+            debugServerConsoleMsg(target, "relax() - target is not a player.");
         }
         setPosture(target, POSTURE_SITTING);
-        debugServerConsoleMsg(self, "relax() - player relaxed.");
+        debugServerConsoleMsg(target, "relax() - player relaxed.");
     }
 
-    public static void suspicious(obj_id self, obj_id target) throws InterruptedException
+    public static void suspicious(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target))
         {
-            debugServerConsoleMsg(self, "suspicious() - target is not a valid object.");
+            debugServerConsoleMsg(target, "suspicious() - target is not a valid object.");
         }
         if (!isPlayer(target))
         {
-            debugServerConsoleMsg(self, "suspicious() - target is not a player.");
+            debugServerConsoleMsg(target, "suspicious() - target is not a player.");
         }
         setPosture(target, POSTURE_CROUCHED);
-        debugServerConsoleMsg(self, "suspicious() - player is now suspicious.");
+        debugServerConsoleMsg(target, "suspicious() - player is now suspicious.");
+    }
+    public static void sneak(obj_id target) throws InterruptedException
+    {
+        if (!isIdValid(target) || !exists(target))
+        {
+            debugServerConsoleMsg(target, "sneak() - target is not a valid object.");
+        }
+        if (!isPlayer(target))
+        {
+            debugServerConsoleMsg(target, "sneak() - target is not a player.");
+        }
+        setPosture(target, POSTURE_SNEAKING);
+        debugServerConsoleMsg(target, "sneak() - player is now suspicious.");
     }
 
     public static void bankruptPlayer(obj_id self, obj_id target) throws InterruptedException
@@ -198,11 +214,11 @@ public class resurgence extends script.base_script
         int bank = getBankBalance(target);
         if (cash > 0)
         {
-            withdrawCashFromBank(target, cash, "bankruptPlayer", null, null);
+            withdrawCashFromBank(target, cash, "noHandler", null, null);
         }
         if (bank > 0)
         {
-            withdrawCashFromBank(target, bank, "bankruptPlayer", null, null);
+            withdrawCashFromBank(target, bank, "noHandler", null, null);
         }
         debugServerConsoleMsg(self, "bankruptPlayer() - player is now bankrupt.");
     }
@@ -313,4 +329,306 @@ public class resurgence extends script.base_script
         debugServerConsoleMsg(self, "requestMemoryUsage() - memory usage requested.");
     }
 
+    public static void warpGroup(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
+            }
+        }
+    }
+
+    public static void warpGroupCell(obj_id groupId, location loc) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(groupId);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                warpPlayer(member, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0);
+            }
+        }
+    }
+
+    public static void warpGroupToPlayer(obj_id groupId, obj_id player) throws InterruptedException
+    {
+        location loc = getLocation(player);
+        warpGroup(groupId, loc);
+    }
+
+    public static void warpGroupToObjectByName(obj_id groupId, String objectName, float tolerance) throws InterruptedException
+    {
+        obj_id[] objects = getAllObjectsWithTemplate(getLocation(groupId), tolerance, objectName);
+        if (objects == null || objects.length == 0)
+        {
+            return;
+        }
+        location loc = getLocation(objects[0]);
+        warpGroup(groupId, loc);
+    }
+
+    public static void rewardGroup(obj_id group_id, String item, boolean noTrade) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group_id);
+        for (obj_id member : members)
+        {
+            obj_id inventory = utils.getInventoryContainer(member);
+            if (isIdValid(member))
+            {
+                obj_id item_id = createObject(item, inventory, "");
+                if (isIdValid(item_id))
+                {
+                    if (noTrade)
+                    {
+                        setObjVar(item_id, "noTrade", true);
+                    }
+                }
+            }
+        }
+    }
+
+    public int broadcastGroup(obj_id player, String message)
+    {
+        obj_id group = getGroupObject(player);
+        if (isIdValid(group))
+        {
+            obj_id[] members = getGroupMemberIds(group);
+            for (obj_id member : members)
+            {
+                if (isIdValid(member))
+                {
+                    broadcast(member, message);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int placePlayersAroundPoint(location point)
+    {
+        obj_id[] targets = getAllPlayers(point, 100.0f);
+        for (obj_id player : targets)
+        {
+            // Make sure the player is valid
+            if (isIdValid(player))
+            {
+                if (isPlayer(player))
+                {
+                    //place them in a ring facing the point.
+                    float angle = rand(0, 360);
+                    float distance = rand(1, 10);
+                    float x = point.x + (float) Math.cos(angle) * distance;
+                    float z = point.z + (float) Math.sin(angle) * distance;
+                    warpPlayer(player, point.area, x, point.y, z, null, 0, 0, 0);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int placePlayersInGridFormation(location x1)
+    {
+        obj_id[] targets = getAllPlayers(x1, 100.0f);
+        for (obj_id player : targets)
+        {
+            // Make sure the player is valid
+            if (isIdValid(player))
+            {
+                if (isPlayer(player))
+                {
+                    //make a 10 x 10 grid and plot each player in a random spot in the grid.
+                    float x = rand(x1.x - 5, x1.x + 5);
+                    float z = rand(x1.z - 5, x1.z + 5);
+                    warpPlayer(player, x1.area, x, x1.y, z, null, 0, 0, 0);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int listCreaturesAlphabetically(obj_id who, float radius, location where) throws InterruptedException
+    {
+        obj_id[] targets = getCreaturesInRange(where, radius);
+        String[] names = new String[targets.length];
+        for (int i = 0; i < targets.length; i++)
+        {
+            names[i] = getName(targets[i]);
+        }
+        Arrays.sort(names);
+        sui.listbox(who, who, "Creatures in range:", sui.OK_ONLY, "Area Tracking", names, "handleTrackingSelection");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int handleTrackingSelection(obj_id self, dictionary params) throws InterruptedException
+    {
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int idx = sui.getListboxSelectedRow(params);
+        if (idx == -1)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        // Get the list of names but we must use the index because the list isn't baked.
+        int index = sui.getListboxSelectedRow(params);
+        String name = sui.getListboxSelectedRowText(params);
+        obj_id[] targets = getCreaturesInRange(getLocation(self), 100.0f);
+        for (obj_id target : targets)
+        {
+            if (getName(target).equals(name))
+            {
+                debugSpeakMsg(self, "I found " + name + " at " + getLocation(target));
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public void echoToGroup(obj_id group, String message) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group);
+        for (obj_id member : members)
+        {
+            if (isIdValid(member))
+            {
+                sendConsoleMessage(member, message);
+            }
+        }
+    }
+
+    public void disarmGroup(obj_id group) throws InterruptedException
+    {
+        obj_id[] members = getGroupMemberIds(group);
+        for (obj_id member : members)
+        {
+            obj_id heldWeapon = getCurrentWeapon(member);
+            if (isIdValid(heldWeapon))
+            {
+                putIn(heldWeapon, utils.getInventoryContainer(member));
+            }
+        }
+    }
+
+    public void disarmPlayer(obj_id player) throws InterruptedException
+    {
+        obj_id heldWeapon = getCurrentWeapon(player);
+        if (isIdValid(heldWeapon))
+        {
+            putIn(heldWeapon, utils.getInventoryContainer(player));
+        }
+    }
+
+    public void ringBomb(obj_id player, location where, float radius)
+    {
+        String clientEffect = "clienteffect/bacta_bomb.cef";
+        float angle = rand(0, 360);
+        float distance = rand(1, 10);
+        float x = where.x + (float) Math.cos(angle) * distance;
+        float z = where.z + (float) Math.sin(angle) * distance;
+        float y = getHeightAtLocation(x, z);
+        location targetPoint = new location(x, y, z);
+        playClientEffectLoc(player, clientEffect, targetPoint, 0);
+    }
+
+    public void stripPlayer(obj_id player) throws InterruptedException
+    {
+        obj_id[] possessions = utils.getAllItemsInBankAndInventory(player);
+        for (obj_id possession : possessions)
+        {
+            if (isIdValid(possession))
+            {
+                destroyObject(possession);
+            }
+            else
+            {
+                System.out.println("stripPlayer() - possession is invalid. ID: " + possession);
+            }
+        }
+    }
+    public static String[] getAttackerList(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = new String[0];
+        if (isIdValid(target))
+        {
+            obj_id[] attackers = getHateList(target);
+            if (attackers != null)
+            {
+                attackerList = new String[attackers.length];
+                for (int i = 0; i < attackers.length; i++)
+                {
+                    if (isPlayer(attackers[i]))
+                    {
+                        attackerList[i] = getName(attackers[i]);
+                    }
+                }
+            }
+        }
+        return attackerList;
+    }
+
+    public static void doWorldBossAnnounce(obj_id target, int worldboss) throws InterruptedException
+    {
+        location here = getLocation(target);
+        switch (worldboss)
+        {
+            case 0:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Mutated Peko-Peko Empress has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 1:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 2:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\nThe Renegade Pax Vizla has been reported to have been last seen on Dxun near the Abandoned Mandalorian Outpost.The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 3:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wretched and accursed, Darth Gizmo, has been reported to have been seen last on Endor at one of the Lake Villages. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 4:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The wanted criminal, Donk-Donk Binks, has been reported to have been seen near the Rorgungan Lake Village on Rori. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+            case 5:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
+                break;
+
+        }
+    }
+    public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
+    {
+        String[] attackerList = getAttackerList(target);
+        if (attackerList.length > 0)
+        {
+            String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
+            for (int i = 1; i < attackerList.length; i++)
+            {
+                msg += ", " + toUpper(attackerList[i], 0);
+            }
+            msg += ". Congratulations to all!";
+            notifyGalacticFeed(msg);
+        }
+    }
+
+    public int downloadCharacterData(obj_id avatar)
+    {
+        return SCRIPT_CONTINUE;
+    }
+
+    public void doClientEffect(obj_id[] players, String clientEffect) throws InterruptedException
+    {
+        for (obj_id player : players)
+        {
+            playClientEffectObj(player, clientEffect, player, "");
+        }
+    }
+
+    public void doParticleEffect(obj_id[] players, String particleEffect) throws InterruptedException
+    {
+        for (obj_id player : players)
+        {
+            playClientEffectObj(player, particleEffect, player, "");
+        }
+    }
 }

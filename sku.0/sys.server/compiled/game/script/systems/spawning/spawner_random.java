@@ -13,6 +13,7 @@ public class spawner_random extends script.base_script
     public spawner_random()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: Initialized for: " + self);
@@ -30,6 +31,7 @@ public class spawner_random extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: Initialized for: " + self);
@@ -46,12 +48,13 @@ public class spawner_random extends script.base_script
             CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: CAN SPAWN for: " + self);
             messageTo(self, "doSpawnEvent", null, 20, false);
         }
-        else 
+        else
         {
             CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: CANNOT SPAWN for: " + self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker))
@@ -81,6 +84,7 @@ public class spawner_random extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("holidaySpawner", "spawner_random.doSpawnEvent: Initialized for: " + self);
@@ -161,14 +165,14 @@ public class spawner_random extends script.base_script
             }
             createMob(strSpawn, null, locLocation, yaw, self);
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(self, "locationFindTries"))
             {
                 int nrTries = utils.getIntScriptVar(self, "locationFindTries");
                 utils.setScriptVar(self, "locationFindTries", nrTries + 1);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "locationFindTries", 1);
             }
@@ -176,13 +180,14 @@ public class spawner_random extends script.base_script
             {
                 messageTo(self, "doSpawnEvent", null, 3, false);
             }
-            else 
+            else
             {
                 LOG("spawning", "Random spawner: " + self + " named: " + getStringObjVar(self, "strName") + " has tried to find a good location for a spawn 500 times. Now giving up");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createMob(String strId, obj_id objLocationObject, location locLocation, float yaw, obj_id self) throws InterruptedException
     {
         if (!spawning.checkSpawnCount(self))
@@ -230,7 +235,7 @@ public class spawner_random extends script.base_script
             }
             setYaw(objTemplate, yaw);
         }
-        else 
+        else
         {
             if (isIdValid(objLocationObject))
             {
@@ -263,6 +268,7 @@ public class spawner_random extends script.base_script
         }
         messageTo(self, "doSpawnEvent", null, fltRespawnTime, false);
     }
+
     public int spawnDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         int intCurrentSpawnCount = utils.getIntScriptVar(self, "intCurrentSpawnCount");
@@ -271,7 +277,7 @@ public class spawner_random extends script.base_script
         {
             utils.setScriptVar(self, "intCurrentSpawnCount", intCurrentSpawnCount);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "intCurrentSpawnCount", 0);
         }
@@ -283,10 +289,13 @@ public class spawner_random extends script.base_script
         messageTo(self, "doSpawnEvent", null, 2, false);
         return SCRIPT_CONTINUE;
     }
-    public boolean canSpawnByConfigSetting() throws InterruptedException {
+
+    public boolean canSpawnByConfigSetting() throws InterruptedException
+    {
         String disableSpawners = getConfigSetting("GameServer", "disableAreaSpawners");
         return disableSpawners == null || !(disableSpawners.equals("true") || disableSpawners.equals("1"));
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "debugSpawnList"))
@@ -296,8 +305,10 @@ public class spawner_random extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id spawn : spawns) {
-                if (isIdValid(spawn) && exists(spawn)) {
+            for (obj_id spawn : spawns)
+            {
+                if (isIdValid(spawn) && exists(spawn))
+                {
                     messageTo(spawn, "selfDestruct", null, 5, false);
                 }
             }

@@ -7,12 +7,11 @@ import script.obj_id;
 
 public class spider_queen_dna extends script.base_script
 {
+    public static final String SPIDER_QUEEN_DNA_LOOT_ITEM = "item_spiderclan_queen_dna";
+    public static final int SPIDER_QUEEN_DNA_LOOT_CHANCE = 5;
     public spider_queen_dna()
     {
     }
-    public static final String SPIDER_QUEEN_DNA_LOOT_ITEM = "item_spiderclan_queen_dna";
-    public static final int SPIDER_QUEEN_DNA_LOOT_CHANCE = 5;
-
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

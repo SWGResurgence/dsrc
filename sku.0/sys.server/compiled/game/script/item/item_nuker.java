@@ -6,10 +6,6 @@ package script.item;/*
 */
 
 import script.obj_id;
-import script.location;
-import script.menu_info_types;
-import script.menu_info_data;
-import script.dictionary;
 
 public class item_nuker extends script.base_script
 {
@@ -22,6 +18,7 @@ public class item_nuker extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToRecieveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item)
     {
         if (isPlayer(item))

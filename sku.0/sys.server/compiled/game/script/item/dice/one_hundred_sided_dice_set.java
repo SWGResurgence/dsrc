@@ -9,12 +9,13 @@ import script.obj_id;
 
 public class one_hundred_sided_dice_set extends script.item.dice.base.base_dice
 {
-    public one_hundred_sided_dice_set()
-    {
-    }
     public static final int FACE_COUNT = 100;
     public static final int DEFAULT_DICE_COUNT = 1;
     public static final String TYPE_NAME = "one_hundred_sided_dice_set";
+    public one_hundred_sided_dice_set()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########one hundred sided dice script initialized##############");
@@ -23,6 +24,7 @@ public class one_hundred_sided_dice_set extends script.item.dice.base.base_dice
         setObjVar(self, DICE_TYPE_NAME, TYPE_NAME);
         return super.OnInitialize(self);
     }
+
     public int roll(obj_id self, dictionary params) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########one hundred sided dice roll()##############");
@@ -36,18 +38,21 @@ public class one_hundred_sided_dice_set extends script.item.dice.base.base_dice
             int roll = rand(1, faceCount, 0);
             rollValues[i] = roll;
         }
-        for (int rollValue : rollValues) {
+        for (int rollValue : rollValues)
+        {
             debug.debugAllMsg("DEBUG", self, "#############Roll Values: " + rollValue + "############");
         }
         setObjVar(self, VAR_ROLL_RESULT, rollValues);
         informGroupOfResults(rollValues, player, self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "##########one hundred sided dice script detached##############");
         return super.OnDetach(self);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -58,7 +63,7 @@ public class one_hundred_sided_dice_set extends script.item.dice.base.base_dice
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier"))
         {
             names[idx] = "usemodifier";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".useModifier");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)

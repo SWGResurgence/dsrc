@@ -6,10 +6,12 @@ import script.string_id;
 
 public class lore extends script.base_script
 {
+    public static final string_id ITEM_LORE = new string_id("error_message", "item_lore");
+
     public lore()
     {
     }
-    public static final string_id ITEM_LORE = new string_id("error_message", "item_lore");
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -18,10 +20,13 @@ public class lore extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String _template = getTemplateName(content);
-            if ((content != self) && template.equals(_template)) {
-                if (isPlayer(transferer)) {
+            if ((content != self) && template.equals(_template))
+            {
+                if (isPlayer(transferer))
+                {
                     sendSystemMessage(transferer, ITEM_LORE);
                 }
                 return SCRIPT_OVERRIDE;
@@ -29,6 +34,7 @@ public class lore extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

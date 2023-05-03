@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class xp extends script.base_script
 {
-    public xp()
-    {
-    }
     public static final float COMBAT_GENERAL_EXCHANGE_RATE = 0.10f;
     public static final float JEDI_GENERAL_EXCHANGE_RATE = 0.18f;
     public static final float SOCIAL_ENTERTAINER_EXCHANGE_RATE = 1.0f;
@@ -138,30 +135,40 @@ public class xp extends script.base_script
     public static final string_id SID_FLYTEXT_XP_GROUP = new string_id("base_player", "prose_flytext_xp_group");
     public static final int TRIAL_LEVEL_CAP = 25;
     public static final string_id SID_FREE_TRIAL_LEVEL_CAP = new string_id("base_player", "free_trial_level_cap");
+    public xp()
+    {
+    }
+
     public static int grant(obj_id target, String xp_type, int amt) throws InterruptedException
     {
         return grant(target, xp_type, amt, true, null, null, null);
     }
+
     public static int grant(obj_id target, String xp_type, int amt, String callback) throws InterruptedException
     {
         return grant(target, xp_type, amt, true, callback, new dictionary(), getSelf());
     }
+
     public static int grant(obj_id target, String xp_type, int amt, String callback, dictionary callbackData) throws InterruptedException
     {
         return grant(target, xp_type, amt, true, callback, callbackData, getSelf());
     }
+
     public static int grant(obj_id target, String xp_type, int amt, String callback, dictionary callbackData, obj_id callbackId) throws InterruptedException
     {
         return grant(target, xp_type, amt, true, callback, callbackData, callbackId);
     }
+
     public static int grant(obj_id target, String xp_type, int amt, boolean verbose) throws InterruptedException
     {
         return grant(target, xp_type, amt, verbose, null, null, null);
     }
+
     public static int grant(obj_id target, String xp_type, int amt, boolean verbose, String callback, dictionary callbackData) throws InterruptedException
     {
         return grant(target, xp_type, amt, verbose, callback, callbackData, getSelf());
     }
+
     public static int grant(obj_id target, String xp_type, int amt, boolean verbose, String callback, dictionary callbackData, obj_id callbackId) throws InterruptedException
     {
         if (!isIdValid(target) || (xp_type == null) || (xp_type.equals("")))
@@ -182,31 +189,37 @@ public class xp extends script.base_script
         {
             return amt;
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt) throws InterruptedException
     {
         return grantUnmodifiedExperience(target, xp_type, amt, true, null, null, null);
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt, boolean verbose) throws InterruptedException
     {
         return grantUnmodifiedExperience(target, xp_type, amt, verbose, null, null, null);
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt, String callback) throws InterruptedException
     {
         return grantUnmodifiedExperience(target, xp_type, amt, true, callback, new dictionary(), getSelf());
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt, String callback, dictionary callbackData) throws InterruptedException
     {
         return grantUnmodifiedExperience(target, xp_type, amt, true, callback, callbackData, getSelf());
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt, String callback, dictionary callbackData, obj_id callbackId) throws InterruptedException
     {
         return grantUnmodifiedExperience(target, xp_type, amt, true, callback, callbackData, callbackId);
     }
+
     public static boolean grantUnmodifiedExperience(obj_id target, String xp_type, int amt, boolean verbose, String callback, dictionary callbackData, obj_id callbackId) throws InterruptedException
     {
         if (!isIdValid(target) || (xp_type == null) || (xp_type.equals("")))
@@ -239,6 +252,7 @@ public class xp extends script.base_script
         int xpCap = getExperienceCap(target, xp_type);
         return currentXp < xpCap;
     }
+
     public static boolean _grantUnmodifiedExperience(obj_id target, String xp_type, int amt, String callback, dictionary callbackData, obj_id callbackId) throws InterruptedException
     {
         int delta = 0;
@@ -267,6 +281,7 @@ public class xp extends script.base_script
         }
         return result;
     }
+
     public static boolean grantCraftingXpChance(obj_id item, obj_id user, int chance) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -277,10 +292,11 @@ public class xp extends script.base_script
         removeObjVar(item, "crafting.creator.pxp");
         return true;
     }
+
     public static int applySpeciesXpModifier(obj_id target, String xp_type, int amt) throws InterruptedException
     {
         xp_type = toLower(xp_type);
-        int mod_xp = (int)(amt * getSpeciesXpModifier(target, xp_type));
+        int mod_xp = (int) (amt * getSpeciesXpModifier(target, xp_type));
         if (utils.hasScriptVar(target, "buff.dish_ormachek.value"))
         {
             float xp_mod = utils.getFloatScriptVar(target, "buff.dish_ormachek.value");
@@ -288,21 +304,22 @@ public class xp extends script.base_script
             int dur = 20;
             if (utils.hasScriptVar(target, "buff.dish_ormachek.duration"))
             {
-                dur = (int)utils.getFloatScriptVar(target, "buff.dish_ormachek.duration");
+                dur = (int) utils.getFloatScriptVar(target, "buff.dish_ormachek.duration");
             }
             dur--;
             if (dur <= 0)
             {
                 buff.removeBuff(target, "dish_ormachek");
             }
-            else 
+            else
             {
                 utils.setScriptVar(target, "buff.dish_ormachek.duration", dur);
             }
-            mod_xp = (int)(mod_xp * f_mod);
+            mod_xp = (int) (mod_xp * f_mod);
         }
         return mod_xp;
     }
+
     public static int applyGroupXpModifier(obj_id target, int amt) throws InterruptedException
     {
         float mod = 1.0f;
@@ -317,11 +334,12 @@ public class xp extends script.base_script
             }
             mod = getGroupXpModifier(target, activeGroupSize);
             modAmt = Math.round(amt * mod);
-            modAmt = (int)(modAmt / (1 + ((activeGroupSize - 1) * GROUP_XP_DIVIDER)));
+            modAmt = (int) (modAmt / (1 + ((activeGroupSize - 1) * GROUP_XP_DIVIDER)));
         }
         utils.setScriptVar(target, "combat.xp.groupBonus", mod);
         return modAmt;
     }
+
     public static int applyInspirationBuffXpModifier(obj_id target, String xp_type, int amt) throws InterruptedException
     {
         if (amt > 0)
@@ -330,11 +348,12 @@ public class xp extends script.base_script
             float modAmt = amt * mod;
             return Math.round(modAmt);
         }
-        else 
+        else
         {
             return amt;
         }
     }
+
     public static float getGroupXpModifier(obj_id target, int activeGroupSize) throws InterruptedException
     {
         float bonusMod = 1.0f;
@@ -345,6 +364,7 @@ public class xp extends script.base_script
         }
         return bonusMod;
     }
+
     public static float getSpeciesXpModifier(obj_id target, String xp_type) throws InterruptedException
     {
         if (!isIdValid(target) || xp_type == null || xp_type.equals(""))
@@ -356,12 +376,16 @@ public class xp extends script.base_script
         if (xpMods != null && xpMods.length > 0)
         {
             String[] s;
-            for (String xpMod : xpMods) {
-                if (xpMod.startsWith(xp_type)) {
+            for (String xpMod : xpMods)
+            {
+                if (xpMod.startsWith(xp_type))
+                {
                     s = split(xpMod, ':');
-                    if ((s != null) && (s.length == 2)) {
+                    if ((s != null) && (s.length == 2))
+                    {
                         int val = utils.stringToInt(s[1]);
-                        if (val != -1) {
+                        if (val != -1)
+                        {
                             return (100.0f + val) / 100.0f;
                         }
                     }
@@ -370,16 +394,19 @@ public class xp extends script.base_script
         }
         return 1.0f;
     }
+
     public static float getInspirationBuffXpModifier(obj_id target, String xp_type) throws InterruptedException
     {
         float mod = 1.0f;
         if (utils.hasScriptVar(target, "buff.xpBonus.types"))
         {
             String[] xpList = utils.getStringArrayScriptVar(target, "buff.xpBonus.types");
-            if (xpList != null && xpList.length > 0)
+            if (xpList != null)
             {
-                for (String aXpList : xpList) {
-                    if (aXpList.equals(xp_type)) {
+                for (String aXpList : xpList)
+                {
+                    if (aXpList.equals(xp_type))
+                    {
                         mod += utils.getFloatScriptVar(target, "buff.xpBonus.value");
                     }
                 }
@@ -388,10 +415,12 @@ public class xp extends script.base_script
         if (utils.hasScriptVar(target, "buff.xpBonusGeneral.types"))
         {
             String[] xpList = utils.getStringArrayScriptVar(target, "buff.xpBonusGeneral.types");
-            if (xpList != null && xpList.length > 0)
+            if (xpList != null)
             {
-                for (String aXpList : xpList) {
-                    if (aXpList.equals(xp_type)) {
+                for (String aXpList : xpList)
+                {
+                    if (aXpList.equals(xp_type))
+                    {
                         mod += utils.getFloatScriptVar(target, "buff.xpBonusGeneral.value");
                     }
                 }
@@ -399,6 +428,7 @@ public class xp extends script.base_script
         }
         return mod;
     }
+
     public static void grantSquadLeaderXp(obj_id player, int amt) throws InterruptedException
     {
         if (!isIdValid(player) || !player.isLoaded() || amt < 1 || !hasSkill(player, "class_officer_phase1_novice"))
@@ -410,6 +440,7 @@ public class xp extends script.base_script
         resultData.put("amt", amt);
         grant(player, SQUADLEADER, amt, false, "grantSquadLeaderXpResult", resultData, player);
     }
+
     public static void grantSquadLeaderXpResult(obj_id player, int granted, int amt) throws InterruptedException
     {
         if (granted > 0)
@@ -424,6 +455,7 @@ public class xp extends script.base_script
             notifySquadLeaderXp(player);
         }
     }
+
     public static void notifySquadLeaderXp(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !player.isLoaded())
@@ -447,6 +479,7 @@ public class xp extends script.base_script
         }
         utils.removeScriptVarTree(player, VAR_SQUADLEADER_BASE);
     }
+
     public static int getRawCombatXP(obj_id player, obj_id npc) throws InterruptedException
     {
         if (isMob(npc) && (isPlayer(npc) || isIdValid(getMaster(npc))))
@@ -456,6 +489,7 @@ public class xp extends script.base_script
         float baseCombatXP = getLevelBasedXP(player, npc);
         return Math.round(baseCombatXP);
     }
+
     public static int getActiveGroupSize(obj_id gid) throws InterruptedException
     {
         if (!group.isGroupObject(gid))
@@ -468,16 +502,20 @@ public class xp extends script.base_script
             return 1;
         }
         int count = 0;
-        for (obj_id member : members) {
-            if (member != null && member.isLoaded() && isPlayer(member)) {
+        for (obj_id member : members)
+        {
+            if (member != null && member.isLoaded() && isPlayer(member))
+            {
                 count++;
             }
-            if (count >= MAX_GROUP_BONUS_COUNT) {
+            if (count >= MAX_GROUP_BONUS_COUNT)
+            {
                 break;
             }
         }
         return count;
     }
+
     public static int getLevelBasedXP(obj_id player, obj_id npc) throws InterruptedException
     {
         int level = getLevel(player);
@@ -496,7 +534,7 @@ public class xp extends script.base_script
         {
             bonus += 0.05f;
         }
-        xp += (int)(xp * bonus);
+        xp += (int) (xp * bonus);
         if (levelDiff < 0)
         {
             float maxLevelDiff = 10.0f;
@@ -504,7 +542,7 @@ public class xp extends script.base_script
             {
                 maxLevelDiff += (level - 20) / 6;
             }
-            xp += (int)(xp * (levelDiff / maxLevelDiff));
+            xp += (int) (xp * (levelDiff / maxLevelDiff));
             if (xp < 1)
             {
                 xp = 1;
@@ -512,6 +550,7 @@ public class xp extends script.base_script
         }
         return xp;
     }
+
     public static int getLevelBasedXP(int level) throws InterruptedException
     {
         if (level < 1)
@@ -520,6 +559,7 @@ public class xp extends script.base_script
         }
         return dataTableGetInt("datatables/mob/stat_balance.iff", level - 1, "XP");
     }
+
     public static String getWeaponXpType(int weapon_type) throws InterruptedException
     {
         String xp_type;
@@ -572,9 +612,11 @@ public class xp extends script.base_script
         }
         return xp_type;
     }
+
     public static String getWeaponStringFromXPType(String strXPType) throws InterruptedException
     {
-        switch (strXPType) {
+        switch (strXPType)
+        {
             case COMBAT_RANGEDSPECIALIZE_RIFLE:
                 return "rifle";
             case COMBAT_RANGEDSPECIALIZE_CARBINE:
@@ -600,15 +642,18 @@ public class xp extends script.base_script
         }
         return "";
     }
+
     public static boolean setupCreditForKills() throws InterruptedException
     {
         return true;
     }
+
     public static boolean cleanupCreditForKills() throws InterruptedException
     {
         utils.removeScriptVarTree(getSelf(), VAR_CREDIT_FOR_KILLS);
         return true;
     }
+
     public static void updateCombatXpList(obj_id target, obj_id attacker, obj_id wpn, int dam) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(attacker) || !isIdValid(wpn))
@@ -622,7 +667,7 @@ public class xp extends script.base_script
             LOG("DESIGNER_FATAL", "xp.updateCombatXpList: unable to getTemplateName(wpn) -> " + wpn + ":" + getName(wpn));
             return;
         }
-        else 
+        else
         {
             if (hasObjVar(wpn, WEAPON_TYPE))
             {
@@ -637,6 +682,7 @@ public class xp extends script.base_script
         }
         updateCombatXpList(target, attacker, xp_type, dam);
     }
+
     public static void updateCombatXpList(obj_id target, obj_id attacker, String xp_type, int dam) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(attacker) || xp_type == null || xp_type.equals(""))
@@ -671,7 +717,7 @@ public class xp extends script.base_script
                     utils.setBatchScriptVar(target, VAR_ATTACKER_LIST + ".attackers", attackerList);
                 }
             }
-            else 
+            else
             {
                 attackerList = utils.addElement(attackerList, attacker);
                 utils.setBatchScriptVar(target, VAR_ATTACKER_LIST + ".attackers", attackerList);
@@ -691,7 +737,7 @@ public class xp extends script.base_script
                     utils.setBatchScriptVar(target, xpListPath, xpTypes);
                 }
             }
-            else 
+            else
             {
                 xpTypes = utils.addElement(xpTypes, xp_type);
                 utils.setBatchScriptVar(target, xpListPath, xpTypes);
@@ -701,6 +747,7 @@ public class xp extends script.base_script
             utils.setScriptVar(target, xpTypePath, xpTally);
         }
     }
+
     public static void removeXpListCombatant(obj_id target, obj_id combatant) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(combatant))
@@ -725,6 +772,7 @@ public class xp extends script.base_script
         utils.setBatchScriptVar(target, VAR_ATTACKER_LIST + ".attackers", attackerList);
         utils.removeScriptVarTree(target, VAR_ATTACKER_LIST + "." + combatant);
     }
+
     public static void assessCombatResults(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -741,7 +789,7 @@ public class xp extends script.base_script
         }
         int npcDamage = utils.getIntScriptVar(target, VAR_NPC_DAMAGE);
         int tally = utils.getIntScriptVar(target, VAR_DAMAGE_TALLY);
-        float npcDamagePercent = npcDamage / (float)tally;
+        float npcDamagePercent = npcDamage / (float) tally;
         if (npcDamagePercent > MAX_NPC_DAMAGE_PERCENT)
         {
             return;
@@ -775,12 +823,15 @@ public class xp extends script.base_script
         int topDamage = Integer.MIN_VALUE;
         int gDam;
         obj_id attacker;
-        for (obj_var attackerDamageVar : killers) {
+        for (obj_var attackerDamageVar : killers)
+        {
             attacker = utils.stringToObjId(attackerDamageVar.getName());
-            if (isIdValid(attacker)) {
+            if (isIdValid(attacker))
+            {
                 int attackerDamage = attackerDamageVar.getIntData();
                 gDam = updateGroupDamageDictionary(groupDamage, attacker, attackerDamage, target);
-                if (gDam > topDamage) {
+                if (gDam > topDamage)
+                {
                     topDamage = gDam;
                 }
             }
@@ -812,7 +863,7 @@ public class xp extends script.base_script
             return;
         }
         int winnerIdx = rand(0, primaryKillers.size() - 1);
-        obj_id winner = ((obj_id)primaryKillers.get(winnerIdx));
+        obj_id winner = ((obj_id) primaryKillers.get(winnerIdx));
         if (!group.isGroupObject(winner) && !isPlayer(winner) && isMob(winner))
         {
             obj_id winnerMaster = getMaster(winner);
@@ -823,10 +874,13 @@ public class xp extends script.base_script
         }
         if (group.isGroupObject(winner))
         {
-            for (obj_var attackerDamageVar : killers) {
+            for (obj_var attackerDamageVar : killers)
+            {
                 attacker = utils.stringToObjId(attackerDamageVar.getName());
-                if (isIdValid(attacker)) {
-                    if (getGroupObject(attacker) == winner) {
+                if (isIdValid(attacker))
+                {
+                    if (getGroupObject(attacker) == winner)
+                    {
                         incrementKillMeter(attacker, 1);
                     }
                 }
@@ -854,27 +908,40 @@ public class xp extends script.base_script
         }
         setObjVar(target, scenario.VAR_PRIMARY_KILLERS, primaryKillers);
     }
+
     public static obj_id[] getPlayersFromKillerList(obj_id[] killerList) throws InterruptedException
     {
         Vector players = new Vector();
         players.setSize(0);
         obj_id[] groupMembers;
-        for (obj_id aKillerList : killerList) {
-            if (group.isGroupObject(aKillerList)) {
+        for (obj_id aKillerList : killerList)
+        {
+            if (group.isGroupObject(aKillerList))
+            {
                 groupMembers = utils.getGroupMemberIds(aKillerList);
-                for (obj_id groupMember : groupMembers) {
-                    if (isIdValid(groupMember) && exists(groupMember)) {
-                        if (pet_lib.isPet(groupMember)) {
+                for (obj_id groupMember : groupMembers)
+                {
+                    if (isIdValid(groupMember) && exists(groupMember))
+                    {
+                        if (pet_lib.isPet(groupMember))
+                        {
                             utils.addElement(players, getMaster(groupMember));
-                        } else {
+                        }
+                        else
+                        {
                             utils.addElement(players, groupMember);
                         }
                     }
                 }
-            } else {
-                if (pet_lib.isPet(aKillerList)) {
+            }
+            else
+            {
+                if (pet_lib.isPet(aKillerList))
+                {
                     utils.addElement(players, getMaster(aKillerList));
-                } else {
+                }
+                else
+                {
                     utils.addElement(players, aKillerList);
                 }
             }
@@ -884,6 +951,7 @@ public class xp extends script.base_script
 
         return killerList;
     }
+
     public static void grantQuestKillCredit(obj_id winner, obj_id target) throws InterruptedException
     {
         obj_id[] killList;
@@ -891,7 +959,7 @@ public class xp extends script.base_script
         {
             killList = getGroupMemberIds(winner);
         }
-        else 
+        else
         {
             killList = new obj_id[1];
             killList[0] = winner;
@@ -909,12 +977,12 @@ public class xp extends script.base_script
         params.put("creatureName", creatureName);
         params.put("location", getLocation(target));
         // only put a value in socialGroup if one can be derived from the target.
-        if(ai_lib.getSocialGroup(target) != null)
+        if (ai_lib.getSocialGroup(target) != null)
             params.put("socialGroup", ai_lib.getSocialGroup(target));
         else
             LOG("DESIGNER_FATAL", "WARNING: target (" + target + ":" + creatureName + ") with tempate (" + getTemplateName(target) + ") does not have a social group!!");
         // only put a value in col_faction if one is found in the datatable.
-        if(dataTableGetString(CREATURES_TABLE, creatureName, "col_faction") != null)
+        if (dataTableGetString(CREATURES_TABLE, creatureName, "col_faction") != null)
             params.put("col_faction", dataTableGetString(CREATURES_TABLE, creatureName, "col_faction"));
         params.put("difficultyClass", dataTableGetInt(CREATURES_TABLE, creatureName, "difficultyClass"));
         params.put("target", target);
@@ -923,27 +991,36 @@ public class xp extends script.base_script
             params.put("spawnedBy", getObjIdObjVar(target, "quest_spawner.spawned_by"));
         }
         obj_id collectionOwner;
-        for (obj_id aKillList : killList) {
-            if (!hasObjVar(target, "soloCollection")) {
-                if (!exists(aKillList) || !isIdValid(aKillList)) {
+        for (obj_id aKillList : killList)
+        {
+            if (!hasObjVar(target, "soloCollection"))
+            {
+                if (!exists(aKillList) || !isIdValid(aKillList))
+                {
                     continue;
                 }
                 float distance = getDistance(target, aKillList);
-                if (distance < 128.0f && distance >= 0.0f) {
+                if (distance < 128.0f && distance >= 0.0f)
+                {
                     messageTo(aKillList, "receiveCreditForKill", params, 0.0f, false);
                 }
-            } else {
+            }
+            else
+            {
                 collectionOwner = getObjIdObjVar(target, "soloCollection");
-                if (!exists(collectionOwner) || !isIdValid(collectionOwner)) {
+                if (!exists(collectionOwner) || !isIdValid(collectionOwner))
+                {
                     continue;
                 }
                 float distance = getDistance(target, collectionOwner);
-                if (distance < 128.0f && distance >= 0.0f) {
+                if (distance < 128.0f && distance >= 0.0f)
+                {
                     messageTo(collectionOwner, "receiveCreditForKill", params, 0.0f, false);
                 }
             }
         }
     }
+
     public static int updateGroupDamageDictionary(dictionary groupDamage, obj_id attacker, int attackerDamage, obj_id target) throws InterruptedException
     {
         if (!isIdValid(attacker) || !isIdValid(target) || attackerDamage < 1)
@@ -966,7 +1043,7 @@ public class xp extends script.base_script
             groupDamage.put(attacker.toString(), totalPersonalDamage);
             return totalPersonalDamage;
         }
-        else 
+        else
         {
             int currentGroupDamage = groupDamage.getInt(attackerGroupId.toString());
             int totalGroupDamage = currentGroupDamage + attackerDamage;
@@ -974,6 +1051,7 @@ public class xp extends script.base_script
             return totalGroupDamage;
         }
     }
+
     public static obj_var[] grantCombatXp(obj_id target, obj_var[] killers) throws InterruptedException
     {
         if (!isIdValid(target) || killers == null || killers.length == 0)
@@ -994,7 +1072,7 @@ public class xp extends script.base_script
         {
             killList = getGroupMemberIds(killCredit);
         }
-        else 
+        else
         {
             killList = new obj_id[1];
             killList[0] = killCredit;
@@ -1045,7 +1123,7 @@ public class xp extends script.base_script
                     gcw_gain_object = master;
                 }
             }
-            else 
+            else
             {
                 gcw_gain_object = killer;
             }
@@ -1074,7 +1152,7 @@ public class xp extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     if (beast_lib.isBeast(killer) && beast_lib.isValidPlayer(master) && beast_lib.canBeastGetLevelBasedXP(killer, target))
                     {
@@ -1082,7 +1160,7 @@ public class xp extends script.base_script
                         {
                             continue;
                         }
-                        else 
+                        else
                         {
                             beast_lib.grantBeastExperience(killer);
                             params = new dictionary();
@@ -1133,6 +1211,7 @@ public class xp extends script.base_script
         ret.toArray(_ret);
         return _ret;
     }
+
     public static void grantCombatXpPerAttackType(obj_id player, obj_id target, int totalXp) throws InterruptedException
     {
         if (!isIdValid(player) || (!isPlayer(player)) || !isIdValid(target) || totalXp < 1)
@@ -1170,41 +1249,59 @@ public class xp extends script.base_script
         int jediXp = 0;
         int generalXp = 0;
         int totalXpGranted = 0;
-        for (String xpType : xpTypes) {
+        for (String xpType : xpTypes)
+        {
             int val = utils.getIntScriptVar(target, xpListBasePath + "." + xpType);
             float xpPercent = ((float) (val) / (tally));
             int intNewTotal = totalXp;
-            if (xpType.equals(RAW_COMBAT)) {
+            if (xpType.equals(RAW_COMBAT))
+            {
                 intNewTotal = (int) (intNewTotal * xpPercent);
                 bonusCombatXp += intNewTotal;
-            } else if (xpType.equals(PARTIAL_COMBAT)) {
+            }
+            else if (xpType.equals(PARTIAL_COMBAT))
+            {
                 intNewTotal = (int) (intNewTotal * xpPercent);
                 intNewTotal = (int) (intNewTotal * COMBAT_GENERAL_EXCHANGE_RATE);
                 bonusCombatXp += intNewTotal;
-            } else if (xpType.equals(COMBAT_GENERAL)) {
+            }
+            else if (xpType.equals(COMBAT_GENERAL))
+            {
                 int amt = (int) (intNewTotal * xpPercent);
-                if (amt < 1) {
+                if (amt < 1)
+                {
                     amt = 1;
                 }
                 generalXp += amt;
-            } else if (isCombatXpType(xpType)) {
+            }
+            else if (isCombatXpType(xpType))
+            {
                 int amt = (int) (intNewTotal * xpPercent);
-                if (amt < 1) {
+                if (amt < 1)
+                {
                     amt = 1;
                 }
-                if (xpType.equals(COMBAT_JEDI_ONEHANDLIGHTSABER) || xpType.equals(COMBAT_JEDI_TWOHANDLIGHTSABER) || xpType.equals(COMBAT_JEDI_POLEARMLIGHTSABER) || xpType.equals(COMBAT_JEDI_FORCE_POWER) || xpType.equals(JEDI_GENERAL)) {
-                    if (isJedi(player)) {
+                if (xpType.equals(COMBAT_JEDI_ONEHANDLIGHTSABER) || xpType.equals(COMBAT_JEDI_TWOHANDLIGHTSABER) || xpType.equals(COMBAT_JEDI_POLEARMLIGHTSABER) || xpType.equals(COMBAT_JEDI_FORCE_POWER) || xpType.equals(JEDI_GENERAL))
+                {
+                    if (isJedi(player))
+                    {
                         jediXp += amt;
                     }
-                } else {
+                }
+                else
+                {
                     raw += amt;
-                    if (!xpType.equals(COMBAT_THROWN)) {
+                    if (!xpType.equals(COMBAT_THROWN))
+                    {
                         totalXpGranted += grantCombatStyleXp(player, xpType, amt);
                     }
                 }
-            } else if (!xpType.equals(UNKNOWN) && !xpType.equals(PERMISSIONS_ONLY) && !xpType.equals(PET_DAMAGE)) {
+            }
+            else if (!xpType.equals(UNKNOWN) && !xpType.equals(PERMISSIONS_ONLY) && !xpType.equals(PET_DAMAGE))
+            {
                 int amt = (int) (intNewTotal * xpPercent);
-                if (amt < 1) {
+                if (amt < 1)
+                {
                     amt = 1;
                 }
                 totalXpGranted += grantCombatStyleXp(player, xpType, amt);
@@ -1216,9 +1313,9 @@ public class xp extends script.base_script
             totalXpGranted += grantCombatStyleXp(player, JEDI_GENERAL, jediXp);
             LOG("jedi", "Granting " + jediXp + " to " + player + " type is " + JEDI_GENERAL);
         }
-        else 
+        else
         {
-            generalXp += (int)(raw * COMBAT_GENERAL_EXCHANGE_RATE);
+            generalXp += (int) (raw * COMBAT_GENERAL_EXCHANGE_RATE);
             if (generalXp < 0)
             {
                 generalXp = 0;
@@ -1239,6 +1336,7 @@ public class xp extends script.base_script
         displayXpFlyText(player, player, totalXpGranted);
         displayXpMsg(player, null, totalXpGranted);
     }
+
     public static int grantSocialStyleXp(obj_id player, String xpType, int amount) throws InterruptedException
     {
         amount = Math.round(amount * ENTERTAINER_XP_MOD);
@@ -1249,17 +1347,18 @@ public class xp extends script.base_script
             {
                 amount = grant(player, templateXp, amount, false);
             }
-            else 
+            else
             {
                 amount = 0;
             }
         }
-        else 
+        else
         {
             amount = 0;
         }
         return amount;
     }
+
     public static int grantCraftingQuestXp(obj_id player, int amount) throws InterruptedException
     {
         String templateXp = skill_template.getTemplateSkillXpType(player, false);
@@ -1269,21 +1368,22 @@ public class xp extends script.base_script
             {
                 amount = grant(player, templateXp, amount, false);
             }
-            else 
+            else
             {
                 amount = 0;
             }
         }
-        else 
+        else
         {
             amount = 0;
         }
         return amount;
     }
+
     public static int grantCraftingStyleXp(obj_id player, String xpType, int amount) throws InterruptedException
     {
         amount = Math.round(amount * TRADER_XP_MOD);
-        int merchantXP = (int)(amount * CRAFTING_MERCHANT_EXCHANGE_RATE);
+        int merchantXP = (int) (amount * CRAFTING_MERCHANT_EXCHANGE_RATE);
         float xpRatio = skill_template.NON_TEMPLATE_XP_RATIO;
         if (xpType.equals(QUEST_CRAFTING))
         {
@@ -1297,26 +1397,27 @@ public class xp extends script.base_script
             {
                 if (!xpType.equals(templateXp))
                 {
-                    amount = (int)(amount * xpRatio);
+                    amount = (int) (amount * xpRatio);
                 }
                 if (!templateXp.equals(MERCHANT))
                 {
-                    merchantXP = (int)(merchantXP * xpRatio);
+                    merchantXP = (int) (merchantXP * xpRatio);
                 }
                 amount += merchantXP;
                 amount = grant(player, templateXp, amount, false);
             }
-            else 
+            else
             {
                 amount = 0;
             }
         }
-        else 
+        else
         {
             amount = 0;
         }
         return amount;
     }
+
     public static int grantCombatStyleXp(obj_id player, String xpType, int amount) throws InterruptedException
     {
         float xpRatio = skill_template.NON_TEMPLATE_XP_RATIO;
@@ -1331,21 +1432,22 @@ public class xp extends script.base_script
             {
                 if (!xpType.equals(templateXp))
                 {
-                    amount = (int)(amount * xpRatio);
+                    amount = (int) (amount * xpRatio);
                 }
                 amount = grant(player, templateXp, amount, false);
             }
-            else 
+            else
             {
                 amount = 0;
             }
         }
-        else 
+        else
         {
             amount = 0;
         }
         return amount;
     }
+
     public static void displayXpMsg(obj_id player, String xpType, int amt) throws InterruptedException
     {
         if (xpType == null)
@@ -1388,6 +1490,7 @@ public class xp extends script.base_script
             }
         }
     }
+
     public static void displayXpFlyText(obj_id player, obj_id target, int amount) throws InterruptedException
     {
         if (amount == 0)
@@ -1408,6 +1511,7 @@ public class xp extends script.base_script
         color flyColor = getCombatXpFlyColor(groupModPct);
         showFlyTextPrivate(target, player, prose.getPackage(SID_FLYTEXT_XP, amount), flyScale, flyColor);
     }
+
     public static float getGroupXpModifierPercentageOfMax(float groupMod) throws InterruptedException
     {
         float groupModPct;
@@ -1419,6 +1523,7 @@ public class xp extends script.base_script
         }
         return groupModPct;
     }
+
     public static float getCombatXpFlyScale(float groupModPct) throws InterruptedException
     {
         final float minScale = 1.5f;
@@ -1426,6 +1531,7 @@ public class xp extends script.base_script
         final float scaleRange = maxScale - minScale;
         return minScale + (scaleRange * groupModPct);
     }
+
     public static color getCombatXpFlyColor(float groupModPct) throws InterruptedException
     {
         final color minColor = new color(140, 15, 210, 255);
@@ -1433,9 +1539,9 @@ public class xp extends script.base_script
         final int redRange = maxColor.getR() - minColor.getR();
         final int greenRange = maxColor.getG() - minColor.getG();
         final int blueRange = maxColor.getB() - minColor.getB();
-        int red = minColor.getR() + (int)(redRange * groupModPct);
-        int green = minColor.getG() + (int)(greenRange * groupModPct);
-        int blue = minColor.getB() + (int)(blueRange * groupModPct);
+        int red = minColor.getR() + (int) (redRange * groupModPct);
+        int green = minColor.getG() + (int) (greenRange * groupModPct);
+        int blue = minColor.getB() + (int) (blueRange * groupModPct);
         if (red > maxColor.getR())
         {
             red = maxColor.getR();
@@ -1450,9 +1556,11 @@ public class xp extends script.base_script
         }
         return new color(red, green, blue, 255);
     }
+
     public static boolean isCombatXpType(String xpType) throws InterruptedException
     {
-        switch (xpType) {
+        switch (xpType)
+        {
             case COMBAT_GENERAL:
             case COMBAT_RANGEDSPECIALIZE_RIFLE:
             case COMBAT_RANGEDSPECIALIZE_CARBINE:
@@ -1478,9 +1586,11 @@ public class xp extends script.base_script
         }
         return false;
     }
+
     public static boolean isSocialXpType(String xpType) throws InterruptedException
     {
-        switch (xpType) {
+        switch (xpType)
+        {
             case MUSIC:
             case DANCE:
             case JUGGLING:
@@ -1493,9 +1603,11 @@ public class xp extends script.base_script
         }
         return false;
     }
+
     public static boolean isCraftingXpType(String xpType) throws InterruptedException
     {
-        switch (xpType) {
+        switch (xpType)
+        {
             case HARVEST_INORGANIC:
             case CRAFTING_GENERAL:
             case CRAFTING_FOOD_GENERAL:
@@ -1517,6 +1629,7 @@ public class xp extends script.base_script
         }
         return false;
     }
+
     public static String[] getXpTypes(obj_id self) throws InterruptedException
     {
         Vector xpTypes = new Vector();
@@ -1528,9 +1641,12 @@ public class xp extends script.base_script
             {
                 return null;
             }
-            for (String type : colXpType) {
-                if (type != null && !type.equals("") && !type.equals("unobtainable") && !type.equals("jedi")) {
-                    if (utils.getElementPositionInArray(xpTypes, type) == -1) {
+            for (String type : colXpType)
+            {
+                if (type != null && !type.equals("") && !type.equals("unobtainable") && !type.equals("jedi"))
+                {
+                    if (utils.getElementPositionInArray(xpTypes, type) == -1)
+                    {
                         xpTypes = utils.addElement(xpTypes, type);
                     }
                 }
@@ -1544,6 +1660,7 @@ public class xp extends script.base_script
         }
         return _xpTypes;
     }
+
     public static void checkAndUpdateHuntingMissions(obj_id objPlayer, obj_id objCreature) throws InterruptedException
     {
         if (!isMob(objCreature))
@@ -1560,20 +1677,26 @@ public class xp extends script.base_script
         String strMissionType;
         String strCreatureToKill;
         string_id strName;
-        for (obj_id objMission : objMissions) {
+        for (obj_id objMission : objMissions)
+        {
             strMissionType = getMissionType(objMission);
             LOG("missions", "type is " + strMissionType);
-            if (strMissionType.equals("hunting")) {
+            if (strMissionType.equals("hunting"))
+            {
                 strCreatureToKill = getStringObjVar(objMission, "strCreatureToKill");
                 final String strCreatureType = getCreatureName(objCreature);
                 LOG("missions", "creature to kill is " + strCreatureToKill);
                 LOG("missions", "creature type is " + strCreatureType);
-                if (strCreatureType.equals(strCreatureToKill)) {
+                if (strCreatureType.equals(strCreatureToKill))
+                {
                     int intQuantityToKill = getIntObjVar(objMission, "intQuantityToKill");
                     intQuantityToKill = intQuantityToKill - 1;
-                    if (intQuantityToKill <= 0) {
+                    if (intQuantityToKill <= 0)
+                    {
                         messageTo(objMission, "huntingSuccess", null, 0, true);
-                    } else {
+                    }
+                    else
+                    {
                         LOG("missions", "Quanitty Ledft is " + intQuantityToKill);
                         setObjVar(objMission, "intQuantityToKill", intQuantityToKill);
                         strName = new string_id("mob/creature_names", strCreatureType);
@@ -1584,6 +1707,7 @@ public class xp extends script.base_script
             }
         }
     }
+
     public static obj_id[] getTopIndividualAttacker(obj_var[] killers) throws InterruptedException
     {
         Vector tempArray = new Vector();
@@ -1598,7 +1722,7 @@ public class xp extends script.base_script
         {
             tempArray = utils.addElement(tempArray, alphaObjId);
         }
-        else 
+        else
         {
             int alphaValue = alpha.getIntData();
             obj_var omega = killers[killers.length - 1];
@@ -1616,7 +1740,7 @@ public class xp extends script.base_script
                     {
                         tempArray = utils.addElement(tempArray, utils.stringToObjId(next.getName()));
                     }
-                    else 
+                    else
                     {
                         break;
                     }
@@ -1634,7 +1758,7 @@ public class xp extends script.base_script
                     {
                         tempArray = utils.addElement(tempArray, utils.stringToObjId(next.getName()));
                     }
-                    else 
+                    else
                     {
                         break;
                     }
@@ -1643,6 +1767,7 @@ public class xp extends script.base_script
         }
         return utils.toStaticObjIdArray(tempArray);
     }
+
     public static boolean displayForceSensitiveXP(obj_id player, String type) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1697,16 +1822,18 @@ public class xp extends script.base_script
             int pid = sui.listbox(player, player, "Select the experience you wish to convert to " + type_name + ".", sui.OK_CANCEL, "Experience Conversion", dsrc, "msgFSXPConvertSelected");
             utils.setScriptVar(player, "force_sensitive.sui_pid", pid);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("quest/force_sensitive/utils", "convert_not_enough_for_conversion"));
         }
         return true;
     }
+
     public static prose_package getXpProsePackage(String xpType, int xpAmt) throws InterruptedException
     {
         return getXpProsePackage(xpType, xpAmt, 1.0f, 1.0f);
     }
+
     public static prose_package getXpProsePackage(String xpType, int xpAmt, float grpMod, float inspMod) throws InterruptedException
     {
         prose_package pp = new prose_package();
@@ -1727,45 +1854,46 @@ public class xp extends script.base_script
                     prose.setTT(pp, grpBonusString);
                     prose.setTU(pp, inspBonusString);
                 }
-                else 
+                else
                 {
                     prose.setStringId(pp, PROSE_GRANT_BUFF_XP);
                     prose.setTT(pp, inspBonusString);
                 }
             }
-            else 
+            else
             {
                 if (grpBonus > 0)
                 {
                     prose.setStringId(pp, PROSE_GRANT_GROUP_XP);
                     prose.setTT(pp, grpBonusString);
                 }
-                else 
+                else
                 {
                     if (xpAmt == 1)
                     {
                         prose.setStringId(pp, PROSE_GRANT_XP1);
                     }
-                    else 
+                    else
                     {
                         prose.setStringId(pp, PROSE_GRANT_XP);
                     }
                 }
             }
         }
-        else 
+        else
         {
             if (xpAmt == 1)
             {
                 prose.setStringId(pp, PROSE_REVOKE_XP1);
             }
-            else 
+            else
             {
                 prose.setStringId(pp, PROSE_REVOKE_XP);
             }
         }
         return pp;
     }
+
     public static int grantXpByTemplate(obj_id player, int amount) throws InterruptedException
     {
         String template = getSkillTemplate(player);
@@ -1784,7 +1912,7 @@ public class xp extends script.base_script
             grantSocialStyleXp(player, xp.QUEST_SOCIAL, amount);
             xpType = xp.QUEST_SOCIAL;
         }
-        else 
+        else
         {
             grantCombatStyleXp(player, xp.QUEST_COMBAT, amount);
             xpType = xp.QUEST_COMBAT;
@@ -1793,6 +1921,7 @@ public class xp extends script.base_script
         xp.displayXpMsg(player, xpType, amount);
         return amount;
     }
+
     public static int grantUnmodifiedXpByTemplate(obj_id player, int amount) throws InterruptedException
     {
         String template = getSkillTemplate(player);
@@ -1809,7 +1938,7 @@ public class xp extends script.base_script
         {
             xpType = xp.QUEST_SOCIAL;
         }
-        else 
+        else
         {
             xpType = xp.QUEST_COMBAT;
         }
@@ -1822,6 +1951,7 @@ public class xp extends script.base_script
         xp.displayXpMsg(player, xpType, amount);
         return amount;
     }
+
     public static int grantUnmodifiedXPPercentageOfLevel(obj_id player, float percentage) throws InterruptedException
     {
         int playerLevel = getLevel(player);
@@ -1830,7 +1960,7 @@ public class xp extends script.base_script
             int xpForCurrentLevel = dataTableGetInt(xp.TBL_PLAYER_LEVEL_XP, playerLevel - 1, "xp_required");
             int xpForNextLevel = dataTableGetInt(xp.TBL_PLAYER_LEVEL_XP, playerLevel, "xp_required");
             float xpGrantedFloat = (xpForNextLevel - xpForCurrentLevel) * percentage / 100;
-            int xpGranted = (int)xpGrantedFloat;
+            int xpGranted = (int) xpGrantedFloat;
             if (grantUnmodifiedXpByTemplate(player, xpGranted) > 0)
             {
                 return xpGranted;
@@ -1838,6 +1968,7 @@ public class xp extends script.base_script
         }
         return 0;
     }
+
     public static void applyHealingCredit(obj_id self) throws InterruptedException
     {
         deltadictionary scriptVars = self.getScriptVars();
@@ -1849,7 +1980,7 @@ public class xp extends script.base_script
             params.put("target", self);
             while (i.hasNext())
             {
-                obj_id healer = (obj_id)i.next();
+                obj_id healer = (obj_id) i.next();
                 if (isIdValid(healer))
                 {
                     messageTo(healer, "receiveCreditForCombatHealing", params, 0.0f, false);
@@ -1857,6 +1988,7 @@ public class xp extends script.base_script
             }
         }
     }
+
     public static void grantMissionXp(obj_id player, int missionLevel) throws InterruptedException
     {
         if (isIdValid(player) && missionLevel > 0)
@@ -1870,11 +2002,12 @@ public class xp extends script.base_script
                 prose_package pp = new prose_package();
                 prose.setStringId(pp, missions.DAILY_REWARD_XP);
                 prose.setDI(pp, xpToGrantForRealsies);
-                prose.setTT(pp, "" + huySaidToUseTTForTheSecondNumber);
+                prose.setTT(pp, String.valueOf(huySaidToUseTTForTheSecondNumber));
                 sendSystemMessageProse(player, pp);
             }
         }
     }
+
     public static int getMissionXpAmount(obj_id player, int missionLevel) throws InterruptedException
     {
         int xpToGrant = 0;
@@ -1917,6 +2050,7 @@ public class xp extends script.base_script
         }
         return xpToGrant;
     }
+
     public static int grantCollectionXP(obj_id player, String collectionName) throws InterruptedException
     {
         float xpToGrant;
@@ -1934,11 +2068,12 @@ public class xp extends script.base_script
         {
             float repeatXpModifier = repeatCollectionXpModifier(player, repeatSlotValue);
             xpToGrant = xpModifier * xpForLevel * repeatXpModifier;
-            return (int)xpToGrant;
+            return (int) xpToGrant;
         }
         xpToGrant = xpModifier * xpForLevel;
-        return (int)xpToGrant;
+        return (int) xpToGrant;
     }
+
     public static int grantCollectionSpaceXP(obj_id player, String collectionName) throws InterruptedException
     {
         if (!isValidId(player))
@@ -1985,7 +2120,7 @@ public class xp extends script.base_script
             xpForCurrentLevel = dataTableGetInt(TBL_SKILL, tierOneSkill, "XP_COST");
             xpForNextLevel = dataTableGetInt(TBL_SKILL, tierTwoSkill, "XP_COST");
         }
-        else 
+        else
         {
             String tierOneSkill = profPrefix + space_flags.SKILL_NAMES[space_flags.TIER1_INDEXSTART];
             xpForCurrentLevel = 0;
@@ -2002,11 +2137,12 @@ public class xp extends script.base_script
         {
             float repeatXpModifier = repeatCollectionXpModifier(player, repeatSlotValue);
             xpToGrant = xpModifier * xpForLevel * repeatXpModifier;
-            return (int)xpToGrant;
+            return (int) xpToGrant;
         }
         xpToGrant = xpModifier * xpForLevel;
-        return (int)xpToGrant;
+        return (int) xpToGrant;
     }
+
     public static float repeatCollectionXpModifier(obj_id player, long repeatSlotValue) throws InterruptedException
     {
         float repeatMultiplier;

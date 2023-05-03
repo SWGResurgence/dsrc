@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class structure_maintenance extends script.base_script
 {
-    public structure_maintenance()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_ROOT_MAINT = new string_id(STF_FILE, "struct_maint_root");
     public static final string_id SID_STRUCT_MAINT = new string_id(STF_FILE, "struct_maint_perform");
@@ -38,152 +35,156 @@ public class structure_maintenance extends script.base_script
     public static final string_id SID_SUI_TOTAL_FUNDS_HEADER = new string_id(STF_FILE, "sui_total_funds_header");
     public static final string_id SID_WILL_COMPLETE_MAINT_RUN = new string_id(STF_FILE, "will_complete_maint_run");
     public static final int droidTravelCost = 300;
-    public static final String[] planetList = 
+    public static final String[] planetList =
+            {
+                    "corellia",
+                    "dantooine",
+                    "dathomir",
+                    "endor",
+                    "lok",
+                    "naboo",
+                    "rori",
+                    "talus",
+                    "tatooine",
+                    "yavin4"
+            };
+    public static final String[][] travelMap =
+            {
+
+                    {
+                            "corellia",
+                            "dantooine",
+                            "dathomir",
+                            "endor",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "talus",
+                            "tatooine",
+                            "yavin4"
+                    },
+
+                    {
+                            "corellia",
+                            "dantooine",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "dathomir",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "endor",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "corellia",
+                            "naboo",
+                            "corellia"
+                    },
+
+                    {
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "lok",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "tatooine",
+                            "naboo"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "endor",
+                            "lok",
+                            "naboo",
+                            "rori",
+                            "corellia",
+                            "tatooine",
+                            "corellia"
+                    },
+
+                    {
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "naboo",
+                            "rori",
+                            "naboo",
+                            "naboo",
+                            "naboo"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "talus",
+                            "corellia",
+                            "corellia"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "naboo",
+                            "lok",
+                            "naboo",
+                            "naboo",
+                            "corellia",
+                            "tatooine",
+                            "corellia"
+                    },
+
+                    {
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corellia",
+                            "corella",
+                            "yavin4"
+                    }
+            };
+    public structure_maintenance()
     {
-        "corellia",
-        "dantooine",
-        "dathomir",
-        "endor",
-        "lok",
-        "naboo",
-        "rori",
-        "talus",
-        "tatooine",
-        "yavin4"
-    };
-    public static final String[][] travelMap = 
-    {
-        
-        {
-            "corellia",
-            "dantooine",
-            "dathomir",
-            "endor",
-            "naboo",
-            "naboo",
-            "naboo",
-            "talus",
-            "tatooine",
-            "yavin4"
-        },
-        
-        {
-            "corellia",
-            "dantooine",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "dathomir",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "corellia",
-            "endor",
-            "naboo",
-            "naboo",
-            "naboo",
-            "corellia",
-            "naboo",
-            "corellia"
-        },
-        
-        {
-            "naboo",
-            "naboo",
-            "naboo",
-            "naboo",
-            "lok",
-            "naboo",
-            "naboo",
-            "naboo",
-            "tatooine",
-            "naboo"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "corellia",
-            "endor",
-            "lok",
-            "naboo",
-            "rori",
-            "corellia",
-            "tatooine",
-            "corellia"
-        },
-        
-        {
-            "naboo",
-            "naboo",
-            "naboo",
-            "naboo",
-            "naboo",
-            "naboo",
-            "rori",
-            "naboo",
-            "naboo",
-            "naboo"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "talus",
-            "corellia",
-            "corellia"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "corellia",
-            "naboo",
-            "lok",
-            "naboo",
-            "naboo",
-            "corellia",
-            "tatooine",
-            "corellia"
-        },
-        
-        {
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corellia",
-            "corella",
-            "yavin4"
-        }
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -211,6 +212,7 @@ public class structure_maintenance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(player))
@@ -241,6 +243,7 @@ public class structure_maintenance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void clearMaintenanceList() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -254,6 +257,7 @@ public class structure_maintenance extends script.base_script
         utils.removeScriptVar(self, "bankList");
         utils.removeScriptVar(self, "msgCount");
     }
+
     public void requestStructData() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -294,12 +298,13 @@ public class structure_maintenance extends script.base_script
         {
             utils.setScriptVar(self, "msgCount", msgCount);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_EMPTY_LIST);
             return;
         }
     }
+
     public void displayMaintenanceList() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -338,8 +343,8 @@ public class structure_maintenance extends script.base_script
                     name += " \\#.\\>250";
                     location structLoc = loc_list[i];
                     name += structLoc.area;
-                    name += " (" + (int)structLoc.x;
-                    name += "," + (int)structLoc.z + ")";
+                    name += " (" + (int) structLoc.x;
+                    name += "," + (int) structLoc.z + ")";
                     nameList = utils.addElement(nameList, name);
                     idList = utils.addElement(idList, struct_list[i]);
                     locList = utils.addElement(locList, loc_list[i]);
@@ -366,7 +371,7 @@ public class structure_maintenance extends script.base_script
             sui.listboxButtonSetup(pid, sui.OK_CANCEL_ALL);
             setSUIProperty(pid, sui.LISTBOX_BTN_OTHER, sui.PROP_TEXT, "@add");
         }
-        else 
+        else
         {
             sui.listboxButtonSetup(pid, sui.OK_CANCEL);
         }
@@ -377,12 +382,13 @@ public class structure_maintenance extends script.base_script
         for (int i = 0; i < ubound; i++)
         {
             addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
-            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String)nameList.get(i)));
+            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String) nameList.get(i)));
         }
         subscribeToSUIProperty(pid, sui.LISTBOX_LIST, sui.PROP_SELECTEDROW);
         subscribeToSUIProperty(pid, sui.LISTBOX_TITLE, sui.PROP_TEXT);
         showSUIPage(pid);
     }
+
     public String getCurrentMaintList() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -396,9 +402,9 @@ public class structure_maintenance extends script.base_script
             for (int i = 0; i < maintListNames.size(); i++)
             {
                 String listEntry = "";
-                listEntry += ((String)maintListNames.get(i));
+                listEntry += ((String) maintListNames.get(i));
                 listEntry += " \\#.\\>450";
-                listEntry += "+" + (Integer) maintListAmounts.get(i);
+                listEntry += "+" + maintListAmounts.get(i);
                 listEntry += "\\>000\n";
                 maintList += listEntry;
             }
@@ -410,6 +416,7 @@ public class structure_maintenance extends script.base_script
         }
         return maintList;
     }
+
     public int currentMaintListCount() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -420,6 +427,7 @@ public class structure_maintenance extends script.base_script
         }
         return (maintListNames.size());
     }
+
     public boolean isInMaintList(obj_id structure) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -428,13 +436,16 @@ public class structure_maintenance extends script.base_script
         {
             return false;
         }
-        for (Object maintListId : maintListIds) {
-            if (((obj_id) maintListId) == structure) {
+        for (Object maintListId : maintListIds)
+        {
+            if (maintListId == structure)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public int handleMaintenanceListDialog(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -447,17 +458,18 @@ public class structure_maintenance extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            clearMaintenanceList();
-            return SCRIPT_CONTINUE;
+                clearMaintenanceList();
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            startMaintenanceRun(self, player);
-            return SCRIPT_CONTINUE;
+                startMaintenanceRun(self, player);
+                return SCRIPT_CONTINUE;
             case sui.BP_REVERT:
-            addStructureForMaintenance(self, player, idx);
-            return SCRIPT_CONTINUE;
+                addStructureForMaintenance(self, player, idx);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public void addStructureForMaintenance(obj_id self, obj_id player, int idx) throws InterruptedException
     {
         if (idx < 0)
@@ -486,9 +498,9 @@ public class structure_maintenance extends script.base_script
             maintListLocs = new Vector();
             maintListAmounts = new Vector();
         }
-        maintListNames = utils.addElement(maintListNames, ((String)nameList.get(idx)));
-        maintListIds = utils.addElement(maintListIds, ((obj_id)idList.get(idx)));
-        maintListLocs = utils.addElement(maintListLocs, ((location)locList.get(idx)));
+        maintListNames = utils.addElement(maintListNames, nameList.get(idx));
+        maintListIds = utils.addElement(maintListIds, idList.get(idx));
+        maintListLocs = utils.addElement(maintListLocs, locList.get(idx));
         maintListAmounts = utils.addElement(maintListAmounts, -1);
         utils.setScriptVar(self, "maintList.name", maintListNames);
         utils.setScriptVar(self, "maintList.id", maintListIds);
@@ -501,20 +513,20 @@ public class structure_maintenance extends script.base_script
         {
             String title = utils.packStringId(SID_MAINT_AMOUNT_TITLE);
             String prompt = utils.packStringId(SID_MAINT_AMOUNT_PROMPT);
-            int maint_pool = getStoredBankBalance(((obj_id)idList.get(idx)));
+            int maint_pool = getStoredBankBalance(((obj_id) idList.get(idx)));
             if (maint_pool >= 0)
             {
                 prose_package ppMaintPool = prose.getPackage(SID_SUI_MAINT_AMOUNT_POOL);
                 prose.setDI(ppMaintPool, maint_pool);
                 prompt += "\n\n \0" + packOutOfBandProsePackage(null, ppMaintPool);
             }
-            else 
+            else
             {
                 prompt += "\n\n" + utils.packStringId(SID_SUI_MAINT_POOL_UNKNOWN);
             }
-            if (!isSamePlanet(player, ((location)locList.get(idx)).area))
+            if (!isSamePlanet(player, ((location) locList.get(idx)).area))
             {
-                int travelCost = getTravelCost(player, ((location)locList.get(idx)).area);
+                int travelCost = getTravelCost(player, ((location) locList.get(idx)).area);
                 total -= travelCost;
                 if (total < 0)
                 {
@@ -530,16 +542,17 @@ public class structure_maintenance extends script.base_script
             if (pid > -1)
             {
                 utils.setScriptVar(self, "payMaintenance.pid", pid);
-                utils.setScriptVar(self, "payMaintenance.target", ((obj_id)idList.get(idx)));
+                utils.setScriptVar(self, "payMaintenance.target", ((obj_id) idList.get(idx)));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_NOT_ENOUGH_MONEY);
             removeLastStruct();
             displayMaintenanceList();
         }
     }
+
     public int handleMaintenanceAmountDialog(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -551,28 +564,29 @@ public class structure_maintenance extends script.base_script
         switch (bp)
         {
             case sui.BP_CANCEL:
-            removeLastStruct();
-            displayMaintenanceList();
-            return SCRIPT_CONTINUE;
-            case sui.BP_OK:
-            int amount = sui.getTransferInputTo(params);
-            if (amount <= 0)
-            {
-                sendSystemMessage(player, SID_INVALID_AMOUNT);
-                return SCRIPT_CONTINUE;
-            }
-            Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
-            maintListAmounts.set(maintListAmounts.size() - 1, amount);
-            utils.setScriptVar(self, "maintList.amount", maintListAmounts);
-            if (!validateMaintenanceCost(player, amount))
-            {
                 removeLastStruct();
-            }
-            displayMaintenanceList();
-            return SCRIPT_CONTINUE;
+                displayMaintenanceList();
+                return SCRIPT_CONTINUE;
+            case sui.BP_OK:
+                int amount = sui.getTransferInputTo(params);
+                if (amount <= 0)
+                {
+                    sendSystemMessage(player, SID_INVALID_AMOUNT);
+                    return SCRIPT_CONTINUE;
+                }
+                Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+                maintListAmounts.set(maintListAmounts.size() - 1, amount);
+                utils.setScriptVar(self, "maintList.amount", maintListAmounts);
+                if (!validateMaintenanceCost(player, amount))
+                {
+                    removeLastStruct();
+                }
+                displayMaintenanceList();
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean validateMaintenanceCost(obj_id player, int amount) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -596,6 +610,7 @@ public class structure_maintenance extends script.base_script
         utils.setScriptVar(self, "totalTravelCost", totalTravelCost);
         return true;
     }
+
     public int getStoredBankBalance(obj_id structure) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -620,6 +635,7 @@ public class structure_maintenance extends script.base_script
         }
         return balance;
     }
+
     public location[] getLocationData() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -635,6 +651,7 @@ public class structure_maintenance extends script.base_script
         }
         return loc_list;
     }
+
     public int getTravelCost(obj_id player, String structPlanet) throws InterruptedException
     {
         String startPlanet = getLocation(player).area;
@@ -665,6 +682,7 @@ public class structure_maintenance extends script.base_script
         }
         return travelCost + returnCost + droidTravelCost;
     }
+
     public int getPlanetIdx(String planet) throws InterruptedException
     {
         for (int i = 0; i < planetList.length; i++)
@@ -676,6 +694,7 @@ public class structure_maintenance extends script.base_script
         }
         return -1;
     }
+
     public void removeLastStruct() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -698,7 +717,7 @@ public class structure_maintenance extends script.base_script
             utils.removeScriptVar(self, "maintList.loc");
             utils.removeScriptVar(self, "maintList.amount");
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "maintList.name", maintListNames);
             utils.setScriptVar(self, "maintList.id", maintListIds);
@@ -706,6 +725,7 @@ public class structure_maintenance extends script.base_script
             utils.setScriptVar(self, "maintList.amount", maintListAmounts);
         }
     }
+
     public void startMaintenanceRun(obj_id self, obj_id player) throws InterruptedException
     {
         Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
@@ -719,8 +739,8 @@ public class structure_maintenance extends script.base_script
         int runTime = 0;
         for (int i = 0; i < maintListIds.size(); i++)
         {
-            runTime += getMaintRunTime(player, ((obj_id)maintListIds.get(i)), ((location)maintListLocs.get(i)));
-            money.pay(player, ((obj_id)maintListIds.get(i)), (Integer) maintListAmounts.get(i), "handlePayment", null);
+            runTime += getMaintRunTime(player, ((obj_id) maintListIds.get(i)), ((location) maintListLocs.get(i)));
+            money.pay(player, ((obj_id) maintListIds.get(i)), (Integer) maintListAmounts.get(i), "handlePayment", null);
         }
         int travelCost = utils.getIntScriptVar(self, "totalTravelCost");
         money.pay(player, money.ACCT_TRAVEL, travelCost, "handlePayment", null, false);
@@ -733,6 +753,7 @@ public class structure_maintenance extends script.base_script
         setObjVar(pcd, "ai.pet.powerLevel", (pet_lib.OUT_OF_POWER + 1));
         pet_lib.storePet(self);
     }
+
     public int getMaintRunTime(obj_id player, obj_id structure, location structLoc) throws InterruptedException
     {
         float distance = 0;
@@ -742,7 +763,7 @@ public class structure_maintenance extends script.base_script
             distance = 10000;
             planetHops = countPlanetHops(player, structLoc.area);
         }
-        else 
+        else
         {
             distance = utils.getDistance2D(player, structure);
             if (distance <= 0)
@@ -751,9 +772,10 @@ public class structure_maintenance extends script.base_script
             }
         }
         int planetRunTime = planetHops * (60 * 30);
-        int distanceRunTime = (int)(distance / 3) + (60 * 15);
+        int distanceRunTime = (int) (distance / 3) + (60 * 15);
         return planetRunTime + distanceRunTime;
     }
+
     public int countPlanetHops(obj_id player, String structPlanet) throws InterruptedException
     {
         String startPlanet = getLocation(player).area;
@@ -767,6 +789,7 @@ public class structure_maintenance extends script.base_script
         }
         return planetHops;
     }
+
     public void editMaintenanceList() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -791,8 +814,8 @@ public class structure_maintenance extends script.base_script
             name += " \\#.\\>250";
             location structLoc = loc_list[i];
             name += structLoc.area;
-            name += " (" + (int)structLoc.x;
-            name += "," + (int)structLoc.z + ")";
+            name += " (" + (int) structLoc.x;
+            name += "," + (int) structLoc.z + ")";
             nameList = utils.addElement(nameList, name);
         }
         String title = utils.packStringId(SID_DROID_EDIT_MAINT_LIST_TITLE);
@@ -810,12 +833,13 @@ public class structure_maintenance extends script.base_script
         for (int i = 0; i < ubound; i++)
         {
             addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
-            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String)nameList.get(i)));
+            setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, ((String) nameList.get(i)));
         }
         subscribeToSUIProperty(pid, sui.LISTBOX_LIST, sui.PROP_SELECTEDROW);
         subscribeToSUIProperty(pid, sui.LISTBOX_TITLE, sui.PROP_TEXT);
         showSUIPage(pid);
     }
+
     public int handleEditMaintListDialog(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -830,24 +854,26 @@ public class structure_maintenance extends script.base_script
         {
             case sui.BP_CANCEL:
             case sui.BP_OK:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
             case sui.BP_REVERT:
-            if (idx == -1)
-            {
+                if (idx == -1)
+                {
+                    editMaintenanceList();
+                    return SCRIPT_CONTINUE;
+                }
+                player_structure.removeStructureFromMaintenance(self, pcd, idx);
                 editMaintenanceList();
                 return SCRIPT_CONTINUE;
-            }
-            player_structure.removeStructureFromMaintenance(self, pcd, idx);
-            editMaintenanceList();
-            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSamePlanet(obj_id player, String structPlanet) throws InterruptedException
     {
         location playerLoc = getLocation(player);
         return (playerLoc.area.equals(structPlanet));
     }
+
     public int returnRequestedBankBalance(obj_id self, dictionary params) throws InterruptedException
     {
         int balance = params.getInt("balance");
@@ -878,12 +904,13 @@ public class structure_maintenance extends script.base_script
             utils.removeScriptVar(self, "msgCount");
             executeMaintenanceCommand();
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "msgCount", msgCount);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int returnRequestedName(obj_id self, dictionary params) throws InterruptedException
     {
         String name = params.getString("name");
@@ -914,12 +941,13 @@ public class structure_maintenance extends script.base_script
             utils.removeScriptVar(self, "msgCount");
             executeMaintenanceCommand();
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "msgCount", msgCount);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void executeMaintenanceCommand() throws InterruptedException
     {
         obj_id self = getSelf();

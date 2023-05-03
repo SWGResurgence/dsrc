@@ -11,6 +11,7 @@ public class final_battle_help_npc extends script.base_script
     public final_battle_help_npc()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "quest_spawner.spawned_by");
@@ -45,7 +46,7 @@ public class final_battle_help_npc extends script.base_script
                         startCombat(self, player);
                     }
                 }
-                else 
+                else
                 {
                     if (isIdValid(killer))
                     {

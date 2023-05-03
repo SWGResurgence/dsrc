@@ -7,10 +7,12 @@ import script.region;
 
 public class battlefield_spawner extends script.base_script
 {
+    public static final String VAR_NUMBER_SPAWNS = "battlefield.number_spawns";
+
     public battlefield_spawner()
     {
     }
-    public static final String VAR_NUMBER_SPAWNS = "battlefield.number_spawns";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, battlefield.VAR_SPAWNER_CURRENT_POPULATION, 0);
@@ -19,6 +21,7 @@ public class battlefield_spawner extends script.base_script
         messageTo(self, "msgBattlefieldSpawn", null, pulse, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgBattlefieldSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_spawner::msgBattlefieldSpawn -- " + self);

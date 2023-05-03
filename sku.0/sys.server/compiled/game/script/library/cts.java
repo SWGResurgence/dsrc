@@ -5,9 +5,6 @@ import script.obj_id;
 
 public class cts extends script.base_script
 {
-    public cts()
-    {
-    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "CharacterTransfer";
     public static final String CTS_GIFT_TEMPLATE = "object/tangible/furniture/house_cleanup/cts_";
@@ -26,6 +23,10 @@ public class cts extends script.base_script
     public static final String CTS_PAINTING_OBJVAR = "cts.greeter.painting";
     public static final String CTS_UNRESTRICTED_GIFT_BOX_OBJVAR = "cts.greeter.unrestricted_box";
     public static final String SCRIPTVAR_CTS_ITEM_ID = "ctsItemId";
+    public cts()
+    {
+    }
+
     public static boolean grantPackagedPainting(obj_id sponsorGiftBox, obj_id anyPlayer) throws InterruptedException
     {
         blog("grantPackagedPainting init");
@@ -130,6 +131,7 @@ public class cts extends script.base_script
         CustomerServiceLog("CharacterTransfer", "Packed item: " + sponsorGiftBox + " " + getName(sponsorGiftBox) + " unpacked: " + sponsorGiftPainting + " " + getName(sponsorGiftPainting) + " for player: " + anyPlayer + " " + getName(anyPlayer) + ".");
         return true;
     }
+
     public static String getCtsInscription(obj_id object) throws InterruptedException
     {
         if (!isValidId(object) || !exists(object))
@@ -171,7 +173,7 @@ public class cts extends script.base_script
             inscriptionString += "Given to " + refugeeName + ", " + refugeeCurrentGalaxy + " upon transfer from " + refugeePrevName;
             inscriptionString += ", " + refugeePrevGalaxy + " on " + refugeeTimeTransfer;
         }
-        else 
+        else
         {
             obj_id sponsorOid = getObjIdObjVar(object, cts.SPONSOR_PLAYER_OID);
             if (!isValidId(sponsorOid))
@@ -203,6 +205,7 @@ public class cts extends script.base_script
         }
         return inscriptionString;
     }
+
     public static boolean initializeCtsObject(obj_id object) throws InterruptedException
     {
         blog("initializeCtsPainting init");
@@ -261,12 +264,13 @@ public class cts extends script.base_script
         {
             CustomerServiceLog("veteran", "- CTS SPONSOR'S GIFT BOX stamped with data from Player: " + containingPlayer + " " + getName(containingPlayer) + " claimed the Galaxy Painting CTS Reward: " + object + " " + getName(object) + " at " + getCalendarTimeStringLocal(timeDate[timeDate.length - 1]) + " showing a previous galaxy of: " + playerPreviousGalaxy[playerPreviousGalaxy.length - 1] + " where the player's name was: " + playerPreviousName[playerPreviousName.length - 1]);
         }
-        else 
+        else
         {
             CustomerServiceLog("veteran", "- CTS REFUGEE PAINTING stamped with data from Player: " + containingPlayer + " " + getName(containingPlayer) + " claimed the Galaxy Painting CTS Reward: " + object + " " + getName(object) + " at " + getCalendarTimeStringLocal(timeDate[timeDate.length - 1]) + " showing a previous galaxy of: " + playerPreviousGalaxy[playerPreviousGalaxy.length - 1] + " where the player's name was: " + playerPreviousName[playerPreviousName.length - 1]);
         }
         return true;
     }
+
     public static boolean blog(String msg) throws InterruptedException
     {
         if (BLOGGING_ON)
@@ -275,6 +279,7 @@ public class cts extends script.base_script
         }
         return true;
     }
+
     public static void initiateCtsFromItem(obj_id player, obj_id item) throws InterruptedException
     {
         if (!isValidId(player) || !isValidId(item))

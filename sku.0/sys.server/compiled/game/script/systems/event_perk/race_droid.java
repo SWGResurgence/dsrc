@@ -7,15 +7,18 @@ import java.util.StringTokenizer;
 
 public class race_droid extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+
     public race_droid()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeRaceDroid", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeRaceDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))
@@ -34,6 +37,7 @@ public class race_droid extends script.base_script
         setObjVar(self, "event_perk.racing.settingUp", 0);
         return SCRIPT_CONTINUE;
     }
+
     public boolean allowedToUse(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id storyteller = getObjIdObjVar(self, "storytellerid");
@@ -46,14 +50,12 @@ public class race_droid extends script.base_script
             else if (utils.hasScriptVar(player, "storytellerAssistant"))
             {
                 obj_id whoAmIAssisting = utils.getObjIdScriptVar(player, "storytellerAssistant");
-                if (isIdValid(whoAmIAssisting) && storyteller == whoAmIAssisting)
-                {
-                    return true;
-                }
+                return isIdValid(whoAmIAssisting) && storyteller == whoAmIAssisting;
             }
         }
         return false;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int initialized = getIntObjVar(self, "event_perk.racing.initialized");
@@ -72,6 +74,7 @@ public class race_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU3 || item == menu_info_types.SERVER_MENU4 || item == menu_info_types.SERVER_MENU5)
@@ -113,6 +116,7 @@ public class race_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -131,7 +135,7 @@ public class race_droid extends script.base_script
         {
             returnLoc = getLocation(self);
         }
-        else 
+        else
         {
             returnLoc = getLocation(building);
         }
@@ -158,12 +162,13 @@ public class race_droid extends script.base_script
         {
             messageTo(player, "handleRestartMission", params, 0, false);
         }
-        else 
+        else
         {
             attachScript(player, "systems.event_perk.race_droid_player");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageRegisterBest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -230,6 +235,7 @@ public class race_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int messageDisplayLeader(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -244,6 +250,7 @@ public class race_droid extends script.base_script
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int continueCollectingRaceData(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "event_perk.racing.settingUp", 1);
@@ -251,6 +258,7 @@ public class race_droid extends script.base_script
         showRaceSetupUI(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int showRaceSetupUI(obj_id self, obj_id player) throws InterruptedException
     {
         int current = getIntObjVar(self, "event_perk.racing.setupStep");
@@ -263,6 +271,7 @@ public class race_droid extends script.base_script
         int pid = sui.inputbox(self, player, "\0" + prompt, "\0" + title, "handleRaceUIdata", 10, false, "");
         return pid;
     }
+
     public int handleRaceUIdata(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -277,7 +286,7 @@ public class race_droid extends script.base_script
             {
                 setObjVar(self, "event_perk.racing.setupStep", 9);
             }
-            else 
+            else
             {
                 setObjVar(self, "event_perk.racing.setupStep", 0);
             }
@@ -293,6 +302,7 @@ public class race_droid extends script.base_script
         messageTo(self, "storeLastRaceDataObjVar", params, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int storeLastRaceDataObjVar(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -395,6 +405,7 @@ public class race_droid extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showStoredPlayerWaypointRaceData(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

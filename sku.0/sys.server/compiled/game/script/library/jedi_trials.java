@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class jedi_trials extends script.base_script
 {
-    public jedi_trials()
-    {
-    }
     public static final String PADAWAN_TRIALS_DATATABLE = "datatables/jedi_trials/padawan_trials.iff";
     public static final String KNIGHT_TRIALS_DATATABLE = "datatables/jedi_trials/knight_trials.iff";
     public static final String FORCE_SHRINES_DATATABLE = "datatables/jedi_trials/force_shrine_loc.iff";
@@ -108,6 +105,10 @@ public class jedi_trials extends script.base_script
     public static final String PADAWAN_ROBE_STRING = "item_jedi_robe_padawan_04_01";
     public static final String PADAWAN_TRIALS_LOG = "PADAWAN_TRIALS_LOG";
     public static final String KNIGHT_TRIALS_LOG = "KNIGHT_TRIALS_LOG";
+    public jedi_trials()
+    {
+    }
+
     public static boolean isEligibleForJediPadawanTrials(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))
@@ -122,14 +123,12 @@ public class jedi_trials extends script.base_script
             if (!hasSkill(player, JEDI_PADAWAN_SKBOX))
             {
                 int numFSBranchesComplete = fs_quests.getBranchesLearned(player);
-                if (numFSBranchesComplete >= 6 && hasObjVar(player, PADAWAN_TRIALS_ELIGIBLE_OBJVAR))
-                {
-                    return true;
-                }
+                return numFSBranchesComplete >= 6 && hasObjVar(player, PADAWAN_TRIALS_ELIGIBLE_OBJVAR);
             }
         }
         return false;
     }
+
     public static void initializePadawanTrials(obj_id player) throws InterruptedException
     {
         setObjVar(player, PADAWAN_TRIALS_ELIGIBLE_OBJVAR, true);
@@ -137,12 +136,12 @@ public class jedi_trials extends script.base_script
         {
             attachScript(player, PADAWAN_TRIALS_SCRIPT);
         }
-        else 
+        else
         {
             messageTo(player, "handleDoPadawanTrialsSetup", null, 2, false);
         }
-        return;
     }
+
     public static void doPadawanTrialsSetup(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))
@@ -165,14 +164,14 @@ public class jedi_trials extends script.base_script
                 String custQuestListLogMsg = "Padawan trials quest list: Padawan trials quest list for Player %TU is: " + questListSting + ".";
                 CustomerServiceLog(PADAWAN_TRIALS_LOG, custQuestListLogMsg, player);
             }
-            else 
+            else
             {
                 String custLogMsg = "Padawan trials (library.jedi_trials): FATAL - failed to generate questList - initialization aborted.";
                 CustomerServiceLog(PADAWAN_TRIALS_LOG, custLogMsg, player);
             }
         }
-        return;
     }
+
     public static boolean isEligibleForJediKnightTrials(obj_id player) throws InterruptedException
     {
         String frsConfig = getConfigSetting("GameServer", "enableFRS");
@@ -191,6 +190,7 @@ public class jedi_trials extends script.base_script
         }
         return false;
     }
+
     public static int isEligibleForJediKnightTrialsPointsRemaining(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))
@@ -198,11 +198,14 @@ public class jedi_trials extends script.base_script
             String[] skillList = getSkillListingForPlayer(player);
             int jediSkillPtsSpent = 0;
             int jediDisciplineSkillTrees = 0;
-            for (String skillName : skillList) {
-                if (skillName.startsWith("force_discipline")) {
+            for (String skillName : skillList)
+            {
+                if (skillName.startsWith("force_discipline"))
+                {
                     int cost = 0;
                     jediSkillPtsSpent = jediSkillPtsSpent + cost;
-                    if (skillName.endsWith("_04")) {
+                    if (skillName.endsWith("_04"))
+                    {
                         jediDisciplineSkillTrees = jediDisciplineSkillTrees + 1;
                     }
                 }
@@ -214,6 +217,7 @@ public class jedi_trials extends script.base_script
         }
         return -1;
     }
+
     public static void initializeKnightTrials(obj_id player) throws InterruptedException
     {
         int[] questList = getQuestOrderFromDatatable(KNIGHT_TRIALS_DATATABLE);
@@ -231,13 +235,13 @@ public class jedi_trials extends script.base_script
             String custLogMsg = "Knight trials initialization (library.jedi_trials): Player %TU has begun the Jedi Knight trials.";
             CustomerServiceLog(KNIGHT_TRIALS_LOG, custLogMsg, player);
         }
-        else 
+        else
         {
             String custLogMsg = "Knight trials initialization (library.jedi_trials): FATAL - failed to generate questList - initialization aborted.";
             CustomerServiceLog(KNIGHT_TRIALS_LOG, custLogMsg, player);
         }
-        return;
     }
+
     public static void doJediTrialsCleanup(obj_id player) throws InterruptedException
     {
         removeObjVar(player, JEDI_TRIALS_BASE_OBJVAR);
@@ -253,8 +257,8 @@ public class jedi_trials extends script.base_script
         {
             detachScript(player, KNIGHT_TRIALS_SCRIPT);
         }
-        return;
     }
+
     public static int getJediTrialRow(obj_id player) throws InterruptedException
     {
         int[] questList = getIntArrayObjVar(player, PADAWAN_QUESTLIST_OBJVAR);
@@ -266,6 +270,7 @@ public class jedi_trials extends script.base_script
         int datatableRow = questList[trialNum];
         return datatableRow;
     }
+
     public static String getJediTrialName(obj_id player) throws InterruptedException
     {
         int trialRow = getJediTrialRow(player);
@@ -276,28 +281,30 @@ public class jedi_trials extends script.base_script
         String trialName = dataTableGetString(PADAWAN_TRIALS_DATATABLE, trialRow, "trialName");
         return trialName;
     }
+
     public static location getRandomForceShrineLocation(obj_id player) throws InterruptedException
     {
         String shrinePlanet = chooseRandomPlanet(player);
         location shrineLoc = chooseForceShrineOnPlanet(shrinePlanet);
         return shrineLoc;
     }
+
     public static String chooseRandomPlanet(obj_id player) throws InterruptedException
     {
         String planet = "";
-        String[] allPlanets = 
-        {
-            "rori",
-            "talus",
-            "tatooine",
-            "naboo",
-            "corellia",
-            "yavin4",
-            "dathomir",
-            "dantooine",
-            "endor",
-            "lok"
-        };
+        String[] allPlanets =
+                {
+                        "rori",
+                        "talus",
+                        "tatooine",
+                        "naboo",
+                        "corellia",
+                        "yavin4",
+                        "dathomir",
+                        "dantooine",
+                        "endor",
+                        "lok"
+                };
         location playerLoc = getLocation(player);
         if (playerLoc != null)
         {
@@ -314,17 +321,18 @@ public class jedi_trials extends script.base_script
         }
         return planet;
     }
+
     public static String chooseRandomCivilizedPlanet(obj_id player) throws InterruptedException
     {
         String planet = "";
-        String[] allPlanets = 
-        {
-            "rori",
-            "talus",
-            "tatooine",
-            "naboo",
-            "corellia"
-        };
+        String[] allPlanets =
+                {
+                        "rori",
+                        "talus",
+                        "tatooine",
+                        "naboo",
+                        "corellia"
+                };
         location playerLoc = getLocation(player);
         if (playerLoc != null)
         {
@@ -341,17 +349,18 @@ public class jedi_trials extends script.base_script
         }
         return planet;
     }
+
     public static String chooseRandomAdventurePlanet(obj_id player) throws InterruptedException
     {
         String planet = "";
-        String[] allPlanets = 
-        {
-            "yavin4",
-            "dathomir",
-            "dantooine",
-            "endor",
-            "lok"
-        };
+        String[] allPlanets =
+                {
+                        "yavin4",
+                        "dathomir",
+                        "dantooine",
+                        "endor",
+                        "lok"
+                };
         location playerLoc = getLocation(player);
         if (playerLoc != null)
         {
@@ -368,6 +377,7 @@ public class jedi_trials extends script.base_script
         }
         return planet;
     }
+
     public static void setClosestForceShrineWaypoint(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, PADAWAN_SHRINE_WAYPOINT_OBJVAR))
@@ -391,8 +401,8 @@ public class jedi_trials extends script.base_script
             setWaypointActive(waypoint, true);
             setObjVar(player, PADAWAN_SHRINE_WAYPOINT_OBJVAR, waypoint);
         }
-        return;
     }
+
     public static location getclosetForceShrineLocation(obj_id player) throws InterruptedException
     {
         location here = getLocation(player);
@@ -420,6 +430,7 @@ public class jedi_trials extends script.base_script
         }
         return shrineLoc;
     }
+
     public static location chooseForceShrineOnPlanet(String planet) throws InterruptedException
     {
         location shrineLoc = new location(3087.47f, 124.22f, 4887.14f, "dathomir", null);
@@ -435,6 +446,7 @@ public class jedi_trials extends script.base_script
         }
         return shrineLoc;
     }
+
     public static int getPlanetForceShrineDatatableIndex(String planet) throws InterruptedException
     {
         int numItems = dataTableGetNumRows(FORCE_SHRINES_DATATABLE);
@@ -450,6 +462,7 @@ public class jedi_trials extends script.base_script
         }
         return index;
     }
+
     public static boolean isValidShrineLocObjVar(obj_id player) throws InterruptedException
     {
         location currentShrineLoc = getLocationObjVar(player, JEDI_TRIALS_SHRINELOC_OBJVAR);
@@ -475,6 +488,7 @@ public class jedi_trials extends script.base_script
         }
         return false;
     }
+
     public static int[] getQuestOrderFromDatatable(String datatable) throws InterruptedException
     {
         int numTrials = dataTableGetNumRows(datatable);
@@ -492,7 +506,7 @@ public class jedi_trials extends script.base_script
             {
                 questList[questNum] = datatableRow;
             }
-            else 
+            else
             {
                 utils.addElement(unusedRows, datatableRow);
             }
@@ -510,6 +524,7 @@ public class jedi_trials extends script.base_script
         }
         return questList;
     }
+
     public static String getJediTrialsQuestListAsString(obj_id player, int[] questList) throws InterruptedException
     {
         String questListString = "{ ";
@@ -525,6 +540,7 @@ public class jedi_trials extends script.base_script
         questListString = questListString + " }";
         return questListString;
     }
+
     public static String getJediTrialsDatatableString(obj_id player, String column) throws InterruptedException
     {
         String jediTrialString = "";
@@ -552,6 +568,7 @@ public class jedi_trials extends script.base_script
         }
         return jediTrialString;
     }
+
     public static int getJediTrialsDatatableInt(obj_id player, String column) throws InterruptedException
     {
         int jediTrialInt = Integer.MIN_VALUE;
@@ -579,14 +596,15 @@ public class jedi_trials extends script.base_script
         }
         return jediTrialInt;
     }
+
     public static void giveGenericForceShrineMessage(obj_id player) throws InterruptedException
     {
         int chance = rand(1, 15);
         String str_reference = "force_shrine_wisdom_" + chance;
         string_id sid_msg = new string_id("jedi_trials", str_reference);
         sendSystemMessage(player, sid_msg);
-        return;
     }
+
     public static boolean checkForGroupCombatQuestKill(obj_id player, dictionary params, String datatableColumn) throws InterruptedException
     {
         obj_id creature = params.getObjId("target");
@@ -600,7 +618,7 @@ public class jedi_trials extends script.base_script
                 {
                     killers = getGroupMemberIds(topGroup);
                 }
-                else 
+                else
                 {
                     killers = new obj_id[1];
                     killers[0] = topGroup;
@@ -619,9 +637,11 @@ public class jedi_trials extends script.base_script
                     String[] validTargets = getValidQuestTargets(player, datatableColumn);
                     if (validTargets != null)
                     {
-                        for (String targetName : validTargets) {
+                        for (String targetName : validTargets)
+                        {
                             int stringCheck = creatureType.indexOf(targetName);
-                            if (stringCheck > -1) {
+                            if (stringCheck > -1)
+                            {
                                 return true;
                             }
                         }
@@ -631,6 +651,7 @@ public class jedi_trials extends script.base_script
         }
         return false;
     }
+
     public static boolean checkForIndividualCombatQuestKill(obj_id player, dictionary params, String datatableColumn) throws InterruptedException
     {
         obj_id creature = params.getObjId("target");
@@ -651,9 +672,11 @@ public class jedi_trials extends script.base_script
                     String[] validTargets = getValidQuestTargets(player, datatableColumn);
                     if (validTargets != null)
                     {
-                        for (String targetName : validTargets) {
+                        for (String targetName : validTargets)
+                        {
                             int stringCheck = creatureType.indexOf(targetName);
-                            if (stringCheck > -1) {
+                            if (stringCheck > -1)
+                            {
                                 return true;
                             }
                         }
@@ -663,6 +686,7 @@ public class jedi_trials extends script.base_script
         }
         return false;
     }
+
     public static String[] getValidQuestTargets(obj_id player, String datatableColumn) throws InterruptedException
     {
         String targets = getJediTrialsDatatableString(player, datatableColumn);
@@ -682,11 +706,13 @@ public class jedi_trials extends script.base_script
         }
         return validTargets;
     }
+
     public static int oneButtonMsgBox(obj_id controller, obj_id player, String handler, string_id title, string_id textMsg, string_id okButton) throws InterruptedException
     {
         String newTextMsg = utils.packStringId(textMsg);
         return oneButtonMsgBox(controller, player, handler, title, newTextMsg, okButton);
     }
+
     public static int oneButtonMsgBox(obj_id controller, obj_id player, String handler, string_id title, String textMsg, string_id okButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "jedi_trials.openSui"))
@@ -711,6 +737,7 @@ public class jedi_trials extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public static int twoButtonMsgBox(obj_id controller, obj_id player, String handler, string_id title, String textMsg, string_id okButton, string_id cancelButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "jedi_trials.openSui"))
@@ -737,11 +764,13 @@ public class jedi_trials extends script.base_script
         sui.showSUIPage(pid);
         return pid;
     }
+
     public static int threeButtonMsgBox(obj_id controller, obj_id player, String handler, string_id title, string_id textMsg, string_id okButton, string_id cancelButton, string_id revertButton) throws InterruptedException
     {
         String TEXT_MSG = utils.packStringId(textMsg);
         return threeButtonMsgBox(controller, player, handler, title, TEXT_MSG, okButton, cancelButton, revertButton);
     }
+
     public static int threeButtonMsgBox(obj_id controller, obj_id player, String handler, string_id title, String textMsg, string_id okButton, string_id cancelButton, string_id revertButton) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "jedi_trials.openSui"))

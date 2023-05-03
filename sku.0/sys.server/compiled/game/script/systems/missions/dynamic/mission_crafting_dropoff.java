@@ -10,11 +10,13 @@ public class mission_crafting_dropoff extends script.systems.missions.base.missi
     public mission_crafting_dropoff()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -23,10 +25,12 @@ public class mission_crafting_dropoff extends script.systems.missions.base.missi
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id objItem, obj_id objPlayer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(self, "objMission");
@@ -56,14 +60,14 @@ public class mission_crafting_dropoff extends script.systems.missions.base.missi
                 messageTo(self, "destroySelf", null, 120, true);
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("mission/mission_generic", "wrong_item");
                 chat.chat(self, speaker, strSpam);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             string_id message = new string_id("mission/mission_generic", "crafting_already_dropped_off");
             chat.chat(self, speaker, message);
@@ -71,6 +75,7 @@ public class mission_crafting_dropoff extends script.systems.missions.base.missi
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

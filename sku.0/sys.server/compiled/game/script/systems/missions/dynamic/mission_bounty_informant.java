@@ -11,15 +11,18 @@ public class mission_bounty_informant extends script.systems.missions.base.missi
     public mission_bounty_informant()
     {
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "removeInformant", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setWantSawAttackTriggers(self, false);
@@ -29,6 +32,7 @@ public class mission_bounty_informant extends script.systems.missions.base.missi
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         if (!hasSkill(speaker, "class_bountyhunter_phase1_novice"))
@@ -117,15 +121,16 @@ public class mission_bounty_informant extends script.systems.missions.base.missi
                     messageTo(objMission, "moveTarget", dctParams, rand(30, 60), false);
                 }
             }
-            else 
+            else
             {
             }
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeInformant(obj_id self, dictionary params) throws InterruptedException
     {
         if (isValidId(self) && !isPlayer(self))

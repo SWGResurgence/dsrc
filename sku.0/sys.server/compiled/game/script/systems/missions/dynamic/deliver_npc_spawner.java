@@ -10,6 +10,7 @@ public class deliver_npc_spawner extends script.base_script
     public deliver_npc_spawner()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");

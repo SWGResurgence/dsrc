@@ -771,7 +771,7 @@ public class ai extends script.base_script
         String[] EMOTE_PET_HUMANOID_RESPONSES = {
                 "I don't like that.",
                 "Please don't touch me.",
-                "In some places we'd be betrothed",
+                "In some places we'd be betrothed.",
                 "Ew, your ugly."
         };
         String[] EMOTE_SLAP_HUMANOID_RESPONSES = {
@@ -792,6 +792,24 @@ public class ai extends script.base_script
                 "Feel the vibes.",
                 "Ok, if you say so.."
         };
+        String[] EMOTE_WORSHIP_HUMANOID_RESPONSES = {
+                "That's right. I am superior.",
+                "Have you donated to my righteous cause yet?",
+                "You have been blessed, my child.",
+                "Uuh, what are you doing?"
+        };
+        if (ai_lib.isAiDead(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (ai_lib.isInCombat(performer))
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
         {
             return SCRIPT_CONTINUE;
@@ -815,6 +833,13 @@ public class ai extends script.base_script
             ai_lib.follow(self, performer, 1.0f, 12.0f);
             return SCRIPT_CONTINUE;
         }
+        else if (emote.startsWith("halt"))
+        {
+            showFlyText(self, new string_id("!!!"), 12.0f, colors.WHITE);
+            ai.stop(self);
+            stopCombat(self);
+            return SCRIPT_CONTINUE;
+        }
         else if (emote.startsWith("shoo") || emote.startsWith("dismiss"))
         {
             showFlyText(self, new string_id("- ! -"), 12.0f, colors.RED);
@@ -824,7 +849,7 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("slap") || emote.startsWith("backhand"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 chat.chat(self, getRandomArray(EMOTE_SLAP_HUMANOID_RESPONSES));
                 if (enableSlapDamage)
@@ -851,10 +876,9 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("bmoc"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 chat.chat(self, getRandomArray(EMOTE_BMOC_HUMANOID_RESPONSES));
-                startCombat(self, performer);
             }
             else
             {
@@ -865,7 +889,7 @@ public class ai extends script.base_script
         }
         else if (emote.startsWith("dance"))
         {
-            if (ai_lib.isHumanoid(self))
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
             {
                 setAnimationMood(self, "themepark_oola");
                 ai_lib.setDefaultCalmMood(self, "themepark_oola");
@@ -875,6 +899,32 @@ public class ai extends script.base_script
             else
             {
                 chat.chat(self, "<This creature cannot dance with you.>");
+            }
+            return SCRIPT_CONTINUE;
+
+        }
+        else if (emote.startsWith("worship"))
+        {
+            if (ai_lib.isHumanoid(self) && getCondition(self) != CONDITION_CONVERSABLE)
+            {
+                chat.chat(self, getRandomArray(EMOTE_WORSHIP_HUMANOID_RESPONSES));
+                int luckChance = rand(0, 99);
+                if (luckChance >= 50)
+                {
+                    float time = 60.0f * 60.0f;
+                    float value = rand(50, 65);
+                    // note, the previous value is equal to 60 minutes with a random pool of 50-65 value
+                    buff.applyBuff(self, "lckConsumable40", time, value);
+                    broadcast(performer, "You have been blessed by " + getEncodedName(self) + "!");
+                }
+                else
+                {
+                    broadcast(performer, "Based on your deity, this creature has no interest in you.");
+                }
+            }
+            else
+            {
+                chat.chat(self, "<This creature is not worth prophetizing.>");
             }
             return SCRIPT_CONTINUE;
 
@@ -1982,9 +2032,9 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor"))
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor") && (!pet_lib.isPet(self) || !beast_lib.isBeast(self)))
         {
-            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Manage Loot *"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("* Decrease Drop Count by 1"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("* Set Loot Table"));
@@ -2076,7 +2126,7 @@ public class ai extends script.base_script
             {
                 if (!hasScript(self, "systems.city.city_actor"))
                 {
-                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out creatures.iff!";
                     int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
                     sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
                 }
@@ -2588,7 +2638,34 @@ public class ai extends script.base_script
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
-        if (getTemplateName(item).equals(TOOL))
+        if (hasScript(item, "item.loot_roll_item"))//loot roll item
+        {
+            if (isHeroicMob(self))
+            {
+                if (hasObjVar(item, "loot_roll.charges"))
+                {
+                    int currentCharges = getIntObjVar(self, "loot.numItems");
+                    int totalCharges = currentCharges + getIntObjVar(item, "loot_roll.charges");
+                    setObjVar(self, "loot.numItems", totalCharges);
+                    broadcast(giver, "You have added " + getIntObjVar(item, "loot_roll.charges") + " to the loot roll.");
+                    destroyObject(item);
+                }
+                else
+                {
+                    broadcast(giver, "This item is not properly configured. Please configure before use.");
+                    putIn(item, utils.getInventoryContainer(giver), giver);
+                    return SCRIPT_CONTINUE;
+                }
+            }
+            else
+            {
+                broadcast(giver, "This creature does not qualify for additional loot rolls.");
+                putIn(item, utils.getInventoryContainer(giver), giver);
+                return SCRIPT_CONTINUE;
+            }
+
+        }
+        if (getTemplateName(item).equals(TOOL)) // city actors
         {
             if (!hasObjVar(item, "actorMade"))
             {
@@ -2719,6 +2796,15 @@ public class ai extends script.base_script
             messageTo(self, "removeMeatlumpRecruitmentScriptVar", null, 82800, false);
         }
         return SCRIPT_CONTINUE;
+    }
+
+    private boolean isHeroicMob(obj_id self)
+    {
+        if (getCreatureName(self).startsWith("heroic_"))
+        {
+            return true;
+        }
+        return false;
     }
 
     public int removeMeatlumpRecruitmentScriptVar(obj_id self, dictionary params) throws InterruptedException

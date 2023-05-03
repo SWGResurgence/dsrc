@@ -10,15 +10,18 @@ public class gcw_city_kit_patrol extends script.systems.gcw.gcw_city_kit
     public gcw_city_kit_patrol()
     {
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Patrol Construction Site");
         utils.setScriptVar(pylon, "gcw.name", "Patrol Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_patrol");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)

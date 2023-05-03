@@ -1,13 +1,9 @@
 package script.library;
 
 import script.*;
-import script.library.groundquests;
 
 public class minigame extends script.base_script
 {
-    public minigame()
-    {
-    }
     public static final String SCRIPT_FISHING_PLAYER = "fishing.player";
     public static final String SCRIPT_FISHING_NPC = "fishing.npc";
     public static final String SCRIPT_FISHING_POLE = "fishing.pole";
@@ -87,17 +83,17 @@ public class minigame extends script.base_script
     public static final int FS_CAUGHT = 5;
     public static final int FS_SNAG = 6;
     public static final int FS_LOOT = 7;
-    public static final String[] FISHING_STATUS = 
-    {
-        "None",
-        "Just Cast Line...",
-        "Waiting.....",
-        "Nibble...",
-        "BITE!",
-        "CAUGHT SOMETHING!",
-        "Line Snagged?",
-        "CAUGHT SOMETHING!"
-    };
+    public static final String[] FISHING_STATUS =
+            {
+                    "None",
+                    "Just Cast Line...",
+                    "Waiting.....",
+                    "Nibble...",
+                    "BITE!",
+                    "CAUGHT SOMETHING!",
+                    "Line Snagged?",
+                    "CAUGHT SOMETHING!"
+            };
     public static final int FA_NONE = 0;
     public static final int FA_TUG_UP = 1;
     public static final int FA_TUG_RIGHT = 2;
@@ -105,23 +101,23 @@ public class minigame extends script.base_script
     public static final int FA_SMALL_REEL = 4;
     public static final int FA_STOP_FISHING = 5;
     public static final int FA_MAX = 5;
-    public static final String[] FISHING_ACTIONS = 
-    {
-        "None",
-        "Tug Up",
-        "Tug Right",
-        "Tug Left",
-        "Small Reel",
-        "Stop Fishing"
-    };
-    public static final String[] ENCODED_FISHING_ACTIONS = 
-    {
-        "@" + STF_FISH + ":fa_tug_up",
-        "@" + STF_FISH + ":fa_tug_right",
-        "@" + STF_FISH + ":fa_tug_left",
-        "@" + STF_FISH + ":fa_small_reel",
-        "@" + STF_FISH + ":fa_stop"
-    };
+    public static final String[] FISHING_ACTIONS =
+            {
+                    "None",
+                    "Tug Up",
+                    "Tug Right",
+                    "Tug Left",
+                    "Small Reel",
+                    "Stop Fishing"
+            };
+    public static final String[] ENCODED_FISHING_ACTIONS =
+            {
+                    "@" + STF_FISH + ":fa_tug_up",
+                    "@" + STF_FISH + ":fa_tug_right",
+                    "@" + STF_FISH + ":fa_tug_left",
+                    "@" + STF_FISH + ":fa_small_reel",
+                    "@" + STF_FISH + ":fa_stop"
+            };
     public static final String SCRIPTVAR_IN_USE = "fishing.inUse";
     public static final String VAR_FISHING_BAIT_BASE = "fishing.bait";
     public static final String VAR_FISHING_BAIT_STATUS = VAR_FISHING_BAIT_BASE + ".status";
@@ -129,19 +125,23 @@ public class minigame extends script.base_script
     public static final int BS_FRESH = 1;
     public static final int BS_SOGGY = 2;
     public static final int BS_MUSH = 3;
-    public static final String[] BAIT_STATUS = 
-    {
-        "None",
-        "Fresh",
-        "Soggy",
-        "Mush"
-    };
+    public static final String[] BAIT_STATUS =
+            {
+                    "None",
+                    "Fresh",
+                    "Soggy",
+                    "Mush"
+            };
     public static final String HANDLER_FISHING_TICK = "handleFishingTick";
     public static final String HANDLER_FISHING_SUI = "handleFishingSui";
     public static final String HANDLER_PLAY_CAST_SPLASH = "handlePlayCastSplash";
     public static final String HANDLER_REEL_IN = "handleReelIn";
     public static final String HANDLER_CAUGHT_SOMETHING = "handleCaughtSomething";
     public static final String HANDLER_BAIT_SUI = "handleBaitSui";
+    public minigame()
+    {
+    }
+
     public static boolean startFishing(obj_id target) throws InterruptedException
     {
         LOG("fishing", "************ startFishing: now = " + getGameTime() + " ****************");
@@ -180,7 +180,7 @@ public class minigame extends script.base_script
                 sendSystemMessage(target, new string_id(STF_FISH, "not_this_vehicle"));
                 return false;
             }
-            else 
+            else
             {
                 isOnYodaChair = true;
             }
@@ -200,7 +200,7 @@ public class minigame extends script.base_script
             attachScript(target, SCRIPT_FISHING_PLAYER);
             sendSystemMessage(target, new string_id(STF_FISH, "cast_line"));
         }
-        else 
+        else
         {
             attachScript(target, SCRIPT_FISHING_NPC);
         }
@@ -227,6 +227,7 @@ public class minigame extends script.base_script
         messageTo(target, HANDLER_PLAY_CAST_SPLASH, params, castTime, false);
         return true;
     }
+
     public static void stopFishing(obj_id target, boolean animate) throws InterruptedException
     {
         LOG("fishing", "************ stopFishing: now = " + getGameTime() + " ****************");
@@ -253,15 +254,17 @@ public class minigame extends script.base_script
             detachScript(target, SCRIPT_FISHING_PLAYER);
             sendSystemMessage(target, new string_id(STF_FISH, "stop_fishing"));
         }
-        else 
+        else
         {
             detachScript(target, SCRIPT_FISHING_NPC);
         }
     }
+
     public static void stopFishing(obj_id target) throws InterruptedException
     {
         stopFishing(target, true);
     }
+
     public static boolean isPoleInUse(obj_id pole) throws InterruptedException
     {
         if (!isIdValid(pole))
@@ -270,6 +273,7 @@ public class minigame extends script.base_script
         }
         return utils.hasScriptVar(pole, SCRIPTVAR_IN_USE);
     }
+
     public static void playCastSplash(obj_id target, dictionary params) throws InterruptedException
     {
         if (!isIdValid(target) || (params == null) || (params.isEmpty()))
@@ -299,6 +303,7 @@ public class minigame extends script.base_script
             utils.setScriptVar(target, SCRIPTVAR_MARKER, marker);
         }
     }
+
     public static void initializeFishingData(obj_id target, obj_id pole, location castLoc) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(pole) || (castLoc == null))
@@ -321,6 +326,7 @@ public class minigame extends script.base_script
             setObjVar(bait, VAR_FISHING_BAIT_STATUS, BS_FRESH);
         }
     }
+
     public static void cleanupFishing(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -337,7 +343,7 @@ public class minigame extends script.base_script
         {
             doAnimationAction(target, "fishing_reel");
         }
-        else 
+        else
         {
             utils.removeScriptVar(target, "noAnimate");
         }
@@ -360,6 +366,7 @@ public class minigame extends script.base_script
         closeFishingSui(target);
         chat.resetTempAnimationMood(target);
     }
+
     public static boolean isFishing(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -368,18 +375,16 @@ public class minigame extends script.base_script
         }
         return hasScript(target, SCRIPT_FISHING_PLAYER) || hasScript(target, SCRIPT_FISHING_NPC);
     }
+
     public static boolean isFishingPole(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return false;
         }
-        if (!hasScript(target, SCRIPT_FISHING_POLE))
-        {
-            return false;
-        }
-        return true;
+        return hasScript(target, SCRIPT_FISHING_POLE);
     }
+
     public static void updateBaitStatus(obj_id target) throws InterruptedException
     {
         LOG("fishing", "updateBaitStatus: entering...");
@@ -430,11 +435,12 @@ public class minigame extends script.base_script
             LOG("fishing", "updateBaitStatus: bait just went from mush to nothing...");
             lostBait(target);
         }
-        else 
+        else
         {
             setObjVar(bait, VAR_FISHING_BAIT_STATUS, status);
         }
     }
+
     public static void cleanupBait(obj_id target, obj_id pole) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(pole))
@@ -460,7 +466,7 @@ public class minigame extends script.base_script
                 prose_package ppTossBait = prose.getPackage(PROSE_TOSS_BAIT, bait, stringStatus);
                 sendSystemMessageProse(target, ppTossBait);
             }
-            else 
+            else
             {
                 sendSystemMessage(target, SID_TOSS_BAIT);
             }
@@ -475,6 +481,7 @@ public class minigame extends script.base_script
             removeObjVar(bait, VAR_FISHING_BAIT_STATUS);
         }
     }
+
     public static boolean isFishingPoleBaited(obj_id pole) throws InterruptedException
     {
         if (!isIdValid(pole))
@@ -482,12 +489,9 @@ public class minigame extends script.base_script
             return false;
         }
         obj_id bait = getBait(pole);
-        if (isIdValid(bait))
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(bait);
     }
+
     public static obj_id getBait(obj_id pole) throws InterruptedException
     {
         if (!isIdValid(pole))
@@ -501,6 +505,7 @@ public class minigame extends script.base_script
         }
         return null;
     }
+
     public static int getBaitStatus(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -531,6 +536,7 @@ public class minigame extends script.base_script
         }
         return getIntObjVar(bait, VAR_FISHING_BAIT_STATUS);
     }
+
     public static String getEncodedBaitStatus(int status) throws InterruptedException
     {
         if (status < 0 || status > BAIT_STATUS.length - 1)
@@ -541,6 +547,7 @@ public class minigame extends script.base_script
         string_id sidStatus = new string_id(STF_FISH, baitStatus);
         return utils.packStringId(sidStatus);
     }
+
     public static location getFishingCastLocation(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -567,7 +574,7 @@ public class minigame extends script.base_script
                     max = range;
                 }
             }
-            else 
+            else
             {
                 if (i == 2)
                 {
@@ -596,6 +603,7 @@ public class minigame extends script.base_script
         castLoc.y = getWaterTableHeight(castLoc);
         return castLoc;
     }
+
     public static float getFishingCastTime(float range) throws InterruptedException
     {
         if (range < 0.0f)
@@ -604,16 +612,18 @@ public class minigame extends script.base_script
         }
         return 3.0f;
     }
+
     public static boolean isLocationFishable(location loc) throws InterruptedException
     {
         if (loc != null)
         {
-            location testLoc = (location)loc.clone();
+            location testLoc = (location) loc.clone();
             testLoc.y = getHeightAtLocation(loc.x, loc.z);
             return isBelowWater(testLoc);
         }
         return false;
     }
+
     public static int showFishingSui(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || !isFishing(target))
@@ -654,7 +664,7 @@ public class minigame extends script.base_script
         {
             prompt += "LINE RANGE  : " + ((String.valueOf(lineRange))).substring(0, 5) + " \n";
         }
-        else 
+        else
         {
             prompt += "LINE RANGE  : " + ((String.valueOf(lineRange))).substring(0, 4) + " \n";
         }
@@ -668,6 +678,7 @@ public class minigame extends script.base_script
         }
         return pid;
     }
+
     public static String getStars(float eff) throws InterruptedException
     {
         if (eff < 0.16f)
@@ -692,6 +703,7 @@ public class minigame extends script.base_script
         }
         return "*****";
     }
+
     public static void closeFishingSui(obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(target, SCRIPTVAR_SUI))
@@ -701,6 +713,7 @@ public class minigame extends script.base_script
             utils.removeScriptVar(target, SCRIPTVAR_SUI);
         }
     }
+
     public static void defaultFishingUpdate(obj_id target, int action) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -714,34 +727,35 @@ public class minigame extends script.base_script
             case FA_TUG_UP:
             case FA_TUG_RIGHT:
             case FA_TUG_LEFT:
-            if (status == FS_NIBBLE)
-            {
-                if (checkForBite(target, -0.25f))
+                if (status == FS_NIBBLE)
                 {
-                    setWait = false;
+                    if (checkForBite(target, -0.25f))
+                    {
+                        setWait = false;
+                    }
                 }
-            }
-            else if (status == FS_BITE)
-            {
-                if (checkForCatch(target, -0.25f))
+                else if (status == FS_BITE)
                 {
-                    setWait = false;
+                    if (checkForCatch(target, -0.25f))
+                    {
+                        setWait = false;
+                    }
                 }
-            }
-            break;
+                break;
             case FA_SMALL_REEL:
-            updateFishingLocation(target, action);
-            break;
+                updateFishingLocation(target, action);
+                break;
             case FA_NONE:
             default:
-            updateFishingWaitState(target);
-            break;
+                updateFishingWaitState(target);
+                break;
         }
         if (setWait)
         {
             utils.setScriptVar(target, SCRIPTVAR_STATUS, FS_WAIT);
         }
     }
+
     public static void updateFishingLocation(obj_id target, int action, boolean caught) throws InterruptedException
     {
         LOG("fishing", "updateFishingLocation: entered...");
@@ -764,7 +778,7 @@ public class minigame extends script.base_script
         }
         float currentDistance = getDistance(here, there);
         LOG("fishing", "updateFishingLocation: here = " + here.toString());
-        LOG("fishing", "updateFishingLocation: there = " + there.toString());
+        LOG("fishing", "updateFishingLocation: there = " + there);
         LOG("fishing", "updateFishingLocation: pre-update distance = " + currentDistance);
         float dist = 0.0f;
         switch (action)
@@ -772,27 +786,27 @@ public class minigame extends script.base_script
             case FA_TUG_UP:
             case FA_TUG_RIGHT:
             case FA_TUG_LEFT:
-            dist = 0.25f;
-            break;
+                dist = 0.25f;
+                break;
             case FA_SMALL_REEL:
             default:
-            dist = 0.75f;
-            break;
+                dist = 0.75f;
+                break;
         }
         switch (action)
         {
             case FA_TUG_UP:
-            doAnimationAction(target, "fishing_tug_back");
-            break;
+                doAnimationAction(target, "fishing_tug_back");
+                break;
             case FA_TUG_RIGHT:
-            doAnimationAction(target, "fishing_tug_right");
-            break;
+                doAnimationAction(target, "fishing_tug_right");
+                break;
             case FA_TUG_LEFT:
-            doAnimationAction(target, "fishing_tug_left");
-            break;
+                doAnimationAction(target, "fishing_tug_left");
+                break;
             case FA_SMALL_REEL:
-            doAnimationAction(target, "fishing_reel");
-            break;
+                doAnimationAction(target, "fishing_reel");
+                break;
         }
         LOG("fishing", "updateFishingLocation: action distance = " + dist);
         if (currentDistance < dist && !caught)
@@ -806,16 +820,16 @@ public class minigame extends script.base_script
         switch (action)
         {
             case FA_TUG_RIGHT:
-            dTheta = rand(-45.0f, -15.0f);
-            break;
+                dTheta = rand(-45.0f, -15.0f);
+                break;
             case FA_TUG_LEFT:
-            dTheta = rand(15.0f, 45.0f);
-            break;
+                dTheta = rand(15.0f, 45.0f);
+                break;
             case FA_TUG_UP:
             case FA_SMALL_REEL:
             default:
-            dTheta = rand(-5.0f, 5.0f);
-            break;
+                dTheta = rand(-5.0f, 5.0f);
+                break;
         }
         LOG("fishing", "updateFishingLocation: heading to player = " + theta);
         LOG("fishing", "updateFishingLocation: action heading delta = " + dTheta);
@@ -829,7 +843,7 @@ public class minigame extends script.base_script
             return;
         }
         loc.y = getWaterTableHeight(loc);
-        LOG("fishing", "updateFishingLocation: revised location = " + loc.toString());
+        LOG("fishing", "updateFishingLocation: revised location = " + loc);
         if (!isLocationFishable(loc))
         {
             LOG("fishing", "updateFishingLocation: revised location not fishable.. stop fishing...");
@@ -842,10 +856,12 @@ public class minigame extends script.base_script
         faceTo(marker, target);
         checkForSnag(target, loc);
     }
+
     public static void updateFishingLocation(obj_id target, int action) throws InterruptedException
     {
         updateFishingLocation(target, action, false);
     }
+
     public static void setFishingState(obj_id target, int state) throws InterruptedException
     {
         LOG("fishing", "setFishingState: entered... target = " + target + " state = " + state);
@@ -857,35 +873,36 @@ public class minigame extends script.base_script
         switch (state)
         {
             case FS_WAIT:
-            break;
+                break;
             case FS_NIBBLE:
-            markerFlyText(target, FLY_NIBBLE, colors.GREEN);
-            sendSystemMessage(target, SID_FS_NIBBLE);
-            break;
+                markerFlyText(target, FLY_NIBBLE, colors.GREEN);
+                sendSystemMessage(target, SID_FS_NIBBLE);
+                break;
             case FS_BITE:
-            markerFlyText(target, FLY_BITE, colors.SALMON);
-            sendSystemMessage(target, SID_FS_BITE);
-            break;
+                markerFlyText(target, FLY_BITE, colors.SALMON);
+                sendSystemMessage(target, SID_FS_BITE);
+                break;
             case FS_CAUGHT:
-            markerFlyText(target, FLY_CATCH, colors.GOLDYELLOW);
-            sendSystemMessage(target, SID_FS_CAUGHT);
-            break;
+                markerFlyText(target, FLY_CATCH, colors.GOLDYELLOW);
+                sendSystemMessage(target, SID_FS_CAUGHT);
+                break;
             case FS_SNAG:
-            markerFlyText(target, FLY_SNAG, colors.ORANGERED);
-            sendSystemMessage(target, SID_FS_SNAG);
-            break;
+                markerFlyText(target, FLY_SNAG, colors.ORANGERED);
+                sendSystemMessage(target, SID_FS_SNAG);
+                break;
             case FS_LOOT:
-            markerFlyText(target, FLY_CATCH, colors.GOLDYELLOW);
-            sendSystemMessage(target, SID_FS_LOOT);
-            break;
+                markerFlyText(target, FLY_CATCH, colors.GOLDYELLOW);
+                sendSystemMessage(target, SID_FS_LOOT);
+                break;
             default:
-            break;
+                break;
         }
         if (state == FS_LOOT || state == FS_CAUGHT)
         {
             utils.setScriptVar(target, SCRIPTVAR_CAUGHT, true);
         }
     }
+
     public static void updateFishingWaitState(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -900,6 +917,7 @@ public class minigame extends script.base_script
         bonus += rand(0.0f, 0.05f);
         utils.setScriptVar(target, SCRIPTVAR_BONUS, bonus);
     }
+
     public static boolean checkForNibble(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -951,6 +969,7 @@ public class minigame extends script.base_script
         }
         return false;
     }
+
     public static boolean checkForBite(obj_id target, float superBonus) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -999,10 +1018,12 @@ public class minigame extends script.base_script
         }
         return false;
     }
+
     public static boolean checkForBite(obj_id target) throws InterruptedException
     {
         return checkForBite(target, 0.0f);
     }
+
     public static boolean checkForCatch(obj_id target, float superBonus) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1024,7 +1045,7 @@ public class minigame extends script.base_script
         {
             caughtFish = true;
         }
-        else 
+        else
         {
             float poleBonus = getPoleBonus(target);
             float chance = 0.25f + bonus + superBonus + poleBonus;
@@ -1041,10 +1062,12 @@ public class minigame extends script.base_script
         }
         return false;
     }
+
     public static boolean checkForCatch(obj_id target) throws InterruptedException
     {
         return checkForCatch(target, 0.0f);
     }
+
     public static boolean checkForSnag(obj_id target, location loc) throws InterruptedException
     {
         if (!isIdValid(target) || loc == null)
@@ -1060,6 +1083,7 @@ public class minigame extends script.base_script
         }
         return false;
     }
+
     public static float getFishEfficiency(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -1075,6 +1099,7 @@ public class minigame extends script.base_script
         }
         return getResourceEfficiency(resourceId, loc);
     }
+
     public static float getVegetationSnagFactor(location loc) throws InterruptedException
     {
         if (loc == null)
@@ -1088,6 +1113,7 @@ public class minigame extends script.base_script
         }
         return getResourceEfficiency(resourceId, loc);
     }
+
     public static void freeSnaggedLine(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1098,6 +1124,7 @@ public class minigame extends script.base_script
         setFishingState(target, FS_WAIT);
         utils.removeScriptVar(target, SCRIPTVAR_BONUS);
     }
+
     public static void snapFishingLine(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1108,6 +1135,7 @@ public class minigame extends script.base_script
         decrementBait(target);
         stopFishing(target);
     }
+
     public static void spoolFishingLine(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1118,6 +1146,7 @@ public class minigame extends script.base_script
         decrementBait(target);
         stopFishing(target);
     }
+
     public static void caughtLoot(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1127,6 +1156,7 @@ public class minigame extends script.base_script
         setFishingState(target, FS_LOOT);
         utils.removeScriptVar(target, SCRIPTVAR_BONUS);
     }
+
     public static void lostBait(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1141,6 +1171,7 @@ public class minigame extends script.base_script
         sendSystemMessage(target, SID_LOST_BAIT);
         stopFishing(target);
     }
+
     public static void decrementBait(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1181,6 +1212,7 @@ public class minigame extends script.base_script
             }
         }
     }
+
     public static int[] getGoodActions() throws InterruptedException
     {
         int numActions = rand(1, 2);
@@ -1191,6 +1223,7 @@ public class minigame extends script.base_script
         }
         return ret;
     }
+
     public static void confirmReelIn(obj_id target, location castLoc) throws InterruptedException
     {
         if (!isIdValid(target) || (castLoc == null))
@@ -1208,7 +1241,7 @@ public class minigame extends script.base_script
         }
         int base_chance = 40;
         float bonus = utils.getFloatScriptVar(target, SCRIPTVAR_BONUS);
-        int chance = base_chance + (int)(bonus * 100);
+        int chance = base_chance + (int) (bonus * 100);
         boolean lostCatch = false;
         int roll = rand(0, 100);
         if (isGod(target))
@@ -1223,9 +1256,8 @@ public class minigame extends script.base_script
         if (lostCatch)
         {
             loseCatch(target);
-            return;
         }
-        else 
+        else
         {
             sendSystemMessage(target, SID_REEL_IN);
             float delay = rand(1.5f, 5.0f);
@@ -1234,6 +1266,7 @@ public class minigame extends script.base_script
             messageTo(target, HANDLER_REEL_IN, params, delay, false);
         }
     }
+
     public static void loseCatch(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1243,6 +1276,7 @@ public class minigame extends script.base_script
         sendSystemMessage(target, SID_LOST_CATCH);
         lostBait(target);
     }
+
     public static void markerFlyText(obj_id target, string_id sid, color textColor) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1264,6 +1298,7 @@ public class minigame extends script.base_script
         }
         showFlyText(marker, sid, 1.0f, textColor);
     }
+
     public static float getPoleBonus(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1283,6 +1318,7 @@ public class minigame extends script.base_script
         float bonus = useModifier / 500.0f;
         return bonus;
     }
+
     public static obj_id spawnFishingFish(obj_id target, location castLoc) throws InterruptedException
     {
         LOG("fishingLog", "target = " + target);
@@ -1315,7 +1351,7 @@ public class minigame extends script.base_script
             fish = static_item.createNewItemFunction(fishName, inv);
             LOG("fishingLog", "Static Fish=  " + fish);
         }
-        else 
+        else
         {
             dictionary templateRow = dataTableGetRow(TBL_TEMPLATE, fishName);
             String templateFish = templateRow.getString("template");
@@ -1347,6 +1383,7 @@ public class minigame extends script.base_script
         fishing.handleElusiveFishRollAndWin(target, fish);
         return fish;
     }
+
     public static dictionary getFishData(obj_id target, location castLoc) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1364,7 +1401,7 @@ public class minigame extends script.base_script
             String planetName = getCurrentSceneName();
             fishLootTable = "datatables/fishing/fish/" + planetName + ".iff";
         }
-        else 
+        else
         {
             fishLootTable = "datatables/fishing/loot/generic.iff";
         }
@@ -1383,6 +1420,7 @@ public class minigame extends script.base_script
         }
         return dataTableGetRow(fishLootTable, name);
     }
+
     public static boolean setFishData(obj_id fish, dictionary params, obj_id player, location castLoc) throws InterruptedException
     {
         LOG("fishingLog", "static fish - after passing to SetFishData -  " + fish);
@@ -1448,7 +1486,7 @@ public class minigame extends script.base_script
             length = absoluteLengthMax;
         }
         setObjVar(fish, VAR_FISH_LENGTH, length);
-        int xp = (int)(90.0f * (length / lengthNorm));
+        int xp = (int) (90.0f * (length / lengthNorm));
         utils.setScriptVar(fish, "fish_xp", xp);
         int resourceMin = params.getInt(COL_RESOURCE_MIN);
         int resourceNorm = params.getInt(COL_RESOURCE_NORM);
@@ -1488,7 +1526,7 @@ public class minigame extends script.base_script
         if (resourceMax != resourceMin)
         {
             float percentile = (resourceAmt - resourceMin) / (resourceMax - resourceMin);
-            chumAmt = chumNorm + (int)rand(-percentile, percentile);
+            chumAmt = chumNorm + (int) rand(-percentile, percentile);
         }
         if (chumAmt > 0)
         {
@@ -1510,6 +1548,7 @@ public class minigame extends script.base_script
         }
         return true;
     }
+
     public static boolean filetFish(obj_id target, obj_id fish) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(fish))
@@ -1538,20 +1577,18 @@ public class minigame extends script.base_script
         {
             sendSystemMessage(target, new string_id(STF_FISH, "good_filet"));
         }
-        else 
+        else
         {
             sendSystemMessage(target, new string_id(STF_FISH, "no_resource"));
         }
         return trophyFish(target, fish);
     }
+
     public static boolean trophyFish(obj_id target, obj_id fish) throws InterruptedException
     {
-        if (!isIdValid(target) || !isIdValid(fish))
-        {
-            return false;
-        }
-        return true;
+        return isIdValid(target) && isIdValid(fish);
     }
+
     public static void createVegetation(obj_id target, obj_id inv, location castLoc) throws InterruptedException
     {
         if (!isIdValid(target) || !isIdValid(inv) || castLoc == null)
@@ -1561,6 +1598,7 @@ public class minigame extends script.base_script
         sendSystemMessage(target, new string_id(STF_FISH, "shucks_veggies"));
         resource.createRandom("vegetable_greens", 2, castLoc, inv, target, 1);
     }
+
     public static obj_id[] spawnFishingLoot(obj_id target, location castLoc) throws InterruptedException
     {
         if (!isIdValid(target) || castLoc == null)

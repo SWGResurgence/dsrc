@@ -212,10 +212,10 @@ public class battle_controller extends script.base_script {
     }
 
     /*
-    * Stagger is the amount of time (in hours) to stagger the battles.
-      * ex:
-      * 1. If a battle starts at 1PM and the stagger is 2 (hours) then the next battle will occur at 3PM.
-      * 2. If the stagger is 0, the next battle will start as soon as the first one finishes.
+     * Stagger is the amount of time (in hours) to stagger the battles.
+     * ex:
+     * 1. If a battle starts at 1PM and the stagger is 2 (hours) then the next battle will occur at 3PM.
+     * 2. If the stagger is 0, the next battle will start as soon as the first one finishes.
      */
     public int getStagger(String zone) {
         int stagger = 0;
@@ -283,7 +283,7 @@ public class battle_controller extends script.base_script {
         for (String[] scene : battle_controller.BATTLE_SCENES){
             if(scene[0].equals(zone)){
                 obj_id spawner = getObjIdObjVar(controller, "space_gcw." + scene[0] + ".spawner");
-                
+
                 if(getIntObjVar(controller, "space_gcw." + spawner + ".active") == 1){
                     return -2;
                 }

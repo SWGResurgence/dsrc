@@ -6,9 +6,6 @@ import script.string_id;
 
 public class check_inform_respec extends script.base_script
 {
-    public check_inform_respec()
-    {
-    }
     public static final string_id POPUP_RESPEC_HAS_TOKEN_PROMPT = new string_id("ui_respec", "server_inform_respec_token");
     public static final string_id POPUP_RESPEC_AUTHORIZED_PROMPT = new string_id("ui_respec", "server_inform_respec_authorized");
     public static final string_id POPUP_RESPEC_AUTHORIZED_NO_COUNT_PROMPT = new string_id("ui_respec", "server_inform_respec_authorized_no_count");
@@ -26,11 +23,16 @@ public class check_inform_respec extends script.base_script
     public static final String PROPERTY_SIZE = "Size";
     public static final String VALUE_SIZE = "450,375";
     public static final String SKILLS_RESPEC_ACTION = "/ui action skillsRespec";
+    public check_inform_respec()
+    {
+    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         detachScript(self, respec.SCRIPT_CHECK_INFORM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, respec.SCRIPT_CHECK_INFORM);

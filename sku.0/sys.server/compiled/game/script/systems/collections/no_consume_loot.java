@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class no_consume_loot extends script.base_script
 {
-    public no_consume_loot()
-    {
-    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPTVAR_LIST = "collections.availableCollections";
     public static final String OBJVAR_SLOT_GRANTED = "collectionSlotGrantedTo";
@@ -22,6 +19,10 @@ public class no_consume_loot extends script.base_script
     public static final string_id STR_COLLECTION_LIST_PROMPT = new string_id("collection", "collection_list_prompt");
     public static final string_id STR_COLLECTION_LIST_TITLE = new string_id("collection", "collection_list_title");
     public static final string_id SID_ALREADY_BEEN_USED = new string_id("collection", "already_been_used");
+    public no_consume_loot()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -31,6 +32,7 @@ public class no_consume_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -53,7 +55,7 @@ public class no_consume_loot extends script.base_script
                 boolean success = getUiConsumeMessageBox(self, player);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, collection.SID_NEED_TO_ACTIVATE_COLLECTION);
                 return SCRIPT_CONTINUE;
@@ -61,6 +63,7 @@ public class no_consume_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -91,12 +94,12 @@ public class no_consume_loot extends script.base_script
                         {
                             attribs[idx] = "@collection_n:" + collectionsForItem[i] + "_unfinished";
                         }
-                        else 
+                        else
                         {
                             attribs[idx] = "@collection_n:" + collectionsForItem[i] + "_finished";
                         }
                     }
-                    else 
+                    else
                     {
                         attribs[idx] = "@collection_n:" + collectionsForItem[i] + "_finished";
                     }
@@ -106,6 +109,7 @@ public class no_consume_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiAddToCollection(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -147,7 +151,7 @@ public class no_consume_loot extends script.base_script
         }
         if (availableCollections != null && availableCollections.length > 1)
         {
-            String[] dataStored = (String[])availableCollections.clone();
+            String[] dataStored = availableCollections.clone();
             utils.setScriptVar(player, SCRIPTVAR_LIST, dataStored);
             for (int i = 0; i < availableCollections.length; ++i)
             {
@@ -171,7 +175,7 @@ public class no_consume_loot extends script.base_script
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will now be destroyed.");
                     setObjVar(collectionItem, OBJVAR_SLOT_GRANTED, player);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was NOT consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will NOT be destroyed.");
                     sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -179,20 +183,21 @@ public class no_consume_loot extends script.base_script
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ALREADY_HAVE_SLOT);
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_ALREADY_FINISHED_COLLECTION);
         }
         sui.removePid(player, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public int onCollectionListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -232,13 +237,18 @@ public class no_consume_loot extends script.base_script
         utils.removeScriptVarTree(player, "collections");
         String slotName = "";
         String collectionName = availableCollections[idx];
-        for (String baseSlotName : baseSlotNames) {
+        for (String baseSlotName : baseSlotNames)
+        {
             boolean found = false;
             String[] splitSlotNames = split(baseSlotName, ':');
-            for (int j = 0; j < splitSlotNames.length; j += 2) {
-                if (collectionName.equals(splitSlotNames[j])) {
-                    if (!hasCompletedCollection(player, collectionName)) {
-                        if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1])) {
+            for (int j = 0; j < splitSlotNames.length; j += 2)
+            {
+                if (collectionName.equals(splitSlotNames[j]))
+                {
+                    if (!hasCompletedCollection(player, collectionName))
+                    {
+                        if (!hasCompletedCollectionSlot(player, splitSlotNames[j + 1]))
+                        {
                             slotName = splitSlotNames[j + 1];
                             found = true;
                             break;
@@ -246,7 +256,8 @@ public class no_consume_loot extends script.base_script
                     }
                 }
             }
-            if (found) {
+            if (found)
+            {
                 break;
             }
         }
@@ -259,7 +270,7 @@ public class no_consume_loot extends script.base_script
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will now be destroyed.");
                     setObjVar(collectionItem, OBJVAR_SLOT_GRANTED, player);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was NOT consumed into a collection, for player " + getFirstName(player) + "(" + player + "). collectionItem(" + collectionItem + ") will NOT be destroyed.");
                     sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -267,20 +278,21 @@ public class no_consume_loot extends script.base_script
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ALREADY_HAVE_SLOT);
                 sui.removePid(player, PID_NAME);
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_ALREADY_FINISHED_COLLECTION);
         }
         sui.removePid(player, PID_NAME);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getUiConsumeMessageBox(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !isValidId(player))

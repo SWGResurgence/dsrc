@@ -6,12 +6,13 @@ import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
 import script.string_id;
-
+@SuppressWarnings("unused")
 public class portamedic extends script.base_script
 {
     public static int COOLDOWN_TIME = 3600 * 2; // 2 hours
     public static float BUFF_MODIFIER = 75.0f;
     public static int currentGameTime = getCalendarTime();
+
     public portamedic()
     {
     }

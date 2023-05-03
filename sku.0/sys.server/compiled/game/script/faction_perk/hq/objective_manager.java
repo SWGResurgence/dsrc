@@ -14,10 +14,10 @@ public class objective_manager extends script.base_script
     {
         if (!hasObjVar(self, "isPvpBase"))
         {
-            messageTo(self, "handlePveVulnerability", null, VULN_DELAY, true);
+            messageTo(self, "handlePveVulnerability", null, (float) VULN_DELAY, true);
             return SCRIPT_CONTINUE;
         }
-        messageTo(self, "handleLoadVulnerability", null, VULN_DELAY, true);
+        messageTo(self, "handleLoadVulnerability", null, (float) VULN_DELAY, true);
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException

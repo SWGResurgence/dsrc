@@ -5,9 +5,6 @@ import script.library.*;
 
 public class survey_tool_script extends script.base_script
 {
-    public survey_tool_script()
-    {
-    }
     public static final int MIN_SURVEY_POINTS = 3;
     public static final int MAX_SURVEY_POINTS = 9;
     public static final int MIN_SURVEY_RANGE = 32;
@@ -43,6 +40,10 @@ public class survey_tool_script extends script.base_script
     public static final string_id SID_NO_SURVEY_WATER = new string_id("survey", "no_survey_in_water");
     public static final String STF = "survey";
     public static dictionary dctParams = new dictionary();
+    public survey_tool_script()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, resource.VAR_SETTINGS_INDEX, 0);
@@ -50,6 +51,7 @@ public class survey_tool_script extends script.base_script
         setObjVar(self, resource.VAR_SURVEY_RESOLUTION_VALUE, 3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "surveying.player"))
@@ -61,6 +63,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "surveying.takingSamples"))
@@ -73,6 +76,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         String resource_class = getStringObjVar(self, resource.VAR_SURVEY_CLASS);
@@ -112,7 +116,7 @@ public class survey_tool_script extends script.base_script
             {
                 mnuOptions = mi.addRootMenu(menu_info_types.SERVER_ITEM_OPTIONS, SID_TOOL_OPTIONS);
             }
-            else 
+            else
             {
                 mnuOptions = mid.getId();
             }
@@ -123,6 +127,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -202,6 +207,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRequestSurvey(obj_id self, obj_id player, String resource_type) throws InterruptedException
     {
         obj_id containPlayer = getTopMostContainer(player);
@@ -286,7 +292,8 @@ public class survey_tool_script extends script.base_script
         utils.setScriptVar(self, "surveying.surveying", 1);
         utils.setScriptVar(self, "surveying.player", player);
         String resType = getStringObjVar(self, "survey.resource_class");
-        switch (resType) {
+        switch (resType)
+        {
             case "gas":
                 playClientEffectLoc(player, "clienteffect/survey_tool_gas.cef", getLocation(player), 0.0f);
                 break;
@@ -324,6 +331,7 @@ public class survey_tool_script extends script.base_script
         xp.grantCraftingXpChance(self, player, 30);
         return SCRIPT_CONTINUE;
     }
+
     public int finalizeSurvey(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -357,37 +365,52 @@ public class survey_tool_script extends script.base_script
             obj_id[] objMissionArray = getMissionObjects(player);
             if (objMissionArray != null)
             {
-                for (obj_id objMissionData : objMissionArray) {
+                for (obj_id objMissionData : objMissionArray)
+                {
                     String strMissionType = getMissionType(objMissionData);
                     location locSurveyLocation = getLocation(player);
-                    if (strMissionType.equals("survey")) {
+                    if (strMissionType.equals("survey"))
+                    {
                         obj_id objResource = getResourceTypeByName(resource_type);
                         String strResource = getStringObjVar(objMissionData, "strResource");
-                        if (objResource != null) {
-                            if (isResourceDerivedFrom(objResource, strResource) && isResourceDerivedFrom(objResource, resource_class)) {
+                        if (objResource != null)
+                        {
+                            if (isResourceDerivedFrom(objResource, strResource) && isResourceDerivedFrom(objResource, resource_class))
+                            {
                                 int intEffeciency = getIntObjVar(objMissionData, "intEffeciency");
                                 float fltEffeciency = getResourceEfficiency(objResource, locSurveyLocation);
                                 fltEffeciency *= 100.0f;
-                                if (fltEffeciency >= intEffeciency) {
+                                if (fltEffeciency >= intEffeciency)
+                                {
                                     float testDistance = 10000.0f;
                                     location locStartLocation = getLocationObjVar(objMissionData, "locStartLocation");
-                                    if (locStartLocation == null) {
+                                    if (locStartLocation == null)
+                                    {
                                         CustomerServiceLog("survey_mission", "getLocationObjVar for mission data " + objMissionData + " returned null");
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         String strStartPlanet = locStartLocation.area;
                                         String strCurrentPlanet = locSurveyLocation.area;
-                                        if (strStartPlanet.equals(strCurrentPlanet)) {
+                                        if (strStartPlanet.equals(strCurrentPlanet))
+                                        {
                                             float realDistance = getDistance(locStartLocation, locSurveyLocation);
-                                            if (realDistance < 0) {
+                                            if (realDistance < 0)
+                                            {
                                                 CustomerServiceLog("survey_mission", "Could not get a valid distance between " + locStartLocation + " and " + locSurveyLocation);
-                                            } else {
+                                            }
+                                            else
+                                            {
                                                 testDistance = realDistance;
                                             }
                                         }
                                     }
-                                    if (testDistance > MIN_SURVEY_MISSION_DISTANCE) {
+                                    if (testDistance > MIN_SURVEY_MISSION_DISTANCE)
+                                    {
                                         messageTo(objMissionData, "surveySuccess", null, 0, false);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         prose_package pp = new prose_package();
                                         pp.stringId = new string_id("mission/mission_generic", "survey_too_close");
                                         pp.digitInteger = MIN_SURVEY_MISSION_DISTANCE;
@@ -395,24 +418,27 @@ public class survey_tool_script extends script.base_script
                                         sendSystemMessageProse(player, pp);
                                     }
                                 }
-                            } else {
+                            }
+                            else
+                            {
                             }
                         }
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("survey_mission", "NULL MISSION ARRAY");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, resource.SID_SURVEY_ERROR);
         }
         resource.cleanupTool(player, self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkNewbieHandoffSurveyMission(obj_id player, String resource_type) throws InterruptedException
     {
         location surveyLoc = getLocation(player);
@@ -431,16 +457,17 @@ public class survey_tool_script extends script.base_script
                 LOG("newbie_survey_mission", "SUCCESSFUL MISSION!");
                 messageTo(player, "missionSurveyComplete", null, 0, true);
             }
-            else 
+            else
             {
                 LOG("newbie_survey_mission", "Not effecient enough ");
             }
         }
-        else 
+        else
         {
             LOG("newbie_survey_mission", "Not surveying for correct resource");
         }
     }
+
     public int OnRequestCoreSample(obj_id self, obj_id player, String resource_type) throws InterruptedException
     {
         if (hasScript(player, "quest.force_sensitive.fs_survey_player"))
@@ -461,7 +488,7 @@ public class survey_tool_script extends script.base_script
                         removeObjVar(player, "quest.survey.specialResource");
                     }
                 }
-                else 
+                else
                 {
                     removeObjVar(player, "quest.survey.specialResource");
                     sendSystemMessage(player, "", null);
@@ -591,7 +618,7 @@ public class survey_tool_script extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(player, "surveying.radioactive.pid"))
             {
@@ -623,6 +650,7 @@ public class survey_tool_script extends script.base_script
         xp.grantCraftingXpChance(self, player, 30);
         return SCRIPT_CONTINUE;
     }
+
     public int sampleLoop(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -691,7 +719,7 @@ public class survey_tool_script extends script.base_script
         else if (sampleRes == resource.SAMPLE_PAUSE_LOOP_EVENT)
         {
         }
-        else 
+        else
         {
             messageTo(self, "samplingEffect", params, getSurveyToolDelay(player), false);
             messageTo(self, "resourceHarvest", params, getSurveyToolDelay(player) + 2, false);
@@ -702,6 +730,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRadioactiveConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -725,12 +754,13 @@ public class survey_tool_script extends script.base_script
         {
             sendSystemMessageTestingOnly(player, getString(new string_id(STF, "radioactive_sample_known")) + resource_type + ".");
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, getString(new string_id(STF, "radioactive_sample_unknown")));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int samplingEffect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -751,7 +781,8 @@ public class survey_tool_script extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String resType = getStringObjVar(self, "survey.resource_class");
-        switch (resType) {
+        switch (resType)
+        {
             case "gas":
                 playClientEffectLoc(player, "clienteffect/survey_sample_gas.cef", getLocation(player), 0.0f);
                 break;
@@ -773,6 +804,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resourceHarvest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -793,6 +825,7 @@ public class survey_tool_script extends script.base_script
         messageTo(self, "sampleLoop", params, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetRange(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -827,7 +860,7 @@ public class survey_tool_script extends script.base_script
             {
                 setObjVar(self, resource.VAR_SURVEY_RANGE_VALUE, resource.SURVEY_RANGE_MAX);
             }
-            else 
+            else
             {
                 setObjVar(self, resource.VAR_SURVEY_RANGE_VALUE, max_range);
             }
@@ -836,12 +869,12 @@ public class survey_tool_script extends script.base_script
             {
                 setObjVar(self, resource.VAR_SURVEY_RESOLUTION_VALUE, resource.SURVEY_RESOLUTION_MIN);
             }
-            else 
+            else
             {
                 setObjVar(self, resource.VAR_SURVEY_RESOLUTION_VALUE, min_res);
             }
         }
-        else 
+        else
         {
             if (idx > ranges.length - 1)
             {
@@ -855,6 +888,7 @@ public class survey_tool_script extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int continueSampleLoop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -863,6 +897,7 @@ public class survey_tool_script extends script.base_script
         utils.setScriptVar(player, "surveying.outstandingHarvestMessage", getGameTime() + getSurveyToolDelay(player) + 4);
         return SCRIPT_CONTINUE;
     }
+
     public int stopSampleEvent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -870,6 +905,7 @@ public class survey_tool_script extends script.base_script
         queueCommand(player, (-1465754503), player, "No params.", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
+
     public String pickSpecialResourceToGive(obj_id player, String resource) throws InterruptedException
     {
         String special = "";
@@ -883,12 +919,12 @@ public class survey_tool_script extends script.base_script
             {
                 special = "object/tangible/loot/quest/ardanium_ii.iff";
             }
-            else 
+            else
             {
                 special = "object/tangible/loot/quest/wind_crystal.iff";
             }
         }
-        else 
+        else
         {
             int mineralSwitch = rand(1, 3);
             if (mineralSwitch == 1)
@@ -899,21 +935,23 @@ public class survey_tool_script extends script.base_script
             {
                 special = "object/tangible/loot/quest/endrine.iff";
             }
-            else 
+            else
             {
                 special = "object/tangible/loot/quest/rudic.iff";
             }
         }
         return special;
     }
+
     public void setSpecialResourceObjVars(String special, obj_id resource, float efficiency) throws InterruptedException
     {
         if (!isIdValid(resource) || special == null || special.equals(""))
         {
             return;
         }
-        int average = (int)(efficiency * 10.0f);
-        switch (special) {
+        int average = (int) (efficiency * 10.0f);
+        switch (special)
+        {
             case "object/tangible/loot/quest/ardanium_ii.iff":
                 setObjVar(resource, "crafting_components.res_potential_energy", getResourceValue(average));
                 setObjVar(resource, "crafting_components.res_quality", getResourceValue(average));
@@ -938,6 +976,7 @@ public class survey_tool_script extends script.base_script
                 break;
         }
     }
+
     public int getResourceValue(int average) throws InterruptedException
     {
         float value = gaussRand(average, 50.0f);
@@ -949,15 +988,16 @@ public class survey_tool_script extends script.base_script
         {
             value = Math.max(average - 150, 150);
         }
-        return (int)(value);
+        return (int) (value);
     }
+
     public int getSurveyToolDelay(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return SURVEY_TOOL_DELAY;
         }
-        int delay = SURVEY_TOOL_DELAY - (int)getSkillStatisticModifier(player, "expertise_resource_sampling_time_decrease");
+        int delay = SURVEY_TOOL_DELAY - getSkillStatisticModifier(player, "expertise_resource_sampling_time_decrease");
         if (delay <= MIN_SURVEY_TOOL_DELAY)
         {
             delay = MIN_SURVEY_TOOL_DELAY;

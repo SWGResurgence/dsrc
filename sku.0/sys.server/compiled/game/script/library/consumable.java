@@ -4,21 +4,18 @@ import script.*;
 
 public class consumable extends script.base_script
 {
-    public consumable()
-    {
-    }
     public static final float MAX_AFFECT_DISTANCE = 6.0f;
-    public static final String[] STAT_NAME = 
-    {
-        "HEALTH",
-        "CONSTITUTION",
-        "ACTION",
-        "STAMINA",
-        "MIND",
-        "WILLPOWER",
-        "POISON",
-        "DISEASE"
-    };
+    public static final String[] STAT_NAME =
+            {
+                    "HEALTH",
+                    "CONSTITUTION",
+                    "ACTION",
+                    "STAMINA",
+                    "MIND",
+                    "WILLPOWER",
+                    "POISON",
+                    "DISEASE"
+            };
     public static final String VAR_CONSUMABLE_BASE = "consumable";
     public static final String VAR_CONSUMABLE_TARGET = "consumable.target";
     public static final String VAR_CONSUMABLE_MODS = "consumable.mods";
@@ -56,10 +53,15 @@ public class consumable extends script.base_script
     public static final int MT_HEAL_ENHANCE = 4;
     public static final int MT_REVIVE_PLAYER = 5;
     public static final String FORAGED_DATA = "datatables/foraging/forage_global.iff";
+    public consumable()
+    {
+    }
+
     public static boolean consumeItem(obj_id player, obj_id target, obj_id item) throws InterruptedException
     {
         return consumeItem(player, target, item, true);
     }
+
     public static boolean consumeItem(obj_id player, obj_id target, obj_id item, boolean checkPvpStatus) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || !isIdValid(item))
@@ -79,13 +81,13 @@ public class consumable extends script.base_script
         if (player == owner)
         {
         }
-        else 
+        else
         {
             if (isIdValid(owner))
             {
                 CustomerServiceLog("VendorCreditDupeExploit", "%TU tried to consume an item (" + item + "), but is no longer in possession of it! %TT currently has the item.", player, owner);
             }
-            else 
+            else
             {
                 CustomerServiceLog("VendorCreditDupeExploit", "%TU tried to consume an item (" + item + "), but is no longer in possession of it!", player);
             }
@@ -104,7 +106,7 @@ public class consumable extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (getDistance(player, target) > MAX_AFFECT_DISTANCE)
             {
@@ -113,11 +115,11 @@ public class consumable extends script.base_script
             }
         }
         boolean isConsumable = false;
-        int[] vol = 
-        {
-            60,
-            0
-        };
+        int[] vol =
+                {
+                        60,
+                        0
+                };
         attrib_mod[] am = null;
         String[] skillReq = null;
         int[] skillMin = null;
@@ -125,16 +127,9 @@ public class consumable extends script.base_script
         {
             isConsumable = true;
             am = getForagedFoodMods(item);
-            if (am == null)
-            {
-                isConsumable = false;
-            }
-            else 
-            {
-                isConsumable = true;
-            }
+            isConsumable = am != null;
         }
-        else 
+        else
         {
             isConsumable = hasObjVar(item, VAR_CONSUMABLE_BASE);
             if (isConsumable)
@@ -144,7 +139,7 @@ public class consumable extends script.base_script
                 skillReq = getStringArrayObjVar(item, VAR_SKILL_MOD_REQUIRED);
                 skillMin = getIntArrayObjVar(item, VAR_SKILL_MOD_MIN);
             }
-            else 
+            else
             {
                 if (hasScript(item, "item.comestible.crafted"))
                 {
@@ -163,7 +158,7 @@ public class consumable extends script.base_script
             {
                 canTarget = true;
             }
-            else 
+            else
             {
                 if (checkPvpStatus)
                 {
@@ -172,7 +167,7 @@ public class consumable extends script.base_script
                         canTarget = true;
                     }
                 }
-                else 
+                else
                 {
                     canTarget = true;
                 }
@@ -210,7 +205,7 @@ public class consumable extends script.base_script
                     am = modifyBuffValue;
                 }
             }
-            else if ((am.length == 2) && ((int)dcy == (int)MOD_POOL))
+            else if ((am.length == 2) && ((int) dcy == (int) MOD_POOL))
             {
                 LOG("buffs", "Roger Dodger");
                 am = utils.addMindAttribToStim(am[0].getValue());
@@ -241,7 +236,7 @@ public class consumable extends script.base_script
                             sui.listbox(player, player, MSG_INSUFFICIENT_SKILL, reqs);
                             sendSystemMessage(player, SID_INSUFFICIENT_SKILL);
                         }
-                        else 
+                        else
                         {
                             String skill_mod_name = "@stat_n:" + skillReq[0];
                             prose_package pp = prose.getPackage(SID_INSUFFICIENT_SKILL_HEAL, skill_mod_name, skillMin[0]);
@@ -288,7 +283,7 @@ public class consumable extends script.base_script
                             final_multiplier = 1.0f;
                         }
                         attrib_mod[] am_new = healing.modifyMedicineAttributes(am, final_multiplier);
-                        am = (attrib_mod[])am_new.clone();
+                        am = am_new.clone();
                         if (healing.isBuffMedicine(item))
                         {
                             String buff_name = "";
@@ -305,14 +300,14 @@ public class consumable extends script.base_script
                                         removeAttribOrSkillModModifier(target, buff_name);
                                         utils.setScriptVar(target, medicinerebuff + "." + x, current_value);
                                     }
-                                    else 
+                                    else
                                     {
                                         failed++;
                                         if (player == target)
                                         {
                                             sendSystemMessage(player, SID_YOU_HAVE_GREATER_ENHANCEMENT);
                                         }
-                                        else 
+                                        else
                                         {
                                             prose_package ppGreaterEnhancement = prose.getPackage(SID_THEY_HAVE_GREATER_ENHANCEMENT, target);
                                             sendSystemMessageProse(player, ppGreaterEnhancement);
@@ -327,7 +322,7 @@ public class consumable extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     debugSpeakMsg(player, "consumable::consumeItem(): skill mod arrays are not synchronized");
                 }
@@ -339,7 +334,7 @@ public class consumable extends script.base_script
                     if (hasObjVar(item, "consumable.energy"))
                     {
                         int totalEnergy = getIntObjVar(item, "consumable.energy");
-                        int toHeal[] = healing.distributeHAMDamageHealingPoints(target, totalEnergy);
+                        int[] toHeal = healing.distributeHAMDamageHealingPoints(target, totalEnergy);
                         attrib_mod[] tempAm = new attrib_mod[3];
                         if (toHeal.length != 3)
                         {
@@ -351,10 +346,10 @@ public class consumable extends script.base_script
                         }
                         am = tempAm;
                     }
-                    else 
+                    else
                     {
                         int totalPower = am[0].getValue();
-                        int toHeal[] = healing.distributeHAMWoundHealingPoints(target, totalPower);
+                        int[] toHeal = healing.distributeHAMWoundHealingPoints(target, totalPower);
                         attrib_mod[] tempAm = new attrib_mod[3];
                         if (toHeal.length != 3)
                         {
@@ -368,7 +363,7 @@ public class consumable extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 debugSpeakMsg(player, "consumable::consumeItem(): skill mod arrays are fubar!");
             }
@@ -423,18 +418,21 @@ public class consumable extends script.base_script
                     }
                     metrics.logBuffStatus(target);
                 }
-                else 
+                else
                 {
                     if (am != null)
                     {
                         boolean isBuff = false;
-                        for (attrib_mod attrib_mod : am) {
+                        for (attrib_mod attrib_mod : am)
+                        {
                             debugServerConsoleMsg(target, ">>>>>>>>>>>> PREPARING TO APPLY MOD TO ATTRIBUTE: " + attrib_mod.getAttribute());
-                            if (attrib_mod.getAttribute() == HEALTH) {
+                            if (attrib_mod.getAttribute() == HEALTH)
+                            {
                                 debugServerConsoleMsg(target, ">>>>>>>>>>>> ATTEMPTING TO APPLY MOD -- " + attrib_mod.getAttribute() + " LOOKS LIKE HEALTH TO ME!");
                                 utils.addAttribMod(target, attrib_mod);
                             }
-                            if (attrib_mod.getDuration() > 0) {
+                            if (attrib_mod.getDuration() > 0)
+                            {
                                 isBuff = true;
                             }
                         }
@@ -454,27 +452,27 @@ public class consumable extends script.base_script
                         case SPECIES_BOTHAN:
                         case SPECIES_TWILEK:
                         case SPECIES_ZABRAK:
-                        snd += "human_";
-                        break;
+                            snd += "human_";
+                            break;
                         case SPECIES_MON_CALAMARI:
                         case SPECIES_RODIAN:
                         case SPECIES_TRANDOSHAN:
-                        snd += "reptile_";
-                        break;
+                            snd += "reptile_";
+                            break;
                         case SPECIES_WOOKIEE:
-                        snd += "wookiee_";
-                        break;
+                            snd += "wookiee_";
+                            break;
                     }
                     Gender gender = getGender(player);
                     switch (gender)
                     {
                         case FEMALE:
-                        snd += "female_eat.cef";
-                        break;
+                            snd += "female_eat.cef";
+                            break;
                         case MALE:
                         default:
-                        snd += "male_eat.cef";
-                        break;
+                            snd += "male_eat.cef";
+                            break;
                     }
                     if (!snd.equals(""))
                     {
@@ -486,7 +484,7 @@ public class consumable extends script.base_script
                 removeObjVar(item, VAR_BEEN_CONSUMED);
                 return decrementCharges(item, player);
             }
-            else 
+            else
             {
                 removeObjVar(item, VAR_BEEN_CONSUMED);
             }
@@ -494,10 +492,12 @@ public class consumable extends script.base_script
         }
         return false;
     }
+
     public static boolean consumeItem(obj_id player, obj_id item) throws InterruptedException
     {
         return consumeItem(player, player, item);
     }
+
     public static attrib_mod[] modifyConsumableMods(obj_id player, obj_id target, obj_id item, attrib_mod[] am) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || !isIdValid(item))
@@ -522,7 +522,7 @@ public class consumable extends script.base_script
             {
                 String lFac = factions.getFaction(regLoc);
                 String pFac = factions.getFaction(player);
-                if (lFac != null && pFac != null && lFac.equals(pFac))
+                if (lFac != null && lFac.equals(pFac))
                 {
                     modval *= 1.25f;
                 }
@@ -544,7 +544,7 @@ public class consumable extends script.base_script
                 }
                 if (modval != 1.0f && (atk == healing.AM_HEAL_WOUND || atk == healing.AM_HEAL_SHOCK || decay == MOD_ANTIDOTE))
                 {
-                    attrib_mod tmp = new attrib_mod(am[x].getAttribute(), (int)(am[x].getValue() * modval), am[x].getDuration(), atk, decay);
+                    attrib_mod tmp = new attrib_mod(am[x].getAttribute(), (int) (am[x].getValue() * modval), am[x].getDuration(), atk, decay);
                     if (tmp != null)
                     {
                         am[x] = tmp;
@@ -554,6 +554,7 @@ public class consumable extends script.base_script
         }
         return am;
     }
+
     public static attrib_mod[] modifyBuffMods(obj_id player, obj_id target, obj_id item, attrib_mod[] am) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || !isIdValid(item))
@@ -577,6 +578,7 @@ public class consumable extends script.base_script
         }
         return am;
     }
+
     public static boolean createConsumable(obj_id item, attrib_mod[] am, int[] stomach, dictionary skillReq) throws InterruptedException
     {
         if ((item == null) || (am == null) || (stomach == null) || (stomach.length != player_stomach.STOMACH_MAX))
@@ -597,7 +599,7 @@ public class consumable extends script.base_script
             int[] skillModMin = new int[skillReq.size()];
             for (int i = 0; i < skillReq.size(); i++)
             {
-                skillModReq[i] = (String)keys.nextElement();
+                skillModReq[i] = (String) keys.nextElement();
                 skillModMin[i] = skillReq.getInt(skillModReq[i]);
             }
             if (skillModReq.length == 0 || skillModMin.length == 0)
@@ -609,6 +611,7 @@ public class consumable extends script.base_script
         }
         return litmus;
     }
+
     public static boolean decrementCharges(obj_id item, obj_id player) throws InterruptedException
     {
         if (item == null)
@@ -628,7 +631,7 @@ public class consumable extends script.base_script
         {
             incrementCount(item, -1);
         }
-        else 
+        else
         {
             if (!doctor_bag.isDoctorBag(item))
             {
@@ -637,6 +640,7 @@ public class consumable extends script.base_script
         }
         return true;
     }
+
     public static boolean decrementSpecificObjectRecursive(obj_id player, String template, String objvar) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -645,14 +649,17 @@ public class consumable extends script.base_script
         {
             return false;
         }
-        for (obj_id obj_id : device) {
-            if ((getTemplateName(obj_id)).equals(template) && hasObjVar(obj_id, objvar)) {
+        for (obj_id obj_id : device)
+        {
+            if ((getTemplateName(obj_id)).equals(template) && hasObjVar(obj_id, objvar))
+            {
                 decrementCount(obj_id);
                 return true;
             }
         }
         return false;
     }
+
     public static boolean decrementObjectInventoryOrEquipped(obj_id player, String template, String objvar) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -661,14 +668,17 @@ public class consumable extends script.base_script
         {
             return false;
         }
-        for (obj_id inventoryContent : inventoryContents) {
-            if ((getTemplateName(inventoryContent)).equals(template) && hasObjVar(inventoryContent, objvar)) {
+        for (obj_id inventoryContent : inventoryContents)
+        {
+            if ((getTemplateName(inventoryContent)).equals(template) && hasObjVar(inventoryContent, objvar))
+            {
                 decrementCount(inventoryContent);
                 return true;
             }
         }
         return false;
     }
+
     public static boolean decrementSpecificObject(obj_id player, String template, String objvar) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(player);
@@ -677,14 +687,17 @@ public class consumable extends script.base_script
         {
             return false;
         }
-        for (obj_id obj_id : device) {
-            if ((getTemplateName(obj_id)).equals(template)) {
+        for (obj_id obj_id : device)
+        {
+            if ((getTemplateName(obj_id)).equals(template))
+            {
                 decrementCount(obj_id);
                 return true;
             }
         }
         return false;
     }
+
     public static attrib_mod[] getForagedFoodMods(obj_id item) throws InterruptedException
     {
         int mod_time = 0;
@@ -704,7 +717,7 @@ public class consumable extends script.base_script
             return null;
         }
         int index = -1;
-        String tangibles[] = dataTableGetStringColumn(FORAGED_DATA, "ITEM_TANGIBLE");
+        String[] tangibles = dataTableGetStringColumn(FORAGED_DATA, "ITEM_TANGIBLE");
         if (tangibles == null || tangibles.length == 0)
         {
             detachScript(item, "item.comestible.foraged");
@@ -755,6 +768,7 @@ public class consumable extends script.base_script
         }
         return am;
     }
+
     public static boolean canEatFood(obj_id target, obj_id item) throws InterruptedException
     {
         if (hasObjVar(item, "duration"))
@@ -787,6 +801,7 @@ public class consumable extends script.base_script
         }
         return true;
     }
+
     public static void applyFoodEffects(obj_id target, obj_id item, attrib_mod[] am) throws InterruptedException
     {
         String templateName = getTemplateName(item);
@@ -836,8 +851,8 @@ public class consumable extends script.base_script
         else if (hasObjVar(item, "skill_mod"))
         {
             String mod_name = getStringObjVar(item, "skill_mod.name");
-            int amount = (int)getFloatObjVar(item, "skill_mod.amount");
-            int duration = (int)getFloatObjVar(item, "skill_mod.dur");
+            int amount = (int) getFloatObjVar(item, "skill_mod.amount");
+            int duration = (int) getFloatObjVar(item, "skill_mod.dur");
             String mod_id = "food_" + mod_name;
             if (utils.hasScriptVar(target, mod_id))
             {

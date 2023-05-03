@@ -9,14 +9,15 @@ import script.string_id;
 
 public class st_object_movement extends script.base_script
 {
-    public st_object_movement()
-    {
-    }
     public static final String DATATABLE_HEIGHT = "datatables/structure/cell_height.iff";
     public static final String STORYTELLER_DATATABLE = "datatables/item/master_item/storyteller_item.iff";
     public static final String THEATER_MODE = "theater_mode";
     public static final String STF = "player_structure";
     public static final float MAX_HEIGHT = 8.0f;
+    public st_object_movement()
+    {
+    }
+
     public int rotateStorytellerObject(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -49,7 +50,7 @@ public class st_object_movement extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             rotation = 90;
         }
@@ -57,14 +58,14 @@ public class st_object_movement extends script.base_script
         {
             target = obj_id.getObjId(Long.valueOf(st.nextToken()));
         }
-        else 
+        else
         {
             obj_id intendedTarget = getIntendedTarget(self);
             if (!isIdValid(intendedTarget))
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -96,6 +97,7 @@ public class st_object_movement extends script.base_script
         setYaw(target, obj_rot);
         return SCRIPT_CONTINUE;
     }
+
     public int moveStorytellerObject(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -143,7 +145,7 @@ public class st_object_movement extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             distance = 100;
         }
@@ -151,14 +153,14 @@ public class st_object_movement extends script.base_script
         {
             target = obj_id.getObjId(Long.valueOf(st.nextToken()));
         }
-        else 
+        else
         {
             obj_id intendedTarget = getIntendedTarget(self);
             if (!isIdValid(intendedTarget))
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -179,7 +181,7 @@ public class st_object_movement extends script.base_script
             location loc = getLocation(target);
             float facing = getYaw(self);
             float dist_scaled = distance / 100.0f;
-            float facing_rad = (float)Math.toRadians(facing);
+            float facing_rad = (float) Math.toRadians(facing);
             float x = dist_scaled * (float) StrictMath.sin(facing_rad);
             float z = dist_scaled * (float) StrictMath.cos(facing_rad);
             if (direction.equals("BACK"))
@@ -278,36 +280,43 @@ public class st_object_movement extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemRotateRight(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-933756769), target, "left 90 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemRotateLeft(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-933756769), target, "right 90 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemMoveForward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-918547884), target, "forward 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemMoveBack(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-918547884), target, "back 10 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemMoveUp(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-918547884), target, "up 1 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerItemMoveDown(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-918547884), target, "down 1 " + target, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isStorytellerMoveCommandValidation(obj_id player, obj_id target) throws InterruptedException
     {
         if (!hasObjVar(target, "storytellerid"))

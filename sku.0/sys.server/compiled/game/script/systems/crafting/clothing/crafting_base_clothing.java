@@ -8,19 +8,24 @@ import script.obj_id;
 
 public class crafting_base_clothing extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_clothing()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "crafting_base_clothing -- " + prototype);
@@ -29,28 +34,38 @@ public class crafting_base_clothing extends script.systems.crafting.crafting_bas
         int[] mod_idx = getIntArrayObjVar(self, root + craftinglib.TISSUE_SKILL_INDEX);
         int[] mod_val = getIntArrayObjVar(self, root + craftinglib.TISSUE_SKILL_VALUE);
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).startsWith("mod_idx") || ((itemAttribute.name).getAsciiId()).startsWith("mod_val")) {
-                } else {
-                    switch (((itemAttribute.name).getAsciiId())) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).startsWith("mod_idx") || ((itemAttribute.name).getAsciiId()).startsWith("mod_val"))
+                {
+                }
+                else
+                {
+                    switch (((itemAttribute.name).getAsciiId()))
+                    {
                         case "armor_rating":
                             setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), (int) itemAttribute.currentValue);
                             break;
-                        case "armor_health_encumbrance": {
+                        case "armor_health_encumbrance":
+                        {
                             float encum_value = (itemAttribute.maxValue + itemAttribute.minValue) - itemAttribute.currentValue;
                             setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), encum_value);
                             break;
                         }
-                        case "armor_action_encumbrance": {
+                        case "armor_action_encumbrance":
+                        {
                             float encum_value = (itemAttribute.maxValue + itemAttribute.minValue) - itemAttribute.currentValue;
                             setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), encum_value);
                             break;
                         }
-                        case "armor_mind_encumbrance": {
+                        case "armor_mind_encumbrance":
+                        {
                             float encum_value = (itemAttribute.maxValue + itemAttribute.minValue) - itemAttribute.currentValue;
                             setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), encum_value);
                             break;

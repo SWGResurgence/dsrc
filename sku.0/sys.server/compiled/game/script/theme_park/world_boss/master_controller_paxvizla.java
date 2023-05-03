@@ -6,7 +6,6 @@ import script.obj_id;
 public class master_controller_paxvizla extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
-
     public String[] MAND_MSGS = {
             "Cowards!",
             "You will not escape me!",
@@ -18,9 +17,32 @@ public class master_controller_paxvizla extends script.base_script
             "I will not be defeated!",
             "I am Mand'alor!",
     };
+
+    public int OnInitialize(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.pax", "Active");
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnDestroy(obj_id self) throws InterruptedException
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.pax", "Inactive");
+        return SCRIPT_CONTINUE;
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been last seen on Dxun at the Abandoned Mandalorian Outpost.");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PAX);
         return SCRIPT_CONTINUE;
     }
 
@@ -35,8 +57,10 @@ public class master_controller_paxvizla extends script.base_script
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
         }
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getName(killer));
+        resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
@@ -83,7 +107,7 @@ public class master_controller_paxvizla extends script.base_script
                 chat.chat(self, MAND_MSGS[rand(0, MAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " has enraged Pax Vizla, causing him to increase his focus.");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged Pax Vizla, causing him to increase his focus.");
                 }
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
@@ -114,12 +138,13 @@ public class master_controller_paxvizla extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        return  SCRIPT_CONTINUE;
+        return SCRIPT_CONTINUE;
     }
+
     public void stunPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
         playClientEffectObj(targets, "clienteffect/cr_bodyfall_huge.cef", self, "");
-        if (targets == null || targets.length == 0)
+        if (targets == null)
         {
             return;
         }
@@ -130,23 +155,26 @@ public class master_controller_paxvizla extends script.base_script
             faceTo(iTarget, self);
         }
     }
-    public void bombard (obj_id self, obj_id[] targets) throws InterruptedException
+
+    public void bombard(obj_id self, obj_id[] targets) throws InterruptedException
     {
-        if (targets == null || targets.length == 0)
+        if (targets == null)
         {
             return;
         }
         for (obj_id iTarget : targets)
         {
-            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", self, "");
+            playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
             reduceHealth(iTarget, rand(1200, 3000));
             reduceAction(iTarget, rand(1200, 3000));
         }
     }
+
     public boolean reduceHealth(obj_id player, int amt)
     {
         return setHealth(player, (getHealth(player) - amt));
     }
+
     public boolean reduceAction(obj_id player, int amt)
     {
         return setAction(player, (getAction(player) - amt));

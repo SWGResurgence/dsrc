@@ -5,9 +5,6 @@ import script.library.*;
 
 public class droid_med extends script.base_script
 {
-    public droid_med()
-    {
-    }
     public static final String SCRIPT_DROID_MED = "item.comestible.droid_med";
     public static final string_id SID_NO_TARGET = new string_id("error_message", "droid_repair_no_target");
     public static final string_id SID_TARGET_NOT_DROID = new string_id("error_message", "droid_repair_target_not_droid");
@@ -21,6 +18,10 @@ public class droid_med extends script.base_script
     public static final string_id SID_YOU_IN_COMBAT = new string_id("error_message", "droid_repair_you_in_combat");
     public static final string_id SID_DROID_IN_COMBAT = new string_id("error_message", "droid_repair_droid_in_combat");
     public static final string_id SID_BAD_LOCATION = new string_id("error_message", "droid_repair_not_valid_location");
+    public droid_med()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, consumable.VAR_CONSUMABLE_BASE))
@@ -36,12 +37,13 @@ public class droid_med extends script.base_script
                 mid2.setServerNotify(true);
             }
         }
-        else 
+        else
         {
             detachScript(self, SCRIPT_DROID_MED);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -52,13 +54,14 @@ public class droid_med extends script.base_script
                 sendSystemMessage(player, SID_NO_TARGET);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 performDroidHealing(player, target, self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         attrib_mod[] am = getAttribModArrayObjVar(self, consumable.VAR_CONSUMABLE_MODS);
@@ -88,7 +91,7 @@ public class droid_med extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (am != null && am.length > 0)
             {
@@ -104,6 +107,7 @@ public class droid_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int healDroidDamage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (target == null)
@@ -111,7 +115,7 @@ public class droid_med extends script.base_script
             sendSystemMessage(self, SID_NO_TARGET);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id droid_med = healing.findDroidDamageMed(self);
             if (droid_med == null)
@@ -123,6 +127,7 @@ public class droid_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int healDroidWound(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (target == null)
@@ -130,7 +135,7 @@ public class droid_med extends script.base_script
             sendSystemMessage(self, SID_NO_TARGET);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id droid_med = healing.findDroidWoundMed(self);
             if (droid_med == null)
@@ -142,6 +147,7 @@ public class droid_med extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean performDroidHealing(obj_id player, obj_id target, obj_id droid_med) throws InterruptedException
     {
         int useTime = utils.getIntScriptVar(player, "pet_med.useTime");
@@ -172,7 +178,7 @@ public class droid_med extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!isDroidEngineer(player))
             {
@@ -213,12 +219,9 @@ public class droid_med extends script.base_script
         }
         return false;
     }
+
     public boolean isDroidEngineer(obj_id player) throws InterruptedException
     {
-        if (hasSkill(player, "class_engineering_phase1_novice"))
-        {
-            return true;
-        }
-        return false;
+        return hasSkill(player, "class_engineering_phase1_novice");
     }
 }

@@ -7,23 +7,26 @@ import script.library.utils;
 
 public class flag_game_flag extends script.base_script
 {
+    public static final String[] RESTRICTED_BUFFS =
+            {
+                    "invis_forceCloak",
+                    "cover",
+                    "paralyze",
+                    "paralyze_1",
+                    "stasis",
+                    "feign_death"
+            };
+
     public flag_game_flag()
     {
     }
-    public static final String[] RESTRICTED_BUFFS = 
-    {
-        "invis_forceCloak",
-        "cover",
-        "paralyze",
-        "paralyze_1",
-        "stasis",
-        "feign_death"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setStandbyMode", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "event_perk.mom");
@@ -56,6 +59,7 @@ public class flag_game_flag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -110,17 +114,20 @@ public class flag_game_flag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setStandbyMode(obj_id self, dictionary params) throws InterruptedException
     {
         int gameState = 0;
         utils.setScriptVar(self, "event_perk.game_state", gameState);
         return SCRIPT_CONTINUE;
     }
+
     public int goDie(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canUseMe(obj_id player, obj_id self) throws InterruptedException
     {
         String ownerName = getStringObjVar(self, "event_perk.owner_name");
@@ -130,21 +137,16 @@ public class flag_game_flag extends script.base_script
         int playerFactionId = pvpGetAlignedFaction(player);
         String playerFaction = factions.getFactionNameByHashCode(playerFactionId);
         int pvpType = pvpGetType(player);
-        for (String restrictedBuff : RESTRICTED_BUFFS) {
-            if (buff.hasBuff(player, restrictedBuff)) {
+        for (String restrictedBuff : RESTRICTED_BUFFS)
+        {
+            if (buff.hasBuff(player, restrictedBuff))
+            {
                 return false;
             }
         }
         if (pvpType == PVPTYPE_DECLARED)
         {
-            if ((gameState == 2 && playerFaction.equals("Imperial")) || (gameState == 3 && playerFaction.equals("Rebel")))
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return (gameState != 2 || !playerFaction.equals("Imperial")) && (gameState != 3 || !playerFaction.equals("Rebel"));
         }
         return false;
     }

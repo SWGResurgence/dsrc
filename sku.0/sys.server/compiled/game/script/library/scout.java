@@ -4,9 +4,6 @@ import script.*;
 
 public class scout extends script.base_script
 {
-    public scout()
-    {
-    }
     public static final string_id SID_SYS_SCENTMASK_BREAK = new string_id("skl_use", "sys_scentmask_break");
     public static final string_id SID_SYS_SCENTMASK_BREAK_COMBAT = new string_id("skl_use", "sys_scentmask_break_combat");
     public static final string_id SID_SYS_SCENTMASK_SUCCESS = new string_id("skl_use", "sys_scentmask_success");
@@ -22,6 +19,10 @@ public class scout extends script.base_script
     public static final string_id SID_SYS_CONCEAL_APPLY = new string_id("skl_use", "sys_conceal_apply");
     public static final string_id SID_SYS_CONCEAL_DELAY = new string_id("skl_use", "sys_conceal_delay");
     public static final int MASK_BREAK_DELAY = 60;
+    public scout()
+    {
+    }
+
     public static boolean isScentMasked(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(npc))
@@ -91,7 +92,7 @@ public class scout extends script.base_script
                 maskMod += getEnhancedSkillStatisticModifier(player, "camouflage") / 2;
             }
         }
-        else 
+        else
         {
             maskMod = getEnhancedSkillStatisticModifier(player, "mask_scent");
             if (maskMod > 0)
@@ -139,7 +140,7 @@ public class scout extends script.base_script
                 sneakChance = 98;
             }
         }
-        else 
+        else
         {
             if (sneakChance > 95)
             {
@@ -162,7 +163,7 @@ public class scout extends script.base_script
                     outparams.put("player", conplayer);
                     outparams.put("concealed", 1);
                 }
-                else 
+                else
                 {
                     String msg = "scout.scriptlib, isScentMasked player " + player + "has no scentmask.camoapply scriptvar";
                     LOG("scout", msg);
@@ -170,7 +171,7 @@ public class scout extends script.base_script
                     outparams.put("player", player);
                 }
             }
-            else 
+            else
             {
                 outparams.put("player", player);
             }
@@ -179,13 +180,14 @@ public class scout extends script.base_script
             utils.setScriptVar(player, "scentmask.creatureDiff", level);
             utils.setScriptVar(player, "scentmask.time", getGameTime());
         }
-        else 
+        else
         {
             breakScentMask(player, false);
             return false;
         }
         return true;
     }
+
     public static void breakScentMask(obj_id player, boolean combat) throws InterruptedException
     {
         int maskMod = getEnhancedSkillStatisticModifier(player, "mask_scent") / 2;
@@ -197,11 +199,12 @@ public class scout extends script.base_script
         {
             sendSystemMessage(player, SID_SYS_SCENTMASK_BREAK_COMBAT);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_SYS_SCENTMASK_BREAK);
         }
     }
+
     public static boolean isScentMaskedCheck(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -216,10 +219,12 @@ public class scout extends script.base_script
         }
         return true;
     }
+
     public static boolean isSnared(obj_id npc) throws InterruptedException
     {
         return hasAttribModifier(npc, "movement.snare");
     }
+
     public static void conceal(obj_id self, obj_id target) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "remaskDelay"))
@@ -230,7 +235,7 @@ public class scout extends script.base_script
             {
                 utils.removeScriptVar(self, "remaskDelay");
             }
-            else 
+            else
             {
                 prose_package pp = prose.getPackage(SID_SYS_CONCEAL_DELAY, -timeDiff);
                 sendSystemMessageProse(self, pp);
@@ -265,7 +270,7 @@ public class scout extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             int scentMasked = getState(self, STATE_MASK_SCENT);
             int count = utils.getIntScriptVar(self, "scentmask.count");
@@ -277,7 +282,7 @@ public class scout extends script.base_script
                 {
                     messageTo(self, "removeConceal", outparams, 0, false);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, SID_SYS_CONCEAL_SCENTMASKED);
                 }
@@ -297,9 +302,12 @@ public class scout extends script.base_script
         obj_id[] contents = getContents(pInv);
         obj_id kit = null;
 
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "camokit")) {
-                if (getStringObjVar(content, "camokit").equals(planetName)) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "camokit"))
+            {
+                if (getStringObjVar(content, "camokit").equals(planetName))
+                {
                     kit = content;
                     break;
                 }
@@ -315,7 +323,7 @@ public class scout extends script.base_script
         {
             destroyObject(kit);
         }
-        else 
+        else
         {
             count--;
             setCount(kit, count);
@@ -332,7 +340,7 @@ public class scout extends script.base_script
             sendSystemMessageProse(self, pp);
             messageTo(target, "concealEnable", outparams, 0.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "concealEnable", outparams, 0.0f, false);
         }

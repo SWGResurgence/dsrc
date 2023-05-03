@@ -15,7 +15,7 @@ public class araneya_bendix extends script.base_script {
 // Script Constants
 // ======================================================================
 
-    public static String c_stringFile = "conversation/aranerya_bendix";
+    public static String c_stringFile = "conversation/araneya_bendix";
 
 // ======================================================================
 // Script Conditions
@@ -51,7 +51,7 @@ public class araneya_bendix extends script.base_script {
 
     public void araneya_bendix_action_sendRewardSignal (obj_id player, obj_id npc) throws InterruptedException
     {
-        groundquests.sendSignal(player, "completedGizmoWorldBoss");
+        groundquests.sendSignal(player, "completedWorldBossEndorGizmo");
     }
 
 // ----------------------------------------------------------------------

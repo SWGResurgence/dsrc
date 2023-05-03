@@ -7,9 +7,6 @@ import script.string_id;
 
 public class doctor_bag extends script.base_script
 {
-    public doctor_bag()
-    {
-    }
     public static final int MAX_MEDS = 25;
     public static final int HEALING_RANGE = 0;
     public static final int HEALING_AREA = 1;
@@ -19,14 +16,20 @@ public class doctor_bag extends script.base_script
     public static final int HEALING_DOT_DURATION = 5;
     public static final string_id SID_MEDICINE_STORED = new string_id("doctor_bag", "medicine_stored");
     public static final string_id SID_MEDICINE_REMOVED = new string_id("doctor_bag", "medicine_removed");
+    public doctor_bag()
+    {
+    }
+
     public static boolean isDoctorBag(obj_id object) throws InterruptedException
     {
         return hasObjVar(object, "doctor_bag");
     }
+
     public static boolean hasDoctorBag(obj_id player) throws InterruptedException
     {
         return (null != getDoctorBag(player));
     }
+
     public static obj_id getDoctorBag(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -39,13 +42,16 @@ public class doctor_bag extends script.base_script
         {
             return null;
         }
-        for (obj_id content : contents) {
-            if (isDoctorBag(content)) {
+        for (obj_id content : contents)
+        {
+            if (isDoctorBag(content))
+            {
                 return content;
             }
         }
         return null;
     }
+
     public static boolean addMedicine(obj_id player, obj_id bag, obj_id medicine) throws InterruptedException
     {
         if (hasScript(medicine, "systems.combat.combat_delayed_tracker"))
@@ -102,7 +108,7 @@ public class doctor_bag extends script.base_script
             {
                 setObjVar(bag, prefix + "healing.state", getStringObjVar(medicine, "healing.state"));
             }
-            int dotInfo[] = new int[6];
+            int[] dotInfo = new int[6];
             dotInfo[0] = getIntObjVar(medicine, "healing.range");
             dotInfo[1] = getIntObjVar(medicine, "healing.area");
             dotInfo[2] = getIntObjVar(medicine, "healing.dot_power");
@@ -116,6 +122,7 @@ public class doctor_bag extends script.base_script
         destroyObject(medicine);
         return true;
     }
+
     public static boolean removeMedicine(obj_id player, obj_id bag, int med) throws InterruptedException
     {
         String prefix = "meds." + med + ".";
@@ -154,7 +161,7 @@ public class doctor_bag extends script.base_script
             {
                 setObjVar(new_med, "healing.state", getStringObjVar(bag, prefix + "healing.state"));
             }
-            int dotInfo[] = getIntArrayObjVar(bag, prefix + "healing.dot_info");
+            int[] dotInfo = getIntArrayObjVar(bag, prefix + "healing.dot_info");
             if (dotInfo[0] != 0)
             {
                 setObjVar(new_med, "healing.range", dotInfo[0]);
@@ -186,6 +193,7 @@ public class doctor_bag extends script.base_script
         sendSystemMessageProse(player, pp);
         return true;
     }
+
     public static boolean setSurrogateState(obj_id bag, String prefix) throws InterruptedException
     {
         clearSurrogateState(bag);
@@ -211,7 +219,7 @@ public class doctor_bag extends script.base_script
             {
                 setObjVar(bag, "healing.state", getStringObjVar(bag, prefix + "healing.state"));
             }
-            int dotInfo[] = getIntArrayObjVar(bag, prefix + "healing.dot_info");
+            int[] dotInfo = getIntArrayObjVar(bag, prefix + "healing.dot_info");
             if (dotInfo[0] != 0)
             {
                 setObjVar(bag, "healing.range", dotInfo[0]);
@@ -243,6 +251,7 @@ public class doctor_bag extends script.base_script
         setObjVar(bag, "consumable.stomachValues", stomachMods);
         return true;
     }
+
     public static boolean clearSurrogateState(obj_id bag) throws InterruptedException
     {
         removeObjVar(bag, "surrogate");
@@ -255,6 +264,7 @@ public class doctor_bag extends script.base_script
         setCount(bag, 0);
         return true;
     }
+
     public static void decrementSurrogateCharge(obj_id bag) throws InterruptedException
     {
         String prefix = getStringObjVar(bag, "surrogate");
@@ -265,7 +275,7 @@ public class doctor_bag extends script.base_script
             String index = prefix.substring(0, prefix.length() - 1);
             removeObjVar(bag, index);
         }
-        else 
+        else
         {
             setObjVar(bag, prefix + "count", charges);
         }

@@ -8,6 +8,7 @@ public class fannypack extends script.base_script
     public fannypack()
     {
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(destContainer) && isPlayer(destContainer))
@@ -20,6 +21,7 @@ public class fannypack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void performUnequipBackSlotContainer(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))

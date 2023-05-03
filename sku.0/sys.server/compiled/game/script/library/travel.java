@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class travel extends script.base_script
 {
-    public travel()
-    {
-    }
     public static final String STARPORT_DATATABLE = "datatables/structure/municipal/starport.iff";
     public static final String DATATABLE_COL_STRUCTURE = "STRUCTURE";
     public static final String DATATABLE_COL_ARRIVAL_X = "ARRIVAL_X";
@@ -67,6 +64,10 @@ public class travel extends script.base_script
     public static final string_id SID_MUSTAFAR_UNAUTHORIZED = new string_id("travel", "mustafar_unauthorized");
     public static final string_id SID_KASHYYYK_UNAUTHORIZED = new string_id("travel", "kashyyyk_unauthorized");
     public static final int TRAVEL_BLOCK_ALLOW_LAUNCH = 1;
+    public travel()
+    {
+    }
+
     public static boolean initializeStarport(obj_id structure, String travel_point, int travel_cost, boolean civic) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "structure ->" + structure + " travel ->" + travel_point + " cost ->" + travel_cost);
@@ -105,7 +106,7 @@ public class travel extends script.base_script
             arrival_z = transform[1];
             arrival_loc = new location(s_loc.x - arrival_x, s_loc.y - arrival_y, s_loc.z - arrival_z, planet, obj_id.NULL_ID);
         }
-        else 
+        else
         {
             obj_id cell_id = getCellId(structure, arrival_cell);
             if (cell_id == null || cell_id == obj_id.NULL_ID)
@@ -174,7 +175,7 @@ public class travel extends script.base_script
                     obj_loc = new location(s_loc.x - x, s_loc.y - y, s_loc.z - z, planet, obj_id.NULL_ID);
                     object = createObject(obj_template, obj_loc);
                 }
-                else 
+                else
                 {
                     obj_id cell_id = getCellId(structure, cell);
                     if (cell_id == null || cell_id == obj_id.NULL_ID)
@@ -185,28 +186,28 @@ public class travel extends script.base_script
                     object = createObjectInCell(obj_template, structure, cell, obj_loc);
                 }
                 if (heading != 0.0f)
-				{
+                {
 
-				}
+                }
 
                 {
-					setYaw(object, heading);
-					object_list = utils.addElement(object_list, object);
-				}
+                    setYaw(object, heading);
+                    object_list = utils.addElement(object_list, object);
+                }
                 if (is_terminal == 1)
-				{
-					setObjVar(object, VAR_STARPORT, structure);
-				}
+                {
+                    setObjVar(object, VAR_STARPORT, structure);
+                }
                 if (is_transport == 1)
-				{
-					setObjVar(object, VAR_STARPORT, structure);
-					attachScript(object, SCRIPT_SHUTTLE);
-				}
+                {
+                    setObjVar(object, VAR_STARPORT, structure);
+                    attachScript(object, SCRIPT_SHUTTLE);
+                }
                 if (is_pilot == 1)
-				{
-					setObjVar(object, VAR_STARPORT, structure);
-					attachScript(object, SCRIPT_SHUTTLE_PILOT);
-				}
+                {
+                    setObjVar(object, VAR_STARPORT, structure);
+                    attachScript(object, SCRIPT_SHUTTLE_PILOT);
+                }
                 if (object_list.size() > 0)
                 {
                     setObjVar(structure, VAR_BASE_OBJECT, object_list);
@@ -215,6 +216,7 @@ public class travel extends script.base_script
         }
         return true;
     }
+
     public static String getTravelPointName(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -234,11 +236,12 @@ public class travel extends script.base_script
         {
             return getStringObjVar(structure, VAR_TRAVEL_POINT_NAME);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static location getArrivalLocation(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -249,11 +252,12 @@ public class travel extends script.base_script
         {
             return getLocationObjVar(structure, VAR_ARRIVAL_LOCATION);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getTravelCost(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -264,11 +268,12 @@ public class travel extends script.base_script
         {
             return getIntObjVar(structure, VAR_TRAVEL_COST);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getGroundTime(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -279,11 +284,12 @@ public class travel extends script.base_script
         {
             return getIntObjVar(structure, VAR_GROUND_TIME);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getAirTime(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -294,11 +300,12 @@ public class travel extends script.base_script
         {
             return getIntObjVar(structure, VAR_AIR_TIME);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static int getShuttleTimestamp(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -309,11 +316,12 @@ public class travel extends script.base_script
         {
             return getIntObjVar(structure, VAR_SHUTTLE_TIMESTAMP);
         }
-        else 
+        else
         {
             return -1;
         }
     }
+
     public static obj_id[] getBaseObjects(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -324,11 +332,12 @@ public class travel extends script.base_script
         {
             return getObjIdArrayObjVar(structure, VAR_BASE_OBJECT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getTicketDeparturePlanet(obj_id ticket) throws InterruptedException
     {
         if (ticket == null || ticket == obj_id.NULL_ID)
@@ -339,11 +348,12 @@ public class travel extends script.base_script
         {
             return getStringObjVar(ticket, VAR_DEPARTURE_PLANET);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getTicketDeparturePoint(obj_id ticket) throws InterruptedException
     {
         if (ticket == null || ticket == obj_id.NULL_ID)
@@ -354,11 +364,12 @@ public class travel extends script.base_script
         {
             return getStringObjVar(ticket, VAR_DEPARTURE_POINT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getTicketArrivalPlanet(obj_id ticket) throws InterruptedException
     {
         if (ticket == null || ticket == obj_id.NULL_ID)
@@ -369,11 +380,12 @@ public class travel extends script.base_script
         {
             return getStringObjVar(ticket, VAR_ARRIVAL_PLANET);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static String getTicketArrivalPoint(obj_id ticket) throws InterruptedException
     {
         if (ticket == null || ticket == obj_id.NULL_ID)
@@ -384,11 +396,12 @@ public class travel extends script.base_script
         {
             return getStringObjVar(ticket, VAR_ARRIVAL_POINT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static int getStarportVersion(obj_id starport) throws InterruptedException
     {
         if (starport == null || starport == obj_id.NULL_ID)
@@ -399,11 +412,12 @@ public class travel extends script.base_script
         {
             return getIntObjVar(starport, VAR_VERSION);
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public static int getStarportTableIndex(String template) throws InterruptedException
     {
         int idx = -1;
@@ -419,22 +433,25 @@ public class travel extends script.base_script
         }
         return idx;
     }
+
     public static boolean isTravelTicketValid(obj_id object, String depart_planet, String depart_point) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
         {
             return false;
         }
-        if (hasObjVar(object, VAR_DEPARTURE_PLANET)) {
+        if (hasObjVar(object, VAR_DEPARTURE_PLANET))
+        {
             String ticket_planet = getTicketDeparturePlanet(object);
             String ticket_point = getTicketDeparturePoint(object);
             return ticket_planet.equals(depart_planet) && ticket_point.equals(depart_point);
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean isShuttlePort(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -443,6 +460,7 @@ public class travel extends script.base_script
         }
         return hasObjVar(structure, VAR_IS_SHUTTLEPORT);
     }
+
     public static boolean isTravelShuttle(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
@@ -451,6 +469,7 @@ public class travel extends script.base_script
         }
         return hasScript(object, SCRIPT_SHUTTLE);
     }
+
     public static boolean isTravelShuttlePilot(obj_id object) throws InterruptedException
     {
         if (object == null || object == obj_id.NULL_ID)
@@ -459,6 +478,7 @@ public class travel extends script.base_script
         }
         return hasScript(object, SCRIPT_SHUTTLE_PILOT);
     }
+
     public static boolean isShuttleAvailable(obj_id starport) throws InterruptedException
     {
         if (starport == null || starport == obj_id.NULL_ID)
@@ -468,6 +488,7 @@ public class travel extends script.base_script
         int available = getIntObjVar(starport, VAR_SHUTTLE_AVAILABLE);
         return available == 1;
     }
+
     public static boolean qualifiesForGcwTravelPerks(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -494,6 +515,7 @@ public class travel extends script.base_script
         }
         return false;
     }
+
     public static boolean restrictedByGcwTravelRestrictions(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -520,6 +542,7 @@ public class travel extends script.base_script
         }
         return false;
     }
+
     public static int getGcwTravelRestrictionsSurcharge(obj_id player, String departPlanet, String arrivePlanet) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -555,6 +578,7 @@ public class travel extends script.base_script
         }
         return 0;
     }
+
     public static String getGcwTravelRestrictionsAvailableStarport(obj_id player, String planet) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -585,18 +609,23 @@ public class travel extends script.base_script
                 int numStarport = 0;
                 String gcwContestedRegion;
 
-                for (String planetTravelPoint : planetTravelPoints) {
-                    if (getPlanetTravelPointInterplanetary(planet, planetTravelPoint)) {
+                for (String planetTravelPoint : planetTravelPoints)
+                {
+                    if (getPlanetTravelPointInterplanetary(planet, planetTravelPoint))
+                    {
                         ++numStarport;
                         int score = 50;
                         gcwContestedRegion = getPlanetTravelPointGcwContestedRegion(planet, planetTravelPoint);
-                        if ((gcwContestedRegion != null) && (gcwContestedRegion.length() > 0)) {
+                        if ((gcwContestedRegion != null) && (gcwContestedRegion.length() > 0))
+                        {
                             score = getGcwImperialScorePercentile(gcwContestedRegion);
-                            if ((370444368) == faction) {
+                            if ((370444368) == faction)
+                            {
                                 score = 100 - score;
                             }
                         }
-                        if (score > highestScore) {
+                        if (score > highestScore)
+                        {
                             availableStarport = planetTravelPoint;
                             highestScore = score;
                         }
@@ -611,6 +640,7 @@ public class travel extends script.base_script
         }
         return null;
     }
+
     public static obj_id getTravelShuttle(obj_id player) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -619,13 +649,16 @@ public class travel extends script.base_script
         }
         location loc = getLocation(player);
         obj_id[] items = getObjectsInRange(loc, MAXIMUM_SHUTTLE_DISTANCE);
-        for (obj_id item : items) {
-            if (isTravelShuttle(item)) {
+        for (obj_id item : items)
+        {
+            if (isTravelShuttle(item))
+            {
                 return item;
             }
         }
         return null;
     }
+
     public static boolean isInShuttleBoardingRange(obj_id player, obj_id shuttle) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -645,6 +678,7 @@ public class travel extends script.base_script
         }
         return distance <= MAXIMUM_SHUTTLE_DISTANCE;
     }
+
     public static boolean isValidRoute(String planet1, String point1, String planet2, String point2) throws InterruptedException
     {
         int planet_cost = getPlanetTravelCost(planet1, planet2);
@@ -667,13 +701,11 @@ public class travel extends script.base_script
             boolean starport1 = getPlanetTravelPointInterplanetary(planet1, point1);
             boolean starport2 = getPlanetTravelPointInterplanetary(planet2, point2);
             LOG("LOG_CHANNEL", "starport1 ->" + starport1 + " starport2 ->" + starport2);
-            if (!starport1 || !starport2)
-            {
-                return false;
-            }
+            return starport1 && starport2;
         }
         return true;
     }
+
     public static obj_id getStarportFromTerminal(obj_id terminal) throws InterruptedException
     {
         if (terminal == null || terminal == obj_id.NULL_ID || !isIdValid(terminal))
@@ -684,19 +716,22 @@ public class travel extends script.base_script
         {
             return getObjIdObjVar(terminal, VAR_STARPORT);
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static obj_id getShuttleFromStarport(obj_id starport) throws InterruptedException
     {
         obj_id[] starport_objects = travel.getBaseObjects(starport);
         obj_id shuttle = obj_id.NULL_ID;
         if (starport_objects != null)
         {
-            for (obj_id starport_object : starport_objects) {
-                if (travel.isTravelShuttle(starport_object)) {
+            for (obj_id starport_object : starport_objects)
+            {
+                if (travel.isTravelShuttle(starport_object))
+                {
                     shuttle = starport_object;
                     break;
                 }
@@ -706,11 +741,12 @@ public class travel extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             return shuttle;
         }
     }
+
     public static boolean setShuttleAvailability(obj_id starport) throws InterruptedException
     {
         if (starport == null || starport == obj_id.NULL_ID)
@@ -731,18 +767,19 @@ public class travel extends script.base_script
                 ++shuttleAvailableCount;
                 utils.setScriptVar(starport, SCRIPTVAR_SHUTTLE_AVAILABLE_COUNT, shuttleAvailableCount);
             }
-            else 
+            else
             {
                 setObjVar(starport, VAR_SHUTTLE_AVAILABLE, 1);
             }
             setObjVar(starport, VAR_SHUTTLE_TIMESTAMP, getGameTime());
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean setStarportTravelPoint(obj_id structure, String travel_point, location arrival_loc, int travel_cost, boolean civic) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -769,14 +806,14 @@ public class travel extends script.base_script
         {
             setup = city.addStarport(structure, arrival_loc, travel_cost, interplanetary);
         }
-        else 
+        else
         {
             int type = TPT_NPC_Shuttleport;
             if (interplanetary)
             {
                 type = TPT_NPC_Starport;
             }
-            else 
+            else
             {
                 String template = getTemplateName(structure);
                 if ((template != null) && (template.equals("object/tangible/camp/camp_shuttle_beacon.iff")))
@@ -806,11 +843,12 @@ public class travel extends script.base_script
             }
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean removeTravelPoint(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -823,7 +861,7 @@ public class travel extends script.base_script
         {
             travel_point = getStringObjVar(structure, VAR_TRAVEL_POINT_NAME);
         }
-        else 
+        else
         {
             return false;
         }
@@ -832,11 +870,12 @@ public class travel extends script.base_script
             removeObjVar(structure, VAR_TRAVEL);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static boolean destroyBaseObjects(obj_id structure) throws InterruptedException
     {
         if (structure == null || structure == obj_id.NULL_ID)
@@ -846,14 +885,17 @@ public class travel extends script.base_script
         obj_id[] base_objects = getBaseObjects(structure);
         if (base_objects != null)
         {
-            for (obj_id base_object : base_objects) {
-                if (isIdValid(base_object)) {
+            for (obj_id base_object : base_objects)
+            {
+                if (isIdValid(base_object))
+                {
                     destroyObject(base_object);
                 }
             }
         }
         return true;
     }
+
     public static boolean purchaseTicket(obj_id player, String planet1, String point1, String planet2, String point2, boolean roundtrip, obj_id starport) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel::purchaseTicket");
@@ -892,7 +934,7 @@ public class travel extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!getPlanetTravelPointInterplanetary(planet1, point1))
             {
@@ -1039,7 +1081,7 @@ public class travel extends script.base_script
                             sui.showSUIPage(pid);
                             return false;
                         }
-                        else 
+                        else
                         {
                             String custLogMsg = "New Player Rewards: %TU tried to use a travel voucher but isn't the owner. Rightful owner is %TT";
                             CustomerServiceLog("NEW_PLAYER_QUESTS", custLogMsg, player, owner);
@@ -1054,7 +1096,7 @@ public class travel extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     String custLogMsg = "New Player Rewards: %TU tried to use a travel voucher but the voucher is invalid - does not have an owner.";
                     CustomerServiceLog("NEW_PLAYER_QUESTS", custLogMsg, player);
@@ -1080,14 +1122,16 @@ public class travel extends script.base_script
             utils.setScriptVar(player, VAR_PURCHASING_TICKET, 1);
             return true;
         }
-        else 
+        else
         {
             return false;
         }
     }
+
     public static void showTravelVoucherSui() throws InterruptedException
     {
     }
+
     public static obj_id[] createTicket(obj_id player, String planet1, String point1, String planet2, String point2, boolean roundtrip) throws InterruptedException
     {
         if (player == null || player == obj_id.NULL_ID)
@@ -1102,7 +1146,7 @@ public class travel extends script.base_script
             sendSystemMessage(player, new string_id("travel", "no_room_for_ticket"));
             ticket = createObject(BASE_TRAVEL_TICKET, getLocation(player));
         }
-        else 
+        else
         {
             ticket = createObject(BASE_TRAVEL_TICKET, inv, "");
         }
@@ -1120,7 +1164,7 @@ public class travel extends script.base_script
         {
             tickets = new obj_id[2];
         }
-        else 
+        else
         {
             tickets = new obj_id[1];
         }
@@ -1136,10 +1180,12 @@ public class travel extends script.base_script
         }
         return tickets;
     }
+
     public static boolean movePlayerToDestination(obj_id player, String planet, String point) throws InterruptedException
     {
         return movePlayerToDestination(player, planet, point, false);
     }
+
     public static boolean movePlayerToDestination(obj_id player, String planet, String point, boolean groupPickupPointTravel) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1204,17 +1250,18 @@ public class travel extends script.base_script
             {
                 warpPlayer(player, planet, arrival.x, arrival.y, arrival.z, null, 0.0f, 0.0f, 0.0f);
             }
-            else 
+            else
             {
                 warpPlayer(player, planet, arrival.x, arrival.y, arrival.z, null, 0.0f, 0.0f, 0.0f, "msgTravelComplete");
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "travel::movePlayerToDestination -- travel point: " + planet + ", " + point + " has a cell arrival location.  This is not supported.");
         }
         return true;
     }
+
     public static float[] transformDeltaWorldCoord(float X, float Z, int rotation) throws InterruptedException
     {
         float x = X;
@@ -1237,10 +1284,11 @@ public class travel extends script.base_script
                 break;
         }
         return new float[]{
-            X,
-            Z
+                X,
+                Z
         };
     }
+
     public static float[] transformDeltaWorldYaw(obj_id object, float x, float z) throws InterruptedException
     {
         if (!isIdValid(object))
@@ -1248,14 +1296,15 @@ public class travel extends script.base_script
             return null;
         }
         float yaw = getYaw(object);
-        float yaw_radians = (float)Math.toRadians(yaw);
+        float yaw_radians = (float) Math.toRadians(yaw);
         float X = (x * (float) StrictMath.cos(yaw_radians)) + (z * (float) StrictMath.sin(yaw_radians));
         float Z = (z * (float) StrictMath.cos(yaw_radians)) - (x * (float) StrictMath.sin(yaw_radians));
         return new float[]{
-            X,
-            Z
+                X,
+                Z
         };
     }
+
     public static boolean testBoardShuttle(obj_id player, obj_id shuttle) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -1271,8 +1320,10 @@ public class travel extends script.base_script
         obj_id[] inv_contents = utils.getContents(inventory, false);
         String ticket_planet;
 
-        for (obj_id inv_content : inv_contents) {
-            if (isTravelTicketValid(inv_content, planet, depart_point)) {
+        for (obj_id inv_content : inv_contents)
+        {
+            if (isTravelTicketValid(inv_content, planet, depart_point))
+            {
                 ticket_planet = getTicketArrivalPlanet(inv_content);
                 ticket_planet = (ticket_planet.substring(0, 1)).toUpperCase() + (ticket_planet.substring(1)).toLowerCase();
                 dsrc = utils.addElement(dsrc, ticket_planet + " -- " + getTicketArrivalPoint(inv_content));
@@ -1284,7 +1335,7 @@ public class travel extends script.base_script
             sendSystemMessage(player, new string_id("travel", "no_ticket_for_shuttle"));
             return false;
         }
-        else 
+        else
         {
             string_id sd = new string_id("travel", "select_destination");
             String txt = utils.packStringId(sd);
@@ -1292,6 +1343,7 @@ public class travel extends script.base_script
             return true;
         }
     }
+
     public static Vector getFilteredPortLocationsForPlanet(String planet, boolean isStarport) throws InterruptedException
     {
         if (planet == null || planet.equals(""))
@@ -1305,29 +1357,36 @@ public class travel extends script.base_script
         }
         Vector ret = new Vector();
         ret.setSize(0);
-        for (String allPt : allPts) {
-            if (getPlanetTravelPointInterplanetary(planet, allPt) == isStarport) {
+        for (String allPt : allPts)
+        {
+            if (getPlanetTravelPointInterplanetary(planet, allPt) == isStarport)
+            {
                 ret = utils.addElement(ret, allPt);
             }
         }
         return ret;
     }
+
     public static String[] getStarportsForPlanet(String planet) throws InterruptedException
     {
         return utils.toStaticStringArray(getFilteredPortLocationsForPlanet(planet, true));
     }
+
     public static String[] getStarportsForPlanet() throws InterruptedException
     {
         return getStarportsForPlanet(getCurrentSceneName());
     }
+
     public static String[] getShuttleportsForPlanet(String planet) throws InterruptedException
     {
         return utils.toStaticStringArray(getFilteredPortLocationsForPlanet(planet, false));
     }
+
     public static String[] getShuttleportsForPlanet() throws InterruptedException
     {
         return getShuttleportsForPlanet(getCurrentSceneName());
     }
+
     public static boolean instantTravel(obj_id player, String planet1, String point1, String planet2, String point2, boolean roundtrip, obj_id starport) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel::instantTravel");
@@ -1360,13 +1419,10 @@ public class travel extends script.base_script
         }
         return movePlayerToDestination(player, planet2, point2);
     }
+
     public static boolean isTravelBlocked(obj_id player, boolean isLaunch) throws InterruptedException
     {
-        boolean blocked = false;
-        if (utils.hasScriptVar(player, "travelBlock"))
-        {
-            blocked = true;
-        }
+        boolean blocked = utils.hasScriptVar(player, "travelBlock");
         if (isLaunch && utils.getIntScriptVar(player, "travelBlock") == TRAVEL_BLOCK_ALLOW_LAUNCH)
         {
             blocked = false;
@@ -1381,11 +1437,13 @@ public class travel extends script.base_script
         }
         return blocked;
     }
+
     public static void setTravelBlock(obj_id player, boolean allowLaunch) throws InterruptedException
     {
         int travelBlockValue = allowLaunch ? TRAVEL_BLOCK_ALLOW_LAUNCH : 0;
         utils.setScriptVar(player, "travelBlock", travelBlockValue);
     }
+
     public static void clearTravelBlock(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "travelBlock"))

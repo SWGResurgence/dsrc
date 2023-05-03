@@ -11,12 +11,13 @@ import script.string_id;
 
 public class fs_village_panicked extends script.base_script
 {
-    public fs_village_panicked()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_panicked";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_panicked.iff";
     public static int INITIAL_DELAY = 10;
+    public fs_village_panicked()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.ai"))
@@ -39,6 +40,7 @@ public class fs_village_panicked extends script.base_script
         messageTo(self, "fsPanicked", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fsPanicked(obj_id self, dictionary params) throws InterruptedException
     {
         int randPanic = rand(0, 9);
@@ -51,6 +53,7 @@ public class fs_village_panicked extends script.base_script
         messageTo(self, "fsPanicked", null, randMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandLamentation(obj_id target, int panicRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, panicRow, 1));

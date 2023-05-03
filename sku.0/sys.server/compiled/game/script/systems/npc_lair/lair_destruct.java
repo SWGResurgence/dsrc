@@ -12,11 +12,13 @@ public class lair_destruct extends script.base_script
     public lair_destruct()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "systems.npc_lair.lair_interactivity");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "lairDestroyed"))
@@ -26,6 +28,7 @@ public class lair_destruct extends script.base_script
         attachScript(self, "systems.npc_lair.lair_interactivity");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -41,8 +44,10 @@ public class lair_destruct extends script.base_script
         obj_id[] enemies = getWhoIsTargetingMe(self);
         if (enemies != null && enemies.length > 1)
         {
-            for (obj_id enemy : enemies) {
-                if (isPlayer(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isPlayer(enemy))
+                {
                     setTarget(enemy, null);
                     setCombatTarget(enemy, null);
                 }
@@ -50,11 +55,13 @@ public class lair_destruct extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyDisabledLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -69,7 +76,8 @@ public class lair_destruct extends script.base_script
             }
         }
         obj_id[] attackers = getWhoIsTargetingMe(self);
-        if (attackers != null && attackers.length != 0) {
+        if (attackers != null && attackers.length != 0)
+        {
             obj_id poiBaseObject = getObjIdObjVar(self, "poi.baseObject");
             if (isIdValid(poiBaseObject))
             {
@@ -85,7 +93,7 @@ public class lair_destruct extends script.base_script
                     setObjVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
                 }
-                else 
+                else
                 {
                     setObjVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
@@ -101,6 +109,7 @@ public class lair_destruct extends script.base_script
         sendAlarm(self, attacker);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnWaveOfDefenders(obj_id lair, int curHP) throws InterruptedException
     {
         int lastWave = getIntObjVar(lair, "npc_lair.waveSpawned");
@@ -131,6 +140,7 @@ public class lair_destruct extends script.base_script
         }
         setObjVar(lair, "npc_lair.waveSpawned", nextWave);
     }
+
     public void spawnBossMonster(obj_id lair) throws InterruptedException
     {
         if (!isIdValid(lair))
@@ -152,7 +162,8 @@ public class lair_destruct extends script.base_script
         {
             String diff = getStringObjVar(poiBaseObject, "spawning.lairDifficulty");
             int multiplier = 2;
-            switch (diff) {
+            switch (diff)
+            {
                 case "veryEasy":
                     multiplier = 1;
                     break;
@@ -179,13 +190,16 @@ public class lair_destruct extends script.base_script
         parms.put("npc_lair", lair);
         messageTo(poiBaseObject, "handleSpawnBossMonster", parms, 0, false);
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
-        if(isIdValid(self) && hasObjVar(self, "playingEffect")) {
+        if (isIdValid(self) && hasObjVar(self, "playingEffect"))
+        {
             removeObjVar(self, "playingEffect");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void callForHealing(obj_id lair, int curHP, int maxHP) throws InterruptedException
     {
         if (curHP == maxHP)
@@ -207,6 +221,7 @@ public class lair_destruct extends script.base_script
         lastCall = getGameTime() + 15;
         utils.setScriptVar(lair, "npc_lair.lastHealingCall", lastCall);
     }
+
     public void sendAlarm(obj_id lair, obj_id attacker) throws InterruptedException
     {
         int lastCall = utils.getIntScriptVar(lair, "npc_lair.lastAlarmCall");
@@ -225,6 +240,7 @@ public class lair_destruct extends script.base_script
         lastCall = getGameTime() + 60;
         utils.setScriptVar(lair, "npc_lair.lastAlarmCall", lastCall);
     }
+
     public void setLairFaction(obj_id lair) throws InterruptedException
     {
         obj_id poiBaseObject = getObjIdObjVar(lair, "poi.baseObject");

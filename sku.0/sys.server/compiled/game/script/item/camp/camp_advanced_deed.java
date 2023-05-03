@@ -5,9 +5,6 @@ import script.library.*;
 
 public class camp_advanced_deed extends script.base_script
 {
-    public camp_advanced_deed()
-    {
-    }
     public static final string_id SID_DEPLOY = new string_id("camp", "deploy");
     public static final string_id SID_SYS_ALREADY_CAMPING = new string_id("camp", "sys_already_camping");
     public static final string_id SID_SYS_CANT_CAMP = new string_id("camp", "sys_cant_camp");
@@ -39,6 +36,10 @@ public class camp_advanced_deed extends script.base_script
     public static final string_id SID_CAMP_EXIT = new string_id("camp", "camp_exit");
     public static final string_id PROSE_CAMP_ENTER = new string_id("camp", "prose_camp_enter");
     public static final string_id PROSE_CAMP_EXIT = new string_id("camp", "prose_camp_exit");
+    public camp_advanced_deed()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -48,6 +49,7 @@ public class camp_advanced_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -56,6 +58,7 @@ public class camp_advanced_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -69,7 +72,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "shuttle_beacon";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -83,7 +86,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "cloning_tube";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -97,7 +100,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "entertainer";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -111,7 +114,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "junk_dealer";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -125,7 +128,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "clothing_station";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -139,7 +142,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "food_station";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -153,7 +156,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "ship_station";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -167,7 +170,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "structure_station";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -181,7 +184,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "weapon_station";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -195,7 +198,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "imperial";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -209,7 +212,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "rebel";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -223,7 +226,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "extra_life";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -245,7 +248,7 @@ public class camp_advanced_deed extends script.base_script
             if (attrib != 0.0f)
             {
                 names[idx] = "lifetime";
-                attribs[idx] = " " + (int)(attrib);
+                attribs[idx] = " " + (int) (attrib);
                 idx++;
                 if (idx >= names.length)
                 {
@@ -255,6 +258,7 @@ public class camp_advanced_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void deployCamp(obj_id self, obj_id player) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -333,14 +337,14 @@ public class camp_advanced_deed extends script.base_script
             if ((myCamp == null) || (myCamp == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 if (exists(myCamp) && myCamp.isLoaded())
                 {
                     sendSystemMessage(player, SID_SYS_ALREADY_CAMPING);
                     return;
                 }
-                else 
+                else
                 {
                     removeObjVar(player, camping.VAR_CAMP_BASE);
                 }

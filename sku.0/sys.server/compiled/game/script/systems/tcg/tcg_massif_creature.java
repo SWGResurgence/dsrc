@@ -5,12 +5,9 @@ import script.library.*;
 
 public class tcg_massif_creature extends script.base_script
 {
-    public tcg_massif_creature()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "sissynoid";
-    public static final String TCG_STR = new String("tcg");
+    public static final String TCG_STR = "tcg";
     public static final string_id SID_CHANGE_NAME = new string_id("player_structure", "greeter_change_name");
     public static final string_id SID_OBSCENE = new string_id(TCG_STR, "obscene_or_space_in_name");
     public static final string_id SID_SET_COLOR = new string_id(TCG_STR, "set_color");
@@ -20,6 +17,10 @@ public class tcg_massif_creature extends script.base_script
     public static final string_id SID_PET_CANT_HEAR_YOU = new string_id(TCG_STR, "pet_cant_hear_you");
     public static final int CHECK_PULSE = 60;
     public static final int MAX_DISTANCE_FOR_COMMAND = 8;
+    public tcg_massif_creature()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         blog("OnDestroy - init");
@@ -59,12 +60,14 @@ public class tcg_massif_creature extends script.base_script
         removeObjVar(controller, house_pet.MASSIFF_CURRENT_PHASE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "resetVariablesOnMassiff", null, 1, false);
         updateMassiffPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "resetVariablesOnMassiff", null, 1, false);
@@ -73,13 +76,14 @@ public class tcg_massif_creature extends script.base_script
         {
             messageTo(self, "findRandomMassiffPetActivity", null, rand(9, 18), false);
         }
-        else 
+        else
         {
             messageTo(self, "findRandomMassiffPetActivity", null, rand(900, 1800), false);
         }
         updateMassiffPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id master, String text) throws InterruptedException
     {
         if (!isValidId(self))
@@ -93,6 +97,7 @@ public class tcg_massif_creature extends script.base_script
         processSpeech(self, master, text);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -102,6 +107,7 @@ public class tcg_massif_creature extends script.base_script
         utils.setScriptVar(self, house_pet.PET_MOVING, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isValidId(self))
@@ -111,6 +117,7 @@ public class tcg_massif_creature extends script.base_script
         utils.removeScriptVar(self, house_pet.PET_MOVING);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!house_pet.isInAPlayerHouse(self))
@@ -129,6 +136,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!house_pet.isInAPlayerHouse(self))
@@ -155,6 +163,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawEmote(obj_id self, obj_id performer, String emote) throws InterruptedException
     {
         if (!isValidId(performer) || !exists(performer))
@@ -235,6 +244,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean processSpeech(obj_id pet, obj_id speaker, String text) throws InterruptedException
     {
         if (!isIdValid(pet))
@@ -305,10 +315,12 @@ public class tcg_massif_creature extends script.base_script
         }
         return true;
     }
+
     public boolean initiateMassiffAction(obj_id pet, obj_id speaker, String petCommand) throws InterruptedException
     {
         return initiateMassiffAction(pet, speaker, petCommand, true);
     }
+
     public boolean initiateMassiffAction(obj_id pet, obj_id speaker, String petCommand, boolean showCantHearOwner) throws InterruptedException
     {
         if (!isValidId(pet) || !exists(pet))
@@ -502,7 +514,7 @@ public class tcg_massif_creature extends script.base_script
                 }
                 petAnim = house_pet.MASSIF_ANIMATION_ASHAMED;
             }
-            else 
+            else
             {
                 if (creatureTemplate.contains("nuna"))
                 {
@@ -531,7 +543,7 @@ public class tcg_massif_creature extends script.base_script
             petBehaviour = ai_lib.BEHAVIOR_SENTINEL;
             goToMaster = true;
         }
-        else 
+        else
         {
             CustomerServiceLog("tcg", "Massif Pet Object: " + pet + " of controller object: " + controller + " heard a command from owner: " + speaker + " but the owner didn't use a known command so the owner was ignored. Failing.");
             showFlyText(pet, new string_id("npc_reaction/flytext", "alert"), 2.0f, colors.MEDIUMSLATEBLUE);
@@ -560,6 +572,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return true;
     }
+
     public int findRandomMassiffPetActivity(obj_id self, dictionary params) throws InterruptedException
     {
         blog("findRandomMassiffPetActivity - init");
@@ -574,208 +587,208 @@ public class tcg_massif_creature extends script.base_script
         switch (randNum)
         {
             case 0:
-            petState = POSTURE_UPRIGHT;
-            petAnim = "trick_" + rand(1, 2);
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = "trick_" + rand(1, 2);
+                break;
             case 1:
-            petState = POSTURE_SITTING;
-            petAnim = house_pet.MASSIF_ANIMATION_HAPPY;
-            break;
+                petState = POSTURE_SITTING;
+                petAnim = house_pet.MASSIF_ANIMATION_HAPPY;
+                break;
             case 2:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_HAPPY;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_HAPPY;
+                break;
             case 3:
-            petState = POSTURE_SITTING;
-            petAnim = house_pet.MASSIF_ANIMATION_CONFUSED;
-            break;
+                petState = POSTURE_SITTING;
+                petAnim = house_pet.MASSIF_ANIMATION_CONFUSED;
+                break;
             case 4:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_CONFUSED;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_CONFUSED;
+                break;
             case 5:
-            petState = POSTURE_SITTING;
-            petAnim = house_pet.MASSIF_ANIMATION_ASHAMED;
-            break;
+                petState = POSTURE_SITTING;
+                petAnim = house_pet.MASSIF_ANIMATION_ASHAMED;
+                break;
             case 6:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_ASHAMED;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_ASHAMED;
+                break;
             case 7:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_SCRATCH;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_SCRATCH;
+                break;
             case 8:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_ALERT;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_ALERT;
+                break;
             case 9:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_FIDGET;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_FIDGET;
+                break;
             case 10:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_LOOK;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_LOOK;
+                break;
             case 11:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_LOOK_LEFT;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_LOOK_LEFT;
+                break;
             case 12:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_LOOK_RIGHT;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_LOOK_RIGHT;
+                break;
             case 13:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_NERVOUS;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_NERVOUS;
+                break;
             case 14:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_SNIFF;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_SNIFF;
+                break;
             case 15:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_STRETCH;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_STRETCH;
+                break;
             case 16:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_TRICK1;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_TRICK1;
+                break;
             case 17:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_TRICK2;
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_TRICK2;
+                break;
             case 18:
-            petState = POSTURE_UPRIGHT;
-            petAnim = house_pet.MASSIF_ANIMATION_VOCALIZE;
-            if (creatureTemplate.contains("nuna"))
-            {
-                petSound = house_pet.SOUND_GROWL_RANDOM_NUNA;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petSound = house_pet.SOUND_GROWL_RANDOM_MASSIFF;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petSound = house_pet.SOUND_GROWL_RANDOM_SCURRIER;
-            }
-            break;
+                petState = POSTURE_UPRIGHT;
+                petAnim = house_pet.MASSIF_ANIMATION_VOCALIZE;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petSound = house_pet.SOUND_GROWL_RANDOM_NUNA;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petSound = house_pet.SOUND_GROWL_RANDOM_MASSIFF;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petSound = house_pet.SOUND_GROWL_RANDOM_SCURRIER;
+                }
+                break;
             case 19:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 20:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             case 21:
-            if (creatureTemplate.contains("nuna"))
-            {
-                petState = POSTURE_LYING_DOWN;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petState = POSTURE_LYING_DOWN;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
             case 22:
-            if (creatureTemplate.contains("nuna"))
-            {
-                petState = POSTURE_LYING_DOWN;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petState = POSTURE_LYING_DOWN;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
             case 23:
-            if (creatureTemplate.contains("nuna"))
-            {
-                petState = POSTURE_LYING_DOWN;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petState = POSTURE_LYING_DOWN;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
             case 24:
-            if (creatureTemplate.contains("nuna"))
-            {
-                petState = POSTURE_LYING_DOWN;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petState = POSTURE_LYING_DOWN;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
             case 25:
-            if (creatureTemplate.contains("nuna"))
-            {
-                petState = POSTURE_LYING_DOWN;
-            }
-            if (creatureTemplate.contains("massif"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            if (creatureTemplate.contains("scurrier"))
-            {
-                petState = POSTURE_SITTING;
-            }
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                if (creatureTemplate.contains("nuna"))
+                {
+                    petState = POSTURE_LYING_DOWN;
+                }
+                if (creatureTemplate.contains("massif"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                if (creatureTemplate.contains("scurrier"))
+                {
+                    petState = POSTURE_SITTING;
+                }
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
             case 26:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 27:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             case 28:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 29:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             case 30:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 31:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             case 32:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 33:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             case 34:
-            petState = POSTURE_SITTING;
-            break;
+                petState = POSTURE_SITTING;
+                break;
             case 35:
-            petState = POSTURE_LYING_DOWN;
-            break;
+                petState = POSTURE_LYING_DOWN;
+                break;
             default:
-            petState = POSTURE_SITTING;
-            messageTo(self, "layNunaEggs", null, 4, false);
-            break;
+                petState = POSTURE_SITTING;
+                messageTo(self, "layNunaEggs", null, 4, false);
+                break;
         }
         if (petState > -1)
         {
@@ -798,12 +811,13 @@ public class tcg_massif_creature extends script.base_script
         {
             messageTo(self, "findRandomMassiffPetActivity", null, 20, false);
         }
-        else 
+        else
         {
             messageTo(self, "findRandomMassiffPetActivity", null, rand(900, 1800), false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int layNunaEggs(obj_id self, dictionary params) throws InterruptedException
     {
         blog("LAYNUNAEGGS - Enter");
@@ -840,7 +854,7 @@ public class tcg_massif_creature extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             blog("LAYNUNAEGGS - I'm not a Nuna - Standing Up and Exiting");
             ai_lib.aiSetPosture(self, POSTURE_UPRIGHT);
@@ -863,7 +877,7 @@ public class tcg_massif_creature extends script.base_script
                     {
                         setObjVar(self, house_pet.MASSIFF_EGG_COUNT, 1);
                     }
-                    else 
+                    else
                     {
                         int count = getIntObjVar(self, house_pet.MASSIFF_EGG_COUNT);
                         setObjVar(self, house_pet.MASSIFF_EGG_COUNT, ++count);
@@ -874,6 +888,7 @@ public class tcg_massif_creature extends script.base_script
         ai_lib.aiSetPosture(self, POSTURE_UPRIGHT);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetPetName(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -922,6 +937,7 @@ public class tcg_massif_creature extends script.base_script
         sendSystemMessage(player, SID_PET_RENAMED);
         return SCRIPT_CONTINUE;
     }
+
     public int findOwner(obj_id self, dictionary params) throws InterruptedException
     {
         blog("findOwner - Init");
@@ -964,7 +980,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.x += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.x -= 0.5f;
         }
@@ -972,7 +988,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.z += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.z -= 0.5f;
         }
@@ -981,6 +997,7 @@ public class tcg_massif_creature extends script.base_script
         messageTo(self, "makeHappySounds", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int feedingTime(obj_id self, dictionary params) throws InterruptedException
     {
         blog("feedingTime - init");
@@ -1000,7 +1017,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.x += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.x -= 0.5f;
         }
@@ -1008,7 +1025,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.z += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.z -= 0.5f;
         }
@@ -1017,6 +1034,7 @@ public class tcg_massif_creature extends script.base_script
         messageTo(self, "eatTheFood", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int eatTheFood(obj_id self, dictionary params) throws InterruptedException
     {
         blog("eatTheFood - init");
@@ -1069,6 +1087,7 @@ public class tcg_massif_creature extends script.base_script
         CustomerServiceLog("tcg", "Massif Pet: " + self + " has been fed by owner: " + getOwner(controller));
         return SCRIPT_CONTINUE;
     }
+
     public boolean updateMassiffPet(obj_id pet) throws InterruptedException
     {
         blog("updateMassiffPet - Init");
@@ -1182,6 +1201,7 @@ public class tcg_massif_creature extends script.base_script
         CustomerServiceLog("tcg", "Massif Pet: " + pet + " is currently in some unknown state: " + currentPhase + " report this to design asap.");
         return false;
     }
+
     public boolean canSeeOwner(obj_id owner, obj_id pet) throws InterruptedException
     {
         if (!isValidId(owner) || !exists(owner))
@@ -1215,6 +1235,7 @@ public class tcg_massif_creature extends script.base_script
         CustomerServiceLog("tcg", "Massif Pet: " + pet + " found its owner in the same cell.");
         return true;
     }
+
     public int startWhining(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = getObjIdObjVar(self, house_pet.PARENT_OBJ_ID);
@@ -1263,6 +1284,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeHappySounds(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isFollowing(self))
@@ -1286,6 +1308,7 @@ public class tcg_massif_creature extends script.base_script
         doAnimationAction(self, house_pet.MASSIF_ANIMATION_VOCALIZE);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePetColorize(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handlePetColorize - Init");
@@ -1321,12 +1344,13 @@ public class tcg_massif_creature extends script.base_script
         custom_var myVar = getCustomVarByName(self, hue.INDEX_1);
         if (myVar != null && myVar.isPalColor())
         {
-            palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+            palcolor_custom_var pcVar = (palcolor_custom_var) myVar;
             pcVar.setValue(idx);
             setObjVar(controller, house_pet.PET_HUE_INDEX1, idx);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int resetVariablesOnMassiff(obj_id self, dictionary params) throws InterruptedException
     {
         blog("resetVariablesOnMassiff - init");
@@ -1359,6 +1383,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startLoitering(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasMessageTo(self, "startLoitering"))
@@ -1387,16 +1412,19 @@ public class tcg_massif_creature extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_WANDER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int resumeStanding(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.aiSetPosture(self, POSTURE_UPRIGHT);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))
@@ -1405,6 +1433,7 @@ public class tcg_massif_creature extends script.base_script
         }
         return true;
     }
+
     public int snackTime(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Scurrier informed of SnackTime");
@@ -1423,7 +1452,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.x += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.x -= 0.5f;
         }
@@ -1431,7 +1460,7 @@ public class tcg_massif_creature extends script.base_script
         {
             pathToLoc.z += 0.5f;
         }
-        else 
+        else
         {
             pathToLoc.z -= 0.5f;
         }
@@ -1439,6 +1468,7 @@ public class tcg_massif_creature extends script.base_script
         messageTo(self, "eatTheSnack", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int eatTheSnack(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Scurrier is Eating the snack");
@@ -1476,6 +1506,7 @@ public class tcg_massif_creature extends script.base_script
         CustomerServiceLog("tcg", "Scurrier Pet: " + self + " has been given a snack by owner: " + getOwner(controller));
         return SCRIPT_CONTINUE;
     }
+
     public void scurrierPetEatingSurprise(obj_id controller, obj_id creature) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -1500,26 +1531,26 @@ public class tcg_massif_creature extends script.base_script
             switch (rollItem)
             {
                 case 1:
-                spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_01, getContainedBy(controller), feedDishLoc);
-                break;
+                    spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_01, getContainedBy(controller), feedDishLoc);
+                    break;
                 case 2:
-                spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_02, getContainedBy(controller), feedDishLoc);
-                break;
+                    spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_02, getContainedBy(controller), feedDishLoc);
+                    break;
                 case 3:
-                spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_03, getContainedBy(controller), feedDishLoc);
-                break;
+                    spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_03, getContainedBy(controller), feedDishLoc);
+                    break;
                 case 4:
-                spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_04, getContainedBy(controller), feedDishLoc);
-                break;
+                    spawnedItem = static_item.createNewItemFunction(house_pet.SCURRIER_ITEM_04, getContainedBy(controller), feedDishLoc);
+                    break;
                 default:
-                CustomerServiceLog("tcg", "Scurrier Pet(" + creature + ") failed to spawn a junk combine item. Controller(" + controller + ") - please contact a developer should this trend continue.");
-                break;
+                    CustomerServiceLog("tcg", "Scurrier Pet(" + creature + ") failed to spawn a junk combine item. Controller(" + controller + ") - please contact a developer should this trend continue.");
+                    break;
             }
             if (!isValidId(spawnedItem) || !exists(spawnedItem))
             {
                 CustomerServiceLog("tcg", "Scurrier Pet(" + creature + ") failed to spawn a junk combine item. Controller(" + controller + ") - please contact a developer should this trend continue.");
             }
-            else 
+            else
             {
                 setOwner(spawnedItem, getOwner(controller));
                 CustomerServiceLog("tcg", "Scurrier Pet(" + creature + ") spawned item(" + spawnedItem + ") at Controller(" + controller + ") - owner(" + getOwner(controller) + ").");

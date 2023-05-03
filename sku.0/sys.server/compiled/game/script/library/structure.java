@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class structure extends script.base_script
 {
-    public structure()
-    {
-    }
     public static final String TEMPLATE_DEED = "object/intangible/deed/deed.iff";
     public static final String TEMPLATE_CELL = "object/cell/cell.iff";
     public static final String SLOT_GENERAL_INVENTORY = "";
@@ -82,6 +79,10 @@ public class structure extends script.base_script
     public static final String VAR_FILLER_SPAWN_CURRENT_EGG = "fillerSpawn.current.egg";
     public static final String VAR_FILLER_SPAWN_CURRENT_LOC = "fillerSpawn.current.loc";
     public static final String HANDLER_CLEANUP_SELF = "handleCleanupSelf";
+    public structure()
+    {
+    }
+
     public static obj_id getContainingBuilding(obj_id target) throws InterruptedException
     {
         if (target == null)
@@ -95,6 +96,7 @@ public class structure extends script.base_script
         }
         return topMost;
     }
+
     public static boolean isInside(obj_id target) throws InterruptedException
     {
         if (target == null)
@@ -104,6 +106,7 @@ public class structure extends script.base_script
         obj_id topMost = getTopMostContainer(target);
         return !((topMost == target) || (topMost == null));
     }
+
     public static String getRandomCell(obj_id structure) throws InterruptedException
     {
         if ((structure == null) || (structure == obj_id.NULL_ID))
@@ -115,7 +118,7 @@ public class structure extends script.base_script
         {
             return "";
         }
-        else 
+        else
         {
             int idx = rand(0, cellNames.length - 1);
             String cellName = cellNames[idx];
@@ -126,6 +129,7 @@ public class structure extends script.base_script
         }
         return "";
     }
+
     public static obj_id getRandomCellId(obj_id structure) throws InterruptedException
     {
         if ((structure == null) || (structure == obj_id.NULL_ID))
@@ -137,20 +141,22 @@ public class structure extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             int idx = rand(0, cellNames.length - 1);
             String cellName = cellNames[idx];
             if (!cellName.equals(""))
             {
                 obj_id cellId = getCellId(structure, cellName);
-                if ((cellId != null) && (cellId != obj_id.NULL_ID)) {
+                if ((cellId != null) && (cellId != obj_id.NULL_ID))
+                {
                     return cellId;
                 }
             }
         }
         return null;
     }
+
     public static location getRandomLocationInStructure(obj_id structure) throws InterruptedException
     {
         if ((structure == null) || (structure == obj_id.NULL_ID))
@@ -164,6 +170,7 @@ public class structure extends script.base_script
         }
         return null;
     }
+
     public static int getFacilityVersion(obj_id facility, String scriptName, String columnName) throws InterruptedException
     {
         if ((facility == null) || (scriptName.equals("")) || (columnName.equals("")))
@@ -192,6 +199,7 @@ public class structure extends script.base_script
         LOG("structure", "script = " + scriptName + " col = " + columnName);
         return -1;
     }
+
     public static int getFacilityTerminalVersion(obj_id facility, String scriptName) throws InterruptedException
     {
         if ((facility == null) || (scriptName.equals("")))
@@ -200,6 +208,7 @@ public class structure extends script.base_script
         }
         return getFacilityVersion(facility, scriptName, DATATABLE_COL_VERSION_TERMINAL);
     }
+
     public static int getFacilitySpawnVersion(obj_id facility, String scriptName) throws InterruptedException
     {
         if ((facility == null) || (scriptName.equals("")))
@@ -208,6 +217,7 @@ public class structure extends script.base_script
         }
         return getFacilityVersion(facility, scriptName, DATATABLE_COL_VERSION_SPAWN);
     }
+
     public static boolean isCurrentTerminalVersion(obj_id facility, String scriptName) throws InterruptedException
     {
         if ((facility == null) || (scriptName.equals("")))
@@ -218,6 +228,7 @@ public class structure extends script.base_script
         int latest = getFacilityTerminalVersion(facility, scriptName);
         return current >= latest;
     }
+
     public static boolean isCurrentSpawnVersion(obj_id facility, String scriptName) throws InterruptedException
     {
         if ((facility == null) || (scriptName.equals("")))
@@ -228,6 +239,7 @@ public class structure extends script.base_script
         int latest = getFacilitySpawnVersion(facility, scriptName);
         return current >= latest;
     }
+
     public static obj_id[] getPlayersInStructure(obj_id facility) throws InterruptedException
     {
         if (facility == null)
@@ -246,8 +258,10 @@ public class structure extends script.base_script
                 {
                     return null;
                 }
-                for (obj_id content : contents) {
-                    if ((getTemplateName(content)).equals(TEMPLATE_CELL)) {
+                for (obj_id content : contents)
+                {
+                    if ((getTemplateName(content)).equals(TEMPLATE_CELL))
+                    {
                         cells = utils.addElement(cells, content);
                     }
                 }
@@ -263,11 +277,15 @@ public class structure extends script.base_script
         Vector players = new Vector();
         players.setSize(0);
         obj_id[] cellContents;
-        for (obj_id aCellsArray : cellsArray) {
+        for (obj_id aCellsArray : cellsArray)
+        {
             cellContents = getContents(aCellsArray);
-            if ((cellContents != null) && (cellContents.length != 0)) {
-                for (obj_id cellContent : cellContents) {
-                    if (isPlayer(cellContent)) {
+            if (cellContents != null)
+            {
+                for (obj_id cellContent : cellContents)
+                {
+                    if (isPlayer(cellContent))
+                    {
                         players = utils.addElement(players, cellContent);
                     }
                 }
@@ -277,13 +295,14 @@ public class structure extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             obj_id[] _players = new obj_id[players.size()];
             players.toArray(_players);
             return _players;
         }
     }
+
     public static boolean addStructureCoOwner(obj_id structure, obj_id owner, obj_id player) throws InterruptedException
     {
         if ((structure == null) || (owner == null) || (player == null))
@@ -306,7 +325,7 @@ public class structure extends script.base_script
                 return true;
             }
         }
-        else 
+        else
         {
             obj_id[] newCoOwners = new obj_id[1];
             newCoOwners[0] = player;
@@ -318,6 +337,7 @@ public class structure extends script.base_script
         }
         return false;
     }
+
     public static boolean removeStructureCoOwner(obj_id structure, obj_id owner, obj_id player) throws InterruptedException
     {
         if ((structure == null) || (owner == null) || (player == null))
@@ -342,7 +362,7 @@ public class structure extends script.base_script
             {
                 removeObjVar(structure, utils.VAR_COOWNERS);
             }
-            else 
+            else
             {
                 setObjVar(structure, utils.VAR_COOWNERS, coowners);
             }
@@ -350,6 +370,7 @@ public class structure extends script.base_script
         }
         return false;
     }
+
     public static obj_id packStructureToDeed(obj_id owner, obj_id building) throws InterruptedException
     {
         if ((owner == null) || (building == null))
@@ -364,6 +385,7 @@ public class structure extends script.base_script
         destroyObject(deed);
         return null;
     }
+
     public static obj_id unpackStructureFromDeed(obj_id owner, obj_id deed) throws InterruptedException
     {
         if ((owner == null) || (deed == null))
@@ -383,6 +405,7 @@ public class structure extends script.base_script
         }
         return null;
     }
+
     public static boolean createStructureTerminals(obj_id facility, String scriptName, String datatable) throws InterruptedException
     {
         if (!isIdValid(facility) || datatable == null || datatable.equals(""))
@@ -392,6 +415,7 @@ public class structure extends script.base_script
         obj_id[] terminals = createStructureTerminals(facility, datatable);
         return !((terminals == null) || (terminals.length == 0));
     }
+
     public static obj_id[] createStructureTerminals(obj_id facility, String datatable) throws InterruptedException
     {
         if (!isIdValid(facility) || datatable == null || datatable.equals(""))
@@ -425,14 +449,15 @@ public class structure extends script.base_script
                 obj_id CELL_ID = obj_id.NULL_ID;
                 LOG("structureTerminal", "retrieved terminal data...");
                 LOG("structureTerminal", "loc = " + X + ", " + Y + ". " + Z + " H = " + relativeHeading + " cell = " + CELL_NAME);
-                if (!CELL_NAME.equals(WORLD_DELTA)) {
+                if (!CELL_NAME.equals(WORLD_DELTA))
+                {
                     CELL_ID = getCellId(facility, CELL_NAME);
                 }
                 if (CELL_ID == null)
                 {
                     LOG("structure", "datatable " + datatable + " has a bad cell name");
                 }
-                else 
+                else
                 {
                     obj_id terminal_id;
                     location spot = new location(X, Y, Z, sceneName, CELL_ID);
@@ -455,7 +480,7 @@ public class structure extends script.base_script
                         LOG("structureTerminal", "Creating new terminal at: " + spot.x + " " + spot.y + " " + spot.z + ".");
                         terminal_id = createObject(TEMPLATE, spot);
                     }
-                    else 
+                    else
                     {
                         LOG("structureTerminal", "creating terminal in CELL (" + CELL_ID + ") space");
                         terminal_id = createObjectInCell(TEMPLATE, facility, CELL_NAME, spot);
@@ -475,6 +500,7 @@ public class structure extends script.base_script
         }
         return utils.toStaticObjIdArray(terminals);
     }
+
     public static boolean destroyStructureTerminals(obj_id facility) throws InterruptedException
     {
         if (facility == null)
@@ -486,12 +512,14 @@ public class structure extends script.base_script
         {
             return false;
         }
-        for (obj_id terminal : terminals) {
+        for (obj_id terminal : terminals)
+        {
             destroyObject(terminal);
         }
         removeObjVar(facility, VAR_STRUCTURE_TERMINALS);
         return true;
     }
+
     public static boolean initializeStructureInteriorSpawn(obj_id facility) throws InterruptedException
     {
         if (facility == null)
@@ -509,7 +537,7 @@ public class structure extends script.base_script
         {
             setObjVar(facility, VAR_SPAWN_POPULATION_PLAYER, 0);
         }
-        else 
+        else
         {
             setObjVar(facility, VAR_SPAWN_POPULATION_PLAYER, players.length);
         }
@@ -519,6 +547,7 @@ public class structure extends script.base_script
         }
         return true;
     }
+
     public static int getSpawnSwitchState(obj_id facility, int idx) throws InterruptedException
     {
         if (facility != null)
@@ -538,6 +567,7 @@ public class structure extends script.base_script
         }
         return -1;
     }
+
     public static boolean setSpawnSwitchState(obj_id facility, int idx, boolean setActive) throws InterruptedException
     {
         if (facility != null)
@@ -551,7 +581,7 @@ public class structure extends script.base_script
                     {
                         switches = utils.setBit(switches, idx);
                     }
-                    else 
+                    else
                     {
                         switches = utils.clearBit(switches, idx);
                     }
@@ -561,6 +591,7 @@ public class structure extends script.base_script
         }
         return false;
     }
+
     public static boolean resetFillerSpawns(obj_id building) throws InterruptedException
     {
         LOG("FILLER_BUILDING", "resetFillerSpawns: entered!");
@@ -586,13 +617,14 @@ public class structure extends script.base_script
                 LOG("FILLER_BUILDING", "resetFillerSpawns: SPAWN FAILED!");
                 doContinue = false;
             }
-            else 
+            else
             {
                 count++;
             }
         } while (doContinue);
         return count > 0;
     }
+
     public static boolean cleanupFillerSpawns(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -600,14 +632,17 @@ public class structure extends script.base_script
             return false;
         }
         obj_id[] eggs = getObjIdArrayObjVar(building, VAR_FILLER_SPAWN_CURRENT_EGG);
-        if ((eggs != null) && (eggs.length != 0)) {
-            for (obj_id egg : eggs) {
+        if (eggs != null)
+        {
+            for (obj_id egg : eggs)
+            {
                 destroyObject(egg);
             }
         }
         removeObjVar(building, VAR_FILLER_SPAWN_CURRENT_BASE);
         return true;
     }
+
     public static dictionary getFillerEggTemplate(obj_id building, int spawnIdx, int eggIdx) throws InterruptedException
     {
         if ((building == null) || (spawnIdx < -1) || (eggIdx < -1))
@@ -649,20 +684,18 @@ public class structure extends script.base_script
                         if (dataTableOpen(lookup))
                         {
                             eggs = dataTableGetStringColumn(lookup, DATATABLE_COL_TEMPLATE);
-                            switch (eggIdx)
+                            if (eggIdx == -1)
                             {
-                                case -1:
-                                    eggIdx = rand(0, eggs.length - 1);
-                                    default:
-                                if (eggIdx < eggs.length)
-                                {
-                                    d.put(DICT_TEMPLATE, eggs[eggIdx]);
-                                    return d;
-                                }
-                                else 
-                                {
-                                    return null;
-                                }
+                                eggIdx = rand(0, eggs.length - 1);
+                            }
+                            if (eggIdx < eggs.length)
+                            {
+                                d.put(DICT_TEMPLATE, eggs[eggIdx]);
+                                return d;
+                            }
+                            else
+                            {
+                                return null;
                             }
                         }
                     }
@@ -671,6 +704,7 @@ public class structure extends script.base_script
         }
         return null;
     }
+
     public static dictionary getRandomFillerEggTemplate(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -679,6 +713,7 @@ public class structure extends script.base_script
         }
         return getFillerEggTemplate(building, -1, -1);
     }
+
     public static dictionary getNextFillerEggTemplate(obj_id building) throws InterruptedException
     {
         if (building == null)
@@ -692,12 +727,13 @@ public class structure extends script.base_script
         {
             spawnIdx = 0;
         }
-        else 
+        else
         {
             spawnIdx = eggs.length;
         }
         return getFillerEggTemplate(building, spawnIdx, eggIdx);
     }
+
     public static boolean spawnNextFillerEggTemplate(obj_id building) throws InterruptedException
     {
         LOG("FILLER_BUILDING", "spawnNextFillerEggTemplate: entered!");
@@ -720,7 +756,7 @@ public class structure extends script.base_script
                 return spawnFillerEgg(building, d);
             }
         }
-        else 
+        else
         {
             if (idx == eggs.length)
             {
@@ -729,6 +765,7 @@ public class structure extends script.base_script
         }
         return false;
     }
+
     public static boolean spawnFillerEgg(obj_id building, dictionary params) throws InterruptedException
     {
         LOG("FILLER_BUILDING", "spawnFillerEgg: entered!");
@@ -757,7 +794,7 @@ public class structure extends script.base_script
             setObjVar(building, VAR_FILLER_SPAWN_CURRENT_LOC, locs);
             return true;
         }
-        else 
+        else
         {
             return false;
         }

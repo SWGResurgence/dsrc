@@ -7,9 +7,6 @@ import script.string_id;
 
 public class npc_inventory extends script.base_script
 {
-    public npc_inventory()
-    {
-    }
     public static final String OBJVAR_CRAFTING_TRACKER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_TRACKER;
     public static final String OBJVAR_MY_OWNER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".myOwner";
     public static final String OBJVAR_PLAYERS_CAN_ACCESS_CONTAINER = "players_can_access_container";
@@ -18,6 +15,10 @@ public class npc_inventory extends script.base_script
     public static final string_id SID_THANK_YOU_ONE = new string_id("crafting", "cc_thank_you_one");
     public static final string_id SID_THANK_YOU_WITH_COUNTS = new string_id("crafting", "cc_thank_you_with_counts");
     public static final string_id SID_NOT_CRAFTING = new string_id("crafting", "cc_not_crafting");
+    public npc_inventory()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -29,6 +30,7 @@ public class npc_inventory extends script.base_script
         setObjVar(self, OBJVAR_PLAYERS_CAN_ACCESS_CONTAINER, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id owner = getOwner(self);
@@ -40,6 +42,7 @@ public class npc_inventory extends script.base_script
         setObjVar(self, OBJVAR_PLAYERS_CAN_ACCESS_CONTAINER, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(self, OBJVAR_CRAFTING_TRACKER);
@@ -66,6 +69,7 @@ public class npc_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id craftingTracker = getObjIdObjVar(self, OBJVAR_CRAFTING_TRACKER);
@@ -73,7 +77,7 @@ public class npc_inventory extends script.base_script
         {
             sendSystemMessage(transferer, SID_THANK_YOU);
         }
-        else 
+        else
         {
             int itemsLeft = community_crafting.getNumIngredientsNeededByPlayer(craftingTracker, transferer);
             if (itemsLeft < 0)
@@ -88,7 +92,7 @@ public class npc_inventory extends script.base_script
             {
                 sendSystemMessage(transferer, SID_THANK_YOU_ONE);
             }
-            else 
+            else
             {
                 prose_package pp = new prose_package();
                 pp.stringId = SID_THANK_YOU_WITH_COUNTS;

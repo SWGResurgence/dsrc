@@ -11,6 +11,7 @@ public class starport extends script.base_script
     public starport()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::OnAttach -- " + self);
@@ -21,12 +22,14 @@ public class starport extends script.base_script
         doInitializeStarport(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         travel.destroyBaseObjects(self);
         travel.removeTravelPoint(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::OnIntialize -- " + self);
@@ -41,11 +44,13 @@ public class starport extends script.base_script
         messageTo(self, "retryInitializeStarport", params, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::OnUnloadedFromMemory -- " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::OnDestroy -- " + self);
@@ -57,6 +62,7 @@ public class starport extends script.base_script
         travel.destroyBaseObjects(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgArrivalLocation(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::msgArrivalLocation -- " + self + "  " + params);
@@ -67,6 +73,7 @@ public class starport extends script.base_script
         messageTo(player, "msgTravelToStarport", params, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int msgRestartShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::msgRestartShuttle -- " + self);
@@ -86,6 +93,7 @@ public class starport extends script.base_script
         LOG("LOG_CHANNEL", "starport::msgRestartShuttle -- sending message to " + shuttle);
         return SCRIPT_CONTINUE;
     }
+
     public int retryInitializeStarport(obj_id self, dictionary params) throws InterruptedException
     {
         String planet = getCurrentSceneName();
@@ -112,6 +120,7 @@ public class starport extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doInitializeStarport(obj_id self) throws InterruptedException
     {
         if (player_structure.isCivic(self))

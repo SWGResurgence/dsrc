@@ -7,15 +7,18 @@ import script.obj_id;
 
 public class serving_droid_control extends script.base_script
 {
+    public static final String DROID_ID = "serving_droid.droid";
+
     public serving_droid_control()
     {
     }
-    public static final String DROID_ID = "serving_droid.droid";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkdroidId", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -24,6 +27,7 @@ public class serving_droid_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -32,6 +36,7 @@ public class serving_droid_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkDroidId(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(getObjIdObjVar(self, DROID_ID)))
@@ -40,6 +45,7 @@ public class serving_droid_control extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleReceived(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) && !exists(self))
@@ -71,6 +77,7 @@ public class serving_droid_control extends script.base_script
         broadcastMessage("handleActivateDroid", new dictionary());
         return SCRIPT_CONTINUE;
     }
+
     public int handleLost(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) && !exists(self))

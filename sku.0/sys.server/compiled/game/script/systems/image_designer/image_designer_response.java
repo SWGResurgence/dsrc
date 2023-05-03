@@ -11,9 +11,6 @@ import script.string_id;
 
 public class image_designer_response extends script.base_script
 {
-    public image_designer_response()
-    {
-    }
     public static final String DATATABLE_CUSTOMIZATION = "datatables/customization/customization_skill_mods.iff";
     public static final String DATATABLE_HAIR_STYLE_MODS = "datatables/customization/hair_assets_skill_mods.iff";
     public static final String SCRIPT_IMAGE_DESIGNER_RESPONSE = "systems.image_designer.image_designer_response";
@@ -47,6 +44,10 @@ public class image_designer_response extends script.base_script
     public static final int IMAGE_DESIGN_EXPERIENCE_COSMETIC = 100;
     public static final int IMAGE_DESIGN_EXPERIENCE_PHYSICAL = 300;
     public static final int IMAGE_DESIGN_EXPERIENCE_STAT_MIG = 2000;
+    public image_designer_response()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasScript(self, SCRIPT_IMAGE_DESIGNER_RESPONSE))
@@ -59,6 +60,7 @@ public class image_designer_response extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (hasScript(self, SCRIPT_IMAGE_DESIGNER_RESPONSE))
@@ -71,6 +73,7 @@ public class image_designer_response extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnImmediateLogout(obj_id self) throws InterruptedException
     {
         if (hasScript(self, SCRIPT_IMAGE_DESIGNER_RESPONSE))
@@ -100,6 +103,7 @@ public class image_designer_response extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnImageDesignValidate(obj_id self, obj_id designerId, obj_id target, obj_id terminalId, int startingTime, int designType, boolean newHairSet, String newHairAsset, String hairCustomizationData, int designerRequiredCredits, int recipientPaidCredits, boolean accepted, String[] morphChangesKeys, float[] morphChangesValues, String[] indexChangesKeys, int[] indexChangesValues, String holoEmote) throws InterruptedException
     {
         if (!accepted)
@@ -144,12 +148,12 @@ public class image_designer_response extends script.base_script
                         accepted = false;
                     }
                 }
-                else 
+                else
                 {
                     accepted = false;
                 }
             }
-            else 
+            else
             {
                 accepted = false;
             }
@@ -192,6 +196,7 @@ public class image_designer_response extends script.base_script
         imagedesignValidated(designerId, target, terminalId, startingTime, designType, newHairSet, newHairAsset, hairCustomizationData, designerRequiredCredits, recipientPaidCredits, accepted, morphChangesKeys, morphChangesValues, indexChangesKeys, indexChangesValues, holoEmote);
         return SCRIPT_CONTINUE;
     }
+
     public int OnImageDesignCompleted(obj_id self, obj_id designerId, obj_id target, obj_id terminalId, int startingTime, int designType, boolean newHairSet, String newHairAsset, String hairCustomizationData, int designerRequiredCredits, int recipientPaidCredits, boolean accepted, String[] morphChangesKeys, float[] morphChangesValues, String[] indexChangesKeys, int[] indexChangesValues, String holoEmote) throws InterruptedException
     {
         utils.removeScriptVar(self, VAR_IMAGE_DESIGN_TIMESTAMP);
@@ -226,7 +231,7 @@ public class image_designer_response extends script.base_script
                 experience = IMAGE_DESIGN_EXPERIENCE_STAT_MIG;
                 if (target == self)
                 {
-                    experience = (int)(experience / 2);
+                    experience = experience / 2;
                 }
             }
             else if (designType == 1)
@@ -234,15 +239,15 @@ public class image_designer_response extends script.base_script
                 experience = IMAGE_DESIGN_EXPERIENCE_PHYSICAL;
                 if (target == self)
                 {
-                    experience = (int)(experience / 2);
+                    experience = experience / 2;
                 }
             }
-            else 
+            else
             {
                 experience = IMAGE_DESIGN_EXPERIENCE_COSMETIC;
                 if (target == self)
                 {
-                    experience = (int)(experience / 2);
+                    experience = experience / 2;
                 }
             }
             xp.grantSocialStyleXp(self, xp.IMAGEDESIGNER, experience);
@@ -250,6 +255,7 @@ public class image_designer_response extends script.base_script
         detachScript(self, SCRIPT_IMAGE_DESIGNER_RESPONSE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnImageDesignCanceled(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, VAR_IMAGE_DESIGN_CONFIRM);

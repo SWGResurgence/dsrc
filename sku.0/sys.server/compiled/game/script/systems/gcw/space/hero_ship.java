@@ -10,7 +10,8 @@ import script.string_id;
 
 import java.util.Vector;
 
-public class hero_ship extends support_ship {
+public class hero_ship extends support_ship
+{
     private static final String HERO_PILOT_DATA = "datatables/npc/space/space_gcw_hero.iff";
     private final int TAUNT_QUANTITY = 5;
     private final String DESPAWN_TAUNT = "despawn";
@@ -20,36 +21,44 @@ public class hero_ship extends support_ship {
     private final String VANQUISH_TAUNT = "vanquished";
 
     @Override
-    public int OnAttach(obj_id self) throws InterruptedException {
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
         return SCRIPT_CONTINUE;
     }
 
     @Override
-    public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int intSlot, boolean fromPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException {
-        if(!isValidId(attacker) || !space_utils.isPlayerControlledShip(attacker)){
+    public int OnShipWasHit(obj_id self, obj_id attacker, int weaponIndex, boolean isMissile, int missileType, int intSlot, boolean fromPlayerAutoTurret, float hitLocationX_o, float hitLocationY_o, float hitLocationZ_o) throws InterruptedException
+    {
+        if (!isValidId(attacker) || !space_utils.isPlayerControlledShip(attacker))
+        {
             return SCRIPT_CONTINUE;
         }
-            // get this ship's pilot information
+        // get this ship's pilot information
         dictionary pilotData = getPilotRow(getStringObjVar(self, "ace_name"));
 
         // check if this is a new attacker - if so, add it to the list of attackers.
         Vector attackers = getAttackers();
         boolean newAttacker = false;
-        if(attackers != null){
+        if (attackers != null)
+        {
             newAttacker = !attackers.contains(attacker);
         }
-        if(attackers == null || newAttacker){
+        if (attackers == null || newAttacker)
+        {
             addAttacker(attacker);
         }
-        if(newAttacker){
+        if (newAttacker)
+        {
             handleTauntNewAttacker(attacker, pilotData);
         }
-        else{
+        else
+        {
             handleTauntKnownAttacker(attacker, pilotData);
         }
 
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary pilotData = getPilotRow(getStringObjVar(self, "ace_name"));
@@ -71,39 +80,47 @@ public class hero_ship extends support_ship {
         return SCRIPT_CONTINUE;
     }
 
-    private int getPilotRowIndex(String hero_name){
+    private int getPilotRowIndex(String hero_name)
+    {
         String[] pilotNames = dataTableGetStringColumn(HERO_PILOT_DATA, 0);
-        for(int i = 0; i < pilotNames.length; i++){
-            if(pilotNames[i].equals(hero_name)) return i;
+        for (int i = 0; i < pilotNames.length; i++)
+        {
+            if (pilotNames[i].equals(hero_name)) return i;
         }
         return -1;
     }
 
-    private dictionary getPilotRow(String hero_name){
+    private dictionary getPilotRow(String hero_name)
+    {
         return dataTableGetRow(HERO_PILOT_DATA, getPilotRowIndex(hero_name));
     }
 
-    private Vector getAttackers(){
+    private Vector getAttackers()
+    {
         return getResizeableObjIdArrayObjVar(getSelf(), "attackers");
     }
 
-    private void addAttacker(obj_id attacker){
+    private void addAttacker(obj_id attacker)
+    {
         // get all current attackers and add the supplied attacker.
         Vector attackers = getAttackers();
-        if(attackers == null) attackers = new Vector();
+        if (attackers == null) attackers = new Vector();
         attackers.add(attacker);
         setObjVar(getSelf(), "attackers", attackers);
     }
 
-    private String getTauntStringFile(dictionary pilotData){
+    private String getTauntStringFile(dictionary pilotData)
+    {
         return pilotData.getString("taunt_file");
     }
 
-    private boolean pilotWillTaunt(){
+    private boolean pilotWillTaunt()
+    {
         obj_id self = getSelf();
         int TAUNT_DELAY = 3;
 
-        if(getGameTime() < (getIntObjVar(self,  "lastTauntTime") + TAUNT_DELAY)) {
+        if (getGameTime() < (getIntObjVar(self, "lastTauntTime") + TAUNT_DELAY))
+        {
             dictionary pilotData = getPilotRow(getStringObjVar(self, "ace_name"));
             float tauntChance = pilotData.getFloat("taunt_chance");
             return (rand() * 100) < tauntChance;
@@ -112,31 +129,38 @@ public class hero_ship extends support_ship {
 
     }
 
-    private void handleTauntNewAttacker(obj_id attacker, dictionary pilotData) throws InterruptedException{
-        if(pilotWillTaunt()) {
+    private void handleTauntNewAttacker(obj_id attacker, dictionary pilotData) throws InterruptedException
+    {
+        if (pilotWillTaunt())
+        {
             String taunt = ENTER_COMBAT_TAUNT + rand(1, TAUNT_QUANTITY);
             doTaunt(attacker, pilotData, taunt);
         }
     }
 
-    private void handleTauntKnownAttacker(obj_id attacker, dictionary pilotData) throws InterruptedException{
-        if(pilotWillTaunt()) {
+    private void handleTauntKnownAttacker(obj_id attacker, dictionary pilotData) throws InterruptedException
+    {
+        if (pilotWillTaunt())
+        {
             String taunt = GOT_HIT_TAUNT + rand(1, TAUNT_QUANTITY);
             doTaunt(attacker, pilotData, taunt);
         }
     }
 
-    private void handleTauntVanquished(obj_id attacker, dictionary pilotData) throws InterruptedException{
+    private void handleTauntVanquished(obj_id attacker, dictionary pilotData) throws InterruptedException
+    {
         String taunt = VANQUISH_TAUNT + rand(1, TAUNT_QUANTITY);
         doTaunt(attacker, pilotData, taunt);
     }
 
-    private void handleTauntDespawn(obj_id attacker, dictionary pilotData) throws InterruptedException{
+    private void handleTauntDespawn(obj_id attacker, dictionary pilotData) throws InterruptedException
+    {
         String taunt = DESPAWN_TAUNT + rand(1, TAUNT_QUANTITY);
         doTaunt(attacker, pilotData, taunt);
     }
 
-    private void doTaunt(obj_id attacker, dictionary pilotData, String taunt) throws InterruptedException{
+    private void doTaunt(obj_id attacker, dictionary pilotData, String taunt) throws InterruptedException
+    {
         obj_id self = getSelf();
 
         // get the taunt string_id
@@ -156,7 +180,8 @@ public class hero_ship extends support_ship {
         utils.setLocalVar(self, "lastTauntTime", getGameTime());
     }
 
-    public int handleDespawn(obj_id self, dictionary pilotData) throws InterruptedException{
+    public int handleDespawn(obj_id self, dictionary pilotData) throws InterruptedException
+    {
         String taunt = DESPAWN_TAUNT + rand(1, TAUNT_QUANTITY);
         doTaunt(pilotData.getObjId("attacker"), pilotData, taunt);
         destroyObjectHyperspace(self);

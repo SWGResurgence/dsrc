@@ -9,16 +9,19 @@ public class planet_scheduler extends script.base_script
     public planet_scheduler()
     {
     }
+
     public int clearPromotions(obj_id self, dictionary params) throws InterruptedException
     {
         String[] promotions = scheduled_drop.getSchedulerPromotions();
-        for (String promotion : promotions) {
+        for (String promotion : promotions)
+        {
             removeObjVar(self, "tcg." + promotion + ".count");
         }
         scheduled_drop.removeClusterPromotions();
         scheduled_drop.setLastClusterUpdateTime(getCalendarTime());
         return SCRIPT_CONTINUE;
     }
+
     public int setPromotion(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -34,6 +37,7 @@ public class planet_scheduler extends script.base_script
         scheduled_drop.setLastClusterUpdateTime(getCalendarTime());
         return SCRIPT_CONTINUE;
     }
+
     public int reducePromotion(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class tcg_pet_extras extends script.base_script
 {
-    public tcg_pet_extras()
-    {
-    }
     public static final string_id SID_PICK_UP_EGG = new string_id("tcg", "pick_up_eggs");
     public static final string_id SID_DISCARD_EGG = new string_id("tcg", "discard_eggs");
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
@@ -20,6 +17,10 @@ public class tcg_pet_extras extends script.base_script
     public static final String NUNA_FLOWER_03 = "object/tangible/item/nuna_egg_flower_stage_03.iff";
     public static final String NUNA_FLOWER_DEAD = "object/tangible/item/nuna_egg_flower_dead.iff";
     public static final String THIS_SCRIPT = "systems.tcg.tcg_pet_extras";
+    public tcg_pet_extras()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id rottenEgg = getSelf();
@@ -44,6 +45,7 @@ public class tcg_pet_extras extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id rottenEgg = getSelf();
@@ -58,10 +60,12 @@ public class tcg_pet_extras extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id rottenEgg = self;
@@ -85,6 +89,7 @@ public class tcg_pet_extras extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id rottenEgg = self;
@@ -106,7 +111,7 @@ public class tcg_pet_extras extends script.base_script
                     LOG("sissynoid", "In Player's Inventory - Player in World");
                     placeRottenEgg(player, rottenEgg);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_NOT_OUTSIDE);
                 }
@@ -114,6 +119,7 @@ public class tcg_pet_extras extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void placeRottenEgg(obj_id player, obj_id rottenEgg) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(rottenEgg))
@@ -154,11 +160,12 @@ public class tcg_pet_extras extends script.base_script
         {
             messageTo(replacementEggs, "handleRottenEggPulseUpdate", null, 1800, false);
         }
-        else 
+        else
         {
             messageTo(replacementEggs, "handleRottenEggPulseUpdate", null, 180, false);
         }
     }
+
     public int handleRottenEggPulseUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("sissynoid", "Pulsing Rotten Egg.");
@@ -183,7 +190,7 @@ public class tcg_pet_extras extends script.base_script
                 {
                     messageTo(newItem, "handleDestroyDeadFlowerUpdate", null, 300, false);
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(originalOwner, "The wildflower has died - ");
                     messageTo(newItem, "handleDestroyDeadFlowerUpdate", null, 60, false);
@@ -220,7 +227,7 @@ public class tcg_pet_extras extends script.base_script
                     {
                         messageTo(newItem, "handleRottenEggPulseUpdate", null, 1800, false);
                     }
-                    else 
+                    else
                     {
                         messageTo(newItem, "handleRottenEggPulseUpdate", null, 180, false);
                     }
@@ -249,7 +256,7 @@ public class tcg_pet_extras extends script.base_script
                     {
                         messageTo(newItem, "handleRottenEggPulseUpdate", null, 1800, false);
                     }
-                    else 
+                    else
                     {
                         messageTo(newItem, "handleRottenEggPulseUpdate", null, 180, false);
                     }
@@ -278,12 +285,13 @@ public class tcg_pet_extras extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyDeadFlowerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

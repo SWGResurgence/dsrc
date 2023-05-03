@@ -9,6 +9,7 @@ public class travel_shuttle extends script.base_script
     public travel_shuttle()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");
@@ -33,12 +34,14 @@ public class travel_shuttle extends script.base_script
         messageTo(self, "msgShuttleTakeOff", null, ground_time, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         obj_id starport = travel.getStarportFromTerminal(self);
         LOG("LOG_CHANNEL", "travel_shuttle::OnUnloadedFromMemory -- " + self + " from starport " + starport);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel_shuttle::OnInitialize -- " + self);
@@ -63,7 +66,7 @@ public class travel_shuttle extends script.base_script
             LOG("LOG_CHANNEL", "starport ->" + starport + " ground_time ->" + ground_time + " shuttle ->" + self);
             messageTo(self, "msgShuttleTakeOff", null, ground_time, false);
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "travel_shuttle::OnInitialize -- starport " + starport + " is not yet loaded.");
             dictionary params = new dictionary();
@@ -73,6 +76,7 @@ public class travel_shuttle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgShuttleTakeOff(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel_shuttle::msgShuttleTakeOff --" + self);
@@ -93,6 +97,7 @@ public class travel_shuttle extends script.base_script
         messageTo(self, "msgShuttleLand", null, air_time, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgShuttleLand(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel_shuttle::msgShuttleLand -- " + self);
@@ -108,6 +113,7 @@ public class travel_shuttle extends script.base_script
         messageTo(self, "msgBoardTime", null, 25, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgBoardTime(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel_shuttle::msgBoardTime -- " + self);
@@ -116,6 +122,7 @@ public class travel_shuttle extends script.base_script
         LOG("LOG_CHANNEL", "travel_shuttle::msgBoardTime -- starport ->" + starport + " toggle ->" + toggle);
         return SCRIPT_CONTINUE;
     }
+
     public int msgRestartShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "travel_shuttle::msgRestartShuttle -- " + self);

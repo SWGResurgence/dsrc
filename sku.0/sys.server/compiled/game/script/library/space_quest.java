@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class space_quest extends script.base_script
 {
-    public space_quest()
-    {
-    }
     public static final String QUEST_OBJECT_TEMPLATE = "object/mission/base_mission_object.iff";
     public static final String QUEST_MANAGER = "questManager";
     public static final String QUEST_TYPE = "questType";
@@ -80,6 +77,12 @@ public class space_quest extends script.base_script
     public static final String MUSIC_QUEST_MISSION_START = "sound/mus_quest_theme_opening.snd";
     public static final String ALERT_DROID_WARNING = "clienteffect/space_droid_warning.iff";
     public static final String ALERT_DROID_DANGER = "clienteffect/space_droid_danger.iff";
+    public static final String FAMILIARITY_LIST = "familiarity.";
+
+    public space_quest()
+    {
+    }
+
     public static boolean hasQuest(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -90,18 +93,22 @@ public class space_quest extends script.base_script
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, QUEST_NAME)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, QUEST_NAME))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static boolean hasQuest(obj_id player, String questType) throws InterruptedException
     {
         return (_getQuest(player, questType) != null);
     }
+
     public static obj_id _getQuest(obj_id player, String questType) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -116,10 +123,13 @@ public class space_quest extends script.base_script
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, QUEST_TYPE)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, QUEST_TYPE))
+                {
                     String tname = getStringObjVar(dpobj, QUEST_TYPE);
-                    if (questType.equals(tname)) {
+                    if (questType.equals(tname))
+                    {
                         return dpobj;
                     }
                 }
@@ -127,10 +137,12 @@ public class space_quest extends script.base_script
         }
         return null;
     }
+
     public static boolean hasQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return (_getQuest(player, questType, questName) != null);
     }
+
     public static obj_id _getQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -145,11 +157,14 @@ public class space_quest extends script.base_script
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, QUEST_NAME)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, QUEST_NAME))
+                {
                     String qname = getStringObjVar(dpobj, QUEST_NAME);
                     String tname = getStringObjVar(dpobj, QUEST_TYPE);
-                    if (questName.equals(qname) && questType.equals(tname)) {
+                    if (questName.equals(qname) && questType.equals(tname))
+                    {
                         return dpobj;
                     }
                 }
@@ -157,14 +172,17 @@ public class space_quest extends script.base_script
         }
         return null;
     }
+
     public static boolean grantQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return grantQuest(player, questType, questName, false, false);
     }
+
     public static boolean grantQuest(obj_id player, String questType, String questName, boolean splitQuest) throws InterruptedException
     {
         return grantQuest(player, questType, questName, splitQuest, false);
     }
+
     public static boolean grantQuest(obj_id player, String questType, String questName, boolean splitQuest, boolean ignoreDelay) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -181,11 +199,7 @@ public class space_quest extends script.base_script
             return false;
         }
         String qTable = "datatables/spacequest/" + questType + "/" + questName + ".iff";
-        boolean duty = false;
-        if (questType.indexOf("_duty") > 0)
-        {
-            duty = true;
-        }
+        boolean duty = questType.indexOf("_duty") > 0;
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
@@ -212,7 +226,7 @@ public class space_quest extends script.base_script
             {
                 pp = prose.getPackage(SID_DUTY_RECEIVED, title);
             }
-            else 
+            else
             {
                 pp = prose.getPackage(SID_QUEST_RECEIVED, title);
             }
@@ -235,18 +249,20 @@ public class space_quest extends script.base_script
             CustomerServiceLog("space_quest", "QUEST_STARTED|V1|" + groupString + "|TIME:" + getGameTime() + "|PLAYER:" + player + "|TYPE:" + questType + "|NAME:" + questName + "|ZONE:" + getCurrentSceneName());
             return true;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "Failed to grantQuest '" + questType + ":" + questName + "'.");
             return false;
         }
     }
+
     public static boolean grantGroupQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         boolean result = grantQuest(player, questType, questName);
         flagGroupQuest(player, questType, questName);
         return result;
     }
+
     public static void flagGroupQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         if (group.isGrouped(player))
@@ -255,8 +271,10 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null && members.length >= 0)
             {
-                for (obj_id member : members) {
-                    if (member != player) {
+                for (obj_id member : members)
+                {
+                    if (member != player)
+                    {
                         sendSystemMessage(member, GROUP_QUEST_RECEIVED);
                     }
                     utils.setScriptVar(member, "group_space_quest." + questType + "." + questName, 1);
@@ -264,10 +282,12 @@ public class space_quest extends script.base_script
             }
         }
     }
+
     public static boolean isOnGroupQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return utils.hasScriptVar(player, "group_space_quest." + questType + "." + questName);
     }
+
     public static boolean isOnThisGroupQuest(obj_id quest, obj_id player) throws InterruptedException
     {
         String questName = getStringObjVar(quest, QUEST_NAME);
@@ -283,8 +303,10 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null && members.length >= 0)
             {
-                for (obj_id member : members) {
-                    if (member == player) {
+                for (obj_id member : members)
+                {
+                    if (member == player)
+                    {
                         return isOnGroupQuest(player, questType, questName);
                     }
                 }
@@ -292,6 +314,7 @@ public class space_quest extends script.base_script
         }
         return false;
     }
+
     public static boolean flagQuestGroup(obj_id missionObj, int flag) throws InterruptedException
     {
         String questName = getStringObjVar(missionObj, QUEST_NAME);
@@ -303,14 +326,22 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null && members.length >= 0)
             {
-                for (obj_id member : members) {
-                    if (isOnGroupQuest(member, questType, questName)) {
-                        if (member != owner) {
-                            if (flag == QUEST_FAILED) {
+                for (obj_id member : members)
+                {
+                    if (isOnGroupQuest(member, questType, questName))
+                    {
+                        if (member != owner)
+                        {
+                            if (flag == QUEST_FAILED)
+                            {
                                 sendSystemMessage(member, GROUP_QUEST_FAILED);
-                            } else if (flag == QUEST_WON) {
+                            }
+                            else if (flag == QUEST_WON)
+                            {
                                 sendSystemMessage(member, GROUP_QUEST_WON);
-                            } else if (flag == QUEST_ABORTED) {
+                            }
+                            else if (flag == QUEST_ABORTED)
+                            {
                                 sendSystemMessage(member, GROUP_QUEST_ABORTED);
                             }
                         }
@@ -322,23 +353,23 @@ public class space_quest extends script.base_script
         }
         return true;
     }
+
     public static boolean canTakeGroupQuest(obj_id player, int minGroupSize) throws InterruptedException
     {
         if (group.isGrouped(player))
         {
             obj_id gid = getGroupObject(player);
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
-            if (members != null && members.length >= minGroupSize)
-            {
-                return true;
-            }
+            return members != null && members.length >= minGroupSize;
         }
         return false;
     }
+
     public static boolean hasCompletedQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return hasObjVar(player, QUEST_STATUS + "." + questType + "." + questName);
     }
+
     public static boolean hasCompletedQuestRecursive(obj_id player, String questType, String questName) throws InterruptedException
     {
         int recNum = utils.getIntScriptVar(player, "recursiveCheck");
@@ -369,7 +400,7 @@ public class space_quest extends script.base_script
             utils.removeScriptVar(player, "recursiveCheck");
             return true;
         }
-        else 
+        else
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(splitmission, ":");
             String rtype = st.nextToken();
@@ -377,34 +408,42 @@ public class space_quest extends script.base_script
             return hasCompletedQuestRecursive(player, rtype, rname);
         }
     }
+
     public static boolean hasFailedQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _testQuestFlag(player, questType, questName, QUEST_FAILED);
     }
+
     public static boolean hasFailedQuestRecursive(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _recursiveFlagTest(player, questType, questName, QUEST_FAILED);
     }
+
     public static boolean hasWonQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _testQuestFlag(player, questType, questName, QUEST_WON);
     }
+
     public static boolean hasWonQuestRecursive(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _recursiveFlagTestLast(player, questType, questName, QUEST_WON);
     }
+
     public static boolean hasAbortedQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _testQuestFlag(player, questType, questName, QUEST_ABORTED);
     }
+
     public static boolean hasAbortedQuestRecursive(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _recursiveFlagTest(player, questType, questName, QUEST_ABORTED);
     }
+
     public static boolean hasReceivedReward(obj_id player, String questType, String questName) throws InterruptedException
     {
         return _testQuestFlag(player, questType, questName, QUEST_RECEIVED_REWARD);
     }
+
     public static boolean _recursiveFlagTest(obj_id player, String questType, String questName, int flag) throws InterruptedException
     {
         int recNum = utils.getIntScriptVar(player, "recursiveCheck");
@@ -436,7 +475,7 @@ public class space_quest extends script.base_script
             utils.removeScriptVar(player, "recursiveCheck");
             return _testQuestFlag(player, questType, questName, flag);
         }
-        else 
+        else
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(splitmission, ":");
             String rtype = st.nextToken();
@@ -444,6 +483,7 @@ public class space_quest extends script.base_script
             return _recursiveFlagTest(player, rtype, rname, flag);
         }
     }
+
     public static boolean _recursiveFlagTestLast(obj_id player, String questType, String questName, int flag) throws InterruptedException
     {
         String qTable = "datatables/spacequest/" + questType + "/" + questName + ".iff";
@@ -458,7 +498,7 @@ public class space_quest extends script.base_script
         {
             return _testQuestFlag(player, questType, questName, flag);
         }
-        else 
+        else
         {
             java.util.StringTokenizer st = new java.util.StringTokenizer(splitmission, ":");
             String rtype = st.nextToken();
@@ -466,10 +506,12 @@ public class space_quest extends script.base_script
             return _recursiveFlagTest(player, rtype, rname, flag);
         }
     }
+
     public static boolean setQuestFailed(obj_id player, obj_id missionObj) throws InterruptedException
     {
         return setQuestFailed(player, missionObj, true);
     }
+
     public static boolean setQuestFailed(obj_id player, obj_id missionObj, boolean canSplit) throws InterruptedException
     {
         String questName = getStringObjVar(missionObj, QUEST_NAME);
@@ -508,23 +550,25 @@ public class space_quest extends script.base_script
                 setObjVar(missionObj, "noAbort", 1);
                 messageTo(player, "doSpecialEvent", params, triggerD + 5, false);
             }
-            else 
+            else
             {
                 _removeQuest(player, questType, questName);
                 messageTo(player, "groundSpaceFailed", webster, 1, false);
             }
         }
-        else 
+        else
         {
             _removeQuest(player, questType, questName);
             messageTo(player, "groundSpaceFailed", webster, 1, false);
         }
         return true;
     }
+
     public static boolean setQuestWon(obj_id player, obj_id missionObj) throws InterruptedException
     {
         return setQuestWon(player, missionObj, true);
     }
+
     public static boolean setQuestWon(obj_id player, obj_id missionObj, boolean wsplit) throws InterruptedException
     {
         String questName = getStringObjVar(missionObj, QUEST_NAME);
@@ -539,7 +583,7 @@ public class space_quest extends script.base_script
             sendQuestSystemMessage(player, pp);
             _groupNotify(player, SID_GROUP_QUEST_ENDED, title);
         }
-        else 
+        else
         {
             pp = prose.getPackage(SID_QUEST_WON, title);
             sendQuestSystemMessage(player, pp);
@@ -574,7 +618,7 @@ public class space_quest extends script.base_script
             sendQuestSystemMessage(player, pp);
             String player_name = getName(player);
             String body_oob = chatMakePersistentMessageOutOfBandBody(null, autoRewardEmailBody);
-            chatSendPersistentMessage("@" + autoRewardEmailFrom.toString(), player_name, "@" + autoRewardEmailSubject.toString(), null, body_oob);
+            chatSendPersistentMessage("@" + autoRewardEmailFrom, player_name, "@" + autoRewardEmailSubject, null, body_oob);
             _setQuestFlag(player, questType, questName, QUEST_RECEIVED_REWARD);
         }
         play2dNonLoopingMusic(player, MUSIC_QUEST_WON);
@@ -601,19 +645,20 @@ public class space_quest extends script.base_script
                 setObjVar(missionObj, "noAbort", 1);
                 messageTo(player, "doSpecialEvent", params, triggerD + 5, false);
             }
-            else 
+            else
             {
                 _removeQuest(player, questType, questName);
                 messageTo(player, "groundSpaceWinner", webster, 1, false);
             }
         }
-        else 
+        else
         {
             _removeQuest(player, questType, questName);
             messageTo(player, "groundSpaceWinner", webster, 1, false);
         }
         return true;
     }
+
     public static boolean setQuestAborted(obj_id player, obj_id missionObj) throws InterruptedException
     {
         String questName = getStringObjVar(missionObj, QUEST_NAME);
@@ -626,7 +671,7 @@ public class space_quest extends script.base_script
         {
             pp = prose.getPackage(SID_DUTY_ABORTED, title);
         }
-        else 
+        else
         {
             pp = prose.getPackage(SID_QUEST_ABORTED, title);
         }
@@ -651,6 +696,7 @@ public class space_quest extends script.base_script
         CustomerServiceLog("space_quest", "QUEST_ABORTED|V1|" + groupString + "|TIME:" + getGameTime() + "|PLAYER:" + player + "|TYPE:" + questType + "|NAME:" + questName + "|ZONE:" + getCurrentSceneName());
         return true;
     }
+
     public static boolean setSilentQuestAborted(obj_id player, obj_id missionObj) throws InterruptedException
     {
         String questName = getStringObjVar(missionObj, QUEST_NAME);
@@ -675,6 +721,7 @@ public class space_quest extends script.base_script
         CustomerServiceLog("space_quest", "QUEST_ABORTED|V1|" + groupString + "|TIME:" + getGameTime() + "|PLAYER:" + player + "|TYPE:" + questType + "|NAME:" + questName + "|ZONE:" + getCurrentSceneName());
         return true;
     }
+
     public static boolean setQuestRewarded(obj_id player, String questType, String questName) throws InterruptedException
     {
         string_id title = new string_id("spacequest/" + questType + "/" + questName, "title");
@@ -684,10 +731,12 @@ public class space_quest extends script.base_script
         play2dNonLoopingMusic(player, MUSIC_QUEST_WON);
         return true;
     }
+
     public static boolean _setQuestInProgress(obj_id quest) throws InterruptedException
     {
         return _setQuestInProgress(quest, false);
     }
+
     public static boolean _setQuestInProgress(obj_id quest, boolean music) throws InterruptedException
     {
         if (hasObjVar(quest, "in_progress"))
@@ -708,17 +757,12 @@ public class space_quest extends script.base_script
         _groupNotify(player, SID_GROUP_QUEST_IN_PROGRESS, title);
         return true;
     }
+
     public static boolean isQuestInProgress(obj_id quest) throws InterruptedException
     {
-        if (hasObjVar(quest, "in_progress"))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return hasObjVar(quest, "in_progress");
     }
+
     public static void showQuestUpdate(obj_id quest, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(quest, QUEST_OWNER);
@@ -728,13 +772,14 @@ public class space_quest extends script.base_script
         {
             pp = prose.getPackage(SID_DUTY_UPDATE_S, update_id);
         }
-        else 
+        else
         {
             pp = prose.getPackage(SID_QUEST_UPDATE_S, update_id);
         }
         sendQuestSystemMessage(player, pp);
         _groupNotify(player, pp);
     }
+
     public static void showQuestUpdate(obj_id quest, string_id update_id, int count) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(quest, QUEST_OWNER);
@@ -744,19 +789,21 @@ public class space_quest extends script.base_script
         {
             pp = prose.getPackage(SID_DUTY_UPDATE_IS, update_id, count);
         }
-        else 
+        else
         {
             pp = prose.getPackage(SID_QUEST_UPDATE_IS, update_id, count);
         }
         sendQuestSystemMessage(player, pp);
         _groupNotify(player, pp);
     }
+
     public static void showQuestAlert(obj_id player, string_id update_id) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_QUEST_ALERT_S, update_id);
         sendQuestSystemMessage(player, pp);
         _groupNotify(player, pp);
     }
+
     public static void showEscortUpdate(obj_id quest, string_id update_id) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(quest, QUEST_OWNER);
@@ -765,10 +812,12 @@ public class space_quest extends script.base_script
         sendQuestSystemMessage(player, pp);
         _groupNotify(player, pp);
     }
+
     public static void giveReward(obj_id player, String questType, String questName, int credits) throws InterruptedException
     {
         giveReward(player, questType, questName, credits, null);
     }
+
     public static void giveReward(obj_id player, String questType, String questName, int credits, String obj) throws InterruptedException
     {
         setQuestRewarded(player, questType, questName);
@@ -786,6 +835,7 @@ public class space_quest extends script.base_script
             sendQuestSystemMessage(player, pp);
         }
     }
+
     public static void clearQuestFlags(obj_id player, String questType, String questName) throws InterruptedException
     {
         removeObjVar(player, QUEST_STATUS + "." + questType + "." + questName);
@@ -798,10 +848,12 @@ public class space_quest extends script.base_script
             setQuestAborted(player, quest);
         }
     }
+
     public static int _getQuestId(String questName) throws InterruptedException
     {
         return dataTableSearchColumnForString(questName, 0, "datatables/player/quests.iff");
     }
+
     public static boolean _setupQuest(obj_id player, String questType, String questName, String qTable, boolean duty) throws InterruptedException
     {
         if (duty && _hasDutyQuest(player))
@@ -833,7 +885,8 @@ public class space_quest extends script.base_script
         }
         setMissionDescription(missionObj, new string_id("spacequest/" + questType + "/" + questName, "title_d"));
         setMissionTitle(missionObj, new string_id("space/quest", questType));
-        switch (questType) {
+        switch (questType)
+        {
             case "space_battle":
             case "space_mining_destroy":
                 setMissionType(missionObj, questType);
@@ -892,41 +945,49 @@ public class space_quest extends script.base_script
         _clearQuestFlag(player, questType, questName, QUEST_WON);
         return true;
     }
+
     public static boolean _removeQuest(obj_id player, String questType, String questName) throws InterruptedException
     {
         obj_id missionObj = _getQuest(player, questType, questName);
         _removeQuest(player, missionObj);
         return true;
     }
+
     public static boolean _removeQuest(obj_id player, obj_id missionObj) throws InterruptedException
     {
         _removeMissionCriticalShips(player, missionObj);
         destroyObject(missionObj);
         return true;
     }
+
     public static boolean _hasDutyQuest(obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, QUEST_DUTY)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, QUEST_DUTY))
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static int _getQuestStatus(obj_id player, String questType, String questName) throws InterruptedException
     {
         return getIntObjVar(player, QUEST_STATUS + "." + questType + "." + questName);
     }
+
     public static int _setQuestStatus(obj_id player, String questType, String questName, int flags) throws InterruptedException
     {
         setObjVar(player, QUEST_STATUS + "." + questType + "." + questName, flags);
         return flags;
     }
+
     public static boolean _testQuestFlag(obj_id player, String questType, String questName, int flag) throws InterruptedException
     {
         if (hasCompletedQuest(player, questType, questName))
@@ -936,34 +997,39 @@ public class space_quest extends script.base_script
         }
         return false;
     }
+
     public static void _setQuestFlag(obj_id player, String questType, String questName, int flag) throws InterruptedException
     {
         int questStatus = _getQuestStatus(player, questType, questName);
         questStatus |= flag;
         _setQuestStatus(player, questType, questName, questStatus);
     }
+
     public static void _clearQuestFlag(obj_id player, String questType, String questName, int flag) throws InterruptedException
     {
         int questStatus = _getQuestStatus(player, questType, questName);
         questStatus = questStatus & ~flag;
         _setQuestStatus(player, questType, questName, questStatus);
     }
+
     public static boolean hasCompletedQuestSeries(obj_id player, String questSeries) throws InterruptedException
     {
         int flags = getIntObjVar(player, QUEST_STATUS_SERIES + "." + questSeries);
         return ((flags & QUEST_SERIES_COMPLETED) != 0);
     }
+
     public static void setQuestSeriesFlag(obj_id player, String questSeries, int flag) throws InterruptedException
     {
         int flags = getIntObjVar(player, QUEST_STATUS_SERIES + "." + questSeries);
         flags |= flag;
         setObjVar(player, QUEST_STATUS_SERIES + "." + questSeries, flags);
     }
+
     public static void clearQuestSeriesFlags(obj_id player, String questSeries) throws InterruptedException
     {
         removeObjVar(player, QUEST_STATUS_SERIES + "." + questSeries);
     }
-    public static final String FAMILIARITY_LIST = "familiarity.";
+
     public static void setFamiliarity(obj_id player, String label, int value) throws InterruptedException
     {
         if (!isPlayer(player))
@@ -972,10 +1038,12 @@ public class space_quest extends script.base_script
         }
         setObjVar(player, FAMILIARITY_LIST + label, value);
     }
+
     public static int getFamiliarity(obj_id player, String label) throws InterruptedException
     {
         return (getIntObjVar(player, FAMILIARITY_LIST + label));
     }
+
     public static int adjustFamiliarity(obj_id player, String label, int value) throws InterruptedException
     {
         int currentFamiliarity = getFamiliarity(player, label);
@@ -983,20 +1051,19 @@ public class space_quest extends script.base_script
         setFamiliarity(player, label, currentFamiliarity);
         return currentFamiliarity;
     }
+
     public static void clearFamiliarity(obj_id player, String label) throws InterruptedException
     {
         removeObjVar(player, FAMILIARITY_LIST + label);
     }
+
     public static boolean isPlayerQualifiedForSkill(obj_id objPlayer, String strSkill) throws InterruptedException
     {
         boolean boolHasSkills = skill.hasRequiredSkillsForSkillPurchase(objPlayer, strSkill);
         boolean boolHasXp = skill.hasRequiredXpForSkillPurchase(objPlayer, strSkill);
-        if ((boolHasSkills) && (boolHasXp))
-        {
-            return true;
-        }
-        return false;
+        return (boolHasSkills) && (boolHasXp);
     }
+
     public static transform getRandomPositionInSphere(transform trStartPosition, float fltMinRadius, float fltMaxRadius) throws InterruptedException
     {
         float fltDistance = rand(fltMinRadius, fltMaxRadius);
@@ -1005,6 +1072,7 @@ public class space_quest extends script.base_script
         transform_w = transform_w.move_p(vctOffset);
         return transform_w;
     }
+
     public static void cleanArray(obj_id quest, String objVar, String[] array) throws InterruptedException
     {
         if (array == null)
@@ -1012,8 +1080,10 @@ public class space_quest extends script.base_script
             return;
         }
         int k = 0;
-        for (String s : array) {
-            if (!s.equals("")) {
+        for (String s : array)
+        {
+            if (!s.equals(""))
+            {
                 k++;
             }
         }
@@ -1022,12 +1092,10 @@ public class space_quest extends script.base_script
             return;
         }
         String[] newarray = new String[k];
-        for (int i = 0; i < k; i++)
-        {
-            newarray[i] = array[i];
-        }
+        System.arraycopy(array, 0, newarray, 0, k);
         setObjVar(quest, objVar, newarray);
     }
+
     public static void cleanArray(obj_id quest, String objVar, int[] array) throws InterruptedException
     {
         if (array == null)
@@ -1035,8 +1103,10 @@ public class space_quest extends script.base_script
             return;
         }
         int k = 0;
-        for (int i1 : array) {
-            if (i1 != -1) {
+        for (int i1 : array)
+        {
+            if (i1 != -1)
+            {
                 k++;
             }
         }
@@ -1045,21 +1115,16 @@ public class space_quest extends script.base_script
             return;
         }
         int[] newarray = new int[k];
-        for (int i = 0; i < k; i++)
-        {
-            newarray[i] = array[i];
-        }
+        System.arraycopy(array, 0, newarray, 0, k);
         setObjVar(quest, objVar, newarray);
     }
+
     public static boolean hasShip(obj_id player) throws InterruptedException
     {
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
-        if (shipControlDevices != null && shipControlDevices.length > 0)
-        {
-            return true;
-        }
-        return false;
+        return shipControlDevices != null && shipControlDevices.length > 0;
     }
+
     public static boolean hasCertifiedShip(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -1067,26 +1132,33 @@ public class space_quest extends script.base_script
             return false;
         }
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
-        if (shipControlDevices == null || shipControlDevices.length == 0)
+        if (shipControlDevices == null)
         {
             return false;
         }
-        for (obj_id shipControlDevice : shipControlDevices) {
+        for (obj_id shipControlDevice : shipControlDevices)
+        {
             obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
-            if (!isIdValid(ship)) {
+            if (!isIdValid(ship))
+            {
                 return false;
             }
-            if (hasCertificationsForItem(player, ship)) {
+            if (hasCertificationsForItem(player, ship))
+            {
                 String template = getTemplateName(ship);
-                if (template.endsWith("player_sorosuub_space_yacht.iff")) {
+                if (template.endsWith("player_sorosuub_space_yacht.iff"))
+                {
                     continue;
-                } else {
+                }
+                else
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static boolean hasCertifiedNonNewbieShip(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -1094,44 +1166,54 @@ public class space_quest extends script.base_script
             return false;
         }
         obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(player);
-        if (shipControlDevices == null || shipControlDevices.length == 0)
+        if (shipControlDevices == null)
         {
             return false;
         }
-        for (obj_id shipControlDevice : shipControlDevices) {
+        for (obj_id shipControlDevice : shipControlDevices)
+        {
             obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
-            if (!isIdValid(ship)) {
+            if (!isIdValid(ship))
+            {
                 return false;
             }
-            if (hasCertificationsForItem(player, ship)) {
+            if (hasCertificationsForItem(player, ship))
+            {
                 String template = getTemplateName(ship);
-                if (template.endsWith("player_basic_tiefighter.iff")) {
+                if (template.endsWith("player_basic_tiefighter.iff"))
+                {
                     continue;
-                } else if (template.endsWith("player_basic_z95.iff")) {
+                }
+                else if (template.endsWith("player_basic_z95.iff"))
+                {
                     continue;
-                } else if (template.endsWith("player_basic_hutt_light.iff")) {
+                }
+                else if (template.endsWith("player_basic_hutt_light.iff"))
+                {
                     continue;
-                } else if (template.endsWith("player_sorosuub_space_yacht.iff")) {
+                }
+                else if (template.endsWith("player_sorosuub_space_yacht.iff"))
+                {
                     continue;
-                } else {
+                }
+                else
+                {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public static boolean canGrantNewbieShip(obj_id player) throws InterruptedException
     {
         if (hasCertifiedShip(player))
         {
             return false;
         }
-        if (!space_transition.isPlayerBelowShipLimit(player))
-        {
-            return false;
-        }
-        return true;
+        return space_transition.isPlayerBelowShipLimit(player);
     }
+
     public static void grantNewbieShip(obj_id player, String faction) throws InterruptedException
     {
         obj_id datapad = utils.getDatapad(player);
@@ -1141,7 +1223,8 @@ public class space_quest extends script.base_script
         }
         String pcd = null;
         String ship = null;
-        switch (faction) {
+        switch (faction)
+        {
             case "imperial":
                 pcd = "object/intangible/ship/tiefighter_pcd.iff";
                 ship = "object/ship/player/player_prototype_tiefighter.iff";
@@ -1160,7 +1243,7 @@ public class space_quest extends script.base_script
         {
             sendSystemMessageTestingOnly(player, "Critical failure: Could not create a pcd for the player!");
         }
-        else 
+        else
         {
             obj_id oship = createObject(ship, opcd, "");
             if (isIdValid(oship))
@@ -1197,12 +1280,13 @@ public class space_quest extends script.base_script
                     setShipComponentEnergyMaintenanceRequirement(oship, ship_chassis_slot_type.SCST_weapon_0, 2000);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Critical failure: Could not create a ship for the player's pcd!");
             }
         }
     }
+
     public static void _groupNotify(obj_id player, string_id mid, string_id s1) throws InterruptedException
     {
         if (group.isGrouped(player))
@@ -1211,8 +1295,10 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
-                    if (member == player) {
+                for (obj_id member : members)
+                {
+                    if (member == player)
+                    {
                         continue;
                     }
                     prose_package pp = prose.getPackage(mid, s1, getName(player));
@@ -1221,6 +1307,7 @@ public class space_quest extends script.base_script
             }
         }
     }
+
     public static void _groupNotify(obj_id player, prose_package pp) throws InterruptedException
     {
         if (group.isGrouped(player))
@@ -1229,8 +1316,10 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
-                    if (member == player) {
+                for (obj_id member : members)
+                {
+                    if (member == player)
+                    {
                         continue;
                     }
                     sendQuestSystemMessage(member, pp);
@@ -1238,6 +1327,7 @@ public class space_quest extends script.base_script
             }
         }
     }
+
     public static void _groupNotify(obj_id player, string_id mid) throws InterruptedException
     {
         if (group.isGrouped(player))
@@ -1246,8 +1336,10 @@ public class space_quest extends script.base_script
             obj_id[] members = space_utils.getSpaceGroupMemberIds(gid);
             if (members != null)
             {
-                for (obj_id member : members) {
-                    if (member == player) {
+                for (obj_id member : members)
+                {
+                    if (member == player)
+                    {
                         continue;
                     }
                     sendQuestSystemMessage(member, mid);
@@ -1255,16 +1347,19 @@ public class space_quest extends script.base_script
             }
         }
     }
+
     public static void sendQuestMessage(obj_id player, prose_package pp) throws InterruptedException
     {
         sendQuestSystemMessage(player, pp);
         _groupNotify(player, pp);
     }
+
     public static void sendQuestMessage(obj_id player, string_id mid) throws InterruptedException
     {
         sendQuestSystemMessage(player, mid);
         _groupNotify(player, mid);
     }
+
     public static void groupTaunt(obj_id ship, obj_id player, prose_package pp) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -1280,11 +1375,12 @@ public class space_quest extends script.base_script
                 space_utils.tauntArray(ship, new Vector(Arrays.asList(members)), pp);
             }
         }
-        else 
+        else
         {
             _tauntShip(ship, space_transition.getContainingShip(player), pp);
         }
     }
+
     public static void _removeQuestJournalEntry(obj_id player, String quest) throws InterruptedException
     {
         quest = "spacequest/" + quest;
@@ -1294,22 +1390,27 @@ public class space_quest extends script.base_script
             questClearQuest(questid, player);
         }
     }
+
     public static void _addMissionCriticalShip(obj_id player, obj_id quest, obj_id ship) throws InterruptedException
     {
         addMissionCriticalObject(player, ship);
     }
+
     public static void _removeMissionCriticalShip(obj_id player, obj_id quest, obj_id ship) throws InterruptedException
     {
         removeMissionCriticalObject(player, ship);
     }
+
     public static boolean _isMissionCriticalShip(obj_id player, obj_id quest, obj_id ship) throws InterruptedException
     {
         return isMissionCriticalObject(player, ship);
     }
+
     public static void _removeMissionCriticalShips(obj_id player, obj_id quest) throws InterruptedException
     {
         clearMissionCriticalObjects(player);
     }
+
     public static void _tauntShip(obj_id ship, obj_id target, prose_package pp) throws InterruptedException
     {
         if (isIdValid(target) && isIdValid(ship))
@@ -1317,38 +1418,49 @@ public class space_quest extends script.base_script
             space_utils.tauntShip(target, ship, pp, true, true, false, false);
         }
     }
+
     public static void _tauntShips(obj_id ship, obj_id[] targets, prose_package pp) throws InterruptedException
     {
-        for (obj_id target : targets) {
-            if (isIdValid(target) && isIdValid(ship)) {
+        for (obj_id target : targets)
+        {
+            if (isIdValid(target) && isIdValid(ship))
+            {
                 space_utils.tauntShip(target, ship, pp, true, true, false, false);
             }
         }
     }
+
     public static void notifyMissions(obj_id player, String msg, dictionary params) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, space_quest.QUEST_NAME)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, space_quest.QUEST_NAME))
+                {
                     space_utils.notifyObject(dpobj, msg, params);
                 }
             }
         }
     }
+
     public static void cleanupOnUnload(obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
         if (isIdValid(datapad))
         {
             obj_id[] dpobjs = getContents(datapad);
-            for (obj_id dpobj : dpobjs) {
-                if (hasObjVar(dpobj, QUEST_NAME)) {
+            for (obj_id dpobj : dpobjs)
+            {
+                if (hasObjVar(dpobj, QUEST_NAME))
+                {
                     String type = getStringObjVar(dpobj, QUEST_TYPE);
-                    if (type.equals("assassinate") || type.equals("recovery")) {
-                        if (isQuestInProgress(dpobj)) {
+                    if (type.equals("assassinate") || type.equals("recovery"))
+                    {
+                        if (isQuestInProgress(dpobj))
+                        {
                             recoveryCleanUpShips(dpobj);
                         }
                     }
@@ -1356,6 +1468,7 @@ public class space_quest extends script.base_script
             }
         }
     }
+
     public static void recoveryCleanUpShips(obj_id quest) throws InterruptedException
     {
         obj_id ship = getObjIdObjVar(quest, "target");
@@ -1369,13 +1482,16 @@ public class space_quest extends script.base_script
         obj_id[] escorts = getObjIdArrayObjVar(quest, "escorts");
         if (escorts != null)
         {
-            for (obj_id escort : escorts) {
-                if (isIdValid(escort) && exists(escort)) {
+            for (obj_id escort : escorts)
+            {
+                if (isIdValid(escort) && exists(escort))
+                {
                     destroyObjectHyperspace(escort);
                 }
             }
         }
     }
+
     public static obj_id findQuestLocation(obj_id quest, obj_id player, String navName, String type) throws InterruptedException
     {
         obj_id questManager = getNamedObject(QUEST_MANAGER);
@@ -1387,9 +1503,11 @@ public class space_quest extends script.base_script
                 debugServerConsoleMsg(questManager, "Quest Manager: Warning! Zone " + getCurrentSceneName() + " has not been initialized properly, but has been queried for a quest!");
                 return null;
             }
-            for (obj_id nav : navs) {
+            for (obj_id nav : navs)
+            {
                 String curNavName = getStringObjVar(nav, "nav_name");
-                if (curNavName != null && curNavName.equals(navName)) {
+                if (curNavName != null && curNavName.equals(navName))
+                {
                     return nav;
                 }
             }

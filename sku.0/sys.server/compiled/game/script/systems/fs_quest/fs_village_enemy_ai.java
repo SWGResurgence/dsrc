@@ -14,6 +14,7 @@ public class fs_village_enemy_ai extends script.base_script
     public fs_village_enemy_ai()
     {
     }
+
     public void setPatrolPaths() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -43,6 +44,7 @@ public class fs_village_enemy_ai extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_WANDER);
         ai_lib.aiPathTo(self, targetLocation);
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("questAI", "fs_village_enemy_ai.OnAttach(" + self + ") - setting up new patrol paths");
@@ -52,12 +54,14 @@ public class fs_village_enemy_ai extends script.base_script
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         LOG("questAI", "fs_village_enemy_ai.OnMovePathNotFound(" + self + ") - setting up new patrol paths");
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int tryPathAgain(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "fs_quest.patrol_set"))
@@ -67,17 +71,20 @@ public class fs_village_enemy_ai extends script.base_script
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         setPatrolPaths();
         setAttributeInterested(self, attrib.ALL);
         return SCRIPT_CONTINUE;
     }
+
     public int msgSelfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int fs_enemy_combat_tick(obj_id self, dictionary params) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self))

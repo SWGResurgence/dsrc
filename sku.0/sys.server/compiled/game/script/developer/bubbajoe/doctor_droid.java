@@ -9,16 +9,18 @@ import script.library.*;
 
 public class doctor_droid extends script.base_script
 {
-    public int OnAttach(obj_id self)
+    public int OnInitialize(obj_id self)//persisted load
     {
         createTriggerVolume("healDroid", 3.0f, true);
-        setName(self, colors_hex.HEADER + colors_hex.ORCHID + "FX-7 Medical Droid");
-        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who enter."));
+        setName(self, colors_hex.HEADER + colors_hex.ORANGE + "FX-7 Medical Droid");
+        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
         return SCRIPT_CONTINUE;
     }
-
-    public int OnInitialize(obj_id self)
+    public int OnAttach(obj_id self)//dynamic load
     {
+        createTriggerVolume("healDroid", 3.0f, true);
+        setName(self, colors_hex.HEADER + colors_hex.ORANGE + "FX-7 Medical Droid");
+        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
         return SCRIPT_CONTINUE;
     }
 
@@ -30,7 +32,7 @@ public class doctor_droid extends script.base_script
         }
         if (combat.isInCombat(breacher))
         {
-            chat.chat(self, "<This service droid cannot assist those engaged in combat.>");
+            broadcast(breacher, "This service droid cannot assist those engaged in combat.");
             return SCRIPT_CONTINUE;
         }
         if (volumeName.equals("healDroid"))
@@ -39,27 +41,26 @@ public class doctor_droid extends script.base_script
             int maxAction = getMaxAttrib(breacher, ACTION);
             setHealth(breacher, maxHealth);
             setAction(breacher, maxAction);
-            int cooldownTime = 3600;
+            int cooldownTime = 7200;
             if (hasObjVar(breacher, "healDroid.cooldown"))
             {
                 int cooldown = getIntObjVar(breacher, "healDroid.cooldown");
                 if (getGameTime() < cooldown)
                 {
-                    chat.chat(self, "<This service droid indicates his power levels are low, therefore unable to provide medical assistance at this time.>");
+                    broadcast(breacher, "You must wait " + ((cooldown - getGameTime()) / 60) + " minutes before receiving another enhancement of this calliber.");
                     return SCRIPT_CONTINUE;
                 }
             }
             ai_lib.aiStopFollowing(self);
             stop(self);
             faceToBehavior(self, breacher);
-            buff.applyBuff(breacher,"me_buff_health_2", 3600, 55);
-            buff.applyBuff(breacher,"me_buff_action_3", 3600, 55);
-            buff.applyBuff(breacher,"me_buff_strength_3", 3600);
-            buff.applyBuff(breacher,"me_buff_agility_3", 3600);
-            buff.applyBuff(breacher,"me_buff_precision_3", 3600);
-            buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600);
-            buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600);
-            chat.chat(self, convertToBinary("You have been healed and recieved low-grade enhancements."));
+            buff.applyBuff(breacher,"me_buff_health_2", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_action_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_strength_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_agility_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_precision_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600, 225);
             setObjVar(breacher, "healDroid.cooldown", getGameTime() + cooldownTime);
         }
         return SCRIPT_CONTINUE;

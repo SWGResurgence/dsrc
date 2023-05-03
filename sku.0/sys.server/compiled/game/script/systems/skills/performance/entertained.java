@@ -6,15 +6,18 @@ import script.obj_id;
 
 public class entertained extends script.base_script
 {
+    public static final int ENTERTAINED_CHECK_TIME = 10;
+
     public entertained()
     {
     }
-    public static final int ENTERTAINED_CHECK_TIME = 10;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "OnEntertainedCheck", null, ENTERTAINED_CHECK_TIME, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (performance.checkPlayerEntertained(self, "both"))
@@ -23,6 +26,7 @@ public class entertained extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEntertainedCheck(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("performance_entertained", "OnEntertainedCheck");
@@ -31,16 +35,18 @@ public class entertained extends script.base_script
             LOG("performance_entertained", "Still being entertained.");
             messageTo(self, "OnEntertainedCheck", null, ENTERTAINED_CHECK_TIME, false);
         }
-        else 
+        else
         {
             LOG("performance_entertained", "No longer entertained.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id target) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformerStopPerforming(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("performance_entertained", "Received stop performing message");
@@ -51,6 +57,7 @@ public class entertained extends script.base_script
         performance.checkPlayerEntertained(self, check);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformerStartPerforming(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("performance_entertained", "Received start performing message");

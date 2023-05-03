@@ -5,16 +5,19 @@ import script.library.*;
 
 public class gcw_barricade extends script.base_script
 {
+    public static final boolean LOGGING_ON = false;
+
     public gcw_barricade()
     {
     }
-    public static final boolean LOGGING_ON = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, gcw.GCW_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_barricade_tool.iff");
         setObjVar(self, "questCallBack", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleGCWBarricade", null, 2, false);
@@ -27,6 +30,7 @@ public class gcw_barricade extends script.base_script
         messageTo(self, "playQuestIcon", params, 2.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -44,13 +48,14 @@ public class gcw_barricade extends script.base_script
         {
             attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
-        else 
+        else
         {
             attribs[idx] = "Never Repaired";
         }
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "faction"))
@@ -63,7 +68,7 @@ public class gcw_barricade extends script.base_script
             blog("faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.TRADER))
             {
@@ -87,6 +92,7 @@ public class gcw_barricade extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("OnObjectMenuSelect");
@@ -110,7 +116,7 @@ public class gcw_barricade extends script.base_script
             blog("Wrong Faction");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.TRADER))
             {
@@ -142,7 +148,7 @@ public class gcw_barricade extends script.base_script
                     groundquests.grantQuest(player, gcw.GCW_REPAIR_BARRICADE_QUEST);
                 }
             }
-            else 
+            else
             {
                 String questName = gcw.GCW_DEFEND_BARRICADE_REBEL;
                 if (faction == factions.FACTION_FLAG_IMPERIAL)
@@ -166,11 +172,13 @@ public class gcw_barricade extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         gcw.playQuestIconHandler(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGCWBarricade(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(self, 5.0f);
@@ -181,8 +189,10 @@ public class gcw_barricade extends script.base_script
         }
         if (objects != null && objects.length > 0)
         {
-            for (obj_id object : objects) {
-                if (isIdValid(object) && isMob(object) && factions.isPlayerSameGcwFactionAsSchedulerObject(object, self)) {
+            for (obj_id object : objects)
+            {
+                if (isIdValid(object) && isMob(object) && factions.isPlayerSameGcwFactionAsSchedulerObject(object, self))
+                {
                     buff.applyBuff(object, self, "barricade_defender");
                 }
             }
@@ -190,6 +200,7 @@ public class gcw_barricade extends script.base_script
         messageTo(self, "handleGCWBarricade", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCallBack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -215,21 +226,25 @@ public class gcw_barricade extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyGCWBarricade(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDestroyBarricade(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDestroyBarricade(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDestroyBarricade(obj_id self, obj_id killer) throws InterruptedException
     {
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 0);
@@ -251,6 +266,7 @@ public class gcw_barricade extends script.base_script
         }
         return;
     }
+
     public void blog(String text) throws InterruptedException
     {
         if (LOGGING_ON)

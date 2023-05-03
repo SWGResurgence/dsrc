@@ -10,14 +10,17 @@ import script.string_id;
 
 public class beast_food extends script.base_script
 {
+    public static final string_id SID_FEED_BEAST = new string_id("beast", "menu_feed");
+
     public beast_food()
     {
     }
-    public static final string_id SID_FEED_BEAST = new string_id("beast", "menu_feed");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -27,6 +30,7 @@ public class beast_food extends script.base_script
         int management_root = mi.addRootMenu(menu_info_types.ITEM_USE, SID_FEED_BEAST);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -47,6 +51,7 @@ public class beast_food extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))

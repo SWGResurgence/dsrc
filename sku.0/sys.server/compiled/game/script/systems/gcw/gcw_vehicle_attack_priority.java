@@ -12,6 +12,7 @@ public class gcw_vehicle_attack_priority extends script.systems.combat.combat_ba
     public gcw_vehicle_attack_priority()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);
@@ -22,6 +23,7 @@ public class gcw_vehicle_attack_priority extends script.systems.combat.combat_ba
         messageTo(self, "findTarget", null, rand(5.0f, 10.0f), false);
         return SCRIPT_CONTINUE;
     }
+
     public int findTarget(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInvulnerable(self))
@@ -39,15 +41,19 @@ public class gcw_vehicle_attack_priority extends script.systems.combat.combat_ba
                 messageTo(self, "findTarget", null, rand(2.0f, 4.0f), false);
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id target1 : targets) {
-                if (!isIdValid(target1)) {
+            for (obj_id target1 : targets)
+            {
+                if (!isIdValid(target1))
+                {
                     continue;
                 }
-                if (target1 == self) {
+                if (target1 == self)
+                {
                     continue;
                 }
                 String templateName = getTemplateName(target1);
-                if (templateName.equals("object/tangible/destructible/gcw_imperial_tower.iff") || templateName.equals("object/tangible/destructible/gcw_rebel_tower.iff")) {
+                if (templateName.equals("object/tangible/destructible/gcw_imperial_tower.iff") || templateName.equals("object/tangible/destructible/gcw_rebel_tower.iff"))
+                {
                     validTargets.add(target1);
                 }
             }
@@ -56,10 +62,10 @@ public class gcw_vehicle_attack_priority extends script.systems.combat.combat_ba
                 messageTo(self, "findTarget", null, rand(2.0f, 4.0f), false);
                 return SCRIPT_CONTINUE;
             }
-            target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+            target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
             if (!isIdValid(target))
             {
-                target = ((obj_id)validTargets.get(rand(0, validTargets.size() - 1)));
+                target = ((obj_id) validTargets.get(rand(0, validTargets.size() - 1)));
             }
             if (!isIdValid(target) || !exists(target))
             {

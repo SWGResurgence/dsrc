@@ -7,6 +7,7 @@ public class base extends script.base_script
     public base()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");

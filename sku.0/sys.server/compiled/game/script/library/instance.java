@@ -26,7 +26,7 @@ public class instance extends script.base_script
     public static final int REQUEST_CLOSE = 1;
     public static final int RESET_NONE = 0;
     public static final int RESET_DAILY = 1;
-	public static final int RESET_12HR = 2;
+    public static final int RESET_12HR = 2;
     public static final int FAIL_INSTANCE_FULL = 0;
     public static final int FAIL_NOT_MEMBER = 1;
     public static final int INSTANCE_TIMEOUT = 2;
@@ -35,24 +35,28 @@ public class instance extends script.base_script
     public static final int FAIL_INSTANCE_FEW_PLAYERS = 5;
     public static final int FAIL_WARN_TOO_FEW = 6;
     public static final string_id SID_UNDER_FIVE_MINUTE_WARNING = new string_id("instance", "five_minute_warning");
+
     public static void registerInstance(obj_id instance_id) throws InterruptedException
     {
         registerInstance(instance_id, getInstanceName(instance_id));
     }
+
     public static void registerInstance(obj_id instance_id, String instanceName) throws InterruptedException
     {
         getClusterWideData("instance_manager-" + instanceName, instanceName + "_" + instance_id, true, instance_id);
     }
+
     public static boolean isInstanceActive(obj_id instance_id) throws InterruptedException
     {
         return false;
     }
+
     public static boolean isInInstanceArea(obj_id subject) throws InterruptedException
     {
         String area_name = locations.getBuildoutAreaName(subject);
         int area_row = locations.getBuildoutAreaRow(subject);
         obj_id planet = getPlanetByName(getLocation(subject).area);
-        String instance_controller = "" + area_name + "_" + area_row;
+        String instance_controller = area_name + "_" + area_row;
         obj_id areaInstanceController = utils.hasScriptVar(planet, instance_controller) ? utils.getObjIdScriptVar(planet, instance_controller) : null;
         if (!isIdValid(areaInstanceController))
         {
@@ -61,50 +65,62 @@ public class instance extends script.base_script
         }
         return true;
     }
+
     public static String getInstanceName(obj_id instance_id) throws InterruptedException
     {
         return getStringObjVar(instance_id, "instance_name");
     }
+
     public static int getInstancePlayerCap(obj_id instance_id) throws InterruptedException
     {
         return getInstancePlayerCap(getInstanceName(instance_id));
     }
+
     public static int getInstancePlayerCap(String instance_name) throws InterruptedException
     {
         return dataTableGetInt(INSTANCE_DATATABLE, instance_name, "max_players");
     }
+
     public static int getMinPlayers(obj_id instance_id) throws InterruptedException
     {
         return getMinPlayers(getInstanceName(instance_id));
     }
+
     public static int getMinPlayers(String instance_name) throws InterruptedException
     {
         return dataTableGetInt(INSTANCE_DATATABLE, instance_name, "min_players");
     }
+
     public static obj_id getInstanceOwner(obj_id instance_id) throws InterruptedException
     {
         return utils.hasScriptVar(instance_id, INSTANCE_OWNER) ? utils.getObjIdScriptVar(instance_id, INSTANCE_OWNER) : instance_id;
     }
+
     public static String getPlayerList(obj_id instance_id) throws InterruptedException
     {
         return getPlayerList(instance_id, 1);
     }
+
     public static String getPlayerList(obj_id instance_id, int groupNumber) throws InterruptedException
     {
         return utils.hasScriptVar(instance_id, PLAYER_LIST + "_" + groupNumber) ? utils.getStringScriptVar(instance_id, PLAYER_LIST + "_" + groupNumber) : "none";
     }
+
     public static int getInstanceCloseTime(obj_id instance_id) throws InterruptedException
     {
         return getInstanceStartTime(instance_id) + getInstanceDuration(instance_id);
     }
+
     public static int getInstanceStartTime(obj_id instance_id) throws InterruptedException
     {
         return utils.hasScriptVar(instance_id, INSTANCE_START_TIME) ? utils.getIntScriptVar(instance_id, INSTANCE_START_TIME) : -1;
     }
+
     public static int getInstanceTeam(obj_id instance_id) throws InterruptedException
     {
         return utils.hasScriptVar(instance_id, INSTANCE_TEAM) ? utils.getIntScriptVar(instance_id, INSTANCE_TEAM) : -1;
     }
+
     public static int getCurrentPopulation(obj_id instance_id) throws InterruptedException
     {
         obj_id[] players = utils.getPlayersInBuildoutRow(getLocation(instance_id).area, locations.getBuildoutAreaRow(instance_id));
@@ -114,6 +130,7 @@ public class instance extends script.base_script
         }
         return players.length;
     }
+
     public static obj_id[] getPlayersInInstanceArea(obj_id instance_id) throws InterruptedException
     {
         String instance_area = getLocation(instance_id).area;
@@ -124,7 +141,7 @@ public class instance extends script.base_script
             {
                 utils.removeScriptVar(instance_id, "buildoutCoordinates");
             }
-            else 
+            else
             {
                 return utils.getPlayersInBuildoutDimensions(instance_area, coords.getFloat("x1"), coords.getFloat("x2"), coords.getFloat("z1"), coords.getFloat("z2"));
             }
@@ -137,18 +154,23 @@ public class instance extends script.base_script
         }
         return utils.getPlayersInBuildoutDimensions(instance_area, coords.getFloat("x1"), coords.getFloat("x2"), coords.getFloat("z1"), coords.getFloat("z2"));
     }
+
     public static obj_id[] getPlayersInInstanceArea(String area, int row) throws InterruptedException
     {
         return utils.getPlayersInBuildoutRow(area, row);
     }
+
     public static obj_id[] getPlayersByTeamList(obj_id[] allPlayers, String groupList) throws InterruptedException
     {
         obj_id[] listPlayers = getPlayersInPlayerList(groupList);
         Vector validPlayers = new Vector();
         validPlayers.setSize(0);
-        for (obj_id allPlayer : allPlayers) {
-            for (obj_id listPlayer : listPlayers) {
-                if (allPlayer == listPlayer) {
+        for (obj_id allPlayer : allPlayers)
+        {
+            for (obj_id listPlayer : listPlayers)
+            {
+                if (allPlayer == listPlayer)
+                {
                     utils.addElement(validPlayers, allPlayer);
                 }
             }
@@ -165,10 +187,12 @@ public class instance extends script.base_script
         }
         return _validPlayers;
     }
+
     public static boolean testNextPlayerInstanceCap(obj_id instance_id) throws InterruptedException
     {
         return testNextPlayerInstanceCap(instance_id, 1);
     }
+
     public static boolean testNextPlayerInstanceCap(obj_id instance_id, int team) throws InterruptedException
     {
         String groupList = getPlayerList(instance_id, team);
@@ -192,6 +216,7 @@ public class instance extends script.base_script
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "testNextPlayerInstanceCap-projectedPop was GREATUER than to playerLimit for instance_id (" + instance_id + "), returning TRUE. Which means the player will not get in.");
         return true;
     }
+
     public static boolean isFlaggedForInstance(obj_id player, dictionary data) throws InterruptedException
     {
         String instance_key = data.getString("key_required");
@@ -201,6 +226,7 @@ public class instance extends script.base_script
         }
         return hasObjVar(player, PLAYER_INSTANCE_PROTECTED + "." + instance_key);
     }
+
     public static boolean isFlaggedForInstance(obj_id player, String instance_key) throws InterruptedException
     {
         dictionary dict = dataTableGetRow("datatables/instance/instance_datatable.iff", instance_key);
@@ -223,22 +249,27 @@ public class instance extends script.base_script
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "isFlaggedForInstance-player " + getFirstName(player) + "(" + player + ") passed all checks returning " + (hasObjVar(player, PLAYER_INSTANCE_PROTECTED + "." + instance_key)));
         return hasObjVar(player, PLAYER_INSTANCE_PROTECTED + "." + instance_key);
     }
+
     public static void flagPlayerForInstance(obj_id player, String instance_key) throws InterruptedException
     {
         setObjVar(player, PLAYER_INSTANCE_PROTECTED + "." + instance_key, 1);
     }
+
     public static void removePlayerFlagForInstance(obj_id player, String instance_key) throws InterruptedException
     {
         utils.removeObjVar(player, PLAYER_INSTANCE_PROTECTED + "." + instance_key);
     }
+
     public static boolean requestInstanceMovement(obj_id player, String instanceName) throws InterruptedException
     {
         return requestInstanceMovement(player, instanceName, 1, "default");
     }
+
     public static boolean requestInstanceMovement(obj_id player, String instanceName, String defaultTrigger) throws InterruptedException
     {
         return requestInstanceMovement(player, instanceName, 1, defaultTrigger);
     }
+
     public static boolean requestInstanceMovement(obj_id player, String instanceName, int team, String defaultTrigger) throws InterruptedException
     {
         if (!instance.isFlaggedForInstance(player, instanceName))
@@ -296,14 +327,17 @@ public class instance extends script.base_script
         setRequestPending(player);
         return true;
     }
+
     public static int getInstanceRequestType(obj_id player) throws InterruptedException
     {
         return utils.hasScriptVar(player, REQUEST_TYPE) ? utils.getIntScriptVar(player, REQUEST_TYPE) : REQUEST_INVALID;
     }
+
     public static int getInstanceRequestTeam(obj_id player) throws InterruptedException
     {
         return utils.hasScriptVar(player, REQUEST_TEAM) ? utils.getIntScriptVar(player, REQUEST_TEAM) : REQUEST_INVALID;
     }
+
     public static boolean isPlayerOwnerGroupList(obj_id player, obj_id owner, obj_id instance_id, String groupList, int team, int instance_team) throws InterruptedException
     {
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "isPlayerOwnerGroupList-Start for player " + getFirstName(player) + "(" + player + ").");
@@ -339,10 +373,12 @@ public class instance extends script.base_script
         }
         return false;
     }
+
     public static void movePlayerToInstance(obj_id player, obj_id dungeon, String instance_name, obj_id owner, boolean startInstance) throws InterruptedException
     {
         movePlayerToInstance(player, dungeon, instance_name, owner, startInstance, 1);
     }
+
     public static void movePlayerToInstance(obj_id player, obj_id instance_id, String instance_name, obj_id owner, boolean startInstance, int team) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -363,16 +399,18 @@ public class instance extends script.base_script
             CustomerServiceLog(INSTANCE_DEBUG_LOG, "movePlayerToInstance-isValidatedByLockoutData passed for player " + getFirstName(player) + "(" + player + "). Sending messageTo 'startNewInstance' to instance_id " + instance_id);
             messageTo(instance_id, "startNewInstance", dict, 0.0f, false);
         }
-        else 
+        else
         {
             CustomerServiceLog(INSTANCE_DEBUG_LOG, "movePlayerToInstance-isValidatedByLockoutData passed for player " + getFirstName(player) + "(" + player + "). Sending messageTo 'requestEnterPlayer' to instance_id " + instance_id);
             messageTo(instance_id, "requestEnterPlayer", dict, 0.0f, false);
         }
     }
+
     public static void addToPlayerList(obj_id instance, obj_id player) throws InterruptedException
     {
         addToPlayerList(instance, player, 1);
     }
+
     public static void addToPlayerList(obj_id instance, obj_id player, int group) throws InterruptedException
     {
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "addToPlayerList-Start for player " + getFirstName(player) + "(" + player + ").");
@@ -380,7 +418,7 @@ public class instance extends script.base_script
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "addToPlayerList-playerList for player " + getFirstName(player) + "(" + player + ") " + playerList);
         if (playerList.equals("none"))
         {
-            utils.setScriptVar(instance, PLAYER_LIST + "_" + group, "" + player);
+            utils.setScriptVar(instance, PLAYER_LIST + "_" + group, String.valueOf(player));
             CustomerServiceLog(INSTANCE_DEBUG_LOG, "addToPlayerList-playerList was 'none' for player " + getFirstName(player) + "(" + player + "). setting scriptvar and bailing.");
             return;
         }
@@ -390,10 +428,12 @@ public class instance extends script.base_script
             utils.setScriptVar(instance, PLAYER_LIST + "_" + group, playerList.concat("_" + player));
         }
     }
+
     public static void removeFromPlayerList(obj_id instance_id, obj_id player) throws InterruptedException
     {
         removeFromPlayerList(instance_id, player, 1);
     }
+
     public static void removeFromPlayerList(obj_id instance_id, obj_id player, int group) throws InterruptedException
     {
         String playerList = getPlayerList(instance_id, group);
@@ -403,8 +443,10 @@ public class instance extends script.base_script
         }
         String[] groupSplit = split(playerList, '_');
         String newList = "";
-        for (String s : groupSplit) {
-            if (s.equals("" + player)) {
+        for (String s : groupSplit)
+        {
+            if (s.equals(String.valueOf(player)))
+            {
                 continue;
             }
             newList = newList.concat("_" + groupSplit);
@@ -420,6 +462,7 @@ public class instance extends script.base_script
         }
         utils.setScriptVar(instance_id, PLAYER_LIST + "_" + group, newList);
     }
+
     public static boolean isPlayerInPlayerList(obj_id player, String groupList) throws InterruptedException
     {
         if (groupList.equals("none"))
@@ -427,13 +470,16 @@ public class instance extends script.base_script
             return false;
         }
         String[] groupSplit = split(groupList, '_');
-        for (String s : groupSplit) {
-            if (utils.stringToObjId(s) == player) {
+        for (String s : groupSplit)
+        {
+            if (utils.stringToObjId(s) == player)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static obj_id[] getPlayersInPlayerList(String groupList) throws InterruptedException
     {
         if (groupList == null || groupList.equals("none"))
@@ -449,14 +495,17 @@ public class instance extends script.base_script
         }
         return playerList;
     }
+
     public static void sendToEnterOne(obj_id player, obj_id instanceId, location instanceLoc, dictionary data) throws InterruptedException
     {
         playerEnterInstance(player, instanceId, instanceLoc, data, "enter_one");
     }
+
     public static void sendToEnterTwo(obj_id player, obj_id instanceId, location instanceLoc, dictionary data) throws InterruptedException
     {
         playerEnterInstance(player, instanceId, instanceLoc, data, "enter_two");
     }
+
     public static void playerEnterInstance(obj_id player, obj_id instanceId, location instanceLoc, dictionary data, String enterString) throws InterruptedException
     {
         if (data == null || data.isEmpty())
@@ -491,31 +540,36 @@ public class instance extends script.base_script
             CustomerServiceLog(INSTANCE_DEBUG_LOG, "playerEnterInstance-calling warpPlayer(" + player + ", " + instanceLoc.area + ", " + post.x + ", " + post.y + ", " + post.z + ", obj_id.NULL_ID, " + 0.0f + " , " + 0.0f + " , " + 0.0f + " , 'noCallBack', true) for player " + getFirstName(player) + "(" + player + ")");
             warpPlayer(player, instanceLoc.area, post.x, post.y, post.z, obj_id.NULL_ID, 0.0f, 0.0f, 0.0f, "noCallBack", true);
         }
-        else 
+        else
         {
             CustomerServiceLog(INSTANCE_DEBUG_LOG, "playerEnterInstance-calling warpPlayer(" + player + ", " + instanceLoc.area + ", " + instanceLoc.x + ", " + instanceLoc.y + ", " + instanceLoc.z + ", " + instanceId + ", " + cellName + ", " + locX + ", " + locY + ", " + locZ + ", 'noCallBack, true) for player " + getFirstName(player) + "(" + player + ")");
             warpPlayer(player, instanceLoc.area, instanceLoc.x, instanceLoc.y, instanceLoc.z, instanceId, cellName, locX, locY, locZ, "noCallBack", true);
         }
     }
+
     public static void requestExitPlayer(obj_id instance, obj_id[] players, int team) throws InterruptedException
     {
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             requestExitPlayer(instance, player, team);
         }
     }
+
     public static void requestExitPlayer(obj_id instance_id, obj_id player, int team) throws InterruptedException
     {
         String instance_name = instance.getInstanceName(instance_id);
         requestExitPlayer(instance_name, player, team);
     }
+
     public static void requestExitPlayer(String instance_name, obj_id player) throws InterruptedException
     {
         requestExitPlayer(instance_name, player, 1);
     }
+
     public static void requestExitPlayer(String instance_name, obj_id player, int team) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !inSameInstanceType(instance_name, player))
@@ -545,6 +599,7 @@ public class instance extends script.base_script
             instance.sendToExitTwo(player, data);
         }
     }
+
     public static boolean inSameInstanceType(String instance_name, obj_id player) throws InterruptedException
     {
         String test_name = locations.getBuildoutAreaName(player);
@@ -554,6 +609,7 @@ public class instance extends script.base_script
         }
         return test_name.equals(instance_name);
     }
+
     public static void sendToExitOne(obj_id player, dictionary data) throws InterruptedException
     {
         String exitLoc = data.getString("exit_one");
@@ -563,6 +619,7 @@ public class instance extends script.base_script
         float locZ = utils.stringToFloat(parse[2]);
         warpPlayer(player, parse[3], locX, locY, locZ, null, 0.0f, 0.0f, 0.0f, "noCallBack", true);
     }
+
     public static void sendToExitTwo(obj_id player, dictionary data) throws InterruptedException
     {
         String exitLoc = data.getString("exit_two");
@@ -572,34 +629,41 @@ public class instance extends script.base_script
         float locZ = utils.stringToFloat(parse[2]);
         warpPlayer(player, parse[3], locX, locY, locZ, null, 0.0f, 0.0f, 0.0f, "noCallBack", true);
     }
+
     public static void startInstanceTimer(obj_id instance_id) throws InterruptedException
     {
         messageTo(instance_id, "startClock", null, 0.0f, false);
     }
+
     public static void closeOwnedInstance(obj_id player, String instanceName) throws InterruptedException
     {
         utils.setScriptVar(player, REQUEST_TYPE, REQUEST_CLOSE);
         getClusterWideData("instance_manager-" + instanceName, instanceName + "*", true, player);
     }
+
     public static void closeInstance(obj_id owner, dictionary data) throws InterruptedException
     {
         obj_id instance_id = data.getObjId("instance_id");
         messageTo(instance_id, "endInstanceSession", data, 0.0f, false);
     }
+
     public static void closeInstance(obj_id instance_id) throws InterruptedException
     {
         messageTo(instance_id, "endInstanceSession", null, 0.0f, false);
     }
+
     public static int getInstanceDuration(obj_id instance_id) throws InterruptedException
     {
         String instance_name = getInstanceName(instance_id);
         return getInstanceDuration(instance_name);
     }
+
     public static int getInstanceDuration(String instance_name) throws InterruptedException
     {
         dictionary data = dataTableGetRow(instance.INSTANCE_DATATABLE, instance_name);
         return data.getInt("time_limit");
     }
+
     public static void validateDungeonParticipants(obj_id instance_id) throws InterruptedException
     {
         int buildout_row = locations.getBuildoutAreaRow(instance_id);
@@ -609,11 +673,13 @@ public class instance extends script.base_script
             return;
         }
         dictionary dict = new dictionary();
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             dict.put("player", player);
             messageTo(instance_id, "validatePlayer", dict, 0.0f, false);
         }
     }
+
     public static dictionary getNextClockTic(int time) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -628,16 +694,19 @@ public class instance extends script.base_script
         dict.put("timeRemaining", time - 300);
         return dict;
     }
+
     public static void sendSoonToCloseWarining(obj_id instance_id, int timeLeft) throws InterruptedException
     {
         obj_id[] players = getPlayersInInstanceArea(instance_id);
         sendSoonToCloseWarining(instance_id, timeLeft, players);
     }
+
     public static void sendSoonToCloseWarining(obj_id instance, int timeLeft, obj_id[] players) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_UNDER_FIVE_MINUTE_WARNING, timeLeft);
         utils.sendSystemMessageProse(players, pp);
     }
+
     public static void setClock(obj_id instance_id, int seconds) throws InterruptedException
     {
         trial.bumpSession(instance_id, "clock");
@@ -645,6 +714,7 @@ public class instance extends script.base_script
         dict.put("instance_time", seconds);
         messageTo(instance_id, "handleClockTic", dict, 0.0f, false);
     }
+
     public static boolean isExclusiveInstance(String instance_name) throws InterruptedException
     {
         dictionary dict = dataTableGetRow(INSTANCE_DATATABLE, instance_name);
@@ -655,6 +725,7 @@ public class instance extends script.base_script
         }
         return dict.getInt("lockoutTimer") != RESET_NONE;
     }
+
     public static void setResetDataOnPlayer(obj_id player, obj_id instance_id, obj_id owner, String instance_name, int start_time) throws InterruptedException
     {
         dictionary dict = dataTableGetRow(INSTANCE_DATATABLE, instance_name);
@@ -663,24 +734,25 @@ public class instance extends script.base_script
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-dictionary was null for player " + getFirstName(player) + "(" + player + "), we are returning here.");
             return;
         }
-		int resetAt = 0;
+        int resetAt = 0;
         int resetType = dict.getInt("lockoutTimer");
         switch (resetType)
         {
             case RESET_NONE:
-            CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_NONE for player " + getFirstName(player) + "(" + player + "), doing nothing.");
-				return;
-			case RESET_12HR:
-				resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
-				CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_12HR, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
-				break;
+                CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_NONE for player " + getFirstName(player) + "(" + player + "), doing nothing.");
+                return;
+            case RESET_12HR:
+                resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
+                CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_12HR, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
+                break;
             case RESET_DAILY:
-				resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
+                resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
                 CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_DAILY, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
                 break;
         }
-		setObjVar(player, PLAYER_INSTANCE + "." + instance_name, "" + resetAt + "_" + instance_id + "_" + owner + "_" + start_time);
+        setObjVar(player, PLAYER_INSTANCE + "." + instance_name, resetAt + "_" + instance_id + "_" + owner + "_" + start_time);
     }
+
     public static boolean isValidatedByLockoutData(obj_id player, obj_id instance_id, obj_id owner, String instance_name) throws InterruptedException
     {
         if (!hasObjVar(player, PLAYER_INSTANCE + "." + instance_name))
@@ -705,6 +777,7 @@ public class instance extends script.base_script
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "isValidatedByLockoutData-player " + getFirstName(player) + "(" + player + ") calling return (" + (instance_id == recInstance) + " && " + (recOwner == owner) + ")");
         return (instance_id == recInstance && recOwner == owner);
     }
+
     public static dictionary getLockoutData(obj_id player, String instance_name) throws InterruptedException
     {
         CustomerServiceLog(INSTANCE_DEBUG_LOG, "getLockoutData-started for player " + getFirstName(player) + "(" + player + "). instance_name was " + instance_name + ".");
@@ -742,6 +815,7 @@ public class instance extends script.base_script
         dict.put("start_time", start_time);
         return dict;
     }
+
     public static dictionary[] getAllLockoutData(obj_id player) throws InterruptedException
     {
         int numRows = dataTableGetNumRows(INSTANCE_DATATABLE);
@@ -771,6 +845,7 @@ public class instance extends script.base_script
         }
         return _instanceData;
     }
+
     public static void attachInstanceScriptsOnPlayer(obj_id player, dictionary data) throws InterruptedException
     {
         if (data == null || data.isEmpty())
@@ -790,15 +865,17 @@ public class instance extends script.base_script
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "attachInstanceScriptsOnPlayer-script parse list was null for player " + player + "(" + getPlayerName(player) + "). We are returning here.");
             return;
         }
-        for (String s : parse) {
-            if (!hasScript(player, s)) {
+        for (String s : parse)
+        {
+            if (!hasScript(player, s))
+            {
                 CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "attachInstanceScriptsOnPlayer-player " + player + "(" + getPlayerName(player) + ") did not have the script '" + s + "'. It is being attached now.");
                 attachScript(player, s);
             }
         }
         CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "attachInstanceScriptsOnPlayer-all scripts have been attached for player " + player + "(" + getPlayerName(player) + ") returning now.");
-        return;
     }
+
     public static void removeInstanceScriptFromPlayer(obj_id player, dictionary data) throws InterruptedException
     {
         String scriptList = data.getString("player_script");
@@ -807,48 +884,59 @@ public class instance extends script.base_script
             return;
         }
         String[] parse = split(scriptList, ',');
-        if (parse == null || parse.length == 0)
+        if (parse == null)
         {
             return;
         }
-        for (String s : parse) {
-            if (hasScript(player, s)) {
+        for (String s : parse)
+        {
+            if (hasScript(player, s))
+            {
                 detachScript(player, s);
             }
         }
     }
+
     public static void validateInstanceScriptsOnPlayer(obj_id player) throws InterruptedException
     {
         String[] allScripts = dataTableGetStringColumn(INSTANCE_DATATABLE, "player_script");
-        for (String allScript : allScripts) {
-            if (allScript.equals("none")) {
+        for (String allScript : allScripts)
+        {
+            if (allScript.equals("none"))
+            {
                 continue;
             }
             String[] parse = split(allScript, ',');
-            for (String s : parse) {
-                if (hasScript(player, s)) {
+            for (String s : parse)
+            {
+                if (hasScript(player, s))
+                {
                     detachScript(player, s);
                 }
             }
         }
     }
+
     public static obj_id getAreaInstanceController(obj_id base_object) throws InterruptedException
     {
         String area_name = locations.getBuildoutAreaName(base_object);
         int area_row = locations.getBuildoutAreaRow(base_object);
         obj_id planet = getPlanetByName(getLocation(base_object).area);
-        String instance_controller = "" + area_name + "_" + area_row;
+        String instance_controller = area_name + "_" + area_row;
         obj_id areaInstanceController = utils.hasScriptVar(planet, instance_controller) ? utils.getObjIdScriptVar(planet, instance_controller) : null;
         return areaInstanceController;
     }
+
     public static boolean[] requestInstancePobGroup(obj_id[] players, String instance_name) throws InterruptedException
     {
         obj_id ship = space_transition.getContainingShip(players[0]);
         obj_id pilot = space_utils.getPilotForRealsies(ship);
         boolean[] results = new boolean[players.length];
         int idx = 0;
-        for (obj_id player : players) {
-            if (player != pilot) {
+        for (obj_id player : players)
+        {
+            if (player != pilot)
+            {
                 results[idx] = requestInstanceMovement(player, instance_name);
                 idx++;
             }
@@ -859,17 +947,20 @@ public class instance extends script.base_script
         results[idx] = true;
         return results;
     }
+
     public static void playMusicInInstance(obj_id dungeon, String sound) throws InterruptedException
     {
         obj_id[] players = getPlayersInInstanceArea(dungeon);
-        if (players == null || players.length == 0)
+        if (players == null)
         {
             return;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playMusic(player, sound);
         }
     }
+
     public static void sendInstanceSystemMessage(obj_id dungeon, string_id message) throws InterruptedException
     {
         obj_id[] players = getPlayersInInstanceArea(dungeon);
@@ -879,14 +970,17 @@ public class instance extends script.base_script
         }
         utils.sendSystemMessage(players, message);
     }
+
     public static boolean vehicleAllowedInInstance(obj_id instance_id) throws InterruptedException
     {
         return vehicleAllowedInInstance(getInstanceName(instance_id));
     }
+
     public static boolean vehicleAllowedInInstance(String instance_name) throws InterruptedException
     {
         return dataTableGetInt(INSTANCE_DATATABLE, instance_name, "vehicle_allowed") == 1;
     }
+
     public static obj_id[] addToPlayerIdList(obj_id instance_id, obj_id player) throws InterruptedException
     {
         Vector playerList = new Vector();
@@ -920,6 +1014,7 @@ public class instance extends script.base_script
         }
         return _playerList;
     }
+
     public static obj_id[] removeFromPlayerIdList(obj_id instance_id, obj_id player) throws InterruptedException
     {
         Vector playerList = new Vector();
@@ -932,10 +1027,7 @@ public class instance extends script.base_script
         {
             return null;
         }
-        if (playerList.contains(player))
-        {
-            playerList.remove(player);
-        }
+        playerList.remove(player);
         utils.setScriptVar(instance_id, PLAYER_ID_LIST, playerList);
         obj_id[] _playerList = new obj_id[0];
         if (playerList != null)
@@ -945,6 +1037,7 @@ public class instance extends script.base_script
         }
         return _playerList;
     }
+
     public static obj_id[] getPlayerIdList(obj_id instance_id) throws InterruptedException
     {
         Vector playerList = utils.hasScriptVar(instance_id, PLAYER_ID_LIST) ? utils.getResizeableObjIdArrayScriptVar(instance_id, PLAYER_ID_LIST) : null;
@@ -962,31 +1055,38 @@ public class instance extends script.base_script
         }
         return _playerList;
     }
+
     public static Vector getResizeablePlayerIdList(obj_id instance_id) throws InterruptedException
     {
         return utils.hasScriptVar(instance_id, PLAYER_ID_LIST) ? utils.getResizeableObjIdArrayScriptVar(instance_id, PLAYER_ID_LIST) : null;
     }
+
     public static boolean isPlayerInPlayerList(obj_id instance_id, obj_id player) throws InterruptedException
     {
         Vector playerList = getResizeablePlayerIdList(instance_id);
         return playerList.contains(player);
     }
+
     public static void setRequestPending(obj_id player) throws InterruptedException
     {
         buff.applyBuff(player, REQUEST_BUFF);
     }
+
     public static void setRequestResolved(obj_id player) throws InterruptedException
     {
         buff.removeBuff(player, REQUEST_BUFF);
     }
+
     public static boolean isRequestPending(obj_id player) throws InterruptedException
     {
         return buff.hasBuff(player, REQUEST_BUFF);
     }
+
     public static void doLogging(String message) throws InterruptedException
     {
         LOG("doLogging/library.instance", message);
     }
+
     public static void doLogging(String section, String message) throws InterruptedException
     {
         LOG("doLogging/library.instance/" + section, message);

@@ -11,6 +11,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
     public bounty_probe_droid()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int intDroidType = getIntObjVar(self, "intDroidType");
@@ -24,6 +25,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int intRootMenu;
@@ -56,6 +58,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.EXAMINE)
@@ -104,7 +107,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
                     sendSystemMessage(player, strSpam);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     boolean boolOnline = dctJediInfo.getBoolean("online");
                     if (!boolOnline)
@@ -167,7 +170,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
                 {
                     destroyObject(self);
                 }
-                else 
+                else
                 {
                     setCount(self, intCount);
                 }
@@ -178,13 +181,14 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_Probot_Start(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "PROBE_DROID STARTED");
         obj_id objPlayer = params.getObjId("objPlayer");
         location locCurrentLocation = getLocation(objPlayer);
-        region rgnCities[] = getRegionsWithMunicipalAtPoint(locCurrentLocation, regions.MUNI_TRUE);
-        region geoCities[] = getRegionsWithGeographicalAtPoint(locCurrentLocation, regions.GEO_CITY);
+        region[] rgnCities = getRegionsWithMunicipalAtPoint(locCurrentLocation, regions.MUNI_TRUE);
+        region[] geoCities = getRegionsWithGeographicalAtPoint(locCurrentLocation, regions.GEO_CITY);
         if (rgnCities != null || geoCities != null)
         {
             debugServerConsoleMsg(self, "cities!");
@@ -226,11 +230,12 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
             dctParams.put("intCountDown", 6);
             messageTo(self, "probe_Droid_Countdown", dctParams, 20, true);
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public int probe_Droid_Countdown(obj_id self, dictionary params) throws InterruptedException
     {
         int intCountDown = params.getInt("intCountDown");
@@ -245,7 +250,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
             playClientEffectLoc(objPlayer, "clienteffect/probot_delivery.cef", locSpawnLocation, 0);
             messageTo(self, "probe_Droid_Spawn", null, 4, true);
         }
-        else 
+        else
         {
             string_id strResponse = new string_id("mission/mission_generic", "probe_droid_arrival_" + intCountDown);
             sendSystemMessage(objPlayer, strResponse);
@@ -255,6 +260,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
         }
         return SCRIPT_CONTINUE;
     }
+
     public int probe_Droid_Spawn(obj_id self, dictionary params) throws InterruptedException
     {
         location locSpawnLocation = getLocationObjVar(self, "locSpawnLocation");
@@ -288,7 +294,7 @@ public class bounty_probe_droid extends script.systems.missions.base.mission_dyn
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setCount(self, intCount);
         }

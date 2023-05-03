@@ -12,6 +12,7 @@ public class nomove_furniture extends script.base_script
     public nomove_furniture()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))
@@ -21,6 +22,7 @@ public class nomove_furniture extends script.base_script
         setObjVar(self, "noTrade", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))
@@ -30,6 +32,7 @@ public class nomove_furniture extends script.base_script
         setObjVar(self, "noTrade", true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         if (!isPlayer(transferer) || isGod(transferer))

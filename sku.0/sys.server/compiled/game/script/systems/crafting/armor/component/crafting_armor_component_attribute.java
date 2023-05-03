@@ -11,6 +11,7 @@ public class crafting_armor_component_attribute extends script.base_script
     public crafting_armor_component_attribute()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -21,8 +22,8 @@ public class crafting_armor_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_effectiveness"))
         {
             names[idx] = "baseeffectiveness";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_effectiveness");
-            attribs[idx] = Integer.toString(attrib) + "%";
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_effectiveness");
+            attribs[idx] = attrib + "%";
             idx++;
             if (idx >= names.length)
             {
@@ -32,7 +33,7 @@ public class crafting_armor_component_attribute extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_integrity"))
         {
             names[idx] = "baseintegrity";
-            int attrib = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_integrity");
+            int attrib = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "armor_integrity");
             attribs[idx] = Integer.toString(attrib);
             idx++;
             if (idx >= names.length)
@@ -52,37 +53,37 @@ public class crafting_armor_component_attribute extends script.base_script
                     switch (prot_type)
                     {
                         case 0x00000001:
-                        names[idx] = "kineticeffectiveness";
-                        break;
+                            names[idx] = "kineticeffectiveness";
+                            break;
                         case 0x00000002:
-                        names[idx] = "energyeffectiveness";
-                        break;
+                            names[idx] = "energyeffectiveness";
+                            break;
                         case 0x00000004:
-                        names[idx] = "blasteffectiveness";
-                        break;
+                            names[idx] = "blasteffectiveness";
+                            break;
                         case 0x00000008:
-                        names[idx] = "stuneffectiveness";
-                        break;
+                            names[idx] = "stuneffectiveness";
+                            break;
                         case 0x00000010:
-                        names[idx] = "restrainteffectiveness";
-                        break;
+                            names[idx] = "restrainteffectiveness";
+                            break;
                         case 0x00000020:
-                        names[idx] = "heateffectiveness";
-                        break;
+                            names[idx] = "heateffectiveness";
+                            break;
                         case 0x00000040:
-                        names[idx] = "coldeffectiveness";
-                        break;
+                            names[idx] = "coldeffectiveness";
+                            break;
                         case 0x00000080:
-                        names[idx] = "acideffectiveness";
-                        break;
+                            names[idx] = "acideffectiveness";
+                            break;
                         case 0x00000100:
-                        names[idx] = "electricaleffectiveness";
-                        break;
+                            names[idx] = "electricaleffectiveness";
+                            break;
                         default:
-                        continue;
+                            continue;
                     }
-                    int prot_eff = (int)prot.getFloatData();
-                    attribs[idx] = Integer.toString(prot_eff) + "%";
+                    int prot_eff = (int) prot.getFloatData();
+                    attribs[idx] = prot_eff + "%";
                     idx++;
                     if (idx >= names.length)
                     {

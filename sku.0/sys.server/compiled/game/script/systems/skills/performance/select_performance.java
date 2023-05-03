@@ -10,11 +10,13 @@ public class select_performance extends script.base_script
     public select_performance()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, performance.PERFORMANCE_SELECT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES))
@@ -23,6 +25,7 @@ public class select_performance extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSongSelected(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "performCommands::msgSongSelected");
@@ -32,7 +35,7 @@ public class select_performance extends script.base_script
             available_music = getStringArrayObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
             removeObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
         }
-        else 
+        else
         {
             performance.performanceMessageToSelf(self, null, performance.SID_MUSIC_LACK_SKILL_INSTRUMENT);
             detachScript(self, performance.PERFORMANCE_SELECT);
@@ -65,24 +68,25 @@ public class select_performance extends script.base_script
             {
                 queueCommand(self, (2039359915), null, selected_music, COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 queueCommand(self, (-1256059356), null, selected_music, COMMAND_PRIORITY_DEFAULT);
             }
         }
-        else 
+        else
         {
             if (band)
             {
                 queueCommand(self, (-12231596), null, selected_music, COMMAND_PRIORITY_DEFAULT);
             }
-            else 
+            else
             {
                 queueCommand(self, (-573445903), null, selected_music, COMMAND_PRIORITY_DEFAULT);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDanceSelected(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "performCommands::msgDanceSelected");
@@ -92,7 +96,7 @@ public class select_performance extends script.base_script
             available_dances = getStringArrayObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
             removeObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
         }
-        else 
+        else
         {
             performance.performanceMessageToSelf(self, null, performance.SID_DANCE_UNKNOWN_SELF);
             detachScript(self, performance.PERFORMANCE_SELECT);
@@ -120,12 +124,13 @@ public class select_performance extends script.base_script
             removeObjVar(self, performance.VAR_SELECT_DANCE_CHANGE);
             queueCommand(self, (334376245), null, selected_dance, COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             queueCommand(self, (2065550304), null, selected_dance, COMMAND_PRIORITY_DEFAULT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgJuggleSelected(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "performCommands::msgJuggleSelected");
@@ -135,7 +140,7 @@ public class select_performance extends script.base_script
             available_juggles = getStringArrayObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
             removeObjVar(self, performance.VAR_AVAILABLE_PERFORMANCES);
         }
-        else 
+        else
         {
             performance.performanceMessageToSelf(self, null, performance.SID_JUGGLE_UNKNOWN_SELF);
             detachScript(self, performance.PERFORMANCE_SELECT);
@@ -167,7 +172,7 @@ public class select_performance extends script.base_script
             removeObjVar(self, performance.VAR_SELECT_JUGGLE_CHANGE);
             queueCommand(self, (-3482002), null, selected_juggle, COMMAND_PRIORITY_DEFAULT);
         }
-        else 
+        else
         {
             queueCommand(self, (1621157837), null, selected_juggle, COMMAND_PRIORITY_DEFAULT);
         }

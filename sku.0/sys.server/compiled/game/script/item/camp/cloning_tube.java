@@ -9,11 +9,13 @@ public class cloning_tube extends script.base_script
     public cloning_tube()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeCloningTube", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeCloningTube(obj_id self, dictionary params) throws InterruptedException
     {
         attachScript(self, "structure.municipal.cloning_facility");

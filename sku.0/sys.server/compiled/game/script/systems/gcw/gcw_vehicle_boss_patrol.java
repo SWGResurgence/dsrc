@@ -7,17 +7,18 @@ import script.obj_id;
 
 public class gcw_vehicle_boss_patrol extends script.base_script
 {
+    public static final String bossImperials = "gcw_city_atat";
+    public static final String bossRebels = "gcw_city_hailfire_droid";
     public gcw_vehicle_boss_patrol()
     {
     }
-    public static final String bossImperials = "gcw_city_atat";
-    public static final String bossRebels = "gcw_city_hailfire_droid";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleGCWPatrol", null, 2, false);
         return SCRIPT_CONTINUE;
     }
-    
+
     public int getConstructionQuestsCompleted(obj_id pylon) throws InterruptedException
     {
         int completed = 0;
@@ -31,6 +32,7 @@ public class gcw_vehicle_boss_patrol extends script.base_script
         }
         return completed;
     }
+
     public int handleGCWPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         int faction = -1;
@@ -83,6 +85,7 @@ public class gcw_vehicle_boss_patrol extends script.base_script
         messageTo(self, "handleGCWPatrol", null, 900.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int getSchedulerNPCs(obj_id kit, String npcID) throws InterruptedException
     {
         if (!isIdValid(kit) || !exists(kit))
@@ -101,6 +104,7 @@ public class gcw_vehicle_boss_patrol extends script.base_script
         }
         return npcs.length;
     }
+
     public obj_id createSchedulerNPC(obj_id kit, String npcName) throws InterruptedException
     {
         if (!isIdValid(kit) || !exists(kit))
@@ -137,21 +141,25 @@ public class gcw_vehicle_boss_patrol extends script.base_script
         attachScript(npc, "systems.dungeon_sequencer.ai_controller");
         return npc;
     }
+
     public int destroyGCWPatrol(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDestroyPatrol(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDestroyPatrol(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDestroyPatrol(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);

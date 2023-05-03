@@ -5,11 +5,12 @@ package script.developer.bubbajoe;/*
 */
 
 import script.*;
-import script.library.sui;
-import script.library.target_dummy;
-import script.library.utils;
-import script.library.veteran_deprecated;
+import script.library.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 public class dev_res extends script.base_script
@@ -18,6 +19,7 @@ public class dev_res extends script.base_script
     public static final String ROOT_SPACE_RESOURCE_CLASS = "space_resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
+    public static final String ROOT_ENERGY_CLASS = "energy";
     public static final String OBJVAR_RESOURCE_REWARDED = "rewarded";
     public static final String SCRIPTVAR_INUSE = "inuse";
     public static final string_id SID_RESOURCE_TITLE = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "resource_title");
@@ -26,52 +28,39 @@ public class dev_res extends script.base_script
     public static final string_id SID_CHOOSE_TYPE = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "choose_type");
     public static final string_id SID_CONFIRM_RESOURCE_SELECTION = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "confirm_choose_type");
     public static final string_id SID_RESOURCE_NAME = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "resource_name");
-    public static final string_id SID_USE = new string_id("ui_radial", "item_use");
+    public static final string_id SID_USE = new string_id("Analyze");
     public static final String SCRIPTVAR_BASE_CLASS = "resource.base";
     public static final String SCRIPTVAR_SUB_CLASSES = "resource.subclass";
     public static final String SCRIPTVAR_TYPES = "resource.types";
     public static final String SCRIPTVAR_RESOURCECHOSEN = "resource.resoucechosen";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
-        if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (utils.hasScriptVar(self, SCRIPTVAR_INUSE))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (utils.getContainingPlayer(self) == player)
-        {
-            item.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
-        }
         if (isGod(player))
         {
+            item.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
             item.addRootMenu(menu_info_types.SERVER_MENU11, new string_id("Set Amount"));
+            item.addRootMenu(menu_info_types.SERVER_MENU12, new string_id("Set Stack"));
         }
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.ITEM_USE)
+        if (isGod(player))
         {
-            if (utils.hasScriptVar(self, SCRIPTVAR_INUSE))
+            if (item == menu_info_types.ITEM_USE)
             {
-                return SCRIPT_CONTINUE;
+                ((getSelf()).getScriptVars()).put(SCRIPTVAR_INUSE, 1);
+                chooseResourceClass(player, ROOT_RESOURCE_CLASS, true);
             }
-            if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
-            {
-                return SCRIPT_CONTINUE;
-            }
-            ((getSelf()).getScriptVars()).put(SCRIPTVAR_INUSE, 1);
-            chooseResourceClass(player, ROOT_RESOURCE_CLASS, true);
-        }
-        if (item == menu_info_types.SERVER_MENU11)
-        {
-            if (isGod(player))
+            if (item == menu_info_types.SERVER_MENU11)
             {
                 String prompt = "Enter the quantity for reimbursement.";
-                sui.inputbox(self, player, prompt, "Set Amount", "handleSetAmount", 8, false, "");
+                sui.inputbox(self, player, prompt, "Set Amount", "handleSetAmount", 8, false, "10000000");
+            }
+            if (item == menu_info_types.SERVER_MENU12)
+            {
+                String prompt = "Enter the amount of stacks.";
+                sui.inputbox(self, player, prompt, "Set Stacks", "handleSetStack", 2, false, "1");
             }
         }
         return SCRIPT_CONTINUE;
@@ -81,14 +70,24 @@ public class dev_res extends script.base_script
         obj_id player = sui.getPlayerId(params);
         String text = sui.getInputBoxText(params);
         int amount = utils.stringToInt(text);
-        if (amount > 0)
+        setObjVar(self, "resource_amount", amount);
+        broadcast(player, "Amount set to " + amount);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetStack(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        String text = sui.getInputBoxText(params);
+        int amount = utils.stringToInt(text);
+        if (amount == 0)
         {
-            setObjVar(self, "resource_amount", amount);
-            sendSystemMessage(player, "Amount set to " + amount, null);
+            removeObjVar(self, "resource_stack");
+            broadcast(player, "Removed stack option.");
+            return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessage(player, "Invalid amount.", null);
+            setObjVar(self, "resource_stack", amount);
         }
         return SCRIPT_CONTINUE;
     }
@@ -286,6 +285,10 @@ public class dev_res extends script.base_script
     };
     public int handleCreateChosenResourceConfirm(obj_id self, dictionary params) throws InterruptedException
     {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[MM/dd/yyyy | HH:mm:ss]");
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("America/Chicago"));
+        String localTime = zonedDateTime.format(formatter);
         int RESOURCE_AMOUNT = getIntObjVar(self, "resource_amount");
         if ((params == null) || (params.isEmpty()))
         {
@@ -301,17 +304,36 @@ public class dev_res extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-
             {
                 obj_id resourceChosen = (self.getScriptVars()).getObjId(SCRIPTVAR_RESOURCECHOSEN);
                 if (isIdValid(resourceChosen))
                 {
                     obj_id player = sui.getPlayerId(params);
                     obj_id crate = createResourceCrate(resourceChosen, RESOURCE_AMOUNT, utils.getInventoryContainer(player));
+                    if (hasObjVar(self, "resource_stack"))
+                    {
+                        int howmanystacks = getIntObjVar(self, "resource_stack");
+                        if (howmanystacks >= 1)
+                        {
+                            for (int i = 0; i < howmanystacks; i++)
+                            {
+                                obj_id stacks = createResourceCrate(resourceChosen, RESOURCE_AMOUNT, utils.getInventoryContainer(player));
+                                String DESC = "\\#.This crate of resources has been generated by \\#ffa41d " + getFirstName(player) + "\\#. on " + localTime + " (Central Time)";
+                                setDescriptionStringId(stacks, new string_id(DESC));
+                                setObjVar(stacks, "null_desc", DESC);
+                                attachScript(stacks, "developer.bubbajoe.sync");
+                            }
+                        }
+                    }
+
                     if (isIdValid(crate))
                     {
-                        CustomerServiceLog("devnull", "Giving player %TU " + RESOURCE_AMOUNT + " of resource type " + resourceChosen + ". They have TWICE confirmed that they wish to consume this deed in order to get a crate of their chosen resource.", player);
+                        System.out.print("devnull | Giving player admin " + RESOURCE_AMOUNT + " of resource type " + resourceChosen + ".");
                     }
+                    String DESC = "\\#.This crate of resources has been generated by \\#ffa41d " + getFirstName(player) + "\\#. on " + localTime + " (Central Time)";
+                    setDescriptionStringId(crate, new string_id(DESC));
+                    setObjVar(crate, "null_desc", DESC);
+                    attachScript(crate, "developer.bubbajoe.sync");
                     cleanup();
                 }
                 else
@@ -322,7 +344,6 @@ public class dev_res extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -505,9 +526,7 @@ public class dev_res extends script.base_script
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
         Vector tempResourceClassTwo = null;
         for (String tempResourceClass1 : tempResourceClass) {
-            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
-                tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
-            }
+            tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
         }
         resourceClasses = new String[tempResourceClassTwo.size()];
         tempResourceClassTwo.toArray(resourceClasses);

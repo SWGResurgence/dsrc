@@ -17,7 +17,8 @@ public class vet_token_scroll extends script.base_script
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
-        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 400));
+        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);

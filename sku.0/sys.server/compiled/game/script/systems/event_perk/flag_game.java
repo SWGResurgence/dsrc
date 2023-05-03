@@ -8,25 +8,29 @@ import script.library.utils;
 
 public class flag_game extends script.base_script
 {
+    public static final String[] TEMPLATE =
+            {
+                    "object/tangible/furniture/all/event_flag_game_neut_banner.iff",
+                    "object/tangible/furniture/all/event_flag_game_imp_banner.iff",
+                    "object/tangible/furniture/all/event_flag_game_reb_banner.iff"
+            };
+
     public flag_game()
     {
     }
-    public static final String[] TEMPLATE = 
-    {
-        "object/tangible/furniture/all/event_flag_game_neut_banner.iff",
-        "object/tangible/furniture/all/event_flag_game_imp_banner.iff",
-        "object/tangible/furniture/all/event_flag_game_reb_banner.iff"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         startGame(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         startGame(self);
         return SCRIPT_CONTINUE;
     }
+
     public void startGame(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "intGameStarted"))
@@ -46,6 +50,7 @@ public class flag_game extends script.base_script
         messageTo(self, "spawnFlag", params, 1, false);
         messageTo(self, "advanceGamePulse", null, 15, false);
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id flag = getObjIdObjVar(self, "event_perk.current_flag");
@@ -53,6 +58,7 @@ public class flag_game extends script.base_script
         messageTo(flag, "goDie", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int showTimeTillExpiration(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -60,23 +66,27 @@ public class flag_game extends script.base_script
         float timeStamp = getFloatObjVar(self, "event_perk.timeStamp");
         float rightNow = getGameTime();
         float expirationTimeMinutesFloat = ((lifeSpan + timeStamp) - rightNow) / 60;
-        int expirationTimeMinutes = (int)expirationTimeMinutesFloat;
+        int expirationTimeMinutes = (int) expirationTimeMinutesFloat;
         prose_package showExpiration = new prose_package();
         showExpiration = prose.getPackage(new string_id("event_perk", "show_exp_time"));
         prose.setDI(showExpiration, expirationTimeMinutes);
         sendSystemMessageProse(player, showExpiration);
         return SCRIPT_CONTINUE;
     }
+
     public int tryRedeeding(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
         obj_id[] allContents = utils.getAllItemsInBankAndInventory(player);
         int perkCount = 0;
-        for (obj_id allContent : allContents) {
-            if (hasObjVar(allContent, "event_perk")) {
+        for (obj_id allContent : allContents)
+        {
+            if (hasObjVar(allContent, "event_perk"))
+            {
                 perkCount++;
             }
-            if (perkCount >= 5) {
+            if (perkCount >= 5)
+            {
                 sendSystemMessage(player, new string_id("event_perk", "redeed_too_many_deeds"));
                 return SCRIPT_CONTINUE;
             }
@@ -95,12 +105,13 @@ public class flag_game extends script.base_script
             destroyObject(self);
             sendSystemMessage(player, new string_id("event_perk", "redeed_success"));
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event_perk", "redeed_failed"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnFlag(obj_id self, dictionary params) throws InterruptedException
     {
         int flagType = params.getInt("flagType");
@@ -115,6 +126,7 @@ public class flag_game extends script.base_script
         attachScript(flag, "systems.event_perk.flag_game_flag");
         return SCRIPT_CONTINUE;
     }
+
     public int setTimeLimit(obj_id self, dictionary params) throws InterruptedException
     {
         int timeLimit = params.getInt("timeLimit");
@@ -122,6 +134,7 @@ public class flag_game extends script.base_script
         setObjVar(self, "event_perk.time_limit", timeLimit);
         return SCRIPT_CONTINUE;
     }
+
     public int startGame(obj_id self, dictionary params) throws InterruptedException
     {
         int gameState = utils.getIntScriptVar(self, "event_perk.game_state");
@@ -145,6 +158,7 @@ public class flag_game extends script.base_script
         announceStatusToPlayers(self, messageId);
         return SCRIPT_CONTINUE;
     }
+
     public int tryToSwapFlags(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -178,6 +192,7 @@ public class flag_game extends script.base_script
         sendSystemMessage(player, new string_id("event_perk", "flag_game_cannot_switch_yet"));
         return SCRIPT_CONTINUE;
     }
+
     public int advanceGamePulse(obj_id self, dictionary params) throws InterruptedException
     {
         int timeLimit = getIntObjVar(self, "event_perk.time_limit");
@@ -217,6 +232,7 @@ public class flag_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gameOver(obj_id self, dictionary params) throws InterruptedException
     {
         int rebelScore = getIntObjVar(self, "event_perk.rebel_score");
@@ -252,6 +268,7 @@ public class flag_game extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showScores(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -265,28 +282,34 @@ public class flag_game extends script.base_script
         sendSystemMessageProse(player, pp2);
         return SCRIPT_CONTINUE;
     }
+
     public void announceStatusToPlayers(obj_id self, String messageId) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
         if (objPlayers != null && objPlayers.length > 0)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 sendSystemMessage(objPlayer, new string_id("event_perk", messageId));
             }
         }
     }
+
     public void playVictoryEffects(obj_id self, String faction) throws InterruptedException
     {
         obj_id[] objPlayers = getPlayerCreaturesInRange(self, 256.0f);
         if (objPlayers != null && objPlayers.length > 0)
         {
-            for (obj_id objPlayer : objPlayers) {
+            for (obj_id objPlayer : objPlayers)
+            {
                 int playerFactionId = pvpGetAlignedFaction(objPlayer);
                 String playerFaction = factions.getFactionNameByHashCode(playerFactionId);
-                if (playerFaction.equals("Rebel") && faction.equals("Rebel")) {
+                if (playerFaction.equals("Rebel") && faction.equals("Rebel"))
+                {
                     playClientEffectObj(objPlayer, "clienteffect/holoemote_rebel.cef", objPlayer, "head");
                 }
-                if (playerFaction.equals("Imperial") && faction.equals("Imperial")) {
+                if (playerFaction.equals("Imperial") && faction.equals("Imperial"))
+                {
                     playClientEffectObj(objPlayer, "clienteffect/holoemote_imperial.cef", objPlayer, "head");
                 }
             }

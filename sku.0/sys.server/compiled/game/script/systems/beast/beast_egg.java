@@ -5,9 +5,6 @@ import script.library.*;
 
 public class beast_egg extends script.base_script
 {
-    public beast_egg()
-    {
-    }
     public static final string_id SID_WHILE_DEAD = new string_id("beast", "no_hatch_while_dead");
     public static final string_id SID_EGG_HATCH = new string_id("beast", "hatch_egg");
     public static final string_id SID_GOD_EGG_HATCH = new string_id("beast", "god_hatch_egg");
@@ -18,17 +15,23 @@ public class beast_egg extends script.base_script
     public static final string_id SID_MAKE_HOLOPET = new string_id("beast", "egg_make_holopet");
     public static final string_id SID_HOLOBEAST_CONVERT_PROMPT = new string_id("beast", "egg_make_holobeast_prompt");
     public static final string_id SID_HOLOBEAST_CONVERT_TITLE = new string_id("beast", "egg_make_holobeast_title");
+    public beast_egg()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeValues", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         incubator.setEggHue(self);
         messageTo(self, "rename_egg", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int rename_egg(obj_id self, dictionary params) throws InterruptedException
     {
         String beastType = beast_lib.getBCDBeastType(self);
@@ -36,6 +39,7 @@ public class beast_egg extends script.base_script
         setName(self, new string_id("beast", beastType));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id egg = self;
@@ -65,6 +69,7 @@ public class beast_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -112,7 +117,7 @@ public class beast_egg extends script.base_script
                     destroyObject(egg);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("BeastEggToMountConversion: ", "Player (" + player + ") tried to convert incubated egg (" + egg + "). Conversion was not a success. New PCD was NOT created and egg was NOT destroyed.");
                     return SCRIPT_CONTINUE;
@@ -130,6 +135,7 @@ public class beast_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -153,7 +159,7 @@ public class beast_egg extends script.base_script
                             attribs[idx] = "" + utils.roundFloatByDecimal(stat * beast_lib.DISPLAY_OBJVAR_CONVERSION_RATES[i]) + "%";
                             idx++;
                         }
-                        else 
+                        else
                         {
                             names[idx] = beast_lib.DISPLAY_NAMES[i];
                             attribs[idx] = "" + stat;
@@ -161,7 +167,7 @@ public class beast_egg extends script.base_script
                         }
                         continue;
                     }
-                    else 
+                    else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
                         attribs[idx] = "" + stat;
@@ -248,12 +254,14 @@ public class beast_egg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeValues(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("beast", "beast_egg: handleInitializeValues()");
         incubator.initializeEgg(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStampEggAsMount(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -266,6 +274,7 @@ public class beast_egg extends script.base_script
         incubator.stampEggAsMount(egg, player);
         return SCRIPT_CONTINUE;
     }
+
     public int handleConvertEggToHolobeast(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);

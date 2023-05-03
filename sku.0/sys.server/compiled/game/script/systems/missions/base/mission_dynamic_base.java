@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class mission_dynamic_base extends script.systems.missions.base.mission_base
 {
-    public mission_dynamic_base()
-    {
-    }
+    public static final int BH_MISSION_PAYOUT_BONUS = Integer.parseInt(getConfigSetting("GameServer", "bhMissionPayoutBonus"));
     public static final float MIN_DESTROY_DISTANCE = 350.0f;
     public static final int FACTION_DELIVER_REWARD_VALUE = 150;
     public static final int FACTION_REWARD_VALUE = 100;
@@ -26,18 +24,19 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     public static final int MISSION_DIFFICULTY_HARD = 3;
     public static final int MISSION_BOUNTY_DIFFICULTY_JEDI = 4;
     public static final int MISSION_DIFFICULTY_BOSS = 5;
+    public static final int MISSION_MULTIPLIER = utils.getIntConfigSetting("GameServer", "missionCreditBonus");
     public static final int STRING_ID_QUANTITY = 5;
-    public static final String[] PLAYER_SPECIES = 
-    {
-        "wookiee",
-        "human",
-        "bothan",
-        "trandoshan",
-        "zabrak",
-        "rodian",
-        "moncal",
-        "twilek"
-    };
+    public static final String[] PLAYER_SPECIES =
+            {
+                    "wookiee",
+                    "human",
+                    "bothan",
+                    "trandoshan",
+                    "zabrak",
+                    "rodian",
+                    "moncal",
+                    "twilek"
+            };
     public static final float DELIVER_DIFFICULTY_MODIFIER = 0.5f;
     public static final float FETCH_DIFFICULTY_MODIFIER = 0.5f;
     public static final float ESCORT_DIFFICULTY_MODIFIER = 0.5f;
@@ -64,96 +63,96 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     public static final int MISSION_DESTROY_DIFFICULTY_EASY = 12;
     public static final int MISSION_DESTROY_DIFFICULTY_MEDIUM = 24;
     public static final int MISSION_DESTROY_DIFFICULTY_HARD = 30;
-    public static final String[] CITY_PLANETS = 
-    {
-        "tatooine",
-        "naboo",
-        "talus",
-        "corellia",
-        "yavin4",
-        "dantooine",
-        "dathomir",
-            "dxun",
-        "lok",
-        "rori",
-        "endor"
-    };
-    public static final String[] PLANETS = 
-    {
-        "tatooine",
-        "naboo",
-        "talus",
-        "corellia",
-        "yavin4",
-        "dantooine",
-            "dathomir",
-            "dxun",
-        "lok",
-        "rori",
-        "endor"
-    };
+    public static final String[] CITY_PLANETS =
+            {
+                    "tatooine",
+                    "naboo",
+                    "talus",
+                    "corellia",
+                    "yavin4",
+                    "dantooine",
+                    "dathomir",
+                    "dxun",
+                    "lok",
+                    "rori",
+                    "endor"
+            };
+    public static final String[] PLANETS =
+            {
+                    "tatooine",
+                    "naboo",
+                    "talus",
+                    "corellia",
+                    "yavin4",
+                    "dantooine",
+                    "dathomir",
+                    "dxun",
+                    "lok",
+                    "rori",
+                    "endor"
+            };
     public static final int DELIVERY_INTEREST_MIN_DELAY = 15;
     public static final int DELIVERY_INTEREST_MAX_DELAY = 30;
     public static final float DELIVER_REWARD_RATIO = 7;
     public static final float RECON_REWARD_RATIO = 6;
     public static final float CRAFTING_REWARD_RATIO = 4;
-    public static final String[] NPC_NONPERSISTENT_MISSION_OBJVAR_NAMES = 
-    {
-        "mission.objDestroyMission",
-        "mission.objDeliverMission",
-        "mission.objSurveyMission",
-        "mission.objDancerMission",
-        "mission.objMusicianMission",
-        "mission.objCraftingMission",
-        "mission.objSurveyMission",
-        "mission.objDancerMission",
-        "mission.objMusicianMission",
-        "mission.objCraftingMission",
-        "mission.objHuntingMission"
-    };
-    public static final String[] NPC_PERSISTENT_MISSION_OBJVAR_NAMES = 
-    {
-        "mission.objDestroyMission",
-        "mission.objDeliverMission",
-        "mission.objReconMission"
-    };
+    public static final String[] NPC_NONPERSISTENT_MISSION_OBJVAR_NAMES =
+            {
+                    "mission.objDestroyMission",
+                    "mission.objDeliverMission",
+                    "mission.objSurveyMission",
+                    "mission.objDancerMission",
+                    "mission.objMusicianMission",
+                    "mission.objCraftingMission",
+                    "mission.objSurveyMission",
+                    "mission.objDancerMission",
+                    "mission.objMusicianMission",
+                    "mission.objCraftingMission",
+                    "mission.objHuntingMission"
+            };
+    public static final String[] NPC_PERSISTENT_MISSION_OBJVAR_NAMES =
+            {
+                    "mission.objDestroyMission",
+                    "mission.objDeliverMission",
+                    "mission.objReconMission"
+            };
     public static final float MIN_RECON_DISTANCE = 0.0f;
     public static final float MAX_RECON_DISTANCE = 5000.0f;
     public static final float RECON_EASY_DISTANCE = 1000;
     public static final float RECON_MEDIUM_DISTANCE = 2000;
     public static final float RECON_HARD_DISTANCE = 5000;
     public static final int RECON_OFF_PLANET_THRESHOLD = 100000;
-    public static final String[] RECON_PLANETS = 
-    {
-        "tatooine",
-        "naboo"
-    };
-    public static final int[] RECON_DIFFICULTY_MODIFIER = 
-    {
-        1,
-        1
-    };
+    public static final String[] RECON_PLANETS =
+            {
+                    "tatooine",
+                    "naboo"
+            };
+    public static final int[] RECON_DIFFICULTY_MODIFIER =
+            {
+                    1,
+                    1
+            };
     public static final float RECON_OFF_PLANET_BASE_MODIFIER = 2;
     public static final int ESCORT_DIFFICULTY_EASY = 5;
     public static final int ESCORT_DIFFICULTY_MEDIUM = 8;
     public static final int ESCORT_DIFFICULTY_HARD = 20;
-    public static final String[] NPC_TYPES = 
-    {
-        "artisan",
-        "bodyguard",
-        "businessman",
-        "bothan_diplomat",
-        "entertainer",
-        "explorer",
-        "farmer",
-        "gambler",
-        "info_broker",
-        "miner",
-        "medic",
-        "noble",
-        "pilot",
-        "scientist"
-    };
+    public static final String[] NPC_TYPES =
+            {
+                    "artisan",
+                    "bodyguard",
+                    "businessman",
+                    "bothan_diplomat",
+                    "entertainer",
+                    "explorer",
+                    "farmer",
+                    "gambler",
+                    "info_broker",
+                    "miner",
+                    "medic",
+                    "noble",
+                    "pilot",
+                    "scientist"
+            };
     public static final String OBJVAR_SURVEY_MISSION_EFFECIENCY = "intEffeciency";
     public static final String OBJVAR_SURVEY_MISSION_RESOURCE = "strResource";
     public static final String SID_SURVEY_RESOURCE_NAMES_TABLE = "mission/survey/survey_resource_names";
@@ -168,33 +167,37 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     public static final string_id SID_MISSION_YAVIN_ENDOR = new string_id("spam", "mission_wrong_planet_yavin_endor");
     public static final string_id SID_MISSION_YAVIN_ENDOR_DATHOMIR = new string_id("spam", "mission_wrong_planet_yavin_endor_dathomir");
     public static final string_id SID_MISSION_TARGET_IN_WATER = new string_id("spam", "target_in_water");
-    public static final String[] CITIES_WITH_STARPORTS = 
-    {
-        "bestine",
-        "mos_eisley",
-        "mos_entha",
-        "mos_espa",
-        "theed",
-        "keren",
-        "moenia",
-        "kaadara",
-        "coronet",
-        "tyrena",
-        "kor_vella",
-        "doaba_guerfel",
-        "restuss",
-        "narmle",
-        "lok_nyms_stronghold",
-        "yavin4_labor_outpost",
-        "yavin4_mining_outpost",
-        "endor_neutral_outpost",
-        "dantooine_mining_outpost",
-        "dantooine_pirate_outpost",
-        "dathomir_trade_outpost",
-        "dathomir_survey_outpost"
-            //add in dxun outpost when it is added
-    };
+    public static final String[] CITIES_WITH_STARPORTS =
+            {
+                    "bestine",
+                    "mos_eisley",
+                    "mos_entha",
+                    "mos_espa",
+                    "theed",
+                    "keren",
+                    "moenia",
+                    "kaadara",
+                    "coronet",
+                    "tyrena",
+                    "kor_vella",
+                    "doaba_guerfel",
+                    "restuss",
+                    "narmle",
+                    "lok_nyms_stronghold",
+                    "yavin4_labor_outpost",
+                    "yavin4_mining_outpost",
+                    "endor_neutral_outpost",
+                    "dantooine_mining_outpost",
+                    "dantooine_pirate_outpost",
+                    "dathomir_trade_outpost",
+                    "dathomir_survey_outpost"
+                    //add in dxun outpost when it is added
+            };
     public static final float PREFERRED_DISTANCE = 1000.0f;
+    public mission_dynamic_base()
+    {
+    }
+
     public obj_id createMissionDataInContainer(obj_id objCreator, float fltEffeciencyRequirement, int intExpireTime, obj_id objCreatorToken, String strMissionType, String strScript) throws InterruptedException
     {
         obj_id objContainer;
@@ -206,7 +209,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             objContainer = utils.getMissionBag(objCreator);
         }
-        else 
+        else
         {
             objContainer = objCreator;
         }
@@ -218,7 +221,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         if (!isIdValid(objMissionData))
         {
             obj_id[] objContents = utils.getContents(objContainer);
-            for (obj_id objContent : objContents) {
+            for (obj_id objContent : objContents)
+            {
                 destroyObject(objContent);
             }
             return null;
@@ -227,10 +231,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionRootScriptName(objMissionData, strScript);
         return objMissionData;
     }
+
     public obj_id getMissionData(obj_id objMission) throws InterruptedException
     {
         return objMission;
     }
+
     public obj_id createDestructionMissionDataFromLocation(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strPlanet, String strFaction, float fltRewardModifier) throws InterruptedException
     {
         LOG("missions", "Making destroy mission");
@@ -253,7 +259,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 fltRange = intDifficulty * RANGE_MODIFIER;
             }
-            else 
+            else
             {
                 fltRange = rand(500, 1500);
             }
@@ -261,7 +267,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 locGoodLocation = locations.getGoodLocationOutsideOfRegion(rgnCities[0], DEFAULT_OBJECTIVE_SIZE, DEFAULT_OBJECTIVE_SIZE, fltRange, false, true);
             }
-            else 
+            else
             {
                 location locNewLocation = utils.getRandomLocationInRing(locMissionStart, fltRange, fltRange + 200);
                 locGoodLocation = locations.getGoodLocationAroundLocation(locNewLocation, 30, 30, 150, 150, false, true);
@@ -278,7 +284,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
             if (locGoodLocation != null)
             {
-                locMissionDestination = (location)locGoodLocation.clone();
+                locMissionDestination = (location) locGoodLocation.clone();
                 rgnCities = getRegionsWithMunicipalAtPoint(locMissionDestination, regions.MUNI_TRUE);
                 region[] rgnCities2 = getRegionsWithGeographicalAtPoint(locMissionDestination, regions.GEO_CITY);
                 if (rgnCities == null && rgnCities2 == null)
@@ -292,7 +298,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                             rgnSpawnRegion = locations.getSmallestRegion(rgnMissionListing);
                             strSpawnType = regions.translateGeoToString(rgnSpawnRegion.getGeographicalType());
                         }
-                        else 
+                        else
                         {
                             strSpawnType = "default";
                         }
@@ -368,7 +374,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             setObjVar(objMissionData, "originalGroupSize", getPCGroupSize(groupObject));
         }
-        else 
+        else
         {
             setObjVar(objMissionData, "originalGroupSize", 1);
         }
@@ -379,7 +385,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             setMissionTargetName(objMissionData, utils.packStringId(strTokenName));
             setMissionTargetAppearance(objMissionData, strGoal);
         }
-        else 
+        else
         {
             string_id strTokenName = new string_id("lair_n", strLairType);
             setObjVar(objMissionData, "strGoal", strGoal);
@@ -388,7 +394,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         float fltDistance = utils.getDistance(locMissionStart, locMissionDestination);
         int intReward = getDestroyReward(intMinReward, intMaxReward, fltDistance);
-        intReward = (int)(intReward * fltRewardModifier);
+        intReward = (int) (intReward * fltRewardModifier);
         if (!strFaction.equals("") && strFaction != null)
         {
             String strActualFaction = utils.getFactionSubString(strFaction);
@@ -402,7 +408,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         setMissionReward(objMissionData, intReward);
         dictionary dctParams = new dictionary();
-        location locSpawnLocation = (location)locMissionDestination.clone();
+        location locSpawnLocation = (location) locMissionDestination.clone();
         setMissionStartLocation(objMissionData, locSpawnLocation);
         setMissionDifficulty(objMissionData, intDifficulty);
         int intMissionDifficulty = 0;
@@ -414,7 +420,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             intMissionDifficulty = MISSION_DIFFICULTY_MEDIUM;
         }
-        else 
+        else
         {
             intMissionDifficulty = MISSION_DIFFICULTY_HARD;
         }
@@ -423,7 +429,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             setObjVar(objMissionData, "intStringId", intStringId);
             setObjVar(objMissionData, "strIdFileName", strIdFileName);
         }
-        else 
+        else
         {
             setupContextualizationStrings(objMissionData, intMissionDifficulty, objCreator, strFaction);
         }
@@ -435,6 +441,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMissionData, "location.locMissionStart", locMissionStart);
         return objMissionData;
     }
+
     public obj_id createDeliverMissionFromLocation(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strPlanet, String strFaction, float fltRewardModifier) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_deliver");
@@ -465,7 +472,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             locStartLocation = locations.getGoodCityRegionLocation(rgnStartRegion, strPlanet);
             boolIsCity = true;
         }
-        else 
+        else
         {
             region closestCity = locations.getClosestCityRegion(rgnStartRegion);
             locStartLocation = locations.getGoodCityRegionLocation(closestCity, strPlanet);
@@ -483,35 +490,38 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 locEndLocation = locations.getDifferentGoodCityRegionLocation(locStartLocation);
             }
-            else 
+            else
             {
                 if (intRoll < 75)
                 {
                     intMissionDifficulty = MISSION_DIFFICULTY_HARD;
                 }
-                else{
+                else
+                {
                     intMissionDifficulty = MISSION_DIFFICULTY_MEDIUM;
                 }
                 region rgnEndRegion = locations.getDeliverCityRegion(rgnStartRegion);
-                try {
+                try
+                {
                     locEndLocation = locations.getGoodCityRegionLocation(rgnEndRegion, rgnEndRegion.getPlanetName());
-                }
-                catch(Exception e){
+                } catch (Exception e)
+                {
                     LOG("mission", "Missions (DELIVER): Unable to resolve end location for mission.  End Region Planet (" + rgnEndRegion.getPlanetName()
-                            + "), End Region City (" + rgnEndRegion.getName() + "), Start Location (" + locStartLocation.toString() + ") on Planet " + locStartLocation.area
+                            + "), End Region City (" + rgnEndRegion.getName() + "), Start Location (" + locStartLocation + ") on Planet " + locStartLocation.area
                             + "), Start Region City (" + rgnStartRegion.getName() + "), Pickup NPC (" + strPickupNPC + "), Dropoff NPC (" + strDropoffNPC
                             + "), Terminal Location (" + getLocation(getSelf()) + "), Terminal ID (" + getSelf() + ")");
                     return null;
                 }
             }
         }
-        else 
+        else
         {
             region rgnEndRegion = locations.getClosestCityRegion(rgnStartRegion);
-            try {
+            try
+            {
                 locEndLocation = locations.getGoodCityRegionLocation(rgnEndRegion, strPlanet);
-            }
-            catch(Exception e){
+            } catch (Exception e)
+            {
                 LOG("mission", "Missions (DELIVER): Unable to resolve end location for mission.  End Region Planet (" + rgnEndRegion.getPlanetName()
                         + "), End Region City (" + rgnEndRegion.getName() + "), Start Location (" + locStartLocation.toString() + ") on Planet " + locStartLocation.area
                         + "), Start Region City (" + rgnStartRegion.getName() + "), Pickup NPC (" + strPickupNPC + "), Dropoff NPC (" + strDropoffNPC
@@ -532,13 +542,13 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             setMissionEndLocation(objMissionData, getMissionLocation(objCreator));
             setObjVar(objMissionData, "objEndNPC", objCreator);
         }
-        else 
+        else
         {
             setMissionStartLocation(objMissionData, locStartLocation);
             setMissionEndLocation(objMissionData, locEndLocation);
         }
         int intReward = getDeliverReward(locStartLocation, locEndLocation, DELIVER_REWARD_RATIO, 1);
-        intReward = (int)(intReward * fltRewardModifier);
+        intReward = (int) (intReward * fltRewardModifier);
         if (intReward < 5)
         {
             intReward = 5;
@@ -559,6 +569,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, intMissionDifficulty, objCreator, strFaction);
         return objMissionData;
     }
+
     public location getGoodBountyDestination(String strPlanet) throws InterruptedException
     {
         location locMissionDestination = null;
@@ -571,12 +582,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         if (rgnMissionRegion.getMunicipalType() == regions.MUNI_TRUE)
         {
             locMissionDestination = locations.getGoodCityLocation(rgnMissionRegion, strPlanet);
-            if (locMissionDestination == null)
-            {
-                return null;
-            }
         }
-        else 
+        else
         {
             location[] locExtents = getRegionExtent(rgnMissionRegion);
             location locLowerLeft = locExtents[0];
@@ -605,6 +612,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return locMissionDestination;
     }
+
     public obj_id createDynamicBountyMission(obj_id objMissionData, obj_id objCreator, int intBountyDifficulty, int intDifficulty, String strStartPlanet, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_bounty");
@@ -612,10 +620,10 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         float fltMovementTime = 0;
         location locMissionDestination = new location();
         region rgnMissionRegion;
-        String strPlanet = new String();
+        String strPlanet = "";
         String strTargetName;
         int intMissionDifficulty = MISSION_DIFFICULTY_EASY;
-        String strColumnName = new String();
+        String strColumnName = "";
         if (intDifficulty < 42 || intBountyDifficulty < 2)
         {
             strColumnName = "strEasy";
@@ -625,7 +633,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             strColumnName = "strMedium";
             intMissionDifficulty = MISSION_DIFFICULTY_MEDIUM;
         }
-        else 
+        else
         {
             strColumnName = "strHard";
             intMissionDifficulty = MISSION_DIFFICULTY_HARD;
@@ -658,7 +666,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             fltDifficultyModifier = 2.0f;
             strPlanet = PLANETS[rand(0, PLANETS.length - 1)];
         }
-        else 
+        else
         {
             return null;
         }
@@ -687,12 +695,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 strSex = "male";
             }
-            else 
+            else
             {
                 strSex = "female";
             }
         }
-        else 
+        else
         {
             strSpecies = "alien";
             strSex = "other";
@@ -706,8 +714,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMissionData, "strTargetName", strTargetName);
         setObjVar(objMissionData, "strSpecies", strSpecies);
         float fltVariance = rand(MIN_REWARD_VARIANCE, MAX_REWARD_VARIANCE);
-        fltVariance = fltVariance / 100;
-        intDifficulty = intDifficulty + (int)(intDifficulty * fltVariance);
+        fltVariance = fltVariance / 200;
+        intDifficulty = intDifficulty + (int) (intDifficulty * fltVariance);
         location locTest = new location();
         String strGoal = "object/tangible/mission/mission_bounty_target.iff";
         setMissionTargetAppearance(objMissionData, strGoal);
@@ -715,13 +723,13 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         int intReward = 0;
         if (intBountyDifficulty > 1)
         {
-            intReward = (intBountyDifficulty * 40) + intDifficulty;
+            intReward = (intBountyDifficulty * 80) + intDifficulty;
         }
-        else 
+        else
         {
-            intReward = 20 + intDifficulty;
+            intReward = 50 + intDifficulty;
         }
-        intReward = intReward * 150 + rand(-100, 300);
+        intReward = intReward * BH_MISSION_PAYOUT_BONUS + rand(0, 1000);
         obj_id groupObject = getGroupObject(objCreator);
         if (isIdValid(groupObject))
         {
@@ -729,7 +737,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         setMissionReward(objMissionData, intReward);
         dictionary dctParams = new dictionary();
-        location locSpawnLocation = (location)locMissionDestination.clone();
+        location locSpawnLocation = (location) locMissionDestination.clone();
         setObjVar(objMissionData, "locSpawnLocation", locSpawnLocation);
         if (intDifficulty > 90)
         {
@@ -745,10 +753,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, intMissionDifficulty, objCreator, strFaction);
         return objMissionData;
     }
+
     public obj_id createJediBountyMission(obj_id objMissionData, obj_id objCreator, String strFaction, int hunterLevel, obj_id bountyHunterId) throws InterruptedException
     {
         return createJediBountyMission(objMissionData, objCreator, strFaction, hunterLevel, bountyHunterId, missions.BOUNTY_FLAG_NONE);
     }
+
     public obj_id createJediBountyMission(obj_id objMissionData, obj_id objCreator, String strFaction, int hunterLevel, obj_id bountyHunterId, int flag) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_bounty");
@@ -759,10 +769,10 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return null;
         }
-        else 
+        else
         {
-            bhMin = (int)(hunterLevel * 0.75);
-            bhMax = (int)(hunterLevel * 1.5);
+            bhMin = (int) (hunterLevel * 0.75);
+            bhMax = (int) (hunterLevel * 1.5);
         }
         dictionary dctJediInfo = requestJedi(IGNORE_JEDI_STAT, 15000, bhMin, bhMax, IGNORE_JEDI_STAT, -3);
         if (dctJediInfo == null)
@@ -807,12 +817,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         while (jediList.size() > 0)
         {
             intRoll = rand(0, jediList.size() - 1);
-            if (!isIdValid(((obj_id)jediList.get(intRoll))) || !boolOnline[(Integer) (jediIdx.get(intRoll))])
+            if (!isIdValid(((obj_id) jediList.get(intRoll))) || !boolOnline[(Integer) (jediIdx.get(intRoll))])
             {
                 jediList = utils.removeElementAt(jediList, intRoll);
                 jediIdx = utils.removeElementAt(jediIdx, intRoll);
             }
-            else if ((((obj_id)jediList.get(intRoll)) == bountyHunterId) || ((intFaction != 0) && (jediFaction[(Integer) (jediIdx.get(intRoll))] != intFaction)))
+            else if ((jediList.get(intRoll) == bountyHunterId) || ((intFaction != 0) && (jediFaction[(Integer) (jediIdx.get(intRoll))] != intFaction)))
             {
                 jediList = utils.removeElementAt(jediList, intRoll);
                 jediIdx = utils.removeElementAt(jediIdx, intRoll);
@@ -824,13 +834,13 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
             else if (jediPlanet[(Integer) (jediIdx.get(intRoll))].equals(bountyHunterLocation.area))
             {
-                SamePlanetObjId[SamePlanetCounter] = ((obj_id)jediList.get(intRoll));
+                SamePlanetObjId[SamePlanetCounter] = ((obj_id) jediList.get(intRoll));
                 SamePlanetInt[SamePlanetCounter] = (Integer) jediIdx.get(intRoll);
                 ++SamePlanetCounter;
                 jediList = utils.removeElementAt(jediList, intRoll);
                 jediIdx = utils.removeElementAt(jediIdx, intRoll);
             }
-            else 
+            else
             {
                 intRoll = (Integer) jediIdx.get(intRoll);
                 String[] strNames = dctJediInfo.getStringArray("name");
@@ -898,31 +908,31 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "rebel_smuggler")));
             }
-            else 
+            else
             {
                 if (jediFaction[intRoll] == (-615855020))
                 {
                     setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "imperial_smuggler")));
                 }
-                else 
+                else
                 {
                     setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "neutral_smuggler")));
                 }
             }
         }
-        else 
+        else
         {
             if (jediFaction[intRoll] == (370444368))
             {
                 setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "rebel_jedi")));
             }
-            else 
+            else
             {
                 if (jediFaction[intRoll] == (-615855020))
                 {
                     setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "imperial_jedi")));
                 }
-                else 
+                else
                 {
                     setMissionTargetName(objMissionData, utils.packStringId(new string_id("mission/mission_bounty_jedi", "neutral_jedi")));
                 }
@@ -946,6 +956,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, MISSION_BOUNTY_DIFFICULTY_JEDI, objCreator, factionName, flag);
         return objMissionData;
     }
+
     public obj_id createBountyTarget(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -957,7 +968,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             locGoodLocation = locations.getGoodLocationAroundLocationAvoidCollidables(locSpawnLocation, 1, 1, 64, 64, false, true, 10.0f);
         }
-        else 
+        else
         {
             region rgnCityRegion = locations.getCityRegion(locSpawnLocation);
             locGoodLocation = locations.getGoodCityLocation(rgnCityRegion, locSpawnLocation.area);
@@ -996,28 +1007,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMission, "intTargetSpawned", 1);
         return objTargetNPC;
     }
+
     public boolean transferDeliveryItem(obj_id objItem, obj_id objTarget) throws InterruptedException
     {
         obj_id objInventory = getObjectInSlot(objTarget, "inventory");
         boolean boolTransfer = putIn(objItem, objInventory);
-        if (boolTransfer == true)
-        {
-            return true;
-        }
-        return false;
+        return boolTransfer == true;
     }
+
     public void missionArrival(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "onArrivedAtLocation", dctParams, 0, true);
         return;
     }
+
     public void cleanupLocationTargets(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         dctParams.put("strLocationTarget", objMission.toString());
         messageTo(getMissionHolder(objMission), "cleanupLocationTarget", dctParams, 0, true);
     }
+
     public void setupSpawn(obj_id objMission, location locSpawnLocation) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(objMission);
@@ -1026,6 +1037,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dctParams.put("locSpawnLocation", locSpawnLocation);
         messageTo(objPlayer, "setupSpawn", dctParams, 0, true);
     }
+
     public void setupUnloadedSpawn(obj_id objMission, obj_id objMissionHolder, location locSpawnLocation) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -1033,6 +1045,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dctParams.put("locSpawnLocation", locSpawnLocation);
         messageTo(objMissionHolder, "setupSpawn", dctParams, 0, true);
     }
+
     public location getGoodMissionLocation(obj_id objMission, obj_id objPlayer) throws InterruptedException
     {
         int intSize = getIntObjVar(objMission, "intSize");
@@ -1075,35 +1088,39 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         locGoodLocation.y = fltHeight;
         return locGoodLocation;
     }
+
     public boolean setupDestructionMissionObject(obj_id objMission) throws InterruptedException
     {
         return true;
     }
+
     public void sendMissionStartMovementSpam(obj_id objMission) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(objMission);
         sendSystemMessage(objPlayer, SID_MISSION_TARGET_UPDATED);
     }
+
     public void moveMissionStartLocation(obj_id objMission) throws InterruptedException
     {
         location locSpawnLocation = getMissionStartLocation(objMission);
         location locStartLocation = getLocationObjVar(objMission, "location.locMissionStart");
         int intDistance = rand(MIN_DISTANCE_FOR_RETRY, MAX_DISTANCE_FOR_RETRY);
-        location locNewLocation = (location)locSpawnLocation.clone();
+        location locNewLocation = (location) locSpawnLocation.clone();
         locNewLocation.x = locSpawnLocation.x - locStartLocation.x;
         locNewLocation.z = locSpawnLocation.z - locStartLocation.z;
         float fltDistance = utils.getDistance(locStartLocation, locSpawnLocation);
         locNewLocation.x = locNewLocation.x / fltDistance;
         locNewLocation.z = locNewLocation.z / fltDistance;
-        location locFinalLocation = (location)locSpawnLocation.clone();
-        locFinalLocation.x = locSpawnLocation.x + (float)(locNewLocation.x * intDistance);
-        locFinalLocation.z = locSpawnLocation.z + (float)(locNewLocation.z * intDistance);
+        location locFinalLocation = (location) locSpawnLocation.clone();
+        locFinalLocation.x = locSpawnLocation.x + (locNewLocation.x * intDistance);
+        locFinalLocation.z = locSpawnLocation.z + (locNewLocation.z * intDistance);
         setMissionStartLocation(objMission, locFinalLocation);
         updateMissionWaypoint(objMission, locFinalLocation);
         sendMissionStartMovementSpam(objMission);
         setupSpawn(objMission, locFinalLocation);
         return;
     }
+
     public boolean createDestructionTarget(obj_id objMission, obj_id objPlayer) throws InterruptedException
     {
         int intAttempts = 0;
@@ -1111,7 +1128,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             intAttempts = getIntObjVar(objMission, "intAttempts");
         }
-        else 
+        else
         {
             setObjVar(objMission, "intAttempts", intAttempts);
         }
@@ -1121,7 +1138,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             strTemplate = getStringObjVar(objMissionData, "strGoal");
         }
-        else 
+        else
         {
             return false;
         }
@@ -1132,7 +1149,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 return false;
             }
-            else 
+            else
             {
                 intAttempts = intAttempts + 1;
                 setObjVar(objMission, "intAttempts", intAttempts);
@@ -1168,12 +1185,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 setObjVar(objDestructionTarget, "spawning.target", strObjectiveTarget);
             }
-            else 
+            else
             {
                 setObjVar(objDestructionTarget, "spawning.killPercent", fltKillPercentage);
             }
         }
-        else 
+        else
         {
             int intNumToSpawn = getIntObjVar(objMissionData, "intNumToSpawn");
             String strTemplateToSpawn = getStringObjVar(objMissionData, "strTemplateToSpawn");
@@ -1198,36 +1215,43 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         messageTo(objDestructionTarget, "handle_Spawn_Setup_Complete", dctParams, 0, true);
         return true;
     }
+
     public void sendDestructionFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "destructionFail", dctParams, 0, true);
     }
+
     public void sendDestructionSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "destructionSuccess", dctParams, 0, false);
     }
+
     public void sendDestructionIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "destructionIncomplete", dctParams, 0, true);
     }
+
     public void sendEscortFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortFail", dctParams, 0, true);
     }
+
     public void sendEscortSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortSuccess", dctParams, 0, true);
     }
+
     public void sendEscortIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortIncomplete", dctParams, 0, true);
     }
+
     public boolean createEscortTarget(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -1238,7 +1262,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             locSpawnLocation = locations.getGoodCityLocation(rgnCities[0], locSpawnLocation.area);
         }
-        else 
+        else
         {
             locSpawnLocation = locations.getGoodLocationAroundLocation(locSpawnLocation, 1, 1, 128, 128, false, true);
             rgnCities = getRegionsWithMunicipalAtPoint(locSpawnLocation, regions.MUNI_TRUE);
@@ -1259,7 +1283,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             updateMissionWaypoint(objMission, locSpawnLocation);
             setObjVar(objMission, "objEscortTarget", objEscortTarget);
@@ -1271,21 +1295,25 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public void escortFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortFailure", dctParams, 0, true);
     }
+
     public void escortSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortSuccess", dctParams, 0, true);
     }
+
     public void escortIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "escortIncomplete", dctParams, 0, true);
     }
+
     public boolean setupFetchMissionObject(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -1293,10 +1321,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         location locDropoffLocation = getMissionEndLocation(objMissionData);
         return true;
     }
+
     public boolean createFetchPickupNPC(obj_id objMission) throws InterruptedException
     {
         return true;
     }
+
     public boolean createFetchDropoffNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -1307,7 +1337,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             attachScript(objDropoffNPC, "systems.missions.dynamic.mission_fetch_dropoff");
             setObjVar(objDropoffNPC, "objMission", objMission);
@@ -1315,24 +1345,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public void fetchFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "fetchFailure", dctParams, 0, true);
     }
+
     public void fetchSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "fetchSuccess", dctParams, 0, true);
     }
+
     public void fetchIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "fetchIncomplete", dctParams, 0, true);
     }
+
     public boolean verifyDeliveryItem(obj_id objPlayer, obj_id objDeliveryItem) throws InterruptedException
     {
         obj_id objInventory = getObjectInSlot(objPlayer, "inventory");
@@ -1341,7 +1375,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             int intI = 0;
             while (intI < objContents.length)
@@ -1355,24 +1389,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return false;
     }
+
     public void sendDeliverFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "deliverFailure", dctParams, 0, true);
     }
+
     public void sendDeliverSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "deliverSuccess", dctParams, 0, true);
     }
+
     public void sendDeliverIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "deliverIncomplete", dctParams, 0, true);
     }
+
     public boolean createDeliverPickupNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(objMission);
@@ -1384,7 +1422,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             updateMissionWaypoint(objMission, locSpawnLocation);
             attachScript(objPickupNPC, "systems.missions.dynamic.mission_deliver_pickup");
@@ -1396,6 +1434,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public boolean createDeliverDropoffNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -1407,7 +1446,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             persistAndRegisterObject(objDropoffNPC, objMission);
             updateMissionWaypoint(objMission, locSpawnLocation);
@@ -1419,6 +1458,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public dictionary getDestructionMissionSpawnList(obj_id objCreator, int intDifficulty, String strPlanet, String strSpawnType, String strFaction) throws InterruptedException
     {
         strFaction = toLower(strFaction);
@@ -1427,7 +1467,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             strFileName = "datatables/missions/" + strPlanet + "/" + strPlanet + "_destroy_" + strSpawnType + ".iff";
         }
-        else 
+        else
         {
             strFileName = "datatables/missions/faction/" + strFaction + "_destroy" + ".iff";
         }
@@ -1449,7 +1489,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             okRows = utils.addElement(okRows, intOverrideMissionIndex);
         }
-        else 
+        else
         {
             for (int j = 0; j < maxLength; j++)
             {
@@ -1479,6 +1519,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return row;
     }
+
     public String getOverloadTemplate(int intDifficulty, String strFaction, int intFaction) throws InterruptedException
     {
         String strFileName = "datatables/spawning/spawn_lists/overloads/spawn_overloads.iff";
@@ -1517,7 +1558,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                         }
                     }
                 }
-                else 
+                else
                 {
                     strTemplates[intArrayIndex] = dctSpawnInformation.getString("strTemplate");
                     intArrayIndex = intArrayIndex + 1;
@@ -1532,10 +1573,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return null;
     }
+
     public void setupContextualizationStrings(obj_id objMissionData, int intMissionDifficulty, obj_id objCreator, String strMissionFaction) throws InterruptedException
     {
         setupContextualizationStrings(objMissionData, intMissionDifficulty, objCreator, strMissionFaction, missions.BOUNTY_FLAG_NONE);
     }
+
     public void setupContextualizationStrings(obj_id objMissionData, int intMissionDifficulty, obj_id objCreator, String strMissionFaction, int flag) throws InterruptedException
     {
         if (strMissionFaction == null)
@@ -1555,7 +1598,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             boolNPC = true;
         }
-        else 
+        else
         {
         }
         boolean boolRandomName = false;
@@ -1582,7 +1625,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             strIdFileName = strIdFileName + strMissionType + "_" + strMissionFaction + "_";
         }
-        else 
+        else
         {
             strIdFileName = strIdFileName + strMissionType + "_neutral_";
         }
@@ -1606,7 +1649,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             strIdFileName = "mission_bounty_jedi";
         }
-        else 
+        else
         {
             strIdFileName = strIdFileName + "easy";
             return;
@@ -1623,19 +1666,23 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 strIdFileName = strIdFileName + "_" + strTargetType;
                 location locMissionStartLocation = getMissionStartLocation(objMissionData);
                 String strPlanet = locMissionStartLocation.area;
-                switch (strPlanet) {
+                switch (strPlanet)
+                {
                     case "tatooine":
-                        if (!boolNPC) {
+                        if (!boolNPC)
+                        {
                             strIdFileName = strIdFileName + "_tatooine";
                         }
                         break;
                     case "naboo":
-                        if (!boolNPC) {
+                        if (!boolNPC)
+                        {
                             strIdFileName = strIdFileName + "_naboo";
                         }
                         break;
                     case "corellia":
-                        if (!boolNPC) {
+                        if (!boolNPC)
+                        {
                             strIdFileName = strIdFileName + "_corellia";
                         }
                         break;
@@ -1659,8 +1706,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 try
                 {
                     intTest = Integer.valueOf(strNumberOfEntries);
-                }
-                catch(NumberFormatException err)
+                } catch (NumberFormatException err)
                 {
                     boolError = true;
                 }
@@ -1685,7 +1731,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 intId = 1;
             }
-            else 
+            else
             {
                 intId = 3;
             }
@@ -1721,7 +1767,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             strDescription = "m" + intStringId + "o" + flagChar;
 
             String strTest = getMissionType(objMissionData);
-            switch (strTest) {
+            switch (strTest)
+            {
                 case "survey":
                     strDescription = "m" + intStringId + "o";
                     break;
@@ -1736,7 +1783,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                     break;
             }
         }
-        else 
+        else
         {
             strDescription = "m" + intStringId + "d" + flagChar;
         }
@@ -1754,7 +1801,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 {
                     strName = "The Alliance";
                 }
-                else 
+                else
                 {
                     strName = "Corporate Sector Authority";
                 }
@@ -1770,23 +1817,23 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                         strName = getRandomMissionCreatorName();
                         setObjVar(objMissionData, "strCreatorName", strName);
                     }
-                    else 
+                    else
                     {
                         strName = getString(strCreator);
                     }
                 }
-                else 
+                else
                 {
                     strName = getString(strCreator);
                 }
             }
-            else 
+            else
             {
                 strName = getRandomMissionCreatorName();
             }
             setMissionCreator(objMissionData, strName);
         }
-        else 
+        else
         {
             strName = getName(objCreator);
             setMissionCreator(objMissionData, strName);
@@ -1795,10 +1842,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDescription(objMissionData, strDescriptionId);
         return;
     }
+
     public void sendMissionPersistentMessage(obj_id objMission, String strType) throws InterruptedException
     {
         return;
     }
+
     public void createDeliverInterestNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -1832,7 +1881,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 removeObjVar(objMission, "intInterest");
             }
-            else 
+            else
             {
                 setObjVar(objMission, "intInterest", intInterest);
             }
@@ -1852,12 +1901,14 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return;
     }
+
     public void cleanUpInterestNPC(obj_id objNPC) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(objNPC, "objMission");
         destroyObject(objNPC);
         return;
     }
+
     public void removeSpawnedTemplateElement(obj_id objMissionData, obj_id objTemplate) throws InterruptedException
     {
         int intI = 0;
@@ -1866,7 +1917,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             Vector objSpawnedTemplates = getResizeableObjIdArrayObjVar(objMissionData, "objSpawnedTemplates");
             while (intI < objSpawnedTemplates.size())
             {
-                if (((obj_id)objSpawnedTemplates.get(intI)) == objTemplate)
+                if (objSpawnedTemplates.get(intI) == objTemplate)
                 {
                     objSpawnedTemplates = utils.removeElementAt(objSpawnedTemplates, intI);
                     return;
@@ -1875,6 +1926,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
         }
     }
+
     public String getRandomMissionCreatorName() throws InterruptedException
     {
         String strTemplate = "object/creature/player/human_male.iff";
@@ -1882,33 +1934,34 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         switch (intRoll)
         {
             case 1:
-            strTemplate = "object/creature/player/bothan_male.iff";
-            break;
+                strTemplate = "object/creature/player/bothan_male.iff";
+                break;
             case 2:
-            strTemplate = "object/creature/player/moncal_male.iff";
-            break;
+                strTemplate = "object/creature/player/moncal_male.iff";
+                break;
             case 3:
-            strTemplate = "object/creature/player/trandoshan_male.iff";
-            break;
+                strTemplate = "object/creature/player/trandoshan_male.iff";
+                break;
             case 4:
-            strTemplate = "object/creature/player/twilek_male.iff";
-            break;
+                strTemplate = "object/creature/player/twilek_male.iff";
+                break;
             case 5:
-            strTemplate = "object/creature/player/rodian_male.iff";
-            break;
+                strTemplate = "object/creature/player/rodian_male.iff";
+                break;
             case 6:
-            strTemplate = "object/creature/player/zabrak_male.iff";
-            break;
+                strTemplate = "object/creature/player/zabrak_male.iff";
+                break;
             case 7:
-            strTemplate = "object/creature/player/wookiee_male.iff";
-            break;
+                strTemplate = "object/creature/player/wookiee_male.iff";
+                break;
             case 8:
-            strTemplate = "object/creature/player/human_male.iff";
-            break;
+                strTemplate = "object/creature/player/human_male.iff";
+                break;
         }
         String strName = generateRandomName(strTemplate);
         return strName;
     }
+
     public String getRandomSpeciesName(String strSpecies) throws InterruptedException
     {
         String strTemplate = "";
@@ -1918,34 +1971,35 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             switch (intRoll)
             {
                 case 1:
-                strTemplate = "object/creature/player/bothan_male.iff";
-                break;
+                    strTemplate = "object/creature/player/bothan_male.iff";
+                    break;
                 case 2:
-                strTemplate = "object/creature/player/moncal_male.iff";
-                break;
+                    strTemplate = "object/creature/player/moncal_male.iff";
+                    break;
                 case 3:
-                strTemplate = "object/creature/player/trandoshan_male.iff";
-                break;
+                    strTemplate = "object/creature/player/trandoshan_male.iff";
+                    break;
                 case 4:
-                strTemplate = "object/creature/player/twilek_male.iff";
-                break;
+                    strTemplate = "object/creature/player/twilek_male.iff";
+                    break;
                 case 5:
-                strTemplate = "object/creature/player/rodian_male.iff";
-                break;
+                    strTemplate = "object/creature/player/rodian_male.iff";
+                    break;
                 case 6:
-                strTemplate = "object/creature/player/zabrak_male.iff";
-                break;
+                    strTemplate = "object/creature/player/zabrak_male.iff";
+                    break;
                 case 7:
-                strTemplate = "object/creature/player/wookiee_male.iff";
-                break;
+                    strTemplate = "object/creature/player/wookiee_male.iff";
+                    break;
                 case 8:
-                strTemplate = "object/creature/player/human_male.iff";
-                break;
+                    strTemplate = "object/creature/player/human_male.iff";
+                    break;
             }
         }
-        else 
+        else
         {
-            switch (strSpecies) {
+            switch (strSpecies)
+            {
                 case "bothan":
                     strTemplate = "object/creature/player/bothan_male.iff";
                     break;
@@ -1978,10 +2032,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         String strName = generateRandomName(strTemplate);
         return strName;
     }
+
     public void preLoadDestructionDataTables(obj_id objMissionBoard, String strPlanet) throws InterruptedException
     {
         return;
     }
+
     public void registerBountyInformant(obj_id objInformant) throws InterruptedException
     {
         location locCurrentLocation = getMissionLocation(objInformant);
@@ -1996,6 +2052,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dctMissionInformation.put(strArrayName, objInformants);
         return;
     }
+
     public void removeBountyInformant(obj_id objInformant) throws InterruptedException
     {
         location locCurrentLocation = getMissionLocation(objInformant);
@@ -2019,6 +2076,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return;
     }
+
     public void setupInvisibleWaypoint(obj_id objMission) throws InterruptedException
     {
         location locSpawnLocation = getLocation(objMission);
@@ -2033,6 +2091,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             setName(objMission, strWaypointName);
         }
     }
+
     public boolean updateMissionWaypoint(obj_id objMission, location locSpawnLocation) throws InterruptedException
     {
         if (!isIdValid(objMission))
@@ -2057,7 +2116,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 setName(objMission, strWaypointName);
             }
         }
-        else 
+        else
         {
             objTargetWaypoint = getObjIdObjVar(objMission, "objTargetWaypoint");
         }
@@ -2078,6 +2137,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public void activateMissionWaypoint(obj_id objMission) throws InterruptedException
     {
         if (hasObjVar(objMission, "objTargetWaypoint"))
@@ -2087,6 +2147,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return;
     }
+
     public obj_id generateNPCMissions(obj_id objNPC) throws InterruptedException
     {
         obj_id objMissionData = createMissionObjectInCreatureMissionBag(objNPC);
@@ -2117,7 +2178,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         if (!isIdValid(foo))
         {
         }
-        else 
+        else
         {
             locCurrentLocation = getLocation(foo);
         }
@@ -2136,7 +2197,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             objCreator = objNPC;
         }
-        else 
+        else
         {
             objCreator = utils.getMissionBag(objNPC);
         }
@@ -2146,7 +2207,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             if (!hasObjVar(objNPC, strMissionTypes[intI]))
             {
                 String strMissionType = strMissionTypes[intI];
-                switch (strMissionType) {
+                switch (strMissionType)
+                {
                     case "mission.objReconMission":
                         objMissionData = createReconMission(objMissionData, objNPC, locCurrentLocation, intDifficulty, strPlanet, "");
                         break;
@@ -2155,42 +2217,55 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                         break;
                     case "mission.objDestroyMission":
                         boolean boolDeclaredOnly = false;
-                        if (!strFaction.equals("")) {
-                            if (hasObjVar(objNPC, "mission.intDeclaredOnly")) {
+                        if (!strFaction.equals(""))
+                        {
+                            if (hasObjVar(objNPC, "mission.intDeclaredOnly"))
+                            {
                                 boolDeclaredOnly = true;
                                 strFaction = strFaction + "_military";
-                            } else {
+                            }
+                            else
+                            {
                                 strFaction = strFaction + "_non_military";
                             }
                         }
                         objMissionData = createDestructionMissionDataFromLocation(objMissionData, objCreator, locCurrentLocation, intDifficulty, strPlanet, strFaction, 1.0f);
-                        if (isIdValid(objMissionData)) {
-                            if (boolDeclaredOnly) {
+                        if (isIdValid(objMissionData))
+                        {
+                            if (boolDeclaredOnly)
+                            {
                                 setObjVar(objMissionData, "boolDeclaredOnly", true);
                             }
-                            if (!hasObjVar(objNPC, "mission.intPersistent")) {
+                            if (!hasObjVar(objNPC, "mission.intPersistent"))
+                            {
                                 reContextualizationTerminalToNPCMission(objMissionData, objNPC);
                             }
-                            if (hasObjVar(objNPC, "mission.strNPCName")) {
+                            if (hasObjVar(objNPC, "mission.strNPCName"))
+                            {
                                 objMissionData = dynamicDestroyToThemePark(objMissionData, objNPC);
                             }
                         }
                         break;
                     case "mission.objDeliverMission":
                         objMissionData = createDeliverMissionFromLocation(objMissionData, objCreator, locCurrentLocation, intDifficulty, strPlanet, strFaction, 1.0f);
-                        if (isIdValid(objMissionData)) {
-                            if (!hasObjVar(objNPC, "mission.intPersistent")) {
+                        if (isIdValid(objMissionData))
+                        {
+                            if (!hasObjVar(objNPC, "mission.intPersistent"))
+                            {
                                 reContextualizationTerminalToNPCMission(objMissionData, objNPC);
                             }
-                            if (hasObjVar(objNPC, "mission.strNPCName")) {
+                            if (hasObjVar(objNPC, "mission.strNPCName"))
+                            {
                                 objMissionData = dynamicDeliverToThemePark(objMissionData, objNPC);
                             }
                         }
                         break;
                     case "mission.objEscortMission":
                         objMissionData = createEscortToCreatorMission(objMissionData, objNPC, locCurrentLocation, intDifficulty, strPlanet, strFaction);
-                        if (isIdValid(objMissionData)) {
-                            if (hasObjVar(objNPC, "mission.strNPCName")) {
+                        if (isIdValid(objMissionData))
+                        {
+                            if (hasObjVar(objNPC, "mission.strNPCName"))
+                            {
                                 objMissionData = dynamicEscortToCreatorToThemePark(objMissionData, objNPC);
                             }
                         }
@@ -2214,7 +2289,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 {
                     return null;
                 }
-                else 
+                else
                 {
                     setObjVar(objMissionData, "objCreator", objNPC);
                     return objMissionData;
@@ -2224,6 +2299,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return null;
     }
+
     public void cleanUpMissions(obj_id objNPC) throws InterruptedException
     {
         int intI = 0;
@@ -2239,6 +2315,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return;
     }
+
     public boolean hasMissionFromNPC(obj_id objPlayer, obj_id objNPC) throws InterruptedException
     {
         obj_id[] objMissionArray = getMissionObjects(objPlayer);
@@ -2259,6 +2336,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return false;
     }
+
     public obj_id getMissionObjectFromNPC(obj_id objNPC, int intPlayerDifficulty) throws InterruptedException
     {
         obj_id objMissionData = generateNPCMissions(objNPC);
@@ -2268,6 +2346,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return objMissionData;
     }
+
     public void removeMissionObjectFromNPC(obj_id objNPC, obj_id objMissionData) throws InterruptedException
     {
         int intI = 0;
@@ -2285,12 +2364,14 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             intI = intI + 1;
         }
     }
+
     public void assignNPCMissionToPlayer(obj_id objNPC, obj_id objMissionData, obj_id objPlayer) throws InterruptedException
     {
         assignMission(objMissionData, objPlayer);
         removeMissionObjectFromNPC(objNPC, objMissionData);
         return;
     }
+
     public obj_id getAssignedNPCMission(obj_id objNPC, obj_id objPlayer) throws InterruptedException
     {
         obj_id[] objMissionArray = getMissionObjects(objPlayer);
@@ -2311,6 +2392,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return null;
     }
+
     public string_id sendNPCMissionSuccess(obj_id objMission, obj_id objNPC) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -2330,6 +2412,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         string_id strResponse = getNPCMissionSuccessId(objMissionData);
         return strResponse;
     }
+
     public string_id getNPCMissionSuccessId(obj_id objMissionData) throws InterruptedException
     {
         int intStringId = getIntObjVar(objMissionData, "intStringId");
@@ -2337,6 +2420,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         string_id strMissionDescription = new string_id(strIdFileName, "m" + intStringId + "c");
         return strMissionDescription;
     }
+
     public string_id getNPCEscortPickupId(obj_id objMissionData) throws InterruptedException
     {
         int intStringId = getIntObjVar(objMissionData, "intStringId");
@@ -2344,6 +2428,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         string_id strPickupId = new string_id(strIdFileName, "m" + intStringId + "p");
         return strPickupId;
     }
+
     public string_id getNPCEscortDropoffId(obj_id objMissionData) throws InterruptedException
     {
         int intStringId = getIntObjVar(objMissionData, "intStringId");
@@ -2351,6 +2436,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         string_id strPickupId = new string_id(strIdFileName, "m" + intStringId + "e");
         return strPickupId;
     }
+
     public string_id getNPCMissionDescriptionId(obj_id objMissionData) throws InterruptedException
     {
         int intStringId = getIntObjVar(objMissionData, "intStringId");
@@ -2364,17 +2450,18 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 strMissionDescription = new string_id(strIdFileName, "m" + intStringId + "o");
             }
-            else 
+            else
             {
                 strMissionDescription = new string_id(strIdFileName, "m" + intStringId + "d");
             }
         }
-        else 
+        else
         {
             strMissionDescription = new string_id(strIdFileName, "m" + intStringId + "d");
         }
         return strMissionDescription;
     }
+
     public obj_id createReconMission(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strPlanet, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_recon");
@@ -2413,20 +2500,20 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 }
                 fltCityRegionExtent = 0;
             }
-            else 
+            else
             {
                 boolInCity = true;
                 fltCityRegionExtent = locations.getRegionExtents(rgnCities[0]);
             }
         }
-        else 
+        else
         {
             rgnCities = getRegionsWithMunicipalAtPoint(locMissionStart, regions.MUNI_TRUE);
             if (rgnCities != null)
             {
                 fltCityRegionExtent = locations.getRegionExtents(rgnCities[0]);
             }
-            else 
+            else
             {
                 fltCityRegionExtent = 0;
             }
@@ -2448,7 +2535,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 {
                     continue;
                 }
-                else 
+                else
                 {
                     region rgnBattlefield = battlefield.getBattlefield(locGoodLocation);
                     if (rgnBattlefield != null)
@@ -2458,7 +2545,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 }
                 break;
             }
-            else 
+            else
             {
             }
             intI = intI + 1;
@@ -2471,7 +2558,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return null;
         }
-        location locSpawnLocation = (location)locMissionDestination.clone();
+        location locSpawnLocation = (location) locMissionDestination.clone();
         location locCreator = getMissionLocation(objCreator);
         float fltDistance = 0;
         fltDistance = utils.getDistance(locCreator, locSpawnLocation);
@@ -2492,7 +2579,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             intMissionDifficulty = MISSION_DIFFICULTY_MEDIUM;
         }
-        else 
+        else
         {
             intMissionDifficulty = MISSION_DIFFICULTY_HARD;
         }
@@ -2530,12 +2617,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             setObjVar(objMissionData, "originalGroupSize", getPCGroupSize(groupObject));
         }
-        else 
+        else
         {
             setObjVar(objMissionData, "originalGroupSize", 1);
         }
         int intReward = getDeliverReward(locMissionStart, locSpawnLocation, RECON_REWARD_RATIO, 4);
-        intReward = (int)(intReward * fltRewardModifier);
+        intReward = (int) (intReward * fltRewardModifier);
         intReward = intReward + rand(-100, 100);
         setMissionReward(objMissionData, intReward);
         dictionary dctParams = new dictionary();
@@ -2543,6 +2630,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDifficulty(objMissionData, intDifficulty);
         return objMissionData;
     }
+
     public dictionary getReconSpawnList(obj_id objMissionData, location locMissionLocation, int intPlayerDifficulty) throws InterruptedException
     {
         if (locMissionLocation == null)
@@ -2563,7 +2651,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 strFileName = "datatables/missions/recon/recon_npc.iff";
             }
         }
-        else 
+        else
         {
             strFileName = "datatables/missions/recon/recon_npc.iff";
         }
@@ -2585,21 +2673,25 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         dctReturn.put("intMaxDifficulties", intMaxDifficulties);
         return dctReturn;
     }
+
     public void sendReconFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "reconFail", dctParams, 0, true);
     }
+
     public void sendReconSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "reconSuccess", dctParams, 0, true);
     }
+
     public void sendReconIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(objMission, "reconIncomplete", dctParams, 0, true);
     }
+
     public void setupArrivedAtLocation(obj_id objTarget, obj_id objMission, location locTargetLocation, float fltDistance) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -2609,6 +2701,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         messageTo(objTarget, "setupArrivedAtLocation", dctParams, 0, true);
         return;
     }
+
     public boolean createReconTarget(obj_id objMission, obj_id objPlayer) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -2654,6 +2747,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupArrivedAtLocation(objPlayer, objMission, locGoodLocation, 32);
         return true;
     }
+
     public obj_id createEscortToCreatorMission(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strPlanet, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_escort");
@@ -2676,7 +2770,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
         }
         location locCreatorLocation = getMissionLocation(objCreator);
-        locEndLocation = (location)locCreatorLocation.clone();
+        locEndLocation = (location) locCreatorLocation.clone();
         if (intDifficulty < ESCORT_DIFFICULTY_EASY)
         {
             region rgnEndRegion = rgnCities[0];
@@ -2684,7 +2778,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 locStartLocation = locations.getGoodLocationOutsideOfRegion(rgnEndRegion, 1, 1, 200, false, true);
             }
-            else 
+            else
             {
                 locStartLocation = utils.getRandomLocationInRing(locCreatorLocation, 128, 200);
                 locStartLocation = locations.getGoodLocationAroundLocation(locStartLocation, 1, 1, 150, 150, false, true);
@@ -2708,7 +2802,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 return null;
             }
         }
-        else 
+        else
         {
             region rgnCity = locations.getCityRegion(rgnCities[0]);
             locStartLocation = locations.getGoodCityLocation(rgnCity, strPlanet);
@@ -2737,6 +2831,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, intDifficulty, objCreator, strFaction);
         return objMissionData;
     }
+
     public obj_id createEscortTargetMission(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strPlanet, String strFaction) throws InterruptedException
     {
         setMissionType(objMissionData, "escort");
@@ -2756,7 +2851,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             }
         }
         location locCreatorLocation = getMissionLocation(objCreator);
-        locEndLocation = (location)locCreatorLocation.clone();
+        locEndLocation = (location) locCreatorLocation.clone();
         if (intDifficulty < ESCORT_DIFFICULTY_EASY)
         {
             region rgnEndRegion = rgnCities[0];
@@ -2764,7 +2859,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 locStartLocation = locations.getGoodLocationOutsideOfRegion(rgnEndRegion, 1, 1, 200, false, true);
             }
-            else 
+            else
             {
                 locStartLocation = utils.getRandomLocationInRing(locCreatorLocation, 128, 200);
                 locStartLocation = locations.getGoodLocationAroundLocation(locStartLocation, 1, 1, 150, 150, false, true);
@@ -2788,7 +2883,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 return null;
             }
         }
-        else 
+        else
         {
             region rgnCity = locations.getCityRegion(rgnCities[0]);
             locStartLocation = locations.getGoodCityLocation(rgnCity, strPlanet);
@@ -2815,6 +2910,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, intDifficulty, objCreator, strFaction);
         return objMissionData;
     }
+
     public int getDeliverReward(location locStartLocation, location locEndLocation, float fltDistanceModifier, float fltRewardModifier) throws InterruptedException
     {
         float fltReward = 0;
@@ -2826,7 +2922,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             fltDistance = utils.getDistance(locStartLocation, locEndLocation);
             fltReward = fltDistance / fltDistanceModifier;
         }
-        else 
+        else
         {
             fltDistance = 1;
             fltReward = 1000;
@@ -2841,10 +2937,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             fltReward = fltReward + rand(25, 50);
         }
-        int intReward = 20 + (int)(fltReward);
+        int intReward = 20 + (int) (fltReward);
         intReward = intReward + rand(-10, 10);
-        return intReward;
+        return (intReward * MISSION_MULTIPLIER);
     }
+
     public int getDestroyReward(int intMinReward, int intMaxReward, float fltDistance) throws InterruptedException
     {
         final int minRangeReward = 500;
@@ -2859,9 +2956,10 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         float fltRewardPercentage = (fltDistance - minRangeReward) / (maxRangeReward - minRangeReward);
         int intRewardDifference = intMaxReward - intMinReward;
-        int intReward = intMinReward + (int)(intRewardDifference * fltRewardPercentage);
-        return intReward;
+        int intReward = intMinReward + (int) (intRewardDifference * fltRewardPercentage);
+        return (intReward * MISSION_MULTIPLIER);
     }
+
     public void persistAndRegisterObject(obj_id objObject, obj_id objMission) throws InterruptedException
     {
         persistObject(objObject);
@@ -2870,6 +2968,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         messageTo(objMission, "objectCreated", dctParams, 0, true);
         return;
     }
+
     public void cleanupObjects(obj_id objMission) throws InterruptedException
     {
         obj_id[] objObjects = getObjIdArrayObjVar(objMission, "objObjects");
@@ -2884,6 +2983,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return;
     }
+
     public location getGoodTheaterLocation(obj_id objMissionData, location locSpawnLocation) throws InterruptedException
     {
         int intSize = getIntObjVar(objMissionData, "intSize");
@@ -2910,12 +3010,12 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                             return null;
                         }
                     }
-                    else 
+                    else
                     {
                         return locGoodLocation;
                     }
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -2923,6 +3023,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return locGoodLocation;
     }
+
     public obj_id createSurveyMission(obj_id objMissionData, obj_id objCreator, int intDifficulty, String strFaction) throws InterruptedException
     {
         final int MIN_SURVEY_EFFECIENCY = 50;
@@ -2951,7 +3052,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             strResources = dataTableGetStringColumnNoDefaults(strFileName, "strResourceEasy");
             strDetailTemplates = dataTableGetStringColumnNoDefaults(strFileName, "strDetailTemplateEasy");
         }
-        else 
+        else
         {
             intRewardMultiplier = 2;
             strResources = dataTableGetStringColumnNoDefaults(strFileName, "strResourceHard");
@@ -2980,24 +3081,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMissionData, "locStartLocation", getLocation(objCreator));
         return objMissionData;
     }
+
     public void sendSurveyFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "surveyFailure", dctParams, 0, true);
     }
+
     public void sendSurveySuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "surveySuccess", dctParams, 0, true);
     }
+
     public void sendSurveyIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "surveyIncomplete", dctParams, 0, true);
     }
+
     public obj_id createDancerMission(obj_id objMissionData, obj_id objCreator, int intDifficulty, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_entertainer");
@@ -3031,6 +3136,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, 1, objCreator, strFaction);
         return objMissionData;
     }
+
     public obj_id createMusicianMission(obj_id objMissionData, obj_id objCreator, int intDifficulty, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_entertainer");
@@ -3065,17 +3171,18 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, 1, objCreator, strFaction);
         return objMissionData;
     }
+
     public boolean setupEntertainerMissionTarget(obj_id objMissionData, String strPlanet) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_entertainer");
-        final String[] ENTERTAINER_TARGET_CATEGORY = 
-        {
-            "cantina",
-            "hotel",
-            "tavern",
-            "barracks",
-            "theater"
-        };
+        final String[] ENTERTAINER_TARGET_CATEGORY =
+                {
+                        "cantina",
+                        "hotel",
+                        "tavern",
+                        "barracks",
+                        "theater"
+                };
         Vector strCategories = new Vector();
         strCategories.setSize(0);
         for (int intI = 0; intI < ENTERTAINER_TARGET_CATEGORY.length - 1; intI++)
@@ -3090,7 +3197,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return true;
         }
-        String strCategory = ((String)strCategories.get(rand(0, strCategories.size() - 1)));
+        String strCategory = ((String) strCategories.get(rand(0, strCategories.size() - 1)));
         map_location[] locTargets = getPlanetaryMapLocations(strCategory, "");
         if (locTargets == null)
         {
@@ -3110,24 +3217,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionStartLocation(objMissionData, locDestination);
         return true;
     }
+
     public void sendEntertainerFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "entertainerFailure", dctParams, 0, true);
     }
+
     public void sendEntertainerSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "entertainerSuccess", dctParams, 0, true);
     }
+
     public void sendEntertainerIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "entertainerIncomplete", dctParams, 0, true);
     }
+
     public obj_id createCraftingMission(obj_id objMissionData, obj_id objCreator, location locMissionStart, int intDifficulty, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_crafting");
@@ -3183,7 +3294,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             locStartLocation = locations.getGoodCityRegionLocation(rgnStartRegion, strPlanet);
             boolIsCity = true;
         }
-        else 
+        else
         {
             region closestCity = locations.getClosestCityRegion(rgnStartRegion);
             locStartLocation = locations.getGoodCityRegionLocation(closestCity, strPlanet);
@@ -3203,14 +3314,14 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 {
                     locEndLocation = locations.getDifferentGoodCityLocation(locStartLocation);
                 }
-                else 
+                else
                 {
                     region rgnEndRegion = locations.getClosestCityRegion(rgnStartRegion);
                     String strName = rgnEndRegion.getName();
                     locEndLocation = locations.getGoodCityLocation(rgnEndRegion, strPlanet);
                 }
             }
-            else 
+            else
             {
                 region rgnEndRegion = locations.getClosestCityRegion(rgnStartRegion);
                 String strName = rgnEndRegion.getName();
@@ -3219,7 +3330,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             intMissionDifficulty = MISSION_DIFFICULTY_EASY;
             setObjVar(objMissionData, "intMissionDifficulty", intMissionDifficulty);
         }
-        else 
+        else
         {
             region rgnEndRegion = locations.getCityRegion(rgnStartRegion);
             if (rgnEndRegion == null)
@@ -3254,24 +3365,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setupContextualizationStrings(objMissionData, intMissionDifficulty, objCreator, strFaction);
         return objMissionData;
     }
+
     public void sendCraftingFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "craftingFailure", dctParams, 0, true);
     }
+
     public void sendCraftingSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "craftingSuccess", dctParams, 0, true);
     }
+
     public void sendCraftingIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "craftingIncomplete", dctParams, 0, true);
     }
+
     public boolean createCraftingPickupNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(objMission);
@@ -3283,7 +3398,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             attachScript(objPickupNPC, "systems.missions.dynamic.mission_crafting_pickup");
             setObjVar(objPickupNPC, "objMission", objMission);
@@ -3294,6 +3409,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public boolean createCraftingDropoffNPC(obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -3305,7 +3421,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        else 
+        else
         {
             attachScript(objDropoffNPC, "systems.missions.dynamic.mission_crafting_dropoff");
             setObjVar(objDropoffNPC, "objMission", objMission);
@@ -3316,6 +3432,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public void grantMissionSchematic(obj_id objPlayer, obj_id objMission) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(objMission);
@@ -3326,6 +3443,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objPlayer, "mission." + strSchematic, intNumGranted);
         return;
     }
+
     public void revokeMissionSchematic(obj_id objPlayer, obj_id objMission) throws InterruptedException
     {
         if (!hasObjVar(objMission, "strSchematic"))
@@ -3342,13 +3460,14 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             revokeSchematic(objPlayer, strSchematic);
             removeObjVar(objMission, "strSchematic");
         }
-        else 
+        else
         {
             setObjVar(objPlayer, "mission." + strSchematic, intNumGranted);
             return;
         }
         return;
     }
+
     public void reContextualizationTerminalToNPCMission(obj_id objMissionData, obj_id objCreator) throws InterruptedException
     {
         String strIdFileName = getStringObjVar(objMissionData, "strIdFileName");
@@ -3358,7 +3477,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 String strMissionType = getMissionType(objMissionData);
             }
-            else 
+            else
             {
             }
             return;
@@ -3398,8 +3517,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 try
                 {
                     intTest = Integer.valueOf(strNumberOfEntries);
-                }
-                catch(NumberFormatException err)
+                } catch (NumberFormatException err)
                 {
                     boolError = true;
                 }
@@ -3427,6 +3545,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDescription(objMissionData, strDescriptionId);
         return;
     }
+
     public obj_id dynamicDestroyToThemePark(obj_id objMissionData, obj_id objCreator) throws InterruptedException
     {
         int intDifficulty = getIntObjVar(objMissionData, "intDifficulty");
@@ -3495,16 +3614,17 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             setObjVar(objMissionData, "originalGroupSize", getPCGroupSize(groupObject));
         }
-        else 
+        else
         {
             setObjVar(objMissionData, "originalGroupSize", 1);
         }
-        intReward = intReward + rand(-10, 10);
+        intReward = (intReward * MISSION_MULTIPLIER) + rand(-10, 10);
         setMissionReward(objMissionData, intReward);
         dictionary dctParams = new dictionary();
         convertDynamicContextualizationToThemePark(objMissionData, strFileName, intRoll);
         return objMissionData;
     }
+
     public obj_id dynamicDeliverToThemePark(obj_id objMissionData, obj_id objCreator) throws InterruptedException
     {
         String strNPCType = getStringObjVar(objCreator, "mission.strNPCName");
@@ -3528,6 +3648,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         convertDynamicContextualizationToThemePark(objMissionData, strFileName, intRoll);
         return objMissionData;
     }
+
     public void convertDynamicContextualizationToThemePark(obj_id objMissionData, String strFileName, int intId) throws InterruptedException
     {
         setObjVar(objMissionData, "intStringId", intId);
@@ -3541,6 +3662,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDescription(objMissionData, strDescriptionId);
         return;
     }
+
     public obj_id dynamicEscortToCreatorToThemePark(obj_id objMissionData, obj_id objCreator) throws InterruptedException
     {
         String strNPCType = getStringObjVar(objCreator, "mission.strNPCName");
@@ -3556,6 +3678,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         convertDynamicContextualizationToThemePark(objMissionData, strFileName, intRoll);
         return objMissionData;
     }
+
     public location getMissionLocation(obj_id objTarget) throws InterruptedException
     {
         obj_id objTopMostContainer = getTopMostContainer(objTarget);
@@ -3564,22 +3687,23 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             location locTest = getLocation(objTarget);
             return locTest;
         }
-        else 
+        else
         {
             location locTest = getLocation(objTopMostContainer);
             return locTest;
         }
     }
+
     public boolean areMissionsAllowed(location locTest) throws InterruptedException
     {
         if (locTest == null || locTest.area == null)
         {
             return false;
         }
-        final String[] MISSIONS_NOT_ALLOWED = 
-        {
-            "tutorial"
-        };
+        final String[] MISSIONS_NOT_ALLOWED =
+                {
+                        "tutorial"
+                };
         int intI = 0;
         String strTest = locTest.area;
         for (intI = 0; intI < MISSIONS_NOT_ALLOWED.length; intI++)
@@ -3591,6 +3715,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return true;
     }
+
     public void doIncorrectPlayerBlurb(obj_id objNPC, obj_id player) throws InterruptedException
     {
         int lastBlurb = utils.getIntScriptVar(objNPC, "mission.blurbTime");
@@ -3601,14 +3726,14 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         utils.setScriptVar(objNPC, "mission.blurbTime", gameTime);
         final int NUMBER_OF_RESPONSES = 4;
-        final String[] ANIMATIONS = 
-        {
-            anims.PLAYER_POINT_TO_SELF,
-            anims.PLAYER_REFUSE_OFFER_FORMAL,
-            anims.PLAYER_RUB_CHIN_THOUGHTFUL,
-            anims.PLAYER_SHAKE_HEAD_DISGUST,
-            anims.PLAYER_SHUSH
-        };
+        final String[] ANIMATIONS =
+                {
+                        anims.PLAYER_POINT_TO_SELF,
+                        anims.PLAYER_REFUSE_OFFER_FORMAL,
+                        anims.PLAYER_RUB_CHIN_THOUGHTFUL,
+                        anims.PLAYER_SHAKE_HEAD_DISGUST,
+                        anims.PLAYER_SHUSH
+                };
         String strId = "deliver_incorrect_player_";
         int intId = rand(0, NUMBER_OF_RESPONSES);
         doAnimationAction(objNPC, ANIMATIONS[intId]);
@@ -3617,6 +3742,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         chat.chat(objNPC, player, strSpam);
         return;
     }
+
     public boolean validateNPCMissionForPlayer(obj_id objNPC, obj_id objMissionData, obj_id objPlayer) throws InterruptedException
     {
         if (!isIdValid(objMissionData))
@@ -3646,13 +3772,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         if (strMissionType.equals("dancer"))
         {
-            if (!utils.isProfession(objPlayer, utils.ENTERTAINER))
-            {
-                return false;
-            }
+            return utils.isProfession(objPlayer, utils.ENTERTAINER);
         }
         return true;
     }
+
     public boolean hasStarPort(location locTestLocation) throws InterruptedException
     {
         String strName = locations.getCityName(locTestLocation);
@@ -3660,18 +3784,22 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        for (String citiesWithStarport : CITIES_WITH_STARPORTS) {
-            if (strName.equals(citiesWithStarport)) {
+        for (String citiesWithStarport : CITIES_WITH_STARPORTS)
+        {
+            if (strName.equals(citiesWithStarport))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public int getFactionReward(int intReward) throws InterruptedException
     {
         int intBaseReward = 5 + intReward / FACTION_REWARD_VALUE;
         return intBaseReward;
     }
+
     public obj_id getBountyMission(obj_id objPlayer) throws InterruptedException
     {
         if (isIdValid(objPlayer))
@@ -3679,9 +3807,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             obj_id[] objMissionArray = getMissionObjects(objPlayer);
             if (objMissionArray != null)
             {
-                for (obj_id obj_id : objMissionArray) {
+                for (obj_id obj_id : objMissionArray)
+                {
                     String strType = getMissionType(obj_id);
-                    if (strType.equals("bounty")) {
+                    if (strType.equals("bounty"))
+                    {
                         return obj_id;
                     }
                 }
@@ -3689,6 +3819,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return null;
     }
+
     public boolean hasCraftingMissionItem(obj_id objPlayer, String strTemplate) throws InterruptedException
     {
         obj_id objInventory = utils.getInventoryContainer(objPlayer);
@@ -3701,50 +3832,56 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        for (obj_id objContent : objContents) {
+        for (obj_id objContent : objContents)
+        {
             String strItemTemplate = getTemplateName(objContent);
-            if (strItemTemplate.equals(strTemplate)) {
+            if (strItemTemplate.equals(strTemplate))
+            {
                 destroyObject(objContent);
                 return true;
             }
         }
         return false;
     }
+
     public void sendHuntingFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "huntingFailure", dctParams, 0, true);
     }
+
     public void sendHuntingSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "huntingSuccess", dctParams, 0, true);
     }
+
     public void sendHuntingIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "huntingIncomplete", dctParams, 0, true);
     }
+
     public obj_id createHuntingMission(obj_id objMissionData, obj_id objCreator, int intDifficulty, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_hunting");
         setMissionType(objMissionData, "hunting");
         int intMissionDifficulty = rand(1, 3);
-        final int[] HUNTING_QUANTITIES = 
-        {
-            15,
-            30,
-            45
-        };
-        final int[] REWARD_MULTIPLIER = 
-        {
-            4,
-            6,
-            8
-        };
+        final int[] HUNTING_QUANTITIES =
+                {
+                        15,
+                        30,
+                        45
+                };
+        final int[] REWARD_MULTIPLIER =
+                {
+                        4,
+                        6,
+                        8
+                };
         location locStartLocation = getLocation(objCreator);
         String strFileName = "datatables/missions/hunting/hunting_";
         strFileName = strFileName + locStartLocation.area + ".iff";
@@ -3797,24 +3934,28 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDifficulty(objMissionData, intDifficulty);
         return objMissionData;
     }
+
     public void sendAssassinFail(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "assassinFailure", dctParams, 0, true);
     }
+
     public void sendAssassinSuccess(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "assassinSuccess", dctParams, 0, true);
     }
+
     public void sendAssassinIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         setObjVar(objMission, "intState", missions.STATE_MISSION_COMPLETE);
         messageTo(objMission, "assassinIncomplete", dctParams, 0, true);
     }
+
     public obj_id createAssassinMission(obj_id objMissionData, obj_id objCreator, int intDifficulty, String strFaction) throws InterruptedException
     {
         setMissionRootScriptName(objMissionData, "systems.missions.dynamic.mission_assassin");
@@ -3839,6 +3980,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setMissionDifficulty(objMissionData, intDifficulty);
         return objMissionData;
     }
+
     public location[] getAssassinMissionLocation() throws InterruptedException
     {
         location[] locMissionLocations = new location[2];
@@ -3847,10 +3989,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         region rgnStartRegion = rgnCities[rand(0, rgnCities.length - 1)];
         location locStartLocation = locations.getRegionCenter(rgnStartRegion);
         location locSpawnLocation = locations.getGoodCityLocation(rgnStartRegion, strPlanet);
-        locMissionLocations[0] = (location)locStartLocation.clone();
-        locMissionLocations[1] = (location)locSpawnLocation.clone();
+        locMissionLocations[0] = (location) locStartLocation.clone();
+        locMissionLocations[1] = (location) locSpawnLocation.clone();
         return locMissionLocations;
     }
+
     public boolean createAssassinTarget(obj_id objMission) throws InterruptedException
     {
         String strNPC = NPC_TYPES[rand(0, NPC_TYPES.length - 1)];
@@ -3867,6 +4010,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         setObjVar(objMission, "objNPC", objNPC);
         return true;
     }
+
     public obj_id getAssassinMission(obj_id objPlayer) throws InterruptedException
     {
         if (isIdValid(objPlayer))
@@ -3874,9 +4018,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             obj_id[] objMissionArray = getMissionObjects(objPlayer);
             if (objMissionArray != null)
             {
-                for (obj_id obj_id : objMissionArray) {
+                for (obj_id obj_id : objMissionArray)
+                {
                     String strType = getMissionType(obj_id);
-                    if (strType.equals("assassin")) {
+                    if (strType.equals("assassin"))
+                    {
                         return obj_id;
                     }
                 }
@@ -3884,6 +4030,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         return null;
     }
+
     public boolean isPlanetHuntingViable(obj_id player, String area) throws InterruptedException
     {
         int playerLevel = getLevel(player);
@@ -3907,29 +4054,26 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             return false;
         }
-        if (area.equals("dathomir") && playerLevel < 80)
-        {
-            return false;
-        }
-        return true;
+        return !area.equals("dathomir") || playerLevel >= 80;
     }
+
     public void msgWrongHuntingPlanet(obj_id player) throws InterruptedException
     {
         int playerLevel = getLevel(player);
         int msgIndex = playerLevel / 10;
-        string_id[] missionPlanets = 
-        {
-            SID_MISSION_TATOOINE,
-            SID_MISSION_TATOOINE,
-            SID_MISSION_TATOOINE_NABOO_CORELIA,
-            SID_MISSION_NABOO_CORELIA,
-            SID_MISSION_RORI_TALUS,
-            SID_MISSION_RORI_TALUS_DANTOOINE_LOK,
-            SID_MISSION_DANTOOINE_LOK,
-            SID_MISSION_YAVIN_ENDOR,
-            SID_MISSION_YAVIN_ENDOR_DATHOMIR,
-            SID_MISSION_YAVIN_ENDOR_DATHOMIR
-        };
+        string_id[] missionPlanets =
+                {
+                        SID_MISSION_TATOOINE,
+                        SID_MISSION_TATOOINE,
+                        SID_MISSION_TATOOINE_NABOO_CORELIA,
+                        SID_MISSION_NABOO_CORELIA,
+                        SID_MISSION_RORI_TALUS,
+                        SID_MISSION_RORI_TALUS_DANTOOINE_LOK,
+                        SID_MISSION_DANTOOINE_LOK,
+                        SID_MISSION_YAVIN_ENDOR,
+                        SID_MISSION_YAVIN_ENDOR_DATHOMIR,
+                        SID_MISSION_YAVIN_ENDOR_DATHOMIR
+                };
         if (msgIndex > missionPlanets.length)
         {
             return;

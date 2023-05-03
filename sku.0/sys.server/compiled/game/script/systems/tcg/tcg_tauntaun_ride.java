@@ -8,17 +8,18 @@ import script.library.utils;
 
 public class tcg_tauntaun_ride extends script.base_script
 {
-    public tcg_tauntaun_ride()
-    {
-    }
     public static final string_id COLLECT_MONEY = new string_id("spam", "collect_money");
     public static final string_id COIN_BOX_TITLE = new string_id("spam", "coin_box_title");
     public static final string_id COIN_BOX_PROMPT = new string_id("spam", "coin_box_prompt");
-    public static final String SOUND_01 = new String("sound/tcg_tauntaun_carnival_ride.snd");
+    public static final String SOUND_01 = "sound/tcg_tauntaun_carnival_ride.snd";
     public static final String ANIMATION_ACTIVE_RIDE = "trick_2";
     public static final String LOCKOUT = "tauntaun_lockout";
     public static final String MONEY_TOTAL = "money_total";
     public static final int RIDE_COST = 25;
+    public tcg_tauntaun_ride()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -36,6 +37,7 @@ public class tcg_tauntaun_ride extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -48,7 +50,7 @@ public class tcg_tauntaun_ride extends script.base_script
             {
                 activateTauntaunRide(player, self);
             }
-            else 
+            else
             {
                 if (utils.hasScriptVar(self, LOCKOUT))
                 {
@@ -59,7 +61,7 @@ public class tcg_tauntaun_ride extends script.base_script
                 {
                     sui.msgbox(self, player, "@spam:tauntaun_ride_pay", sui.OK_CANCEL, "@spam:tauntaun_ride_pay_title", sui.MSG_QUESTION, "handlePayForTauntaunRide");
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("spam", "not_enough_credits"));
                 }
@@ -76,6 +78,7 @@ public class tcg_tauntaun_ride extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int TauntaunAnimationLockout(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, LOCKOUT))
@@ -84,6 +87,7 @@ public class tcg_tauntaun_ride extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int transferTauntaunEarnings(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -97,7 +101,7 @@ public class tcg_tauntaun_ride extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (collectionAmount > 0)
             {
@@ -107,7 +111,7 @@ public class tcg_tauntaun_ride extends script.base_script
                     sendSystemMessage(player, new string_id("spam", "credit_problem"));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     prose_package pp = new prose_package();
                     pp = prose.setStringId(pp, new string_id("spam", "success_tauntaun_collect"));
@@ -121,6 +125,7 @@ public class tcg_tauntaun_ride extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateTauntaunRide(obj_id player, obj_id ride) throws InterruptedException
     {
         doAnimationAction(ride, ANIMATION_ACTIVE_RIDE);
@@ -128,6 +133,7 @@ public class tcg_tauntaun_ride extends script.base_script
         utils.setScriptVar(ride, LOCKOUT, 1);
         messageTo(ride, "TauntaunAnimationLockout", null, 60.0f, false);
     }
+
     public int handlePayForTauntaunRide(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -143,7 +149,7 @@ public class tcg_tauntaun_ride extends script.base_script
             moneyTotal += RIDE_COST;
             setObjVar(self, MONEY_TOTAL, moneyTotal);
         }
-        else 
+        else
         {
             setObjVar(self, MONEY_TOTAL, RIDE_COST);
         }

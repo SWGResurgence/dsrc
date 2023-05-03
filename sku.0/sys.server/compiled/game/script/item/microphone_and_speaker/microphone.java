@@ -7,9 +7,6 @@ import script.library.xp;
 
 public class microphone extends script.base_script
 {
-    public microphone()
-    {
-    }
     public static final float MIC_RADIUS = 0.05f;
     public static final string_id SIGNAL_MESSAGE = new string_id("sui", "mic_speaker_signal");
     public static final string_id SID_ACTIVATE = new string_id("sui", "mic_activation");
@@ -18,12 +15,17 @@ public class microphone extends script.base_script
     public static final string_id SID_DEACTIVATE_MSG = new string_id("sui", "mic_deactivation_msg");
     public static final String VAR_IS_ACTIVE = "microphone_is_active";
     public static final String SPEAKER_TEMPLATE = "object/tangible/speaker/speaker.iff";
+    public microphone()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debug.debugAllMsg("DEBUG", self, "#############microphone script initialized############");
         setObjVar(self, VAR_IS_ACTIVE, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id player, String message) throws InterruptedException
     {
         boolean isActive = getBooleanObjVar(self, VAR_IS_ACTIVE);
@@ -38,12 +40,14 @@ public class microphone extends script.base_script
             xp.grantCraftingXpChance(self, player, 40);
             dictionary params = new dictionary();
             params.put("message", message);
-            for (obj_id speaker : speakers) {
+            for (obj_id speaker : speakers)
+            {
                 messageTo(speaker, "projectMicSpeak", params, 0, true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         boolean isActive = getBooleanObjVar(self, VAR_IS_ACTIVE);
@@ -51,12 +55,13 @@ public class microphone extends script.base_script
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_DEACTIVATE);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_ACTIVATE);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -72,7 +77,8 @@ public class microphone extends script.base_script
             {
                 dictionary params = new dictionary();
                 params.put("message", utils.packStringId(SIGNAL_MESSAGE));
-                for (obj_id speaker : speakers) {
+                for (obj_id speaker : speakers)
+                {
                     messageTo(speaker, "projectMicActive", params, 0, true);
                 }
             }

@@ -9,6 +9,7 @@ public class spawned_object extends script.base_script
     public spawned_object()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -32,6 +33,7 @@ public class spawned_object extends script.base_script
         messageTo(master, "handleNpcDeath", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -55,6 +57,7 @@ public class spawned_object extends script.base_script
         messageTo(master, "handleNpcDeath", info, respawnTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestroyRequest(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

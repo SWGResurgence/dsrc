@@ -550,11 +550,7 @@ public class vehicle_control_device extends script.base_script
         final float MAX_ATK_VALUE = 30.0f;
         final float MAX_HIT_VALUE = 1.0f;
         final int MAX_DAM_VALUE = 1500;
-        boolean status = true;
-        if (getIntObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[HEALTH]) > MAX_HAM_VALUE)
-        {
-            status = false;
-        }
+        boolean status = getIntObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[HEALTH]) <= MAX_HAM_VALUE;
         if (getIntObjVar(pcd, "creature_attribs." + create.MAXATTRIBNAMES[ACTION]) > MAX_HAM_VALUE)
         {
             status = false;
@@ -579,7 +575,7 @@ public class vehicle_control_device extends script.base_script
         {
             status = false;
         }
-        if (status == false)
+        if (status == false && getIntObjVar(pcd, "difficultyClass") != 1)
         {
             sendSystemMessage(player, pet_lib.SID_INVALID_CRAFTED_PET);
         }
@@ -784,7 +780,7 @@ public class vehicle_control_device extends script.base_script
         {
             if (ranged_int_custom_var.isPalColor())
             {
-                pcv = utils.addElement(pcv, (palcolor_custom_var) ranged_int_custom_var);
+                pcv = utils.addElement(pcv, ranged_int_custom_var);
             }
         }
         if (pcv == null || pcv.size() == 0)

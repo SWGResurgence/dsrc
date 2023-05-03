@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class city_flag extends script.base_script
 {
-    public city_flag()
-    {
-    }
     public static final string_id SID_ALTER = new string_id("city/city", "alter_flag");
     public static final string_id SID_PROMPT = new string_id("city/city", "flag_prompt");
     public static final string_id SID_TITLE = new string_id("city/city", "flag_title");
@@ -28,31 +25,36 @@ public class city_flag extends script.base_script
     public static final String FLAG_LIFEDAY_01 = "object/tangible/furniture/lifeday/lifeday_banner_s01.iff";
     public static final String FLAG_LIFEDAY_02 = "object/tangible/furniture/lifeday/lifeday_banner_s02.iff";
     public static final String FLAG_LIFEDAY_03 = "object/tangible/furniture/lifeday/lifeday_banner_s03.iff";
-    public static final String[] FLAG_SELECT_OPTIONS = 
+    public static final String[] FLAG_SELECT_OPTIONS =
+            {
+                    "Corellia",
+                    "Dantooine",
+                    "Dathomir",
+                    "Endor",
+                    "Lok",
+                    "Naboo",
+                    "Rori",
+                    "Talus",
+                    "Tatooine",
+                    "Yavin 4",
+                    "Imperial",
+                    "Rebel"
+            };
+    public static final String[] LIFEDAY_FLAG_SELECT_OPTIONS =
+            {
+                    "Wookiee Home Banner",
+                    "Kachirho Cornucopia Banner",
+                    "Life Day Orb Banner"
+            };
+    public city_flag()
     {
-        "Corellia",
-        "Dantooine",
-        "Dathomir",
-        "Endor",
-        "Lok",
-        "Naboo",
-        "Rori",
-        "Talus",
-        "Tatooine",
-        "Yavin 4",
-        "Imperial",
-        "Rebel"
-    };
-    public static final String[] LIFEDAY_FLAG_SELECT_OPTIONS = 
-    {
-        "Wookiee Home Banner",
-        "Kachirho Cornucopia Banner",
-        "Life Day Orb Banner"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -64,6 +66,7 @@ public class city_flag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -81,7 +84,7 @@ public class city_flag extends script.base_script
                     int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, LIFEDAY_FLAG_SELECT_OPTIONS, "handleFlagSui", true, false);
                     sui.setPid(player, pid, PID_NAME);
                 }
-                else 
+                else
                 {
                     int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, FLAG_SELECT_OPTIONS, "handleFlagSui", true, false);
                     sui.setPid(player, pid, PID_NAME);
@@ -90,6 +93,7 @@ public class city_flag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleFlagSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -127,62 +131,62 @@ public class city_flag extends script.base_script
             switch (idx)
             {
                 case 0:
-                flagName = FLAG_LIFEDAY_01;
-                break;
+                    flagName = FLAG_LIFEDAY_01;
+                    break;
                 case 1:
-                flagName = FLAG_LIFEDAY_02;
-                break;
+                    flagName = FLAG_LIFEDAY_02;
+                    break;
                 case 2:
-                flagName = FLAG_LIFEDAY_03;
-                break;
+                    flagName = FLAG_LIFEDAY_03;
+                    break;
                 default:
-                cleanUpFlagVars(player);
-                return SCRIPT_CONTINUE;
+                    cleanUpFlagVars(player);
+                    return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             switch (idx)
             {
                 case 0:
-                flagName = FLAG_CORELLIA;
-                break;
+                    flagName = FLAG_CORELLIA;
+                    break;
                 case 1:
-                flagName = FLAG_DANTOOINE;
-                break;
+                    flagName = FLAG_DANTOOINE;
+                    break;
                 case 2:
-                flagName = FLAG_DATHOMIR;
-                break;
+                    flagName = FLAG_DATHOMIR;
+                    break;
                 case 3:
-                flagName = FLAG_ENDOR;
-                break;
+                    flagName = FLAG_ENDOR;
+                    break;
                 case 4:
-                flagName = FLAG_LOK;
-                break;
+                    flagName = FLAG_LOK;
+                    break;
                 case 5:
-                flagName = FLAG_NABOO;
-                break;
+                    flagName = FLAG_NABOO;
+                    break;
                 case 6:
-                flagName = FLAG_RORI;
-                break;
+                    flagName = FLAG_RORI;
+                    break;
                 case 7:
-                flagName = FLAG_TALUS;
-                break;
+                    flagName = FLAG_TALUS;
+                    break;
                 case 8:
-                flagName = FLAG_TATOOINE;
-                break;
+                    flagName = FLAG_TATOOINE;
+                    break;
                 case 9:
-                flagName = FLAG_YAVIN;
-                break;
+                    flagName = FLAG_YAVIN;
+                    break;
                 case 10:
-                flagName = FLAG_IMPERIAL;
-                break;
+                    flagName = FLAG_IMPERIAL;
+                    break;
                 case 11:
-                flagName = FLAG_REBEL;
-                break;
+                    flagName = FLAG_REBEL;
+                    break;
                 default:
-                cleanUpFlagVars(player);
-                return SCRIPT_CONTINUE;
+                    cleanUpFlagVars(player);
+                    return SCRIPT_CONTINUE;
             }
         }
         if (!flagName.equals(""))
@@ -196,6 +200,7 @@ public class city_flag extends script.base_script
         cleanUpFlagVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpFlagVars(obj_id player) throws InterruptedException
     {
         sui.removePid(player, PID_NAME);

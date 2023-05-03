@@ -1,17 +1,14 @@
 @base object/building/base/base_player_building.iff
 
 @class building_object_template 1
-
 @class tangible_object_template 1
-
 @class object_template 3
 
 sharedTemplate = "object/building/player/city/shared_cantina_tatooine.iff"
 
 objvars =+["healing.canhealshock"=1, "safeLogout"=1]
 
-scripts = ["structure.municipal.cantina"]
+scripts =+["structure.municipal.cantina", "structure.buffs.city_buffs.cantina_city_buff"]
 
 updateRanges[UR_near] = 0
-
 updateRanges[UR_normal] = 0

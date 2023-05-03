@@ -52,98 +52,98 @@ public class beast_lib extends script.base_script
     public static final String OBJVAR_BEAST_PALETTE3 = "beast.palette3";
     public static final String OBJVAR_BEAST_MOUNT_FLAG = "beast.isMount";
     public static final String OBJVAR_INJECTOR_MARK = "beast.injectorMark";
-    public static final String[] DISPLAY_NAMES = 
-    {
-        "aggression_skill",
-        "beastial_resilience_skill",
-        "cunning_skill",
-        "hunters_instinct_skill",
-        "intelligence_skill",
-        "survival_skill",
-        "armor_bonus",
-        "dps_bonus",
-        "health_bonus",
-        "hit_chance_bonus",
-        "dodge_bonus",
-        "parry_bonus",
-        "glancing_blow_bonus",
-        "block_chance_bonus",
-        "block_value_bonus",
-        "critical_hit_bonus",
-        "evasion_bonus",
-        "evasion_rating_bonus",
-        "strikethrough_bonus",
-        "strikethrough_rating_bonus"
-    };
-    public static final float[] DISPLAY_CONVERSION_RATES = 
-    {
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        0.1f,
-        0.1f,
-        0.2f,
-        0.1f,
-        1.0f,
-        1.0f,
-        0.1f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f
-    };
-    public static final float[] DISPLAY_OBJVAR_CONVERSION_RATES = 
-    {
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-        0.1f,
-        0.1f,
-        0.2f,
-        0.1f,
-        0.1f,
-        0.1f,
-        0.1f,
-        0.1f,
-        1.0f,
-        0.1f,
-        0.1f,
-        1.0f,
-        0.1f,
-        1.0f
-    };
-    public static final String[] ARRAY_BEAST_INCUBATION_STATS = 
-    {
-        OBJVAR_SKILL_AGGRESSION,
-        OBJVAR_SKILL_BEASTIAL_RESILIENCE,
-        OBJVAR_SKILL_CUNNING,
-        OBJVAR_SKILL_HUNTERS_INSTINCT,
-        OBJVAR_SKILL_INTELLIGENCE,
-        OBJVAR_SKILL_SURVIVAL,
-        OBJVAR_INCREASE_ARMOR,
-        OBJVAR_INCREASE_DPS,
-        OBJVAR_INCREASE_HEALTH,
-        OBJVAR_INCREASE_HIT_CHANCE,
-        OBJVAR_INCREASE_DODGE,
-        OBJVAR_INCREASE_PARRY,
-        OBJVAR_INCREASE_GLANCING_BLOW,
-        OBJVAR_INCREASE_BLOCK_CHANCE,
-        OBJVAR_INCREASE_BLOCK_VALUE,
-        OBJVAR_INCREASE_CRITICAL_HIT,
-        OBJVAR_INCREASE_EVASION,
-        OBJVAR_INCREASE_EVASION_RATING,
-        OBJVAR_INCREASE_STRIKETHROUGH,
-        OBJVAR_INCREASE_STRIKETHROUGH_RATING
-    };
+    public static final String[] DISPLAY_NAMES =
+            {
+                    "aggression_skill",
+                    "beastial_resilience_skill",
+                    "cunning_skill",
+                    "hunters_instinct_skill",
+                    "intelligence_skill",
+                    "survival_skill",
+                    "armor_bonus",
+                    "dps_bonus",
+                    "health_bonus",
+                    "hit_chance_bonus",
+                    "dodge_bonus",
+                    "parry_bonus",
+                    "glancing_blow_bonus",
+                    "block_chance_bonus",
+                    "block_value_bonus",
+                    "critical_hit_bonus",
+                    "evasion_bonus",
+                    "evasion_rating_bonus",
+                    "strikethrough_bonus",
+                    "strikethrough_rating_bonus"
+            };
+    public static final float[] DISPLAY_CONVERSION_RATES =
+            {
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    0.1f,
+                    0.1f,
+                    0.2f,
+                    0.1f,
+                    1.0f,
+                    1.0f,
+                    0.1f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f
+            };
+    public static final float[] DISPLAY_OBJVAR_CONVERSION_RATES =
+            {
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    1.0f,
+                    0.1f,
+                    0.1f,
+                    0.2f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    0.1f,
+                    1.0f,
+                    0.1f,
+                    0.1f,
+                    1.0f,
+                    0.1f,
+                    1.0f
+            };
+    public static final String[] ARRAY_BEAST_INCUBATION_STATS =
+            {
+                    OBJVAR_SKILL_AGGRESSION,
+                    OBJVAR_SKILL_BEASTIAL_RESILIENCE,
+                    OBJVAR_SKILL_CUNNING,
+                    OBJVAR_SKILL_HUNTERS_INSTINCT,
+                    OBJVAR_SKILL_INTELLIGENCE,
+                    OBJVAR_SKILL_SURVIVAL,
+                    OBJVAR_INCREASE_ARMOR,
+                    OBJVAR_INCREASE_DPS,
+                    OBJVAR_INCREASE_HEALTH,
+                    OBJVAR_INCREASE_HIT_CHANCE,
+                    OBJVAR_INCREASE_DODGE,
+                    OBJVAR_INCREASE_PARRY,
+                    OBJVAR_INCREASE_GLANCING_BLOW,
+                    OBJVAR_INCREASE_BLOCK_CHANCE,
+                    OBJVAR_INCREASE_BLOCK_VALUE,
+                    OBJVAR_INCREASE_CRITICAL_HIT,
+                    OBJVAR_INCREASE_EVASION,
+                    OBJVAR_INCREASE_EVASION_RATING,
+                    OBJVAR_INCREASE_STRIKETHROUGH,
+                    OBJVAR_INCREASE_STRIKETHROUGH_RATING
+            };
     public static final int MOD_HUNTERS_INSTINCT = 0;
     public static final int MOD_AGGRESSION = 1;
     public static final int MOD_INTELLIGENCE = 2;
@@ -249,17 +249,17 @@ public class beast_lib extends script.base_script
     public static final String PET_KILL_MESSAGE_SCRIPTVAR = "beastmood.ownerReceivedKillMessage";
     public static final int EXTRACTION_LIMIT = 1;
     public static final String EXTRACTION_LIST = "enzyme.extraction_list";
-    public static final string_id[] ENZYME_EXTRACTION_ERRORS = 
-    {
-        new string_id("beast", "enzyme_fail_invalid_target"),
-        new string_id("beast", "enzyme_fail_too_many_extractions"),
-        new string_id("beast", "enzyme_fail_beast_not_dead"),
-        new string_id("beast", "enzyme_fail_target_is_pet"),
-        new string_id("beast", "enzyme_fail_target_not_monster"),
-        new string_id("beast", "enzyme_fail_no_loot_permission"),
-        new string_id("beast", "enzyme_fail_already_harvested"),
-        new string_id("beast", "beast_master_use_only")
-    };
+    public static final string_id[] ENZYME_EXTRACTION_ERRORS =
+            {
+                    new string_id("beast", "enzyme_fail_invalid_target"),
+                    new string_id("beast", "enzyme_fail_too_many_extractions"),
+                    new string_id("beast", "enzyme_fail_beast_not_dead"),
+                    new string_id("beast", "enzyme_fail_target_is_pet"),
+                    new string_id("beast", "enzyme_fail_target_not_monster"),
+                    new string_id("beast", "enzyme_fail_no_loot_permission"),
+                    new string_id("beast", "enzyme_fail_already_harvested"),
+                    new string_id("beast", "beast_master_use_only")
+            };
     public static final int ENZ_ERROR_INVALID_TARGET = 0;
     public static final int ENZ_ERROR_TOO_MANY_EXTRACTIONS = 1;
     public static final int ENZ_ERROR_NOT_DEAD = 2;
@@ -274,18 +274,18 @@ public class beast_lib extends script.base_script
     public static final String BM_COMMAND_DISABLED = "disabled";
     public static final String BM_DISPOSITION_DEFENSIVE = "toggleBeastDefensive";
     public static final String BM_DISPOSITION_PASSIVE = "toggleBeastPassive";
-    public static final String[] PET_BAR_DEFAULT_ARRAY = 
-    {
-        BM_COMMAND_DISABLED,
-        BM_COMMAND_FOLLOW,
-        BM_COMMAND_STAY,
-        BM_COMMAND_DISABLED,
-        BM_COMMAND_DISABLED,
-        BM_COMMAND_DISABLED,
-        BM_COMMAND_DISABLED,
-        BM_DISPOSITION_DEFENSIVE,
-        BM_DISPOSITION_PASSIVE
-    };
+    public static final String[] PET_BAR_DEFAULT_ARRAY =
+            {
+                    BM_COMMAND_DISABLED,
+                    BM_COMMAND_FOLLOW,
+                    BM_COMMAND_STAY,
+                    BM_COMMAND_DISABLED,
+                    BM_COMMAND_DISABLED,
+                    BM_COMMAND_DISABLED,
+                    BM_COMMAND_DISABLED,
+                    BM_DISPOSITION_DEFENSIVE,
+                    BM_DISPOSITION_PASSIVE
+            };
     public static final string_id SID_TOGGLE_DEFENSIVE = new string_id("beast", "defensive_message");
     public static final int SKILL_CANNOT_COMPARE = -1;
     public static final int SKILL_DIFFERENT_LINE = 0;
@@ -312,6 +312,7 @@ public class beast_lib extends script.base_script
     public static final int HOLO_BEAST_TYPE3_QUALITY3 = 10;
     public static final int HOLOGRAM_MAX_SETTING = 11;
     public static final String HOLO_BEAST_RARE_COLOR_OBJVAR = "rareHoloBeastColor";
+
     public static void blog(String text) throws InterruptedException
     {
         if (BEAST_DEBUG)
@@ -319,6 +320,7 @@ public class beast_lib extends script.base_script
             LOG("beast_lib", text);
         }
     }
+
     public static boolean isBeast(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -327,6 +329,7 @@ public class beast_lib extends script.base_script
         }
         return hasScript(beast, "ai.beast");
     }
+
     public static boolean isBeastMaster(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -334,24 +337,18 @@ public class beast_lib extends script.base_script
             return false;
         }
         int skill = getSkillStatisticModifier(player, "expertise_bm_base_mod");
-        if (skill > 0)
-        {
-            return true;
-        }
-        return false;
+        return skill > 0;
     }
+
     public static boolean isValidBeast(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
         {
             return false;
         }
-        if (!callable.hasCallableCD(beast))
-        {
-            return false;
-        }
-        return true;
+        return callable.hasCallableCD(beast);
     }
+
     public static boolean isValidBCD(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd))
@@ -360,14 +357,12 @@ public class beast_lib extends script.base_script
         }
         return hasObjVar(bcd, OBJVAR_BEAST_TYPE);
     }
+
     public static boolean isValidPlayer(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player) || !exists(player))
-        {
-            return false;
-        }
-        return true;
+        return isIdValid(player) && exists(player);
     }
+
     public static float getBeastScaleByLevel(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -384,8 +379,9 @@ public class beast_lib extends script.base_script
         {
             return minScale;
         }
-        return (float)(minScale + (scaleDifference * (level / 90.0f)));
+        return minScale + (scaleDifference * (level / 90.0f));
     }
+
     public static obj_id getBCDPlayer(obj_id bcd) throws InterruptedException
     {
         obj_id datapad = getContainedBy(bcd);
@@ -399,18 +395,19 @@ public class beast_lib extends script.base_script
                 {
                     return owner;
                 }
-                else 
+                else
                 {
                     return null;
                 }
             }
-            else 
+            else
             {
                 return null;
             }
         }
         return player;
     }
+
     public static void setBCDBeastCalled(obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -420,6 +417,7 @@ public class beast_lib extends script.base_script
         setBCDBeastCalledTime(bcd, getGameTime());
         callable.setCDCallable(bcd, beast);
     }
+
     public static obj_id getBCDBeastCalled(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -428,6 +426,7 @@ public class beast_lib extends script.base_script
         }
         return callable.getCDCallable(bcd);
     }
+
     public static void setBeastOnPlayer(obj_id player, obj_id beast) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -436,6 +435,7 @@ public class beast_lib extends script.base_script
         }
         callable.setCallable(player, beast, callable.CALLABLE_TYPE_COMBAT_PET);
     }
+
     public static obj_id getBeastOnPlayer(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -449,6 +449,7 @@ public class beast_lib extends script.base_script
         }
         return beast;
     }
+
     public static boolean hasActiveBeast(obj_id player) throws InterruptedException
     {
         if (beast_lib.isBeastMaster(player))
@@ -456,14 +457,12 @@ public class beast_lib extends script.base_script
             obj_id activePet = getBeastOnPlayer(player);
             if (isIdValid(activePet) && exists(activePet))
             {
-                if (beast_lib.isBeast(activePet))
-                {
-                    return true;
-                }
+                return beast_lib.isBeast(activePet);
             }
         }
         return false;
     }
+
     public static void setBCDBeastTimeStored(obj_id bcd, int time) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -472,6 +471,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.timeStored", time);
     }
+
     public static int getBCDBeastTimeStored(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -485,6 +485,7 @@ public class beast_lib extends script.base_script
         }
         return time;
     }
+
     public static void setBCDBeastCalledTime(obj_id bcd, int time) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -493,6 +494,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.timeCalled", time);
     }
+
     public static int getBCDBeastCalledTime(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -506,6 +508,7 @@ public class beast_lib extends script.base_script
         }
         return time;
     }
+
     public static String getBeastLocalizedName(obj_id bcd) throws InterruptedException
     {
         String beastType = getBCDBeastType(bcd);
@@ -513,6 +516,7 @@ public class beast_lib extends script.base_script
         string_id beastTypeSid = new string_id("monster_name", beastDisplayType);
         return localize(beastTypeSid);
     }
+
     public static void setBCDBeastName(obj_id bcd, String beastName) throws InterruptedException
     {
         if (!isIdValid(bcd) || beastName == null)
@@ -522,10 +526,12 @@ public class beast_lib extends script.base_script
         setName(bcd, beastName);
         setObjVar(bcd, "beast.beastName", beastName);
     }
+
     public static boolean hasBCDBeastName(obj_id bcd) throws InterruptedException
     {
         return hasObjVar(bcd, "beast.beastName");
     }
+
     public static String getBCDBeastName(obj_id bcd) throws InterruptedException
     {
         String beastName = getBeastLocalizedName(bcd);
@@ -535,6 +541,7 @@ public class beast_lib extends script.base_script
         }
         return beastName;
     }
+
     public static void setBeastName(obj_id beast, String beastName) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -543,6 +550,7 @@ public class beast_lib extends script.base_script
         }
         setName(beast, beastName);
     }
+
     public static boolean hasBeastName(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -551,6 +559,7 @@ public class beast_lib extends script.base_script
         }
         return hasBCDBeastName(getBeastBCD(beast));
     }
+
     public static String getBeastName(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -559,6 +568,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastName(getBeastBCD(beast));
     }
+
     public static void setBCDBeastType(obj_id bcd, String beastType) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -568,6 +578,7 @@ public class beast_lib extends script.base_script
         int hashBeastType = incubator.getHashType(beastType);
         setObjVar(bcd, OBJVAR_BEAST_TYPE, hashBeastType);
     }
+
     public static String getBCDBeastType(obj_id bcd) throws InterruptedException
     {
         String beastType = "";
@@ -578,6 +589,7 @@ public class beast_lib extends script.base_script
         }
         return beastType;
     }
+
     public static void setBeastType(obj_id beast, String template) throws InterruptedException
     {
         if (!isIdValid(beast) || template == null || template.length() <= 0)
@@ -609,6 +621,7 @@ public class beast_lib extends script.base_script
         setBCDBeastType(bcd, type);
         createBeastFromBCD(player, bcd);
     }
+
     public static String getBeastType(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -627,6 +640,7 @@ public class beast_lib extends script.base_script
         String type = dict.getString("beastType");
         return type;
     }
+
     public static void setBeastBCD(obj_id beast, obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -635,6 +649,7 @@ public class beast_lib extends script.base_script
         }
         callable.setCallableCD(beast, bcd);
     }
+
     public static obj_id getBeastBCD(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -648,6 +663,7 @@ public class beast_lib extends script.base_script
         }
         return bcd;
     }
+
     public static void setBCDBeastLevel(obj_id bcd, int level) throws InterruptedException
     {
         if (!isIdValid(bcd) || level < 1 || level > 90)
@@ -656,6 +672,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.level", level);
     }
+
     public static int getBCDBeastLevel(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -669,6 +686,7 @@ public class beast_lib extends script.base_script
         }
         return level;
     }
+
     public static void setBeastLevel(obj_id beast, int level) throws InterruptedException
     {
         if (!isIdValid(beast) || level < 1 || level > 90)
@@ -677,6 +695,7 @@ public class beast_lib extends script.base_script
         }
         setLevel(beast, level);
     }
+
     public static int getBeastLevel(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -685,6 +704,7 @@ public class beast_lib extends script.base_script
         }
         return getLevel(beast);
     }
+
     public static void setBCDBeastExperience(obj_id bcd, int exp) throws InterruptedException
     {
         if (!isIdValid(bcd) || exp < 0)
@@ -693,6 +713,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.experience", exp);
     }
+
     public static int getBCDBeastExperience(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -706,6 +727,7 @@ public class beast_lib extends script.base_script
         }
         return exp;
     }
+
     public static void setBeastExperience(obj_id beast, int exp) throws InterruptedException
     {
         if (!isIdValid(beast) || exp < 0)
@@ -714,6 +736,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(beast, "beast.experience", exp);
     }
+
     public static int getBeastExperience(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -727,6 +750,7 @@ public class beast_lib extends script.base_script
         }
         return exp;
     }
+
     public static void setBCDBeastHealth(obj_id bcd, int health) throws InterruptedException
     {
         if (!isIdValid(bcd) || health < 0)
@@ -735,6 +759,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.health", health);
     }
+
     public static int getBCDBeastHealth(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -746,12 +771,13 @@ public class beast_lib extends script.base_script
         {
             health = getIntObjVar(bcd, "beast.health");
         }
-        else 
+        else
         {
             return -1;
         }
         return health;
     }
+
     public static void setBCDBeastCanLevel(obj_id bcd, boolean canLevel) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -760,6 +786,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.canLevel", canLevel);
     }
+
     public static boolean getBCDBeastCanLevel(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -773,6 +800,7 @@ public class beast_lib extends script.base_script
         }
         return canLevel;
     }
+
     public static void setBeastCanLevel(obj_id beast, boolean canLevel) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -781,6 +809,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(beast, "beast.canLevel", canLevel);
     }
+
     public static boolean getBeastCanLevel(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -794,6 +823,7 @@ public class beast_lib extends script.base_script
         }
         return canLevel;
     }
+
     public static void setBCDBeastIsDead(obj_id bcd, boolean beastIsDead) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -802,6 +832,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, "beast.isDead", beastIsDead);
     }
+
     public static boolean getBCDBeastIsDead(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -815,6 +846,7 @@ public class beast_lib extends script.base_script
         }
         return beastIsDead;
     }
+
     public static void setBCDBeastDefensive(obj_id bcd, obj_id player, boolean beastIsDefensive) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -832,7 +864,7 @@ public class beast_lib extends script.base_script
             utils.removeScriptVar(beast, "petIgnoreAttacks");
             pp = prose.setTT(pp, "DEFENSIVE");
         }
-        else 
+        else
         {
             utils.setScriptVar(beast, "petIgnoreAttacks", getGameTime());
             pp = prose.setTT(pp, "PASSIVE");
@@ -842,6 +874,7 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, "beast.isDefensive", beastIsDefensive);
         setToggledCommands(player, bcd);
     }
+
     public static boolean getBCDBeastDefensive(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -854,6 +887,7 @@ public class beast_lib extends script.base_script
         }
         return false;
     }
+
     public static void setBeastDefensive(obj_id beast, obj_id player, boolean beastIsDefensive) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -862,6 +896,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastDefensive(getBeastBCD(beast), player, beastIsDefensive);
     }
+
     public static boolean getBeastDefensive(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -870,6 +905,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastDefensive(getBeastBCD(beast));
     }
+
     public static obj_id[] getDatapadBCDs(obj_id player) throws InterruptedException
     {
         Vector datapadBCDs = new Vector();
@@ -884,8 +920,10 @@ public class beast_lib extends script.base_script
             return null;
         }
         obj_id[] dataItems = getContents(datapad);
-        for (obj_id dataItem : dataItems) {
-            if (beast_lib.isValidBCD(dataItem)) {
+        for (obj_id dataItem : dataItems)
+        {
+            if (beast_lib.isValidBCD(dataItem))
+            {
                 datapadBCDs = utils.addElement(datapadBCDs, dataItem);
             }
         }
@@ -897,6 +935,7 @@ public class beast_lib extends script.base_script
         }
         return _datapadBCDs;
     }
+
     public static int getTotalBeastControlDevices(obj_id player) throws InterruptedException
     {
         Vector datapadBCDs = new Vector();
@@ -916,13 +955,16 @@ public class beast_lib extends script.base_script
             return 0;
         }
         int numStored = 0;
-        for (obj_id dataItem : dataItems) {
-            if (beast_lib.isValidBCD(dataItem)) {
+        for (obj_id dataItem : dataItems)
+        {
+            if (beast_lib.isValidBCD(dataItem))
+            {
                 numStored++;
             }
         }
         return numStored;
     }
+
     public static int getTotalBeastsCalled(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -940,13 +982,16 @@ public class beast_lib extends script.base_script
             return 0;
         }
         int beastTotal = 0;
-        for (obj_id datapadContent : datapadContents) {
-            if (hasObjVar(datapadContent, "beast.called") && isValidBeast(getBCDBeastCalled(datapadContent))) {
+        for (obj_id datapadContent : datapadContents)
+        {
+            if (hasObjVar(datapadContent, "beast.called") && isValidBeast(getBCDBeastCalled(datapadContent)))
+            {
                 beastTotal++;
             }
         }
         return beastTotal;
     }
+
     public static int getBCDBeastHappiness(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -960,6 +1005,7 @@ public class beast_lib extends script.base_script
         }
         return getIntObjVar(bcd, OBJVAR_BEAST_HAPPINESS);
     }
+
     public static void setBCDBeastHappiness(obj_id bcd, int happiness) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -968,6 +1014,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, OBJVAR_BEAST_HAPPINESS, happiness);
     }
+
     public static boolean hasBCDBeastHappiness(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -976,6 +1023,7 @@ public class beast_lib extends script.base_script
         }
         return hasObjVar(bcd, OBJVAR_BEAST_HAPPINESS);
     }
+
     public static int getBeastHappiness(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -984,6 +1032,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastHappiness(getBeastBCD(beast));
     }
+
     public static void setBeastHappiness(obj_id beast, int happiness) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -992,6 +1041,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastHappiness(getBeastBCD(beast), happiness);
     }
+
     public static float getBCDBeastLoyalty(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1005,6 +1055,7 @@ public class beast_lib extends script.base_script
         }
         return getFloatObjVar(bcd, PET_LOYALTY_OBJVAR);
     }
+
     public static void setBCDBeastLoyalty(obj_id bcd, float newLoyalty) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1013,6 +1064,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, PET_LOYALTY_OBJVAR, newLoyalty);
     }
+
     public static boolean hasBCDBeastLoyalty(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1021,6 +1073,7 @@ public class beast_lib extends script.base_script
         }
         return hasObjVar(bcd, PET_LOYALTY_OBJVAR);
     }
+
     public static float getBeastLoyalty(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1029,6 +1082,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastLoyalty(getBeastBCD(beast));
     }
+
     public static void setBeastLoyalty(obj_id beast, float newLoyalty) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1045,9 +1099,10 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastLoyalty(getBeastBCD(beast), newLoyalty);
     }
+
     public static int getBeastLoyaltyToNextLevelPercentage(obj_id beast) throws InterruptedException
     {
-        int loyalty = (int)getBeastLoyalty(beast);
+        int loyalty = (int) getBeastLoyalty(beast);
         if (loyalty >= LOYALTY_LVL_FIVE)
         {
             return -1;
@@ -1055,22 +1110,23 @@ public class beast_lib extends script.base_script
         float percentage = 0.0f;
         if (loyalty < LOYALTY_LVL_TWO)
         {
-            percentage = (float)loyalty / LOYALTY_LVL_TWO;
+            percentage = (float) loyalty / LOYALTY_LVL_TWO;
         }
         else if (loyalty < LOYALTY_LVL_THREE)
         {
-            percentage = (float)(loyalty - LOYALTY_LVL_TWO) / LOYALTY_LVL_THREE;
+            percentage = (float) (loyalty - LOYALTY_LVL_TWO) / LOYALTY_LVL_THREE;
         }
         else if (loyalty < LOYALTY_LVL_FOUR)
         {
-            percentage = (float)(loyalty - LOYALTY_LVL_THREE) / LOYALTY_LVL_FOUR;
+            percentage = (float) (loyalty - LOYALTY_LVL_THREE) / LOYALTY_LVL_FOUR;
         }
         else if (loyalty < LOYALTY_LVL_FIVE)
         {
-            percentage = (float)(loyalty - LOYALTY_LVL_FOUR) / LOYALTY_LVL_FIVE;
+            percentage = (float) (loyalty - LOYALTY_LVL_FOUR) / LOYALTY_LVL_FIVE;
         }
-        return (int)(percentage * 100);
+        return (int) (percentage * 100);
     }
+
     public static void incrementBeastLoyalty(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1094,7 +1150,8 @@ public class beast_lib extends script.base_script
             modifiedHappiness *= multiplier;
         }
         float newLoyalty = loyalty + modifiedHappiness;
-        if (buff.hasBuff(getBCDBeastCalled(bcd), "bm_beast_steroid")) {
+        if (buff.hasBuff(getBCDBeastCalled(bcd), "bm_beast_steroid"))
+        {
             newLoyalty *= utils.getIntScriptVar(getBCDBeastCalled(bcd), "beastBuff.beastXpBonusPercent");
         }
         if (loyalty < LOYALTY_LVL_TWO && newLoyalty >= LOYALTY_LVL_TWO)
@@ -1115,6 +1172,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastLoyalty(bcd, newLoyalty);
     }
+
     public static void decrementBeastLoyalty(obj_id bcd, float loyaltyDecrement) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1150,6 +1208,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastLoyalty(bcd, newLoyalty);
     }
+
     public static int getBCDBeastLoyaltyLevel(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1163,6 +1222,7 @@ public class beast_lib extends script.base_script
         }
         return getIntObjVar(bcd, PET_LOYALTY_LEVEL_OBJVAR);
     }
+
     public static void setBCDBeastLoyaltyLevel(obj_id bcd, int newLevel) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1179,6 +1239,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, PET_LOYALTY_LEVEL_OBJVAR, newLevel);
     }
+
     public static boolean hasBCDBeastLoyaltyLevel(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1187,6 +1248,7 @@ public class beast_lib extends script.base_script
         }
         return hasObjVar(bcd, PET_LOYALTY_LEVEL_OBJVAR);
     }
+
     public static int getBeastLoyaltyLevel(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1195,6 +1257,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastLoyaltyLevel(getBeastBCD(beast));
     }
+
     public static void setBeastLoyaltyLevel(obj_id beast, int newLevel) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1203,6 +1266,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastLoyalty(getBeastBCD(beast), newLevel);
     }
+
     public static void incrementBeastLoyaltyLevel(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1225,6 +1289,7 @@ public class beast_lib extends script.base_script
         sendSystemMessage(player, SID_LOYALTY_LEVEL_GAIN);
         updateBeastStats(bcd, beast);
     }
+
     public static void decrementBeastLoyaltyLevel(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1247,6 +1312,7 @@ public class beast_lib extends script.base_script
         sendSystemMessage(player, SID_LOYALTY_LEVEL_LOSS);
         updateBeastStats(bcd, beast);
     }
+
     public static int[] getBCDBeastFood(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1263,6 +1329,7 @@ public class beast_lib extends script.base_script
         }
         return getIntArrayObjVar(bcd, OBJVAR_BEAST_FOOD);
     }
+
     public static void setBCDBeastFood(obj_id bcd, int[] newFood) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1277,6 +1344,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(bcd, OBJVAR_BEAST_FOOD, newFood);
     }
+
     public static boolean hasBCDBeastFood(obj_id bcd) throws InterruptedException
     {
         if (!isValidBCD(bcd))
@@ -1285,6 +1353,7 @@ public class beast_lib extends script.base_script
         }
         return hasObjVar(bcd, OBJVAR_BEAST_FOOD);
     }
+
     public static int[] getBeastFood(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1293,6 +1362,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDBeastFood(getBeastBCD(beast));
     }
+
     public static void setBeastFood(obj_id beast, int[] newFood) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1301,6 +1371,7 @@ public class beast_lib extends script.base_script
         }
         setBCDBeastFood(getBeastBCD(beast), newFood);
     }
+
     public static int getBCDBeastLastFedTime(obj_id bcd) throws InterruptedException
     {
         int storedTime = getBCDBeastTimeStored(bcd);
@@ -1312,19 +1383,20 @@ public class beast_lib extends script.base_script
         {
             fedTimeDelta = (storedTime - beastFood[PET_TIME_SINCE_FEEDING]) + (currentTime - calledTime);
         }
-        else 
+        else
         {
             if (storedTime > beastFood[PET_TIME_SINCE_FEEDING])
             {
                 fedTimeDelta = currentTime - storedTime;
             }
-            else 
+            else
             {
                 fedTimeDelta = currentTime - beastFood[PET_TIME_SINCE_FEEDING];
             }
         }
         return fedTimeDelta;
     }
+
     public static void updateBeastHappiness(obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isValidBCD(bcd) || !isValidBeast(beast))
@@ -1359,10 +1431,11 @@ public class beast_lib extends script.base_script
         {
             happiness += utils.getIntScriptVar(bcd, PET_ACTIVITY_SCRIPTVAR);
         }
-        happiness += (int)getSkillStatisticModifier(player, "expertise_bm_pet_happiness");
+        happiness += getSkillStatisticModifier(player, "expertise_bm_pet_happiness");
         setBCDBeastHappiness(bcd, happiness);
         applyHappinessBuffIcon(beast);
     }
+
     public static void setBeastLinks(obj_id player, obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(bcd) || !isIdValid(beast))
@@ -1373,10 +1446,11 @@ public class beast_lib extends script.base_script
         setBeastBCD(beast, bcd);
         setBeastOnPlayer(player, beast);
         setMaster(beast, player);
-								int buffs[] = buff.getAllBuffs(player);
-								buff.applyBuff(beast, buffs);
+        int[] buffs = buff.getAllBuffs(player);
+        buff.applyBuff(beast, buffs);
 
     }
+
     public static void removeBeastLinks(obj_id player, obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(bcd) || !isIdValid(beast))
@@ -1388,6 +1462,7 @@ public class beast_lib extends script.base_script
         setBeastOnPlayer(player, null);
         setMaster(beast, null);
     }
+
     public static obj_id createBCDFromEgg(obj_id player, obj_id egg) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1454,7 +1529,7 @@ public class beast_lib extends script.base_script
             {
                 setBCDBeastName(beastControlDevice, oldName);
             }
-            else 
+            else
             {
                 setName(beastControlDevice, getBeastLocalizedName(beastControlDevice));
             }
@@ -1464,7 +1539,7 @@ public class beast_lib extends script.base_script
                 setObjVar(beastControlDevice, OBJVAR_OLD_PET_REHUED, 1);
             }
         }
-        else 
+        else
         {
             setName(beastControlDevice, getBeastLocalizedName(beastControlDevice));
         }
@@ -1478,6 +1553,7 @@ public class beast_lib extends script.base_script
         setupHappinessLoyalty(beastControlDevice);
         return beastControlDevice;
     }
+
     public static String stripBmFromType(String beastType) throws InterruptedException
     {
         if (beastType.contains("bm_"))
@@ -1491,11 +1567,13 @@ public class beast_lib extends script.base_script
         }
         return beastType;
     }
+
     public static obj_id createBasicBeastFromObject(obj_id source) throws InterruptedException
     {
         location spawnLocation = getLocation(source);
         return createBasicBeastFromObject(source, spawnLocation);
     }
+
     public static obj_id createBasicBeastFromObject(obj_id source, location spawnLocation) throws InterruptedException
     {
         if (!isIdValid(source))
@@ -1526,6 +1604,7 @@ public class beast_lib extends script.base_script
         initializeBeastColor(beast);
         return beast;
     }
+
     public static obj_id createBasicBeastFromPlayer(obj_id player, obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1562,6 +1641,7 @@ public class beast_lib extends script.base_script
         initializeBeastColor(beast);
         return beast;
     }
+
     public static obj_id createBeastFromBCD(obj_id player, obj_id bcd) throws InterruptedException
     {
         obj_id beast = createBasicBeastFromPlayer(player, bcd);
@@ -1589,6 +1669,7 @@ public class beast_lib extends script.base_script
         setAttributeAttained(beast, attrib.BEAST);
         return beast;
     }
+
     public static void initializeBeastScripts(obj_id beast) throws InterruptedException
     {
         attachScript(beast, "ai.ai");
@@ -1596,6 +1677,7 @@ public class beast_lib extends script.base_script
         attachScript(beast, "systems.combat.combat_actions");
         attachScript(beast, "ai.beast");
     }
+
     public static void initializeBeastStats(obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isValidBCD(bcd) || !isValidBeast(beast))
@@ -1616,7 +1698,7 @@ public class beast_lib extends script.base_script
         {
             setBeastName(beast, getBCDBeastName(bcd));
         }
-        else 
+        else
         {
             removeObjVar(bcd, "beast.beastName");
         }
@@ -1637,7 +1719,7 @@ public class beast_lib extends script.base_script
         {
             incubationBonuses = getIntArrayObjVar(bcd, OBJVAR_BEAST_INCUBATION_BONUSES);
         }
-        else 
+        else
         {
             for (int i = 0; i < ARRAY_BEAST_INCUBATION_STATS.length; ++i)
             {
@@ -1646,7 +1728,7 @@ public class beast_lib extends script.base_script
         }
         for (int i = 0; i < ARRAY_BEAST_INCUBATION_STATS.length; ++i)
         {
-            utils.setScriptVar(beast, ARRAY_BEAST_INCUBATION_STATS[i], (float)incubationBonuses[i]);
+            utils.setScriptVar(beast, ARRAY_BEAST_INCUBATION_STATS[i], (float) incubationBonuses[i]);
         }
         addInnateBeastBonuses(beast, beastType);
         setBeastSkillBonuses(beast);
@@ -1659,22 +1741,22 @@ public class beast_lib extends script.base_script
         addSkillModModifier(beast, "slope_move", "slope_move", 50, -1, false, false);
         updateBeastHappiness(bcd, beast);
         obj_id master = getMaster(beast);
-			int expertiseRegen = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_regen");
-			int expertiseHealth = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_health");
-			int expertiseAttackSpeed = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_attack_speed");
-			int expertiseArmor = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_armor");
-			int expertiseDamage = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_damage");
+        int expertiseRegen = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_regen");
+        int expertiseHealth = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_health");
+        int expertiseAttackSpeed = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_attack_speed");
+        int expertiseArmor = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_armor");
+        int expertiseDamage = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_damage");
         float incubationArmorBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_ARMOR);
         float incubationDamageBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_DPS);
         float incubationHealthBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_HEALTH);
-        int intMinDamage = (int)beastStatsDict.getInt("MinDmg");
-        int intMaxDamage = (int)beastStatsDict.getInt("MaxDmg");
+        int intMinDamage = beastStatsDict.getInt("MinDmg");
+        int intMaxDamage = beastStatsDict.getInt("MaxDmg");
         intMinDamage = getExpertiseStat(intMinDamage, expertiseDamage, 0.5f);
         intMaxDamage = getExpertiseStat(intMaxDamage, expertiseDamage, 0.5f);
         float floatMinDamage = intMinDamage * (1.0f + incubationDamageBonus / 100.0f);
         float floatMaxDamage = intMaxDamage * (1.0f + incubationDamageBonus / 100.0f);
-        intMinDamage = (int)floatMinDamage;
-        intMaxDamage = (int)floatMaxDamage;
+        intMinDamage = (int) floatMinDamage;
+        intMaxDamage = (int) floatMaxDamage;
         int specialDamagePercent = getExpertiseStat(100, expertiseDamage, 0.5f) - 100;
         if (!hasSkillModModifier(beast, "expertise_damage_line_beast_only"))
         {
@@ -1699,7 +1781,7 @@ public class beast_lib extends script.base_script
             weapons.setWeaponData(defaultWeapon);
             utils.setScriptVar(defaultWeapon, "isCreatureWeapon", 1);
         }
-        int beastHealth = (int)(getExpertiseStat(beastStatsDict.getInt("HP"), expertiseHealth, 0.5f) * (1.0f + (incubationHealthBonus * 0.2f) / 100.0f));
+        int beastHealth = (int) (getExpertiseStat(beastStatsDict.getInt("HP"), expertiseHealth, 0.5f) * (1.0f + (incubationHealthBonus * 0.2f) / 100.0f));
         int constitutionBonus = getEnhancedSkillStatisticModifierUncapped(beast, "constitution_modified");
         int staminaBonus = getEnhancedSkillStatisticModifierUncapped(beast, "stamina_modified");
         beastHealth += (constitutionBonus * 8) + (staminaBonus * 2);
@@ -1709,7 +1791,7 @@ public class beast_lib extends script.base_script
         {
             setAttrib(beast, HEALTH, getMaxAttrib(beast, HEALTH));
         }
-        else 
+        else
         {
             if (utils.hasScriptVar(beast, "beast.creationInProgress"))
             {
@@ -1736,8 +1818,8 @@ public class beast_lib extends script.base_script
             setBaseWalkSpeed(beast, runSpeed);
         }
         armor.removeAllArmorData(beast);
-        int intArmor = (int)(getExpertiseStat(beastStatsDict.getInt("Armor"), expertiseArmor, 0.5f) * (1.0f + incubationArmorBonus / 100.0f));
-        intArmor += (int)getSkillStatisticModifier(beast, "expertise_innate_protection_all");
+        int intArmor = (int) (getExpertiseStat(beastStatsDict.getInt("Armor"), expertiseArmor, 0.5f) * (1.0f + incubationArmorBonus / 100.0f));
+        intArmor += getSkillStatisticModifier(beast, "expertise_innate_protection_all");
         utils.setScriptVar(beast, "beast.display.armor", intArmor);
         if (intArmor >= 0)
         {
@@ -1746,7 +1828,7 @@ public class beast_lib extends script.base_script
             String armorLevelObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_ARMOR_LEVEL;
             setObjVar(beast, armorLevelObjVar, AL_standard);
             String genProtectionObjVar = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION;
-            setObjVar(beast, genProtectionObjVar, (float)intArmor);
+            setObjVar(beast, genProtectionObjVar, (float) intArmor);
             utils.setScriptVar(beast, armor.SCRIPTVAR_CACHED_GENERAL_PROTECTION, intArmor);
         }
         setBeastExperience(beast, getBCDBeastExperience(bcd));
@@ -1762,11 +1844,12 @@ public class beast_lib extends script.base_script
         {
             buff.applyBuff(master, ATTENTION_PENALTY_DEBUFF + hackeyWorkAroundValue);
         }
-        else 
+        else
         {
             removeAttentionPenaltyDebuff(master);
         }
     }
+
     public static void storeBeast(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -1789,7 +1872,7 @@ public class beast_lib extends script.base_script
                 return;
             }
         }
-        else 
+        else
         {
             messageTo(currentBeast, "handlePackRequest", null, 1, false);
         }
@@ -1800,7 +1883,7 @@ public class beast_lib extends script.base_script
         {
             sendSystemMessage(player, beast_lib.SID_STORED);
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "beast.no_store_message");
         }
@@ -1811,6 +1894,7 @@ public class beast_lib extends script.base_script
             buff.removeBuff(player, petBuff);
         }
     }
+
     public static void storeBeastStats(obj_id bcd, obj_id beast) throws InterruptedException
     {
         int health = getAttrib(beast, HEALTH);
@@ -1818,6 +1902,7 @@ public class beast_lib extends script.base_script
         boolean beastIsDead = isDead(beast);
         setBCDBeastIsDead(bcd, beastIsDead);
     }
+
     public static void storeBeasts(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -1838,6 +1923,7 @@ public class beast_lib extends script.base_script
         }
         storeBeast(bcd);
     }
+
     public static void killBeast(obj_id beast, obj_id killer) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1880,6 +1966,7 @@ public class beast_lib extends script.base_script
         setBCDBeastHealth(bcd, 0);
         setBCDBeastIsDead(bcd, true);
     }
+
     public static void playerDeathStoreBeast(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd))
@@ -1897,6 +1984,7 @@ public class beast_lib extends script.base_script
         stop(currentBeast);
         storeBeast(bcd);
     }
+
     public static void incrementBeastExperience(obj_id beast, dictionary params) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1928,7 +2016,8 @@ public class beast_lib extends script.base_script
         if (isValidPlayer(master))
         {
             int experienceGain = Math.round(100 * percentageBonuses);
-            if (params.containsKey("xpAmount")) {
+            if (params.containsKey("xpAmount"))
+            {
                 experienceGain = Math.round(params.getInt("xpAmount") * percentageBonuses);
             }
             experienceGain += experienceGain * 0.01f * getEnhancedSkillStatisticModifierUncapped(master, "bm_xp_mod_boost");
@@ -1944,6 +2033,7 @@ public class beast_lib extends script.base_script
         setBeastExperience(beast, experience);
         setBCDBeastExperience(bcd, experience);
     }
+
     public static void incrementBeastLevel(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1971,6 +2061,7 @@ public class beast_lib extends script.base_script
         playClientEffectObj(beast, "clienteffect/level_granted.cef", beast, null);
         initializeBeastStats(bcd, beast);
     }
+
     public static boolean canBeastLevelUp(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast))
@@ -1989,9 +2080,10 @@ public class beast_lib extends script.base_script
             blog("initializeBeastStats() missing entry in the " + BEASTS_STATS + " table for level: " + level + ".");
             return false;
         }
-        int experience = (int)beastStatsDict.getInt("XP");
+        int experience = beastStatsDict.getInt("XP");
         return experience > 0 && getBeastExperience(beast) >= experience;
     }
+
     public static void grantBeastExperience(obj_id beast) throws InterruptedException
     {
         if (!isValidBeast(beast) || isDead(beast))
@@ -2014,12 +2106,14 @@ public class beast_lib extends script.base_script
             incrementBeastLevel(beast);
         }
     }
+
     public static float scaleDistanceByLevel(obj_id beast, float distance) throws InterruptedException
     {
         int level = getLevel(beast);
         distance += (level / 45);
         return distance;
     }
+
     public static void validateFollowTarget(obj_id beast, obj_id target) throws InterruptedException
     {
         if (!isIdValid(beast) || !isIdValid(target))
@@ -2051,9 +2145,9 @@ public class beast_lib extends script.base_script
         {
             if (getLocomotion(beast) != LOCOMOTION_RUNNING)
             {
-                
+
             }
-            
+
             {
                 setMovementRun(beast);
             }
@@ -2063,9 +2157,9 @@ public class beast_lib extends script.base_script
         {
             if (getLocomotion(beast) != LOCOMOTION_RUNNING)
             {
-                
+
             }
-            
+
             {
                 setMovementRun(beast);
             }
@@ -2096,16 +2190,16 @@ public class beast_lib extends script.base_script
                 }
                 follow(beast, target, scaleDistanceByLevel(beast, 0.1f), scaleDistanceByLevel(beast, 0.5f));
             }
-            else 
+            else
             {
                 location offset = new location();
                 offset.x = -1.5f;
                 offset.z = -1;
                 if (getLocomotion(beast) != LOCOMOTION_RUNNING && getDistance(beast, master) >= 5.0f)
                 {
-                    
+
                 }
-                
+
                 {
                     setMovementRun(beast);
                 }
@@ -2116,9 +2210,9 @@ public class beast_lib extends script.base_script
                 follow(beast, target, offset);
             }
             messageTo(beast, "checkMovementSpeed", params, 1, false);
-            return;
         }
     }
+
     public static void doConfusedEmote(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast))
@@ -2128,6 +2222,7 @@ public class beast_lib extends script.base_script
         showFlyText(beast, new string_id("npc_reaction/flytext", "alert"), 3.0f, colors.COPPER);
         doAnimationAction(beast, "emt_stand_confused");
     }
+
     public static void doStayCommand(obj_id beast, obj_id master) throws InterruptedException
     {
         if (!isIdValid(beast) || !isIdValid(master))
@@ -2149,6 +2244,7 @@ public class beast_lib extends script.base_script
         doAnimationAction(beast, "vocalize");
         ai_lib.setDefaultCalmBehavior(beast, ai_lib.BEHAVIOR_STOP);
     }
+
     public static void doFollowCommand(obj_id beast, obj_id master) throws InterruptedException
     {
         if (!isIdValid(beast) || !isIdValid(master))
@@ -2175,11 +2271,13 @@ public class beast_lib extends script.base_script
         }
         beastFollowTarget(beast, master);
     }
+
     public static void beastFollowTarget(obj_id beast, obj_id target) throws InterruptedException
     {
         follow(beast, target, scaleDistanceByLevel(beast, 0.1f), scaleDistanceByLevel(beast, 0.2f));
         setMovementRun(beast);
     }
+
     public static void doAttackCommand(obj_id beast, obj_id master) throws InterruptedException
     {
         if (!isIdValid(master))
@@ -2192,7 +2290,7 @@ public class beast_lib extends script.base_script
             stealth._makeVisible(master, new string_id("spam", "stealthoff"), null);
         }
         obj_id target = getIntendedTarget(master);
-        if (isIdValid(target) == false || target == beast)
+        if (!isIdValid(target) || target == beast)
         {
             doConfusedEmote(beast);
             return;
@@ -2224,13 +2322,14 @@ public class beast_lib extends script.base_script
             setHate(target, beast, 0);
             utils.setScriptVar(beast, "ai.combat.target", target);
         }
-        else 
+        else
         {
             utils.setScriptVar(beast, "ai.combat.target", target);
             float maxHate = getMaxHate(beast);
             setHate(beast, target, maxHate + 5000);
         }
     }
+
     public static void doTrickCommand(obj_id beast, int trickNumber) throws InterruptedException
     {
         int myPosture = getPosture(beast);
@@ -2250,11 +2349,12 @@ public class beast_lib extends script.base_script
         {
             doAnimationAction(beast, "sit_trick_" + trickNumber);
         }
-        else 
+        else
         {
             doAnimationAction(beast, "trick_" + trickNumber);
         }
     }
+
     public static void setupHappinessLoyalty(obj_id beastBCD) throws InterruptedException
     {
         if (!isIdValid(beastBCD))
@@ -2330,6 +2430,7 @@ public class beast_lib extends script.base_script
         }
         setObjVar(beastBCD, PET_FAVORITES_OBJVAR, beastHappiness);
     }
+
     public static boolean feedBeastUsingAutoFeeder(obj_id beast, obj_id player, String autoFeederBuffName) throws InterruptedException
     {
         obj_id autofeeder = utils.getObjIdScriptVar(beast, beast_lib.getBeastBuffItemVar(autoFeederBuffName));
@@ -2348,20 +2449,25 @@ public class beast_lib extends script.base_script
         buff.removeBuff(beast, autoFeederBuffName);
         return false;
     }
+
     public static String getBeastBuffItemVar(String buffName) throws InterruptedException
     {
         return "beastBuffItem." + buffName;
     }
+
     public static obj_id checkAutoFeederForBeastFood(obj_id autofeeder) throws InterruptedException
     {
         obj_id[] contents = getContents(autofeeder);
         if (contents != null && contents.length > 0)
         {
             String[] beastFoods = dataTableGetStringColumnNoDefaults(beast_lib.DATATABLE_BEAST_FAVORITES, beast_lib.DATATABLE_FOOD_COL);
-            for (obj_id food : contents) {
-                if (isIdValid(food)) {
+            for (obj_id food : contents)
+            {
+                if (isIdValid(food))
+                {
                     String templateNoPath = utils.getTemplateFilenameNoPath(food);
-                    if (utils.getElementPositionInArray(beastFoods, templateNoPath) > -1) {
+                    if (utils.getElementPositionInArray(beastFoods, templateNoPath) > -1)
+                    {
                         return food;
                     }
                 }
@@ -2369,6 +2475,7 @@ public class beast_lib extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public static void applyFoodEffect(obj_id food, obj_id beast, obj_id player) throws InterruptedException
     {
         obj_id beastBCD = getBeastBCD(beast);
@@ -2401,7 +2508,7 @@ public class beast_lib extends script.base_script
             petFood[PET_TIME_SINCE_FEEDING] = currentTime;
             sendSystemMessage(player, SID_DISLIKE_FOOD);
         }
-        else 
+        else
         {
             foodType = PET_NORMAL_FOOD;
             petFood[PET_WHICH_FOOD] = PET_NORMAL_FOOD;
@@ -2414,6 +2521,7 @@ public class beast_lib extends script.base_script
         ai_lib.doAction(beast, "eat");
         messageTo(beastBCD, "beastHungry", params, 3600, false);
     }
+
     public static void checkForFavoriteLocation(obj_id beastBCD) throws InterruptedException
     {
         if (!isValidBCD(beastBCD))
@@ -2450,10 +2558,12 @@ public class beast_lib extends script.base_script
                 if (areaName != null && areaName.length() > 0)
                 {
                     String[] alternateLocs = dataTableGetStringColumn(DATATABLE_BEAST_FAVORITES, alternatesColumn);
-                    if (alternateLocs != null && alternateLocs.length > 0)
+                    if (alternateLocs != null)
                     {
-                        for (String alternateLocation : alternateLocs) {
-                            if (alternateLocation.equals(areaName)) {
+                        for (String alternateLocation : alternateLocs)
+                        {
+                            if (alternateLocation.equals(areaName))
+                            {
                                 locationType = PET_FAVORITE_LOCATION;
                                 sendSystemMessage(player, SID_FAVORITE_LOCATION);
                             }
@@ -2467,7 +2577,7 @@ public class beast_lib extends script.base_script
             locationType = PET_DISLIKE_LOCATION;
             sendSystemMessage(player, SID_DISLIKE_LOCATION);
         }
-        else 
+        else
         {
             locationType = PET_NORMAL_LOCATION;
         }
@@ -2490,6 +2600,7 @@ public class beast_lib extends script.base_script
         }
         updateBeastHappiness(beastBCD, beast);
     }
+
     public static int getSingleSkillMaxTrainingPoints(obj_id pet) throws InterruptedException
     {
         int loyaltyLevel = getBeastLoyaltyLevel(pet);
@@ -2498,45 +2609,53 @@ public class beast_lib extends script.base_script
         {
             level = getBeastLevel(pet);
         }
-        else 
+        else
         {
             level = getBCDBeastLevel(pet);
         }
         return loyaltyLevel * level;
     }
+
     public static int getSingleSkillMaxTrainingPoints(obj_id bcd, int level) throws InterruptedException
     {
         int loyaltyLevel = getBCDBeastLoyaltyLevel(bcd);
         return loyaltyLevel * level;
     }
+
     public static int getMaxTrainingPoints(obj_id pet) throws InterruptedException
     {
         return getSingleSkillMaxTrainingPoints(pet) * 4;
     }
+
     public static int getAvailableTrainingPoints(obj_id pet) throws InterruptedException
     {
         return getAvailableTrainingPoints(pet, null);
     }
+
     public static int getAvailableTrainingPoints(obj_id pet, String passedAbility) throws InterruptedException
     {
         int spent = calculateTrainingPointsSpent(pet, passedAbility);
         int maximum = getMaxTrainingPoints(pet);
         return maximum - spent;
     }
+
     public static boolean hasSufficientTrainingPoints(obj_id pet, String ability) throws InterruptedException
     {
         int available = getAvailableTrainingPoints(pet, ability);
         return (getAbilityCost(ability) <= available);
     }
+
     public static boolean isValidForSingleSkillMaxCost(obj_id pet, String ability) throws InterruptedException
     {
         int singleSkillMax = getSingleSkillMaxTrainingPoints(pet);
         return getAbilityCost(ability) <= singleSkillMax;
     }
+
     public static int getAbilityCost(String ability) throws InterruptedException
     {
         return dataTableGetInt(BEASTS_SPECIALS, ability, "training_cost");
     }
+
     public static String[] getTrainedSkills(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd))
@@ -2547,24 +2666,25 @@ public class beast_lib extends script.base_script
         {
             return getTrainedSkills(getBeastBCD(bcd));
         }
-        String[] trainedSkills = 
-        {
-            "empty",
-            "empty",
-            "empty",
-            "empty"
-        };
+        String[] trainedSkills =
+                {
+                        "empty",
+                        "empty",
+                        "empty",
+                        "empty"
+                };
         if (!hasObjVar(bcd, PET_TRAINED_SKILLS_LIST))
         {
             return trainedSkills;
         }
-        else 
+        else
         {
             trainedSkills = getStringArrayObjVar(bcd, PET_TRAINED_SKILLS_LIST);
         }
         trainedSkills = correctNullSkills(trainedSkills);
         return trainedSkills;
     }
+
     public static String[] getAutoRepeatAbilityList(obj_id bcd) throws InterruptedException
     {
         if (isBeast(bcd))
@@ -2572,20 +2692,20 @@ public class beast_lib extends script.base_script
             return getAutoRepeatAbilityList(getBeastBCD(bcd));
         }
         String[] barData = getBeastmasterPetBarData(getBCDBeastCalled(bcd));
-        String[] abilityList = 
-        {
-            barData[3],
-            barData[4],
-            barData[5],
-            barData[6]
-        };
-        String[] repeatList = 
-        {
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] abilityList =
+                {
+                        barData[3],
+                        barData[4],
+                        barData[5],
+                        barData[6]
+                };
+        String[] repeatList =
+                {
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         if (hasObjVar(bcd, PET_AUTO_REPEAT_LIST))
         {
             repeatList = getStringArrayObjVar(bcd, PET_AUTO_REPEAT_LIST);
@@ -2593,9 +2713,12 @@ public class beast_lib extends script.base_script
         for (int i = 0; i < repeatList.length; i++)
         {
             boolean contains = false;
-            for (String s : abilityList) {
-                if (s.equals(repeatList[i])) {
+            for (String s : abilityList)
+            {
+                if (s.equals(repeatList[i]))
+                {
                     contains = true;
+                    break;
                 }
             }
             if (!contains)
@@ -2605,21 +2728,23 @@ public class beast_lib extends script.base_script
         }
         return repeatList;
     }
+
     public static void clearAutoRepeatAbiltiyList(obj_id bcd) throws InterruptedException
     {
         if (isBeast(bcd))
         {
             bcd = getBeastBCD(bcd);
         }
-        String[] repeatList = 
-        {
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] repeatList =
+                {
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         setObjVar(bcd, PET_AUTO_REPEAT_LIST, repeatList);
     }
+
     public static boolean isAbilityAutoRepeat(obj_id bcd, String abilityName) throws InterruptedException
     {
         if (isBeast(bcd))
@@ -2627,13 +2752,16 @@ public class beast_lib extends script.base_script
             return isAbilityAutoRepeat(getBeastBCD(bcd), abilityName);
         }
         String[] repeatList = getAutoRepeatAbilityList(bcd);
-        for (String s : repeatList) {
-            if (!s.equals("") && s.equals(abilityName)) {
+        for (String s : repeatList)
+        {
+            if (!s.equals("") && s.equals(abilityName))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static String[] setAbilityAutoRepeat(obj_id bcd, String abilityName) throws InterruptedException
     {
         if (isBeast(bcd))
@@ -2666,6 +2794,7 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, PET_AUTO_REPEAT_LIST, repeatList);
         return repeatList;
     }
+
     public static String[] unsetAbilityAutoRepeat(obj_id bcd, String abilityName) throws InterruptedException
     {
         if (isBeast(bcd))
@@ -2683,32 +2812,39 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, PET_AUTO_REPEAT_LIST, repeatList);
         return repeatList;
     }
+
     public static String getBestAutoRepeatAbility(obj_id beast) throws InterruptedException
     {
         String[] abilityList = getAutoRepeatAbilityList(beast);
         String bestAction = "";
         float highestCost = 0.0f;
-        for (String s : abilityList) {
-            if (s.equals("")) {
+        for (String s : abilityList)
+        {
+            if (s.equals(""))
+            {
                 continue;
             }
             combat_data abilityData = combat_engine.getCombatData(s);
-            if (abilityData == null) {
+            if (abilityData == null)
+            {
                 continue;
             }
             String cooldownGroup = abilityData.cooldownGroup;
             int groupCrc = getStringCrc(cooldownGroup);
             float coolDownLeft = getCooldownTimeLeft(getMaster(beast), groupCrc);
-            if (coolDownLeft > 0.0f) {
+            if (coolDownLeft > 0.0f)
+            {
                 continue;
             }
-            if (combat.canDrainCombatActionAttributes(beast, (int) abilityData.vigorCost) && abilityData.vigorCost > highestCost) {
+            if (combat.canDrainCombatActionAttributes(beast, (int) abilityData.vigorCost) && abilityData.vigorCost > highestCost)
+            {
                 highestCost = abilityData.vigorCost;
                 bestAction = s;
             }
         }
         return bestAction;
     }
+
     public static void setTrainedPetSkills(obj_id pet, String[] abilityList) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(pet);
@@ -2718,6 +2854,7 @@ public class beast_lib extends script.base_script
         setBeastmasterToggledPetCommands(player, abilityList);
         updatePetAbilityList(bcd);
     }
+
     public static String[] correctNullSkills(String[] abilityList) throws InterruptedException
     {
         for (int i = 0; i < abilityList.length; i++)
@@ -2729,27 +2866,29 @@ public class beast_lib extends script.base_script
         }
         return abilityList;
     }
+
     public static void clearTrainedSkills(obj_id pet) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(pet);
-        String[] emptyList = 
-        {
-            "empty",
-            "empty",
-            "empty",
-            "empty"
-        };
-        String[] nullList = 
-        {
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] emptyList =
+                {
+                        "empty",
+                        "empty",
+                        "empty",
+                        "empty"
+                };
+        String[] nullList =
+                {
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         setObjVar(bcd, PET_TRAINED_SKILLS_LIST, emptyList);
         setObjVar(bcd, PET_AUTO_REPEAT_LIST, nullList);
         updatePetAbilityList(bcd);
     }
+
     public static boolean canPerformCommand(obj_id player, obj_id pet, String command) throws InterruptedException
     {
         int additionalAbilitySlot = getSkillStatisticModifier(player, "expertise_bm_add_pet_bar");
@@ -2767,6 +2906,7 @@ public class beast_lib extends script.base_script
         }
         return false;
     }
+
     public static int getAvailableTrainingSlots(obj_id pet, String abilityName) throws InterruptedException
     {
         String[] knownSkills = getTrainedSkills(pet);
@@ -2788,6 +2928,7 @@ public class beast_lib extends script.base_script
         }
         return openSlots;
     }
+
     public static boolean isValidBeastSkillForCreature(obj_id pet, String skill) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(pet);
@@ -2797,41 +2938,51 @@ public class beast_lib extends script.base_script
         int isValidForType = dataTableGetInt(BEASTS_SPECIALS, skill, specialAttackFamily);
         return isValidForType == 1;
     }
+
     public static int calculateTrainingPointsSpent(obj_id pet) throws InterruptedException
     {
         return calculateTrainingPointsSpent(pet, null);
     }
+
     public static int calculateTrainingPointsSpent(obj_id pet, String passedAbility) throws InterruptedException
     {
         boolean compareAbility = passedAbility != null;
         String[] attackList = getTrainedSkills(pet);
         int trainedTotal = 0;
-        for (String s : attackList) {
-            if (s.equals("empty")) {
+        for (String s : attackList)
+        {
+            if (s.equals("empty"))
+            {
                 continue;
             }
-            if (compareAbility && getSkillBeastmasterSkillComparison(passedAbility, s) == SKILL_HIGHER) {
+            if (compareAbility && getSkillBeastmasterSkillComparison(passedAbility, s) == SKILL_HIGHER)
+            {
                 int costOldAbility = getAbilityCost(s);
                 trainedTotal -= costOldAbility;
                 continue;
             }
             int cost = getAbilityCost(s);
-            if (cost != -1) {
+            if (cost != -1)
+            {
                 trainedTotal += cost;
             }
         }
         return trainedTotal;
     }
+
     public static boolean isSkillAlreadyTrained(obj_id pet, String ability) throws InterruptedException
     {
         String[] knownSkills = getTrainedSkills(pet);
-        for (String knownSkill : knownSkills) {
-            if (knownSkill.equals(ability) || getSkillBeastmasterSkillComparison(ability, knownSkill) == SKILL_LOWER) {
+        for (String knownSkill : knownSkills)
+        {
+            if (knownSkill.equals(ability) || getSkillBeastmasterSkillComparison(ability, knownSkill) == SKILL_LOWER)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean isSkillUpgrade(obj_id pet, String ability) throws InterruptedException
     {
         String[] knownSkills = getTrainedSkills(pet);
@@ -2839,13 +2990,16 @@ public class beast_lib extends script.base_script
         {
             return true;
         }
-        for (String knownSkill : knownSkills) {
-            if (getSkillBeastmasterSkillComparison(ability, knownSkill) == SKILL_HIGHER) {
+        for (String knownSkill : knownSkills)
+        {
+            if (getSkillBeastmasterSkillComparison(ability, knownSkill) == SKILL_HIGHER)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public static boolean canLearnSkill(obj_id pet, String abilityName) throws InterruptedException
     {
         int returnCode = getTrainingSuccessCode(pet, abilityName);
@@ -2853,28 +3007,29 @@ public class beast_lib extends script.base_script
         switch (returnCode)
         {
             case TRAINING_INVALID_PETTYPE:
-            sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_bad_pet_type"));
-            canLearn = false;
-            break;
+                sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_bad_pet_type"));
+                canLearn = false;
+                break;
             case TRAINING_SKILL_TOO_HIGH:
-            sendSystemMessage(getMaster(pet), new string_id("beast", "trail_fail_spam_single_skill_max"));
-            canLearn = false;
-            break;
+                sendSystemMessage(getMaster(pet), new string_id("beast", "trail_fail_spam_single_skill_max"));
+                canLearn = false;
+                break;
             case TRAINING_INSUFFICIENT_POINTS:
-            sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_insufficient_points"));
-            canLearn = false;
-            break;
+                sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_insufficient_points"));
+                canLearn = false;
+                break;
             case TRAINING_NON_IMPROVED_SKILL:
-            sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_already_known"));
-            canLearn = false;
-            break;
+                sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_already_known"));
+                canLearn = false;
+                break;
             case TRAINING_NO_AVAILABLE_SLOTS:
-            sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_no_slots"));
-            canLearn = false;
-            break;
+                sendSystemMessage(getMaster(pet), new string_id("beast", "train_fail_spam_no_slots"));
+                canLearn = false;
+                break;
         }
         return canLearn;
     }
+
     public static int getTrainingSuccessCode(obj_id pet, String abilityName) throws InterruptedException
     {
         if (!isValidBeastSkillForCreature(pet, abilityName))
@@ -2899,6 +3054,7 @@ public class beast_lib extends script.base_script
         }
         return TRAINING_VALID;
     }
+
     public static void updatePetAbilityList(obj_id bcd) throws InterruptedException
     {
         obj_id pet = getBCDBeastCalled(bcd);
@@ -2908,6 +3064,7 @@ public class beast_lib extends script.base_script
         }
         updatePetAbilityList(bcd, pet);
     }
+
     public static void updatePetAbilityList(obj_id bcd, obj_id pet) throws InterruptedException
     {
         String[] petAbilities = getTrainedSkills(bcd);
@@ -2915,6 +3072,7 @@ public class beast_lib extends script.base_script
         setBeastmasterPetCommands(getBCDPlayer(bcd), getBeastmasterPetBarData(getBCDPlayer(bcd), pet));
         setToggledCommands(getBCDPlayer(bcd), bcd);
     }
+
     public static boolean canTrainPet(obj_id player, obj_id pet) throws InterruptedException
     {
         if (!beast_lib.isBeastMaster(player))
@@ -2929,14 +3087,17 @@ public class beast_lib extends script.base_script
         }
         return true;
     }
+
     public static int getSkillCrcByName(String abilityName) throws InterruptedException
     {
         return dataTableGetInt(BEASTS_SPECIALS, abilityName, "abilityCrc");
     }
+
     public static String[] playerLearnBeastMasterSkill(obj_id player, String newSkill) throws InterruptedException
     {
         return playerLearnBeastMasterSkill(player, newSkill, true);
     }
+
     public static String[] playerLearnBeastMasterSkill(obj_id player, String newSkill, boolean notify) throws InterruptedException
     {
         Vector abilityCrcList = new Vector();
@@ -2963,7 +3124,7 @@ public class beast_lib extends script.base_script
         if (utils.getElementPositionInArray(castToIntArray, newSkillCrc) > -1)
         {
         }
-        else 
+        else
         {
             utils.addElement(abilityCrcList, newSkillCrc);
             if (notify)
@@ -2983,6 +3144,7 @@ public class beast_lib extends script.base_script
         utils.setBatchObjVar(player, PLAYER_KNOWN_SKILLS_LIST, castToIntArray);
         return getKnownSkills(player);
     }
+
     public static boolean isLearnableBeastMasterSkill(String skillName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(skillName, "ability_name", BEASTS_SPECIALS);
@@ -2993,6 +3155,7 @@ public class beast_lib extends script.base_script
         int specialType = getBeastMasterSpecialType(skillName);
         return (specialType != ABILITY_INVALID && specialType != ABILITY_TYPE_INNATE);
     }
+
     public static int getBeastMasterSpecialType(String skillName) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(skillName, "ability_name", BEASTS_SPECIALS);
@@ -3002,6 +3165,7 @@ public class beast_lib extends script.base_script
         }
         return dataTableGetInt(BEASTS_SPECIALS, row, "specialType");
     }
+
     public static boolean hasBeastMasterSkill(obj_id player, String beastAbility) throws InterruptedException
     {
         if (isIdValid(player))
@@ -3019,19 +3183,18 @@ public class beast_lib extends script.base_script
                         castToIntArray[_i] = (Integer) abilityCrcList.get(_i);
                     }
                 }
-                if (utils.getElementPositionInArray(castToIntArray, newSkillCrc) > -1)
-                {
-                    return true;
-                }
+                return utils.getElementPositionInArray(castToIntArray, newSkillCrc) > -1;
             }
         }
         return false;
     }
+
     public static void sendCreatureAbilitySkillLearnSpam(obj_id player, String newSkill) throws InterruptedException
     {
         sendSystemMessage(player, new string_id("beast", "ability_learn_new_skill"));
         sendSystemMessage(player, new string_id("cmd_n", newSkill));
     }
+
     public static String[] getKnownSkills(obj_id player) throws InterruptedException
     {
         Vector abilityCrc = getKnownSkillsCrc(player);
@@ -3052,6 +3215,7 @@ public class beast_lib extends script.base_script
         Arrays.sort(abilityString);
         return abilityString;
     }
+
     public static Vector getKnownSkillsCrc(obj_id player) throws InterruptedException
     {
         if (!utils.hasIntBatchObjVar(player, PLAYER_KNOWN_SKILLS_LIST))
@@ -3060,6 +3224,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getResizeableIntBatchObjVar(player, PLAYER_KNOWN_SKILLS_LIST);
     }
+
     public static void trainPetAbility(obj_id pet, String abilityName) throws InterruptedException
     {
         if (!canLearnSkill(pet, abilityName))
@@ -3078,6 +3243,7 @@ public class beast_lib extends script.base_script
         setTrainedPetSkills(pet, trainedSkills);
         sendPetTrainNotification(pet, abilityName);
     }
+
     public static void sendPetTrainNotification(obj_id pet, String abilityName) throws InterruptedException
     {
         obj_id master = getMaster(pet);
@@ -3086,31 +3252,36 @@ public class beast_lib extends script.base_script
         pp.actor.set(new string_id("cmd_n", abilityName));
         sendSystemMessageProse(master, pp);
     }
+
     public static int getExpertiseStat(int baseStat, int expertiseMod, float nerfPercent) throws InterruptedException
     {
-        float expertisePercent = (float)expertiseMod / 100;
+        float expertisePercent = (float) expertiseMod / 100;
         float baseStatFloat = baseStat;
         float expertiseStatFloat = baseStatFloat - (baseStatFloat * (nerfPercent - (nerfPercent * expertisePercent)));
-        int expertiseStat = (int)expertiseStatFloat;
+        int expertiseStat = (int) expertiseStatFloat;
         return expertiseStat;
     }
+
     public static float getExpertiseSpeed(float baseStat, int expertiseMod) throws InterruptedException
     {
-        float expertisePercent = (float)expertiseMod / 100;
+        float expertisePercent = (float) expertiseMod / 100;
         float expertiseSpeed = baseStat + (baseStat * (1.0f - expertisePercent));
         return expertiseSpeed;
     }
+
     public static boolean isPreparedToLearnCreatureAbility(obj_id player) throws InterruptedException
     {
         return buff.hasBuff(player, "bm_creature_knowledge");
     }
+
     public static float getCreatureKnowledgeLevel(obj_id player) throws InterruptedException
     {
         int ck_skill = getEnhancedSkillStatisticModifier(player, "bm_creature_knowledge");
         int level = getLevel(player);
-        float learningPotential = (((float)ck_skill + level) / 10.0f);
+        float learningPotential = (((float) ck_skill + level) / 10.0f);
         return learningPotential;
     }
+
     public static boolean makeAbilityLearnSkillCheck(obj_id player, String ability) throws InterruptedException
     {
         float learningPotential = getCreatureKnowledgeLevel(player);
@@ -3143,10 +3314,12 @@ public class beast_lib extends script.base_script
         }
         return skillLearnResult;
     }
+
     public static int getDifficultyToLearnAbility(String ability) throws InterruptedException
     {
         return dataTableGetInt(BEASTS_SPECIALS, ability, "level_to_learn");
     }
+
     public static boolean checkForSkillAcquisition(obj_id attacker, obj_id defender, String actionName) throws InterruptedException
     {
         if (isBeast(defender))
@@ -3176,6 +3349,7 @@ public class beast_lib extends script.base_script
         }
         return false;
     }
+
     public static boolean isLearnableCreatureAbility(obj_id player, String actionName) throws InterruptedException
     {
         dictionary actionData = dataTableGetRow(BEASTS_SPECIALS, actionName);
@@ -3189,6 +3363,7 @@ public class beast_lib extends script.base_script
         }
         return isValidBeastSkillForCreature(getBeastOnPlayer(player), actionName);
     }
+
     public static void doBmProvokeCommand(obj_id self, obj_id target, int provokeLevel) throws InterruptedException
     {
         if (!isIdValid(target) || !exists(target) || isPlayer(target) || isBeast(target))
@@ -3218,6 +3393,7 @@ public class beast_lib extends script.base_script
         finalHateAdd = finalHateAdd < 1 ? 1 : finalHateAdd;
         addHate(target, self, finalHateAdd);
     }
+
     public static void performingActivity(obj_id beastBCD, int activity) throws InterruptedException
     {
         obj_id player = getBCDPlayer(beastBCD);
@@ -3226,6 +3402,7 @@ public class beast_lib extends script.base_script
         updateBeastHappiness(beastBCD, beast);
         updateBeastStats(beastBCD, beast);
     }
+
     public static void verifyAndUpdateCalledBeastStats(obj_id player) throws InterruptedException
     {
         obj_id beast = getBeastOnPlayer(player);
@@ -3242,6 +3419,7 @@ public class beast_lib extends script.base_script
         }
         initializeBeastStats(BCD, beast);
     }
+
     public static void removeAttentionPenaltyDebuff(obj_id player) throws InterruptedException
     {
         for (int i = 1; i < 6; i++)
@@ -3251,8 +3429,8 @@ public class beast_lib extends script.base_script
                 buff.removeBuff(player, ATTENTION_PENALTY_DEBUFF + i);
             }
         }
-        return;
     }
+
     public static int[] fillIncubationArray(obj_id egg, obj_id beastControlDevice) throws InterruptedException
     {
         int[] incubationBonuses = new int[ARRAY_BEAST_INCUBATION_STATS.length];
@@ -3262,13 +3440,14 @@ public class beast_lib extends script.base_script
             {
                 incubationBonuses[i] = getIntObjVar(egg, ARRAY_BEAST_INCUBATION_STATS[i]);
             }
-            else 
+            else
             {
                 incubationBonuses[i] = 0;
             }
         }
         return incubationBonuses;
     }
+
     public static string_id convertHappinessString(obj_id beastBCD) throws InterruptedException
     {
         int currentHappiness = getBCDBeastHappiness(beastBCD);
@@ -3279,6 +3458,7 @@ public class beast_lib extends script.base_script
         }
         return happiness;
     }
+
     public static string_id convertHappinessString(int currentHappiness) throws InterruptedException
     {
         if (currentHappiness < -20)
@@ -3321,11 +3501,12 @@ public class beast_lib extends script.base_script
         {
             return SID_BEAST_NORMAL;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public static void applyHappinessBuffIcon(obj_id beast) throws InterruptedException
     {
         obj_id beastBCD = getBeastBCD(beast);
@@ -3389,6 +3570,7 @@ public class beast_lib extends script.base_script
             buff.applyBuff(beast, "bm_happiness_content");
         }
     }
+
     public static string_id convertLoyaltyString(obj_id beastBCD) throws InterruptedException
     {
         int currentLoyalty = getBCDBeastLoyaltyLevel(beastBCD);
@@ -3399,32 +3581,36 @@ public class beast_lib extends script.base_script
         }
         return loyalty;
     }
+
     public static string_id convertLoyaltyString(int currentLoyalty) throws InterruptedException
     {
         switch (currentLoyalty)
         {
             case 1:
-            return SID_BEAST_WILD;
+                return SID_BEAST_WILD;
             case 2:
-            return SID_BEAST_DISOBEDIENT;
+                return SID_BEAST_DISOBEDIENT;
             case 3:
-            return SID_BEAST_TRAINED;
+                return SID_BEAST_TRAINED;
             case 4:
-            return SID_BEAST_LOYAL;
+                return SID_BEAST_LOYAL;
             case 5:
-            return SID_BEAST_BFF;
+                return SID_BEAST_BFF;
             default:
-            return null;
+                return null;
         }
     }
+
     public static obj_id generateTypeThreeEnzyme(obj_id player, float enzymeValue) throws InterruptedException
     {
         return generateTypeThreeEnzyme(player, null, enzymeValue, enzymeValue, "none");
     }
+
     public static obj_id generateTypeThreeEnzyme(obj_id player, float enzymePurity, float enzymeMutagen) throws InterruptedException
     {
         return generateTypeThreeEnzyme(player, null, enzymePurity, enzymeMutagen, "none");
     }
+
     public static obj_id generateTypeThreeEnzyme(obj_id player, obj_id target, float enzymePurity, float enzymeMutagen, String trait) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -3437,7 +3623,7 @@ public class beast_lib extends script.base_script
         }
         int skillMod = getEnhancedSkillStatisticModifierUncapped(player, "expertise_bm_genetic_engineering");
         float ge_mod = 1.0f + (skillMod / 1000.0f);
-        float levelDifference = (float)getLevel(target) / getLevel(player);
+        float levelDifference = (float) getLevel(target) / getLevel(player);
         levelDifference = levelDifference > 1.0f ? 1.0f : levelDifference;
         float valuePerLevel = 0.02f;
         float levelAddedValue = getLevel(target) * valuePerLevel;
@@ -3450,16 +3636,16 @@ public class beast_lib extends script.base_script
         switch (difficultyClass)
         {
             case 0:
-            seed = 1;
-            break;
+                seed = 1;
+                break;
             case 1:
-            seed = 3;
-            randomCeiling += eliteValueAdd;
-            break;
+                seed = 3;
+                randomCeiling += eliteValueAdd;
+                break;
             case 2:
-            seed = 5;
-            randomCeiling += bossValueAdd;
-            break;
+                seed = 5;
+                randomCeiling += bossValueAdd;
+                break;
         }
         float basePurity = distributedRand(randomFloor, randomCeiling, seed);
         float baseMutagen = distributedRand(randomFloor, randomCeiling, seed);
@@ -3476,6 +3662,7 @@ public class beast_lib extends script.base_script
         setObjVar(newEnzyme, "enzyme.trait", trait);
         return newEnzyme;
     }
+
     public static int getEnzymeExtractionReturnCode(obj_id player, obj_id creatureCorpse) throws InterruptedException
     {
         if (!isBeastMaster(player))
@@ -3518,6 +3705,7 @@ public class beast_lib extends script.base_script
         }
         return -1;
     }
+
     public static Vector getExtractionList(obj_id corpse) throws InterruptedException
     {
         if (hasObjVar(corpse, EXTRACTION_LIST))
@@ -3528,12 +3716,14 @@ public class beast_lib extends script.base_script
         extractionList.setSize(0);
         return extractionList;
     }
+
     public static void addToExtractionList(obj_id player, obj_id corpse) throws InterruptedException
     {
         Vector extractionList = getExtractionList(corpse);
         utils.addElement(extractionList, player);
         setObjVar(corpse, EXTRACTION_LIST, extractionList);
     }
+
     public static float distributedRand(float min, float max, int level) throws InterruptedException
     {
         final int levelMin = 0;
@@ -3547,7 +3737,7 @@ public class beast_lib extends script.base_script
             min = _max;
             max = _min;
         }
-        float rank = (float)(level - levelMin) / (levelMax - levelMin);
+        float rank = (float) (level - levelMin) / (levelMax - levelMin);
         float mid = min + ((max - min) * rank);
         if (mid < min)
         {
@@ -3568,13 +3758,15 @@ public class beast_lib extends script.base_script
         }
         return randNum;
     }
+
     public static String[] getBeastmasterPetBarData(obj_id pet) throws InterruptedException
     {
         return getBeastmasterPetBarData(getMaster(pet), pet);
     }
+
     public static String[] getBeastmasterPetBarData(obj_id player, obj_id pet) throws InterruptedException
     {
-        String[] barData = (String[])PET_BAR_DEFAULT_ARRAY.clone();
+        String[] barData = PET_BAR_DEFAULT_ARRAY.clone();
         String[] knownSkills = getTrainedSkills(pet);
         int additionalAbilitySlot = 0;
         additionalAbilitySlot = getSkillStatisticModifier(player, "expertise_bm_add_pet_bar");
@@ -3600,10 +3792,12 @@ public class beast_lib extends script.base_script
         }
         return barData;
     }
+
     public static boolean isChargeAttack(String actionName) throws InterruptedException
     {
         return actionName.startsWith("bm_charge") || actionName.startsWith("bm_trample");
     }
+
     public static boolean setBCDBeastHueFromEgg(obj_id bcd, obj_id egg) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !isIdValid(egg) || !exists(egg))
@@ -3618,6 +3812,7 @@ public class beast_lib extends script.base_script
         }
         return false;
     }
+
     public static void setBCDBeastHuePrimary(obj_id bcd, String palette, int hueIndex) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || palette == null || palette.length() <= 0 || hueIndex < 0)
@@ -3628,6 +3823,7 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, OBJVAR_BEAST_HUE, hueIndex);
         setObjVar(bcd, OBJVAR_BEAST_PALETTE, palette);
     }
+
     public static void setBeastHuePrimary(obj_id beast, String palette, int hueIndex) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(beast);
@@ -3638,6 +3834,7 @@ public class beast_lib extends script.base_script
         setBCDBeastHuePrimary(bcd, palette, hueIndex);
         hue.setColor(beast, palette, hueIndex);
     }
+
     public static String getBCDPalettePrimary(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_PALETTE))
@@ -3646,6 +3843,7 @@ public class beast_lib extends script.base_script
         }
         return getStringObjVar(bcd, OBJVAR_BEAST_PALETTE);
     }
+
     public static int getBCDHuePrimary(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_HUE))
@@ -3654,6 +3852,7 @@ public class beast_lib extends script.base_script
         }
         return getIntObjVar(bcd, OBJVAR_BEAST_HUE);
     }
+
     public static String getBeastPalettePrimary(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3667,6 +3866,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDPalettePrimary(bcd);
     }
+
     public static int getBeastHuePrimary(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3680,6 +3880,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDHuePrimary(bcd);
     }
+
     public static void setBCDBeastHueSecondary(obj_id bcd, String palette, int hueIndex) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || palette == null || palette.length() <= 0 || hueIndex < 0)
@@ -3690,6 +3891,7 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, OBJVAR_BEAST_HUE2, hueIndex);
         setObjVar(bcd, OBJVAR_BEAST_PALETTE2, palette);
     }
+
     public static void setBeastHueSecondary(obj_id beast, String palette, int hueIndex) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(beast);
@@ -3700,6 +3902,7 @@ public class beast_lib extends script.base_script
         setBCDBeastHueSecondary(bcd, palette, hueIndex);
         hue.setColor(beast, palette, hueIndex);
     }
+
     public static String getBCDPaletteSecondary(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_PALETTE2))
@@ -3708,6 +3911,7 @@ public class beast_lib extends script.base_script
         }
         return getStringObjVar(bcd, OBJVAR_BEAST_PALETTE2);
     }
+
     public static int getBCDHueSecondary(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_HUE2))
@@ -3716,6 +3920,7 @@ public class beast_lib extends script.base_script
         }
         return getIntObjVar(bcd, OBJVAR_BEAST_HUE2);
     }
+
     public static String getBeastPaletteSecondary(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3729,6 +3934,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDPaletteSecondary(bcd);
     }
+
     public static int getBeastHueSecondary(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3742,6 +3948,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDHueSecondary(bcd);
     }
+
     public static void setBCDBeastHueThird(obj_id bcd, String palette, int hueIndex) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || palette == null || palette.length() <= 0 || hueIndex < 0)
@@ -3752,6 +3959,7 @@ public class beast_lib extends script.base_script
         setObjVar(bcd, OBJVAR_BEAST_HUE3, hueIndex);
         setObjVar(bcd, OBJVAR_BEAST_PALETTE3, palette);
     }
+
     public static void setBeastHueThird(obj_id beast, String palette, int hueIndex) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(beast);
@@ -3762,6 +3970,7 @@ public class beast_lib extends script.base_script
         setBCDBeastHueThird(bcd, palette, hueIndex);
         hue.setColor(beast, palette, hueIndex);
     }
+
     public static String getBCDPaletteThird(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_PALETTE3))
@@ -3770,6 +3979,7 @@ public class beast_lib extends script.base_script
         }
         return getStringObjVar(bcd, OBJVAR_BEAST_PALETTE3);
     }
+
     public static int getBCDHueThird(obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(bcd) || !exists(bcd) || !hasObjVar(bcd, OBJVAR_BEAST_HUE3))
@@ -3778,6 +3988,7 @@ public class beast_lib extends script.base_script
         }
         return getIntObjVar(bcd, OBJVAR_BEAST_HUE3);
     }
+
     public static String getBeastPaletteThird(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3791,6 +4002,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDPaletteThird(bcd);
     }
+
     public static int getBeastHueThird(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -3804,6 +4016,7 @@ public class beast_lib extends script.base_script
         }
         return getBCDHueThird(bcd);
     }
+
     public static void clearBeastColor(obj_id beast) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(beast);
@@ -3818,6 +4031,7 @@ public class beast_lib extends script.base_script
         removeObjVar(bcd, OBJVAR_BEAST_PALETTE2);
         removeObjVar(bcd, OBJVAR_BEAST_PALETTE3);
     }
+
     public static void initializeBeastColor(obj_id beast) throws InterruptedException
     {
         obj_id bcd = getBeastBCD(beast);
@@ -3840,6 +4054,7 @@ public class beast_lib extends script.base_script
         setBeastHueSecondary(beast, secondaryPalette, secondaryHue);
         setBeastHueThird(beast, thirdPalette, thirdHue);
     }
+
     public static boolean addInnateBeastBonuses(obj_id beast, String beastType) throws InterruptedException
     {
         int row = dataTableSearchColumnForString(beastType, "beastType", BEASTS_TABLE);
@@ -3861,10 +4076,13 @@ public class beast_lib extends script.base_script
         for (int i = 0; i < attributesAffected.length; ++i)
         {
             String fullName = "beast." + attributesAffected[i];
-            for (String arrayBeastIncubationStat : ARRAY_BEAST_INCUBATION_STATS) {
-                if (fullName.equals(arrayBeastIncubationStat)) {
+            for (String arrayBeastIncubationStat : ARRAY_BEAST_INCUBATION_STATS)
+            {
+                if (fullName.equals(arrayBeastIncubationStat))
+                {
                     float currentBonus = 0.0f;
-                    if (utils.hasScriptVar(beast, arrayBeastIncubationStat)) {
+                    if (utils.hasScriptVar(beast, arrayBeastIncubationStat))
+                    {
                         currentBonus = utils.getFloatScriptVar(beast, arrayBeastIncubationStat);
                     }
                     float newBonus = currentBonus + incrementAmounts[i];
@@ -3875,6 +4093,7 @@ public class beast_lib extends script.base_script
         }
         return true;
     }
+
     public static dictionary getBeastMasterExamineInfo(obj_id player, obj_id creature, String[] names, String[] attribs, int idx) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -3937,13 +4156,13 @@ public class beast_lib extends script.base_script
         switch (difficultyClass)
         {
             case 1:
-            prefix = "Elite_";
-            break;
+                prefix = "Elite_";
+                break;
             case 2:
-            prefix = "Boss_";
-            break;
+                prefix = "Boss_";
+                break;
             default:
-            break;
+                break;
         }
         if (ck_skill > 3)
         {
@@ -3980,14 +4199,15 @@ public class beast_lib extends script.base_script
                 for (int i = 1; i < 15; i++)
                 {
                     String ability = dataTableGetString("datatables/ai/ai_combat_profiles.iff", special_list, "action" + i);
-                    if (ability != null && !ability.equals("") && actionList.indexOf(ability) == -1)
+                    if (ability != null && !ability.equals("") && !actionList.contains(ability))
                     {
                         utils.addElement(actionList, ability);
                     }
                 }
                 if (actionList.size() > 0)
                 {
-                    for (Object o : actionList) {
+                    for (Object o : actionList)
+                    {
                         names[idx] = "special_attack";
                         attribs[idx] = utils.packStringId(new string_id("cmd_n", ((String) o)));
                         idx++;
@@ -4000,6 +4220,7 @@ public class beast_lib extends script.base_script
         dict.put("idx", idx);
         return dict;
     }
+
     public static String getBestBeastMasterSkill(obj_id player, String skillName) throws InterruptedException
     {
         String[] knownSkills = getKnownSkills(player);
@@ -4010,37 +4231,45 @@ public class beast_lib extends script.base_script
         String passedSkillLine = getSkillLine(skillName);
         int passedSkillRank = getSkillRank(skillName);
         String bestSkill = skillName;
-        for (String knownSkill : knownSkills) {
+        for (String knownSkill : knownSkills)
+        {
             String skillLine = getSkillLine(knownSkill);
             int skillRank = getSkillRank(knownSkill);
-            if (!skillLine.equals(passedSkillLine)) {
+            if (!skillLine.equals(passedSkillLine))
+            {
                 continue;
             }
-            if (skillRank <= passedSkillRank) {
+            if (skillRank <= passedSkillRank)
+            {
                 continue;
             }
             bestSkill = knownSkill;
         }
         return bestSkill;
     }
+
     public static String getNextSkillInLine(String skillName) throws InterruptedException
     {
         String[] allSkills = dataTableGetStringColumn(BEASTS_SPECIALS, "ability_name");
         String passedSkillLine = getSkillLine(skillName);
         int passedSkillRank = getSkillRank(skillName);
         int nextRank = passedSkillRank + 1;
-        for (String allSkill : allSkills) {
+        for (String allSkill : allSkills)
+        {
             String skillLine = getSkillLine(allSkill);
             int skillRank = getSkillRank(allSkill);
-            if (!skillLine.equals(passedSkillLine)) {
+            if (!skillLine.equals(passedSkillLine))
+            {
                 continue;
             }
-            if (skillRank == nextRank) {
+            if (skillRank == nextRank)
+            {
                 return allSkill;
             }
         }
         return skillName;
     }
+
     public static int getSkillBeastmasterSkillComparison(String querySkill, String skillToCompare) throws InterruptedException
     {
         String queryLine = getSkillLine(querySkill);
@@ -4065,14 +4294,17 @@ public class beast_lib extends script.base_script
         }
         return SKILL_CANNOT_COMPARE;
     }
+
     public static String getSkillLine(String skillName) throws InterruptedException
     {
         return dataTableGetString(BEASTS_SPECIALS, skillName, "skill_line");
     }
+
     public static int getSkillRank(String skillName) throws InterruptedException
     {
         return dataTableGetInt(BEASTS_SPECIALS, skillName, "skill_rank");
     }
+
     public static void updateBeastStats(obj_id bcd, obj_id beast) throws InterruptedException
     {
         if (!isValidBCD(bcd) || !isValidBeast(beast))
@@ -4100,14 +4332,14 @@ public class beast_lib extends script.base_script
         }
         int expertiseDamage = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_damage");
         float incubationDamageBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_DPS);
-        int intMinDamage = (int)beastStatsDict.getInt("MinDmg");
-        int intMaxDamage = (int)beastStatsDict.getInt("MaxDmg");
+        int intMinDamage = beastStatsDict.getInt("MinDmg");
+        int intMaxDamage = beastStatsDict.getInt("MaxDmg");
         intMinDamage = getExpertiseStat(intMinDamage, expertiseDamage, 0.5f);
         intMaxDamage = getExpertiseStat(intMaxDamage, expertiseDamage, 0.5f);
         float floatMinDamage = intMinDamage * (1.0f + incubationDamageBonus / 100.0f);
         float floatMaxDamage = intMaxDamage * (1.0f + incubationDamageBonus / 100.0f);
-        intMinDamage = (int)floatMinDamage;
-        intMaxDamage = (int)floatMaxDamage;
+        intMinDamage = (int) floatMinDamage;
+        intMaxDamage = (int) floatMaxDamage;
         obj_id beastWeapon = getCurrentWeapon(beast);
         if (isIdValid(beastWeapon))
         {
@@ -4124,6 +4356,7 @@ public class beast_lib extends script.base_script
         }
         updateBeastHappiness(bcd, beast);
     }
+
     public static void setBCDIncubationStats(obj_id bcd, obj_id egg) throws InterruptedException
     {
         int[] incubationBonuses = fillIncubationArray(egg, bcd);
@@ -4133,6 +4366,7 @@ public class beast_lib extends script.base_script
         String creatorName = getStringObjVar(egg, OBJVAR_BEAST_ENGINEER);
         setObjVar(bcd, OBJVAR_BEAST_ENGINEER, creatorName);
     }
+
     public static void setBeastSkillBonuses(obj_id beast) throws InterruptedException
     {
         setBeastCritChance(beast);
@@ -4145,6 +4379,7 @@ public class beast_lib extends script.base_script
         setBeastEvadeChance(beast);
         setBeastEvadeValue(beast);
     }
+
     public static boolean setBeastCritChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4161,6 +4396,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_CRITICAL_HIT, critChance);
         return true;
     }
+
     public static float getBeastCritChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4177,6 +4413,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_CRITICAL_HIT);
     }
+
     public static boolean setBeastStrikethroughChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4193,6 +4430,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_STRIKETHROUGH, strikeChance);
         return true;
     }
+
     public static float getBeastStrikethroughChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4209,6 +4447,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_STRIKETHROUGH);
     }
+
     public static boolean setBeastStrikethroughValue(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4225,6 +4464,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_STRIKETHROUGH_RATING, strikeValue);
         return true;
     }
+
     public static float getBeastStrikethroughValue(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4241,6 +4481,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_STRIKETHROUGH_RATING);
     }
+
     public static float getBeastHitChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4257,6 +4498,7 @@ public class beast_lib extends script.base_script
         }
         return (utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_HIT_CHANCE) / 10.0f);
     }
+
     public static boolean setBeastBlockChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4273,6 +4515,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_BLOCK_CHANCE, blockChance);
         return true;
     }
+
     public static float getBeastBlockChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4289,6 +4532,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_BLOCK_CHANCE);
     }
+
     public static float getBeastGlanceChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4297,6 +4541,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(beast, OBJVAR_INCREASE_GLANCING_BLOW);
     }
+
     public static boolean setBeastBlockValue(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4313,6 +4558,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_BLOCK_VALUE, blockValue);
         return true;
     }
+
     public static int getBeastBlockValue(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4327,8 +4573,9 @@ public class beast_lib extends script.base_script
             cun_mod = (cun_mod / 100.0f);
             return Math.round(block_value * cun_mod);
         }
-        return (int)utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_BLOCK_VALUE);
+        return (int) utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_BLOCK_VALUE);
     }
+
     public static boolean setBeastDodgeChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4345,6 +4592,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_DODGE, dodgeChance);
         return true;
     }
+
     public static float getBeastDodgeChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4361,6 +4609,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_DODGE);
     }
+
     public static boolean setBeastParryChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4377,6 +4626,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_PARRY, parryChance);
         return true;
     }
+
     public static float getBeastParryChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4393,6 +4643,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_PARRY);
     }
+
     public static boolean setBeastEvadeChance(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4409,6 +4660,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_EVASION, evadeChance);
         return true;
     }
+
     public static float getBeastEvadeChance(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4425,6 +4677,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_EVASION);
     }
+
     public static boolean setBeastEvadeValue(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4441,6 +4694,7 @@ public class beast_lib extends script.base_script
         utils.setScriptVar(beast, OBJVAR_INCREASE_EVASION_RATING, evadeValue);
         return true;
     }
+
     public static float getBeastEvadeValue(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4457,6 +4711,7 @@ public class beast_lib extends script.base_script
         }
         return utils.getFloatScriptVar(attacker, OBJVAR_INCREASE_EVASION_RATING);
     }
+
     public static float getBeastLearnBonus(obj_id beast) throws InterruptedException
     {
         if (isPlayer(beast))
@@ -4470,6 +4725,7 @@ public class beast_lib extends script.base_script
         float int_mod = getBeastCustomMod(beast, MOD_INTELLIGENCE);
         return (int_mod * 1.5f);
     }
+
     public static float getBeastCunningRating(obj_id beast) throws InterruptedException
     {
         if (!isIdValid(beast) || !exists(beast))
@@ -4479,6 +4735,7 @@ public class beast_lib extends script.base_script
         float cun_mod = getBeastCustomMod(beast, MOD_CUNNING);
         return (cun_mod * 3.0f);
     }
+
     public static float getBeastModDamageBonus(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4494,8 +4751,9 @@ public class beast_lib extends script.base_script
             return dam_mod * cun_mod;
         }
         float agg_mod = getBeastCustomMod(attacker, MOD_AGGRESSION);
-        return (float)agg_mod * 2.0f;
+        return agg_mod * 2.0f;
     }
+
     public static float getBeastModGlancingReduction(obj_id attacker) throws InterruptedException
     {
         if (isPlayer(attacker))
@@ -4511,8 +4769,9 @@ public class beast_lib extends script.base_script
             return dam_mod * cun_mod;
         }
         float agg_mod = getBeastCustomMod(attacker, MOD_AGGRESSION);
-        return agg_mod * 1.0f;
+        return agg_mod;
     }
+
     public static float getBeastModDamageReduction(obj_id defender) throws InterruptedException
     {
         if (isPlayer(defender))
@@ -4530,6 +4789,7 @@ public class beast_lib extends script.base_script
         float res_mod = getBeastCustomMod(defender, MOD_RESILIENCE);
         return res_mod * 1.25f;
     }
+
     public static float getBeastModPunishingReduction(obj_id defender) throws InterruptedException
     {
         if (isPlayer(defender))
@@ -4545,8 +4805,9 @@ public class beast_lib extends script.base_script
             return dam_mod * cun_mod;
         }
         float res_mod = getBeastCustomMod(defender, MOD_RESILIENCE);
-        return res_mod * 1.0f;
+        return res_mod;
     }
+
     public static float getBeastCustomMod(obj_id beast, int type) throws InterruptedException
     {
         if (isPlayer(beast))
@@ -4560,20 +4821,21 @@ public class beast_lib extends script.base_script
         switch (type)
         {
             case MOD_HUNTERS_INSTINCT:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_HUNTERS_INSTINCT);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_HUNTERS_INSTINCT);
             case MOD_AGGRESSION:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_AGGRESSION);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_AGGRESSION);
             case MOD_INTELLIGENCE:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_INTELLIGENCE);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_INTELLIGENCE);
             case MOD_CUNNING:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_CUNNING);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_CUNNING);
             case MOD_RESILIENCE:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_BEASTIAL_RESILIENCE);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_BEASTIAL_RESILIENCE);
             case MOD_SURVIVAL:
-            return utils.getFloatScriptVar(beast, OBJVAR_SKILL_SURVIVAL);
+                return utils.getFloatScriptVar(beast, OBJVAR_SKILL_SURVIVAL);
         }
         return 0;
     }
+
     public static boolean setToggledCommands(obj_id player, obj_id bcd) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -4584,34 +4846,33 @@ public class beast_lib extends script.base_script
         {
             return false;
         }
-        String[] toggledAbilities = 
-        {
-            "",
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] toggledAbilities =
+                {
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         String[] toggledAutoRepeats = getAutoRepeatAbilityList(bcd);
-        for (int i = 0; i < toggledAutoRepeats.length; ++i)
-        {
-            toggledAbilities[i] = toggledAutoRepeats[i];
-        }
+        System.arraycopy(toggledAutoRepeats, 0, toggledAbilities, 0, toggledAutoRepeats.length);
         if (getBCDBeastDefensive(bcd))
         {
             toggledAbilities[4] = "toggleBeastDefensive";
         }
-        else 
+        else
         {
             toggledAbilities[4] = "toggleBeastPassive";
         }
         setBeastmasterToggledPetCommands(player, toggledAbilities);
         return true;
     }
+
     public static String getBeastTrait(obj_id player, obj_id target) throws InterruptedException
     {
         return "none";
     }
+
     public static boolean canBeastGetLevelBasedXP(obj_id beast, obj_id npc) throws InterruptedException
     {
         int beastLevel = getBeastLevel(beast);
@@ -4627,9 +4888,9 @@ public class beast_lib extends script.base_script
             float maxLevelDiff = 10.0f;
             if (beastLevel > 20)
             {
-                maxLevelDiff += (int)((beastLevel - 20) / 6);
+                maxLevelDiff += (beastLevel - 20) / 6;
             }
-            exp += (int)(exp * (levelDiff / maxLevelDiff));
+            exp += (int) (exp * (levelDiff / maxLevelDiff));
             if (exp < 1)
             {
                 exp = 1;
@@ -4637,6 +4898,7 @@ public class beast_lib extends script.base_script
         }
         return exp > 1;
     }
+
     public static int useBeastInjector(obj_id player, obj_id injector, obj_id beast, String beastFamily, String[] injectorFamilies, int mark) throws InterruptedException
     {
         if (!exists(player) || !exists(injector) || !exists(beast))
@@ -4672,8 +4934,10 @@ public class beast_lib extends script.base_script
         }
         if (injectorFamilies.length > 0)
         {
-            for (String injectorFamily : injectorFamilies) {
-                if (beastFamily.equals(injectorFamily)) {
+            for (String injectorFamily : injectorFamilies)
+            {
+                if (beastFamily.equals(injectorFamily))
+                {
                     return INJECTOR_RETURN_SUCESS;
                 }
             }
@@ -4681,6 +4945,7 @@ public class beast_lib extends script.base_script
         }
         return INJECTOR_RETURN_BAD_DATA;
     }
+
     public static boolean convertBcdIntoBeastItem(obj_id player, obj_id bcd) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -4702,6 +4967,7 @@ public class beast_lib extends script.base_script
         }
         return true;
     }
+
     public static obj_id createHolopetCubeFromEgg(obj_id player, obj_id egg) throws InterruptedException
     {
         int beastHashType = getIntObjVar(egg, beast_lib.OBJVAR_BEAST_TYPE);
@@ -4720,6 +4986,7 @@ public class beast_lib extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public static obj_id createBeastHolopet(obj_id player, obj_id source, String beastType) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -4746,6 +5013,7 @@ public class beast_lib extends script.base_script
         }
         return obj_id.NULL_ID;
     }
+
     public static String localizedHoloBeastBaseName(String beastType) throws InterruptedException
     {
         if (beastType.startsWith("bm_"))
@@ -4758,7 +5026,8 @@ public class beast_lib extends script.base_script
         if (lowercaseName != null && lowercaseName.length() > 0)
         {
             String[] splitName = split(lowercaseName, ' ');
-            for (String s : splitName) {
+            for (String s : splitName)
+            {
                 finalName += toUpper(s, 0) + " ";
             }
         }

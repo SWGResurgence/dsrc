@@ -5,15 +5,16 @@ import script.library.*;
 
 public class vehicle_base extends script.base_script
 {
-    public vehicle_base()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final String VCDPING_VEHICLE_SCRIPT_NAME = "systems.vehicle_system.vehicle_ping";
     public static final String MESSAGE_VEHICLE_ID = "vehicleId";
     public static final string_id SID_CITY_GARAGE_BANNED = new string_id("city/city", "garage_banned");
     public static final string_id SID_NO_GROUND_VEHICLE_IN_SPACE = new string_id("space/space_interaction", "no_ground_vehicle_in_space");
     public static final boolean debug = false;
+    public vehicle_base()
+    {
+    }
+
     public int revertVehicleMod(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || !params.containsKey("type"))
@@ -40,6 +41,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setAttributeAttained(self, attrib.VEHICLE);
@@ -54,6 +56,7 @@ public class vehicle_base extends script.base_script
         sendDestroyUnattendedVehicleSignal(self);
         return SCRIPT_CONTINUE;
     }
+
     public int checkForJetpack(obj_id self, dictionary params) throws InterruptedException
     {
         String creature_name = getTemplateName(self);
@@ -70,12 +73,12 @@ public class vehicle_base extends script.base_script
                     queueCommand(player, (-536363215), self, creature_name, COMMAND_PRIORITY_FRONT);
                     debugServerConsoleMsg(player, "+++ pet . onObjectMenuSelect +++ just attempted to Enqueue MOUNT command");
                 }
-                else 
+                else
                 {
                     storeJetpack = true;
                 }
             }
-            else 
+            else
             {
                 storeJetpack = true;
             }
@@ -89,10 +92,12 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVehicleDecay(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(player) || self == null || self == obj_id.NULL_ID || !isIdValid(self))
@@ -116,7 +121,7 @@ public class vehicle_base extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             LOG("special_sign", "isOwnedByPlayer || isMountedOn");
         }
@@ -162,6 +167,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -212,7 +218,7 @@ public class vehicle_base extends script.base_script
                     debugServerConsoleMsg(player, "+++ pet . onObjectMenuSelect +++ just attempted to Enqueue MOUNT command");
                 }
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(player, "+++ pet . onObjectMenuSelect +++ getMountsEneabled returnted FALSE");
             }
@@ -242,6 +248,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isMountedOnCreatureQueried(obj_id pet, obj_id player) throws InterruptedException
     {
         if (!isIdValid(pet))
@@ -257,12 +264,9 @@ public class vehicle_base extends script.base_script
         {
             return false;
         }
-        if (playerCurrentMount != pet)
-        {
-            return false;
-        }
-        return true;
+        return playerCurrentMount == pet;
     }
+
     public boolean canTrainAsMount(obj_id pet, obj_id player) throws InterruptedException
     {
         if (!isIdValid(pet))
@@ -283,6 +287,7 @@ public class vehicle_base extends script.base_script
         }
         return true;
     }
+
     public boolean trainMount(obj_id pet, obj_id player) throws InterruptedException
     {
         if (!isIdValid(pet) || !isIdValid(player))
@@ -298,12 +303,13 @@ public class vehicle_base extends script.base_script
             debugServerConsoleMsg(player, "+++ VEHICLE . onAttach +++ makePetAMount(self,player) returned FALSE");
             return false;
         }
-        else 
+        else
         {
             debugServerConsoleMsg(player, "+++ VEHICLE . onAttach +++ makePetAMount(self,player) returned TRUE. YEAH!");
         }
         return true;
     }
+
     public boolean makePetAMount(obj_id pet, obj_id player) throws InterruptedException
     {
         if (!isIdValid(pet) || !isIdValid(player))
@@ -321,12 +327,13 @@ public class vehicle_base extends script.base_script
             debugServerConsoleMsg(player, "+++ VEHICLE . onAttach +++ makePetMountable(pet) returned FALSE.");
             return false;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         }
         return true;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -338,10 +345,26 @@ public class vehicle_base extends script.base_script
         {
             names[idx] = "owner";
             attribs[idx] = getStringObjVar(self, "ai.pet.masterName");
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Speed (min)"));
+            attribs[idx] = String.valueOf(vehicle.getMinimumSpeed(self));
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Speed (min)"));
+            attribs[idx] = String.valueOf(vehicle.getMaximumSpeed(self));
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Acceleration (min)"));
+            attribs[idx] = String.valueOf(vehicle.getAccelMin(self));
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Acceleration (max)"));
+            attribs[idx] = String.valueOf(vehicle.getAccelMin(self));
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Hover Height"));
+            attribs[idx] = String.valueOf(vehicle.getHoverHeight(self));
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id owner = getMaster(self);
@@ -358,7 +381,7 @@ public class vehicle_base extends script.base_script
                     {
                         killerDesc = "player " + killer + "(" + killerName + ")";
                     }
-                    else 
+                    else
                     {
                         killerDesc = "npc " + killer + "(" + getName(killer) + ")";
                     }
@@ -383,7 +406,7 @@ public class vehicle_base extends script.base_script
             {
                 vehicle.storeVehicle(vcd, rider, false);
             }
-            else 
+            else
             {
                 messageTo(self, "handleDisabledPackRequest", null, 120, false);
             }
@@ -395,6 +418,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "pet.controlDestroyed"))
@@ -423,6 +447,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDisabledPackRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (isDisabled(self))
@@ -431,6 +456,7 @@ public class vehicle_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePackRequest(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(null, "+++ vehicle_base.messageHandler handlePackRequest +++ entered HANDLEPACKREQUEST message handler");
@@ -455,12 +481,13 @@ public class vehicle_base extends script.base_script
         {
             messageTo(vehicleControlDevice, "handleRemoveCurrentVehicle", messageData, 1, false);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "+++ vehicle_base.messageHandler handlePackRequest +++ WARNINGWARNING - FAILED TO DESTROY SELF");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyNow(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "pet.controlDestroyed", true);
@@ -468,16 +495,19 @@ public class vehicle_base extends script.base_script
         destroyObject(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         utils.setScriptVar(self, "pet.combatEnded", getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         utils.setScriptVar(self, "pet.combatEnded", getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetColors(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -487,6 +517,7 @@ public class vehicle_base extends script.base_script
         setColors(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetCustomization(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -505,12 +536,13 @@ public class vehicle_base extends script.base_script
         {
             messageTo(tool, "customizationSuccess", params, 0.0f, false);
         }
-        else 
+        else
         {
             messageTo(tool, "customizationFailed", params, 0.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean setColors(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -521,22 +553,25 @@ public class vehicle_base extends script.base_script
         java.util.Enumeration keys = params.keys();
         while (keys.hasMoreElements())
         {
-            String var = (String)keys.nextElement();
+            String var = (String) keys.nextElement();
             int idx = params.getInt(var);
             litmus &= hue.setColor(self, var, idx);
         }
         return litmus;
     }
+
     public boolean hasBarcRepairKit(obj_id player) throws InterruptedException
     {
         obj_id tool = utils.getItemPlayerHasByTemplate(player, "object/tangible/item/ep3/barc_repair_tool.iff");
         return (isIdValid(tool));
     }
+
     public void sendDestroyUnattendedVehicleSignal(obj_id vehicle) throws InterruptedException
     {
         trial.bumpSession(vehicle);
         messageTo(vehicle, "handleDestroyUnattended", trial.getSessionDict(vehicle), 600, false);
     }
+
     public int handleDestroyUnattended(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))

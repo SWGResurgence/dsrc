@@ -1,13 +1,13 @@
 package script.item;
 
 import script.*;
-import script.library.*;
+import script.library.buff;
+import script.library.prose;
+import script.library.static_item;
+import script.library.utils;
 
 public class buff_group_click_item extends script.base_script
 {
-    public buff_group_click_item()
-    {
-    }
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final string_id SID_NOT_LINKED = new string_id("base_player", "not_linked");
     public static final string_id SID_NOT_LINKED_TO_HOLDER = new string_id("base_player", "not_linked_to_holder");
@@ -21,6 +21,11 @@ public class buff_group_click_item extends script.base_script
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");
     public static final string_id SID_BUFF_NOT_OWNER = new string_id("base_player", "food_buff_not_owner");
     public static final String OWNER_OID = "owner";
+
+    public buff_group_click_item()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -32,7 +37,7 @@ public class buff_group_click_item extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
                 }
@@ -40,6 +45,7 @@ public class buff_group_click_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -119,40 +125,42 @@ public class buff_group_click_item extends script.base_script
                             sendSystemMessage(player, "The Buff was applied because you were in god mode.", null);
                         }
                         CustomerServiceLog("buff", "buff_group_click_item object self: " + self + " Static Item Name: " + itemName + " providing buff: " + buffName + " being used by player: " + player + " Name: " + getName(player) + " of player level: " + playerLevel);
-						obj_id myGroup = getGroupObject(player);
-						if (isValidId(myGroup))
-						{
-							obj_id[] members = getGroupMemberIds(myGroup);
-							for (obj_id member : members) {
-								buff.applyBuff(member, buffName);
-								setObjVar(player, varName, (getGameTime() + (reuseTime)));
-								sendCooldownGroupTimingOnly(player, getStringCrc(coolDownGroup.toLowerCase()), reuseTime);
-								sendSystemMessage(player, BUFF_APPLIED);
-								doAnimationAction(player, clientAnimation);
-								playClientEffectObj(player, clientEffect, player, "");
-								if (!isIdValid(member) || !exists(member)) {
-									continue;
-								}
-							}
-						}
-						else
-						{
-							sendSystemMessage(player, MUST_BE_GROUPED);
-							return SCRIPT_CONTINUE;
-						}
+                        obj_id myGroup = getGroupObject(player);
+                        if (isValidId(myGroup))
+                        {
+                            obj_id[] members = getGroupMemberIds(myGroup);
+                            for (obj_id member : members)
+                            {
+                                buff.applyBuff(member, buffName);
+                                setObjVar(player, varName, (getGameTime() + (reuseTime)));
+                                sendCooldownGroupTimingOnly(player, getStringCrc(coolDownGroup.toLowerCase()), reuseTime);
+                                sendSystemMessage(player, BUFF_APPLIED);
+                                doAnimationAction(player, clientAnimation);
+                                playClientEffectObj(player, clientEffect, player, "");
+                                if (!isIdValid(member) || !exists(member))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            sendSystemMessage(player, MUST_BE_GROUPED);
+                            return SCRIPT_CONTINUE;
+                        }
                         if (getCount(self) > 0)
                         {
                             CustomerServiceLog("buff", "buff_group_click_item object self: " + self + " Static Item Name: " + itemName + " providing buff: " + buffName + " being used by player: " + player + " Name: " + getName(player) + ". Object is being decremented by ONE.");
                             static_item.decrementStaticItem(self);
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, CANT_APPLY_BUFF);
                         return SCRIPT_CONTINUE;
                     }
                 }
-                else 
+                else
                 {
                     int timeDiff = buffTime - getGameTime();
                     prose_package pp = prose.getPackage(SID_NOT_YET, timeDiff);
@@ -160,7 +168,7 @@ public class buff_group_click_item extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_ITEM_LEVEL_TOO_LOW);
             }

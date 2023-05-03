@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class smuggler extends script.base_script
 {
-    public smuggler()
-    {
-    }
     public static final String TBL = "datatables/npc/junk_dealer/junk_dealer.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";
@@ -56,27 +53,27 @@ public class smuggler extends script.base_script
     public static final String FLAG_ITEM_TITLE = "@" + STF + ":junk_not_found_title";
     public static final String NO_ITEMS_FOUND_PROMPT = "@" + STF + ":junk_not_found_description";
     public static final String BUY_BACK_CONTROL_DEVICE_TEMPLATE = "object/intangible/buy_back/buy_back_control_device.iff";
-    public static final string_id[] PROSE_FENCE_COMM = 
-    {
-        new string_id(STF, "prose_fence_comm"),
-        new string_id(STF, "prose_fence_comm_1"),
-        new string_id(STF, "prose_fence_comm_2")
-    };
-    public static final String[] COMM_SPECIES = 
-    {
-        "object/mobile/dressed_borvos_thief.iff",
-        "object/mobile/dressed_corsair_cutthroat_hum_m.iff",
-        "object/mobile/dressed_binayre_thief_twk_male_01.iff",
-        "object/mobile/dressed_binayre_goon_bith_male_01.iff",
-        "object/mobile/dressed_cobral_mugger_human_male_01.iff"
-    };
-    public static final String[] COMM_SOUND = 
-    {
-        "sound/sys_comm_other.snd",
-        "sound/sys_comm_generic.snd",
-        "sound/sys_comm_imperial.snd",
-        "sound/sys_comm_rebel_male.snd"
-    };
+    public static final string_id[] PROSE_FENCE_COMM =
+            {
+                    new string_id(STF, "prose_fence_comm"),
+                    new string_id(STF, "prose_fence_comm_1"),
+                    new string_id(STF, "prose_fence_comm_2")
+            };
+    public static final String[] COMM_SPECIES =
+            {
+                    "object/mobile/dressed_borvos_thief.iff",
+                    "object/mobile/dressed_corsair_cutthroat_hum_m.iff",
+                    "object/mobile/dressed_binayre_thief_twk_male_01.iff",
+                    "object/mobile/dressed_binayre_goon_bith_male_01.iff",
+                    "object/mobile/dressed_cobral_mugger_human_male_01.iff"
+            };
+    public static final String[] COMM_SOUND =
+            {
+                    "sound/sys_comm_other.snd",
+                    "sound/sys_comm_generic.snd",
+                    "sound/sys_comm_imperial.snd",
+                    "sound/sys_comm_rebel_male.snd"
+            };
     public static final string_id SID_CONTRABAND_FOUND = new string_id("smuggler/messages", "contraband_found");
     public static final float FENCE_MULTIPLIER_LOW = 0.80f;
     public static final float FENCE_MULTIPLIER = 0.85f;
@@ -100,10 +97,15 @@ public class smuggler extends script.base_script
     public static final String JUNK_DEALKER_NO_SALE_FLAG = "doNotSellFlag";
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
+    public smuggler()
+    {
+    }
+
     public static obj_id[] getAllJunkItems(obj_id player) throws InterruptedException
     {
         return getAllJunkItems(player, false);
     }
+
     public static obj_id[] getAllJunkItems(obj_id player, boolean getFlaggedNoSale) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -115,27 +117,40 @@ public class smuggler extends script.base_script
         {
             Vector junk = new Vector();
             junk.setSize(0);
-            for (obj_id content : contents) {
-                if (!validateItemsBeingSold(player, content)) {
+            for (obj_id content : contents)
+            {
+                if (!validateItemsBeingSold(player, content))
+                {
                     continue;
                 }
-                if (!getFlaggedNoSale && hasObjVar(content, JUNK_DEALKER_NO_SALE_FLAG)) {
+                if (!getFlaggedNoSale && hasObjVar(content, JUNK_DEALKER_NO_SALE_FLAG))
+                {
                     continue;
                 }
-                if (hasObjVar(content, "noTrade") || utils.isEquipped(content)) {
+                if (hasObjVar(content, "noTrade") || utils.isEquipped(content))
+                {
                     continue;
                 }
-                if (hasObjVar(content, "junkDealer.intPrice")) {
+                if (hasObjVar(content, "junkDealer.intPrice"))
+                {
                     junk = utils.addElement(junk, content);
-                } else if (static_item.isStaticItem(content)) {
-                    if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0) {
+                }
+                else if (static_item.isStaticItem(content))
+                {
+                    if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0)
+                    {
                         junk = utils.addElement(junk, content);
                     }
-                } else {
-                    if (!isCrafted(content)) {
+                }
+                else
+                {
+                    if (!isCrafted(content))
+                    {
                         String template = getTemplateName(content);
-                        if ((template != null) && (!template.equals(""))) {
-                            if (dataTableGetInt(TBL, template, "price") > 0) {
+                        if ((template != null) && (!template.equals("")))
+                        {
+                            if (dataTableGetInt(TBL, template, "price") > 0)
+                            {
                                 junk = utils.addElement(junk, content);
                             }
                         }
@@ -149,6 +164,7 @@ public class smuggler extends script.base_script
         }
         return null;
     }
+
     public static void showSellJunkSui(obj_id player, obj_id salesman, boolean fence, boolean showCommWindow) throws InterruptedException
     {
         if (!isIdValid(player) || !isValidId(salesman))
@@ -195,15 +211,15 @@ public class smuggler extends script.base_script
             String[] entries = new String[junk.length];
             for (int i = 0; i < junk.length; i++)
             {
-                int price = (int)(getPrice(junk[i]));
+                int price = getPrice(junk[i]);
                 if (fence)
                 {
-                    price = (int)(getPrice(junk[i]) * cashMultiplier);
+                    price = (int) (getPrice(junk[i]) * cashMultiplier);
                 }
                 String name = getAssignedName(junk[i]);
                 if (name.equals("") || name == null)
                 {
-                    name = getString(getNameStringId(junk[i]));
+                    name = getString(getNameFromTemplate(getTemplateName(junk[i])));
                 }
                 String entry = "[" + price + "] " + name;
                 entries[i] = entry;
@@ -220,7 +236,7 @@ public class smuggler extends script.base_script
                     buttonSell = BTN_SELL_FENCE;
                     utils.setScriptVar(player, "fence", true);
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(player, "fence", false);
                 }
@@ -237,26 +253,28 @@ public class smuggler extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (fence)
             {
                 prose_package ppfence = prose.getPackage(PROSE_FENCE_COMM_NOTHING);
                 commPlayers(player, strSpecies, strSound, 7.0f, player, ppfence);
             }
-            else 
+            else
             {
                 int msgPid = sui.msgbox(salesman, player, NO_ITEMS_PROMPT, sui.OK_ONLY, SELL_TITLE, "noHandler");
             }
             cleanupSellJunkSui(player);
         }
     }
+
     public static void cleanupSellJunkSui(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, "fence");
         utils.removeScriptVar(player, SCRIPTVAR_JUNK_SUI);
         utils.removeBatchScriptVar(player, SCRIPTVAR_JUNK_IDS);
     }
+
     public static void sellJunkItem(obj_id player, obj_id item, boolean fence, boolean reshowSui) throws InterruptedException
     {
         obj_id salesman = getSelf();
@@ -298,10 +316,10 @@ public class smuggler extends script.base_script
                 cashMultiplier = FENCE_MULTIPLIER_HIGH;
             }
         }
-        int price = (int)(getPrice(item));
+        int price = getPrice(item);
         if (fence)
         {
-            price = (int)(getPrice(item) * cashMultiplier);
+            price = (int) (getPrice(item) * cashMultiplier);
         }
         if (price > 0 && !hasObjVar(item, "quest_item"))
         {
@@ -323,7 +341,7 @@ public class smuggler extends script.base_script
                 blog("smuggler.sellJunkItem() this is a fence player");
                 params.put("fence", true);
             }
-            else 
+            else
             {
                 blog("smuggler.sellJunkItem() this is NOT a fence player");
                 params.put("fence", false);
@@ -343,10 +361,10 @@ public class smuggler extends script.base_script
                     params.put("item", item);
                     params.put("price", price);
                     params.put("reshowSui", false);
-                    int smugglerCut = (int)getSkillStatisticModifier(master, "expertise_junk_dealer_cut");
+                    int smugglerCut = getSkillStatisticModifier(master, "expertise_junk_dealer_cut");
                     if (smugglerCut > 0)
                     {
-                        price = (int)((float)price * smugglerCut * 0.01f);
+                        price = (int) ((float) price * smugglerCut * 0.01f);
                         money.systemPayout(money.ACCT_RELIC_DEALER, master, price, "handleSoldJunk", junkParams);
                         CustomerServiceLog("Junk_Dealer: ", "smuggler.sellJunkItem() - Player (" + playerName + " OID: " + player + ") sold item (" + itemName + " OID: " + item + ") for (" + price + ")credits, at (" + realTime + ")");
                         int totalProfits = utils.getIntScriptVar(salesman, "totalProfits");
@@ -356,7 +374,7 @@ public class smuggler extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             prose_package ppNoBuy = prose.getPackage(PROSE_NO_BUY, salesman, item);
             if (fence)
@@ -366,14 +384,17 @@ public class smuggler extends script.base_script
             sendSystemMessageProse(player, ppNoBuy);
         }
     }
+
     public static void sellJunkItem(obj_id player, obj_id item) throws InterruptedException
     {
         sellJunkItem(player, item, false);
     }
+
     public static void sellJunkItem(obj_id player, obj_id item, boolean reshowUi) throws InterruptedException
     {
         sellJunkItem(player, item, false, reshowUi);
     }
+
     public static int getPrice(obj_id item) throws InterruptedException
     {
         int price = 0;
@@ -385,7 +406,7 @@ public class smuggler extends script.base_script
         {
             price = static_item.getStaticObjectValue(getStaticItemName(item));
         }
-        else 
+        else
         {
             String template = getTemplateName(item);
             price = dataTableGetInt(TBL, template, "price");
@@ -397,6 +418,7 @@ public class smuggler extends script.base_script
         }
         return price;
     }
+
     public static boolean checkInventory(obj_id player, obj_id npc) throws InterruptedException
     {
         String item = "";
@@ -435,18 +457,17 @@ public class smuggler extends script.base_script
         }
         return false;
     }
+
     public static boolean hasItemsInContainer(obj_id item) throws InterruptedException
     {
         if (getContainerType(item) == 2)
         {
             obj_id[] subContents = utils.getContents(item);
-            if (subContents.length > 0)
-            {
-                return true;
-            }
+            return subContents.length > 0;
         }
         return false;
     }
+
     public static boolean validateItemsBeingSold(obj_id player, obj_id item) throws InterruptedException
     {
         if (utils.getContainingPlayer(item) != (player))
@@ -457,20 +478,21 @@ public class smuggler extends script.base_script
         {
             return false;
         }
-        if (utils.isEquipped(item))
-        {
-            return false;
-        }
-        return true;
+        return !utils.isEquipped(item);
     }
+
     public static boolean canSlyLie(obj_id playerSmuggler) throws InterruptedException
     {
         location here = getLocation(playerSmuggler);
         obj_id[] objects = getObjectsInRange(here, 25);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "quest.owner")) {
-                if (playerSmuggler == getObjIdObjVar(object, "quest.owner")) {
-                    if (utils.hasScriptVar(object, "contrabandCheck")) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "quest.owner"))
+            {
+                if (playerSmuggler == getObjIdObjVar(object, "quest.owner"))
+                {
+                    if (utils.hasScriptVar(object, "contrabandCheck"))
+                    {
                         return true;
                     }
                 }
@@ -478,14 +500,19 @@ public class smuggler extends script.base_script
         }
         return false;
     }
+
     public static boolean doSlyLie(obj_id playerSmuggler) throws InterruptedException
     {
         location here = getLocation(playerSmuggler);
         obj_id[] objects = getObjectsInRange(here, 25);
-        for (obj_id object : objects) {
-            if (hasObjVar(object, "quest.owner")) {
-                if (playerSmuggler == getObjIdObjVar(object, "quest.owner")) {
-                    if (utils.hasScriptVar(object, "contrabandCheck")) {
+        for (obj_id object : objects)
+        {
+            if (hasObjVar(object, "quest.owner"))
+            {
+                if (playerSmuggler == getObjIdObjVar(object, "quest.owner"))
+                {
+                    if (utils.hasScriptVar(object, "contrabandCheck"))
+                    {
                         utils.setScriptVar(object, "slyLie", 1);
                         return true;
                     }
@@ -495,6 +522,7 @@ public class smuggler extends script.base_script
         sendSystemMessage(playerSmuggler, new string_id("smuggler/enemy", "sly_lie_failure"));
         return false;
     }
+
     public static boolean canFastTalk(obj_id playerSmuggler, obj_id target) throws InterruptedException
     {
         if (!hasScript(target, "ai.smuggler_spawn_enemy"))
@@ -504,13 +532,11 @@ public class smuggler extends script.base_script
         if (ai_lib.isInCombat(target))
         {
             obj_id enemyTarget = getHateTarget(target);
-            if (enemyTarget != playerSmuggler)
-            {
-                return false;
-            }
+            return enemyTarget == playerSmuggler;
         }
         return true;
     }
+
     public static boolean doFastTalk(obj_id playerSmuggler, obj_id target) throws InterruptedException
     {
         if (!hasScript(target, "ai.smuggler_spawn_enemy"))
@@ -530,6 +556,7 @@ public class smuggler extends script.base_script
         messageTo(target, "fastTalkReaction", params, 0, false);
         return true;
     }
+
     public static int getSmugglerRank(float underworldFaction) throws InterruptedException
     {
         if (underworldFaction < 1000.0f)
@@ -546,6 +573,7 @@ public class smuggler extends script.base_script
         }
         return 3;
     }
+
     public static int getSmuggleTier(float underworldFaction) throws InterruptedException
     {
         if (underworldFaction < 1000.0f)
@@ -566,16 +594,20 @@ public class smuggler extends script.base_script
         }
         return 5;
     }
+
     public static boolean hasIllicitContraband(obj_id player) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         return true;
                     }
                 }
@@ -583,19 +615,24 @@ public class smuggler extends script.base_script
         }
         return false;
     }
+
     public static boolean hasIllicitMissionContraband(obj_id player) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         obj_id[] contrabandToCheck = utils.getAllStaticItemsInPlayerInventory(player, itemName);
                         int contrabandCount = utils.countOfStackedItemsInArray(contrabandToCheck);
-                        if (contrabandCount >= 5) {
+                        if (contrabandCount >= 5)
+                        {
                             return true;
                         }
                     }
@@ -604,6 +641,7 @@ public class smuggler extends script.base_script
         }
         return false;
     }
+
     public static int getIllicitContrabandTier(String itemName) throws InterruptedException
     {
         if (itemName.startsWith("item_smuggler_contraband_01"))
@@ -628,24 +666,32 @@ public class smuggler extends script.base_script
         }
         return 0;
     }
+
     public static String getIllicitMissionContrabandSmugglerTier(obj_id player, int smugglerTier) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         String contrabandFound = "";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         obj_id[] contrabandToCheck = utils.getAllStaticItemsInPlayerInventory(player, itemName);
                         int contrabandCount = utils.countOfStackedItemsInArray(contrabandToCheck);
-                        if (contrabandCount >= 5) {
+                        if (contrabandCount >= 5)
+                        {
                             int contrabandTier = getIllicitContrabandTier(itemName);
-                            if (contrabandTier == smugglerTier) {
+                            if (contrabandTier == smugglerTier)
+                            {
                                 return itemName;
-                            } else {
+                            }
+                            else
+                            {
                                 contrabandFound = itemName;
                             }
                         }
@@ -655,21 +701,27 @@ public class smuggler extends script.base_script
         }
         return contrabandFound;
     }
+
     public static boolean hasMissionContrabandForTransaction(obj_id player, int brokerTier) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         obj_id[] contrabandToCheck = utils.getAllStaticItemsInPlayerInventory(player, itemName);
                         int contrabandCount = utils.countOfStackedItemsInArray(contrabandToCheck);
-                        if (contrabandCount >= 5) {
+                        if (contrabandCount >= 5)
+                        {
                             int contrabandTier = getIllicitContrabandTier(itemName);
-                            if (contrabandTier == brokerTier) {
+                            if (contrabandTier == brokerTier)
+                            {
                                 return true;
                             }
                         }
@@ -679,21 +731,27 @@ public class smuggler extends script.base_script
         }
         return false;
     }
+
     public static String getMissionContrabandForTransactionName(obj_id player, int brokerTier) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         obj_id[] contrabandToCheck = utils.getAllStaticItemsInPlayerInventory(player, itemName);
                         int contrabandCount = utils.countOfStackedItemsInArray(contrabandToCheck);
-                        if (contrabandCount >= 5) {
+                        if (contrabandCount >= 5)
+                        {
                             int contrabandTier = getIllicitContrabandTier(itemName);
-                            if (contrabandTier == brokerTier) {
+                            if (contrabandTier == brokerTier)
+                            {
                                 return itemName;
                             }
                         }
@@ -703,19 +761,24 @@ public class smuggler extends script.base_script
         }
         return "";
     }
+
     public static int getMissionCotrabandPointerTier(obj_id player) throws InterruptedException
     {
         String contrabandName = "item_smuggler_contraband_0";
         obj_id[] contents = getInventoryAndEquipment(player);
-        if (contents != null && contents.length > 0)
+        if (contents != null)
         {
-            for (obj_id content : contents) {
-                if (static_item.isStaticItem(content)) {
+            for (obj_id content : contents)
+            {
+                if (static_item.isStaticItem(content))
+                {
                     String itemName = getStaticItemName(content);
-                    if (itemName.startsWith(contrabandName)) {
+                    if (itemName.startsWith(contrabandName))
+                    {
                         obj_id[] contrabandToCheck = utils.getAllStaticItemsInPlayerInventory(player, itemName);
                         int contrabandCount = utils.countOfStackedItemsInArray(contrabandToCheck);
-                        if (contrabandCount >= 5) {
+                        if (contrabandCount >= 5)
+                        {
                             return (getIllicitContrabandTier(itemName));
                         }
                     }
@@ -724,6 +787,7 @@ public class smuggler extends script.base_script
         }
         return 0;
     }
+
     public static void createRandomContrabandTier(obj_id player, int dropTier) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -734,15 +798,15 @@ public class smuggler extends script.base_script
         prose_package pp = null;
         pp = prose.getPackage(SID_CONTRABAND_FOUND, contrabandName);
         sendSystemMessageProse(player, pp);
-        return;
     }
+
     public static void spaceContrabandDropCheck(obj_id player) throws InterruptedException
     {
         float underworldFaction = factions.getFactionStanding(player, "underworld");
         int tier = getSmuggleTier(underworldFaction);
         int chance = (12 - tier * 2);
         int buffFeelingLucky = 0;
-        chance += buffFeelingLucky = (int)getSkillStatisticModifier(player, "expertise_increase_smuggler_loot");
+        chance += buffFeelingLucky = getSkillStatisticModifier(player, "expertise_increase_smuggler_loot");
         if (chance >= rand(1, 100))
         {
             createRandomContrabandTier(player, tier);
@@ -751,8 +815,8 @@ public class smuggler extends script.base_script
                 buff.applyBuff(player, "sm_feeling_lucky");
             }
         }
-        return;
     }
+
     public static void contrabandDropCheck(obj_id player, obj_id target, int tier, int corpseLevel) throws InterruptedException
     {
         int dropTier = 0;
@@ -782,7 +846,7 @@ public class smuggler extends script.base_script
         }
         int chance = (12 - (dropTier * 2));
         int buffFeelingLucky = 0;
-        chance += buffFeelingLucky = (int)getSkillStatisticModifier(player, "expertise_increase_smuggler_loot");
+        chance += buffFeelingLucky = getSkillStatisticModifier(player, "expertise_increase_smuggler_loot");
         utils.setScriptVar(target, "contrabandChecked", 1);
         if (chance >= rand(1, 100))
         {
@@ -794,8 +858,8 @@ public class smuggler extends script.base_script
             return;
         }
         sendSystemMessage(player, new string_id("smuggler/messages", "no_contraband_found"));
-        return;
     }
+
     public static void inspectCorpseForContraband(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -837,8 +901,8 @@ public class smuggler extends script.base_script
         int smugglerTier = getSmuggleTier(underworldFaction);
         int intLevel = getIntObjVar(target, "intCombatDifficulty");
         contrabandDropCheck(player, target, smugglerTier, intLevel);
-        return;
     }
+
     public static void removeFromBountyTerminal(obj_id self, int questCrc, boolean failed) throws InterruptedException
     {
         if (questCrc == (1824374497) || questCrc == (1752998742))
@@ -862,7 +926,7 @@ public class smuggler extends script.base_script
                     removeObjVar(self, "bounty.amount");
                     setJediBountyValue(self, 0);
                 }
-                else 
+                else
                 {
                     setObjVar(self, "bounty.amount", current_bounty);
                     setJediBountyValue(self, current_bounty);
@@ -873,9 +937,10 @@ public class smuggler extends script.base_script
                     dictionary d = new dictionary();
                     d.put("target", self);
                     d.put("bounty", current_bounty);
-                    if (hunters != null && hunters.length > 0)
+                    if (hunters != null)
                     {
-                        for (obj_id hunter : hunters) {
+                        for (obj_id hunter : hunters)
+                        {
                             messageTo(hunter, "handleBountyMissionIncomplete", d, 0.0f, true);
                         }
                     }
@@ -885,8 +950,8 @@ public class smuggler extends script.base_script
                 updateJediScriptData(self, "smuggler", 0);
             }
         }
-        return;
     }
+
     public static void checkSmugglerMissionBountyFailure(obj_id player, obj_id killer) throws InterruptedException
     {
         if (utils.isProfession(player, utils.SMUGGLER))
@@ -905,6 +970,7 @@ public class smuggler extends script.base_script
             }
         }
     }
+
     public static void checkSmugglerTitleGrants(obj_id player, float value) throws InterruptedException
     {
         if (value >= 1000.0f)
@@ -914,7 +980,7 @@ public class smuggler extends script.base_script
                 grantSkill(player, "sm_title_bootlegger");
             }
         }
-        else 
+        else
         {
             if (hasSkill(player, "sm_title_bootlegger"))
             {
@@ -928,7 +994,7 @@ public class smuggler extends script.base_script
                 grantSkill(player, "sm_title_pirate");
             }
         }
-        else 
+        else
         {
             if (hasSkill(player, "sm_title_pirate"))
             {
@@ -942,15 +1008,15 @@ public class smuggler extends script.base_script
                 grantSkill(player, "sm_title_master_smuggler");
             }
         }
-        else 
+        else
         {
             if (hasSkill(player, "sm_title_master_smuggler"))
             {
                 revokeSkill(player, "sm_title_master_smuggler");
             }
         }
-        return;
     }
+
     public static void checkBountyTitleGrants(obj_id player, float value) throws InterruptedException
     {
         if (value <= -1000.0f)
@@ -974,8 +1040,8 @@ public class smuggler extends script.base_script
                 grantSkill(player, "bh_title_agent");
             }
         }
-        return;
     }
+
     public static void checkRewardQuestGrants(obj_id target, float value) throws InterruptedException
     {
         if (value >= 1000.0f)
@@ -999,8 +1065,8 @@ public class smuggler extends script.base_script
                 groundquests.requestGrantQuest(target, "smuggler_reward_3");
             }
         }
-        return;
     }
+
     public static boolean moveBuyBackObjectIntoContainer(obj_id player, obj_id object, int credits) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1060,12 +1126,9 @@ public class smuggler extends script.base_script
         setObjVar(object, BUYBACK_OBJ_TIMESTAMP, timeNow);
         setObjVar(object, BUYBACK_OBJ_CREDITS, credits);
         // This should be a vendor... and if so, we don't care if it's full because the vendor does NOT try to move.
-        if (putInOverloaded(object, objContainer))
-        {
-            return true;
-        }
-        return false;
+        return putInOverloaded(object, objContainer);
     }
+
     public static boolean moveBuyBackObjectIntoInventory(obj_id player, obj_id object) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1098,6 +1161,7 @@ public class smuggler extends script.base_script
         CustomerServiceLog("Junk_Dealer: ", "smuggler.moveBuyBackObjectIntoInventory() - Player (OID: " + player + ") could not put object: " + object + " in buy back container.");
         return false;
     }
+
     public static obj_id[] getBuyBackItemsInContainer(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1121,6 +1185,7 @@ public class smuggler extends script.base_script
         }
         return objContents;
     }
+
     public static boolean hasBuyBackContainer(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1139,6 +1204,7 @@ public class smuggler extends script.base_script
         }
         return true;
     }
+
     public static obj_id createBuyBackControlDeviceOnPlayer(obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -1152,13 +1218,17 @@ public class smuggler extends script.base_script
             return null;
         }
         obj_id[] objContents = utils.getContents(datapad, true);
-        if (objContents != null && objContents.length > 0)
+        if (objContents != null)
         {
-            for (obj_id objContent : objContents) {
-                if (isIdValid(objContent)) {
+            for (obj_id objContent : objContents)
+            {
+                if (isIdValid(objContent))
+                {
                     String template = getTemplateName(objContent);
-                    if (template != null && template.length() > 0) {
-                        if (template.equals(BUY_BACK_CONTROL_DEVICE_TEMPLATE)) {
+                    if (template != null && template.length() > 0)
+                    {
+                        if (template.equals(BUY_BACK_CONTROL_DEVICE_TEMPLATE))
+                        {
                             CustomerServiceLog("Junk_Dealer: ", "smuggler.createBuyBackControlDeviceOnPlayer() - Player (OID: " + player + ") had an already valid buy back controller device that somehow got removed!: " + objContent);
                             setBuyBackContainerObjVar(player, objContent);
                             return objContent;
@@ -1176,6 +1246,7 @@ public class smuggler extends script.base_script
         setBuyBackContainerObjVar(player, buyBackControlDevice);
         return buyBackControlDevice;
     }
+
     public static void setBuyBackContainerObjVar(obj_id player, obj_id buyBackControlDevice) throws InterruptedException
     {
         obj_id buyBackContainer = utils.getInventoryContainer(buyBackControlDevice);
@@ -1183,12 +1254,12 @@ public class smuggler extends script.base_script
         {
             setObjVar(player, BUYBACK_CONTAINER_VAR, buyBackContainer);
         }
-        else 
+        else
         {
             CustomerServiceLog("Junk_Dealer: ", "smuggler.setBuyBackContainerObjVar() - Player (OID: " + player + ") buy back control device did not have a back buy container in its inventory.");
         }
-        return;
     }
+
     public static obj_id getBuyBackContainerObjVar(obj_id player) throws InterruptedException
     {
         if (hasObjVar(player, BUYBACK_CONTAINER_VAR))
@@ -1198,6 +1269,7 @@ public class smuggler extends script.base_script
         CustomerServiceLog("Junk_Dealer: ", "smuggler.getBuyBackContainerObjVar() - Player (OID: " + player + ") did not have a buy back container objvar. Attempting to find buy back control device.");
         return utils.getInventoryContainer(createBuyBackControlDeviceOnPlayer(player));
     }
+
     public static boolean hasBuyBackItems(obj_id player) throws InterruptedException
     {
         if (!isValidId(player))
@@ -1207,6 +1279,7 @@ public class smuggler extends script.base_script
         obj_id[] listOfBuyBacks = getBuyBackItemsInContainer(player);
         return listOfBuyBacks != null && listOfBuyBacks.length > 0;
     }
+
     public static boolean showBuyBackSui(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -1249,7 +1322,7 @@ public class smuggler extends script.base_script
             String name = getAssignedName(junk[i]);
             if (name.equals("") || name == null)
             {
-                name = getString(getNameStringId(junk[i]));
+                name = getString(getNameFromTemplate(getTemplateName(junk[i])));
             }
             String entry = "[" + price + "] " + name;
             entries[i] = entry;
@@ -1273,6 +1346,7 @@ public class smuggler extends script.base_script
         utils.setBatchScriptVar(player, SCRIPTVAR_JUNK_IDS, junk);
         return true;
     }
+
     public static boolean buyBackJunkItem(obj_id player, obj_id junkDealer, obj_id item, boolean reshowSui) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(item) || !isValidId(junkDealer))
@@ -1307,6 +1381,7 @@ public class smuggler extends script.base_script
         money.requestPayment(player, junkDealer, price, "handleTheBuyBack", params, true);
         return true;
     }
+
     public static void flagJunkSaleSui(obj_id player, obj_id salesman) throws InterruptedException
     {
         if (!isIdValid(player) || !isValidId(salesman))
@@ -1351,12 +1426,13 @@ public class smuggler extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             int msgPid = sui.msgbox(salesman, player, smuggler.NO_ITEMS_FOUND_PROMPT, sui.OK_ONLY, smuggler.FLAG_ITEM_TITLE, "noHandler");
             smuggler.cleanupSellJunkSui(player);
         }
     }
+
     public static boolean blog(String txt) throws InterruptedException
     {
         if (LOGGING_ON)

@@ -44,23 +44,24 @@ public class resource extends script.base_script
     public static final int CLASS_ENERGY_WIND = 12;
     public static final int CLASS_ENERGY_SOLAR = 13;
     public static final int CLASS_MAX = 14;
-    public static final String[] CLASS_NAME = 
-    {
-        "resource",
-        "inorganic",
-        "mineral",
-        "water",
-        "chemical",
-        "gas",
-        "energy",
-        "organic",
-        "creature_food",
-        "creature_structural",
-        "flora_resources",
-        "flora_structural",
-        "energy_renewable_unlimited_wind",
-        "energy_renewable_unlimited_solar"
-    };
+    public static final String[] CLASS_NAME =
+            {
+                    "resource",
+                    "inorganic",
+                    "mineral",
+                    "water",
+                    "chemical",
+                    "gas",
+                    "energy",
+                    "organic",
+                    "creature_food",
+                    "creature_structural",
+                    "flora_resources",
+                    "flora_structural",
+                    "energy_renewable_unlimited_wind",
+                    "energy_renewable_unlimited_solar",
+                    "energy_renewable_site_limited_geothermal"
+            };
     public static final String RT_ORGANIC = "organic";
     public static final String RT_INORGANIC = "inorganic";
     public static final String RT_MINERAL = "mineral";
@@ -158,6 +159,7 @@ public class resource extends script.base_script
     public static final int SAMPLE_CONTINUE_LOOP = 1;
     public static final int SAMPLE_CONTINUE_LOOP_NOSAMPLE = 2;
     public static final int SAMPLE_PAUSE_LOOP_EVENT = 3;
+
     public static boolean isResourceDerivedFrom(String resource_type, String parent_class) throws InterruptedException
     {
         if ((resource_type.equals("")) || (parent_class.equals("")))
@@ -173,12 +175,9 @@ public class resource extends script.base_script
         {
             return false;
         }
-        if (isResourceDerivedFrom(resourceId, parent_class))
-        {
-            return true;
-        }
-        return false;
+        return isResourceDerivedFrom(resourceId, parent_class);
     }
+
     public static obj_id[] create(obj_id resourceId, int amt, obj_id targetContainer, obj_id playerId) throws InterruptedException
     {
         if ((resourceId == null) || (resourceId == obj_id.NULL_ID))
@@ -211,7 +210,8 @@ public class resource extends script.base_script
             if (total > 0)
             {
                 obj_id crate = createObject(containerTemplate, targetContainer, "");
-                if ((crate != null) && (crate != obj_id.NULL_ID)) {
+                if ((crate != null) && (crate != obj_id.NULL_ID))
+                {
                     int containerAmount = CONTAINER_VOLUME_MAX;
                     if (total < CONTAINER_VOLUME_MAX)
                     {
@@ -231,10 +231,12 @@ public class resource extends script.base_script
         ret.toArray(_ret);
         return _ret;
     }
+
     public static obj_id[] create(obj_id resourceId, int amt, obj_id targetContainer) throws InterruptedException
     {
         return create(resourceId, amt, targetContainer, obj_id.NULL_ID);
     }
+
     public static obj_id[] createRandom(String resourceClass, int amt, location loc, obj_id targetContainer, obj_id playerId, int min) throws InterruptedException
     {
         if ((resourceClass == null) || (resourceClass.equals("")))
@@ -271,7 +273,7 @@ public class resource extends script.base_script
                 return null;
             }
         }
-        else 
+        else
         {
             resource_density[] availableResources = requestResourceList(loc, 0.0f, 1.0f, resourceClass);
             if (availableResources == null || availableResources.length == 0)
@@ -296,14 +298,17 @@ public class resource extends script.base_script
         utils.setScriptVar(playerId, "resource.lastId", resourceId);
         return create(resourceId, finalAmount, targetContainer, playerId);
     }
+
     public static obj_id[] createRandom(String resourceClass, int amt, location loc, obj_id targetContainer, obj_id playerId) throws InterruptedException
     {
         return createRandom(resourceClass, amt, loc, targetContainer, playerId, 1);
     }
+
     public static obj_id[] createRandom(String resourceClass, int amt, location loc, obj_id targetContainer) throws InterruptedException
     {
         return createRandom(resourceClass, amt, loc, targetContainer, obj_id.NULL_ID, 1);
     }
+
     public static boolean setToolClass(obj_id tool, int resource_class) throws InterruptedException
     {
         if (tool == null)
@@ -316,6 +321,7 @@ public class resource extends script.base_script
         }
         return setObjVar(tool, VAR_SURVEY_CLASS, CLASS_NAME[resource_class]);
     }
+
     public static boolean requestSetToolRatio(obj_id user, obj_id tool) throws InterruptedException
     {
         if ((user == null) || (tool == null))
@@ -359,8 +365,8 @@ public class resource extends script.base_script
             }
             res += (res_max - res_min) / 5.0;
             ranges = utils.addElement(ranges, range);
-            resolutions = utils.addElement(resolutions, (int)res);
-            options = utils.addElement(options, "" + range + "m x " + ((int)res) + "pts");
+            resolutions = utils.addElement(resolutions, (int) res);
+            options = utils.addElement(options, range + "m x " + ((int) res) + "pts");
             count++;
         }
         if (ranges.size() == 0 || resolutions.size() == 0)
@@ -374,6 +380,7 @@ public class resource extends script.base_script
         sui.listbox(tool, user, MSG_SELECT_RANGE, options, HANDLER_SET_RANGE);
         return true;
     }
+
     public static int getSample(obj_id user, obj_id tool, String type) throws InterruptedException
     {
         if ((user == null) || (tool == null) || (type.equals("")))
@@ -426,18 +433,18 @@ public class resource extends script.base_script
                 if (utils.hasScriptVar(user, "survey_event.gamble"))
                 {
                     gamble = utils.getIntScriptVar(user, "survey_event.gamble");
-                    
+
                     utils.removeScriptVar(user, "survey_event.gamble");
                     utils.removeScriptVar(user, "survey_event.tool");
                 }
-                else 
+                else
                 {
                     obj_id crittool = utils.getObjIdScriptVar(user, "survey_event.tool");
                     if (crittool != tool)
                     {
                         utils.removeScriptVar(user, "survey_event.tool");
                     }
-                    else 
+                    else
                     {
                         nodecritloc = utils.getLocationScriptVar(user, "survey_event.location");
                         location ploc = getLocation(user);
@@ -465,7 +472,7 @@ public class resource extends script.base_script
             if ((roll <= chance) || (gamble > 0) || (nodecritloc != null))
             {
                 float resultModifier = ((2 * chance) - roll) / (2 * chance);
-                int amt = (int)(famt * resultModifier);
+                int amt = (int) (famt * resultModifier);
                 if (amt == 0)
                 {
                     amt = 1;
@@ -503,7 +510,7 @@ public class resource extends script.base_script
                     utils.removeScriptVar(user, "survey_event.location");
                     utils.removeScriptVar(user, "survey_event.tool");
                 }
-                else 
+                else
                 {
                     int rollResult = 10;
                     if (isGod(user))
@@ -534,7 +541,7 @@ public class resource extends script.base_script
                                     sui.setPid(user, pid, PID_NAME);
                                 }
                             }
-                            else 
+                            else
                             {
                                 String[] nodeOptions = new String[2];
                                 nodeOptions[0] = "@survey:cnode_1";
@@ -547,7 +554,7 @@ public class resource extends script.base_script
                             }
                             return SAMPLE_PAUSE_LOOP_EVENT;
                         }
-                        else 
+                        else
                         {
                             utils.setScriptVar(user, "survey_event.tool", tool);
                             String collectionName = "col_resource_" + resource_class + "_01";
@@ -563,7 +570,7 @@ public class resource extends script.base_script
                                     sui.setPid(user, pid, PID_NAME);
                                 }
                             }
-                            else 
+                            else
                             {
                                 String[] nodeOptions = new String[2];
                                 nodeOptions[0] = "@survey:gnode_1";
@@ -581,11 +588,11 @@ public class resource extends script.base_script
                 int expertiseResourceIncrease = getSkillStatisticModifier(user, "expertise_resource_sampling_increase");
                 if (expertiseResourceIncrease > 0)
                 {
-                    amt += (int)(amt * expertiseResourceIncrease / 100.0f);
+                    amt += (int) (amt * expertiseResourceIncrease / 100.0f);
                 }
                 if (buff.hasBuff(user, "tcg_series4_falleens_fist"))
                 {
-                    amt = (int)(amt * 1.5f);
+                    amt = (int) (amt * 1.5f);
                     LOG("sissynoid", "Granting 50% Increase due to Falleen's Fist Buff");
                 }
                 String crateTemplate = getResourceContainerTemplate(typeId);
@@ -614,29 +621,29 @@ public class resource extends script.base_script
                             }
                             sendSystemMessageProse(user, prose.getPackage(SID_SAMPLE_LOCATED, type, amt));
                             if (isResourceDerivedFrom(typeId, "radioactive"))
-                        {
-                            int pe = resource.getResourceAttribute(typeId, "res_potential_energy");
-                            if (pe > 500)
                             {
-                                int damage = (pe - 500) / 2;
-                                if (damage < 1)
+                                int pe = resource.getResourceAttribute(typeId, "res_potential_energy");
+                                if (pe > 500)
                                 {
-                                    damage = 1;
+                                    int damage = (pe - 500) / 2;
+                                    if (damage < 1)
+                                    {
+                                        damage = 1;
+                                    }
+                                    int current = getAttrib(user, HEALTH);
+                                    if (damage > current)
+                                    {
+                                        damage = (current - 1);
+                                    }
+                                    addAttribModifier(user, HEALTH, (damage * -1), 0, 0, MOD_POOL);
+                                    int fatigue = damage / 4;
+                                    addShockWound(user, fatigue);
+                                    sendSystemMessage(user, SID_EFFECTS_OF_RADIATION_SICKNESS);
                                 }
-                                int current = getAttrib(user, HEALTH);
-                                if (damage > current)
-                                {
-                                    damage = (current - 1);
-                                }
-                                addAttribModifier(user, HEALTH, (damage * -1), 0, 0, MOD_POOL);
-                                int fatigue = damage / 4;
-                                addShockWound(user, fatigue);
-                                sendSystemMessage(user, SID_EFFECTS_OF_RADIATION_SICKNESS);
                             }
-                        }
                             return SAMPLE_CONTINUE_LOOP;
                         }
-                        else 
+                        else
                         {
                             setObjVar(user, "sampleCrateGenFailed", 1);
                             sendSystemMessage(user, SID_NO_INV_SPACE);
@@ -647,7 +654,7 @@ public class resource extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             sendSystemMessageProse(user, prose.getPackage(SID_DENSITY_BELOW_THESHOLD, type));
             return SAMPLE_STOP_LOOP;
@@ -656,6 +663,7 @@ public class resource extends script.base_script
         sendSystemMessageProse(user, prose.getPackage(SID_SAMPLE_FAILED, type));
         return SAMPLE_CONTINUE_LOOP_NOSAMPLE;
     }
+
     public static String getResourceContainerTemplate(obj_id typeId) throws InterruptedException
     {
         if (typeId == null)
@@ -669,6 +677,7 @@ public class resource extends script.base_script
         }
         return tpf;
     }
+
     public static boolean showToolProperties(obj_id target, obj_id tool) throws InterruptedException
     {
         if ((target == null) || (tool == null))
@@ -729,6 +738,7 @@ public class resource extends script.base_script
         }
         return false;
     }
+
     public static String getSkillModForClass(String resource_class) throws InterruptedException
     {
         if (resource_class.equals("resource"))
@@ -781,66 +791,52 @@ public class resource extends script.base_script
         }
         return "";
     }
+
     public static boolean isEnergyGeoThermal(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_ENERGY_GEO))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_ENERGY_GEO);
     }
+
     public static boolean isOrganic(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_ORGANIC))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_ORGANIC);
     }
+
     public static boolean isInorganic(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_INORGANIC))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_INORGANIC);
     }
+
     public static boolean isSolid(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_MINERAL))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_MINERAL);
     }
+
     public static boolean isGas(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_GAS))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_GAS);
     }
+
     public static boolean isLiquid(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
@@ -851,84 +847,63 @@ public class resource extends script.base_script
         {
             return true;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_LIQUID_CHEMICAL))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_LIQUID_CHEMICAL);
     }
+
     public static boolean isCreatureResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_CREATURE_RESOURCES))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_CREATURE_RESOURCES);
     }
+
     public static boolean isFloraResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_FLORA_RESOURCES))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_FLORA_RESOURCES);
     }
+
     public static boolean isFloraFoodResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_FLORA_FOOD))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_FLORA_FOOD);
     }
+
     public static boolean isFloraStructuralResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_FLORA_STRUCTURAL))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_FLORA_STRUCTURAL);
     }
+
     public static boolean isEnergyWindResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_ENERGY_WIND))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_ENERGY_WIND);
     }
+
     public static boolean isEnergySolarResource(String resource_class) throws InterruptedException
     {
         if (resource_class.equals(""))
         {
             return false;
         }
-        if (isResourceClassDerivedFrom(resource_class, RT_ENERGY_SOLAR))
-        {
-            return true;
-        }
-        return false;
+        return isResourceClassDerivedFrom(resource_class, RT_ENERGY_SOLAR);
     }
+
     public static String getResourceName(String resource_class) throws InterruptedException
     {
         int rowNum = dataTableSearchColumnForString(resource_class, 1, DATATABLE_RESOURCES);
@@ -945,6 +920,7 @@ public class resource extends script.base_script
         }
         return res;
     }
+
     public static int getEnergyTotalOnTarget(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -956,11 +932,15 @@ public class resource extends script.base_script
         if ((items != null) && (items.length > 0))
         {
             obj_id rId;
-            for (obj_id item : items) {
-                if (isGameObjectTypeOf(getGameObjectType(item), GOT_resource_container)) {
+            for (obj_id item : items)
+            {
+                if (isGameObjectTypeOf(getGameObjectType(item), GOT_resource_container))
+                {
                     rId = getResourceContainerResourceType(item);
-                    if (isIdValid(rId)) {
-                        if (isResourceDerivedFrom(rId, "energy") || isResourceDerivedFrom(rId, "radioactive")) {
+                    if (isIdValid(rId))
+                    {
+                        if (isResourceDerivedFrom(rId, "energy") || isResourceDerivedFrom(rId, "radioactive"))
+                        {
                             cnt += getPotentialEnergyValue(item);
                         }
                     }
@@ -969,6 +949,7 @@ public class resource extends script.base_script
         }
         return cnt;
     }
+
     public static int getPotentialEnergyValue(obj_id crate) throws InterruptedException
     {
         if (!isIdValid(crate))
@@ -987,6 +968,7 @@ public class resource extends script.base_script
         }
         return Math.round(getEnergyPowerRatio(rType) * amt);
     }
+
     public static float getEnergyPowerRatio(obj_id rType) throws InterruptedException
     {
         int potential = getResourceAttribute(rType, "res_potential_energy");
@@ -998,11 +980,12 @@ public class resource extends script.base_script
         {
             return 1.0f;
         }
-        else 
+        else
         {
             return 1.0f + (potential - 500.0f) / 500.0f;
         }
     }
+
     public static int getResourceAttribute(String resourceName, String attribName) throws InterruptedException
     {
         if (resourceName == null || resourceName.equals(""))
@@ -1011,6 +994,7 @@ public class resource extends script.base_script
         }
         return getResourceAttribute(getResourceTypeByName(resourceName), attribName);
     }
+
     public static dictionary getGeoThermalEnergyInformationOnTarget(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1027,17 +1011,23 @@ public class resource extends script.base_script
         if ((items != null) && (items.length > 0))
         {
             obj_id resourceType;
-            for (obj_id item : items) {
-                if (isGameObjectTypeOf(getGameObjectType(item), GOT_resource_container)) {
+            for (obj_id item : items)
+            {
+                if (isGameObjectTypeOf(getGameObjectType(item), GOT_resource_container))
+                {
                     resourceType = getResourceContainerResourceType(item);
-                    if (isIdValid(resourceType)) {
-                        if (isResourceDerivedFrom(resourceType, "energy_renewable_site_limited_geothermal")) {
-                            if (tempListUniqueList.size() == 0) {
+                    if (isIdValid(resourceType))
+                    {
+                        if (isResourceDerivedFrom(resourceType, "energy_renewable_site_limited_geothermal"))
+                        {
+                            if (tempListUniqueList.size() == 0)
+                            {
                                 tempListUniqueList.addElement(resourceType);
                                 resourceName = getResourceName(resourceType);
                                 resourceQuality = getResourceAttribute(resourceType, "res_quality");
                             }
-                            if (tempListUniqueList.contains(resourceType)) {
+                            if (tempListUniqueList.contains(resourceType))
+                            {
                                 cnt += getResourceContainerQuantity(item);
                             }
                         }
@@ -1050,6 +1040,7 @@ public class resource extends script.base_script
         resourceInfo.put("resourceQuality", resourceQuality);
         return resourceInfo;
     }
+
     public static void cleanupTool(obj_id player, obj_id tool) throws InterruptedException
     {
         if (isIdValid(player))
@@ -1066,6 +1057,7 @@ public class resource extends script.base_script
             utils.removeScriptVar(tool, "surveying.surveying");
         }
     }
+
     public static boolean consumeResource(obj_id player, String resource, int quantity) throws InterruptedException
     {
         obj_id[] contents = getInventoryAndEquipment(player);
@@ -1076,27 +1068,33 @@ public class resource extends script.base_script
         obj_id container;
         String parent;
 
-        for (obj_id content : contents) {
-            if (!isIdValid(content) || !exists(content)) {
+        for (obj_id content : contents)
+        {
+            if (!isIdValid(content) || !exists(content))
+            {
                 continue;
             }
-            if (!isResourceContainer(content)) {
+            if (!isResourceContainer(content))
+            {
                 continue;
             }
             container = getResourceContainerResourceType(content);
-            if (!isIdValid(container)) {
+            if (!isIdValid(container))
+            {
                 continue;
             }
             parent = getResourceParentClass(getResourceClass(container));
             parent = getResourceParentClass(parent);
             parent = getResourceParentClass(parent);
-            if (resource.equals(parent) && getResourceContainerQuantity(content) >= quantity) {
+            if (resource.equals(parent) && getResourceContainerQuantity(content) >= quantity)
+            {
                 removeResourceFromContainer(content, getResourceContainerResourceType(content), quantity);
                 return true;
             }
         }
         return false;
     }
+
     public static boolean hasResource(obj_id player, String resource, int quantity) throws InterruptedException
     {
         obj_id[] contents = getInventoryAndEquipment(player);
@@ -1106,21 +1104,26 @@ public class resource extends script.base_script
         }
         obj_id container;
         String parent;
-        for (obj_id content : contents) {
-            if (!isIdValid(content) || !exists(content)) {
+        for (obj_id content : contents)
+        {
+            if (!isIdValid(content) || !exists(content))
+            {
                 continue;
             }
-            if (!isResourceContainer(content)) {
+            if (!isResourceContainer(content))
+            {
                 continue;
             }
             container = getResourceContainerResourceType(content);
-            if (!isIdValid(container)) {
+            if (!isIdValid(container))
+            {
                 continue;
             }
             parent = getResourceParentClass(getResourceClass(container));
             parent = getResourceParentClass(parent);
             parent = getResourceParentClass(parent);
-            if (resource.equals(parent) && getResourceContainerQuantity(content) >= quantity) {
+            if (resource.equals(parent) && getResourceContainerQuantity(content) >= quantity)
+            {
                 return true;
             }
         }

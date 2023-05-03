@@ -9,22 +9,25 @@ import script.obj_id;
 
 public class base_container extends script.base_script
 {
+    public static final String SCRIPT_BASE_CONTAINER = "item.container.base.base_container";
+
     public base_container()
     {
     }
-    public static final String SCRIPT_BASE_CONTAINER = "item.container.base.base_container";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         switch (getContainerType(self))
         {
             case 0:
-            detachScript(self, SCRIPT_BASE_CONTAINER);
-            return SCRIPT_OVERRIDE;
+                detachScript(self, SCRIPT_BASE_CONTAINER);
+                return SCRIPT_OVERRIDE;
             default:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data midOpen = mi.getMenuItemByType(menu_info_types.ITEM_OPEN);
@@ -39,6 +42,7 @@ public class base_container extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_OPEN)
@@ -48,13 +52,13 @@ public class base_container extends script.base_script
                 switch (getContainerType(self))
                 {
                     case 0:
-                    detachScript(self, SCRIPT_BASE_CONTAINER);
-                    break;
+                        detachScript(self, SCRIPT_BASE_CONTAINER);
+                        break;
                     case 1:
-                    utils.requestContainerOpen(player, self);
-                    break;
+                        utils.requestContainerOpen(player, self);
+                        break;
                     default:
-                    break;
+                        break;
                 }
             }
         }

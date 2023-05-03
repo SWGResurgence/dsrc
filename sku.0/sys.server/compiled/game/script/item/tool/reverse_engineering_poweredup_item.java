@@ -11,6 +11,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
     public reverse_engineering_poweredup_item()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float dieTime = reverse_engineering.getDieTime(reverse_engineering.EXPIRATION_TIME, self);
@@ -34,11 +35,12 @@ public class reverse_engineering_poweredup_item extends script.base_script
             finalPower = 1;
         }
         obj_id player = getContainedBy(self);
-        addSkillModModifier(player, slotName + "_powerup", mod, (int)finalPower, -1, false, false);
+        addSkillModModifier(player, slotName + "_powerup", mod, finalPower, -1, false, false);
         reverse_engineering.applyBuffIcon(player, self);
         reverse_engineering.recalcPoolsIfNeeded(player, mod);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         String slotName = reverse_engineering.getMyEquippedSlot(self);
@@ -46,7 +48,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasSkillModModifier(transferer, slotName + "_powerup"))
             {
@@ -58,6 +60,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(destContainer))
@@ -67,7 +70,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 int power = getIntObjVar(self, reverse_engineering.ENGINEERING_POWER);
                 String mod = getStringObjVar(self, reverse_engineering.ENGINEERING_MODIFIER);
@@ -81,13 +84,14 @@ public class reverse_engineering_poweredup_item extends script.base_script
                 {
                     obj_id player = getFirstParentInWorld(self);
                     reverse_engineering.applyBuffIcon(player, self);
-                    addSkillModModifier(player, slotName + "_powerup", mod, (int)finalPower, -1, false, false);
+                    addSkillModModifier(player, slotName + "_powerup", mod, finalPower, -1, false, false);
                     reverse_engineering.recalcPoolsIfNeeded(player, mod);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String slotName = reverse_engineering.getMyEquippedSlot(self);
@@ -102,6 +106,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -112,6 +117,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU8, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -125,6 +131,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)
@@ -153,6 +160,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (self.isBeingDestroyed())
@@ -171,7 +179,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
             reverse_engineering.removeModsAndScript(player, self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (hasSkillModModifier(player, slotName + "_powerup"))
             {
@@ -181,6 +189,7 @@ public class reverse_engineering_poweredup_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleOverrideExistingPowerUp(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

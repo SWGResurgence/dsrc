@@ -378,10 +378,12 @@ public class battle_spawner extends script.base_class {
     }
     public static obj_id createUnit(obj_id centralObject, String unitName, float radius) throws InterruptedException
     {
-        return space_create.createShip(
+        obj_id ship = space_create.createShip(
                 unitName,
-                space_utils.getRandomPositionInSphere(getTransform_o2p(centralObject), 100.0f, radius, true)
-        );
+                space_utils.getRandomPositionInSphere(getTransform_o2p(centralObject), 100.0f, radius, true));
+
+        setObjVar(ship, "motherShip", centralObject);
+        return ship;
     }
     public int capitalShipDestroyed(obj_id self, dictionary params) {
         if(!battleIsActive(self)) return SCRIPT_CONTINUE;
@@ -436,8 +438,39 @@ public class battle_spawner extends script.base_class {
         spaceLog( "In distributeAwards... now checking single ship participants.");
         // distribute to pob qualifiers
         pointAwardedPlayers.addAll(
-            processShip(
-                getObjVarList(self, "space_gcw.participant." + battleId),
+                processShip(
+                        getObjVarList(self, "space_gcw.participant." + battleId),
+                        pobPlayerCeiling,
+                        self,
+                        pointAwardedPlayers,
+                        attackingFaction,
+                        imperialsWon,
+                        shipType,
+                        battleType,
+                        battleId
+                )
+        );
+
+        spaceLog( "In distributeAwards... now checking gunship participants.");
+        // distribute to gunship qualifiers
+        pointAwardedPlayers.addAll(
+                processShip(
+                        getObjVarList(self, "space_gcw.gunship.participant." + battleId),
+                        gunshipPlayerCeiling,
+                        self,
+                        pointAwardedPlayers,
+                        attackingFaction,
+                        imperialsWon,
+                        shipType,
+                        battleType,
+                        battleId
+                )
+        );
+
+        spaceLog( "In distributeAwards... now checking POB participants.");
+        // distribute to pob qualifiers
+        processShip(
+                getObjVarList(self, "space_gcw.pob.participant." + battleId),
                 pobPlayerCeiling,
                 self,
                 pointAwardedPlayers,
@@ -446,37 +479,6 @@ public class battle_spawner extends script.base_class {
                 shipType,
                 battleType,
                 battleId
-            )
-        );
-
-        spaceLog( "In distributeAwards... now checking gunship participants.");
-        // distribute to gunship qualifiers
-        pointAwardedPlayers.addAll(
-            processShip(
-                getObjVarList(self, "space_gcw.gunship.participant." + battleId),
-                gunshipPlayerCeiling,
-                self,
-                pointAwardedPlayers,
-                attackingFaction,
-                imperialsWon,
-                shipType,
-                battleType,
-                battleId
-            )
-        );
-
-        spaceLog( "In distributeAwards... now checking POB participants.");
-        // distribute to pob qualifiers
-        processShip(
-            getObjVarList(self, "space_gcw.pob.participant." + battleId),
-            pobPlayerCeiling,
-            self,
-            pointAwardedPlayers,
-            attackingFaction,
-            imperialsWon,
-            shipType,
-            battleType,
-            battleId
         );
     }
     public List<obj_id> processShip(obj_var_list qualifiedShips, int playerCeiling, obj_id self, List<obj_id> pointAwardedPlayers, String attackingFaction, boolean imperialsWon, String shipType, String battleType, String battleId) throws InterruptedException{
@@ -518,7 +520,8 @@ public class battle_spawner extends script.base_class {
 
             spaceLog( "In processShip... now processing " + playerCount + " VALID players on board ship " + ship + " (i.e. not ejected, still on board ship, etc).");
             for(obj_id player : currentShipMembers){
-                if(!factions.isImperialorImperialHelper(player) && !factions.isRebelorRebelHelper(player)) continue;
+                if (!space_flags.isImperialHelperPilot(player) && !space_flags.isImperialPilot(player) && !space_flags.isRebelHelperPilot(player) && !space_flags.isRebelPilot(player)) continue;
+
                 spaceLog( "In processShip... now processing player " + player + ".");
                 // make sure the player haven't been given anything yet.
                 if(pointAwardedPlayers.contains(player)){
@@ -534,8 +537,9 @@ public class battle_spawner extends script.base_class {
     }
     public void handlePlayerAwards(obj_id player, String attackingFaction, boolean imperialsWon, String shipType, String battleType, String battleId, float pointAdjustmentValue) throws InterruptedException {
         spaceLog( "In handlePlayerAwards... now awarding GCW points.");
-        boolean playerIsImperial = factions.isImperialorImperialHelper(player);
-        boolean playerWasAttacking = (playerIsImperial && attackingFaction.equals("imperial")) || (factions.isRebelorRebelHelper(player) && attackingFaction.equals("rebel"));
+        boolean playerIsImperial = space_flags.isImperialHelperPilot(player) || space_flags.isImperialPilot(player) ;
+        boolean playerIsRebel = space_flags.isRebelHelperPilot(player) || space_flags.isRebelPilot(player) ;
+        boolean playerWasAttacking = (playerIsImperial && attackingFaction.equals("imperial")) || (playerIsRebel && attackingFaction.equals("rebel"));
         boolean playerWon = (playerIsImperial && imperialsWon) ||
                 (!playerIsImperial && !imperialsWon);
 
@@ -556,7 +560,7 @@ public class battle_spawner extends script.base_class {
         );
 
         // tell player they've won/lost
-        sendSystemMessage(
+        sendConsoleMessage(
                 player,
                 constructFinishedBattleMessage(
                         playerWasAttacking,
@@ -567,8 +571,7 @@ public class battle_spawner extends script.base_class {
                         attackingFaction,
                         playerIsImperial ? "Imperial" : "Rebel",
                         awardedTokens
-                ),
-                null
+                )
         );
 
 
@@ -767,7 +770,7 @@ public class battle_spawner extends script.base_class {
         removeObjVar(self, "pending_cleanup");
         return SCRIPT_CONTINUE;
     }
-    
+
     public static void spaceLog(String message){
         String zone = getLocation(getSelf()).area;
         LOG("space_gcw", "Zone " + zone + ": " + message);

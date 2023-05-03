@@ -6,9 +6,6 @@ import script.string_id;
 
 public class geiger extends script.base_script
 {
-    public geiger()
-    {
-    }
     public static final String OBJVAR_GEIGER_LOCATION = "geiger.location";
     public static final String OBJVAR_GEIGER_FACTOR = "geiger.factor";
     public static final String OBJVAR_GEIGER_OBJECT = "geiger.object";
@@ -17,10 +14,15 @@ public class geiger extends script.base_script
     public static final String SCRIPTVAR_GEIGER_LAST = "geiger.last";
     public static final String GEIGER_TEMPLATE = "object/intangible/data_item/data_geiger_counter.iff";
     public static final String GEIGER_SCRIPT = "item.geiger.base";
+    public geiger()
+    {
+    }
+
     public static boolean hasGeiger(obj_id player) throws InterruptedException
     {
         return hasObjVar(player, OBJVAR_GEIGER_OBJECT);
     }
+
     public static void resetGeiger(obj_id player) throws InterruptedException
     {
         LOG("geiger", "before creating object");
@@ -37,6 +39,7 @@ public class geiger extends script.base_script
             sendSystemMessage(player, newDevice);
         }
     }
+
     public static void setGeiger(obj_id player, location loc) throws InterruptedException
     {
         LOG("geiger", "setGeiger: " + loc);
@@ -56,49 +59,55 @@ public class geiger extends script.base_script
             sendSystemMessage(player, newDevice);
         }
     }
+
     public static void clearGeiger(obj_id player) throws InterruptedException
     {
         removeObjVar(player, OBJVAR_GEIGER_LOCATION);
         removeObjVar(player, OBJVAR_GEIGER_FACTOR);
     }
+
     public static void removeGeiger(obj_id player) throws InterruptedException
     {
         obj_id datapad = utils.getPlayerDatapad(player);
         obj_id[] contents = getContents(datapad);
-        for (obj_id content : contents) {
-            if (hasScript(content, GEIGER_SCRIPT)) {
+        for (obj_id content : contents)
+        {
+            if (hasScript(content, GEIGER_SCRIPT))
+            {
                 destroyObject(content);
             }
         }
         clearGeiger(player);
     }
+
     public static float calculateGeigerNumber(obj_id player) throws InterruptedException
     {
         location here = getLocation(player);
         if (getLocationObjVar(player, OBJVAR_GEIGER_LOCATION) != null)
         {
             location loc = getLocationObjVar(player, OBJVAR_GEIGER_LOCATION);
-            int targetX = (int)loc.x;
-            int targetZ = (int)loc.z;
+            int targetX = (int) loc.x;
+            int targetZ = (int) loc.z;
             int factor = getIntObjVar(player, OBJVAR_GEIGER_FACTOR);
-            float distance = (float)Math.sqrt((here.x - targetX) * (here.x - targetX) + (here.z - targetZ) * (here.z - targetZ));
+            float distance = (float) Math.sqrt((here.x - targetX) * (here.x - targetX) + (here.z - targetZ) * (here.z - targetZ));
             distance = 5000 - distance;
             float result;
             if (factor % 2 == 1)
             {
                 result = distance / factor;
             }
-            else 
+            else
             {
-                result = (float)Math.sqrt(distance / factor) * 100;
+                result = (float) Math.sqrt(distance / factor) * 100;
             }
             return result;
         }
-        else 
+        else
         {
             return 0.0f;
         }
     }
+
     public static void updateGeiger(obj_id player, obj_id geiger) throws InterruptedException
     {
         if (hasObjVar(player, OBJVAR_GEIGER_PID))
@@ -112,16 +121,16 @@ public class geiger extends script.base_script
             }
             location targetLoc = getLocationObjVar(player, OBJVAR_GEIGER_LOCATION);
             location here = getLocation(player);
-            if ((targetLoc != null && !here.area.equals(targetLoc.area)) || targetLoc == null)
+            if (targetLoc == null || !here.area.equals(targetLoc.area))
             {
                 setSUIProperty(pid, "%info%", "Text", "\\#ff0000 \n\nNo Signal");
                 flushSUIPage(pid);
                 return;
             }
             location signalCheck = getLocation(player);
-            int targetX = (int)targetLoc.x;
-            int targetZ = (int)targetLoc.z;
-            float distance = (float)Math.sqrt((here.x - targetX) * (here.x - targetX) + (here.z - targetZ) * (here.z - targetZ));
+            int targetX = (int) targetLoc.x;
+            int targetZ = (int) targetLoc.z;
+            float distance = (float) Math.sqrt((here.x - targetX) * (here.x - targetX) + (here.z - targetZ) * (here.z - targetZ));
             float varience = rand(500, 1000);
             if (distance > 4500.0f + varience)
             {
@@ -143,11 +152,10 @@ public class geiger extends script.base_script
             {
                 setSUIProperty(pid, "%info%", "Text", "\n\nEnemy Threat Level: " + val + "\nDelta: 0.  You are not moving.");
                 flushSUIPage(pid);
-                return;
             }
-            else 
+            else
             {
-                setSUIProperty(pid, "%info%", "Text", "\n\nEnemy Threat Level: " + val + "\nDelta: " + (value > 0.0f ? "\\#00ff00 Moving closer \n " : "\\#ff0000 Moving away \n ") + (value > 9999.0f ? "-Out of range-" : (value + "")));
+                setSUIProperty(pid, "%info%", "Text", "\n\nEnemy Threat Level: " + val + "\nDelta: " + (value > 0.0f ? "\\#00ff00 Moving closer \n " : "\\#ff0000 Moving away \n ") + (value > 9999.0f ? "-Out of range-" : (String.valueOf(value))));
                 flushSUIPage(pid);
             }
         }

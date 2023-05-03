@@ -8,13 +8,14 @@ import script.string_id;
 
 public class message_assembled extends script.base_script
 {
-    public message_assembled()
-    {
-    }
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("encoded_disk/message_fragment", "sys_not_in_inv");
     public static final string_id SID_USE = new string_id("treasure_map/treasure_map", "use");
     public static final String SID_CLOSE = "@treasure_map/treasure_map:close";
     public static final String MESSAGE_TABLE = "datatables/encoded_disk/message_fragment.iff";
+    public message_assembled()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String scenarioName = getStringObjVar(self, "scenarioName");
@@ -22,11 +23,13 @@ public class message_assembled extends script.base_script
         setName(self, nameId);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_USE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -35,6 +38,7 @@ public class message_assembled extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public void displayDialog(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -56,6 +60,7 @@ public class message_assembled extends script.base_script
         }
         createDialog(self, player, text, title);
     }
+
     public int createDialog(obj_id self, obj_id player, String text, String title) throws InterruptedException
     {
         if (player == null)

@@ -9,15 +9,18 @@ import script.obj_id;
 
 public class chaffflare extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
+
     public chaffflare()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 5);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -26,13 +29,14 @@ public class chaffflare extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[free] = "effectiveness";
-        attribs[free++] = "" + floatFormat.format((float)getIntObjVar(self, stealth.DETECT_EFFECTIVENESS) / 10) + "%";
+        attribs[free++] = "" + floatFormat.format((float) getIntObjVar(self, stealth.DETECT_EFFECTIVENESS) / 10) + "%";
         float flareDistance = stealth.CHAFF_FLARE_DISTANCE;
         names[free] = "trap_radius";
         attribs[free++] = "" + flareDistance;
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -54,6 +58,7 @@ public class chaffflare extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -77,7 +82,7 @@ public class chaffflare extends script.base_script
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 setCount(self, count);
             }

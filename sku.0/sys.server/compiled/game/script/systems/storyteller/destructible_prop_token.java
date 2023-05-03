@@ -7,11 +7,12 @@ import script.*;
 
 public class destructible_prop_token extends script.base_script
 {
+    public static final int MIN_HEALTH = 180000;
+    public static final int MAX_HEALTH = 250000;
     public destructible_prop_token()
     {
     }
-    public static final int MIN_HEALTH = 180000;
-    public static final int MAX_HEALTH = 250000;
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -22,6 +23,7 @@ public class destructible_prop_token extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, eliteConversionPrompt);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -57,13 +59,14 @@ public class destructible_prop_token extends script.base_script
                     CustomerServiceLog("storyteller", logMsg);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("storyteller", "invalid_target"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getStorytellerTokenTarget(obj_id player) throws InterruptedException
     {
         obj_id target = null;
@@ -72,12 +75,13 @@ public class destructible_prop_token extends script.base_script
         {
             target = intendedTarget;
         }
-        else 
+        else
         {
             target = getLookAtTarget(player);
         }
         return target;
     }
+
     public boolean isTargetMyStorytellerObject(obj_id player, obj_id target) throws InterruptedException
     {
         if (storyteller.isAnyStorytellerItem(target))
@@ -91,7 +95,7 @@ public class destructible_prop_token extends script.base_script
                     {
                         return true;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(player, new string_id("storyteller", "destrucible_prop_on_prop_only"));
                         return false;

@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class doc_bag extends script.base_script
 {
-    public doc_bag()
-    {
-    }
     public static final string_id SID_EXAMINE_MEDS = new string_id("doctor_bag", "examine_meds");
     public static final string_id SID_REMOVE_MEDS = new string_id("doctor_bag", "remove_meds");
     public static final string_id SID_NOTHING_IN_BAG = new string_id("doctor_bag", "nothing_in_bag");
@@ -21,6 +18,10 @@ public class doc_bag extends script.base_script
     public static final string_id SID_LABEL_ALREADY = new string_id("doctor_bag", "label_already_assigned");
     public static final string_id SID_NEW_LABEL = new string_id("doctor_bag", "new_label");
     public static final string_id SID_LABEL_NO_SPACES = new string_id("doctor_bag", "label_no_spaces");
+    public doc_bag()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         setCount(self, 1);
@@ -28,6 +29,7 @@ public class doc_bag extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_SET_LABEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -44,6 +46,7 @@ public class doc_bag extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void displayRemoveMeds(obj_id player, obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -85,6 +88,7 @@ public class doc_bag extends script.base_script
         utils.setScriptVar(self, "med_index", med_index);
         sui.listbox(self, player, "@doctor_bag:remove_med_d", sui.OK_CANCEL, "@doctor_bag:remove_med_t", med_names, "handleRemoveMed", true, false);
     }
+
     public int handleRemoveMed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -103,6 +107,7 @@ public class doc_bag extends script.base_script
         doctor_bag.removeMedicine(player, self, real_med_index);
         return SCRIPT_CONTINUE;
     }
+
     public void displayLabelMeds(obj_id player, obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -144,6 +149,7 @@ public class doc_bag extends script.base_script
         utils.setScriptVar(self, "med_index", med_index);
         sui.listbox(self, player, "@doctor_bag:label_med_d", sui.OK_CANCEL, "@doctor_bag:label_med_t", med_names, "handleLabelMed", true, false);
     }
+
     public int handleLabelMed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -165,6 +171,7 @@ public class doc_bag extends script.base_script
         sui.inputbox(self, player, "@doctor_bag:label_input_d", "@doctor_bag:label_input_t", "handleSetLabel", label);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetLabel(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -197,6 +204,7 @@ public class doc_bag extends script.base_script
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public void displayExamineMeds(obj_id player, obj_id self) throws InterruptedException
     {
         int count = 0;
@@ -233,6 +241,7 @@ public class doc_bag extends script.base_script
         utils.setScriptVar(self, "med_index", med_index);
         sui.listbox(self, player, "@doctor_bag:examine_med_d", sui.OK_CANCEL, "@doctor_bag:examine_med_t", med_names, "handleExamineMed", true, false);
     }
+
     public int handleExamineMed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

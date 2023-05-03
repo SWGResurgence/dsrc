@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class marriage extends script.base_script
 {
-    public marriage()
-    {
-    }
     public static final float PROPOSAL_RANGE = 5.0f;
     public static final float PROPOSAL_TIME = 120.0f;
     public static final String SCRIPT_RING_BASE = "item.ring.base";
@@ -68,6 +65,10 @@ public class marriage extends script.base_script
     public static final string_id SID_WED_OOR = new string_id(STF, "wed_oor");
     public static final string_id SID_YOU_EXCHANGE_RINGS = new string_id(STF, "you_exchange_rings");
     public static final string_id PROSE_END_UNITY = new string_id(STF, "prose_end_unity");
+    public marriage()
+    {
+    }
+
     public static boolean isMarried(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -76,6 +77,7 @@ public class marriage extends script.base_script
         }
         return hasObjVar(target, VAR_MARRIAGE_BASE);
     }
+
     public static boolean hasProposed(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -84,6 +86,7 @@ public class marriage extends script.base_script
         }
         return utils.hasScriptVar(target, VAR_PROPOSAL_NAME);
     }
+
     public static void propose(obj_id player, obj_id target, obj_id ring) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target) || !isIdValid(ring))
@@ -153,6 +156,7 @@ public class marriage extends script.base_script
         sendSystemMessageProse(player, ppPropose);
         messageTo(target, HANDLER_PROPOSED_TO, params, 2, false);
     }
+
     public static void cleanupProposal(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -163,6 +167,7 @@ public class marriage extends script.base_script
         utils.removeScriptVar(player, VAR_PROPOSAL_NAME);
         utils.removeScriptVar(player, VAR_PROPOSAL_RING);
     }
+
     public static void cleanupProposedTo(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -173,6 +178,7 @@ public class marriage extends script.base_script
         utils.removeScriptVar(player, VAR_PROPOSEDTO_NAME);
         utils.removeScriptVar(player, VAR_PROPOSEDTO_RING);
     }
+
     public static void cleanupAcceptance(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -188,6 +194,7 @@ public class marriage extends script.base_script
         utils.removeScriptVar(player, VAR_ACCEPT_SUI_OPTIONS);
         utils.removeScriptVar(player, VAR_ACCEPT_RING);
     }
+
     public static obj_id[] getRings(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -218,6 +225,7 @@ public class marriage extends script.base_script
         }
         return utils.toStaticObjIdArray(rings);
     }
+
     public static void wed(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -268,6 +276,7 @@ public class marriage extends script.base_script
         messageTo(player, HANDLER_RING_SETUP, toPlayer, 0, false);
         messageTo(target, HANDLER_RING_SETUP, toTarget, 0, false);
     }
+
     public static void weddingError(obj_id player, obj_id target) throws InterruptedException
     {
         sendSystemMessage(player, SID_WED_ERROR);
@@ -275,6 +284,7 @@ public class marriage extends script.base_script
         detachScript(player, SCRIPT_UNITY);
         detachScript(target, SCRIPT_UNITY);
     }
+
     public static void weddingError(obj_id player) throws InterruptedException
     {
         obj_id target = null;
@@ -290,12 +300,13 @@ public class marriage extends script.base_script
         {
             weddingError(player, target);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_WED_ERROR);
             detachScript(player, SCRIPT_UNITY);
         }
     }
+
     public static void divorce(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -315,6 +326,7 @@ public class marriage extends script.base_script
         }
         endUnity(player);
     }
+
     public static void declineProposal(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -329,6 +341,7 @@ public class marriage extends script.base_script
         sendSystemMessage(player, SID_DECLINE);
         detachScript(player, SCRIPT_UNITY);
     }
+
     public static void cannotAccept(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -343,6 +356,7 @@ public class marriage extends script.base_script
         sendSystemMessage(player, SID_NO_RING);
         detachScript(player, SCRIPT_UNITY);
     }
+
     public static void endUnity(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

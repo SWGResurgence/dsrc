@@ -10,10 +10,12 @@ import script.obj_id;
 
 public class gcw_city_kit extends script.base_script
 {
+    public static final int CONSTRUCTION_HP_BASE = 5000;
+
     public gcw_city_kit()
     {
     }
-    public static final int CONSTRUCTION_HP_BASE = 5000;
+
     public void destroyKitObj(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -29,6 +31,7 @@ public class gcw_city_kit extends script.base_script
         removeObjVar(self, "gcw.kitObj");
         utils.removeScriptVar(self, "iconMessageTime");
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(objSpeaker))
@@ -77,11 +80,13 @@ public class gcw_city_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyKitObj(self);
         return SCRIPT_CONTINUE;
     }
+
     public int getConstructionQuestsCompleted(obj_id pylon) throws InterruptedException
     {
         int completed = 0;
@@ -95,13 +100,16 @@ public class gcw_city_kit extends script.base_script
         }
         return completed;
     }
+
     public boolean hasConstructionQuests() throws InterruptedException
     {
         return true;
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
     }
+
     public int beginConstruction(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -153,17 +161,21 @@ public class gcw_city_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         return null;
     }
+
     public int getConstructionHP() throws InterruptedException
     {
         return CONSTRUCTION_HP_BASE;
     }
+
     public int beginInvasion(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -227,6 +239,7 @@ public class gcw_city_kit extends script.base_script
         setupInvasionQuests(kit);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyKitObj(self);

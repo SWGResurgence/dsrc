@@ -8,9 +8,6 @@ import script.string_id;
 
 public class slicing_weapon extends script.base_script
 {
-    public slicing_weapon()
-    {
-    }
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_REPAIR = new string_id("slicing/slicing", "repair");
     public static final string_id SID_NO_KIT = new string_id("slicing/slicing", "no_weapon_kit");
@@ -23,11 +20,16 @@ public class slicing_weapon extends script.base_script
     public static final string_id SID_FAILED_NO_EQUIP = new string_id("slicing/slicing", "failed_no_equip");
     public static final string_id SID_SLICE_APPLIED = new string_id("slicing/slicing", "slice_applied");
     public static final String SLICE_TABLE = "datatables/smuggler/slice_weapon.iff";
+    public slicing_weapon()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.slicing.slicing_weapon");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (jedi.isLightsaber(self))
@@ -40,6 +42,7 @@ public class slicing_weapon extends script.base_script
         detachScript(self, "item.slicing.slicing_weapon");
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -71,7 +74,8 @@ public class slicing_weapon extends script.base_script
             int slice_cost = effect.getInt("COST");
             int slice_amount = effect.getInt("AMOUNT");
             boolean asuccess = false;
-            switch (stat) {
+            switch (stat)
+            {
                 case "fire_rate":
                     asuccess = applyFireRateChange(self, player, slice_amount);
                     break;
@@ -94,11 +98,12 @@ public class slicing_weapon extends script.base_script
                 sendDirtyAttributesNotification(self);
             }
         }
-        else 
+        else
         {
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean applyFireRateChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -122,12 +127,13 @@ public class slicing_weapon extends script.base_script
             spd = (spdLow * 0.7f);
         }
         setWeaponAttackSpeed(self, spd);
-        int mod = (int)(pctBonus * 100);
+        int mod = (int) (pctBonus * 100);
         prose_package pp = prose.getPackage(SID_SPD_MOD, mod);
         sendSystemMessageProse(player, pp);
         setObjVar(self, "slice.fire_rate", slice_amount);
         return true;
     }
+
     public boolean applyDamageChange(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -165,14 +171,15 @@ public class slicing_weapon extends script.base_script
         {
             maxDam = (maxDamHigh * 1.3f);
         }
-        setWeaponMinDamage(self, (int)minDam);
-        setWeaponMaxDamage(self, (int)maxDam);
-        int mod = (int)(pctBonus * 100);
+        setWeaponMinDamage(self, (int) minDam);
+        setWeaponMaxDamage(self, (int) maxDam);
+        int mod = (int) (pctBonus * 100);
         prose_package pp = prose.getPackage(SID_DAM_MOD, mod);
         sendSystemMessageProse(player, pp);
         setObjVar(self, "slice.damage", slice_amount);
         return true;
     }
+
     public boolean applyCritChance(obj_id self, obj_id player, int slice_amount) throws InterruptedException
     {
         prose_package pp = prose.getPackage(SID_CRIT_MOD, slice_amount);

@@ -14,17 +14,20 @@ public class banner_buff_manager extends script.base_script
     public banner_buff_manager()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "buffPlayers", null, 1.0f, false);
         messageTo(self, "handleDeleteSelf", null, 180.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public String getBannerBuff(obj_id self) throws InterruptedException
     {
         obj_id player = trial.getParent(self);
@@ -35,26 +38,27 @@ public class banner_buff_manager extends script.base_script
         switch (utils.getPlayerProfession(player))
         {
             case utils.COMMANDO:
-            return "banner_buff_commando";
+                return "banner_buff_commando";
             case utils.SMUGGLER:
-            return "banner_buff_smuggler";
+                return "banner_buff_smuggler";
             case utils.MEDIC:
-            return "banner_buff_medic";
+                return "banner_buff_medic";
             case utils.OFFICER:
-            return "banner_buff_officer";
+                return "banner_buff_officer";
             case utils.SPY:
-            return "banner_buff_spy";
+                return "banner_buff_spy";
             case utils.BOUNTY_HUNTER:
-            return "banner_buff_bounty_hunter";
+                return "banner_buff_bounty_hunter";
             case utils.FORCE_SENSITIVE:
-            return "banner_buff_force_sensitive";
+                return "banner_buff_force_sensitive";
             case utils.TRADER:
-            return "banner_buff_trader";
+                return "banner_buff_trader";
             case utils.ENTERTAINER:
-            return "banner_buff_entertainer";
+                return "banner_buff_entertainer";
         }
         return null;
     }
+
     public int buffPlayers(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidPlayersInRadius(self, 30.0f);
@@ -66,7 +70,7 @@ public class banner_buff_manager extends script.base_script
         {
             applyBuff = false;
         }
-        else 
+        else
         {
             faction = getIntObjVar(self, "parent.faction");
         }
@@ -74,17 +78,21 @@ public class banner_buff_manager extends script.base_script
         {
             applyBuff = false;
         }
-        else 
+        else
         {
-            for (obj_id player : players) {
-                switch (faction) {
+            for (obj_id player : players)
+            {
+                switch (faction)
+                {
                     case 0:
-                        if (factions.isRebel(player)) {
+                        if (factions.isRebel(player))
+                        {
                             utils.addElement(filteredPlayers, player);
                         }
                         break;
                     case 1:
-                        if (factions.isImperial(player)) {
+                        if (factions.isImperial(player))
+                        {
                             utils.addElement(filteredPlayers, player);
                         }
                         break;
@@ -115,6 +123,7 @@ public class banner_buff_manager extends script.base_script
         messageTo(self, "buffPlayers", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteSelf(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);

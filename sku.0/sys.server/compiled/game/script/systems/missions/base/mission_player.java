@@ -7,50 +7,59 @@ import java.util.Vector;
 
 public class mission_player extends script.systems.missions.base.mission_player_base
 {
+    public static final String[] OPS_APPEARANCES =
+            {
+                    "object/mobile/dressed_rebel_trooper_human_female_01.iff",
+                    "object/mobile/dressed_rebel_trooper_twk_female_01.iff",
+                    "object/mobile/dressed_rebel_trooper_bith_m_01.iff",
+                    "object/mobile/dressed_rebel_trooper_sullustan_male_01.iff"
+            };
+    public static final string_id IMPROVED_JOB_MARKET_MESSAGE = new string_id("city/city", "improved_job_market_message");
     public mission_player()
     {
     }
-    public static final String[] OPS_APPEARANCES = 
-    {
-        "object/mobile/dressed_rebel_trooper_human_female_01.iff",
-        "object/mobile/dressed_rebel_trooper_twk_female_01.iff",
-        "object/mobile/dressed_rebel_trooper_bith_m_01.iff",
-        "object/mobile/dressed_rebel_trooper_sullustan_male_01.iff"
-    };
-    public static final string_id IMPROVED_JOB_MARKET_MESSAGE = new string_id("city/city", "improved_job_market_message");
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        final String[] strSchematics = 
+        final String[] strSchematics =
+                {
+                        "object/draft_schematic/item/quest_item/attunement_grid.iff",
+                        "object/draft_schematic/item/quest_item/current_alternator.iff",
+                        "object/draft_schematic/item/quest_item/feedback_controller.iff",
+                        "object/draft_schematic/item/quest_item/output_governor.iff",
+                        "object/draft_schematic/item/quest_item/power_regulator.iff"
+                };
+        for (String strSchematic1 : strSchematics)
         {
-            "object/draft_schematic/item/quest_item/attunement_grid.iff",
-            "object/draft_schematic/item/quest_item/current_alternator.iff",
-            "object/draft_schematic/item/quest_item/feedback_controller.iff",
-            "object/draft_schematic/item/quest_item/output_governor.iff",
-            "object/draft_schematic/item/quest_item/power_regulator.iff"
-        };
-        for (String strSchematic1 : strSchematics) {
             boolean boolHasMission = false;
-            if (hasSchematic(self, strSchematic1)) {
+            if (hasSchematic(self, strSchematic1))
+            {
                 obj_id[] objMissions = getMissionObjects(self);
-                if ((objMissions != null) && (objMissions.length > 0)) {
-                    for (int intM = 0; intM < objMissions.length; intM++) {
-                        if (hasObjVar(objMissions[intM], "strSchematic")) {
+                if ((objMissions != null) && (objMissions.length > 0))
+                {
+                    for (int intM = 0; intM < objMissions.length; intM++)
+                    {
+                        if (hasObjVar(objMissions[intM], "strSchematic"))
+                        {
                             String strSchematic = getStringObjVar(objMissions[intM], "strSchematic");
                             String strTest = strSchematic1;
-                            if (strSchematic.equals(strTest)) {
+                            if (strSchematic.equals(strTest))
+                            {
                                 intM = objMissions.length;
                                 boolHasMission = true;
                             }
                         }
                     }
                 }
-                if (!boolHasMission) {
+                if (!boolHasMission)
+                {
                     revokeSchematic(self, strSchematic1);
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPlayerRequestMissionBoard(obj_id self, obj_id objPlayer, obj_id objMissionTerminal, obj_id[] objMissionData) throws InterruptedException
     {
         if (objMissionData.length < 10)
@@ -113,12 +122,12 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     strDestroyFaction = strFaction + "_military";
                 }
-                else 
+                else
                 {
                     strDestroyFaction = strFaction + "_non_military";
                 }
             }
-            else 
+            else
             {
                 strDestroyFaction = strFaction + "_non_military";
             }
@@ -150,39 +159,52 @@ public class mission_player extends script.systems.missions.base.mission_player_
             int intBountyDifficulty = getBountyDifficulty(objPlayer);
             int intPlayerDifficulty = getLevel(objPlayer);
             int pvpBountyCount = 0;
-            for (obj_id objMissionDatum : objMissionData) {
+            for (obj_id objMissionDatum : objMissionData)
+            {
                 cleanMissionObject(objMissionDatum);
                 obj_id objTest = null;
                 LOG("missions", "Making regular missions");
-                if (pvpBountyCount < 1) {
+                if (pvpBountyCount < 1)
+                {
                     objTest = createJediBountyMission(objMissionDatum, objMissionTerminal, strFaction, intPlayerDifficulty, objPlayer, missions.BOUNTY_FLAG_SMUGGLER);
-                    if (objTest == null) {
+                    if (objTest == null)
+                    {
                         objTest = createJediBountyMission(objMissionDatum, objMissionTerminal, strFaction, intPlayerDifficulty, objPlayer, missions.BOUNTY_FLAG_NONE);
-                        if (objTest == null) {
+                        if (objTest == null)
+                        {
                             objTest = createDynamicBountyMission(objMissionDatum, objMissionTerminal, intBountyDifficulty, intPlayerDifficulty, locTest.area, strFaction);
                         }
                     }
                 }
-                if (pvpBountyCount >= 1 && pvpBountyCount < 3) {
+                if (pvpBountyCount >= 1 && pvpBountyCount < 3)
+                {
                     objTest = createJediBountyMission(objMissionDatum, objMissionTerminal, opposingFaction, intPlayerDifficulty, objPlayer, missions.BOUNTY_FLAG_NONE);
-                    if (objTest == null) {
+                    if (objTest == null)
+                    {
                         objTest = createDynamicBountyMission(objMissionDatum, objMissionTerminal, intBountyDifficulty, intPlayerDifficulty, locTest.area, strFaction);
                     }
                 }
-                if (pvpBountyCount >= 3 && pvpBountyCount < 5) {
+                if (pvpBountyCount >= 3 && pvpBountyCount < 5)
+                {
                     objTest = createJediBountyMission(objMissionDatum, objMissionTerminal, strFaction, intPlayerDifficulty, objPlayer, missions.BOUNTY_FLAG_NONE);
-                    if (objTest == null) {
+                    if (objTest == null)
+                    {
                         objTest = createDynamicBountyMission(objMissionDatum, objMissionTerminal, intBountyDifficulty, intPlayerDifficulty, locTest.area, strFaction);
                     }
                 }
-                if (pvpBountyCount >= 5) {
+                if (pvpBountyCount >= 5)
+                {
                     objTest = createDynamicBountyMission(objMissionDatum, objMissionTerminal, intBountyDifficulty, intPlayerDifficulty, locTest.area, strFaction);
                 }
-                if (objTest == null) {
+                if (objTest == null)
+                {
                     setMissionStatus(objMissionDatum, 0);
-                } else {
+                }
+                else
+                {
                     setMissionStatus(objMissionDatum, 1);
-                    if (isIdValid(objHq)) {
+                    if (isIdValid(objHq))
+                    {
                         setObjVar(objTest, "hq", objHq);
                     }
                 }
@@ -200,7 +222,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI], 1);
                     if (isIdValid(objHq))
@@ -213,7 +235,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI + 1], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI + 1], 1);
                     if (isIdValid(objHq))
@@ -234,7 +256,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI], 1);
                     if (isIdValid(objHq))
@@ -247,7 +269,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI + 1], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI + 1], 1);
                     if (isIdValid(objHq))
@@ -268,7 +290,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI], 1);
                     if (isIdValid(objHq))
@@ -281,7 +303,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI + 1], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI + 1], 1);
                     if (isIdValid(objHq))
@@ -291,7 +313,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 }
             }
         }
-        else 
+        else
         {
             for (int intI = 0; intI < objMissionData.length; intI = intI + 2)
             {
@@ -302,7 +324,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI], 1);
                     if (isIdValid(objHq))
@@ -320,7 +342,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 {
                     setMissionStatus(objMissionData[intI + 1], 0);
                 }
-                else 
+                else
                 {
                     setMissionStatus(objMissionData[intI + 1], 1);
                     if (isIdValid(objHq))
@@ -341,6 +363,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMissionAssigned(obj_id self, dictionary params) throws InterruptedException
     {
         playMusic(self, "sound/music_mission_accepted.snd");
@@ -349,6 +372,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         startMission(objMission);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAssignMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "Mission Assigned -- " + params);
@@ -356,9 +380,9 @@ public class mission_player extends script.systems.missions.base.mission_player_
         {
             debugServerConsoleMsg(self, "Params is most definitely Null");
         }
-        else 
+        else
         {
-            debugServerConsoleMsg(self, "Params is " + params.toString());
+            debugServerConsoleMsg(self, "Params is " + params);
         }
         obj_id objMessageSource = params.getObjId("messageSource");
         if (objMessageSource == null)
@@ -426,7 +450,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                     transferBankCreditsTo(self, objMissionData, intBond, "bondTransferSuccess", "bondTransferFail", dctParams);
                     debugServerConsoleMsg(self, "Mission Object Id is " + objMission.toString());
                 }
-                else 
+                else
                 {
                     obj_id objMission = objMissionData;
                     debugServerConsoleMsg(objMission, "Mission Object Succesfully Created without a BOND");
@@ -435,7 +459,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                         debugServerConsoleMsg(self, "SEE? ITS NULL!!!");
                         return SCRIPT_CONTINUE;
                     }
-                    debugServerConsoleMsg(objMission, "Mission Object is " + objMission.toString());
+                    debugServerConsoleMsg(objMission, "Mission Object is " + objMission);
                     if (strMissionType.equals("bounty"))
                     {
                         if (hasObjVar(objMessageSource, "objTarget"))
@@ -456,13 +480,14 @@ public class mission_player extends script.systems.missions.base.mission_player_
                     dictionary dctParams = new dictionary();
                     dctParams.put("missionObject", objMission);
                     startMission(objMission);
-                    debugServerConsoleMsg(self, "Mission Object Id is " + objMission.toString());
+                    debugServerConsoleMsg(self, "Mission Object Id is " + objMission);
                 }
             }
         }
         debugServerConsoleMsg(self, "done with onAssignMission Trigger");
         return SCRIPT_CONTINUE;
     }
+
     public int bondTransferSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMessageSource = params.getObjId("objMessageSource");
@@ -470,11 +495,13 @@ public class mission_player extends script.systems.missions.base.mission_player_
         startMission(objMessageSource);
         return SCRIPT_CONTINUE;
     }
+
     public int bondTransferFailure(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "You need more bond money to take this mission");
         return SCRIPT_CONTINUE;
     }
+
     public int msgJediMissionStartConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "requestJediBountyResult for hunter " + self + " success");
@@ -490,7 +517,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
                     string_id message = new string_id("mission/mission_generic", "too_many_missions");
                     sendSystemMessage(self, message);
                 }
-                else 
+                else
                 {
                     startMission(jedi_mission);
                 }
@@ -501,6 +528,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         sendSystemMessage(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public int msgJediMissionStartFailed(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "requestJediBountyResult for hunter " + self + " fail");
@@ -512,6 +540,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         sendSystemMessage(self, message);
         return SCRIPT_CONTINUE;
     }
+
     public int setupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "setupSpawn message received on the player");
@@ -523,6 +552,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         addLocationTarget(objMission.toString(), locSpawnLocation, MISSION_SPAWN_TRIGGER_RANGE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String strName) throws InterruptedException
     {
         debugServerConsoleMsg(self, "ARRIVED AT LOCATION " + strName);
@@ -531,8 +561,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         try
         {
             lngId = Long.valueOf(strName);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             debugServerConsoleMsg(self, "Long Conversion Failed, Continuing to next onArrivedAtLocation");
             return SCRIPT_CONTINUE;
@@ -554,19 +583,22 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupLocationTarget(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "cleaning up location targets on player, message received");
-        String strLocationTarget = (String)params.get("strLocationTarget");
+        String strLocationTarget = (String) params.get("strLocationTarget");
         debugServerConsoleMsg(self, "strLocationTarget is " + strLocationTarget);
         removeLocationTarget(strLocationTarget);
         debugServerConsoleMsg(self, "locationTargets was removed");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int setupArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         float fltDistance = params.getFloat("fltDistance");
@@ -575,6 +607,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         addLocationTarget(objMission.toString(), locTargetLocation, fltDistance);
         return SCRIPT_CONTINUE;
     }
+
     public int bountyIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -592,6 +625,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bountyFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -609,6 +643,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bountySuccess(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -626,6 +661,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destruction_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -635,6 +671,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int assassin_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -644,6 +681,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recon_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "got recon arrival message");
@@ -654,6 +692,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int deliver_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -675,12 +714,13 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "Something so horribly fucked happened here. I got a state thats not defined anywhere in a t mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int crafting_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -702,12 +742,13 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "Something so horribly fucked happened here. I got a state thats not defined anywhere in a t mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int fetch_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -738,12 +779,13 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "Something so horribly fucked happened here. I got a state thats not defined anywhere in a fetch mission");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int escort_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -753,6 +795,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int bounty_Arrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMission = params.getObjId("objMission");
@@ -785,6 +828,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setup_Spawn_Overload(obj_id self, dictionary params) throws InterruptedException
     {
         String strOverloadTemplate = params.getString("strOverloadTemplate");
@@ -814,6 +858,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         setObjVar(self, "strSpawnOverloadArray", strNewSpawnOverloadArray);
         return SCRIPT_CONTINUE;
     }
+
     public int informantComm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = self;
@@ -888,6 +933,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int addListener(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objListener = params.getObjId("objListener");
@@ -907,8 +953,10 @@ public class mission_player extends script.systems.missions.base.mission_player_
         {
             objListeners = getResizeableObjIdArrayObjVar(self, strObjVar);
         }
-        for (Object objListener1 : objListeners) {
-            if (((obj_id) objListener1) == objListener) {
+        for (Object objListener1 : objListeners)
+        {
+            if (objListener1 == objListener)
+            {
                 LOG("DESIGNER_FATAL", "objListener of " + objListener + " is alread listening to " + self);
                 return SCRIPT_CONTINUE;
             }
@@ -920,6 +968,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeListener(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objListener = params.getObjId("objListener");
@@ -939,13 +988,13 @@ public class mission_player extends script.systems.missions.base.mission_player_
         {
             objListeners = getResizeableObjIdArrayObjVar(self, strObjVar);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         for (int intI = 0; intI < objListeners.size(); intI++)
         {
-            if (((obj_id)objListeners.get(intI)) == objListener)
+            if (objListeners.get(intI) == objListener)
             {
                 objListeners = utils.removeElement(objListeners, objListener);
                 setObjVar(self, strObjVar, objListeners);
@@ -956,6 +1005,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         LOG("DESIGNER_FATAL", "target is " + self + " and listener is " + objListener);
         return SCRIPT_CONTINUE;
     }
+
     public int findAssassinTarget(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objTarget = target;
@@ -977,7 +1027,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
             pvpSetPermanentPersonalEnemyFlag(objTarget, self);
         }
         string_id strDirection = utils.getCardinalDirectionForPoints(locCurrentLocation, locTarget);
-        int intDistance = (int)fltDistance;
+        int intDistance = (int) fltDistance;
         prose_package ppTargetLoc = prose.getPackage(new string_id("mission/mission_generic", "assassin_target_location"), strDirection, intDistance);
         sendSystemMessageProse(self, ppTargetLoc);
         return SCRIPT_CONTINUE;

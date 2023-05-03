@@ -4,16 +4,19 @@ import script.*;
 
 public class elevator extends script.base_script
 {
+    public static final String STF_FILE = "elevator_text";
+
     public elevator()
     {
     }
-    public static final String STF_FILE = "elevator_text";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.ELEVATOR_UP, new string_id(STF_FILE, "up"));
         int mnu2 = mi.addRootMenu(menu_info_types.ELEVATOR_DOWN, new string_id(STF_FILE, "down"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);
