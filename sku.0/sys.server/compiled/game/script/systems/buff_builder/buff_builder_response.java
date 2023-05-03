@@ -87,17 +87,18 @@ public class buff_builder_response extends script.base_script
             setObjVar(recipientId, "saved_performance.buildabuff.bufferId", bufferId);
             setObjVar(recipientId, "saved_performance.buildabuff.recipientId", recipientId);
             setObjVar(recipientId, "saved_performance.buildabuff.buffComponentValues", buffComponentValues);
+            setObjVar(recipientId, "saved_performance.buildabuff.buffComponentKeys", buffComponentKeys);
             float currentBuffTime = 30.0f;
             if (utils.hasScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION)) {
                 currentBuffTime = utils.getFloatScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION);
             }
-            if (buff.hasBuff(recipientId, "buildabuff_inspiration")) {
-                buff.removeBuff(recipientId, "buildabuff_inspiration");
+            if (buff.hasBuff(recipientId, BUILDABUFF_NAME)) {
+                buff.removeBuff(recipientId, BUILDABUFF_NAME);
             }
             if (bufferId == recipientId) {
                 currentBuffTime = performance.inspireGetMaxDuration(bufferId);
             }
-            buff.applyBuff(recipientId, "buildabuff_inspiration", currentBuffTime);
+            buff.applyBuff(recipientId, BUILDABUFF_NAME, currentBuffTime);
             setObjVar(recipientId, "saved_performance.buildabuff.buffTime", currentBuffTime);
             setObjVar(recipientId, "saved_performance.buildabuff.buffTimeGame", getGameTime());
             if (utils.hasScriptVar(recipientId, "performance.inspireMaxReached")) {
