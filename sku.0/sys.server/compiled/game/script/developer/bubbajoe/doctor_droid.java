@@ -54,13 +54,13 @@ public class doctor_droid extends script.base_script
             ai_lib.aiStopFollowing(self);
             stop(self);
             faceToBehavior(self, breacher);
-            buff.applyBuff(breacher,"me_buff_health_2", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_action_3", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_strength_3", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_agility_3", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_precision_3", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600, 225);
-            buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_health_2", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_action_3", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_strength_3", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_agility_3", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_precision_3", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_melee_gb_1", (float) cooldownTime, 310);
+            buff.applyBuff(breacher,"me_buff_ranged_gb_1", (float) cooldownTime, 310);
             setObjVar(breacher, "healDroid.cooldown", getGameTime() + cooldownTime);
         }
         return SCRIPT_CONTINUE;

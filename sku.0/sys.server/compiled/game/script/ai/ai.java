@@ -914,8 +914,8 @@ public class ai extends script.base_script
                     float time = 60.0f * 60.0f;
                     float value = rand(50, 65);
                     // note, the previous value is equal to 60 minutes with a random pool of 50-65 value
-                    buff.applyBuff(self, "lckConsumable40", time, value);
-                    broadcast(performer, "You have been blessed by " + getEncodedName(self) + "!");
+                    buff.applyBuff(performer, "lckConsumable40", time, value);
+                    broadcast(performer, "You have been blessed!");
                 }
                 else
                 {

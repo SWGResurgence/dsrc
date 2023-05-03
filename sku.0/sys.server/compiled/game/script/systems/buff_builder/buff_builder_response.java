@@ -12,7 +12,7 @@ public class buff_builder_response extends script.base_script
     public static final String SCRIPT_BUFF_BUILDER_CANCEL = "systems.buff_builder.buff_builder_cancel";
     public static final String BUILDABUFF_NAME = "buildabuff_inspiration";
     public static final float BUFF_BUILDER_RANGE = 8.0f;
-    public static final int ENT_TIP_PAYOUT_BONUS = Integer.parseInt(getConfigSetting("GameServer", "entTipPayoutBonus"));
+    public static final int ENT_TIP_PAYOUT_BONUS = 2;
     public static final String GRANT_BUFF_TO_PLAYER_ALTS_SOUND = "sound/voc_huttese_blurt_rnd_03_thru_05.snd";
     public static final String GRANT_BUFF_TO_PLAYER_SOUND = "sound/halloween_jabba.snd";
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -70,7 +70,7 @@ public class buff_builder_response extends script.base_script
                 intPay = intPay * ENT_TIP_PAYOUT_BONUS;
             }
             if (getPlayerStationId(bufferId) == getPlayerStationId(recipientId)) {
-                sendSystemMessageTestingOnly(bufferId, "Jabba the Hut was impressed by your show, he thinks you should consider buffing other characters in a cantina to earn some tips!");
+                sendSystemMessageTestingOnly(bufferId, "Jabba the Hutt was impressed by your show, he thinks you should consider buffing other characters in a cantina to earn some tips!");
                 String soundFile = GRANT_BUFF_TO_PLAYER_ALTS_SOUND;
 
             } else {
