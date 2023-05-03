@@ -43,7 +43,7 @@ public class new_rug_kit extends script.base_script
         }
         if (utils.isNestedWithinAPlayer(self))
         {
-           mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rug"));
+           mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rugs"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -59,7 +59,7 @@ public class new_rug_kit extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
-            if (getTotalVolume(utils.getInventoryContainer(player)) >= 122)
+            if (getVolumeFree(utils.getInventoryContainer(player)) < 3)
             {
                 broadcast(player, "You do not have enough inventory space to fabricate three rugs.");
                 return SCRIPT_CONTINUE;

@@ -60,7 +60,7 @@ public class trader_care_package_cities extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (getVolumeFree(player) < 7)
+        if (getVolumeFree(utils.getInventoryContainer(player)) < 7)
         {
             broadcast(player, "You do not have enough inventory space to claim this care package.");
             return SCRIPT_CONTINUE;

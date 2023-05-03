@@ -131,7 +131,8 @@ public class vendor extends script.base_script
             }
         }
         setObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR, containerList);
-        chat.chat(self, "I'm open for business");
+        chat.chat(self, "Greetings. I am now open for business!");
+        playClientEffectLoc(getAllPlayers(getLocation(self), 24.0f), "clienteffect/bacta_bomb.cef", getLocation(self), 0.0f);
         if (exists(self))
         {
             String logData = "";
