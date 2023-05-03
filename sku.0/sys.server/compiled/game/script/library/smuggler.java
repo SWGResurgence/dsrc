@@ -194,7 +194,7 @@ public class smuggler extends script.base_script
                 prose_package ppfence = prose.getPackage(PROSE_FENCE_COMM[rand(0, PROSE_FENCE_COMM.length - 1)]);
                 commPlayers(player, strSpecies, strSound, 7.0f, player, ppfence);
             }
-            float cashMultiplier = 1.0f;
+            float cashMultiplier = 2.5f;
             if (fence)
             {
                 int playerLevel = getLevel(player);
@@ -216,10 +216,11 @@ public class smuggler extends script.base_script
                 {
                     price = (int) (getPrice(junk[i]) * cashMultiplier);
                 }
-                String name = getAssignedName(junk[i]);
-                if (name.equals("") || name == null)
+                String name = getString(getNameStringId(junk[i]));
+                if (static_item.isStaticItem(junk[i]))
                 {
-                    name = getString(getNameFromTemplate(getTemplateName(junk[i])));
+                    dictionary itemData = static_item.getMasterItemDictionary(junk[i]);
+                    name = itemData.getString("string_name");
                 }
                 String entry = "[" + price + "] " + name;
                 entries[i] = entry;
@@ -1405,9 +1406,19 @@ public class smuggler extends script.base_script
             for (int i = 0; i < junk.length; i++)
             {
                 String entry = "[ Sellable ] " + getString(getNameStringId(junk[i]));
+                if (static_item.isStaticItem(junk[i]))
+                {
+                    dictionary itemData = static_item.getMasterItemDictionary(junk[i]);
+                    entry = "[ Sellable ] " + itemData.getString("string_name");
+                }
                 if (hasObjVar(junk[i], smuggler.JUNK_DEALKER_NO_SALE_FLAG))
                 {
                     entry = "[ *No Sell* ] " + getString(getNameStringId(junk[i]));
+                    if (static_item.isStaticItem(junk[i]))
+                    {
+                        dictionary itemData = static_item.getMasterItemDictionary(junk[i]);
+                        entry = "[ *No Sell* ] " + itemData.getString("string_name");
+                    }
                 }
                 entries[i] = entry;
             }
