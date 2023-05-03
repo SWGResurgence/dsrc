@@ -59,7 +59,7 @@ public class new_rug_kit extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
-            if (getTotalVolume(utils.getInventoryContainer(player)) >= 125)
+            if (getTotalVolume(utils.getInventoryContainer(player)) >= 122)
             {
                 broadcast(player, "You do not have enough inventory space to fabricate three rugs.");
                 return SCRIPT_CONTINUE;
