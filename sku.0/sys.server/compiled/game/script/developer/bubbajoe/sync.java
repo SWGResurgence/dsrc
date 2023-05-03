@@ -13,12 +13,12 @@ public class sync extends script.base_script
         String DESC = getStringObjVar(self, "null_desc");
         if (DESC == null)
         {
-            DESC = "An unknown object";
+            setDescriptionString(self, "An unknown object");
         }
         else
         {
-            string_id descMem = new string_id(getStringObjVar(self, "null_desc"));
-            setDescriptionStringId(self, descMem);
+            String descMem = getStringObjVar(self, "null_desc");
+            setDescriptionString(self, descMem);
         }
         return SCRIPT_CONTINUE;
     }
@@ -28,12 +28,12 @@ public class sync extends script.base_script
         String DESC = getStringObjVar(self, "null_desc");
         if (DESC == null)
         {
-            DESC = "An unknown object";
+            setDescriptionString(self, "An unknown object");
         }
         else
         {
-            string_id descMem = new string_id(getStringObjVar(self, "null_desc"));
-            setDescriptionStringId(self, descMem);
+            String descMem = getStringObjVar(self, "null_desc");
+            setDescriptionString(self, descMem);
         }
         return SCRIPT_CONTINUE;
     }

@@ -47,8 +47,22 @@ public class trader_care_package_cities extends script.base_script
     {
         obj_id player = sui.getPlayerId(params);
         int idx = sui.getListboxSelectedRow(params);
+        int btnPressed = sui.getIntButtonPressed(params);
         if (idx < 0)
         {
+            return SCRIPT_CONTINUE;
+        }
+        if (btnPressed == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!isIdValid(player) || !exists(player))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (getVolumeFree(utils.getInventoryContainer(player)) < 7)
+        {
+            broadcast(player, "You do not have enough inventory space to claim this care package.");
             return SCRIPT_CONTINUE;
         }
         String planet = PLANETS[idx];

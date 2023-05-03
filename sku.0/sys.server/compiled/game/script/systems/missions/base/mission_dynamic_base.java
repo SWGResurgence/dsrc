@@ -1012,7 +1012,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     {
         obj_id objInventory = getObjectInSlot(objTarget, "inventory");
         boolean boolTransfer = putIn(objItem, objInventory);
-        return boolTransfer == true;
+        return boolTransfer;
     }
 
     public void missionArrival(obj_id objMission) throws InterruptedException
@@ -1598,9 +1598,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             boolNPC = true;
         }
-        else
-        {
-        }
         boolean boolRandomName = false;
         if (hasObjVar(objCreator, "intScout"))
         {
@@ -2175,10 +2172,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         String strNPCType = getStringObjVar(objNPC, "strNPCType");
         location locCurrentLocation = getLocation(objNPC);
         obj_id foo = getTopMostContainer(objNPC);
-        if (!isIdValid(foo))
-        {
-        }
-        else
+        if (isIdValid(foo))
         {
             locCurrentLocation = getLocation(foo);
         }
@@ -3476,9 +3470,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             if (isIdValid(objMissionData))
             {
                 String strMissionType = getMissionType(objMissionData);
-            }
-            else
-            {
             }
             return;
         }

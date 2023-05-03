@@ -1589,6 +1589,20 @@ public class player_developer extends base_script
             ai_lib.setMood(entertainer, "themepark_oola");
             attachScript(entertainer, "bot.entertainer");
         }
+        if (cmd.equalsIgnoreCase("toggleVendorCosts")) // GM command to toggle vendor costs on and off - useful for debugging item transactions
+        {
+            String vendorVar = "vend";
+            if (hasObjVar(self, vendorVar))
+            {
+                removeObjVar(self, vendorVar);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now disabled.");
+            }
+            else
+            {
+                setObjVar(self, vendorVar, 1);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now enabled.");
+            }
+        }
         if (cmd.equalsIgnoreCase("invulnerable"))
         {
             if (isInvulnerable(target))
@@ -1634,6 +1648,13 @@ public class player_developer extends base_script
             obj_id healer = create.object("object/mobile/fx_7_droid.iff", getLocation(self));
             attachScript(healer, "developer.bubbajoe.doctor_droid");
             return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("setCraftedBy"))
+        {
+            String craftedBy = tok.nextToken();
+            obj_id who = getPlayerIdFromFirstName(craftedBy);
+            setCrafter(target, who);
+            sendSystemMessageTestingOnly(self, "Item will now display that" + craftedBy + " crafted it.");
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {

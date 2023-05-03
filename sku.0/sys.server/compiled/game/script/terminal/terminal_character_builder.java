@@ -2310,9 +2310,9 @@ public class terminal_character_builder extends script.base_script
         if (idx == 0)
         {
             float currentBuffTime = performance.inspireGetMaxDuration(player);
-            buff.applyBuff(player, "buildabuff_inspiration", 7200);
             utils.setScriptVar(player, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
             utils.setScriptVar(player, "performance.buildabuff.buffComponentValues", buffComponentValues);
+            buff.applyBuff(player, "buildabuff_inspiration", 7200);
             utils.setScriptVar(player, "performance.buildabuff.player", player);
             buff.applyBuff((player), "me_buff_health_2", 7200);
             buff.applyBuff((player), "me_buff_action_3", 7200);

@@ -83,16 +83,17 @@ public class magic_light extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        int parent = mi.addRootMenu(menu_info_types.SERVER_MENU13, unlocalized("Lamp Options"));
         if (!hasObjVar(self, OBJVAR_CLAIMED_BY))
         {
-            mi.addRootMenu(menu_info_types.SERVER_MENU10, unlocalized("Claim"));
+            mi.addSubMenu(parent, menu_info_types.SERVER_MENU10, unlocalized("Claim"));
         }
         else
         {
             if (player == getObjIdObjVar(self, OBJVAR_CLAIMED_BY))
             {
-                mi.addRootMenu(menu_info_types.SERVER_MENU11, unlocalized("Modify Color"));
-                mi.addRootMenu(menu_info_types.SERVER_MENU12, unlocalized("Unclaim"));
+                mi.addSubMenu(parent, menu_info_types.SERVER_MENU11, unlocalized("Modify Color"));
+                mi.addSubMenu(parent, menu_info_types.SERVER_MENU12, unlocalized("Unclaim"));
             }
             else
             {
@@ -186,6 +187,8 @@ public class magic_light extends script.base_script
         setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
         setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
         setLocation(newLight, loc);
+        persistObject(newLight);
+        persistObject(utils.getTopMostContainer(self));
         destroyObject(self);
     }
 }
