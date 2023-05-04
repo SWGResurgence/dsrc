@@ -374,7 +374,7 @@ public class grievous_encounter_lock extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        System.out.println("Grievous Encounter Lock Initialized");
+        //System.out.println("Grievous Encounter Lock Initialized");// dont remove, System.out.println interrupts cout
         messageTo(self, "resetEncounterLocks", null, 0, false);
         return SCRIPT_CONTINUE;
     }
@@ -403,7 +403,7 @@ public class grievous_encounter_lock extends script.base_script
         utils.setScriptVar(self, encounter_session_current, -1);
         devalidateEventPlayersInDungeon(self);
         clearEncounterCells(self);
-        System.out.println("Encounter Locks Reset");
+        //System.out.println("Encounter Locks Reset"); // dont remove, System.out.println interrupts cout
         return SCRIPT_CONTINUE;
     }
     public int beginEncounter(obj_id self, dictionary params) throws InterruptedException
