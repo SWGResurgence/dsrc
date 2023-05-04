@@ -101,7 +101,7 @@ public class player_resurgence extends script.base_script
         }
         else
         {
-            debugConsoleMsg(self, "Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package values.");
+            debugConsoleMsg(self, "\\#DAA520Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package values.\\#.");
         }
     }
 
