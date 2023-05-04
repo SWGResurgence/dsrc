@@ -65,7 +65,7 @@ public class buff_builder_response extends script.base_script
             return SCRIPT_CONTINUE;
         }
         if (rand(1, 3) == 1) {
-            int intPay = rand(25000, 75000);
+            int intPay = rand(2500, 7500);
             if (ENT_TIP_PAYOUT_BONUS > 1) {
                 intPay = intPay * ENT_TIP_PAYOUT_BONUS;
             }
@@ -86,8 +86,8 @@ public class buff_builder_response extends script.base_script
             //This is a hacky way to save the performance data for the recipient if it gets lost from a crash or forced logout.
             setObjVar(recipientId, "saved_performance.buildabuff.bufferId", bufferId);
             setObjVar(recipientId, "saved_performance.buildabuff.recipientId", recipientId);
-            setObjVar(recipientId, "saved_performance.buildabuff.buffComponentValues", buffComponentValues);
             setObjVar(recipientId, "saved_performance.buildabuff.buffComponentKeys", buffComponentKeys);
+            setObjVar(recipientId, "saved_performance.buildabuff.buffComponentValues", buffComponentValues);
             float currentBuffTime = 30.0f;
             if (utils.hasScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION)) {
                 currentBuffTime = utils.getFloatScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION);
