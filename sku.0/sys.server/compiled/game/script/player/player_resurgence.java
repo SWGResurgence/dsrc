@@ -33,7 +33,7 @@ public class player_resurgence extends script.base_script
     {
         if (hasObjVar(self, "saved_performance"))
         {
-            restoreEntertainerBuffs(self);
+            //restoreEntertainerBuffs(self);
         }
         showServerInfo(self);
         incrementPlayerCount(self);
@@ -89,6 +89,7 @@ public class player_resurgence extends script.base_script
 
     public void restoreEntertainerBuffs(obj_id self) throws InterruptedException
     {
+        utils.removeScriptVar(self, "performance.buildabuff");
         utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buildabuff.buffComponentKeys"));
         utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buildabuff.buffComponentValues"));
         utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.buildabuff.bufferId"));
