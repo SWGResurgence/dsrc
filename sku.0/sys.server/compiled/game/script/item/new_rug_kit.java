@@ -28,7 +28,7 @@ public class new_rug_kit extends script.base_script
     public void reInitializeKit(obj_id self)
     {
         setName(self, "Abbub's Rug Kit");
-        setDescriptionString(self, "This kit can be used to create three random rugs from 171 variations.  Use the kit to select the rug you want to create.");
+        setDescriptionString(self, "This kit can be used to create three random rugs from 171 variations. Select 'Fabricate Rugs' to create your rugs.");
     }
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
