@@ -56,6 +56,7 @@ public class terminal_structure extends script.base_script
     public static final string_id SID_MAYOR_HOUSE_SIGN_DISPLAY = new string_id("city/city", "installation_owner");
     public static final string_id SID_SHOW_MAYOR_OWNER = new string_id("city/city", "installation_owner_option");
     public static final string_id SID_TERMINAL_CITY_PACK_HOUSE = new string_id("city/city", "city_packup_house");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -124,7 +125,7 @@ public class terminal_structure extends script.base_script
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ADMIN, SID_TERMINAL_PERMISSIONS_ADMIN);
             }
             /*if ((template.contains("cityhall_")))*/
-                      if (template.indexOf("cityhall_") > -1)
+            if (template.indexOf("cityhall_") > -1)
             {
                 return SCRIPT_CONTINUE;
             }
@@ -150,7 +151,7 @@ public class terminal_structure extends script.base_script
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ENTER, SID_TERMINAL_PERMISSIONS_ENTER);
                 mi.addSubMenu(management_root, menu_info_types.SERVER_TERMINAL_MANAGEMENT_RESIDENCE, SID_TERMINAL_MANAGEMENT_RESIDENCE);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_BANNED, SID_TERMINAL_PERMISSIONS_BANNED);
-                if(isStructureOwner)
+                if (isStructureOwner)
                 {
                     String text = player_structure.isAdminToAccountEnabled(structure) ? "Remove Account as Admin" : "Add Account as Admin";
                     mi.addSubMenu(permissions_root, menu_info_types.SERVER_MENU25, new string_id(text));
@@ -162,7 +163,7 @@ public class terminal_structure extends script.base_script
                     {
                         privacyMenu_sid = SID_TERMINAL_MANAGEMENT_PRIVACY_PUBLIC;
                     }
-                    else 
+                    else
                     {
                         privacyMenu_sid = SID_TERMINAL_MANAGEMENT_PRIVACY_PRIVATE;
                     }
@@ -177,7 +178,7 @@ public class terminal_structure extends script.base_script
                         {
                             mi.addSubMenu(management_root, menu_info_types.SERVER_MENU3, SID_TERMINAL_MANAGEMENT_REMOVE_TURNSTILE);
                         }
-                        else 
+                        else
                         {
                             mi.addSubMenu(management_root, menu_info_types.SERVER_MENU4, SID_TERMINAL_MANAGEMENT_ADD_TURNSTILE);
                         }
@@ -190,6 +191,7 @@ public class terminal_structure extends script.base_script
                     mi.addSubMenu(management_root, menu_info_types.SERVER_MENU13, SID_SEARCH_FOR_HOUSE_ITEMS);
                     mi.addSubMenu(management_root, menu_info_types.SERVER_MENU9, SID_MOVE_FIRST_ITEM);
                     mi.addSubMenu(management_root, menu_info_types.SERVER_MENU2, SID_DELETE_ALL_ITEMS);
+                    mi.addSubMenu(management_root, menu_info_types.SERVER_MENU20, unlocalized("Align Structure"));
                     if (player_structure.isOwner(structure, player))
                     {
                         if (hasObjVar(structure, player_structure.OBJVAR_STRUCTURE_STORAGE_INCREASE))
@@ -198,7 +200,7 @@ public class terminal_structure extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     blog("terminal_structure::OnObjectMenuRequest - NOT ALL ITEMS LOADED");
                 }
@@ -216,7 +218,7 @@ public class terminal_structure extends script.base_script
                     int decor_root = mi.addRootMenu(menu_info_types.SERVER_MENU14, new string_id("GM Tools"));
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU15, SID_STRUCTURE_ADD_DECOR);
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU16, SID_STRUCTURE_REMOVE_DECOR);
-					mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU33, new string_id("Fix Terminal Placement"));
+                    mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU33, new string_id("Fix Terminal Placement"));
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU34, new string_id("Fix Structure Sign"));
                 }
             }
@@ -235,7 +237,7 @@ public class terminal_structure extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (player_structure.canPlayerPackAbandonedStructure(player, structure))
             {
@@ -250,6 +252,7 @@ public class terminal_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -333,7 +336,7 @@ public class terminal_structure extends script.base_script
         {
             session.logActivity(player, session.ACTIVITY_ACCESS_FACTORY);
         }
-        else 
+        else
         {
             session.logActivity(player, session.ACTIVITY_ACCESS_STRUCTURE);
         }
@@ -391,7 +394,7 @@ public class terminal_structure extends script.base_script
                             return SCRIPT_CONTINUE;
                         }
                     }
-                    else 
+                    else
                     {
                         string_id message = new string_id("player_structure", "catastrophic_failure_city_destroy_structure");
                         sendSystemMessage(player, message);
@@ -418,6 +421,13 @@ public class terminal_structure extends script.base_script
             sendSystemMessage(player, SID_TCG_VENDOR_CTS_WARNING);
             queueCommand(player, (-303051094), null, "", COMMAND_PRIORITY_DEFAULT);
         }
+        else if (item == menu_info_types.SERVER_MENU20)
+        {
+            String[] directions = {
+                    "North", "East", "South", "West"
+            };
+            sui.listbox(self, player, "Select which cardinal direction you'd like to set for this structure.", sui.OK_CANCEL, "Structure Alignment", directions, "handleStructureAlignment", true);
+        }
         else if (item == menu_info_types.SERVER_MENU5)
         {
             queueCommand(player, (1801226979), null, "", COMMAND_PRIORITY_DEFAULT);
@@ -439,7 +449,7 @@ public class terminal_structure extends script.base_script
                 player_structure.initializeFindAllItemsInHouse(self, player);
                 setObjVar(self, "findItems.lockout", currentTime + player_structure.HOUSE_ITEMS_SEARCH_LOCKOUT);
             }
-            else 
+            else
             {
                 string_id message = new string_id("player_structure", "find_items_locked_out");
                 prose_package pp = prose.getPackage(message, player, player);
@@ -464,7 +474,7 @@ public class terminal_structure extends script.base_script
                 player_structure.initializeItemSearchInHouse(self, player);
                 setObjVar(self, "findItems.lockout", currentTime + player_structure.HOUSE_ITEMS_SEARCH_LOCKOUT);
             }
-            else 
+            else
             {
                 string_id message = new string_id("player_structure", "find_items_locked_out");
                 prose_package pp = prose.getPackage(message, player, player);
@@ -579,19 +589,25 @@ public class terminal_structure extends script.base_script
             }
             player_structure.displayAvailableNonGenericStorageTypes(player, self, structure);
         }
-		
-		// GM Tool Begin
-		
-		else if (item == menu_info_types.SERVER_MENU33 && isGod(player))
+
+        // GM Tool Begin
+
+        else if (item == menu_info_types.SERVER_MENU33 && isGod(player))
         {
             obj_id top = player_structure.getStructure(self);
-            if(isIdValid(top)) {
+            if (isIdValid(top))
+            {
                 sendSystemMessageTestingOnly(player, "Resetting placement of Structure Management Terminal...");
                 float yaw = getYaw(top);
-                if (yaw < 0.0f) { yaw = yaw + 360.0f; }
-                player_structure.createStructureObjects(top, (int)(yaw + 1) / 90);
+                if (yaw < 0.0f)
+                {
+                    yaw = yaw + 360.0f;
+                }
+                player_structure.createStructureObjects(top, (int) (yaw + 1) / 90);
                 destroyObject(self);
-            } else {
+            }
+            else
+            {
                 sendSystemMessageTestingOnly(player, "Fix attempt failed - Is the terminal inside a valid player structure?");
             }
         }
@@ -599,17 +615,20 @@ public class terminal_structure extends script.base_script
         else if (item == menu_info_types.SERVER_MENU34 && isGod(player))
         {
             obj_id top = player_structure.getStructure(self);
-            if (isIdValid(top)) {
+            if (isIdValid(top))
+            {
                 sendSystemMessageTestingOnly(player, "Requesting the generation of a new sign for this structure...");
                 player_structure.createStructureSign(top);
-            } else {
+            }
+            else
+            {
                 sendSystemMessageTestingOnly(player, "Fix attempt failed - Could not determine structure object.");
             }
         }
         // player owner can add their entire account to the admin list with this toggle (does not show up on admin list, separate button)
         else if (item == menu_info_types.SERVER_MENU25 && player_structure.isOwner(structure, player))
         {
-            if(player_structure.isAdminToAccountEnabled(structure))
+            if (player_structure.isAdminToAccountEnabled(structure))
             {
                 player_structure.removeAccountFromAdminList(structure, player);
             }
@@ -618,11 +637,12 @@ public class terminal_structure extends script.base_script
                 player_structure.addAccountToAdminList(structure, player);
             }
         }
-		
-		// GM Tool End
-		
+
+        // GM Tool End
+
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorageRedeedChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -656,6 +676,7 @@ public class terminal_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetAccessFee(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -676,6 +697,7 @@ public class terminal_structure extends script.base_script
         sui.inputbox(self, player, "@player_structure:access_time", sui.OK_CANCEL, "@player_structure:access_time_t", sui.INPUT_NORMAL, null, "handleSetAccessLength", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetAccessLength(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -707,10 +729,12 @@ public class terminal_structure extends script.base_script
         sendSystemMessage(player, "Other players will now be charged " + fee + " credits to access your building for " + length / 60 + " minutes.", null);
         return SCRIPT_CONTINUE;
     }
+
     public void moveFirstItem(obj_id self, obj_id player, obj_id structure) throws InterruptedException
     {
         sui.msgbox(self, player, "@player_structure:move_first_item_d", sui.OK_CANCEL, "@player_structure:move_first_item", sui.MSG_QUESTION, "handleMoveFirstItem");
     }
+
     public int handleMoveFirstItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -724,10 +748,12 @@ public class terminal_structure extends script.base_script
         sendSystemMessage(player, SID_MOVED_FIRST_ITEM);
         return SCRIPT_CONTINUE;
     }
+
     public void deleteAllItems(obj_id self, obj_id player, obj_id structure) throws InterruptedException
     {
         sui.msgbox(self, player, "@player_structure:delete_all_items_d", sui.OK_CANCEL, "@player_structure:delete_all_items", sui.MSG_QUESTION, "handleDeleteSecondConfirm");
     }
+
     public int handleDeleteSecondConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -739,6 +765,7 @@ public class terminal_structure extends script.base_script
         sui.msgbox(self, player, "@player_structure:delete_all_items_second_d", sui.OK_CANCEL, "@player_structure:delete_all_items", sui.MSG_QUESTION, "handleDeleteAllItemsCodeConfirm");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteAllItemsCodeConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -755,6 +782,7 @@ public class terminal_structure extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDeleteAllItemsConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -791,39 +819,45 @@ public class terminal_structure extends script.base_script
             sendSystemMessage(player, SID_ITEMS_DELETED);
             CustomerServiceLog("playerStructure", "deleteAllItems (Deleting all objects in house by player's request. Player had to enter a 6 Digit Code to confirm Deleting All Items.) Player: " + player + " (" + getName(player) + ") Structure: " + building);
         }
-        else 
+        else
         {
             sui.msgbox(player, "@player_structure:incorrect_destroy_all_items_code");
             utils.removeScriptVarTree(self, "player_structure.destroyAllItems");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clearCollectionMeatlumpCamera(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
         utils.removeScriptVar(target, "collection.picture_taken");
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureFindItemsListResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleFindItemsListResponse(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureFindItemsPageResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleFindItemsChangePageResponse(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureSearchItemsGetKeyword(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleSearchItemsGetKeyword(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayerStructureSearchItemsSelectedResponse(obj_id self, dictionary params) throws InterruptedException
     {
         player_structure.handleSearchItemsSelectedResponse(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public boolean getSpecialSignManagementMenu(obj_id player, obj_id structure) throws InterruptedException
     {
         blog("terminal_structure.getSpecialSignManagementMenu: init");
@@ -886,6 +920,7 @@ public class terminal_structure extends script.base_script
         sui.setPid(player, pid, player_structure.VAR_SPECIAL_SIGN_MENU_PID);
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (msg == null || msg.equals(""))
@@ -898,11 +933,60 @@ public class terminal_structure extends script.base_script
         }
         return true;
     }
-	// ensure GMs can't accidentally pick up a structure management terminal that's in a building
-    public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException {
-        if(!utils.isNestedWithinAPlayer(self) && isGod(transferer)) {
+
+    // ensure GMs can't accidentally pick up a structure management terminal that's in a building
+    public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
+    {
+        if (!utils.isNestedWithinAPlayer(self) && isGod(transferer))
+        {
             return SCRIPT_OVERRIDE;
         }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int handleStructureAlignment(obj_id self, dictionary params) throws InterruptedException
+    {
+        int index = sui.getListboxSelectedRow(params);
+        obj_id structure = getTopMostContainer(self);
+        switch (index)
+        {
+            case 0:
+                faceNorth(structure);
+                break;
+            case 1:
+                faceEast(structure);
+                break;
+            case 2:
+                faceSouth(structure);
+                break;
+            case 3:
+                faceWest(structure);
+                break;
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int faceNorth(obj_id target) throws InterruptedException
+    {
+        setYaw(target, 0);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int faceSouth(obj_id target) throws InterruptedException
+    {
+        setYaw(target, 180);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int faceEast(obj_id target) throws InterruptedException
+    {
+        setYaw(target, 90);
+        return SCRIPT_CONTINUE;
+    }
+
+    public int faceWest(obj_id target) throws InterruptedException
+    {
+        setYaw(target, -90);
         return SCRIPT_CONTINUE;
     }
 }

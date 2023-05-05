@@ -615,7 +615,6 @@ public class buff_handler extends script.base_script
             }
         }
         proc.buildCurrentProcList(self);
-        return;
     }
 
     public void procBuffRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -636,7 +635,6 @@ public class buff_handler extends script.base_script
         }
         stopClientEffectObjByLabel(self, effectName);
         proc.buildCurrentProcList(self);
-        return;
     }
 
     public void reactiveBuffAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -658,7 +656,6 @@ public class buff_handler extends script.base_script
             }
         }
         proc.buildCurrentReacList(self);
-        return;
     }
 
     public void reactiveBuffRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -679,7 +676,6 @@ public class buff_handler extends script.base_script
         }
         stopClientEffectObjByLabel(self, effectName);
         proc.buildCurrentReacList(self);
-        return;
     }
 
     public int stanceAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -1864,8 +1860,6 @@ public class buff_handler extends script.base_script
         String[] buffComponentKeys = utils.getStringArrayScriptVar(self, "performance.buildabuff.buffComponentKeys");
         int[] buffComponentValues = utils.getIntArrayScriptVar(self, "performance.buildabuff.buffComponentValues");
         obj_id bufferId = utils.getObjIdScriptVar(self, "performance.buildabuff.bufferId");
-
-
         {
             //CustomerServiceLog("SuspectedCheaterChannel: ", "Entered BuildABuffAdd Handler, dumping info...");
             //CustomerServiceLog("SuspectedCheaterChannel: ", "BufferId: " + bufferId + " IsValid: " + isIdValid(bufferId) + " Exists: " + exists(bufferId) + " isInternalDecay: " + utils.hasScriptVar(self, "buffDecay"));
@@ -1885,15 +1879,13 @@ public class buff_handler extends script.base_script
             internalDecay = true;
             utils.removeScriptVar(self, "buffDecay");
         }
-
         //CustomerServiceLog("SuspectedCheaterChannel: ", "Internal Decay = " + internalDecay);
-
         int improv = 0;
         if (isIdValid(bufferId) && exists(bufferId))
         {
             improv = getSkillStatisticModifier(bufferId, "expertise_en_improv");
         }
-        if (internalDecay == true)
+        if (internalDecay)
         {
             if (utils.hasScriptVar(self, "decayImprov"))
             {
@@ -1924,22 +1916,18 @@ public class buff_handler extends script.base_script
                 }
             }
         }
-        if (internalDecay == true)
+        if (internalDecay)
         {
             if (utils.hasScriptVar(self, "decayImprovDance"))
             {
                 improvDance = utils.getIntScriptVar(self, "decayImprovDance");
-
                 //CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored ImprovDance: " + improvDance);
-
             }
         }
         else
         {
             utils.setScriptVar(self, "decayImprovDance", improvDance);
-
-            //CustomerServiceLog("SuspectedCheaterChannel: ", "Storing improvDance: " + improvDance);
-
+            //CustomerServiceLog("SuspectedCheaterChannel: ", "Storing improvDance: " + improvDance)
         }
         int actualPointsToSpend = 40;
         if (isIdValid(bufferId) && exists(bufferId))
@@ -1949,14 +1937,14 @@ public class buff_handler extends script.base_script
         int attemptingToSpendPoints = 0;
         for (int i = 0; i < buffComponentKeys.length; i++)
         {
-            if (internalDecay == true)
+            if (internalDecay)
             {
                 break;
             }
             dictionary buffData = dataTableGetRow(DATATABLE_BUFF_BUILDER, buffComponentKeys[i]);
             int cost = buffData.getInt("COST") * buffComponentValues[i];
             attemptingToSpendPoints += cost;
-            if (attemptingToSpendPoints > actualPointsToSpend && internalDecay == false)
+            if (attemptingToSpendPoints > actualPointsToSpend && !internalDecay)
             {
                 sendSystemMessage(bufferId, "ERROR: Invalid data. Discrepancy logs generated.", null);
                 //CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has tried to spend more points on inspiration buffs then they have (" + attemptingToSpendPoints + ")! The buff failed.");
@@ -1974,7 +1962,7 @@ public class buff_handler extends script.base_script
                 int maxTimes = buffData.getInt("MAX_TIMES_APPLIED");
                 if (buffComponentValues[i] > maxTimes)
                 {
-                    if (internalDecay == false)
+                    if (!internalDecay)
                     {
                         //CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has passed an out of bounds build-a-buff value (" + buffComponentValues[i] + ") which has a cap of (" + maxTimes + "). HAX!");
                         sendSystemMessage(bufferId, "ERROR: Capping invalid buff values. Discrepancy logs generated.", null);
@@ -1986,52 +1974,30 @@ public class buff_handler extends script.base_script
                 {
                     buffValue = (buffValue * 0.2f);
                 }
-
                 String[] effectPackage = buff_builder_effect_map.getEffectList(effect);
-
                 if (effectPackage == null || effectPackage.length == 0)
                 {
                     effectPackage = new String[1];
                     effectPackage[0] = effect;
                 }
-
                 for (String e : effectPackage)
                 {
                     switch (category)
                     {
                         case "attributes":
-                            ApplyBuildaBuffAttributeBuff(self,
-                                    bufferId,
-                                    internalDecay,
-                                    e,
-                                    buffValue,
-                                    duration);
+                            ApplyBuildaBuffAttributeBuff(self, bufferId, internalDecay, e, buffValue, duration);
                             break;
-
                         case "resistances":
-                            ApplyBuildaBuffResistanceBuff(self,
-                                    bufferId, internalDecay, e,
-                                    buffValue, duration);
+                            ApplyBuildaBuffResistanceBuff(self, bufferId, internalDecay, e, buffValue, duration);
                             break;
-
                         case "combat":
-                            ApplyBuildaBuffCombatBuff(self, bufferId, internalDecay, e,
-                                    buffValue, duration);
+                            ApplyBuildaBuffCombatBuff(self, bufferId, internalDecay, e, buffValue, duration);
                             break;
-
                         case "trade":
-                            ApplyBuildaBuffTradeBuff(self, bufferId,
-                                    internalDecay, e,
-                                    buffValue,
-                                    duration);
+                            ApplyBuildaBuffTradeBuff(self, bufferId, internalDecay, e, buffValue, duration);
                             break;
-
                         case "misc":
-                            ApplyBuildaBuffMiscBuff(self, bufferId,
-                                    internalDecay, e,
-                                    value,
-                                    buffValue,
-                                    duration);
+                            ApplyBuildaBuffMiscBuff(self, bufferId, internalDecay, e, buffValue, duration);
                             break;
                     }
                 }
@@ -2058,60 +2024,43 @@ public class buff_handler extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public void ApplyBuildaBuffAttributeBuff(obj_id self,
-                                             obj_id bufferId,
-                                             boolean internalDecay, String effect,
-                                             float buffValue, float duration) throws InterruptedException
+    public void ApplyBuildaBuffAttributeBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect, float buffValue, float duration) throws InterruptedException
     {
-
         float attribModifier = 0.0f;
-
         if (isIdValid(bufferId) && exists(bufferId))
         {
             attribModifier = getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_attrib_increase") / 100.0f;
         }
-
-        if (internalDecay == true)
+        if (internalDecay)
         {
-
             if (utils.hasScriptVar(self, "decayAttribMod"))
             {
                 attribModifier = utils.getFloatScriptVar(self, "decayAttribMod");
                 CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored attribMod: " + attribModifier);
             }
-
         }
         else
         {
             CustomerServiceLog("SuspectedCheaterChannel: ", "Storing attribMod: " + attribModifier);
             utils.setScriptVar(self, "decayAttribMod", attribModifier);
         }
-
-
         buffValue *= 1.0f + attribModifier;
-
         addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
         CheckForBuildABuffCombatRecalc(self, effect);
 
     }
 
-    public void ApplyBuildaBuffResistanceBuff(obj_id self,
-                                              obj_id bufferId, boolean internalDecay, String effect,
-                                              float buffValue, float duration) throws InterruptedException
+    public void ApplyBuildaBuffResistanceBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect, float buffValue, float duration) throws InterruptedException
     {
-
         float resistModifier = 0.0f;
-
         if (isIdValid(bufferId) && exists(bufferId))
         {
             resistModifier = getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_resist_increase") / 100.0f;
         }
-
-        if (internalDecay == true)
+        if (internalDecay)
         {
             if (utils.hasScriptVar(self, "decayResistMod"))
             {
-
                 resistModifier = utils.getFloatScriptVar(self, "decayResistMod");
             }
         }
@@ -2119,131 +2068,88 @@ public class buff_handler extends script.base_script
         {
             utils.setScriptVar(self, "decayResistMod", resistModifier);
         }
-
         buffValue *= 1.0f + resistModifier;
-
         addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
         CheckForBuildABuffCombatRecalc(self, effect);
     }
 
-    public void ApplyBuildaBuffCombatBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect,
-                                          float buffValue, float duration) throws InterruptedException
+    public void ApplyBuildaBuffCombatBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect, float buffValue, float duration) throws InterruptedException
     {
         float combatModifier = 0.0f;
-
         if (isIdValid(bufferId) && exists(bufferId))
         {
-
             combatModifier = getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_combat_buff_increase");
-
         }
-
-        if (internalDecay == true)
+        if (internalDecay)
         {
-
             if (utils.hasScriptVar(self, "decayCombatMod"))
             {
                 combatModifier = utils.getFloatScriptVar(self, "decayCombatMod");
             }
-
         }
         else
         {
             utils.setScriptVar(self, "decayCombatMod", combatModifier);
         }
-
         buffValue += combatModifier;
         addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
         CheckForBuildABuffCombatRecalc(self, effect);
     }
 
-    public void ApplyBuildaBuffTradeBuff(obj_id self, obj_id bufferId,
-                                         boolean internalDecay, String effect,
-                                         float buffValue,
-                                         float duration) throws InterruptedException
+    public void ApplyBuildaBuffTradeBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect, float buffValue, float duration) throws InterruptedException
     {
         float tradeModifier = 0.0f;
 
         if (isIdValid(bufferId) && exists(bufferId))
         {
-
             tradeModifier = getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_trader_increase") / 100.0f;
         }
-
-        if (internalDecay == true)
+        if (internalDecay)
         {
-
             if (utils.hasScriptVar(self, "decayTradeMod"))
             {
-
                 tradeModifier = utils.getFloatScriptVar(self, "decayTradeMod");
-
             }
         }
         else
         {
             utils.setScriptVar(self, "decayTradeMod", tradeModifier);
         }
-
         buffValue *= 1.0f + tradeModifier;
-
         ApplyBuildaBuffXpBuff(self, buffValue);
         addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
     }
 
-    public void ApplyBuildaBuffMiscBuff(obj_id self, obj_id bufferId,
-                                        boolean internalDecay, String effect,
-                                        float value,
-                                        float buffValue,
-                                        float duration) throws InterruptedException
+    public void ApplyBuildaBuffMiscBuff(obj_id self, obj_id bufferId, boolean internalDecay, String effect, float buffValue, float duration) throws InterruptedException
     {
         switch (effect)
         {
-
             case "movement_speed":
-
-                if (value == 0)
-                {
-                    value = 1;
-                }
-
                 if (movement.hasMovementModifier(self, "buildabuff_movement_speed"))
                 {
-
                     movement.removeMovementModifier(self, "buildabuff_movement_speed", false);
                 }
-
                 movement.applyMovementModifier(self, "buildabuff_movement_speed", buffValue);
-
                 break;
-
             case "reactive_second_chance":
-
                 int playerLevel = getLevel(self);
-
                 float reactiveModifier = 0.0f;
-
                 if (isIdValid(bufferId) && exists(bufferId))
                 {
                     reactiveModifier = getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_proc_chance_increase");
                 }
-
-                if (internalDecay == true)
+                if (internalDecay)
                 {
-
                     if (utils.hasScriptVar(self, "decayReactiveMod"))
                     {
                         reactiveModifier = utils.getFloatScriptVar(self, "decayReactiveMod");
                     }
-
                 }
                 else
                 {
                     utils.setScriptVar(self, "decayReactiveMod", reactiveModifier);
                 }
-
                 buffValue += reactiveModifier;
-
                 if (playerLevel > 69)
                 {
                     addSkillModModifier(self, "expertise_buildabuff_heal_3_reac", "expertise_buildabuff_heal_3_reac", (int) buffValue, duration, false, true);
@@ -2251,29 +2157,20 @@ public class buff_handler extends script.base_script
                 else if (playerLevel > 39 && playerLevel < 70)
                 {
                     addSkillModModifier(self, "expertise_buildabuff_heal_2_reac", "expertise_buildabuff_heal_2_reac", (int) buffValue, duration, false, true);
-
                 }
                 else
                 {
                     addSkillModModifier(self, "expertise_buildabuff_heal_1_reac", "expertise_buildabuff_heal_1_reac", (int) buffValue, duration, false, true);
                 }
-
                 messageTo(self, "cacheExpertiseProcReacList", null, 2, false);
-
                 break;
-
             case "flush_with_success":
-
                 ApplyBuildaBuffXpBuff(self, buffValue);
-
                 break;
-
             default:
                 CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
                 break;
-
         }
-
         addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
     }
 
@@ -2292,9 +2189,6 @@ public class buff_handler extends script.base_script
     public void ApplyBuildaBuffXpBuff(obj_id self, float buffValue) throws InterruptedException
     {
         float bonusXpValue = buffValue / 100;
-
-        //add the bonus types if they do not exist
-
         if (!hasObjVar(self, "buff.xpBonus.types"))
         {
             String[] xpArray =
@@ -2308,11 +2202,9 @@ public class buff_handler extends script.base_script
 
             utils.setScriptVar(self, "buff.xpBonus.types", xpArray);
         }
-
         if (hasObjVar(self, "buff.xpBonus.value"))
         {
             float currentBonus = getFloatObjVar(self, "buff.xpBonus.value");
-
             if (bonusXpValue > currentBonus)
             {
                 utils.setScriptVar(self, "buff.xpBonus.value", bonusXpValue);
@@ -2335,10 +2227,8 @@ public class buff_handler extends script.base_script
             }
         }
         baseModList = buff_builder_effect_map.getEffects();
-
-        if (baseModList != null && baseModList.length > 0)
+        if (baseModList != null)
         {
-
             for (String s : baseModList)
             {
                 if (hasSkillModModifier(self, "buildabuff_" + s))
@@ -2860,7 +2750,7 @@ public class buff_handler extends script.base_script
     {
         obj_id weapon = getCurrentWeapon(self);
         float currentAttackSpeed = getWeaponAttackSpeed(weapon);
-        utils.setScriptVar(self, "recordedAttackSpeed", "" + weapon + "-" + currentAttackSpeed);
+        utils.setScriptVar(self, "recordedAttackSpeed", weapon + "-" + currentAttackSpeed);
         float newAttackSpeed = currentAttackSpeed - (currentAttackSpeed * value);
         if (isIdValid(weapon))
         {
@@ -3059,7 +2949,7 @@ public class buff_handler extends script.base_script
         if (isMob(self) && !isPlayer(self) && isIdValid(caster) && self == caster)
         {
             obj_id[] buffAi = getCreaturesInRange(getLocation(self), 45.0f);
-            if (buffAi != null && buffAi.length > 0)
+            if (buffAi != null)
             {
                 for (obj_id obj_id : buffAi)
                 {
@@ -3412,7 +3302,6 @@ public class buff_handler extends script.base_script
         }
         buff.applyBuff(beast, self, buffName);
         buff.applyBuff(player, self, buffName);
-        return;
     }
 
     public void bmBeastFamilyRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -3440,7 +3329,6 @@ public class buff_handler extends script.base_script
         }
         buff.removeBuff(player, buffName);
         buff.removeBuff(beast, buffName);
-        return;
     }
 
     public String getInitialBuffName(String effectName) throws InterruptedException
@@ -3457,13 +3345,11 @@ public class buff_handler extends script.base_script
 
     public void bmBeastXpBuffAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        return;
     }
 
     public void bmBeastXpBuffRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
         utils.removeScriptVarTree(self, "beastBuff");
-        return;
     }
 
     public int combatStunAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
@@ -3616,7 +3502,7 @@ public class buff_handler extends script.base_script
             return SCRIPT_CONTINUE;
         }
         location tarLoc = getLocation(self);
-        String targetData = "" + tarLoc.x + " " + tarLoc.y + " " + tarLoc.z + " " + tarLoc.cell + " " + tarLoc.x + " " + tarLoc.y + " " + tarLoc.z;
+        String targetData = tarLoc.x + " " + tarLoc.y + " " + tarLoc.z + " " + tarLoc.cell + " " + tarLoc.x + " " + tarLoc.y + " " + tarLoc.z;
         queueCommand(closed_fist, (1856722390), self, targetData, COMMAND_PRIORITY_DEFAULT);
         messageTo(self, "handle_closed_fist_burn", null, 1.0f, false);
         return SCRIPT_CONTINUE;
@@ -3773,7 +3659,7 @@ public class buff_handler extends script.base_script
         float travelDistance = getDistance(selfLoc, tesla);
         float speed = travelDistance / 2.0f;
         createClientProjectile(self, "object/weapon/ranged/pistol/shared_pistol_green_bolt.iff", tesla, selfLoc, speed, 2.0f, false, 255, 0, 0, 255);
-        String targetData = "" + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z + " " + selfLoc.cell + " " + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z;
+        String targetData = selfLoc.x + " " + selfLoc.y + " " + selfLoc.z + " " + selfLoc.cell + " " + selfLoc.x + " " + selfLoc.y + " " + selfLoc.z;
         queueCommand(openHand, (744605409), self, targetData, COMMAND_PRIORITY_DEFAULT);
         messageTo(self, "openSparkHandler", trial.getSessionDict(self, "spark_handler"), 4.0f, false);
         return SCRIPT_CONTINUE;
@@ -4014,7 +3900,7 @@ public class buff_handler extends script.base_script
         {
             removeBuffs.add(buffName);
         }
-        else if (removeBuffs.indexOf(buffName) < 0)
+        else if (!removeBuffs.contains(buffName))
         {
             removeBuffs.add(buffName);
         }
@@ -4035,7 +3921,7 @@ public class buff_handler extends script.base_script
             return SCRIPT_CONTINUE;
         }
         utils.removeScriptVar(self, buff.ON_ATTACK_REMOVE);
-        if (removeBuffs.indexOf(buffName) > -1)
+        if (removeBuffs.contains(buffName))
         {
             removeBuffs.remove(buffName);
         }
@@ -4248,7 +4134,6 @@ public class buff_handler extends script.base_script
             playClientEffectObj(self, "appearance/pt_state_onfire.prt", self, "", null, "costume_burning_effect");
             messageTo(self, "handleCostumeBurningBuffEffect", null, 15, false);
         }
-        return;
     }
 
     public int handleCostumeBurningBuffEffect(obj_id self, dictionary params) throws InterruptedException
@@ -4279,7 +4164,6 @@ public class buff_handler extends script.base_script
             playClientEffectObj(self, "appearance/pt_efol_hearts_02.prt", self, "head", null, "loveday_hearts_effect");
             messageTo(self, "handleCostumeBurningBuffEffect", null, 15, false);
         }
-        return;
     }
 
     public int handleLovedayHeartsEffect(obj_id self, dictionary params) throws InterruptedException
@@ -4494,7 +4378,6 @@ public class buff_handler extends script.base_script
         setObjVar(tatooine, "lifeday.position" + position + ".playerName", playerName);
         setObjVar(tatooine, "lifeday.position" + position + ".playerObjId", self);
         setObjVar(tatooine, "lifeday.position" + position + ".playerFaction", playerFaction);
-        return;
     }
 
     public void checkLifeDayData(obj_id planet) throws InterruptedException
@@ -4561,7 +4444,7 @@ public class buff_handler extends script.base_script
     {
         queueCommand(caster, (-1448600302), self, "", COMMAND_PRIORITY_IMMEDIATE);
         obj_id[] otherPlayers = trial.getValidTargetsInRadiusIgnoreLOS(self, 8.0f);
-        if (otherPlayers != null && otherPlayers.length > 0)
+        if (otherPlayers != null)
         {
             for (obj_id nextPlayer : otherPlayers)
             {
@@ -4585,7 +4468,7 @@ public class buff_handler extends script.base_script
     {
         queueCommand(caster, (156825053), self, "", COMMAND_PRIORITY_IMMEDIATE);
         obj_id[] otherPlayers = trial.getValidTargetsInRadiusIgnoreLOS(self, 8.0f);
-        if (otherPlayers != null && otherPlayers.length > 0)
+        if (otherPlayers != null)
         {
             for (obj_id nextPlayer : otherPlayers)
             {
@@ -4603,7 +4486,7 @@ public class buff_handler extends script.base_script
     {
         String targetName = getName(target);
         obj_id[] playersInArea = getPlayerCreaturesInRange(target, 250.0f);
-        if (playersInArea != null && playersInArea.length > 0)
+        if (playersInArea != null)
         {
             for (obj_id player : playersInArea)
             {
@@ -4616,7 +4499,6 @@ public class buff_handler extends script.base_script
                 }
             }
         }
-        return;
     }
 
     public int iceblockEffectAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException

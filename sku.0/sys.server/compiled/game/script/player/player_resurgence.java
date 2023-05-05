@@ -17,7 +17,7 @@ import static script.library.factions.setFaction;
 
 public class player_resurgence extends script.base_script
 {
-    public boolean requireEntBuffRecycle = true;
+    public boolean requireEntBuffRecycle = false;
     public boolean restoredContent = false;
     public int OnAttach(obj_id self)
     {
@@ -33,7 +33,7 @@ public class player_resurgence extends script.base_script
     {
         if (hasObjVar(self, "saved_performance"))
         {
-            restoreEntertainerBuffs(self);
+            //restoreEntertainerBuffs(self);
         }
         showServerInfo(self);
         incrementPlayerCount(self);
@@ -89,9 +89,10 @@ public class player_resurgence extends script.base_script
 
     public void restoreEntertainerBuffs(obj_id self) throws InterruptedException
     {
-        utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buffComponentKeys"));
-        utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buffComponentValues"));
-        utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.bufferId"));
+        utils.removeScriptVar(self, "performance.buildabuff");
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buildabuff.buffComponentKeys"));
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buildabuff.buffComponentValues"));
+        utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.buildabuff.bufferId"));
         float buffTime = getFloatObjVar(self, "saved_performance.buildabuff.buffTime");
         buff.applyBuff(self, "buildabuff_inspiration", buffTime);
         if (requireEntBuffRecycle)
@@ -101,7 +102,7 @@ public class player_resurgence extends script.base_script
         }
         else
         {
-            debugConsoleMsg(self, "Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package.");
+            debugConsoleMsg(self, "\\#DAA520Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package values.\\#.");
         }
     }
 
