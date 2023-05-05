@@ -35,9 +35,65 @@ public class player_resurgence extends script.base_script
         {
             //restoreEntertainerBuffs(self);
         }
+        arrivalSound(self);
+        //messageTo(self, "arrivalSound", null, 60, true);
         showServerInfo(self);
         incrementPlayerCount(self);
         return SCRIPT_CONTINUE;
+    }
+
+    public void arrivalSound(obj_id self)
+    {
+        String planetName = getCurrentSceneName();
+        if (planetName.equals("tutorial"))
+        {
+            return;
+        }
+        else if (planetName.equals("corellia"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_corellia.snd", self, "");
+        }
+        else if (planetName.equals("dantooine"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_dantooine.snd", self, "");
+        }
+        else if (planetName.equals("dathomir"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_dathomir.snd", self, "");
+        }
+        else if (planetName.equals("endor"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_endor.snd", self, "");
+        }
+        else if (planetName.equals("lok"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_lok.snd", self, "");
+        }
+        else if (planetName.equals("naboo"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_naboo.snd", self, "");
+        }
+        else if (planetName.equals("rori"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_rori.snd", self, "");
+        }
+        else if (planetName.equals("talus"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_talus.snd", self, "");
+        }
+        else if (planetName.equals("tanaab"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_tanaab.snd", self, "");
+        }
+        else if (planetName.equals("tatooine"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_tatooine.snd", self, "");
+        }
+        else if (planetName.equals("yavin4"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_yavin4.snd", self, "");
+        }
+
     }
 
     public void showServerInfo(obj_id self)

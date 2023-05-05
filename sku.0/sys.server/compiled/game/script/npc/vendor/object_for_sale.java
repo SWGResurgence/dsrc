@@ -309,6 +309,7 @@ public class object_for_sale extends script.base_script
                     }
                 }
             }
+            playClientEffectObj(player, "sound/item_vend.snd", player, "");
         }
         return;
     }

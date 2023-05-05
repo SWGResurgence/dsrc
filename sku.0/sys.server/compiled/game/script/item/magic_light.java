@@ -115,6 +115,7 @@ public class magic_light extends script.base_script
             {
                 setObjVar(self, OBJVAR_CLAIMED_BY, player);
                 broadcast(player, "You have claimed this lightsource, only you can modify it now.");
+                playClientEffectObj(player, "sound/wep_landmine_on.snd", self, "");
             }
         }
         if (item == menu_info_types.SERVER_MENU11)
@@ -130,6 +131,7 @@ public class magic_light extends script.base_script
             {
                 removeObjVar(self, OBJVAR_CLAIMED_BY);
                 broadcast(player, "You have unclaimed this lightsource.");
+                playClientEffectObj(player, "sound/wep_landmine_off.snd", self, "");
             }
         }
         return SCRIPT_CONTINUE;
@@ -187,6 +189,7 @@ public class magic_light extends script.base_script
         setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
         setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
         setLocation(newLight, loc);
+        playClientEffectObj(newLight, "sound/item_switch_on.snd", newLight, "");
         persistObject(newLight);
         persistObject(utils.getTopMostContainer(self));
         destroyObject(self);

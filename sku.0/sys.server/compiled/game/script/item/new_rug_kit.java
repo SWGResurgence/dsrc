@@ -79,6 +79,7 @@ public class new_rug_kit extends script.base_script
                 setObjVar(items[i], "null_desc", "This exotic rug was fabricated from Abbub's Rug Kit. What a spectacular rug!");
                 attachScript(items[i], "developer.bubbajoe.sync");
             }
+            playClientEventObj(player, "sound/item_cloth_open.snd", player, "");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
