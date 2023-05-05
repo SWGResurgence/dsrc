@@ -1662,23 +1662,37 @@ public class player_developer extends base_script
             String subcommand = tok.nextToken();
             if (subcommand.equals("x"))
             {
-                location loc = getLocation(iTarget);
-                float alignment = loc.x;
-                setObjVar(self, "dev_align_x", alignment);
-                return SCRIPT_CONTINUE;
-            }
-            else if (subcommand.equals("y"))
-            {
-                if (!hasObjVar(self, "dev_height"))
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
                 {
-                    sendSystemMessageTestingOnly(self, "No height to paste.");
-                    return SCRIPT_CONTINUE;
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_x", alignment);
                 }
-                float height = getFloatObjVar(self, "dev_height");
-                location loc = getLocation(iTarget);
-                loc.y = height;
-                setLocation(iTarget, loc);
-                broadcast(self, "Height of " + height +  " pasted to " + target);
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_x");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
+            }
+            else if (subcommand.equals("z"))
+            {
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_z", alignment);
+                }
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_z");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
                 return SCRIPT_CONTINUE;
             }
         }
