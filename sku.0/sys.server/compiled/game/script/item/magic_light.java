@@ -168,16 +168,17 @@ public class magic_light extends script.base_script
     }
     public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
+        obj_id player = sui.getPlayerId(params);
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
         {
             return;
         }
         int idx = sui.getListboxSelectedRow(params);
         String rangeSelection = RANGES_MAGIC_LIGHT[idx];
-        switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
+        switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection, player);
         setObjVar(self, "range", rangeSelection);
     }
-    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection) throws InterruptedException
+    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection, obj_id player) throws InterruptedException
     {
         location loc = getLocation(self);
         float yaw = getYaw(self);
@@ -197,7 +198,7 @@ public class magic_light extends script.base_script
         }
         else //inside inventory
         {
-            obj_id newLight = createObjectInInventoryAllowOverload(template, utils.getContainingPlayer(self));
+            obj_id newLight = createObjectInInventoryAllowOverload(template, utils.getInventoryContainer(player));
             attachScript(newLight, SCRIPT_MAGIC_LIGHT);
             destroyObject(self);
         }
