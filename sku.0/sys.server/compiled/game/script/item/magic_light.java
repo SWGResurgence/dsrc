@@ -177,21 +177,30 @@ public class magic_light extends script.base_script
         switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
         setObjVar(self, "range", rangeSelection);
     }
-    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection)
+    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection) throws InterruptedException
     {
         location loc = getLocation(self);
         float yaw = getYaw(self);
         float[] rotation = getQuaternion(self);
         String template  = "object/tangible/tarkin_custom/decorative/lights/" + color + "/" + subcolor + "_" + rangeSelection + ".iff";
-        obj_id newLight = createObject(template, loc);
-        attachScript(newLight, SCRIPT_MAGIC_LIGHT);
-        setYaw(newLight, yaw);
-        setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
-        setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
-        setLocation(newLight, loc);
-        playClientEffectObj(newLight, "sound/item_switch_on.snd", newLight, "");
-        persistObject(newLight);
-        persistObject(utils.getTopMostContainer(self));
-        destroyObject(self);
+        if (!utils.isNestedWithinAPlayer(self, true))//inside a house
+        {
+            obj_id newLight = createObject(template, loc);
+            attachScript(newLight, SCRIPT_MAGIC_LIGHT);
+            setYaw(newLight, yaw);
+            setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
+            setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+            setLocation(newLight, loc);
+            persistObject(newLight);
+            persistObject(utils.getTopMostContainer(self));
+            destroyObject(self);
+        }
+        else //inside inventory
+        {
+            obj_id newLight = createObjectInInventoryAllowOverload(template, utils.getContainingPlayer(self));
+            attachScript(newLight, SCRIPT_MAGIC_LIGHT);
+            destroyObject(self);
+        }
+        playClientEffectObj(self, "sound/item_switch_on.snd", self, "");
     }
 }
