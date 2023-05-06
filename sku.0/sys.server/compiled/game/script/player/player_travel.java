@@ -1037,6 +1037,7 @@ public class player_travel extends script.base_script
         }
         if (canCallForPickup(self))
         {
+            play2dNonLoopingSound(self, "sound/voice_trnspt_begin_landing_seq.snd");
             debugLogging("//***// commandHandler : callForPickup", "////>>>> player CAN call for pickup. Executing shuttle spawn sequence.");
             sendSystemMessage(self, SID_CALLING_FOR_PICKUP);
             spawnPickupCraft(self, itvType);
@@ -1172,20 +1173,24 @@ public class player_travel extends script.base_script
             if (playerFactionID == (-615855020))
             {
                 pickupCraftType = "object/tangible/terminal/terminal_travel_instant_tie.iff";
+                playClientEffectObj(player, "sound/eng_decel_tie.snd", player, "");
                 spawnLoc.y += 5.0f;
             }
         }
         else if (type == SHIP_TYPE_INSTANT_PRIVATEER)
         {
             pickupCraftType = "object/tangible/terminal/terminal_travel_instant_privateer.iff";
+            playClientEventObj(player, "sound/eng_decel_awing.snd", player, "");
         }
         else if (type == SHIP_TYPE_INSTANT_ROYAL_SHIP)
         {
             pickupCraftType = "object/tangible/terminal/terminal_travel_instant_royal_ship.iff";
+            playClientEffectObj(player, "sound/veh_military_transport_decel.snd", player, "");
         }
         else if (type == SHIP_TYPE_INSTANT_JALOPY)
         {
             pickupCraftType = "object/tangible/terminal/terminal_travel_instant_jalopy.iff";
+            playClientEffectObj(player, "sound/veh_aat_decel.snd", player, "");
         }
         else if (type == SHIP_TYPE_TCG_LOCATION_SHIP)
         {
@@ -1221,6 +1226,7 @@ public class player_travel extends script.base_script
         utils.setScriptVar(pickupCraft, "playerOwner", player);
         messageTo(pickupCraft, "initializeInstaTravelShip", null, 1, false);
         faceTo(pickupCraft, player);
+        playClientEffectObj(player, "voice/sound/voice_trnspt_landing_seq_initialized.snd", player, "");
         buff.applyBuff(player, ITV_PICKUP_BUFF);
         return true;
     }

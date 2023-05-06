@@ -1022,6 +1022,18 @@ public class player_developer extends base_script
                 playClientEffectObj(iTarget, sound, iTarget, "");
             }
         }
+        if (cmd.equalsIgnoreCase("smite"))
+        {
+            String EFFECT = "appearance/must_lightning_3.prt";
+            String SOUNDEFFECT = "sound/wtr_lightning_strike.snd";
+            obj_id[] players = getAllPlayers(getLocation(target), 2000.0f);
+            playClientEffectLoc(players, EFFECT, getLocation(target), 0.0f);
+            playClientEffectLoc(players, SOUNDEFFECT, getLocation(target), 0.0f);
+            if (!isPlayer(target) && isMob(target))
+            {
+                damage(target, DAMAGE_ELEMENTAL_ELECTRICAL, HIT_LOCATION_BODY, 1000000);
+            }
+        }
         if (cmd.equalsIgnoreCase("playsoundloc"))
         {
             if (!tok.hasMoreTokens())
