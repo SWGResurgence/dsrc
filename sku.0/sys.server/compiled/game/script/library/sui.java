@@ -191,7 +191,9 @@ public class sui extends script.base_script
         int pid = createSUIPage(SUI_MSGBOX, target, target, HANDLER_SUI);
         String prompt = utils.packStringId(sid_prompt);
         setSUIProperty(pid, MSGBOX_PROMPT, PROP_TEXT, prompt);
+        setSUIProperty(pid, MSGBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         setSUIProperty(pid, MSGBOX_TITLE, PROP_TEXT, DEFAULT_TITLE);
+        setSUIProperty(pid, MSGBOX_TITLE, "Font", "starwarslogo_optimized_56");
         setPageProperties(pid, params);
         trackSUI(target, pid, params);
         showSUIPage(pid);
@@ -607,6 +609,8 @@ public class sui extends script.base_script
         int pid = createSUIPage(SUI_MSGBOX, owner, target, suiHandler);
         setSUIProperty(pid, MSGBOX_PROMPT, PROP_TEXT, prompt);
         setSUIProperty(pid, MSGBOX_TITLE, PROP_TEXT, box_title);
+        setSUIProperty(pid, MSGBOX_TITLE, "Font", "starwarslogo_optimized_56");
+        setSUIProperty(pid, MSGBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         msgboxButtonSetup(pid, buttons);
         showSUIPage(pid);
         if (owner != target)
@@ -765,7 +769,9 @@ public class sui extends script.base_script
         }
         int pid = createSUIPage(SUI_INPUTBOX, owner, target, suiHandler);
         setSUIProperty(pid, INPUTBOX_PROMPT, PROP_TEXT, prompt);
+        setSUIProperty(pid, INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         setSUIProperty(pid, INPUTBOX_TITLE, PROP_TEXT, box_title);
+        setSUIProperty(pid, INPUTBOX_TITLE, "Font", "starwarslogo_optimized_56");
         inputboxButtonSetup(pid, buttons);
         inputboxStyleSetup(pid, style);
         if ((style > INPUT_NORMAL) && (dsrc != null))
@@ -797,6 +803,7 @@ public class sui extends script.base_script
             {
                 addSUIDataItem(pid, INPUTBOX_DATASOURCE, String.valueOf(i));
                 setSUIProperty(pid, INPUTBOX_DATASOURCE + "." + i, PROP_TEXT, dsrc[i]);
+                setSUIProperty(pid, INPUTBOX_DATASOURCE + "." + i, "Font", "starwarslogo_optimized_56");
             }
         }
         setSUIProperty(pid, INPUTBOX_INPUT, "MaxLength", String.valueOf(MAX_INPUT_LENGTH));
@@ -873,7 +880,9 @@ public class sui extends script.base_script
                 box_title = DEFAULT_TITLE;
             }
             setSUIProperty(pid, INPUTBOX_PROMPT, PROP_TEXT, prompt);
-            setSUIProperty(pid, INPUTBOX_TITLE, PROP_TEXT, box_title);
+            setSUIProperty(pid, INPUTBOX_PROMPT, PROP_TEXT, prompt);
+            setSUIProperty(pid, INPUTBOX_TITLE, "Font", "starwarslogo_optimized_56");
+            setSUIProperty(pid, INPUTBOX_TITLE, "Font", "starwarslogo_optimized_56");
             inputboxButtonSetup(pid, OK_CANCEL);
             inputboxStyleSetup(pid, INPUT_NORMAL);
             setSUIProperty(pid, INPUTBOX_INPUT, "MaxLength", String.valueOf(MAX_INPUT_LENGTH));
@@ -883,6 +892,7 @@ public class sui extends script.base_script
             }
             subscribeToSUIProperty(pid, INPUTBOX_PROMPT, PROP_TEXT);
             subscribeToSUIProperty(pid, INPUTBOX_TITLE, PROP_TEXT);
+            subscribeToSUIProperty(pid, INPUTBOX_TITLE, "Font");
             subscribeToSUIProperty(pid, INPUTBOX_INPUT, "MaxLength");
             subscribeToSUIProperty(pid, INPUTBOX_INPUT, PROP_LOCALTEXT);
             showSUIPage(pid);
@@ -1108,7 +1118,9 @@ public class sui extends script.base_script
         if (pid > -1)
         {
             setSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT, box_title);
+            setSUIProperty(pid, LISTBOX_TITLE, "Font", "starwarslogo_optimized_56");
             setSUIProperty(pid, LISTBOX_PROMPT, PROP_TEXT, prompt);
+            setSUIProperty(pid, LISTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
             listboxButtonSetup(pid, buttons);
             clearSUIDataSource(pid, LISTBOX_DATASOURCE);
             int ubound = dsrc.length;
@@ -1118,9 +1130,11 @@ public class sui extends script.base_script
                 String oob = "";
                 oob = packOutOfBandProsePackage(oob, -1, dsrc[i]);
                 setSUIPropertyOOB(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, oob);
+                setSUIPropertyOOB(pid, LISTBOX_DATASOURCE + "." + i, "Font", "starwarslogo_optimized_56");
             }
             subscribeToSUIProperty(pid, LISTBOX_LIST, PROP_SELECTEDROW);
             subscribeToSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT);
+            subscribeToSUIProperty(pid, LISTBOX_TITLE, PROP_FONT);
             if (show)
             {
                 showSUIPage(pid);
@@ -1186,7 +1200,9 @@ public class sui extends script.base_script
         if (pid > -1)
         {
             setSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT, box_title);
+            setSUIProperty(pid, LISTBOX_TITLE, "Font", "starwarslogo_optimized_56");
             setSUIProperty(pid, LISTBOX_PROMPT, PROP_TEXT, prompt);
+            setSUIProperty(pid, LISTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
             listboxButtonSetup(pid, buttons);
             clearSUIDataSource(pid, LISTBOX_DATASOURCE);
             int ubound = dsrc.length;
@@ -1194,6 +1210,7 @@ public class sui extends script.base_script
             {
                 addSUIDataItem(pid, LISTBOX_DATASOURCE, String.valueOf(i));
                 setSUIProperty(pid, LISTBOX_DATASOURCE + "." + i, PROP_TEXT, dsrc[i]);
+                setSUIProperty(pid, LISTBOX_DATASOURCE + "." + i, "Font", "starwarslogo_optimized_56");
             }
             subscribeToSUIProperty(pid, LISTBOX_LIST, PROP_SELECTEDROW);
             subscribeToSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT);
@@ -1235,7 +1252,9 @@ public class sui extends script.base_script
         if (pid > -1)
         {
             setSUIProperty(pid, LISTBOX_TITLE, PROP_TEXT, box_title);
+            setSUIProperty(pid, LISTBOX_TITLE, PROP_FONT, "starwarslogo_optimized_56");
             setSUIProperty(pid, LISTBOX_PROMPT, PROP_TEXT, prompt);
+            setSUIProperty(pid, LISTBOX_PROMPT, PROP_FONT, "starwarslogo_optimized_56");
             listboxButtonSetup(pid, buttons);
             clearSUIDataSource(pid, LISTBOX_DATASOURCE);
             subscribeToSUIProperty(pid, LISTBOX_LIST, PROP_SELECTEDROW);
@@ -1545,7 +1564,9 @@ public class sui extends script.base_script
         }
         int pid = createSUIPage(SUI_TRANSFER, owner, target, suiHandler);
         setSUIProperty(pid, TRANSFER_TITLE, PROP_TEXT, box_title);
+        setSUIProperty(pid, TRANSFER_TITLE, PROP_FONT, "starwarslogo_optimized_56");
         setSUIProperty(pid, TRANSFER_PROMPT, PROP_TEXT, prompt);
+        setSUIProperty(pid, TRANSFER_PROMPT, PROP_FONT, "starwarslogo_optimized_56");
         setSUIProperty(pid, TRANSFER_FROM_TEXT, PROP_TEXT, lblFrom);
         setSUIProperty(pid, TRANSFER_TO_TEXT, PROP_TEXT, lblTo);
         setSUIProperty(pid, TRANSFER_FROM, PROP_TEXT, Integer.toString(inputFrom));
@@ -1609,6 +1630,7 @@ public class sui extends script.base_script
             setSUIProperty(pid, COLORPICKER_COLORPICKER, PROP_TARGETVAR, customizationVar);
             setSUIProperty(pid, COLORPICKER_COLORPICKER, PROP_TARGETRANGEMAX, "500");
             setSUIProperty(pid, COLORPICKER_TITLE, PROP_TEXT, DEFAULT_TITLE);
+            setSUIProperty(pid, COLORPICKER_TITLE, PROP_FONT, "starwarslogo_optimized_56");
             subscribeToSUIProperty(pid, COLORPICKER_COLORPICKER, PROP_SELECTEDINDEX);
             showSUIPage(pid);
         }
