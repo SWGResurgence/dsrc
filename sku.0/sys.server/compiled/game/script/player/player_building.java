@@ -4861,7 +4861,7 @@ public class player_building extends script.base_script
         string_id confirm_destruction_title = new string_id(STF, "confirm_destruction_t");
         String title = getString(confirm_destruction_title);
         string_id redeed_structure_prefix = new string_id(STF, "your_structure_prefix");
-        String prompt = getString(redeed_structure_prefix) + "\\";
+        String prompt = getString(redeed_structure_prefix);
         boolean willRedeed = utils.getBooleanScriptVar(self, "player_structure.destroy.willredeed");
         if (willRedeed)
         {
