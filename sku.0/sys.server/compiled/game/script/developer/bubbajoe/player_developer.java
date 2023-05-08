@@ -14,6 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static script.library.utils.setScriptVar;
+
 public class player_developer extends base_script
 {
     public player_developer()
@@ -196,6 +198,40 @@ public class player_developer extends base_script
             broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("uberize"))
+        {
+            String type = tok.nextToken();
+            String[] skillMods = dataTableGetStringColumnNoDefaults("datatables/buff/effect_mapping.iff", "SUBTYPE");
+            if (type.equals("crafting"))
+            {
+                for (String s : skillMods) {
+                    if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
+                    {
+                        setSkillModBonus(target, s, 350);
+                    }
+                }
+            }
+            else if (type.equals("combat"))
+            {
+                for (String s : skillMods) {
+                    if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
+                    {
+                        setSkillModBonus(target, s, 350);
+                    }
+                }
+            }
+            else if (type.equals("all"))
+            {
+                for (String s : skillMods) {
+                    setSkillModBonus(target, s, 350);
+                }
+                broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(self, "Invalid type. Valid types are: crafting, combat, all");
+            }
+        }
         if (cmd.equalsIgnoreCase("describe"))
         {
             dictionary paramsDict = new dictionary();
@@ -305,7 +341,7 @@ public class player_developer extends base_script
                 if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                 {
                     broadcast(self, "Breached 500 items.");
-                    utils.setScriptVar(self, "bagLimit", 1);
+                    setScriptVar(self, "bagLimit", 1);
                 }
                 obj_id madeItem = makeCraftedItem(item, 100f, myBag);
                 setDescriptionStringId(madeItem, new string_id(description));
@@ -336,7 +372,7 @@ public class player_developer extends base_script
                     if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                     {
                         broadcast(self, "Breached 500 items.");
-                        utils.setScriptVar(self, "bagLimit", 1);
+                        setScriptVar(self, "bagLimit", 1);
                     }
                     obj_id madeItem = makeCraftedItem(item, 1000.0f, myBag);
                     setDescriptionStringId(madeItem, new string_id(description));
@@ -431,6 +467,22 @@ public class player_developer extends base_script
         {
             dictionary param = new dictionary();
             messageTo(target, tok.nextToken(), param, utils.stringToFloat(tok.nextToken()), true);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("messagetoparams"))
+        {
+            // /developer messagetoparams (target) <message> <delay> <ensured> <param1> <value1> <param2> <value2> ...
+            dictionary param = new dictionary();
+            String message = tok.nextToken();
+            float delay = utils.stringToFloat(tok.nextToken());
+            boolean ensured = Boolean.parseBoolean(tok.nextToken());
+            while (tok.hasMoreTokens())
+            {
+                String key = tok.nextToken();
+                String value = tok.nextToken();
+                param.put(key, value);
+            }
+            messageTo(target, message, param, delay, ensured);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("convertstringtocrc"))
@@ -1720,6 +1772,28 @@ public class player_developer extends base_script
             setDescriptionStringId(gonkieControlDevice, new string_id("This control device allows users to request an experimental EG-6 unit. The unit will be delivered to the user's current location."));
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("saveBuilding"))
+        {
+            obj_id building = target;
+            obj_id contents[] = getContents(building);
+            persistObject(building);
+            for (obj_id content : contents)
+            {
+                persistObject(content);
+                echo(self, "Persisted " + content + " (" + getName(content) + ")");
+            }
+        }
+        if (cmd.equals("saveBuildingCell"))
+        {
+            obj_id building = utils.stringToObjId(tok.nextToken());
+            obj_id contents[] = getContents(building);
+            persistObject(building);
+            for (obj_id content : contents)
+            {
+                persistObject(content);
+                echo(self, "Persisted " + content + " (" + getName(content) + ")");
+            }
+        }
         if (cmd.equalsIgnoreCase("meddroid"))
         {
             obj_id healer = create.object("object/mobile/fx_7_droid.iff", getLocation(self));
@@ -1760,7 +1834,7 @@ public class player_developer extends base_script
         {
             if (tok.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle (target) <mod index> <mod value>");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(target))
@@ -1791,6 +1865,30 @@ public class player_developer extends base_script
                 obj_id pInv = utils.getInventoryContainer(self);
                 sendConsoleCommand("/object createIn " + template + " " + pInv, self);
                 return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("scriptvar"))
+        {
+            debugConsoleMsg(self, "scriptvar command received");
+            String subcommand = tok.nextToken();
+            if (subcommand.equalsIgnoreCase("set"))
+            {
+                String varName = tok.nextToken();
+                String varValue = tok.nextToken();
+                utils.setScriptVar(target, varName, varValue);
+                debugConsoleMsg(self, "scriptvar " + varName + " set to " + varValue + " for " + getPlayerFullName(target));
+            }
+            else if (subcommand.equalsIgnoreCase("removeTree"))
+            {
+                String varName = tok.nextToken();
+                utils.removeScriptVarTree(target, varName);
+                debugConsoleMsg(self, "scriptvar tree" + varName + " removed from " + getPlayerFullName(target));
+            }
+            else if (subcommand.equalsIgnoreCase("remove"))
+            {
+                String varName = tok.nextToken();
+                utils.removeScriptVar(target, varName);
+                debugConsoleMsg(self, "scriptvar " + varName + " removed from " + getPlayerFullName(target));
             }
         }
         if (cmd.equalsIgnoreCase("prepareStaticStrings"))
