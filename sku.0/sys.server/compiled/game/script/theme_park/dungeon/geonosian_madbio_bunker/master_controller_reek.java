@@ -2,6 +2,7 @@ package script.theme_park.dungeon.geonosian_madbio_bunker;
 
 import script.dictionary;
 import script.library.pet_lib;
+import script.library.resurgence;
 import script.library.utils;
 import script.obj_id;
 
@@ -12,6 +13,7 @@ public class master_controller_reek extends script.base_script
     public static final String  SIGHTING_NAME = "reek_spotted";
     public int OnAttach(obj_id self) throws InterruptedException
     {
+        resurgence.setupLootAmount(self, rand(1, 3));
         createTriggerVolume(SIGHTING_NAME, SIGHTING_RADIUS, false);
         return SCRIPT_CONTINUE;
     }
