@@ -41,6 +41,11 @@ public class resurgence extends script.base_script
         attachScript(spawned, script);
         return SCRIPT_CONTINUE;
     }
+    public static int setupLootAmount(obj_id what, int amount)
+    {
+        setObjVar(what, "loot.numItems", amount);
+        return SCRIPT_CONTINUE;
+    }
 
     public static void sendToOrigin(obj_id self)
     {
