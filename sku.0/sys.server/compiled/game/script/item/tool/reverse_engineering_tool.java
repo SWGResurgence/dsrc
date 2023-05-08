@@ -15,62 +15,62 @@ public class reverse_engineering_tool extends script.base_script
     public static final String MOD_BIT_TEMPLATE = "object/tangible/component/reverse_engineering/modifier_bit.iff";
     public static final String NO_PUP = "no_pup";
     public String TYPE_SELECTION = "";
-    public static final String[] POWER_BIT_TEMPLATE =
-            {
-                    "object/tangible/component/reverse_engineering/power_bit_1.iff",
-                    "object/tangible/component/reverse_engineering/power_bit_2.iff",
-                    "object/tangible/component/reverse_engineering/power_bit_3.iff"
-            };
-    public static final String[] BASIC_MOD_LIST =
-            {
-                    "precision_modified",
-                    "strength_modified",
-                    "agility_modified",
-                    "stamina_modified",
-                    "constitution_modified",
-                    "luck_modified",
-                    "camouflage",
-                    "combat_block_value"
-            };
-    public static final String[] FINAL_ATTACHMENT_TEMPLATE =
-            {
-                    "object/tangible/gem/clothing.iff",
-                    "object/tangible/gem/armor.iff",
-                    "object/tangible/gem/weapon.iff",
-                    "object/tangible/gem/weapon.iff",
-                    "object/tangible/gem/shirt_only.iff",
-                    "object/tangible/gem/bp_armor_only.iff",
-                    "object/tangible/gem/weapon.iff",
-                    "object/tangible/gem/weapon.iff"
-            };
-    public static final String[] NON_BP_ATTACHMENTS =
-            {
-                    "object/tangible/gem/clothing.iff",
-                    "object/tangible/gem/armor.iff"
-            };
-    public static final String[] SKILL_LIST =
-            {
-                    "class_domestics_phase1_novice",
-                    "class_munitions_phase1_novice",
-                    "class_engineering_phase1_novice"
-            };
-    public static final String[] POWERUP_STATIC_NAMES =
-            {
-                    "item_reverse_engineering_powerup_clothing_02_01",
-                    "item_reverse_engineering_powerup_armor_02_01",
-                    "item_reverse_engineering_powerup_weapon_02_01"
-            };
-    public static final String[] BANNED_SCRIPTS =
-            {
-                    "item.special.nomove",
-                    "item.special.autoinsure",
-                    "item.special.nodestroy",
-                    "item.special.nomove_base",
-                    "item.special.nomove_container",
-                    "item.special.nomove_cube_loot",
-                    "item.special.nomove_furniture",
-                    "item.special.officer_drop_item"
-            };
+    public static final String[] POWER_BIT_TEMPLATE = 
+    {
+        "object/tangible/component/reverse_engineering/power_bit_1.iff",
+        "object/tangible/component/reverse_engineering/power_bit_2.iff",
+        "object/tangible/component/reverse_engineering/power_bit_3.iff"
+    };
+    public static final String[] BASIC_MOD_LIST = 
+    {
+        "precision_modified",
+        "strength_modified",
+        "agility_modified",
+        "stamina_modified",
+        "constitution_modified",
+        "luck_modified",
+        "camouflage",
+        "combat_block_value"
+    };
+    public static final String[] FINAL_ATTACHMENT_TEMPLATE = 
+    {
+        "object/tangible/gem/clothing.iff",
+        "object/tangible/gem/armor.iff",
+        "object/tangible/gem/weapon.iff",
+        "object/tangible/gem/weapon.iff",
+        "object/tangible/gem/shirt_only.iff",
+        "object/tangible/gem/bp_armor_only.iff",
+        "object/tangible/gem/weapon.iff",
+        "object/tangible/gem/weapon.iff"
+    };
+    public static final String[] NON_BP_ATTACHMENTS = 
+    {
+        "object/tangible/gem/clothing.iff",
+        "object/tangible/gem/armor.iff"
+    };
+    public static final String[] SKILL_LIST = 
+    {
+        "class_domestics_phase1_novice",
+        "class_munitions_phase1_novice",
+        "class_engineering_phase1_novice"
+    };
+    public static final String[] POWERUP_STATIC_NAMES = 
+    {
+        "item_reverse_engineering_powerup_clothing_02_01",
+        "item_reverse_engineering_powerup_armor_02_01",
+        "item_reverse_engineering_powerup_weapon_02_01"
+    };
+    public static final String[] BANNED_SCRIPTS = 
+    {
+        "item.special.nomove",
+        "item.special.autoinsure",
+        "item.special.nodestroy",
+        "item.special.nomove_base",
+        "item.special.nomove_container",
+        "item.special.nomove_cube_loot",
+        "item.special.nomove_furniture",
+        "item.special.officer_drop_item"
+    };
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -373,12 +373,12 @@ public class reverse_engineering_tool extends script.base_script
                 int attachmentLevel = 1;
                 int ratio = 100;
                 String mod = "strength_modified";
-                int[] whosWho =
-                        {
-                                -1,
-                                -1,
-                                -1
-                        };
+                int[] whosWho = 
+                {
+                    -1,
+                    -1,
+                    -1
+                };
                 boolean success = false;
                 for (int i = 0; i < stuff.length; i++)
                 {
@@ -422,7 +422,7 @@ public class reverse_engineering_tool extends script.base_script
                             sendSystemMessage(player, new string_id("spam", "re_already_has_mod"));
                             return;
                         }
-                        else
+                        else 
                         {
                             power = power / ratio;
                             setObjVar(stuff[i], "skillmod.bonus." + mod, power);
@@ -440,7 +440,7 @@ public class reverse_engineering_tool extends script.base_script
                             int count = getCount(stuff[i]);
                             setCount(stuff[i], count - 1);
                         }
-                        else
+                        else 
                         {
                             destroyObject(stuff[i]);
                         }
@@ -514,7 +514,7 @@ public class reverse_engineering_tool extends script.base_script
                 prependModNameToObject(powerup, mod);
             }
         }
-        else
+        else 
         {
             sendSystemMessage(player, new string_id("spam", "powerup_wrong_components"));
         }
@@ -555,11 +555,15 @@ public class reverse_engineering_tool extends script.base_script
         if (canUpgradeAttachment(player))
         {
             powerOrderResult = skillMod + (numStats * 100) + rand(1, 100);
-            if (powerOrderResult > 480)
+            if (powerOrderResult > 500)
+            {
+                powerOrderSuccessLevel = 3;
+            }
+            else if (powerOrderResult <= 500 && powerOrderResult > 360)
             {
                 powerOrderSuccessLevel = 2;
             }
-            else if (powerOrderResult > 298)
+            else if (powerOrderResult > 200)
             {
                 powerOrderSuccessLevel = 1;
             }
@@ -592,9 +596,9 @@ public class reverse_engineering_tool extends script.base_script
             skillMod += luckMod;
             if (skillMod > randomRoll)
             {
-                finalPower = maxStat + 1;
+                finalPower = maxStat + 2;
             }
-            else
+            else 
             {
                 finalPower = maxStat;
             }
@@ -799,7 +803,7 @@ public class reverse_engineering_tool extends script.base_script
                     classType = i + 4;
                     break;
                 }
-                else
+                else 
                 {
                     classType = i;
                     break;
