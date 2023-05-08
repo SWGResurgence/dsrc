@@ -403,7 +403,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
                 int intFactionReward = getFactionReward(intReward);
                 setObjVar(objMissionData, "intFactionReward", intFactionReward);
                 setObjVar(objMissionData, "strFaction", strActualFaction);
-                setObjVar(objMissionData, "intGCWPoints", intGCWPoints);
+                setObjVar(objMissionData, "intGCWPoints", intGCWPoints * 5); //$GCW multiplier
             }
         }
         setMissionReward(objMissionData, intReward);
@@ -729,7 +729,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             intReward = 50 + intDifficulty;
         }
-        intReward = intReward * BH_MISSION_PAYOUT_BONUS + rand(0, 1000);
+        intReward = intReward + rand(290000, 369999); //$BH multiplier
         obj_id groupObject = getGroupObject(objCreator);
         if (isIdValid(groupObject))
         {
@@ -1012,7 +1012,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
     {
         obj_id objInventory = getObjectInSlot(objTarget, "inventory");
         boolean boolTransfer = putIn(objItem, objInventory);
-        return boolTransfer == true;
+        return boolTransfer;
     }
 
     public void missionArrival(obj_id objMission) throws InterruptedException
@@ -1598,9 +1598,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             boolNPC = true;
         }
-        else
-        {
-        }
         boolean boolRandomName = false;
         if (hasObjVar(objCreator, "intScout"))
         {
@@ -2175,10 +2172,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         String strNPCType = getStringObjVar(objNPC, "strNPCType");
         location locCurrentLocation = getLocation(objNPC);
         obj_id foo = getTopMostContainer(objNPC);
-        if (!isIdValid(foo))
-        {
-        }
-        else
+        if (isIdValid(foo))
         {
             locCurrentLocation = getLocation(foo);
         }
@@ -2939,7 +2933,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         int intReward = 20 + (int) (fltReward);
         intReward = intReward + rand(-10, 10);
-        return (intReward * MISSION_MULTIPLIER);
+        return (intReward * MISSION_MULTIPLIER);//$Destroy missions
     }
 
     public int getDestroyReward(int intMinReward, int intMaxReward, float fltDistance) throws InterruptedException
@@ -3476,9 +3470,6 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             if (isIdValid(objMissionData))
             {
                 String strMissionType = getMissionType(objMissionData);
-            }
-            else
-            {
             }
             return;
         }

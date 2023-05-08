@@ -15,25 +15,19 @@ public class terminal_space extends script.terminal.base.base_terminal {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
-
-    public int OnPreloadComplete(obj_id self) throws InterruptedException {
-        if (getTemplateName(self).contains("portable")) {
-            obj_id building = structure.getContainingBuilding(self);
-            if (hasScript(building,"structure.permanent_structure"))
+    public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
+    {
+        if (isPlayer(transferer) && destContainer != utils.getInventoryContainer(transferer) && !isInWorldCell(destContainer) && getTemplateName(self).contains("portable"))
+        {
+            if (!hasObjVar(getTopMostContainer(self), "travel.point_name"))
             {
-                if (isIdValid(building) && player_structure.isBuilding(building)) {
-                    setObjVar(building, "travel.point_name", "Portable Launch Location");
-                }
-                else
-                {
-                    System.out.println("WARNING: terminal_space.OnPreloadComplete -- Terminal is in a building, but the building is a player structure.");
-                }
-            }
-            else
-            {
-                System.out.println("NOTICE: terminal_space.OnPreloadComplete -- Terminal is in a building, but the building is not a player structure.");
+                setObjVar(getTopMostContainer(self), "travel.point_name", "Portable Launch Location");
             }
         }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnPreloadComplete(obj_id self) throws InterruptedException {
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
         location locTest = getLocation(self);
@@ -174,9 +168,9 @@ public class terminal_space extends script.terminal.base.base_terminal {
     }
 
     public void doStarportToStarportLaunch(obj_id player, obj_id ship, obj_id[] membersApprovedByShipOwner, String planet, String pointName) throws InterruptedException {
-        if (!getPlanetTravelPointInterplanetary(planet, pointName)) {
+        /*if (!getPlanetTravelPointInterplanetary(planet, pointName)) {
             return;
-        }
+        }*/
         if (space_utils.isBasicShip(ship)) {
             if (!planet.equals(getLocation(player).area)) {
                 string_id strSpam = new string_id("space/space_interaction", "no_travel_basic");

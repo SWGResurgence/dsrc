@@ -83,16 +83,17 @@ public class magic_light extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        int parent = mi.addRootMenu(menu_info_types.SERVER_MENU13, unlocalized("Lamp Options"));
         if (!hasObjVar(self, OBJVAR_CLAIMED_BY))
         {
-            mi.addRootMenu(menu_info_types.SERVER_MENU10, unlocalized("Claim"));
+            mi.addSubMenu(parent, menu_info_types.SERVER_MENU10, unlocalized("Claim"));
         }
         else
         {
             if (player == getObjIdObjVar(self, OBJVAR_CLAIMED_BY))
             {
-                mi.addRootMenu(menu_info_types.SERVER_MENU11, unlocalized("Modify Color"));
-                mi.addRootMenu(menu_info_types.SERVER_MENU12, unlocalized("Unclaim"));
+                mi.addSubMenu(parent, menu_info_types.SERVER_MENU11, unlocalized("Modify Color"));
+                mi.addSubMenu(parent, menu_info_types.SERVER_MENU12, unlocalized("Unclaim"));
             }
             else
             {
@@ -114,6 +115,7 @@ public class magic_light extends script.base_script
             {
                 setObjVar(self, OBJVAR_CLAIMED_BY, player);
                 broadcast(player, "You have claimed this lightsource, only you can modify it now.");
+                playClientEffectObj(player, "sound/wep_landmine_on.snd", self, "");
             }
         }
         if (item == menu_info_types.SERVER_MENU11)
@@ -129,6 +131,7 @@ public class magic_light extends script.base_script
             {
                 removeObjVar(self, OBJVAR_CLAIMED_BY);
                 broadcast(player, "You have unclaimed this lightsource.");
+                playClientEffectObj(player, "sound/wep_landmine_off.snd", self, "");
             }
         }
         return SCRIPT_CONTINUE;
@@ -165,27 +168,40 @@ public class magic_light extends script.base_script
     }
     public void handleColorRange(obj_id self, dictionary params) throws InterruptedException
     {
+        obj_id player = sui.getPlayerId(params);
         if (sui.getIntButtonPressed(params) == sui.BP_CANCEL)
         {
             return;
         }
         int idx = sui.getListboxSelectedRow(params);
         String rangeSelection = RANGES_MAGIC_LIGHT[idx];
-        switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection);
+        switchTemplate(self, getStringObjVar(self, DATATABLE_MAIN_COLOR_COL), getStringObjVar(self, DATATABLE_SUB_COLOR_COL), rangeSelection, player);
         setObjVar(self, "range", rangeSelection);
     }
-    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection)
+    public void switchTemplate(obj_id self, String color, String subcolor, String rangeSelection, obj_id player) throws InterruptedException
     {
         location loc = getLocation(self);
         float yaw = getYaw(self);
         float[] rotation = getQuaternion(self);
         String template  = "object/tangible/tarkin_custom/decorative/lights/" + color + "/" + subcolor + "_" + rangeSelection + ".iff";
-        obj_id newLight = createObject(template, loc);
-        attachScript(newLight, SCRIPT_MAGIC_LIGHT);
-        setYaw(newLight, yaw);
-        setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
-        setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
-        setLocation(newLight, loc);
-        destroyObject(self);
+        if (!utils.isNestedWithinAPlayer(self, true))//inside a house
+        {
+            obj_id newLight = createObject(template, loc);
+            attachScript(newLight, SCRIPT_MAGIC_LIGHT);
+            setYaw(newLight, yaw);
+            setQuaternion(newLight, rotation[0], rotation[1], rotation[2], rotation[3]);
+            setObjVar(newLight, "claimedBy", getObjIdObjVar(self, OBJVAR_CLAIMED_BY));
+            setLocation(newLight, loc);
+            persistObject(newLight);
+            persistObject(utils.getTopMostContainer(self));
+            destroyObject(self);
+        }
+        else //inside inventory
+        {
+            obj_id newLight = createObjectInInventoryAllowOverload(template, utils.getInventoryContainer(player));
+            attachScript(newLight, SCRIPT_MAGIC_LIGHT);
+            destroyObject(self);
+        }
+        playClientEffectObj(self, "sound/item_switch_on.snd", self, "");
     }
 }

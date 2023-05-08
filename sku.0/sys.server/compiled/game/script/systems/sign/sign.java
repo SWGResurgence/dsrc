@@ -145,6 +145,7 @@ public class sign extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU3)
         {
+            playClientEffectObj(player, "sound/item_fusioncutter_start.snd", player, "");
             String commPrompt = colors_hex.HEADER + colors_hex.AQUAMARINE + getPlayerFullName(player) + " is at this structure's entrance.";
             obj_id house = utils.getObjIdScriptVar(self, "player_structure.parent");
             obj_id[] occupants = player_structure.getPlayersInBuilding(house);
@@ -160,7 +161,7 @@ public class sign extends script.base_script
                     String doorbellSnd = getStringObjVar(house, "player_structure.doorbell_snd");
                     if (doorbellSnd == null || doorbellSnd.equals(""))
                     {
-                        doorbellSnd = "sound/item_ding.snd";
+                        doorbellSnd = "sound/item_fusioncutter_start.snd";
                     }
                     playClientEffectObj(occupant, doorbellSnd, occupant, "");
                     prose_package pp = new prose_package();

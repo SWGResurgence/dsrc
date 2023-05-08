@@ -387,7 +387,10 @@ public class static_item_base extends script.base_script
     {
         if (isGod(player))
         {
-            mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("[GodMode] Reinitialize Static Item"));
+            if (hasObjVar(self, "live_qa"))
+            {
+                mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("[GodMode] Reinitialize Static Item"));
+            }
         }
         return SCRIPT_CONTINUE;
     }

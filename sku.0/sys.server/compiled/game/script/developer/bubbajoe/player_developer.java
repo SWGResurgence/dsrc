@@ -14,6 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static script.library.utils.setScriptVar;
+
 public class player_developer extends base_script
 {
     public player_developer()
@@ -196,6 +198,40 @@ public class player_developer extends base_script
             broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("uberize"))
+        {
+            String type = tok.nextToken();
+            String[] skillMods = dataTableGetStringColumnNoDefaults("datatables/buff/effect_mapping.iff", "SUBTYPE");
+            if (type.equals("crafting"))
+            {
+                for (String s : skillMods) {
+                    if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
+                    {
+                        setSkillModBonus(target, s, 350);
+                    }
+                }
+            }
+            else if (type.equals("combat"))
+            {
+                for (String s : skillMods) {
+                    if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
+                    {
+                        setSkillModBonus(target, s, 350);
+                    }
+                }
+            }
+            else if (type.equals("all"))
+            {
+                for (String s : skillMods) {
+                    setSkillModBonus(target, s, 350);
+                }
+                broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(self, "Invalid type. Valid types are: crafting, combat, all");
+            }
+        }
         if (cmd.equalsIgnoreCase("describe"))
         {
             dictionary paramsDict = new dictionary();
@@ -305,7 +341,7 @@ public class player_developer extends base_script
                 if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                 {
                     broadcast(self, "Breached 500 items.");
-                    utils.setScriptVar(self, "bagLimit", 1);
+                    setScriptVar(self, "bagLimit", 1);
                 }
                 obj_id madeItem = makeCraftedItem(item, 100f, myBag);
                 setDescriptionStringId(madeItem, new string_id(description));
@@ -336,7 +372,7 @@ public class player_developer extends base_script
                     if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                     {
                         broadcast(self, "Breached 500 items.");
-                        utils.setScriptVar(self, "bagLimit", 1);
+                        setScriptVar(self, "bagLimit", 1);
                     }
                     obj_id madeItem = makeCraftedItem(item, 1000.0f, myBag);
                     setDescriptionStringId(madeItem, new string_id(description));
@@ -431,6 +467,22 @@ public class player_developer extends base_script
         {
             dictionary param = new dictionary();
             messageTo(target, tok.nextToken(), param, utils.stringToFloat(tok.nextToken()), true);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("messagetoparams"))
+        {
+            // /developer messagetoparams (target) <message> <delay> <ensured> <param1> <value1> <param2> <value2> ...
+            dictionary param = new dictionary();
+            String message = tok.nextToken();
+            float delay = utils.stringToFloat(tok.nextToken());
+            boolean ensured = Boolean.parseBoolean(tok.nextToken());
+            while (tok.hasMoreTokens())
+            {
+                String key = tok.nextToken();
+                String value = tok.nextToken();
+                param.put(key, value);
+            }
+            messageTo(target, message, param, delay, ensured);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("convertstringtocrc"))
@@ -1022,6 +1074,18 @@ public class player_developer extends base_script
                 playClientEffectObj(iTarget, sound, iTarget, "");
             }
         }
+        if (cmd.equalsIgnoreCase("smite"))
+        {
+            String EFFECT = "appearance/must_lightning_3.prt";
+            String SOUNDEFFECT = "sound/wtr_lightning_strike.snd";
+            obj_id[] players = getAllPlayers(getLocation(target), 2000.0f);
+            playClientEffectLoc(players, EFFECT, getLocation(target), 0.0f);
+            playClientEffectLoc(players, SOUNDEFFECT, getLocation(target), 0.0f);
+            if (!isPlayer(target) && isMob(target))
+            {
+                damage(target, DAMAGE_ELEMENTAL_ELECTRICAL, HIT_LOCATION_BODY, 1000000);
+            }
+        }
         if (cmd.equalsIgnoreCase("playsoundloc"))
         {
             if (!tok.hasMoreTokens())
@@ -1589,6 +1653,20 @@ public class player_developer extends base_script
             ai_lib.setMood(entertainer, "themepark_oola");
             attachScript(entertainer, "bot.entertainer");
         }
+        if (cmd.equalsIgnoreCase("toggleVendorCosts")) // GM command to toggle vendor costs on and off - useful for debugging item transactions
+        {
+            String vendorVar = "vend";
+            if (hasObjVar(self, vendorVar))
+            {
+                removeObjVar(self, vendorVar);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now disabled.");
+            }
+            else
+            {
+                setObjVar(self, vendorVar, 1);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now enabled.");
+            }
+        }
         if (cmd.equalsIgnoreCase("invulnerable"))
         {
             if (isInvulnerable(target))
@@ -1617,6 +1695,71 @@ public class player_developer extends base_script
                 commPlayer(self, recipient, pp);
             }
         }
+        if (cmd.equalsIgnoreCase("setHeight"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equals("copy"))
+            {
+                location loc = getLocation(iTarget);
+                float height = loc.y;
+                setObjVar(self, "dev_height", height);
+                broadcast(self, "Height of " + height +  " copied.");
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equals("paste"))
+            {
+                if (!hasObjVar(self, "dev_height"))
+                {
+                    sendSystemMessageTestingOnly(self, "No height to paste.");
+                    return SCRIPT_CONTINUE;
+                }
+                float height = getFloatObjVar(self, "dev_height");
+                location loc = getLocation(iTarget);
+                loc.y = height;
+                setLocation(iTarget, loc);
+                broadcast(self, "Height of " + height +  " pasted to " + target);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("setAlign"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equals("x"))
+            {
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_x", alignment);
+                }
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_x");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
+            }
+            else if (subcommand.equals("z"))
+            {
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_z", alignment);
+                }
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_z");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
+                return SCRIPT_CONTINUE;
+            }
+        }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
@@ -1629,11 +1772,40 @@ public class player_developer extends base_script
             setDescriptionStringId(gonkieControlDevice, new string_id("This control device allows users to request an experimental EG-6 unit. The unit will be delivered to the user's current location."));
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("saveBuilding"))
+        {
+            obj_id building = target;
+            obj_id contents[] = getContents(building);
+            persistObject(building);
+            for (obj_id content : contents)
+            {
+                persistObject(content);
+                echo(self, "Persisted " + content + " (" + getName(content) + ")");
+            }
+        }
+        if (cmd.equals("saveBuildingCell"))
+        {
+            obj_id building = utils.stringToObjId(tok.nextToken());
+            obj_id contents[] = getContents(building);
+            persistObject(building);
+            for (obj_id content : contents)
+            {
+                persistObject(content);
+                echo(self, "Persisted " + content + " (" + getName(content) + ")");
+            }
+        }
         if (cmd.equalsIgnoreCase("meddroid"))
         {
             obj_id healer = create.object("object/mobile/fx_7_droid.iff", getLocation(self));
             attachScript(healer, "developer.bubbajoe.doctor_droid");
             return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("setCraftedBy"))
+        {
+            String craftedBy = tok.nextToken();
+            obj_id who = getPlayerIdFromFirstName(craftedBy);
+            setCrafter(target, who);
+            sendSystemMessageTestingOnly(self, "Item will now display that" + craftedBy + " crafted it.");
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1662,7 +1834,7 @@ public class player_developer extends base_script
         {
             if (tok.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle (target) <mod index> <mod value>");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(target))
@@ -1693,6 +1865,30 @@ public class player_developer extends base_script
                 obj_id pInv = utils.getInventoryContainer(self);
                 sendConsoleCommand("/object createIn " + template + " " + pInv, self);
                 return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("scriptvar"))
+        {
+            debugConsoleMsg(self, "scriptvar command received");
+            String subcommand = tok.nextToken();
+            if (subcommand.equalsIgnoreCase("set"))
+            {
+                String varName = tok.nextToken();
+                String varValue = tok.nextToken();
+                utils.setScriptVar(target, varName, varValue);
+                debugConsoleMsg(self, "scriptvar " + varName + " set to " + varValue + " for " + getPlayerFullName(target));
+            }
+            else if (subcommand.equalsIgnoreCase("removeTree"))
+            {
+                String varName = tok.nextToken();
+                utils.removeScriptVarTree(target, varName);
+                debugConsoleMsg(self, "scriptvar tree" + varName + " removed from " + getPlayerFullName(target));
+            }
+            else if (subcommand.equalsIgnoreCase("remove"))
+            {
+                String varName = tok.nextToken();
+                utils.removeScriptVar(target, varName);
+                debugConsoleMsg(self, "scriptvar " + varName + " removed from " + getPlayerFullName(target));
             }
         }
         if (cmd.equalsIgnoreCase("prepareStaticStrings"))
