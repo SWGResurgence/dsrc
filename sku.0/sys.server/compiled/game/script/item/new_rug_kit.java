@@ -28,7 +28,7 @@ public class new_rug_kit extends script.base_script
     public void reInitializeKit(obj_id self)
     {
         setName(self, "Abbub's Rug Kit");
-        setDescriptionString(self, "This kit can be used to create three random rugs from 171 variations.  Use the kit to select the rug you want to create.");
+        setDescriptionString(self, "This kit can be used to create three random rugs from 171 variations. Select 'Fabricate Rugs' to create your rugs.");
     }
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -43,7 +43,7 @@ public class new_rug_kit extends script.base_script
         }
         if (utils.isNestedWithinAPlayer(self))
         {
-           mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rug"));
+           mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Fabricate Rugs"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -59,6 +59,11 @@ public class new_rug_kit extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
+            if (getVolumeFree(utils.getInventoryContainer(player)) < 3)
+            {
+                broadcast(player, "You do not have enough inventory space to fabricate three rugs.");
+                return SCRIPT_CONTINUE;
+            }
             String rugPrefix = "object/tangible/tarkin_custom/decorative/rug/tarkin_rug_";
             String rugSuffix = ".iff";
             obj_id pInv = utils.getInventoryContainer(player);
@@ -71,8 +76,10 @@ public class new_rug_kit extends script.base_script
             {
                 items[i] = (obj_id)theSet.toArray()[i];
                 setName(items[i], "an exotic rug");
-                setDescriptionStringId(items[i], unlocalized("This exotic rug was created by Abbub's Rug Kit."));
+                setObjVar(items[i], "null_desc", "This exotic rug was fabricated from Abbub's Rug Kit. What a spectacular rug!");
+                attachScript(items[i], "developer.bubbajoe.sync");
             }
+            playClientEventObj(player, "sound/item_cloth_open.snd", player, "");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;

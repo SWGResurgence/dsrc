@@ -1022,6 +1022,18 @@ public class player_developer extends base_script
                 playClientEffectObj(iTarget, sound, iTarget, "");
             }
         }
+        if (cmd.equalsIgnoreCase("smite"))
+        {
+            String EFFECT = "appearance/must_lightning_3.prt";
+            String SOUNDEFFECT = "sound/wtr_lightning_strike.snd";
+            obj_id[] players = getAllPlayers(getLocation(target), 2000.0f);
+            playClientEffectLoc(players, EFFECT, getLocation(target), 0.0f);
+            playClientEffectLoc(players, SOUNDEFFECT, getLocation(target), 0.0f);
+            if (!isPlayer(target) && isMob(target))
+            {
+                damage(target, DAMAGE_ELEMENTAL_ELECTRICAL, HIT_LOCATION_BODY, 1000000);
+            }
+        }
         if (cmd.equalsIgnoreCase("playsoundloc"))
         {
             if (!tok.hasMoreTokens())
@@ -1589,6 +1601,20 @@ public class player_developer extends base_script
             ai_lib.setMood(entertainer, "themepark_oola");
             attachScript(entertainer, "bot.entertainer");
         }
+        if (cmd.equalsIgnoreCase("toggleVendorCosts")) // GM command to toggle vendor costs on and off - useful for debugging item transactions
+        {
+            String vendorVar = "vend";
+            if (hasObjVar(self, vendorVar))
+            {
+                removeObjVar(self, vendorVar);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now disabled.");
+            }
+            else
+            {
+                setObjVar(self, vendorVar, 1);
+                sendSystemMessageTestingOnly(self, "Vendor costs are now enabled.");
+            }
+        }
         if (cmd.equalsIgnoreCase("invulnerable"))
         {
             if (isInvulnerable(target))
@@ -1617,6 +1643,71 @@ public class player_developer extends base_script
                 commPlayer(self, recipient, pp);
             }
         }
+        if (cmd.equalsIgnoreCase("setHeight"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equals("copy"))
+            {
+                location loc = getLocation(iTarget);
+                float height = loc.y;
+                setObjVar(self, "dev_height", height);
+                broadcast(self, "Height of " + height +  " copied.");
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equals("paste"))
+            {
+                if (!hasObjVar(self, "dev_height"))
+                {
+                    sendSystemMessageTestingOnly(self, "No height to paste.");
+                    return SCRIPT_CONTINUE;
+                }
+                float height = getFloatObjVar(self, "dev_height");
+                location loc = getLocation(iTarget);
+                loc.y = height;
+                setLocation(iTarget, loc);
+                broadcast(self, "Height of " + height +  " pasted to " + target);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("setAlign"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equals("x"))
+            {
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_x", alignment);
+                }
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_x");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
+            }
+            else if (subcommand.equals("z"))
+            {
+                String subCommand = tok.nextToken();
+                if (subCommand.equals("copy"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = loc.x;
+                    setObjVar(self, "dev_align_z", alignment);
+                }
+                else if (subCommand.equals("paste"))
+                {
+                    location loc = getLocation(iTarget);
+                    float alignment = getFloatObjVar(self, "dev_align_z");
+                    loc.z = alignment;
+                    setLocation(iTarget, loc);
+                }
+                return SCRIPT_CONTINUE;
+            }
+        }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
@@ -1634,6 +1725,13 @@ public class player_developer extends base_script
             obj_id healer = create.object("object/mobile/fx_7_droid.iff", getLocation(self));
             attachScript(healer, "developer.bubbajoe.doctor_droid");
             return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("setCraftedBy"))
+        {
+            String craftedBy = tok.nextToken();
+            obj_id who = getPlayerIdFromFirstName(craftedBy);
+            setCrafter(target, who);
+            sendSystemMessageTestingOnly(self, "Item will now display that" + craftedBy + " crafted it.");
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {

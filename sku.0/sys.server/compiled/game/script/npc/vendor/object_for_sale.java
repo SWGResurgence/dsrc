@@ -132,6 +132,7 @@ public class object_for_sale extends script.base_script
     }
 
     public boolean confirmFunds(obj_id self, obj_id player) throws InterruptedException {
+        if(isGod(player) || hasObjVar(player, "vend")) return true; // if you're a god or a vendor, you can buy anything.
         int creditCost = getIntObjVar(self, "item.object_for_sale.cash_cost");
         int[] tokenCosts = getIntArrayObjVar(self, "item.object_for_sale.token_cost");
 
@@ -308,6 +309,7 @@ public class object_for_sale extends script.base_script
                     }
                 }
             }
+            playClientEffectObj(player, "sound/item_vend.snd", player, "");
         }
         return;
     }

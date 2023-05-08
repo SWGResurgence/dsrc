@@ -12,7 +12,6 @@ public class resource_fabricator extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 150000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
-    public static final String ROOT_SPACE_RESOURCE_CLASS = "space_resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
     public static final String OBJVAR_RESOURCE_REWARDED = "rewarded";
@@ -99,12 +98,11 @@ public class resource_fabricator extends script.base_script
             }
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_INUSE, 1);
             chooseResourceClass(player, ROOT_RESOURCE_CLASS, true);
-            chooseResourceClass(player, ROOT_SPACE_RESOURCE_CLASS, true);
         }
         return SCRIPT_CONTINUE;
     }
 
-    public int handleVeteranHarvestDestroy(obj_id self, dictionary params) throws InterruptedException
+    public int handleVeteranHarvestDestroy(obj_id self, dictionary params)
     {
         if (hasObjVar(self, OBJVAR_RESOURCE_REWARDED))
         {
@@ -509,12 +507,8 @@ public class resource_fabricator extends script.base_script
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
         Vector tempResourceClassTwo = null;
-        for (String tempResourceClass1 : tempResourceClass)
-        {
-            if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource"))
-            {
-                tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
-            }
+        for (String tempResourceClass1 : tempResourceClass) {
+            tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
         }
         resourceClasses = new String[tempResourceClassTwo.size()];
         tempResourceClassTwo.toArray(resourceClasses);

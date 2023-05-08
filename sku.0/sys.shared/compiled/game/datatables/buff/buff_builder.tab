@@ -31,8 +31,7 @@ flush_with_success_bm	misc	bm_xp_mod_boost	5	2	3	flush_with_success
 reactive_go_with_the_flow	misc	movement_speed	5	2	5	go_with_the_flow 
 kinetic	resistances	expertise_innate_protection_kinetic	5	1	450	
 energy	resistances	expertise_innate_protection_energy	5	1	450	
-elemental	resistances	elemental_resistance	5	1	450	
-amazing_success_chance	trade	crafting_critical_success_bonus	5	4	2	harvest_faire  
+elemental	resistances	elemental_resistance	5	1	450
 creature_harvesting	trade	creature_harvesting	2	4	5	harvest_faire  
 crafting_ground_assembly	trade	crafting_ground_assembly	5	2	1	harvest_faire  
 crafting_ground_experimentation	trade	crafting_ground_experimentation	7	2	1	harvest_faire  

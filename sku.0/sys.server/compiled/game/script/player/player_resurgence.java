@@ -17,7 +17,7 @@ import static script.library.factions.setFaction;
 
 public class player_resurgence extends script.base_script
 {
-    public boolean requireEntBuffRecycle = true;
+    public boolean requireEntBuffRecycle = false;
     public boolean restoredContent = false;
     public int OnAttach(obj_id self)
     {
@@ -33,11 +33,67 @@ public class player_resurgence extends script.base_script
     {
         if (hasObjVar(self, "saved_performance"))
         {
-            restoreEntertainerBuffs(self);
+            //restoreEntertainerBuffs(self);
         }
+        arrivalSound(self);
+        //messageTo(self, "arrivalSound", null, 60, true);
         showServerInfo(self);
         incrementPlayerCount(self);
         return SCRIPT_CONTINUE;
+    }
+
+    public void arrivalSound(obj_id self)
+    {
+        String planetName = getCurrentSceneName();
+        if (planetName.equals("tutorial"))
+        {
+            return;
+        }
+        else if (planetName.equals("corellia"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_corellia.snd", self, "");
+        }
+        else if (planetName.equals("dantooine"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_dantooine.snd", self, "");
+        }
+        else if (planetName.equals("dathomir"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_dathomir.snd", self, "");
+        }
+        else if (planetName.equals("endor"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_endor.snd", self, "");
+        }
+        else if (planetName.equals("lok"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_lok.snd", self, "");
+        }
+        else if (planetName.equals("naboo"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_naboo.snd", self, "");
+        }
+        else if (planetName.equals("rori"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_rori.snd", self, "");
+        }
+        else if (planetName.equals("talus"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_talus.snd", self, "");
+        }
+        else if (planetName.equals("tanaab"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_tanaab.snd", self, "");
+        }
+        else if (planetName.equals("tatooine"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_tatooine.snd", self, "");
+        }
+        else if (planetName.equals("yavin4"))
+        {
+            playClientEffectObj(self, "voice/sound/voice_trnspt_welcome_yavin4.snd", self, "");
+        }
+
     }
 
     public void showServerInfo(obj_id self)
@@ -89,9 +145,10 @@ public class player_resurgence extends script.base_script
 
     public void restoreEntertainerBuffs(obj_id self) throws InterruptedException
     {
-        utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buffComponentKeys"));
-        utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buffComponentValues"));
-        utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.bufferId"));
+        utils.removeScriptVar(self, "performance.buildabuff");
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentKeys", getStringArrayObjVar(self, "saved_performance.buildabuff.buffComponentKeys"));
+        utils.setScriptVar(self, "performance.buildabuff.buffComponentValues", getIntArrayObjVar(self, "saved_performance.buildabuff.buffComponentValues"));
+        utils.setScriptVar(self, "performance.buildabuff.bufferId", getObjIdObjVar(self, "saved_performance.buildabuff.bufferId"));
         float buffTime = getFloatObjVar(self, "saved_performance.buildabuff.buffTime");
         buff.applyBuff(self, "buildabuff_inspiration", buffTime);
         if (requireEntBuffRecycle)
@@ -101,7 +158,7 @@ public class player_resurgence extends script.base_script
         }
         else
         {
-            debugConsoleMsg(self, "Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package.");
+            debugConsoleMsg(self, "\\#DAA520Your entertainment buff package has been restored. You will need to seek out an entertainer to change your buff package values.\\#.");
         }
     }
 

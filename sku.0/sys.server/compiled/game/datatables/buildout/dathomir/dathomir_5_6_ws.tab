@@ -14,6 +14,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 1392899	1392896	object/cell/cell.iff	3	0	0	0	1	0	0	0		$|
 1392900	1392896	object/cell/cell.iff	4	0	0	0	1	0	0	0		$|
 1392901	1392896	object/cell/cell.iff	5	0	0	0	1	0	0	0		$|
+9775394	1392901	object/tangible/ground_spawning/area_spawner.iff	5	5.3	0.1	-4.4	0.74314	0	-0.66913	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|9.000000|fltMinSpawnTime|2|3.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary_leader|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary_leader|$|
 1392902	1392896	object/cell/cell.iff	6	0	0	0	1	0	0	0		$|
 1392905	0	object/tangible/terminal/terminal_bazaar.iff	0	572.61	6	1044.46	0.444661	0	0.895699	0		$|
 1392906	0	object/tangible/terminal/terminal_bank.iff	0	580.123	6	1058.82	0.0791209	0	0.996865	0		$|
@@ -47,7 +48,9 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 3946222	6915359	object/tangible/terminal/terminal_space.iff	1	-7.41268	0.146595	-19.2121	1	0	0	0		$|
 6955366	0	object/building/corellia/ply_corl_house_m_s01_fp1.iff	0	603.157	6	987.739	1	0	0	0	planet_map.map_loc:structure.municipal.cantina:theme_park.dungeon.generic_spawner	spawn_table|4|datatables/spawning/poi_spawner/dathomir/dath_trade_outpost_spawns.iff|healing.canhealshock|0|1|safeLogout|0|1|$|
 6955367	6955366	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
+-5	6955367	object/tangible/ground_spawning/area_spawner.iff	1	0.3	0.6	1.0	0.99756	0	0.06976	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
 6955368	6955366	object/cell/cell.iff	2	0	0	0	1	0	0	0		$|
+-4	6955368	object/tangible/ground_spawning/area_spawner.iff	2	-5.1	0.6	5.3	0.57358	0	-0.81915	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
 6955369	6955366	object/cell/cell.iff	3	0	0	0	1	0	0	0		$|
 8346148	6955369	object/tangible/space/content_infrastructure/ground_npc_spawner.iff	3	-3.0	0.6	-7.7	0.96363	0	0.26724	0		$|
 6955370	6955366	object/cell/cell.iff	4	0	0	0	1	0	0	0		$|
@@ -180,3 +183,9 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 9725671	0	object/static/structure/dantooine/dant_boundary_post.iff	0	1489.21	130.116	1470.66	0.865324	0	0.501213	0		$|
 9725679	0	object/static/structure/dantooine/dant_skull_bol.iff	0	1482.15	131.551	1472.02	1	0	0	0		$|
 9725680	0	object/static/structure/dantooine/dant_skull_lizard.iff	0	1489.81	130.304	1464.56	1	0	0	0		$|
+-1	0	object/tangible/ground_spawning/area_spawner.iff	0	575.9	6	1014.6	0.77715	0	0.62932	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
+-2	0	object/tangible/ground_spawning/area_spawner.iff	0	532.5	8.8	1026.3	0.69466	0	-0.71934	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
+-3	0	object/tangible/ground_spawning/area_spawner.iff	0	536.4	8.9	1046.5	0.70711	0	-0.70711	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
+-6	0	object/tangible/ground_spawning/area_spawner.iff	0	623.4	6	989.9	0.39073	0	0.9205	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_solonar_ranger_mercenary|strSpawnerType|4|area|strSpawns|4|wod_solonar_ranger_mercenary|$|
+-7	0	object/tangible/ground_spawning/area_spawner.iff	0	596.6	6	998.2	0.97237	0	-0.23345	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_arlin_felso|strSpawnerType|4|area|strSpawns|4|wod_arlin_felso|$|
+-8	0	object/tangible/ground_spawning/area_spawner.iff	0	595.0	6	998.0	0.9954	0	0.09585	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|wod_arlin_felso|strSpawnerType|4|area|strSpawns|4|wod_silas_hallen|$|
