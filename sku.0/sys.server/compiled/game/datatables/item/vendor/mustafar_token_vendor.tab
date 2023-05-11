@@ -70,15 +70,15 @@ item_schematic_ex_projectile_pistol_barrel	1750		Exceptional Projectile Blaster 
 item_schematic_ex_projectile_rifle_barrel	175		Exceptional Projectile Blaster Rifle Barrel Schematic
 item_schematic_ex_vibro_blade_unit	175		Exceptional Vibro Blade Unit Schematic
 item_schematic_ex_reinforcement_core	500		Exceptional Weapon Reinforcement Core Schematic
-item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
+item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	175		HK47: Mustafar Diorama
 item_schematic_vehicle_lava_res_kit	100		Lava Resistance Kit Schematic
 item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
 item_tow_ring_architect_04_01	100		Relic Ring of Architecture
 item_tow_ring_beast_master_04_01	100		Relic Ring of Beast Mastery
-item_tow_ring_domestics_04_01	100		Relic Ring of Domestics
-item_tow_ring_engineering_04_01	175		Relic Ring of Engineering
+item_tow_ring_domestics_04_01	75		Relic Ring of Domestics
+item_tow_ring_engineering_04_01	125		Relic Ring of Engineering
 item_tow_ring_inspiration_04_01	100		Relic Ring of Inspired Entertainment
-item_tow_ring_munitions_04_01	175		Relic Ring of Munitions
+item_tow_ring_munitions_04_01	125		Relic Ring of Munitions
 item_tow_schematic_psg_05_01	500		Schematic: Old Republic Personal Shield
 item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
 item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt
