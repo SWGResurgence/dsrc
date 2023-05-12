@@ -62,26 +62,26 @@ object/tangible/loot/mustafar/cube_loot/cube_loot_3h.iff	70		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3d.iff	90		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3o.iff	35		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3e.iff	70		warmly glowing
-item_tcg_loot_reward_series7_deed_vip_bunker	1000		Deed VIP Bunker
-item_schematic_ex_blaster_pistol_barrel	500		Exceptional Blaster Pistol Barrel Schematic
-item_schematic_ex_blaster_rifle_barrel	500		Exceptional Blaster Rifle Barrel Schematic
-item_schematic_ex_gas_cartridge	500		Exceptional Gas Cartridge Schematic
-item_schematic_ex_projectile_pistol_barrel	500		Exceptional Projectile Blaster Pistol Barrel Schematic
-item_schematic_ex_projectile_rifle_barrel	500		Exceptional Projectile Blaster Rifle Barrel Schematic
-item_schematic_ex_vibro_blade_unit	500		Exceptional Vibro Blade Unit Schematic
+item_tcg_loot_reward_series7_deed_vip_bunker	250		Deed VIP Bunker
+item_schematic_ex_blaster_pistol_barrel	175		Exceptional Blaster Pistol Barrel Schematic
+item_schematic_ex_blaster_rifle_barrel	175		Exceptional Blaster Rifle Barrel Schematic
+item_schematic_ex_gas_cartridge	175		Exceptional Gas Cartridge Schematic
+item_schematic_ex_projectile_pistol_barrel	1750		Exceptional Projectile Blaster Pistol Barrel Schematic
+item_schematic_ex_projectile_rifle_barrel	175		Exceptional Projectile Blaster Rifle Barrel Schematic
+item_schematic_ex_vibro_blade_unit	175		Exceptional Vibro Blade Unit Schematic
 item_schematic_ex_reinforcement_core	500		Exceptional Weapon Reinforcement Core Schematic
-item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
+item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	175		HK47: Mustafar Diorama
 item_schematic_vehicle_lava_res_kit	100		Lava Resistance Kit Schematic
 item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
 item_tow_ring_architect_04_01	100		Relic Ring of Architecture
 item_tow_ring_beast_master_04_01	100		Relic Ring of Beast Mastery
-item_tow_ring_domestics_04_01	100		Relic Ring of Domestics
-item_tow_ring_engineering_04_01	175		Relic Ring of Engineering
+item_tow_ring_domestics_04_01	75		Relic Ring of Domestics
+item_tow_ring_engineering_04_01	125		Relic Ring of Engineering
 item_tow_ring_inspiration_04_01	100		Relic Ring of Inspired Entertainment
-item_tow_ring_munitions_04_01	175		Relic Ring of Munitions
-item_tow_schematic_psg_05_01	500		Schematic: Old Republic Personal Shield
-item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
-item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt
+item_tow_ring_munitions_04_01	125		Relic Ring of Munitions
+item_tow_schematic_psg_05_01	250		Schematic: Old Republic Personal Shield
+item_tow_foreman_burst_run_04_01	500		Sprint Enhancement Stim
+item_restuss_schematic_saber_04_01	250		Technical Readout of a One-Handed Lightsaber Hilt
 item_limited_use_schematic_commando_ice_gun_04_01	50		CCV-Cryo Projector
 weapon_carbine_advanced_sfor_04_01	175		Weapon: Advanced SFOR Carbine
 weapon_pistol_old_republic_ion_relic_04_01	175		Weapon: Old Republic Ion Pistol
