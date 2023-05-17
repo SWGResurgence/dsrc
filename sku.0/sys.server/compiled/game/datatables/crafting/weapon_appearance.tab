@@ -2393,7 +2393,7 @@ slot																																		resource	0	vibro_unit_and_power_cell_brack
 slot																																		resource	0	power_cell_socket	copper	10																												
 slot																																		template	0	vibration_generator	object/tangible/component/weapon/vibro_unit_base.iff	1																												
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_melee_base.iff	1																												
-weapon	melee	weapon_appearance_magna_guard_polearm_legendary		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	5	weapon_crafting		object/weapon/melee/polearm/lance_staff_magna_guard_legendary.iff	object/weapon/melee/polearm/lance_staff_magna_guard_legendary.iff	20	450	800	1100	0	0	0	0	0	0	kinetic	cold	-1	-1	melee	melee	1	1	100	100		7							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	62	0	50
+weapon	melee	weapon_appearance_polearm_magnaguard_legendary		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	5	weapon_crafting		object/weapon/melee/polearm/lance_staff_magna_guard_legendary.iff	object/weapon/melee/polearm/lance_staff_magna_guard_legendary.iff	20	450	800	1100	0	0	0	0	0	0	kinetic	cold	-1	-1	melee	melee	1	1	100	100		7							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	62	0	50
 slot																																		resource	0	lance_shaft	aluminum_phrik	120
 slot																																		resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	60
 slot																																		resource	0	grip_unit	petrochem_inert_polymer	28
