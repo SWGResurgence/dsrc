@@ -4,9 +4,9 @@
 @class tangible_object_template 2
 @class object_template 0
 
-objectName = "static_item_n" "weapon_magna_guard_polearm_legendary"
-detailedDescription = "static_item_n" "weapon_magna_guard_polearm_legendary"
-lookAtText = "weapon_lookat" "weapon_magna_guard_polearm_legendary"
+objectName = "static_item_n" "weapon_appearance_polearm_magnaguard_legendary"
+detailedDescription = "static_item_n" "weapon_appearance_polearm_magnaguard_legendary"
+lookAtText = "weapon_lookat" "weapon_appearance_polearm_magnaguard_legendary"
 
 appearanceFilename = "appearance/wp_mle_lance_magnaguard.apt"
 portalLayoutFilename = ""
