@@ -4664,14 +4664,22 @@ item_tow_proc_generic_03_01					towPoisonResistAbsorb_3	tow_proc	120	55		appeara
 item_tow_proc_melee_03_01					proc_tow_proc_b_7	tow_proc	120	55		appearance/pt_heal_resist_states.prt	survey
 item_tow_proc_ranged_03_01					proc_tow_proc_b_6	tow_proc	120	55		appearance/pt_heal_resist_states.prt	survey
 item_tow_ring_03_01					towRingAbsorption			55		appearance/pt_heal.prt
-item_tow_ring_architect_04_01	"structure_assembly=10,structure_experimentation=5,general_assembly=10,general_experimentation=5,luck_modified=75"
-item_tow_ring_beast_master_04_01	"bm_incubator_dps_armor=2,incubation_time_reduction=6,expertise_bm_dna_harvesting_1=25,luck_modified=75"
+item_tow_ring_architect_04_01					tow_ring_architect_01			55		appearance/pt_heal.prt
+item_tow_ring_architect_04_02					tow_ring_architect_02			55		appearance/pt_heal.prt
+item_tow_ring_artisan_04_01					tow_ring_artisan_01			55		appearance/pt_heal.prt
+item_tow_ring_artisan_04_02					tow_ring_artisan_02			55		appearance/pt_heal.prt
+item_tow_ring_beast_master_04_01					tow_ring_bm_01			55		appearance/pt_heal.prt
+item_tow_ring_beast_master_04_02					tow_ring_bm_02			55		appearance/pt_heal.prt
+item_tow_ring_domestics_04_01					tow_ring_domestics_01			55		appearance/pt_heal.prt
+item_tow_ring_domestics_04_02					tow_ring_domestics_02			55		appearance/pt_heal.prt
+item_tow_ring_engineering_04_01					tow_ring_engineering_01			55		appearance/pt_heal.prt
+item_tow_ring_engineering_04_02					tow_ring_engineering_02			55		appearance/pt_heal.prt
+item_tow_ring_inspiration_01					tow_ring_inspiration_01			55		appearance/pt_heal.prt
+item_tow_ring_inspiration_02					tow_ring_inspiration_02			55		appearance/pt_heal.prt
+item_tow_ring_munitions_01					tow_ring_munitions_01			55		appearance/pt_heal.prt
+item_tow_ring_munitions_02					tow_ring_munitions_02			55		appearance/pt_heal.prt
 item_tow_ring_shipwright_04_01	"advanced_assembly=10,booster_assembly=10,chassis_assembly=10,engine_assembly=10,power_systems=10, shields_assembly=10,weapon_systems=10,luck_modified=75"
 item_tow_ring_shipwright_04_02	"advanced_ship_experimentation=5,booster_experimentation=5,chassis_experimentation=5,engine_experimentation=5,power_systems_experimentation,shields_experimentation,weapon_systems_experimentation,luck_modified=75"
-item_tow_ring_domestics_04_01	"general_assembly=10,general_experimentation=5,clothing_assembly=10,clothing_experimentation=5,food_assembly=10,food_experimentation=5,luck_modified=75"
-item_tow_ring_engineering_04_01	"general_assembly=10,general_experimentation=5,cybernetic_assembly=10,cybernetic_experimentation=5,droid_assembly=10,droid_experimentation=5,luck_modified=75"
-item_tow_ring_inspiration_04_01	"expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=15,luck_modified=75"
-item_tow_ring_munitions_04_01	"general_assembly=10,general_experimentation=5,armor_assembly=10,armor_experimentation=5,weapon_experimentation=5,luck_modified=75"
 item_tow_schematic_cannon_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_heavy_lava_cannon.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"
 item_tow_schematic_carbine_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_carbine_republic_sfor.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"
 item_tow_schematic_display_case_02_01			"string:loot_schematic.schematic=object/draft_schematic/furniture/must_furniture_display_case.iff,string:loot_schematic.skill_req=class_structures_phase4_master"
