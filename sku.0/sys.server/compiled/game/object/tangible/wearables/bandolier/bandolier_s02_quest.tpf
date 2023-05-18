@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/wearables/bandolier/shared_bandolier_s02_quest.iff"
 
-objvars =+ ["skillmod.bonus.droid_assembly" = 5, "skillmod.bonus.droid_experimentation" = 13, "skillmod.bonus.droid_customization" = 5, "skillmod.bonus.luck_modified" = 75]
+objvars =+ ["skillmod.bonus.droid_assembly" = 5, "skillmod.bonus.droid_experimentation" = 1, "skillmod.bonus.droid_customization" = 5, "skillmod.bonus.luck_modified" = 75]
