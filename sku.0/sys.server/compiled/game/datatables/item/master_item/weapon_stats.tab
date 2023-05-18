@@ -122,6 +122,7 @@ weapon_knuckler_smuggler_roadmap_02_02	1	1000	334	668	0	kinetic			100	1	100	0	5	
 weapon_knuckler_wod_04_01	1	1000	700	1000	0	kinetic	acid	20	100	1	100	0	5		int:wp.canBeDisMantled=1			890	890
 weapon_lightningbeam_commando_roadmap_01_02	1	1000	182	363	0				100	1	100	0	64	precision_modified=5			lvl 30 roadmap	273	273
 weapon_magna_guard_polearm_04_01	1	1000	700	1000	0	kinetic	electric	20	100	1	100	0	5		int:wp.canBeDisMantled=1		pvp BF reward	900	890
+weapon_appearance_polearm_magnaguard_legendary	1	1000	900	1375	0	kinetic	cold	20	100	1	100	1	7	strength_modified=75,luck_modified=75	int:wp.canBeDisMantled=1		lvl88	1225	1215
 weapon_mandalorian_carbine_04_01	1	1000	415	755	0				60	1	100	0	50	"precision_modified=10,constitution_modified=5"			hec	975	975
 weapon_mandalorian_heavy_04_01	1	1000	800	1300	0	kinetic	electric	50	100	1	100	0	64	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1050	1050
 weapon_mandalorian_lightsaber_04_01	1	1000	700	1400	0				100	1	100	0	5	"strength_modified=10,constitution_modified=5"	"int:jedi.saber.base_stats.min_dmg=700,int:jedi.saber.base_stats.max_dmg=1400,float:jedi.saber.base_stats.speed=1.00,float:jedi.saber.base_stats.wound=1.0,int:jedi.saber.base_stats.attack_cost=100,float:jedi.saber.base_stats.damage=0.0"		hec	1050	1050
