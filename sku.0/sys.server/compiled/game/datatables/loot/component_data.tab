@@ -156,9 +156,9 @@ object/tangible/component/armor/hide_gurk_king.iff	amount 	25	50
 	level	75	300
 object/tangible/component/armor/bone_fragment_woolamander_harrower.iff	amount 	25	50
 	level	75	300
-object/tangible/component/clothing/clasp_heavy_duty.iff	amount 	6	8
+object/tangible/component/clothing/clasp_heavy_duty.iff	amount 	25	50
 object/tangible/component/clothing/clothing_treatment_crystalline.iff	amount 	6	8
-object/tangible/component/clothing/leather_heavy_duty.iff	amount 	6	8
+object/tangible/component/clothing/leather_heavy_duty.iff	amount 	25	50
 object/tangible/component/weapon/blaster_rifle_avatar_loot_barrel.iff	amount 	1	1
 object/tangible/component/weapon/quest/projectile_feed_mechanism_faux_bowcaster.iff	amount 	1	1
 object/tangible/component/weapon/quest/projectile_rifle_barrel_faux_bowcaster.iff	amount 	1	1
