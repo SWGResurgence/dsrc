@@ -166,18 +166,36 @@ object/tangible/component/weapon/quest/blaster_power_handler_faux_bowcaster.iff	
 object/tangible/component/weapon/blaster_power_handler_enhancement_bounty.iff	amount 	4	6
 object/tangible/component/weapon/projectile_feed_mechanism_enhancement_bounty.iff	amount 	3	5
 object/tangible/component/armor/armor_segment_enhancement_janta.iff	amount 	10	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_krayt.iff	amount 	9	15
 	attribute.bonus.0	200	450
 	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_nightsister.iff	amount 	10	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_layer_nightsister.iff	amount 	10	13
 object/tangible/component/armor/armor_segment_enhancement_dragonet.iff	amount 	7	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_fambaa.iff	amount 	7	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_brackaset.iff	amount 	7	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_sharnaff.iff	amount 	7	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_voritor_lizard.iff	amount 	7	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_kimogila.iff	amount 	10	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/armor_segment_enhancement_rancor.iff	amount 	10	13
+	attribute.bonus.0	200	450
+	attribute.bonus.2	125	300
 object/tangible/component/armor/feather_peko_albatross.iff	amount 	25	50
 	attribute.bonus.0	100	225
 	attribute.bonus.2	75	150
