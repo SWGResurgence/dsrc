@@ -150,11 +150,11 @@ object/tangible/component/chemistry/spider_venom.iff	amount 	1	1
 object/tangible/component/weapon/spider_spine.iff	amount 	1	1
 	maxDamage	15	30
 object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff	amount 	1	1
-object/tangible/component/armor/scale_giant_dune_kimogila.iff	amount 	9	15
+object/tangible/component/armor/scale_giant_dune_kimogila.iff	amount 	25	50
 	level	125	300
-object/tangible/component/armor/hide_gurk_king.iff	amount 	9	15
+object/tangible/component/armor/hide_gurk_king.iff	amount 	25	50
 	level	75	300
-object/tangible/component/armor/bone_fragment_woolamander_harrower.iff	amount 	9	15
+object/tangible/component/armor/bone_fragment_woolamander_harrower.iff	amount 	25	50
 	level	75	300
 object/tangible/component/clothing/clasp_heavy_duty.iff	amount 	6	8
 object/tangible/component/clothing/clothing_treatment_crystalline.iff	amount 	6	8
@@ -178,7 +178,7 @@ object/tangible/component/armor/armor_segment_enhancement_sharnaff.iff	amount 	7
 object/tangible/component/armor/armor_segment_enhancement_voritor_lizard.iff	amount 	7	13
 object/tangible/component/armor/armor_segment_enhancement_kimogila.iff	amount 	10	13
 object/tangible/component/armor/armor_segment_enhancement_rancor.iff	amount 	10	13
-object/tangible/component/armor/feather_peko_albatross.iff	amount 	9	15
+object/tangible/component/armor/feather_peko_albatross.iff	amount 	25	50
 	attribute.bonus.0	100	225
 	attribute.bonus.2	75	150
 object/tangible/component/armor/armor_appearance_enhancement_acklay.iff	amount 	1	2
