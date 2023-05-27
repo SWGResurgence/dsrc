@@ -5108,7 +5108,7 @@ public class terminal_character_builder extends script.base_script
                 break;
             case 7:  // Objects: New Schematics
                 static_item.createNewItemFunction("item_schematic_ex_scope", pInv);
-                static_item.createNewItemFunction("item_schematic_ex_scope", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_stock", pInv);
             case 8:  // Objects: Others
                 static_item.createNewItemFunction("item_gas_recycler_01_01", pInv);
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);

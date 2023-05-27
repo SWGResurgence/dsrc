@@ -151,15 +151,12 @@ object/tangible/component/weapon/spider_spine.iff	amount 	1	1
 	maxDamage	15	30
 object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff	amount 	1	1
 object/tangible/component/armor/scale_giant_dune_kimogila.iff	amount 	25	50
-	level	125	300
 	attribute.bonus.0	500	1000
 	attribute.bonus.2	250	500
 object/tangible/component/armor/hide_gurk_king.iff	amount 	25	50
-	level	75	300
 	attribute.bonus.0	250	500
 	attribute.bonus.2	125	250
 object/tangible/component/armor/bone_fragment_woolamander_harrower.iff	amount 	25	50
-	level	75	300
 	attribute.bonus.0	125	250
 	attribute.bonus.2	25	75
 object/tangible/component/clothing/clasp_heavy_duty.iff	amount 	25	50
