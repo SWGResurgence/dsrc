@@ -5114,6 +5114,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);
                 static_item.createNewItemFunction("item_resurgence_stark_banner_01_01", pInv);
                 static_item.createNewItemFunction("item_resurgence_targaryen_banner_01_01", pInv);
+                static_item.createNewItemFunction("item_reward_modify_pistol_01_01", pInv, 25);
                 broadcast(player, "Other Objects Issued.");
                 break;
             case 9:  // Objects: Rare Loot Boxes
