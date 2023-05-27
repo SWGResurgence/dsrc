@@ -2400,10 +2400,10 @@ slot																																		resource	0	grip_unit	petrochem_inert_polym
 slot																																		template	0	vibration_generator	object/tangible/component/weapon/vibro_unit_base.iff	1
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_melee_base.iff	1
 weapon	rifle	weapon_rebel_rifle_04_01		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	9	weapon_crafting		object/weapon/ranged/rifle/rifle_rebel.iff	object/weapon/ranged/rifle/rifle_rebel.iff	20	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	rifle	rifle	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	62	0	40
-slot																																		resource	0	frame_assembly	steel_cubirian	150
-slot																																		resource	0	receiver_assembly	copper_beyrllius	85
-slot																																		resource	0	grip_assembly	"petrochem_inert_polymer	"	20
+slot																																		resource	0	frame_assembly	steel_cubirian	150	none
+slot																																		resource	0	receiver_assembly	copper_beyrllius	85	none
+slot																																		resource	0	grip_assembly	"petrochem_inert_polymer	"	20	none
 slot																																		template	0	barrel_rifle_blaster	object/tangible/component/weapon/blaster_rifle_barrel_base.iff	1	muzzle
-slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1	none
 slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope
 slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock
