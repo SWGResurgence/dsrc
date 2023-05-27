@@ -1,12 +1,17 @@
 package script.theme_park.heroic.echo_base;
 
-import script.*;
+import script.dictionary;
 import script.library.groundquests;
 import script.library.trial;
 import script.library.utils;
+import script.obj_id;
+import script.string_id;
 
 public class echo_quest_tracker extends script.base_script
 {
+    public echo_quest_tracker()
+    {
+    }
     public static final String PHASE = "phase";
     public static final String P1_DEAD_AT = "p1_dead_at";
     public static final String P1_GENERATOR_DESTROYED = "p1_generator_destroyed";
@@ -144,15 +149,16 @@ public class echo_quest_tracker extends script.base_script
         setObjVar(self, PHASE, 1);
         setObjVar(self, P1_DEAD_AT, 0);
         setObjVar(self, P1_GENERATOR_DESTROYED, 0);
-        for (String P2_IMPERIAL_SIGNALS1 : P2_IMPERIAL_SIGNALS) {
-            setObjVar(self, P2_IMPERIAL_SIGNALS1, 0);
+        for (String p2ImperialSignal : P2_IMPERIAL_SIGNALS) {
+            setObjVar(self, p2ImperialSignal, 0);
         }
-        for (String P2_REBEL_SIGNALS1 : P2_REBEL_SIGNALS) {
-            setObjVar(self, P2_REBEL_SIGNALS1, 0);
+        for (String p2RebelSignal : P2_REBEL_SIGNALS) {
+            setObjVar(self, p2RebelSignal, 0);
         }
-        for (String P3_IMPERIAL1 : P3_IMPERIAL) {
-            setObjVar(self, P3_IMPERIAL1, 0);
+        for (String s : P3_IMPERIAL) {
+            setObjVar(self, s, 0);
         }
+        return;
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -195,7 +201,7 @@ public class echo_quest_tracker extends script.base_script
         }
         String[] failArray = new String[P2_IMPERIAL_FAIL_TASKS.length];
         failArray = utils.copyArray(P2_IMPERIAL_FAIL_TASKS, failArray);
-        int phase = getPhase(self);
+        int phase = getPhase();
         String activeQuest = "";
         String nextQuest = "";
         switch (phase)
@@ -287,7 +293,7 @@ public class echo_quest_tracker extends script.base_script
                     messageTo(self, "phaseOneVoiceOvers", null, 4.0f, false);
                 }
             }
-            else if (update.equals(PHASE3_STARTED))
+            if (update.equals(PHASE3_STARTED))
             {
                 setObjVar(self, PHASE, 3);
                 if (doBroadcast)
@@ -296,7 +302,7 @@ public class echo_quest_tracker extends script.base_script
                     groundquests.requestGrantQuest(players, nextQuest);
                 }
             }
-            else if (update.equals(P3_COMPLETE))
+            if (update.equals(P3_COMPLETE))
             {
                 setObjVar(self, PHASE, -1);
                 if (doBroadcast)
@@ -316,15 +322,15 @@ public class echo_quest_tracker extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int phase = getPhase(self);
+        int phase = getPhase();
         int isRebel = getIntObjVar(self, "isRebel");
         if (isRebel == 1)
         {
             if (phase == 2)
             {
-                for (String P2_REBEL_FAIL_TASKS1 : P2_REBEL_FAIL_TASKS) {
-                    if (hasObjVar(self, P2_REBEL_FAIL_TASKS1)) {
-                        failEchoTask(self, players, questName, P2_REBEL_FAIL_TASKS1, true);
+                for (String p2RebelFailTask : P2_REBEL_FAIL_TASKS) {
+                    if (hasObjVar(self, p2RebelFailTask)) {
+                        failEchoTask(players, questName, p2RebelFailTask, true);
                     }
                 }
             }
@@ -333,9 +339,9 @@ public class echo_quest_tracker extends script.base_script
         {
             if (phase == 2)
             {
-                for (String P2_IMPERIAL_FAIL_TASKS1 : P2_IMPERIAL_FAIL_TASKS) {
-                    if (hasObjVar(self, P2_IMPERIAL_FAIL_TASKS1)) {
-                        failEchoTask(self, players, questName, P2_IMPERIAL_FAIL_TASKS1, true);
+                for (String p2ImperialFailTask : P2_IMPERIAL_FAIL_TASKS) {
+                    if (hasObjVar(self, p2ImperialFailTask)) {
+                        failEchoTask(players, questName, p2ImperialFailTask, true);
                     }
                 }
             }
@@ -345,19 +351,22 @@ public class echo_quest_tracker extends script.base_script
     public void handleFailCase(obj_id self, obj_id[] players, String questName, String failTask) throws InterruptedException
     {
         setObjVar(self, failTask, 1);
-        failEchoTask(self, players, questName, failTask, true);
+        failEchoTask(players, questName, failTask, true);
+        return;
     }
-    public void failEchoTask(obj_id self, obj_id[] players, String questName, String failTask, boolean showMessage) throws InterruptedException
+    public void failEchoTask(obj_id[] players, String questName, String failTask, boolean showMessage) throws InterruptedException
     {
         if (players != null && players.length > 0)
         {
             for (obj_id player : players) {
-                failEchoTask(self, player, questName, failTask, showMessage);
+                failEchoTask(player, questName, failTask, showMessage);
             }
         }
+        return;
     }
-    public void failEchoTask(obj_id self, obj_id player, String questName, String failTask, boolean showMessage) throws InterruptedException
+    public void failEchoTask(obj_id player, String questName, String failTask, boolean showMessage) throws InterruptedException
     {
+        obj_id self = getSelf();
         if (isIdValid(player) && exists(player))
         {
             if (groundquests.isTaskActive(player, questName, failTask))
@@ -370,7 +379,7 @@ public class echo_quest_tracker extends script.base_script
             }
             else 
             {
-                if (getPhase(self) == 2 && getIntObjVar(self, "isRebel") == 1)
+                if (getPhase() == 2 && getIntObjVar(self, "isRebel") == 1)
                 {
                     String precedingTask = "";
                     switch (failTask) {
@@ -389,16 +398,14 @@ public class echo_quest_tracker extends script.base_script
                         case "reb_phase2_equipment_personnel_task":
                             precedingTask = "p2_rebel_secure_lower_hangar";
                             break;
-                        default:
-                            break;
                     }
-                    if (precedingTask.length() > 0)
+                    if (precedingTask != null && precedingTask.length() > 0)
                     {
                         if (groundquests.isTaskActive(player, questName, precedingTask))
                         {
                             groundquests.completeTask(player, questName, precedingTask);
                             setObjVar(self, failTask, 1);
-                            failEchoTask(self, player, questName, failTask, showMessage);
+                            failEchoTask(player, questName, failTask, showMessage);
                         }
                         if (hasObjVar(self, "reb_phase2_command_center_task") && hasObjVar(self, "reb_phase2_command_personnel_task"))
                         {
@@ -412,20 +419,22 @@ public class echo_quest_tracker extends script.base_script
             }
         }
     }
-    public int getPhase(obj_id self) throws InterruptedException
+    public int getPhase() throws InterruptedException
     {
-        return getIntObjVar(self, PHASE);
+        return getIntObjVar(getSelf(), PHASE);
     }
-    public void updatePlayerQuests(obj_id self, obj_id player) throws InterruptedException
+    public void updatePlayerQuests(obj_id player) throws InterruptedException
     {
+        obj_id self = getSelf();
         int isRebel = getIntObjVar(self, "isRebel");
-        int phase = getPhase(self);
+        int phase = getPhase();
         LOG("echo_quest_tracker", "requestUpdatePlayer phase: " + phase + " self: " + self + " isRebel: " + isRebel);
         questRemoval(player);
+        String activeQuest = "";
         switch (phase)
         {
             case 1:
-            String activeQuest = isRebel == 1 ? P1_REBEL_GRANT : P1_IMPERIAL_GRANT;
+            activeQuest = isRebel == 1 ? P1_REBEL_GRANT : P1_IMPERIAL_GRANT;
             if (!groundquests.isQuestActive(player, activeQuest))
             {
                 groundquests.requestGrantQuest(player, activeQuest);
@@ -448,7 +457,7 @@ public class echo_quest_tracker extends script.base_script
             {
                 activeQuest = P2_REBEL_GRANT;
             }
-            else
+            else 
             {
                 activeQuest = P2_IMPERIAL_GRANT;
             }
@@ -457,28 +466,26 @@ public class echo_quest_tracker extends script.base_script
                 groundquests.requestGrantQuest(player, activeQuest);
             }
             String[] phaseTwoSignals = isRebel == 1 ? P2_REBEL_SIGNALS : P2_IMPERIAL_SIGNALS;
-            for (String phaseTwoSignal : phaseTwoSignals) {
-                int count = getIntObjVar(self, phaseTwoSignal);
-                if (count == 1) {
-                    groundquests.sendSignal(player, phaseTwoSignal);
-                }
-                if (count >= 1) {
-                    for (int j = 0, k = COUNTED_UPDATES.length; j < k; j++) {
-                        if (phaseTwoSignal.equals(COUNTED_UPDATES[j])) {
-                            dictionary dict = new dictionary();
-                            for (int l = 0; l < count; l++)
-                            {
-                                dict.put("creatureName", COUNTED_TASK_NAMES[j]);
-                                dict.put("location", getLocation(player));
-                                dict.put("socialGroup", "atat");
-                                messageTo(player, "receiveCreditForKill", dict, 1.0f, false);
+                for (String phaseTwoSignal : phaseTwoSignals) {
+                    int count = getIntObjVar(self, phaseTwoSignal);
+                    if (count == 1) {
+                        groundquests.sendSignal(player, phaseTwoSignal);
+                    }
+                    if (count >= 1) {
+                        for (int j = 0, k = COUNTED_UPDATES.length; j < k; j++) {
+                            if (phaseTwoSignal.equals(COUNTED_UPDATES[j])) {
+                                dictionary dict = new dictionary();
+                                for (int l = 0; l < count; l++) {
+                                    dict.put("creatureName", COUNTED_TASK_NAMES[j]);
+                                    dict.put("location", getLocation(player));
+                                    dict.put("socialGroup", "atat");
+                                    messageTo(player, "receiveCreditForKill", dict, 1.0f, false);
+                                }
                             }
                         }
                     }
                 }
-            }
-
-            obj_id[] players =
+            obj_id[] players = 
             {
                 player
             };
@@ -492,7 +499,7 @@ public class echo_quest_tracker extends script.base_script
             {
                 activeQuest = P3_REBEL_GRANT;
             }
-            else
+            else 
             {
                 activeQuest = P3_IMPERIAL_GRANT;
             }
@@ -501,34 +508,33 @@ public class echo_quest_tracker extends script.base_script
                 groundquests.requestGrantQuest(player, activeQuest);
             }
             String[] phaseThreeSignals = isRebel == 1 ? P3_REBEL : P3_IMPERIAL;
-            for (String phaseThreeSignal : phaseThreeSignals) {
-                int count = getIntObjVar(self, phaseThreeSignal);
-                if (count == 1) {
-                    groundquests.sendSignal(player, phaseThreeSignal);
-                }
-                if (count >= 1) {
-                    for (int j = 0, k = COUNTED_UPDATES.length; j < k; j++) {
-                        if (phaseThreeSignal.equals(COUNTED_UPDATES[j])) {
-                            dictionary dict = new dictionary();
-                            for (int l = 0; l < count; l++)
-                            {
-                                dict.put("creatureName", COUNTED_TASK_NAMES[j]);
-                                dict.put("location", getLocation(player));
-                                dict.put("socialGroup", "atat");
-                                messageTo(player, "receiveCreditForKill", dict, 1.0f, false);
+                for (String phaseThreeSignal : phaseThreeSignals) {
+                    int count = getIntObjVar(self, phaseThreeSignal);
+                    if (count == 1) {
+                        groundquests.sendSignal(player, phaseThreeSignal);
+                    }
+                    if (count >= 1) {
+                        for (int j = 0, k = COUNTED_UPDATES.length; j < k; j++) {
+                            if (phaseThreeSignal.equals(COUNTED_UPDATES[j])) {
+                                dictionary dict = new dictionary();
+                                for (int l = 0; l < count; l++) {
+                                    dict.put("creatureName", COUNTED_TASK_NAMES[j]);
+                                    dict.put("location", getLocation(player));
+                                    dict.put("socialGroup", "atat");
+                                    messageTo(player, "receiveCreditForKill", dict, 1.0f, false);
+                                }
                             }
                         }
                     }
                 }
-            }
             break;
-
             case -1:
             break;
         }
     }
     public int phaseOneVoiceOvers(obj_id self, dictionary params) throws InterruptedException
     {
+        obj_id[] players = utils.getPlayersInBuildoutRow(self);
         int isRebel = getIntObjVar(self, "isRebel");
         int deadAtats = getIntObjVar(self, P1_DEAD_AT);
         dictionary dict = trial.getSessionDict(trial.getParent(self));
@@ -580,7 +586,7 @@ public class echo_quest_tracker extends script.base_script
     public int requestUpdatePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
-        updatePlayerQuests(self, player);
+        updatePlayerQuests(player);
         return SCRIPT_CONTINUE;
     }
     public void handleGenericTaskCompletion(obj_id self, obj_id[] players, boolean doBroadcast, String task, String creatureName) throws InterruptedException
