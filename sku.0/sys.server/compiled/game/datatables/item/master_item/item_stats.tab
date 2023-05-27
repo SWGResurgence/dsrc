@@ -5127,3 +5127,4 @@ space_collection_reactor_mark_05_subpro			string:collection.slotName=col_space_r
 weapon_black_metal_baton											
 item_kashyyyk_reward_token_01_01											
 item_duty_space_token_box_01_01											
+item_schematic_weapon_rack_01			"string:loot_schematic.schematic=object/draft_schematic/tangible/furniture/cyntech/weapon_rack_01.iff,string:loot_schematic.skill_req=class_structures_phase4_master,int:loot_schematic.uses=3"								
