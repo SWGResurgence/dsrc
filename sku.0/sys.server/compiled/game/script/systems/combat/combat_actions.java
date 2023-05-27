@@ -4587,13 +4587,20 @@ public class combat_actions extends script.systems.combat.combat_base
         return SCRIPT_CONTINUE;
     }
 
+
+
+
+
+
+
+
     public int of_del_ae_dm_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!combatStandardAction("of_del_ae_dm_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
@@ -4607,7 +4614,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
