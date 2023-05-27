@@ -183,7 +183,7 @@ weapon_quest_u10_pistol_01_02	1	1000	162	324	0				40	1	100	0	35	"precision_modif
 weapon_quest_u10_rifle_01_02	1	1000	324	649	0				80	1	100	0	64	"precision_modified=10,constitution_modified=5"			update 10 quest reward	608	607
 weapon_rebel_heavy_04_01	1	1000	800	1300	0	kinetic	kinetic	50	100	1	100	0	64	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1050	1050
 weapon_rebel_pistol_04_01	1	1000	290	450	0		cold	20	40	1	100	0	38	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	975	925
-weapon_rebel_rifle_04_01	1	1000	560	960	0		cold	20	80	1	100	0	64	"precision_modified=10,constitution_modified=5"			hec	975	950
+weapon_rebel_rifle_04_01	1	1000	422	743	0		cold	20	80	1	100	0	64	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1175	1150
 weapon_rebel_sword_04_01	1	1000	600	1500	0	kinetic			100	1	100	0	5	"strength_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1050	1050
 weapon_rifle_02_01	1	1000	35	70	0				80	1	100	0	55	ranged_accuracy=1		proc_fire_attack	testing		66
 weapon_rifle_02_02	1	1000	20	40	0				80	1	100	0	35				level 1 npe	38	38
