@@ -88,5 +88,5 @@ tusken_iso_sword	object/weapon/melee/2h_sword/2h_sword_krayt.iff
 emperors_retreat_emperors_hand	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_pvp_bf_gen5.iff	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_pvp_bf.iff
 restuss_emperors_hand	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_pvp_bf_gen5.iff	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_pvp_bf.iff
 emperors_hand_stormtroopers	object/weapon/ranged/rifle/rifle_t21_legendary.iff
-emperors_hand_isb_guards	object/weapon/ranged/pistol/srcombat.iff	object/weapon/melee/baton/baton_stun_legendary.iff
+emperors_hand_isb_guards	object/weapon/ranged/pistol/pistol_srcombat.iff	object/weapon/melee/baton/baton_stun_legendary.iff
 emperors_hand_inquisitors	object/weapon/melee/polearm/lance_staff_magna_guard.iff
