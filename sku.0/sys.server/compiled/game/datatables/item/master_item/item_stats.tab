@@ -1779,7 +1779,7 @@ item_content_jacket_corsec_02_01	constitution_modified=4
 item_content_jacket_rng_defense_03_01	agility_modified=5										
 item_content_jacket_rsf_02_01	constitution_modified=20										
 item_content_medal_combo_02_01					contentWornComboDef						
-item_content_medic_ring_03_01	constitution_modified=5										
+item_content_medic_ring_03_01	expertise_healing_all=3
 item_content_necklace_finale_imp_04_01	"stamina_modified=8,agility_modified=8,constitution_modified=8,strength_modified=8,precision_modified=8,luck_modified=8"										
 item_content_necklace_finale_reb_04_01	"stamina_modified=8,agility_modified=8,constitution_modified=8,strength_modified=8,precision_modified=8,luck_modified=8"										
 item_content_necklace_lvl33_02_01	"luck_modified=15,stamina_modified=10"										
