@@ -111,3 +111,8 @@ sulfur_lake_pirate	0	1	0		nym
 tusken_isolationist	1	1	0			"jawa,alkhara"
 czerka_corporation	1	0	0		"Hutt,jabba"	Imperial	0
 solonar_ranger	1	1	0		nightsister
+bhguild	1	1	0		underworld	spynet
+spynet	1	1	0		bhguild
+confederacy	1	1	0		rebel	trade_federation,droid_army
+sith	1	1	0		rebel,jedi	sith_shadow
+jedi	1	1	0		confederacy,sith,imperial	fs_villager
