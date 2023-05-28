@@ -25,9 +25,9 @@ item_tow_decor_jedi_relic_02_03	210		Decoration: Jedi Relic
 item_tow_decor_lava_geode_02_01	50		Decoration: Lava Geode
 item_tow_decor_sith_relic_02_01	210		Decoration: Sith Relic
 item_trader_advanced_buff_01_01	500		Advanced Superior Crafting Unit
-rare_loot_chest_quality_1	50		RLS: Rare Loot Chest
-rare_loot_chest_quality_2	75		RLS: Exceptional Loot Chest
-rare_loot_chest_quality_3	100		RLS: Legendary Loot Chest
+rare_loot_chest_quality_1	100		RLS: Rare Loot Chest
+rare_loot_chest_quality_2	150		RLS: Exceptional Loot Chest
+rare_loot_chest_quality_3	200		RLS: Legendary Loot Chest
 item_vet_reward_resource_fabricator	75		Resource Fabricator
 item_vet_reward_resource_industrial_replicator	100		Resource Industrial Replicator
 item_vet_reward_resource_supply_generator	50		Resource Supply Generator
