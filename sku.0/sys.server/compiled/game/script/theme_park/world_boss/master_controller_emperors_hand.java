@@ -118,7 +118,7 @@ public class master_controller_emperors_hand extends script.base_script {
                     broadcast(who, "The Hand has summoned a contingeant of Storm Troopers from the 501st!");
                 }
                 buff.removeAllBuffs(self);
-                resurgence.createCircleSpawn(self, self,"emperors_hand_stormtroopers", 8, 12);
+                resurgence.createCircleSpawn(self, self,"emperors_hand_stormtroopers", 4, 6);
                 utils.setScriptVar(self, "hasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -136,7 +136,7 @@ public class master_controller_emperors_hand extends script.base_script {
                 {
                     broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged , causing him to increase her focus. She has summoned additional reinforcements from the Imperial Security Bureau.");
                 }
-                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 4, 12);
+                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 2, 6);
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
         }
@@ -150,7 +150,7 @@ public class master_controller_emperors_hand extends script.base_script {
                     broadcast(who, "Aralina Silk has summoned the Full Power of the Dark Side of the Force. Her attacks are now amplified, and as she summoned the assistance of the Imperial Inquisitors!");
                     chat.chat(self, "It's Time For You To Meet Your Destiny!");
                     buff.applyBuff(self, "crystal_buff", 60, 20);
-                    resurgence.createCircleSpawn(self, self, "emperors_hand_inquisitors", 2, 6);
+                    resurgence.createCircleSpawn(self, self, "emperors_hand_inquisitors", 1, 3);
                 }
             }
             if (percentHealth <= 1)
