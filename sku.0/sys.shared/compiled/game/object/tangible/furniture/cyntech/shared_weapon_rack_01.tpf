@@ -12,5 +12,3 @@ objectName = "frn_n" "frn_weapon_rack"
 detailedDescription = "frn_d" "frn_weapon_rack"
 
 appearanceFilename = "appearance/frn_weapon_rack_01.apt"
-
-portalLayoutFileName = ""
