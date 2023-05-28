@@ -381,7 +381,7 @@ emperors_retreat_emperors_hand	Naboo NPC World Boss	sp_fld_debuff_ca	1	100		fs_s
 restuss_emperors_hand	Rori NPC World Boss	sp_fld_debuff_ca	1	100		fs_sh_1	5	50		suin_rampage	5	50		lelli_ambush	12	100
 emperors_hand_stormtroopers	Emperor's Hand Stormtroopers	sd_obliterate	16	50		kenkirk_droid_blast	12	50		of_ae_dm_cc_3	8	25		co_del_ae_dm_3	8	25
 emperors_hand_isb_guards	Emperor's Hand ISB	of_firepower_1	1	50		of_dm_4	16	50		of__ae_dm_cc_3	16	50		sd_obliterate	24	50		of_deb_def_3	16	50
-emperors_hand_inquisitors	Emperor's Hand Inquisitors	fs_dm_5	12	100		saberBlock	42	100	ounce	forceThrow	2	50	ounce	fs_dm_cc_3	16	100
+emperors_hand_inquisitors	Emperor's Hand Inquisitors	fs_dm_5	12	100		saberBlock	42	100	once	forceThrow	2	50	once	fs_dm_cc_3	16	100
 clan_vizla_mandalorian	Clan Vizla Mandalorian	bh_dm_2	9	100		bh_dm_crit_2	2	100		me_hot_1	20	100
 dxun_boma	Boma																																																									
 dxun_cannok	Cannok																																																									
