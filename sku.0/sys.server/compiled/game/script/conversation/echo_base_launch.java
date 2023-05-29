@@ -57,7 +57,7 @@ public class echo_base_launch extends script.base_script
             if (isIdValid(groupObj))
             {
                 int numGroupMembers = getGroupSize(groupObj);
-                if (numGroupMembers >= 4)
+                if (numGroupMembers >= 2)
                 {
                     obj_id[] groupies = getGroupMemberIds(groupObj);
                     if (groupies != null && groupies.length > 0)
@@ -68,7 +68,7 @@ public class echo_base_launch extends script.base_script
                                 playerCount = playerCount + 1;
                             }
                         }
-                        if (playerCount >= 4)
+                        if (playerCount >= 2)
                         {
                             return false;
                         }
