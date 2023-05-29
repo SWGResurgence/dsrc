@@ -55,7 +55,10 @@ public class component_attribs extends script.base_script
                         "object/tangible/component/armor/armor_layer_nightsister.iff",
                         "object/tangible/component/armor/feather_peko_albatross.iff",
                         "object/tangible/component/armor/armor_layer_ris.iff",
-                        "object/tangible/component/armor/armor_appearance_enhancement_feather.iff"
+                        "object/tangible/component/armor/armor_appearance_enhancement_feather.iff",
+                        "object/tangible/component/armor/scale_giant_dune_kimogila.iff",
+                        "object/tangible/component/armor/hide_gurk_king.iff",
+                        "object/tangible/component/armor/bone_fragment_woolamander_harrower.iff"
 
                 };
         if (utils.getElementPositionInArray(needToBeFixed, template) > -1)
