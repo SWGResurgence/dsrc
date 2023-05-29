@@ -2642,3 +2642,5 @@ class_chronicles_14	class_chronicles_13		0	0	0	0	0	0		class_chronicles_13		chron
 class_chronicles_15	class_chronicles_14		0	0	0	0	0	0		class_chronicles_14		chronicles	1095000	1680000								chronicles_max_tasks=1			1	0
 class_chronicles_16	class_chronicles_15		0	0	0	0	0	0		class_chronicles_15		chronicles	1225000	1860000								chronicles_max_quest_shared=5			1	0
 class_chronicles_master	class_chronicles_16		0	1	0	0	0	0		class_chronicles_16		chronicles	1365000	1365000							chroniclerVentriloquism	"chronicles_relic_quality=1,chronicles_max_tasks=1,chronicles_relic_mastery=1"			1	0
+social_language_mando_speak	social_language		0	0	0	0	0	0					0	0				bothan,human,moncalamari,rodian,trandoshan,twilek,zabrak			language+mando	language_mando_speak=100			0	0
+social_language_mando_comprehend	social_language		0	0	0	0	0	0					0	0								language_mando_comprehend=100			0	0
