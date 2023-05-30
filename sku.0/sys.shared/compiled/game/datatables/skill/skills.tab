@@ -1630,9 +1630,6 @@ expertise_bh_armor_eng_4	expertise_bh_armor_eng_3																					expertise_
 expertise_bh_survival_instinct_1	expertise																					expertise_cooldown_line_of_heal=2				
 expertise_bh_survival_instinct_2	expertise_bh_survival_instinct_1																					expertise_cooldown_line_of_heal=2				
 expertise_bh_armor_duelist_1	expertise																				bh_armor_duelist_1				0	
-																										
-																										
-																										
 expertise_fs_general_enhanced_strength_1	expertise																					strength_modified=50				
 expertise_fs_general_enhanced_strength_2	expertise_fs_general_enhanced_strength_1																					strength_modified=50				
 expertise_fs_general_enhanced_constitution_1	expertise																					constitution_modified=50				
