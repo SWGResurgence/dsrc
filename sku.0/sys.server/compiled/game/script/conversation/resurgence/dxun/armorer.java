@@ -33,7 +33,7 @@ public class armorer extends script.base_script
     public boolean armorerFriend_condition(obj_id player, obj_id npc) throws InterruptedException
     {
         float bhFaction = factions.getFactionStanding(player, "death_watch");
-        if (bhFaction >= 1000)
+        if (bhFaction >= 2500)
         {
             return true;
         }
@@ -278,10 +278,11 @@ public class armorer extends script.base_script
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_INTERESTING);
-        setName(self, "a Mandalorian Armorer");
+        setName(self, "Death Watch Armorer");
 
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         final int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
@@ -327,6 +328,7 @@ public class armorer extends script.base_script
 
             return SCRIPT_CONTINUE;
         }
+
         chat.chat(npc, "*Speaks in Mando'a*");
         return SCRIPT_CONTINUE;
     }

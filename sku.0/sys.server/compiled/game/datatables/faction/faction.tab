@@ -5,10 +5,10 @@ Rebel	1	1	1	rebel	Imperial
 Hutt	1	1	0		"naboo_security_force,nym,Imperial,corsec,narmle"	"jabba,borvo"	
 ImperialCitizen	0	0	0				
 RebelCitizen	0	0	0				
-Neutral	1	0	0			Hutt,Imperial,Rebel
+Neutral	0	0	0				
 Unattackable	0	0	0	unattackable			
 clone_relics_claw	0	0	0				
-clone_relics_droid	1	1	0		clone_relics_scientist	trade_federation
+clone_relics_droid	0	1	0		clone_relics_scientist		
 clone_relics_scientist	0	0	0		clone_relics_droid	"Hutt,Imperial,Rebel"	
 afarathu	1	1	0		"corsec,survivor"		
 beldonnas_league	1	1	0		"followers_of_lord_nyax,lost_aqualish"	corsec	
@@ -83,7 +83,7 @@ geonosian_mad_bunker	0	1	0			geonosian_crazed_monster
 geonosian_crazed_monster	0	1	0			geonosian_mad_bunker	
 geonosian_crazy	0	1	0		"geonosian_mad_bunker,geonosian_crazed_monster"		
 aggro_corsec	0	1	0		"afarathu,followers_of_lord_nyax,monumenter,rogue_corsec,lost_aqualish"	corsec	
-death_watch	1	1	0		death_watch_special
+death_watch	0	1	0		death_watch_special		
 death_watch_special	0	0	0				
 sith_shadow	1	1	0		fs_villager	"Rebel,Imperial"	0
 fs_villager	1	1	0		sith_shadow		0
