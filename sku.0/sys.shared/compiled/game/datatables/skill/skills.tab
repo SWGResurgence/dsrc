@@ -1646,9 +1646,9 @@ expertise_fs_general_improved_force_throw_2	expertise_fs_general_improved_force_
 expertise_fs_general_alacrity_1	expertise																					"expertise_glancing_blow_all=4,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
 expertise_fs_general_alacrity_2	expertise_fs_general_alacrity_1																					"expertise_glancing_blow_all=4,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
 expertise_fs_general_improved_crippling_accuracy_1	expertise_fs_general_improved_force_throw_2									expertise_fs_general_improved_force_throw_2												expertise_buff_duration_line_fs_force_throw=6				
-expertise_fs_general_premonition_1	expertise																					"combat_dodge=2, combat_parry=2"				
-expertise_fs_general_premonition_2	expertise_fs_general_premonition_1																					"combat_dodge=2, combat_parry=2"				
-expertise_fs_general_premonition_3	expertise_fs_general_premonition_2																					"combat_dodge=4, combat_parry=4"				
+expertise_fs_general_premonition_1	expertise																					"combat_dodge=2,combat_parry=2"				
+expertise_fs_general_premonition_2	expertise_fs_general_premonition_1																					"combat_dodge=2,combat_parry=2"				
+expertise_fs_general_premonition_3	expertise_fs_general_premonition_2																					"combat_dodge=4,combat_parry=4"				
 expertise_fs_general_improved_force_cloak_1	expertise																					expertise_force_cloak_combat_escape=1				
 expertise_fs_general_grace_in_motion_1	expertise																					expertise_action_lightsaber=5				
 expertise_fs_general_grace_in_motion_2	expertise_fs_general_grace_in_motion_1																					expertise_action_lightsaber=5				
@@ -1674,10 +1674,6 @@ expertise_fs_general_improved_force_shockwave_3	expertise_fs_general_improved_fo
 expertise_fs_general_incisiveness_1	expertise																					expertise_critical_niche_all=2				
 expertise_fs_general_incisiveness_2	expertise_fs_general_incisiveness_1																					expertise_critical_niche_all=3				
 expertise_fs_general_incisiveness_3	expertise_fs_general_incisiveness_2																					expertise_critical_niche_all=3				
-																										
-																										
-																										
-																										
 expertise_fs_path_cautious_nature_1	expertise																					"expertise_stance_constitution=10,expertise_stance_parry=1,combat_dodge=1"				
 expertise_fs_path_cautious_nature_2	expertise_fs_path_cautious_nature_1																					"expertise_stance_constitution=10,expertise_stance_parry=1,combat_dodge=1"				
 expertise_fs_path_cautious_nature_3	expertise_fs_path_cautious_nature_2																					"expertise_stance_constitution=10,expertise_stance_parry=1,combat_dodge=1"				
@@ -1686,8 +1682,8 @@ expertise_fs_path_remorseless_nature_1	expertise																					"precision_
 expertise_fs_path_remorseless_nature_2	expertise_fs_path_remorseless_nature_1																					"precision_modified=10,exotic_dodge_reduction=1,exotic_parry_reduction=1"				
 expertise_fs_path_remorseless_nature_3	expertise_fs_path_remorseless_nature_2																					"precision_modified=10,exotic_dodge_reduction=1,exotic_parry_reduction=1"				
 expertise_fs_path_remorseless_nature_4	expertise_fs_path_remorseless_nature_3																					"precision_modified=10,exotic_dodge_reduction=1,exotic_parry_reduction=1"				
-expertise_fs_path_saber_shackle_1	expertise_fs_path_cautious_nature_4									expertise_fs_path_cautious_nature_4												"expertise_stance_saber_throw_snare_chance=50,xpertise_stance_saber_throw_root_chance=4,expertise_damage_line_fs_dm=4"				
-expertise_fs_path_saber_shackle_2	expertise_fs_path_saber_shackle_1																					"expertise_stance_saber_throw_snare_chance=50,xpertise_stance_saber_throw_root_chance=4,expertise_damage_line_fs_dm=4"				
+expertise_fs_path_saber_shackle_1	expertise_fs_path_cautious_nature_4									expertise_fs_path_cautious_nature_4												"expertise_stance_saber_throw_snare_chance=50,expertise_stance_saber_throw_root_chance=4,expertise_damage_line_fs_dm=4"				
+expertise_fs_path_saber_shackle_2	expertise_fs_path_saber_shackle_1																					"expertise_stance_saber_throw_snare_chance=50,expertise_stance_saber_throw_root_chance=4,expertise_damage_line_fs_dm=4"				
 expertise_fs_path_reactive_response_1	expertise_fs_path_cautious_nature_4									expertise_fs_path_cautious_nature_4												expertise_stance_damage_add_to_action=2				
 expertise_fs_path_reactive_response_2	expertise_fs_path_reactive_response_1																					expertise_stance_damage_add_to_action=2				
 expertise_fs_path_perceptive_sentinel_1	expertise_fs_path_cautious_nature_4									expertise_fs_path_cautious_nature_4												"expertise_stance_perceptive_sentinel=2,expertise_stance_perceptive_sentinel_pvp=2"				
@@ -1695,8 +1691,8 @@ expertise_fs_path_perceptive_sentinel_2	expertise_fs_path_perceptive_sentinel_1	
 expertise_fs_path_forsake_fear_1	expertise																				fs_forsake_fear					
 expertise_fs_path_brutality_1	expertise_fs_path_remorseless_nature_4									expertise_fs_path_remorseless_nature_4												expertise_focus_critical_buff_line=2				
 expertise_fs_path_brutality_2	expertise_fs_path_brutality_1																					expertise_focus_critical_buff_line=2				
-expertise_fs_path_ruthless_precision_1	expertise_fs_path_remorseless_nature_4									expertise_fs_path_remorseless_nature_4												xpertise_focus_damage_increase=4				
-expertise_fs_path_ruthless_precision_2	expertise_fs_path_ruthless_precision_1																					xpertise_focus_damage_increase=4				
+expertise_fs_path_ruthless_precision_1	expertise_fs_path_remorseless_nature_4									expertise_fs_path_remorseless_nature_4												expertise_focus_damage_increase=4				
+expertise_fs_path_ruthless_precision_2	expertise_fs_path_ruthless_precision_1																					expertise_focus_damage_increase=4				
 expertise_fs_path_riposte_1	expertise																					expertise_stance_riposte=25				
 expertise_fs_path_riposte_2	expertise_fs_path_riposte_1																					expertise_stance_riposte=25				
 expertise_fs_path_saber_reflect_1	expertise																				fs_saber_reflect_buff					
