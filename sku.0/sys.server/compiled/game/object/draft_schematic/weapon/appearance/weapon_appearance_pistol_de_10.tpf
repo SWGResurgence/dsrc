@@ -39,7 +39,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "de10_barrel",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "de10_barrel", ingredient="object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -47,7 +47,7 @@ slots = [
 	complexity = 0,
 	appearance = "muzzle" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "barrel_pistol_projectile",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "barrel_pistol_projectile", ingredient="object/tangible/component/weapon/projectile_pistol_barrel_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -55,7 +55,7 @@ slots = [
 	complexity = 0,
 	appearance = "muzzle" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "weapon_core",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "weapon_core", ingredient="object/tangible/component/weapon/core/weapon_core_ranged_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
