@@ -216,7 +216,6 @@ public class player_resurgence extends script.base_script
         prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus("world_boss.peko") + "\n";
         prompt += "\t\tDarth Gizmo: " + getDungeonStatus("world_boss.gizmo") + "\n";
         prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
-        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("world_boss.emperors_hand") + "\n";
         prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n";
         prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n";
         prompt += "\tDungeons\n";

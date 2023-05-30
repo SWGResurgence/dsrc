@@ -26,7 +26,9 @@ public class resurgence extends script.base_script
     public static int WORLD_BOSS_GIZMO = 3;
     public static int WORLD_BOSS_DONKDONK = 3;
     public static int WORLD_BOSS_AURRA = 3;
-    public static int WORLD_BOSS_EMPERORS_HAND = 4;
+
+
+
 
     public resurgence()
     {
@@ -596,8 +598,7 @@ public class resurgence extends script.base_script
             case 5:
                 notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
                 break;
-            case 6:
-                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Hand of his Royal Majesty, The Emperor, has been located at the Emperors Retreat on Naboo. The Czerka Corporation is paying a high prices for her dissected remains and any Jedi that she has captured.");
+
         }
     }
     public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
