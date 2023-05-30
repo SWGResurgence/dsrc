@@ -377,7 +377,7 @@ world_boss_peko	Naboo Creature World Boss	bm_bolster_armor_5	2	100	once	trample_
 world_boss_krayt	Tatooine Creature World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once
 world_boss_paxvizla	Dxun NPC World Boss	ig88_droideka_shield	6	50		bh_dm_2	9	75		bh_dread_strike_2	3	75		bh_dm_crit_1	2	50		me_bacta_grenade_1	6	100
 world_boss_darth_gizmo	Endor NPC World Boss	fs_sh_2	1	10		fs_saber_reflect	10	50		fs_buff_3	10	75		fs_dm_3	25	100		fs_maelstrom_2	15	5		axkva_forcestorm	10	100	once
-emperors_retreat_emperors_hand	Naboo NPC World Boss	sp_fld_debuff_ca	1	100		fs_sh_1	5	50		suin_rampage	5	50		fs_dm_5	12	100
+emperors_retreat_emperors_hand	Naboo NPC World Boss	sp_fld_debuff_ca	1	100		fs_sh_1	5	50		suin_rampage	5	50		lelli_ambush	12	100
 restuss_emperors_hand	Rori NPC World Boss	sp_fld_debuff_ca	1	100		fs_sh_1	5	50		suin_rampage	5	50		lelli_ambush	12	100
 emperors_hand_stormtroopers	Emperor's Hand Stormtroopers	sd_obliterate	16	50		kenkirk_droid_blast	12	50		of_ae_dm_cc_3	8	25		co_del_ae_dm_3	8	25
 emperors_hand_isb_guards	Emperor's Hand ISB	of_firepower_1	1	50		of_dm_4	16	50		of__ae_dm_cc_3	16	50		sd_obliterate	24	50		of_deb_def_3	16	50
