@@ -105,13 +105,3 @@ tatooine_opening_cultist_12	static:item_tatooine_junk_mutant_womprat_01_01	35
 	static:weapon_sword_1h_04_01	3
 	static:item_npe_backpack_reward_01_01	1
 spymaster_21	object/tangible/quest/prof_spy_21_incom_plans.iff	1
-resurgence_mand_armorer	item_pgc_token_03	10
-	object/tangible/dungeon/death_watch_bunker/gel_packet.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_hall.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_storage.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_mine.iff	5
-resurgence_mand_apostate	item_pgc_token_03	5
-	object/tangible/dungeon/death_watch_bunker/gel_packet.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_hall.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_storage.iff	5
-	object/tangible/dungeon/death_watch_bunker/passkey_mine.iff	5
