@@ -147,8 +147,12 @@ expertise_fs_general_incisiveness_2	4	5	4	2			force_sensitive
 expertise_fs_general_incisiveness_3	4	5	4	3			force_sensitive
 expertise_fs_path_cautious_nature_1	5	1	2	1			force_sensitive
 expertise_fs_path_cautious_nature_2	5	1	2	2			force_sensitive
+expertise_fs_path_cautious_nature_3	5	1	2	3			force_sensitive
+expertise_fs_path_cautious_nature_4	5	1	2	4			force_sensitive
 expertise_fs_path_remorseless_nature_1	5	1	6	1			force_sensitive
 expertise_fs_path_remorseless_nature_2	5	1	6	2			force_sensitive
+expertise_fs_path_remorseless_nature_3	5	1	6	3			force_sensitive
+expertise_fs_path_remorseless_nature_4	5	1	6	4			force_sensitive
 expertise_fs_path_saber_shackle_1	5	2	1	1			force_sensitive
 expertise_fs_path_saber_shackle_2	5	2	1	2			force_sensitive
 expertise_fs_path_reactive_response_1	5	2	2	1			force_sensitive
