@@ -118,7 +118,7 @@ class_commando_phase3_04	class_commando_phase3_03	oneByFour	0	0	0	0	100	0		class
 class_commando_phase3_05	class_commando_phase3_04	oneByFour	0	0	0	0	100	0		class_commando_phase3_04		combat_general	963800	1466790							co_del_ae_dm_2				1	0
 class_commando_phase3_master	class_commando_phase3	oneByFour	0	1	0	0	100	0		class_commando_phase3_05		combat_general	1128300	1710540							co_dm_6	"slope_move=5,cybernetic_psychosis_resistance=2"			1	0
 class_commando_phase4	class	oneByFour	0	0	1	0	0	0						0											1	0
-class_commando_phase3_novice	class_commando_phase3	oneByFour	0	0	0	0	100	0		class_commando_phase2_master		combat_general	484600	756860							co_fld_dm_1	commando_passive_dot=1			1	0
+class_commando_phase4_novice	class_commando_phase4	oneByFour	0	0	0	0	100	0		class_commando_phase3_master		combat_general	1315800	1988090							co_fld_dm_2,co_double_time				1	0
 class_commando_phase4_02	class_commando_phase4	oneByFour	0	0	0	0	100	0		class_commando_phase4_novice		combat_general	1529300	2304380							co_del_ae_cc_2_2				1	0
 class_commando_phase4_03	class_commando_phase4_02	oneByFour	0	0	0	0	100	0		class_commando_phase4_02		combat_general	1772600	2664480							co_dm_7				1	0
 class_commando_phase4_04	class_commando_phase4_03	oneByFour	0	0	0	0	100	0		class_commando_phase4_03		combat_general	2049600	3074500							co_sh_3				1	0
