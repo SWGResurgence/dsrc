@@ -20,7 +20,7 @@ public class master_controller_paxvizla extends script.base_script
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        obj_id tatooine = getPlanetByName("dxun");
+        obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
@@ -31,7 +31,7 @@ public class master_controller_paxvizla extends script.base_script
 
     public int OnDestroy(obj_id self) throws InterruptedException
     {
-        obj_id tatooine = getPlanetByName("dxun");
+        obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.pax"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.pax");
@@ -83,10 +83,9 @@ public class master_controller_paxvizla extends script.base_script
                 chat.chat(self, "I will not be challenged in such uncivil ways!");
                 for (obj_id who : players)
                 {
-                    broadcast(who, "Pax has lost his enhancements, he has summoned reinforcements from House Vizla. Strike now before you lose the tactical advantage! ");
+                    broadcast(who, "Pax has lost his enhancements. Strike now!");
                 }
                 buff.removeAllBuffs(self);
-                resurgence.createCircleSpawn(self, self, "clan_vizla_mandalorian", 8, 12);
                 utils.setScriptVar(self, "hasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -108,9 +107,8 @@ public class master_controller_paxvizla extends script.base_script
                 chat.chat(self, MAND_MSGS[rand(0, MAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged Pax Vizla, causing him to increase his focus. He has summoned reinforcements from a nearby Mandalorian Patrol.");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged Pax Vizla, causing him to increase his focus.");
                 }
-                resurgence.createCircleSpawn(self, self, "clan_vizla_mandalorian_patrol", 4, 12);
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
         }
@@ -121,11 +119,10 @@ public class master_controller_paxvizla extends script.base_script
                 buff.removeAllBuffs(self);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "Pax Vizla has entered his last stand, and he has summoned reinforcements from his personal guard!");
+                    broadcast(who, "Pax Vizla has entered his last stand!");
                 }
                 chat.chat(self, "This Is The Way.");
                 buff.applyBuff(self, "crystal_buff", 30, 10);
-                resurgence.createCircleSpawn(self, self, "clan_vizla_mandalorian_guard", 2, 6);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
