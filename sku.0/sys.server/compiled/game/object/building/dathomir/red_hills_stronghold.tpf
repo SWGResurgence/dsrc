@@ -1,7 +1,0 @@
-@base object/building/base/base_housing.iff
-
-@class building_object_template 1
-@class tangible_object_template 1
-@class object_template 3
-
-sharedTemplate = "object/building/dathomir/shared_red_hills_stronghold.iff"
