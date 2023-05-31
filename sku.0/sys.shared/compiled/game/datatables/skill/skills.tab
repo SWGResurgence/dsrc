@@ -1711,7 +1711,7 @@ expertise_fs_path_improved_force_choke_2	expertise_fs_path_improved_force_choke_
 expertise_fs_path_flurry	expertise																				fs_flurry_1					
 expertise_fs_path_anticipate_aggression_1	expertise																					expertise_stance_anticipate_aggression=8				
 expertise_fs_path_anticipate_aggression_2	expertise_fs_path_anticipate_aggression_1																					expertise_stance_anticipate_aggression=8				
-expertise_fs_path_soothing_aura_1	expertise_fs_path_hermetic_touch_1									expertise_fs_path_hermetic_touch_1												expertise_stance_healing_line_fs_heal=75				
+expertise_fs_path_soothing_aura_1	expertise_fs_path_hermetic_touch_1									expertise_fs_path_hermetic_touch_1												expertise_stance_healing_line_fs_heal=50				
 expertise_fs_path_soothing_aura_2	expertise_fs_path_soothing_aura_1																					expertise_stance_healing_line_fs_heal=50				
 expertise_fs_path_lethargy_1	expertise_fs_path_expansive_trickery_1									expertise_fs_path_expansive_trickery_1												"expertise_buff_duration_line_fs_mind_trick=5,expertise_action_damage_line_fs_mind_trick=1500"				
 expertise_fs_path_lethargy_2	expertise_fs_path_lethargy_1																					"expertise_buff_duration_line_fs_mind_trick=5,expertise_action_damage_line_fs_mind_trick=1500"				
