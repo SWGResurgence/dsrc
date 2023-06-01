@@ -27,20 +27,29 @@ public class junk_dealer_summon extends script.base_script
         }
         String buffName = "sm_junk_dealer_1";
         int precisionBonus = (int)getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
+        int luckBonus = (int)getSkillStatisticModifier(player, "expertise_buff_under_the_counter");
         int damageDecrease = (int)getSkillStatisticModifier(player, "expertise_buff_best_deal_ever");
-        if (damageDecrease >= 6)
+        if (damageDecrease >= 10)
         {
             buffName = "sm_junk_dealer_5";
         }
-        else if (damageDecrease >= 3)
+        else if (damageDecrease >= 5)
         {
             buffName = "sm_junk_dealer_4";
         }
-        else if (precisionBonus >= 50)
+        else if (precisionBonus >= 150)
         {
             buffName = "sm_junk_dealer_3";
         }
-        else if (precisionBonus >= 25)
+        else if (luckBonus >= 150)
+        {
+            buffName = "sm_junk_dealer_3";
+        }
+        else if (precisionBonus >= 75)
+        {
+            buffName = "sm_junk_dealer_2";
+        }
+        else if (luckBonus >= 75)
         {
             buffName = "sm_junk_dealer_2";
         }
