@@ -1721,118 +1721,76 @@ expertise_fs_path_improved_force_drain_1	expertise_fs_path_force_drain_1								
 expertise_fs_path_improved_force_drain_2	expertise_fs_path_improved_force_drain_1																					expertise_fs_imp_drain=50				
 expertise_fs_path_strangulation_1	expertise_fs_path_improved_force_choke_2									expertise_fs_path_improved_force_choke_2												expertise_fs_imp_choke=10				
 expertise_fs_path_strangulation_2	expertise_fs_path_strangulation_1																					expertise_fs_imp_choke=10				
-expertise_sm_general_enhanced_precision_1	expertise																					precision_modified=25			0	
-expertise_sm_general_enhanced_precision_2	expertise_sm_general_enhanced_precision_1																					precision_modified=25			0	
-expertise_sm_general_hidden_padding_1	expertise																					expertise_overridable_protection_generic=1475			0	
-expertise_sm_general_hidden_padding_2	expertise_sm_general_hidden_padding_1																					expertise_overridable_protection_generic=1475			0	
-expertise_sm_general_gun_oil_1	expertise																					expertise_action_weapon_2=5			0	
-expertise_sm_general_elbow_grease_1	expertise																					expertise_action_weapon_melee=5			0	
-expertise_sm_general_enhanced_luck_1	expertise																					luck_modified=25			0	
-expertise_sm_general_enhanced_luck_2	expertise_sm_general_enhanced_luck_1																					luck_modified=25			0	
-expertise_sm_general_spot_a_sucker_1	expertise																				sm_spot_a_sucker_1				0	
-expertise_sm_general_hair_trigger_1	expertise_sm_general_gun_oil_1									expertise_sm_general_gun_oil_1												expertise_action_line_sm_dm=4			0	
-expertise_sm_general_hair_trigger_2	expertise_sm_general_hair_trigger_1																					expertise_action_line_sm_dm=4			0	
-expertise_sm_general_hair_trigger_3	expertise_sm_general_hair_trigger_2																					expertise_action_line_sm_dm=4			0	
-expertise_sm_general_hair_trigger_4	expertise_sm_general_hair_trigger_3																					expertise_action_line_sm_dm=4			0	
-expertise_sm_general_switcheroo_1	expertise_sm_general_elbow_grease_1									expertise_sm_general_elbow_grease_1												expertise_glancing_blow_melee_defense=2			0	
-expertise_sm_general_switcheroo_2	expertise_sm_general_switcheroo_1																					expertise_glancing_blow_melee_defense=2			0	
-expertise_sm_general_switcheroo_3	expertise_sm_general_switcheroo_2																					expertise_glancing_blow_melee_defense=2			0	
-expertise_sm_general_switcheroo_4	expertise_sm_general_switcheroo_3																					expertise_glancing_blow_melee_defense=2			0	
-expertise_sm_general_off_the_cuff_1	expertise																				sm_off_the_cuff				0	
-expertise_sm_general_meager_fortune_1	expertise_sm_general_spot_a_sucker_1									expertise_sm_general_spot_a_sucker_1												expertise_spot_a_sucker_critical_decrease=25			0	
-expertise_sm_general_meager_fortune_2	expertise_sm_general_meager_fortune_1																					expertise_spot_a_sucker_critical_decrease=25			0	
-expertise_sm_general_lined_pockets_1	expertise_sm_general_hidden_padding_2									expertise_sm_general_hidden_padding_2												expertise_overridable_protection_generic=1475			0	
-expertise_sm_general_lined_pockets_2	expertise_sm_general_lined_pockets_1																					expertise_overridable_protection_generic=1475			0	
-expertise_sm_general_precise_bead_1	expertise_sm_general_hair_trigger_4									expertise_sm_general_hair_trigger_4												"expertise_undiminished_critical_pistol=5,expertise_range_bonus_pistol=5"			0	
-expertise_sm_general_precise_bead_2	expertise_sm_general_precise_bead_1																					"expertise_undiminished_critical_pistol=5,expertise_range_bonus_pistol=5"			0	
-expertise_sm_general_head_crack_1	expertise_sm_general_switcheroo_4									expertise_sm_general_switcheroo_4												expertise_sm_melee_stun_proc=6			0	
-expertise_sm_general_head_crack_2	expertise_sm_general_head_crack_1																					expertise_sm_melee_stun_proc=6			0	
-expertise_sm_general_double_deal_1	expertise_sm_general_off_the_cuff_1									expertise_sm_general_off_the_cuff_1												expertise_double_deal_chance=10			0	
-expertise_sm_general_double_deal_2	expertise_sm_general_double_deal_1																					expertise_double_deal_chance=10			0	
-expertise_sm_general_wretched_fate_1	expertise_sm_general_meager_fortune_2									expertise_sm_general_meager_fortune_2												expertise_spot_a_sucker_glance_chance=25			0	
-expertise_sm_general_wretched_fate_2	expertise_sm_general_wretched_fate_1																					expertise_spot_a_sucker_glance_chance=25			0	
-expertise_sm_general_hammer_fanning_1	expertise_sm_general_precise_bead_2									expertise_sm_general_precise_bead_2												expertise_sm_ranged_shot_proc=5			0	
-expertise_sm_general_hammer_fanning_2	expertise_sm_general_hammer_fanning_1																					expertise_sm_ranged_shot_proc=5			0	
-expertise_sm_general_hammer_fanning_3	expertise_sm_general_hammer_fanning_2																					expertise_sm_ranged_shot_proc=5			0	
-expertise_sm_general_hammer_fanning_4	expertise_sm_general_hammer_fanning_3																					expertise_sm_ranged_shot_proc=5			0	
-expertise_sm_general_one_two_pummel_1	expertise_sm_general_head_crack_2									expertise_sm_general_head_crack_2												expertise_sm_melee_proc=4			0	
-expertise_sm_general_one_two_pummel_2	expertise_sm_general_one_two_pummel_1																					expertise_sm_melee_proc=4			0	
-expertise_sm_general_one_two_pummel_3	expertise_sm_general_one_two_pummel_2																					expertise_sm_melee_proc=4			0	
-expertise_sm_general_one_two_pummel_4	expertise_sm_general_one_two_pummel_3																					expertise_sm_melee_proc=4			0	
-expertise_sm_general_end_of_the_line_1	expertise_sm_general_double_deal_2									expertise_sm_general_double_deal_2											sm_end_of_the_line				0	
-expertise_sm_general_poor_prospect_1	expertise_sm_general_wretched_fate_2									expertise_sm_general_wretched_fate_2												expertise_spot_a_sucker_damage_decrease_chance=20			0	
-expertise_sm_general_poor_prospect_2	expertise_sm_general_poor_prospect_1																					expertise_spot_a_sucker_damage_decrease_chance=20			0	
-expertise_sm_general_idiot_proof_plan_1	expertise_sm_general_lined_pockets_2									expertise_sm_general_lined_pockets_2												damage_decrease_percentage=2			0	
-expertise_sm_general_idiot_proof_plan_2	expertise_sm_general_idiot_proof_plan_1																					damage_decrease_percentage=2			0	
-expertise_sm_general_break_the_deal_1	expertise_sm_general_hammer_fanning_4			1						expertise_sm_general_hammer_fanning_4											sm_break_the_deal				0	
-expertise_sm_general_bad_odds_1	expertise_sm_general_one_two_pummel_4			1						expertise_sm_general_one_two_pummel_4											sm_bad_odds_1				0	
-expertise_sm_general_narrow_escape_1	expertise																				sm_narrow_escape_1				0	
-expertise_sm_general_nerf_herder_1	expertise_sm_general_end_of_the_line_1									expertise_sm_general_end_of_the_line_1											sm_nerf_herder				0	
-expertise_sm_path_sly_lie_1																									0	
-expertise_sm_path_fast_talk_1																									0	
-expertise_sm_path_half_truth_1																									0	
-expertise_sm_path_half_truth_2																									0	
-expertise_sm_path_fake_id_1																									0	
-expertise_sm_path_innocent_cargo_1																									0	
-expertise_sm_path_innocent_cargo_2																									0	
-expertise_sm_path_underworld_boss_1																									0	
-expertise_sm_path_long_odds_1																									0	
-expertise_sm_path_blindside_1	expertise_sm_path_skullduggery_1									expertise_sm_path_skullduggery_1												expertise_buff_duration_line_sm_skullduggery=13			0	
-expertise_sm_path_blindside_2	expertise_sm_path_blindside_1																					expertise_buff_duration_line_sm_skullduggery=13			0	
-expertise_sm_path_skullduggery_1	expertise																				sm_skullduggery				0	
-expertise_sm_path_eat_dirt_1	expertise_sm_path_skullduggery_1									expertise_sm_path_skullduggery_1												expertise_miss_by_luck=6			0	
-expertise_sm_path_eat_dirt_2	expertise_sm_path_eat_dirt_1																					expertise_miss_by_luck=6			0	
-expertise_sm_path_easy_money_1	expertise																					luck_modified=25			0	
-expertise_sm_path_easy_money_2	expertise_sm_path_easy_money_1																					luck_modified=25			0	
-expertise_sm_path_ploy_1	expertise																					precision_modified=25			0	
-expertise_sm_path_ploy_2	expertise_sm_path_ploy_1																					precision_modified=25			0	
-expertise_sm_path_healthy_profits_1	expertise																				sm_summon_medic				0	
-expertise_sm_path_sleight_of_hand_1	expertise_sm_path_impossible_odds_1									expertise_sm_path_impossible_odds_1												expertise_hit_by_luck=8			0	
-expertise_sm_path_sleight_of_hand_2	expertise_sm_path_sleight_of_hand_1																					expertise_hit_by_luck=8			0	
-expertise_sm_path_impossible_odds_1	expertise_sm_path_skullduggery_1									expertise_sm_path_skullduggery_1											sm_impossible_odds				0	
-expertise_sm_path_loaded_chance_dice_1	expertise_sm_path_impossible_odds_1									expertise_sm_path_impossible_odds_1												"expertise_increase_hit_by_luck=5,expertise_buff_duration_line_sm_impossible_odds=13"			0	
-expertise_sm_path_loaded_chance_dice_2	expertise_sm_path_loaded_chance_dice_1																					"expertise_increase_hit_by_luck=5,expertise_buff_duration_line_sm_impossible_odds=13"			0	
-expertise_sm_path_feeling_lucky_1	expertise_sm_path_easy_money_2									expertise_sm_path_easy_money_2												"expertise_increase_smuggler_loot=1,expertise_sm_feeling_lucky_chance_proc=1"			0	
-expertise_sm_path_feeling_lucky_2	expertise_sm_path_feeling_lucky_1																					"expertise_increase_smuggler_loot=1,expertise_sm_feeling_lucky_chance_proc=1"			0	
-expertise_sm_path_feeling_lucky_3	expertise_sm_path_feeling_lucky_2																					"expertise_increase_smuggler_loot=1,expertise_sm_feeling_lucky_chance_proc=1"			0	
-expertise_sm_path_feeling_lucky_4	expertise_sm_path_feeling_lucky_3																					"expertise_increase_smuggler_loot=1,expertise_sm_feeling_lucky_chance_proc=1"			0	
-expertise_sm_path_scandal_1	expertise_sm_path_ploy_2									expertise_sm_path_ploy_2												expertise_damage_area_effect=1			0	
-expertise_sm_path_scandal_2	expertise_sm_path_scandal_1																					expertise_damage_area_effect=1			0	
-expertise_sm_path_scandal_3	expertise_sm_path_scandal_2																					expertise_damage_area_effect=1			0	
-expertise_sm_path_scandal_4	expertise_sm_path_scandal_3																					expertise_damage_area_effect=1			0	
-expertise_sm_path_lucky_break_1	expertise_sm_path_feeling_lucky_4									expertise_sm_path_feeling_lucky_4												expertise_lucky_break_chance=1			0	
-expertise_sm_path_lucky_break_2	expertise_sm_path_lucky_break_1																					expertise_lucky_break_chance=1			0	
-expertise_sm_path_lucky_break_3	expertise_sm_path_lucky_break_2																					expertise_lucky_break_chance=1			0	
-expertise_sm_path_lucky_break_4	expertise_sm_path_lucky_break_3																					expertise_lucky_break_chance=1			0	
-expertise_sm_path_smooth_move_1	expertise_sm_path_scandal_4									expertise_sm_path_scandal_4												"expertise_damage_melee=1,expertise_damage_weapon_2=1"			0	
-expertise_sm_path_smooth_move_2	expertise_sm_path_smooth_move_1																					"expertise_damage_melee=1,expertise_damage_weapon_2=1"			0	
-expertise_sm_path_smooth_move_3	expertise_sm_path_smooth_move_2																					"expertise_damage_melee=1,expertise_damage_weapon_2=1"			0	
-expertise_sm_path_smooth_move_4	expertise_sm_path_smooth_move_3																					"expertise_damage_melee=1,expertise_damage_weapon_2=1"			0	
-expertise_sm_path_off_the_books_1	expertise																				sm_off_the_books				0	
-expertise_sm_path_inside_information_1	expertise																				sm_inside_information				0	
-expertise_sm_path_flying_tackle_1	expertise_sm_path_pistol_whip_1									expertise_sm_path_pistol_whip_1												expertise_stun_line_sm_pistol_whip=50			0	
-expertise_sm_path_flying_tackle_2	expertise_sm_path_flying_tackle_1																					expertise_stun_line_sm_pistol_whip=50			0	
-expertise_sm_path_pistol_whip_1	expertise_sm_path_impossible_odds_1									expertise_sm_path_impossible_odds_1											sm_pistol_whip_1				0	
-expertise_sm_path_beat_down_1	expertise_sm_path_pistol_whip_1									expertise_sm_path_pistol_whip_1												expertise_buff_duration_line_sm_pistol_whip=1			0	
-expertise_sm_path_beat_down_2	expertise_sm_path_beat_down_1																					expertise_buff_duration_line_sm_pistol_whip=1			0	
-expertise_sm_path_card_up_your_sleeve_1	expertise_sm_path_lucky_break_4									expertise_sm_path_lucky_break_4												"expertise_double_hit_chance=10,expertise_sm_card_ranged_proc=25,expertise_sm_card_melee_proc=25"			0	
-expertise_sm_path_card_up_your_sleeve_2	expertise_sm_path_card_up_your_sleeve_1																					"expertise_double_hit_chance=10,expertise_sm_card_ranged_proc=25,expertise_sm_card_melee_proc=25"			0	
-expertise_sm_path_card_up_your_sleeve_3	expertise_sm_path_card_up_your_sleeve_2																					"expertise_double_hit_chance=10,expertise_sm_card_ranged_proc=25,expertise_sm_card_melee_proc=25"			0	
-expertise_sm_path_card_up_your_sleeve_4	expertise_sm_path_card_up_your_sleeve_3																					"expertise_double_hit_chance=10,expertise_sm_card_ranged_proc=25,expertise_sm_card_melee_proc=25"			0	
-expertise_sm_path_false_hope_1	expertise_sm_path_smooth_move_4									expertise_sm_path_smooth_move_4											sm_false_hope				0	
-expertise_sm_path_under_the_counter_1	expertise_sm_path_off_the_books_1									expertise_sm_path_off_the_books_1												expertise_buff_under_the_counter=25			0	
-expertise_sm_path_under_the_counter_2	expertise_sm_path_under_the_counter_1																					expertise_buff_under_the_counter=25			0	
-expertise_sm_path_blaster_at_your_side_1	expertise_sm_path_pistol_whip_1									expertise_sm_path_pistol_whip_1												level_add_to_damage=100			0	
-expertise_sm_path_blaster_at_your_side_2	expertise_sm_path_blaster_at_your_side_1																					level_add_to_damage=100			0	
-expertise_sm_path_quick_fix_1	expertise																					expertise_healing_line_sm_heal=10			0	
-expertise_sm_path_quick_fix_2	expertise_sm_path_quick_fix_1																					expertise_healing_line_sm_heal=10			0	
-expertise_sm_path_quick_fix_3	expertise_sm_path_quick_fix_2																					expertise_healing_line_sm_heal=10			0	
-expertise_sm_path_quick_fix_4	expertise_sm_path_quick_fix_3																					expertise_healing_line_sm_heal=10			0	
-expertise_sm_path_fake_goods_1	expertise_sm_path_false_hope_1									expertise_sm_path_false_hope_1												"expertise_buff_duration_line_sm_false_hope=1,expertise_delay_reduce_line_sm_false_hope=1"			0	
-expertise_sm_path_fake_goods_2	expertise_sm_path_fake_goods_1																					"expertise_buff_duration_line_sm_false_hope=1,expertise_delay_reduce_line_sm_false_hope=1"			0	
-expertise_sm_path_best_deal_ever_1	expertise_sm_path_under_the_counter_2									expertise_sm_path_under_the_counter_2												"expertise_buff_best_deal_ever=3,expertise_junk_dealer_cut=5"			0	
-expertise_sm_path_best_deal_ever_2	expertise_sm_path_best_deal_ever_1																					"expertise_buff_best_deal_ever=3,expertise_junk_dealer_cut=5"			0	
-expertise_sm_path_shoot_first_1	expertise_sm_path_inside_information_1									expertise_sm_path_inside_information_1											sm_shoot_first_1				0	
+expertise_sm_general_enhanced_agility_1	expertise																					agility_modified=50				
+expertise_sm_general_enhanced_agility_2	expertise_sm_general_enhanced_agility_1																					agility_modified=50				
+expertise_sm_general_enhanced_luck_1	expertise																					luck_modified=50				
+expertise_sm_general_enhanced_luck_2	expertise_sm_general_enhanced_luck_1																					luck_modified=50				
+expertise_sm_general_enhanced_constitution_1	expertise																					constitution_modified=50				
+expertise_sm_general_enhanced_constitution_2	expertise_sm_general_enhanced_constitution_1																					constitution_modified=50				
+expertise_sm_general_enhanced_precision_1	expertise																					precision_modified=50				
+expertise_sm_general_enhanced_precision_2	expertise_sm_general_enhanced_precision_1																					precision_modified=50				
+expertise_sm_general_enhanced_strength_1	expertise																					strength_modified=50				
+expertise_sm_general_enhanced_strength_2	expertise_sm_general_enhanced_strength_1																					strength_modified=50				
+expertise_sm_general_spot_a_sucker_1	expertise																				sm_spot_a_sucker_1					
+expertise_sm_general_hidden_padding_1	expertise																					expertise_overridable_protection_generic=1850				
+expertise_sm_general_hidden_padding_2	expertise_sm_general_hidden_padding_1																					expertise_overridable_protection_generic=1850				
+expertise_sm_general_precise_bead_1	expertise																					"expertise_action_line_sm_dm=5,expertise_undiminished_critical_pistol=5,expertise_range_bonus_pistol=10"				
+expertise_sm_general_precise_bead_2	expertise_sm_general_precise_bead_1																					"expertise_action_line_sm_dm=5,expertise_undiminished_critical_pistol=5,expertise_range_bonus_pistol=5"				
+expertise_sm_general_double_deal_1	expertise																					expertise_double_deal_chance=15				
+expertise_sm_general_double_deal_2	expertise_sm_general_double_deal_1																					expertise_double_deal_chance=15				
+expertise_sm_general_elbow_grease_1	expertise																					expertise_action_weapon_melee=10				
+expertise_sm_general_meager_fortune_1	expertise_sm_general_spot_a_sucker_1									expertise_sm_general_spot_a_sucker_1												"expertise_spot_a_sucker_critical_decrease=50,expertise_spot_a_sucker_damage_decrease_chance=50"				
+expertise_sm_general_meager_fortune_2	expertise_sm_general_meager_fortune_1																					"expertise_spot_a_sucker_critical_decrease=50,expertise_spot_a_sucker_damage_decrease_chance=50"				
+expertise_sm_general_lined_pockets_1	expertise_sm_general_hidden_padding_2									expertise_sm_general_hidden_padding_2												expertise_overridable_protection_generic=1850				
+expertise_sm_general_lined_pockets_2	expertise_sm_general_lined_pockets_1																					expertise_overridable_protection_generic=1850				
+expertise_sm_general_hammer_fanning_1	expertise_sm_general_precise_bead_2									expertise_sm_general_precise_bead_2												expertise_sm_ranged_shot_proc=10				
+expertise_sm_general_hammer_fanning_2	expertise_sm_general_hammer_fanning_1																					expertise_sm_ranged_shot_proc=10				
+expertise_sm_general_off_the_cuff_1	expertise																				sm_off_the_cuff					
+expertise_sm_general_switcheroo_1	expertise																					expertise_glancing_blow_melee_defense=4				
+expertise_sm_general_switcheroo_2	expertise_sm_general_switcheroo_1																					expertise_glancing_blow_melee_defense=4				
+expertise_sm_general_wretched_fate_1	expertise_sm_general_meager_fortune_2									expertise_sm_general_meager_fortune_2												expertise_spot_a_sucker_glance_chance=50				
+expertise_sm_general_idiot_proof_plan_1	expertise																					damage_decrease_percentage=4				
+expertise_sm_general_idiot_proof_plan_2	expertise_sm_general_idiot_proof_plan_1																					damage_decrease_percentage=4				
+expertise_sm_general_break_the_deal_1	expertise																				sm_break_the_deal					
+expertise_sm_general_end_of_the_line_1	expertise_sm_general_off_the_cuff_1									expertise_sm_general_off_the_cuff_1											sm_end_of_the_line					
+expertise_sm_general_head_crack_1	expertise																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8"				
+expertise_sm_general_head_crack_2	expertise_sm_general_head_crack_1																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8"				
+expertise_sm_general_narrow_escape_1	expertise																				sm_narrow_escape_1					
+expertise_sm_general_nerf_herder_1	expertise_sm_general_end_of_the_line_1									expertise_sm_general_end_of_the_line_1																
+expertise_sm_general_bad_odds_1	expertise_sm_general_head_crack_2									expertise_sm_general_head_crack_2											sm_bad_odds_1					
+expertise_sm_path_quick_fix_1	expertise																					expertise_healing_line_sm_heal=30				
+expertise_sm_path_quick_fix_2	expertise_sm_path_quick_fix_1																					expertise_healing_line_sm_heal=15				
+expertise_sm_path_quick_fix_3	expertise_sm_path_quick_fix_2																					expertise_healing_line_sm_heal=15				
+expertise_sm_path_healthy_profits_1	expertise																				sm_summon_medic					
+expertise_sm_path_inside_information_1	expertise																				sm_inside_information					
+expertise_sm_path_flying_tackle_1	expertise_sm_path_pistol_whip_1									expertise_sm_path_pistol_whip_1												expertise_stun_line_sm_pistol_whip=50				
+expertise_sm_path_flying_tackle_2	expertise_sm_path_flying_tackle_1																					expertise_stun_line_sm_pistol_whip=50				
+expertise_sm_path_pistol_whip_1	expertise																				sm_pistol_whip_1					
+expertise_sm_path_beat_down_1	expertise_sm_path_pistol_whip_1									expertise_sm_path_pistol_whip_1												expertise_buff_duration_line_sm_pistol_whip=2				
+expertise_sm_path_beat_down_2	expertise_sm_path_beat_down_1																					expertise_buff_duration_line_sm_pistol_whip=1				
+expertise_sm_path_feeling_lucky_1	expertise																					"expertise_increase_smuggler_loot=2,expertise_sm_feeling_lucky_chance_proc=2"				
+expertise_sm_path_feeling_lucky_2	expertise_sm_path_feeling_lucky_1																					"expertise_increase_smuggler_loot=2,expertise_sm_feeling_lucky_chance_proc=2"				
+expertise_sm_general_hair_trigger_1	expertise																					expertise_action_line_sm_dm=8				
+expertise_sm_general_hair_trigger_2	expertise_sm_general_hair_trigger_1																					expertise_action_line_sm_dm=8				
+expertise_sm_path_shoot_first_1	expertise																				sm_shoot_first_1					
+expertise_sm_path_lucky_break_1	expertise_sm_path_feeling_lucky_2									expertise_sm_path_feeling_lucky_2												expertise_lucky_break_chance=2				
+expertise_sm_path_lucky_break_2	expertise_sm_path_lucky_break_1																					expertise_lucky_break_chance=2				
+expertise_sm_path_scandal_1	expertise																					expertise_damage_area_effect=2				
+expertise_sm_path_scandal_2	expertise_sm_path_scandal_1																					expertise_damage_area_effect=2				
+expertise_sm_path_off_the_books_1	expertise																				sm_off_the_books					
+expertise_sm_path_blaster_at_your_side_1	expertise																					level_add_to_damage=250				
+expertise_sm_path_blaster_at_your_side_2	expertise_sm_path_blaster_at_your_side_1																					level_add_to_damage=250				
+expertise_sm_path_card_up_your_sleeve_1	expertise_sm_path_lucky_break_2									expertise_sm_path_lucky_break_2												"expertise_double_hit_chance=20,expertise_sm_card_ranged_proc=50,expertise_sm_card_melee_proc=50"				
+expertise_sm_path_card_up_your_sleeve_2	expertise_sm_path_card_up_your_sleeve_1																					"expertise_double_hit_chance=20,expertise_sm_card_ranged_proc=50,expertise_sm_card_melee_proc=50"				
+expertise_sm_path_smooth_move_1	expertise_sm_path_scandal_2									expertise_sm_path_scandal_2												"expertise_damage_melee=2,expertise_damage_weapon_2=2"				
+expertise_sm_path_smooth_move_2	expertise_sm_path_smooth_move_1																					"expertise_damage_melee=2,expertise_damage_weapon_2=2"				
+expertise_sm_path_under_the_counter_1	expertise_sm_path_off_the_books_1									expertise_sm_path_off_the_books_1												expertise_buff_under_the_counter=75				
+expertise_sm_path_under_the_counter_2	expertise_sm_path_under_the_counter_1																					expertise_buff_under_the_counter=75				
+expertise_sm_path_false_hope_1	expertise																				sm_false_hope					
+expertise_sm_path_best_deal_ever_1	expertise_sm_path_under_the_counter_2									expertise_sm_path_under_the_counter_2												"expertise_buff_best_deal_ever=5,expertise_junk_dealer_cut=5"				
+expertise_sm_path_best_deal_ever_2	expertise_sm_path_best_deal_ever_1																					"expertise_buff_best_deal_ever=5,expertise_junk_dealer_cut=20"				
+expertise_sm_path_fake_goods_1	expertise_sm_path_false_hope_1									expertise_sm_path_false_hope_1												"expertise_buff_duration_line_sm_false_hope=2,expertise_delay_reduce_line_sm_false_hope=2"				
+expertise_sm_path_fake_goods_2	expertise_sm_path_fake_goods_1																					"expertise_buff_duration_line_sm_false_hope=2,expertise_delay_reduce_line_sm_false_hope=2"				
 internal_expertise_autoallocated						1																			0	
 internal_expertise_autoallocated_respec						1																			0	
 expertise_of_group_buff_duration_1	expertise																					"expertise_buff_duration_line_of_group_buff=15,expertise_aura_maintain=1,expertise_action_line_of_group_buff=5"			0	
