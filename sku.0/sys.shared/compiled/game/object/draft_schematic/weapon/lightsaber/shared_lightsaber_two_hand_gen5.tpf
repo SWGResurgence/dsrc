@@ -4,8 +4,8 @@
 attributes = [
 	[name = "crafting" "complexity", experiment = "" "", value = 19..19],
 	[name = "crafting" "xp", experiment = "" "", value = 0..0],
-	[name = "crafting" "minDamage", experiment = "" "", value = 185..195],
-	[name = "crafting" "maxDamage", experiment = "" "", value = 265..305],
+	[name = "crafting" "minDamage", experiment = "" "", value = 245..255],
+	[name = "crafting" "maxDamage", experiment = "" "", value = 325..370],
 	[name = "crafting" "attackSpeed", experiment = "" "", value = 45..48],
 	[name = "crafting" "woundChance", experiment = "" "", value = 25..50],
 	[name = "crafting" "forceCost", experiment = "" "", value = 48..55]]
