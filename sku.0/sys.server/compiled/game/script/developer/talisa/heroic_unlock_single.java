@@ -22,7 +22,7 @@ public class heroic_unlock_single extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID);
-        sendSystemMessageTestingOnly(player, "Select which Heroic Instance that you wish to permenantly unlock. You can only choose one.");
+        broadcast(player, "Select which Heroic Instance that you wish to permenantly unlock. You can only choose one.");
         return SCRIPT_CONTINUE;
     }
 
@@ -33,7 +33,7 @@ public class heroic_unlock_single extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             use(self, player);
-            sendSystemMessageTestingOnly(player, "Are you sure that you wish to unlock this one?");
+            broadcast(player, "Are you sure that you wish to unlock this one?");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -72,7 +72,7 @@ public class heroic_unlock_single extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "No Instancing To Flag");
+            broadcast(player, "No Instancing To Flag");
         }
     }
 
@@ -104,7 +104,7 @@ public class heroic_unlock_single extends script.base_script
             String instanceToFlag = unflaggedInstances[idx];
             instance.flagPlayerForInstance(player, instanceToFlag);
             cleanScriptVars(player);
-            sendSystemMessageTestingOnly(player, "The Heroic Instance that you have choosen, has been unlocked.");
+            broadcast(player, "The Heroic Instance that you have choosen, has been unlocked.");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;

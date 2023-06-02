@@ -65,7 +65,7 @@ public class player_battlefield extends script.base_script
         if (!battlefield.isNearBattlefieldConstructor(master_object, position, faction))
         {
             LOG("LOG_CHANNEL", self + " ->This is too far away from one of your constructors.");
-            sendSystemMessageTestingOnly(self, "This is too far away from one of your constructors.");
+            broadcast(self, "This is too far away from one of your constructors.");
             return SCRIPT_OVERRIDE;
         }
         String template = getStringObjVar(player, VAR_PLACED_STRUCTURE);
@@ -74,14 +74,14 @@ public class player_battlefield extends script.base_script
         if (stats == null)
         {
             LOG("LOG_CHANNEL", player + " ->You cannot build that in this battlefield.");
-            sendSystemMessageTestingOnly(player, "You cannot build that in this battlefield.");
+            broadcast(player, "You cannot build that in this battlefield.");
             return SCRIPT_OVERRIDE;
         }
         region bf_check = battlefield.getBattlefield(position);
         if (bf_check == null)
         {
             LOG("LOG_CHANNEL", player + " ->You must place structures within the battlefield.");
-            sendSystemMessageTestingOnly(player, "You must place structures within the battlefield.");
+            broadcast(player, "You must place structures within the battlefield.");
             return SCRIPT_CONTINUE;
         }
         String name = stats.getString("name");
@@ -90,7 +90,7 @@ public class player_battlefield extends script.base_script
         if (build_points < cost)
         {
             LOG("LOG_CHANNEL", self + " ->There are insufficent build points remaining.");
-            sendSystemMessageTestingOnly(self, "There are insufficent build points remaining.");
+            broadcast(self, "There are insufficent build points remaining.");
             return SCRIPT_OVERRIDE;
         }
         battlefield.decrementFactionBuildPoints(master_object, faction, cost);
@@ -98,19 +98,19 @@ public class player_battlefield extends script.base_script
         if (placement_height == -9997.0f)
         {
             LOG("LOG_CHANNEL", player + " ->Internal code error: canPlaceStructure");
-            sendSystemMessageTestingOnly(player, "Internal code error: canPlaceStructure");
+            broadcast(player, "Internal code error: canPlaceStructure");
             return SCRIPT_CONTINUE;
         }
         if (placement_height == -9998.0f)
         {
             LOG("LOG_CHANNEL", player + " ->Internal script error: OnPlaceStructure");
-            sendSystemMessageTestingOnly(player, "Internal script error: OnPlaceStructure");
+            broadcast(player, "Internal script error: OnPlaceStructure");
             return SCRIPT_CONTINUE;
         }
         if (placement_height == -9999.0f)
         {
             LOG("LOG_CHANNEL", player + " ->There is no room to place the structure here.");
-            sendSystemMessageTestingOnly(player, "There is no room to place the structure here.");
+            broadcast(player, "There is no room to place the structure here.");
             return SCRIPT_CONTINUE;
         }
         position.y = getHeightAtLocation(position.x, position.z);
@@ -150,7 +150,7 @@ public class player_battlefield extends script.base_script
                     if (row_selected >= factions.length)
                     {
                         LOG("LOG_CHANNEL", self + " ->That is an invalid selection.");
-                        sendSystemMessageTestingOnly(self, "That is an invalid selection.");
+                        broadcast(self, "That is an invalid selection.");
                         return SCRIPT_CONTINUE;
                     }
                     selected_faction = factions[row_selected];
@@ -165,7 +165,7 @@ public class player_battlefield extends script.base_script
                 else
                 {
                     LOG("LOG_CHANNEL", self + " ->That faction has been eliminated from the battle.");
-                    sendSystemMessageTestingOnly(self, "That faction has been eliminated from the battle.");
+                    broadcast(self, "That faction has been eliminated from the battle.");
                 }
             }
         }
@@ -258,12 +258,12 @@ public class player_battlefield extends script.base_script
             {
                 battlefield.expelPlayerFromBattlefield(self, master_object);
                 LOG("LOG_CHANNEL", self + " ->You are about to be resuscitated! You may not return to the battlefield until the current battle has ended.");
-                sendSystemMessageTestingOnly(self, "You are about to be resuscitated! You may not return to the battlefield until the current battle has ended.");
+                broadcast(self, "You are about to be resuscitated! You may not return to the battlefield until the current battle has ended.");
             }
             else
             {
                 LOG("LOG_CHANNEL", self + " ->You are about to be revived!");
-                sendSystemMessageTestingOnly(self, "You are about to be revived!");
+                broadcast(self, "You are about to be revived!");
             }
         }
         if (hasObjVar(self, "combat.intIncapacitationCount"))
@@ -320,7 +320,7 @@ public class player_battlefield extends script.base_script
         if (row_selected >= buildable_structures.length)
         {
             LOG("LOG_CHANNEL", self + " ->That is an invalid selected.");
-            sendSystemMessageTestingOnly(self, "That is an invalid selected.");
+            broadcast(self, "That is an invalid selected.");
             return SCRIPT_CONTINUE;
         }
         String structure_name = buildable_structures[row_selected];
@@ -328,7 +328,7 @@ public class player_battlefield extends script.base_script
         if (structure_stats == null)
         {
             LOG("LOG_CHANNEL", self + " ->Unable to create that structure in this battlefield.");
-            sendSystemMessageTestingOnly(self, "Unable to create that structure in this battlefield.");
+            broadcast(self, "Unable to create that structure in this battlefield.");
             return SCRIPT_CONTINUE;
         }
         String template = structure_stats.getString("template");
@@ -338,7 +338,7 @@ public class player_battlefield extends script.base_script
         if (build_points < cost)
         {
             LOG("LOG_CHANNEL", self + " ->There are insufficent build points remaining.");
-            sendSystemMessageTestingOnly(self, "There are insufficent build points remaining.");
+            broadcast(self, "There are insufficent build points remaining.");
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, VAR_PLACED_STRUCTURE, template);
@@ -368,7 +368,7 @@ public class player_battlefield extends script.base_script
                 factions.addFactionStanding(self, faction, standing);
             }
             LOG("LOG_CHANNEL", self + " ->Your " + faction + " faction standing has been increased by " + standing + " for your battlefield deeds.");
-            sendSystemMessageTestingOnly(self, "Your " + faction + " faction standing has been increased by " + standing + " for your battlefield deeds.");
+            broadcast(self, "Your " + faction + " faction standing has been increased by " + standing + " for your battlefield deeds.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -428,7 +428,7 @@ public class player_battlefield extends script.base_script
         {
             if (!isIdValid(master_object))
             {
-                sendSystemMessageTestingOnly(self, "Cannot found the battlefield. Cancelling refresh.");
+                broadcast(self, "Cannot found the battlefield. Cancelling refresh.");
             }
             else
             {
@@ -451,14 +451,14 @@ public class player_battlefield extends script.base_script
         if (bf == null)
         {
             LOG("LOG_CHANNEL", self + " ->You must be at a battlefield to do that.");
-            sendSystemMessageTestingOnly(self, "You must be at a battlefield to do that.");
+            broadcast(self, "You must be at a battlefield to do that.");
             return SCRIPT_CONTINUE;
         }
         obj_id master_object = battlefield.getMasterObjectFromRegion(bf);
         if (!isIdValid(master_object))
         {
             LOG("LOG_CHANNEL", self + " ->You must be at a battlefield to do that.");
-            sendSystemMessageTestingOnly(self, "You must be at a battlefield to do that.");
+            broadcast(self, "You must be at a battlefield to do that.");
             return SCRIPT_CONTINUE;
         }
         if (params.equals("game"))
@@ -466,7 +466,7 @@ public class player_battlefield extends script.base_script
             if (!battlefield.isBattlefieldActive(bf))
             {
                 LOG("LOG_CHANNEL", self + " ->The battlefield must be active in order to get statistics.");
-                sendSystemMessageTestingOnly(self, "The battlefield must be active in order to get statistics.");
+                broadcast(self, "The battlefield must be active in order to get statistics.");
             }
             else
             {
@@ -570,14 +570,14 @@ public class player_battlefield extends script.base_script
         if (bf == null)
         {
             LOG("LOG_CHANNEL", self + " ->You must be in a battlefield to do that.");
-            sendSystemMessageTestingOnly(self, "You must be in a battlefield to do that.");
+            broadcast(self, "You must be in a battlefield to do that.");
             return SCRIPT_CONTINUE;
         }
         obj_id master_object = battlefield.getMasterObjectFromRegion(bf);
         if (!battlefield.isBattlefieldActive(master_object))
         {
             LOG("LOG_CHANNEL", self + " ->The battlefield must be active in order to do that.");
-            sendSystemMessageTestingOnly(self, "The battlefield must be active in order to do that.");
+            broadcast(self, "The battlefield must be active in order to do that.");
             return SCRIPT_CONTINUE;
         }
         String faction = battlefield.getPlayerTeamFaction(self);
@@ -589,7 +589,7 @@ public class player_battlefield extends script.base_script
         if (buildable_structures == null)
         {
             LOG("LOG_CHANNEL", self + " ->You cannot build on this battlefield.");
-            sendSystemMessageTestingOnly(self, "You cannot build on this battlefield.");
+            broadcast(self, "You cannot build on this battlefield.");
             return SCRIPT_CONTINUE;
         }
         String[] dsrc = new String[buildable_structures.length];
@@ -617,7 +617,7 @@ public class player_battlefield extends script.base_script
         if (bf == null)
         {
             LOG("LOG_CHANNEL", self + " ->You must be in a battlefield to do that.");
-            sendSystemMessageTestingOnly(self, "You must be in a battlefield to do that.");
+            broadcast(self, "You must be in a battlefield to do that.");
             return SCRIPT_CONTINUE;
         }
         obj_id master_object = battlefield.getMasterObjectFromRegion(bf);
@@ -627,14 +627,14 @@ public class player_battlefield extends script.base_script
             if (target == null || target == obj_id.NULL_ID)
             {
                 LOG("LOG_CHANNEL", self + " ->From which installation do you wish to purchase reinforcements?");
-                sendSystemMessageTestingOnly(self, "From which installation do you wish to purchase reinforcements?");
+                broadcast(self, "From which installation do you wish to purchase reinforcements?");
                 return SCRIPT_CONTINUE;
             }
         }
         if (!battlefield.canBuildReinforcement(target))
         {
             LOG("LOG_CHANNEL", self + " ->Reinforcements are unavailable from that.");
-            sendSystemMessageTestingOnly(self, "Reinforcements are unavailable from that.");
+            broadcast(self, "Reinforcements are unavailable from that.");
             return SCRIPT_CONTINUE;
         }
         location loc_player = getLocation(self);
@@ -642,18 +642,18 @@ public class player_battlefield extends script.base_script
         if (loc_player.distance(loc_target) > battlefield.REINFORCEMENT_RANGE)
         {
             LOG("LOG_CHANNEL", self + " ->You are too far away from the installation.");
-            sendSystemMessageTestingOnly(self, "You are too far away from the installation.");
+            broadcast(self, "You are too far away from the installation.");
             return SCRIPT_CONTINUE;
         }
         if (battlefield.buildReinforcement(master_object, target, self) == null)
         {
             LOG("LOG_CHANNEL", self + " ->Reinforcement request denied.");
-            sendSystemMessageTestingOnly(self, "Reinforcement request denied.");
+            broadcast(self, "Reinforcement request denied.");
         }
         else
         {
             LOG("LOG_CHANNEL", self + " ->Your reinforcements have arrived.");
-            sendSystemMessageTestingOnly(self, "Your reinforcements have arrived.");
+            broadcast(self, "Your reinforcements have arrived.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -665,7 +665,7 @@ public class player_battlefield extends script.base_script
         if (bf == null)
         {
             LOG("LOG_CHANNEL", self + " ->You must be in a battlefield to do that.");
-            sendSystemMessageTestingOnly(self, "You must be in a battlefield to do that.");
+            broadcast(self, "You must be in a battlefield to do that.");
             return SCRIPT_CONTINUE;
         }
         obj_id master_object = battlefield.getMasterObjectFromRegion(bf);
@@ -675,7 +675,7 @@ public class player_battlefield extends script.base_script
             if (target == null || target == obj_id.NULL_ID)
             {
                 LOG("LOG_CHANNEL", self + " ->Which structure do you wish to repair?");
-                sendSystemMessageTestingOnly(self, "Which structure do you wish to repair?");
+                broadcast(self, "Which structure do you wish to repair?");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -684,7 +684,7 @@ public class player_battlefield extends script.base_script
         if (loc_player.distance(loc_target) > battlefield.REINFORCEMENT_RANGE)
         {
             LOG("LOG_CHANNEL", self + " ->You are too far away from the structure.");
-            sendSystemMessageTestingOnly(self, "You are too far away from the structure.");
+            broadcast(self, "You are too far away from the structure.");
             return SCRIPT_CONTINUE;
         }
         battlefield.repairBattlefieldStructure(master_object, self, target);

@@ -1732,7 +1732,7 @@ public class player_building extends script.base_script
         }
         if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
         {
-            sendSystemMessageTestingOnly(self, "You cannot use this command on a Harvester or Generator.");
+            broadcast(self, "You cannot use this command on a Harvester or Generator.");
             return SCRIPT_CONTINUE;
         }
         if (!player_structure.isAdmin(structure, self))

@@ -220,12 +220,12 @@ public class gambling extends script.base_script
         }
         if (!isTablePlayer(table, player))
         {
-            sendSystemMessageTestingOnly(player, "You cannot bet on a table you have not joined!");
+            broadcast(player, "You cannot bet on a table you have not joined!");
             return;
         }
         if (!utils.hasScriptVar(table, VAR_TABLE_BET_ACCEPT))
         {
-            sendSystemMessageTestingOnly(player, "The table is not currently accepting bets!");
+            broadcast(player, "The table is not currently accepting bets!");
             return;
         }
         String[] tmp = split(params, ' ');
@@ -241,7 +241,7 @@ public class gambling extends script.base_script
         int maxBet = getIntObjVar(table, VAR_TABLE_BET_MAX);
         if (maxBet > 0 && amt > maxBet)
         {
-            sendSystemMessageTestingOnly(player, "The maximum bet for this station is " + maxBet + " credits.");
+            broadcast(player, "The maximum bet for this station is " + maxBet + " credits.");
             return;
         }
         dictionary d = new dictionary();

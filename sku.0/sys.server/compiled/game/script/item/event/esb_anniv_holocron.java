@@ -89,7 +89,7 @@ public class esb_anniv_holocron extends script.base_script
 
     public static void handleCompletedHolocron(obj_id self, obj_id player) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(player, "You have completed the Holocron of Destiny!");
+        broadcast(player, "You have completed the Holocron of Destiny!");
         int[] scores = {
                 getIntObjVar(self, "esb_holocron_neutral_ct"),
                 getIntObjVar(self, "esb_holocron_darkside_ct"),
@@ -180,12 +180,12 @@ public class esb_anniv_holocron extends script.base_script
         String planet = getCurrentSceneName();
         if (hasCompletedThisPlanet(self, planet))
         {
-            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has nothing more for you while you are on this planet.");
+            broadcast(player, "The Holocron of Destiny has nothing more for you while you are on this planet.");
             return SCRIPT_CONTINUE;
         }
         if (!Arrays.asList(allowed_planets).contains(planet))
         {
-            sendSystemMessageTestingOnly(player, "The Holocron of Destiny has no knowledge of this planet. You must continue your journey.");
+            broadcast(player, "The Holocron of Destiny has no knowledge of this planet. You must continue your journey.");
             return SCRIPT_CONTINUE;
         }
         if (!hasCompletedCollectionPage(player, "esb_anniversary_collection"))
@@ -265,7 +265,7 @@ public class esb_anniv_holocron extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Your response to the Holocron of Destiny has been recorded.");
+                broadcast(player, "Your response to the Holocron of Destiny has been recorded.");
             }
         }
         return SCRIPT_CONTINUE;

@@ -161,7 +161,7 @@ public class medic extends script.base_script
                 xfer = new obj_id[gods.size()];
                 gods.toArray(xfer);
             }
-            utils.sendSystemMessageTestingOnly(xfer, message);
+            utils.broadcast(xfer, message);
         }
     }
 }

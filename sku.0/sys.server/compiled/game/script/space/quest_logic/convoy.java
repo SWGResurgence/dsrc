@@ -25,7 +25,7 @@ public class convoy extends script.space.quest_logic.escort
         if (questInfo == null)
         {
             LOG("convoy_quest", "Failed to find more quest info");
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, "convoySize", questInfo.getInt("convoySize"));
@@ -40,7 +40,7 @@ public class convoy extends script.space.quest_logic.escort
             rawEscortShipTypes[0] = questInfo.getString("escortShipType");
             if (rawEscortShipTypes == null)
             {
-                sendSystemMessageTestingOnly(player, "Debug: escortShipTypes are missing from " + qTable);
+                broadcast(player, "Debug: escortShipTypes are missing from " + qTable);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -51,7 +51,7 @@ public class convoy extends script.space.quest_logic.escort
             rawEscortPoints = dataTableGetStringColumn(qTable, "escortPath");
             if (rawEscortPoints == null)
             {
-                sendSystemMessageTestingOnly(player, "Debug: escortPoints are missing from " + qTable);
+                broadcast(player, "Debug: escortPoints are missing from " + qTable);
                 return SCRIPT_CONTINUE;
             }
         }

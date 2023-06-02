@@ -12,7 +12,7 @@ public class missiontest extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "MISSION TEST SCRIPT ATTACHED");
+        broadcast(self, "MISSION TEST SCRIPT ATTACHED");
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
@@ -28,7 +28,7 @@ public class missiontest extends script.base_script
                     if (hasObjVar(dpobj, space_quest.QUEST_TYPE)) {
                         String tname = getStringObjVar(dpobj, space_quest.QUEST_TYPE);
                         String qname = getStringObjVar(dpobj, space_quest.QUEST_NAME);
-                        sendSystemMessageTestingOnly(self, "Found: " + tname + ":" + qname);
+                        broadcast(self, "Found: " + tname + ":" + qname);
                     }
                 }
             }
@@ -37,13 +37,13 @@ public class missiontest extends script.base_script
         {
             if (commands.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "unable to parse: " + text);
-                sendSystemMessageTestingOnly(self, "say GRANTQUEST QUESTTYPE QUESTNAME" + text);
+                broadcast(self, "unable to parse: " + text);
+                broadcast(self, "say GRANTQUEST QUESTTYPE QUESTNAME" + text);
                 return SCRIPT_CONTINUE;
             }
             if (!space_quest.grantQuest(self, commands[1], commands[2]))
             {
-                sendSystemMessageTestingOnly(self, "FAILED: " + text);
+                broadcast(self, "FAILED: " + text);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -51,41 +51,41 @@ public class missiontest extends script.base_script
         {
             if (commands.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "unable to parse: " + text);
-                sendSystemMessageTestingOnly(self, "say CHECKQUEST QUESTTYPE QUESTNAME" + text);
+                broadcast(self, "unable to parse: " + text);
+                broadcast(self, "say CHECKQUEST QUESTTYPE QUESTNAME" + text);
                 return SCRIPT_CONTINUE;
             }
             if (space_quest.hasQuest(self, commands[1], commands[2]))
             {
-                sendSystemMessageTestingOnly(self, "hasQuest:          TRUE");
+                broadcast(self, "hasQuest:          TRUE");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "hasQuest:          FALSE");
+                broadcast(self, "hasQuest:          FALSE");
             }
             if (space_quest.hasCompletedQuest(self, commands[1], commands[2]))
             {
-                sendSystemMessageTestingOnly(self, "hasCompletedQuest: TRUE");
+                broadcast(self, "hasCompletedQuest: TRUE");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "hasCompletedQuest: FALSE");
+                broadcast(self, "hasCompletedQuest: FALSE");
             }
             if (space_quest.hasFailedQuest(self, commands[1], commands[2]))
             {
-                sendSystemMessageTestingOnly(self, "hasFailedQuest:    TRUE");
+                broadcast(self, "hasFailedQuest:    TRUE");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "hasFailedQuest:    FALSE");
+                broadcast(self, "hasFailedQuest:    FALSE");
             }
             if (space_quest.hasWonQuest(self, commands[1], commands[2]))
             {
-                sendSystemMessageTestingOnly(self, "hasWonQuest:       TRUE");
+                broadcast(self, "hasWonQuest:       TRUE");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "hasWonQuest:       FALSE");
+                broadcast(self, "hasWonQuest:       FALSE");
             }
             return SCRIPT_CONTINUE;
         }
@@ -93,19 +93,19 @@ public class missiontest extends script.base_script
         {
             if (commands.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "unable to parse: " + text);
-                sendSystemMessageTestingOnly(self, "say CLEARQUEST QUESTTYPE QUESTNAME" + text);
+                broadcast(self, "unable to parse: " + text);
+                broadcast(self, "say CLEARQUEST QUESTTYPE QUESTNAME" + text);
                 return SCRIPT_CONTINUE;
             }
             space_quest.clearQuestFlags(self, commands[1], commands[2]);
-            sendSystemMessageTestingOnly(self, commands[1] + ":" + commands[2] + " quest flags cleared");
+            broadcast(self, commands[1] + ":" + commands[2] + " quest flags cleared");
         }
         else if (commands[0].equalsIgnoreCase("winquest"))
         {
             if (commands.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "unable to parse: " + text);
-                sendSystemMessageTestingOnly(self, "say WINQUEST QUESTTYPE QUESTNAME");
+                broadcast(self, "unable to parse: " + text);
+                broadcast(self, "say WINQUEST QUESTTYPE QUESTNAME");
                 return SCRIPT_CONTINUE;
             }
             String questType = commands[1];
@@ -114,13 +114,13 @@ public class missiontest extends script.base_script
             dictionary questInfo = dataTableGetRow(qTable, 0);
             if (questInfo == null)
             {
-                sendSystemMessageTestingOnly(self, "Unable to find quest data for " + questType + ":" + questName + "!");
+                broadcast(self, "Unable to find quest data for " + questType + ":" + questName + "!");
                 return SCRIPT_CONTINUE;
             }
             obj_id missionObj = space_quest._getQuest(self, questType, questName);
             if (missionObj == null)
             {
-                sendSystemMessageTestingOnly(self, "You don't have that quest.");
+                broadcast(self, "You don't have that quest.");
                 return SCRIPT_CONTINUE;
             }
             int splittype = questInfo.getInt("triggerSplitCondition");
@@ -133,7 +133,7 @@ public class missiontest extends script.base_script
             else 
             {
                 space_quest.setQuestWon(self, missionObj, false);
-                sendSystemMessageTestingOnly(self, "--- Forced Victory on Split Mission, Assigning Split ---");
+                broadcast(self, "--- Forced Victory on Split Mission, Assigning Split ---");
                 java.util.StringTokenizer st = new java.util.StringTokenizer(splitmission, ":");
                 String rtype = st.nextToken();
                 String rname = st.nextToken();

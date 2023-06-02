@@ -127,7 +127,7 @@ public class rebel_turret extends script.base_script
         obj_id debugPlayer = getClosestPlayer(loc);
         if (isGod(debugPlayer) && hasObjVar(debugPlayer, "hoth.turretSpeak"))
         {
-            sendSystemMessageTestingOnly(debugPlayer, "Turret (" + turret + ") hit ATAT (" + target + ") for: " + boltDamage + " points of damage.");
+            broadcast(debugPlayer, "Turret (" + turret + ") hit ATAT (" + target + ") for: " + boltDamage + " points of damage.");
         }
         damage(target, DAMAGE_ENERGY, HIT_LOCATION_BODY, boltDamage);
     }

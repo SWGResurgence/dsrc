@@ -33,7 +33,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id id = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "hasProxyOrAuthObject(id=" + id + ") returns " + hasProxyOrAuthObject(id));
+                broadcast(self, "hasProxyOrAuthObject(id=" + id + ") returns " + hasProxyOrAuthObject(id));
             }
         }
         else if (strText.startsWith("getCharacterCtsHistory "))
@@ -43,11 +43,11 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getCharacterCtsHistory(player=" + player + ") returns:");
+                broadcast(self, "getCharacterCtsHistory(player=" + player + ") returns:");
                 dictionary ctsHistory = getCharacterCtsHistory(player);
                 if (ctsHistory == null)
                 {
-                    sendSystemMessageTestingOnly(self, "null dictionary");
+                    broadcast(self, "null dictionary");
                 }
                 else 
                 {
@@ -56,41 +56,41 @@ public class cwdm_test extends script.base_script
                     int[] transferTimes = ctsHistory.getIntArray("transfer_time");
                     if (sourceCharacterNames == null)
                     {
-                        sendSystemMessageTestingOnly(self, "null \"character_name\" dictionary");
+                        broadcast(self, "null \"character_name\" dictionary");
                     }
                     else if (sourceClusterNames == null)
                     {
-                        sendSystemMessageTestingOnly(self, "null \"cluster_name\" dictionary");
+                        broadcast(self, "null \"cluster_name\" dictionary");
                     }
                     else if (transferTimes == null)
                     {
-                        sendSystemMessageTestingOnly(self, "null \"transfer_time\" dictionary");
+                        broadcast(self, "null \"transfer_time\" dictionary");
                     }
                     else if (sourceCharacterNames.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, "empty \"character_name\" dictionary");
+                        broadcast(self, "empty \"character_name\" dictionary");
                     }
                     else if (sourceClusterNames.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, "empty \"cluster_name\" dictionary");
+                        broadcast(self, "empty \"cluster_name\" dictionary");
                     }
                     else if (transferTimes.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, "empty \"transfer_time\" dictionary");
+                        broadcast(self, "empty \"transfer_time\" dictionary");
                     }
                     else if (sourceCharacterNames.length != sourceClusterNames.length)
                     {
-                        sendSystemMessageTestingOnly(self, "\"character_name\" dictionary length != \"cluster_name\" dictionary length");
+                        broadcast(self, "\"character_name\" dictionary length != \"cluster_name\" dictionary length");
                     }
                     else if (sourceCharacterNames.length != transferTimes.length)
                     {
-                        sendSystemMessageTestingOnly(self, "\"character_name\" dictionary length != \"transfer_time\" dictionary length");
+                        broadcast(self, "\"character_name\" dictionary length != \"transfer_time\" dictionary length");
                     }
                     else 
                     {
                         for (int i = 0; i < sourceCharacterNames.length; ++i)
                         {
-                            sendSystemMessageTestingOnly(self, "(" + sourceCharacterNames[i] + ") (" + sourceClusterNames[i] + ") (" + transferTimes[i] + ", " + getCalendarTimeStringLocal(transferTimes[i]) + ")");
+                            broadcast(self, "(" + sourceCharacterNames[i] + ") (" + sourceClusterNames[i] + ") (" + transferTimes[i] + ", " + getCalendarTimeStringLocal(transferTimes[i]) + ")");
                         }
                     }
                 }
@@ -104,7 +104,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int value = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setHealth(target=" + target + ", value=" + value + ")");
+                broadcast(self, "calling setHealth(target=" + target + ", value=" + value + ")");
                 setHealth(target, value);
             }
         }
@@ -116,7 +116,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int value = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setHitpoints(target=" + target + ", value=" + value + ")");
+                broadcast(self, "calling setHitpoints(target=" + target + ", value=" + value + ")");
                 setHitpoints(target, value);
             }
         }
@@ -133,23 +133,23 @@ public class cwdm_test extends script.base_script
                     obj_id[] contents = getContents(ship);
                     if (contents == null)
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has null contents");
+                        broadcast(self, ship + " has null contents");
                     }
                     else if (contents.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has " + contents.length + " contents");
+                        broadcast(self, ship + " has " + contents.length + " contents");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has " + contents.length + " contents");
+                        broadcast(self, ship + " has " + contents.length + " contents");
                         for (obj_id content : contents) {
-                            sendSystemMessageTestingOnly(self, "" + content);
+                            broadcast(self, "" + content);
                         }
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, ship + " is not of type GOT_ship");
+                    broadcast(self, ship + " is not of type GOT_ship");
                 }
             }
         }
@@ -166,27 +166,27 @@ public class cwdm_test extends script.base_script
                     int[] shipSlots = getShipChassisSlots(ship);
                     if (shipSlots == null)
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has null slots");
+                        broadcast(self, ship + " has null slots");
                     }
                     else if (shipSlots.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has " + shipSlots.length + " slots");
+                        broadcast(self, ship + " has " + shipSlots.length + " slots");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, ship + " has " + shipSlots.length + " slots");
+                        broadcast(self, ship + " has " + shipSlots.length + " slots");
                         for (int i = 0; i < shipSlots.length; ++i)
                         {
-                            sendSystemMessageTestingOnly(self, ship + " slot " + (i + 1) + " " + (isShipSlotInstalled(ship, shipSlots[i]) ? "installed" : "NOT installed"));
+                            broadcast(self, ship + " slot " + (i + 1) + " " + (isShipSlotInstalled(ship, shipSlots[i]) ? "installed" : "NOT installed"));
                         }
-                        sendSystemMessageTestingOnly(self, ship + " getChassisComponentMassMaximum()=" + getChassisComponentMassMaximum(ship));
-                        sendSystemMessageTestingOnly(self, ship + " getShipMaximumChassisHitPoints()=" + getShipMaximumChassisHitPoints(ship));
-                        sendSystemMessageTestingOnly(self, ship + " getShipCurrentChassisHitPoints()=" + getShipCurrentChassisHitPoints(ship));
+                        broadcast(self, ship + " getChassisComponentMassMaximum()=" + getChassisComponentMassMaximum(ship));
+                        broadcast(self, ship + " getShipMaximumChassisHitPoints()=" + getShipMaximumChassisHitPoints(ship));
+                        broadcast(self, ship + " getShipCurrentChassisHitPoints()=" + getShipCurrentChassisHitPoints(ship));
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, ship + " is not of type GOT_ship");
+                    broadcast(self, ship + " is not of type GOT_ship");
                 }
             }
         }
@@ -198,35 +198,35 @@ public class cwdm_test extends script.base_script
             dictionary itemContentsOut = itemDictionary.getDictionary("contents");
             if (itemContentsOut == null)
             {
-                sendSystemMessageTestingOnly(self, "itemContentsOut is null");
+                broadcast(self, "itemContentsOut is null");
             }
             else 
             {
                 Set keySet = itemContentsOut.keySet();
                 if (keySet == null)
                 {
-                    sendSystemMessageTestingOnly(self, "keySet is null");
+                    broadcast(self, "keySet is null");
                 }
                 else 
                 {
                     Iterator contentsIterator = keySet.iterator();
                     if (contentsIterator == null)
                     {
-                        sendSystemMessageTestingOnly(self, "contentsIterator is null");
+                        broadcast(self, "contentsIterator is null");
                     }
                     else 
                     {
                         if (contentsIterator.hasNext())
                         {
-                            sendSystemMessageTestingOnly(self, "contentsIterator.hasNext() is true");
+                            broadcast(self, "contentsIterator.hasNext() is true");
                         }
                         Integer[] contents = new Integer[keySet.size()];
                         keySet.toArray(contents);
-                        sendSystemMessageTestingOnly(self, "contents.length is " + contents.length);
+                        broadcast(self, "contents.length is " + contents.length);
                     }
                 }
             }
-            sendSystemMessageTestingOnly(self, "testEmptyDictionary done");
+            broadcast(self, "testEmptyDictionary done");
         }
         if (strText.equals("testIntegerLongReferenceParam"))
         {
@@ -234,9 +234,9 @@ public class cwdm_test extends script.base_script
             i[0] = 777;
             long[] l = new long[1];
             l[0] = 7777L;
-            sendSystemMessageTestingOnly(self, "before i=" + i[0] + " l=" + l[0]);
+            broadcast(self, "before i=" + i[0] + " l=" + l[0]);
             testIntegerLongReferenceParam(i, l);
-            sendSystemMessageTestingOnly(self, "after i=" + i[0] + " l=" + l[0]);
+            broadcast(self, "after i=" + i[0] + " l=" + l[0]);
         }
         else if (strText.startsWith("isAccountQualifiedForHousePackup "))
         {
@@ -245,7 +245,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "isAccountQualifiedForHousePackup(target=" + target + ") returns " + isAccountQualifiedForHousePackup(target));
+                broadcast(self, "isAccountQualifiedForHousePackup(target=" + target + ") returns " + isAccountQualifiedForHousePackup(target));
             }
         }
         else if (strText.equals("nukeItems"))
@@ -283,7 +283,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getResourceCtsData(resourceContainer=" + object + ") returns " + getResourceCtsData(object));
+                broadcast(self, "getResourceCtsData(resourceContainer=" + object + ") returns " + getResourceCtsData(object));
             }
         }
         else if (strText.startsWith("setCount "))
@@ -294,7 +294,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int count = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setCount(target=" + object + ", value=" + count + ") returns " + setCount(object, count));
+                broadcast(self, "setCount(target=" + object + ", value=" + count + ") returns " + setCount(object, count));
             }
         }
         else if (strText.startsWith("setCrafter "))
@@ -305,7 +305,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 obj_id crafter = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setCrafter(target=" + target + ", crafter=" + crafter + ") returns " + setCrafter(target, crafter));
+                broadcast(self, "setCrafter(target=" + target + ", crafter=" + crafter + ") returns " + setCrafter(target, crafter));
             }
         }
         else if (strText.startsWith("getCrafter "))
@@ -315,7 +315,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getCrafter(object=" + object + ") returns " + getCrafter(object));
+                broadcast(self, "getCrafter(object=" + object + ") returns " + getCrafter(object));
             }
         }
         else if (strText.startsWith("recomputeCrateAttributes "))
@@ -325,7 +325,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id crate = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling recomputeCrateAttributes(crate=" + crate + ")");
+                broadcast(self, "calling recomputeCrateAttributes(crate=" + crate + ")");
                 recomputeCrateAttributes(crate);
             }
         }
@@ -337,7 +337,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 String skillMod = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getSkillModBonus(target=" + target + ", skillMod=" + skillMod + ") returns " + getSkillModBonus(target, skillMod));
+                broadcast(self, "getSkillModBonus(target=" + target + ", skillMod=" + skillMod + ") returns " + getSkillModBonus(target, skillMod));
             }
         }
         else if (strText.startsWith("setSkillModBonus "))
@@ -349,7 +349,7 @@ public class cwdm_test extends script.base_script
                 obj_id target = utils.stringToObjId(st.nextToken());
                 String skillMod = st.nextToken();
                 int bonus = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setSkillModBonus(target=" + target + ", skillMod=" + skillMod + ", bonus=" + bonus + ") returns " + setSkillModBonus(target, skillMod, bonus));
+                broadcast(self, "setSkillModBonus(target=" + target + ", skillMod=" + skillMod + ", bonus=" + bonus + ") returns " + setSkillModBonus(target, skillMod, bonus));
             }
         }
         else if (strText.startsWith("setCategorizedSkillModBonus "))
@@ -362,7 +362,7 @@ public class cwdm_test extends script.base_script
                 String category = st.nextToken();
                 String skillMod = st.nextToken();
                 int bonus = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setCategorizedSkillModBonus(target=" + target + ", category=" + category + ", skillMod=" + skillMod + ", bonus=" + bonus + ") returns " + setCategorizedSkillModBonus(target, category, skillMod, bonus));
+                broadcast(self, "setCategorizedSkillModBonus(target=" + target + ", category=" + category + ", skillMod=" + skillMod + ", bonus=" + bonus + ") returns " + setCategorizedSkillModBonus(target, category, skillMod, bonus));
             }
         }
         else if (strText.startsWith("removeCategorizedSkillModBonuses "))
@@ -373,7 +373,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 String category = st.nextToken();
-                sendSystemMessageTestingOnly(self, "calling removeCategorizedSkillModBonuses(target=" + target + ", category=" + category + ")");
+                broadcast(self, "calling removeCategorizedSkillModBonuses(target=" + target + ", category=" + category + ")");
                 removeCategorizedSkillModBonuses(target, category);
             }
         }
@@ -474,10 +474,10 @@ public class cwdm_test extends script.base_script
         }
         else if (strText.equals("checkRadialMenuItems"))
         {
-            sendSystemMessageTestingOnly(self, "SERVER_MENU1 = " + menu_info_types.SERVER_MENU1);
-            sendSystemMessageTestingOnly(self, "SERVER_MENU2 = " + menu_info_types.SERVER_MENU2);
-            sendSystemMessageTestingOnly(self, "SERVER_PET_MOUNT = " + menu_info_types.SERVER_PET_MOUNT);
-            sendSystemMessageTestingOnly(self, "SERVER_VEHICLE_ENTER_EXIT = " + menu_info_types.SERVER_VEHICLE_ENTER_EXIT);
+            broadcast(self, "SERVER_MENU1 = " + menu_info_types.SERVER_MENU1);
+            broadcast(self, "SERVER_MENU2 = " + menu_info_types.SERVER_MENU2);
+            broadcast(self, "SERVER_PET_MOUNT = " + menu_info_types.SERVER_PET_MOUNT);
+            broadcast(self, "SERVER_VEHICLE_ENTER_EXIT = " + menu_info_types.SERVER_VEHICLE_ENTER_EXIT);
         }
         else if (strText.startsWith("createStaticItem "))
         {
@@ -488,7 +488,7 @@ public class cwdm_test extends script.base_script
                 String item = st.nextToken();
                 String container = st.nextToken();
                 obj_id containerOid = utils.stringToObjId(container);
-                sendSystemMessageTestingOnly(self, "static_item.createNewItemFunction(item=" + item + ", container=" + containerOid + ") returns " + static_item.createNewItemFunction(item, containerOid));
+                broadcast(self, "static_item.createNewItemFunction(item=" + item + ", container=" + containerOid + ") returns " + static_item.createNewItemFunction(item, containerOid));
             }
         }
         else if (strText.startsWith("random "))
@@ -499,7 +499,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 int min = utils.stringToInt(st.nextToken());
                 int max = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "rand(min=" + min + ", max=" + max + ") returns " + rand(min, max));
+                broadcast(self, "rand(min=" + min + ", max=" + max + ") returns " + rand(min, max));
             }
         }
         else if (strText.startsWith("modifyYaw "))
@@ -510,7 +510,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 float degrees = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyYaw(object=" + object + ", degrees=" + degrees + ")");
+                broadcast(self, "modifyYaw(object=" + object + ", degrees=" + degrees + ")");
                 modifyYaw(object, degrees);
             }
         }
@@ -522,7 +522,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 float degrees = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyPitch(object=" + object + ", degrees=" + degrees + ")");
+                broadcast(self, "modifyPitch(object=" + object + ", degrees=" + degrees + ")");
                 modifyPitch(object, degrees);
             }
         }
@@ -534,7 +534,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 float degrees = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyRoll(object=" + object + ", degrees=" + degrees + ")");
+                broadcast(self, "modifyRoll(object=" + object + ", degrees=" + degrees + ")");
                 modifyRoll(object, degrees);
             }
         }
@@ -545,7 +545,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "resetRotation(object=" + object + ")");
+                broadcast(self, "resetRotation(object=" + object + ")");
                 setQuaternion(object, 1.0f, 0.0f, 0.0f, 0.0f);
             }
         }
@@ -559,7 +559,7 @@ public class cwdm_test extends script.base_script
                 int yaw = rand(-180, 180);
                 int pitch = rand(-180, 180);
                 int roll = rand(-180, 180);
-                sendSystemMessageTestingOnly(self, "rotateRandom(object=" + object + ") y=" + yaw + ", p=" + pitch + ", r=" + roll);
+                broadcast(self, "rotateRandom(object=" + object + ") y=" + yaw + ", p=" + pitch + ", r=" + roll);
                 modifyYaw(object, yaw);
                 modifyPitch(object, pitch);
                 modifyRoll(object, roll);
@@ -573,7 +573,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int degrees = rand(-180, 180);
-                sendSystemMessageTestingOnly(self, "rotateRandomYaw(object=" + object + ") degrees=" + degrees);
+                broadcast(self, "rotateRandomYaw(object=" + object + ") degrees=" + degrees);
                 modifyYaw(object, degrees);
             }
         }
@@ -585,7 +585,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int degrees = rand(-180, 180);
-                sendSystemMessageTestingOnly(self, "rotateRandomPitch(object=" + object + ") degrees=" + degrees);
+                broadcast(self, "rotateRandomPitch(object=" + object + ") degrees=" + degrees);
                 modifyPitch(object, degrees);
             }
         }
@@ -597,7 +597,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int degrees = rand(-180, 180);
-                sendSystemMessageTestingOnly(self, "rotateRandomRoll(object=" + object + ") degrees=" + degrees);
+                broadcast(self, "rotateRandomRoll(object=" + object + ") degrees=" + degrees);
                 modifyRoll(object, degrees);
             }
         }
@@ -609,7 +609,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 obj_id source = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "copyRotation(target=" + target + ", source=" + source + ")");
+                broadcast(self, "copyRotation(target=" + target + ", source=" + source + ")");
                 float[] quaternion = getQuaternion(source);
                 if ((quaternion != null) && (quaternion.length == 4))
                 {
@@ -625,16 +625,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 obj_id source = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "verifying copyPosition(target=" + target + ", source=" + source + ")");
+                broadcast(self, "verifying copyPosition(target=" + target + ", source=" + source + ")");
                 location sourceLoc = getLocation(source);
                 location targetLoc = getLocation(target);
-                sendSystemMessageTestingOnly(self, "sourceLoc=" + sourceLoc);
-                sendSystemMessageTestingOnly(self, "targetLoc=" + targetLoc);
+                broadcast(self, "sourceLoc=" + sourceLoc);
+                broadcast(self, "targetLoc=" + targetLoc);
                 if ((sourceLoc != null) && (targetLoc != null) && (sourceLoc.area != null) && (targetLoc.area != null) && (sourceLoc.area.equals(targetLoc.area)) && (isIdValid(sourceLoc.cell)) && (isIdValid(targetLoc.cell)) && (sourceLoc.cell == targetLoc.cell))
                 {
                     targetLoc.x = sourceLoc.x;
                     targetLoc.z = sourceLoc.z;
-                    sendSystemMessageTestingOnly(self, "doing copyPosition(target=" + target + ", source=" + source + ")");
+                    broadcast(self, "doing copyPosition(target=" + target + ", source=" + source + ")");
                     setLocation(target, targetLoc);
                 }
             }
@@ -647,15 +647,15 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 obj_id source = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "verifying copyHeight(target=" + target + ", source=" + source + ")");
+                broadcast(self, "verifying copyHeight(target=" + target + ", source=" + source + ")");
                 location sourceLoc = getLocation(source);
                 location targetLoc = getLocation(target);
-                sendSystemMessageTestingOnly(self, "sourceLoc=" + sourceLoc);
-                sendSystemMessageTestingOnly(self, "targetLoc=" + targetLoc);
+                broadcast(self, "sourceLoc=" + sourceLoc);
+                broadcast(self, "targetLoc=" + targetLoc);
                 if ((sourceLoc != null) && (targetLoc != null) && (sourceLoc.area != null) && (targetLoc.area != null) && (sourceLoc.area.equals(targetLoc.area)) && (isIdValid(sourceLoc.cell)) && (isIdValid(targetLoc.cell)) && (sourceLoc.cell == targetLoc.cell))
                 {
                     targetLoc.y = sourceLoc.y;
-                    sendSystemMessageTestingOnly(self, "doing copyHeight(target=" + target + ", source=" + source + ")");
+                    broadcast(self, "doing copyHeight(target=" + target + ", source=" + source + ")");
                     setLocation(target, targetLoc);
                 }
             }
@@ -675,21 +675,21 @@ public class cwdm_test extends script.base_script
                         obj_id objVarValueAsOid = utils.stringToObjId(objVarValue.substring(1));
                         if (isValidId(objVarValueAsOid))
                         {
-                            sendSystemMessageTestingOnly(self, self + " has objvar " + objVarName + " with objvar string value " + objVarValue + " which converts to valid oid " + objVarValueAsOid);
+                            broadcast(self, self + " has objvar " + objVarName + " with objvar string value " + objVarValue + " which converts to valid oid " + objVarValueAsOid);
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, self + " has objvar " + objVarName + " but objvar string value " + objVarValue + " is not a valid oid");
+                            broadcast(self, self + " has objvar " + objVarName + " but objvar string value " + objVarValue + " is not a valid oid");
                         }
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, self + " has objvar " + objVarName + " but objvar string value is null or empty");
+                        broadcast(self, self + " has objvar " + objVarName + " but objvar string value is null or empty");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, self + " does have objvar " + objVarName);
+                    broadcast(self, self + " does have objvar " + objVarName);
                 }
             }
         }
@@ -702,7 +702,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspMiss(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspMiss(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = false;
                 sendCombatSpam(attacker, defender, weapon, hr, new string_id(), true, true, true, COMBAT_RESULT_MISS);
@@ -717,7 +717,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspDodge(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspDodge(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = false;
                 hr.dodge = true;
@@ -733,7 +733,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspParry(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspParry(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = false;
                 hr.parry = true;
@@ -749,7 +749,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspHit(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspHit(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = true;
                 hr.damage = 777;
@@ -765,7 +765,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspCrush(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspCrush(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = true;
                 hr.damage = 777;
@@ -782,7 +782,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspStrikethrough(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspStrikethrough(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = true;
                 hr.damage = 777;
@@ -800,7 +800,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspEvade(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspEvade(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = true;
                 hr.damage = 777;
@@ -818,7 +818,7 @@ public class cwdm_test extends script.base_script
                 obj_id attacker = utils.stringToObjId(st.nextToken());
                 obj_id defender = utils.stringToObjId(st.nextToken());
                 obj_id weapon = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "cspBlock(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
+                broadcast(self, "cspBlock(attacker=" + attacker + ", defender=" + defender + ", weapon=" + weapon + ")");
                 combat_engine.hit_result hr = new combat_engine.hit_result();
                 hr.success = true;
                 hr.damage = 777;
@@ -835,7 +835,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id value = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setting residenceHouseId objvar for " + object + " value " + value);
+                broadcast(self, "setting residenceHouseId objvar for " + object + " value " + value);
                 setObjVar(object, "residenceHouseId", value);
             }
         }
@@ -846,7 +846,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String firstName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getPlayerIdFromFirstName(" + firstName + ") returns " + getPlayerIdFromFirstName(firstName));
+                broadcast(self, "getPlayerIdFromFirstName(" + firstName + ") returns " + getPlayerIdFromFirstName(firstName));
             }
         }
         else if (strText.startsWith("getName "))
@@ -856,10 +856,10 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getName(object=" + object + ") is (" + getName(object) + ")");
-                sendSystemMessageTestingOnly(self, "getFirstName(object=" + object + ") is (" + getFirstName(object) + ")");
-                sendSystemMessageTestingOnly(self, "getPlayerName(object=" + object + ") is (" + getPlayerName(object) + ")");
-                sendSystemMessageTestingOnly(self, "getPlayerFullName(object=" + object + ") is (" + getPlayerFullName(object) + ")");
+                broadcast(self, "getName(object=" + object + ") is (" + getName(object) + ")");
+                broadcast(self, "getFirstName(object=" + object + ") is (" + getFirstName(object) + ")");
+                broadcast(self, "getPlayerName(object=" + object + ") is (" + getPlayerName(object) + ")");
+                broadcast(self, "getPlayerFullName(object=" + object + ") is (" + getPlayerFullName(object) + ")");
             }
         }
         else if (strText.startsWith("msgDestroyStructure "))
@@ -869,7 +869,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id structure = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "sending msgDestroyStructure for structure " + structure + " with a delay of 10 seconds");
+                broadcast(self, "sending msgDestroyStructure for structure " + structure + " with a delay of 10 seconds");
                 messageTo(structure, "msgDestroyStructure", null, 10.0f, false);
             }
         }
@@ -882,12 +882,12 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 if (exists(object))
                 {
-                    sendSystemMessageTestingOnly(self, "obj_id.isAuthoritative(object=" + object + ") returns " + object.isAuthoritative());
-                    sendSystemMessageTestingOnly(self, "obj_id.isLoaded(object=" + object + ") returns " + object.isLoaded());
+                    broadcast(self, "obj_id.isAuthoritative(object=" + object + ") returns " + object.isAuthoritative());
+                    broadcast(self, "obj_id.isLoaded(object=" + object + ") returns " + object.isLoaded());
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                    broadcast(self, "object " + object + " does not exist");
                 }
             }
         }
@@ -900,11 +900,11 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 if (exists(object))
                 {
-                    sendSystemMessageTestingOnly(self, "getOwner(object=" + object + ") returns " + getOwner(object));
+                    broadcast(self, "getOwner(object=" + object + ") returns " + getOwner(object));
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                    broadcast(self, "object " + object + " does not exist");
                 }
             }
         }
@@ -915,7 +915,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getCitizenOfCityId target=" + object + " returns " + getCitizenOfCityId(object));
+                broadcast(self, "getCitizenOfCityId target=" + object + " returns " + getCitizenOfCityId(object));
             }
         }
         else if (strText.startsWith("getPlanetByName "))
@@ -925,7 +925,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String planet = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getPlanetByName planet=" + planet + " returns " + getPlanetByName(planet));
+                broadcast(self, "getPlanetByName planet=" + planet + " returns " + getPlanetByName(planet));
             }
         }
         else if (strText.equals("registerCloningFacility"))
@@ -944,13 +944,13 @@ public class cwdm_test extends script.base_script
                 params.put("respawn", cloneRespawn);
                 params.put("type", 0);
                 messageTo(planet, "registerCloningFacility", params, 1.0f, false);
-                sendSystemMessageTestingOnly(self, "registerCloningFacility planet=" + planet);
+                broadcast(self, "registerCloningFacility planet=" + planet);
             }
         }
         else if (strText.equals("removeTef"))
         {
             pvpRemoveAllTempEnemyFlags(self);
-            sendSystemMessageTestingOnly(self, "removeTef");
+            broadcast(self, "removeTef");
         }
         else if (strText.startsWith("doDamage "))
         {
@@ -962,7 +962,7 @@ public class cwdm_test extends script.base_script
                 int amount = utils.stringToInt(st.nextToken());
                 hit_result hit = new hit_result();
                 hit.damage = amount;
-                sendSystemMessageTestingOnly(self, "doDamage(attacker=" + self + ", target=" + target + ", amount=" + amount + ")");
+                broadcast(self, "doDamage(attacker=" + self + ", target=" + target + ", amount=" + amount + ")");
                 doDamage(self, target, hit);
                 addHate(self, target, 0.0f);
                 addHate(target, self, 0.0f);
@@ -976,7 +976,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 int activity = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "session.logActivity(player=" + player + ", activity=" + activity + ")");
+                broadcast(self, "session.logActivity(player=" + player + ", activity=" + activity + ")");
                 session.logActivity(player, activity);
             }
         }
@@ -988,7 +988,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id actor = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "pvpCanHelp(actor=" + actor + ", target=" + target + ") returns " + pvpCanHelp(actor, target));
+                broadcast(self, "pvpCanHelp(actor=" + actor + ", target=" + target + ") returns " + pvpCanHelp(actor, target));
             }
         }
         else if (strText.startsWith("canSee "))
@@ -999,8 +999,8 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id source = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "canSee(source=" + source + ", target=" + target + ") returns " + canSee(source, target));
-                sendSystemMessageTestingOnly(self, "canSee(source=" + target + ", target=" + source + ") returns " + canSee(target, source));
+                broadcast(self, "canSee(source=" + source + ", target=" + target + ") returns " + canSee(source, target));
+                broadcast(self, "canSee(source=" + target + ", target=" + source + ") returns " + canSee(target, source));
             }
         }
         else if (strText.startsWith("testSui "))
@@ -1010,7 +1010,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 int buttons = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling sui.msgbox() with button(s) " + buttons);
+                broadcast(self, "calling sui.msgbox() with button(s) " + buttons);
                 int pid = sui.msgbox(self, self, "this is a test message", buttons, "testSuiHandler");
             }
         }
@@ -1030,7 +1030,7 @@ public class cwdm_test extends script.base_script
                 setSUIAssociatedObject(pid, object);
                 setSUIMaxRangeToObject(pid, range);
                 showSUIPage(pid);
-                sendSystemMessageTestingOnly(self, "calling sui.msgbox() with button(s)=" + buttons + ", object=" + object + ", range=" + range + " returns pid " + pid);
+                broadcast(self, "calling sui.msgbox() with button(s)=" + buttons + ", object=" + object + ", range=" + range + " returns pid " + pid);
             }
         }
         else if (strText.startsWith("testSuiLocationRange "))
@@ -1049,7 +1049,7 @@ public class cwdm_test extends script.base_script
                 setSUIAssociatedLocation(pid, object);
                 setSUIMaxRangeToObject(pid, range);
                 showSUIPage(pid);
-                sendSystemMessageTestingOnly(self, "calling sui.msgbox() with button(s)=" + buttons + ", object=" + object + ", range=" + range + " returns pid " + pid);
+                broadcast(self, "calling sui.msgbox() with button(s)=" + buttons + ", object=" + object + ", range=" + range + " returns pid " + pid);
             }
         }
         else if (strText.startsWith("hidePlayer "))
@@ -1059,7 +1059,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setCreatureCoverVisibility(target=" + target + ", isVisible=false)");
+                broadcast(self, "calling setCreatureCoverVisibility(target=" + target + ", isVisible=false)");
                 setCreatureCoverVisibility(target, false);
             }
         }
@@ -1071,7 +1071,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id pilot = utils.stringToObjId(st.nextToken());
                 obj_id ship = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "pilotShip(pilot=" + pilot + ", ship=" + ship + ") returns " + pilotShip(pilot, ship));
+                broadcast(self, "pilotShip(pilot=" + pilot + ", ship=" + ship + ") returns " + pilotShip(pilot, ship));
             }
         }
         else if (strText.startsWith("showPlayer "))
@@ -1081,7 +1081,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setCreatureCoverVisibility(target=" + target + ", isVisible=true)");
+                broadcast(self, "calling setCreatureCoverVisibility(target=" + target + ", isVisible=true)");
                 setCreatureCoverVisibility(target, true);
             }
         }
@@ -1092,7 +1092,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling hideFromClient(target=" + target + ", hide=true)");
+                broadcast(self, "calling hideFromClient(target=" + target + ", hide=true)");
                 hideFromClient(target, true);
             }
         }
@@ -1103,7 +1103,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling hideFromClient(target=" + target + ", hide=false)");
+                broadcast(self, "calling hideFromClient(target=" + target + ", hide=false)");
                 hideFromClient(target, false);
             }
         }
@@ -1116,7 +1116,7 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int range = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling addPassiveReveal(object=" + object + ", target=" + target + ", range=" + range + ")");
+                broadcast(self, "calling addPassiveReveal(object=" + object + ", target=" + target + ", range=" + range + ")");
                 addPassiveReveal(object, target, range);
             }
         }
@@ -1128,7 +1128,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling removePassiveReveal(object=" + object + ", target=" + target + ")");
+                broadcast(self, "calling removePassiveReveal(object=" + object + ", target=" + target + ")");
                 removePassiveReveal(object, target);
             }
         }
@@ -1139,7 +1139,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling clearPassiveRevealList(object=" + object + ")");
+                broadcast(self, "calling clearPassiveRevealList(object=" + object + ")");
                 clearPassiveRevealList(object);
             }
         }
@@ -1151,7 +1151,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getPassiveRevealRange(object=" + object + ", target=" + target + ") returns " + getPassiveRevealRange(object, target));
+                broadcast(self, "getPassiveRevealRange(object=" + object + ", target=" + target + ") returns " + getPassiveRevealRange(object, target));
             }
         }
         else if (strText.startsWith("getPassiveRevealList "))
@@ -1164,7 +1164,7 @@ public class cwdm_test extends script.base_script
                 dictionary revealList = getPassiveRevealList(object);
                 if (revealList == null)
                 {
-                    sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns null");
+                    broadcast(self, "getPassiveRevealList(object=" + object + ") returns null");
                 }
                 else 
                 {
@@ -1172,30 +1172,30 @@ public class cwdm_test extends script.base_script
                     int[] range = revealList.getIntArray("range");
                     if (ids == null)
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns null id list");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns null id list");
                     }
                     if (ids.length == 0)
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns 0-length id list");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns 0-length id list");
                     }
                     if (range == null)
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns null range list");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns null range list");
                     }
                     if (range.length == 0)
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns 0-length range list");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns 0-length range list");
                     }
                     if (ids.length != range.length)
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns different size id (" + ids.length + ") and range (" + range.length + ") lists");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns different size id (" + ids.length + ") and range (" + range.length + ") lists");
                     }
                     if ((ids != null) && (ids.length > 0) && (range != null) && (range.length > 0) && (ids.length == range.length))
                     {
-                        sendSystemMessageTestingOnly(self, "getPassiveRevealList(object=" + object + ") returns:");
+                        broadcast(self, "getPassiveRevealList(object=" + object + ") returns:");
                         for (int i = 0; i < ids.length; ++i)
                         {
-                            sendSystemMessageTestingOnly(self, "id=" + ids[i] + ", range=" + range[i]);
+                            broadcast(self, "id=" + ids[i] + ", range=" + range[i]);
                         }
                     }
                 }
@@ -1209,7 +1209,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int amount = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyCurrentGcwPoints(target=" + target + ", adjustment=" + amount + ")");
+                broadcast(self, "modifyCurrentGcwPoints(target=" + target + ", adjustment=" + amount + ")");
                 pvpModifyCurrentGcwPoints(target, amount);
             }
         }
@@ -1221,7 +1221,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int amount = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyCurrentPvpKills(target=" + target + ", adjustment=" + amount + ")");
+                broadcast(self, "modifyCurrentPvpKills(target=" + target + ", adjustment=" + amount + ")");
                 pvpModifyCurrentPvpKills(target, amount);
             }
         }
@@ -1232,7 +1232,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getGcwRank(target=" + target + ") returns current=" + pvpGetCurrentGcwRank(target) + ", maxImperial=" + pvpGetMaxGcwImperialRank(target) + ", maxRebel=" + pvpGetMaxGcwRebelRank(target));
+                broadcast(self, "getGcwRank(target=" + target + ") returns current=" + pvpGetCurrentGcwRank(target) + ", maxImperial=" + pvpGetMaxGcwImperialRank(target) + ", maxRebel=" + pvpGetMaxGcwRebelRank(target));
             }
         }
         else if (strText.startsWith("getGcwInfo "))
@@ -1242,7 +1242,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getGcwInfo(target=" + target + ") returns points=" + pvpGetCurrentGcwPoints(target) + ", rating=" + pvpGetCurrentGcwRating(target) + ", kills=" + pvpGetCurrentPvpKills(target) + ", lifetime points=" + pvpGetLifetimeGcwPoints(target) + ", max imp rating=" + pvpGetMaxGcwImperialRating(target) + ", max reb rating=" + pvpGetMaxGcwRebelRating(target) + ", lifetime kills=" + pvpGetLifetimePvpKills(target) + ", next recalc=" + pvpGetNextGcwRatingCalcTime(target));
+                broadcast(self, "getGcwInfo(target=" + target + ") returns points=" + pvpGetCurrentGcwPoints(target) + ", rating=" + pvpGetCurrentGcwRating(target) + ", kills=" + pvpGetCurrentPvpKills(target) + ", lifetime points=" + pvpGetLifetimeGcwPoints(target) + ", max imp rating=" + pvpGetMaxGcwImperialRating(target) + ", max reb rating=" + pvpGetMaxGcwRebelRating(target) + ", lifetime kills=" + pvpGetLifetimePvpKills(target) + ", next recalc=" + pvpGetNextGcwRatingCalcTime(target));
             }
         }
         else if (strText.startsWith("transferGcwInfo "))
@@ -1253,7 +1253,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id source = utils.stringToObjId(st.nextToken());
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "transferGcwInfo(source=" + source + ", target=" + target + ")");
+                broadcast(self, "transferGcwInfo(source=" + source + ", target=" + target + ")");
                 dictionary characterData = new dictionary();
                 characterData.put("gcw_current_point", pvpGetCurrentGcwPoints(source));
                 characterData.put("gcw_current_rating", pvpGetCurrentGcwRating(source));
@@ -1273,7 +1273,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "isInWorldCell(target=" + target + ") returns " + isInWorldCell(target));
+                broadcast(self, "isInWorldCell(target=" + target + ") returns " + isInWorldCell(target));
             }
         }
         else if (strText.startsWith("isAccountQualifiedForHousePackup "))
@@ -1283,12 +1283,12 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "isAccountQualifiedForHousePackup(target=" + target + ") returns " + isAccountQualifiedForHousePackup(target));
+                broadcast(self, "isAccountQualifiedForHousePackup(target=" + target + ") returns " + isAccountQualifiedForHousePackup(target));
             }
         }
         else if (strText.equals("sneak"))
         {
-            sendSystemMessageTestingOnly(self, "doing queueCommand(sp_buff_stealth_1)");
+            broadcast(self, "doing queueCommand(sp_buff_stealth_1)");
             queueCommand(self, (-1926826718), null, "", COMMAND_PRIORITY_DEFAULT);
         }
         else if (strText.startsWith("checkBadgeCount "))
@@ -1298,7 +1298,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "badge.checkBadgeCount(target=" + target + ") returns " + badge.checkBadgeCount(target));
+                broadcast(self, "badge.checkBadgeCount(target=" + target + ") returns " + badge.checkBadgeCount(target));
             }
         }
         else if (strText.startsWith("addOldBadge "))
@@ -1343,7 +1343,7 @@ public class cwdm_test extends script.base_script
                 }
                 setObjVar(player, "badge.tracking", badges);
                 setObjVar(player, "badge.count", count);
-                sendSystemMessageTestingOnly(self, "addOldBadge player=" + player + ", badgeId=" + badgeId + " (" + getCollectionSlotName(badgeId) + ")");
+                broadcast(self, "addOldBadge player=" + player + ", badgeId=" + badgeId + " (" + getCollectionSlotName(badgeId) + ")");
             }
         }
         else if (strText.startsWith("explorerBadgeByNumber "))
@@ -1354,7 +1354,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int badgeNum = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "explorerBadgeByNumber(target=" + target + ", badgeNum=" + badgeNum + ")");
+                broadcast(self, "explorerBadgeByNumber(target=" + target + ", badgeNum=" + badgeNum + ")");
                 dictionary explorerBadges = new dictionary();
                 explorerBadges.put("badgeNumber", badgeNum);
                 messageTo(target, "explorerBadge", explorerBadges, 0, false);
@@ -1368,7 +1368,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 String badgeName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "explorerBadgeByNumber(target=" + target + ", badgeName=" + badgeName + ")");
+                broadcast(self, "explorerBadgeByNumber(target=" + target + ", badgeName=" + badgeName + ")");
                 dictionary explorerBadges = new dictionary();
                 explorerBadges.put("badgeName", badgeName);
                 messageTo(target, "explorerBadge", explorerBadges, 0, false);
@@ -1383,7 +1383,7 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id hateTarget = utils.stringToObjId(st.nextToken());
                 float hateValue = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "addHate(object=" + object + ", hateTarget=" + hateTarget + ", hate=" + hateValue + ")");
+                broadcast(self, "addHate(object=" + object + ", hateTarget=" + hateTarget + ", hate=" + hateValue + ")");
                 addHate(object, hateTarget, hateValue);
             }
         }
@@ -1397,7 +1397,7 @@ public class cwdm_test extends script.base_script
                 obj_id target = utils.stringToObjId(st.nextToken());
                 float hate = utils.stringToFloat(st.nextToken());
                 int seconds = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "addHateDot(object=" + o + ", hateTarget=" + target + ", hateAmount=" + hate + ", seconds=" + seconds + ")");
+                broadcast(self, "addHateDot(object=" + o + ", hateTarget=" + target + ", hateAmount=" + hate + ", seconds=" + seconds + ")");
                 addHateDot(o, target, hate, seconds);
             }
         }
@@ -1409,7 +1409,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id hateTarget = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getHate(object=" + object + ", hateTarget=" + hateTarget + ") returns " + getHate(object, hateTarget));
+                broadcast(self, "getHate(object=" + object + ", hateTarget=" + hateTarget + ") returns " + getHate(object, hateTarget));
             }
         }
         else if (strText.startsWith("getDefaultWeapon "))
@@ -1419,7 +1419,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getDefaultWeapon(player=" + player + ") returns " + getDefaultWeapon(player));
+                broadcast(self, "getDefaultWeapon(player=" + player + ") returns " + getDefaultWeapon(player));
             }
         }
         else if (strText.startsWith("removeOldBadge "))
@@ -1464,7 +1464,7 @@ public class cwdm_test extends script.base_script
                 }
                 setObjVar(player, "badge.tracking", badges);
                 setObjVar(player, "badge.count", count);
-                sendSystemMessageTestingOnly(self, "removeOldBadge player=" + player + ", badgeId=" + badgeId + " (" + getCollectionSlotName(badgeId) + ")");
+                broadcast(self, "removeOldBadge player=" + player + ", badgeId=" + badgeId + " (" + getCollectionSlotName(badgeId) + ")");
             }
         }
         else if (strText.startsWith("modifyCollectionSlotValue "))
@@ -1476,7 +1476,7 @@ public class cwdm_test extends script.base_script
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String slotName = st.nextToken();
                 obj_id delta = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "modifyCollectionSlotValue(player=" + player + ", slotName=" + slotName + ", delta=" + delta + ") returns " + modifyCollectionSlotValue(player, slotName, delta.getValue()));
+                broadcast(self, "modifyCollectionSlotValue(player=" + player + ", slotName=" + slotName + ", delta=" + delta + ") returns " + modifyCollectionSlotValue(player, slotName, delta.getValue()));
             }
         }
         else if (strText.startsWith("getCollectionSlotValue "))
@@ -1487,7 +1487,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCollectionSlotValue(player=" + player + ", slotName=" + slotName + ") returns " + getCollectionSlotValue(player, slotName));
+                broadcast(self, "getCollectionSlotValue(player=" + player + ", slotName=" + slotName + ") returns " + getCollectionSlotValue(player, slotName));
             }
         }
         else if (strText.startsWith("hasCompletedCollectionSlotPrereq "))
@@ -1498,7 +1498,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "hasCompletedCollectionSlotPrereq(player=" + player + ", slotName=" + slotName + ") returns " + hasCompletedCollectionSlotPrereq(player, slotName));
+                broadcast(self, "hasCompletedCollectionSlotPrereq(player=" + player + ", slotName=" + slotName + ") returns " + hasCompletedCollectionSlotPrereq(player, slotName));
             }
         }
         else if (strText.startsWith("hasCompletedCollectionSlot "))
@@ -1509,7 +1509,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "hasCompletedCollectionSlot(player=" + player + ", slotName=" + slotName + ") returns " + hasCompletedCollectionSlot(player, slotName));
+                broadcast(self, "hasCompletedCollectionSlot(player=" + player + ", slotName=" + slotName + ") returns " + hasCompletedCollectionSlot(player, slotName));
             }
         }
         else if (strText.startsWith("hasCompletedCollection "))
@@ -1520,7 +1520,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String collectionName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "hasCompletedCollection(player=" + player + ", collectionName=" + collectionName + ") returns " + hasCompletedCollection(player, collectionName));
+                broadcast(self, "hasCompletedCollection(player=" + player + ", collectionName=" + collectionName + ") returns " + hasCompletedCollection(player, collectionName));
             }
         }
         else if (strText.startsWith("hasCompletedCollectionPage "))
@@ -1531,7 +1531,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "hasCompletedCollectionPage(player=" + player + ", pageName=" + pageName + ") returns " + hasCompletedCollectionPage(player, pageName));
+                broadcast(self, "hasCompletedCollectionPage(player=" + player + ", pageName=" + pageName + ") returns " + hasCompletedCollectionPage(player, pageName));
             }
         }
         else if (strText.startsWith("hasCompletedCollectionBook "))
@@ -1542,7 +1542,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "hasCompletedCollectionBook(player=" + player + ", bookName=" + bookName + ") returns " + hasCompletedCollectionBook(player, bookName));
+                broadcast(self, "hasCompletedCollectionBook(player=" + player + ", bookName=" + bookName + ") returns " + hasCompletedCollectionBook(player, bookName));
             }
         }
         else if (strText.startsWith("getCompletedCollectionSlotsInCollection "))
@@ -1553,16 +1553,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String collectionName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionSlotsInCollection(player=" + player + ", collectionName=" + collectionName + ") returns:");
+                broadcast(self, "getCompletedCollectionSlotsInCollection(player=" + player + ", collectionName=" + collectionName + ") returns:");
                 String[] slotNames = getCompletedCollectionSlotsInCollection(player, collectionName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1575,16 +1575,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionSlotsInPage(player=" + player + ", pageName=" + pageName + ") returns:");
+                broadcast(self, "getCompletedCollectionSlotsInPage(player=" + player + ", pageName=" + pageName + ") returns:");
                 String[] slotNames = getCompletedCollectionSlotsInPage(player, pageName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1597,16 +1597,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionsInPage(player=" + player + ", pageName=" + pageName + ") returns:");
+                broadcast(self, "getCompletedCollectionsInPage(player=" + player + ", pageName=" + pageName + ") returns:");
                 String[] collectionNames = getCompletedCollectionsInPage(player, pageName);
                 if ((collectionNames == null) || (collectionNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String collectionName : collectionNames) {
-                        sendSystemMessageTestingOnly(self, collectionName);
+                        broadcast(self, collectionName);
                     }
                 }
             }
@@ -1619,16 +1619,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionSlotsInBook(player=" + player + ", bookName=" + bookName + ") returns:");
+                broadcast(self, "getCompletedCollectionSlotsInBook(player=" + player + ", bookName=" + bookName + ") returns:");
                 String[] slotNames = getCompletedCollectionSlotsInBook(player, bookName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1641,16 +1641,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionsInBook(player=" + player + ", bookName=" + bookName + ") returns:");
+                broadcast(self, "getCompletedCollectionsInBook(player=" + player + ", bookName=" + bookName + ") returns:");
                 String[] collectionNames = getCompletedCollectionsInBook(player, bookName);
                 if ((collectionNames == null) || (collectionNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String collectionName : collectionNames) {
-                        sendSystemMessageTestingOnly(self, collectionName);
+                        broadcast(self, collectionName);
                     }
                 }
             }
@@ -1663,16 +1663,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionPagesInBook(player=" + player + ", bookName=" + bookName + ") returns:");
+                broadcast(self, "getCompletedCollectionPagesInBook(player=" + player + ", bookName=" + bookName + ") returns:");
                 String[] pageNames = getCompletedCollectionPagesInBook(player, bookName);
                 if ((pageNames == null) || (pageNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String pageName : pageNames) {
-                        sendSystemMessageTestingOnly(self, pageName);
+                        broadcast(self, pageName);
                     }
                 }
             }
@@ -1684,16 +1684,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id player = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getCompletedCollectionBooks(player=" + player + ") returns:");
+                broadcast(self, "getCompletedCollectionBooks(player=" + player + ") returns:");
                 String[] bookNames = getCompletedCollectionBooks(player);
                 if ((bookNames == null) || (bookNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String bookName : bookNames) {
-                        sendSystemMessageTestingOnly(self, bookName);
+                        broadcast(self, bookName);
                     }
                 }
             }
@@ -1705,18 +1705,18 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCollectionSlotInfo(slotName=" + slotName + ") returns:");
+                broadcast(self, "getCollectionSlotInfo(slotName=" + slotName + ") returns:");
                 String[] info = getCollectionSlotInfo(slotName);
                 if ((info == null) || (info.length != COLLECTION_INFO_ARRAY_SIZE))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "book=" + info[COLLECTION_INFO_INDEX_BOOK]);
-                    sendSystemMessageTestingOnly(self, "page=" + info[COLLECTION_INFO_INDEX_PAGE]);
-                    sendSystemMessageTestingOnly(self, "collection=" + info[COLLECTION_INFO_INDEX_COLLECTION]);
-                    sendSystemMessageTestingOnly(self, "music=" + info[COLLECTION_INFO_INDEX_MUSIC]);
+                    broadcast(self, "book=" + info[COLLECTION_INFO_INDEX_BOOK]);
+                    broadcast(self, "page=" + info[COLLECTION_INFO_INDEX_PAGE]);
+                    broadcast(self, "collection=" + info[COLLECTION_INFO_INDEX_COLLECTION]);
+                    broadcast(self, "music=" + info[COLLECTION_INFO_INDEX_MUSIC]);
                 }
             }
         }
@@ -1727,7 +1727,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "isCollectionSlotATitle(slotName=" + slotName + ") returns " + isCollectionSlotATitle(slotName));
+                broadcast(self, "isCollectionSlotATitle(slotName=" + slotName + ") returns " + isCollectionSlotATitle(slotName));
             }
         }
         else if (strText.startsWith("isCollectionATitle "))
@@ -1737,7 +1737,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String collectionName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "isCollectionATitle(collectionName=" + collectionName + ") returns " + isCollectionATitle(collectionName));
+                broadcast(self, "isCollectionATitle(collectionName=" + collectionName + ") returns " + isCollectionATitle(collectionName));
             }
         }
         else if (strText.startsWith("isCollectionPageATitle "))
@@ -1747,7 +1747,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "isCollectionPageATitle(pageName=" + pageName + ") returns " + isCollectionPageATitle(pageName));
+                broadcast(self, "isCollectionPageATitle(pageName=" + pageName + ") returns " + isCollectionPageATitle(pageName));
             }
         }
         else if (strText.startsWith("getCollectionSlotCategoryInfo "))
@@ -1757,16 +1757,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCollectionSlotCategoryInfo(slotName=" + slotName + ") returns:");
+                broadcast(self, "getCollectionSlotCategoryInfo(slotName=" + slotName + ") returns:");
                 String[] category = getCollectionSlotCategoryInfo(slotName);
                 if ((category == null) || (category.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String s : category) {
-                        sendSystemMessageTestingOnly(self, s);
+                        broadcast(self, s);
                     }
                 }
             }
@@ -1778,16 +1778,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String slotName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getCollectionSlotPrereqInfo(slotName=" + slotName + ") returns:");
+                broadcast(self, "getCollectionSlotPrereqInfo(slotName=" + slotName + ") returns:");
                 String[] prereqs = getCollectionSlotPrereqInfo(slotName);
                 if ((prereqs == null) || (prereqs.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String prereq : prereqs) {
-                        sendSystemMessageTestingOnly(self, prereq);
+                        broadcast(self, prereq);
                     }
                 }
             }
@@ -1799,7 +1799,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 int collectionId = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getCollectionSlotName(collectionId=" + collectionId + ") returns " + getCollectionSlotName(collectionId));
+                broadcast(self, "getCollectionSlotName(collectionId=" + collectionId + ") returns " + getCollectionSlotName(collectionId));
             }
         }
         else if (strText.startsWith("getAllCollectionSlotsInCollection "))
@@ -1809,16 +1809,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String collectionName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInCollection(collectionName=" + collectionName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInCollection(collectionName=" + collectionName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInCollection(collectionName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1830,16 +1830,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInPage(pageName=" + pageName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInPage(pageName=" + pageName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInPage(pageName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1851,16 +1851,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionsInPage(pageName=" + pageName + ") returns:");
+                broadcast(self, "getAllCollectionsInPage(pageName=" + pageName + ") returns:");
                 String[] collectionNames = getAllCollectionsInPage(pageName);
                 if ((collectionNames == null) || (collectionNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String collectionName : collectionNames) {
-                        sendSystemMessageTestingOnly(self, collectionName);
+                        broadcast(self, collectionName);
                     }
                 }
             }
@@ -1872,16 +1872,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInBook(bookName=" + bookName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInBook(bookName=" + bookName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInBook(bookName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1893,16 +1893,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionsInBook(bookName=" + bookName + ") returns:");
+                broadcast(self, "getAllCollectionsInBook(bookName=" + bookName + ") returns:");
                 String[] collectionNames = getAllCollectionsInBook(bookName);
                 if ((collectionNames == null) || (collectionNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String collectionName : collectionNames) {
-                        sendSystemMessageTestingOnly(self, collectionName);
+                        broadcast(self, collectionName);
                     }
                 }
             }
@@ -1914,32 +1914,32 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionPagesInBook(bookName=" + bookName + ") returns:");
+                broadcast(self, "getAllCollectionPagesInBook(bookName=" + bookName + ") returns:");
                 String[] pageNames = getAllCollectionPagesInBook(bookName);
                 if ((pageNames == null) || (pageNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String pageName : pageNames) {
-                        sendSystemMessageTestingOnly(self, pageName);
+                        broadcast(self, pageName);
                     }
                 }
             }
         }
         else if (strText.equals("getAllCollectionBooks"))
         {
-            sendSystemMessageTestingOnly(self, "getAllCollectionBooks() returns:");
+            broadcast(self, "getAllCollectionBooks() returns:");
             String[] bookNames = getAllCollectionBooks();
             if ((bookNames == null) || (bookNames.length < 1))
             {
-                sendSystemMessageTestingOnly(self, "no entries");
+                broadcast(self, "no entries");
             }
             else 
             {
                 for (String bookName : bookNames) {
-                    sendSystemMessageTestingOnly(self, bookName);
+                    broadcast(self, bookName);
                 }
             }
         }
@@ -1950,16 +1950,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String categoryName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInCategory(categoryName=" + categoryName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInCategory(categoryName=" + categoryName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInCategory(categoryName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1972,16 +1972,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 String collectionName = st.nextToken();
                 String categoryName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInCategoryInCollection(collectionName=" + collectionName + ", categoryName=" + categoryName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInCategoryInCollection(collectionName=" + collectionName + ", categoryName=" + categoryName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInCategoryInCollection(collectionName, categoryName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -1994,16 +1994,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 String pageName = st.nextToken();
                 String categoryName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInCategoryInPage(pageName=" + pageName + ", categoryName=" + categoryName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInCategoryInPage(pageName=" + pageName + ", categoryName=" + categoryName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInCategoryInPage(pageName, categoryName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -2016,16 +2016,16 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 String bookName = st.nextToken();
                 String categoryName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotsInCategoryInBook(bookName=" + bookName + ", categoryName=" + categoryName + ") returns:");
+                broadcast(self, "getAllCollectionSlotsInCategoryInBook(bookName=" + bookName + ", categoryName=" + categoryName + ") returns:");
                 String[] slotNames = getAllCollectionSlotsInCategoryInBook(bookName, categoryName);
                 if ((slotNames == null) || (slotNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String slotName : slotNames) {
-                        sendSystemMessageTestingOnly(self, slotName);
+                        broadcast(self, slotName);
                     }
                 }
             }
@@ -2037,16 +2037,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String collectionName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotCategoriesInCollection(collectionName=" + collectionName + ") returns:");
+                broadcast(self, "getAllCollectionSlotCategoriesInCollection(collectionName=" + collectionName + ") returns:");
                 String[] categoryNames = getAllCollectionSlotCategoriesInCollection(collectionName);
                 if ((categoryNames == null) || (categoryNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String categoryName : categoryNames) {
-                        sendSystemMessageTestingOnly(self, categoryName);
+                        broadcast(self, categoryName);
                     }
                 }
             }
@@ -2058,16 +2058,16 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String pageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotCategoriesInPage(pageName=" + pageName + ") returns:");
+                broadcast(self, "getAllCollectionSlotCategoriesInPage(pageName=" + pageName + ") returns:");
                 String[] categoryNames = getAllCollectionSlotCategoriesInPage(pageName);
                 if ((categoryNames == null) || (categoryNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String categoryName : categoryNames) {
-                        sendSystemMessageTestingOnly(self, categoryName);
+                        broadcast(self, categoryName);
                     }
                 }
             }
@@ -2079,32 +2079,32 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String bookName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "getAllCollectionSlotCategoriesInBook(bookName=" + bookName + ") returns:");
+                broadcast(self, "getAllCollectionSlotCategoriesInBook(bookName=" + bookName + ") returns:");
                 String[] categoryNames = getAllCollectionSlotCategoriesInBook(bookName);
                 if ((categoryNames == null) || (categoryNames.length < 1))
                 {
-                    sendSystemMessageTestingOnly(self, "no entries");
+                    broadcast(self, "no entries");
                 }
                 else 
                 {
                     for (String categoryName : categoryNames) {
-                        sendSystemMessageTestingOnly(self, categoryName);
+                        broadcast(self, categoryName);
                     }
                 }
             }
         }
         else if (strText.equals("getAllCollectionSlotCategories"))
         {
-            sendSystemMessageTestingOnly(self, "getAllCollectionSlotCategories() returns:");
+            broadcast(self, "getAllCollectionSlotCategories() returns:");
             String[] categoryNames = getAllCollectionSlotCategories();
             if ((categoryNames == null) || (categoryNames.length < 1))
             {
-                sendSystemMessageTestingOnly(self, "no entries");
+                broadcast(self, "no entries");
             }
             else 
             {
                 for (String categoryName : categoryNames) {
-                    sendSystemMessageTestingOnly(self, categoryName);
+                    broadcast(self, categoryName);
                 }
             }
         }
@@ -2126,21 +2126,21 @@ public class cwdm_test extends script.base_script
                         if (collections != null && collections.length > 0)
                         {
                             setAutoVariableFromByteStream(playerObjectTarget, "collections", collections);
-                            sendSystemMessageTestingOnly(self, "transferCollections(source=" + source + ", target=" + target + ")");
+                            broadcast(self, "transferCollections(source=" + source + ", target=" + target + ")");
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, "transferCollections(source=" + source + ", target=" + target + ") source doesn't have any collections");
+                            broadcast(self, "transferCollections(source=" + source + ", target=" + target + ") source doesn't have any collections");
                         }
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "transferCollections(source=" + source + ", target=" + target + ") target has invalid PlayerObject");
+                        broadcast(self, "transferCollections(source=" + source + ", target=" + target + ") target has invalid PlayerObject");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "transferCollections(source=" + source + ", target=" + target + ") source has invalid PlayerObject");
+                    broadcast(self, "transferCollections(source=" + source + ", target=" + target + ") source has invalid PlayerObject");
                 }
             }
         }
@@ -2151,7 +2151,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "makeOnLeave(target=" + target + ")");
+                broadcast(self, "makeOnLeave(target=" + target + ")");
                 pvpMakeOnLeave(target);
             }
         }
@@ -2167,7 +2167,7 @@ public class cwdm_test extends script.base_script
                 float backCurrent = utils.stringToFloat(st.nextToken());
                 float backMax = utils.stringToFloat(st.nextToken());
                 float rechargeRate = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "changing shield for ship " + shipOid + " (front=" + frontCurrent + "/" + frontMax + " back=" + backCurrent + "/" + backMax + " rechargeRate=" + rechargeRate + ")");
+                broadcast(self, "changing shield for ship " + shipOid + " (front=" + frontCurrent + "/" + frontMax + " back=" + backCurrent + "/" + backMax + " rechargeRate=" + rechargeRate + ")");
                 setShipShieldHitpointsFrontCurrent(shipOid, frontCurrent);
                 setShipShieldHitpointsFrontMaximum(shipOid, frontMax);
                 setShipShieldHitpointsBackCurrent(shipOid, backCurrent);
@@ -2183,7 +2183,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 obj_id value = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setResidenceHouseId for " + object + " to " + value);
+                broadcast(self, "setResidenceHouseId for " + object + " to " + value);
                 setHouseId(object, value);
             }
         }
@@ -2194,13 +2194,13 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getResidenceHouseId for " + object + " returned " + getHouseId(object));
+                broadcast(self, "getResidenceHouseId for " + object + " returned " + getHouseId(object));
             }
         }
         else if (strText.equals("progressBar"))
         {
             int result = progressBar(self);
-            sendSystemMessageTestingOnly(self, "progress bar SUI page " + result + " shown");
+            broadcast(self, "progress bar SUI page " + result + " shown");
         }
         else if (strText.startsWith("setProgressBarText "))
         {
@@ -2212,7 +2212,7 @@ public class cwdm_test extends script.base_script
                 String newText = st.nextToken();
                 setSUIProperty(pageId, "comp.pText.text", PROP_TEXT, newText);
                 flushSUIPage(pageId);
-                sendSystemMessageTestingOnly(self, "setting progress bar SUI page " + pageId + " text to " + newText);
+                broadcast(self, "setting progress bar SUI page " + pageId + " text to " + newText);
             }
         }
         else if (strText.startsWith("createCountdownTimerBar "))
@@ -2228,7 +2228,7 @@ public class cwdm_test extends script.base_script
                 int currentTime = utils.stringToInt(st.nextToken());
                 int totalTime = utils.stringToInt(st.nextToken());
                 int pid = sui.countdownTimerSUI(self, self, type, sid, currentTime, totalTime, "CountdownTimerBarCallback");
-                sendSystemMessageTestingOnly(self, "sui.countdownTimerSUI(...," + type + ", " + utils.packStringId(sid) + ", " + currentTime + ", " + totalTime + ", ...) returned pid " + pid);
+                broadcast(self, "sui.countdownTimerSUI(...," + type + ", " + utils.packStringId(sid) + ", " + currentTime + ", " + totalTime + ", ...) returned pid " + pid);
             }
         }
         else if (strText.startsWith("updateCountdownTimerBar "))
@@ -2244,7 +2244,7 @@ public class cwdm_test extends script.base_script
                 int currentTime = utils.stringToInt(st.nextToken());
                 int totalTime = utils.stringToInt(st.nextToken());
                 boolean result = sui.updateCountdownTimerSUI(pageId, sid, currentTime, totalTime);
-                sendSystemMessageTestingOnly(self, "sui.updateCountdownTimerSUI(" + pageId + ", " + utils.packStringId(sid) + ", " + currentTime + ", " + totalTime + ") returned result " + result);
+                broadcast(self, "sui.updateCountdownTimerSUI(" + pageId + ", " + utils.packStringId(sid) + ", " + currentTime + ", " + totalTime + ") returned result " + result);
             }
         }
         else if (strText.startsWith("factionMessagePP "))
@@ -2258,7 +2258,7 @@ public class cwdm_test extends script.base_script
                 int notifyRebel = utils.stringToInt(st.nextToken());
                 int callTime = 45;
                 prose_package pp = prose.getPackage(pet_lib.SID_SYS_CALL_PET_DELAY, callTime);
-                sendSystemMessageTestingOnly(self, "calling sendFactionalSystemMessagePlanet() for radius " + radius);
+                broadcast(self, "calling sendFactionalSystemMessagePlanet() for radius " + radius);
                 sendFactionalSystemMessagePlanet(pp, getLocation(self), radius, (notifyImperial != 0), (notifyRebel != 0));
             }
         }
@@ -2274,7 +2274,7 @@ public class cwdm_test extends script.base_script
                 string_id sid = new string_id(sid_table, sid_text);
                 int notifyImperial = utils.stringToInt(st.nextToken());
                 int notifyRebel = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling sendFactionalSystemMessagePlanet() for radius " + radius);
+                broadcast(self, "calling sendFactionalSystemMessagePlanet() for radius " + radius);
                 sendFactionalSystemMessagePlanet(sid, null, radius, (notifyImperial != 0), (notifyRebel != 0));
             }
         }
@@ -2287,7 +2287,7 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int condition = utils.stringToInt(st.nextToken());
                 setCondition(object, condition);
-                sendSystemMessageTestingOnly(self, "setting condition " + condition + " for object " + object);
+                broadcast(self, "setting condition " + condition + " for object " + object);
             }
         }
         else if (strText.startsWith("clearCondition "))
@@ -2299,7 +2299,7 @@ public class cwdm_test extends script.base_script
                 obj_id object = utils.stringToObjId(st.nextToken());
                 int condition = utils.stringToInt(st.nextToken());
                 clearCondition(object, condition);
-                sendSystemMessageTestingOnly(self, "clearing condition " + condition + " for object " + object);
+                broadcast(self, "clearing condition " + condition + " for object " + object);
             }
         }
         else if (strText.startsWith("addMapLocation "))
@@ -2310,7 +2310,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 boolean result = planetary_map.addMapLocation(object);
-                sendSystemMessageTestingOnly(self, "addMapLocation for object " + object + " result " + result);
+                broadcast(self, "addMapLocation for object " + object + " result " + result);
             }
         }
         else if (strText.startsWith("removeMapLocation "))
@@ -2321,7 +2321,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
                 planetary_map.removeMapLocation(object);
-                sendSystemMessageTestingOnly(self, "removeMapLocation for object " + object);
+                broadcast(self, "removeMapLocation for object " + object);
             }
         }
         else if (strText.startsWith("updateBankTerminalMapLocationName "))
@@ -2335,7 +2335,7 @@ public class cwdm_test extends script.base_script
                 newName = "\\#FFFF22" + newName;
                 location loc = getWorldLocation(object);
                 boolean result = addPlanetaryMapLocationIgnoreLocationCountLimits(object, newName, (int)loc.x, (int)loc.z, "terminal", "terminal_bank", MLT_STATIC, 0);
-                sendSystemMessageTestingOnly(self, "updateBankTerminalMapLocationName for object " + object + " newName " + newName + " result " + result);
+                broadcast(self, "updateBankTerminalMapLocationName for object " + object + " newName " + newName + " result " + result);
             }
         }
         else if (strText.startsWith("updateMissionTerminalMapLocationName "))
@@ -2349,7 +2349,7 @@ public class cwdm_test extends script.base_script
                 newName = "\\#FFFF22" + newName;
                 location loc = getWorldLocation(object);
                 boolean result = addPlanetaryMapLocationIgnoreLocationCountLimits(object, newName, (int)loc.x, (int)loc.z, "terminal", "terminal_mission", MLT_STATIC, 0);
-                sendSystemMessageTestingOnly(self, "updateMissionTerminalMapLocationName for object " + object + " newName " + newName + " result " + result);
+                broadcast(self, "updateMissionTerminalMapLocationName for object " + object + " newName " + newName + " result " + result);
             }
         }
         else if (strText.startsWith("pvpSetAttackableOverride "))
@@ -2369,7 +2369,7 @@ public class cwdm_test extends script.base_script
                 {
                     bValue = false;
                 }
-                sendSystemMessageTestingOnly(self, "calling pvpSetAttackableOverride(" + target + ", " + bValue + ")");
+                broadcast(self, "calling pvpSetAttackableOverride(" + target + ", " + bValue + ")");
                 pvpSetAttackableOverride(target, bValue);
             }
         }
@@ -2381,7 +2381,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
                 int value = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setMaxHitpoints(" + target + ", " + value + ")");
+                broadcast(self, "calling setMaxHitpoints(" + target + ", " + value + ")");
                 setMaxHitpoints(target, value);
             }
         }
@@ -2392,7 +2392,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id target = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "areAllContentsLoaded(" + target + ")=" + areAllContentsLoaded(target));
+                broadcast(self, "areAllContentsLoaded(" + target + ")=" + areAllContentsLoaded(target));
             }
         }
         else if (strText.startsWith("enterClientTicketPurchaseMode "))
@@ -2419,12 +2419,12 @@ public class cwdm_test extends script.base_script
         {
             int gameTime = getGameTime();
             int[] convertedGameTime = player_structure.convertSecondsTime(gameTime);
-            sendSystemMessageTestingOnly(self, "getGameTime() returns " + gameTime + " (" + (convertedGameTime[0] / 365) + "y:" + (convertedGameTime[0] % 365) + "d:" + convertedGameTime[1] + "h:" + convertedGameTime[2] + "m:" + convertedGameTime[3] + "s)");
+            broadcast(self, "getGameTime() returns " + gameTime + " (" + (convertedGameTime[0] / 365) + "y:" + (convertedGameTime[0] % 365) + "d:" + convertedGameTime[1] + "h:" + convertedGameTime[2] + "m:" + convertedGameTime[3] + "s)");
             int calendarTime = getCalendarTime();
             int[] convertedCalendarTime = player_structure.convertSecondsTime(calendarTime);
-            sendSystemMessageTestingOnly(self, "getCalendarTime() returns " + calendarTime + " (" + (convertedCalendarTime[0] / 365) + "y:" + (convertedCalendarTime[0] % 365) + "d:" + convertedCalendarTime[1] + "h:" + convertedCalendarTime[2] + "m:" + convertedCalendarTime[3] + "s)");
-            sendSystemMessageTestingOnly(self, "getCalendarTimeStringGMT(" + calendarTime + ") returns " + getCalendarTimeStringGMT(calendarTime));
-            sendSystemMessageTestingOnly(self, "getCalendarTimeStringLocal(" + calendarTime + ") returns " + getCalendarTimeStringLocal(calendarTime));
+            broadcast(self, "getCalendarTime() returns " + calendarTime + " (" + (convertedCalendarTime[0] / 365) + "y:" + (convertedCalendarTime[0] % 365) + "d:" + convertedCalendarTime[1] + "h:" + convertedCalendarTime[2] + "m:" + convertedCalendarTime[3] + "s)");
+            broadcast(self, "getCalendarTimeStringGMT(" + calendarTime + ") returns " + getCalendarTimeStringGMT(calendarTime));
+            broadcast(self, "getCalendarTimeStringLocal(" + calendarTime + ") returns " + getCalendarTimeStringLocal(calendarTime));
         }
         else if (strText.startsWith("getTime "))
         {
@@ -2441,11 +2441,11 @@ public class cwdm_test extends script.base_script
                 int time = getCalendarTime(year, month, day, hour, minute, second);
                 if (time < 0)
                 {
-                    sendSystemMessageTestingOnly(self, month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second + " is not a valid date/time (" + time + ")");
+                    broadcast(self, month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second + " is not a valid date/time (" + time + ")");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second + " is " + time + ", " + getCalendarTimeStringLocal(time) + ", " + getCalendarTimeStringGMT(time));
+                    broadcast(self, month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second + " is " + time + ", " + getCalendarTimeStringLocal(time) + ", " + getCalendarTimeStringGMT(time));
                 }
             }
         }
@@ -2456,7 +2456,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id obj = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "making " + obj + " invulnerable");
+                broadcast(self, "making " + obj + " invulnerable");
                 setInvulnerable(obj, true);
             }
         }
@@ -2467,7 +2467,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id obj = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "making " + obj + " vulnerable");
+                broadcast(self, "making " + obj + " vulnerable");
                 setInvulnerable(obj, false);
             }
         }
@@ -2485,11 +2485,11 @@ public class cwdm_test extends script.base_script
                 int timeUntil = createHourlyAlarmClock(self, "huyHourlyAlarmClock", d, minute, second);
                 if (timeUntil <= -1)
                 {
-                    sendSystemMessageTestingOnly(self, "createHourlyAlarmClock(minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
+                    broadcast(self, "createHourlyAlarmClock(minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "createHourlyAlarmClock(minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
+                    broadcast(self, "createHourlyAlarmClock(minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
                 }
             }
         }
@@ -2508,11 +2508,11 @@ public class cwdm_test extends script.base_script
                 int timeUntil = createDailyAlarmClock(self, "huyDailyAlarmClock", d, hour, minute, second);
                 if (timeUntil <= -1)
                 {
-                    sendSystemMessageTestingOnly(self, "createDailyAlarmClock(hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
+                    broadcast(self, "createDailyAlarmClock(hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "createDailyAlarmClock(hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
+                    broadcast(self, "createDailyAlarmClock(hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
                 }
             }
         }
@@ -2552,7 +2552,7 @@ public class cwdm_test extends script.base_script
                 }
                 if ((intDayOfWeek < DAY_OF_WEEK_SUN) || (intDayOfWeek > DAY_OF_WEEK_SAT))
                 {
-                    sendSystemMessageTestingOnly(self, "weeklyAlarm invalid day of week " + intDayOfWeek);
+                    broadcast(self, "weeklyAlarm invalid day of week " + intDayOfWeek);
                 }
                 else 
                 {
@@ -2562,11 +2562,11 @@ public class cwdm_test extends script.base_script
                     int timeUntil = createWeeklyAlarmClock(self, "huyWeeklyAlarmClock", d, intDayOfWeek, hour, minute, second);
                     if (timeUntil <= -1)
                     {
-                        sendSystemMessageTestingOnly(self, "createWeeklyAlarmClock(dow=" + intDayOfWeek + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
+                        broadcast(self, "createWeeklyAlarmClock(dow=" + intDayOfWeek + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "createWeeklyAlarmClock(dow=" + intDayOfWeek + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
+                        broadcast(self, "createWeeklyAlarmClock(dow=" + intDayOfWeek + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
                     }
                 }
             }
@@ -2587,11 +2587,11 @@ public class cwdm_test extends script.base_script
                 int timeUntil = createMonthlyAlarmClock(self, "huyMonthlyAlarmClock", d, dayOfMonth, hour, minute, second);
                 if (timeUntil <= -1)
                 {
-                    sendSystemMessageTestingOnly(self, "createMonthlyAlarmClock(dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
+                    broadcast(self, "createMonthlyAlarmClock(dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "createMonthlyAlarmClock(dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
+                    broadcast(self, "createMonthlyAlarmClock(dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
                 }
             }
         }
@@ -2612,11 +2612,11 @@ public class cwdm_test extends script.base_script
                 int timeUntil = createYearlyAlarmClock(self, "huyYearlyAlarmClock", d, month, dayOfMonth, hour, minute, second);
                 if (timeUntil <= -1)
                 {
-                    sendSystemMessageTestingOnly(self, "createYearlyAlarmClock(month=" + month + ", dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
+                    broadcast(self, "createYearlyAlarmClock(month=" + month + ", dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "createYearlyAlarmClock(month=" + month + ", dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
+                    broadcast(self, "createYearlyAlarmClock(month=" + month + ", dom=" + dayOfMonth + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ") now=" + now + " returns " + timeUntil + " (" + (timeUntil / (60 * 60 * 24)) + "d:" + ((timeUntil % (60 * 60 * 24)) / (60 * 60)) + "h:" + ((timeUntil % (60 * 60)) / 60) + "m:" + (timeUntil % 60) + "s)");
                 }
             }
         }
@@ -2631,8 +2631,8 @@ public class cwdm_test extends script.base_script
                 int now = getCalendarTime();
                 int secondsUntil = secondsUntilNextHourlyTime(minute, second);
                 int then = now + secondsUntil;
-                sendSystemMessageTestingOnly(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
-                sendSystemMessageTestingOnly(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
+                broadcast(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
+                broadcast(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
             }
         }
         else if (strText.startsWith("secondsUntilDaily "))
@@ -2647,8 +2647,8 @@ public class cwdm_test extends script.base_script
                 int now = getCalendarTime();
                 int secondsUntil = secondsUntilNextDailyTime(hour, minute, second);
                 int then = now + secondsUntil;
-                sendSystemMessageTestingOnly(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
-                sendSystemMessageTestingOnly(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
+                broadcast(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
+                broadcast(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
             }
         }
         else if (strText.startsWith("secondsUntilWeekly "))
@@ -2664,8 +2664,8 @@ public class cwdm_test extends script.base_script
                 int now = getCalendarTime();
                 int secondsUntil = secondsUntilNextWeeklyTime(dayOfWeek, hour, minute, second);
                 int then = now + secondsUntil;
-                sendSystemMessageTestingOnly(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
-                sendSystemMessageTestingOnly(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
+                broadcast(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
+                broadcast(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
             }
         }
         else if (strText.startsWith("secondsUntilMonthly "))
@@ -2681,8 +2681,8 @@ public class cwdm_test extends script.base_script
                 int now = getCalendarTime();
                 int secondsUntil = secondsUntilNextMonthlyTime(dayOfMonth, hour, minute, second);
                 int then = now + secondsUntil;
-                sendSystemMessageTestingOnly(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
-                sendSystemMessageTestingOnly(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
+                broadcast(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
+                broadcast(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
             }
         }
         else if (strText.startsWith("secondsUntilYearly "))
@@ -2699,8 +2699,8 @@ public class cwdm_test extends script.base_script
                 int now = getCalendarTime();
                 int secondsUntil = secondsUntilNextYearlyTime(month, dayOfMonth, hour, minute, second);
                 int then = now + secondsUntil;
-                sendSystemMessageTestingOnly(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
-                sendSystemMessageTestingOnly(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
+                broadcast(self, "now is " + getCalendarTimeStringLocal(now) + ", " + getCalendarTimeStringGMT(now));
+                broadcast(self, secondsUntil + " seconds until " + getCalendarTimeStringLocal(then) + ", " + getCalendarTimeStringGMT(then));
             }
         }
         else if (strText.startsWith("createRegion "))
@@ -2711,7 +2711,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 String regionName = st.nextToken();
                 int regionSize = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "createRegion " + regionName + " " + regionSize + " meters");
+                broadcast(self, "createRegion " + regionName + " " + regionSize + " meters");
                 createCircleRegion(getWorldLocation(self), regionSize, regionName, regions.PVP_REGION_TYPE_NORMAL, regions.BUILD_FALSE, regions.MUNI_TRUE, regions.GEO_CITY, 0, 0, regions.SPAWN_FALSE, regions.MISSION_NONE, false, true);
             }
         }
@@ -2738,11 +2738,11 @@ public class cwdm_test extends script.base_script
                         strOutput += ")\r\n";
                     }
                     saveTextOnClient(self, planetName + "_regions.txt", strOutput);
-                    sendSystemMessageTestingOnly(self, regions.length + " regions saved in " + planetName + "_regions.txt");
+                    broadcast(self, regions.length + " regions saved in " + planetName + "_regions.txt");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "no regions returned for planet " + planetName);
+                    broadcast(self, "no regions returned for planet " + planetName);
                 }
             }
         }
@@ -2757,11 +2757,11 @@ public class cwdm_test extends script.base_script
                 region region = getRegion(planetName, regionName);
                 if (region != null)
                 {
-                    sendSystemMessageTestingOnly(self, "deleteRegion(" + planetName + ", " + regionName + ") returned " + deleteRegion(region));
+                    broadcast(self, "deleteRegion(" + planetName + ", " + regionName + ") returned " + deleteRegion(region));
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "no region returned for planet " + planetName + ", region " + regionName);
+                    broadcast(self, "no region returned for planet " + planetName + ", region " + regionName);
                 }
             }
         }
@@ -2816,7 +2816,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id broadcasterOid = utils.stringToObjId(st.nextToken());
                 String messageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, self + " listen to " + broadcasterOid + " for message " + messageName);
+                broadcast(self, self + " listen to " + broadcasterOid + " for message " + messageName);
                 listenToMessage(broadcasterOid, messageName);
             }
         }
@@ -2828,7 +2828,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 obj_id broadcasterOid = utils.stringToObjId(st.nextToken());
                 String messageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, self + " stop listen to " + broadcasterOid + " for message " + messageName);
+                broadcast(self, self + " stop listen to " + broadcasterOid + " for message " + messageName);
                 stopListeningToMessage(broadcasterOid, messageName);
             }
         }
@@ -2839,12 +2839,12 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 String messageName = st.nextToken();
-                sendSystemMessageTestingOnly(self, "get listeners for " + self + " for message " + messageName);
+                broadcast(self, "get listeners for " + self + " for message " + messageName);
                 obj_id[] listeners = getMessageListeners(messageName);
                 if (listeners != null && listeners.length > 0)
                 {
                     for (obj_id listener : listeners) {
-                        sendSystemMessageTestingOnly(self, "" + listener);
+                        broadcast(self, "" + listener);
                     }
                 }
             }
@@ -2871,11 +2871,11 @@ public class cwdm_test extends script.base_script
                 int intGuildId = getGuildId(destOid);
                 if (intGuildId != 0)
                 {
-                    sendSystemMessageTestingOnly(self, destOid + " is in guild " + intGuildId + " (" + guildGetName(intGuildId) + "," + guildGetAbbrev(intGuildId) + ")");
+                    broadcast(self, destOid + " is in guild " + intGuildId + " (" + guildGetName(intGuildId) + "," + guildGetAbbrev(intGuildId) + ")");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, destOid + " is in guild " + intGuildId);
+                    broadcast(self, destOid + " is in guild " + intGuildId);
                 }
             }
         }
@@ -2890,12 +2890,12 @@ public class cwdm_test extends script.base_script
                 int[] enemies_A_to_B = guildGetEnemies(intGuildId);
                 if (enemies_A_to_B == null || enemies_A_to_B.length <= 0)
                 {
-                    sendSystemMessageTestingOnly(self, "guild " + intGuildId + " has not declared war on any other guild");
+                    broadcast(self, "guild " + intGuildId + " has not declared war on any other guild");
                 }
                 else 
                 {
                     for (int i1 : enemies_A_to_B) {
-                        sendSystemMessageTestingOnly(self, "guild " + intGuildId + " has declared war on guild " + i1 + " (" + guildGetName(i1) + "," + guildGetAbbrev(i1) + ")");
+                        broadcast(self, "guild " + intGuildId + " has declared war on guild " + i1 + " (" + guildGetName(i1) + "," + guildGetAbbrev(i1) + ")");
                     }
                 }
             }
@@ -2911,12 +2911,12 @@ public class cwdm_test extends script.base_script
                 int[] enemies_B_to_A = getGuildsAtWarWith(intGuildId);
                 if (enemies_B_to_A == null || enemies_B_to_A.length <= 0)
                 {
-                    sendSystemMessageTestingOnly(self, "no other guild has declared war on guild " + intGuildId);
+                    broadcast(self, "no other guild has declared war on guild " + intGuildId);
                 }
                 else 
                 {
                     for (int i1 : enemies_B_to_A) {
-                        sendSystemMessageTestingOnly(self, "guild " + i1 + " (" + guildGetName(i1) + "," + guildGetAbbrev(i1) + ") has declared war on guild " + intGuildId);
+                        broadcast(self, "guild " + i1 + " (" + guildGetName(i1) + "," + guildGetAbbrev(i1) + ") has declared war on guild " + intGuildId);
                     }
                 }
             }
@@ -2928,18 +2928,18 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 float factionPoints = utils.stringToFloat(st.nextToken());
-                sendSystemMessageTestingOnly(self, "setting rebel faction points for " + self + " to " + factionPoints);
+                broadcast(self, "setting rebel faction points for " + self + " to " + factionPoints);
                 factions.addFactionStanding(self, factions.FACTION_REBEL, factionPoints);
             }
         }
         else if (strText.equals("unequipFactionEquipmentCheckObjvar"))
         {
-            sendSystemMessageTestingOnly(self, "unequipping faction equipments (check objvar) for " + self);
+            broadcast(self, "unequipping faction equipments (check objvar) for " + self);
             factions.unequipFactionEquipment(self, true);
         }
         else if (strText.equals("unequipFactionEquipmentNoCheckObjvar"))
         {
-            sendSystemMessageTestingOnly(self, "unequipping faction equipments (no check objvar) for " + self);
+            broadcast(self, "unequipping faction equipments (no check objvar) for " + self);
             factions.unequipFactionEquipment(self, false);
         }
         else if (strText.equals("tblair_bug"))
@@ -3025,17 +3025,17 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "calling createVendorMarket() for vendor " + object);
+                        broadcast(self, "calling createVendorMarket() for vendor " + object);
                         createVendorMarket(self, object, 0);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3047,7 +3047,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 int state = utils.stringToInt(st.nextToken());
                 int on = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling setState() for " + self + " state " + state + " on " + on);
+                broadcast(self, "calling setState() for " + self + " state " + state + " on " + on);
                 setState(self, state, ((on != 0) ? true : false));
             }
         }
@@ -3062,16 +3062,16 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "isAFK object " + object + " is " + isAwayFromKeyBoard(object));
+                        broadcast(self, "isAFK object " + object + " is " + isAwayFromKeyBoard(object));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3086,16 +3086,16 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "getVolume for object " + object + " is " + getVolume(object));
+                        broadcast(self, "getVolume for object " + object + " is " + getVolume(object));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3110,16 +3110,16 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "getNumItemsIn for object " + object + " is " + getNumItemsIn(object));
+                        broadcast(self, "getNumItemsIn for object " + object + " is " + getNumItemsIn(object));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3134,18 +3134,18 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "calling putInOverloaded() for object " + object);
+                        broadcast(self, "calling putInOverloaded() for object " + object);
                         obj_id inv = getObjectInSlot(self, "inventory");
                         putInOverloaded(object, inv);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3160,16 +3160,16 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "isInWorld for object " + object + " is " + isInWorld(object));
+                        broadcast(self, "isInWorld for object " + object + " is " + isInWorld(object));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3184,37 +3184,37 @@ public class cwdm_test extends script.base_script
                 {
                     if (exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "getCurrentSceneName is " + getCurrentSceneName() + " getTravelPointName for object " + object + " is " + travel.getTravelPointName(object) + " getArrivalLocation for object " + object + " is " + travel.getArrivalLocation(object) + " getTravelCost for object " + object + " is " + travel.getTravelCost(object));
+                        broadcast(self, "getCurrentSceneName is " + getCurrentSceneName() + " getTravelPointName for object " + object + " is " + travel.getTravelPointName(object) + " getArrivalLocation for object " + object + " is " + travel.getArrivalLocation(object) + " getTravelCost for object " + object + " is " + travel.getTravelCost(object));
                         String planet = getCurrentSceneName();
                         String travel_point = travel.getTravelPointName(object);
                         location arrival_loc = travel.getArrivalLocation(object);
                         int travel_cost = travel.getTravelCost(object);
                         if (travel_point == null || travel_cost == -1)
                         {
-                            sendSystemMessageTestingOnly(self, "not calling calling initializeStarport()");
+                            broadcast(self, "not calling calling initializeStarport()");
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, "calling initializeStarport()");
+                            broadcast(self, "calling initializeStarport()");
                             initializeStarport(self, object, travel_point, travel_cost, true);
                         }
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
         else if (strText.equals("getCityAtLocation"))
         {
             location loc = getWorldLocation(self);
-            sendSystemMessageTestingOnly(self, "I am currently at " + loc);
-            sendSystemMessageTestingOnly(self, "City I am currently in " + getCityAtLocation(loc, 0));
+            broadcast(self, "I am currently at " + loc);
+            broadcast(self, "City I am currently in " + getCityAtLocation(loc, 0));
         }
         else if (strText.startsWith("useTicketTerminal "))
         {
@@ -3235,7 +3235,7 @@ public class cwdm_test extends script.base_script
                             int city_id = getCityAtLocation(getLocation(starport), 0);
                             if (city.isCityBanned(self, city_id))
                             {
-                                sendSystemMessageTestingOnly(self, "Can't buy ticket");
+                                broadcast(self, "Can't buy ticket");
                                 return SCRIPT_CONTINUE;
                             }
                         }
@@ -3244,20 +3244,20 @@ public class cwdm_test extends script.base_script
                         {
                             if (config.equals("on"))
                             {
-                                sendSystemMessageTestingOnly(self, "Travel disabled");
+                                broadcast(self, "Travel disabled");
                                 return SCRIPT_CONTINUE;
                             }
                         }
-                        sendSystemMessageTestingOnly(self, "OK to buy ticket");
+                        broadcast(self, "OK to buy ticket");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "object " + object + " does not exist");
+                        broadcast(self, "object " + object + " does not exist");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid id for object " + object);
+                    broadcast(self, "invalid id for object " + object);
                 }
             }
         }
@@ -3271,11 +3271,11 @@ public class cwdm_test extends script.base_script
                 obj_id groupObject = getGroupObject(object);
                 if (isIdValid(groupObject))
                 {
-                    sendSystemMessageTestingOnly(self, "group " + groupObject + " has " + getPCGroupSize(groupObject) + "/" + getGroupSize(groupObject) + " player controlled member(s)");
+                    broadcast(self, "group " + groupObject + " has " + getPCGroupSize(groupObject) + "/" + getGroupSize(groupObject) + " player controlled member(s)");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "invalid group id for object " + object);
+                    broadcast(self, "invalid group id for object " + object);
                 }
             }
         }
@@ -3286,7 +3286,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getPlayerName(" + object + ") is " + getPlayerName(object));
+                broadcast(self, "getPlayerName(" + object + ") is " + getPlayerName(object));
             }
         }
         else if (strText.startsWith("NMGetPlayerFullName "))
@@ -3296,7 +3296,7 @@ public class cwdm_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id object = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "getPlayerFullName(" + object + ") is " + getPlayerFullName(object));
+                broadcast(self, "getPlayerFullName(" + object + ") is " + getPlayerFullName(object));
             }
         }
         else if (strText.startsWith("messageToAtSameTime "))
@@ -3307,7 +3307,7 @@ public class cwdm_test extends script.base_script
                 String command = st.nextToken();
                 int count = utils.stringToInt(st.nextToken());
                 int delay = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "messageToAtSameTime count=" + count + " delay=" + delay);
+                broadcast(self, "messageToAtSameTime count=" + count + " delay=" + delay);
                 dictionary d = new dictionary();
                 for (int i = 1; i <= count; ++i)
                 {
@@ -3328,7 +3328,7 @@ public class cwdm_test extends script.base_script
         }
         else if (strText.equals("getServerSpawnLimit"))
         {
-            sendSystemMessageTestingOnly(self, "serverSpawnLimit is " + getServerSpawnLimit());
+            broadcast(self, "serverSpawnLimit is " + getServerSpawnLimit());
         }
         else if (strText.startsWith("getOneJedi "))
         {
@@ -3342,16 +3342,16 @@ public class cwdm_test extends script.base_script
                 {
                     if (result.size() > 0)
                     {
-                        sendSystemMessageTestingOnly(self, result.getString("name") + "(" + result.getObjId("id") + ") " + result.getInt("spentJediSkillPoints"));
+                        broadcast(self, result.getString("name") + "(" + result.getObjId("id") + ") " + result.getInt("spentJediSkillPoints"));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "No jedi " + object);
+                        broadcast(self, "No jedi " + object);
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Error getting jedi " + object);
+                    broadcast(self, "Error getting jedi " + object);
                 }
             }
         }
@@ -3367,35 +3367,35 @@ public class cwdm_test extends script.base_script
                 {
                     for (int i = 0; i < id.length; ++i)
                     {
-                        sendSystemMessageTestingOnly(self, name[i] + "(" + id[i] + ") " + spentJediSkillPoints[i]);
+                        broadcast(self, name[i] + "(" + id[i] + ") " + spentJediSkillPoints[i]);
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "No jedi");
+                    broadcast(self, "No jedi");
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Error getting jedi");
+                broadcast(self, "Error getting jedi");
             }
         }
         else if (strText.equals("getNumAI"))
         {
-            sendSystemMessageTestingOnly(self, "getNumAI=" + getNumAI());
+            broadcast(self, "getNumAI=" + getNumAI());
         }
         else if (strText.equals("calculateWeaponRepair"))
         {
             float base_complexity = 10.0f;
             int assembly_mod = getSkillStatMod(self, "general_assembly");
             float complexity = base_complexity * (1.0f - (0.15f * assembly_mod / 100.0f));
-            sendSystemMessageTestingOnly(self, "assembly_mod=" + assembly_mod + " complexity=" + complexity);
+            broadcast(self, "assembly_mod=" + assembly_mod + " complexity=" + complexity);
             int elite_mod = getSkillStatMod(self, "weapon_assembly");
             if (elite_mod > 0)
             {
                 complexity -= base_complexity * (0.35f * elite_mod / 100.0f);
             }
-            sendSystemMessageTestingOnly(self, "elite_mod=" + elite_mod + " complexity=" + complexity);
+            broadcast(self, "elite_mod=" + elite_mod + " complexity=" + complexity);
         }
         else if (strText.startsWith("getEntitlementInfo "))
         {
@@ -3407,7 +3407,7 @@ public class cwdm_test extends script.base_script
                 dictionary timeData = getAccountTimeData(object);
                 if (timeData == null)
                 {
-                    sendSystemMessageTestingOnly(self, "couldn't get entitlement info for " + object);
+                    broadcast(self, "couldn't get entitlement info for " + object);
                 }
                 else 
                 {
@@ -3415,23 +3415,23 @@ public class cwdm_test extends script.base_script
                     int entitledTime = timeData.getInt("total_entitled_time");
                     int lastLoginTime = timeData.getInt("last_login_time");
                     int entitledLoginTime = timeData.getInt("entitled_login_time");
-                    sendSystemMessageTestingOnly(self, "entitlement info for " + object + " is total: " + entitledTime + "/" + totalTime + ",  since last login: " + entitledLoginTime + "/" + lastLoginTime);
+                    broadcast(self, "entitlement info for " + object + " is total: " + entitledTime + "/" + totalTime + ",  since last login: " + entitledLoginTime + "/" + lastLoginTime);
                 }
             }
         }
         else if (strText.equals("createFsTheater"))
         {
-            sendSystemMessageTestingOnly(self, "Creating FS Theater");
+            broadcast(self, "Creating FS Theater");
             createTheater("datatables/theater/fs_quest_combat3/fs_quest_combat3.iff", getLocation(self), "", TLT_flatten);
         }
         else if (strText.equals("setJediVisibility"))
         {
-            sendSystemMessageTestingOnly(self, "Setting Jedi Visibility to 9000");
+            broadcast(self, "Setting Jedi Visibility to 9000");
             setJediVisibility(self, 9000);
         }
         else if (strText.equals("clearJediVisibility"))
         {
-            sendSystemMessageTestingOnly(self, "Setting Jedi Visibility to 0");
+            broadcast(self, "Setting Jedi Visibility to 0");
             setJediVisibility(self, 0);
         }
         else if (strText.equals("cwdm_doit"))
@@ -3669,7 +3669,7 @@ public class cwdm_test extends script.base_script
     public int huyTestMessageTo3(obj_id self, dictionary params) throws InterruptedException
     {
         int count = params.getInt("count");
-        sendSystemMessageTestingOnly(self, "huyTestMessageTo3 count=" + count);
+        broadcast(self, "huyTestMessageTo3 count=" + count);
         return SCRIPT_CONTINUE;
     }
     public int huyTestXP(obj_id self, dictionary params) throws InterruptedException
@@ -3680,20 +3680,20 @@ public class cwdm_test extends script.base_script
     }
     public int huyTestPersistedMessageTo(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "huyTestPersistedMessageTo() params is " + params.toString());
+        broadcast(self, "huyTestPersistedMessageTo() params is " + params.toString());
         return SCRIPT_CONTINUE;
     }
     public int huyTestPersistedMessageTo2(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "huyTestPersistedMessageTo2() params is " + params.toString());
+        broadcast(self, "huyTestPersistedMessageTo2() params is " + params.toString());
         return SCRIPT_CONTINUE;
     }
     public boolean initializeStarport(obj_id self, obj_id structure, String travel_point, int travel_cost, boolean civic) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "initializeStarport() in");
+        broadcast(self, "initializeStarport() in");
         if (structure == null || structure == obj_id.NULL_ID)
         {
-            sendSystemMessageTestingOnly(self, "structure == null || structure == obj_id.NULL_ID");
+            broadcast(self, "structure == null || structure == obj_id.NULL_ID");
             return false;
         }
         int num_items = dataTableGetNumRows(travel.STARPORT_DATATABLE);
@@ -3701,7 +3701,7 @@ public class cwdm_test extends script.base_script
         int idx = travel.getStarportTableIndex(template);
         if (idx == -1)
         {
-            sendSystemMessageTestingOnly(self, "idx == -1");
+            broadcast(self, "idx == -1");
             return false;
         }
         String planet = getCurrentSceneName();
@@ -3733,7 +3733,7 @@ public class cwdm_test extends script.base_script
             obj_id cell_id = getCellId(structure, arrival_cell);
             if (cell_id == null || cell_id == obj_id.NULL_ID)
             {
-                sendSystemMessageTestingOnly(self, "cell_id == null || cell_id == obj_id.NULL_ID");
+                broadcast(self, "cell_id == null || cell_id == obj_id.NULL_ID");
                 return false;
             }
             arrival_loc = new location(arrival_x, arrival_y, arrival_z, planet, cell_id);
@@ -3753,11 +3753,11 @@ public class cwdm_test extends script.base_script
         }
         if (travel.setStarportTravelPoint(structure, travel_point, arrival_loc, travel_cost, civic))
         {
-            sendSystemMessageTestingOnly(self, "travel.setStarportTravelPoint() OK");
+            broadcast(self, "travel.setStarportTravelPoint() OK");
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "travel.setStarportTravelPoint() FAILED");
+            broadcast(self, "travel.setStarportTravelPoint() FAILED");
         }
         if (hasObjVar(structure, travel.VAR_BASE_OBJECT))
         {
@@ -3856,22 +3856,22 @@ public class cwdm_test extends script.base_script
                 }
             }
         }
-        sendSystemMessageTestingOnly(self, "initializeStarport() out");
+        broadcast(self, "initializeStarport() out");
         return true;
     }
     public int huyRequestJediBountySuccess(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "huyRequestJediBountySuccess() params is " + params.toString());
+        broadcast(self, "huyRequestJediBountySuccess() params is " + params.toString());
         return SCRIPT_CONTINUE;
     }
     public int huyRequestJediBountyFailure(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "huyRequestJediBountyFailure() params is " + params.toString());
+        broadcast(self, "huyRequestJediBountyFailure() params is " + params.toString());
         return SCRIPT_CONTINUE;
     }
     public int huyTestSUIProgressBar(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "ProgressBar update");
+        broadcast(self, "ProgressBar update");
         int startTime = params.getInt("startTime");
         int pid = params.getInt("pid");
         if (setSUIProperty(pid, "comp.pText.text", PROP_TEXT, (getGameTime() - startTime) + " seconds have elapsed"))
@@ -3895,7 +3895,7 @@ public class cwdm_test extends script.base_script
     }
     public int ProgressBarCallback(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "ProgressBarCallback");
+        broadcast(self, "ProgressBarCallback");
         return SCRIPT_CONTINUE;
     }
     public int countdownTimerBar(obj_id player) throws InterruptedException
@@ -3911,86 +3911,86 @@ public class cwdm_test extends script.base_script
     }
     public int CountdownTimerBarCallback(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "CountdownTimerBarCallback");
+        broadcast(self, "CountdownTimerBarCallback");
         return SCRIPT_CONTINUE;
     }
     public int OnEnterRegion(obj_id self, String planetName, String regionName) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnEnterRegion planet=" + planetName + " region=" + regionName);
+        broadcast(self, "OnEnterRegion planet=" + planetName + " region=" + regionName);
         LOG("***HUY_REGION***", self + " OnEnterRegion planet=" + planetName + " region=" + regionName);
         return SCRIPT_CONTINUE;
     }
     public int OnExitRegion(obj_id self, String planetName, String regionName) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnExitRegion planet=" + planetName + " region=" + regionName);
+        broadcast(self, "OnExitRegion planet=" + planetName + " region=" + regionName);
         LOG("***HUY_REGION***", self + " OnExitRegion planet=" + planetName + " region=" + regionName);
         return SCRIPT_CONTINUE;
     }
     public int OnCollectionSlotModified(obj_id self, String bookName, String pageName, String collectionName, String slotName, boolean isCounterTypeSlot, int previousValue, int currentValue, int maxSlotValue, boolean slotCompleted) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnCollectionSlotModified book=" + bookName + ", page=" + pageName + ", collection=" + collectionName + ", slot=" + slotName + ", isCounterTypeSlot=" + isCounterTypeSlot + ", previousValue=" + previousValue + ", currentValue=" + currentValue + ", maxSlotValue=" + maxSlotValue + ", slotCompleted=" + slotCompleted);
+        broadcast(self, "OnCollectionSlotModified book=" + bookName + ", page=" + pageName + ", collection=" + collectionName + ", slot=" + slotName + ", isCounterTypeSlot=" + isCounterTypeSlot + ", previousValue=" + previousValue + ", currentValue=" + currentValue + ", maxSlotValue=" + maxSlotValue + ", slotCompleted=" + slotCompleted);
         return SCRIPT_CONTINUE;
     }
     public int OnCollectionServerFirst(obj_id self, String bookName, String pageName, String collectionName) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnCollectionServerFirst book=" + bookName + ", page=" + pageName + ", collection=" + collectionName);
+        broadcast(self, "OnCollectionServerFirst book=" + bookName + ", page=" + pageName + ", collection=" + collectionName);
         return SCRIPT_CONTINUE;
     }
     public int OnIncubatorCommitted(obj_id self, obj_id playerId, obj_id terminalId, obj_id slot1Id, obj_id slot2Id, obj_id slot3Id, obj_id slot4Id, int initialPointsSurvival, int initialPointsBeastialResilience, int initialPointsCunning, int initialPointsIntelligence, int initialPointsAggression, int initialPointsHuntersInstinct, int totalPointsSurvival, int totalPointsBeastialResilience, int totalPointsCunning, int totalPointsIntelligence, int totalPointsAggression, int totalPointsHuntersInstinct, int temperatureGauge, int nutrientGauge, int newCreatureColorIndex) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnIncubatorCommitted");
+        broadcast(self, "OnIncubatorCommitted");
         return SCRIPT_CONTINUE;
     }
     public int OnIncubatorCancelled(obj_id self, obj_id playerId, obj_id terminalId) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnIncubatorCancelled");
+        broadcast(self, "OnIncubatorCancelled");
         return SCRIPT_CONTINUE;
     }
     public int endDuelCommandNotification(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
-        sendSystemMessageTestingOnly(self, "endDuelCommandNotification() I am=" + self + " target=" + target);
+        broadcast(self, "endDuelCommandNotification() I am=" + self + " target=" + target);
         return SCRIPT_CONTINUE;
     }
     public int OnPvpRankingChanged(obj_id self, int oldRank, int newRank) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnPvpRankingChanged oldRank=" + oldRank + " newRank=" + newRank);
+        broadcast(self, "OnPvpRankingChanged oldRank=" + oldRank + " newRank=" + newRank);
         LOG("***HUY_ONPVPRANKINGCHANGED***", self + " OnPvpRankingChanged oldRank=" + oldRank + " newRank=" + newRank);
         return SCRIPT_CONTINUE;
     }
     public int huyHourlyAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         int now = params.getInt("gameTime");
-        sendSystemMessageTestingOnly(self, "huyHourlyAlarmClock now=" + now);
+        broadcast(self, "huyHourlyAlarmClock now=" + now);
         return SCRIPT_CONTINUE;
     }
     public int huyDailyAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         int now = params.getInt("gameTime");
-        sendSystemMessageTestingOnly(self, "huyDailyAlarmClock now=" + now);
+        broadcast(self, "huyDailyAlarmClock now=" + now);
         return SCRIPT_CONTINUE;
     }
     public int huyWeeklyAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         int now = params.getInt("gameTime");
-        sendSystemMessageTestingOnly(self, "huyWeeklyAlarmClock now=" + now);
+        broadcast(self, "huyWeeklyAlarmClock now=" + now);
         return SCRIPT_CONTINUE;
     }
     public int huyMonthlyAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         int now = params.getInt("gameTime");
-        sendSystemMessageTestingOnly(self, "huyMonthlyAlarmClock now=" + now);
+        broadcast(self, "huyMonthlyAlarmClock now=" + now);
         return SCRIPT_CONTINUE;
     }
     public int huyYearlyAlarmClock(obj_id self, dictionary params) throws InterruptedException
     {
         int now = params.getInt("gameTime");
-        sendSystemMessageTestingOnly(self, "huyYearlyAlarmClock now=" + now);
+        broadcast(self, "huyYearlyAlarmClock now=" + now);
         return SCRIPT_CONTINUE;
     }
     public int testSuiHandler(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "buttonPressed=" + params.getString("buttonPressed"));
+        broadcast(self, "buttonPressed=" + params.getString("buttonPressed"));
         return SCRIPT_CONTINUE;
     }
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException

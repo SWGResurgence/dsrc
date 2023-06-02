@@ -548,7 +548,7 @@ public class ship_control_device extends script.base_script
             if (intCount > MAX_RESOURCE)
             {
                 intCount = intCount - MAX_RESOURCE;
-                sendSystemMessageTestingOnly(player, "Add the Diff!  " + intCount);
+                broadcast(player, "Add the Diff!  " + intCount);
                 intAmount = intAmount - intCount;
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
                 objStack = null;
@@ -556,7 +556,7 @@ public class ship_control_device extends script.base_script
             else
             {
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
-                sendSystemMessageTestingOnly(player, "Incrementing count!");
+                broadcast(player, "Incrementing count!");
             }
         }
         else

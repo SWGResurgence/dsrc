@@ -21,12 +21,12 @@ public class balancetest extends script.base_script
     public int checkDifficulty(obj_id self, dictionary params) throws InterruptedException
     {
         int intRawDifficulty = getLevel(self);
-        sendSystemMessageTestingOnly(self, "getLevel returned " + intRawDifficulty);
+        broadcast(self, "getLevel returned " + intRawDifficulty);
         if (intRawDifficulty == 0)
         {
-            sendSystemMessageTestingOnly(self, "you lost your difficulty!");
+            broadcast(self, "you lost your difficulty!");
             deltadictionary dctScriptVars = self.getScriptVars();
-            sendSystemMessageTestingOnly(self, "Scriptvars are " + dctScriptVars.toString());
+            broadcast(self, "Scriptvars are " + dctScriptVars.toString());
         }
         messageTo(self, "checkDifficulty", null, 3, false);
         return SCRIPT_CONTINUE;
@@ -60,22 +60,22 @@ public class balancetest extends script.base_script
         switch (actionName)
         {
             case "help":
-                sendSystemMessageTestingOnly(self, "REMINDER: key phrases for balancetest are: or 'b wipe'  or 'b spawn <creatureName>' or 'b newlevel <level>'");
-                sendSystemMessageTestingOnly(self, " 'b clev <creature level>' or 'b wdam <mindamage> <maxdamage>' (can enter just one damage value to set both same)' ");
-                sendSystemMessageTestingOnly(self, " 'b newlevel <newlevel> will mod all current and following creatures. A <newlevel> value of 0 will remove a stored level delta variable ");
+                broadcast(self, "REMINDER: key phrases for balancetest are: or 'b wipe'  or 'b spawn <creatureName>' or 'b newlevel <level>'");
+                broadcast(self, " 'b clev <creature level>' or 'b wdam <mindamage> <maxdamage>' (can enter just one damage value to set both same)' ");
+                broadcast(self, " 'b newlevel <newlevel> will mod all current and following creatures. A <newlevel> value of 0 will remove a stored level delta variable ");
                 break;
             case "clev":
             {
                 debugLogging("//// OnHearSpeech: ", "////>>>> 3");
                 if (numArgs < 3)
                 {
-                    sendSystemMessageTestingOnly(self, "You've got to have at least TWO arguments to spawn a creature  'b clev <creature level> ");
+                    broadcast(self, "You've got to have at least TWO arguments to spawn a creature  'b clev <creature level> ");
                     debugLogging("//// OnHearSpeech: ", "////>>>> 4");
                     return SCRIPT_CONTINUE;
                 }
                 String levelStr = st.nextToken();
                 int level = utils.stringToInt(levelStr);
-                sendSystemMessageTestingOnly(self, "creature level selected: " + level);
+                broadcast(self, "creature level selected: " + level);
                 dictionary creatureDict = null;
                 Vector validCreatureNames = new Vector();
                 validCreatureNames.setSize(0);
@@ -107,17 +107,17 @@ public class balancetest extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "no matches in creatures.tab found for level: " + level);
+                    broadcast(self, "no matches in creatures.tab found for level: " + level);
                     return SCRIPT_CONTINUE;
                 }
                 if (creatureDict == null)
                 {
-                    sendSystemMessageTestingOnly(self, "no creatures found at level: " + level);
+                    broadcast(self, "no creatures found at level: " + level);
                     return SCRIPT_CONTINUE;
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "creature selected for spawn is: " + creatureDict.getString("creatureName"));
+                    broadcast(self, "creature selected for spawn is: " + creatureDict.getString("creatureName"));
                 }
                 String creatureName = creatureDict.getString("creatureName");
                 utils.setScriptVar(self, "clev_creature", creatureName);
@@ -129,17 +129,17 @@ public class balancetest extends script.base_script
                 debugLogging("//// OnHearSpeech: ", "////>>>> 8");
                 if (!utils.hasScriptVar(self, "clev_creature"))
                 {
-                    sendSystemMessageTestingOnly(self, "no you haven't selected a creature to spawn");
+                    broadcast(self, "no you haven't selected a creature to spawn");
                     return SCRIPT_CONTINUE;
                 }
                 int creaturelevel = utils.getIntScriptVar(self, "clev_creature_level");
                 String creatureName = utils.getStringScriptVar(self, "clev_creature");
-                sendSystemMessageTestingOnly(self, "we're going to try to spawn the level " + creaturelevel + " creature, the " + creatureName);
+                broadcast(self, "we're going to try to spawn the level " + creaturelevel + " creature, the " + creatureName);
                 int newCreatureLevel = 0;
                 if (utils.hasScriptVar(self, "newCreatureLevel"))
                 {
                     newCreatureLevel = utils.getIntScriptVar(self, "newCreatureLevel");
-                    sendSystemMessageTestingOnly(self, " and going to re-level the creature to be " + newCreatureLevel);
+                    broadcast(self, " and going to re-level the creature to be " + newCreatureLevel);
                 }
                 int numCreatures = 1;
                 if (numArgs == 3)
@@ -162,13 +162,13 @@ public class balancetest extends script.base_script
                     location spawnLoc = locations.getGoodLocationAroundLocation(here, 1.0f, 1.0f, 4.0f, 4.0f);
                     if (spawnLoc == null)
                     {
-                        sendSystemMessageTestingOnly(self, " spawnLoc was NULL ");
+                        broadcast(self, " spawnLoc was NULL ");
                         return SCRIPT_CONTINUE;
                     }
                     obj_id mob = create.createCreature(creatureName, spawnLoc, creaturelevel, true, false);
                     if (!isIdValid(mob))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid objid on the creature we just tried to spawn. OH NO!");
+                        broadcast(self, "invalid objid on the creature we just tried to spawn. OH NO!");
                     }
                     else
                     {
@@ -192,7 +192,7 @@ public class balancetest extends script.base_script
                 obj_id weapon = getCurrentWeapon(self);
                 if (!isIdValid(weapon))
                 {
-                    sendSystemMessageTestingOnly(self, "bad weapon - objId was: " + weapon);
+                    broadcast(self, "bad weapon - objId was: " + weapon);
                 }
                 if (getWeaponType(weapon) != WEAPON_TYPE_UNARMED)
                 {
@@ -209,7 +209,7 @@ public class balancetest extends script.base_script
                 {
                     if (utils.hasScriptVar(self, "newCreatureLevel"))
                     {
-                        sendSystemMessageTestingOnly(self, "Removed existing creature level delta value");
+                        broadcast(self, "Removed existing creature level delta value");
                         utils.removeScriptVar(self, "newCreatureLevel");
                     }
                 }
@@ -217,7 +217,7 @@ public class balancetest extends script.base_script
                 {
                     if (utils.setScriptVar(self, "newCreatureLevel", newLevel))
                     {
-                        sendSystemMessageTestingOnly(self, "All creatures spawned will now be set to level " + newLevel);
+                        broadcast(self, "All creatures spawned will now be set to level " + newLevel);
                     }
                 }
                 if (utils.hasScriptVar(self, "spawnedCreatures"))
@@ -234,7 +234,7 @@ public class balancetest extends script.base_script
                     }
                     if (reLeveledMobCounter > 0)
                     {
-                        sendSystemMessageTestingOnly(self, "A total of " + reLeveledMobCounter + " creatures were re-set to be level " + newLevel);
+                        broadcast(self, "A total of " + reLeveledMobCounter + " creatures were re-set to be level " + newLevel);
                     }
                 }
                 break;
@@ -242,7 +242,7 @@ public class balancetest extends script.base_script
                 debugLogging("//// OnHearSpeech: ", "////>>>> 11");
                 if (!utils.hasScriptVar(self, "spawnedCreatures"))
                 {
-                    sendSystemMessageTestingOnly(self, "No apparent creature to destroy. Couldn't find obj_id scripvar. OH NO!");
+                    broadcast(self, "No apparent creature to destroy. Couldn't find obj_id scripvar. OH NO!");
                 }
                 else
                 {
@@ -257,7 +257,7 @@ public class balancetest extends script.base_script
                 }
                 break;
             default:
-                sendSystemMessageTestingOnly(self, "valid trigger phrases for balancetest script are: 'wdam #' for weapon damage value and 'clev #' for creature level.");
+                broadcast(self, "valid trigger phrases for balancetest script are: 'wdam #' for weapon damage value and 'clev #' for creature level.");
                 break;
         }
         return SCRIPT_CONTINUE;

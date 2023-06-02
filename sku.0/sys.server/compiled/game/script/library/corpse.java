@@ -108,8 +108,8 @@ public class corpse extends script.base_script
         obj_id corpse = createObject(TEMPLATE_PLAYER_CORPSE, loc);
         if ((corpse == null) || (corpse == obj_id.NULL_ID))
         {
-            sendSystemMessageTestingOnly(player, "spawnPlayerCorpse: unable to spawn a corpse at your location");
-            sendSystemMessageTestingOnly(player, "spawnPlayerCorpse: loc = " + loc.toString());
+            broadcast(player, "spawnPlayerCorpse: unable to spawn a corpse at your location");
+            broadcast(player, "spawnPlayerCorpse: loc = " + loc.toString());
             return null;
         }
         else
@@ -1075,14 +1075,14 @@ public class corpse extends script.base_script
             }
             else if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "GOD MODE: Granting access to storyteller loot container that you do not have permission for.");
+                broadcast(player, "GOD MODE: Granting access to storyteller loot container that you do not have permission for.");
                 return true;
             }
             return false;
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "GOD MODE: Granting access to loot container that you do not have permission for.");
+            broadcast(player, "GOD MODE: Granting access to loot container that you do not have permission for.");
             return true;
         }
         if (player == killCredit)

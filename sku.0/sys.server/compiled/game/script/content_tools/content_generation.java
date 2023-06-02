@@ -13,7 +13,7 @@ public class content_generation extends script.base_script
     public static final float AUTOSAVE_DELAY = 300;
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Welcome to the content maker script. Please consult Development before dorking around with this script.  NOTE - to test pilot you need to attach the space content_generation script, not this one");
+        broadcast(self, "Welcome to the content maker script. Please consult Development before dorking around with this script.  NOTE - to test pilot you need to attach the space content_generation script, not this one");
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -26,7 +26,7 @@ public class content_generation extends script.base_script
     public int delayedMessage(obj_id self, dictionary params) throws InterruptedException
     {
         String strSpam = params.getString("strSpam");
-        sendSystemMessageTestingOnly(self, strSpam);
+        broadcast(self, strSpam);
         return SCRIPT_CONTINUE;
     }
     public int autoSave(obj_id self, dictionary params) throws InterruptedException
@@ -39,13 +39,13 @@ public class content_generation extends script.base_script
         location locTest = getLocation(self);
         String strArea = locTest.area;
         String strDataTable = "";
-        sendSystemMessageTestingOnly(self, "AutoSaving zone to " + strDataTable);
+        broadcast(self, "AutoSaving zone to " + strDataTable);
         messageTo(self, "autoSave", null, AUTOSAVE_DELAY, false);
         return SCRIPT_CONTINUE;
     }
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "2");
+        broadcast(self, "2");
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
@@ -54,12 +54,12 @@ public class content_generation extends script.base_script
         if (strCommands[0].equals("preload"))
         {
             requestPreloadCompleteTrigger(self);
-            sendSystemMessageTestingOnly(self, "1");
+            broadcast(self, "1");
         }
         if (strCommands[0].equals("preloadOther"))
         {
             requestPreloadCompleteTrigger(getLookAtTarget(self));
-            sendSystemMessageTestingOnly(self, "1");
+            broadcast(self, "1");
         }
         if (strCommands[0].equals("createAt"))
         {
@@ -77,18 +77,18 @@ public class content_generation extends script.base_script
                 }
                 if (objShip == null)
                 {
-                    sendSystemMessageTestingOnly(self, "You passed in a bad shipType. Type is " + strCommands[1]);
+                    broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
+                    broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "You need to pass in a ship type for me to spawn.");
+                broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -101,18 +101,18 @@ public class content_generation extends script.base_script
                 obj_id objShip = space_create.createShip(strCommands[1], nearby);
                 if (objShip == null)
                 {
-                    sendSystemMessageTestingOnly(self, "You passed in a bad shipType. Type is " + strCommands[1]);
+                    broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
+                    broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "You need to pass in a ship type for me to spawn.");
+                broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -122,7 +122,7 @@ public class content_generation extends script.base_script
             for (obj_id objContent : objContents) {
                 destroyObject(objContent);
             }
-            sendSystemMessageTestingOnly(self, "Cleaned Up");
+            broadcast(self, "Cleaned Up");
         }
         if (strCommands[0].equals("recreateBuildout"))
         {
@@ -131,19 +131,19 @@ public class content_generation extends script.base_script
         {
             if (strCommands.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "Syntax is setFlightModel <shipType>");
+                broadcast(self, "Syntax is setFlightModel <shipType>");
                 return SCRIPT_CONTINUE;
             }
             dictionary dctShipInfo = dataTableGetRow("datatables/ship/ship_debug.iff", strCommands[1]);
             if (dctShipInfo == null)
             {
-                sendSystemMessageTestingOnly(self, strCommands[1] + " is not a valid ship type to use for this command");
+                broadcast(self, strCommands[1] + " is not a valid ship type to use for this command");
                 return SCRIPT_CONTINUE;
             }
             obj_id objShip = getPilotedShip(self);
             if (!isIdValid(objShip))
             {
-                sendSystemMessageTestingOnly(self, "You must be in a ship to use this command");
+                broadcast(self, "You must be in a ship to use this command");
                 return SCRIPT_CONTINUE;
             }
             setShipEngineAccelerationRate(objShip, dctShipInfo.getFloat("engine_accel"));
@@ -163,19 +163,19 @@ public class content_generation extends script.base_script
             setShipBoosterEnergyConsumptionRate(objShip, dctShipInfo.getFloat("booster_consumption"));
             setShipBoosterAcceleration(objShip, dctShipInfo.getFloat("booster_accel"));
             setShipBoosterSpeedMaximum(objShip, dctShipInfo.getFloat("booster_speed"));
-            sendSystemMessageTestingOnly(self, "Reset flight model to " + strCommands[1]);
+            broadcast(self, "Reset flight model to " + strCommands[1]);
         }
         if (strCommands[0].equals("setAIFlightModel"))
         {
             if (strCommands.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "Syntax is setAIFlightModel <shipType>");
+                broadcast(self, "Syntax is setAIFlightModel <shipType>");
                 return SCRIPT_CONTINUE;
             }
             dictionary dctShipInfo = dataTableGetRow("datatables/ship/ship_debug.iff", strCommands[1]);
             if (dctShipInfo == null)
             {
-                sendSystemMessageTestingOnly(self, strCommands[1] + " is not a valid ship type to use for this command");
+                broadcast(self, strCommands[1] + " is not a valid ship type to use for this command");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objTestObjects = getAllObjectsWithScript(getLocation(self), 320000, "space.combat.combat_ship");
@@ -207,7 +207,7 @@ public class content_generation extends script.base_script
                     ship_ai.unitSetLeashDistance(objShip, dctShipInfo.getFloat("fltLeashDistance"));
                 }
             }
-            sendSystemMessageTestingOnly(self, "Reset flight models of All AI  to " + strCommands[1]);
+            broadcast(self, "Reset flight models of All AI  to " + strCommands[1]);
         }
         if (strCommands[0].equals("setupSharedStation"))
         {
@@ -226,14 +226,14 @@ public class content_generation extends script.base_script
             obj_id[] objCells = getContents(objStation);
             if ((objCells == null) || (objCells.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "ship  doesn't have an interior");
+                broadcast(self, "ship  doesn't have an interior");
                 return SCRIPT_CONTINUE;
             }
             obj_id objCell = objCells[0];
             location locTest = new location();
             locTest.cell = objCell;
             setLocation(self, locTest);
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("setupSpaceDungeon"))
         {
@@ -252,14 +252,14 @@ public class content_generation extends script.base_script
             obj_id[] objCells = getContents(objStation);
             if ((objCells == null) || (objCells.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "ship  doesn't have an interior");
+                broadcast(self, "ship  doesn't have an interior");
                 return SCRIPT_CONTINUE;
             }
             obj_id objCell = objCells[0];
             location locTest = new location();
             locTest.cell = objCell;
             setLocation(self, locTest);
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("hackTest"))
         {
@@ -279,30 +279,30 @@ public class content_generation extends script.base_script
             obj_id[] objCells = getContents(objStation);
             if ((objCells == null) || (objCells.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "ship  doesn't have an interior");
+                broadcast(self, "ship  doesn't have an interior");
                 return SCRIPT_CONTINUE;
             }
             obj_id objCell = objCells[0];
             location locTest = new location();
             locTest.cell = objCell;
             setLocation(self, locTest);
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("setChassisVariant"))
         {
             if (strCommands.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "Syntax is setChassisVariant <Type>");
+                broadcast(self, "Syntax is setChassisVariant <Type>");
                 return SCRIPT_CONTINUE;
             }
             String strFoo = toLower(strCommands[1]);
             if (space_crafting.setupChassisDifferentiation(space_transition.getContainingShip(self), strFoo))
             {
-                sendSystemMessageTestingOnly(self, "Set Chassis to " + strCommands[1]);
+                broadcast(self, "Set Chassis to " + strCommands[1]);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Did not Set Chassis. Bad Type:" + strFoo);
+                broadcast(self, "Did not Set Chassis. Bad Type:" + strFoo);
             }
         }
         if (strCommands[0].equals("autoSave"))
@@ -315,7 +315,7 @@ public class content_generation extends script.base_script
                     {
                         removeObjVar(self, "intAutoSaveOff");
                     }
-                    sendSystemMessageTestingOnly(self, "Auto Save is turned on");
+                    broadcast(self, "Auto Save is turned on");
                     return SCRIPT_CONTINUE;
                 }
                 else if (strCommands[1].equals("off"))
@@ -324,38 +324,38 @@ public class content_generation extends script.base_script
                     {
                         setObjVar(self, "intAutoSaveOff", 1);
                     }
-                    sendSystemMessageTestingOnly(self, "Auto Save is turned off");
+                    broadcast(self, "Auto Save is turned off");
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
+                    broadcast(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
                     return SCRIPT_CONTINUE;
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
+                broadcast(self, "Incorrect Syntax. Autosave commands are 'autoSave on' and 'autoSave off'");
                 return SCRIPT_CONTINUE;
             }
         }
         if (strCommands[0].equals("fixMe"))
         {
             space_crafting.repairDamage(self, getPilotedShip(self), 100.0f);
-            sendSystemMessageTestingOnly(self, "Fixed ship");
+            broadcast(self, "Fixed ship");
         }
         if (strCommands[0].equals("getIn"))
         {
             obj_id objShip = getLookAtTarget(self);
             if (!isIdValid(objShip))
             {
-                sendSystemMessageTestingOnly(self, "No look at target");
+                broadcast(self, "No look at target");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objCells = getContents(objShip);
             if ((objCells == null) || (objCells.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "ship  doesn't have an interior");
+                broadcast(self, "ship  doesn't have an interior");
                 return SCRIPT_CONTINUE;
             }
             obj_id objCell = objCells[0];
@@ -369,13 +369,13 @@ public class content_generation extends script.base_script
             obj_id objCell = locTest.cell;
             if (!isIdValid(objCell))
             {
-                sendSystemMessageTestingOnly(self, "DONT USE THIS IF YOU'RE NOT IN A BUILDING!");
+                broadcast(self, "DONT USE THIS IF YOU'RE NOT IN A BUILDING!");
                 return SCRIPT_CONTINUE;
             }
             obj_id objBuilding = getContainedBy(objCell);
             if (!isIdValid(objBuilding))
             {
-                sendSystemMessageTestingOnly(self, "You are not in a building. Don't use this when not in a building");
+                broadcast(self, "You are not in a building. Don't use this when not in a building");
                 return SCRIPT_CONTINUE;
             }
             String strBuildoutName = "";
@@ -391,11 +391,11 @@ public class content_generation extends script.base_script
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Syntax is dumpBuildout <type> or set the strBuildout objvar");
+                    broadcast(self, "Syntax is dumpBuildout <type> or set the strBuildout objvar");
                     return SCRIPT_CONTINUE;
                 }
             }
-            sendSystemMessageTestingOnly(self, "for objbuilding " + objBuilding + " objvatr is " + strBuildoutName);
+            broadcast(self, "for objbuilding " + objBuilding + " objvatr is " + strBuildoutName);
             String strArea = locTest.area;
             String strDataTable = "";
             strDataTable = "datatables/interior_buildouts/" + strBuildoutName + ".tab";
@@ -439,11 +439,11 @@ public class content_generation extends script.base_script
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
-                sendSystemMessageTestingOnly(self, "No dattable made");
+                broadcast(self, "No dattable made");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objObjects = getBuildingContents(objBuilding);
-            sendSystemMessageTestingOnly(self, "dumping contents of " + objBuilding);
+            broadcast(self, "dumping contents of " + objBuilding);
             for (obj_id objObject : objObjects) {
                 if (isDumpable(objObject, true)) {
                     dictionary dctRow = new dictionary();
@@ -490,7 +490,7 @@ public class content_generation extends script.base_script
         if (strCommands[0].equals("sad"))
         {
             obj_id objGun = createObject("object/weapon/ranged/pistol/pistol_cdef.iff", getLookAtTarget(self), "hold_r");
-            sendSystemMessageTestingOnly(self, "asd");
+            broadcast(self, "asd");
         }
         if (strCommands[0].equals("makeTestGuy"))
         {
@@ -510,16 +510,16 @@ public class content_generation extends script.base_script
             obj_id objTarget = getLookAtTarget(self);
             if (strCommands.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "Syntax is setupSequencerNPC <name> <table>");
+                broadcast(self, "Syntax is setupSequencerNPC <name> <table>");
             }
             String strName = strCommands[1];
             String strTable = strCommands[2];
             attachScript(objTarget, "content_tools.sequencer_master_object");
             attachScript(objTarget, "content_tools.sequencer_object");
             setObjVar(objTarget, "strSequenceTable", strTable);
-            sendSystemMessageTestingOnly(self, "Set Table to " + strTable);
+            broadcast(self, "Set Table to " + strTable);
             setObjVar(objTarget, "strSequenceIdentifier", strName);
-            sendSystemMessageTestingOnly(self, "Set Name to " + strName);
+            broadcast(self, "Set Name to " + strName);
             Object[] newParams = new Object[1];
             newParams[0] = objTarget;
             space_utils.callTrigger("OnPreloadComplete", newParams);
@@ -528,14 +528,14 @@ public class content_generation extends script.base_script
         {
             obj_id objTarget = getLookAtTarget(self);
             setObjVar(objTarget, "strSequenceTable", strCommands[1]);
-            sendSystemMessageTestingOnly(self, "set " + objTarget + " to table " + strCommands[1]);
+            broadcast(self, "set " + objTarget + " to table " + strCommands[1]);
         }
         if (strCommands[0].equals("setSequencerName"))
         {
             obj_id objTarget = getLookAtTarget(self);
             attachScript(objTarget, "content_tools.sequencer_object");
             String strName = strCommands[1];
-            sendSystemMessageTestingOnly(self, "Set Name to " + strName);
+            broadcast(self, "Set Name to " + strName);
             setObjVar(objTarget, "strSequenceTable", strName);
             Object[] newParams = new Object[1];
             newParams[0] = objTarget;
@@ -548,7 +548,7 @@ public class content_generation extends script.base_script
             utils.removeScriptVar(objTarget, "strSecondaryTable");
             utils.removeScriptVar(objTarget, "intMainIndex");
             messageTo(objTarget, "doEvents", null, 0, false);
-            sendSystemMessageTestingOnly(self, "messaged " + objTarget + " with doEvents");
+            broadcast(self, "messaged " + objTarget + " with doEvents");
         }
         if (strCommands[0].equals("testSequence"))
         {
@@ -557,38 +557,38 @@ public class content_generation extends script.base_script
             utils.removeScriptVar(objTarget, "strSecondaryTable");
             utils.removeScriptVar(objTarget, "intMainIndex");
             messageTo(objTarget, "doEvents", null, 0, false);
-            sendSystemMessageTestingOnly(self, "Asdq");
+            broadcast(self, "Asdq");
         }
         if (strCommands[0].equals("checkSequencer"))
         {
             String strSequencerName = strCommands[1];
             obj_id objSequencer = sequencer.getSequenceObject(strSequencerName);
-            sendSystemMessageTestingOnly(self, strSequencerName + " is " + objSequencer);
+            broadcast(self, strSequencerName + " is " + objSequencer);
         }
         if (strCommands[0].equals("continueSequence"))
         {
             obj_id objTarget = getLookAtTarget(self);
             messageTo(objTarget, "continueMainTable", null, 0, false);
-            sendSystemMessageTestingOnly(self, "Asdq2");
+            broadcast(self, "Asdq2");
         }
         if (strCommands[0].equals("interruptSequence"))
         {
             obj_id objTarget = getTopMostContainer(self);
             messageTo(objTarget, "interruptSequence", null, 0, false);
-            sendSystemMessageTestingOnly(self, "Asdq2");
+            broadcast(self, "Asdq2");
         }
         if (strCommands[0].equals("makeSequencerObject"))
         {
             if (strCommands.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "Syntax is makeSequencerObject <sequencerName>");
+                broadcast(self, "Syntax is makeSequencerObject <sequencerName>");
                 return SCRIPT_CONTINUE;
             }
             String strTest = strCommands[1];
             obj_id objSequencer = createObject("object/tangible/npe/npe_node.iff", getLocation(self));
             setObjVar(objSequencer, "strSequenceIdentifier", strCommands[1]);
             attachScript(objSequencer, "content_tools.sequencer_object");
-            sendSystemMessageTestingOnly(self, "Made Sequencer object " + objSequencer + " and name " + strCommands[1]);
+            broadcast(self, "Made Sequencer object " + objSequencer + " and name " + strCommands[1]);
             Object[] newParams = new Object[1];
             newParams[0] = objSequencer;
             space_utils.callTrigger("OnPreloadComplete", newParams);
@@ -599,30 +599,30 @@ public class content_generation extends script.base_script
             Object[] newParams = new Object[1];
             newParams[0] = getTopMostContainer(self);
             space_utils.callTrigger("OnInitialize", newParams);
-            sendSystemMessageTestingOnly(self, "trigger sent to " + newParams[0] + " and Buildout done");
+            broadcast(self, "trigger sent to " + newParams[0] + " and Buildout done");
         }
         if (strCommands[0].equals("zoneBootstrap"))
         {
             obj_id[] objTestObjects = getObjectsInRange(getLocation(self), 320000);
-            sendSystemMessageTestingOnly(self, "Notifying " + objTestObjects.length);
+            broadcast(self, "Notifying " + objTestObjects.length);
             for (obj_id objTestObject : objTestObjects) {
                 Object[] newParams = new Object[1];
                 newParams[0] = objTestObject;
                 space_utils.callTrigger("OnPreloadComplete", newParams);
             }
-            sendSystemMessageTestingOnly(self, "Reset zone");
+            broadcast(self, "Reset zone");
         }
         if (strCommands[0].equals("dungeon"))
         {
             warpPlayer(self, "dungeon1", 0, 0, 0, null, null, 0, 0, 0);
             location post = new location();
             warpPlayer(self, "dungeon1", post.x, post.y, post.z, obj_id.NULL_ID, 0.0f, 0.0f, 0.0f, "msgDungeonTravelComplete");
-            sendSystemMessageTestingOnly(self, "Going to dungeon");
+            broadcast(self, "Going to dungeon");
         }
         if (strCommands[0].equals("makeDungeonObjects"))
         {
             location locTest = new location();
-            sendSystemMessageTestingOnly(self, "Making formal objects");
+            broadcast(self, "Making formal objects");
             String strObject = "object/building/general/npe_hangar_1.iff";
             obj_id[] objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, strObject);
             location selfLocation = getLocation(self);
@@ -634,11 +634,11 @@ public class content_generation extends script.base_script
                 locFoo.z = 1000;
                 obj_id objObject = createObject(strObject, locFoo);
                 persistObject(objObject);
-                sendSystemMessageTestingOnly(self, "Made " + objObject + " " + strObject);
+                broadcast(self, "Made " + objObject + " " + strObject);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Found " + objTestObjects[0] + " " + strObject);
+                broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
             strObject = "object/building/general/npe_space_dungeon.iff";
             objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, strObject);
@@ -650,11 +650,11 @@ public class content_generation extends script.base_script
                 locFoo.z = 2000;
                 obj_id objObject = createObject(strObject, locFoo);
                 persistObject(objObject);
-                sendSystemMessageTestingOnly(self, "Made " + objObject + " " + strObject);
+                broadcast(self, "Made " + objObject + " " + strObject);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Found " + objTestObjects[0] + " " + strObject);
+                broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
             strObject = "object/building/general/npe_hangar_2.iff";
             objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, strObject);
@@ -666,11 +666,11 @@ public class content_generation extends script.base_script
                 locFoo.z = 3000;
                 obj_id objObject = createObject(strObject, locFoo);
                 persistObject(objObject);
-                sendSystemMessageTestingOnly(self, "Made " + objObject + " " + strObject);
+                broadcast(self, "Made " + objObject + " " + strObject);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Found " + objTestObjects[0] + " " + strObject);
+                broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
             strObject = "object/building/general/npe_space_station.iff";
             objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, strObject);
@@ -682,13 +682,13 @@ public class content_generation extends script.base_script
                 locFoo.z = 4000;
                 obj_id objObject = createObject(strObject, locFoo);
                 persistObject(objObject);
-                sendSystemMessageTestingOnly(self, "Made " + objObject + " " + strObject);
+                broadcast(self, "Made " + objObject + " " + strObject);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Found " + objTestObjects[0] + " " + strObject);
+                broadcast(self, "Found " + objTestObjects[0] + " " + strObject);
             }
-            sendSystemMessageTestingOnly(self, "Go to falcon ");
+            broadcast(self, "Go to falcon ");
             return SCRIPT_CONTINUE;
         }
         if (strCommands[0].equals("makeFalcon"))
@@ -703,12 +703,12 @@ public class content_generation extends script.base_script
                 locFoo.y = 4000;
                 locFoo.z = 4000;
                 obj_id objObject = createObject(strObject, locFoo);
-                sendSystemMessageTestingOnly(self, "Made " + objObject);
+                broadcast(self, "Made " + objObject);
                 persistObject(objObject);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Found " + objTestObjects[0]);
+                broadcast(self, "Found " + objTestObjects[0]);
             }
             return SCRIPT_CONTINUE;
         }
@@ -718,7 +718,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to ord space...");
+            broadcast(self, "Going to ord space...");
             npe.movePlayerFromSharedStationToOrdMantellSpace(self, new location(0, 0, 0));
         }
         if (strCommands[0].equals("gotoSpaceDungeon"))
@@ -727,7 +727,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to space station...");
+            broadcast(self, "Going to space station...");
             npe.movePlayerFromOrdMantellSpaceToOrdMantellDungeon(self);
         }
         if (strCommands[0].equals("leaveSpaceDungeon"))
@@ -736,7 +736,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to ord space...");
+            broadcast(self, "Going to ord space...");
             npe.movePlayerFromOrdMantellDungeonToOrdMantellSpace(self, new location(0, 0, 0));
         }
         if (strCommands[0].equals("gotoSharedStationFromOrdZone"))
@@ -745,7 +745,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to space station...");
+            broadcast(self, "Going to space station...");
             npe.movePlayerFromOrdMantellSpaceToSharedStation(self);
         }
         if (strCommands[0].equals("gotoFalcon"))
@@ -754,7 +754,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to turret...");
+            broadcast(self, "Going to turret...");
             npe.movePlayerFromHangarToFalcon(self);
         }
         if (strCommands[0].equals("startHangar"))
@@ -762,7 +762,7 @@ public class content_generation extends script.base_script
             obj_id objBuilding = getTopMostContainer(self);
             setObjVar(objBuilding, "tester", self);
             messageTo(objBuilding, "setupArea", null, 0, false);
-            sendSystemMessageTestingOnly(self, "setting up " + objBuilding);
+            broadcast(self, "setting up " + objBuilding);
             messageTo(objBuilding, "doEvents", null, 4, false);
         }
         if (strCommands[0].equals("finishNpe"))
@@ -771,7 +771,7 @@ public class content_generation extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to post staging area...");
+            broadcast(self, "Going to post staging area...");
             npe.movePlayerFromSharedStationToFinishLocation(self);
         }
         if (strCommands[0].equals("doNpe"))
@@ -779,17 +779,17 @@ public class content_generation extends script.base_script
             space_utils.destroyShipControlDevices(self, true);
             space_utils.createShipControlDevice(self, "basic_hutt_light", true);
             grantCommand(self, "cert_starships_lighthuttfighter");
-            sendSystemMessageTestingOnly(self, "Setting up for npe...");
+            broadcast(self, "Setting up for npe...");
             if (isGod(self))
             {
-                sendSystemMessageTestingOnly(self, "TURN OFF GOD MODE! NEW PLAYERS DON't GET THAT");
+                broadcast(self, "TURN OFF GOD MODE! NEW PLAYERS DON't GET THAT");
                 return SCRIPT_CONTINUE;
             }
         }
         if (strCommands[0].equals("findDungeon"))
         {
             obj_id[] objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/building/general/npe_space_dungeon.iff");
-            sendSystemMessageTestingOnly(self, "objTestObjects.length is " + objTestObjects.length);
+            broadcast(self, "objTestObjects.length is " + objTestObjects.length);
         }
         if (strCommands[0].equalsIgnoreCase("endHangar"))
         {
@@ -808,7 +808,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling interior component creation");
+            broadcast(self, "Cancelling interior component creation");
             return SCRIPT_CONTINUE;
         }
         String strTypeToCreate = sui.getInputBoxText(params);
@@ -829,19 +829,19 @@ public class content_generation extends script.base_script
         dictionary dctInfo = dataTableGetRow("datatables/space_crafting/interior_component_lookup.iff", strTypeToCreate);
         if (dctInfo == null)
         {
-            sendSystemMessageTestingOnly(self, "CATASTROPHIC FUCKUP! go find dan and ask how this could POSSIBLY EVERY HAPPEN1?#@!@?!?@!@");
+            broadcast(self, "CATASTROPHIC FUCKUP! go find dan and ask how this could POSSIBLY EVERY HAPPEN1?#@!@?!?@!@");
             return SCRIPT_CONTINUE;
         }
         String strTemplate = dctInfo.getString("strTemplateName");
         obj_id objTest = createObject(strTemplate, getLocation(self));
         if (!isIdValid(objTest))
         {
-            sendSystemMessageTestingOnly(self, "You have made a bad object of type " + strTemplate + ". This is using entry " + strTypeToCreate + " in datatables/space_crafting/interior_component_lookup.tab. Please go fix this!@!@!");
+            broadcast(self, "You have made a bad object of type " + strTemplate + ". This is using entry " + strTypeToCreate + " in datatables/space_crafting/interior_component_lookup.tab. Please go fix this!@!@!");
             return SCRIPT_CONTINUE;
         }
         setObjVar(objTest, "strManagerName", strTypeToCreate);
         attachScript(objTest, "space.crafting.interior_component");
-        sendSystemMessageTestingOnly(self, "Interior Manager Created, move into position, object id is " + objTest);
+        broadcast(self, "Interior Manager Created, move into position, object id is " + objTest);
         return SCRIPT_CONTINUE;
     }
     public int specifyCellToLock(obj_id self, dictionary params) throws InterruptedException
@@ -849,7 +849,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling terminal creation");
+            broadcast(self, "Cancelling terminal creation");
             return SCRIPT_CONTINUE;
         }
         String strCellToLock = sui.getInputBoxText(params);
@@ -857,7 +857,7 @@ public class content_generation extends script.base_script
         obj_id objShip = getTopMostContainer(self);
         if (!isIdValid(objShip))
         {
-            sendSystemMessageTestingOnly(self, "This command only works in a ship");
+            broadcast(self, "This command only works in a ship");
             return SCRIPT_CONTINUE;
         }
         String[] strCells = getCellNames(objShip);
@@ -875,7 +875,7 @@ public class content_generation extends script.base_script
         obj_id objTest = createObject("object/tangible/terminal/terminal_ship_interior_security_1.iff", getLocation(self));
         setObjVar(objTest, "strCellToLock", strCellToLock);
         attachScript(objTest, "space.combat.combat_ship_security_terminal");
-        sendSystemMessageTestingOnly(self, "Terminal Created, move into position, object id is " + objTest);
+        broadcast(self, "Terminal Created, move into position, object id is " + objTest);
         return SCRIPT_CONTINUE;
     }
     public int specifyLootLookup(obj_id self, dictionary params) throws InterruptedException
@@ -883,7 +883,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling Loot COntainer creation");
+            broadcast(self, "Cancelling Loot COntainer creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -905,7 +905,7 @@ public class content_generation extends script.base_script
         obj_id objContainer = null;
         if ((strColumns == null) || (strColumns.length == 0))
         {
-            sendSystemMessageTestingOnly(self, "BAD BAD BAD LOOT LOOKUP TYPE FOR YOUR CHEST! FOR ENTRY " + strChestType + " You used " + strLootLookup + " GO FIX IT!@!@!");
+            broadcast(self, "BAD BAD BAD LOOT LOOKUP TYPE FOR YOUR CHEST! FOR ENTRY " + strChestType + " You used " + strLootLookup + " GO FIX IT!@!@!");
             return SCRIPT_CONTINUE;
         }
         try
@@ -914,12 +914,12 @@ public class content_generation extends script.base_script
         }
         catch(Throwable err)
         {
-            sendSystemMessageTestingOnly(self, "BAD OBJECT at entry " + strChestType + " Object is " + strChestTemplate);
+            broadcast(self, "BAD OBJECT at entry " + strChestType + " Object is " + strChestTemplate);
             return SCRIPT_CONTINUE;
         }
         if (!isIdValid(objContainer))
         {
-            sendSystemMessageTestingOnly(self, "BAD OBJECT at entry " + strChestType + " Object is " + strChestTemplate);
+            broadcast(self, "BAD OBJECT at entry " + strChestType + " Object is " + strChestTemplate);
             return SCRIPT_CONTINUE;
         }
         setObjVar(objContainer, "loot.intCredits", rand(intMinCredits, intMaxCredits));
@@ -941,7 +941,7 @@ public class content_generation extends script.base_script
         String strScript = dctParams.getString("strScript");
         attachScript(objContainer, "space.content_tools.loot_container");
         attachScript(objContainer, strScript);
-        sendSystemMessageTestingOnly(self, "Loot Container created, object id is " + objContainer);
+        broadcast(self, "Loot Container created, object id is " + objContainer);
         return SCRIPT_CONTINUE;
     }
     public int makeSpaceStation(obj_id self, dictionary params) throws InterruptedException
@@ -949,7 +949,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling station creation");
+            broadcast(self, "Cancelling station creation");
             return SCRIPT_CONTINUE;
         }
         String strStationType = sui.getInputBoxText(params);
@@ -974,7 +974,7 @@ public class content_generation extends script.base_script
         dictionary dctStationInfo = dataTableGetRow("datatables/space_content/spacestations.iff", strStationType);
         if (dctStationInfo == null)
         {
-            sendSystemMessageTestingOnly(self, "Critical station failure. Go ask dan. Station type was " + strStationType);
+            broadcast(self, "Critical station failure. Go ask dan. Station type was " + strStationType);
             utils.removeScriptVar(self, "strStations");
             return SCRIPT_CONTINUE;
         }
@@ -987,7 +987,7 @@ public class content_generation extends script.base_script
         obj_id objStation = space_create.createShip(strType, getTransform_o2p(getPilotedShip(self)));
         if (!isIdValid(objStation))
         {
-            sendSystemMessageTestingOnly(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the template is bad. Template name is " + strType);
+            broadcast(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the template is bad. Template name is " + strType);
             return SCRIPT_CONTINUE;
         }
         setObjVar(objStation, "strName", strName);
@@ -996,7 +996,7 @@ public class content_generation extends script.base_script
         {
             if (!(attachScript(objStation, strConversationScript) == SCRIPT_CONTINUE))
             {
-                sendSystemMessageTestingOnly(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the convo script is bad. script name is " + strConversationScript);
+                broadcast(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the convo script is bad. script name is " + strConversationScript);
                 destroyObject(objStation);
                 return SCRIPT_CONTINUE;
             }
@@ -1019,7 +1019,7 @@ public class content_generation extends script.base_script
         {
             removeObjVar(objStation, "intNoDump");
         }
-        sendSystemMessageTestingOnly(self, "Station created! id is " + objStation);
+        broadcast(self, "Station created! id is " + objStation);
         return SCRIPT_CONTINUE;
     }
     public int makeEntrySpaceStation(obj_id self, dictionary params) throws InterruptedException
@@ -1027,7 +1027,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling station creation");
+            broadcast(self, "Cancelling station creation");
             return SCRIPT_CONTINUE;
         }
         String strStationType = sui.getInputBoxText(params);
@@ -1052,7 +1052,7 @@ public class content_generation extends script.base_script
         dictionary dctStationInfo = dataTableGetRow("datatables/space_content/battlefields/entry_stations.iff", strStationType);
         if (dctStationInfo == null)
         {
-            sendSystemMessageTestingOnly(self, "Critical station failure. Go ask dan. Station type was " + strStationType);
+            broadcast(self, "Critical station failure. Go ask dan. Station type was " + strStationType);
             utils.removeScriptVar(self, "strStations");
             return SCRIPT_CONTINUE;
         }
@@ -1062,7 +1062,7 @@ public class content_generation extends script.base_script
         obj_id objStation = space_create.createShip(strShipType, getTransform_o2p(space_transition.getContainingShip(self)));
         if (!isIdValid(objStation))
         {
-            sendSystemMessageTestingOnly(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the ship type is bad. ship type  name is " + strShipType);
+            broadcast(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the ship type is bad. ship type  name is " + strShipType);
             return SCRIPT_CONTINUE;
         }
         setObjVar(objStation, "strName", strName);
@@ -1070,11 +1070,11 @@ public class content_generation extends script.base_script
         setObjVar(objStation, "intInvincible", 1);
         if (!(attachScript(objStation, strConversationScript) == SCRIPT_CONTINUE))
         {
-            sendSystemMessageTestingOnly(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the convo script is bad. script name is " + strConversationScript);
+            broadcast(self, "in datatable datatables/space_content/spacestations.tab entry " + strStationType + " the convo script is bad. script name is " + strConversationScript);
             destroyObject(objStation);
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Station created! id is " + objStation);
+        broadcast(self, "Station created! id is " + objStation);
         return SCRIPT_CONTINUE;
     }
     public boolean isValidSpawnerType(String strText) throws InterruptedException
@@ -1098,14 +1098,14 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
         String strType = sui.getInputBoxText(params);
         if (!isValidSpawnerType(strType))
         {
-            sendSystemMessageTestingOnly(self, "That's not a valid spawner type, exiting");
+            broadcast(self, "That's not a valid spawner type, exiting");
             sui.inputbox(self, self, "INVALID SPAWN TYPE, PLEASE RE_ENTER. \nWhat type of spawner? Valid types are : generic", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawnerType", null);
             return SCRIPT_CONTINUE;
         }
@@ -1127,7 +1127,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1149,7 +1149,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1171,7 +1171,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1189,7 +1189,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1204,7 +1204,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1219,7 +1219,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1234,7 +1234,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1249,7 +1249,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1268,7 +1268,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1302,7 +1302,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1322,7 +1322,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1348,7 +1348,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1368,7 +1368,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1394,7 +1394,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1414,7 +1414,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1440,7 +1440,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1460,7 +1460,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1500,7 +1500,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1540,7 +1540,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1576,7 +1576,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1596,7 +1596,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1631,7 +1631,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1642,18 +1642,18 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "INVALID NUMBER, PLEASE USE A NUMBER\nSCALE: Meters \nWhat is the minimum loiter distance? ", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMinLoiterDistance", null);
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Calling max thing");
+        broadcast(self, "Calling max thing");
         sui.inputbox(self, self, "Minimum Loiter Distance: " + fltMinLoiterDistance + "\n SCALE: Meters \nWhat is the maximum loiter distance? ", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyMaxLoiterDistance", null);
         utils.setScriptVar(self, "fltMinLoiterDistance", fltMinLoiterDistance);
         return SCRIPT_CONTINUE;
     }
     public int specifyMaxLoiterDistance(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "MAX CALLEd");
+        broadcast(self, "MAX CALLEd");
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1770,7 +1770,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1804,7 +1804,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -1919,17 +1919,17 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
         String strString = sui.getInputBoxText(params);
         if (strString.equals("done"))
         {
-            sendSystemMessageTestingOnly(self, "DoNE");
+            broadcast(self, "DoNE");
             if (utils.hasScriptVar(self, "objPatrolPoints"))
             {
-                sendSystemMessageTestingOnly(self, "HasScriptVar");
+                broadcast(self, "HasScriptVar");
                 obj_id[] objPatrolPoints = utils.getObjIdArrayScriptVar(self, "objPatrolPoints");
                 if (objPatrolPoints.length < 2)
                 {
@@ -1967,7 +1967,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -2001,7 +2001,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -2022,7 +2022,7 @@ public class content_generation extends script.base_script
                 return SCRIPT_CONTINUE;
         }
         utils.setScriptVar(self, "intActivationPhase", intPhase);
-        sendSystemMessageTestingOnly(self, "DoNE");
+        broadcast(self, "DoNE");
         writeSpawner(self);
         return SCRIPT_CONTINUE;
     }
@@ -2073,7 +2073,7 @@ public class content_generation extends script.base_script
     }
     public void writeAsteroidSpawner(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Writing asteroid spawner");
+        broadcast(self, "Writing asteroid spawner");
         transform trTest = getTransform_o2p(getPilotedShip(self));
         if (utils.hasScriptVar(self, "trTestLocation"))
         {
@@ -2100,7 +2100,7 @@ public class content_generation extends script.base_script
     }
     public void writeSpawner(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Writing spawner");
+        broadcast(self, "Writing spawner");
         transform trTest = getTransform_o2p(getPilotedShip(self));
         if (utils.hasScriptVar(self, "trTestLocation"))
         {
@@ -2222,7 +2222,7 @@ public class content_generation extends script.base_script
         }
         for (String s : strColumn) {
             if (!isValidMobString(s)) {
-                sendSystemMessageTestingOnly(getSelf(), "BAD DATA IN WAVE FILE, COLUMN " + strWave + " entry is " + s);
+                broadcast(getSelf(), "BAD DATA IN WAVE FILE, COLUMN " + strWave + " entry is " + s);
                 return false;
             }
         }
@@ -2261,7 +2261,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling player patrol point creation.");
+            broadcast(self, "Cancelling player patrol point creation.");
             return SCRIPT_CONTINUE;
         }
         String name = sui.getInputBoxText(params);
@@ -2272,7 +2272,7 @@ public class content_generation extends script.base_script
         }
         obj_id pp = createObject("object/tangible/space/content_infrastructure/quest_nav_point.iff", getTransform_o2p(getPilotedShip(self)), null);
         setObjVar(pp, "nav_name", name);
-        sendSystemMessageTestingOnly(self, "Created player patrol point: " + name);
+        broadcast(self, "Created player patrol point: " + name);
         return SCRIPT_CONTINUE;
     }
     public int specifyEscortPointName(obj_id self, dictionary params) throws InterruptedException
@@ -2280,7 +2280,7 @@ public class content_generation extends script.base_script
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling escort point creation.");
+            broadcast(self, "Cancelling escort point creation.");
             return SCRIPT_CONTINUE;
         }
         String name = sui.getInputBoxText(params);
@@ -2291,13 +2291,13 @@ public class content_generation extends script.base_script
         }
         obj_id pp = createObject("object/tangible/space/content_infrastructure/quest_escort_point.iff", getTransform_o2p(getPilotedShip(self)), null);
         setObjVar(pp, "nav_name", name);
-        sendSystemMessageTestingOnly(self, "Created escort point: " + name);
+        broadcast(self, "Created escort point: " + name);
         return SCRIPT_CONTINUE;
     }
     public int handleDebugOutput(obj_id self, dictionary params) throws InterruptedException
     {
         String strSpam = params.getString("strSpam");
-        sendSystemMessageTestingOnly(self, "strSpam");
+        broadcast(self, "strSpam");
         return SCRIPT_CONTINUE;
     }
     public boolean isDumpable(obj_id objObject, boolean boolDumpCells) throws InterruptedException
@@ -2411,9 +2411,9 @@ public class content_generation extends script.base_script
                     dictionary dctParams = dataTableGetRow("datatables/ship/components/" + strComponentType + ".iff", getTemplateName(objItem));
                     if (dctParams == null)
                     {
-                        sendSystemMessageTestingOnly(self, "Loot Type: " + strColumn);
-                        sendSystemMessageTestingOnly(self, "Item Template: " + strTemplate);
-                        sendSystemMessageTestingOnly(self, "NO ENTRY IN LOOT TABLE FOR TYPE " + strComponentType);
+                        broadcast(self, "Loot Type: " + strColumn);
+                        broadcast(self, "Item Template: " + strTemplate);
+                        broadcast(self, "NO ENTRY IN LOOT TABLE FOR TYPE " + strComponentType);
                         debugConsoleMsg(self, "Loot Type: " + strColumn);
                         debugConsoleMsg(self, "Item Template: " + strTemplate);
                         debugConsoleMsg(self, "NO ENTRY IN LOOT TABLE FOR TYPE " + strComponentType);
@@ -2421,9 +2421,9 @@ public class content_generation extends script.base_script
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Loot Type: " + strColumn);
-                    sendSystemMessageTestingOnly(self, "Item Template: " + strTemplate);
-                    sendSystemMessageTestingOnly(self, "NO COMPONENT TYPE SETUP!@!@");
+                    broadcast(self, "Loot Type: " + strColumn);
+                    broadcast(self, "Item Template: " + strTemplate);
+                    broadcast(self, "NO COMPONENT TYPE SETUP!@!@");
                     debugConsoleMsg(self, "Loot Type: " + strColumn);
                     debugConsoleMsg(self, "Item Template: " + strTemplate);
                     debugConsoleMsg(self, "NO COMPONENT TYPE SETUP!@!@");
@@ -2437,9 +2437,9 @@ public class content_generation extends script.base_script
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "Loot Type: " + strColumn);
-            sendSystemMessageTestingOnly(self, "Item Template: " + strTemplate);
-            sendSystemMessageTestingOnly(self, "BAD OBJECT TEMPLATE");
+            broadcast(self, "Loot Type: " + strColumn);
+            broadcast(self, "Item Template: " + strTemplate);
+            broadcast(self, "BAD OBJECT TEMPLATE");
             debugConsoleMsg(self, "Loot Type: " + strColumn);
             debugConsoleMsg(self, "Item Template: " + strTemplate);
             debugConsoleMsg(self, "BAD OBJECT TEMPLATE");

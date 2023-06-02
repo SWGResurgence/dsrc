@@ -31,7 +31,7 @@ public class recovery extends script.base_script
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, "targetArrivalDelay", questInfo.getInt("targetArrivalDelay"));
@@ -283,12 +283,12 @@ public class recovery extends script.base_script
             }
             if (!found)
             {
-                sendSystemMessageTestingOnly(player, "WARNING: Failed to find nav point " + pathPoints[j] + " specified in nav point list.");
+                broadcast(player, "WARNING: Failed to find nav point " + pathPoints[j] + " specified in nav point list.");
             }
         }
         if (b != translist.length)
         {
-            sendSystemMessageTestingOnly(player, "WARNING: Failed to find " + translist.length + " valid nav points for this mission!");
+            broadcast(player, "WARNING: Failed to find " + translist.length + " valid nav points for this mission!");
         }
         return translist;
     }

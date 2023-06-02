@@ -35,7 +35,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
         {
-            sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+            broadcast(player, "Only declared factional personnel may access this terminal!");
             return SCRIPT_CONTINUE;
         }
         obj_id structure = getObjIdObjVar(self, "objParent");
@@ -47,12 +47,12 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         int pFac = pvpGetAlignedFaction(player);
         if (!pvpAreFactionsOpposed(sFac, pFac))
         {
-            sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
+            broadcast(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "The security terminal has already been sliced!");
+            broadcast(player, "The security terminal has already been sliced!");
             return SCRIPT_CONTINUE;
         }
         obj_id nextObjective = hq.getNextObjective(structure);
@@ -66,7 +66,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
+                broadcast(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -81,20 +81,20 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
                     {
                         if (player == repairer)
                         {
-                            sendSystemMessageTestingOnly(player, "You are already repairing a prior slice attempt's damage...");
+                            broadcast(player, "You are already repairing a prior slice attempt's damage...");
                             return SCRIPT_CONTINUE;
                         }
                         else
                         {
                             if (repairer.isLoaded())
                             {
-                                sendSystemMessageTestingOnly(player, getName(repairer) + " is already repairing a prior slice attempt's damage...");
+                                broadcast(player, getName(repairer) + " is already repairing a prior slice attempt's damage...");
                                 return SCRIPT_CONTINUE;
                             }
                         }
                     }
                 }
-                sendSystemMessageTestingOnly(player, "You begin repairing the damage done by a prior slicing attempt...");
+                broadcast(player, "You begin repairing the damage done by a prior slicing attempt...");
                 dictionary d = new dictionary();
                 d.put("player", player);
                 d.put("cnt", 10);
@@ -146,7 +146,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         }
         if (!hasObjVar(self, "slicing.failed"))
         {
-            sendSystemMessageTestingOnly(player, "It appears that the terminal has been repaired. You may begin slicing again.");
+            broadcast(player, "It appears that the terminal has been repaired. You may begin slicing again.");
             return SCRIPT_CONTINUE;
         }
         int cnt = params.getInt("cnt");
@@ -154,13 +154,13 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         cnt -= rand(1, max);
         if (cnt < 0)
         {
-            sendSystemMessageTestingOnly(player, "It appears that the terminal has been repaired. You may begin slicing again.");
+            broadcast(player, "It appears that the terminal has been repaired. You may begin slicing again.");
             removeObjVar(self, "slicing.failed");
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Security terminal repairs continue...");
+            broadcast(player, "Security terminal repairs continue...");
             params.put("cnt", cnt);
             messageTo(self, "handleSlicingRepair", params, 5.0f, false);
         }

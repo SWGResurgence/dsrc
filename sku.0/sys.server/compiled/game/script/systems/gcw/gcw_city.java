@@ -89,7 +89,7 @@ public class gcw_city extends script.base_script
                 }
                 utils.setScriptVar(planet, "gcw.calendar_time." + city, getCalendarTime() - gcw.GCW_CONSTRUCTION_END_TIMER - gcw.GCW_COMBAT_END_TIMER);
                 messageTo(self, "cleanupInvasion", params, 1.0f, false);
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: Cleaning up invasion.");
+                broadcast(objSpeaker, "GCW Controller: Cleaning up invasion.");
                 break;
             }
             case "gcwdefensewin":
@@ -175,7 +175,7 @@ public class gcw_city extends script.base_script
                 }
                 utils.setScriptVar(planet, "gcw.calendar_time." + city, getCalendarTime() - gcw.GCW_CONSTRUCTION_END_TIMER - gcw.GCW_COMBAT_END_TIMER);
                 messageTo(self, "cleanupInvasion", params, 1.0f, false);
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: Defense has won the invasion -- No announcements will be sent.");
+                broadcast(objSpeaker, "GCW Controller: Defense has won the invasion -- No announcements will be sent.");
                 break;
             }
             case "gcwbegin":
@@ -197,14 +197,14 @@ public class gcw_city extends script.base_script
                 String cityConfig = getConfigSetting("GameServer", "gcwcity" + city);
                 if (cityConfig == null || cityConfig.length() <= 0)
                 {
-                    sendSystemMessageTestingOnly(objSpeaker, "The city configuration (gcwcity" + city + ") is turned off.  OVERRIDING");
+                    broadcast(objSpeaker, "The city configuration (gcwcity" + city + ") is turned off.  OVERRIDING");
                     utils.setScriptVar(self, "gcw.configOverride", 1);
                 }
                 utils.setScriptVar(planet, "gcw.time." + city, getGameTime());
                 utils.setScriptVar(planet, "gcw.object." + city, self);
                 utils.setScriptVar(planet, "gcw.calendar_time." + city, getCalendarTime());
                 messageTo(self, "beginInvasion", null, 1.0f, false);
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: Starting construction.");
+                broadcast(objSpeaker, "GCW Controller: Starting construction.");
                 break;
             }
             case "gcwendbuild":
@@ -225,12 +225,12 @@ public class gcw_city extends script.base_script
                 }
                 utils.setScriptVar(planet, "gcw.calendar_time." + city, getCalendarTime() - gcw.GCW_CONSTRUCTION_END_TIMER);
                 messageTo(self, "endConstruction", params, 1.0f, false);
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: Starting invasion.");
+                broadcast(objSpeaker, "GCW Controller: Starting invasion.");
                 break;
             }
             case "gcwkits":
                 obj_id[] npcs = trial.getObjectsInInstanceBySpawnId(self, "defense_kit");
-                sendSystemMessageTestingOnly(self, "count: " + npcs.length);
+                broadcast(self, "count: " + npcs.length);
                 break;
             case "gcwquickbuild":
             {
@@ -247,7 +247,7 @@ public class gcw_city extends script.base_script
                 kits = trial.getObjectsInInstanceBySpawnId(self, "vehicle_patrol");
                 qaInstabuild(kits);
                 kitsLength += kits.length / 2;
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: " + kitsLength + " Construction kits modified.");
+                broadcast(objSpeaker, "GCW Controller: " + kitsLength + " Construction kits modified.");
                 break;
             }
             case "gcwquickbuildclear":
@@ -265,7 +265,7 @@ public class gcw_city extends script.base_script
                 kits = trial.getObjectsInInstanceBySpawnId(self, "vehicle_patrol");
                 qaInstaclear(kits);
                 kitsLength += kits.length / 2;
-                sendSystemMessageTestingOnly(objSpeaker, "GCW Controller: " + kitsLength + " Construction kits modified to zero quests completed.");
+                broadcast(objSpeaker, "GCW Controller: " + kitsLength + " Construction kits modified to zero quests completed.");
                 break;
             }
         }

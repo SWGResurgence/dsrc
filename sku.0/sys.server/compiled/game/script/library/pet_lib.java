@@ -2629,7 +2629,7 @@ public class pet_lib extends script.base_script
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because you have the fasttame objvar set");
+                broadcast(master, "GODMODE MSG: You can call a pet because you have the fasttame objvar set");
             }
             return true;
         }
@@ -2659,7 +2659,7 @@ public class pet_lib extends script.base_script
                 {
                     if (isGod(master))
                     {
-                        sendSystemMessageTestingOnly(master, "GODMODE MSG:  You are in a mount restricted scene.");
+                        broadcast(master, "GODMODE MSG:  You are in a mount restricted scene.");
                     }
                     return true;
                 }
@@ -2672,14 +2672,14 @@ public class pet_lib extends script.base_script
     {
         if (isGod(master))
         {
-            sendSystemMessageTestingOnly(master, "GODMODE MSG: You can quickUnpack because you are in GOD MODE:");
+            broadcast(master, "GODMODE MSG: You can quickUnpack because you are in GOD MODE:");
             return true;
         }
         if (hasObjVar(master, "fasttame"))
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because you have the fasttame objvar set");
+                broadcast(master, "GODMODE MSG: You can call a pet because you have the fasttame objvar set");
             }
             return true;
         }
@@ -2692,7 +2692,7 @@ public class pet_lib extends script.base_script
             }
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because locations.isInMissionCity() return TRUE");
+                broadcast(master, "GODMODE MSG: You can call a pet because locations.isInMissionCity() return TRUE");
             }
             return true;
         }
@@ -2700,7 +2700,7 @@ public class pet_lib extends script.base_script
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because you are in a building, not in town");
+                broadcast(master, "GODMODE MSG: You can call a pet because you are in a building, not in town");
             }
             return true;
         }
@@ -2709,7 +2709,7 @@ public class pet_lib extends script.base_script
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because camping.getCurrentCamp() return TRUE");
+                broadcast(master, "GODMODE MSG: You can call a pet because camping.getCurrentCamp() return TRUE");
             }
             return true;
         }
@@ -2717,7 +2717,7 @@ public class pet_lib extends script.base_script
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: You can call a pet because isNearResidence() returned true");
+                broadcast(master, "GODMODE MSG: You can call a pet because isNearResidence() returned true");
             }
             return true;
         }

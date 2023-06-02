@@ -331,13 +331,13 @@ public class resource extends script.base_script
         String resource_class = getStringObjVar(tool, resource.VAR_SURVEY_CLASS);
         if (resource_class.equals(""))
         {
-            sendSystemMessageTestingOnly(user, "ERROR: survey tool broken -> no assigned resource class");
+            broadcast(user, "ERROR: survey tool broken -> no assigned resource class");
             return false;
         }
         String baseMod = getSkillModForClass(resource_class);
         if (baseMod.equals(""))
         {
-            sendSystemMessageTestingOnly(user, "ERROR: survey tool broken -> unknown resource class");
+            broadcast(user, "ERROR: survey tool broken -> unknown resource class");
             return false;
         }
         int rangeVal = getSkillStatMod(user, "surveying") / 20;
@@ -397,7 +397,7 @@ public class resource extends script.base_script
         String resource_class = getStringObjVar(tool, resource.VAR_SURVEY_CLASS);
         if (resource_class == null || resource_class.equals(""))
         {
-            sendSystemMessageTestingOnly(user, "ERROR: survey tool broken -> no assigned resource class");
+            broadcast(user, "ERROR: survey tool broken -> no assigned resource class");
             return SAMPLE_STOP_LOOP;
         }
         if (!isResourceDerivedFrom(typeId, resource_class))

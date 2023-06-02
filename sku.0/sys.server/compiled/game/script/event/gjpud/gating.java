@@ -26,7 +26,7 @@ public class gating extends script.base_script
         int gating = getIntObjVar(item, "gjpud.gating");
         if (gating != 1)
         {
-            sendSystemMessageTestingOnly(item, "It would be impolite to enter a private residence.");
+            broadcast(item, "It would be impolite to enter a private residence.");
             return SCRIPT_OVERRIDE;
         }
         else

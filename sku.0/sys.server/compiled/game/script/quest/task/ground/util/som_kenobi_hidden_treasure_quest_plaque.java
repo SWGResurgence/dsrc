@@ -38,7 +38,7 @@ public class som_kenobi_hidden_treasure_quest_plaque extends script.base_script
             String questName = getStringObjVar(self, QUEST_NAME_OBJVAR);
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "GODMODE MSG: quest name provided with questGiver.questName objvar is invalid.");
+                broadcast(player, "GODMODE MSG: quest name provided with questGiver.questName objvar is invalid.");
             }
         }
         return SCRIPT_CONTINUE;

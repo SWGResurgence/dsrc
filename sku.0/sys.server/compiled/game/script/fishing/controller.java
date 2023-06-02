@@ -40,7 +40,7 @@ public class controller extends script.base_script {
 
     // Make sure CSRs can't take the master object on a stroll down Amidala's Beach when they should be home doing their homework
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException {
-        sendSystemMessageTestingOnly(transferer, "You cannot move this item!");
+        broadcast(transferer, "You cannot move this item!");
         return SCRIPT_OVERRIDE;
     }
 

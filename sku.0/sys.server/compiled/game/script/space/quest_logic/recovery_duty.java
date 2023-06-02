@@ -23,7 +23,7 @@ public class recovery_duty extends script.space.quest_logic.recovery
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         String[] targetShips = dataTableGetStringColumn(qTable, "targetShipTypes");

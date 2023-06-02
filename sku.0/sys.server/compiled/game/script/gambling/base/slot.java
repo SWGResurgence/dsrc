@@ -282,7 +282,7 @@ public class slot extends script.gambling.base.default_interface
             msg += "| " + getString(gambling.SID_ROLLING) + " | ";
         }
         msg += "--";
-        sendSystemMessageTestingOnly(player, msg);
+        broadcast(player, msg);
         if (idx >= results.length)
         {
             messageTo(self, "handleParseResults", params, 1.0f, false);
@@ -334,7 +334,7 @@ public class slot extends script.gambling.base.default_interface
         else 
         {
             CustomerServiceLog("gambling", getGameTime() + ": (" + player + ") " + getName(player) + " lost");
-            sendSystemMessageTestingOnly(player, "Sorry, you did not win this round. Please try again.");
+            broadcast(player, "Sorry, you did not win this round. Please try again.");
             messageTo(self, "handleDelayedRestart", params, 3.0f, false);
         }
         return SCRIPT_CONTINUE;
@@ -433,7 +433,7 @@ public class slot extends script.gambling.base.default_interface
         }
         if (pid == -1)
         {
-            sendSystemMessageTestingOnly(player, "The slot machine was unable to create an interface for you.");
+            broadcast(player, "The slot machine was unable to create an interface for you.");
             return;
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);
@@ -460,7 +460,7 @@ public class slot extends script.gambling.base.default_interface
         String[] reel = dataTableGetStringColumnNoDefaults(tbl, "REEL");
         if (reel == null || reel.length == 0)
         {
-            sendSystemMessageTestingOnly(player, "This machine appears to be broken. Please try again later.");
+            broadcast(player, "This machine appears to be broken. Please try again later.");
             return;
         }
         utils.removeScriptVar(self, gambling.VAR_TABLE_BET_ACCEPT);
@@ -470,7 +470,7 @@ public class slot extends script.gambling.base.default_interface
         d.put("results", new int[3]);
         d.put("idx", 0);
         d.put("reel", reel);
-        sendSystemMessageTestingOnly(player, "You activate the machine and the reels start spinning...");
+        broadcast(player, "You activate the machine and the reels start spinning...");
         messageTo(self, "handleReelsSpinning", d, 5.0f, false);
     }
     private void showPayoutSchedule(obj_id self, obj_id player) throws InterruptedException

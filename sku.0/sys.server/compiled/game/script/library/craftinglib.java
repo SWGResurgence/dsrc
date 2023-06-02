@@ -287,7 +287,7 @@ public class craftinglib extends script.base_script
         debugServerConsoleMsg(null, "@@@@ calcSkillDesignAssemblyCheck: Force Mod = " + forceSkillMod);
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING ---------------------------------");
+            broadcast(player, "CRAFTING ---------------------------------");
         }
         int city_id = city.checkCity(player, false);
         if (city_id > 0 && (city.cityHasSpec(city_id, city.SF_SPEC_INDUSTRY) || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
@@ -296,7 +296,7 @@ public class craftinglib extends script.base_script
             sendSystemMessage(player, new string_id("city/city", "manufacturing_center_message"));
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "CRAFTING -- 10% raw random bonus for industry city");
+                broadcast(player, "CRAFTING -- 10% raw random bonus for industry city");
             }
         }
         dieRollMod += getCraftingInspirationBonus(player, craftingValuesDictionary, dieRoll, 5.0f);
@@ -307,19 +307,19 @@ public class craftinglib extends script.base_script
             dieRollMod += (eff * deltaMod);
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "CRAFTING -- Food buff effect applied to raw random roll");
+                broadcast(player, "CRAFTING -- Food buff effect applied to raw random roll");
             }
         }
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Raw Random Roll = " + dieRoll);
-            sendSystemMessageTestingOnly(player, "CRAFTING --");
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Item Complexity Mod = " + itemComplexitySkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Resource Malleability Mod = " + resourceMalleabilitySkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Resource Quality Mod = " + resourceQualitySkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Assembly Skill Mod = " + playerSkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Force Skill Mod = " + forceSkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Crafting Station Mod = " + craftingStationMod);
+            broadcast(player, "CRAFTING -- Raw Random Roll = " + dieRoll);
+            broadcast(player, "CRAFTING --");
+            broadcast(player, "CRAFTING -- Item Complexity Mod = " + itemComplexitySkillMod);
+            broadcast(player, "CRAFTING -- Resource Malleability Mod = " + resourceMalleabilitySkillMod);
+            broadcast(player, "CRAFTING -- Resource Quality Mod = " + resourceQualitySkillMod);
+            broadcast(player, "CRAFTING -- Assembly Skill Mod = " + playerSkillMod);
+            broadcast(player, "CRAFTING -- Force Skill Mod = " + forceSkillMod);
+            broadcast(player, "CRAFTING -- Crafting Station Mod = " + craftingStationMod);
         }
         debugServerConsoleMsg(null, "@@@@");
         float totalSkillMod = resourceMalleabilitySkillMod + resourceQualitySkillMod + playerSkillMod + forceSkillMod + craftingStationMod - itemComplexitySkillMod;
@@ -327,22 +327,22 @@ public class craftinglib extends script.base_script
         debugServerConsoleMsg(null, "@@@@ calcSkillDesignAssemblyCheck: Delta = " + deltaMod);
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Sum of Roll Modifiers = " + totalSkillMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING --");
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Modifier Balance Multiplier = " + deltaMod);
-            sendSystemMessageTestingOnly(player, "CRAFTING --");
+            broadcast(player, "CRAFTING -- Sum of Roll Modifiers = " + totalSkillMod);
+            broadcast(player, "CRAFTING --");
+            broadcast(player, "CRAFTING -- Modifier Balance Multiplier = " + deltaMod);
+            broadcast(player, "CRAFTING --");
         }
         totalSkillMod *= deltaMod;
         debugServerConsoleMsg(null, "@@@@ calcSkillDesignAssemblyCheck: Adjusted Skill Mod = " + totalSkillMod);
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Balanced Roll Modifiers = " + totalSkillMod);
+            broadcast(player, "CRAFTING -- Balanced Roll Modifiers = " + totalSkillMod);
         }
         float modifiedDieRoll = dieRoll + totalSkillMod + dieRollMod;
         debugServerConsoleMsg(null, "@@@@ calcSkillDesignAssemblyCheck: Total Roll = " + modifiedDieRoll);
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING -- FINAL MODIFIED ROLL = " + modifiedDieRoll);
+            broadcast(player, "CRAFTING -- FINAL MODIFIED ROLL = " + modifiedDieRoll);
         }
         float criticalAdjust = playerSkillMod / 4000.0f;
         if (criticalAdjust > 0.05f)
@@ -386,17 +386,17 @@ public class craftinglib extends script.base_script
         debugServerConsoleMsg(null, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "CRAFTING --");
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Critical Success: raw roll above " + criticalSuccess);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Critical Failure: raw roll below " + criticalFailure);
-            sendSystemMessageTestingOnly(player, "CRAFTING --");
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Great Success: mod roll above " + greatSuccess);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Good Success: mod roll above " + goodSuccess);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Moderate Success: mod roll above " + moderateSuccess);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Success: mod roll above " + defaultSkillCheckDifficulty);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Failure: mod roll above " + moderateFailure);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Moderate Failure: mod roll above " + bigFailure);
-            sendSystemMessageTestingOnly(player, "CRAFTING -- Big Failure: mod roll below " + bigFailure);
+            broadcast(player, "CRAFTING --");
+            broadcast(player, "CRAFTING -- Critical Success: raw roll above " + criticalSuccess);
+            broadcast(player, "CRAFTING -- Critical Failure: raw roll below " + criticalFailure);
+            broadcast(player, "CRAFTING --");
+            broadcast(player, "CRAFTING -- Great Success: mod roll above " + greatSuccess);
+            broadcast(player, "CRAFTING -- Good Success: mod roll above " + goodSuccess);
+            broadcast(player, "CRAFTING -- Moderate Success: mod roll above " + moderateSuccess);
+            broadcast(player, "CRAFTING -- Success: mod roll above " + defaultSkillCheckDifficulty);
+            broadcast(player, "CRAFTING -- Failure: mod roll above " + moderateFailure);
+            broadcast(player, "CRAFTING -- Moderate Failure: mod roll above " + bigFailure);
+            broadcast(player, "CRAFTING -- Big Failure: mod roll below " + bigFailure);
         }
         if (isPlayerTester)
         {
@@ -451,9 +451,9 @@ public class craftinglib extends script.base_script
         {
             if (successState >= 0 && successState < STATE_NAMES.length)
             {
-                sendSystemMessageTestingOnly(player, "CRAFTING --");
-                sendSystemMessageTestingOnly(player, "CRAFTING -- Success State: " + STATE_NAMES[successState]);
-                sendSystemMessageTestingOnly(player, "CRAFTING ---------------------------------");
+                broadcast(player, "CRAFTING --");
+                broadcast(player, "CRAFTING -- Success State: " + STATE_NAMES[successState]);
+                broadcast(player, "CRAFTING ---------------------------------");
             }
         }
         if (successState >= 0 && successState < STATE_NAMES.length)
@@ -1115,24 +1115,24 @@ public class craftinglib extends script.base_script
         final float deltaMod = NUMERIC_RANGE_EXPRESSION / BASE_RANGE;
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, " ");
-            sendSystemMessageTestingOnly(player, "EXPERIMENT ---------------------------------");
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Experimentation Skill Mod = " + playerSkillMod);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Resource Malleability Mod = " + malleabilitySkillMod);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Crafting Station Mod = " + craftingStationMod);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Item Complexity Mod = " + (-1.0f * complexityModifier));
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Attributes Mod = " + (-1.0f * numAttributesExperimentedMod));
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Sum of Roll Modifiers = " + totalExperimentPointModifier);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT --");
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Modifier Balance Multiplier = " + deltaMod);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT --");
+            broadcast(player, " ");
+            broadcast(player, "EXPERIMENT ---------------------------------");
+            broadcast(player, "EXPERIMENT -- Experimentation Skill Mod = " + playerSkillMod);
+            broadcast(player, "EXPERIMENT -- Resource Malleability Mod = " + malleabilitySkillMod);
+            broadcast(player, "EXPERIMENT -- Crafting Station Mod = " + craftingStationMod);
+            broadcast(player, "EXPERIMENT -- Item Complexity Mod = " + (-1.0f * complexityModifier));
+            broadcast(player, "EXPERIMENT -- Attributes Mod = " + (-1.0f * numAttributesExperimentedMod));
+            broadcast(player, "EXPERIMENT -- Sum of Roll Modifiers = " + totalExperimentPointModifier);
+            broadcast(player, "EXPERIMENT --");
+            broadcast(player, "EXPERIMENT -- Modifier Balance Multiplier = " + deltaMod);
+            broadcast(player, "EXPERIMENT --");
         }
         float numericRangeModifiedTargetNumberModifier = totalExperimentPointModifier;
         numericRangeModifiedTargetNumberModifier *= deltaMod;
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Balanced Roll Modifiers = " + numericRangeModifiedTargetNumberModifier);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT --");
+            broadcast(player, "EXPERIMENT -- Balanced Roll Modifiers = " + numericRangeModifiedTargetNumberModifier);
+            broadcast(player, "EXPERIMENT --");
         }
         int averageSuccessState = 0;
         int averageSuccessStateCount = 0;
@@ -1156,7 +1156,7 @@ public class craftinglib extends script.base_script
             sendSystemMessage(player, new string_id("city/city", "research_center_message"));
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "GOD MODE: [Experiment] 15% raw random bonus for research city\n");
+                broadcast(player, "GOD MODE: [Experiment] 15% raw random bonus for research city\n");
             }
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation city adjustment = " + cityRollAdjust);
@@ -1168,7 +1168,7 @@ public class craftinglib extends script.base_script
             foodRollAdjust = eff * deltaMod;
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "EXPERIMENT -- Food buff effect applied to raw random rolls");
+                broadcast(player, "EXPERIMENT -- Food buff effect applied to raw random rolls");
             }
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation food adjustment = " + foodRollAdjust);
@@ -1179,7 +1179,7 @@ public class craftinglib extends script.base_script
             forceRollAdjust = forceBonus * deltaMod;
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "EXPERIMENT -- Force Experimentation bonus applied to raw random rolls");
+                broadcast(player, "EXPERIMENT -- Force Experimentation bonus applied to raw random rolls");
             }
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation force adjustment = " + forceRollAdjust);
@@ -1191,7 +1191,7 @@ public class craftinglib extends script.base_script
             expertiseRollAdjust = expertiseBonus * deltaMod;
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "EXPERIMENT -- Expertise Experimentation bonus applied to raw random rolls: " + expertiseRollAdjust + " expertiseSkill: " + expertiseSkill);
+                broadcast(player, "EXPERIMENT -- Expertise Experimentation bonus applied to raw random rolls: " + expertiseRollAdjust + " expertiseSkill: " + expertiseSkill);
             }
         }
         for (int i = 0; i < itemAttributes.length; ++i)
@@ -1323,13 +1323,13 @@ public class craftinglib extends script.base_script
                 }
                 if (isPlayerQA)
                 {
-                    sendSystemMessageTestingOnly(player, "EXPERIMENT -- Raw Random Roll: " + itemAttributes[i].name + " = " + dieRoll);
-                    sendSystemMessageTestingOnly(player, "EXPERIMENT -- FINAL MODIFIED ROLL: " + itemAttributes[i].name + " = " + modifiedSkillRoll);
+                    broadcast(player, "EXPERIMENT -- Raw Random Roll: " + itemAttributes[i].name + " = " + dieRoll);
+                    broadcast(player, "EXPERIMENT -- FINAL MODIFIED ROLL: " + itemAttributes[i].name + " = " + modifiedSkillRoll);
                     if (successState >= 0 && successState < STATE_NAMES.length)
                     {
-                        sendSystemMessageTestingOnly(player, "EXPERIMENT -- Success state for " + itemAttributes[i].name + ": " + STATE_NAMES[successState]);
+                        broadcast(player, "EXPERIMENT -- Success state for " + itemAttributes[i].name + ": " + STATE_NAMES[successState]);
                     }
-                    sendSystemMessageTestingOnly(player, "EXPERIMENT --");
+                    broadcast(player, "EXPERIMENT --");
                 }
                 if (successState >= 0 && successState < STATE_NAMES.length)
                 {
@@ -1360,16 +1360,16 @@ public class craftinglib extends script.base_script
         }
         if (isPlayerQA)
         {
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Critical Success: raw roll above " + critical_s);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Critical Failure: raw roll below " + critical_f);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT --");
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Great Success: mod roll above " + great_s);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Good Success: mod roll above " + good_s);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Moderate Success: mod roll above " + moderate_s);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Success: mod roll above " + s);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Failure: mod roll above " + moderate_f);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Moderate Failure: mod roll above " + big_f);
-            sendSystemMessageTestingOnly(player, "EXPERIMENT -- Big Failure: mod roll below " + big_f);
+            broadcast(player, "EXPERIMENT -- Critical Success: raw roll above " + critical_s);
+            broadcast(player, "EXPERIMENT -- Critical Failure: raw roll below " + critical_f);
+            broadcast(player, "EXPERIMENT --");
+            broadcast(player, "EXPERIMENT -- Great Success: mod roll above " + great_s);
+            broadcast(player, "EXPERIMENT -- Good Success: mod roll above " + good_s);
+            broadcast(player, "EXPERIMENT -- Moderate Success: mod roll above " + moderate_s);
+            broadcast(player, "EXPERIMENT -- Success: mod roll above " + s);
+            broadcast(player, "EXPERIMENT -- Failure: mod roll above " + moderate_f);
+            broadcast(player, "EXPERIMENT -- Moderate Failure: mod roll above " + big_f);
+            broadcast(player, "EXPERIMENT -- Big Failure: mod roll below " + big_f);
         }
         averageSuccessState = (int)(((float)averageSuccessState / averageSuccessStateCount) + 0.5f);
         if (averageSuccessState >= STATE_CRITICAL_FAILURE)
@@ -1383,10 +1383,10 @@ public class craftinglib extends script.base_script
         {
             if (averageSuccessState >= 0 && averageSuccessState < STATE_NAMES.length)
             {
-                sendSystemMessageTestingOnly(player, "EXPERIMENT --");
-                sendSystemMessageTestingOnly(player, "EXPERIMENT -- Overall success state: " + STATE_NAMES[averageSuccessState]);
+                broadcast(player, "EXPERIMENT --");
+                broadcast(player, "EXPERIMENT -- Overall success state: " + STATE_NAMES[averageSuccessState]);
             }
-            sendSystemMessageTestingOnly(player, "EXPERIMENT ---------------------------------");
+            broadcast(player, "EXPERIMENT ---------------------------------");
         }
         if (averageSuccessState > STATE_CRITICAL_FAILURE)
         {

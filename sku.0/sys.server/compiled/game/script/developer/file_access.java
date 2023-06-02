@@ -30,7 +30,7 @@ public class file_access extends script.base_script
                 } catch (Exception e)
                 {
                     obj_id self = getSelf();
-                    sendSystemMessageTestingOnly(self, "An exception occurred while trying to read " + fileName);
+                    broadcast(self, "An exception occurred while trying to read " + fileName);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class file_access extends script.base_script
             } catch (Exception e)
             {
                 obj_id self = getSelf();
-                sendSystemMessageTestingOnly(self, "failed to write " + fileName + " : " + e);
+                broadcast(self, "failed to write " + fileName + " : " + e);
             }
         }
         return result;

@@ -71,7 +71,7 @@ public class buildout_exterior_utility extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Buildout Utility Attached... say INFO for help.");
+        broadcast(self, "Buildout Utility Attached... say INFO for help.");
         return SCRIPT_CONTINUE;
     }
 
@@ -99,7 +99,7 @@ public class buildout_exterior_utility extends script.base_script
         // ===========================================================================
         if (command1.equalsIgnoreCase("info"))
         {
-            sendSystemMessageTestingOnly(self, "Instructions for buildout utility sent to your console.");
+            broadcast(self, "Instructions for buildout utility sent to your console.");
             sendConsoleMessage(self, "\\#ffff00 ============ buildout_utility spatial chat/speak commands ============ \\#.");
             sendConsoleMessage(self, "\\#00ffff clearObjects \\#.");
             sendConsoleMessage(self, "destroys all objects within 500m with buildout_utility.write objvar");
@@ -129,7 +129,7 @@ public class buildout_exterior_utility extends script.base_script
                 here = getLocation(containingBuilding);
             }
             String buildoutAreaName = getBuildoutAreaName(here.x, here.z, getCurrentSceneName());
-            sendSystemMessageTestingOnly(self, "You are in buildout area: " + buildoutAreaName);
+            broadcast(self, "You are in buildout area: " + buildoutAreaName);
 
 
             // ===========================================================================
@@ -148,7 +148,7 @@ public class buildout_exterior_utility extends script.base_script
 
             if (!isIdValid(oid))
             {
-                sendSystemMessageTestingOnly(self, "OID specified for getBuildoutInfo was not valid.");
+                broadcast(self, "OID specified for getBuildoutInfo was not valid.");
                 return SCRIPT_CONTINUE;
             }
 
@@ -240,14 +240,14 @@ public class buildout_exterior_utility extends script.base_script
             String buildoutAreaName = getBuildoutAreaName(here.x, here.z, getCurrentSceneName());
             if (command2.isEmpty())
             {
-                sendSystemMessageTestingOnly(self, "[SYNTAX] writeBuildout <file name>");
+                broadcast(self, "[SYNTAX] writeBuildout <file name>");
                 return SCRIPT_CONTINUE;
             }
 
             List<String> list = Arrays.asList(SCENES);
             if (!list.contains(getCurrentSceneName()))
             {
-                sendSystemMessageTestingOnly(self, "You cannot use this feature in your current scene (likely due to world size mismatch).");
+                broadcast(self, "You cannot use this feature in your current scene (likely due to world size mismatch).");
                 return SCRIPT_CONTINUE;
             }
 
@@ -281,7 +281,7 @@ public class buildout_exterior_utility extends script.base_script
                 writer.println(i + "\t" + (!isIdValid(container) ? "0" : container) + "\t" + template + "\t" + getCellIndex(cell) + "\t" + coord_x + "\t" + wp.y + "\t" + coord_z + "\t" + q[3] + "\t" + q[0] + "\t" + q[1] + "\t" + q[2] + "\t" + final_scripts + "\t" + objvars);
             }
             writer.close();
-            sendSystemMessageTestingOnly(self, "Wrote to file: devl_" + buildoutAreaName + ".tab. Check your /exe/linux directory.");
+            broadcast(self, "Wrote to file: devl_" + buildoutAreaName + ".tab. Check your /exe/linux directory.");
 
             // ===========================================================================
             // ===== getObjects
@@ -313,7 +313,7 @@ public class buildout_exterior_utility extends script.base_script
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
             int count = 0;
 
-            sendSystemMessageTestingOnly(self, "clearObjects: Destroying all objects in range with buildout_utility.write ObjVar...");
+            broadcast(self, "clearObjects: Destroying all objects in range with buildout_utility.write ObjVar...");
 
             for (obj_id i : objects)
             {
@@ -322,7 +322,7 @@ public class buildout_exterior_utility extends script.base_script
                 count++;
             }
 
-            sendSystemMessageTestingOnly(self, "clearObjects: Finished - Deleted " + count + " objects");
+            broadcast(self, "clearObjects: Finished - Deleted " + count + " objects");
             return SCRIPT_CONTINUE;
 
             // ===========================================================================
@@ -334,7 +334,7 @@ public class buildout_exterior_utility extends script.base_script
 
             if (command2.isEmpty())
             {
-                sendSystemMessageTestingOnly(self, "[SYNTAX] createObject <template>");
+                broadcast(self, "[SYNTAX] createObject <template>");
                 return SCRIPT_CONTINUE;
             }
 
@@ -344,11 +344,11 @@ public class buildout_exterior_utility extends script.base_script
 
             if (isValidId(object))
             {
-                sendSystemMessageTestingOnly(self, "createObject: Success, new object OID is " + object);
+                broadcast(self, "createObject: Success, new object OID is " + object);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "createObject: ERROR creating object. Check your template spelling.");
+                broadcast(self, "createObject: ERROR creating object. Check your template spelling.");
             }
 
             return SCRIPT_CONTINUE;
@@ -358,7 +358,7 @@ public class buildout_exterior_utility extends script.base_script
             obj_id objToSave = getIntendedTarget(self);
             if (!isIdValid(objToSave))
             {
-                sendSystemMessageTestingOnly(self, "tag: ERROR - You must have an object targeted to use this command.");
+                broadcast(self, "tag: ERROR - You must have an object targeted to use this command.");
                 return SCRIPT_CONTINUE;
             }
             setObjVar(objToSave, "buildout_utility.write", 1);

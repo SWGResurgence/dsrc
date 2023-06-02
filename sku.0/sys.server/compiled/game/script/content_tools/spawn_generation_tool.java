@@ -164,7 +164,7 @@ public class spawn_generation_tool extends script.base_script
         String tableName = sui.getInputBoxText(params);
         if (tableName == null || tableName.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "You have entered a null or invalid name");
+            broadcast(player, "You have entered a null or invalid name");
             setAssociatedSpawnTable(player);
             return SCRIPT_CONTINUE;
         }
@@ -174,7 +174,7 @@ public class spawn_generation_tool extends script.base_script
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Failed to create table with specified name");
+            broadcast(player, "Failed to create table with specified name");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;

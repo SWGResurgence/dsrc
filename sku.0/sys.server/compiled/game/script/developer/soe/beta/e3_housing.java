@@ -15,7 +15,7 @@ public class e3_housing extends script.base_script
         obj_id inv = getObjectInSlot(self, "inventory");
         if (inv == null)
         {
-            sendSystemMessageTestingOnly(self, "Player inventory is null.");
+            broadcast(self, "Player inventory is null.");
             return SCRIPT_CONTINUE;
         }
         switch (text) {
@@ -36,7 +36,7 @@ public class e3_housing extends script.base_script
         {
             setObjVar(deed, player_structure.VAR_DEED_BUILDTIME, 15);
             removeObjVar(deed, player_structure.VAR_DEED_SCENE);
-            sendSystemMessageTestingOnly(self, deed + " created.");
+            broadcast(self, deed + " created.");
             return SCRIPT_CONTINUE;
         }
         if (text.startsWith("destroy"))
@@ -47,7 +47,7 @@ public class e3_housing extends script.base_script
                 if (player_structure.isBuilding(object) || player_structure.isInstallation(object)) {
                     if (player_structure.getStructureOwnerObjId(object) == self) {
                         player_structure.destroyStructure(object);
-                        sendSystemMessageTestingOnly(self, object + " destroyed.");
+                        broadcast(self, object + " destroyed.");
                     }
                 }
             }

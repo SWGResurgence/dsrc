@@ -224,7 +224,7 @@ public class qadatapad extends script.base_script
     }
     public void goWarpLocation(obj_id player, location selectedLocation) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(player, "Waypoint data received, warping now.");
+        broadcast(player, "Waypoint data received, warping now.");
         warpPlayer(player, selectedLocation.area, selectedLocation.x, selectedLocation.y, selectedLocation.z, null, 0.0f, 0.0f, 0.0f);
     }
     public boolean createWaypoint(obj_id self, String planetArea, float locationX, float locationY, float locationZ, String waypointName) throws InterruptedException

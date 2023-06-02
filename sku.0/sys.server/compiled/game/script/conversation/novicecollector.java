@@ -131,7 +131,7 @@ public class novicecollector extends script.base_script
     public boolean novicecollector_condition_collectorHintEndor(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        sendSystemMessageTestingOnly(player, planetName);
+        broadcast(player, planetName);
         if (planetName.equals("endor"))
         {
             return false;
@@ -182,7 +182,7 @@ public class novicecollector extends script.base_script
     public boolean novicecollector_condition_collectorHintTatooine(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        sendSystemMessageTestingOnly(player, planetName);
+        broadcast(player, planetName);
         if (planetName.equals("tatooine"))
         {
             return false;
@@ -192,7 +192,7 @@ public class novicecollector extends script.base_script
     public boolean novicecollector_condition_collectorHintYavin4(obj_id player, obj_id npc) throws InterruptedException
     {
         String planetName = getCurrentSceneName();
-        sendSystemMessageTestingOnly(player, planetName);
+        broadcast(player, planetName);
         if (planetName.equals("yavin4"))
         {
             return false;
@@ -203,7 +203,7 @@ public class novicecollector extends script.base_script
     {
         String planetName = getCurrentSceneName();
         int playerLevel = getLevel(player);
-        sendSystemMessageTestingOnly(player, planetName);
+        broadcast(player, planetName);
         if (planetName.equals("dathomir") || playerLevel < 70)
         {
             return false;

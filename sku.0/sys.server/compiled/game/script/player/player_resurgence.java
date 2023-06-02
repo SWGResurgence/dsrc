@@ -275,7 +275,7 @@ public class player_resurgence extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /aiManipulate [command] ([subcommand])");
+            broadcast(self, "[syntax] /aiManipulate [command] ([subcommand])");
         }
         else
         {

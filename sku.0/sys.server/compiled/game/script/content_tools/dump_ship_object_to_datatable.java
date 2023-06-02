@@ -25,13 +25,13 @@ public class dump_ship_object_to_datatable extends script.base_script
             obj_id objCell = locTest.cell;
             if (!isIdValid(objCell))
             {
-                sendSystemMessageTestingOnly(self, "DONT USE THIS IF YOU'RE NOT IN A BUILDING!");
+                broadcast(self, "DONT USE THIS IF YOU'RE NOT IN A BUILDING!");
                 return SCRIPT_CONTINUE;
             }
             obj_id objBuilding = getContainedBy(objCell);
             if (!isIdValid(objBuilding))
             {
-                sendSystemMessageTestingOnly(self, "You are not in a building. Don't use this when not in a building");
+                broadcast(self, "You are not in a building. Don't use this when not in a building");
                 return SCRIPT_CONTINUE;
             }
             String strArea = locTest.area;
@@ -77,11 +77,11 @@ public class dump_ship_object_to_datatable extends script.base_script
             boolean boolTest = datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes);
             if (!boolTest)
             {
-                sendSystemMessageTestingOnly(self, "No datatable made");
+                broadcast(self, "No datatable made");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objObjects = getBuildingContents(objBuilding);
-            sendSystemMessageTestingOnly(self, "dumping contents of " + objBuilding);
+            broadcast(self, "dumping contents of " + objBuilding);
             for (obj_id objObject : objObjects) {
                 if (isDumpable(objObject)) {
                     dictionary dctRow = new dictionary();

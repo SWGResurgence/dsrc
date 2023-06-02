@@ -2010,39 +2010,39 @@ public class combat_base extends script.base_script
         }
         if (hasObjVar(attacker, "viewHitTable"))
         {
-            sendSystemMessageTestingOnly(attacker, "Forming Hit Table");
-            sendSystemMessageTestingOnly(attacker, getName(attacker) + " Attacking. " + getName(defender));
-            sendSystemMessageTestingOnly(attacker, "Miss " + miss);
-            sendSystemMessageTestingOnly(attacker, "Dodge " + dodge);
-            sendSystemMessageTestingOnly(attacker, "Parry " + parry);
-            sendSystemMessageTestingOnly(attacker, "Glancing " + glancing);
-            sendSystemMessageTestingOnly(attacker, "Block " + block);
-            sendSystemMessageTestingOnly(attacker, "Critical " + critical);
-            sendSystemMessageTestingOnly(attacker, "Punishing " + punishing);
-            sendSystemMessageTestingOnly(attacker, "Hit " + hit);
-            sendSystemMessageTestingOnly(attacker, "Evade " + evade);
-            sendSystemMessageTestingOnly(attacker, "Strikethrough " + strikethrough);
-            sendSystemMessageTestingOnly(attacker, "" + getHitResultByName(defResult));
-            sendSystemMessageTestingOnly(attacker, "" + getHitResultByName(atkResult));
-            sendSystemMessageTestingOnly(attacker, "xx");
+            broadcast(attacker, "Forming Hit Table");
+            broadcast(attacker, getName(attacker) + " Attacking. " + getName(defender));
+            broadcast(attacker, "Miss " + miss);
+            broadcast(attacker, "Dodge " + dodge);
+            broadcast(attacker, "Parry " + parry);
+            broadcast(attacker, "Glancing " + glancing);
+            broadcast(attacker, "Block " + block);
+            broadcast(attacker, "Critical " + critical);
+            broadcast(attacker, "Punishing " + punishing);
+            broadcast(attacker, "Hit " + hit);
+            broadcast(attacker, "Evade " + evade);
+            broadcast(attacker, "Strikethrough " + strikethrough);
+            broadcast(attacker, "" + getHitResultByName(defResult));
+            broadcast(attacker, "" + getHitResultByName(atkResult));
+            broadcast(attacker, "xx");
         }
         if (hasObjVar(defender, "viewHitTable"))
         {
-            sendSystemMessageTestingOnly(defender, "Forming Hit Table");
-            sendSystemMessageTestingOnly(defender, getName(attacker) + " Attacking. " + getName(defender));
-            sendSystemMessageTestingOnly(defender, "Miss " + miss);
-            sendSystemMessageTestingOnly(defender, "Dodge " + dodge);
-            sendSystemMessageTestingOnly(defender, "Parry " + parry);
-            sendSystemMessageTestingOnly(defender, "Glancing " + glancing);
-            sendSystemMessageTestingOnly(defender, "Block " + block);
-            sendSystemMessageTestingOnly(defender, "Critical " + critical);
-            sendSystemMessageTestingOnly(defender, "Punishing " + punishing);
-            sendSystemMessageTestingOnly(defender, "Hit " + hit);
-            sendSystemMessageTestingOnly(defender, "Evade " + evade);
-            sendSystemMessageTestingOnly(defender, "Strikethrough " + strikethrough);
-            sendSystemMessageTestingOnly(defender, "" + getHitResultByName(defResult));
-            sendSystemMessageTestingOnly(defender, "" + getHitResultByName(atkResult));
-            sendSystemMessageTestingOnly(defender, "xx");
+            broadcast(defender, "Forming Hit Table");
+            broadcast(defender, getName(attacker) + " Attacking. " + getName(defender));
+            broadcast(defender, "Miss " + miss);
+            broadcast(defender, "Dodge " + dodge);
+            broadcast(defender, "Parry " + parry);
+            broadcast(defender, "Glancing " + glancing);
+            broadcast(defender, "Block " + block);
+            broadcast(defender, "Critical " + critical);
+            broadcast(defender, "Punishing " + punishing);
+            broadcast(defender, "Hit " + hit);
+            broadcast(defender, "Evade " + evade);
+            broadcast(defender, "Strikethrough " + strikethrough);
+            broadcast(defender, "" + getHitResultByName(defResult));
+            broadcast(defender, "" + getHitResultByName(atkResult));
+            broadcast(defender, "xx");
         }
     }
 

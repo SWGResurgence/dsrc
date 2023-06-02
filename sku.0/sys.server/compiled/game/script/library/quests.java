@@ -1061,7 +1061,7 @@ public class quests extends script.base_script
             {
                 if (isGod(self))
                 {
-                    sendSystemMessageTestingOnly(self, "GOD MODE - WARNING: The good location chosen for the theater lies within a battlefield");
+                    broadcast(self, "GOD MODE - WARNING: The good location chosen for the theater lies within a battlefield");
                 }
                 LOG("newquests", "the good location chosen for the theater lies within a battlefield: " + result);
             }

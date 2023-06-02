@@ -82,13 +82,13 @@ public class survey_tool_script extends script.base_script
         String resource_class = getStringObjVar(self, resource.VAR_SURVEY_CLASS);
         if (resource_class.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "ERROR: survey tool broken -> no assigned resource class");
+            broadcast(player, "ERROR: survey tool broken -> no assigned resource class");
             return SCRIPT_CONTINUE;
         }
         String baseMod = resource.getSkillModForClass(resource_class);
         if (baseMod.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "ERROR: survey tool broken -> unknown resource class");
+            broadcast(player, "ERROR: survey tool broken -> unknown resource class");
             return SCRIPT_CONTINUE;
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.EXAMINE);
@@ -138,7 +138,7 @@ public class survey_tool_script extends script.base_script
         String resource_class = getStringObjVar(self, resource.VAR_SURVEY_CLASS);
         if (resource_class == null || resource_class.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "ERROR: survey tool broken -> no assigned resource class");
+            broadcast(player, "ERROR: survey tool broken -> no assigned resource class");
             return SCRIPT_CONTINUE;
         }
         if (item == menu_info_types.EXAMINE)
@@ -153,7 +153,7 @@ public class survey_tool_script extends script.base_script
         String baseMod = resource.getSkillModForClass(resource_class);
         if (baseMod == null || baseMod.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "ERROR: survey tool broken -> unknown resource class");
+            broadcast(player, "ERROR: survey tool broken -> unknown resource class");
             return SCRIPT_CONTINUE;
         }
         String modToUse = "surveying";
@@ -752,11 +752,11 @@ public class survey_tool_script extends script.base_script
         String resource_type = utils.getStringScriptVar(player, "surveying.radioactive.name");
         if (resource_type != null && !resource_type.equals(""))
         {
-            sendSystemMessageTestingOnly(player, getString(new string_id(STF, "radioactive_sample_known")) + resource_type + ".");
+            broadcast(player, getString(new string_id(STF, "radioactive_sample_known")) + resource_type + ".");
         }
         else
         {
-            sendSystemMessageTestingOnly(player, getString(new string_id(STF, "radioactive_sample_unknown")));
+            broadcast(player, getString(new string_id(STF, "radioactive_sample_unknown")));
         }
         return SCRIPT_CONTINUE;
     }

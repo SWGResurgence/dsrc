@@ -112,10 +112,10 @@ public class medikit extends script.base_script
         }
         if (item == menu_info_types.SERVER_MED_TOOL_TENDWOUND)
         {
-            sendSystemMessageTestingOnly(player, "Selected TENDWOUND,  line 144");
+            broadcast(player, "Selected TENDWOUND,  line 144");
             if (isIdValid(self) && isIdValid(lookatTarget))
             {
-                sendSystemMessageTestingOnly(player, "Check passed isIdValid(self) AND isIdValid(target),  line 147");
+                broadcast(player, "Check passed isIdValid(self) AND isIdValid(target),  line 147");
                 queueCommand(self, (-2132418973), lookatTarget, "no_params", COMMAND_PRIORITY_DEFAULT);
                 utils.setScriptVar(self, SCRIPTVAR_TARGET, lookatTarget);
                 utils.setScriptVar(self, SCRIPTVAR_LASTCOMMAND, "tendwound");
@@ -123,10 +123,10 @@ public class medikit extends script.base_script
         }
         if (item == menu_info_types.SERVER_MED_TOOL_TENDDAMAGE)
         {
-            sendSystemMessageTestingOnly(player, "Selected TENDDAMAGE, line 155");
+            broadcast(player, "Selected TENDDAMAGE, line 155");
             if (isIdValid(self) && isIdValid(lookatTarget))
             {
-                sendSystemMessageTestingOnly(player, "Check passed isIdValid(self) AND isIdValid(target),  line 158");
+                broadcast(player, "Check passed isIdValid(self) AND isIdValid(target),  line 158");
                 queueCommand(self, (2132302964), lookatTarget, "no_params", COMMAND_PRIORITY_DEFAULT);
                 utils.setScriptVar(self, SCRIPTVAR_TARGET, lookatTarget);
                 utils.setScriptVar(self, SCRIPTVAR_LASTCOMMAND, "tenddamage");

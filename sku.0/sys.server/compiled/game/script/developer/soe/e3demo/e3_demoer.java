@@ -303,14 +303,14 @@ public class e3_demoer extends script.base_script
             String strArea = locTest.area;
             if (!strArea.equals("space_light1"))
             {
-                sendSystemMessageTestingOnly(self, "You must make a tiebomber pcd and go to space_light1 to use this command");
+                broadcast(self, "You must make a tiebomber pcd and go to space_light1 to use this command");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/ship/player/player_star_destroyer.iff");
             obj_id objShip = objTestObjects[0];
             obj_id objCell = getCellId(objShip, "elevator_e3_up");
             transform trDestination = getTransformObjVar(objShip, "trBridge");
-            sendSystemMessageTestingOnly(self, "Sending you to " + objCell + " in object " + objShip);
+            broadcast(self, "Sending you to " + objCell + " in object " + objShip);
             space_transition.enterCapitalShip(self, trDestination, objCell);
             messageTo(self, "beginMusicPlaying", null, 10, false);
         }
@@ -336,17 +336,17 @@ public class e3_demoer extends script.base_script
         if (strCommands[0].equalsIgnoreCase("makeMandalorian"))
         {
             createInInventory(self, MANDALORIAN_ARMOR);
-            sendSystemMessageTestingOnly(self, "Made Mandalorian Armor");
+            broadcast(self, "Made Mandalorian Armor");
         }
         if (strCommands[0].equalsIgnoreCase("makeWookieeArmor"))
         {
             createInInventory(self, WOOKIEE_ARMOR);
-            sendSystemMessageTestingOnly(self, "Made Wookiee Armor");
+            broadcast(self, "Made Wookiee Armor");
         }
         if (strCommands[0].equalsIgnoreCase("makeShipComponents"))
         {
             createInInventory(self, SHIP_COMPONENTS);
-            sendSystemMessageTestingOnly(self, "Made Ship ComponentsArmor");
+            broadcast(self, "Made Ship ComponentsArmor");
         }
         if (strCommands[0].equalsIgnoreCase("nextColor"))
         {
@@ -367,19 +367,19 @@ public class e3_demoer extends script.base_script
         if (strCommands[0].equalsIgnoreCase("makeJediClothes"))
         {
             createInInventory(self, JEDI_CLOTHES);
-            sendSystemMessageTestingOnly(self, "Made jedi clothes");
+            broadcast(self, "Made jedi clothes");
         }
         if (strCommands[0].equalsIgnoreCase("combatOn"))
         {
             setCombatTarget(self, getLookAtTarget(self));
             setState(self, STATE_COMBAT, true);
-            sendSystemMessageTestingOnly(self, "COMBAT ON!");
+            broadcast(self, "COMBAT ON!");
         }
         if (strCommands[0].equalsIgnoreCase("combatOff"))
         {
             setCombatTarget(self, null);
             setState(self, STATE_COMBAT, false);
-            sendSystemMessageTestingOnly(self, "COMBAT ON!");
+            broadcast(self, "COMBAT ON!");
         }
         if (strCommands[0].equalsIgnoreCase("makeLightsabers"))
         {
@@ -388,13 +388,13 @@ public class e3_demoer extends script.base_script
             for (String strItem : strItems) {
                 obj_id objTest = createObjectOverloaded(strItem, objInventory);
                 if (!isIdValid(objTest)) {
-                    sendSystemMessageTestingOnly(self, "Item of template " + strItem + " is Incorret!");
+                    broadcast(self, "Item of template " + strItem + " is Incorret!");
                 } else {
                     setObjVar(objTest, "crafting.source_schematic", objTest);
                     setCrafter(objTest, self);
                 }
             }
-            sendSystemMessageTestingOnly(self, "Made some lightsabers");
+            broadcast(self, "Made some lightsabers");
         }
         if (strCommands[0].equalsIgnoreCase("resetNebulon"))
         {
@@ -406,7 +406,7 @@ public class e3_demoer extends script.base_script
             obj_id[] objNebulon = getAllObjectsWithScript(getLocation(self), 320000, "e3demo.spawner_nebulon");
             dictionary dctParams = new dictionary();
             space_utils.notifyObject(objNebulon[0], "spawnNebulon", dctParams);
-            sendSystemMessageTestingOnly(self, "Reset nebulon");
+            broadcast(self, "Reset nebulon");
         }
         if (strCommands[0].equalsIgnoreCase("destroyNebulon"))
         {
@@ -551,7 +551,7 @@ public class e3_demoer extends script.base_script
             setObjVar(object, "dataModuleRating", 12);
             setObjVar(object, "ai.pet.hasContainer", 12);
             setObjVar(object, "ai.pet.isRepairDroid", true);
-            sendSystemMessageTestingOnly(self, "Made R2 Unit deed in your inventory");
+            broadcast(self, "Made R2 Unit deed in your inventory");
         }
         return SCRIPT_CONTINUE;
     }
@@ -635,7 +635,7 @@ public class e3_demoer extends script.base_script
         for (String strItem : strItems) {
             obj_id objTest = createObjectOverloaded(strItem, objInventory);
             if (!isIdValid(objTest)) {
-                sendSystemMessageTestingOnly(objPlayer, "Item of template " + strItem + " is Incorret!");
+                broadcast(objPlayer, "Item of template " + strItem + " is Incorret!");
             }
         }
         return;

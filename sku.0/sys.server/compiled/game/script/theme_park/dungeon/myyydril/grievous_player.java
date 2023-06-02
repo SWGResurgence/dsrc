@@ -31,7 +31,7 @@ public class grievous_player extends script.base_script
     public int handleGrievousTimerUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         String message = params.getString("message");
-        sendSystemMessageTestingOnly(self, message);
+        broadcast(self, message);
         return SCRIPT_CONTINUE;
     }
     public int cleanupEjectedPlayers(obj_id self, dictionary params) throws InterruptedException

@@ -64,7 +64,7 @@ public class wheel extends script.gambling.base.default_interface
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Please wait a moment for next game to begin.");
+            broadcast(player, "Please wait a moment for next game to begin.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -277,7 +277,7 @@ public class wheel extends script.gambling.base.default_interface
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {
-            sendSystemMessageTestingOnly(player, "The wheel was unable to create an interface for you.");
+            broadcast(player, "The wheel was unable to create an interface for you.");
             return;
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);

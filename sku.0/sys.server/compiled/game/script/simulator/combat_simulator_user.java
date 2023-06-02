@@ -1837,7 +1837,7 @@ public class combat_simulator_user extends script.base_script
     {
         if (!isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "You cannot run the combat simulator when not in god mode");
+            broadcast(self, "You cannot run the combat simulator when not in god mode");
             return SCRIPT_OVERRIDE;
         }
         text = toLower(text);

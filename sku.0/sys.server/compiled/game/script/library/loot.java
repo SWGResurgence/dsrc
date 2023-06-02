@@ -2586,13 +2586,13 @@ public class loot extends script.base_script
         String strForageFeedBackLog = utils.getStringScriptVar(player, "qa.strForageFeedBack");
         if (strForageFeedBackLog == null || strForageFeedBackLog.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "The log was blank");
+            broadcast(player, "The log was blank");
             return false;
         }
         int strForageFeedBackCategoryLog = utils.getIntScriptVar(player, "qa.strForageFeedBackCategory");
         if (strForageFeedBackCategoryLog < 0)
         {
-            sendSystemMessageTestingOnly(player, "The Category Number was invalid");
+            broadcast(player, "The Category Number was invalid");
             return false;
         }
         String categoryName = "";
@@ -2621,7 +2621,7 @@ public class loot extends script.base_script
         }
         if (categoryName.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "The Category Name was blank");
+            broadcast(player, "The Category Name was blank");
             return false;
         }
         int number = getGameTime() + loopSeed + rand(1, 100) + rand(1, 100);

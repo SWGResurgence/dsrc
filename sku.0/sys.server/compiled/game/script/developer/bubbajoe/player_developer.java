@@ -64,7 +64,7 @@ public class player_developer extends base_script
             obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
             for (obj_id watto : wattos)
             {
-                sendSystemMessageTestingOnly(self, "Watto: " + watto);
+                broadcast(self, "Watto: " + watto);
             }
             return SCRIPT_CONTINUE;
         }
@@ -227,7 +227,7 @@ public class player_developer extends base_script
                     }
                     broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
                 default:
-                    sendSystemMessageTestingOnly(self, "Invalid type. Valid types are: crafting, combat, all");
+                    broadcast(self, "Invalid type. Valid types are: crafting, combat, all");
             }
         }
         if (cmd.equalsIgnoreCase("describe"))
@@ -547,11 +547,11 @@ public class player_developer extends base_script
             {
                 setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
                 removeObjVar(city_hall, VAR_CITY);
-                sendSystemMessageTestingOnly(self, "Removed specstamp from City Hall with preservation of old specstamp.");
+                broadcast(self, "Removed specstamp from City Hall with preservation of old specstamp.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "This target does not have the \"spec_stamp\" objvar.");
+                broadcast(self, "This target does not have the \"spec_stamp\" objvar.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -910,7 +910,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer openlink url");
+                broadcast(self, "Syntax: /developer openlink url");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -970,7 +970,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffect <effect name>");
+                broadcast(self, "Syntax: /admin playeffect <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -983,7 +983,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffecttarget <effect name>");
+                broadcast(self, "Syntax: /admin playeffecttarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -996,7 +996,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloc <effect name>");
+                broadcast(self, "Syntax: /admin playeffectloc <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1009,7 +1009,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloctarget <effect name>");
+                broadcast(self, "Syntax: /admin playeffectloctarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1022,7 +1022,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
+                broadcast(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1039,7 +1039,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsound <sound name>");
+                broadcast(self, "Syntax: /admin playsound <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1052,7 +1052,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundtarget <sound name>");
+                broadcast(self, "Syntax: /admin playsoundtarget <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1077,7 +1077,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                broadcast(self, "Syntax: /admin playsoundloc <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1090,7 +1090,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundeveryone <sound name>");
+                broadcast(self, "Syntax: /admin playsoundeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1107,7 +1107,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playcefeveryone <sound name>");
+                broadcast(self, "Syntax: /admin playcefeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1124,7 +1124,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin stopmacros (target)");
+                broadcast(self, "Syntax: /admin stopmacros (target)");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1136,7 +1136,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer rewardarea <item> <count>");
+                broadcast(self, "Syntax: /developer rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1150,7 +1150,7 @@ public class player_developer extends base_script
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
                     if (isIdValid(pItem))
                     {
-                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
+                        broadcast(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
                     }
                 }
             }
@@ -1194,13 +1194,13 @@ public class player_developer extends base_script
             String table = tok.nextToken();
             if (table == null || table.equals(""))
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setloottable <loot table name>");
+                broadcast(self, "Syntax: /admin setloottable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.lootTable", table);
-                sendSystemMessageTestingOnly(self, "Loot table set to " + table);
+                broadcast(self, "Loot table set to " + table);
             }
         }
         if (cmd.equalsIgnoreCase("setnumitems"))
@@ -1208,13 +1208,13 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot count>");
+                broadcast(self, "Syntax: /admin setnumitems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.numItems", level);
-                sendSystemMessageTestingOnly(self, "Number of loot items set to " + level);
+                broadcast(self, "Number of loot items set to " + level);
             }
         }
         if (cmd.equalsIgnoreCase("setcount"))
@@ -1337,7 +1337,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloctarget <sound name>");
+                broadcast(self, "Syntax: /admin playsoundloctarget <sound name>");
             }
             else
             {
@@ -1350,7 +1350,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
+                broadcast(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
             }
             else
             {
@@ -1367,7 +1367,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <radius> <command>");
+                broadcast(self, "Syntax: /developer areacommand <radius> <command>");
             }
             else
             {
@@ -1410,7 +1410,7 @@ public class player_developer extends base_script
             };
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCorpse <table> <amount>");
+                broadcast(self, "Syntax: /developer createLootableCorpse <table> <amount>");
             }
             else
             {
@@ -1422,7 +1422,7 @@ public class player_developer extends base_script
                 attachScript (treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
-                sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+                broadcast(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
                 obj_id[] contents = getContents(treasureChest);
                 {
                     for (obj_id content : contents)
@@ -1446,7 +1446,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCargo <table> <amount>");
+                broadcast(self, "Syntax: /developer createLootableCargo <table> <amount>");
             }
             else
             {
@@ -1458,7 +1458,7 @@ public class player_developer extends base_script
                 attachScript (treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
-                sendSystemMessageTestingOnly(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
+                broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
                 obj_id[] contents = getContents(treasureChest);
                 {
                     for (obj_id content : contents)
@@ -1483,7 +1483,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createJunkCache [total amount] [min amt of each item] [max amt of each item]");
+                broadcast(self, "Syntax: /developer createJunkCache [total amount] [min amt of each item] [max amt of each item]");
             }
             else
             {
@@ -1512,7 +1512,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusic <music name>");
+                broadcast(self, "Syntax: /admin playmusic <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1554,7 +1554,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusictarget <music name>");
+                broadcast(self, "Syntax: /admin playmusictarget <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1568,7 +1568,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer getItemStringByName <item name>");
+                broadcast(self, "Syntax: /developer getItemStringByName <item name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1608,7 +1608,7 @@ public class player_developer extends base_script
                 if (getFirstName(aTargetPool).equalsIgnoreCase(parse))
                 {
                     setLocation(self, getLocation(aTargetPool));
-                    sendSystemMessageTestingOnly(self, "Teleported to " + getEncodedName(aTargetPool));
+                    broadcast(self, "Teleported to " + getEncodedName(aTargetPool));
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -1641,12 +1641,12 @@ public class player_developer extends base_script
             if (hasObjVar(self, vendorVar))
             {
                 removeObjVar(self, vendorVar);
-                sendSystemMessageTestingOnly(self, "Vendor costs are now disabled.");
+                broadcast(self, "Vendor costs are now disabled.");
             }
             else
             {
                 setObjVar(self, vendorVar, 1);
-                sendSystemMessageTestingOnly(self, "Vendor costs are now enabled.");
+                broadcast(self, "Vendor costs are now enabled.");
             }
         }
         if (cmd.equalsIgnoreCase("invulnerable"))
@@ -1654,12 +1654,12 @@ public class player_developer extends base_script
             if (isInvulnerable(target))
             {
                 setInvulnerable(target, false);
-                sendSystemMessageTestingOnly(self, "Target is no longer invulnerable.");
+                broadcast(self, "Target is no longer invulnerable.");
             }
             else
             {
                 setInvulnerable(target, true);
-                sendSystemMessageTestingOnly(self, "Target is now invulnerable.");
+                broadcast(self, "Target is now invulnerable.");
             }
         }
         if (cmd.equalsIgnoreCase("commPlanet"))
@@ -1692,7 +1692,7 @@ public class player_developer extends base_script
             {
                 if (!hasObjVar(self, "dev_height"))
                 {
-                    sendSystemMessageTestingOnly(self, "No height to paste.");
+                    broadcast(self, "No height to paste.");
                     return SCRIPT_CONTINUE;
                 }
                 float height = getFloatObjVar(self, "dev_height");
@@ -1784,7 +1784,7 @@ public class player_developer extends base_script
             String craftedBy = tok.nextToken();
             obj_id who = getPlayerIdFromFirstName(craftedBy);
             setCrafter(target, who);
-            sendSystemMessageTestingOnly(self, "Item will now display that" + craftedBy + " crafted it.");
+            broadcast(self, "Item will now display that" + craftedBy + " crafted it.");
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1813,7 +1813,7 @@ public class player_developer extends base_script
         {
             if (tok.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
+                broadcast(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(target))
@@ -1826,7 +1826,7 @@ public class player_developer extends base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
+                broadcast(self, "You are not riding a vehicle.");
             }
         }
         if (cmd.equalsIgnoreCase("copy"))

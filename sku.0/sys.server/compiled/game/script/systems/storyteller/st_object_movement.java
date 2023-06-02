@@ -333,26 +333,26 @@ public class st_object_movement extends script.base_script
         int row = dataTableSearchColumnForString(itemName, "name", storyteller.STORYTELLER_DATATABLE);
         if (row == -1)
         {
-            sendSystemMessageTestingOnly(player, "This is not a valid item");
+            broadcast(player, "This is not a valid item");
             return false;
         }
         dict = dataTableGetRow(storyteller.STORYTELLER_DATATABLE, itemName);
         int typeString = dict.getInt("type");
         if (typeString == storyteller.THEATER)
         {
-            sendSystemMessageTestingOnly(player, "This is a theater object");
+            broadcast(player, "This is a theater object");
             return false;
         }
         obj_id structure = getTopMostContainer(player);
         obj_id item_structure = getTopMostContainer(target);
         if (((structure != player) || (item_structure != target)) && (structure != item_structure))
         {
-            sendSystemMessageTestingOnly(player, "This is not a valid move location");
+            broadcast(player, "This is not a valid move location");
             return false;
         }
         if (!isIdValid(structure))
         {
-            sendSystemMessageTestingOnly(player, "This is not a valid location");
+            broadcast(player, "This is not a valid location");
             return false;
         }
         return true;

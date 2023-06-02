@@ -119,7 +119,7 @@ public class mining_asteroid_dynamic extends script.base_script
         }
         if (!isIdValid(objResourceId))
         {
-            sendSystemMessageTestingOnly(objPilot, "No resources, bucko!");
+            broadcast(objPilot, "No resources, bucko!");
         }
         obj_id objStack = getResourceStack(objContainer, objResourceId);
         if (isIdValid(objStack))

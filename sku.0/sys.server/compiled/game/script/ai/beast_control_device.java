@@ -607,7 +607,7 @@ public class beast_control_device extends script.base_script
                 {
                     if (isIdValid(player) && hasObjVar(player, "qa_beast_hate"))
                     {
-                        sendSystemMessageTestingOnly(player, "QA: Beast used to hate combat with creatures.  It would have its happiness lowered here.");
+                        broadcast(player, "QA: Beast used to hate combat with creatures.  It would have its happiness lowered here.");
                     }
                 }
             }
@@ -630,7 +630,7 @@ public class beast_control_device extends script.base_script
                 {
                     if (isIdValid(player) && hasObjVar(player, "qa_beast_hate"))
                     {
-                        sendSystemMessageTestingOnly(player, "QA: Beast used to hate combat with npc's.  It would have its happiness lowered here.");
+                        broadcast(player, "QA: Beast used to hate combat with npc's.  It would have its happiness lowered here.");
                     }
                 }
             }

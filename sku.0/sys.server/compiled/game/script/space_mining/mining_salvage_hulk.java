@@ -19,7 +19,7 @@ public class mining_salvage_hulk extends script.base_script
         obj_id pilot = space_utils.getPilotForRealsies(self);
         if (pilot != null)
         {
-            sendSystemMessageTestingOnly(pilot, "jwatson_ship IDOT removed slot=" + chassisSlot + ", damageRate=" + damageRate + ", threshold=" + damageThreshold);
+            broadcast(pilot, "jwatson_ship IDOT removed slot=" + chassisSlot + ", damageRate=" + damageRate + ", threshold=" + damageThreshold);
         }
         return SCRIPT_CONTINUE;
     }
@@ -91,7 +91,7 @@ public class mining_salvage_hulk extends script.base_script
         }
         if (!isIdValid(objResourceId))
         {
-            sendSystemMessageTestingOnly(objPilot, "No resources, bucko!");
+            broadcast(objPilot, "No resources, bucko!");
         }
         obj_id objStack = getResourceStack(objContainer, objResourceId);
         if (isIdValid(objStack))
@@ -101,7 +101,7 @@ public class mining_salvage_hulk extends script.base_script
             if (intCount > MAX_RESOURCE)
             {
                 intCount = intCount - MAX_RESOURCE;
-                sendSystemMessageTestingOnly(objPilot, "Add the Diff!  " + intCount);
+                broadcast(objPilot, "Add the Diff!  " + intCount);
                 intAmount = intAmount - intCount;
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
                 objStack = null;
@@ -109,7 +109,7 @@ public class mining_salvage_hulk extends script.base_script
             else 
             {
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
-                sendSystemMessageTestingOnly(objPilot, "Incrementing count!");
+                broadcast(objPilot, "Incrementing count!");
             }
         }
         else 

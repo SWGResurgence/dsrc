@@ -71,7 +71,7 @@ public class tcg_bespin_lights extends script.base_script
 
     private void toggleLight(obj_id self, String type, String position) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(getOwner(self), "Turning light " + position);
+        broadcast(getOwner(self), "Turning light " + position);
         location currentLocation = getLocation(self);
 
         dictionary itemData = dataTableGetRow("datatables/item/master_item/master_item.iff", "item_tcg_loot_reward_series8_bespin_" + type + "_" + position);
@@ -94,6 +94,6 @@ public class tcg_bespin_lights extends script.base_script
         setQuaternion(newLight, orientation[0], orientation[1], orientation[2], orientation[3]);
         persistObject(newLight);
         destroyObject(self);
-        sendSystemMessageTestingOnly(getOwner(self), "Light created!");
+        broadcast(getOwner(self), "Light created!");
     }
 }

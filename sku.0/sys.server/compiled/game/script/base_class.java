@@ -5005,6 +5005,8 @@ public class base_class
     /**
      * Send a system message to an individual
      */
+    
+    //artifact !pure
     public static void sendSystemMessageTestingOnly(String to, String localizedMessageText)
     {
         sendSystemMessage(to, localizedMessageText, null);
@@ -5041,7 +5043,7 @@ public class base_class
      */
     public static void sendSystemMessageTestingOnly(obj_id to, String localizedMessageText)
     {
-        //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
+        //broadcast (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
 
@@ -5050,7 +5052,7 @@ public class base_class
      */
     public static void broadcast(obj_id to, String localizedMessageText)
     {
-        //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
+        //broadcast (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
 

@@ -2186,7 +2186,7 @@ public class space_crafting extends script.base_script
         dictionary dctShipInfo = dataTableGetRow(strFileName, strType);
         if (dctShipInfo == null)
         {
-            sendSystemMessageTestingOnly(objPlayer, "No Ship Type of " + strType + " in " + strFileName);
+            broadcast(objPlayer, "No Ship Type of " + strType + " in " + strFileName);
             LOG("space", "Bad ship type of " + strType);
             return;
         }

@@ -740,9 +740,9 @@ public class player_utility extends script.base_script
         location destination = new location(x, y, z, planet, cell_id);
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "pathToLocation " + params);
-            sendSystemMessageTestingOnly(self, "  scene=" + destination.area);
-            sendSystemMessageTestingOnly(self, "  cell=" + getCellName(destination.cell));
+            broadcast(self, "pathToLocation " + params);
+            broadcast(self, "  scene=" + destination.area);
+            broadcast(self, "  cell=" + getCellName(destination.cell));
         }
         createClientPathAdvanced(self, getLocation(self), destination, "default");
         return SCRIPT_CONTINUE;
@@ -1070,7 +1070,7 @@ public class player_utility extends script.base_script
         String msg = params.getString("stringMsg");
         if (msg != null && !msg.equals(""))
         {
-            sendSystemMessageTestingOnly(self, msg);
+            broadcast(self, msg);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -1278,7 +1278,7 @@ public class player_utility extends script.base_script
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Target is no longer valid.");
+            broadcast(self, "Target is no longer valid.");
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return SCRIPT_CONTINUE;
         }
@@ -1304,7 +1304,7 @@ public class player_utility extends script.base_script
             dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
             if (xpReqs == null || xpReqs.isEmpty())
             {
-                sendSystemMessageTestingOnly(self, "Player does not have a valid working skill");
+                broadcast(self, "Player does not have a valid working skill");
                 return SCRIPT_CONTINUE;
             }
             java.util.Enumeration e = xpReqs.keys();
@@ -1349,7 +1349,7 @@ public class player_utility extends script.base_script
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Target is no longer valid.");
+            broadcast(self, "Target is no longer valid.");
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return SCRIPT_CONTINUE;
         }
@@ -1380,13 +1380,13 @@ public class player_utility extends script.base_script
         String[] skillList = split(templateSkills, ',');
         if (skillList == null || skillList.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "No skills found for this profession");
+            broadcast(self, "No skills found for this profession");
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return;
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "Revoking all skills and experience for " + getName(target));
+            broadcast(self, "Revoking all skills and experience for " + getName(target));
             respec.revokeAllSkillsAndExperience(target);
             skill.recalcPlayerPools(target, true);
             if (!template.equals(getSkillTemplate(target)))
@@ -1406,7 +1406,7 @@ public class player_utility extends script.base_script
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Target is no longer valid.");
+            broadcast(self, "Target is no longer valid.");
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return SCRIPT_CONTINUE;
         }
@@ -1425,7 +1425,7 @@ public class player_utility extends script.base_script
         }
         if (idx == -1)
         {
-            sendSystemMessageTestingOnly(self, "Please make a selection.");
+            broadcast(self, "Please make a selection.");
             gmGrantSkillRoadmapProgression(self, target, skillTemplate);
             return SCRIPT_CONTINUE;
         }
@@ -1439,7 +1439,7 @@ public class player_utility extends script.base_script
                 skill_template.grantRoadmapItem(target);
                 setWorkingSkill(target, skill_template.getNextWorkingSkill(target));
             }
-            sendSystemMessageTestingOnly(self, "Skill Granting for " + getName(target) + " is complete");
+            broadcast(self, "Skill Granting for " + getName(target) + " is complete");
         }
         utils.removeScriptVarTree(self, "gmGrantSkill");
         return SCRIPT_CONTINUE;
@@ -1449,7 +1449,7 @@ public class player_utility extends script.base_script
         obj_id target = utils.getObjIdScriptVar(self, "gmGrantSkill.target");
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Target is no longer valid.");
+            broadcast(self, "Target is no longer valid.");
             utils.removeScriptVarTree(self, "gmGrantSkill");
             return SCRIPT_CONTINUE;
         }
@@ -1457,14 +1457,14 @@ public class player_utility extends script.base_script
         int level = utils.stringToInt(text);
         if (level < 1 || level > 90)
         {
-            sendSystemMessageTestingOnly(self, "Invalid level entered!");
+            broadcast(self, "Invalid level entered!");
             return SCRIPT_CONTINUE;
         }
         else 
         {
             respec.autoLevelPlayer(target, level, true);
         }
-        sendSystemMessageTestingOnly(self, "Skill Granting for " + getName(target) + " is complete");
+        broadcast(self, "Skill Granting for " + getName(target) + " is complete");
         utils.removeScriptVarTree(self, "gmGrantSkill");
         return SCRIPT_CONTINUE;
     }

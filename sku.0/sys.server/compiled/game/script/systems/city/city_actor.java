@@ -36,12 +36,12 @@ public class city_actor extends script.base_script
             {
                 if (isPlayer(giver))
                 {
-                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(item) + "] to [" + getName(self) + "].");
+                    broadcast(giver, "You gave [" + getName(item) + "] to [" + getName(self) + "].");
                     equipOverride(item, self);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(giver, "You cannot give this item to a Bio-logical Display Matrix.");
+                    broadcast(giver, "You cannot give this item to a Bio-logical Display Matrix.");
                     return SCRIPT_OVERRIDE;
                 }
             }

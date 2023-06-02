@@ -26,7 +26,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         if (rgnRegionList == null)
         {
-            sendSystemMessageTestingOnly(self, "Catastrophic failure, no spawn region at this point");
+            broadcast(self, "Catastrophic failure, no spawn region at this point");
             return SCRIPT_CONTINUE;
         }
         region rgnOverloadRegion = null;
@@ -38,14 +38,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
         region rgnSpawnRegion = locations.getSmallestRegion(rgnRegionList);
         if (rgnOverloadRegion != null)
         {
-            sendSystemMessageTestingOnly(self, "Multiple Spawn Regions found : ");
-            sendSystemMessageTestingOnly(self, "Overload region is " + rgnOverloadRegion.getName());
+            broadcast(self, "Multiple Spawn Regions found : ");
+            broadcast(self, "Overload region is " + rgnOverloadRegion.getName());
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Spawn Region:");
+            broadcast(self, "Spawn Region:");
         }
-        sendSystemMessageTestingOnly(self, "Region: " + rgnSpawnRegion.getName());
+        broadcast(self, "Region: " + rgnSpawnRegion.getName());
         return SCRIPT_CONTINUE;
     }
 
@@ -54,12 +54,12 @@ public class spawn_player extends script.systems.spawning.spawn_base
         if (hasObjVar(self, "spawning.verboseMode"))
         {
             removeObjVar(self, "spawning.verboseMode");
-            sendSystemMessageTestingOnly(self, "Verbose spawn checks disabled");
+            broadcast(self, "Verbose spawn checks disabled");
         }
         else
         {
             setObjVar(self, "spawning.verboseMode", 1);
-            sendSystemMessageTestingOnly(self, "Verbose spawning checks enabled");
+            broadcast(self, "Verbose spawning checks enabled");
         }
         return SCRIPT_CONTINUE;
     }
@@ -79,7 +79,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
     {
         if (params.equals(""))
         {
-            sendSystemMessageTestingOnly(self, "You must provide a datatable and an index for this to work properly");
+            broadcast(self, "You must provide a datatable and an index for this to work properly");
             return SCRIPT_CONTINUE;
         }
         int intIndex = params.indexOf(" ");
@@ -90,7 +90,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         debugSpeakMsg(self, "strNumber is " + strNumber);
         if (!dataTableOpen(strTable))
         {
-            sendSystemMessageTestingOnly(self, strTable + " is not a valid dataTable");
+            broadcast(self, strTable + " is not a valid dataTable");
             return SCRIPT_CONTINUE;
         }
         Integer intTestIndex;
@@ -99,14 +99,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
             intTestIndex = Integer.valueOf(strNumber);
         } catch (NumberFormatException err)
         {
-            sendSystemMessageTestingOnly(self, strNumber + " is not a valid index");
+            broadcast(self, strNumber + " is not a valid index");
             return SCRIPT_CONTINUE;
         }
         intIndex = intTestIndex;
         dictionary dctRow = dataTableGetRow(strTable, intIndex);
         if (dctRow == null)
         {
-            sendSystemMessageTestingOnly(self, "Not a valid combination of data");
+            broadcast(self, "Not a valid combination of data");
             return SCRIPT_CONTINUE;
         }
         int intMinDifficulty = dctRow.getInt("intMinDifficulty");
@@ -149,7 +149,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
     {
         if (params.equals(""))
         {
-            sendSystemMessageTestingOnly(self, "You must provide a datatable, difficulty and an index for this to work properly");
+            broadcast(self, "You must provide a datatable, difficulty and an index for this to work properly");
             return SCRIPT_CONTINUE;
         }
         int intIndex = params.indexOf(" ");
@@ -161,7 +161,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         String strDifficultyInt = strRemainingString.substring(intNextIndex + 1);
         if (!dataTableOpen(strTable))
         {
-            sendSystemMessageTestingOnly(self, strTable + " is not a valid dataTable");
+            broadcast(self, strTable + " is not a valid dataTable");
             return SCRIPT_CONTINUE;
         }
         Integer intTestIndex;
@@ -170,7 +170,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             intTestIndex = Integer.valueOf(strNumber);
         } catch (NumberFormatException err)
         {
-            sendSystemMessageTestingOnly(self, strNumber + " is not a valid index");
+            broadcast(self, strNumber + " is not a valid index");
             return SCRIPT_CONTINUE;
         }
         intIndex = intTestIndex;
@@ -179,14 +179,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
             intTestIndex = Integer.valueOf(strDifficultyInt);
         } catch (NumberFormatException err)
         {
-            sendSystemMessageTestingOnly(self, strDifficultyInt + " is not a valid index");
+            broadcast(self, strDifficultyInt + " is not a valid index");
             return SCRIPT_CONTINUE;
         }
         int intLevel = intTestIndex;
         dictionary dctRow = dataTableGetRow(strTable, intIndex);
         if (dctRow == null)
         {
-            sendSystemMessageTestingOnly(self, "Not a valid combination of data");
+            broadcast(self, "Not a valid combination of data");
             return SCRIPT_CONTINUE;
         }
         int intMinDifficulty = dctRow.getInt("intMinDifficulty");
@@ -237,7 +237,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         if (!hasObjVar(objMasterSpawner, "boolSpawnerIsOn"))
         {
-            sendSystemMessageTestingOnly(self, "The masterspawner is not setup correctly.  Resetting it to off.");
+            broadcast(self, "The masterspawner is not setup correctly.  Resetting it to off.");
             setObjVar(objMasterSpawner, "boolSpawnerIsOn", false);
             return SCRIPT_OVERRIDE;
         }
@@ -246,12 +246,12 @@ public class spawn_player extends script.systems.spawning.spawn_base
             if (!getBooleanObjVar(objMasterSpawner, "boolSpawnerIsOn"))
             {
                 setObjVar(objMasterSpawner, "boolSpawnerIsOn", true);
-                sendSystemMessageTestingOnly(self, "The master spawner is now on!");
+                broadcast(self, "The master spawner is now on!");
                 return SCRIPT_OVERRIDE;
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The master spawner is already on!");
+                broadcast(self, "The master spawner is already on!");
                 return SCRIPT_OVERRIDE;
             }
         }
@@ -350,7 +350,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You must provide a filename. Syntax: dumpBuildout <fileName>");
+                broadcast(self, "You must provide a filename. Syntax: dumpBuildout <fileName>");
                 return SCRIPT_CONTINUE;
             }
             location locTest = getLocation(self);
@@ -395,7 +395,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
                     };
             if (!datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes))
             {
-                sendSystemMessageTestingOnly(self, "No datatable made");
+                broadcast(self, "No datatable made");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objObjects;
@@ -407,7 +407,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             {
                 objObjects = getAllObjectsWithObjVar(getLocation(self), 15000, "intSpawnLocation");
             }
-            sendSystemMessageTestingOnly(self, "dumping contents of " + objBuilding);
+            broadcast(self, "dumping contents of " + objBuilding);
             dictionary dctRow;
             for (obj_id objObject : objObjects)
             {
@@ -444,7 +444,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             obj_id objSpawner = createObject("object/tangible/space/content_infrastructure/generic_egg_small.iff", getTransform_o2p(self), getLocation(self).cell);
             setObjVar(objSpawner, "intSpawnLocation", 1);
             setName(objSpawner, "SPAWN LOCATION!");
-            sendSystemMessageTestingOnly(self, "Made spawn location");
+            broadcast(self, "Made spawn location");
         }
         if (strCommands[0].equals("createMineField"))
         {
@@ -462,7 +462,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, false);
             return SCRIPT_CONTINUE;
         }
@@ -566,7 +566,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -589,7 +589,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -634,7 +634,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -660,7 +660,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
                         "stop"
                 };
         int intIndex = utils.getElementPositionInArray(BEHAVIORS, strBehavior);
-        sendSystemMessageTestingOnly(getSelf(), "For behavior " + strBehavior + " intIndex is " + intIndex);
+        broadcast(getSelf(), "For behavior " + strBehavior + " intIndex is " + intIndex);
         return intIndex;
     }
 
@@ -669,7 +669,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -704,7 +704,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -733,7 +733,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -754,7 +754,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -775,7 +775,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -796,7 +796,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -830,7 +830,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intButton = sui.getIntButtonPressed(params);
         if (intButton == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling spawner creation");
+            broadcast(self, "Cancelling spawner creation");
             clearSpawnerScriptVar(self, true);
             return SCRIPT_CONTINUE;
         }
@@ -867,8 +867,8 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             if (!utils.hasScriptVar(self, "objPatrolPoints"))
             {
-                sendSystemMessageTestingOnly(self, "Attempted to create patrol route with no waypoints");
-                sendSystemMessageTestingOnly(self, "Cancelling spawner creation.");
+                broadcast(self, "Attempted to create patrol route with no waypoints");
+                broadcast(self, "Cancelling spawner creation.");
                 clearSpawnerScriptVar(self, true);
                 return SCRIPT_CONTINUE;
             }
@@ -877,7 +877,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             utils.setScriptVar(self, "objPatrolPoints", waypointArray);
             if (waypointArray == null || waypointArray.size() < 2)
             {
-                sendSystemMessageTestingOnly(self, "Location Array was NULL or only contained the base waypoint");
+                broadcast(self, "Location Array was NULL or only contained the base waypoint");
                 clearSpawnerScriptVar(self, true);
                 return SCRIPT_CONTINUE;
             }
@@ -970,7 +970,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
 
     public void writeSpawner(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Writing spawner");
+        broadcast(self, "Writing spawner");
         String strSpawnerType = utils.getStringScriptVar(self, "strType");
         Vector patrolPoints = new Vector();
         patrolPoints.setSize(0);
@@ -1088,7 +1088,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int button = sui.getIntButtonPressed(params);
         if (button == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling mine field creation");
+            broadcast(self, "Cancelling mine field creation");
             clearMineScriptVar(self);
             return SCRIPT_CONTINUE;
         }
@@ -1104,7 +1104,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int button = sui.getIntButtonPressed(params);
         if (button == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling mine field creation");
+            broadcast(self, "Cancelling mine field creation");
             clearMineScriptVar(self);
             return SCRIPT_CONTINUE;
         }
@@ -1120,7 +1120,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int button = sui.getIntButtonPressed(params);
         if (button == sui.BP_CANCEL)
         {
-            sendSystemMessageTestingOnly(self, "Cancelling mine field creation");
+            broadcast(self, "Cancelling mine field creation");
             clearMineScriptVar(self);
             return SCRIPT_CONTINUE;
         }

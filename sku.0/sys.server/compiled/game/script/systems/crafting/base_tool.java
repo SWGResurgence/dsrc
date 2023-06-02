@@ -456,7 +456,7 @@ public class base_tool extends script.base_script
                 {
                     if (isGod(crafter) && hasObjVar(crafter, "qa_tcg"))
                     {
-                        sendSystemMessageTestingOnly(crafter, "QA TCG CRAFTING NOT DROPPED.  Card is null. Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
+                        broadcast(crafter, "QA TCG CRAFTING NOT DROPPED.  Card is null. Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
                     }
                 }
             }
@@ -464,7 +464,7 @@ public class base_tool extends script.base_script
             {
                 if (isGod(crafter) && hasObjVar(crafter, "qa_tcg"))
                 {
-                    sendSystemMessageTestingOnly(crafter, "QA TCG CRAFTING NOT DROPPED.  Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
+                    broadcast(crafter, "QA TCG CRAFTING NOT DROPPED.  Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
                 }
             }
             utils.setScriptVar(crafter, scheduled_drop.PLAYER_SCRIPTVAR_DROP_TIME, getGameTime());
