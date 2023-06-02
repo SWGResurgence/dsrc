@@ -873,7 +873,7 @@ public class qatool extends script.base_script
                 attachScript(self, "test.qa_resource_reward");
                 attachScript(self, "test.qadna");
                 grantSkill(self, "swg_dev");
-                sendSystemMessageTestingOnly(self, "You can access the \"SWG Developer\" title by opening your Community options.");
+                broadcast(self, "You can access the \"SWG Developer\" title by opening your Community options.");
             }
         }
         else
@@ -979,7 +979,7 @@ public class qatool extends script.base_script
                 obj_id oid = getIntendedTarget(self);
                 int count = utils.stringToInt(st.nextToken());
                 setCount(oid, count);
-                sendSystemMessageTestingOnly(self, "Object: " + target + " has added " + count + " to it's item count.");
+                broadcast(self, "Object: " + target + " has added " + count + " to it's item count.");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -999,7 +999,7 @@ public class qatool extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
+                broadcast(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1007,20 +1007,20 @@ public class qatool extends script.base_script
                 String lootTable = st.nextToken();
                 if (lootTable == null || lootTable.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
+                    broadcast(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
                     return SCRIPT_CONTINUE;
                 }
                 int tableMaxLevel = lootTable.lastIndexOf("_") + 1;
                 if (tableMaxLevel < 0)
                 {
-                    sendSystemMessageTestingOnly(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
+                    broadcast(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
                     return SCRIPT_CONTINUE;
                 }
                 String treasureLevel = lootTable.substring(tableMaxLevel);
                 int intTreasureLevel = utils.stringToInt(treasureLevel);
                 if (intTreasureLevel < 10 || intTreasureLevel > 90)
                 {
-                    sendSystemMessageTestingOnly(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
+                    broadcast(self, "Usage: /qatool testtreasure treasure/treasure_1_10 or /qatool testtreasure treasure/treasure_11_20, etc.");
                     return SCRIPT_CONTINUE;
                 }
                 location treasureLoc = getLocation(self);
@@ -1036,7 +1036,7 @@ public class qatool extends script.base_script
                 boolean success = loot.makeLootInContainer(treasureChest, lootTable, 6, intTreasureLevel);
                 if (!success)
                 {
-                    sendSystemMessageTestingOnly(self, "Text export failed.");
+                    broadcast(self, "Text export failed.");
                     return SCRIPT_CONTINUE;
                 }
                 obj_id[] contents = getContents(treasureChest);
@@ -1079,7 +1079,7 @@ public class qatool extends script.base_script
             {
                 obj_id terminalId = qa.templateObjectSpawner(self, s, true);
             }
-            sendSystemMessageTestingOnly(self, "Terminals Spawned.");
+            broadcast(self, "Terminals Spawned.");
             return SCRIPT_OVERRIDE;
         }
         else if ((toLower(command)).equals("eggspawn") || (toLower(command)).equals("eggspawner") || (toLower(command)).equals("spawnegg") || (toLower(command)).equals("spawn"))
@@ -1117,20 +1117,20 @@ public class qatool extends script.base_script
                     obj_id item = utils.stringToObjId(serialCommand);
                     if (!isIdValid(item))
                     {
-                        sendSystemMessageTestingOnly(self, "To serialize an item you need to specify a valid OID.");
+                        broadcast(self, "To serialize an item you need to specify a valid OID.");
                         return SCRIPT_CONTINUE;
                     }
                     else
                     {
                         setCraftedId(item, utils.getInventoryContainer(self));
                         setCrafter(item, self);
-                        sendSystemMessageTestingOnly(self, "Item " + item + " has been serialized.");
+                        broadcast(self, "Item " + item + " has been serialized.");
                     }
                 }
             } catch (Exception e)
             {
-                sendSystemMessageTestingOnly(self, "You need to specify the object Id of the object you want to be serialized.");
-                sendSystemMessageTestingOnly(self, "/qatool serialize <OID>");
+                broadcast(self, "You need to specify the object Id of the object you want to be serialized.");
+                broadcast(self, "/qatool serialize <OID>");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1164,7 +1164,7 @@ public class qatool extends script.base_script
                 if (buffArg.equals("remove") || buffArg.equals("removebuff") || buffArg.equals("clear"))
                 {
                     buff.removeAllBuffs(self);
-                    sendSystemMessageTestingOnly(self, "Buffs cleared.");
+                    broadcast(self, "Buffs cleared.");
                 }
                 else
                 {
@@ -1184,7 +1184,7 @@ public class qatool extends script.base_script
                     }
                     if (!foundBuff)
                     {
-                        sendSystemMessageTestingOnly(self, "Either the Buff or the Buff name was not found.");
+                        broadcast(self, "Either the Buff or the Buff name was not found.");
                     }
                 }
             }
@@ -1264,12 +1264,12 @@ public class qatool extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool contraband <integer between 1 - 10> ");
+                    broadcast(self, "The tool requires the following usage to function: /qatool contraband <integer between 1 - 10> ");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool contraband <integer between 1 - 10> ");
+                broadcast(self, "The tool requires the following usage to function: /qatool contraband <integer between 1 - 10> ");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1283,12 +1283,12 @@ public class qatool extends script.base_script
                 boolean spawningComplete = mulipleStaticSpawn(self, spawnString, intNumber, true);
                 if (!spawningComplete)
                 {
-                    sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
+                    broadcast(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
+                broadcast(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1297,7 +1297,7 @@ public class qatool extends script.base_script
             boolean successMsg = specTester(self, st);
             if (!successMsg)
             {
-                sendSystemMessageTestingOnly(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
+                broadcast(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
                 return SCRIPT_CONTINUE;
             }
             return SCRIPT_CONTINUE;
@@ -1307,7 +1307,7 @@ public class qatool extends script.base_script
             boolean successMsg = createEnzyme(self, st);
             if (!successMsg)
             {
-                sendSystemMessageTestingOnly(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
+                broadcast(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
                 return SCRIPT_CONTINUE;
             }
             return SCRIPT_CONTINUE;
@@ -1317,7 +1317,7 @@ public class qatool extends script.base_script
             boolean successMsg = createLyase(self, st);
             if (!successMsg)
             {
-                sendSystemMessageTestingOnly(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
+                broadcast(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
                 return SCRIPT_CONTINUE;
             }
             return SCRIPT_CONTINUE;
@@ -1336,7 +1336,7 @@ public class qatool extends script.base_script
             boolean successMsg = createIsomerase(self, st);
             if (!successMsg)
             {
-                sendSystemMessageTestingOnly(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
+                broadcast(self, "***The tool failed in part or in full.  Make sure your arguments are spelled correctly and try again.***");
                 return SCRIPT_CONTINUE;
             }
             return SCRIPT_CONTINUE;
@@ -1344,7 +1344,7 @@ public class qatool extends script.base_script
         else if ((toLower(command)).equals("revokepilot") || (toLower(command)).equals("pilotrevoke"))
         {
             qa.revokePilotingSkills(self);
-            sendSystemMessageTestingOnly(self, "Pilot Skills revoked");
+            broadcast(self, "Pilot Skills revoked");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equals("qange"))
@@ -1365,7 +1365,7 @@ public class qatool extends script.base_script
         {
             healShockWound(self, getShockWound(self));
             setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));
-            sendSystemMessageTestingOnly(self, "gmr used on self");
+            broadcast(self, "gmr used on self");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equals("helper") || (toLower(command)).equals("qahelper") || (toLower(command)).equals("aihelper"))
@@ -1409,7 +1409,7 @@ public class qatool extends script.base_script
         }
         else if ((toLower(command)).equals("npcname") || (toLower(command)).equals("mobfinder") || (toLower(command)).equals("npcfinder") || (toLower(command)).equals("findnpc"))
         {
-            sendSystemMessageTestingOnly(self, "Collecting list of Mobs and NPCs. Please wait.");
+            broadcast(self, "Collecting list of Mobs and NPCs. Please wait.");
             npcFinderFunction(self, st);
             return SCRIPT_CONTINUE;
         }
@@ -1427,21 +1427,21 @@ public class qatool extends script.base_script
                 }
                 else if (stringCount > 1)
                 {
-                    sendSystemMessageTestingOnly(self, "The String ID must not contain any spaces.");
-                    sendSystemMessageTestingOnly(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106");
+                    broadcast(self, "The String ID must not contain any spaces.");
+                    broadcast(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106");
                     return SCRIPT_CONTINUE;
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "The proper format for this command is: /qaTool string [code/identifying_the_string]:string_id ");
-                    sendSystemMessageTestingOnly(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106 ");
+                    broadcast(self, "The proper format for this command is: /qaTool string [code/identifying_the_string]:string_id ");
+                    broadcast(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106 ");
                     return SCRIPT_CONTINUE;
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The proper format for this command is: /qaTool string [code/identifying_the_string]:string_id ");
-                sendSystemMessageTestingOnly(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106 ");
+                broadcast(self, "The proper format for this command is: /qaTool string [code/identifying_the_string]:string_id ");
+                broadcast(self, "Example: /qaTool string [conversation/tatooine_espa_watto]:s_106 ");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1495,7 +1495,7 @@ public class qatool extends script.base_script
             utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
             if (badgeMenuArray.length < 1)
             {
-                sendSystemMessageTestingOnly(self, "Badge UI creation failed.");
+                broadcast(self, "Badge UI creation failed.");
             }
             utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
             qa.refreshMenu(self, "Choose the Badge", "Badge Granter", badgeMenuArray, "mainMenuOptions", "qabadge.pid", sui.OK_CANCEL_REFRESH);
@@ -1554,12 +1554,12 @@ public class qatool extends script.base_script
             if (!hasBag)
             {
                 createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
-                sendSystemMessageTestingOnly(self, "QA Bag Granted");
+                broadcast(self, "QA Bag Granted");
                 return SCRIPT_CONTINUE;
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You already have the QA bag");
+                broadcast(self, "You already have the QA bag");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1592,7 +1592,7 @@ public class qatool extends script.base_script
         {
             if (isSpaceScene())
             {
-                sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+                broadcast(self, "You have to be on the ground to use this tool.");
             }
             else
             {
@@ -1620,14 +1620,14 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The Search String you entered was not found");
+                        broadcast(self, "The Search String you entered was not found");
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "A level number is needed for this tool to work.  Example '/qatool groundmoblevel 2'");
+                    broadcast(self, "A level number is needed for this tool to work.  Example '/qatool groundmoblevel 2'");
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
@@ -1637,7 +1637,7 @@ public class qatool extends script.base_script
         {
             if (isSpaceScene())
             {
-                sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+                broadcast(self, "You have to be on the ground to use this tool.");
             }
             else
             {
@@ -1665,7 +1665,7 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The planet string you entered was not found");
+                        broadcast(self, "The planet string you entered was not found");
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
@@ -1692,7 +1692,7 @@ public class qatool extends script.base_script
         {
             if (isSpaceScene())
             {
-                sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+                broadcast(self, "You have to be on the ground to use this tool.");
             }
             else
             {
@@ -1719,14 +1719,14 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The Search String you entered was not found");
+                        broadcast(self, "The Search String you entered was not found");
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Format: /qatool groundmobsearch <creature name or partial name> ");
+                    broadcast(self, "Format: /qatool groundmobsearch <creature name or partial name> ");
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
@@ -1760,21 +1760,21 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The Search String you entered was not found");
+                        broadcast(self, "The Search String you entered was not found");
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Format: /qatool spacemobsearch <possible enemy ship name>");
+                    broadcast(self, "Format: /qatool spacemobsearch <possible enemy ship name>");
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You need to be in space to use this tool.");
+                broadcast(self, "You need to be in space to use this tool.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1793,7 +1793,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You need to type a search string. \nExample: /qaTool lootnamesearch pistol");
+                broadcast(self, "You need to type a search string. \nExample: /qaTool lootnamesearch pistol");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1807,7 +1807,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You need to type a search string. \nExample: /qaTool lootcodesearch weapon_pistol");
+                broadcast(self, "You need to type a search string. \nExample: /qaTool lootcodesearch weapon_pistol");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1821,7 +1821,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You need to type a code string. \nExample: /qaTool item weapon_pistol_02_02.\n\n  If you don't know the code string to spawn something use one of the following tools: /qatool lootnamesearch <searchString> or /qatool lootcodesearch <searchString>");
+                broadcast(self, "You need to type a code string. \nExample: /qaTool item weapon_pistol_02_02.\n\n  If you don't know the code string to spawn something use one of the following tools: /qatool lootnamesearch <searchString> or /qatool lootcodesearch <searchString>");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1840,13 +1840,13 @@ public class qatool extends script.base_script
         {
             if (!isDead(self))
             {
-                sendSystemMessageTestingOnly(self, "Killing self.");
+                broadcast(self, "Killing self.");
                 setPosture(self, POSTURE_INCAPACITATED);
                 pclib.coupDeGrace(self, self, true, true);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You're already dead.");
+                broadcast(self, "You're already dead.");
             }
         }
         else if ((toLower(command)).equals("aistop"))
@@ -1855,12 +1855,12 @@ public class qatool extends script.base_script
             if (isValidId(stopTarget) && isMob(stopTarget))
             {
                 ai_lib.setDefaultCalmBehavior(stopTarget, ai_lib.BEHAVIOR_SENTINEL);
-                sendSystemMessageTestingOnly(self, "target(" + stopTarget + ") STOPPED at location.  The target WILL defend itself.");
+                broadcast(self, "target(" + stopTarget + ") STOPPED at location.  The target WILL defend itself.");
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has stopped (" + stopTarget + ") " + utils.getStringName(stopTarget) + " using the aiStop command.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "target empty or invalid");
+                broadcast(self, "target empty or invalid");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1871,12 +1871,12 @@ public class qatool extends script.base_script
             {
                 ai_lib.setDefaultCalmBehavior(stopTarget, ai_lib.BEHAVIOR_SENTINEL);
                 detachScript(stopTarget, "ai.creature_combat");
-                sendSystemMessageTestingOnly(self, "target(" + stopTarget + ") STOPPED at location.  The target will NOT defend itself.");
+                broadcast(self, "target(" + stopTarget + ") STOPPED at location.  The target will NOT defend itself.");
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has frozen (" + stopTarget + ") " + utils.getStringName(stopTarget) + " using the aiFreeze command.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "target empty or invalid");
+                broadcast(self, "target empty or invalid");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1912,11 +1912,11 @@ public class qatool extends script.base_script
             {
                 idList.add(self);
                 utils.setScriptVar(planet, cloninglib.VAR_PLANET_CLONE_ID, idList);
-                sendSystemMessageTestingOnly(self, "Cloning planet lists broken for " + planetName);
+                broadcast(self, "Cloning planet lists broken for " + planetName);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Cloning planet lists are already invalid.");
+                broadcast(self, "Cloning planet lists are already invalid.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1978,7 +1978,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "No such QA Tool Command.  Please check your spelling");
+            broadcast(self, "No such QA Tool Command.  Please check your spelling");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2026,7 +2026,7 @@ public class qatool extends script.base_script
                                         setObjVar(buffItem, "item.buff.type", 0);
                                         setObjVar(buffItem, "item.buff.value", 2000);
                                         setObjVar(buffItem, "item.buff.duration", 7200);
-                                        sendSystemMessageTestingOnly(self, "Item Issued.");
+                                        broadcast(self, "Item Issued.");
                                         CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has spawned (" + oldFsVillageItem + ") using a QA Tool or command.");
                                     }
                                 }
@@ -2083,12 +2083,12 @@ public class qatool extends script.base_script
                             }
                             else
                             {
-                                sendSystemMessageTestingOnly(self, "Delete or drop your Current QA Bag for this tool.");
+                                broadcast(self, "Delete or drop your Current QA Bag for this tool.");
                             }
                         }
                         if (previousSelection == null)
                         {
-                            sendSystemMessageTestingOnly(self, "Menu Selection Failed.");
+                            broadcast(self, "Menu Selection Failed.");
                             qa.refreshMenu(self, "Select a old item category.", "Old Item Spawner", OLD_ITEM_MENU, "oldItemMenuHandler", true, "oldItem.pid", "oldItem.menu");
                         }
                         qa.refreshMenu(self, "Select a old item category. DO NOT BUG ITEMS SPAWNED WITH THIS TOOL! DO NOT BUG ITEMS SPAWNED WITH THIS TOOL! DO NOT BUG ITEMS SPAWNED WITH THIS TOOL!", "Old Item Spawner", OLD_ITEM_MENU, "oldItemMenuHandler", true, "oldItem.pid", "oldItem.menu");
@@ -2139,7 +2139,7 @@ public class qatool extends script.base_script
                                 setWeather(self, 3);
                                 break;
                             default:
-                                sendSystemMessageTestingOnly(self, "Selection Failed.");
+                                broadcast(self, "Selection Failed.");
                                 qa.refreshMenu(self, "Select weather type.", "Weather Tool", WEATHER_TYPES, "msgHandleWeatherSelection", true, "weather.pid", "weather.list");
                                 break;
                         }
@@ -2329,13 +2329,13 @@ public class qatool extends script.base_script
                     }
                     if (!isIdValid(objShip))
                     {
-                        sendSystemMessageTestingOnly(self, "Tool failed to spawn enemy mobile");
+                        broadcast(self, "Tool failed to spawn enemy mobile");
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Made ship of type " + previousSelection + " object id is: " + objShip);
+                        broadcast(self, "Made ship of type " + previousSelection + " object id is: " + objShip);
                         qa.refreshMenu(self, "List of space mobiles found.", "QA SPACE MOB SEARCH TOOL", previousMainMenuArray, "spaceMobSearchOptions", true, "spaceMobSearch.pid", "spaceMobSearch.mobsFound");
                         CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has spawned (" + objShip + ") " + utils.getStringName(objShip) + " using a QA Tool SUI Menu.");
                     }
@@ -2387,7 +2387,7 @@ public class qatool extends script.base_script
                         utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
                         if (badgeMenuArray.length < 1)
                         {
-                            sendSystemMessageTestingOnly(self, "Badge UI creation failed.");
+                            broadcast(self, "Badge UI creation failed.");
                         }
                         utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
                         qa.refreshMenu(self, "Choose the Badge", "Badge Granter", badgeMenuArray, "mainMenuOptions", "qabadge.pid", sui.OK_CANCEL_REFRESH);
@@ -2610,7 +2610,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The tool failed to attain the correct location and warp the test character.  Notify the Tool Team!");
+                broadcast(self, "The tool failed to attain the correct location and warp the test character.  Notify the Tool Team!");
             }
         }
         else
@@ -2623,7 +2623,7 @@ public class qatool extends script.base_script
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has warped to (" + objectId + ") " + utils.getStringName(objectId) + " at location " + objLocation.area + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " " + objLocation.cell + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " using a QA Tool.");
             } catch (Exception e)
             {
-                sendSystemMessageTestingOnly(self, "Failed to create an object Id. " + e);
+                broadcast(self, "Failed to create an object Id. " + e);
             }
         }
     }
@@ -2633,7 +2633,7 @@ public class qatool extends script.base_script
         obj_id inventory = utils.getInventoryContainer(self);
         if (getVolumeFree(inventory) <= 0)
         {
-            sendSystemMessageTestingOnly(self, "Your Inventory is Full, please make room and try again.");
+            broadcast(self, "Your Inventory is Full, please make room and try again.");
         }
         else
         {
@@ -2642,7 +2642,7 @@ public class qatool extends script.base_script
             {
                 createObject("object/tangible/terminal/terminal_kashyyyk_content.iff", inventory, "");
             }
-            sendSystemMessageTestingOnly(self, getClusterName() + " Character Builder Terminal Issued.");
+            broadcast(self, getClusterName() + " Character Builder Terminal Issued.");
             qa.refreshMenu(self, PROMPT, TITLE, QATOOL_MAIN_MENU, "toolMainMenu", true, SCRIPT_VAR + ".pid");
         }
     }
@@ -2680,7 +2680,7 @@ public class qatool extends script.base_script
             target = player;
         }
         create.createCreature(stringIndex, getLocation(target), true);
-        sendSystemMessageTestingOnly(player, "Mobile spawned at location targeted.");
+        broadcast(player, "Mobile spawned at location targeted.");
     }
 
     public String scriptToolPromptMaker(obj_id player) throws InterruptedException
@@ -2699,7 +2699,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "An error has occurred, please try again.");
+            broadcast(player, "An error has occurred, please try again.");
         }
     }
 
@@ -2772,8 +2772,8 @@ public class qatool extends script.base_script
                     dictionary troubleRow = dataTableGetRow(MASTER_ITEM_TABLE, i);
                     if (hasObjVar(self, "showTroubledStrings"))
                     {
-                        sendSystemMessageTestingOnly(self, "Code String Found: " + troubleRow.getString("name"));
-                        sendSystemMessageTestingOnly(self, "This tool cannot be used until this code string is fixed");
+                        broadcast(self, "Code String Found: " + troubleRow.getString("name"));
+                        broadcast(self, "This tool cannot be used until this code string is fixed");
                     }
                 }
             }
@@ -2798,7 +2798,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "The Search String you entered was not found");
+            broadcast(self, "The Search String you entered was not found");
             cleanAllScriptVars(self);
         }
     }
@@ -2902,12 +2902,12 @@ public class qatool extends script.base_script
                 }
                 else if (!searchString.equals("none") && searchString.length() <= 2)
                 {
-                    sendSystemMessageTestingOnly(self, "The mobile name must be at least 3 characters long");
+                    broadcast(self, "The mobile name must be at least 3 characters long");
                     break;
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "There was a problem with your search string.");
+                    broadcast(self, "There was a problem with your search string.");
                     break;
                 }
             }
@@ -2920,12 +2920,12 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "No Mobiles found.");
+                broadcast(self, "No Mobiles found.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "No Mobiles found in vicinity!");
+            broadcast(self, "No Mobiles found in vicinity!");
         }
         return null;
     }
@@ -2970,17 +2970,17 @@ public class qatool extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Equip a weapon before attempting to use this tool.");
+                    broadcast(self, "Equip a weapon before attempting to use this tool.");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.");
+                broadcast(self, "You must have a valid mob or player targeted.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.");
+            broadcast(self, "You must have a valid mob or player targeted.");
         }
     }
 
@@ -2988,7 +2988,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -3068,14 +3068,14 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Invalid Object Id passed to tool.  Try again.");
+                broadcast(self, "Invalid Object Id passed to tool.  Try again.");
             }
         }
         else
         {
             if (!isIdValid(lookAtTarget))
             {
-                sendSystemMessageTestingOnly(self, "You need to have something targeted to use this command");
+                broadcast(self, "You need to have something targeted to use this command");
             }
             else if (isIdValid(lookAtTarget))
             {
@@ -3086,7 +3086,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "you must have a valid target to use this command.");
+                broadcast(self, "you must have a valid target to use this command.");
             }
         }
     }
@@ -3136,12 +3136,12 @@ public class qatool extends script.base_script
                 if (iteration > 100)
                 {
                     iteration = 100;
-                    sendSystemMessageTestingOnly(self, "You cannot spawn more than 100!!!");
+                    broadcast(self, "You cannot spawn more than 100!!!");
                 }
                 if (iteration < 1)
                 {
                     iteration = 1;
-                    sendSystemMessageTestingOnly(self, "You cannot spawn less than 1!!!");
+                    broadcast(self, "You cannot spawn less than 1!!!");
                 }
                 if (iteration <= 100)
                 {
@@ -3164,7 +3164,7 @@ public class qatool extends script.base_script
                                     messageTo(self, "runLootLoggerIncrement", incrementDict, 5, true);
                                 } catch (Exception e)
                                 {
-                                    sendSystemMessageTestingOnly(self, "Interrupted! " + e);
+                                    broadcast(self, "Interrupted! " + e);
                                 }
                             }
                         }
@@ -3187,14 +3187,14 @@ public class qatool extends script.base_script
             {
                 if (scriptString.equals("none"))
                 {
-                    sendSystemMessageTestingOnly(self, "Invalid creature name. Please check your spelling and try again.");
+                    broadcast(self, "Invalid creature name. Please check your spelling and try again.");
                 }
-                sendSystemMessageTestingOnly(self, "Invalid dungeon creature name. Please make sure the creature you are spawning is spawned in the dungeon and also can be found in the creature table.");
+                broadcast(self, "Invalid dungeon creature name. Please make sure the creature you are spawning is spawned in the dungeon and also can be found in the creature table.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Format: /qatool qaspawner <Creature Name> <number of iterations>");
+            broadcast(self, "Format: /qatool qaspawner <Creature Name> <number of iterations>");
             cleanAllScriptVars(self);
         }
     }
@@ -3307,7 +3307,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "No items were looted!");
+                broadcast(self, "No items were looted!");
             }
         }
         return false;
@@ -3325,13 +3325,13 @@ public class qatool extends script.base_script
                 {
                     obj_id helperMob = create.createCreature(argumentString, getLocation(self), true);
                     attachScript(helperMob, "test.qa_ai_helper_attach");
-                    sendSystemMessageTestingOnly(self, "Helper Created.  Use radial menu.");
+                    broadcast(self, "Helper Created.  Use radial menu.");
                     dictionary creatureRow = dataTableGetRow(CREATURE_TABLE, creatureRowNumber);
                     utils.setScriptVar(self, QAHELPER_SCRIPTVAR + ".creatureDictionary", creatureRow);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Creature name invalid.");
+                    broadcast(self, "Creature name invalid.");
                 }
             }
         }
@@ -3360,7 +3360,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -3386,22 +3386,22 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The tool could not figure out what type of object you were searching for.  Check the string argument");
+                        broadcast(self, "The tool could not figure out what type of object you were searching for.  Check the string argument");
                         cleanAllScriptVars(self);
                     }
                 }
                 if (stringCount > 1)
                 {
-                    sendSystemMessageTestingOnly(self, "The tool only accepts one argument (a script string) without spaces.  Example: /qatool findobj npc.random_quest.quest_setup");
+                    broadcast(self, "The tool only accepts one argument (a script string) without spaces.  Example: /qatool findobj npc.random_quest.quest_setup");
                     cleanAllScriptVars(self);
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The Tool requires you to specify the template of the object or the script attached to the object.");
-                sendSystemMessageTestingOnly(self, "Example: /qatool findobj object/creature/player/human_male.iff");
-                sendSystemMessageTestingOnly(self, "Example: /qatool findobj npc.random_quest.quest_setup");
-                sendSystemMessageTestingOnly(self, "If successful, the tool will return a list of objects with the pattern specified by the tester.");
+                broadcast(self, "The Tool requires you to specify the template of the object or the script attached to the object.");
+                broadcast(self, "Example: /qatool findobj object/creature/player/human_male.iff");
+                broadcast(self, "Example: /qatool findobj npc.random_quest.quest_setup");
+                broadcast(self, "If successful, the tool will return a list of objects with the pattern specified by the tester.");
                 cleanAllScriptVars(self);
             }
         }
@@ -3423,7 +3423,7 @@ public class qatool extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "No objects with that Script were found.");
+                    broadcast(self, "No objects with that Script were found.");
                     cleanAllScriptVars(self);
                 }
             }
@@ -3457,13 +3457,13 @@ public class qatool extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "No objects with that Template were found. Make sure you include the entire object template to include the '.iff'.  Leave out the 'shared'.  If the tool still fails, try searching for the script attached to the object.");
+                    broadcast(self, "No objects with that Template were found. Make sure you include the entire object template to include the '.iff'.  Leave out the 'shared'.  If the tool still fails, try searching for the script attached to the object.");
                     cleanAllScriptVars(self);
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The tool did not know what type of object you were searching for.  Inform the tool team.");
+                broadcast(self, "The tool did not know what type of object you were searching for.  Inform the tool team.");
                 cleanAllScriptVars(self);
             }
         }
@@ -3493,7 +3493,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "The function didn't receive a list of objects.  Make sure the spelling of the template is correct.  Report problems to the tool team.");
+            broadcast(self, "The function didn't receive a list of objects.  Make sure the spelling of the template is correct.  Report problems to the tool team.");
             cleanAllScriptVars(self);
         }
         return null;
@@ -3503,7 +3503,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -3534,12 +3534,12 @@ public class qatool extends script.base_script
                                 levelInt = Integer.parseInt(st.nextToken());
                             } catch (Exception e)
                             {
-                                sendSystemMessageTestingOnly(self, "You failed to specify a profession level.");
+                                broadcast(self, "You failed to specify a profession level.");
                                 return false;
                             }
                             if (levelInt > 90)
                             {
-                                sendSystemMessageTestingOnly(self, "90th Level is max.");
+                                broadcast(self, "90th Level is max.");
                                 return false;
                             }
                             String[] roadmapList = gm.getRoadmapList();
@@ -3601,7 +3601,7 @@ public class qatool extends script.base_script
                                                 boolean allArmorSpawned = spawnItems(self, armorStr, ARMOR_SEARCH_MULTIARRAY, ARMOR_STATS_TABLE);
                                                 if (allArmorSpawned)
                                                 {
-                                                    sendSystemMessageTestingOnly(self, "Armor spawned without error.");
+                                                    broadcast(self, "Armor spawned without error.");
                                                     qa.findOrCreateAndEquipQABag(self, testerInventoryId, true);
                                                 }
                                             }
@@ -3610,7 +3610,7 @@ public class qatool extends script.base_script
                                                 boolean miscItemSpawned = spawnItems(self, armorStr, MISC_SEARCH_MULTIARRAY, MASTER_ITEM_TABLE);
                                                 if (miscItemSpawned)
                                                 {
-                                                    sendSystemMessageTestingOnly(self, "Items spawned without error.");
+                                                    broadcast(self, "Items spawned without error.");
                                                     qa.findOrCreateAndEquipQABag(self, testerInventoryId, true);
                                                 }
                                                 else
@@ -3628,7 +3628,7 @@ public class qatool extends script.base_script
                                             boolean allWeaponsSpawned = spawnItems(self, weaponStr, WEAPON_SEARCH_MULTIARRAY, WEAPON_STATS_TABLE);
                                             if (allWeaponsSpawned)
                                             {
-                                                sendSystemMessageTestingOnly(self, "Weapons spawned without error.");
+                                                broadcast(self, "Weapons spawned without error.");
                                                 qa.findOrCreateAndEquipQABag(self, testerInventoryId, true);
                                                 return true;
                                             }
@@ -3653,7 +3653,7 @@ public class qatool extends script.base_script
                 }
             }
         }
-        sendSystemMessageTestingOnly(self, "***There was a problem trying to implement all tool arguments***");
+        broadcast(self, "***There was a problem trying to implement all tool arguments***");
         return false;
     }
 
@@ -3745,10 +3745,10 @@ public class qatool extends script.base_script
             {
                 if (factions.isNeutral(self))
                 {
-                    sendSystemMessageTestingOnly(self, "Neutral");
+                    broadcast(self, "Neutral");
                     return true;
                 }
-                sendSystemMessageTestingOnly(self, "Failure Neutral");
+                broadcast(self, "Failure Neutral");
             }
         }
         return false;
@@ -3773,7 +3773,7 @@ public class qatool extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Unknown faction. Setting faction to Neutral.");
+                broadcast(self, "Unknown faction. Setting faction to Neutral.");
                 fullFactionName = factions.FACTION_NEUTRAL;
             }
             if (!fullFactionName.equals(""))
@@ -3843,7 +3843,7 @@ public class qatool extends script.base_script
         dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
         if (xpReqs == null || xpReqs.isEmpty())
         {
-            sendSystemMessageTestingOnly(self, "Current working skill is invalid.");
+            broadcast(self, "Current working skill is invalid.");
         }
         java.util.Enumeration e = xpReqs.keys();
         String xpType = (String) (e.nextElement());
@@ -3867,7 +3867,7 @@ public class qatool extends script.base_script
                 obj_id[] objContents = utils.getContents(inv, true);
                 if (objContents.length >= 80)
                 {
-                    sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
+                    broadcast(self, "Empty your inventory before trying to spawn more items");
                 }
                 else
                 {
@@ -3877,7 +3877,7 @@ public class qatool extends script.base_script
                         obj_id itemSpawned = qa.spawnStaticItemInInventory(self, spawnString, "none", true);
                         if (isIdNull(itemSpawned))
                         {
-                            sendSystemMessageTestingOnly(self, "Bad Spawn String.");
+                            broadcast(self, "Bad Spawn String.");
                             return false;
                         }
                         else
@@ -3890,25 +3890,25 @@ public class qatool extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
+                        broadcast(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
                         return false;
                     }
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "inventory id failed.");
+                broadcast(self, "inventory id failed.");
                 return false;
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
+            broadcast(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
             return false;
         }
         if (!silent)
         {
-            sendSystemMessageTestingOnly(self, "Done.");
+            broadcast(self, "Done.");
         }
         return true;
     }
@@ -3946,7 +3946,7 @@ public class qatool extends script.base_script
             }
         } catch (Exception e)
         {
-            sendSystemMessageTestingOnly(self, "Unable to dump quest data due to internal exception or because the test character has no quests.");
+            broadcast(self, "Unable to dump quest data due to internal exception or because the test character has no quests.");
         }
     }
 
@@ -3989,7 +3989,7 @@ public class qatool extends script.base_script
                 spamAmount = Integer.parseInt(st.nextToken());
             } catch (Exception e)
             {
-                sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
+                broadcast(self, "You failed to specify the amount of spam.");
             }
             if (spamAmount > 0)
             {
@@ -3997,16 +3997,16 @@ public class qatool extends script.base_script
                 {
                     utils.sendMail(NEW_CITY_STRUCTURE_SUBJECT, NEW_CITY_STRUCTURE_BODY, self, getName(self));
                 }
-                sendSystemMessageTestingOnly(self, "Spamming completed.");
+                broadcast(self, "Spamming completed.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
+                broadcast(self, "You failed to specify the amount of spam.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
+            broadcast(self, "You failed to specify the amount of spam.");
         }
     }
 
@@ -4045,7 +4045,7 @@ public class qatool extends script.base_script
         location here = getLocation(self);
         if (!minigame.isLocationFishable(here))
         {
-            sendSystemMessageTestingOnly(self, "You must be within 2 meters of fishable water and facing it to start fishing.");
+            broadcast(self, "You must be within 2 meters of fishable water and facing it to start fishing.");
             return;
         }
         if (continueFishing)
@@ -4062,12 +4062,12 @@ public class qatool extends script.base_script
             if (iteration > 100)
             {
                 iteration = 100;
-                sendSystemMessageTestingOnly(self, "Catch limit = 1 to 100");
+                broadcast(self, "Catch limit = 1 to 100");
             }
             if (iteration < 1)
             {
                 iteration = 1;
-                sendSystemMessageTestingOnly(self, "Catch limit = 1 to 100");
+                broadcast(self, "Catch limit = 1 to 100");
             }
             if (iteration <= 100)
             {
@@ -4082,7 +4082,7 @@ public class qatool extends script.base_script
     public void qaEnableCollectionClickBypass(obj_id self, StringTokenizer st, String scriptString) throws InterruptedException
     {
         utils.setScriptVar(self, "collection.qa.clickBypass", 0);
-        sendSystemMessageTestingOnly(self, "Collection Click Bypass Enabled. Logout to reset to normal collecting.");
+        broadcast(self, "Collection Click Bypass Enabled. Logout to reset to normal collecting.");
     }
 
     public int qaSetScriptVar(obj_id self, StringTokenizer st) throws InterruptedException
@@ -4125,7 +4125,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Invalid backpack or no backpack equipped");
+            broadcast(self, "Invalid backpack or no backpack equipped");
         }
     }
 
@@ -4133,7 +4133,7 @@ public class qatool extends script.base_script
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Kill command failed.");
+            broadcast(self, "Kill command failed.");
             return SCRIPT_CONTINUE;
         }
         obj_id objMyShip = space_transition.getContainingShip(self);
@@ -4144,7 +4144,7 @@ public class qatool extends script.base_script
         }
         else if (target == self)
         {
-            sendSystemMessageTestingOnly(self, "Kill Command Failed. Cannot Kill self.  Use /qatool suicide.");
+            broadcast(self, "Kill Command Failed. Cannot Kill self.  Use /qatool suicide.");
             return SCRIPT_CONTINUE;
         }
         else if (isPlayer(target))
@@ -4158,7 +4158,7 @@ public class qatool extends script.base_script
         {
             if (isIncapacitated(target))
             {
-                sendSystemMessageTestingOnly(self, "Kill Command. Target is already dead.");
+                broadcast(self, "Kill Command. Target is already dead.");
                 return SCRIPT_CONTINUE;
             }
             int commandKillMobResult = commandKillMob(self, target);
@@ -4167,7 +4167,7 @@ public class qatool extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "you must have a valid player or mobile target to use this command");
+            broadcast(self, "you must have a valid player or mobile target to use this command");
             return SCRIPT_CONTINUE;
         }
     }
@@ -4176,23 +4176,23 @@ public class qatool extends script.base_script
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Kill ship command failed.");
+            broadcast(self, "Kill ship command failed.");
             return SCRIPT_CONTINUE;
         }
         obj_id objMyShip = space_transition.getContainingShip(self);
         if (!isIdValid(target) || !isIdValid(objMyShip))
         {
-            sendSystemMessageTestingOnly(self, "You must be in space and target a ship to destroy it");
+            broadcast(self, "You must be in space and target a ship to destroy it");
             return SCRIPT_CONTINUE;
         }
         if (target == self)
         {
-            sendSystemMessageTestingOnly(self, "DO NOT DESTROY YOURSELF");
+            broadcast(self, "DO NOT DESTROY YOURSELF");
             return SCRIPT_CONTINUE;
         }
         if (target == objMyShip)
         {
-            sendSystemMessageTestingOnly(self, "DO NOT DESTROY YOURSELF");
+            broadcast(self, "DO NOT DESTROY YOURSELF");
             return SCRIPT_CONTINUE;
         }
         notifyShipDamage(target, objMyShip, 10.0f);
@@ -4211,7 +4211,7 @@ public class qatool extends script.base_script
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Kill command failed.");
+            broadcast(self, "Kill command failed.");
             return SCRIPT_CONTINUE;
         }
         final String ATTACK_TYPE = "combat_rangedspecialize_pistol";
@@ -4270,7 +4270,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -4293,7 +4293,7 @@ public class qatool extends script.base_script
                         mutagen = Integer.parseInt(mutagenStr);
                         if (mutagen > 20 || mutagen < 1)
                         {
-                            sendSystemMessageTestingOnly(self, "The mutagen value must be between 1 and 20.");
+                            broadcast(self, "The mutagen value must be between 1 and 20.");
                             return false;
                         }
                     }
@@ -4311,7 +4311,7 @@ public class qatool extends script.base_script
                                 purity = Integer.parseInt(purityStr);
                                 if (purity > 20 || purity < 1)
                                 {
-                                    sendSystemMessageTestingOnly(self, "The purity value must be between 1 and 20.");
+                                    broadcast(self, "The purity value must be between 1 and 20.");
                                     return false;
                                 }
                             }
@@ -4332,11 +4332,11 @@ public class qatool extends script.base_script
             {
                 setObjVar(enzyme, "enzyme.enzyme_mutagen", mutagenFloat);
                 setObjVar(enzyme, "enzyme.enzyme_purity", purityFloat);
-                sendSystemMessageTestingOnly(self, "Created an Enzyme with the values: Mutagen: " + mutagen + " and Purity: " + purity);
+                broadcast(self, "Created an Enzyme with the values: Mutagen: " + mutagen + " and Purity: " + purity);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
+                broadcast(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
@@ -4361,7 +4361,7 @@ public class qatool extends script.base_script
                 return colorIndex;
             }
 
-            sendSystemMessageTestingOnly(self, "Invalid color specified. Valid colors are: " + String.join(", ", ENZYME_COMMAND_COLOR_LOOKUP));
+            broadcast(self, "Invalid color specified. Valid colors are: " + String.join(", ", ENZYME_COMMAND_COLOR_LOOKUP));
             return -1;
         }
 
@@ -4372,7 +4372,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -4403,11 +4403,11 @@ public class qatool extends script.base_script
                     removeObjVar(lyase, "beast.enzyme.freeStatName");
                 }
 
-                sendSystemMessageTestingOnly(self, "Created a Lyase Enzyme with the values: Random Stats: 11, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
+                broadcast(self, "Created a Lyase Enzyme with the values: Random Stats: 11, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
+                broadcast(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
@@ -4418,12 +4418,12 @@ public class qatool extends script.base_script
         if (hasObjVar(self, "instance_player_data"))
         {
             removeObjVar(self, "instance_player_data");
-            sendSystemMessageTestingOnly(self, "Removed instance_player_data from: " + self + " - Heroic timers reset");
+            broadcast(self, "Removed instance_player_data from: " + self + " - Heroic timers reset");
             return true;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "QA tool could not find the objvar instance_player_data on the player: " + self);
+            broadcast(self, "QA tool could not find the objvar instance_player_data on the player: " + self);
         }
         return false;
     }
@@ -4432,7 +4432,7 @@ public class qatool extends script.base_script
     {
         if (isSpaceScene())
         {
-            sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
+            broadcast(self, "You have to be on the ground to use this tool.");
         }
         else
         {
@@ -4458,11 +4458,11 @@ public class qatool extends script.base_script
                 setObjVar(isomerase, "beast.enzyme.color", enzymeColorIndex);
                 hue.setColor(isomerase, "/private/index_color_1", enzymeColorIndex);
 
-                sendSystemMessageTestingOnly(self, "Created a Isomerase Enzyme with the values: random Stats: 90%, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
+                broadcast(self, "Created a Isomerase Enzyme with the values: random Stats: 90%, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
+                broadcast(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
@@ -4495,21 +4495,21 @@ public class qatool extends script.base_script
         {
             case 0:
                 scheduled_drop.dropCard(scheduled_drop.SYSTEM_COMBAT_NORMAL, self);
-                sendSystemMessageTestingOnly(self, "Item placed in inventory.");
+                broadcast(self, "Item placed in inventory.");
                 qaTCGMenu(self);
                 break;
             case 1:
                 if (!hasObjVar(self, "qa_tcg"))
                 {
                     setObjVar(self, "qa_tcg", 1);
-                    sendSystemMessageTestingOnly(self, "TCG Info flag has been set on your character.");
+                    broadcast(self, "TCG Info flag has been set on your character.");
                     qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
                     return SCRIPT_CONTINUE;
                 }
                 else
                 {
                     removeObjVar(self, "qa_tcg");
-                    sendSystemMessageTestingOnly(self, "TCG Info flag has been removed from your character.");
+                    broadcast(self, "TCG Info flag has been removed from your character.");
                     qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
                     return SCRIPT_CONTINUE;
                 }
@@ -4517,14 +4517,14 @@ public class qatool extends script.base_script
                 if (!hasObjVar(self, "qa_tcg_always_drop"))
                 {
                     setObjVar(self, "qa_tcg_always_drop", 1);
-                    sendSystemMessageTestingOnly(self, "TCG always drop flag has been set on your character.");
+                    broadcast(self, "TCG always drop flag has been set on your character.");
                     qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
                     return SCRIPT_CONTINUE;
                 }
                 else
                 {
                     removeObjVar(self, "qa_tcg_always_drop");
-                    sendSystemMessageTestingOnly(self, "TCG always drop flag has been removed from your character.");
+                    broadcast(self, "TCG always drop flag has been removed from your character.");
                     qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
                     return SCRIPT_CONTINUE;
                 }
@@ -4580,7 +4580,7 @@ public class qatool extends script.base_script
         String[] listBoxInfo = tcgClusterInfo("card");
         if (listBoxInfo == null || listBoxInfo.length <= 0)
         {
-            sendSystemMessageTestingOnly(self, "No promotions running.");
+            broadcast(self, "No promotions running.");
             return;
         }
         qa.refreshMenu(self, "Select...", "-SWG Card Promotions-", listBoxInfo, "handleTCGPromotionMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
@@ -4591,7 +4591,7 @@ public class qatool extends script.base_script
         String[] listBoxInfo = tcgClusterInfo("item");
         if (listBoxInfo == null || listBoxInfo.length <= 0)
         {
-            sendSystemMessageTestingOnly(self, "No promotions running.");
+            broadcast(self, "No promotions running.");
             return;
         }
         qa.refreshMenu(self, "Select...", "-SWG Item Promotions-", listBoxInfo, "handleTCGPromotionMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
@@ -4599,7 +4599,7 @@ public class qatool extends script.base_script
 
     public void qaTCGReinit(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Promotions Reinitialized!  Planet tatooine: " + getPlanetByName("tatooine"));
+        broadcast(self, "Promotions Reinitialized!  Planet tatooine: " + getPlanetByName("tatooine"));
         scheduled_drop.removeClusterPromotions();
         scheduled_drop.removeLastClusterUpdateTime();
         scheduled_drop.instantiatePromotionsOnCluster();
