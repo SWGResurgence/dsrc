@@ -122,7 +122,7 @@ expertise_fs_general_heightened_speed_1	4	2	6	1			force_sensitive
 expertise_fs_general_heightened_speed_2	4	2	6	2			force_sensitive
 expertise_fs_general_heightened_speed_3	4	2	6	3			force_sensitive
 expertise_fs_general_heightened_speed_4	4	2	6	4			force_sensitive
-expertise_fs_general_improved_crippling_accuracy_1	4	3	2	1			force_sensitive
+expertise_fs_general_crippling_accuracy_1	4	3	2	1			force_sensitive
 expertise_fs_general_premonition_1	4	3	3	1			force_sensitive
 expertise_fs_general_premonition_2	4	3	3	2			force_sensitive
 expertise_fs_general_premonition_3	4	3	3	3			force_sensitive
