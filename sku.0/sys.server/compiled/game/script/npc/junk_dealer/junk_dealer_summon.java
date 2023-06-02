@@ -45,7 +45,7 @@ public class junk_dealer_summon extends script.base_script
         {
             buffName = "sm_junk_dealer_3";
         }
-        else if (precisionBonus >= 75)
+        else if (precisionBonus >= 125)
         {
             buffName = "sm_junk_dealer_2";
         }

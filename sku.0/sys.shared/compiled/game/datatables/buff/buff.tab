@@ -757,9 +757,9 @@ sm_spot_a_sucker_4_7	spot_a_sucker			70	command.sm_spot_a_sucker	12	precision_mo
 sm_break_the_deal	break_the_deal			34	command.sm_break_the_deal	5	combat_divide_damage_dealt	75		0		0		0		0	STATE_NONE	sm_break_the_deal_recourse	appearance/pt_smuggler_break_deal.prt		1	1		1	1	1	0	1	1	0	1	1	1
 sm_break_the_deal_recourse	break_the_deal			35	command.sm_break_the_deal_recourse	25		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 sm_junk_dealer_1	junk_dealer			18	command.sm_off_the_books	3600	luck_modified	50		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_2	junk_dealer			19	command.sm_off_the_books	3600	luck_modified	50	precision_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_3	junk_dealer			20	command.sm_off_the_books	3600	luck_modified	50	precision_modified	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_4	junk_dealer			21	command.sm_off_the_books	3600	luck_modified	100	precision_modified	100	combat_divide_damage_taken	5		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_2	junk_dealer			19	command.sm_off_the_books	3600	luck_modified	75	precision_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_3	junk_dealer			20	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_4	junk_dealer			21	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150	combat_divide_damage_taken	5		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sm_junk_dealer_5	junk_dealer			22	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150	combat_divide_damage_taken	10		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sm_underworld_boss_1	underworld_boss			1	command.sm_path_underworld_boss	-1	expertise_overridable_protection_generic	200	expertise_underworld_boss	200		0		0		0	STATE_NONE	none			0	0		0	1	0	0	1	1	0	1	1	1
 sm_underworld_boss_2	underworld_boss			1	command.sm_path_underworld_boss	-1	expertise_overridable_protection_generic	400	expertise_underworld_boss	400		0		0		0	STATE_NONE	none			0	0		0	1	0	0	1	1	0	1	1	1
