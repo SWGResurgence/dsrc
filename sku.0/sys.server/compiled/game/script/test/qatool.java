@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 
 public class qatool extends script.base_script
 {
-    public qatool()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String SPACE_MOBILE_TABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
@@ -92,753 +89,755 @@ public class qatool extends script.base_script
     public static final float MINIMUM_FINDER_RADIUS_FLOAT = 10000000.0f;
     public static final string_id NEW_CITY_STRUCTURE_SUBJECT = new string_id("city/city", "new_city_structure_subject");
     public static final string_id NEW_CITY_STRUCTURE_BODY = new string_id("city/city", "new_city_structure_body");
-    public static final String[] QATOOLPROMPT = 
-    {
-        " Format: /qatool <command>",
-        " qabadge -- Assigns and revokes badges",
-        " qawearables -- spawns clothing into your inventory",
-        " buff -- provides a list of in game buffs that can be applied to the tester (also /qatool buff <buffString>)",
-        " qainv -- Inventory manipulation functions",
-        " qafaction -- Faction manipulation functions ",
-        " qaxp - Experience tool.  Allows tester to attain expereince based on current profession.",
-        "* (command driven tool) qabag -- Creates the QA bag into your inventory ",
-        " qange -- Allows the tester to receive a respec token.",
-        " frog -- Allows the tester to spawn character builder terminals directly into the tester inventory.",
-        " qaquest -- QA version of a quest tool.  Should provide tester with a list of current quests that are yet to be completed. Allows tester to complete ground and space quests.",
-        " qaprofession -- Tester can use this tool to research stats, roadmap and other data. A report can be created based off of the tool data.",
-        "* (command driven tool) qalootlogger <Creature Name> <number of iterations> -- Spawns the supplied creature specified number of times and loots it, default is 25",
-        " spacetool -- Allows the tester to use tools specific to Space. Also known as the JTL Tool.",
-        "* (command driven tool) groundmobsearch -- Allows the tester to search the creature table ",
-        "* (command driven tool) groundmoblevel <level number> -- Allows the tester to search the creature table by creature level",
-        "* (command driven tool) groundmobplanet <null | planet> -- Allows the tester to search the creature table by planet",
-        "* (command driven tool) spacemobsearch -- Allows the tester to search the space mobile table",
-        " qaresource -- Allows the tester to spawn different types of resources ",
-        " qadatapad - Allows the tester to manipulate datapad data",
-        " qascript - Allows the tester to attach or detach common QA scripts without memorizing the script string",
-        "* (command driven tool) lootnamesearch - Allows the tester to search for a Static Loot/Reward item by the title of the object (ex. Basic Pistol)",
-        "* (command driven tool) lootcodesearch - Allows the tester to search for a Static Loot/Reward item by the staticItem code string (ex. weapon_pistol_02_01)",
-        " qaitem - Allows the tester to attain armor and weapons. Also known as the Master Item Tool.",
-        "* (command driven tool) kill <target>- Allows the tester to kill another tester (or themself) depending on the current target",
-        "* (command driven tool) suicide - Allows the tester to kill themself instantly.",
-        "* (command driven tool) spawnitem <itemCodeString> - Allows the tester to spawn a static item into their inventory.",
-        " damage <mobTarget or playerTarget> - Allows the tester to damage the health of a target without entering combat with the mobile or player.",
-        "* (command driven tool) heal <mobTarget or playerTarget> - Allows the tester to heal the health of a mobile or player target.",
-        "* (command driven tool) aistop <mobTarget> - Allows the tester to stop a mobile so it doesn't walk around or wander off.  Once attacked, the mobile will defend itself.",
-        "* (command driven tool) aifreeze <mobTarget> - Allows the tester to stop a mobile so it doesn't move even if damaged by combat.  The mobile will not attempt to fight back.",
-        " npcFinder (or findNPC) - Allows the tester to look for specific mobs within the server boundaries of their current position.",
-        "* (command driven tool) string [code/identifying_the_string]:string_id - Example: /qaTool string [conversation/tatooine_espa_watto]:s_106",
-        "* (command driven tool) targetData - Gives tester a popup window with a target's data to include scripts, stats, scriptvars, etc. The popup itself can be edited meaning you can copy or cut from the popup to the chat UI or other applications.",
-        "* (command driven tool) helper <creatureName> - Gives tester a creature with additional functionality.  Tester can instruct the test creature to carry out specific instructions in order to assist the tester in attaining a structured combat test case.",
-        "* (command driven tool) objFinder <script.string.argument | template/name.iff> - Lists all objects, that have the specified template or script attached, within the server boundary in which the tester currently resides.",
-        "* (command driven tool) revokepilot - Removes the test character's Pilot profession completely.",
-        "* (command driven tool) spec - Allows tester to instantly change profession, level, faction, armor and weapons. Example: /qatool spec smu 22 rebsf bone pis",
-        "* (command driven tool) gmr - Restores health on test character (self only).",
-        "* (command driven tool) multi - Allows for multiple spawning of a static item using 2 arguments.  Example: /qatool multi item_restuss_imperial_commendation_02_01 2000",
-        "* (command driven tool) entertaineritems - Spawns all entertainer instraments into tester inventory.",
-        "* (command driven tool) serialize - Command that allows a crafter to simulate items from a crate.  To use this tool, create two or more of the same item and then /qatool serialize <OID> of the object to be serialized.",
-        " vetreward -- Allows tester to spawn veteran rewards rapidly.",
-        " qacybernetic -- Allows testers to install/uninstall/repair cybernetics without the need to find the correct NPC.",
-        " qaweapon -- Allows testers to spawn weapons that have a set damage amount instead of a damage range.  This is useful in testing various special abilities and armor mitigation.",
-        "* (command driven tool) questdump - Exports a text file of all test character completed/active quests to the client root directory.",
-        " qa_cube -- Allows testers to obtain components needed to create items using the Chu-Gon Dar Cube.",
-        "* (command driven tool) eggspawn - Forces a Yellow Spawner Egg (crown) to spawn its mobile(s) immediately.  Mobile selected is random.",
-        " weather -- Allows testers to change weather locally, on their client to test effects of the environment when weather is used.",
-        "* (command driven tool) spam - Pass the amount of emails you want to receive to spam your own character with emails from the email server.",
-        "* (command driven tool) glow - Issues the test character a blue glowie ability Icon regardless of profession. Allows for testing Blue Glow character model.",
-        "* (command driven tool) olditem - Gives tester immediate access to some of the older loot or quest items that may or may not work.",
-        " qarewardresource -- Allows testers to quickly access the Resource Reward Deed interface.  From there, testers can spawn resources needed for crafting.",
-        " qadna -- Creates valid DNA samples for testers.",
-        " fish [n] -- Succesfully catches a fish. Optional parameter [n] = 1-100. Location is the current planet but does not test for valid fishing location.",
-        " collectionclickbypass -- Sets scriptvar to allow 1 second clicks on collection items",
-        "* (command driven tool) clearAllCollections -- Removes every collection slot your character has earned.",
-        "* (command driven tool) setScriptVar -- Sets a scriptvar on to 0 or a given value. If no current target then scriptvar is set on player.",
-        "* (command driven tool) enzyme -- Creates an Enzyme with preset values the mutagen score and the purity score (for example /qatool enzyme 10 15).",
-        "* (command driven tool) lyase or qalyase [color] -- Creates an Lyase Enzyme with randomStats set to 11. Optional parameter [color]",
-        "* (command driven tool) clearHeroicTimer -- Removes all heroic lockout timers from the character",
-        "* (command driven tool) iso or qaiso [color] -- Creates an Isomerase Enzyme with a quality of 90.00. Optional parameter [color]",
-        "* (command driven tool) spawnShip <ship spawn string> <number of ships> -- Creates a ship in front of you.(For example: /qat spawnShip awing_tier6 3)",
-        " qatcg or tcg - Brings up a menu of options for the SWG Trading Card Game"
-    };
+    public static final String[] QATOOLPROMPT =
+            {
+                    " Format: /qatool <command>",
+                    " qabadge -- Assigns and revokes badges",
+                    " qawearables -- spawns clothing into your inventory",
+                    " buff -- provides a list of in game buffs that can be applied to the tester (also /qatool buff <buffString>)",
+                    " qainv -- Inventory manipulation functions",
+                    " qafaction -- Faction manipulation functions ",
+                    " qaxp - Experience tool.  Allows tester to attain expereince based on current profession.",
+                    "* (command driven tool) qabag -- Creates the QA bag into your inventory ",
+                    " qange -- Allows the tester to receive a respec token.",
+                    " frog -- Allows the tester to spawn character builder terminals directly into the tester inventory.",
+                    " qaquest -- QA version of a quest tool.  Should provide tester with a list of current quests that are yet to be completed. Allows tester to complete ground and space quests.",
+                    " qaprofession -- Tester can use this tool to research stats, roadmap and other data. A report can be created based off of the tool data.",
+                    "* (command driven tool) qalootlogger <Creature Name> <number of iterations> -- Spawns the supplied creature specified number of times and loots it, default is 25",
+                    " spacetool -- Allows the tester to use tools specific to Space. Also known as the JTL Tool.",
+                    "* (command driven tool) groundmobsearch -- Allows the tester to search the creature table ",
+                    "* (command driven tool) groundmoblevel <level number> -- Allows the tester to search the creature table by creature level",
+                    "* (command driven tool) groundmobplanet <null | planet> -- Allows the tester to search the creature table by planet",
+                    "* (command driven tool) spacemobsearch -- Allows the tester to search the space mobile table",
+                    " qaresource -- Allows the tester to spawn different types of resources ",
+                    " qadatapad - Allows the tester to manipulate datapad data",
+                    " qascript - Allows the tester to attach or detach common QA scripts without memorizing the script string",
+                    "* (command driven tool) lootnamesearch - Allows the tester to search for a Static Loot/Reward item by the title of the object (ex. Basic Pistol)",
+                    "* (command driven tool) lootcodesearch - Allows the tester to search for a Static Loot/Reward item by the staticItem code string (ex. weapon_pistol_02_01)",
+                    " qaitem - Allows the tester to attain armor and weapons. Also known as the Master Item Tool.",
+                    "* (command driven tool) kill <target>- Allows the tester to kill another tester (or themself) depending on the current target",
+                    "* (command driven tool) suicide - Allows the tester to kill themself instantly.",
+                    "* (command driven tool) spawnitem <itemCodeString> - Allows the tester to spawn a static item into their inventory.",
+                    " damage <mobTarget or playerTarget> - Allows the tester to damage the health of a target without entering combat with the mobile or player.",
+                    "* (command driven tool) heal <mobTarget or playerTarget> - Allows the tester to heal the health of a mobile or player target.",
+                    "* (command driven tool) aistop <mobTarget> - Allows the tester to stop a mobile so it doesn't walk around or wander off.  Once attacked, the mobile will defend itself.",
+                    "* (command driven tool) aifreeze <mobTarget> - Allows the tester to stop a mobile so it doesn't move even if damaged by combat.  The mobile will not attempt to fight back.",
+                    " npcFinder (or findNPC) - Allows the tester to look for specific mobs within the server boundaries of their current position.",
+                    "* (command driven tool) string [code/identifying_the_string]:string_id - Example: /qaTool string [conversation/tatooine_espa_watto]:s_106",
+                    "* (command driven tool) targetData - Gives tester a popup window with a target's data to include scripts, stats, scriptvars, etc. The popup itself can be edited meaning you can copy or cut from the popup to the chat UI or other applications.",
+                    "* (command driven tool) helper <creatureName> - Gives tester a creature with additional functionality.  Tester can instruct the test creature to carry out specific instructions in order to assist the tester in attaining a structured combat test case.",
+                    "* (command driven tool) objFinder <script.string.argument | template/name.iff> - Lists all objects, that have the specified template or script attached, within the server boundary in which the tester currently resides.",
+                    "* (command driven tool) revokepilot - Removes the test character's Pilot profession completely.",
+                    "* (command driven tool) spec - Allows tester to instantly change profession, level, faction, armor and weapons. Example: /qatool spec smu 22 rebsf bone pis",
+                    "* (command driven tool) gmr - Restores health on test character (self only).",
+                    "* (command driven tool) multi - Allows for multiple spawning of a static item using 2 arguments.  Example: /qatool multi item_restuss_imperial_commendation_02_01 2000",
+                    "* (command driven tool) entertaineritems - Spawns all entertainer instraments into tester inventory.",
+                    "* (command driven tool) serialize - Command that allows a crafter to simulate items from a crate.  To use this tool, create two or more of the same item and then /qatool serialize <OID> of the object to be serialized.",
+                    " vetreward -- Allows tester to spawn veteran rewards rapidly.",
+                    " qacybernetic -- Allows testers to install/uninstall/repair cybernetics without the need to find the correct NPC.",
+                    " qaweapon -- Allows testers to spawn weapons that have a set damage amount instead of a damage range.  This is useful in testing various special abilities and armor mitigation.",
+                    "* (command driven tool) questdump - Exports a text file of all test character completed/active quests to the client root directory.",
+                    " qa_cube -- Allows testers to obtain components needed to create items using the Chu-Gon Dar Cube.",
+                    "* (command driven tool) eggspawn - Forces a Yellow Spawner Egg (crown) to spawn its mobile(s) immediately.  Mobile selected is random.",
+                    " weather -- Allows testers to change weather locally, on their client to test effects of the environment when weather is used.",
+                    "* (command driven tool) spam - Pass the amount of emails you want to receive to spam your own character with emails from the email server.",
+                    "* (command driven tool) glow - Issues the test character a blue glowie ability Icon regardless of profession. Allows for testing Blue Glow character model.",
+                    "* (command driven tool) olditem - Gives tester immediate access to some of the older loot or quest items that may or may not work.",
+                    " qarewardresource -- Allows testers to quickly access the Resource Reward Deed interface.  From there, testers can spawn resources needed for crafting.",
+                    " qadna -- Creates valid DNA samples for testers.",
+                    " fish [n] -- Succesfully catches a fish. Optional parameter [n] = 1-100. Location is the current planet but does not test for valid fishing location.",
+                    " collectionclickbypass -- Sets scriptvar to allow 1 second clicks on collection items",
+                    "* (command driven tool) clearAllCollections -- Removes every collection slot your character has earned.",
+                    "* (command driven tool) setScriptVar -- Sets a scriptvar on to 0 or a given value. If no current target then scriptvar is set on player.",
+                    "* (command driven tool) enzyme -- Creates an Enzyme with preset values the mutagen score and the purity score (for example /qatool enzyme 10 15).",
+                    "* (command driven tool) lyase or qalyase [color] -- Creates an Lyase Enzyme with randomStats set to 11. Optional parameter [color]",
+                    "* (command driven tool) clearHeroicTimer -- Removes all heroic lockout timers from the character",
+                    "* (command driven tool) iso or qaiso [color] -- Creates an Isomerase Enzyme with a quality of 90.00. Optional parameter [color]",
+                    "* (command driven tool) spawnShip <ship spawn string> <number of ships> -- Creates a ship in front of you.(For example: /qat spawnShip awing_tier6 3)",
+                    " qatcg or tcg - Brings up a menu of options for the SWG Trading Card Game"
+            };
     public static final String[] QATOOL_MAIN_MENU = dataTableGetStringColumn("datatables/test/qa_tool_menu.iff", "main_tool");
-    public static final String[] FACTION_TOOL_MENU = 
-    {
-        "Join a faction",
-        "Go Covert (Combatant)",
-        "Go Overt (Special Forces)",
-        "Go On Leave",
-        "Go Neutral",
-        "GCW Faction Points",
-        "Manipulate NPC Factions",
-        "Get Factional HQ's and Supplies"
-    };
-    public static final String[] FS_TOOL_MENU = 
-    {
-        "FS Village Intro Quests",
-        "FS Village Quests",
-        "FS Village Exit Quests"
-    };
-    public static final String[] INVENTORY_TOOL_MENU = 
-    {
-        "Delete all in inventory",
-        "Fill inventory with Junk"
-    };
-    public static final String[] QUEST_TOOL_MENU = 
-    {
-        "Add a ground quest manually",
-        "Add a space quest manually",
-        "Attain test quests",
-        "Bulk Grant/Complete Tool",
-        "Bulk Grant Tool"
-    };
-    public static final String[] JTL_TOOL_MENU = 
-    {
-        "Ship Loot Components",
-        "Mining Components",
-        "God Ships",
-        "Valid Ship Deeds",
-        "Valid Ships With Components",
-        "RoTW Quest Ship Deeds",
-        "Make Master Imperial Pilot",
-        "Make Master Rebel Pilot",
-        "Make Master Neutral Pilot",
-        "Pilot Quest Tools",
-        "Revoke pilot skills"
-    };
-    public static final String[] ENHANCEMENT_TOOL_MENU = 
-    {
-        "Armor Enhancement",
-        "Clothing Enhancement",
-        "Random Enhancement"
-    };
-    public static final String[] XP_TOOL_MENU = 
-    {
-        "Revoke non-pilot experience",
-        "combat_general",
-        "quest_combat",
-        "quest_crafting",
-        "quest_social",
-        "quest_general",
-        "prestige_imperial",
-        "prestige_rebel",
-        "prestige_pilot"
-    };
-    public static final String[] RESOURCE_TOOL_MENU = 
-    {
-        "Recycled Resources",
-        "Space Resources",
-        "Common Resources"
-    };
-    public static final String[] REWARD_RESOURCE_MENU = 
-    {
-        "Enter Resource Menu"
-    };
-    public static final String[] ITEM_TOOL_MENU = 
-    {
-        "Armor",
-        "Best Weapons",
-        "Get all Certified Weapons",
-        "Get Roadmap Items",
-        "List Every Item by Category"
-    };
-    public static final String[] SCRIPT_TOOL_MENU = 
-    {
-        "Attach Script",
-        "Detach Script"
-    };
-    public static final String[] NGE_TOOL_MENU = 
-    {
-        "Make CU Profession",
-        "Get Respec Token"
-    };
-    public static final String[] SCRIPT_TOOL_COMMON_SCRIPTS = 
-    {
-        "csr.get_resource_crate",
-        "working.dantest",
-        "player.player_gm",
-        "gm.cmd",
-        "e3demo.e3_demoer",
-        "developer.soe.e3demo.yavin_e3",
-        "space.content_tools.missiontest",
-        "space.content_tools.content_generation",
-        "quest.utility.quest_test",
-        "test.ttyson_test",
-        "test.qatool",
-        "test.qa_enhancements",
-        "test.qa_jtl_tools",
-        "test.qa_quest_skipper",
-        "test.qa_resources",
-        "test.qabadge",
-        "test.qabuff",
-        "test.qafaction",
-        "test.qainventory",
-        "test.qascript",
-        "test.qawearables",
-        "test.qaxp",
-        "test.qadatapad",
-        "test.qaitem",
-        "test.qange",
-        "test.qaprofession",
-        "test.qa_damage",
-        "test.qa_helper",
-        "test.qa_dynamics",
-        "test.qaham",
-        "test.qa_resource_reward",
-        "test.qadna"
-    };
-    public static final String[] DATAPAD_TOOL_MENU = 
-    {
-        "Warp to Waypoints",
-        "Export Waypoints"
-    };
-    public static final String[] PROFESSION_TOOL_MENU = 
-    {
-        "Abilities Alphabetically",
-        "Profession Details",
-        "Export Profession Details"
-    };
-    public static final String[] MOB_STRING_FILE_POSSIBILITIES = 
-    {
-        "mob/creature_names",
-        "npc_name",
-        "droid_name",
-        "monster_name",
-        "npc_spawner_n",
-        "theme_park_name",
-        "ep3/npc_names"
-    };
-    public static final String[] NPCFINDER_ERR_ARRAY = 
-    {
-        "No Mob/NPC Found"
-    };
-    public static final String[] MITIGATION_HIT_LOCATIONS = 
-    {
-        "Body",
-        "Head",
-        "Right Arm",
-        "Left Arm",
-        "Right Leg",
-        "Left Leg"
-    };
-    public static final String[] WEAPON_DAMAGE_TYPE = 
-    {
-        "DAMAGE_NONE",
-        "DAMAGE_KINETIC",
-        "DAMAGE_ENERGY",
-        "DAMAGE_BLAST",
-        "DAMAGE_STUN",
-        "DAMAGE_RESTRAINT",
-        "DAMAGE_ELEMENTAL_HEAT",
-        "DAMAGE_ELEMENTAL_COLD",
-        "DAMAGE_ELEMENTAL_ACID",
-        "DAMAGE_ELEMENTAL_ELECTRICAL",
-        "DAMAGE_ENVIRONMENTAL_HEAT",
-        "DAMAGE_ENVIRONMENTAL_COLD",
-        "DAMAGE_ENVIRONMENTAL_ACID",
-        "DAMAGE_ENVIRONMENTAL_ELECTRICAL"
-    };
-    public static final String[] PROFESSION_SKILL_NAMES = 
-    {
-        "_phase1_novice",
-        "_phase1_02",
-        "_phase1_03",
-        "_phase1_04",
-        "_phase1_05",
-        "_phase1_master",
-        "_phase2_novice",
-        "_phase2_02",
-        "_phase2_03",
-        "_phase2_04",
-        "_phase2_05",
-        "_phase2_master",
-        "_phase3_novice",
-        "_phase3_02",
-        "_phase3_03",
-        "_phase3_04",
-        "_phase3_05",
-        "_phase3_master",
-        "_phase4_novice",
-        "_phase4_02",
-        "_phase4_03",
-        "_phase4_04",
-        "_phase4_05",
-        "_phase4_master"
-    };
-    public static final String[] PROFESSION_PREFIX = 
-    {
-        "class_smuggler",
-        "class_bountyhunter",
-        "class_officer",
-        "class_commando",
-        "class_forcesensitive",
-        "class_medic",
-        "class_spy"
-    };
-    public static final String[] PET_OPTION_MENU = 
-    {
-        "Access DNA Samples",
-        "Future Pet Options"
-    };
-    public static final String[][] MISC_SEARCH_MULTIARRAY = 
-    {
-        
-        {
-            "robe"
-        },
-        
-        {
-            "item_jedi_robe_"
-        }
-    };
-    public static final String[][] WEAPON_SEARCH_MULTIARRAY = 
-    {
-        
-        {
-            "pis",
-            "rif",
-            "car",
-            "una",
-            "one",
-            "two",
-            "pol"
-        },
-        
-        {
-            "weapon_pistol_",
-            "weapon_rifle_",
-            "weapon_carbine_",
-            "weapon_unarmed_",
-            "weapon_sword_1h_",
-            "weapon_sword_2h_",
-            "weapon_polearm_"
-        }
-    };
-    public static final String[][] ARMOR_SEARCH_MULTIARRAY = 
-    {
-        
-        {
-            "bone",
-            "smuggler",
-            "officer",
-            "commando",
-            "bh",
-            "medic",
-            "spy",
-            "assault_agi",
-            "assault_sta",
-            "assault_con",
-            "assault_pre",
-            "assault_lck",
-            "battle_agi",
-            "battle_sta",
-            "battle_con",
-            "battle_pre",
-            "battle_lck",
-            "recon_agi",
-            "recon_sta",
-            "recon_con",
-            "recon_pre",
-            "recon_lck",
-            "assault_borvo",
-            "mandalorian_imperial_white",
-            "mandalorian_rebel_white",
-            "mandalorian_imperial_black",
-            "mandalorian_rebel_black",
-            "mandalorian_imperial_red",
-            "mandalorian_rebel_red",
-            "mandalorian_imperial_blue",
-            "mandalorian_rebel_blue",
-            "mandalorian_imperial_green",
-            "mandalorian_rebel_green"
-        },
-        
-        {
-            "armor_bone_",
-            "armor_smuggler_roadmap_",
-            "armor_officer_roadmap_",
-            "armor_commando_roadmap_",
-            "armor_bounty_hunter_",
-            "armor_medic_roadmap_",
-            "armor_spy_roadmap_",
-            "armor_assault_agi_lvl80_",
-            "armor_assault_sta_lvl80_",
-            "armor_assault_con_lvl80_",
-            "armor_assault_pre_lvl80_",
-            "armor_assault_lck_lvl80_",
-            "armor_battle_agi_lvl80_",
-            "armor_battle_sta_lvl80_",
-            "armor_battle_con_lvl80_",
-            "armor_battle_pre_lvl80_",
-            "armor_battle_lck_lvl80_",
-            "armor_recon_agi_lvl80_",
-            "armor_recon_sta_lvl80_",
-            "armor_recon_con_lvl80_",
-            "armor_recon_pre_lvl80_",
-            "armor_recon_lck_lvl80_",
-            "armor_assault_borvo_acklay_",
-            "armor_mandalorian_imperial_white_",
-            "armor_mandalorian_rebel_white_",
-            "armor_mandalorian_imperial_black_",
-            "armor_mandalorian_rebel_black_",
-            "armor_mandalorian_imperial_red_",
-            "armor_mandalorian_rebel_red_",
-            "armor_mandalorian_imperial_blue_",
-            "armor_mandalorian_rebel_blue_",
-            "armor_mandalorian_imperial_green_",
-            "armor_mandalorian_rebel_green_"
-        }
-    };
-    public static final String[] ENTERTAINER_ITEMS = 
-    {
-        "object/tangible/component/instrument/dual_wave_synthesizer.iff",
-        "object/tangible/instrument/bandfill.iff",
-        "object/tangible/instrument/fanfar.iff",
-        "object/tangible/instrument/fizz.iff",
-        "object/tangible/instrument/flute_droopy.iff",
-        "object/tangible/instrument/kloo_horn.iff",
-        "object/tangible/instrument/mandoviol.iff",
-        "object/tangible/instrument/nalargon.iff",
-        "object/tangible/instrument/ommni_box.iff",
-        "object/tangible/instrument/slitherhorn.iff",
-        "object/tangible/instrument/traz.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_01_l.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_01_r.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_02_l.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_02_r.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_03_r.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_04_l.iff",
-        "object/tangible/dance_prop/generic_must_prop_baton_04_r.iff",
-        "object/tangible/dance_prop/generic_prop_ribbon_spark_r.iff",
-        "object/tangible/dance_prop/generic_prop_sparkler_l.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_l.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_magic_l.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_magic_r.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_r.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_spark_l.iff",
-        "object/tangible/dance_prop/prop_double_ribbon_spark_r.iff",
-        "object/tangible/dance_prop/prop_glowstick_l.iff",
-        "object/tangible/dance_prop/prop_glowstick_r.iff",
-        "object/tangible/dance_prop/prop_ribbon_l.iff",
-        "object/tangible/dance_prop/prop_ribbon_magic_l.iff",
-        "object/tangible/dance_prop/prop_ribbon_magic_r.iff",
-        "object/tangible/dance_prop/prop_ribbon_r.iff",
-        "object/tangible/dance_prop/prop_ribbon_spark_l.iff",
-        "object/tangible/dance_prop/prop_ribbon_spark_r.iff",
-        "object/tangible/dance_prop/prop_sparkler_l.iff",
-        "object/tangible/dance_prop/prop_sparkler_r.iff",
-        "object/tangible/dance_prop/prop_staff_l.iff",
-        "object/tangible/dance_prop/prop_staff_r.iff",
-        "object/tangible/dance_prop/prop_sword_l.iff",
-        "object/tangible/dance_prop/prop_sword_r.iff",
-        "object/tangible/dance_prop/prop_torch_l.iff",
-        "object/tangible/dance_prop/prop_torch_r.iff"
-    };
-    public static final String[] TERMINAL_LIST = 
-    {
-        "object/tangible/terminal/terminal_mission_artisan.iff",
-        "object/tangible/terminal/terminal_mission_entertainer.iff",
-        "object/tangible/terminal/terminal_mission_bounty.iff",
-        "object/tangible/terminal/terminal_mission.iff",
-        "object/tangible/terminal/terminal_mission_scout.iff"
-    };
-    public static final String[] DATA_SOURCE_MENU_LIST = 
-    {
-        "spawn dynamic armor",
-        "spawn dynamic clothing",
-        "spawn dynamic weapons"
-    };
-    public static final String[] ADD_ON_DATAPAD_MENU = 
-    {
-        "FILL WAYPOINTS",
-        "CLEAR ALL WAYPOINTS"
-    };
-    public static final String[] CYBER_MENU_LIST = 
-    {
-        "Install",
-        "Uninstall",
-        "Repair"
-    };
-    public static final String[] WEAPON_TYPE = 
-    {
-        "Pistol",
-        "Carbine",
-        "Rifle",
-        "Unarmed",
-        "1-Handed",
-        "2-Handed",
-        "Polearm",
-        "Heavy Weapon",
-        "Flame Thrower"
-    };
-    public static final String[] WEATHER_TYPES = 
-    {
-        "Clear",
-        "Mild",
-        "Heavy",
-        "Severe"
-    };
-    public static final String[] CONTRABAND_STRINGS = 
-    {
-        "item_smuggler_contraband_01_01",
-        "item_smuggler_contraband_01_02",
-        "item_smuggler_contraband_01_03",
-        "item_smuggler_contraband_01_04",
-        "item_smuggler_contraband_01_05",
-        "item_smuggler_contraband_02_01",
-        "item_smuggler_contraband_02_02",
-        "item_smuggler_contraband_02_03",
-        "item_smuggler_contraband_02_04",
-        "item_smuggler_contraband_02_05",
-        "item_smuggler_contraband_03_01",
-        "item_smuggler_contraband_03_02",
-        "item_smuggler_contraband_03_03",
-        "item_smuggler_contraband_03_04",
-        "item_smuggler_contraband_03_05",
-        "item_smuggler_contraband_04_01",
-        "item_smuggler_contraband_04_02",
-        "item_smuggler_contraband_04_03",
-        "item_smuggler_contraband_04_04",
-        "item_smuggler_contraband_04_05",
-        "item_smuggler_contraband_05_01",
-        "item_smuggler_contraband_05_02",
-        "item_smuggler_contraband_05_03",
-        "item_smuggler_contraband_05_04",
-        "item_smuggler_contraband_05_05"
-    };
-    public static final String[] OLD_ITEM_MENU = 
-    {
-        "Old FS Village Rewards",
-        "Hero of Tatooine",
-        "Death Watch Bunker Loot",
-        "Old Skill Buff Items",
-        "Crafting Components",
-        "Varactyl Egg and Treasure Map",
-        "Loot Schematics"
-    };
-    public static final String[] OLD_FS_VILLAGE_ITEMS = 
-    {
-        "object/tangible/item/quest/force_sensitive/bacta_tank.iff",
-        "object/tangible/wearables/necklace/necklace_ice_pendant.iff",
-        "object/tangible/item/quest/force_sensitive/fs_village_bannerpole_s01.iff",
-        "object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff",
-        "object/tangible/item/quest/force_sensitive/fs_buff_item.iff",
-        "object/tangible/loot/quest/force_sensitive/force_crystal.iff",
-        "object/tangible/loot/plant_grow/plant_stage_1.iff",
-        "object/tangible/loot/plant_grow/plant_stage_2.iff",
-        "object/tangible/loot/plant_grow/plant_stage_3.iff",
-        "object/tangible/loot/plant_grow/plant_stage_dead.iff",
-        "object/tangible/item/plant/force_melon.iff"
-    };
-    public static final String[] HERO_OF_TATOOINE_ITEMS = 
-    {
-        "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/mark_altruism.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/mark_intellect.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/mark_honor.iff",
-        "object/tangible/loot/quest/hero_of_tatooine/mark_courage.iff"
-    };
-    public static final String[] DEATH_WATCH_BUNKER_ITEMS = 
-    {
-        "object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/mining_drill_reward.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/binary_liquid.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/ducted_fan.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/emulsion_protection.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/fuel_dispersion_unit.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/jetpack_base.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff",
-        "object/tangible/loot/tool/usable_datapad.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/viewscreen_s1.iff",
-        "object/tangible/loot/dungeon/death_watch_bunker/viewscreen_s2.iff"
-    };
-    public static final String[] OLD_SKILL_BUFF_ITEMS = 
-    {
-        "object/tangible/skill_buff/skill_buff_carbine_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_carbine_speed.iff",
-        "object/tangible/skill_buff/skill_buff_heavy_weapon_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_heavy_weapon_speed.iff",
-        "object/tangible/skill_buff/skill_buff_mask_scent.iff",
-        "object/tangible/skill_buff/skill_buff_melee_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_melee_defense.iff",
-        "object/tangible/skill_buff/skill_buff_onehandmelee_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_onehandmelee_speed.iff",
-        "object/tangible/skill_buff/skill_buff_pistol_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_pistol_speed.iff",
-        "object/tangible/skill_buff/skill_buff_polearm_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_polearm_speed.iff",
-        "object/tangible/skill_buff/skill_buff_ranged_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_ranged_defense.iff",
-        "object/tangible/skill_buff/skill_buff_rifle_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_rifle_speed.iff",
-        "object/tangible/skill_buff/skill_buff_thrown_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_thrown_speed.iff",
-        "object/tangible/skill_buff/skill_buff_twohandmelee_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_twohandmelee_speed.iff",
-        "object/tangible/skill_buff/skill_buff_unarmed_accuracy.iff",
-        "object/tangible/skill_buff/skill_buff_unarmed_speed.iff"
-    };
-    public static final String[] CRAFTING_COMPONENTS = 
-    {
-        "object/tangible/component/armor/armor_core_assault_advanced.iff",
-        "object/tangible/component/armor/armor_core_assault_basic.iff",
-        "object/tangible/component/armor/armor_core_battle_advanced.iff",
-        "object/tangible/component/armor/armor_core_battle_standard.iff",
-        "object/tangible/component/armor/armor_core_recon_advanced.iff",
-        "object/tangible/component/armor/bone_fragment_woolamander_harrower.iff",
-        "object/tangible/component/armor/hide_gurk_king.iff",
-        "object/tangible/component/armor/scale_giant_dune_kimogila.iff",
-        "object/tangible/component/chemistry/biologic_effect_controller.iff",
-        "object/tangible/component/chemistry/dispersal_mechanism.iff",
-        "object/tangible/component/chemistry/infection_amplifier.iff",
-        "object/tangible/component/chemistry/janta_blood.iff",
-        "object/tangible/component/chemistry/liquid_delivery_suspension.iff",
-        "object/tangible/component/chemistry/rancor_bile.iff",
-        "object/tangible/component/chemistry/release_mechanism_duration.iff",
-        "object/tangible/component/chemistry/resilience_compound.iff",
-        "object/tangible/component/chemistry/solid_delivery_shell.iff",
-        "object/tangible/component/clothing/clasp_heavy_duty.iff",
-        "object/tangible/component/clothing/clothing_treatment_crystalline.iff",
-        "object/tangible/component/clothing/leather_heavy_duty.iff",
-        "object/tangible/component/munition/kliknick_gland.iff",
-        "object/tangible/component/weapon/blaster_power_handler_enhancement_bounty.iff",
-        "object/tangible/component/weapon/blaster_power_handler_enhancement_durability.iff",
-        "object/tangible/component/weapon/blaster_power_handler_enhancement_max_damage.iff",
-        "object/tangible/component/weapon/blaster_power_handler_enhancement_min_damage.iff",
-        "object/tangible/component/weapon/blaster_rifle_barrel.iff",
-        "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_bounty.iff",
-        "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_durability.iff",
-        "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_gorax.iff",
-        "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_max_damage.iff",
-        "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_min_damage.iff",
-        "object/tangible/component/weapon/projectile_rifle_barrel.iff",
-        "object/tangible/component/weapon/scope_weapon_advanced.iff",
-        "object/tangible/component/weapon/stock_advanced.iff",
-        "object/tangible/component/weapon/vibro_unit_enhancement_durability.iff",
-        "object/tangible/component/weapon/vibro_unit_enhancement_max_damage.iff",
-        "object/tangible/component/weapon/vibro_unit_enhancement_min_damage.iff",
-        "object/tangible/component/weapon/vibro_unit_enhancement_wounding.iff",
-        "object/tangible/loot/quest/ep3/varactyl_egg.iff",
-        "object/tangible/treasure_map/treasure_map_base.iff",
-        "object/tangible/component/weapon/vibro_unit_nightsister.iff"
-    };
-    public static final String[] VARACTYL_TREASURE_ITEMS = 
-    {
-        "object/tangible/loot/quest/ep3/varactyl_egg.iff",
-        "object/tangible/treasure_map/treasure_map_base.iff"
-    };
-    public static final String[] LOOT_SCHEMATICS = 
-    {
-        "object/tangible/loot/quest/schematic_republic_blaster_quest.iff",
-        "object/tangible/loot/quest/2h_sword_scythe_schematic.iff",
-        "object/tangible/loot/loot_schematic/agitator_motor_schematic.iff",
-        "object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff",
-        "object/tangible/loot/loot_schematic/bacta_tank_schematic.iff",
-        "object/tangible/loot/loot_schematic/basket_closed_schematic.iff",
-        "object/tangible/loot/loot_schematic/bottle_fat_schematic.iff",
-        "object/tangible/loot/loot_schematic/bottle_pear_schematic.iff",
-        "object/tangible/loot/loot_schematic/bottle_tall_schematic.iff",
-        "object/tangible/loot/loot_schematic/bowl_carved_schematic.iff",
-        "object/tangible/loot/loot_schematic/bowl_plain_schematic.iff",
-        "object/tangible/loot/loot_schematic/bubble_tank_schematic.iff",
-        "object/tangible/loot/loot_schematic/cabinet_elegant_schematic.iff",
-        "object/tangible/loot/loot_schematic/campfire_schematic.iff",
-        "object/tangible/loot/loot_schematic/cantina_chair_schematic.iff",
-        "object/tangible/loot/loot_schematic/chair_cafe_schematic.iff",
-        "object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff",
-        "object/tangible/loot/loot_schematic/command_console_schematic.iff",
-        "object/tangible/loot/loot_schematic/corellian_corvette_landspeeder_av21_schematic.iff",
-        "object/tangible/loot/loot_schematic/corellian_corvette_rifle_berserker_schematic.iff",
-        "object/tangible/loot/loot_schematic/corellian_flagpole_schematic.iff",
-        "object/tangible/loot/loot_schematic/couch_blue_schematic.iff",
-        "object/tangible/loot/loot_schematic/creature_recycler_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_belt_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bicep_l_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bicep_r_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_boots_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bracer_l_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bracer_r_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_chest_plate_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_gloves_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_helmet_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_leggings_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_drink_mandalorian_wine_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_executioners_hack_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_belt_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_l_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_r_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_boots_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_l_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_r_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_chest_plate_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_gloves_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_helmet_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_jetpack_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_mandalorian_leggings_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_pistol_de_10_schematic.iff",
-        "object/tangible/loot/loot_schematic/death_watch_razor_knuckler_schematic.iff",
-        "object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff",
-        "object/tangible/loot/loot_schematic/droid_body_schematic.iff",
-        "object/tangible/loot/loot_schematic/droid_head_schematic.iff",
-        "object/tangible/loot/loot_schematic/flora_recycler_schematic.iff",
-        "object/tangible/loot/loot_schematic/foodcart_schematic.iff",
-        "object/tangible/loot/loot_schematic/gambling_table_schematic.iff",
-        "object/tangible/loot/loot_schematic/generic_limited_use.iff",
-        "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff",
-        "object/tangible/loot/loot_schematic/generic_vehicle.iff",
-        "object/tangible/loot/loot_schematic/geonosian_acklay_bone_armor_schematic.iff",
-        "object/tangible/loot/loot_schematic/geonosian_acklay_muscle_armor_schematic.iff",
-        "object/tangible/loot/loot_schematic/geonosian_reinforcement_core_schematic.iff",
-        "object/tangible/loot/loot_schematic/geonosian_sonic_blaster_schematic.iff",
-        "object/tangible/loot/loot_schematic/geonosian_sword_core_schematic.iff",
-        "object/tangible/loot/loot_schematic/geonosian_tenloss_dxr6_schematic.iff",
-        "object/tangible/loot/loot_schematic/hanging_planter_schematic.iff",
-        "object/tangible/loot/loot_schematic/metal_recycler_schematic.iff",
-        "object/tangible/loot/loot_schematic/microphone_s01_schematic.iff",
-        "object/tangible/loot/loot_schematic/microphone_s02_schematic.iff",
-        "object/tangible/loot/loot_schematic/ore_recycler_schematic.iff",
-        "object/tangible/loot/loot_schematic/park_bench_schematic.iff",
-        "object/tangible/loot/loot_schematic/pitcher_full_schematic.iff",
-        "object/tangible/loot/loot_schematic/professors_desk_schematic.iff",
-        "object/tangible/loot/loot_schematic/radar_screen_schematic.iff",
-        "object/tangible/loot/loot_schematic/radio_schematic.iff",
-        "object/tangible/loot/loot_schematic/shisa_schematic.iff",
-        "object/tangible/loot/loot_schematic/slave_brazier_schematic.iff",
-        "object/tangible/loot/loot_schematic/spear_rack_schematic.iff",
-        "object/tangible/loot/loot_schematic/speeder_desert_skiff_schematic.iff",
-        "object/tangible/loot/loot_schematic/speeder_usv5_schematic.iff",
-        "object/tangible/loot/loot_schematic/stove_schematic.iff",
-        "object/tangible/loot/loot_schematic/streetlamp_schematic.iff",
-        "object/tangible/loot/loot_schematic/stuffed_fish_schematic.iff",
-        "object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff",
-        "object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff",
-        "object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff",
-        "object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff",
-        "object/tangible/loot/loot_schematic/technical_console_s01_schematic.iff",
-        "object/tangible/loot/loot_schematic/technical_console_s02_schematic.iff",
-        "object/tangible/loot/loot_schematic/throwpillow_schematic.iff",
-        "object/tangible/loot/loot_schematic/trandoshan_hunter_rifle_schematic.iff",
-        "object/tangible/loot/loot_schematic/tumble_blender_schematic.iff",
-        "object/tangible/loot/loot_schematic/utensils_schematic.iff"
-    };
-    public static final String[] TCG_MENU = 
-    {
-        "Generate Drop",
-        "TCG Info Flag",
-        "TCG Always Drop",
-        "Card Cluster Information",
-        "Promotional Items Cluster Info",
-        "Reinitialize TCG Information (warning! this resets everything!)"
-    };
+    public static final String[] FACTION_TOOL_MENU =
+            {
+                    "Join a faction",
+                    "Go Covert (Combatant)",
+                    "Go Overt (Special Forces)",
+                    "Go On Leave",
+                    "Go Neutral",
+                    "GCW Faction Points",
+                    "Manipulate NPC Factions",
+                    "Get Factional HQ's and Supplies"
+            };
+    public static final String[] FS_TOOL_MENU =
+            {
+                    "FS Village Intro Quests",
+                    "FS Village Quests",
+                    "FS Village Exit Quests"
+            };
+    public static final String[] INVENTORY_TOOL_MENU =
+            {
+                    "Delete all in inventory",
+                    "Fill inventory with Junk"
+            };
+    public static final String[] QUEST_TOOL_MENU =
+            {
+                    "Add a ground quest manually",
+                    "Add a space quest manually",
+                    "Attain test quests",
+                    "Bulk Grant/Complete Tool",
+                    "Bulk Grant Tool"
+            };
+    public static final String[] JTL_TOOL_MENU =
+            {
+                    "Ship Loot Components",
+                    "Mining Components",
+                    "God Ships",
+                    "Valid Ship Deeds",
+                    "Valid Ships With Components",
+                    "RoTW Quest Ship Deeds",
+                    "Make Master Imperial Pilot",
+                    "Make Master Rebel Pilot",
+                    "Make Master Neutral Pilot",
+                    "Pilot Quest Tools",
+                    "Revoke pilot skills"
+            };
+    public static final String[] ENHANCEMENT_TOOL_MENU =
+            {
+                    "Armor Enhancement",
+                    "Clothing Enhancement",
+                    "Random Enhancement"
+            };
+    public static final String[] XP_TOOL_MENU =
+            {
+                    "Revoke non-pilot experience",
+                    "combat_general",
+                    "quest_combat",
+                    "quest_crafting",
+                    "quest_social",
+                    "quest_general",
+                    "prestige_imperial",
+                    "prestige_rebel",
+                    "prestige_pilot"
+            };
+    public static final String[] RESOURCE_TOOL_MENU =
+            {
+                    "Recycled Resources",
+                    "Space Resources",
+                    "Common Resources"
+            };
+    public static final String[] REWARD_RESOURCE_MENU =
+            {
+                    "Enter Resource Menu"
+            };
+    public static final String[] ITEM_TOOL_MENU =
+            {
+                    "Armor",
+                    "Best Weapons",
+                    "Get all Certified Weapons",
+                    "Get Roadmap Items",
+                    "List Every Item by Category"
+            };
+    public static final String[] SCRIPT_TOOL_MENU =
+            {
+                    "Attach Script",
+                    "Detach Script"
+            };
+    public static final String[] NGE_TOOL_MENU =
+            {
+                    "Make CU Profession",
+                    "Get Respec Token"
+            };
+    public static final String[] SCRIPT_TOOL_COMMON_SCRIPTS =
+            {
+                    "csr.get_resource_crate",
+                    "working.dantest",
+                    "player.player_gm",
+                    "gm.cmd",
+                    "e3demo.e3_demoer",
+                    "developer.soe.e3demo.yavin_e3",
+                    "space.content_tools.missiontest",
+                    "space.content_tools.content_generation",
+                    "quest.utility.quest_test",
+                    "test.ttyson_test",
+                    "test.qatool",
+                    "test.qa_enhancements",
+                    "test.qa_jtl_tools",
+                    "test.qa_quest_skipper",
+                    "test.qa_resources",
+                    "test.qabadge",
+                    "test.qabuff",
+                    "test.qafaction",
+                    "test.qainventory",
+                    "test.qascript",
+                    "test.qawearables",
+                    "test.qaxp",
+                    "test.qadatapad",
+                    "test.qaitem",
+                    "test.qange",
+                    "test.qaprofession",
+                    "test.qa_damage",
+                    "test.qa_helper",
+                    "test.qa_dynamics",
+                    "test.qaham",
+                    "test.qa_resource_reward",
+                    "test.qadna"
+            };
+    public static final String[] DATAPAD_TOOL_MENU =
+            {
+                    "Warp to Waypoints",
+                    "Export Waypoints"
+            };
+    public static final String[] PROFESSION_TOOL_MENU =
+            {
+                    "Abilities Alphabetically",
+                    "Profession Details",
+                    "Export Profession Details"
+            };
+    public static final String[] MOB_STRING_FILE_POSSIBILITIES =
+            {
+                    "mob/creature_names",
+                    "npc_name",
+                    "droid_name",
+                    "monster_name",
+                    "npc_spawner_n",
+                    "theme_park_name",
+                    "ep3/npc_names"
+            };
+    public static final String[] NPCFINDER_ERR_ARRAY =
+            {
+                    "No Mob/NPC Found"
+            };
+    public static final String[] MITIGATION_HIT_LOCATIONS =
+            {
+                    "Body",
+                    "Head",
+                    "Right Arm",
+                    "Left Arm",
+                    "Right Leg",
+                    "Left Leg"
+            };
+    public static final String[] WEAPON_DAMAGE_TYPE =
+            {
+                    "DAMAGE_NONE",
+                    "DAMAGE_KINETIC",
+                    "DAMAGE_ENERGY",
+                    "DAMAGE_BLAST",
+                    "DAMAGE_STUN",
+                    "DAMAGE_RESTRAINT",
+                    "DAMAGE_ELEMENTAL_HEAT",
+                    "DAMAGE_ELEMENTAL_COLD",
+                    "DAMAGE_ELEMENTAL_ACID",
+                    "DAMAGE_ELEMENTAL_ELECTRICAL",
+                    "DAMAGE_ENVIRONMENTAL_HEAT",
+                    "DAMAGE_ENVIRONMENTAL_COLD",
+                    "DAMAGE_ENVIRONMENTAL_ACID",
+                    "DAMAGE_ENVIRONMENTAL_ELECTRICAL"
+            };
+    public static final String[] PROFESSION_SKILL_NAMES =
+            {
+                    "_phase1_novice",
+                    "_phase1_02",
+                    "_phase1_03",
+                    "_phase1_04",
+                    "_phase1_05",
+                    "_phase1_master",
+                    "_phase2_novice",
+                    "_phase2_02",
+                    "_phase2_03",
+                    "_phase2_04",
+                    "_phase2_05",
+                    "_phase2_master",
+                    "_phase3_novice",
+                    "_phase3_02",
+                    "_phase3_03",
+                    "_phase3_04",
+                    "_phase3_05",
+                    "_phase3_master",
+                    "_phase4_novice",
+                    "_phase4_02",
+                    "_phase4_03",
+                    "_phase4_04",
+                    "_phase4_05",
+                    "_phase4_master"
+            };
+    public static final String[] PROFESSION_PREFIX =
+            {
+                    "class_smuggler",
+                    "class_bountyhunter",
+                    "class_officer",
+                    "class_commando",
+                    "class_forcesensitive",
+                    "class_medic",
+                    "class_spy"
+            };
+    public static final String[] PET_OPTION_MENU =
+            {
+                    "Access DNA Samples",
+                    "Future Pet Options"
+            };
+    public static final String[][] MISC_SEARCH_MULTIARRAY =
+            {
 
-    public static final List<String> ENZYME_COMMAND_COLOR_LOOKUP = 
-        Arrays.asList(incubator.ENZYME_COLORS)
-            .stream()
-            .map(s -> s.replace(" ","").toLowerCase())
-            .collect(Collectors.toList());
+                    {
+                            "robe"
+                    },
+
+                    {
+                            "item_jedi_robe_"
+                    }
+            };
+    public static final String[][] WEAPON_SEARCH_MULTIARRAY =
+            {
+
+                    {
+                            "pis",
+                            "rif",
+                            "car",
+                            "una",
+                            "one",
+                            "two",
+                            "pol"
+                    },
+
+                    {
+                            "weapon_pistol_",
+                            "weapon_rifle_",
+                            "weapon_carbine_",
+                            "weapon_unarmed_",
+                            "weapon_sword_1h_",
+                            "weapon_sword_2h_",
+                            "weapon_polearm_"
+                    }
+            };
+    public static final String[][] ARMOR_SEARCH_MULTIARRAY =
+            {
+
+                    {
+                            "bone",
+                            "smuggler",
+                            "officer",
+                            "commando",
+                            "bh",
+                            "medic",
+                            "spy",
+                            "assault_agi",
+                            "assault_sta",
+                            "assault_con",
+                            "assault_pre",
+                            "assault_lck",
+                            "battle_agi",
+                            "battle_sta",
+                            "battle_con",
+                            "battle_pre",
+                            "battle_lck",
+                            "recon_agi",
+                            "recon_sta",
+                            "recon_con",
+                            "recon_pre",
+                            "recon_lck",
+                            "assault_borvo",
+                            "mandalorian_imperial_white",
+                            "mandalorian_rebel_white",
+                            "mandalorian_imperial_black",
+                            "mandalorian_rebel_black",
+                            "mandalorian_imperial_red",
+                            "mandalorian_rebel_red",
+                            "mandalorian_imperial_blue",
+                            "mandalorian_rebel_blue",
+                            "mandalorian_imperial_green",
+                            "mandalorian_rebel_green"
+                    },
+
+                    {
+                            "armor_bone_",
+                            "armor_smuggler_roadmap_",
+                            "armor_officer_roadmap_",
+                            "armor_commando_roadmap_",
+                            "armor_bounty_hunter_",
+                            "armor_medic_roadmap_",
+                            "armor_spy_roadmap_",
+                            "armor_assault_agi_lvl80_",
+                            "armor_assault_sta_lvl80_",
+                            "armor_assault_con_lvl80_",
+                            "armor_assault_pre_lvl80_",
+                            "armor_assault_lck_lvl80_",
+                            "armor_battle_agi_lvl80_",
+                            "armor_battle_sta_lvl80_",
+                            "armor_battle_con_lvl80_",
+                            "armor_battle_pre_lvl80_",
+                            "armor_battle_lck_lvl80_",
+                            "armor_recon_agi_lvl80_",
+                            "armor_recon_sta_lvl80_",
+                            "armor_recon_con_lvl80_",
+                            "armor_recon_pre_lvl80_",
+                            "armor_recon_lck_lvl80_",
+                            "armor_assault_borvo_acklay_",
+                            "armor_mandalorian_imperial_white_",
+                            "armor_mandalorian_rebel_white_",
+                            "armor_mandalorian_imperial_black_",
+                            "armor_mandalorian_rebel_black_",
+                            "armor_mandalorian_imperial_red_",
+                            "armor_mandalorian_rebel_red_",
+                            "armor_mandalorian_imperial_blue_",
+                            "armor_mandalorian_rebel_blue_",
+                            "armor_mandalorian_imperial_green_",
+                            "armor_mandalorian_rebel_green_"
+                    }
+            };
+    public static final String[] ENTERTAINER_ITEMS =
+            {
+                    "object/tangible/component/instrument/dual_wave_synthesizer.iff",
+                    "object/tangible/instrument/bandfill.iff",
+                    "object/tangible/instrument/fanfar.iff",
+                    "object/tangible/instrument/fizz.iff",
+                    "object/tangible/instrument/flute_droopy.iff",
+                    "object/tangible/instrument/kloo_horn.iff",
+                    "object/tangible/instrument/mandoviol.iff",
+                    "object/tangible/instrument/nalargon.iff",
+                    "object/tangible/instrument/ommni_box.iff",
+                    "object/tangible/instrument/slitherhorn.iff",
+                    "object/tangible/instrument/traz.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_01_l.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_01_r.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_02_l.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_02_r.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_03_r.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_04_l.iff",
+                    "object/tangible/dance_prop/generic_must_prop_baton_04_r.iff",
+                    "object/tangible/dance_prop/generic_prop_ribbon_spark_r.iff",
+                    "object/tangible/dance_prop/generic_prop_sparkler_l.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_l.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_magic_l.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_magic_r.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_r.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_spark_l.iff",
+                    "object/tangible/dance_prop/prop_double_ribbon_spark_r.iff",
+                    "object/tangible/dance_prop/prop_glowstick_l.iff",
+                    "object/tangible/dance_prop/prop_glowstick_r.iff",
+                    "object/tangible/dance_prop/prop_ribbon_l.iff",
+                    "object/tangible/dance_prop/prop_ribbon_magic_l.iff",
+                    "object/tangible/dance_prop/prop_ribbon_magic_r.iff",
+                    "object/tangible/dance_prop/prop_ribbon_r.iff",
+                    "object/tangible/dance_prop/prop_ribbon_spark_l.iff",
+                    "object/tangible/dance_prop/prop_ribbon_spark_r.iff",
+                    "object/tangible/dance_prop/prop_sparkler_l.iff",
+                    "object/tangible/dance_prop/prop_sparkler_r.iff",
+                    "object/tangible/dance_prop/prop_staff_l.iff",
+                    "object/tangible/dance_prop/prop_staff_r.iff",
+                    "object/tangible/dance_prop/prop_sword_l.iff",
+                    "object/tangible/dance_prop/prop_sword_r.iff",
+                    "object/tangible/dance_prop/prop_torch_l.iff",
+                    "object/tangible/dance_prop/prop_torch_r.iff"
+            };
+    public static final String[] TERMINAL_LIST =
+            {
+                    "object/tangible/terminal/terminal_mission_artisan.iff",
+                    "object/tangible/terminal/terminal_mission_entertainer.iff",
+                    "object/tangible/terminal/terminal_mission_bounty.iff",
+                    "object/tangible/terminal/terminal_mission.iff",
+                    "object/tangible/terminal/terminal_mission_scout.iff"
+            };
+    public static final String[] DATA_SOURCE_MENU_LIST =
+            {
+                    "spawn dynamic armor",
+                    "spawn dynamic clothing",
+                    "spawn dynamic weapons"
+            };
+    public static final String[] ADD_ON_DATAPAD_MENU =
+            {
+                    "FILL WAYPOINTS",
+                    "CLEAR ALL WAYPOINTS"
+            };
+    public static final String[] CYBER_MENU_LIST =
+            {
+                    "Install",
+                    "Uninstall",
+                    "Repair"
+            };
+    public static final String[] WEAPON_TYPE =
+            {
+                    "Pistol",
+                    "Carbine",
+                    "Rifle",
+                    "Unarmed",
+                    "1-Handed",
+                    "2-Handed",
+                    "Polearm",
+                    "Heavy Weapon",
+                    "Flame Thrower"
+            };
+    public static final String[] WEATHER_TYPES =
+            {
+                    "Clear",
+                    "Mild",
+                    "Heavy",
+                    "Severe"
+            };
+    public static final String[] CONTRABAND_STRINGS =
+            {
+                    "item_smuggler_contraband_01_01",
+                    "item_smuggler_contraband_01_02",
+                    "item_smuggler_contraband_01_03",
+                    "item_smuggler_contraband_01_04",
+                    "item_smuggler_contraband_01_05",
+                    "item_smuggler_contraband_02_01",
+                    "item_smuggler_contraband_02_02",
+                    "item_smuggler_contraband_02_03",
+                    "item_smuggler_contraband_02_04",
+                    "item_smuggler_contraband_02_05",
+                    "item_smuggler_contraband_03_01",
+                    "item_smuggler_contraband_03_02",
+                    "item_smuggler_contraband_03_03",
+                    "item_smuggler_contraband_03_04",
+                    "item_smuggler_contraband_03_05",
+                    "item_smuggler_contraband_04_01",
+                    "item_smuggler_contraband_04_02",
+                    "item_smuggler_contraband_04_03",
+                    "item_smuggler_contraband_04_04",
+                    "item_smuggler_contraband_04_05",
+                    "item_smuggler_contraband_05_01",
+                    "item_smuggler_contraband_05_02",
+                    "item_smuggler_contraband_05_03",
+                    "item_smuggler_contraband_05_04",
+                    "item_smuggler_contraband_05_05"
+            };
+    public static final String[] OLD_ITEM_MENU =
+            {
+                    "Old FS Village Rewards",
+                    "Hero of Tatooine",
+                    "Death Watch Bunker Loot",
+                    "Old Skill Buff Items",
+                    "Crafting Components",
+                    "Varactyl Egg and Treasure Map",
+                    "Loot Schematics"
+            };
+    public static final String[] OLD_FS_VILLAGE_ITEMS =
+            {
+                    "object/tangible/item/quest/force_sensitive/bacta_tank.iff",
+                    "object/tangible/wearables/necklace/necklace_ice_pendant.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_village_bannerpole_s01.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff",
+                    "object/tangible/item/quest/force_sensitive/fs_buff_item.iff",
+                    "object/tangible/loot/quest/force_sensitive/force_crystal.iff",
+                    "object/tangible/loot/plant_grow/plant_stage_1.iff",
+                    "object/tangible/loot/plant_grow/plant_stage_2.iff",
+                    "object/tangible/loot/plant_grow/plant_stage_3.iff",
+                    "object/tangible/loot/plant_grow/plant_stage_dead.iff",
+                    "object/tangible/item/plant/force_melon.iff"
+            };
+    public static final String[] HERO_OF_TATOOINE_ITEMS =
+            {
+                    "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/mark_altruism.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/mark_intellect.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/mark_honor.iff",
+                    "object/tangible/loot/quest/hero_of_tatooine/mark_courage.iff"
+            };
+    public static final String[] DEATH_WATCH_BUNKER_ITEMS =
+            {
+                    "object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/mining_drill_reward.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/binary_liquid.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/art_crate.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/ducted_fan.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/emulsion_protection.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/fuel_dispersion_unit.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/fuel_injector_tank.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/jetpack_base.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff",
+                    "object/tangible/loot/tool/usable_datapad.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/viewscreen_s1.iff",
+                    "object/tangible/loot/dungeon/death_watch_bunker/viewscreen_s2.iff"
+            };
+    public static final String[] OLD_SKILL_BUFF_ITEMS =
+            {
+                    "object/tangible/skill_buff/skill_buff_carbine_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_carbine_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_heavy_weapon_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_heavy_weapon_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_mask_scent.iff",
+                    "object/tangible/skill_buff/skill_buff_melee_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_melee_defense.iff",
+                    "object/tangible/skill_buff/skill_buff_onehandmelee_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_onehandmelee_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_pistol_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_pistol_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_polearm_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_polearm_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_ranged_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_ranged_defense.iff",
+                    "object/tangible/skill_buff/skill_buff_rifle_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_rifle_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_thrown_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_thrown_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_twohandmelee_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_twohandmelee_speed.iff",
+                    "object/tangible/skill_buff/skill_buff_unarmed_accuracy.iff",
+                    "object/tangible/skill_buff/skill_buff_unarmed_speed.iff"
+            };
+    public static final String[] CRAFTING_COMPONENTS =
+            {
+                    "object/tangible/component/armor/armor_core_assault_advanced.iff",
+                    "object/tangible/component/armor/armor_core_assault_basic.iff",
+                    "object/tangible/component/armor/armor_core_battle_advanced.iff",
+                    "object/tangible/component/armor/armor_core_battle_standard.iff",
+                    "object/tangible/component/armor/armor_core_recon_advanced.iff",
+                    "object/tangible/component/armor/bone_fragment_woolamander_harrower.iff",
+                    "object/tangible/component/armor/hide_gurk_king.iff",
+                    "object/tangible/component/armor/scale_giant_dune_kimogila.iff",
+                    "object/tangible/component/chemistry/biologic_effect_controller.iff",
+                    "object/tangible/component/chemistry/dispersal_mechanism.iff",
+                    "object/tangible/component/chemistry/infection_amplifier.iff",
+                    "object/tangible/component/chemistry/janta_blood.iff",
+                    "object/tangible/component/chemistry/liquid_delivery_suspension.iff",
+                    "object/tangible/component/chemistry/rancor_bile.iff",
+                    "object/tangible/component/chemistry/release_mechanism_duration.iff",
+                    "object/tangible/component/chemistry/resilience_compound.iff",
+                    "object/tangible/component/chemistry/solid_delivery_shell.iff",
+                    "object/tangible/component/clothing/clasp_heavy_duty.iff",
+                    "object/tangible/component/clothing/clothing_treatment_crystalline.iff",
+                    "object/tangible/component/clothing/leather_heavy_duty.iff",
+                    "object/tangible/component/munition/kliknick_gland.iff",
+                    "object/tangible/component/weapon/blaster_power_handler_enhancement_bounty.iff",
+                    "object/tangible/component/weapon/blaster_power_handler_enhancement_durability.iff",
+                    "object/tangible/component/weapon/blaster_power_handler_enhancement_max_damage.iff",
+                    "object/tangible/component/weapon/blaster_power_handler_enhancement_min_damage.iff",
+                    "object/tangible/component/weapon/blaster_rifle_barrel.iff",
+                    "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_bounty.iff",
+                    "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_durability.iff",
+                    "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_gorax.iff",
+                    "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_max_damage.iff",
+                    "object/tangible/component/weapon/projectile_feed_mechanism_enhancement_min_damage.iff",
+                    "object/tangible/component/weapon/projectile_rifle_barrel.iff",
+                    "object/tangible/component/weapon/scope_weapon_advanced.iff",
+                    "object/tangible/component/weapon/stock_advanced.iff",
+                    "object/tangible/component/weapon/vibro_unit_enhancement_durability.iff",
+                    "object/tangible/component/weapon/vibro_unit_enhancement_max_damage.iff",
+                    "object/tangible/component/weapon/vibro_unit_enhancement_min_damage.iff",
+                    "object/tangible/component/weapon/vibro_unit_enhancement_wounding.iff",
+                    "object/tangible/loot/quest/ep3/varactyl_egg.iff",
+                    "object/tangible/treasure_map/treasure_map_base.iff",
+                    "object/tangible/component/weapon/vibro_unit_nightsister.iff"
+            };
+    public static final String[] VARACTYL_TREASURE_ITEMS =
+            {
+                    "object/tangible/loot/quest/ep3/varactyl_egg.iff",
+                    "object/tangible/treasure_map/treasure_map_base.iff"
+            };
+    public static final String[] LOOT_SCHEMATICS =
+            {
+                    "object/tangible/loot/quest/schematic_republic_blaster_quest.iff",
+                    "object/tangible/loot/quest/2h_sword_scythe_schematic.iff",
+                    "object/tangible/loot/loot_schematic/agitator_motor_schematic.iff",
+                    "object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bacta_tank_schematic.iff",
+                    "object/tangible/loot/loot_schematic/basket_closed_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bottle_fat_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bottle_pear_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bottle_tall_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bowl_carved_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bowl_plain_schematic.iff",
+                    "object/tangible/loot/loot_schematic/bubble_tank_schematic.iff",
+                    "object/tangible/loot/loot_schematic/cabinet_elegant_schematic.iff",
+                    "object/tangible/loot/loot_schematic/campfire_schematic.iff",
+                    "object/tangible/loot/loot_schematic/cantina_chair_schematic.iff",
+                    "object/tangible/loot/loot_schematic/chair_cafe_schematic.iff",
+                    "object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/command_console_schematic.iff",
+                    "object/tangible/loot/loot_schematic/corellian_corvette_landspeeder_av21_schematic.iff",
+                    "object/tangible/loot/loot_schematic/corellian_corvette_rifle_berserker_schematic.iff",
+                    "object/tangible/loot/loot_schematic/corellian_flagpole_schematic.iff",
+                    "object/tangible/loot/loot_schematic/couch_blue_schematic.iff",
+                    "object/tangible/loot/loot_schematic/creature_recycler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_belt_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bicep_l_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bicep_r_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_boots_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bracer_l_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_bracer_r_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_chest_plate_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_gloves_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_helmet_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_bounty_hunter_leggings_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_drink_mandalorian_wine_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_executioners_hack_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_belt_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_l_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_r_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_boots_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_l_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_r_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_chest_plate_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_gloves_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_helmet_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_jetpack_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_mandalorian_leggings_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_pistol_de_10_schematic.iff",
+                    "object/tangible/loot/loot_schematic/death_watch_razor_knuckler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff",
+                    "object/tangible/loot/loot_schematic/droid_body_schematic.iff",
+                    "object/tangible/loot/loot_schematic/droid_head_schematic.iff",
+                    "object/tangible/loot/loot_schematic/flora_recycler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/foodcart_schematic.iff",
+                    "object/tangible/loot/loot_schematic/gambling_table_schematic.iff",
+                    "object/tangible/loot/loot_schematic/generic_limited_use.iff",
+                    "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff",
+                    "object/tangible/loot/loot_schematic/generic_vehicle.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_acklay_bone_armor_schematic.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_acklay_muscle_armor_schematic.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_reinforcement_core_schematic.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_sonic_blaster_schematic.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_sword_core_schematic.iff",
+                    "object/tangible/loot/loot_schematic/geonosian_tenloss_dxr6_schematic.iff",
+                    "object/tangible/loot/loot_schematic/hanging_planter_schematic.iff",
+                    "object/tangible/loot/loot_schematic/metal_recycler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/microphone_s01_schematic.iff",
+                    "object/tangible/loot/loot_schematic/microphone_s02_schematic.iff",
+                    "object/tangible/loot/loot_schematic/ore_recycler_schematic.iff",
+                    "object/tangible/loot/loot_schematic/park_bench_schematic.iff",
+                    "object/tangible/loot/loot_schematic/pitcher_full_schematic.iff",
+                    "object/tangible/loot/loot_schematic/professors_desk_schematic.iff",
+                    "object/tangible/loot/loot_schematic/radar_screen_schematic.iff",
+                    "object/tangible/loot/loot_schematic/radio_schematic.iff",
+                    "object/tangible/loot/loot_schematic/shisa_schematic.iff",
+                    "object/tangible/loot/loot_schematic/slave_brazier_schematic.iff",
+                    "object/tangible/loot/loot_schematic/spear_rack_schematic.iff",
+                    "object/tangible/loot/loot_schematic/speeder_desert_skiff_schematic.iff",
+                    "object/tangible/loot/loot_schematic/speeder_usv5_schematic.iff",
+                    "object/tangible/loot/loot_schematic/stove_schematic.iff",
+                    "object/tangible/loot/loot_schematic/streetlamp_schematic.iff",
+                    "object/tangible/loot/loot_schematic/stuffed_fish_schematic.iff",
+                    "object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff",
+                    "object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff",
+                    "object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff",
+                    "object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff",
+                    "object/tangible/loot/loot_schematic/technical_console_s01_schematic.iff",
+                    "object/tangible/loot/loot_schematic/technical_console_s02_schematic.iff",
+                    "object/tangible/loot/loot_schematic/throwpillow_schematic.iff",
+                    "object/tangible/loot/loot_schematic/trandoshan_hunter_rifle_schematic.iff",
+                    "object/tangible/loot/loot_schematic/tumble_blender_schematic.iff",
+                    "object/tangible/loot/loot_schematic/utensils_schematic.iff"
+            };
+    public static final String[] TCG_MENU =
+            {
+                    "Generate Drop",
+                    "TCG Info Flag",
+                    "TCG Always Drop",
+                    "Card Cluster Information",
+                    "Promotional Items Cluster Info",
+                    "Reinitialize TCG Information (warning! this resets everything!)"
+            };
+    public static final List<String> ENZYME_COMMAND_COLOR_LOOKUP =
+            Arrays.stream(incubator.ENZYME_COLORS)
+                    .map(s -> s.replace(" ", "").toLowerCase())
+                    .collect(Collectors.toList());
+
+    public qatool()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -849,7 +848,7 @@ public class qatool extends script.base_script
                 detachScript(self, "test.qatool");
                 sendSystemMessage(self, "You do not have the appropriate access level to use this script.", null);
             }
-            else 
+            else
             {
                 attachScript(self, "test.qabuff");
                 attachScript(self, "test.qawearables");
@@ -877,12 +876,13 @@ public class qatool extends script.base_script
                 sendSystemMessageTestingOnly(self, "You can access the \"SWG Developer\" title by opening your Community options.");
             }
         }
-        else 
+        else
         {
             detachScript(self, "test.qatool");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         detachScript(self, "test.qabuff");
@@ -914,9 +914,11 @@ public class qatool extends script.base_script
         revokeSkillSilent(self, "swg_dev");
         return SCRIPT_CONTINUE;
     }
+
     public int vetRewardOptionHandler(obj_id self, dictionary params) throws InterruptedException
     {
-        if (!isGod(self) || getGodLevel(self) < 10){
+        if (!isGod(self) || getGodLevel(self) < 10)
+        {
             detachScript(self, "test.qatool");
             return SCRIPT_CONTINUE;
         }
@@ -925,7 +927,7 @@ public class qatool extends script.base_script
             qa.checkParams(params, "vetreward");
             int idx = sui.getListboxSelectedRow(params);
             int btn = sui.getIntButtonPressed(params);
-            String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "vetreward.allTemplates");
+            String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "vetreward.allTemplates");
             if (btn == sui.BP_CANCEL)
             {
                 cleanAllScriptVars(self);
@@ -942,6 +944,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdQaTool(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 10)
@@ -1036,13 +1039,11 @@ public class qatool extends script.base_script
                     sendSystemMessageTestingOnly(self, "Text export failed.");
                     return SCRIPT_CONTINUE;
                 }
-                obj_id contents[] = getContents(treasureChest);
+                obj_id[] contents = getContents(treasureChest);
                 String listcontents = "";
-                if (contents.length > 0)
+                for (obj_id content : contents)
                 {
-                    for (obj_id content : contents) {
-                        listcontents += "(" + content + ")" + getTemplateName(content) + "\r";
-                    }
+                    listcontents += "(" + content + ")" + getTemplateName(content) + "\r";
                 }
                 if (!listcontents.equals(""))
                 {
@@ -1074,7 +1075,8 @@ public class qatool extends script.base_script
         }
         else if ((toLower(command)).equals("terminal"))
         {
-            for (String s : TERMINAL_LIST) {
+            for (String s : TERMINAL_LIST)
+            {
                 obj_id terminalId = qa.templateObjectSpawner(self, s, true);
             }
             sendSystemMessageTestingOnly(self, "Terminals Spawned.");
@@ -1125,8 +1127,7 @@ public class qatool extends script.base_script
                         sendSystemMessageTestingOnly(self, "Item " + item + " has been serialized.");
                     }
                 }
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 sendSystemMessageTestingOnly(self, "You need to specify the object Id of the object you want to be serialized.");
                 sendSystemMessageTestingOnly(self, "/qatool serialize <OID>");
@@ -1135,7 +1136,8 @@ public class qatool extends script.base_script
         }
         else if ((toLower(command)).equals("entertaineritems"))
         {
-            for (String entertainerItem : ENTERTAINER_ITEMS) {
+            for (String entertainerItem : ENTERTAINER_ITEMS)
+            {
                 qa.templateObjectSpawner(self, entertainerItem);
             }
             return SCRIPT_CONTINUE;
@@ -1167,10 +1169,13 @@ public class qatool extends script.base_script
                 else
                 {
                     boolean foundBuff = false;
-                    for (String allBuff : allBuffs) {
-                        if (allBuff.equals(buffArg)) {
+                    for (String allBuff : allBuffs)
+                    {
+                        if (allBuff.equals(buffArg))
+                        {
                             String buffName = qa.getClientBuffName(self, buffArg);
-                            if (!buffName.equals("null")) {
+                            if (!buffName.equals("null"))
+                            {
                                 qa.applyBuffOption(self, buffArg, buffName);
                                 foundBuff = true;
                             }
@@ -1199,8 +1204,7 @@ public class qatool extends script.base_script
                 System.arraycopy(allQuests, 0, combinedMenu, 0, allQuests.length);
                 System.arraycopy(QUEST_TOOL_MENU, 0, combinedMenu, allQuests.length, QUEST_TOOL_MENU.length);
                 qa.refreshMenu(self, QUEST_TOOL_PROMPT, QUEST_TOOL_TITLE, combinedMenu, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 qa.refreshMenu(self, QUEST_TOOL_PROMPT + "\n\nNo quests found on character", QUEST_TOOL_TITLE, QUEST_TOOL_MENU, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
             }
@@ -1253,7 +1257,8 @@ public class qatool extends script.base_script
                 int intNumber = utils.stringToInt(stringNumber);
                 if (intNumber > 0 && intNumber < 11)
                 {
-                    for (String contrabandString : CONTRABAND_STRINGS) {
+                    for (String contrabandString : CONTRABAND_STRINGS)
+                    {
                         mulipleStaticSpawn(self, contrabandString, stringNumber, true);
                     }
                 }
@@ -1475,10 +1480,12 @@ public class qatool extends script.base_script
             vectorMenuArray.addElement("*Add All Badges*");
             vectorMenuArray.addElement("*Remove All Badges*");
             String[] badgePages = getAllCollectionPagesInBook("badge_book");
-            if ((badgePages != null) && (badgePages.length > 0))
+            if (badgePages != null)
             {
-                for (String badgePage : badgePages) {
-                    if (!badgePage.equals("bdg_accumulation")) {
+                for (String badgePage : badgePages)
+                {
+                    if (!badgePage.equals("bdg_accumulation"))
+                    {
                         vectorMenuArray.addElement(badgePage);
                     }
                 }
@@ -1497,14 +1504,19 @@ public class qatool extends script.base_script
         else if ((toLower(command)).equalsIgnoreCase("clearAllCollections"))
         {
             String[] books = getAllCollectionBooks();
-            for(String book : books) {
+            for (String book : books)
+            {
                 String[] slots = getAllCollectionSlotsInBook(book);
-                for(String slot : slots) {
-                    if(getCollectionSlotMaxValue(slot) == 0) {
+                for (String slot : slots)
+                {
+                    if (getCollectionSlotMaxValue(slot) == 0)
+                    {
                         modifyCollectionSlotValue(self, slot, -1);
-                    } else {
+                    }
+                    else
+                    {
                         long value = getCollectionSlotValue(self, slot);
-                        modifyCollectionSlotValue(self, slot, -value-1);
+                        modifyCollectionSlotValue(self, slot, -value - 1);
                     }
                 }
             }
@@ -1531,13 +1543,15 @@ public class qatool extends script.base_script
             obj_id inventory = utils.getInventoryContainer(self);
             obj_id[] invAndEquip = getInventoryAndEquipment(self);
             boolean hasBag = false;
-            for (obj_id obj_id : invAndEquip) {
+            for (obj_id obj_id : invAndEquip)
+            {
                 String templateName = getTemplateName(obj_id);
-                if (templateName.equals("object/tangible/test/qabag.iff")) {
+                if (templateName.equals("object/tangible/test/qabag.iff"))
+                {
                     hasBag = true;
                 }
             }
-            if (hasBag == false)
+            if (!hasBag)
             {
                 createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
                 sendSystemMessageTestingOnly(self, "QA Bag Granted");
@@ -1659,10 +1673,14 @@ public class qatool extends script.base_script
                 else
                 {
                     int arrayOfLocationsSize = arrayOfLocations.length;
-                    for (String arrayOfLocation : arrayOfLocations) {
-                        if (arrayOfLocation.equals("")) {
+                    for (String arrayOfLocation : arrayOfLocations)
+                    {
+                        if (arrayOfLocation.equals(""))
+                        {
                             planetHash.add("no_location_listed");
-                        } else {
+                        }
+                        else
+                        {
                             planetHash.add(toLower(arrayOfLocation));
                         }
                     }
@@ -1685,8 +1703,10 @@ public class qatool extends script.base_script
                     HashSet foundCreatures = new HashSet();
                     String[] arrayOfAllCreatures = dataTableGetStringColumn(CREATURE_TABLE, "creatureName");
                     int creatureArraySize = arrayOfAllCreatures.length;
-                    for (String arrayOfAllCreature : arrayOfAllCreatures) {
-                        if (arrayOfAllCreature.contains(argumentString)) {
+                    for (String arrayOfAllCreature : arrayOfAllCreatures)
+                    {
+                        if (arrayOfAllCreature.contains(argumentString))
+                        {
                             foundCreatures.add(arrayOfAllCreature);
                         }
                     }
@@ -1724,8 +1744,10 @@ public class qatool extends script.base_script
                     HashSet foundCreatures = new HashSet();
                     String[] arrayOfAllCreatures = dataTableGetStringColumn(SPACE_MOBILE_TABLE, "strIndex");
                     int creatureArraySize = arrayOfAllCreatures.length;
-                    for (String arrayOfAllCreature : arrayOfAllCreatures) {
-                        if (arrayOfAllCreature.contains(argumentString)) {
+                    for (String arrayOfAllCreature : arrayOfAllCreatures)
+                    {
+                        if (arrayOfAllCreature.contains(argumentString))
+                        {
                             foundCreatures.add(arrayOfAllCreature);
                         }
                     }
@@ -1946,7 +1968,8 @@ public class qatool extends script.base_script
         {
             String allHelpData = "";
             Arrays.sort(QATOOLPROMPT);
-            for (String s : QATOOLPROMPT) {
+            for (String s : QATOOLPROMPT)
+            {
                 allHelpData = allHelpData + s + "\r\n\t";
             }
             saveTextOnClient(self, "commandUsage.txt", allHelpData);
@@ -1959,6 +1982,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int oldItemMenuHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -1968,13 +1992,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "oldItem");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "oldItem.menu");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "oldItem.menu");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     if (previousSelection.equals("No Mob/NPC Found"))
@@ -1982,17 +2006,22 @@ public class qatool extends script.base_script
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         if (previousSelection.equals(OLD_ITEM_MENU[0]))
                         {
-                            for (String oldFsVillageItem : OLD_FS_VILLAGE_ITEMS) {
-                                if (!oldFsVillageItem.equals("object/tangible/item/quest/force_sensitive/fs_buff_item.iff")) {
+                            for (String oldFsVillageItem : OLD_FS_VILLAGE_ITEMS)
+                            {
+                                if (!oldFsVillageItem.equals("object/tangible/item/quest/force_sensitive/fs_buff_item.iff"))
+                                {
                                     qa.templateObjectSpawner(self, oldFsVillageItem);
-                                } else {
+                                }
+                                else
+                                {
                                     obj_id inventoryContainer = utils.getInventoryContainer(self);
                                     obj_id buffItem = createObject(oldFsVillageItem, inventoryContainer, "");
-                                    if (isValidId(buffItem)) {
+                                    if (isValidId(buffItem))
+                                    {
                                         setObjVar(buffItem, "item.time.reuse_time", 259200);
                                         setObjVar(buffItem, "item.buff.type", 0);
                                         setObjVar(buffItem, "item.buff.value", 2000);
@@ -2005,31 +2034,36 @@ public class qatool extends script.base_script
                         }
                         if (previousSelection.equals(OLD_ITEM_MENU[1]))
                         {
-                            for (String heroOfTatooineItem : HERO_OF_TATOOINE_ITEMS) {
+                            for (String heroOfTatooineItem : HERO_OF_TATOOINE_ITEMS)
+                            {
                                 qa.templateObjectSpawner(self, heroOfTatooineItem);
                             }
                         }
                         if (previousSelection.equals(OLD_ITEM_MENU[2]))
                         {
-                            for (String deathWatchBunkerItem : DEATH_WATCH_BUNKER_ITEMS) {
+                            for (String deathWatchBunkerItem : DEATH_WATCH_BUNKER_ITEMS)
+                            {
                                 qa.templateObjectSpawner(self, deathWatchBunkerItem);
                             }
                         }
                         if (previousSelection.equals(OLD_ITEM_MENU[3]))
                         {
-                            for (String oldSkillBuffItem : OLD_SKILL_BUFF_ITEMS) {
+                            for (String oldSkillBuffItem : OLD_SKILL_BUFF_ITEMS)
+                            {
                                 qa.templateObjectSpawner(self, oldSkillBuffItem);
                             }
                         }
                         if (previousSelection.equals(OLD_ITEM_MENU[4]))
                         {
-                            for (String craftingComponent : CRAFTING_COMPONENTS) {
+                            for (String craftingComponent : CRAFTING_COMPONENTS)
+                            {
                                 qa.templateObjectSpawner(self, craftingComponent);
                             }
                         }
                         if (previousSelection.equals(OLD_ITEM_MENU[5]))
                         {
-                            for (String varactylTreasureItem : VARACTYL_TREASURE_ITEMS) {
+                            for (String varactylTreasureItem : VARACTYL_TREASURE_ITEMS)
+                            {
                                 qa.templateObjectSpawner(self, varactylTreasureItem);
                             }
                         }
@@ -2041,12 +2075,13 @@ public class qatool extends script.base_script
                             {
                                 qa.findOrCreateAndEquipQABag(self, testerInventoryId, false);
                                 myBag = getObjectInSlot(self, "back");
-                                for (String lootSchematic : LOOT_SCHEMATICS) {
+                                for (String lootSchematic : LOOT_SCHEMATICS)
+                                {
                                     obj_id itemId = qa.templateObjectSpawner(self, lootSchematic, false);
                                     putInOverloaded(itemId, myBag);
                                 }
                             }
-                            else 
+                            else
                             {
                                 sendSystemMessageTestingOnly(self, "Delete or drop your Current QA Bag for this tool.");
                             }
@@ -2063,6 +2098,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgHandleWeatherSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2072,13 +2108,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "weather");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "weather.list");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "weather.list");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     if (previousSelection.equals("No Mob/NPC Found"))
@@ -2086,9 +2122,10 @@ public class qatool extends script.base_script
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
-                        switch (previousSelection) {
+                        switch (previousSelection)
+                        {
                             case "Clear":
                                 setWeather(self, 0);
                                 break;
@@ -2112,6 +2149,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int npcFinderHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2121,13 +2159,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "npcFinder");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "npcFinder.allMobStrings");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "npcFinder.allMobStrings");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     if (previousSelection.equals("No Mob/NPC Found"))
@@ -2135,7 +2173,7 @@ public class qatool extends script.base_script
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         parseThenWarpTester(self, previousSelection);
                         cleanAllScriptVars(self);
@@ -2146,6 +2184,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int objectFinderHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2155,13 +2194,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "npcFinder");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "objFinder.objStrings");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "objFinder.objStrings");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     parseThenWarpTester(self, previousSelection);
@@ -2172,6 +2211,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int qaLootThem(obj_id self, dictionary params) throws InterruptedException
     {
         boolean isQaBackpackScriptAttached = hasScript(self, "test.qabackpack");
@@ -2190,6 +2230,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int qaSaveData(obj_id self, dictionary params) throws InterruptedException
     {
         String exportText = params.getString("exportData");
@@ -2201,13 +2242,13 @@ public class qatool extends script.base_script
                 String mobContentsByRow = utils.getStringScriptVar(self, "lootLogger.mobContents");
                 boolean contentsExported = exportTextBagContents(self, myBag, exportText, mobContentsByRow);
             }
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
         }
         messageTo(self, "cleanAllScriptVars", null, 2.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int qaDestroyMob(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id myMob = params.getObjId("myMob");
@@ -2216,17 +2257,20 @@ public class qatool extends script.base_script
         qa.findOrCreateAndEquipQABag(self, testerInventoryId, false);
         return SCRIPT_CONTINUE;
     }
+
     public int qaDestroyObject(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id myMob = params.getObjId("object");
         destroyObject(myMob);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanAllScriptVars(obj_id self, dictionary params) throws InterruptedException
     {
         cleanAllScriptVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public int groundMobSearchOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2236,13 +2280,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "groundMobSearch");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "groundMobSearch.creaturesFound");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "groundMobSearch.creaturesFound");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     spawnGroundMob(self, previousSelection);
@@ -2254,6 +2298,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spaceMobSearchOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2263,13 +2308,13 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "spaceMobSearch");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "spaceMobSearch.mobsFound");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "spaceMobSearch.mobsFound");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     String previousSelection = previousMainMenuArray[idx];
                     obj_id objTest = space_transition.getContainingShip(self);
@@ -2278,7 +2323,7 @@ public class qatool extends script.base_script
                     {
                         objShip = space_create.createShip(previousSelection, getTransform_o2p(objTest));
                     }
-                    else 
+                    else
                     {
                         objShip = space_create.createShip(previousSelection, getTransform_o2p(self));
                     }
@@ -2288,7 +2333,7 @@ public class qatool extends script.base_script
                         cleanAllScriptVars(self);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(self, "Made ship of type " + previousSelection + " object id is: " + objShip);
                         qa.refreshMenu(self, "List of space mobiles found.", "QA SPACE MOB SEARCH TOOL", previousMainMenuArray, "spaceMobSearchOptions", true, "spaceMobSearch.pid", "spaceMobSearch.mobsFound");
@@ -2299,6 +2344,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int toolMainMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2322,132 +2368,134 @@ public class qatool extends script.base_script
                 switch (idx)
                 {
                     case BADGETOOL_MENUOPTION:
-                    Vector vectorMenuArray = new Vector();
-                    vectorMenuArray.addElement("*Add All Badges*");
-                    vectorMenuArray.addElement("*Remove All Badges*");
-                    String[] badgePages = getAllCollectionPagesInBook("badge_book");
-                    if ((badgePages != null) && (badgePages.length > 0))
-                    {
-                        for (String badgePage : badgePages) {
-                            if (!badgePage.equals("bdg_accumulation")) {
-                                vectorMenuArray.addElement(badgePage);
+                        Vector vectorMenuArray = new Vector();
+                        vectorMenuArray.addElement("*Add All Badges*");
+                        vectorMenuArray.addElement("*Remove All Badges*");
+                        String[] badgePages = getAllCollectionPagesInBook("badge_book");
+                        if (badgePages != null)
+                        {
+                            for (String badgePage : badgePages)
+                            {
+                                if (!badgePage.equals("bdg_accumulation"))
+                                {
+                                    vectorMenuArray.addElement(badgePage);
+                                }
                             }
                         }
-                    }
-                    String[] badgeMenuArray = new String[vectorMenuArray.size()];
-                    vectorMenuArray.toArray(badgeMenuArray);
-                    utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
-                    if (badgeMenuArray.length < 1)
-                    {
-                        sendSystemMessageTestingOnly(self, "Badge UI creation failed.");
-                    }
-                    utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
-                    qa.refreshMenu(self, "Choose the Badge", "Badge Granter", badgeMenuArray, "mainMenuOptions", "qabadge.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        String[] badgeMenuArray = new String[vectorMenuArray.size()];
+                        vectorMenuArray.toArray(badgeMenuArray);
+                        utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
+                        if (badgeMenuArray.length < 1)
+                        {
+                            sendSystemMessageTestingOnly(self, "Badge UI creation failed.");
+                        }
+                        utils.setScriptVar(self, "qabadge.mainMenu", badgeMenuArray);
+                        qa.refreshMenu(self, "Choose the Badge", "Badge Granter", badgeMenuArray, "mainMenuOptions", "qabadge.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case BUFFTOOL_MENUOPTION:
-                    String[] allBuffs = dataTableGetStringColumn(BUFF_TABLE, "NAME");
-                    Arrays.sort(allBuffs);
-                    utils.setScriptVar(self, "qabuff.buffMenu", allBuffs);
-                    qa.refreshMenu(self, BUFF_TOOL_PROMPT, BUFF_TOOL_TITLE, allBuffs, "buffOptionHandler", "qabuff.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        String[] allBuffs = dataTableGetStringColumn(BUFF_TABLE, "NAME");
+                        Arrays.sort(allBuffs);
+                        utils.setScriptVar(self, "qabuff.buffMenu", allBuffs);
+                        qa.refreshMenu(self, BUFF_TOOL_PROMPT, BUFF_TOOL_TITLE, allBuffs, "buffOptionHandler", "qabuff.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case QACUBE_MENUOPTION:
-                    qaCubeMenu(player);
-                    break;
+                        qaCubeMenu(player);
+                        break;
                     case CYBERNETIC_MENUOPTION:
-                    qa.refreshMenu(player, "- Cybernetic Install Menu -\nSelect Install, Uninstall or Repair.", "Cybernetic Tool", CYBER_MENU_LIST, "handleChoice", "qacybernetic.pid", "qacybernetic.CyberMainMenu", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, "- Cybernetic Install Menu -\nSelect Install, Uninstall or Repair.", "Cybernetic Tool", CYBER_MENU_LIST, "handleChoice", "qacybernetic.pid", "qacybernetic.CyberMainMenu", sui.OK_CANCEL_REFRESH);
+                        break;
                     case DMGTOOL_MENUOPTION:
-                    qa.damageMobTool(self);
-                    break;
+                        qa.damageMobTool(self);
+                        break;
                     case DATAPADTOOL_MENUOPTION:
-                    toolWarpMenu(self);
-                    break;
+                        toolWarpMenu(self);
+                        break;
                     case DYNAMIC_LOOTOPTION:
-                    qa.refreshMenu(self, DYNAMIC_DESCRIPTION, "Dynamic Loot Spawner", DATA_SOURCE_MENU_LIST, "handleMainOptions", "qadynamic.pid", "qadynamic.dynamicMainMenu", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(self, DYNAMIC_DESCRIPTION, "Dynamic Loot Spawner", DATA_SOURCE_MENU_LIST, "handleMainOptions", "qadynamic.pid", "qadynamic.dynamicMainMenu", sui.OK_CANCEL_REFRESH);
+                        break;
                     case XPTOOL_MENUOPTION:
-                    qa.refreshMenu(player, "Select the xp type...", "Beta XP Dispenser", XP_TOOL_MENU, "handleXpOptions", "qaxp.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, "Select the xp type...", "Beta XP Dispenser", XP_TOOL_MENU, "handleXpOptions", "qaxp.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case FACTIONTOOL_MENUOPTION:
-                    qa.refreshMenu(player, PROMPT, TITLE, FACTION_TOOL_MENU, "mainMenuOptions", "qafac.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, PROMPT, TITLE, FACTION_TOOL_MENU, "mainMenuOptions", "qafac.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case INVTOOL_MENUOPTION:
-                    qa.refreshMenu(self, PROMPT, TITLE, INVENTORY_TOOL_MENU, "mainMenuOptions", "qainv.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(self, PROMPT, TITLE, INVENTORY_TOOL_MENU, "mainMenuOptions", "qainv.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     /*case MSTRITEMTOOL_MENUOPTION:
                     utils.setScriptVar(self, "qaitem.mainMenu", ITEM_TOOL_MENU);
                     qa.refreshMenu(self, ITEM_TOOL_PROMPT, ITEM_TOOL_TITLE, ITEM_TOOL_MENU, "handleMainMenuOptions", "qaitem.pid", sui.OK_CANCEL_REFRESH);
                     break;*/
                     case NGETOOL_MENUOPTION:
-                    qa.createInputBox(player, NGE_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", "qange.pid");
-                    break;
+                        qa.createInputBox(player, NGE_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", "qange.pid");
+                        break;
                     case NPCFINDERTOOL_MENUOPTION:
-                    npcFinderFunction(self, st);
-                    break;
+                        npcFinderFunction(self, st);
+                        break;
                     case PET_OPTION:
-                    qa.refreshMenu(self, DNA_PROMPT, DNA_TITLE, PET_OPTION_MENU, "handlePetOptionsTool", "qadna.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(self, DNA_PROMPT, DNA_TITLE, PET_OPTION_MENU, "handlePetOptionsTool", "qadna.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case PROFESSIONTOOL_MENUOPTION:
-                    utils.setScriptVar(self, "qaprofession.mainMenu", PROFESSION_TOOL_MENU);
-                    qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, PROFESSION_TOOL_MENU, "handleMainMenuOptions", "qaprofession.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        utils.setScriptVar(self, "qaprofession.mainMenu", PROFESSION_TOOL_MENU);
+                        qa.refreshMenu(self, PROFESSION_TOOL_PROMPT, PROFESSION_TOOL_TITLE, PROFESSION_TOOL_MENU, "handleMainMenuOptions", "qaprofession.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case QUESTTOOL_MENUOPTION:
-                    try
-                    {
-                        String[] allQuests = qa.getAllQuests(self);
-                        String[] combinedMenu = new String[allQuests.length + QUEST_TOOL_MENU.length];
-                        System.arraycopy(allQuests, 0, combinedMenu, 0, allQuests.length);
-                        System.arraycopy(QUEST_TOOL_MENU, 0, combinedMenu, allQuests.length, QUEST_TOOL_MENU.length);
-                        qa.refreshMenu(self, QUEST_TOOL_PROMPT, QUEST_TOOL_TITLE, combinedMenu, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
-                    }
-                    catch(Exception e)
-                    {
-                        qa.refreshMenu(self, QUEST_TOOL_PROMPT + "\n\nNo quests found on character", QUEST_TOOL_TITLE, QUEST_TOOL_MENU, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
-                    }
-                    break;
+                        try
+                        {
+                            String[] allQuests = qa.getAllQuests(self);
+                            String[] combinedMenu = new String[allQuests.length + QUEST_TOOL_MENU.length];
+                            System.arraycopy(allQuests, 0, combinedMenu, 0, allQuests.length);
+                            System.arraycopy(QUEST_TOOL_MENU, 0, combinedMenu, allQuests.length, QUEST_TOOL_MENU.length);
+                            qa.refreshMenu(self, QUEST_TOOL_PROMPT, QUEST_TOOL_TITLE, combinedMenu, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
+                        } catch (Exception e)
+                        {
+                            qa.refreshMenu(self, QUEST_TOOL_PROMPT + "\n\nNo quests found on character", QUEST_TOOL_TITLE, QUEST_TOOL_MENU, "handleMainMenuOptions", true, "qaquest.pid", "qaquest.qaquestMenu");
+                        }
+                        break;
                     case RESOURCETOOL_MENUOPTION:
-                    utils.setScriptVar(player, "resource.mainMenu", RESOURCE_TOOL_MENU);
-                    qa.refreshMenu(player, RESOURCE_TOOL_PROMPT, "QA Resource Tool", RESOURCE_TOOL_MENU, "startingMenuOptions", "resource.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        utils.setScriptVar(player, "resource.mainMenu", RESOURCE_TOOL_MENU);
+                        qa.refreshMenu(player, RESOURCE_TOOL_PROMPT, "QA Resource Tool", RESOURCE_TOOL_MENU, "startingMenuOptions", "resource.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case RESOURCE_REWARD_TOOL_MENUOPTION:
-                    qa.refreshMenu(self, RESOURCE_REWARD_TOOL_PROMPT, RESOURCE_REWARD_TOOL_TITLE, REWARD_RESOURCE_MENU, "handleQATool", "qarewardresource.pid", "qarewardresource.mainMenu", sui.OK_CANCEL);
-                    break;
+                        qa.refreshMenu(self, RESOURCE_REWARD_TOOL_PROMPT, RESOURCE_REWARD_TOOL_TITLE, REWARD_RESOURCE_MENU, "handleQATool", "qarewardresource.pid", "qarewardresource.mainMenu", sui.OK_CANCEL);
+                        break;
                     case SCRIPTTOOL_MENUOPTION:
-                    utils.setScriptVar(player, "qascript.mainMenu", SCRIPT_TOOL_MENU);
-                    String toolPrompt = scriptToolPromptMaker(player);
-                    qa.refreshMenu(player, toolPrompt, SCRIPT_TOOL_TITLE, SCRIPT_TOOL_MENU, "handleMainMenuOptions", "qascript.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        utils.setScriptVar(player, "qascript.mainMenu", SCRIPT_TOOL_MENU);
+                        String toolPrompt = scriptToolPromptMaker(player);
+                        qa.refreshMenu(player, toolPrompt, SCRIPT_TOOL_TITLE, SCRIPT_TOOL_MENU, "handleMainMenuOptions", "qascript.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case SPACETOOL_MENUOPTION:
-                    utils.setScriptVar(self, "qajtl.mainMenu", JTL_TOOL_MENU);
-                    qa.refreshMenu(player, "Tool for JTL specific testing needs.", "QA JTL TOOL", JTL_TOOL_MENU, "mainMenuOptions", "qajtl.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        utils.setScriptVar(self, "qajtl.mainMenu", JTL_TOOL_MENU);
+                        qa.refreshMenu(player, "Tool for JTL specific testing needs.", "QA JTL TOOL", JTL_TOOL_MENU, "mainMenuOptions", "qajtl.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     case FROGTOOL_MENUOPTION:
-                    giveTesterAFrog(self);
-                    break;
+                        giveTesterAFrog(self);
+                        break;
                     case VETERANREWARD_MENUOPTION:
-                    String[] allRewardTemplates = dataTableGetStringColumn(VET_REWARDS_TABLE, "Object Template");
-                    Arrays.sort(allRewardTemplates);
-                    if (allRewardTemplates.length > 0)
-                    {
-                        qa.refreshMenu(self, "The list below shows veteran rewards available", "Vet Reward Tool", allRewardTemplates, "vetRewardOptionHandler", true, "vetreward.pid", "vetreward.allTemplates");
-                    }
-                    break;
+                        String[] allRewardTemplates = dataTableGetStringColumn(VET_REWARDS_TABLE, "Object Template");
+                        Arrays.sort(allRewardTemplates);
+                        if (allRewardTemplates.length > 0)
+                        {
+                            qa.refreshMenu(self, "The list below shows veteran rewards available", "Vet Reward Tool", allRewardTemplates, "vetRewardOptionHandler", true, "vetreward.pid", "vetreward.allTemplates");
+                        }
+                        break;
                     case WEAPONS_MENUOPTION:
-                    qa.refreshMenu(player, "-Weapon Type Select Menu-\nChoose the type of weapon you wish to use for testing.", "QA Test Weapon Tool", WEAPON_TYPE, "handleWeaponTypeOptions", "qaweapon.pid", "qaweapon.weaponTypeMenu", sui.OK_CANCEL_REFRESH);
-                    break;
+                        qa.refreshMenu(player, "-Weapon Type Select Menu-\nChoose the type of weapon you wish to use for testing.", "QA Test Weapon Tool", WEAPON_TYPE, "handleWeaponTypeOptions", "qaweapon.pid", "qaweapon.weaponTypeMenu", sui.OK_CANCEL_REFRESH);
+                        break;
                     case WEARABLESTOOL_MENUOPTION:
-                    String[] wearableMenuArray = qa.populateArray(player, "wearable_specie", "datatables/test/qa_wearables.iff");
-                    utils.setScriptVar(player, "qawearable.mainMenu", wearableMenuArray);
-                    qa.refreshMenu(player, "Choose the species", "Wearables Spawner", wearableMenuArray, "wearableTypeOptionSelect", "qawearable.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                        String[] wearableMenuArray = qa.populateArray(player, "wearable_specie", "datatables/test/qa_wearables.iff");
+                        utils.setScriptVar(player, "qawearable.mainMenu", wearableMenuArray);
+                        qa.refreshMenu(player, "Choose the species", "Wearables Spawner", wearableMenuArray, "wearableTypeOptionSelect", "qawearable.pid", sui.OK_CANCEL_REFRESH);
+                        break;
                     default:
-                    cleanAllScriptVars(self);
-                    return SCRIPT_CONTINUE;
+                        cleanAllScriptVars(self);
+                        return SCRIPT_CONTINUE;
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleItemSearchOptions(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2457,15 +2505,15 @@ public class qatool extends script.base_script
                 qa.checkParams(params, "itemSearch");
                 int idx = sui.getListboxSelectedRow(params);
                 int btn = sui.getIntButtonPressed(params);
-                String previousMainMenuArray[] = utils.getStringArrayScriptVar(self, "itemSearch.foundStrings");
-                String listOfRowNumbers[] = utils.getStringArrayScriptVar(self, "itemSearch.foundRows");
-                String listOfAllItems[] = utils.getStringArrayScriptVar(self, "itemSearch.allItems");
+                String[] previousMainMenuArray = utils.getStringArrayScriptVar(self, "itemSearch.foundStrings");
+                String[] listOfRowNumbers = utils.getStringArrayScriptVar(self, "itemSearch.foundRows");
+                String[] listOfAllItems = utils.getStringArrayScriptVar(self, "itemSearch.allItems");
                 if (btn == sui.BP_CANCEL)
                 {
                     cleanAllScriptVars(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     int selectedRow = utils.stringToInt(listOfRowNumbers[idx]);
                     String selectedItem = listOfAllItems[selectedRow];
@@ -2475,6 +2523,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int exportFile(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -2490,6 +2539,7 @@ public class qatool extends script.base_script
         cleanAllScriptVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public int animateForceDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         if (isGod(self))
@@ -2498,6 +2548,7 @@ public class qatool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int runLootLoggerIncrement(obj_id self, dictionary params) throws InterruptedException
     {
         int iterationInt = params.getInt("iterationInt");
@@ -2506,7 +2557,7 @@ public class qatool extends script.base_script
         int successInt = lootLoggerMain(self, iterationInt, creatureName, scriptString);
         return SCRIPT_CONTINUE;
     }
-	
+
     public void cleanAllScriptVars(obj_id player) throws InterruptedException
     {
         utils.removeScriptVarTree(player, "qascript");
@@ -2543,6 +2594,7 @@ public class qatool extends script.base_script
         utils.removeScriptVarTree(player, "oldItem");
         utils.removeScriptVarTree(player, SCRIPT_VAR);
     }
+
     public void parseThenWarpTester(obj_id self, String previousSelection) throws InterruptedException
     {
         if (previousSelection.indexOf(" ") > 0)
@@ -2556,12 +2608,12 @@ public class qatool extends script.base_script
                 warpPlayer(self, objLocation.area, objLocation.x, objLocation.y, objLocation.z, objLocation.cell, objLocation.x, objLocation.y, objLocation.z);
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has warped to (" + objOID + ") " + utils.getStringName(objOID) + " at location " + objLocation.area + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " " + objLocation.cell + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " using a QA Tool.");
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The tool failed to attain the correct location and warp the test character.  Notify the Tool Team!");
             }
         }
-        else 
+        else
         {
             try
             {
@@ -2569,13 +2621,13 @@ public class qatool extends script.base_script
                 location objLocation = getLocation(objectId);
                 warpPlayer(self, objLocation.area, objLocation.x, objLocation.y, objLocation.z, objLocation.cell, objLocation.x, objLocation.y, objLocation.z);
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has warped to (" + objectId + ") " + utils.getStringName(objectId) + " at location " + objLocation.area + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " " + objLocation.cell + " " + objLocation.x + " " + objLocation.y + " " + objLocation.z + " using a QA Tool.");
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 sendSystemMessageTestingOnly(self, "Failed to create an object Id. " + e);
             }
         }
     }
+
     public void giveTesterAFrog(obj_id self) throws InterruptedException
     {
         obj_id inventory = utils.getInventoryContainer(self);
@@ -2583,14 +2635,18 @@ public class qatool extends script.base_script
         {
             sendSystemMessageTestingOnly(self, "Your Inventory is Full, please make room and try again.");
         }
-        else 
+        else
         {
             createObject("object/tangible/terminal/terminal_character_builder.iff", inventory, "");
-            createObject("object/tangible/terminal/terminal_kashyyyk_content.iff", inventory, "");
-            sendSystemMessageTestingOnly(self, "Frog Tools Issued.");
+            if (hasObjVar(self, "kash_debug"))
+            {
+                createObject("object/tangible/terminal/terminal_kashyyyk_content.iff", inventory, "");
+            }
+            sendSystemMessageTestingOnly(self, getClusterName() + " Character Builder Terminal Issued.");
             qa.refreshMenu(self, PROMPT, TITLE, QATOOL_MAIN_MENU, "toolMainMenu", true, SCRIPT_VAR + ".pid");
         }
     }
+
     public void initializeXpTool(obj_id self) throws InterruptedException
     {
         String[] xpTypes = xp.getXpTypes(self);
@@ -2599,6 +2655,7 @@ public class qatool extends script.base_script
             setXpTypesScriptVar(self, xpTypes);
         }
     }
+
     public void setXpTypesScriptVar(obj_id self, String[] varData) throws InterruptedException
     {
         if ((varData == null) || (varData.length == 0))
@@ -2614,21 +2671,24 @@ public class qatool extends script.base_script
         }
         utils.setBatchScriptVar(self, VAR_XP_TYPES_NAMES, xpNames);
     }
+
     public void spawnGroundMob(obj_id player, String stringIndex) throws InterruptedException
     {
         obj_id target = qa.findTarget(player);
-        if (isIdValid(target) == false)
+        if (!isIdValid(target))
         {
             target = player;
         }
         create.createCreature(stringIndex, getLocation(target), true);
         sendSystemMessageTestingOnly(player, "Mobile spawned at location targeted.");
     }
+
     public String scriptToolPromptMaker(obj_id player) throws InterruptedException
     {
         String scriptList = getCharacterScriptsPrompt(player);
         return SCRIPT_TOOL_PROMPT + scriptList;
     }
+
     public void qaCubeMenu(obj_id player) throws InterruptedException
     {
         getNamesArray(player);
@@ -2637,21 +2697,28 @@ public class qatool extends script.base_script
             String[] showNamesArray = utils.getStringArrayScriptVar(player, "qa_cube.showNamesArray");
             qa.refreshMenu(player, CHU_GON_DAR_PROMPT, CHU_GON_DAR_TITLE, showNamesArray, "handleChuGonOptions", "qa_cube.pid", "qa_cube.ChuGonMainMenu", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "An error has occurred, please try again.");
         }
     }
+
     public String getCharacterScriptsPrompt(obj_id player) throws InterruptedException
     {
         String strScripts = "";
         String[] scriptArray = filterCharacterScripts(player);
-        for (String s : scriptArray) {
-            if (s.startsWith("test.")) {
+        for (String s : scriptArray)
+        {
+            if (s.startsWith("test."))
+            {
                 strScripts += s + "\r\n";
-            } else {
-                for (String scriptToolCommonScript : SCRIPT_TOOL_COMMON_SCRIPTS) {
-                    if (s.equals(scriptToolCommonScript)) {
+            }
+            else
+            {
+                for (String scriptToolCommonScript : SCRIPT_TOOL_COMMON_SCRIPTS)
+                {
+                    if (s.equals(scriptToolCommonScript))
+                    {
                         strScripts += s + "\r\n";
                     }
                 }
@@ -2659,14 +2726,17 @@ public class qatool extends script.base_script
         }
         return strScripts;
     }
+
     public String[] filterCharacterScripts(obj_id player) throws InterruptedException
     {
         String strScripts = "";
         String[] scriptArray = getScriptList(player);
         HashSet theSet = new HashSet();
-        for (String s : scriptArray) {
+        for (String s : scriptArray)
+        {
             String script = s;
-            if (script.contains("script.")) {
+            if (script.contains("script."))
+            {
                 script = script.substring(7);
                 theSet.add(script);
             }
@@ -2676,6 +2746,7 @@ public class qatool extends script.base_script
         Arrays.sort(menuArray);
         return menuArray;
     }
+
     public void searchStaticLoot(obj_id self, String argumentString, String searchType) throws InterruptedException
     {
         Vector foundItemRowNumbers = new Vector();
@@ -2692,25 +2763,25 @@ public class qatool extends script.base_script
                 {
                     if ((toLower(arrayOfAllItems[i])).contains(toLower(argumentString)))
                     {
-                        foundItemRowNumbers.add("" + i);
+                        foundItemRowNumbers.add(String.valueOf(i));
                         finalListOfCombinedItems.add(arrayOfAllItems[i] + "\t ( " + arrayOfAllStaticItemsInDatatable[i] + " )");
                     }
                 }
-                else 
+                else
                 {
                     dictionary troubleRow = dataTableGetRow(MASTER_ITEM_TABLE, i);
-                    if(hasObjVar(self, "showTroubledStrings"))
+                    if (hasObjVar(self, "showTroubledStrings"))
                     {
                         sendSystemMessageTestingOnly(self, "Code String Found: " + troubleRow.getString("name"));
                         sendSystemMessageTestingOnly(self, "This tool cannot be used until this code string is fixed");
                     }
                 }
             }
-            else 
+            else
             {
                 if ((toLower(arrayOfAllStaticItemsInDatatable[i])).contains(toLower(argumentString)))
                 {
-                    foundItemRowNumbers.add("" + i);
+                    foundItemRowNumbers.add(String.valueOf(i));
                     finalListOfCombinedItems.add(arrayOfAllItems[i] + "\t ( " + arrayOfAllStaticItemsInDatatable[i] + " )");
                 }
             }
@@ -2725,20 +2796,23 @@ public class qatool extends script.base_script
             utils.setScriptVar(self, "itemSearch.allItems", arrayOfAllStaticItemsInDatatable);
             qa.refreshMenu(self, "List of found items.", "QA STATIC ITEM SEARCH TOOL", arrayOfCombinedStrings, "handleItemSearchOptions", true, "itemSearch.pid", "itemSearch.foundStrings");
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "The Search String you entered was not found");
             cleanAllScriptVars(self);
         }
     }
+
     public obj_id[] filterOIDsForMob(obj_id self, obj_id[] allOIDs) throws InterruptedException
     {
         if (allOIDs.length > -1)
         {
             Vector allMobObj_IDs = new Vector();
             allMobObj_IDs.setSize(0);
-            for (obj_id allOID : allOIDs) {
-                if (isMob(allOID) && !isPlayer(allOID)) {
+            for (obj_id allOID : allOIDs)
+            {
+                if (isMob(allOID) && !isPlayer(allOID))
+                {
                     utils.addElement(allMobObj_IDs, allOID);
                 }
             }
@@ -2752,6 +2826,7 @@ public class qatool extends script.base_script
         }
         return null;
     }
+
     public obj_id[] getMobList(obj_id self, location testerLoc, float range) throws InterruptedException
     {
         obj_id[] allMobsCreditKills = getAllObjectsWithScript(testerLoc, range, "systems.combat.credit_for_kills");
@@ -2760,20 +2835,23 @@ public class qatool extends script.base_script
         HashSet combinedMobArrays = new HashSet();
         if (allMobsCreditKills.length > -1)
         {
-            for (obj_id allMobsCreditKill : allMobsCreditKills) {
-                combinedMobArrays.add("" + allMobsCreditKill);
+            for (obj_id allMobsCreditKill : allMobsCreditKills)
+            {
+                combinedMobArrays.add(String.valueOf(allMobsCreditKill));
             }
         }
         if (allMobsAi.length > -1)
         {
-            for (obj_id obj_id : allMobsAi) {
-                combinedMobArrays.add("" + obj_id);
+            for (obj_id obj_id : allMobsAi)
+            {
+                combinedMobArrays.add(String.valueOf(obj_id));
             }
         }
         if (allMobsCombat.length > -1)
         {
-            for (obj_id obj_id : allMobsCombat) {
-                combinedMobArrays.add("" + obj_id);
+            for (obj_id obj_id : allMobsCombat)
+            {
+                combinedMobArrays.add(String.valueOf(obj_id));
             }
         }
         if (combinedMobArrays.size() > 0)
@@ -2792,6 +2870,7 @@ public class qatool extends script.base_script
         }
         return null;
     }
+
     public String[] getMobMenu(obj_id self, obj_id[] allMobOIDs, String searchString) throws InterruptedException
     {
         if (allMobOIDs.length > -1)
@@ -2800,24 +2879,34 @@ public class qatool extends script.base_script
             mobMenu.setSize(0);
             Vector nullMobCodes = new Vector();
             nullMobCodes.setSize(0);
-            for (obj_id allMobOID : allMobOIDs) {
+            for (obj_id allMobOID : allMobOIDs)
+            {
                 String codeString = getCreatureName(allMobOID);
                 String localizedString = localize(new string_id("mob/creature_names", codeString));
-                if (localizedString == null) {
+                if (localizedString == null)
+                {
                     localizedString = getEncodedName(allMobOID);
                 }
-                if (searchString.equals("none")) {
+                if (searchString.equals("none"))
+                {
                     utils.addElement(mobMenu, localizedString + "  ( " + allMobOID + " )");
-                } else if (!searchString.equals("none") && searchString.length() > 2) {
+                }
+                else if (!searchString.equals("none") && searchString.length() > 2)
+                {
                     String lowerCaseMobile = toLower(localizedString);
                     String lowerSearchString = toLower(searchString);
-                    if (lowerCaseMobile.contains(lowerSearchString) || lowerCaseMobile.equals(lowerSearchString)) {
+                    if (lowerCaseMobile.contains(lowerSearchString) || lowerCaseMobile.equals(lowerSearchString))
+                    {
                         utils.addElement(mobMenu, localizedString + "  ( " + allMobOID + " )");
                     }
-                } else if (!searchString.equals("none") && searchString.length() <= 2) {
+                }
+                else if (!searchString.equals("none") && searchString.length() <= 2)
+                {
                     sendSystemMessageTestingOnly(self, "The mobile name must be at least 3 characters long");
                     break;
-                } else {
+                }
+                else
+                {
                     sendSystemMessageTestingOnly(self, "There was a problem with your search string.");
                     break;
                 }
@@ -2829,35 +2918,35 @@ public class qatool extends script.base_script
                 Arrays.sort(arrayStrings);
                 return arrayStrings;
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "No Mobiles found.");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "No Mobiles found in vicinity!");
         }
         return null;
     }
+
     public String parseArgumentRetrieveString(obj_id self, String argString) throws InterruptedException
     {
         if (argString.indexOf("[") == 0)
         {
             int dirEnd = argString.indexOf("]");
             String stringDir = argString.substring(1, dirEnd);
-            String stringName = argString.substring(dirEnd + 2, argString.length());
+            String stringName = argString.substring(dirEnd + 2);
             String localizedString = localize(new string_id(stringDir, stringName));
             return Objects.requireNonNullElse(localizedString, "The string ID was either incorrect or was deleted.  Review the string data you are passing to the tool and make sure it is correct.");
         }
-        else 
+        else
         {
             return "The string ID must contain braces. Example: [conversation/tatooine_espa_watto]:s_106 ";
         }
     }
-	
 
-	
+
     public void mitigationToolFunction(obj_id self, obj_id lookAtTarget) throws InterruptedException
     {
         if (isIdValid(lookAtTarget))
@@ -2868,8 +2957,8 @@ public class qatool extends script.base_script
                 if (isIdValid(objWeapon))
                 {
                     weapon_data newWpnData = getWeaponData(objWeapon);
-                    utils.setScriptVar(self, "mitigation.lookAtTarget", "" + lookAtTarget);
-                    utils.setScriptVar(self, "mitigation.objWeapon", "" + objWeapon);
+                    utils.setScriptVar(self, "mitigation.lookAtTarget", String.valueOf(lookAtTarget));
+                    utils.setScriptVar(self, "mitigation.objWeapon", String.valueOf(objWeapon));
                     utils.setScriptVar(self, "mitigation.minDamage", newWpnData.minDamage);
                     utils.setScriptVar(self, "mitigation.maxDamage", newWpnData.maxDamage);
                     String[] dmgMenu = new String[3];
@@ -2879,28 +2968,29 @@ public class qatool extends script.base_script
                     utils.setScriptVar(self, "mitigation.dmgMenu", dmgMenu);
                     qa.refreshMenu(self, MITIGATION_TOOL_PROMPT, MITIGATION_TOOL_TITLE, MITIGATION_HIT_LOCATIONS, "handleAttackLocationOptions", true, "mitigationPid.pid", "mitigation.hitLocationMenu");
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "Equip a weapon before attempting to use this tool.");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.");
         }
     }
+
     public void npcFinderFunction(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             if (st.hasMoreTokens())
             {
@@ -2926,7 +3016,7 @@ public class qatool extends script.base_script
                                         String promptAppend = "\n\r\n\rTotal Mobs Found within range of " + MINIMUM_FINDER_RADIUS_FLOAT + " = " + allFoundMobsWithNames.length + "\n\rTotal Returned =" + foundMobMenu.length;
                                         qa.refreshMenu(self, "List of Mobs/NPCs: " + promptAppend + "\n\r\n\rThis Tool is NOT 100% accurate.  Do not write defects because you cannot find NPCs using this tool.", NPCFINDER_TITLE, foundMobMenu, "npcFinderHandler", true, "npcFinder.pid", "npcFinder.allMobStrings");
                                     }
-                                    else 
+                                    else
                                     {
                                         String promptAppend = "\n\r\n\rTotal Mobs Found within range of " + MINIMUM_FINDER_RADIUS_FLOAT + " = " + allFoundMobsWithNames.length + "\n\rTotal Returned = NOTHING";
                                         qa.refreshMenu(self, "List of Mobs/NPCs: " + promptAppend + "\n\r\n\rThis Tool is NOT 100% accurate.  Do not write defects because you cannot find NPCs using this tool.", NPCFINDER_TITLE, NPCFINDER_ERR_ARRAY, "npcFinderHandler", true, "npcFinder.pid", "npcFinder.allMobStrings");
@@ -2937,7 +3027,7 @@ public class qatool extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 obj_id[] allMobOids = getMobList(self, getLocation(self), MINIMUM_FINDER_RADIUS_FLOAT);
                 if (allMobOids != null)
@@ -2951,7 +3041,7 @@ public class qatool extends script.base_script
                             String promptAppend = "\n\r\n\rTotal Mobs Found within range of " + MINIMUM_FINDER_RADIUS_FLOAT + " = " + allMobsWithNames.length + "\n\rTotal Returned =" + mobMenu.length;
                             qa.refreshMenu(self, "List of Mobs/NPCs: " + promptAppend + "\n\r\n\rThis Tool is NOT 100% accurate.  Do not write defects because you cannot find NPCs using this tool.", NPCFINDER_TITLE, mobMenu, "npcFinderHandler", true, "npcFinder.pid", "npcFinder.allMobStrings");
                         }
-                        else 
+                        else
                         {
                             String promptAppend = "\n\r\n\rTotal Mobs Found within range of " + MINIMUM_FINDER_RADIUS_FLOAT + " = " + allMobsWithNames.length + "\n\rTotal Returned = NOTHING";
                             qa.refreshMenu(self, "List of Mobs/NPCs: " + promptAppend + "\n\r\n\rThis Tool is NOT 100% accurate.  Do not write defects because you cannot find NPCs using this tool.", NPCFINDER_TITLE, NPCFINDER_ERR_ARRAY, "npcFinderHandler", true, "npcFinder.pid", "npcFinder.allMobStrings");
@@ -2961,6 +3051,7 @@ public class qatool extends script.base_script
             }
         }
     }
+
     public void targetDataToolFunction(obj_id self, StringTokenizer st) throws InterruptedException
     {
         obj_id lookAtTarget = qa.findTarget(self);
@@ -2971,16 +3062,16 @@ public class qatool extends script.base_script
             if (isValidId(lookAtTarget))
             {
                 String combinedString = qa.qaTargetDump(self, lookAtTarget, true);
-                String objIdString = "" + lookAtTarget;
+                String objIdString = String.valueOf(lookAtTarget);
                 utils.setScriptVar(self, "export.lookAtTarget", objIdString);
                 qa.createCustomUI(self, combinedString);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Invalid Object Id passed to tool.  Try again.");
             }
         }
-        else 
+        else
         {
             if (!isIdValid(lookAtTarget))
             {
@@ -2989,16 +3080,17 @@ public class qatool extends script.base_script
             else if (isIdValid(lookAtTarget))
             {
                 String combinedString = qa.qaTargetDump(self, lookAtTarget, true);
-                String objIdString = "" + lookAtTarget;
+                String objIdString = String.valueOf(lookAtTarget);
                 utils.setScriptVar(self, "export.lookAtTarget", objIdString);
                 qa.createCustomUI(self, combinedString);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "you must have a valid target to use this command.");
             }
         }
     }
+
     public void lootLoggerTool(obj_id self, StringTokenizer st, String scriptString) throws InterruptedException
     {
         String myName = null;
@@ -3016,7 +3108,7 @@ public class qatool extends script.base_script
                     continueSpawnTool = true;
                 }
             }
-            else 
+            else
             {
                 dwbSpawnerRow = dataTableSearchColumnForString(myName, "spawns", DWB_SPAWN_TABLE);
                 creatureRowNumber = dataTableSearchColumnForString(myName, "creatureName", CREATURE_TABLE);
@@ -3037,7 +3129,7 @@ public class qatool extends script.base_script
                 {
                     iteration = Integer.parseInt(st.nextToken());
                 }
-                else 
+                else
                 {
                     iteration = 25;
                 }
@@ -3070,8 +3162,7 @@ public class qatool extends script.base_script
                                 {
                                     incrementDict.put("iterationInt", 10);
                                     messageTo(self, "runLootLoggerIncrement", incrementDict, 5, true);
-                                }
-                                catch(Exception e)
+                                } catch (Exception e)
                                 {
                                     sendSystemMessageTestingOnly(self, "Interrupted! " + e);
                                 }
@@ -3092,7 +3183,7 @@ public class qatool extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (scriptString.equals("none"))
                 {
@@ -3101,12 +3192,13 @@ public class qatool extends script.base_script
                 sendSystemMessageTestingOnly(self, "Invalid dungeon creature name. Please make sure the creature you are spawning is spawned in the dungeon and also can be found in the creature table.");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "Format: /qatool qaspawner <Creature Name> <number of iterations>");
             cleanAllScriptVars(self);
         }
     }
+
     public int lootLoggerMain(obj_id self, int iteration, String creatureSpawned, String scriptString) throws InterruptedException
     {
         int returnInt = 0;
@@ -3136,6 +3228,7 @@ public class qatool extends script.base_script
         }
         return returnInt;
     }
+
     public String[] retrieveMobileContents(obj_id self, String mobContentsByRow) throws InterruptedException
     {
         if (mobContentsByRow != null && !mobContentsByRow.equals(""))
@@ -3154,6 +3247,7 @@ public class qatool extends script.base_script
         }
         return null;
     }
+
     public boolean exportTextBagContents(obj_id self, obj_id myBag, String exportString, String mobContentsByRow) throws InterruptedException
     {
         if (isIdValid(myBag))
@@ -3179,21 +3273,27 @@ public class qatool extends script.base_script
                         exportString += "#\t(OID)Item Template\n";
                         int u = 1;
                         String combinedString = "";
-                        for (String mobileContent : mobileContents) {
-                            if (mobileContent != null && !mobileContent.equals("")) {
-                                String eachItemList[] = split(mobileContent, ',');
-                                if (eachItemList != null && eachItemList.length > 0) {
-                                    for (String s : eachItemList) {
+                        for (String mobileContent : mobileContents)
+                        {
+                            if (mobileContent != null && !mobileContent.equals(""))
+                            {
+                                String[] eachItemList = split(mobileContent, ',');
+                                if (eachItemList != null)
+                                {
+                                    for (String s : eachItemList)
+                                    {
                                         String contentsString = s.replace(',', ' ');
                                         contentsString = contentsString.trim();
-                                        if (!contentsString.equals("") && contentsString != null) {
+                                        if (!contentsString.equals("") && contentsString != null)
+                                        {
                                             combinedString += contentsString + ",";
                                             contentsString = "";
                                         }
                                     }
                                 }
                             }
-                            if (!combinedString.equals("")) {
+                            if (!combinedString.equals(""))
+                            {
                                 exportString += " " + u + "\t" + combinedString + "\n";
                                 u++;
                             }
@@ -3205,13 +3305,14 @@ public class qatool extends script.base_script
                 saveTextOnClient(self, "qaDataExport" + getServerFrame() + ".tab", exportString);
                 return true;
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "No items were looted!");
             }
         }
         return false;
     }
+
     public void makeHelper(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (st.hasMoreTokens())
@@ -3228,13 +3329,14 @@ public class qatool extends script.base_script
                     dictionary creatureRow = dataTableGetRow(CREATURE_TABLE, creatureRowNumber);
                     utils.setScriptVar(self, QAHELPER_SCRIPTVAR + ".creatureDictionary", creatureRow);
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "Creature name invalid.");
                 }
             }
         }
     }
+
     public void toolWarpMenu(obj_id self) throws InterruptedException
     {
         obj_id[] waypointArray = qa.getAllValidWaypoints(self);
@@ -3248,18 +3350,19 @@ public class qatool extends script.base_script
             System.arraycopy(ADD_ON_DATAPAD_MENU, 0, combinedMenu, waypointMenu.length, ADD_ON_DATAPAD_MENU.length);
             qa.refreshMenu(self, DATAPAD_TOOL_PROMPT, DATAPAD_TOOL_TITLE, combinedMenu, "handleWarpScriptOptions", "qadatapad.pid", "qadatapad.warpMenu", sui.OK_CANCEL_REFRESH);
         }
-        else 
+        else
         {
             qa.refreshMenu(self, DATAPAD_TOOL_PROMPT, DATAPAD_TOOL_TITLE, ADD_ON_DATAPAD_MENU, "handleWarpScriptOptions", "qadatapad.pid", "qadatapad.warpMenu", sui.OK_CANCEL_REFRESH);
         }
     }
+
     public void objectFinderFunction(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             String scriptStrArg = "";
             if (st.hasMoreTokens())
@@ -3281,7 +3384,7 @@ public class qatool extends script.base_script
                     {
                         listObjectsFound(self, scriptStrArg, searchType);
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(self, "The tool could not figure out what type of object you were searching for.  Check the string argument");
                         cleanAllScriptVars(self);
@@ -3293,7 +3396,7 @@ public class qatool extends script.base_script
                     cleanAllScriptVars(self);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The Tool requires you to specify the template of the object or the script attached to the object.");
                 sendSystemMessageTestingOnly(self, "Example: /qatool findobj object/creature/player/human_male.iff");
@@ -3303,6 +3406,7 @@ public class qatool extends script.base_script
             }
         }
     }
+
     public void listObjectsFound(obj_id self, String attributeString, String searchType) throws InterruptedException
     {
         if (attributeString.length() > 0)
@@ -3317,7 +3421,7 @@ public class qatool extends script.base_script
                     scriptDynamicPrompt += "Found " + scriptObjMenu.length + " objects.\n\nSelect any object below to warp to it's location.";
                     qa.refreshMenu(self, scriptDynamicPrompt, OBJECT_FINDER_TITLE, scriptObjMenu, "objectFinderHandler", true, "objFinder.pid", "objFinder.objStrings");
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "No objects with that Script were found.");
                     cleanAllScriptVars(self);
@@ -3335,11 +3439,12 @@ public class qatool extends script.base_script
                         templateDynamicPrompt += "Found " + templateObjMenu.length + " objects.\n\nSelect any object below to warp to it's location.";
                         qa.refreshMenu(self, templateDynamicPrompt, OBJECT_FINDER_TITLE, templateObjMenu, "objectFinderHandler", true, "objFinder.pid", "objFinder.objStrings");
                     }
-                    else 
+                    else
                     {
                         Vector convertOidToString = new Vector();
-                        for (obj_id allTemplateObjectsRadius1 : allTemplateObjectsRadius) {
-                            utils.addElement(convertOidToString, "" + allTemplateObjectsRadius1);
+                        for (obj_id allTemplateObjectsRadius1 : allTemplateObjectsRadius)
+                        {
+                            utils.addElement(convertOidToString, String.valueOf(allTemplateObjectsRadius1));
                         }
                         if (convertOidToString.size() >= 1)
                         {
@@ -3350,28 +3455,31 @@ public class qatool extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "No objects with that Template were found. Make sure you include the entire object template to include the '.iff'.  Leave out the 'shared'.  If the tool still fails, try searching for the script attached to the object.");
                     cleanAllScriptVars(self);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The tool did not know what type of object you were searching for.  Inform the tool team.");
                 cleanAllScriptVars(self);
             }
         }
     }
+
     public String[] getObjMenu(obj_id self, obj_id[] allObjOIDs) throws InterruptedException
     {
         if (allObjOIDs.length > 0)
         {
             Vector objMenu = new Vector();
             objMenu.setSize(0);
-            for (obj_id allObjOID : allObjOIDs) {
+            for (obj_id allObjOID : allObjOIDs)
+            {
                 String encodeString = getEncodedName(allObjOID);
-                if (encodeString.length() > 0) {
+                if (encodeString.length() > 0)
+                {
                     utils.addElement(objMenu, encodeString + "  ( " + allObjOID + " )");
                 }
             }
@@ -3383,20 +3491,21 @@ public class qatool extends script.base_script
                 return arrayStrings;
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "The function didn't receive a list of objects.  Make sure the spelling of the template is correct.  Report problems to the tool team.");
             cleanAllScriptVars(self);
         }
         return null;
     }
+
     public boolean specTester(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             String professionStr = "";
             int levelInt = 1;
@@ -3413,7 +3522,7 @@ public class qatool extends script.base_script
                     sui.msgbox(self, self, SPECMEPOPUP, sui.OK_ONLY, QATOOL_TITLE, "noHandler");
                     return true;
                 }
-                else 
+                else
                 {
                     int stringCount = st.countTokens();
                     if (stringCount > 0 && stringCount <= 4)
@@ -3423,8 +3532,7 @@ public class qatool extends script.base_script
                             try
                             {
                                 levelInt = Integer.parseInt(st.nextToken());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
                                 sendSystemMessageTestingOnly(self, "You failed to specify a profession level.");
                                 return false;
@@ -3452,7 +3560,7 @@ public class qatool extends script.base_script
                                     {
                                         skill.grantSkillToPlayer(self, professionPrefix + PROFESSION_SKILL_NAMES[i]);
                                     }
-                                    else 
+                                    else
                                     {
                                         break;
                                     }
@@ -3497,7 +3605,7 @@ public class qatool extends script.base_script
                                                     qa.findOrCreateAndEquipQABag(self, testerInventoryId, true);
                                                 }
                                             }
-                                            else 
+                                            else
                                             {
                                                 boolean miscItemSpawned = spawnItems(self, armorStr, MISC_SEARCH_MULTIARRAY, MASTER_ITEM_TABLE);
                                                 if (miscItemSpawned)
@@ -3505,7 +3613,7 @@ public class qatool extends script.base_script
                                                     sendSystemMessageTestingOnly(self, "Items spawned without error.");
                                                     qa.findOrCreateAndEquipQABag(self, testerInventoryId, true);
                                                 }
-                                                else 
+                                                else
                                                 {
                                                     return false;
                                                 }
@@ -3526,7 +3634,7 @@ public class qatool extends script.base_script
                                             }
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         return true;
                                     }
@@ -3535,7 +3643,7 @@ public class qatool extends script.base_script
                                         return true;
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     return true;
                                 }
@@ -3548,6 +3656,7 @@ public class qatool extends script.base_script
         sendSystemMessageTestingOnly(self, "***There was a problem trying to implement all tool arguments***");
         return false;
     }
+
     public boolean spawnItems(obj_id self, String searchString, String[][] arrayOfArrays, String datatableName) throws InterruptedException
     {
         if (!searchString.equals(""))
@@ -3571,7 +3680,7 @@ public class qatool extends script.base_script
                     {
                         if (itemSpawnStrListArray[x].indexOf(searchSpawnString) == 0)
                         {
-                            utils.addElement(itemRowList, "" + x);
+                            utils.addElement(itemRowList, String.valueOf(x));
                         }
                     }
                     if (itemRowList.size() > -1)
@@ -3579,7 +3688,8 @@ public class qatool extends script.base_script
                         String[] allItemRows = new String[itemRowList.size()];
                         itemRowList.toArray(allItemRows);
                         String itemString = "";
-                        for (String allItemRow : allItemRows) {
+                        for (String allItemRow : allItemRows)
+                        {
                             itemString = dataTableGetString(datatableName, utils.stringToInt(allItemRow), "name");
                             utils.addElement(itemSpawnStringList, itemString);
                         }
@@ -3587,11 +3697,9 @@ public class qatool extends script.base_script
                         {
                             String[] allStrings = new String[itemSpawnStringList.size()];
                             itemSpawnStringList.toArray(allStrings);
-                            if (allStrings.length > 0)
+                            for (String allString : allStrings)
                             {
-                                for (String allString : allStrings) {
-                                    qa.spawnStaticItemInInventory(self, allString, "none");
-                                }
+                                qa.spawnStaticItemInInventory(self, allString, "none");
                             }
                             return true;
                         }
@@ -3601,6 +3709,7 @@ public class qatool extends script.base_script
         }
         return false;
     }
+
     public boolean attainCorrectFactionStatus(obj_id self, String factionStr) throws InterruptedException
     {
         if (!factionStr.equals(""))
@@ -3632,7 +3741,7 @@ public class qatool extends script.base_script
                     return true;
                 }
             }
-            else 
+            else
             {
                 if (factions.isNeutral(self))
                 {
@@ -3644,6 +3753,7 @@ public class qatool extends script.base_script
         }
         return false;
     }
+
     public boolean attainCorrectFaction(obj_id self, String factionStr) throws InterruptedException
     {
         if (!factionStr.equals(""))
@@ -3661,7 +3771,7 @@ public class qatool extends script.base_script
             {
                 fullFactionName = factions.FACTION_NEUTRAL;
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Unknown faction. Setting faction to Neutral.");
                 fullFactionName = factions.FACTION_NEUTRAL;
@@ -3676,6 +3786,7 @@ public class qatool extends script.base_script
         }
         return false;
     }
+
     public String validateProfession(obj_id self, String professionStr, String[] roadmapList) throws InterruptedException
     {
         if (!professionStr.equals("") && roadmapList.length > 0)
@@ -3710,7 +3821,7 @@ public class qatool extends script.base_script
             {
                 professionCodeStr = roadmapList[6] + "-" + PROFESSION_PREFIX[6];
             }
-            else 
+            else
             {
                 professionCodeStr = "ERROR";
             }
@@ -3718,13 +3829,14 @@ public class qatool extends script.base_script
             {
                 return professionCodeStr;
             }
-            else 
+            else
             {
                 professionCodeStr = "ERROR";
             }
         }
         return "ERROR";
     }
+
     public boolean earnProfessionLevel(obj_id self) throws InterruptedException
     {
         String skillName = getWorkingSkill(self);
@@ -3734,7 +3846,7 @@ public class qatool extends script.base_script
             sendSystemMessageTestingOnly(self, "Current working skill is invalid.");
         }
         java.util.Enumeration e = xpReqs.keys();
-        String xpType = (String)(e.nextElement());
+        String xpType = (String) (e.nextElement());
         int xpCost = xpReqs.getInt(xpType);
         int curXP = getExperiencePoints(self, xpType);
         if (curXP < xpCost)
@@ -3744,6 +3856,7 @@ public class qatool extends script.base_script
         skill_template.earnWorkingSkill(self);
         return true;
     }
+
     public boolean mulipleStaticSpawn(obj_id self, String spawnString, String intNumber, boolean silent) throws InterruptedException
     {
         if (!spawnString.equals("") && !intNumber.equals(""))
@@ -3756,7 +3869,7 @@ public class qatool extends script.base_script
                 {
                     sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
                 }
-                else 
+                else
                 {
                     int loopInt = utils.stringToInt(intNumber);
                     if (loopInt != -1)
@@ -3767,7 +3880,7 @@ public class qatool extends script.base_script
                             sendSystemMessageTestingOnly(self, "Bad Spawn String.");
                             return false;
                         }
-                        else 
+                        else
                         {
                             for (int x = 0; x < loopInt - 1; x++)
                             {
@@ -3775,20 +3888,20 @@ public class qatool extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
                         return false;
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "inventory id failed.");
                 return false;
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "The tool requires the following usage to function: /qatool mutli <static_item_spawn_string> <integer> ");
             return false;
@@ -3799,13 +3912,15 @@ public class qatool extends script.base_script
         }
         return true;
     }
+
     public void getAllSkillMods(obj_id self) throws InterruptedException
     {
         String[] allSkillModsList = dataTableGetStringColumn(SKILL_MOD_TABLE, "skill_mod");
         if (allSkillModsList.length > -1)
         {
             String combinedString = "This is a current list of all valid combat profession skill mods in SWG:\n\n";
-            for (String s : allSkillModsList) {
+            for (String s : allSkillModsList)
+            {
                 combinedString += localize(new string_id("stat_n", s)) + "\t\t\t" + s + "\n";
             }
             if (!combinedString.equals(""))
@@ -3814,6 +3929,7 @@ public class qatool extends script.base_script
             }
         }
     }
+
     public void saveAllCurrentQuestData(obj_id self) throws InterruptedException
     {
         try
@@ -3822,22 +3938,24 @@ public class qatool extends script.base_script
             String[] allQuests = qa.getAllQuests(self);
             if (allQuests.length > 0)
             {
-                for (String allQuest : allQuests) {
+                for (String allQuest : allQuests)
+                {
                     allQuestData += allQuest + "\r";
                 }
                 saveTextOnClient(self, "questData.txt", allQuestData);
             }
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             sendSystemMessageTestingOnly(self, "Unable to dump quest data due to internal exception or because the test character has no quests.");
         }
     }
+
     public void setWeather(obj_id self, int weatherSelected) throws InterruptedException
     {
         setWeatherData(weatherSelected, 0.01f, 0.01f);
         messageTo(self, "animateForceDestruction", null, 9.0f, true);
     }
+
     public void getNamesArray(obj_id player) throws InterruptedException
     {
         String[] codeStringArray = dataTableGetStringColumn(CUBE_DATATABLE_1, "finalTemplate");
@@ -3851,7 +3969,7 @@ public class qatool extends script.base_script
                 String lookUp = codeStringArray[i].substring(idxSlash, idxPeriod) + "_n";
                 showNamesArray[i] = localize(new string_id("som/som_item", lookUp));
             }
-            else 
+            else
             {
                 showNamesArray[i] = localize(new string_id("static_item_n", codeStringArray[i]));
             }
@@ -3860,6 +3978,7 @@ public class qatool extends script.base_script
         utils.setScriptVar(player, "qa_cube.codeStringArray", codeStringArray);
         utils.setScriptVar(player, "qa_cube.showNamesArray", showNamesArray);
     }
+
     public void emailSpamFunction(obj_id self, StringTokenizer st) throws InterruptedException
     {
         int spamAmount = 0;
@@ -3868,8 +3987,7 @@ public class qatool extends script.base_script
             try
             {
                 spamAmount = Integer.parseInt(st.nextToken());
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
             }
@@ -3881,16 +3999,17 @@ public class qatool extends script.base_script
                 }
                 sendSystemMessageTestingOnly(self, "Spamming completed.");
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "You failed to specify the amount of spam.");
         }
     }
+
     public void checkMobContents(obj_id self, obj_id mobile) throws InterruptedException
     {
         String previousMobileContents = "";
@@ -3898,18 +4017,19 @@ public class qatool extends script.base_script
         {
             previousMobileContents = utils.getStringScriptVar(self, "lootLogger.mobContents");
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "lootLogger.mobContents", "");
         }
         if (isValidId(mobile))
         {
             obj_id mobileInv = utils.getInventoryContainer(mobile);
-            obj_id contents[] = getContents(mobileInv);
+            obj_id[] contents = getContents(mobileInv);
             String mobileContentsExport = "";
             if (contents.length > 0)
             {
-                for (obj_id content : contents) {
+                for (obj_id content : contents)
+                {
                     mobileContentsExport += "(" + content + ")" + getTemplateName(content) + ",";
                 }
                 String combinedContentsString = previousMobileContents + "-" + mobileContentsExport;
@@ -3917,6 +4037,7 @@ public class qatool extends script.base_script
             }
         }
     }
+
     public void qaFishing(obj_id self, StringTokenizer st, String scriptString) throws InterruptedException
     {
         String myName = null;
@@ -3934,7 +4055,7 @@ public class qatool extends script.base_script
             {
                 iteration = Integer.parseInt(st.nextToken());
             }
-            else 
+            else
             {
                 iteration = 1;
             }
@@ -3957,11 +4078,13 @@ public class qatool extends script.base_script
             }
         }
     }
+
     public void qaEnableCollectionClickBypass(obj_id self, StringTokenizer st, String scriptString) throws InterruptedException
     {
         utils.setScriptVar(self, "collection.qa.clickBypass", 0);
         sendSystemMessageTestingOnly(self, "Collection Click Bypass Enabled. Logout to reset to normal collecting.");
     }
+
     public int qaSetScriptVar(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (st.hasMoreTokens())
@@ -3981,12 +4104,13 @@ public class qatool extends script.base_script
             debugSpeakMsg(self, "Scriptvar " + scriptVarName + " = " + scriptVarValue + " set on OID " + target);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "parameters are updateScriptvar <scriptVarName> <scriptVarValue>");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void qaExportBackpackContents(obj_id self) throws InterruptedException
     {
         obj_id testerInventoryId = utils.getInventoryContainer(self);
@@ -3999,11 +4123,12 @@ public class qatool extends script.base_script
             exportDataFile.put("myBag", myBag);
             messageTo(self, "qaSaveData", exportDataFile, 15, true);
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "Invalid backpack or no backpack equipped");
         }
     }
+
     public int commandKill(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
@@ -4040,12 +4165,13 @@ public class qatool extends script.base_script
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has killed (" + target + ") " + utils.getStringName(target) + " using the kill command.");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "you must have a valid player or mobile target to use this command");
             return SCRIPT_CONTINUE;
         }
     }
+
     public int commandKillShip(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
@@ -4080,6 +4206,7 @@ public class qatool extends script.base_script
         space_combat.doDeathCleanup(target);
         return SCRIPT_CONTINUE;
     }
+
     public int commandKillMob(obj_id self, obj_id target) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target) || !exists(target))
@@ -4102,6 +4229,7 @@ public class qatool extends script.base_script
         setHealth(target, -5000);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id qaGetTarget(obj_id self, String override) throws InterruptedException
     {
         obj_id lookAtTarget = getLookAtTarget(self);
@@ -4115,34 +4243,36 @@ public class qatool extends script.base_script
                 {
                     target = intendedTarget;
                 }
-                else 
+                else
                 {
                     target = lookAtTarget;
                 }
             }
-            else 
+            else
             {
                 target = lookAtTarget;
             }
         }
-        else 
+        else
         {
             target = intendedTarget;
         }
         return target;
     }
+
     public obj_id qaGetTarget(obj_id self) throws InterruptedException
     {
         obj_id target = qaGetTarget(self, null);
         return target;
     }
+
     public boolean createEnzyme(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             String mutagenStr = "";
             String purityStr = "";
@@ -4156,7 +4286,7 @@ public class qatool extends script.base_script
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     if (!mutagenStr.equals(""))
                     {
@@ -4174,7 +4304,7 @@ public class qatool extends script.base_script
                         {
                             return true;
                         }
-                        else 
+                        else
                         {
                             if (!purityStr.equals(""))
                             {
@@ -4204,51 +4334,57 @@ public class qatool extends script.base_script
                 setObjVar(enzyme, "enzyme.enzyme_purity", purityFloat);
                 sendSystemMessageTestingOnly(self, "Created an Enzyme with the values: Mutagen: " + mutagen + " and Purity: " + purity);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
     }
+
     /**
      * Retrieves an enzyme color from the next token in a string tokenizer.
      * If there is no token available, a random color will be chosen.
      * If the color specified is not found, -1 will be returned.
      */
-    private int getEnzymeColorFromNextToken(obj_id self, StringTokenizer st) {
-        if(st.hasMoreTokens()) {
+    private int getEnzymeColorFromNextToken(obj_id self, StringTokenizer st)
+    {
+        if (st.hasMoreTokens())
+        {
             // Lowercase and remove underscores so that colors such as Dark_Blue will still work.
             var colorName = st.nextToken().toLowerCase().replace("_", "");
 
             var colorIndex = ENZYME_COMMAND_COLOR_LOOKUP.indexOf(colorName);
 
-            if(colorIndex >= 0) {
+            if (colorIndex >= 0)
+            {
                 return colorIndex;
             }
 
-            sendSystemMessageTestingOnly(self, "Invalid color specified. Valid colors are: " +  String.join(", ", ENZYME_COMMAND_COLOR_LOOKUP));
+            sendSystemMessageTestingOnly(self, "Invalid color specified. Valid colors are: " + String.join(", ", ENZYME_COMMAND_COLOR_LOOKUP));
             return -1;
         }
-        
+
         return rand(0, incubator.NUMBER_OF_COLORS);
     }
+
     public boolean createLyase(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             int randomStat = 11;
             obj_id testerInventoryId = utils.getInventoryContainer(self);
             int enzymeColorIndex = getEnzymeColorFromNextToken(self, st);
 
-            if(enzymeColorIndex == -1) {
+            if (enzymeColorIndex == -1)
+            {
                 return false;
             }
-            
+
             if (getVolumeFree(testerInventoryId) <= 0)
             {
                 sendSystemMessage(self, "Failed to create Enzyme, please make sure that your inventory is not full.", null);
@@ -4269,13 +4405,14 @@ public class qatool extends script.base_script
 
                 sendSystemMessageTestingOnly(self, "Created a Lyase Enzyme with the values: Random Stats: 11, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
     }
+
     public boolean clearHeroicTimer(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "instance_player_data"))
@@ -4284,28 +4421,30 @@ public class qatool extends script.base_script
             sendSystemMessageTestingOnly(self, "Removed instance_player_data from: " + self + " - Heroic timers reset");
             return true;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "QA tool could not find the objvar instance_player_data on the player: " + self);
         }
         return false;
     }
+
     public boolean createIsomerase(obj_id self, StringTokenizer st) throws InterruptedException
     {
         if (isSpaceScene())
         {
             sendSystemMessageTestingOnly(self, "You have to be on the ground to use this tool.");
         }
-        else 
+        else
         {
             obj_id testerInventoryId = utils.getInventoryContainer(self);
-            
+
             int enzymeColorIndex = getEnzymeColorFromNextToken(self, st);
 
-            if(enzymeColorIndex == -1) {
+            if (enzymeColorIndex == -1)
+            {
                 return false;
             }
-            
+
             if (getVolumeFree(testerInventoryId) <= 0)
             {
                 sendSystemMessage(self, "Failed to create Enzyme, please make sure that your inventory is not full.", null);
@@ -4321,13 +4460,14 @@ public class qatool extends script.base_script
 
                 sendSystemMessageTestingOnly(self, "Created a Isomerase Enzyme with the values: random Stats: 90%, Color: " + incubator.ENZYME_COLORS[enzymeColorIndex]);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Failed to create Enzyme, please make sure that your inventory is not full.");
             }
         }
         return true;
     }
+
     public void qaTCGMenu(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self) || !isGod(self))
@@ -4336,6 +4476,7 @@ public class qatool extends script.base_script
         }
         qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
     }
+
     public int handleTCGMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -4353,54 +4494,55 @@ public class qatool extends script.base_script
         switch (idx)
         {
             case 0:
-            scheduled_drop.dropCard(scheduled_drop.SYSTEM_COMBAT_NORMAL, self);
-            sendSystemMessageTestingOnly(self, "Item placed in inventory.");
-            qaTCGMenu(self);
-            break;
+                scheduled_drop.dropCard(scheduled_drop.SYSTEM_COMBAT_NORMAL, self);
+                sendSystemMessageTestingOnly(self, "Item placed in inventory.");
+                qaTCGMenu(self);
+                break;
             case 1:
-            if (!hasObjVar(self, "qa_tcg"))
-            {
-                setObjVar(self, "qa_tcg", 1);
-                sendSystemMessageTestingOnly(self, "TCG Info flag has been set on your character.");
-                qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
-            }
-            else 
-            {
-                removeObjVar(self, "qa_tcg");
-                sendSystemMessageTestingOnly(self, "TCG Info flag has been removed from your character.");
-                qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
-            }
+                if (!hasObjVar(self, "qa_tcg"))
+                {
+                    setObjVar(self, "qa_tcg", 1);
+                    sendSystemMessageTestingOnly(self, "TCG Info flag has been set on your character.");
+                    qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
+                }
+                else
+                {
+                    removeObjVar(self, "qa_tcg");
+                    sendSystemMessageTestingOnly(self, "TCG Info flag has been removed from your character.");
+                    qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
+                }
             case 2:
-            if (!hasObjVar(self, "qa_tcg_always_drop"))
-            {
-                setObjVar(self, "qa_tcg_always_drop", 1);
-                sendSystemMessageTestingOnly(self, "TCG always drop flag has been set on your character.");
-                qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
-            }
-            else 
-            {
-                removeObjVar(self, "qa_tcg_always_drop");
-                sendSystemMessageTestingOnly(self, "TCG always drop flag has been removed from your character.");
-                qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
-                return SCRIPT_CONTINUE;
-            }
+                if (!hasObjVar(self, "qa_tcg_always_drop"))
+                {
+                    setObjVar(self, "qa_tcg_always_drop", 1);
+                    sendSystemMessageTestingOnly(self, "TCG always drop flag has been set on your character.");
+                    qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
+                }
+                else
+                {
+                    removeObjVar(self, "qa_tcg_always_drop");
+                    sendSystemMessageTestingOnly(self, "TCG always drop flag has been removed from your character.");
+                    qa.refreshMenu(self, "Select...", "-SWG TCG Menu-", TCG_MENU, "handleTCGMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
+                    return SCRIPT_CONTINUE;
+                }
             case 3:
-            qaTCGCardClusterInfo(self);
-            break;
+                qaTCGCardClusterInfo(self);
+                break;
             case 4:
-            qaTCGBoosterClusterInfo(self);
-            break;
+                qaTCGBoosterClusterInfo(self);
+                break;
             case 5:
-            qaTCGReinit(self);
-            break;
+                qaTCGReinit(self);
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] tcgClusterInfo(String type) throws InterruptedException
     {
         String[] scheduledPromotions = scheduled_drop.getScheduledPromotions(type);
@@ -4424,7 +4566,7 @@ public class qatool extends script.base_script
             {
                 listBoxInfo[(i * 2) + 1] = "Items Left: Infinite";
             }
-            else 
+            else
             {
                 int maximumDrops = scheduled_drop.getPromotionMaxDrop(promotions[i]);
                 listBoxInfo[(i * 2) + 1] = "Maximum drops: " + maximumDrops + " Items Left: " + cardsLeft[i];
@@ -4432,6 +4574,7 @@ public class qatool extends script.base_script
         }
         return listBoxInfo;
     }
+
     public void qaTCGCardClusterInfo(obj_id self) throws InterruptedException
     {
         String[] listBoxInfo = tcgClusterInfo("card");
@@ -4442,6 +4585,7 @@ public class qatool extends script.base_script
         }
         qa.refreshMenu(self, "Select...", "-SWG Card Promotions-", listBoxInfo, "handleTCGPromotionMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
     }
+
     public void qaTCGBoosterClusterInfo(obj_id self) throws InterruptedException
     {
         String[] listBoxInfo = tcgClusterInfo("item");
@@ -4452,6 +4596,7 @@ public class qatool extends script.base_script
         }
         qa.refreshMenu(self, "Select...", "-SWG Item Promotions-", listBoxInfo, "handleTCGPromotionMenu", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
     }
+
     public void qaTCGReinit(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "Promotions Reinitialized!  Planet tatooine: " + getPlanetByName("tatooine"));
@@ -4459,6 +4604,7 @@ public class qatool extends script.base_script
         scheduled_drop.removeLastClusterUpdateTime();
         scheduled_drop.instantiatePromotionsOnCluster();
     }
+
     public int handleTCGPromotionMenu(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -4494,6 +4640,7 @@ public class qatool extends script.base_script
         qa.refreshMenu(self, "Items in promotion...", "-SWG TCG Promotional Items-", promotionList, "handleTCGPromotionItems", "tcg_menu", "tcg_menu", sui.OK_CANCEL_REFRESH);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTCGPromotionItems(obj_id self, dictionary params) throws InterruptedException
     {
         qaTCGMenu(self);
