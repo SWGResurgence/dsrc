@@ -1638,11 +1638,11 @@ expertise_fs_general_enhanced_agility_1	expertise																					agility_mo
 expertise_fs_general_enhanced_agility_2	expertise_fs_general_enhanced_agility_1																					agility_modified=50				
 expertise_fs_general_enhanced_luck_1	expertise																					luck_modified=50				
 expertise_fs_general_enhanced_luck_2	expertise_fs_general_enhanced_luck_1																					luck_modified=50				
-expertise_fs_general_improved_force_throw_1	expertise_fs_general_improved_crippling_accuracy_1																					expertise_damage_line_fs_force_throw=5				
+expertise_fs_general_improved_force_throw_1	expertise																					expertise_damage_line_fs_force_throw=5				
 expertise_fs_general_improved_force_throw_2	expertise_fs_general_improved_force_throw_1																					expertise_damage_line_fs_force_throw=5				
 expertise_fs_general_alacrity_1	expertise																					"expertise_glancing_blow_all=4,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
 expertise_fs_general_alacrity_2	expertise_fs_general_alacrity_1																					"expertise_glancing_blow_all=4,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
-expertise_fs_general_improved_crippling_accuracy_1	expertise_fs_general_improved_force_throw_2									expertise_fs_general_improved_force_throw_2												expertise_buff_duration_line_fs_force_throw=6				
+expertise_fs_general_crippling_accuracy_1	expertise_fs_general_improved_force_throw_2									expertise_fs_general_improved_force_throw_2												expertise_buff_duration_line_fs_force_throw=6				
 expertise_fs_general_premonition_1	expertise																					"combat_dodge=2,combat_parry=2"				
 expertise_fs_general_premonition_2	expertise_fs_general_premonition_1																					"combat_dodge=2,combat_parry=2"				
 expertise_fs_general_premonition_3	expertise_fs_general_premonition_2																					"combat_dodge=4,combat_parry=4"				
