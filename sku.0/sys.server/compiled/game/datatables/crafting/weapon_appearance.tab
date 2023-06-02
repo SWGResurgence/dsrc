@@ -1862,7 +1862,17 @@ slot																																		resource	0	shock_proofing_and_gasket_seals
 slot																																		resource	0	scope_bracket	aluminum_linksteel	12																												
 slot																																		resource	0	light_accumulators	crystalline_green_diamond	8																												
 slot																																		resource	0	targeting_aid_circuitry	copper_polysteel	5																												
+weapon	component	new_weapon_comp_scope_exceptional		systems.crafting.weapon.core.crafting_comp_scope	50	weapon	5	weapon_crafting		object/tangible/component/weapon/scope_weapon_exceptional.iff	object/tangible/component/weapon/scope_weapon_exceptional.iff	21	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															3	10	0	10								
+slot																																		resource	0	scope_shell	aluminum_chromium	18																												
+slot																																		resource	0	shock_proofing_and_gasket_seals	petrochem_inert_polymer	10																												
+slot																																		resource	0	scope_bracket	aluminum_linksteel	12																												
+slot																																		resource	0	light_accumulators	crystalline_green_diamond	8																												
+slot																																		resource	0	targeting_aid_circuitry	copper_polysteel	5																												
 weapon	component	new_weapon_comp_stock		systems.crafting.weapon.core.crafting_comp_stock	50	weapon	3	weapon_crafting		object/tangible/component/weapon/stock_advanced.iff	object/tangible/component/weapon/stock_advanced.iff	21	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															3	10	0	10								
+slot																																		resource	0	lining	wood_deciduous_corellia	35																												
+slot																																		resource	0	butt_cap_and_receiver_attachment_point	aluminum_linksteel	15																												
+slot																																		resource	0	frame_attachment	steel_duralloy	15																												
+weapon	component	new_weapon_comp_stock_exceptional		systems.crafting.weapon.core.crafting_comp_stock	50	weapon	3	weapon_crafting		object/tangible/component/weapon/stock_weapon_exceptional.iff	object/tangible/component/weapon/stock_weapon_exceptional.iff	21	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															3	10	0	10								
 slot																																		resource	0	lining	wood_deciduous_corellia	35																												
 slot																																		resource	0	butt_cap_and_receiver_attachment_point	aluminum_linksteel	15																												
 slot																																		resource	0	frame_attachment	steel_duralloy	15																												

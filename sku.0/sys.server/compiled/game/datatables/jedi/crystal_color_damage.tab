@@ -36,7 +36,7 @@ i	"e(none=0,cold=64,heat=32,acid=128,electric=256)[none]"	f	c
 34	acid	0.06	Allya's Redemption
 35	heat	0.06	Hett's Isolation
 36	acid	0.08	Meetra's Judgement
-37	cold	0.01	unused
+37	heat	0.08	Aralina's Revenge
 38	cold	0.01	unused
 39	cold	0.01	unused
 40	cold	0.01	unused

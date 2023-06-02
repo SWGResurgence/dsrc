@@ -27,7 +27,9 @@ new_weapon_comp_reinforcement_core	object/tangible/component/weapon/new_weapon_c
 new_weapon_comp_reinforcement_core_advanced	object/tangible/component/weapon/new_weapon_comp_reinforcement_core_advanced.iff	profession_wheel	
 new_weapon_comp_reinforcement_core_exceptional	object/tangible/component/weapon/new_weapon_comp_reinforcement_core_exceptional.iff		
 new_weapon_comp_scope	object/tangible/component/weapon/scope_weapon_advanced.iff	profession_wheel	
+new_weapon_comp_scope_exceptional	object/tangible/component/weapon/scope_weapon_exceptional.iff		
 new_weapon_comp_stock	object/tangible/component/weapon/stock_advanced.iff	profession_wheel	
+new_weapon_comp_stock_exceptional	object/tangible/component/weapon/stock_weapon_exceptional.iff		
 weapon_appearance_2h_maul_legendary	object/weapon/melee/2h_sword/2h_sword_maul_legendary.iff		1
 weapon_appearance_2h_sword_avatar_wke_toothpick	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff		
 weapon_appearance_2h_sword_kashyyk	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff		

@@ -221,7 +221,11 @@ public class new_armor extends script.base_script
         {
             names[free] = "health_bonus";
             attribs[free++] = "+" + getIntObjVar(self, "attribute.bonus.0");
-
+        }
+        if (hasObjVar(self, "attribute.bonus.2"))
+        {
+            names[free] = "action_bonus";
+            attribs[free++] = "+" + getIntObjVar(self, "attribute.bonus.2");
         }
         String[][] entries =
                 {

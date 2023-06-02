@@ -1,9 +1,0 @@
-@base object/building/base/base_cave.iff
-
-@class building_object_template 0
-@class tangible_object_template 0
-@class object_template 1
-
-updateRanges[UR_far] = 512
-
-sharedTemplate = "object/building/general/shared_grounded_yt2400_quest_01.iff"

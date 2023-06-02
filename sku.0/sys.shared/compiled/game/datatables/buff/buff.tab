@@ -756,11 +756,11 @@ sm_spot_a_sucker_4_6	spot_a_sucker			70	command.sm_spot_a_sucker	12	precision_mo
 sm_spot_a_sucker_4_7	spot_a_sucker			70	command.sm_spot_a_sucker	12	precision_modified	-100	expertise_critical_hit_decrease	50	glancing_blow_vulnerable	50	expertise_damage_decrease_chance	50		0	STATE_NONE	none	clienteffect/sm_spot_a_sucker.cef	head	1	1		0	1	1	0	1	1	0	1	1	1
 sm_break_the_deal	break_the_deal			34	command.sm_break_the_deal	5	combat_divide_damage_dealt	75		0		0		0		0	STATE_NONE	sm_break_the_deal_recourse	appearance/pt_smuggler_break_deal.prt		1	1		1	1	1	0	1	1	0	1	1	1
 sm_break_the_deal_recourse	break_the_deal			35	command.sm_break_the_deal_recourse	25		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_1	junk_dealer			18	command.sm_off_the_books	1800	luck_modified	50		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_2	junk_dealer			19	command.sm_off_the_books	1800	luck_modified	50	precision_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_3	junk_dealer			20	command.sm_off_the_books	1800	luck_modified	50	precision_modified	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_4	junk_dealer			21	command.sm_off_the_books	1800	luck_modified	50	precision_modified	50	combat_divide_damage_taken	3		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_junk_dealer_5	junk_dealer			22	command.sm_off_the_books	1800	luck_modified	50	precision_modified	50	combat_divide_damage_taken	6		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_1	junk_dealer			18	command.sm_off_the_books	3600	luck_modified	50		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_2	junk_dealer			19	command.sm_off_the_books	3600	luck_modified	75	precision_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_3	junk_dealer			20	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_4	junk_dealer			21	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150	combat_divide_damage_taken	5		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_junk_dealer_5	junk_dealer			22	command.sm_off_the_books	3600	luck_modified	150	precision_modified	150	combat_divide_damage_taken	10		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sm_underworld_boss_1	underworld_boss			1	command.sm_path_underworld_boss	-1	expertise_overridable_protection_generic	200	expertise_underworld_boss	200		0		0		0	STATE_NONE	none			0	0		0	1	0	0	1	1	0	1	1	1
 sm_underworld_boss_2	underworld_boss			1	command.sm_path_underworld_boss	-1	expertise_overridable_protection_generic	400	expertise_underworld_boss	400		0		0		0	STATE_NONE	none			0	0		0	1	0	0	1	1	0	1	1	1
 sm_underworld_boss_3	underworld_boss			1	command.sm_path_underworld_boss	-1	expertise_overridable_protection_generic	600	expertise_underworld_boss	600		0		0		0	STATE_NONE	none			0	0		0	1	0	0	1	1	0	1	1	1
@@ -780,9 +780,9 @@ sm_lucky_break	lucky_break			18	command.sm_path_lucky_break	10	expertise_critica
 sm_lucky_break_recourse	lucky_break			19	command.sm_lucky_break_recourse	10		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 sm_double_hit	double_hit			26	command.sm_general_hammer_fanning	5		0		0		0		0		0	STATE_NONE	sm_double_hit_recourse			1	0		1	1	1	0	1	1	0	1	1	1
 sm_double_hit_recourse	double_hit			27	command.sm_double_hit_recourse	5		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-sm_modify_pistol_1	modify_pistol			1	command.sm_modify_pistol	1800	expertise_damage_weapon_2	4	expertise_damage_weapon_7	4	expertise_damage_weapon_4	4	expertise_damage_weapon_5	4	expertise_damage_weapon_6	4	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
-sm_modify_pistol_2	modify_pistol			2	command.sm_modify_pistol	1800	expertise_damage_weapon_2	8	expertise_damage_weapon_7	8	expertise_damage_weapon_4	8	expertise_damage_weapon_5	8	expertise_damage_weapon_6	8	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
-sm_modify_pistol_3	modify_pistol			3	command.sm_modify_pistol	1800	expertise_damage_weapon_2	12	expertise_damage_weapon_7	12	expertise_damage_weapon_4	12	expertise_damage_weapon_5	12	expertise_damage_weapon_6	12	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
+sm_modify_pistol_1	modify_pistol			1	command.sm_modify_pistol	3600	expertise_damage_weapon_2	4	expertise_damage_weapon_7	4	expertise_damage_weapon_4	4	expertise_damage_weapon_5	4	expertise_damage_weapon_6	4	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
+sm_modify_pistol_2	modify_pistol			2	command.sm_modify_pistol	3600	expertise_damage_weapon_2	8	expertise_damage_weapon_7	8	expertise_damage_weapon_4	8	expertise_damage_weapon_5	8	expertise_damage_weapon_6	8	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
+sm_modify_pistol_3	modify_pistol			3	command.sm_modify_pistol	3600	expertise_damage_weapon_2	12	expertise_damage_weapon_7	12	expertise_damage_weapon_4	12	expertise_damage_weapon_5	12	expertise_damage_weapon_6	12	STATE_NONE	none	clienteffect/weapon_reload.cef		1	0		1	1	1	0	1	1	0	1	1	1
 sm_skullduggery	skullduggery			10	command.sm_skullduggery	4	sm_skullduggery	4		0		0		0		0	STATE_NONE	none	clienteffect/sm_skullduggery.cef	head	1	1		1	1	1	0	1	1	0	1	1	1
 sm_impossible_odds	impossible_odds			10	command.sm_impossible_odds	4	sm_impossible_odds	4		0		0		0		0	STATE_NONE	none	clienteffect/sm_impossible_odds.cef	head	1	1		1	1	1	0	1	1	0	1	1	1
 sm_pistol_whip	pistol_whip			10	command.sm_pistol_whip	2	sm_pistol_whip	0		0		0		0		0	STATE_NONE	none	clienteffect/sm_pistol_whip.cef	head	1	1		1	1	1	0	1	1	0	1	1	1
@@ -1034,7 +1034,7 @@ bh_shields_block	bh_shields	bh_shields	bh_shields	15		5		0		0		0		0		0	STATE_NON
 bh_shields_charged	bh_shields_recourse			10	command.bh_deflection	15	combat_multiply_damage_dealt	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	100	1	0	1	1	1
 bh_dread_strike	bh_dread_strike			10	command.bh_dread_strike	15	combat_divide_damage_dealt	25	expertise_healing_reduction	50		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 bh_relentless_onslaught	bh_relentless_onslaught			10	command.bh_relentless	15	expertise_action_all	75		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-bh_take_cover	bh_take_cover			10	command.bh_cover	40	expertise_glancing_blow_ranged	40	expertise_damage_all	10	radar_invis	0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+bh_take_cover	bh_take_cover	snare		10	command.bh_cover	40	expertise_glancing_blow_ranged	40	expertise_damage_all	10	radar_invis	0	expertise_strikethrough_chance	25	slope_move	-100	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 bh_power_sprint	bh_power_sprint			10	command.bh_armor_sprint	30	movement	0	movement_resist_snare	100		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 bh_armor_duelist_heal_1	bh_duelist_stance			10	command.bh_armor_duelist	15	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bh_armor_duelist_heal_2	bh_duelist_stance			20	command.bh_armor_duelist	15	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -1077,7 +1077,7 @@ gcw_base_damage_absorb_b	gcw_base_damage_absorb			4	command.shock	1800	expertise
 gcw_base_damage_absorb_c	gcw_base_damage_absorb			3	command.shock	1800	expertise_innate_protection_kinetic	300	expertise_innate_protection_energy	300		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_d	gcw_base_damage_absorb			2	command.shock	1800	expertise_innate_protection_kinetic	500	expertise_innate_protection_energy	500		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_e	gcw_base_damage_absorb			1	command.shock	1800	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	10	group	0	expertise_channel_action_heal	6	action	2000	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	60	group	0	expertise_channel_action_heal	6	action	2000	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_a	gcw_critical_heal			1	command.powerBoost	1800	avoid_incap_heal	800		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_b	gcw_critical_heal			2	command.powerBoost	1800	avoid_incap_heal	1600		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_c	gcw_critical_heal			3	command.powerBoost	1800	avoid_incap_heal	2500		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1160,7 +1160,7 @@ vehicle_3	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	60
 vehicle_4	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	80		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vehicle_5	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	90		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 exclude_self_exclusive_proxy_of_last_words	deadOfficersFTW			90	command.of_last_words	1	exclude_self	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-shmiGraveBuff	genBuff_4			100	buffs.genericBuff	3600	strength_modified	60	stamina_modified	60	agility_modified	60	precision_modified	60	luck_modified	60	STATE_NONE	none	clienteffect/bh_shields_effect.cef		1	0		1	0	1	0	1	1	0	1	1	1
+shmiGraveBuff	genBuff_4			100	buffs.genericBuff	7200	xp_bonus_general	25	stamina_modified	60	agility_modified	60	precision_modified	60	luck_modified	60	STATE_NONE	none	clienteffect/bh_shields_effect.cef		1	0		1	0	1	0	1	1	0	1	1	1
 sr88_mine	mine			5	buffs.cryobanSnare	30	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 me_buff_health_0	medicConstitution			14	command.me_buff_health	600	constitution_modified	35		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	0
 me_buff_health_2	medicConstitution			76	command.me_buff_health	600	constitution_modified	250		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	0

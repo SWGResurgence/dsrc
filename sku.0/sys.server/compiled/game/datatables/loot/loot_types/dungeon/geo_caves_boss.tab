@@ -1,5 +1,5 @@
 acklay	nexu	reek
 s	s	s
 dungeon/geo_caves_boss_drops:acklay	dungeon/geo_caves_boss_drops:nexu	dungeon/geo_caves_boss_drops:reek
-dungeon/geo_caves_boss_drops:acklay	dungeon/geo_caves_boss_drops:nexu	crafting_loot/weapon_components:wp_comp_81_90
-crafting_loot/weapon_components:wp_comp_81_90	crafting_loot/weapon_components:wp_comp_81_90	
+dungeon/geo_caves_boss_drops:acklay	dungeon/geo_caves_boss_drops:nexu	crafting_loot/weapon_components:wp_comp_heroic
+crafting_loot/weapon_componentswp_comp_heroic	crafting_loot/weapon_components:wp_comp_heroic

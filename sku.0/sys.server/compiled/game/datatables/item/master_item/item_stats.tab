@@ -1660,7 +1660,8 @@ item_color_crystal_02_32			"int:jedi.crystal.stats.color=32,int:jedi.crystal.sta
 item_color_crystal_02_33			"int:jedi.crystal.stats.color=33,int:jedi.crystal.stats.level=-1"	index_color_1=33							
 item_color_crystal_02_34			"int:jedi.crystal.stats.color=34,int:jedi.crystal.stats.level=-1"	index_color_1=34							
 item_color_crystal_02_35			"int:jedi.crystal.stats.color=35,int:jedi.crystal.stats.level=-1"	index_color_1=35							
-item_color_crystal_02_36			"int:jedi.crystal.stats.color=36,int:jedi.crystal.stats.level=-1"	index_color_1=25							
+item_color_crystal_02_36			"int:jedi.crystal.stats.color=36,int:jedi.crystal.stats.level=-1"	index_color_1=36							
+item_color_crystal_02_37			"int:jedi.crystal.stats.color=37,int:jedi.crystal.stats.level=-1"	index_color_1=37							
 item_commando_backpack_01_02	"agility_modified=15,stamina_modified=15,precision_modified=15,constitution_modified=15,strength_modified=15"										
 item_commando_boots_02_01	"agility_modified=12,constitution_modified=12,strength_modified=12,precision_modified=12,precision_modified=12"			"index_color_1=31,index_color_2=63"							
 item_commando_clicky_01_02					roadmapCommandoClicky	long_reuse_4	3600			appearance/pt_heal.prt	
@@ -1778,7 +1779,7 @@ item_content_jacket_corsec_02_01	constitution_modified=4
 item_content_jacket_rng_defense_03_01	agility_modified=5										
 item_content_jacket_rsf_02_01	constitution_modified=20										
 item_content_medal_combo_02_01					contentWornComboDef						
-item_content_medic_ring_03_01	constitution_modified=5										
+item_content_medic_ring_03_01	expertise_healing_all=3
 item_content_necklace_finale_imp_04_01	"stamina_modified=8,agility_modified=8,constitution_modified=8,strength_modified=8,precision_modified=8,luck_modified=8"										
 item_content_necklace_finale_reb_04_01	"stamina_modified=8,agility_modified=8,constitution_modified=8,strength_modified=8,precision_modified=8,luck_modified=8"										
 item_content_necklace_lvl33_02_01	"luck_modified=15,stamina_modified=10"										
@@ -3862,6 +3863,11 @@ item_schematic_ex_projectile_pistol_barrel			"string:loot_schematic.schematic=ob
 item_schematic_ex_projectile_rifle_barrel			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_projectile_rifle_barrel_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
 item_schematic_ex_reinforcement_core			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_reinforcement_core_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
 item_schematic_ex_vibro_blade_unit			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_blade_vibro_unit_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
+item_schematic_ex_scope			"string:loot_schematic.schematic=object/draft_schematic/weapon/core/weapon_core_heavy_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
+item_schematic_ex_stock			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_stock_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
+item_schematic_ex_core_heavy			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_stock_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=2"								
+item_schematic_ex_core_melee			"string:loot_schematic.schematic=object/draft_schematic/weapon/core/weapon_core_melee_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=2"								
+item_schematic_ex_core_ranged			"string:loot_schematic.schematic=object/draft_schematic/weapon/core/weapon_core_ranged_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=2"								
 item_schematic_fifth_gen_saber_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_one_handed_gen5.iff,string:loot_schematic.skill_req=class_forcesensitive_phase4_master"								
 item_schematic_fifth_gen_saber_03_02			"string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_two_handed_gen5.iff,string:loot_schematic.skill_req=class_forcesensitive_phase4_master"								
 item_schematic_fifth_gen_saber_03_03			"string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_polearm_gen5.iff,string:loot_schematic.skill_req=class_forcesensitive_phase4_master"								
@@ -5125,3 +5131,4 @@ space_collection_reactor_mark_05_subpro			string:collection.slotName=col_space_r
 weapon_black_metal_baton											
 item_kashyyyk_reward_token_01_01											
 item_duty_space_token_box_01_01											
+item_schematic_weapon_rack_01			"string:loot_schematic.schematic=object/draft_schematic/furniture/cyntech/weapon_rack_01.iff,string:loot_schematic.skill_req=class_structures_phase4_master,int:loot_schematic.uses=3"								

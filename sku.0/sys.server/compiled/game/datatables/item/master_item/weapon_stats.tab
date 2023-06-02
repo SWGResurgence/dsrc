@@ -183,7 +183,7 @@ weapon_quest_u10_pistol_01_02	1	1000	162	324	0				40	1	100	0	35	"precision_modif
 weapon_quest_u10_rifle_01_02	1	1000	324	649	0				80	1	100	0	64	"precision_modified=10,constitution_modified=5"			update 10 quest reward	608	607
 weapon_rebel_heavy_04_01	1	1000	800	1300	0	kinetic	kinetic	50	100	1	100	0	64	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1050	1050
 weapon_rebel_pistol_04_01	1	1000	290	450	0		cold	20	40	1	100	0	38	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	975	925
-weapon_rebel_rifle_04_01	1	1000	560	960	0		cold	20	80	1	100	0	64	"precision_modified=10,constitution_modified=5"			hec	975	950
+weapon_rebel_rifle_04_01	1	1000	422	743	0		cold	20	80	1	100	0	64	"precision_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1175	1150
 weapon_rebel_sword_04_01	1	1000	600	1500	0	kinetic			100	1	100	0	5	"strength_modified=10,constitution_modified=5"	int:wp.canBeDisMantled=1		hec	1050	1050
 weapon_rifle_02_01	1	1000	35	70	0				80	1	100	0	55	ranged_accuracy=1		proc_fire_attack	testing		66
 weapon_rifle_02_02	1	1000	20	40	0				80	1	100	0	35				level 1 npe	38	38
@@ -201,7 +201,7 @@ weapon_rifle_drop_lvl60_02_01	1	1000	294	588	0				80	1	100	0	64				lvl60	552	551
 weapon_rifle_drop_lvl70_02_01	1	1000	349	698	0				80	1	100	0	64				lvl70	654	654
 weapon_rifle_drop_lvl80_02_01	1	1000	411	821	0				80	1	100	0	64				lvl80	770	770
 weapon_rifle_imperial_pvp_general_reward_06_01	1	3000	518	1035	0		acid	20	80	1	100	0	64	"precision_modified=10,constitution_modified=10"	int:wp.canBeDisMantled=1	proc_pvp_despair	hec	971	971
-weapon_rifle_legendary_t21	1	1000	550	1100	0	energy	acid	30	80	1	100	0	64		int:wp.canBeDisMantled=1		lvl88	1106	1106
+weapon_rifle_legendary_t21	1	1000	550	1100	0	energy	acid	30	80	1	100	0	64		int:wp.canBeDisMantled=1		lvl88	1106	1118
 weapon_rifle_pvp_general_reward_06_01	1	3000	518	1035	0		acid	20	80	1	100	0	64	"precision_modified=10,constitution_modified=10"	int:wp.canBeDisMantled=1	proc_pvp_despair	hec	971	971
 weapon_roadmap_lightsaber_02_02	1	1000	200	400	0				100	1	100	0	5		"int:jedi.saber.base_stats.min_dmg=200,int:jedi.saber.base_stats.max_dmg=400,float:jedi.saber.base_stats.speed=1.00,float:jedi.saber.base_stats.wound=1.0,int:jedi.saber.base_stats.attack_cost=100,float:jedi.saber.base_stats.damage=0.0"			300	300
 weapon_smuggler_reward_knucklers_04_01	1	1000	640	1300	0	kinetic	acid	15	100	1	100	0	5	"strength_modified=5,constitution_modified=10"			Lv 88 Reward	1020	970
