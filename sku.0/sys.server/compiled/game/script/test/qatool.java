@@ -2684,7 +2684,8 @@ public class qatool extends script.base_script
         String[] arrayOfAllItems = new String[arrayOfAllStaticItemsInDatatable.length];
         for (int i = 0; i < arrayOfAllStaticItemsInDatatable.length; i++)
         {
-            arrayOfAllItems[i] = localize(new string_id("static_item_n", arrayOfAllStaticItemsInDatatable[i]));
+            dictionary itemData = static_item.getMasterItemDictionary(arrayOfAllStaticItemsInDatatable[i]);
+            arrayOfAllItems[i] = itemData.getString("string_name");
             if (searchType.equals("string"))
             {
                 if (arrayOfAllItems[i] != null && !arrayOfAllItems[i].equals(""))
