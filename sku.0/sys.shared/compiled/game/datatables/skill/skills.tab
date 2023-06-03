@@ -1753,8 +1753,8 @@ expertise_sm_general_idiot_proof_plan_1	expertise																					damage_dec
 expertise_sm_general_idiot_proof_plan_2	expertise_sm_general_idiot_proof_plan_1																					damage_decrease_percentage=4				
 expertise_sm_general_break_the_deal_1	expertise																				sm_break_the_deal					
 expertise_sm_general_end_of_the_line_1	expertise_sm_general_off_the_cuff_1									expertise_sm_general_off_the_cuff_1											sm_end_of_the_line					
-expertise_sm_general_head_crack_1	expertise																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8"				
-expertise_sm_general_head_crack_2	expertise_sm_general_head_crack_1																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8"				
+expertise_sm_general_head_crack_1	expertise																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8,exotic_parry_reduction=5"				
+expertise_sm_general_head_crack_2	expertise_sm_general_head_crack_1																					"expertise_sm_melee_stun_proc=6,expertise_sm_melee_proc=8,exotic_parry_reduction=5"				
 expertise_sm_general_narrow_escape_1	expertise																				sm_narrow_escape_1					
 expertise_sm_general_nerf_herder_1	expertise_sm_general_end_of_the_line_1									expertise_sm_general_end_of_the_line_1																
 expertise_sm_general_bad_odds_1	expertise_sm_general_head_crack_2									expertise_sm_general_head_crack_2											sm_bad_odds_1					
