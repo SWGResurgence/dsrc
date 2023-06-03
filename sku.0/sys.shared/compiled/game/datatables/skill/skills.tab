@@ -1588,8 +1588,8 @@ expertise_bh_carbine_act_1	expertise																					"expertise_action_weapo
 expertise_bh_carbine_act_2	expertise_bh_carbine_act_1																					"expertise_action_weapon_1=3,expertise_action_weapon_2=3"			0	
 expertise_bh_carbine_act_3	expertise_bh_carbine_act_2																					"expertise_action_weapon_1=4,expertise_action_weapon_2=4"			0	
 expertise_bh_carbine_act_4	expertise_bh_carbine_act_3																					"expertise_action_weapon_1=5,expertise_action_weapon_2=5"			0	
-expertise_bh_carbine_dam_1	expertise																					"expertise_damage_weapon_1=2,expertise_damage_weapon_2=2"			0	
-expertise_bh_carbine_dam_2	expertise_bh_carbine_dam_1																					"expertise_damage_weapon_1=3,expertise_damage_weapon_2=3"			0	
+expertise_bh_carbine_dam_1	expertise																					"expertise_damage_weapon_1=2,expertise_damage_weapon_2=2,exotic_dodge_reduction=5"			0	
+expertise_bh_carbine_dam_2	expertise_bh_carbine_dam_1																					"expertise_damage_weapon_1=3,expertise_damage_weapon_2=3,exotic_dodge_reduction=5"			0	
 expertise_bh_carbine_crit_1	expertise_bh_carbine_dam_2									expertise_bh_carbine_dam_2												"expertise_range_bonus_carbine=10,expertise_undiminished_critical_carbine=10,expertise_undiminished_critical_pistol=10,expertise_range_bonus_pistol=5"			0	
 expertise_bh_relentless_1																					bh_relentless_1				0	
 expertise_bh_precision_1	expertise																					precision_modified=25			0	
