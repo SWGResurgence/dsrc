@@ -8943,7 +8943,7 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Lord Nyax's Cult, Corellia", "corellia", 1414, 0, -316),
                 new warp_location("Tactical Training Facility, Corellia", "corellia", 4722, 0, -5233),
                 new warp_location("Mountain Top, Corellia", "corellia", -669, 473, 3189),
-                new warp_location("Small farm?, Corellia", "corellia", 4500, 21, 3600),
+                new warp_location("Small farm, Corellia", "corellia", 4500, 21, 3600),
                 new warp_location("Agrilat Swamps edge, Corellia", "corellia", 123, 31, 4246),
                 new warp_location("Broken White Bridge, Corellia", "corellia", -4250, 1, 3630),
                 new warp_location("Unknown Statue, Corellia", "corellia", -1905, 223, 3988),
