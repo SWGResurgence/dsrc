@@ -1600,8 +1600,8 @@ expertise_bh_rifle_act_1	expertise																					expertise_action_weapon_0
 expertise_bh_rifle_act_2	expertise_bh_rifle_act_1																					expertise_action_weapon_0=3			0	
 expertise_bh_rifle_act_3	expertise_bh_rifle_act_2																					expertise_action_weapon_0=4			0	
 expertise_bh_rifle_act_4	expertise_bh_rifle_act_3																					expertise_action_weapon_0=5			0	
-expertise_bh_rifle_dam_1	expertise																					expertise_damage_weapon_0=2			0	
-expertise_bh_rifle_dam_2	expertise_bh_rifle_dam_1																					expertise_damage_weapon_0=3			0	
+expertise_bh_rifle_dam_1	expertise																					"expertise_damage_weapon_0=2,exotic_parry_reduction=5"			0	
+expertise_bh_rifle_dam_2	expertise_bh_rifle_dam_1																					"expertise_damage_weapon_0=3,exotic_parry_reduction=5"			0	
 expertise_bh_sniper_1	expertise_bh_rifle_dam_2									expertise_bh_rifle_dam_2											bh_sniper_1				0	
 expertise_bh_cover_1	expertise_bh_sniper_1																				bh_cover_1				0	
 expertise_bh_agility_1	expertise																					agility_modified=25			0	
