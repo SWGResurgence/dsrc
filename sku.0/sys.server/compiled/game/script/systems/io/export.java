@@ -77,7 +77,6 @@ public class export extends script.base_script
         Element bindloc = doc.createElement("bindloc");
         profession.setTextContent(getHomeLocation(self).toString());
         character.appendChild(bindloc);
-        //
         Element salary = doc.createElement("credits");
         salary.setAttribute("depositbox", getCashBalance(self) + "");
         salary.setTextContent(getBankBalance(self) + " Galactic Credits");
