@@ -1743,8 +1743,8 @@ expertise_sm_general_meager_fortune_1	expertise_sm_general_spot_a_sucker_1						
 expertise_sm_general_meager_fortune_2	expertise_sm_general_meager_fortune_1																					"expertise_spot_a_sucker_critical_decrease=50,expertise_spot_a_sucker_damage_decrease_chance=50"				
 expertise_sm_general_lined_pockets_1	expertise_sm_general_hidden_padding_2									expertise_sm_general_hidden_padding_2												expertise_overridable_protection_generic=1850				
 expertise_sm_general_lined_pockets_2	expertise_sm_general_lined_pockets_1																					expertise_overridable_protection_generic=1850				
-expertise_sm_general_hammer_fanning_1	expertise_sm_general_precise_bead_2									expertise_sm_general_precise_bead_2												expertise_sm_ranged_shot_proc=10				
-expertise_sm_general_hammer_fanning_2	expertise_sm_general_hammer_fanning_1																					expertise_sm_ranged_shot_proc=10				
+expertise_sm_general_hammer_fanning_1	expertise_sm_general_precise_bead_2									expertise_sm_general_precise_bead_2												"expertise_sm_ranged_shot_proc=10,exotic_dodge_reduction=5"				
+expertise_sm_general_hammer_fanning_2	expertise_sm_general_hammer_fanning_1																					"expertise_sm_ranged_shot_proc=10,exotic_dodge_reduction=5"				
 expertise_sm_general_off_the_cuff_1	expertise																				sm_off_the_cuff					
 expertise_sm_general_switcheroo_1	expertise																					expertise_glancing_blow_melee_defense=4				
 expertise_sm_general_switcheroo_2	expertise_sm_general_switcheroo_1																					expertise_glancing_blow_melee_defense=4				
