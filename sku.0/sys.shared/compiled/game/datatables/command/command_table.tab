@@ -271,7 +271,7 @@ boardShuttle		immediate	boardShuttle						1	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	
 bodyguard	commandClicky	normal	bodyguard	failSpecialAttack			1		1	0	1	1	1	0	1	1	0	0	0	0	0	0	0	0	0	0	0			0	0	1	1		1	0	0	1	1	1	1	0	1	1	1	1	1	1	0	0									0		0	0	0	0	0								other	optional		2		combat_ranged	0	74		combat					0	0	0				1
 bothan_ability_1	commandClicky	normal	bothan_ability_1	failSpecialAttack			1	bothan_ability_1	1	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0			0	0	1	1		1	0	0	1	1	1	1	0	1	0	1	1	1	1	0	0									0		0	0	0	0	0								other	none		2		combat_ranged	0			combat	1	ALL		species_ability		0.25	600			1
 bountyTrackTarget		normal	bountyTrackTarget				0		1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	0	0	0	0	0	0	0	0	1	0		1	1	1	1	1	1	1	1	1	0	1	1	1	1	0	0									0	0	0	0	0	0	0									optional					0								0	0.25	0.25
-bountycheck	commandClicky	normal	bountycheck				1																								0													0																	0	0	0	0	0								enemy	required		2		combat_ranged	0	32		combat	1	ALL	HEAVY	bountycheck	0	0.25	3600			1
+bountycheck	commandClicky	normal	bountycheck				1																								0													0																	0	0	0	0	0								enemy	required		2		combat_ranged	0	32		combat	1	ALL	HEAVY	bountycheck	0	0.25	1800			1
 broadcast		immediate	cmdBroadcast	failAdmin				admin																				1	1		0	1												1																												gm.cmd		none	0				0		40	csr	0
 broadcastArea		immediate	cmdBroadcastArea	failAdmin				admin																				1	1		0	1												1																												gm.cmd		none	0				0		40	csr	0
 broadcastGalaxy		immediate	cmdBroadcastGalaxy	failAdmin				admin																				1	1		0	1												1																												gm.cmd		none	0				0		40	csr	0
