@@ -1174,6 +1174,7 @@ public class terminal_character_builder extends script.base_script
                     "Attach Developer Tool",
                     "Detach Tools",
                     "Reload Character Terminal Builder",
+                    "Sanitize Avatar",
             };
     public static final String[] SMUGGLER_TOOLS_OPTIONS =
             {
@@ -9261,12 +9262,12 @@ public class terminal_character_builder extends script.base_script
                 broadcast(player, "This is deprecated.");
                 break;
             case 2:
-                detachScript(player, "test.qatool"); // prevent it from trying to reattach while attached
+                detachScript(player, "test.qatool");
                 attachScript(player, "test.qatool");
                 broadcast(player, "QA Tool Attached");
                 break;
             case 3:
-                detachScript(player, "event.event_tool");// prevent it from trying to reattach while attached
+                detachScript(player, "event.event_tool");
                 attachScript(player, "event.event_tool");
                 broadcast(player, "Event Tool Attached");
                 break;
@@ -9278,6 +9279,7 @@ public class terminal_character_builder extends script.base_script
             case 5:
                 detachScript(player, "test.qatool");
                 detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
                 break;
             case 6:
                 if (reloadScript("terminal.terminal_character_builder"))
@@ -9288,6 +9290,18 @@ public class terminal_character_builder extends script.base_script
                 {
                     sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Failed to Reload");
                 }
+                break;
+            case 7:
+                detachScript(player, "test.qatool");
+                detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
+                sendConsoleCommand("/hideMe 0", player);
+                if (isInvulnerable(self))
+                {
+                    setInvulnerable(self, false);
+                }
+                sendConsoleCommand("/setGodMode off", player);
+                broadcast(player, "You have sanitized yourself.");
                 break;
             default:
                 cleanScriptVars(player);
