@@ -970,7 +970,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playeffect <effect name>");
+                broadcast(self, "Syntax: /developer playeffect <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -983,7 +983,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playeffecttarget <effect name>");
+                broadcast(self, "Syntax: /developer playeffecttarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -996,7 +996,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playeffectloc <effect name>");
+                broadcast(self, "Syntax: /developer playeffectloc <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1009,7 +1009,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playeffectloctarget <effect name>");
+                broadcast(self, "Syntax: /developer playeffectloctarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1022,7 +1022,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
+                broadcast(self, "Syntax: /developer playeffectatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1039,7 +1039,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsound <sound name>");
+                broadcast(self, "Syntax: /developer playsound <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1052,7 +1052,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsoundtarget <sound name>");
+                broadcast(self, "Syntax: /developer playsoundtarget <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1077,7 +1077,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsoundloc <sound name>");
+                broadcast(self, "Syntax: /developer playsoundloc <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1090,7 +1090,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsoundeveryone <sound name>");
+                broadcast(self, "Syntax: /developer playsoundeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1107,7 +1107,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playcefeveryone <sound name>");
+                broadcast(self, "Syntax: /developer playcefeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1124,7 +1124,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin stopmacros (target)");
+                broadcast(self, "Syntax: /developer stopmacros (target)");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1194,7 +1194,7 @@ public class player_developer extends base_script
             String table = tok.nextToken();
             if (table == null || table.equals(""))
             {
-                broadcast(self, "Syntax: /admin setloottable <loot table name>");
+                broadcast(self, "Syntax: /developer setloottable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1208,7 +1208,7 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                broadcast(self, "Syntax: /admin setnumitems <loot count>");
+                broadcast(self, "Syntax: /developer setnumitems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1337,7 +1337,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsoundloctarget <sound name>");
+                broadcast(self, "Syntax: /developer playsoundloctarget <sound name>");
             }
             else
             {
@@ -1350,7 +1350,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
+                broadcast(self, "Syntax: /developer playsoundatloc <sound name> <x> <y> <z>");
             }
             else
             {
@@ -1512,7 +1512,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playmusic <music name>");
+                broadcast(self, "Syntax: /developer playmusic <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1554,7 +1554,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                broadcast(self, "Syntax: /admin playmusictarget <music name>");
+                broadcast(self, "Syntax: /developer playmusictarget <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
