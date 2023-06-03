@@ -5109,6 +5109,13 @@ public class terminal_character_builder extends script.base_script
             case 7:  // Objects: New Schematics
                 static_item.createNewItemFunction("item_schematic_ex_scope", pInv);
                 static_item.createNewItemFunction("item_schematic_ex_stock", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_heavy", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_melee", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_ranged", pInv);
+                createObject("object/tangible/wearables/bandolier/bandolier_s02_quest.iff", pInv, "");
+                createObject("object/tangible/wearables/bandolier/bandolier_s04_quest.iff", pInv, "");
+                broadcast(player, "New Schematics Issued.");
+                break;
             case 8:  // Objects: Others
                 static_item.createNewItemFunction("item_gas_recycler_01_01", pInv);
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);
