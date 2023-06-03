@@ -151,14 +151,14 @@ object/tangible/component/weapon/spider_spine.iff	amount 	1	1
 	maxDamage	15	30
 object/tangible/loot/dungeon/death_watch_bunker/pistol_de10_barrel.iff	amount 	1	1
 object/tangible/component/armor/scale_giant_dune_kimogila.iff	amount 	25	50
-	attribute.bonus.0	500	1000
-	attribute.bonus.2	250	500
+	attribute.bonus.0	250	300
+	attribute.bonus.2	200	250
 object/tangible/component/armor/hide_gurk_king.iff	amount 	25	50
-	attribute.bonus.0	250	500
-	attribute.bonus.2	125	250
+	attribute.bonus.0	150	200
+	attribute.bonus.2	100	150
 object/tangible/component/armor/bone_fragment_woolamander_harrower.iff	amount 	25	50
-	attribute.bonus.0	125	250
-	attribute.bonus.2	25	75
+	attribute.bonus.0	50	100
+	attribute.bonus.2	25	50
 object/tangible/component/clothing/clasp_heavy_duty.iff	amount 	25	50
 object/tangible/component/clothing/clothing_treatment_crystalline.iff	amount 	6	8
 object/tangible/component/clothing/leather_heavy_duty.iff	amount 	25	50
@@ -200,8 +200,8 @@ object/tangible/component/armor/armor_segment_enhancement_rancor.iff	amount 	10	
 	attribute.bonus.0	200	450
 	attribute.bonus.2	125	300
 object/tangible/component/armor/feather_peko_albatross.iff	amount 	25	50
-	attribute.bonus.0	100	225
-	attribute.bonus.2	75	150
+	attribute.bonus.0	200	250
+	attribute.bonus.2	125	175
 object/tangible/component/armor/armor_appearance_enhancement_acklay.iff	amount 	1	2
 object/tangible/component/weapon/lesser_krayt_pearl.iff	amount 	1	2
 object/tangible/component/weapon/new_weapon/enhancement_melee_slot_one_s01.iff	amount 	1	1
