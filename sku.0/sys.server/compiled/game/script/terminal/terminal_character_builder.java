@@ -1173,7 +1173,7 @@ public class terminal_character_builder extends script.base_script
                     "Attach Event Tool",
                     "Attach Developer Tool",
                     "Detach Tools",
-                    "Build Terminal",
+                    "Reload Character Terminal Builder",
             };
     public static final String[] SMUGGLER_TOOLS_OPTIONS =
             {
@@ -9280,10 +9280,14 @@ public class terminal_character_builder extends script.base_script
                 detachScript(player, "event.event_tool");
                 break;
             case 6:
-                String outputString = system_process.runAndGetOutput("/home/swg/swg-main/utils/build_java.sh");
-                String outputTitle = "Build Terminal";
-                String okbutton = "Exit";
-                sui.msgbox(self, player, outputString, sui.OK_CANCEL, outputTitle, "noHandler");
+                if (reloadScript("terminal.terminal_character_builder"))
+                {
+                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Reloaded");
+                }
+                else
+                {
+                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Failed to Reload");
+                }
                 break;
             default:
                 cleanScriptVars(player);
