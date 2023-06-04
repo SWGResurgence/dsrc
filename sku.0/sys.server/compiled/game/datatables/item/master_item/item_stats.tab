@@ -5132,3 +5132,4 @@ weapon_black_metal_baton
 item_kashyyyk_reward_token_01_01											
 item_duty_space_token_box_01_01											
 item_schematic_weapon_rack_01			"string:loot_schematic.schematic=object/draft_schematic/furniture/cyntech/weapon_rack_01.iff,string:loot_schematic.skill_req=class_structures_phase4_master,int:loot_schematic.uses=3"								
+weapon_heavy_blast_cannon_legendary			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_heavy_blast_cannon_legendary.iff,int:loot_schematic.uses=2,string:loot_schematic.skill_req=class_munitions_phase4_master"								
