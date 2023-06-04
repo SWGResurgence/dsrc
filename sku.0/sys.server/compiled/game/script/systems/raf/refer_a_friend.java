@@ -4,7 +4,7 @@ import script.library.static_item;
 import script.library.sui;
 import script.obj_id;
 
-public class ReferAFriend extends script.base_script
+public class refer_a_friend extends script.base_script
 {
     public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -16,23 +16,24 @@ public class ReferAFriend extends script.base_script
         int stationIdTarget = getPlayerStationId(target);
         if (stationIdSelf == stationIdTarget)
         {
-            sendSystemMessageTestingOnly(self, "You cannot refer yourself.");
+            broadcast(self, "You cannot refer yourself.");
             return SCRIPT_CONTINUE;
         }
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "raf.referred_" + stationIdSelf))
         {
-            sendSystemMessageTestingOnly(self, "You have already set another player as your referrer.");
+            broadcast(self, "You have already set another player as your referrer.");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf)
         {
-            sendSystemMessageTestingOnly(self, "You cannot refer this friend because he is referred to you.");
+            broadcast(self, "You cannot refer this friend because he is referred to you.");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(tatooine, "raf.last_referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.last_referred_" + stationIdTarget) >= getCurrentBirthDate())
-        { // TODO: Check the account instead of the character
-            sendSystemMessageTestingOnly(self, "You cannot refer this friend because he has referred another friend within the last 24 hours.");
+        {
+            // TODO: Check the account instead of the character
+            broadcast(self, "You cannot refer this friend because he has referred another friend within the last 24 hours.");
             return SCRIPT_CONTINUE;
         }
         obj_id[] friend_items = new obj_id[2];

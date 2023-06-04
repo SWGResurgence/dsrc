@@ -640,7 +640,7 @@ public class battlefield extends script.base_script
         if (total_population >= MAXIMUM_POPULATION)
         {
             LOG("LOG_CHANNEL", player + " ->There are too many combatants currently within the battlefield.");
-            sendSystemMessageTestingOnly(player, "There are too many combatants currently within the battlefield.");
+            broadcast(player, "There are too many combatants currently within the battlefield.");
             return false;
         }
         Vector factions_allowed_sizes = new Vector();
@@ -677,7 +677,7 @@ public class battlefield extends script.base_script
         if (faction_size >= max_faction_pop)
         {
             LOG("LOG_CHANNEL", player + " ->There are too many combantants on the " + faction + " faction to join at this list.");
-            sendSystemMessageTestingOnly(player, "There are too many combantants on the " + faction + " faction to join at this list.");
+            broadcast(player, "There are too many combantants on the " + faction + " faction to join at this list.");
             return false;
         }
         for (int i = 0; i < factions_allowed_sizes.size(); i++)
@@ -687,7 +687,7 @@ public class battlefield extends script.base_script
                 if (faction_size - (Integer) factions_allowed_sizes.get(i) > MAXIMUM_FACTION_SIZE_DIFFERENCE)
                 {
                     LOG("LOG_CHANNEL", player + " ->There are too many combantants on the " + faction + " faction to join at this list.");
-                    sendSystemMessageTestingOnly(player, "There are too many combantants on the " + faction + " faction to join at this list.");
+                    broadcast(player, "There are too many combantants on the " + faction + " faction to join at this list.");
                     return false;
                 }
             }
@@ -781,7 +781,7 @@ public class battlefield extends script.base_script
             if (verbose)
             {
                 LOG("LOG_CHANNEL", player + " ->You cannot enter the battlefield as long as you have temporary enemies.");
-                sendSystemMessageTestingOnly(player, "You cannot enter the battlefield as long as you have temporary enemies.");
+                broadcast(player, "You cannot enter the battlefield as long as you have temporary enemies.");
             }
             return false;
         }
@@ -792,7 +792,7 @@ public class battlefield extends script.base_script
                 if (verbose)
                 {
                     LOG("LOG_CHANNEL", player + " ->You must wait for the current battle to end before reentering.");
-                    sendSystemMessageTestingOnly(player, "You must wait for the current battle to end before reentering.");
+                    broadcast(player, "You must wait for the current battle to end before reentering.");
                 }
                 return false;
             }
@@ -839,19 +839,19 @@ public class battlefield extends script.base_script
         if (!utils.isProfession(player, utils.TRADER))
         {
             LOG("LOG_CHANNEL", player + " ->You must have skill as an artisan in order to use the battlefield constructor.");
-            sendSystemMessageTestingOnly(player, "You must have skill as an artisan in order to use the battlefield constructor.");
+            broadcast(player, "You must have skill as an artisan in order to use the battlefield constructor.");
             return false;
         }
         if (!isNearBattlefieldConstructor(master_object, loc, faction))
         {
             LOG("LOG_CHANNEL", player + " ->You must be near a battlefield constructor owned by your faction.");
-            sendSystemMessageTestingOnly(player, "You must be near a battlefield constructor owned by your faction.");
+            broadcast(player, "You must be near a battlefield constructor owned by your faction.");
             return false;
         }
         if (!isBattlefieldActive(master_object))
         {
             LOG("LOG_CHANNEL", player + " ->You can only build in an active battlefield.");
-            sendSystemMessageTestingOnly(player, "You can only build in an active battlefield.");
+            broadcast(player, "You can only build in an active battlefield.");
             return false;
         }
         return true;
@@ -922,7 +922,7 @@ public class battlefield extends script.base_script
                     int[] conv_time = player_structure.convertSecondsTime(time_left);
                     String time_str = player_structure.assembleTimeRemaining(conv_time);
                     LOG("LOG_CHANNEL", player + " ->You may not leave the battlefield until you have played for another " + time_str);
-                    sendSystemMessageTestingOnly(player, "You may not leave the battlefield until you have played for another " + time_str);
+                    broadcast(player, "You may not leave the battlefield until you have played for another " + time_str);
                 }
                 return false;
             }
@@ -2447,8 +2447,8 @@ public class battlefield extends script.base_script
         if (movePlayerToStartLocation(player, master_object))
         {
             LOG("LOG_CHANNEL", player + " ->You have been moved to your faction's starting location. Good luck!");
-            sendSystemMessageTestingOnly(player, "You have been moved to your faction's starting location. Good luck!");
-            sendSystemMessageTestingOnly(player, "Note: use /battlefieldStatus to check on your faction's progress and /placeBattlefieldStructure to build.");
+            broadcast(player, "You have been moved to your faction's starting location. Good luck!");
+            broadcast(player, "Note: use /battlefieldStatus to check on your faction's progress and /placeBattlefieldStructure to build.");
         }
         region reg = getRegionFromMasterObject(master_object);
         pvpBattlefieldSetParticipant(player, reg, getFactionId(faction));
@@ -2650,10 +2650,10 @@ public class battlefield extends script.base_script
         if (amt > points)
         {
             LOG("LOG_CHANNEL", player + " ->You do not have enough faction points remaining.");
-            sendSystemMessageTestingOnly(player, "You do not have enough faction points remaining.");
+            broadcast(player, "You do not have enough faction points remaining.");
             if (declared_faction != 0)
             {
-                sendSystemMessageTestingOnly(player, "Note that your faction may not go below the " + factions.FACTION_RATING_DECLARABLE_MIN + " declared minimum.");
+                broadcast(player, "Note that your faction may not go below the " + factions.FACTION_RATING_DECLARABLE_MIN + " declared minimum.");
             }
             return false;
         }
@@ -3064,13 +3064,13 @@ public class battlefield extends script.base_script
         if (!hasScript(structure, SCRIPT_DESTRUCTIBLE_BUILDING) && !hasScript(structure, SCRIPT_DESTROY_OBJECTIVE))
         {
             LOG("LOG_CHANNEL", player + " ->You cannot repair that.");
-            sendSystemMessageTestingOnly(player, "You cannot repair that.");
+            broadcast(player, "You cannot repair that.");
             return false;
         }
         if (getHitpoints(structure) == getMaxHitpoints(structure))
         {
             LOG("LOG_CHANNEL", player + " ->That does not need repairing.");
-            sendSystemMessageTestingOnly(player, "That does not need repairing.");
+            broadcast(player, "That does not need repairing.");
             return false;
         }
         int repair_cost = getIntObjVar(structure, VAR_REPAIR_COST);
@@ -3080,13 +3080,13 @@ public class battlefield extends script.base_script
             setObjVar(structure, VAR_REPAIRING, 1);
             messageTo(structure, "msgRepairPulse", null, REPAIR_PULSE, true);
             LOG("LOG_CHANNEL", player + " ->Repairs initiated.");
-            sendSystemMessageTestingOnly(player, "Repairs initiated.");
+            broadcast(player, "Repairs initiated.");
             return true;
         }
         else
         {
             LOG("LOG_CHANNEL", player + " ->You do not have the " + repair_cost + " build points to initiate repair.");
-            sendSystemMessageTestingOnly(player, "You do not have the " + repair_cost + " build points to initiate repair.");
+            broadcast(player, "You do not have the " + repair_cost + " build points to initiate repair.");
             return false;
         }
     }

@@ -28,7 +28,7 @@ public class patrol_duty extends script.space.quest_logic.patrol
         dictionary questInfo = dataTableGetRow(qTable, questName);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open or find quest '" + questName + "' in " + questType + ".iff");
+            broadcast(player, "Debug: Failed to open or find quest '" + questName + "' in " + questType + ".iff");
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, "reward", questInfo.getInt("reward"));

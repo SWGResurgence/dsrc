@@ -65,7 +65,7 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
             String strMissionTitle = getString(strMissionTitleId);
             String strSystemMessage = getString(strTitleId);
             strSystemMessage = strSystemMessage + " " + strMissionTitle;
-            sendSystemMessageTestingOnly(speaker, strSystemMessage);
+            broadcast(speaker, strSystemMessage);
             dictionary dctParams = new dictionary();
             messageTo(objMission, "pickup_event", dctParams, 0, true);
             setObjVar(objMission, "intState", missions.STATE_DYNAMIC_DROPOFF);

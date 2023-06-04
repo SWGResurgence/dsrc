@@ -12,7 +12,7 @@ public class block_open extends script.base_script
     {
         if (isGod(who))
         {
-            sendSystemMessageTestingOnly(who, "GOD MODE: You are able to open this container because you are in God Mode!");
+            broadcast(who, "GOD MODE: You are able to open this container because you are in God Mode!");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_OVERRIDE;

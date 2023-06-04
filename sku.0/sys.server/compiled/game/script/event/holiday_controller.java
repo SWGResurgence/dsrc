@@ -162,7 +162,7 @@ public class holiday_controller extends script.base_script
 
     // Make sure CSRs can't take the master object on a stroll down Amidala's Beach when they should be home doing their homework
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException {
-        sendSystemMessageTestingOnly(transferer, "You cannot move this item!");
+        broadcast(transferer, "You cannot move this item!");
         return SCRIPT_OVERRIDE;
     }
 
@@ -170,18 +170,18 @@ public class holiday_controller extends script.base_script
     {
         if (holidayRunning == null)
         {
-            sendSystemMessageTestingOnly(speaker, "Server config is not marked as " + holidayName + " running");
+            broadcast(speaker, "Server config is not marked as " + holidayName + " running");
             return;
         }
         if (holidayRunning.equals("true") || holidayRunning.equals("1"))
         {
             if (holidayStatus > -1)
             {
-                sendSystemMessageTestingOnly(speaker, "Server says that " + holidayName + " is already running. If you are sure that it's not, say " + holidayName + "StartForReals");
+                broadcast(speaker, "Server says that " + holidayName + " is already running. If you are sure that it's not, say " + holidayName + "StartForReals");
             }
             if (holidayStatus < 0)
             {
-                sendSystemMessageTestingOnly(speaker, holidayName + " started.");
+                broadcast(speaker, holidayName + " started.");
                 startUniverseWideEvent(holidayName);
             }
         }
@@ -190,12 +190,12 @@ public class holiday_controller extends script.base_script
     {
         if (holidayRunning == null)
         {
-            sendSystemMessageTestingOnly(speaker, "Server config is not marked as " + holidayName + " running");
+            broadcast(speaker, "Server config is not marked as " + holidayName + " running");
             return;
         }
         if (holidayRunning.equals("true") || holidayRunning.equals("1"))
         {
-            sendSystemMessageTestingOnly(speaker, holidayName + " started.");
+            broadcast(speaker, holidayName + " started.");
             startUniverseWideEvent(holidayName);
         }
     }
@@ -203,12 +203,12 @@ public class holiday_controller extends script.base_script
     {
         if (holidayRunning.equals("true") || holidayRunning.equals("1"))
         {
-            sendSystemMessageTestingOnly(speaker, "Server config is marked as " + holidayName + " running. If you are sure that it should not be running anyway, say " + holidayName + "StopForReals");
+            broadcast(speaker, "Server config is marked as " + holidayName + " running. If you are sure that it should not be running anyway, say " + holidayName + "StopForReals");
         }
     }
     private void stopHolidayEventForReals(obj_id speaker, String holidayName) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(speaker, holidayName + " stopped.");
+        broadcast(speaker, holidayName + " stopped.");
         stopUniverseWideEvent(holidayName);
     }
     public int halloweenServerStart(obj_id self, dictionary params) throws InterruptedException

@@ -25,14 +25,14 @@ public class terminal_money extends script.terminal.base.terminal_add_use
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(player, "You already have 1,000,000+ credits. Why do you need any more money?");
+                    broadcast(player, "You already have 1,000,000+ credits. Why do you need any more money?");
                 }
             }
             return SCRIPT_CONTINUE;
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
@@ -50,7 +50,7 @@ public class terminal_money extends script.terminal.base.terminal_add_use
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction. Please try again later.");
+            broadcast(player, "The system is unable to complete the transaction. Please try again later.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -61,7 +61,7 @@ public class terminal_money extends script.terminal.base.terminal_add_use
         {
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(player, "You recieve " + CASH_AMOUNT + " credits from " + getString(getNameStringId(self)));
+        broadcast(player, "You recieve " + CASH_AMOUNT + " credits from " + getString(getNameStringId(self)));
         return SCRIPT_CONTINUE;
     }
     public int handlePayoutFail(obj_id self, dictionary params) throws InterruptedException
@@ -71,7 +71,7 @@ public class terminal_money extends script.terminal.base.terminal_add_use
         {
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction. Please try again later.");
+        broadcast(player, "The system is unable to complete the transaction. Please try again later.");
         return SCRIPT_CONTINUE;
     }
 }

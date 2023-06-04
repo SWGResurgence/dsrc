@@ -99,7 +99,7 @@ public class space_utils extends script.base_script
     {
         if (hasScript(objTarget, "space.content_tools.content_generation") || isGod(objTarget))
         {
-            sendSystemMessageTestingOnly(objTarget, strSpam);
+            broadcast(objTarget, strSpam);
         }
     }
 
@@ -120,7 +120,7 @@ public class space_utils extends script.base_script
             }
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "** Passing certification test due to god mode. **");
+                broadcast(player, "** Passing certification test due to god mode. **");
                 return true;
             }
             failReason = SID_NO_SHIP_CERTIFICATION;
@@ -152,7 +152,7 @@ public class space_utils extends script.base_script
                         }
                         if (isGod(player))
                         {
-                            sendSystemMessageTestingOnly(player, "** Passing certification test due to god mode. **");
+                            broadcast(player, "** Passing certification test due to god mode. **");
                             return shipControlDevice;
                         }
                         failReason = SID_NO_SHIP_CERTIFICATION;
@@ -934,7 +934,7 @@ public class space_utils extends script.base_script
                     if (verbose)
                     {
                         obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                        sendSystemMessageTestingOnly(player, "Destroyed ship, scd=" + shipControlDevice + ", ship=" + ship);
+                        broadcast(player, "Destroyed ship, scd=" + shipControlDevice + ", ship=" + ship);
                     }
                     destroyObject(shipControlDevice);
                 }
@@ -975,13 +975,13 @@ public class space_utils extends script.base_script
         {
             if (isIdValid(ship))
             {
-                sendSystemMessageTestingOnly(player, "Created ship (" + shipTemplate + ") with scd (" + scdTemplate + ")");
+                broadcast(player, "Created ship (" + shipTemplate + ") with scd (" + scdTemplate + ")");
             }
             else if (isIdValid(shipControlDevice))
             {
                 destroyObject(shipControlDevice);
                 shipControlDevice = null;
-                sendSystemMessageTestingOnly(player, "Failed to create ship (" + shipTemplate + ")");
+                broadcast(player, "Failed to create ship (" + shipTemplate + ")");
             }
         }
         return shipControlDevice;

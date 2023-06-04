@@ -36,7 +36,7 @@ public class terminal extends script.base_script
         {
             if (pvpGetType(player) != PVPTYPE_DECLARED)
             {
-                sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+                broadcast(player, "Only declared factional personnel may access this terminal!");
                 return SCRIPT_CONTINUE;
             }
             if (utils.hasObjVar(structure, hq.VAR_OBJECTIVE_TRACKING))
@@ -67,7 +67,7 @@ public class terminal extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
+            broadcast(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -87,7 +87,7 @@ public class terminal extends script.base_script
         {
             if (pvpGetType(player) != PVPTYPE_DECLARED)
             {
-                sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+                broadcast(player, "Only declared factional personnel may access this terminal!");
                 return SCRIPT_CONTINUE;
             }
             if (item == menu_info_types.SERVER_MENU10)
@@ -97,7 +97,7 @@ public class terminal extends script.base_script
                 {
                     setObjVar(self, "intCompleted", 1);
                     String strText = "Facility has succesfully been taken over.";
-                    sendSystemMessageTestingOnly(player, strText);
+                    broadcast(player, strText);
                     messageTo(structure, "objectiveCompleted", null, 0, true);
                 }
             }
@@ -106,7 +106,7 @@ public class terminal extends script.base_script
         if (item == menu_info_types.SERVER_MENU1)
         {
             LOG("gcw", "1");
-            sendSystemMessageTestingOnly(player, "You must first select a sub-menu of 'Donate' to proceed.");
+            broadcast(player, "You must first select a sub-menu of 'Donate' to proceed.");
             return SCRIPT_CONTINUE;
         }
         else if (item == menu_info_types.SERVER_MENU9)
@@ -139,7 +139,7 @@ public class terminal extends script.base_script
         {
             for (obj_id player1 : players)
             {
-                sendSystemMessageTestingOnly(player1, "COUNTDOWN INITIATED: estimated time to detonation: " + minutes + " minutes.");
+                broadcast(player1, "COUNTDOWN INITIATED: estimated time to detonation: " + minutes + " minutes.");
             }
         }
         utils.setScriptVar(self, SCRIPTVAR_COUNTDOWN, getGameTime() + delay);
@@ -157,7 +157,7 @@ public class terminal extends script.base_script
         {
             for (obj_id player : players)
             {
-                sendSystemMessageTestingOnly(player, "COUNTDOWN ABORTED: FACILITY SHUTTING DOWN!!");
+                broadcast(player, "COUNTDOWN ABORTED: FACILITY SHUTTING DOWN!!");
             }
         }
     }
@@ -175,7 +175,7 @@ public class terminal extends script.base_script
         {
             for (obj_id player : players)
             {
-                sendSystemMessageTestingOnly(player, "FACILITY RESTART: RELOADING PRIMARY FACILITY SYSTEMS");
+                broadcast(player, "FACILITY RESTART: RELOADING PRIMARY FACILITY SYSTEMS");
             }
         }
         return SCRIPT_CONTINUE;
@@ -224,7 +224,7 @@ public class terminal extends script.base_script
             {
                 for (obj_id player1 : players)
                 {
-                    sendSystemMessageTestingOnly(player1, msg);
+                    broadcast(player1, msg);
                 }
             }
             params.put("cnt", minutes);

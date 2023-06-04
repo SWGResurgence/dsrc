@@ -119,14 +119,14 @@ public class battlefield_region extends script.base_script
                                 else
                                 {
                                     LOG("LOG_CHANNEL", breacher + " ->Your faction has been eliminated from the battle. You must wait until the next battle to join.");
-                                    sendSystemMessageTestingOnly(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
+                                    broadcast(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                     return SCRIPT_CONTINUE;
                                 }
                             }
                             else
                             {
                                 LOG("LOG_CHANNEL", breacher + " ->Your faction is not permitted within this battlefield.");
-                                sendSystemMessageTestingOnly(breacher, "Your faction is not permitted within this battlefield.");
+                                broadcast(breacher, "Your faction is not permitted within this battlefield.");
                                 return SCRIPT_CONTINUE;
                             }
                         }
@@ -155,7 +155,7 @@ public class battlefield_region extends script.base_script
                     if (faction == null)
                     {
                         LOG("LOG_CHANNEL", breacher + " ->A battle is in progress here. You must ally yourself with a faction before you may enter.");
-                        sendSystemMessageTestingOnly(breacher, "A battle is in progress here. You must ally yourself with a faction before you may enter.");
+                        broadcast(breacher, "A battle is in progress here. You must ally yourself with a faction before you may enter.");
                         if (!battlefield.hasSelectFactionSui(breacher))
                         {
                             dictionary d = new dictionary();
@@ -180,14 +180,14 @@ public class battlefield_region extends script.base_script
                             else
                             {
                                 LOG("LOG_CHANNEL", breacher + " ->Your faction has been eliminated from the battle. You must wait until the next battle to join.");
-                                sendSystemMessageTestingOnly(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
+                                broadcast(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                 return SCRIPT_CONTINUE;
                             }
                         }
                         else
                         {
                             LOG("LOG_CHANNEL", breacher + " ->Your faction is not permitted within this battlefield.");
-                            sendSystemMessageTestingOnly(breacher, "Your faction is not permitted within this battlefield.");
+                            broadcast(breacher, "Your faction is not permitted within this battlefield.");
                             return SCRIPT_CONTINUE;
                         }
                     }
@@ -227,7 +227,7 @@ public class battlefield_region extends script.base_script
                 if (battlefield.canExitBattlefield(self, breacher, true))
                 {
                     LOG("LOG_CHANNEL", breacher + " ->You are about to leave the battlefield. If you do so, you will be unable to return until the current battle is over.");
-                    sendSystemMessageTestingOnly(breacher, "You are about to leave the battlefield. If you do so, you will be unable to return until the current battle is over.");
+                    broadcast(breacher, "You are about to leave the battlefield. If you do so, you will be unable to return until the current battle is over.");
                 }
                 else
                 {
@@ -262,7 +262,7 @@ public class battlefield_region extends script.base_script
                 if (!expelled)
                 {
                     LOG("LOG_CHANNEL", breacher + " ->You have left the battlefield.");
-                    sendSystemMessageTestingOnly(breacher, "You have left the battlefield.");
+                    broadcast(breacher, "You have left the battlefield.");
                 }
             }
         }

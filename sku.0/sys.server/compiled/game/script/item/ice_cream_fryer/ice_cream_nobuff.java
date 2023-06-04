@@ -81,7 +81,7 @@ public class ice_cream_nobuff extends script.base_script
         obj_id owner = getObjIdObjVar(self, OWNER_OID);
         if (player != owner)
         {
-            sendSystemMessageTestingOnly(player, "temp message: you cannot eat this item. ");
+            broadcast(player, "temp message: you cannot eat this item. ");
             return;
         }
         String buff_name = getStringObjVar(self, "buff_name");

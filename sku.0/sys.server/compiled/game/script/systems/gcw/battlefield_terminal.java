@@ -68,7 +68,7 @@ public class battlefield_terminal extends script.base_script
         if (words[0].equals("treset"))
         {
             terminalReset(self);
-            sendSystemMessageTestingOnly(speaker, "Terminal Reset.");
+            broadcast(speaker, "Terminal Reset.");
         }
         if (words[0].equals("blow"))
         {

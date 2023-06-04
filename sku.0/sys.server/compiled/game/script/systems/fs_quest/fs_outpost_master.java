@@ -109,7 +109,7 @@ public class fs_outpost_master extends script.base_script
     {
         if (isGod(whoTriggeredMe))
         {
-            sendSystemMessageTestingOnly(whoTriggeredMe, "god breach, granted.");
+            broadcast(whoTriggeredMe, "god breach, granted.");
             return SCRIPT_CONTINUE;
         }
         if (hasScript(whoTriggeredMe, "systems.fs_quest.fs_outpost_master"))

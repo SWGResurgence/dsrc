@@ -219,22 +219,22 @@ public class money extends script.base_script
         }
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(objSender, "Sending money");
+            broadcast(objSender, "Sending money");
         }
         boolean boolReturn = transferBankCreditsToNamedAccount(player, acct, amt, HANDLER_BANK_SUCCESS, HANDLER_BANK_TRANSFER_ERROR, dctParams);
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(objSender, "Sent money, return was " + boolReturn);
-            sendSystemMessageTestingOnly(objSender, "Player : " + player);
-            sendSystemMessageTestingOnly(objSender, "Acct is " + acct);
-            sendSystemMessageTestingOnly(objSender, "Amt is " + amt);
+            broadcast(objSender, "Sent money, return was " + boolReturn);
+            broadcast(objSender, "Player : " + player);
+            broadcast(objSender, "Acct is " + acct);
+            broadcast(objSender, "Amt is " + amt);
             if (dctParams != null)
             {
-                sendSystemMessageTestingOnly(objSender, "Params " + dctParams);
+                broadcast(objSender, "Params " + dctParams);
             }
             else
             {
-                sendSystemMessageTestingOnly(objSender, "Params NULL!");
+                broadcast(objSender, "Params NULL!");
             }
         }
         utils.moneyOutMetric(player, acct, amt);

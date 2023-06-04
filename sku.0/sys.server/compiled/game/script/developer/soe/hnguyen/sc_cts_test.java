@@ -24,7 +24,7 @@ public class sc_cts_test extends script.base_script
             {
                 String command = st.nextToken();
                 obj_id item = utils.stringToObjId(st.nextToken());
-                sendSystemMessageTestingOnly(self, "calling cts.initiateCtsFromItem(player=" + self + ", item=" + item + ")");
+                broadcast(self, "calling cts.initiateCtsFromItem(player=" + self + ", item=" + item + ")");
                 cts.initiateCtsFromItem(self, item);
             }
         }

@@ -16,12 +16,12 @@ public class terminal_warp extends script.base_script
             {
                 attachScript(player, "beta.player_warp");
             }
-            sendSystemMessageTestingOnly(player, "Warp script attached.");
+            broadcast(player, "Warp script attached.");
             return SCRIPT_CONTINUE;
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }

@@ -1173,7 +1173,8 @@ public class terminal_character_builder extends script.base_script
                     "Attach Event Tool",
                     "Attach Developer Tool",
                     "Detach Tools",
-                    "Build Terminal",
+                    "Reload Character Terminal Builder",
+                    "Sanitize Avatar",
             };
     public static final String[] SMUGGLER_TOOLS_OPTIONS =
             {
@@ -8942,7 +8943,7 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Lord Nyax's Cult, Corellia", "corellia", 1414, 0, -316),
                 new warp_location("Tactical Training Facility, Corellia", "corellia", 4722, 0, -5233),
                 new warp_location("Mountain Top, Corellia", "corellia", -669, 473, 3189),
-                new warp_location("Small farm?, Corellia", "corellia", 4500, 21, 3600),
+                new warp_location("Small farm, Corellia", "corellia", 4500, 21, 3600),
                 new warp_location("Agrilat Swamps edge, Corellia", "corellia", 123, 31, 4246),
                 new warp_location("Broken White Bridge, Corellia", "corellia", -4250, 1, 3630),
                 new warp_location("Unknown Statue, Corellia", "corellia", -1905, 223, 3988),
@@ -8997,23 +8998,23 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Volcano, Lok", "lok", 2865, 314, -4753),
                 new warp_location("Twin Craters, Lok", "lok", -1928, 0, 1697),
                 new warp_location("Large Mesa, Lok", "lok", -2128, 103, 1164),
-                new warp_location("Imperial Fortress, Yavin IV", "Yavin IV", 4049, 0, -6217),
-                new warp_location("Labor Outpost, Yavin IV", "Yavin IV", -6922, 0, -5723),
-                new warp_location("Mining Outpost, Yavin IV", "Yavin IV", -270, 0, 4895),
-                new warp_location("Geonosian Bio Lab, Yavin IV", "Yavin IV", -6488, 0, -417),
-                new warp_location("Great Massassi Temple, Yavin IV", "Yavin IV", -3187, 0, -3123),
-                new warp_location("Blueleaf Temple, Yavin IV", "Yavin IV", -875, 0, -2048),
-                new warp_location("Exar Kun Temple, Yavin IV", "Yavin IV", 5076, 0, 5537),
-                new warp_location("Woolamander Palace, Yavin IV", "Yavin IV", 517, 0, -650),
-                new warp_location("Dark Jedi Enclave, Yavin IV", "Yavin IV", 5080, 0, 306),
-                new warp_location("Light Jedi Enclave, Yavin IV", "Yavin IV", -5574, 0, 4901),
-                new warp_location("Massassi Sacrificial Stone, Yavin IV", "Yavin IV", -7555, 155, -433),
-                new warp_location("Massassi Pyramid, Yavin IV", "Yavin IV", -6350, 65, -670),
-                new warp_location("Death Star Turret, Yavin IV", "Yavin IV", -4156, 65, 5328),
-                new warp_location("Burning Tree, Yavin IV", "Yavin IV", 317, 190, -5302),
-                new warp_location("Large Crater, Yavin IV", "Yavin IV", 5900, 695, -4320),
-                new warp_location("Gazebo, Yavin IV", "Yavin IV", 943, 86, -1438),
-                new warp_location("Long Beach Front, Yavin IV", "Yavin IV", 6495, 10, 4490),
+                new warp_location("Imperial Fortress, Yavin IV", "yavin4", 4049, 0, -6217),
+                new warp_location("Labor Outpost, Yavin IV", "yavin4", -6922, 0, -5723),
+                new warp_location("Mining Outpost, Yavin IV", "yavin4", -270, 0, 4895),
+                new warp_location("Geonosian Bio Lab, Yavin IV", "yavin4", -6488, 0, -417),
+                new warp_location("Great Massassi Temple, Yavin IV", "yavin4", -3187, 0, -3123),
+                new warp_location("Blueleaf Temple, Yavin IV", "yavin4", -875, 0, -2048),
+                new warp_location("Exar Kun Temple, Yavin IV", "yavin4", 5076, 0, 5537),
+                new warp_location("Woolamander Palace, Yavin IV", "yavin4", 517, 0, -650),
+                new warp_location("Dark Jedi Enclave, Yavin IV", "yavin4", 5080, 0, 306),
+                new warp_location("Light Jedi Enclave, Yavin IV", "yavin4", -5574, 0, 4901),
+                new warp_location("Massassi Sacrificial Stone, Yavin IV", "yavin4", -7555, 155, -433),
+                new warp_location("Massassi Pyramid, Yavin IV", "yavin4", -6350, 65, -670),
+                new warp_location("Death Star Turret, Yavin IV", "yavin4", -4156, 65, 5328),
+                new warp_location("Burning Tree, Yavin IV", "yavin4", 317, 190, -5302),
+                new warp_location("Large Crater, Yavin IV", "yavin4", 5900, 695, -4320),
+                new warp_location("Gazebo, Yavin IV", "yavin4", 943, 86, -1438),
+                new warp_location("Long Beach Front, Yavin IV", "yavin4", 6495, 10, 4490),
                 new warp_location("Research Outpost, Endor", "endor", 3222, 0, -3467),
                 new warp_location("Smugglers Outpost, Endor", "endor", -970, 0, 1557),
                 new warp_location("Death Watch Bunker, Endor", "endor", -4676, 0, 4331),
@@ -9261,12 +9262,12 @@ public class terminal_character_builder extends script.base_script
                 broadcast(player, "This is deprecated.");
                 break;
             case 2:
-                detachScript(player, "test.qatool"); // prevent it from trying to reattach while attached
+                detachScript(player, "test.qatool");
                 attachScript(player, "test.qatool");
                 broadcast(player, "QA Tool Attached");
                 break;
             case 3:
-                detachScript(player, "event.event_tool");// prevent it from trying to reattach while attached
+                detachScript(player, "event.event_tool");
                 attachScript(player, "event.event_tool");
                 broadcast(player, "Event Tool Attached");
                 break;
@@ -9278,12 +9279,29 @@ public class terminal_character_builder extends script.base_script
             case 5:
                 detachScript(player, "test.qatool");
                 detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
                 break;
             case 6:
-                String outputString = system_process.runAndGetOutput("/home/swg/swg-main/utils/build_java.sh");
-                String outputTitle = "Build Terminal";
-                String okbutton = "Exit";
-                sui.msgbox(self, player, outputString, sui.OK_CANCEL, outputTitle, "noHandler");
+                if (reloadScript("terminal.terminal_character_builder"))
+                {
+                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Reloaded");
+                }
+                else
+                {
+                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Failed to Reload");
+                }
+                break;
+            case 7:
+                detachScript(player, "test.qatool");
+                detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
+                sendConsoleCommand("/hideMe 0", player);
+                if (isInvulnerable(self))
+                {
+                    setInvulnerable(self, false);
+                }
+                sendConsoleCommand("/setGodMode off", player);
+                broadcast(player, "You have sanitized yourself.");
                 break;
             default:
                 cleanScriptVars(player);

@@ -198,7 +198,7 @@ public class heroic_token_box extends script.base_script
         int tokensInBox = trial.getTokenAmountInBox(tokenBox, tokenType);
         if (amount < 1 || amount > tokensInBox)
         {
-            sendSystemMessageTestingOnly(player, "You cannot withdraw " + amount + " tokens, you only have " + tokensInBox + " in your token box.");
+            broadcast(player, "You cannot withdraw " + amount + " tokens, you only have " + tokensInBox + " in your token box.");
         }
         else
         {
@@ -216,7 +216,7 @@ public class heroic_token_box extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Please make space in your inventory.");
+                broadcast(player, "Please make space in your inventory.");
             }
         }
         return SCRIPT_CONTINUE;

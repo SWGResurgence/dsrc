@@ -3296,7 +3296,7 @@ public class beast_lib extends script.base_script
         {
             if (watchRoll)
             {
-                sendSystemMessageTestingOnly(player, "Ability(" + ability + ") challenge rating too high for user");
+                broadcast(player, "Ability(" + ability + ") challenge rating too high for user");
             }
             return false;
         }
@@ -3310,7 +3310,7 @@ public class beast_lib extends script.base_script
         boolean skillLearnResult = learnRoll > skillGoal;
         if (watchRoll)
         {
-            sendSystemMessageTestingOnly(player, "Abiltiy: " + ability + ", Random(" + learningPotential + ", " + roll_mod + ") > (" + skillGoal + ")" + " = " + learnRoll + "(" + skillLearnResult + ")" + ", " + beastLearnBonus * 10.0f + " chance gained from pet.");
+            broadcast(player, "Abiltiy: " + ability + ", Random(" + learningPotential + ", " + roll_mod + ") > (" + skillGoal + ")" + " = " + learnRoll + "(" + skillLearnResult + ")" + ", " + beastLearnBonus * 10.0f + " chance gained from pet.");
         }
         return skillLearnResult;
     }

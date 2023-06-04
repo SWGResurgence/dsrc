@@ -96,11 +96,11 @@ public class temporary_structure extends script.base_script
         {
             if (restartConstruction(self))
             {
-                sendSystemMessageTestingOnly(player, "Construction process restarted.");
+                broadcast(player, "Construction process restarted.");
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Construction restart failed.");
+                broadcast(player, "Construction restart failed.");
                 CustomerServiceLog("structure", "Building Marker " + self + "destroyed");
                 destroyObject(self);
             }

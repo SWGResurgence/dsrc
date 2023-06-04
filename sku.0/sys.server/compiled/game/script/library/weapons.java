@@ -756,7 +756,7 @@ public class weapons extends script.base_script
             path = "object/draft_schematic/weapon/";
             if ((grant ? grantSchematic(player, path + allEntry + ".iff") : revokeSchematic(player, path + allEntry + ".iff")))
             {
-                sendSystemMessageTestingOnly(player, "Schematic " + (grant ? "granted: " : "revoked: ") + allEntry);
+                broadcast(player, "Schematic " + (grant ? "granted: " : "revoked: ") + allEntry);
             }
         }
     }

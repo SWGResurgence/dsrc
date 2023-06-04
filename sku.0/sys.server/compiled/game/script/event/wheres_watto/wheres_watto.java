@@ -195,7 +195,7 @@ public class wheres_watto extends script.base_script
                     broadcast(group_member, "Watto has rewarded you with a useless datapad. Maybe you can find use for it.");
                     if (isGod(group_member))
                     {
-                        sendSystemMessageTestingOnly(group_member, "debug: one time grant of: " + reward);
+                        broadcast(group_member, "debug: one time grant of: " + reward);
                     }
                     obj_id one_time_item = static_item.createNewItemFunction(reward, utils.getInventoryContainer(group_member));
                     detachScript(one_time_item, "item.special.nomove");
@@ -208,7 +208,7 @@ public class wheres_watto extends script.base_script
                     broadcast(group_member, "You have received a reward for being grouped with the seeker, and on the same planet!");
                     if (isGod(group_member))
                     {
-                        sendSystemMessageTestingOnly(group_member, "debug: repeatable reward of: " + REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)]);
+                        broadcast(group_member, "debug: repeatable reward of: " + REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)]);
                     }
                     obj_id repeatable_item = static_item.createNewItemFunction(REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)], utils.getInventoryContainer(group_member));
                     detachScript(repeatable_item, "item.special.nomove");
@@ -230,7 +230,7 @@ public class wheres_watto extends script.base_script
                 broadcast(player, "Watto has rewarded you with a useless datapad. Maybe you can find use for it.");
                 if (isGod(player))
                 {
-                    sendSystemMessageTestingOnly(player, "debug: one time grant of: " + reward);
+                    broadcast(player, "debug: one time grant of: " + reward);
                 }
                 obj_id one_time_item = static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
                 detachScript(one_time_item, "item.special.nomove");
@@ -243,7 +243,7 @@ public class wheres_watto extends script.base_script
                 broadcast(player, "You have received a reward for being grouped with the seeker, and on the same planet!");
                 if (isGod(player))
                 {
-                    sendSystemMessageTestingOnly(player, "debug: repeatable reward of: " + REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)]);
+                    broadcast(player, "debug: repeatable reward of: " + REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)]);
                 }
                 obj_id repeatable_item = static_item.createNewItemFunction(REPEATABLE_REWARDS[rand(0, REPEATABLE_REWARDS.length - 1)], utils.getInventoryContainer(player));
                 detachScript(repeatable_item, "item.special.nomove");

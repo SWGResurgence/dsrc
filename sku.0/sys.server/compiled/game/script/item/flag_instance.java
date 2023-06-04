@@ -43,7 +43,7 @@ public class flag_instance extends script.base_script
             if (instanceName == null || instanceName.equals(""))
             {
                 CustomerServiceLog("item", "flag_instance: " + self + " Name: " + getName(self) + " had an invalid static item name. Item object is bailing out early as a result.");
-                sendSystemMessageTestingOnly(player, "Static Name Not Found!.");
+                broadcast(player, "Static Name Not Found!.");
                 return SCRIPT_CONTINUE;
             }
             String[] instanceFlags = dataTableGetStringColumn(instance.INSTANCE_DATATABLE, "key_required");
@@ -59,12 +59,12 @@ public class flag_instance extends script.base_script
             if (contains)
             {
                 instance.flagPlayerForInstance(player, instanceName);
-                sendSystemMessageTestingOnly(player, "Instance Encounter Authorized");
+                broadcast(player, "Instance Encounter Authorized");
                 static_item.decrementStaticItem(self);
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "No Instance Encounter Authorizations have been detected.");
+                broadcast(player, "No Instance Encounter Authorizations have been detected.");
             }
         }
         return SCRIPT_CONTINUE;

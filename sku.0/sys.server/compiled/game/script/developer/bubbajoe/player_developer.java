@@ -22,7 +22,7 @@ public class player_developer extends base_script
     {
     }
 
-    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
+    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException, NullPointerException
     {
         obj_id iTarget = getTarget(self);
         StringTokenizer tok = new java.util.StringTokenizer(params);
@@ -64,7 +64,7 @@ public class player_developer extends base_script
             obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
             for (obj_id watto : wattos)
             {
-                sendSystemMessageTestingOnly(self, "Watto: " + watto);
+                broadcast(self, "Watto: " + watto);
             }
             return SCRIPT_CONTINUE;
         }
@@ -90,7 +90,7 @@ public class player_developer extends base_script
                 // TODO: 4/10/2023 location to clipboard
                 String locationString = getLocation(self).toClipboardFormat();
                 int page = createSUIPage("/Script.messageBox", self, self);
-                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", "");
+                setSUIProperty(page, "Prompt.lblPrompt", "LocalText", locationString);
                 setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
                 setSUIProperty(page, "bg.caption.lblTitle", "Text", "CLIPBOARD");
                 setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
@@ -104,12 +104,12 @@ public class player_developer extends base_script
             }
             if (clipboard.equals("scripts"))
             {
-                String scriptString = "";
+                StringBuilder scriptString = new StringBuilder();
                 String[] scripts = getScriptList(target);
                 for (String s : scripts)
                 {
                     String removed = s.replace("script.", "");
-                    scriptString += removed + "\n";
+                    scriptString.append(removed).append("\n");
                 }
                 String wholePrompt = "Scripts for " + target + ":\n" + scriptString;
                 int page = createSUIPage("/Script.messageBox", self, self);
@@ -129,7 +129,7 @@ public class player_developer extends base_script
             if (clipboard.equals("objvars"))
             {
                 obj_var_list ovl = getObjVarList(target, "");
-                String objvarString = "";
+                StringBuilder objvarString = new StringBuilder();
                 if (ovl != null)
                 {
                     int ovCount = ovl.getNumItems();
@@ -137,7 +137,7 @@ public class player_developer extends base_script
                     {
                         obj_var ov = ovl.getObjVar(i);
                         String ovName = ov.getName();
-                        objvarString += ovName + "\n";
+                        objvarString.append(ovName).append("\n");
                     }
                 }
                 String objvarPrompt = "ObjVars for " + target + ":\n" + objvarString;
@@ -159,7 +159,7 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("say"))
         {
             String speech = tok.nextToken();
-            StringBuilder combinedMessage = new StringBuilder();
+            StringBuilder combinedMessage = new StringBuilder(speech);
             while (tok.hasMoreTokens())
             {
                 combinedMessage.append(tok.nextToken()).append(" ");
@@ -175,7 +175,7 @@ public class player_developer extends base_script
             {
                 combinedMessage.append(speech).append(" ");
             }
-            if (combinedMessage != null && !combinedMessage.toString().equals(""))
+            if (!combinedMessage.toString().equals(""))
             {
                 prose_package pp = prose.getPackage(new string_id(combinedMessage.toString()));
                 commPlayer(self, target, pp);
@@ -202,34 +202,32 @@ public class player_developer extends base_script
         {
             String type = tok.nextToken();
             String[] skillMods = dataTableGetStringColumnNoDefaults("datatables/buff/effect_mapping.iff", "SUBTYPE");
-            if (type.equals("crafting"))
+            switch (type)
             {
-                for (String s : skillMods) {
-                    if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
+                case "crafting":
+                    for (String s : skillMods)
+                    {
+                        if (s.contains("_experimentation") || s.contains("_assembly") || s.contains("_customization") || s.startsWith("jedi_saber_"))
+                        {
+                            setSkillModBonus(target, s, 350);
+                        }
+                    }
+                case "combat":
+                    for (String s : skillMods)
+                    {
+                        if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
+                        {
+                            setSkillModBonus(target, s, 350);
+                        }
+                    }
+                case "all":
+                    for (String s : skillMods)
                     {
                         setSkillModBonus(target, s, 350);
                     }
-                }
-            }
-            else if (type.equals("combat"))
-            {
-                for (String s : skillMods) {
-                    if (s.startsWith("combat_") || s.endsWith("_modified") || s.startsWith("expertise_") || s.startsWith("private_"))
-                    {
-                        setSkillModBonus(target, s, 350);
-                    }
-                }
-            }
-            else if (type.equals("all"))
-            {
-                for (String s : skillMods) {
-                    setSkillModBonus(target, s, 350);
-                }
-                broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
-            }
-            else
-            {
-                sendSystemMessageTestingOnly(self, "Invalid type. Valid types are: crafting, combat, all");
+                    broadcast(self, "Rawdogging " + getName(target) + " with " + skillMods.length + " skillmods.");
+                default:
+                    broadcast(self, "Invalid type. Valid types are: crafting, combat, all");
             }
         }
         if (cmd.equalsIgnoreCase("describe"))
@@ -242,7 +240,6 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("pumpkin"))
         {
-            obj_id pumpkinMaster = target;
             String flag = tok.nextToken();
             String[] pumpkinNames = {
                     "a plump pumpkin",
@@ -259,13 +256,13 @@ public class player_developer extends base_script
             }
             if (flag.equalsIgnoreCase("single"))
             {
-                obj_id pumpkin = createObject("object/tangible/holiday/halloween/pumpkin_object.iff", getLocation(pumpkinMaster));
+                obj_id pumpkin = createObject("object/tangible/holiday/halloween/pumpkin_object.iff", getLocation(target));
                 attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
                 setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
             }
             if (flag.equalsIgnoreCase("ring"))
             {
-                location loc = getLocation(pumpkinMaster);
+                location loc = getLocation(target);
                 int howMany = utils.stringToInt(tok.nextToken());
                 int radius = utils.stringToInt(tok.nextToken());
                 if (howMany == 0 || radius == 0)
@@ -277,8 +274,8 @@ public class player_developer extends base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                float x = loc.x;
-                float z = loc.z;
+                float x;
+                float z;
                 for (int i = 0; i < howMany; i++)
                 {
                     float angle = (float) (i * (360 / howMany));
@@ -286,11 +283,11 @@ public class player_developer extends base_script
                     z = loc.z + (float) Math.sin(angle) * radius;
                     obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", new location(x, getHeightAtLocation(x, z), z, loc.area));
                     attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
-                    faceTo(pumpkin, pumpkinMaster);
+                    faceTo(pumpkin, target);
                     setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
                 }
                 prose_package pp = prose.getPackage(new string_id("H'chu apenkee, Moulee-rah!"));
-                commPlayer(self, pumpkinMaster, pp, "object/mobile/jabba_the_hutt.iff");
+                commPlayer(self, target, pp, "object/mobile/jabba_the_hutt.iff");
             }
         }
         if (cmd.equalsIgnoreCase("wiki"))
@@ -331,7 +328,6 @@ public class player_developer extends base_script
             }
             String schematicTable = "datatables/crafting/schematic_group.iff";
             String column = "SchematicName";
-            String[] schematics = dataTableGetStringColumnNoDefaults(schematicTable, column);
             obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
             String[] items = dataTableGetStringColumnNoDefaults(schematicTable, column);
             int bagLimit = 0;
@@ -360,7 +356,6 @@ public class player_developer extends base_script
             }
             String schematicTable = "datatables/crafting/schematic_group.iff";
             String column = "SchematicName";
-            String[] schematics = dataTableGetStringColumnNoDefaults(schematicTable, column);
             obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
             String[] items = dataTableGetStringColumnNoDefaults(schematicTable, column);
             int bagLimit = 0;
@@ -405,10 +400,10 @@ public class player_developer extends base_script
         {
             String where = tok.nextToken();
             String command = tok.nextToken();
-            String args = "";
+            StringBuilder args = new StringBuilder();
             while (tok.hasMoreTokens())
             {
-                args += tok.nextToken() + " ";
+                args.append(tok.nextToken()).append(" ");
             }
             String fullCommand = command + " " + args;
             broadcast(self, "Running command: [/developer shell] " + where + " " + fullCommand);
@@ -552,11 +547,11 @@ public class player_developer extends base_script
             {
                 setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
                 removeObjVar(city_hall, VAR_CITY);
-                sendSystemMessageTestingOnly(self, "Removed specstamp from City Hall with preservation of old specstamp.");
+                broadcast(self, "Removed specstamp from City Hall with preservation of old specstamp.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "This target does not have the \"spec_stamp\" objvar.");
+                broadcast(self, "This target does not have the \"spec_stamp\" objvar.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -586,24 +581,24 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("renameContainerContents"))
         {
-            String name = tok.nextToken();
+            StringBuilder name = new StringBuilder(tok.nextToken());
             while (tok.hasMoreTokens())
             {
-                name += " " + tok.nextToken();
+                name.append(" ").append(tok.nextToken());
             }
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
             {
-                setName(content, name);
+                setName(content, name.toString());
             }
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("tagContainerContents"))
         {
-            String tag = tok.nextToken();
+            StringBuilder tag = new StringBuilder(tok.nextToken());
             while (tok.hasMoreTokens())
             {
-                tag += " " + tok.nextToken();
+                tag.append(" ").append(tok.nextToken());
             }
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
@@ -721,12 +716,8 @@ public class player_developer extends base_script
                     }
                     broadcast(self, "Applied " + buffName + " to " + getName(target));
                 }
-                else
-                {
-                    continue;
-                }
             }
-            broadcast(self, "Granted all items to " + getName(target));
+            broadcast(self, "Granted all buffs to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("grantAllSkills"))
@@ -758,10 +749,6 @@ public class player_developer extends base_script
                     }
                     grantSkill(target, skill);
                 }
-                else
-                {
-                    continue;
-                }
             }
             broadcast(self, "Granted all skills from search to " + getName(target));
             return SCRIPT_CONTINUE;
@@ -784,21 +771,21 @@ public class player_developer extends base_script
                     debugConsoleMsg(self, "Skipping item " + item);
                 }
             }
-            setName(myBag, "Travel Pack of " + query);
+            setName(myBag, "QA Backpack of '" + query + "'");
             broadcast(self, "Granted all items with search parameter " + query + " to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("listStaticContents"))
         {
             obj_id[] contents = getContents(target);
-            String prompt = "Contents of " + getName(target) + " are: \n";
+            StringBuilder prompt = new StringBuilder("Contents of " + getName(target) + " are: \n");
             for (obj_id content : contents)
             {
                 String itemName = getStaticItemName(content);
-                prompt += itemName + "\n";
+                prompt.append(itemName).append("\n");
             }
             int page = createSUIPage("/Script.messageBox", self, self);
-            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt.toString());
             setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
             setSUIProperty(page, "bg.caption.lblTitle", "Text", "Shell Commander");
             setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
@@ -811,22 +798,22 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("flytext"))
         {
-            String flytext = tok.nextToken();
+            StringBuilder flytext = new StringBuilder(tok.nextToken());
             while (tok.hasMoreTokens())
             {
-                flytext += " " + tok.nextToken();
+                flytext.append(" ").append(tok.nextToken());
             }
-            showFlyText(target, unlocalized(flytext), 2.0f, colors.WHITE);
+            showFlyText(target, unlocalized(flytext.toString()), 2.0f, colors.WHITE);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("flytextTarget"))
         {
-            String flytext = tok.nextToken();
+            StringBuilder flytext = new StringBuilder(tok.nextToken());
             while (tok.hasMoreTokens())
             {
-                flytext += " " + tok.nextToken();
+                flytext.append(" ").append(tok.nextToken());
             }
-            showFlyText(target, unlocalized(flytext), 35.0f, colors.WHITE);
+            showFlyText(target, unlocalized(flytext.toString()), 35.0f, colors.WHITE);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("toggle"))
@@ -923,7 +910,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer openlink url");
+                broadcast(self, "Syntax: /developer openlink url");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -983,7 +970,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffect <effect name>");
+                broadcast(self, "Syntax: /developer playeffect <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -996,7 +983,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffecttarget <effect name>");
+                broadcast(self, "Syntax: /developer playeffecttarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1009,7 +996,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloc <effect name>");
+                broadcast(self, "Syntax: /developer playeffectloc <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1022,7 +1009,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloctarget <effect name>");
+                broadcast(self, "Syntax: /developer playeffectloctarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1035,7 +1022,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
+                broadcast(self, "Syntax: /developer playeffectatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1052,7 +1039,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsound <sound name>");
+                broadcast(self, "Syntax: /developer playsound <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1065,7 +1052,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundtarget <sound name>");
+                broadcast(self, "Syntax: /developer playsoundtarget <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1090,7 +1077,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                broadcast(self, "Syntax: /developer playsoundloc <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1103,7 +1090,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundeveryone <sound name>");
+                broadcast(self, "Syntax: /developer playsoundeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1120,7 +1107,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playcefeveryone <sound name>");
+                broadcast(self, "Syntax: /developer playcefeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1137,7 +1124,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin stopmacros (target)");
+                broadcast(self, "Syntax: /developer stopmacros (target)");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1149,7 +1136,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer rewardarea <item> <count>");
+                broadcast(self, "Syntax: /developer rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1163,7 +1150,7 @@ public class player_developer extends base_script
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
                     if (isIdValid(pItem))
                     {
-                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
+                        broadcast(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
                     }
                 }
             }
@@ -1192,43 +1179,42 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("say"))
         {
             obj_id iTar = getIntendedTarget(self);
-            String words = tok.nextToken();
+            StringBuilder words = new StringBuilder(tok.nextToken());
             if (tok.hasMoreTokens())
             {
                 while (tok.hasMoreTokens())
                 {
-                    words += " " + tok.nextToken();
+                    words.append(" ").append(tok.nextToken());
                 }
             }
-            chat.chat(iTar, words);
+            chat.chat(iTar, words.toString());
         }
         if (cmd.equalsIgnoreCase("setloottable"))
         {
             String table = tok.nextToken();
             if (table == null || table.equals(""))
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setloottable <loot table name>");
+                broadcast(self, "Syntax: /developer setloottable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.lootTable", table);
-                sendSystemMessageTestingOnly(self, "Loot table set to " + table);
+                broadcast(self, "Loot table set to " + table);
             }
         }
         if (cmd.equalsIgnoreCase("setnumitems"))
         {
-            obj_id iTar = getIntendedTarget(self);
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot count>");
+                broadcast(self, "Syntax: /developer setnumitems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.numItems", level);
-                sendSystemMessageTestingOnly(self, "Number of loot items set to " + level);
+                broadcast(self, "Number of loot items set to " + level);
             }
         }
         if (cmd.equalsIgnoreCase("setcount"))
@@ -1285,12 +1271,12 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("sendwarning"))
         {
-            String words = tok.nextToken();
+            StringBuilder words = new StringBuilder(tok.nextToken());
             if (tok.hasMoreTokens())
             {
                 while (tok.hasMoreTokens())
                 {
-                    words += " " + tok.nextToken();
+                    words.append(" ").append(tok.nextToken());
                 }
             }
             //liteLog(words);
@@ -1320,12 +1306,12 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("sendPreviewMessage"))
         {
-            String message = tok.nextToken();
+            StringBuilder message = new StringBuilder(tok.nextToken());
             if (tok.hasMoreTokens())
             {
                 while (tok.hasMoreTokens())
                 {
-                    message += " " + tok.nextToken();
+                    message.append(" ").append(tok.nextToken());
                 }
             }
             //sendWebhook(APIKEY, message);
@@ -1335,7 +1321,6 @@ public class player_developer extends base_script
             String creatureToSpawn = tok.nextToken();
             int num = Integer.parseInt(tok.nextToken());
             float radius = Float.parseFloat(tok.nextToken());
-            location where = getLocation(self);
             resurgence.createCircleSpawn(self, self, creatureToSpawn, num, radius);
 
         }
@@ -1352,22 +1337,20 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloctarget <sound name>");
-                return SCRIPT_CONTINUE;
+                broadcast(self, "Syntax: /developer playsoundloctarget <sound name>");
             }
             else
             {
                 String sound = tok.nextToken();
                 playClientEffectLoc(iTarget, sound, getLocation(iTarget), 0.0f);
-                return SCRIPT_CONTINUE;
             }
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("playsoundatloc"))
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
-                return SCRIPT_CONTINUE;
+                broadcast(self, "Syntax: /developer playsoundatloc <sound name> <x> <y> <z>");
             }
             else
             {
@@ -1377,38 +1360,37 @@ public class player_developer extends base_script
                 float z = Float.parseFloat(tok.nextToken());
                 location loc = new location(x, y, z);
                 playClientEffectLoc(self, sound, loc, 0.0f);
-                return SCRIPT_CONTINUE;
             }
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("areacommand"))
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <radius> <command>");
-                return SCRIPT_CONTINUE;
+                broadcast(self, "Syntax: /developer areacommand <radius> <command>");
             }
             else
             {
                 float radius = Float.parseFloat(tok.nextToken());
-                String command = tok.nextToken();
+                StringBuilder command = new StringBuilder(tok.nextToken());
                 while (tok.hasMoreTokens())
                 {
-                    command += " " + tok.nextToken();
+                    command.append(" ").append(tok.nextToken());
                 }
                 obj_id[] players = getPlayerCreaturesInRange(getLocation(self), radius);
                 for (obj_id player : players)
                 {
                     if (isGod(player))
                     {
-                        continue;
+                        broadcast(player, "Ignoring area command as God Mode avatar.");
                     }
                     else
                     {
                         sendConsoleCommand("/" + command, player);
                     }
                 }
-                return SCRIPT_CONTINUE;
             }
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("createLootableCorpse"))
         {
@@ -1428,7 +1410,7 @@ public class player_developer extends base_script
             };
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCorpse <table> <amount>");
+                broadcast(self, "Syntax: /developer createLootableCorpse <table> <amount>");
             }
             else
             {
@@ -1440,7 +1422,7 @@ public class player_developer extends base_script
                 attachScript (treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
-                sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+                broadcast(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
                 obj_id[] contents = getContents(treasureChest);
                 {
                     for (obj_id content : contents)
@@ -1464,7 +1446,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCargo <table> <amount>");
+                broadcast(self, "Syntax: /developer createLootableCargo <table> <amount>");
             }
             else
             {
@@ -1476,7 +1458,7 @@ public class player_developer extends base_script
                 attachScript (treasureChest, "item.container.loot_crate_opened");
                 setName(treasureChest, "\\#FFC0CBa cargo container\\#.");
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
-                sendSystemMessageTestingOnly(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
+                broadcast(self, "A cargo container was made with " + amt + " items from the loot table: " + table);
                 obj_id[] contents = getContents(treasureChest);
                 {
                     for (obj_id content : contents)
@@ -1501,7 +1483,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer createJunkCache [total amount] [min amt of each item] [max amt of each item]");
+                broadcast(self, "Syntax: /developer createJunkCache [total amount] [min amt of each item] [max amt of each item]");
             }
             else
             {
@@ -1530,7 +1512,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusic <music name>");
+                broadcast(self, "Syntax: /developer playmusic <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1556,23 +1538,23 @@ public class player_developer extends base_script
             int randomIndex = rand(0, RACES.length - 1);
             String randomString = RACES[randomIndex];
             int genderChance = rand(1,100);
+            obj_id bot;
             if (genderChance < 49)
             {
-                obj_id bot = create.object("object/creature/player/" + randomString + "_male.iff", getLocation(self));
-                attachScript(bot, "bot.clone");
+                bot = create.object("object/creature/player/" + randomString + "_male.iff", getLocation(self));
             }
             else
             {
-                obj_id bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
-                attachScript(bot, "bot.clone");
+                bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
             }
+            attachScript(bot, "bot.clone");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("playmusictarget"))
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusictarget <music name>");
+                broadcast(self, "Syntax: /developer playmusictarget <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1586,19 +1568,19 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer getItemStringByName <item name>");
+                broadcast(self, "Syntax: /developer getItemStringByName <item name>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 String itemName = tok.nextToken();
-                String prompt = "";
+                StringBuilder prompt = new StringBuilder();
                 String[] items = dataTableGetStringColumnNoDefaults("datatables/item/master_item/master_item.iff", "name");
                 for (String item : items)
                 {
                     if (item.contains(itemName))
                     {
-                        prompt += item + "\n";
+                        prompt.append(item).append("\n");
                     }
                 }
                 int page = createSUIPage("/Script.messageBox", self, self);
@@ -1626,7 +1608,7 @@ public class player_developer extends base_script
                 if (getFirstName(aTargetPool).equalsIgnoreCase(parse))
                 {
                     setLocation(self, getLocation(aTargetPool));
-                    sendSystemMessageTestingOnly(self, "Teleported to " + getEncodedName(aTargetPool));
+                    broadcast(self, "Teleported to " + getEncodedName(aTargetPool));
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -1659,12 +1641,12 @@ public class player_developer extends base_script
             if (hasObjVar(self, vendorVar))
             {
                 removeObjVar(self, vendorVar);
-                sendSystemMessageTestingOnly(self, "Vendor costs are now disabled.");
+                broadcast(self, "Vendor costs are now disabled.");
             }
             else
             {
                 setObjVar(self, vendorVar, 1);
-                sendSystemMessageTestingOnly(self, "Vendor costs are now enabled.");
+                broadcast(self, "Vendor costs are now enabled.");
             }
         }
         if (cmd.equalsIgnoreCase("invulnerable"))
@@ -1672,48 +1654,48 @@ public class player_developer extends base_script
             if (isInvulnerable(target))
             {
                 setInvulnerable(target, false);
-                sendSystemMessageTestingOnly(self, "Target is no longer invulnerable.");
+                broadcast(self, "Target is no longer invulnerable.");
             }
             else
             {
                 setInvulnerable(target, true);
-                sendSystemMessageTestingOnly(self, "Target is now invulnerable.");
+                broadcast(self, "Target is now invulnerable.");
             }
         }
         if (cmd.equalsIgnoreCase("commPlanet"))
         {
-            String message = tok.nextToken();
+            StringBuilder message = new StringBuilder(tok.nextToken());
             while (tok.hasMoreTokens())
             {
-                message += " " + tok.nextToken();
+                message.append(" ").append(tok.nextToken());
             }
             obj_id[] recipients = getPlayerCreaturesInRange(getLocation(self), 16000.0f);
             for (obj_id recipient : recipients)
             {
                 prose_package pp = new prose_package();
-                prose.setStringId(pp, new string_id(message));
+                prose.setStringId(pp, new string_id(message.toString()));
                 commPlayer(self, recipient, pp);
             }
         }
-        if (cmd.equalsIgnoreCase("setHeight"))
+        if (cmd.equalsIgnoreCase("height"))
         {
             String subcommand = tok.nextToken();
             if (subcommand.equals("copy"))
             {
                 location loc = getLocation(iTarget);
                 float height = loc.y;
-                setObjVar(self, "dev_height", height);
+                setObjVar(self, "developer_clipboard.height", height);
                 broadcast(self, "Height of " + height +  " copied.");
                 return SCRIPT_CONTINUE;
             }
             else if (subcommand.equals("paste"))
             {
-                if (!hasObjVar(self, "dev_height"))
+                if (!hasObjVar(self, "developer_clipboard.height"))
                 {
-                    sendSystemMessageTestingOnly(self, "No height to paste.");
+                    broadcast(self, "No height to paste.");
                     return SCRIPT_CONTINUE;
                 }
-                float height = getFloatObjVar(self, "dev_height");
+                float height = getFloatObjVar(self, "developer_clipboard.height");
                 location loc = getLocation(iTarget);
                 loc.y = height;
                 setLocation(iTarget, loc);
@@ -1721,7 +1703,7 @@ public class player_developer extends base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (cmd.equalsIgnoreCase("setAlign"))
+        if (cmd.equalsIgnoreCase("align"))
         {
             String subcommand = tok.nextToken();
             if (subcommand.equals("x"))
@@ -1731,13 +1713,12 @@ public class player_developer extends base_script
                 {
                     location loc = getLocation(iTarget);
                     float alignment = loc.x;
-                    setObjVar(self, "dev_align_x", alignment);
+                    setObjVar(self, "developer_clipboard.x", alignment);
                 }
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    float alignment = getFloatObjVar(self, "dev_align_x");
-                    loc.z = alignment;
+                    loc.z = getFloatObjVar(self, "developer_clipboard.x");
                     setLocation(iTarget, loc);
                 }
             }
@@ -1748,20 +1729,57 @@ public class player_developer extends base_script
                 {
                     location loc = getLocation(iTarget);
                     float alignment = loc.x;
-                    setObjVar(self, "dev_align_z", alignment);
+                    setObjVar(self, "developer_clipboard.z", alignment);
                 }
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    float alignment = getFloatObjVar(self, "dev_align_z");
-                    loc.z = alignment;
+                    loc.z = getFloatObjVar(self, "developer_clipboard.z");
                     setLocation(iTarget, loc);
+                }
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("copy"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equalsIgnoreCase("-onto"))
+            {
+                String template = getTemplateName(iTarget);
+                sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equalsIgnoreCase("-into"))
+            {
+                String template = getTemplateName(iTarget);
+                obj_id pInv = utils.getInventoryContainer(self);
+                sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equalsIgnoreCase("-template"))
+            {
+                String flag = tok.nextToken();
+                if (flag.equals("copy"))
+                {
+                    String template = getTemplateName(iTarget);
+                    setObjVar(self, "developer_clipboard.template", template);
+                    broadcast(self, "Template " + template + " copied.");
+                }
+                else if (flag.equals("copy"))
+                {
+                    String template = getStringObjVar(self, "developer_clipboard.template");
+                    sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                }
+                else
+                {
+                    broadcast(self, "Usage: /developer copy -template [copy|paste]");
                 }
                 return SCRIPT_CONTINUE;
             }
         }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
+            broadcast(self, "This is experimental, do not use near players or invulnerable NPCs.");
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
             if (hasScript(gonkieControlDevice, "item.buff_click_item"))
             {
@@ -1774,9 +1792,8 @@ public class player_developer extends base_script
         }
         if (cmd.equals("saveBuilding"))
         {
-            obj_id building = target;
-            obj_id contents[] = getContents(building);
-            persistObject(building);
+            obj_id[] contents = getContents(target);
+            persistObject(target);
             for (obj_id content : contents)
             {
                 persistObject(content);
@@ -1786,7 +1803,7 @@ public class player_developer extends base_script
         if (cmd.equals("saveBuildingCell"))
         {
             obj_id building = utils.stringToObjId(tok.nextToken());
-            obj_id contents[] = getContents(building);
+            obj_id[] contents = getContents(building);
             persistObject(building);
             for (obj_id content : contents)
             {
@@ -1805,7 +1822,7 @@ public class player_developer extends base_script
             String craftedBy = tok.nextToken();
             obj_id who = getPlayerIdFromFirstName(craftedBy);
             setCrafter(target, who);
-            sendSystemMessageTestingOnly(self, "Item will now display that" + craftedBy + " crafted it.");
+            broadcast(self, "Item will now display that" + craftedBy + " crafted it.");
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1834,7 +1851,7 @@ public class player_developer extends base_script
         {
             if (tok.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
+                broadcast(self, "Syntax: /developer editVehicle (target) <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(target))
@@ -1847,24 +1864,7 @@ public class player_developer extends base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
-            }
-        }
-        if (cmd.equalsIgnoreCase("copy"))
-        {
-            String subcommand = tok.nextToken();
-            if (subcommand.equalsIgnoreCase("-onto"))
-            {
-                String template = getTemplateName(iTarget);
-                sendConsoleCommand("/spawn " + template + " 1 0 0", self);
-                return SCRIPT_CONTINUE;
-            }
-            else if (subcommand.equalsIgnoreCase("-into"))
-            {
-                String template = getTemplateName(iTarget);
-                obj_id pInv = utils.getInventoryContainer(self);
-                sendConsoleCommand("/object createIn " + template + " " + pInv, self);
-                return SCRIPT_CONTINUE;
+                broadcast(self, "You are not riding a vehicle.");
             }
         }
         if (cmd.equalsIgnoreCase("scriptvar"))
@@ -1909,15 +1909,13 @@ public class player_developer extends base_script
                 String itemDesc =dataTableGetString(table, i, columns[2]);
                 String finalizedFormatName = itemCode + "\t" + itemName + "\n";
                 String finalizedFormatDesc = itemCode + "\t" + itemDesc + "\n";
-                String strName = finalizedFormatName;
-                String strDesc = finalizedFormatDesc;
                 BufferedWriter nameWriter = new BufferedWriter(new FileWriter(clobberedText, true));
                 nameWriter.append(' ');
-                nameWriter.append(strName);
+                nameWriter.append(finalizedFormatName);
                 nameWriter.close();
                 BufferedWriter descWriter = new BufferedWriter(new FileWriter(clobberedDesc, true));
                 descWriter.append(' ');
-                descWriter.append(strDesc);
+                descWriter.append(finalizedFormatDesc);
                 descWriter.close();
             }
             broadcast(self, "Attempting to export " + columns.length + " columns worth of data split between " + clobberedText + " and " + clobberedDesc);
@@ -1990,7 +1988,7 @@ public class player_developer extends base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int getPlayerLevel(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    public int getPlayerLevel(obj_id self, obj_id target, String params, float defaultTime)
     {
         int level = getLevel(target);
         debugSpeakMsg(self, "Your level is " + level);
@@ -2022,7 +2020,7 @@ public class player_developer extends base_script
         }
     }
 
-    public void pathToMe(obj_id self, obj_id target) throws InterruptedException
+    public void pathToMe(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
@@ -2036,7 +2034,7 @@ public class player_developer extends base_script
     }
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if(hasObjVar(self, "live_qa"))
+        if(hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
         {
             sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
             sendConsoleCommand( "/object hide " + self + " " + 0, self);

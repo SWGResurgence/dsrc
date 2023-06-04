@@ -1476,7 +1476,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         {
             String strOverrideFileName = getStringObjVar(objCreator, "missionTerminalOverrideDestroyMissionFileName");
             intOverrideMissionIndex = getIntObjVar(objCreator, "missionTerminalOverrideDestroyMissionIndex");
-            sendSystemMessageTestingOnly(objCreator, "using mission #" + intOverrideMissionIndex + " from " + strOverrideFileName + " instead of " + strFileName);
+            broadcast(objCreator, "using mission #" + intOverrideMissionIndex + " from " + strOverrideFileName + " instead of " + strFileName);
             strFileName = strOverrideFileName;
             intOverrideMissionIndex -= 3;
         }

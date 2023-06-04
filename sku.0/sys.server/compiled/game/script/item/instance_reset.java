@@ -37,7 +37,7 @@ public class instance_reset extends script.base_script
                 int timeLeft = getIntObjVar(player, "neural_cd") - getCalendarTime();
                 if (timeLeft > 0)
                 {
-                    sendSystemMessageTestingOnly(player, "You must wait " + timeLeft + " seconds before using this item again.");
+                    broadcast(player, "You must wait " + timeLeft + " seconds before using this item again.");
                     return false;
                 }
                 removeObjVar(player, "neural_cd");

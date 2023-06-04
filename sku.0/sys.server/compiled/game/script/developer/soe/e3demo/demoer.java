@@ -299,7 +299,7 @@ public class demoer extends script.base_script
             String[] strScripts = getScriptList(palace1);
             detachScriptList(strScripts, palace1);
             LOG("test", "Messaging self with " + dctParams.toString());
-            sendSystemMessageTestingOnly(self, "Setup Ground Demo 1");
+            broadcast(self, "Setup Ground Demo 1");
             messageTo(self, "cleanoutBuilding", dctParams, 15, false);
             obj_id[] decor = new obj_id[13];
             location crawler1loc = new location(2527, 0.66f, 4624);
@@ -371,7 +371,7 @@ public class demoer extends script.base_script
             String[] strScripts = getScriptList(palace2);
             detachScriptList(strScripts, palace2);
             LOG("test", "Messaging self with " + dctParams.toString());
-            sendSystemMessageTestingOnly(self, "Setup Ground Demo 2");
+            broadcast(self, "Setup Ground Demo 2");
             messageTo(self, "cleanoutBuilding", dctParams, 15, false);
             obj_id[] decor = new obj_id[13];
             location crawler1loc = new location(-2528.72f, 0, -4915.57f);
@@ -471,7 +471,7 @@ public class demoer extends script.base_script
         }
         if (strCommands[0].equalsIgnoreCase("startGroundDemo1"))
         {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
+            broadcast(self, "Demo is starting now!  Proceed into the palace!");
             obj_id palace1 = getObjIdObjVar(self, "palace1");
             obj_id cell = getCellId(palace1, "foyer");
             location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
@@ -482,7 +482,7 @@ public class demoer extends script.base_script
         }
         if (strCommands[0].equalsIgnoreCase("startGroundDemo2"))
         {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
+            broadcast(self, "Demo is starting now!  Proceed into the palace!");
             obj_id palace2 = getObjIdObjVar(self, "palace2");
             obj_id cell = getCellId(palace2, "foyer");
             location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
@@ -538,7 +538,7 @@ public class demoer extends script.base_script
             warpPlayer(objShip, "space_kashyyyk", 2934, 455, -2340, null, 2934, 455, -2340, null, true);
             messageTo(self, "faceAvatar", null, 2, false);
             grantAllSkills(self, REBEL_PILOT);
-            sendSystemMessageTestingOnly(self, "FOOZLE");
+            broadcast(self, "FOOZLE");
         }
         if (strCommands[0].equalsIgnoreCase("makeRebelPilot"))
         {
@@ -636,7 +636,7 @@ public class demoer extends script.base_script
             setObjVar(object, "dataModuleRating", 12);
             setObjVar(object, "ai.pet.hasContainer", 12);
             setObjVar(object, "ai.pet.isRepairDroid", true);
-            sendSystemMessageTestingOnly(self, "Made R2 Unit deed in your inventory");
+            broadcast(self, "Made R2 Unit deed in your inventory");
         }
         return SCRIPT_CONTINUE;
     }
@@ -720,7 +720,7 @@ public class demoer extends script.base_script
         for (String strItem : strItems) {
             obj_id objTest = createObjectOverloaded(strItem, objInventory);
             if (!isIdValid(objTest)) {
-                sendSystemMessageTestingOnly(objPlayer, "Item of template " + strItem + " is Incorret!");
+                broadcast(objPlayer, "Item of template " + strItem + " is Incorret!");
             }
         }
         return;

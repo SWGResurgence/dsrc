@@ -91,7 +91,7 @@ public class qafaction extends script.base_script
                     case 1:
                     if (!factions.isRebel(player) && !factions.isImperial(player))
                     {
-                        sendSystemMessageTestingOnly(player, "You have to be part of a faction to go Covert!!!");
+                        broadcast(player, "You have to be part of a faction to go Covert!!!");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                         return SCRIPT_CONTINUE;
                     }
@@ -103,7 +103,7 @@ public class qafaction extends script.base_script
                     case 2:
                     if (!factions.isRebel(player) && !factions.isImperial(player))
                     {
-                        sendSystemMessageTestingOnly(player, "You have to be part of a faction to go Overt!!!");
+                        broadcast(player, "You have to be part of a faction to go Overt!!!");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                         return SCRIPT_CONTINUE;
                     }
@@ -113,10 +113,10 @@ public class qafaction extends script.base_script
                     qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                     break;
                     case 3:
-                    sendSystemMessageTestingOnly(player, faction);
+                    broadcast(player, faction);
                     if (!factions.isRebel(player) && !factions.isImperial(player))
                     {
-                        sendSystemMessageTestingOnly(player, "You have to be part of a faction to go on Leave!!!");
+                        broadcast(player, "You have to be part of a faction to go on Leave!!!");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                         return SCRIPT_CONTINUE;
                     }
@@ -128,7 +128,7 @@ public class qafaction extends script.base_script
                     case 4:
                     pvpMakeNeutral(player);
                     pvpSetAlignedFaction(player, 0);
-                    sendSystemMessageTestingOnly(player, "You are now Neutral.");
+                    broadcast(player, "You are now Neutral.");
                     CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has set their character to Neutral non-faction status using the QA Faction Tool.");
                     qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU_CONST, "mainMenuOptions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                     break;
@@ -181,12 +181,12 @@ public class qafaction extends script.base_script
                 switch (idx)
                 {
                     case 0:
-                    sendSystemMessageTestingOnly(player, "Option 1.");
+                    broadcast(player, "Option 1.");
                     utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_REBEL);
                     sui.transfer(player, player, PROMPT, "Rebel Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
                     break;
                     case 1:
-                    sendSystemMessageTestingOnly(player, "Option 2.");
+                    broadcast(player, "Option 2.");
                     utils.setScriptVar(player, SCRIPTVAR + ".factionType", factions.FACTION_IMPERIAL);
                     sui.transfer(player, player, PROMPT, "Imperial Faction", "Available", XP_AMOUNT, "Amount", 0, "handleFactionAdd");
                     break;
@@ -238,7 +238,7 @@ public class qafaction extends script.base_script
                 if (factionHashCode != factions.AD_HOC_FACTION && factionHashCode != 0)
                 {
                     pvpSetAlignedFaction(player, factionHashCode);
-                    sendSystemMessageTestingOnly(player, "Faction Changed.");
+                    broadcast(player, "Faction Changed.");
                 }
                 qa.refreshMenu(player, PROMPT, TITLE, FACTIONS, "joinFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
             }
@@ -276,7 +276,7 @@ public class qafaction extends script.base_script
                     int i = lastIndex;
                     if (i >= factionArray.length)
                     {
-                        sendSystemMessageTestingOnly(player, "There are no more");
+                        broadcast(player, "There are no more");
                         qa.refreshMenu(player, PROMPT, TITLE, prevMenuArray, "npcFactions", SCRIPTVAR + ".pid", sui.OK_CANCEL_REFRESH);
                         return SCRIPT_CONTINUE;
                     }

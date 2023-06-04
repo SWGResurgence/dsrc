@@ -436,7 +436,7 @@ public class token_vendor extends script.base_script
         }
         if (message)
         {
-            sendSystemMessageTestingOnly(player, "Out of Range of Character Builder Terminal.");
+            broadcast(player, "Out of Range of Character Builder Terminal.");
         }
         return true;
     }

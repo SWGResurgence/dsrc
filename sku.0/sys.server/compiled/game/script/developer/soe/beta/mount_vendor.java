@@ -137,9 +137,9 @@ public class mount_vendor extends script.base_script
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(player, "For some reason, the creature spawned can NOT be turned into a mount. Might be out of SCALE, could be several other things.");
-                        sendSystemMessageTestingOnly(player, "Anyhow, try making a mount using the REAL way instead of using a fake-out shortcut method. If you've got GOD access, it shouldn't take *much* longer.");
-                        sendSystemMessageTestingOnly(player, "And no writing up bugs on a broken TEST script.");
+                        broadcast(player, "For some reason, the creature spawned can NOT be turned into a mount. Might be out of SCALE, could be several other things.");
+                        broadcast(player, "Anyhow, try making a mount using the REAL way instead of using a fake-out shortcut method. If you've got GOD access, it shouldn't take *much* longer.");
+                        broadcast(player, "And no writing up bugs on a broken TEST script.");
                     }
                 }
                 string_id message = new string_id(MOUNT_VENDOR_CONVO, "ok");

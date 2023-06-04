@@ -964,13 +964,13 @@ public class newbie_handoff extends script.base_script
                 }
                 if (!createClientPath(player, start, there))
                 {
-                    sendSystemMessageTestingOnly(player, "The system was unable to create a client path for you.");
+                    broadcast(player, "The system was unable to create a client path for you.");
                 }
                 else 
                 {
                     if (here.cell != start.cell)
                     {
-                        sendSystemMessageTestingOnly(player, "Your find path has been started near the entrance of the structure you are currenly in.");
+                        broadcast(player, "Your find path has been started near the entrance of the structure you are currenly in.");
                     }
                     utils.setScriptVar(player, "hasClientPath", waypoint);
                 }

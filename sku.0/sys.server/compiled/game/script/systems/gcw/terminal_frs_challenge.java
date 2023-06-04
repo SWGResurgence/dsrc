@@ -144,7 +144,7 @@ public class terminal_frs_challenge extends script.base_script
             {
                 if (hasObjVar(player, "force_rank.qa.overrideArenaOpenSlots"))
                 {
-                    sendSystemMessageTestingOnly(player, "QA open slot Vote-Force override.");
+                    broadcast(player, "QA open slot Vote-Force override.");
                 }
                 else
                 {

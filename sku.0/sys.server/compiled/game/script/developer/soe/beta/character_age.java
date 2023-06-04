@@ -17,7 +17,7 @@ public class character_age extends script.base_script
         if (text.equals("age"))
         {
             int age = getCurrentBirthDate() - getPlayerBirthDate(target);
-            sendSystemMessageTestingOnly(self, "Age ->" + age);
+            broadcast(self, "Age ->" + age);
         }
         return SCRIPT_CONTINUE;
     }

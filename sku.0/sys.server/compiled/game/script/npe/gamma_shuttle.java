@@ -52,7 +52,7 @@ public class gamma_shuttle extends script.base_script
     {
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
+            broadcast(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
             return true;
         }
         return false;

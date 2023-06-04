@@ -371,7 +371,7 @@ public class pvp_battlefield extends script.base_script
         if (words[0].equals("bfreset"))
         {
             setupBattlefield(self);
-            sendSystemMessageTestingOnly(speaker, "Battlefield reset.");
+            broadcast(speaker, "Battlefield reset.");
         }
         if (words[0].equals("bfcont"))
         {
@@ -383,13 +383,13 @@ public class pvp_battlefield extends script.base_script
             {
                 messageTo(self, "checkBattlefieldState", params, BATTLEFIELD_HEARTBEAT, false);
             }
-            sendSystemMessageTestingOnly(speaker, "Battlefield continued.");
+            broadcast(speaker, "Battlefield continued.");
         }
         if (words[0].equals("bfend"))
         {
             utils.removeScriptVar(self, "battlefield.bfSetup");
             utils.removeScriptVar(self, "battlefield.battleTime");
-            sendSystemMessageTestingOnly(speaker, "Battlefield ended.");
+            broadcast(speaker, "Battlefield ended.");
         }
         return SCRIPT_CONTINUE;
     }

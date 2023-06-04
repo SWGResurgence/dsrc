@@ -2746,7 +2746,7 @@ public class utils extends script.base_script
         return getLocalTime() >= getLocalDayLength();
     }
 
-    public static void sendSystemMessageTestingOnly(obj_id[] players, String message) throws InterruptedException
+    public static void broadcast(obj_id[] players, String message) throws InterruptedException
     {
         if (players == null)
         {
@@ -2756,7 +2756,7 @@ public class utils extends script.base_script
         {
             if (isIdValid(player) && exists(player))
             {
-                sendSystemMessageTestingOnly(player, message);
+                broadcast(player, message);
             }
         }
     }
@@ -6040,7 +6040,7 @@ public class utils extends script.base_script
             destroyObject(hair);
             createObject(new_hair_template, player, "hair");
             CustomerServiceLog("imageDesigner", getFirstName(player) + "(" + player + ") has an invalid hairstyle. It has been replaced with a default style.");
-            sendSystemMessageTestingOnly(player, "An illegal hairstyle has been detected on your character. This has been corrected.");
+            broadcast(player, "An illegal hairstyle has been detected on your character. This has been corrected.");
         }
         return true;
     }

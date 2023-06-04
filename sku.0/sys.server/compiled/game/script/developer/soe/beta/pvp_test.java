@@ -13,7 +13,7 @@ public class pvp_test extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "PvP debug script attached.");
+        broadcast(self, "PvP debug script attached.");
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
@@ -25,7 +25,7 @@ public class pvp_test extends script.base_script
             obj_id target = getLookAtTarget(self);
             if (target == null || target == obj_id.NULL_ID)
             {
-                sendSystemMessageTestingOnly(self, "PVP_STATUS: no target designated. assuming target = self");
+                broadcast(self, "PVP_STATUS: no target designated. assuming target = self");
                 target = self;
             }
             if (st.hasMoreTokens())
@@ -66,7 +66,7 @@ public class pvp_test extends script.base_script
                                     sFaction = "faction_other";
                                     break;
                             }
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + ") is a " + sType + " " + sFaction);
+                            broadcast(self, getName(target) + "(" + target + ") is a " + sType + " " + sFaction);
                             displayEnemyFlags(self, target);
                             break;
                         case "enemyTo":
@@ -74,41 +74,41 @@ public class pvp_test extends script.base_script
                             break;
                         case "unalign":
                         case "mercenary":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): faction set UNALIGNED");
+                            broadcast(self, getName(target) + "(" + target + "): faction set UNALIGNED");
                             pvpSetAlignedFaction(target, 0);
                             break;
                         case "rebel":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): faction set REBEL");
+                            broadcast(self, getName(target) + "(" + target + "): faction set REBEL");
                             pvpSetAlignedFaction(target, (370444368));
                             break;
                         case "imperial":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): faction set IMPERIAL");
+                            broadcast(self, getName(target) + "(" + target + "): faction set IMPERIAL");
                             pvpSetAlignedFaction(target, (-615855020));
                             break;
                         case "neutral":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): type set NEUTRAL");
+                            broadcast(self, getName(target) + "(" + target + "): type set NEUTRAL");
                             pvpMakeNeutral(target);
                             break;
                         case "covert":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): type set COVERT");
+                            broadcast(self, getName(target) + "(" + target + "): type set COVERT");
                             pvpMakeCovert(target);
                             break;
                         case "declared":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): type set DECLARED");
+                            broadcast(self, getName(target) + "(" + target + "): type set DECLARED");
                             pvpMakeDeclared(target);
                             break;
                         case "clear":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): clearing temp enemy flags");
+                            broadcast(self, getName(target) + "(" + target + "): clearing temp enemy flags");
                             pvpRemoveAllTempEnemyFlags(target);
                             break;
                         case "faction":
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): " + factions.getFaction(target));
+                            broadcast(self, getName(target) + "(" + target + "): " + factions.getFaction(target));
                             break;
                         case "nonaggressive":
                             pvpMakeNeutral(target);
                             pvpSetAlignedFaction(target, (221551254));
                             pvpMakeDeclared(target);
-                            sendSystemMessageTestingOnly(self, getName(target) + "(" + target + "): " + factions.getFaction(target));
+                            broadcast(self, getName(target) + "(" + target + "): " + factions.getFaction(target));
                             break;
                     }
                 } while (st.hasMoreTokens());
@@ -154,7 +154,7 @@ public class pvp_test extends script.base_script
                     sTefFacName = "bubblecombat";
                 }
                 String sExpiration = st.nextToken();
-                sendSystemMessageTestingOnly(player, "(" + player + " " + getName(player) + ") Enemy Flag: [" + sTarget + " (" + sTargetName + "), " + sTefFac + " (" + sTefFacName + "), " + sExpiration + "ms" + "]");
+                broadcast(player, "(" + player + " " + getName(player) + ") Enemy Flag: [" + sTarget + " (" + sTargetName + "), " + sTefFac + " (" + sTefFacName + "), " + sExpiration + "ms" + "]");
             }
         }
         return true;

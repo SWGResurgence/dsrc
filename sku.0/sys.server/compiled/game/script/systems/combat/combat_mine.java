@@ -64,7 +64,7 @@ public class combat_mine extends script.base_script
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "You are getting the options because you are in god mode");
+            broadcast(player, "You are getting the options because you are in god mode");
             mi.addRootMenu(menu_info_types.LANDMINE_DISARM, commandoDefuseAction);
             mi.addRootMenu(menu_info_types.LANDMINE_REVERSE_TRIGGER, smugglerReverseTrigger);
         }

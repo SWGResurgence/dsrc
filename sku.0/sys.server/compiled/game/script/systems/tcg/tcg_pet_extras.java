@@ -192,7 +192,7 @@ public class tcg_pet_extras extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(originalOwner, "The wildflower has died - ");
+                    broadcast(originalOwner, "The wildflower has died - ");
                     messageTo(newItem, "handleDestroyDeadFlowerUpdate", null, 60, false);
                 }
             }

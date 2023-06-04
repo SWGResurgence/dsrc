@@ -39,12 +39,12 @@ public class buildout_dungeon_utility extends script.base_script
         final obj_id dungeon = getTopMostContainer(self);
         if (!isIdValid(dungeon))
         {
-            sendSystemMessageTestingOnly(self, "ERROR: You must be standing inside the dungeon to use this command.");
+            broadcast(self, "ERROR: You must be standing inside the dungeon to use this command.");
             return SCRIPT_CONTINUE;
         }
         if (!hasScript(dungeon, "theme_park.dungeon.generic_spawner"))
         {
-            sendSystemMessageTestingOnly(self, "ERROR: This structure isn't a dungeon or doesn't use a compatible dungeon spawning script.");
+            broadcast(self, "ERROR: This structure isn't a dungeon or doesn't use a compatible dungeon spawning script.");
             return SCRIPT_CONTINUE;
         }
 
@@ -57,7 +57,7 @@ public class buildout_dungeon_utility extends script.base_script
 
         if (strText.equalsIgnoreCase("dungeonTop"))
         {
-            sendSystemMessageTestingOnly(self, "Sending you to the ejection point of the dungeon...");
+            broadcast(self, "Sending you to the ejection point of the dungeon...");
             warpPlayer(self, getBuildingEjectLocation(dungeon), null, false);
         }
 
@@ -66,12 +66,12 @@ public class buildout_dungeon_utility extends script.base_script
             final String[] names = getCellNames(dungeon);
             if (names == null || names.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "ERROR: No cells found to warp you to.");
+                broadcast(self, "ERROR: No cells found to warp you to.");
                 return SCRIPT_CONTINUE;
             }
             final location dloc = getLocation(dungeon);
             final location cloc = getLocation(getCellId(dungeon, names[names.length - 1]));
-            sendSystemMessageTestingOnly(self, "Sending you to the lowest point of the dungeon...");
+            broadcast(self, "Sending you to the lowest point of the dungeon...");
             warpPlayer(self, dloc.area, dloc.x, dloc.y, dloc.z, dungeon, names[names.length - 1], cloc.x, cloc.y, cloc.z, "", false);
         }
 
@@ -79,7 +79,7 @@ public class buildout_dungeon_utility extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "ERROR: Specify a creature type, like \"dugeonJumpMob nightsister_elder\"");
+                broadcast(self, "ERROR: Specify a creature type, like \"dugeonJumpMob nightsister_elder\"");
             }
             final String mob = st.nextToken();
             final String[] values = Arrays.stream(getPackedObjvars(dungeon, "spawned").split("\\|"))
@@ -92,27 +92,27 @@ public class buildout_dungeon_utility extends script.base_script
                 {
                     if (getCreatureName(id).equalsIgnoreCase(mob))
                     {
-                        sendSystemMessageTestingOnly(self, "Found mob of type " + mob + " with ID " + id + " so warping you to them...");
+                        broadcast(self, "Found mob of type " + mob + " with ID " + id + " so warping you to them...");
                         warpPlayer(self, getLocation(id), null, false);
                         return SCRIPT_CONTINUE;
                     }
                 }
             }
-            sendSystemMessageTestingOnly(self, "ERROR: Couldn't find a mob of name " + mob + " in dungeon " + dungeon);
+            broadcast(self, "ERROR: Couldn't find a mob of name " + mob + " in dungeon " + dungeon);
             return SCRIPT_CONTINUE;
         }
 
         if (strText.equalsIgnoreCase("dungeonClean"))
         {
             messageTo(self, "dungeonCleanup", null, 0f, false);
-            sendSystemMessageTestingOnly(self, "Starting cleanup process for dungeon " + dungeon + "...");
+            broadcast(self, "Starting cleanup process for dungeon " + dungeon + "...");
             return SCRIPT_CONTINUE;
         }
 
         if (strText.equalsIgnoreCase("dungeonSpawn"))
         {
             messageTo(self, "beginSpawn", null, 0f, false);
-            sendSystemMessageTestingOnly(self, "Starting spawn process for dungeon " + dungeon + "...");
+            broadcast(self, "Starting spawn process for dungeon " + dungeon + "...");
             return SCRIPT_CONTINUE;
         }
 

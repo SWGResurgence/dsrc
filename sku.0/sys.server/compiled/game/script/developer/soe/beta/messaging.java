@@ -14,7 +14,7 @@ public class messaging extends script.base_script
         location locTest = getLocation(self);
         obj_id objPlanetObject = getPlanetByName(locTest.area);
         setObjVar(objPlanetObject, "strLoginMessageTitle", params);
-        sendSystemMessageTestingOnly(self, "Login Title set");
+        broadcast(self, "Login Title set");
         return SCRIPT_CONTINUE;
     }
     public int setLoginMessage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -22,7 +22,7 @@ public class messaging extends script.base_script
         location locTest = getLocation(self);
         obj_id objPlanetObject = getPlanetByName(locTest.area);
         setObjVar(objPlanetObject, "strLoginMessage", params);
-        sendSystemMessageTestingOnly(self, "Login message set");
+        broadcast(self, "Login message set");
         return SCRIPT_CONTINUE;
     }
     public int resendLoginMessageToAll(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -57,7 +57,7 @@ public class messaging extends script.base_script
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "No title or message currently set, please set before sending ");
+            broadcast(self, "No title or message currently set, please set before sending ");
         }
         return SCRIPT_CONTINUE;
     }

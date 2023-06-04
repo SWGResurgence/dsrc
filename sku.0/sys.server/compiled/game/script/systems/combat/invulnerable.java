@@ -39,7 +39,7 @@ public class invulnerable extends script.base_script
         {
             if (setInvulnerable(target, true))
             {
-                sendSystemMessageTestingOnly(self, "Target(" + target + ") is INVULNERABLE.");
+                broadcast(self, "Target(" + target + ") is INVULNERABLE.");
                 return SCRIPT_OVERRIDE;
             }
         }
@@ -47,7 +47,7 @@ public class invulnerable extends script.base_script
         {
             if (setInvulnerable(target, false))
             {
-                sendSystemMessageTestingOnly(self, "Target(" + target + ") is vulnerable.");
+                broadcast(self, "Target(" + target + ") is vulnerable.");
                 return SCRIPT_OVERRIDE;
             }
         }

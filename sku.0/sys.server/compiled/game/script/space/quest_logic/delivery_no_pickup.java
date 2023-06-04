@@ -24,7 +24,7 @@ public class delivery_no_pickup extends script.space.quest_logic.delivery
 		dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null && isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, "pickupShip", questInfo.getString("pickupShip"));

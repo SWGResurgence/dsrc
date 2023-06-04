@@ -326,7 +326,7 @@ public class spawn_base extends script.base_script
             if (intDifference > 5)
             {
                 dctScriptVars.put("intLastSpamTime", intCurrentTime);
-                sendSystemMessageTestingOnly(objPlayer, strSpam);
+                broadcast(objPlayer, strSpam);
             }
         }
     }

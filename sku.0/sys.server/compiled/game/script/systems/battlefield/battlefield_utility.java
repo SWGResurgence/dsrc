@@ -57,20 +57,20 @@ public class battlefield_utility extends script.base_script
             if (target != null && target != obj_id.NULL_ID)
             {
                 battlefield.endBattlefield(target);
-                sendSystemMessageTestingOnly(self, "Battle ended.");
+                broadcast(self, "Battle ended.");
             }
         }
         if (text.equals("battlefield"))
         {
             String area = getCurrentSceneName();
             battlefield.createBattlefieldRegions(area);
-            sendSystemMessageTestingOnly(self, "Battlefields created.");
+            broadcast(self, "Battlefields created.");
         }
         if (text.equals("destroyall"))
         {
             String area = getCurrentSceneName();
             battlefield.destroyBattlefieldRegions(area);
-            sendSystemMessageTestingOnly(self, "Battlefields destroyed.");
+            broadcast(self, "Battlefields destroyed.");
         }
         if (text.startsWith("delta"))
         {
@@ -94,7 +94,7 @@ public class battlefield_utility extends script.base_script
                 float delta_y = targ_loc.y - loc.y;
                 float delta_z = targ_loc.z - loc.z;
                 LOG("LOG_CHANNEL", "delta ->" + "(" + delta_x + ", " + delta_y + ", " + delta_z + ")");
-                sendSystemMessageTestingOnly(self, "(" + delta_x + ", " + delta_y + ", " + delta_z + ")");
+                broadcast(self, "(" + delta_x + ", " + delta_y + ", " + delta_z + ")");
             }
         }
         if (text.equals("clearbattleobjs"))
@@ -147,14 +147,14 @@ public class battlefield_utility extends script.base_script
                 region bf = battlefield.getBattlefield(target);
                 int faction_id = pvpBattlefieldGetFaction(target, bf);
                 String faction = factions.getFactionNameByHashCode(faction_id);
-                sendSystemMessageTestingOnly(self, "faction ->" + faction);
+                broadcast(self, "faction ->" + faction);
                 factions.addFactionStanding(self, faction, 250.0f);
             }
             else
             {
                 int faction_id = pvpGetAlignedFaction(self);
                 String faction = factions.getFactionNameByHashCode(faction_id);
-                sendSystemMessageTestingOnly(self, "faction ->" + faction);
+                broadcast(self, "faction ->" + faction);
                 factions.addFactionStanding(self, faction, 250.0f);
             }
         }
@@ -180,7 +180,7 @@ public class battlefield_utility extends script.base_script
             if (bf != null)
             {
                 obj_id bf_object = battlefield.getMasterObjectFromRegion(bf);
-                sendSystemMessageTestingOnly(self, "bf_object ->" + bf_object);
+                broadcast(self, "bf_object ->" + bf_object);
             }
         }
         if (text.startsWith("getposture"))
@@ -196,7 +196,7 @@ public class battlefield_utility extends script.base_script
             }
             if (isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "posture ->" + getPosture(target));
+                broadcast(self, "posture ->" + getPosture(target));
             }
         }
         return SCRIPT_CONTINUE;

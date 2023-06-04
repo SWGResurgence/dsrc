@@ -135,7 +135,7 @@ public class gm extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "[" + cmd + "] Unable to parse a valid object id!");
+                    broadcast(self, "[" + cmd + "] Unable to parse a valid object id!");
                     return null;
                 }
                 tmpParams = d.getString("params");
@@ -267,7 +267,7 @@ public class gm extends script.base_script
                 return;
             }
         }
-        sendSystemMessageTestingOnly(player, "/setHue: unable to create hue variable ui!");
+        broadcast(player, "/setHue: unable to create hue variable ui!");
     }
 
     public static void showSetHueColorUI(obj_id player, obj_id target, String varPath) throws InterruptedException
@@ -292,7 +292,7 @@ public class gm extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "/setHue: unable to create colorize ui!");
+            broadcast(player, "/setHue: unable to create colorize ui!");
         }
     }
 
@@ -773,11 +773,11 @@ public class gm extends script.base_script
         if (groundquests.isQuestActive(player, questName) || groundquests.hasCompletedQuest(player, questName))
         {
             groundquests.clearQuest(player, questName);
-            sendSystemMessageTestingOnly(player, "Clear Quest function completed.  The quest removed was " + questName);
+            broadcast(player, "Clear Quest function completed.  The quest removed was " + questName);
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared using this command.");
+            broadcast(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared using this command.");
         }
     }
 
@@ -787,11 +787,11 @@ public class gm extends script.base_script
         {
             groundquests.clearQuest(player, questName);
             groundquests.requestGrantQuest(player, questName, true);
-            sendSystemMessageTestingOnly(player, "Regrant Quest function completed.");
+            broadcast(player, "Regrant Quest function completed.");
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared and granted using this command.");
+            broadcast(player, "Either the player doesn't have this quest or the quest string was incorrect. Space Quests cannot be cleared and granted using this command.");
         }
     }
 

@@ -965,9 +965,9 @@ public class incubator extends script.base_script
         {
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "slotOneColor is wrong.");
-                sendSystemMessageTestingOnly(player, "slotOneColor needed to be " + ENZYME_COLORS[dict.getInt("color_1")]);
-                sendSystemMessageTestingOnly(player, "slotOneColor used was " + ENZYME_COLORS[slotOneColor]);
+                broadcast(player, "slotOneColor is wrong.");
+                broadcast(player, "slotOneColor needed to be " + ENZYME_COLORS[dict.getInt("color_1")]);
+                broadcast(player, "slotOneColor used was " + ENZYME_COLORS[slotOneColor]);
             }
             --numRight;
         }
@@ -975,9 +975,9 @@ public class incubator extends script.base_script
         {
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "slotTwoColor is wrong.");
-                sendSystemMessageTestingOnly(player, "slotTwoColor needed to be " + ENZYME_COLORS[dict.getInt("color_2")]);
-                sendSystemMessageTestingOnly(player, "slotTwoColor used was " + ENZYME_COLORS[slotTwoColor]);
+                broadcast(player, "slotTwoColor is wrong.");
+                broadcast(player, "slotTwoColor needed to be " + ENZYME_COLORS[dict.getInt("color_2")]);
+                broadcast(player, "slotTwoColor used was " + ENZYME_COLORS[slotTwoColor]);
             }
             --numRight;
         }
@@ -990,9 +990,9 @@ public class incubator extends script.base_script
         {
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "slotThreeColor is wrong.");
-                sendSystemMessageTestingOnly(player, "slotThreeColor needed to be " + ENZYME_COLORS[dict.getInt("color_3")]);
-                sendSystemMessageTestingOnly(player, "slotThreeColor used was " + ENZYME_COLORS[slotThreeColor]);
+                broadcast(player, "slotThreeColor is wrong.");
+                broadcast(player, "slotThreeColor needed to be " + ENZYME_COLORS[dict.getInt("color_3")]);
+                broadcast(player, "slotThreeColor used was " + ENZYME_COLORS[slotThreeColor]);
             }
             --numRight;
         }

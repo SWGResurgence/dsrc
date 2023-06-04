@@ -39,7 +39,7 @@ public class owner extends script.base_script
                     String prompt = sui.getInputBoxPrompt(params);
                     int maxLength = sui.getInputBoxMaxLength(params);
                     sui.inputbox(self, player, prompt, title, returnHandler, maxLength, true, defaultText);
-                    sendSystemMessageTestingOnly(player, "You have entered was considered inappropriate.\nPlease enter more suitable text");
+                    broadcast(player, "You have entered was considered inappropriate.\nPlease enter more suitable text");
                 }
             }
         }

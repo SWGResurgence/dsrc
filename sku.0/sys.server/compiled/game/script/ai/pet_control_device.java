@@ -1714,7 +1714,7 @@ public class pet_control_device extends script.base_script
         String masterFaction = factions.getFaction(master);
         if (masterFaction == null || !masterFaction.equals(petFaction))
         {
-            sendSystemMessageTestingOnly(master, "masterFaction is " + masterFaction + " pet is " + petFaction);
+            broadcast(master, "masterFaction is " + masterFaction + " pet is " + petFaction);
             sendSystemMessage(master, new string_id(pet_lib.MENU_FILE, "not_declared"));
             return false;
         }

@@ -28,7 +28,7 @@ public class senate_cell extends script.base_script
         }
         if (isGod(item))
         {
-            sendSystemMessageTestingOnly(item, "god access granted to this area");
+            broadcast(item, "god access granted to this area");
             return true;
         }
         if (!isMob(item))

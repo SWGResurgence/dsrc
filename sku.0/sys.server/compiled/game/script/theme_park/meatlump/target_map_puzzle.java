@@ -699,7 +699,7 @@ public class target_map_puzzle extends script.base_script
             blog("length of cipherChar.length & targetChar.length are not equal.");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "QA Message: failed to convert the target: " + targetString);
+                broadcast(player, "QA Message: failed to convert the target: " + targetString);
             }
             return false;
         }

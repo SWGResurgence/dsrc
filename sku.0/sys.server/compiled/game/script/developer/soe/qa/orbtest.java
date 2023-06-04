@@ -14,7 +14,7 @@ public class orbtest extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "orbtest script attached. Say 'GO' to start the test");
+        broadcast(self, "orbtest script attached. Say 'GO' to start the test");
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
@@ -23,20 +23,20 @@ public class orbtest extends script.base_script
         {
             if (utils.hasScriptVar(self, "testingOn"))
             {
-                sendSystemMessageTestingOnly(self, "testing is already in progress... say 'STOP' to abort");
+                broadcast(self, "testing is already in progress... say 'STOP' to abort");
             }
             else 
             {
                 if (getConfigSetting("GameServer", "enableLevelUpLoot") != null)
                 {
-                    sendSystemMessageTestingOnly(self, "testing in progress. Say 'STOP' to abort");
+                    broadcast(self, "testing in progress. Say 'STOP' to abort");
                     utils.setScriptVar(self, "testingOn", true);
                     utils.setScriptVar(self, "spawnAttempts", 0);
                     messageTo(self, "handleSpawnMob", null, 1, false);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "[GameServer] enableLevelUpLoot config not set! Testing aborted");
+                    broadcast(self, "[GameServer] enableLevelUpLoot config not set! Testing aborted");
                 }
             }
         }
@@ -51,13 +51,13 @@ public class orbtest extends script.base_script
         if (!utils.hasScriptVar(self, "testingOn"))
         {
             int spawnAttempts = utils.getIntScriptVar(self, "spawnAttempts");
-            sendSystemMessageTestingOnly(self, "testing aborted after " + (spawnAttempts * 10) + " real kills");
+            broadcast(self, "testing aborted after " + (spawnAttempts * 10) + " real kills");
             return SCRIPT_CONTINUE;
         }
         int spawnAttempts = utils.getIntScriptVar(self, "spawnAttempts");
         spawnAttempts++;
         utils.setScriptVar(self, "spawnAttempts", spawnAttempts);
-        sendSystemMessageTestingOnly(self, "spawning mob " + spawnAttempts);
+        broadcast(self, "spawning mob " + spawnAttempts);
         location spawnLoc = getLocation(self);
         spawnLoc.x += 2;
         obj_id critter = create.object("meatlump_cretin", spawnLoc);
@@ -67,7 +67,7 @@ public class orbtest extends script.base_script
     }
     public int handleKillCritter(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "killing mob");
+        broadcast(self, "killing mob");
         obj_id critter = params.getObjId("critter");
         setHealth(critter, 0);
         messageTo(self, "handleCreateLoot", params, 0.5f, false);
@@ -75,7 +75,7 @@ public class orbtest extends script.base_script
     }
     public int handleCreateLoot(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "creating loot 10 times");
+        broadcast(self, "creating loot 10 times");
         obj_id critter = params.getObjId("critter");
         for (int i = 0; i < 10; i++)
         {
@@ -89,13 +89,13 @@ public class orbtest extends script.base_script
         {
             int spawnAttempts = utils.getIntScriptVar(self, "spawnAttempts");
             obj_id objOrb = utils.getObjIdScriptVar(critter, "orbCreated");
-            sendSystemMessageTestingOnly(self, "LEVEL UP ORB FOUND! It is Object Id " + objOrb);
-            sendSystemMessageTestingOnly(self, "Total real kills to spawn: " + (spawnAttempts * 10));
+            broadcast(self, "LEVEL UP ORB FOUND! It is Object Id " + objOrb);
+            broadcast(self, "Total real kills to spawn: " + (spawnAttempts * 10));
             utils.removeScriptVar(self, "testingOn");
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "No orb found");
+            broadcast(self, "No orb found");
             destroyObject(critter);
             messageTo(self, "handleSpawnMob", null, 0, false);
         }

@@ -134,7 +134,7 @@ public class fs_patrol_spawns1 extends script.base_script
         removeObjVar(player, "quest.fs_patrol");
         if (DEBUGGING)
         {
-            sendSystemMessageTestingOnly(player, "Cleanup Done");
+            broadcast(player, "Cleanup Done");
         }
     }
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
@@ -148,7 +148,7 @@ public class fs_patrol_spawns1 extends script.base_script
     {
         if (DEBUGGING)
         {
-            sendSystemMessageTestingOnly(self, "Trigger 2");
+            broadcast(self, "Trigger 2");
         }
         String[] tokens = split(locationName, '.');
         String questName = "";
@@ -167,7 +167,7 @@ public class fs_patrol_spawns1 extends script.base_script
                         waypointNumber = utils.stringToInt(tokens[2]);
                         if (DEBUGGING)
                         {
-                            sendSystemMessageTestingOnly(self, "wptoken done");
+                            broadcast(self, "wptoken done");
                         }
                     }
                 }
@@ -241,7 +241,7 @@ public class fs_patrol_spawns1 extends script.base_script
     {
         if (DEBUGGING)
         {
-            sendSystemMessageTestingOnly(self, "Detach Trigger Fire");
+            broadcast(self, "Detach Trigger Fire");
         }
         cleanUpStuff(self);
         return SCRIPT_CONTINUE;

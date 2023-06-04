@@ -49,9 +49,9 @@ public class teleporter_coord extends script.base_script
             String xcoord = getStringObjVar(self, "teleport.x");
             String ycoord = getStringObjVar(self, "teleport.y");
             String zcoord = getStringObjVar(self, "teleport.z");
-            sendSystemMessageTestingOnly(player, "How to: Use radial submenus to set Scene and XZY Coordinates and the Skill to check in order to teleport.");
+            broadcast(player, "How to: Use radial submenus to set Scene and XZY Coordinates and the Skill to check in order to teleport.");
             setName(self, "[" + planet + "] X: " + xcoord + " | Z: " + zcoord + " | Y:" + ycoord );
-                    sendSystemMessageTestingOnly(player, "Debug name set. Use /setname to customize it.");
+                    broadcast(player, "Debug name set. Use /setname to customize it.");
         }
         if (item == menu_info_types.SERVER_MENU2)
         {
@@ -117,13 +117,13 @@ public class teleporter_coord extends script.base_script
         }
         if (message1.equals("tatooine"))
         {
-            sendSystemMessageTestingOnly(player, "Note: using Tatooine will most likely lag the server with many players in a concentrated area. if possible, try to use an adventure planet rather than the main planet.");
+            broadcast(player, "Note: using Tatooine will most likely lag the server with many players in a concentrated area. if possible, try to use an adventure planet rather than the main planet.");
             setObjVar(self, "teleport.scene", message1);
             return SCRIPT_CONTINUE;
         }
         if (message1.equals("kashyyyk_main") || message1.contains("mustafar"))
         {
-            sendSystemMessageTestingOnly(player, "Note: Kashyyyk and Mustafar may have offset coordinates. ");
+            broadcast(player, "Note: Kashyyyk and Mustafar may have offset coordinates. ");
             setObjVar(self, "teleport.scene", message1);
             return SCRIPT_CONTINUE;
         }

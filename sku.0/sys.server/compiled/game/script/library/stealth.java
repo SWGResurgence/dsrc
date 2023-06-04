@@ -1921,7 +1921,7 @@ public class stealth extends script.base_script
         {
             if (isCoughtWhileStealing(thief, mark) || luck.isLucky(mark, 0.01f))
             {
-                sendSystemMessageTestingOnly(thief, "STEALING CHECK FAILED: CAUGHT");
+                broadcast(thief, "STEALING CHECK FAILED: CAUGHT");
                 showFlyText(thief, new string_id("spam", "stealing_cought"), 1.5f, colors.TOMATO);
                 sendSystemMessage(thief, new string_id("spam", "stolen_cought"));
                 String invis = getInvisBuff(thief);

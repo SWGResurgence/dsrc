@@ -40,7 +40,7 @@ public class entertainer_rancor_area_trigger extends script.base_script
         placeWeAre = getStringObjVar(self, "wod.areaName");
         if (debug)
         {
-            sendSystemMessageTestingOnly(who, "you entered " + volumeName);
+            broadcast(who, "you entered " + volumeName);
         }
         if (volumeName.equals("wod_rancor_area"))
         {
@@ -49,7 +49,7 @@ public class entertainer_rancor_area_trigger extends script.base_script
                 obj_id rancorIsFollowing = utils.getObjIdScriptVar(who, "wod_rancor_followingPlayer");
                 if (debug)
                 {
-                    sendSystemMessageTestingOnly(rancorIsFollowing, "your rancor following you entered " + volumeName);
+                    broadcast(rancorIsFollowing, "your rancor following you entered " + volumeName);
                 }
                 messageTo(rancorIsFollowing, placeWeAre, null, 1.0f, false);
                 ai_lib.aiStopFollowing(who);

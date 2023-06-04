@@ -30,12 +30,12 @@ public class script_editor extends script.base_script
         String params = st.nextToken();
         if (params == null)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
+            broadcast(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         if (params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
+            broadcast(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         String scriptBaseName = params;
@@ -89,7 +89,7 @@ public class script_editor extends script.base_script
         String scriptContents = params.getString("pageText.text.LocalText");
         if (scriptContents == null)
         {
-            sendSystemMessageTestingOnly(self, "could not get script from data source!");
+            broadcast(self, "could not get script from data source!");
         }
         String outputWindowText = "";
         if (params.getString("outputPage.text.LocalText") != null)

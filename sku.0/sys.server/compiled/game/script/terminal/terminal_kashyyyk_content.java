@@ -700,7 +700,7 @@ public class terminal_kashyyyk_content extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(player, "You must be enabled for Rage Of The Wookiees to use this");
+                broadcast(player, "You must be enabled for Rage Of The Wookiees to use this");
             }*/
             broadcast(player, "This terminal has been archived. Thanks for testing. ");
         }
@@ -2314,7 +2314,7 @@ public class terminal_kashyyyk_content extends script.base_script
         for (String cyberneticItem : CYBERNETIC_ITEMS) {
             createObject(cyberneticItem, inv, "");
         }
-        sendSystemMessageTestingOnly(player, "Cybernetics issued. Pay a cybernetic Engineer to install the items");
-        sendSystemMessageTestingOnly(player, "Locate the cybernetic engineer on the 2nd floor of a medical center");
+        broadcast(player, "Cybernetics issued. Pay a cybernetic Engineer to install the items");
+        broadcast(player, "Locate the cybernetic engineer on the 2nd floor of a medical center");
     }
 }

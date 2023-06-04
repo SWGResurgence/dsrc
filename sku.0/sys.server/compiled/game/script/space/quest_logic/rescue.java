@@ -25,7 +25,7 @@ public class rescue extends script.space.quest_logic.recovery
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_OVERRIDE;
         }
         setObjVar(self, "targetArrivalDelay", questInfo.getInt("targetArrivalDelay"));
