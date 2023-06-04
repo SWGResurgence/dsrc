@@ -9255,7 +9255,7 @@ public class terminal_character_builder extends script.base_script
         switch (idx)
         {
             case 0:
-                broadcast(player, "Use the 'Duplicate' submenu to obtain a tracked terminal..");
+                broadcast(player, "Use the 'Duplicate' radial submenu to obtain a tracked terminal.");
                 break;
             case 1:
                 setObjVar(player, "character_builder", 1);
@@ -9284,11 +9284,11 @@ public class terminal_character_builder extends script.base_script
             case 6:
                 if (reloadScript("terminal.terminal_character_builder"))
                 {
-                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Reloaded");
+                    broadcast(player, "Character Builder Terminal Script Reloaded");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "Character Builder Terminal Script Failed to Reload");
+                    broadcast(player, "Character Builder Terminal Script Failed to Reload");
                 }
                 break;
             case 7:

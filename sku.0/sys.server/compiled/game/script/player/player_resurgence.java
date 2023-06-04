@@ -240,7 +240,7 @@ public class player_resurgence extends script.base_script
         listAllContentStatuses(self);
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "Showing current Game Masters online since you are in God Mode.");
+            broadcast(self, "Showing current Game Masters online since you are in God Mode.");
             listAllGodModePlayers(self);
         }
         return SCRIPT_CONTINUE;
@@ -249,7 +249,7 @@ public class player_resurgence extends script.base_script
     public void listAllGodModePlayers(obj_id self) throws InterruptedException
     {
         String prompt = "";
-        String root_objvar = "skynet.adminlist";
+        String root_objvar = "skynet.admin_list";
         String[] admin_list = getStringArrayObjVar(getPlanetByName("tatooine"), root_objvar);
         if (admin_list == null || admin_list.length == 0)
         {
@@ -264,12 +264,12 @@ public class player_resurgence extends script.base_script
                 obj_id admin = utils.stringToObjId(admin_list[i]);
                 if (isIdValid(admin))
                 {
-                    prompt += "\t" + getName(admin) + " | Access Level: " + getGodLevel(admin) + "\n";
-                    //prompt += "\t\tLocation: " + getLocation(admin).toReadableFormat(true) + "\n";
+                    prompt += "\t" + getPlayerFullName(admin) + "\n";
+                    prompt += "\t\t" + "Location: " + getLocation(admin).toReadableFormat(true) + "\n";
                 }
             }
         }
-
+        sui.msgbox(self, self, prompt, sui.OK_ONLY, "Game Masters: " + getClusterName(), "noHandler");
     }
 
     public int listAllContentStatuses(obj_id self) throws InterruptedException
@@ -416,8 +416,16 @@ public class player_resurgence extends script.base_script
                 setMaxAttrib(target, ACTION, action);
                 setAttrib(target, ACTION, action);
             }
-            if (command.equals("wearMe"))
+            if (command.equalsIgnoreCase("dressNPC"))
             {
+                obj_id[] currentGear = getAllWornItems(target, false);
+                for (obj_id deleteMe : currentGear)
+                {
+                    if (isIdValid(deleteMe))
+                    {
+                        destroyObject(deleteMe);
+                    }
+                }
                 obj_id[] equipments = getAllWornItems(self, true);
                 for (obj_id equipment : equipments)
                 {
