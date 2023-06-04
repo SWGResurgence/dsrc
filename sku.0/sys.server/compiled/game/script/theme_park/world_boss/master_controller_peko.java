@@ -18,29 +18,13 @@ public class master_controller_peko extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PEKO);
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnInitialize(obj_id self) throws InterruptedException
-    {
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Active");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnDestroy(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
-        {
-            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
-        }
-        setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Inactive");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_PEKO);
         return SCRIPT_CONTINUE;
     }
 
@@ -75,6 +59,12 @@ public class master_controller_peko extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(getMaster(killer)));
         }
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.peko"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.peko");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.peko", "Inactive");
         resurgence.doWorldBossDeathMsg(self);
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;

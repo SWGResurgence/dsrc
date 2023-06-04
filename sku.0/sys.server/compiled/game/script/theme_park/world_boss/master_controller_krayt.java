@@ -1,6 +1,5 @@
 package script.theme_park.world_boss;
 
-import script.dictionary;
 import script.library.*;
 import script.obj_id;
 import script.string_id;
@@ -11,29 +10,13 @@ public class master_controller_krayt extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_KRAYT);
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnInitialize(obj_id self) throws InterruptedException
-    {
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
         {
             removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Active");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnDestroy(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
-        {
-            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
-        }
-        setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Inactive");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_KRAYT);
         return SCRIPT_CONTINUE;
     }
 
@@ -58,6 +41,12 @@ public class master_controller_krayt extends script.base_script
         {
             createStomachContents(self, utils.getInventoryContainer(anAttacker));
         }
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.krayt"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.krayt");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.krayt", "Inactive");
         return SCRIPT_CONTINUE;
     }
 
