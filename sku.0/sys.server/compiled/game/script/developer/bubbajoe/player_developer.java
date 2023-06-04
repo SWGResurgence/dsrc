@@ -1780,7 +1780,7 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("distance"))
         {
-            obj_id objectOne = getTarget(self);
+            obj_id objectOne = getIntendedTarget(self);
             obj_id objectTwo = getLookAtTarget(self);
             if (!isValidId(objectOne) || !exists(objectOne))
             {
@@ -1793,7 +1793,7 @@ public class player_developer extends base_script
                 return SCRIPT_CONTINUE;
             }
             float distance = getDistance2D(objectOne, objectTwo);
-            broadcast(self, "The distance between these two targets is " + distance + " or " + (distance / 10) + " meters, or " + Math.round(distance) + " rounded.");
+            broadcast(self, "The distance between these two targets is " + distance + " or " + Math.round(distance) + " rounded.");
         }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
