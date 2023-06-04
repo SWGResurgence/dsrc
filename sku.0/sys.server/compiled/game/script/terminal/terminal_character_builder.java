@@ -5147,6 +5147,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("weapon_appearance_polearm_magnaguard_legendary", pInv);
                 static_item.createNewItemFunction("weapon_rifle_legendary_t21", pInv);
                 static_item.createNewItemFunction("weapon_energy_lance_legendary", pInv);
+                static_item.createNewItemFunction("weapon_heavy_blast_cannon_legendary", pInv);
             case 13: // Structures: Chronicle Buffs
                 static_item.createNewItemFunction("item_pgc_chronicler_tent_deed", pInv);
                 static_item.createNewItemFunction("item_pgc_sandcrawler_house_deed", pInv);
