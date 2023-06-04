@@ -218,6 +218,7 @@ public class player_resurgence extends script.base_script
         prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
         prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n";
         prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n";
+        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("world_boss.emperor's_hand") + "\n";
         prompt += "\tDungeons\n";
         prompt += "\t\tGeonosian Biolab\n";
         prompt += "\t\t\tAcklay: " + getDungeonStatus("dungeon.geo_madbio.acklay") + "\n";
