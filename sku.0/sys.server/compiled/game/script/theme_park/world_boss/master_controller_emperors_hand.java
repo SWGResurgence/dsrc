@@ -1,50 +1,42 @@
 package script.theme_park.world_boss;
 
-import script.*;
+import script.dictionary;
 import script.library.*;
-
-import java.util.Vector;
+import script.obj_id;
+import script.prose_package;
+import script.string_id;
 
 public class master_controller_emperors_hand extends script.base_script
 {
+    public static final String VOLUME_NAME = "aggressive_area";
+    /**
+     * public String[] = {
+     * };
+     **/
+    public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
+
     public master_controller_emperors_hand()
     {
     }
-    public int OnAddedToWorld(obj_id self) throws InterruptedException
+
+    public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
         setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Active");
-        return SCRIPT_CONTINUE;
-    }
-    public int OnDestroy(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
-        setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Active");
-        return SCRIPT_CONTINUE;
-    }
-    public static final String VOLUME_NAME = "aggressive_area";
-    /**public String[] = {
-    };**/
-    public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
-    public int OnAttach(obj_id self) throws InterruptedException {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_EMPERORS_HAND);
         return SCRIPT_CONTINUE;
     }
-    public int OnInitialize(obj_id self) throws InterruptedException {
+
+    public int OnInitialize(obj_id self) throws InterruptedException
+    {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
-        obj_id tatooine = getPlanetByName("tatooine");
-        if (hasObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand"))
-        {
-            removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
-        }
-        setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Active");
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isGod(killer))
@@ -55,31 +47,43 @@ public class master_controller_emperors_hand extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION IMPERIAL CITIZENS: The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         }
+        obj_id tatooine = getPlanetByName("tatooine");
+        removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
+        setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Inactive");
         sendSystemMessageGalaxyTestingOnly("ATTENTION IMPERIAL CITIZENS: The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }
-    public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException {
+
+    public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
+    {
         prose_package pp = prose.getPackage(FOUND_JEDI);
         pp.target.set(breacher);
-        if (utils.isProfession(breacher, utils.FORCE_SENSITIVE)) {
-            if (!ai_lib.isInCombat(self)) {
+        if (utils.isProfession(breacher, utils.FORCE_SENSITIVE))
+        {
+            if (!ai_lib.isInCombat(self))
+            {
                 chat.chat(self, breacher, pp);
                 addHate(self, breacher, 1000.0f);
                 startCombat(self, breacher);
                 return SCRIPT_CONTINUE;
-            } else {
+            }
+            else
+            {
                 addHate(self, breacher, 500.0f);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_CONTINUE;
     }
-    public int setLoiter(obj_id self, dictionary params) throws InterruptedException {
+
+    public int setLoiter(obj_id self, dictionary params) throws InterruptedException
+    {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         ai_lib.setLoiterRanges(self, 0.0f, 80.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
@@ -102,7 +106,7 @@ public class master_controller_emperors_hand extends script.base_script
                 broadcast(who, "The Hand has summoned a contingeant of Storm Troopers from the 501st!");
             }
             buff.removeAllBuffs(self);
-            resurgence.createCircleSpawn(self, self,"emperors_hand_stormtroopers", 8, 4);
+            resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 8, 4);
             utils.setScriptVar(self, "hasSpawned", 1);
             return SCRIPT_CONTINUE;
         }
@@ -151,6 +155,7 @@ public class master_controller_emperors_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void stunPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
         playClientEffectObj(targets, "clienteffect/cr_bodyfall_huge.cef", self, "");
@@ -165,6 +170,7 @@ public class master_controller_emperors_hand extends script.base_script
             faceTo(iTarget, self);
         }
     }
+
     public void bombard(obj_id self, obj_id[] targets) throws InterruptedException
     {
         chat.chat(self, "If you think that your going to defeat me, you won't live to boast about it.");
@@ -176,13 +182,15 @@ public class master_controller_emperors_hand extends script.base_script
         {
             playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
             reduceHealth(iTarget, rand(2500, 5000));
-            reduceAction(iTarget, rand(5000 , 7500));
+            reduceAction(iTarget, rand(5000, 7500));
         }
     }
+
     public boolean reduceHealth(obj_id player, int amt)
     {
         return setHealth(player, (getHealth(player) - amt));
     }
+
     public boolean reduceAction(obj_id player, int amt)
     {
         return setAction(player, (getAction(player) - amt));

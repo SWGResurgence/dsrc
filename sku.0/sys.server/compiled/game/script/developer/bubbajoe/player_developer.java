@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static script.library.utils.getDistance2D;
 import static script.library.utils.setScriptVar;
 
 public class player_developer extends base_script
@@ -1776,6 +1777,23 @@ public class player_developer extends base_script
                 }
                 return SCRIPT_CONTINUE;
             }
+        }
+        if (cmd.equalsIgnoreCase("distance"))
+        {
+            obj_id objectOne = getIntendedTarget(self);
+            obj_id objectTwo = getLookAtTarget(self);
+            if (!isValidId(objectOne) || !exists(objectOne))
+            {
+                broadcast(self, "You must have a target.");
+                return SCRIPT_CONTINUE;
+            }
+            if (!isValidId(objectTwo) || !exists(objectTwo))
+            {
+                broadcast(self, "You must have a look at target.");
+                return SCRIPT_CONTINUE;
+            }
+            float distance = getDistance2D(objectOne, objectTwo);
+            broadcast(self, "The distance between these two targets is " + distance + " or " + Math.round(distance) + " rounded.");
         }
         if (cmd.equalsIgnoreCase("gonkie"))
         {

@@ -21,7 +21,7 @@ public class master_controller_donkdonk_binks extends script.base_script
             "Stopen da doo-doo, yousa cannot defeat mesa in combat!",
     };
 
-    public int OnInitialize(obj_id self) throws InterruptedException
+    public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks"))
@@ -29,10 +29,11 @@ public class master_controller_donkdonk_binks extends script.base_script
             removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks", "Active");
+        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_DONKDONK);
         return SCRIPT_CONTINUE;
     }
 
-    public int OnDestroy(obj_id self) throws InterruptedException
+    public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks"))
@@ -40,17 +41,6 @@ public class master_controller_donkdonk_binks extends script.base_script
             removeObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.donkdonk_binks", "Inactive");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnAttach(obj_id self) throws InterruptedException
-    {
-        resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_DONKDONK);
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
-    {
         resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }

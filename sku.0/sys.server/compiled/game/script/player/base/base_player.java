@@ -12296,7 +12296,7 @@ public class base_player extends script.base_script
                 professionName = "Entertainer";
                 break;
         }
-        if (isGod(self))
+        if (isGod(self) && (!isAwayFromKeyBoard(self)))
         {
             attribs[idx] = "Game Master";
         }
@@ -12309,23 +12309,11 @@ public class base_player extends script.base_script
         attribs[idx] = Integer.toString(getLevel(self));
         idx++;
         names[idx] = utils.packStringId(new string_id("Faction"));
-        int faction = pvpGetAlignedFaction(self);
-        String factionName = "";
-        switch (faction)
-        {
-            case 0:
-                factionName = "Neutral";
-                break;
-            case 1:
-                factionName = "Imperial";
-                break;
-            case 2:
-                factionName = "Rebel";
-                break;
-        }
-        attribs[idx] = factionName;
+        String factionName;
+        String faction = factions.getFaction(self);
+        attribs[idx] = faction;
         idx++;
-        if (faction == 1 || faction == 2)
+        if (faction.equals("Rebel") || faction.equals("Imperial") && gcw.pvpGetCurrentGcwRank(self) > 0)
         {
             names[idx] = utils.packStringId(new string_id("Faction Rank"));
             int factionRank = pvpGetCurrentGcwRank(self);
@@ -12339,28 +12327,37 @@ public class base_player extends script.base_script
                     factionRankName = "Private";
                     break;
                 case 2:
-                    factionRankName = "Corporal";
+                    factionRankName = "Lance Corporal";
                     break;
                 case 3:
-                    factionRankName = "Sergeant";
+                    factionRankName = "Corporal";
                     break;
                 case 4:
-                    factionRankName = "Lieutenant";
+                    factionRankName = "Sergeant";
                     break;
                 case 5:
-                    factionRankName = "Captain";
+                    factionRankName = "Master Sergeant";
                     break;
                 case 6:
-                    factionRankName = "Major";
+                    factionRankName = "Sergeant Major";
                     break;
                 case 7:
-                    factionRankName = "Colonel";
+                    factionRankName = "Lieutenant";
                     break;
                 case 8:
-                    factionRankName = "General";
+                    factionRankName = "Captain";
                     break;
                 case 9:
-                    factionRankName = "Field Marshal";
+                    factionRankName = "Major";
+                    break;
+                case 10:
+                    factionRankName = "Lt. Colonel";
+                    break;
+                case 11:
+                    factionRankName = "Colonel";
+                    break;
+                case 12:
+                    factionRankName = "General";
                     break;
             }
             attribs[idx] = factionRankName;
