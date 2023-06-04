@@ -1677,25 +1677,25 @@ public class player_developer extends base_script
                 commPlayer(self, recipient, pp);
             }
         }
-        if (cmd.equalsIgnoreCase("setHeight"))
+        if (cmd.equalsIgnoreCase("height"))
         {
             String subcommand = tok.nextToken();
             if (subcommand.equals("copy"))
             {
                 location loc = getLocation(iTarget);
                 float height = loc.y;
-                setObjVar(self, "dev_height", height);
+                setObjVar(self, "developer_clipboard.height", height);
                 broadcast(self, "Height of " + height +  " copied.");
                 return SCRIPT_CONTINUE;
             }
             else if (subcommand.equals("paste"))
             {
-                if (!hasObjVar(self, "dev_height"))
+                if (!hasObjVar(self, "developer_clipboard.height"))
                 {
                     broadcast(self, "No height to paste.");
                     return SCRIPT_CONTINUE;
                 }
-                float height = getFloatObjVar(self, "dev_height");
+                float height = getFloatObjVar(self, "developer_clipboard.height");
                 location loc = getLocation(iTarget);
                 loc.y = height;
                 setLocation(iTarget, loc);
@@ -1703,7 +1703,7 @@ public class player_developer extends base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (cmd.equalsIgnoreCase("setAlign"))
+        if (cmd.equalsIgnoreCase("align"))
         {
             String subcommand = tok.nextToken();
             if (subcommand.equals("x"))
@@ -1713,12 +1713,12 @@ public class player_developer extends base_script
                 {
                     location loc = getLocation(iTarget);
                     float alignment = loc.x;
-                    setObjVar(self, "dev_align_x", alignment);
+                    setObjVar(self, "developer_clipboard.x", alignment);
                 }
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    loc.z = getFloatObjVar(self, "dev_align_x");
+                    loc.z = getFloatObjVar(self, "developer_clipboard.x");
                     setLocation(iTarget, loc);
                 }
             }
@@ -1729,19 +1729,57 @@ public class player_developer extends base_script
                 {
                     location loc = getLocation(iTarget);
                     float alignment = loc.x;
-                    setObjVar(self, "dev_align_z", alignment);
+                    setObjVar(self, "developer_clipboard.z", alignment);
                 }
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    loc.z = getFloatObjVar(self, "dev_align_z");
+                    loc.z = getFloatObjVar(self, "developer_clipboard.z");
                     setLocation(iTarget, loc);
+                }
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("copy"))
+        {
+            String subcommand = tok.nextToken();
+            if (subcommand.equalsIgnoreCase("-onto"))
+            {
+                String template = getTemplateName(iTarget);
+                sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equalsIgnoreCase("-into"))
+            {
+                String template = getTemplateName(iTarget);
+                obj_id pInv = utils.getInventoryContainer(self);
+                sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+                return SCRIPT_CONTINUE;
+            }
+            else if (subcommand.equalsIgnoreCase("-template"))
+            {
+                String flag = tok.nextToken();
+                if (flag.equals("copy"))
+                {
+                    String template = getTemplateName(iTarget);
+                    setObjVar(self, "developer_clipboard.template", template);
+                    broadcast(self, "Template " + template + " copied.");
+                }
+                else if (flag.equals("copy"))
+                {
+                    String template = getStringObjVar(self, "developer_clipboard.template");
+                    sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                }
+                else
+                {
+                    broadcast(self, "Usage: /developer copy -template [copy|paste]");
                 }
                 return SCRIPT_CONTINUE;
             }
         }
         if (cmd.equalsIgnoreCase("gonkie"))
         {
+            broadcast(self, "This is experimental, do not use near players or invulnerable NPCs.");
             obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
             if (hasScript(gonkieControlDevice, "item.buff_click_item"))
             {
@@ -1827,23 +1865,6 @@ public class player_developer extends base_script
             else
             {
                 broadcast(self, "You are not riding a vehicle.");
-            }
-        }
-        if (cmd.equalsIgnoreCase("copy"))
-        {
-            String subcommand = tok.nextToken();
-            if (subcommand.equalsIgnoreCase("-onto"))
-            {
-                String template = getTemplateName(iTarget);
-                sendConsoleCommand("/spawn " + template + " 1 0 0", self);
-                return SCRIPT_CONTINUE;
-            }
-            else if (subcommand.equalsIgnoreCase("-into"))
-            {
-                String template = getTemplateName(iTarget);
-                obj_id pInv = utils.getInventoryContainer(self);
-                sendConsoleCommand("/object createIn " + template + " " + pInv, self);
-                return SCRIPT_CONTINUE;
             }
         }
         if (cmd.equalsIgnoreCase("scriptvar"))
