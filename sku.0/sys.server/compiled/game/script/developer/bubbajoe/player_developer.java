@@ -2034,7 +2034,7 @@ public class player_developer extends base_script
     }
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if(hasObjVar(self, "live_qa"))
+        if(hasObjVar(self, "live_qa")) // not valid for non-optimized clients.
         {
             sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
             sendConsoleCommand( "/object hide " + self + " " + 0, self);
