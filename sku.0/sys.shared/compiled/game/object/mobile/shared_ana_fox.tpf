@@ -14,4 +14,4 @@ lookAtText = "npc_lookat" "ana_fox"
 
 appearanceFilename = "appearance/hum_f.sat"
 
-clientDataFile = "clientdata/npc/client_shared_npe_rebel_agent.cdf"
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_noble_human_f_01.cdf"
