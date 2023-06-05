@@ -2066,8 +2066,8 @@ expertise_co_blast_radius_2	expertise_co_blast_radius_1																					expe
 expertise_co_blast_radius_3	expertise_co_blast_radius_2																					expertise_area_size_line_co_grenade=1			0	
 expertise_co_blast_radius_4	expertise_co_blast_radius_3																					expertise_area_size_line_co_grenade=1			0	
 expertise_co_focus_beam_1	expertise																				co_hw_dm_1				0	
-expertise_co_burst_fire_1	expertise_co_position_secured_1									expertise_co_position_secured_1												"expertise_co_pos_secured_line_burst_fire_proc=10,expertise_co_pos_secured_line_burst_fire_devastation_bonus=5,exotic_dodge_reduction=10,exotic_parry_reduction=10"			0	
-expertise_co_burst_fire_2	expertise_co_burst_fire_1																					"expertise_co_pos_secured_line_burst_fire_proc=10,expertise_co_pos_secured_line_burst_fire_devastation_bonus=5,exotic_dodge_reduction=10,exotic_parry_reduction=10"			0	
+expertise_co_burst_fire_1	expertise_co_position_secured_1									expertise_co_position_secured_1												"expertise_co_pos_secured_line_burst_fire_proc=10,expertise_co_pos_secured_line_burst_fire_devastation_bonus=5,exotic_dodge_reduction=10,exotic_parry_reduction=10,exotic_acid_penetration=10,exotic_electricity_penetration=10"			0	
+expertise_co_burst_fire_2	expertise_co_burst_fire_1																					"expertise_co_pos_secured_line_burst_fire_proc=10,expertise_co_pos_secured_line_burst_fire_devastation_bonus=5,exotic_dodge_reduction=10,exotic_parry_reduction=10,exotic_acid_penetration=10,exotic_electricity_penetration=10"			0	
 expertise_co_keen_eye_1	expertise_co_hose_down_2									expertise_co_hose_down_2												expertise_range_bonus_ranged=4			0	
 expertise_co_keen_eye_2	expertise_co_keen_eye_1																					expertise_range_bonus_ranged=4			0	
 expertise_co_strong_arm_1	expertise_co_blast_radius_4									expertise_co_blast_radius_4												expertise_action_line_co_grenade=2			0	
@@ -2078,10 +2078,10 @@ expertise_co_tibanna_gas_1	expertise_co_focus_beam_1									expertise_co_focus_
 expertise_co_tibanna_gas_2	expertise_co_tibanna_gas_1																					expertise_damage_weapon_3=2			0	
 expertise_co_tibanna_gas_3	expertise_co_tibanna_gas_2																					expertise_damage_weapon_3=2			0	
 expertise_co_tibanna_gas_4	expertise_co_tibanna_gas_3																					expertise_damage_weapon_3=2			0	
-expertise_co_on_target_1	expertise_co_burst_fire_2									expertise_co_burst_fire_2												"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5"			0	
-expertise_co_on_target_2	expertise_co_on_target_1																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5"			0	
-expertise_co_on_target_3	expertise_co_on_target_2																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5"			0	
-expertise_co_on_target_4	expertise_co_on_target_3																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5"			0	
+expertise_co_on_target_1	expertise_co_burst_fire_2									expertise_co_burst_fire_2												"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5,exotic_heat_penetration=5,exotic_cold_penetration=5"			0	
+expertise_co_on_target_2	expertise_co_on_target_1																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5,exotic_heat_penetration=5,exotic_cold_penetration=5"			0	
+expertise_co_on_target_3	expertise_co_on_target_2																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5,exotic_heat_penetration=5,exotic_cold_penetration=5"			0	
+expertise_co_on_target_4	expertise_co_on_target_3																					"expertise_co_pos_secured_line_critical=2,expertise_co_pos_secured_line_protection=5,exotic_heat_penetration=5,exotic_cold_penetration=5"			0	
 expertise_co_heavy_ammunition_1	expertise_co_keen_eye_2									expertise_co_keen_eye_2												"expertise_damage_weapon_0=2,expertise_damage_weapon_1=2"			0	
 expertise_co_heavy_ammunition_2	expertise_co_heavy_ammunition_1																					"expertise_damage_weapon_0=2,expertise_damage_weapon_1=2"			0	
 expertise_co_heavy_ammunition_3	expertise_co_heavy_ammunition_2																					"expertise_damage_weapon_0=2,expertise_damage_weapon_1=2"			0	
