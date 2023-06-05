@@ -106,7 +106,7 @@ public class master_controller_emperors_hand extends script.base_script
                 broadcast(who, "The Hand has summoned a contingeant of Storm Troopers from the 501st!");
             }
             buff.removeAllBuffs(self);
-            resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 8, 4);
+            resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 1, 4);
             utils.setScriptVar(self, "hasSpawned", 1);
             return SCRIPT_CONTINUE;
         }
