@@ -103,11 +103,15 @@ public class master_controller_emperors_hand extends script.base_script
             chat.chat(self, "You Don't Know The Extent Of My Power!");
             for (obj_id who : players)
             {
-                broadcast(who, "The Hand has summoned a contingeant of Storm Troopers from the 501st!");
+                broadcast(who, "The Hand has summoned Medical Buffs.");
             }
-            buff.removeAllBuffs(self);
-            resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 1, 4);
-            utils.setScriptVar(self, "hasSpawned", 1);
+            buff.applyBuff((self), "me_buff_health_2", 900);
+            buff.applyBuff((self), "me_buff_action_3", 900);
+            buff.applyBuff((self), "me_buff_strength_3", 900);
+            buff.applyBuff((self), "me_buff_agility_3", 900);
+            buff.applyBuff((self), "me_buff_precision_3", 900);
+            buff.applyBuff((self), "me_buff_melee_gb_1", 900);
+            buff.applyBuff((self), "me_buff_ranged_gb_1", 900);
             return SCRIPT_CONTINUE;
         }
         if (percentHealth <= 50)
@@ -121,36 +125,43 @@ public class master_controller_emperors_hand extends script.base_script
                 chat.chat(self, "The Sith Will Not Be Denied!");
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged , causing him to increase her focus. She has summoned additional reinforcements from the Imperial Security Bureau.");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged, causing her to increase her focus. She has summoned additional strength from her personal Sith Holocron.");
                 }
-                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 4, 4);
-                utils.setScriptVar(self, "hasDisarmed", 1);
             }
+            buff.applyBuff((self), "forceCrystalHealth", 300);
+            buff.applyBuff((self), "forceCrystalForce", 300);
+            return SCRIPT_CONTINUE;
         }
-        if (percentHealth <= 10)
-        {
-            if (!utils.hasScriptVar(self, "feelsDarkSideForce"))
-            {
-                buff.removeAllBuffs(self);
-                for (obj_id who : players)
-                {
-                    broadcast(who, "Aralina Silk has summoned the Full Power of the Dark Side of the Force. Her attacks are now amplified, and as she summoned the assistance of the Imperial Inquisitors!");
+        if (percentHealth <= 10) {
+            if (!utils.hasScriptVar(self, "feelsDarkSideForce")) {
+                for (obj_id who : players) {
+                    broadcast(who, "Aralina Silk has summoned the Full Power of the Dark Side of the Force. Her attacks are now amplified.");
                     chat.chat(self, "The Emperor Has Decreed It... It Shall Be Done!");
                     buff.applyBuff(self, "crystal_buff", 60, 20);
-                    resurgence.createCircleSpawn(self, self, "emperors_hand_inquisitors", 1, 4);
                 }
             }
-            if (percentHealth <= 1)
+        }
+        if (percentHealth <= 5)
+        {
+            if (!utils.hasScriptVar(self, "releasesHerPower"))
             {
-                if (!utils.hasScriptVar(self, "lastHandMsg"))
+                for (obj_id who : players)
                 {
-                    chat.chat(self, "Long Live The Empire!");
+                    broadcast(who, "Aralina Silk has summoned her defenses.");
+                    chat.chat(self, "You Will Suffer For Your Lack Of Vision.");
+                    buff.applyBuff(self, "ig88_shield", 1800, 100);
                 }
             }
-            else
+        }
+        if (percentHealth <= 1)
+        {
+            if (!utils.hasScriptVar(self, "lastHandMsg"))
             {
-                return SCRIPT_CONTINUE;
+                chat.chat(self, "Long Live The Empire!");
             }
+        }
+        else
+        {
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
