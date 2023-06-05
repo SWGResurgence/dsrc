@@ -124,7 +124,7 @@ public class find_theater extends script.base_script
             {
                 if (isGod(self))
                 {
-                    sendSystemMessageTestingOnly(self, "Theater Location: " + theaterLoc.toString());
+                    broadcast(self, "Theater Location: " + theaterLoc.toString());
                 }
                 addLocationTarget(questName, theaterLoc, 32.0f);
                 setupWaypoint(self, questRow, theaterLoc);

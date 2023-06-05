@@ -253,7 +253,7 @@ public class transition extends script.base_script
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "You are passing the permissions check because you are in god mode");
+            broadcast(player, "You are passing the permissions check because you are in god mode");
             return true;
         }
         return flagType.equals("initialRequiredFlag") && hasPermissionForZone(player, zone, "finalRequiredFlag");

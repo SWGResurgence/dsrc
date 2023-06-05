@@ -40,7 +40,7 @@ public class terminal_medicine extends script.base_script
             {
                 if (!canUseTerminal(self))
                 {
-                    sendSystemMessageTestingOnly(player, "You must wait for the terminal to recharge.");
+                    broadcast(player, "You must wait for the terminal to recharge.");
                     LOG("LOG_CHANNEL", "You must wait for the terminal to recharge.");
                     return SCRIPT_CONTINUE;
                 }
@@ -54,7 +54,7 @@ public class terminal_medicine extends script.base_script
             {
                 if (!canUseTerminal(self))
                 {
-                    sendSystemMessageTestingOnly(player, "You must wait for the terminal to recharge.");
+                    broadcast(player, "You must wait for the terminal to recharge.");
                     LOG("LOG_CHANNEL", "You must wait for the terminal to recharge.");
                     return SCRIPT_CONTINUE;
                 }
@@ -69,7 +69,7 @@ public class terminal_medicine extends script.base_script
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }

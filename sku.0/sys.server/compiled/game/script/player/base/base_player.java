@@ -2179,7 +2179,7 @@ public class base_player extends script.base_script
         int idx = sui.getListboxSelectedRow(params);
         if (idx == -1 || idx == 0)
         {
-            sendSystemMessageTestingOnly(self, "You will be asked the previous question on each log-in until the problem is rectified.");
+            broadcast(self, "You will be asked the previous question on each log-in until the problem is rectified.");
             return SCRIPT_CONTINUE;
         }
         if (opt == null || opt.length == 0)
@@ -3715,7 +3715,7 @@ public class base_player extends script.base_script
             }
             if (!isIdValid(targetShip) && !isIdValid(targetCreature))
             {
-                sendSystemMessageTestingOnly(self, "The /gmRevive command may only be used on creature or ship type objects");
+                broadcast(self, "The /gmRevive command may only be used on creature or ship type objects");
                 return SCRIPT_CONTINUE;
             }
             if (isIdValid(targetShip))
@@ -3728,7 +3728,7 @@ public class base_player extends script.base_script
                 }
                 if (isIdValid(targetCreature))
                 {
-                    sendSystemMessageTestingOnly(targetCreature, "Ship Repaired.");
+                    broadcast(targetCreature, "Ship Repaired.");
                 }
                 CustomerServiceLog("Death", "(" + targetShip + ") " + getName(targetShip) + " has been /gmRevive'd at " + (getLocation(self)).toString() + " by (" + self + ") " + getName(self));
             }
@@ -3741,7 +3741,7 @@ public class base_player extends script.base_script
                 }
                 if (pclib.resurrectPlayer(targetCreature))
                 {
-                    sendSystemMessageTestingOnly(targetCreature, "You have been restored...");
+                    broadcast(targetCreature, "You have been restored...");
                     if (isPlayer(targetCreature))
                     {
                         pclib.clearCombatData(targetCreature);
@@ -3752,7 +3752,7 @@ public class base_player extends script.base_script
                         queueCommand(targetCreature, (-562996732), targetCreature, "", COMMAND_PRIORITY_IMMEDIATE);
                         play2dNonLoopingSound(targetCreature, "sound/music_acq_healer.snd");
                         utils.removeScriptVar(targetCreature, "pvp_death");
-                        sendSystemMessageTestingOnly(self, "You have /gmRevived " + getName(targetCreature));
+                        broadcast(self, "You have /gmRevived " + getName(targetCreature));
                     }
                 }
             }
@@ -3794,7 +3794,7 @@ public class base_player extends script.base_script
         location here = getLocation(self);
         if (((here.area)).equals("tutorial"))
         {
-            sendSystemMessageTestingOnly(self, "You cannot use this command from within the tutorial.");
+            broadcast(self, "You cannot use this command from within the tutorial.");
             return SCRIPT_CONTINUE;
         }
         CustomerServiceLog("Trade", "Tip Invoked -- Self: " + self + " Target: " + target + " Params: " + params);
@@ -3825,7 +3825,7 @@ public class base_player extends script.base_script
         if (target == self)
         {
             CustomerServiceLog("Trade", "  Tip -- Self: " + self + " " + getName(self) + " -- Tip aborted: (target == self)");
-            sendSystemMessageTestingOnly(self, "You can't use yourself as a target for /tip!");
+            broadcast(self, "You can't use yourself as a target for /tip!");
             return SCRIPT_CONTINUE;
         }
         boolean useCash = true;
@@ -3883,7 +3883,7 @@ public class base_player extends script.base_script
 
     public int cmdTipFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "/TIP command failed in command table...");
+        broadcast(self, "/TIP command failed in command table...");
         return SCRIPT_CONTINUE;
     }
 
@@ -4248,14 +4248,14 @@ public class base_player extends script.base_script
                 }
                 if (!pclib.playerRevive(self))
                 {
-                    sendSystemMessageTestingOnly(self, "You may only use this command to force a clone spawn if you are dead.");
+                    broadcast(self, "You may only use this command to force a clone spawn if you are dead.");
                 }
                 return SCRIPT_CONTINUE;
             }
         }
         if (utils.hasScriptVar(self, pclib.VAR_SUI_CLONE))
         {
-            sendSystemMessageTestingOnly(self, "You already have a cloning options menu open!");
+            broadcast(self, "You already have a cloning options menu open!");
             return SCRIPT_CONTINUE;
         }
         if (!isDead(self))
@@ -4268,7 +4268,7 @@ public class base_player extends script.base_script
 
     public int cmdActivateCloneFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "You may only use this command to activate the cloning options menu if you are dead.");
+        broadcast(self, "You may only use this command to activate the cloning options menu if you are dead.");
         return SCRIPT_CONTINUE;
     }
 
@@ -5472,7 +5472,7 @@ public class base_player extends script.base_script
         }
         if (spot == null)
         {
-            sendSystemMessageTestingOnly(self, "Waypoint: The system was unable to parse a valid waypoint location.");
+            broadcast(self, "Waypoint: The system was unable to parse a valid waypoint location.");
         }
         else
         {
@@ -5510,21 +5510,21 @@ public class base_player extends script.base_script
                 {
                     if (isIdValid(intendedTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for intended target location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                        broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for intended target location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                     }
                     else if (isIdValid(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for look at target location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                        broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for look at target location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                        broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                     }
                 }
                 else
                 {
                     final String localizedPlanetName = localize(new string_id("planet_n", spot.area));
-                    sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                    broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                 }
             }
             else
@@ -5773,7 +5773,7 @@ public class base_player extends script.base_script
         }
         if (spot == null)
         {
-            sendSystemMessageTestingOnly(self, "Waypoint: The system was unable to parse a valid waypoint location.");
+            broadcast(self, "Waypoint: The system was unable to parse a valid waypoint location.");
         }
         else
         {
@@ -5813,12 +5813,12 @@ public class base_player extends script.base_script
                 }
                 if (!wpDifferentPlanet)
                 {
-                    sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                    broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                 }
                 else
                 {
                     final String localizedPlanetName = localize(new string_id("planet_n", spot.area));
-                    sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
+                    broadcast(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int) displayCoordX + ", " + (int) spot.y + ", " + (int) displayCoordZ + ")");
                 }
             }
             else
@@ -9907,7 +9907,7 @@ public class base_player extends script.base_script
             dictionary data = params.getDictionary(xp.GRANT_XP_RETURN_DATA);
             obj_id target = data.getObjId("target");
             String xp_type = data.getString("xp_type");
-            sendSystemMessageTestingOnly(self, "/setExperience: granted (" + target + ")" + utils.getStringName(target) + " " + granted + "pts of " + getString(new string_id("exp_n", xp_type)) + " (" + xp_type + ") experience");
+            broadcast(self, "/setExperience: granted (" + target + ")" + utils.getStringName(target) + " " + granted + "pts of " + getString(new string_id("exp_n", xp_type)) + " (" + xp_type + ") experience");
         }
         return SCRIPT_CONTINUE;
     }
@@ -10526,7 +10526,7 @@ public class base_player extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
+                    broadcast(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
                 }
             }
             else
@@ -10553,7 +10553,7 @@ public class base_player extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
+                    broadcast(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
                 }
             }
             else
@@ -10603,7 +10603,7 @@ public class base_player extends script.base_script
     {
         if ((params == null) || (params.equals("")))
         {
-            sendSystemMessageTestingOnly(self, "Incorrect syntax. Syntax is /gmForceCommand  <command> <target_object_id> <command parameters>. You can use 0 instead of a valid object_id if needed. Params are optionsl");
+            broadcast(self, "Incorrect syntax. Syntax is /gmForceCommand  <command> <target_object_id> <command parameters>. You can use 0 instead of a valid object_id if needed. Params are optionsl");
             return SCRIPT_CONTINUE;
         }
         if (!isIdValid(target))
@@ -10612,19 +10612,19 @@ public class base_player extends script.base_script
         }
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "You must target the player you wish to call this command on");
+            broadcast(self, "You must target the player you wish to call this command on");
             return SCRIPT_CONTINUE;
         }
         String[] strText = split(params, ',');
         if (strText.length < 2)
         {
-            sendSystemMessageTestingOnly(self, "Incorrect syntax. Syntax is /gmForceCommand  <command> <target_object_id> <command parameters>. You can use 0 instead of a valid object_id if needed. Params are optionsl");
+            broadcast(self, "Incorrect syntax. Syntax is /gmForceCommand  <command> <target_object_id> <command parameters>. You can use 0 instead of a valid object_id if needed. Params are optionsl");
             return SCRIPT_CONTINUE;
         }
         String strCommand = strText[0];
         if (strCommand.equals("gmForceCommand"))
         {
-            sendSystemMessageTestingOnly(self, "You are not permitted to use this command to force this command. Don't do that");
+            broadcast(self, "You are not permitted to use this command to force this command. Don't do that");
             return SCRIPT_CONTINUE;
         }
         String strCommandTarget = strText[1];
@@ -10639,13 +10639,13 @@ public class base_player extends script.base_script
             lngId = Long.valueOf(strCommandTarget);
         } catch (NumberFormatException err)
         {
-            sendSystemMessageTestingOnly(self, strCommandTarget + " is not a valid number to use. Please retry.");
+            broadcast(self, strCommandTarget + " is not a valid number to use. Please retry.");
             return SCRIPT_CONTINUE;
         }
         obj_id objCommandTarget = obj_id.getObjId(lngId.longValue());
         if (isIdValid(objCommandTarget) && (!exists(objCommandTarget)))
         {
-            sendSystemMessageTestingOnly(self, "That command target does not exist and it is not 0. Object id was " + objCommandTarget);
+            broadcast(self, "That command target does not exist and it is not 0. Object id was " + objCommandTarget);
             return SCRIPT_CONTINUE;
         }
         dictionary dctParams = new dictionary();
@@ -10654,7 +10654,7 @@ public class base_player extends script.base_script
         dctParams.put("intCommand", intCommand);
         dctParams.put("strParams", strParams);
         messageTo(target, "doForcedGmCommand", dctParams, 0, false);
-        sendSystemMessageTestingOnly(self, "Forcing " + target + " to do command " + strCommand + " to target " + objCommandTarget + " with Parameters " + strParams);
+        broadcast(self, "Forcing " + target + " to do command " + strCommand + " to target " + objCommandTarget + " with Parameters " + strParams);
         return SCRIPT_CONTINUE;
     }
 
@@ -10664,7 +10664,7 @@ public class base_player extends script.base_script
         obj_id objTarget = params.getObjId("objTarget");
         String strParams = params.getString("strParams");
         queueCommand(self, intCommand, objTarget, strParams, COMMAND_PRIORITY_DEFAULT);
-        sendSystemMessageTestingOnly(self, "A GM Forced you to do a command");
+        broadcast(self, "A GM Forced you to do a command");
         return SCRIPT_CONTINUE;
     }
 
@@ -10760,7 +10760,7 @@ public class base_player extends script.base_script
     public int handleInstanceTimeRemainingMessage(obj_id self, dictionary params) throws InterruptedException
     {
         String message = params.getString("message");
-        sendSystemMessageTestingOnly(self, message);
+        broadcast(self, message);
         return SCRIPT_CONTINUE;
     }
 
@@ -12296,7 +12296,7 @@ public class base_player extends script.base_script
                 professionName = "Entertainer";
                 break;
         }
-        if (isGod(self))
+        if (isGod(self) && (!isAwayFromKeyBoard(self)))
         {
             attribs[idx] = "Game Master";
         }
@@ -12309,23 +12309,11 @@ public class base_player extends script.base_script
         attribs[idx] = Integer.toString(getLevel(self));
         idx++;
         names[idx] = utils.packStringId(new string_id("Faction"));
-        int faction = pvpGetAlignedFaction(self);
-        String factionName = "";
-        switch (faction)
-        {
-            case 0:
-                factionName = "Neutral";
-                break;
-            case 1:
-                factionName = "Imperial";
-                break;
-            case 2:
-                factionName = "Rebel";
-                break;
-        }
-        attribs[idx] = factionName;
+        String factionName;
+        String faction = factions.getFaction(self);
+        attribs[idx] = faction;
         idx++;
-        if (faction == 1 || faction == 2)
+        if (faction.equals("Rebel") || faction.equals("Imperial") && gcw.pvpGetCurrentGcwRank(self) > 0)
         {
             names[idx] = utils.packStringId(new string_id("Faction Rank"));
             int factionRank = pvpGetCurrentGcwRank(self);
@@ -12339,28 +12327,37 @@ public class base_player extends script.base_script
                     factionRankName = "Private";
                     break;
                 case 2:
-                    factionRankName = "Corporal";
+                    factionRankName = "Lance Corporal";
                     break;
                 case 3:
-                    factionRankName = "Sergeant";
+                    factionRankName = "Corporal";
                     break;
                 case 4:
-                    factionRankName = "Lieutenant";
+                    factionRankName = "Sergeant";
                     break;
                 case 5:
-                    factionRankName = "Captain";
+                    factionRankName = "Master Sergeant";
                     break;
                 case 6:
-                    factionRankName = "Major";
+                    factionRankName = "Sergeant Major";
                     break;
                 case 7:
-                    factionRankName = "Colonel";
+                    factionRankName = "Lieutenant";
                     break;
                 case 8:
-                    factionRankName = "General";
+                    factionRankName = "Captain";
                     break;
                 case 9:
-                    factionRankName = "Field Marshal";
+                    factionRankName = "Major";
+                    break;
+                case 10:
+                    factionRankName = "Lt. Colonel";
+                    break;
+                case 11:
+                    factionRankName = "Colonel";
+                    break;
+                case 12:
+                    factionRankName = "General";
                     break;
             }
             attribs[idx] = factionRankName;
@@ -12886,7 +12883,7 @@ public class base_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         location loc = getWaypointLocation(waypoint);
-        sendSystemMessageTestingOnly(self, "Teleporting you to the location of Waypoint: " + getWaypointName(waypoint) + " (" + waypoint + ") at " + loc + "...");
+        broadcast(self, "Teleporting you to the location of Waypoint: " + getWaypointName(waypoint) + " (" + waypoint + ") at " + loc + "...");
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
         return SCRIPT_CONTINUE;
     }

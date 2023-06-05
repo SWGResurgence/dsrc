@@ -889,7 +889,7 @@ public class space_dungeon extends script.base_script
         LOG("space_dungeon", "space_dungeon.ejectPlayerFromDungeon");
         if (gm.isInstanceAuthorized(player))
         {
-            sendSystemMessageTestingOnly(player, "You are negating the eject call due to authrization override");
+            broadcast(player, "You are negating the eject call due to authrization override");
             return false;
         }
         if (!preCheckEjectStatus(player, true))
@@ -1645,7 +1645,7 @@ public class space_dungeon extends script.base_script
         if (!hasObjVar(player, INSTANCE_ID))
         {
             debugConsoleMsg(player, "Instance Cloning.handleInstanceClone -- Player is calling for an instance clone but does not have a valid controller objVar");
-            sendSystemMessageTestingOnly(player, "You died without knowning your controller.  Did you enter the instance properly?");
+            broadcast(player, "You died without knowning your controller.  Did you enter the instance properly?");
             location currentLoc = getLocation(player);
             warpPlayer(player, currentLoc.area, currentLoc.x, currentLoc.y, currentLoc.z, null, currentLoc.x, currentLoc.y, currentLoc.z, "handleInstanceRessurect", true);
         }

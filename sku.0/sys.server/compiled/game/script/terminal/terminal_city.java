@@ -619,10 +619,10 @@ public class terminal_city extends script.base_script
             else if (item == menu_info_types.SERVER_MENU24) {
                 if(!hasObjVar(structure, city.OBJVAR_DERANK_EXEMPT)) {
                     setObjVar(structure, city.OBJVAR_DERANK_EXEMPT, true);
-                    sendSystemMessageTestingOnly(player, "The city is now de-rank exempt and will not lose its rank standing during normal city reset cycles.");
+                    broadcast(player, "The city is now de-rank exempt and will not lose its rank standing during normal city reset cycles.");
                 } else {
                     removeObjVar(structure, city.OBJVAR_DERANK_EXEMPT);
-                    sendSystemMessageTestingOnly(player, "The city is no longer de-rank exempt.");
+                    broadcast(player, "The city is no longer de-rank exempt.");
                 }
             }
         }
@@ -643,13 +643,13 @@ public class terminal_city extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         if (!isIdValid(player) || !isIdValid(structure))
         {
-            sendSystemMessageTestingOnly(player, "Invalid Object Id - Bailing Out - Please Try Again.");
+            broadcast(player, "Invalid Object Id - Bailing Out - Please Try Again.");
             return SCRIPT_CONTINUE;
         }
         int city_id = findCityByCityHall(structure);
         if (city_id <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Invalid City Id - Bailing Out - Please Try Again.");
+            broadcast(player, "Invalid City Id - Bailing Out - Please Try Again.");
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -728,14 +728,14 @@ public class terminal_city extends script.base_script
         }
         if (!cityExists(city_id))
         {
-            sendSystemMessageTestingOnly(player, "Player City not found at this location...please try again.");
+            broadcast(player, "Player City not found at this location...please try again.");
             return;
         }
         obj_id[] citizen_list = cityGetCitizenIds(city_id);
         String[] citizen_names = new String[citizen_list.length];
         if (citizen_list == null || citizen_list.length <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Player City not found at this location...please try again.");
+            broadcast(player, "Player City not found at this location...please try again.");
             return;
         }
         for (int i = 0; i < citizen_list.length; i++)
@@ -769,7 +769,7 @@ public class terminal_city extends script.base_script
         }
         if (!utils.hasScriptVar(player, "god_command_make_mayor_citizen_ids") && !utils.hasScriptVar(player, "god_command_make_mayor_citizen_names"))
         {
-            sendSystemMessageTestingOnly(player, "Invalid Data - Please attempt the City Transfer Again.");
+            broadcast(player, "Invalid Data - Please attempt the City Transfer Again.");
             return SCRIPT_CONTINUE;
         }
         String[] names = utils.getStringArrayScriptVar(player, "god_command_make_mayor_citizen_names");
@@ -803,7 +803,7 @@ public class terminal_city extends script.base_script
         String template = getTemplateName(structure);
         if (!template.contains("cityhall_"))
         {
-            sendSystemMessageTestingOnly(player, "City Hall not recognized - Please make sure you are in a City Hall and attempt the Mayor Transfer again.");
+            broadcast(player, "City Hall not recognized - Please make sure you are in a City Hall and attempt the Mayor Transfer again.");
             return SCRIPT_CONTINUE;
         }
         CustomerServiceLog("player_city", "CSR changed mayor. CSR(" + player + ") Changed City(" + city_id + ")" + cityGetName(city_id) + " to New Mayor(" + newMayorId + ")" + newMayorName + ".");

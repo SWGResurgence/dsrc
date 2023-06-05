@@ -40,7 +40,7 @@ public class station_exit_terminal extends script.base_script
     {
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
+            broadcast(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ public class station_exit_terminal extends script.base_script
         obj_id player = sui.getPlayerId(params);
         if (btn == sui.BP_OK)
         {
-            sendSystemMessageTestingOnly(player, "Going to staging area...");
+            broadcast(player, "Going to staging area...");
             npe.movePlayerFromSharedStationToFinishLocation(player);
         }
         return SCRIPT_CONTINUE;

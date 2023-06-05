@@ -14937,6 +14937,16 @@ public class combat_actions extends script.systems.combat.combat_base
         return SCRIPT_CONTINUE;
     }
 
+
+    public int fireBlastCannonLegendary(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!combatStandardAction("fireBlastCannonLegendary", self, target, params, "", ""))
+        {
+            return SCRIPT_OVERRIDE;
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     public int droid_flame_jet_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id droid = pet_lib.validateDroidCommand(self);

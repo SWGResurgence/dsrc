@@ -303,7 +303,7 @@ public class tatooine_espa_watto extends script.base_script
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "ERROR : No Naboo quest ObjVar Found!");
+            broadcast(player, "ERROR : No Naboo quest ObjVar Found!");
         }
     }
     public void tatooine_espa_watto_action_signalDroidRetrieved(obj_id player, obj_id npc) throws InterruptedException

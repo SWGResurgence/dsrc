@@ -61,7 +61,7 @@ public class npe_player_end_object extends script.base_script
     {
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
+            broadcast(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
             return true;
         }
         return false;

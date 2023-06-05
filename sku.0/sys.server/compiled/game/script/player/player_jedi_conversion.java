@@ -891,7 +891,7 @@ public class player_jedi_conversion extends script.base_script
     public void completeTraining(obj_id self) throws InterruptedException
     {
         setObjVar(self, "jedi.converted", 1);
-        sendSystemMessageTestingOnly(self, "You have completed your training...");
+        broadcast(self, "You have completed your training...");
         removeObjVar(self, "jedi.currentPoints");
         removeObjVar(self, "jedi.forceSensitivePoints");
         removeObjVar(self, "jedi.nonJediPoints");

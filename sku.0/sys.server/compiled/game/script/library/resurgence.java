@@ -20,15 +20,14 @@ public class resurgence extends script.base_script
 {
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
+    //note: add to this list, do not reindex these values!
     public static int WORLD_BOSS_PEKO = 0;
     public static int WORLD_BOSS_KRAYT= 1;
     public static int WORLD_BOSS_PAX = 2;
     public static int WORLD_BOSS_GIZMO = 3;
-    public static int WORLD_BOSS_DONKDONK = 3;
-    public static int WORLD_BOSS_AURRA = 3;
-
-
-
+    public static int WORLD_BOSS_DONKDONK = 4;
+    public static int WORLD_BOSS_AURRA = 5;
+    public static int WORLD_BOSS_EMPERORS_HAND = 6;
 
     public resurgence()
     {
@@ -598,7 +597,8 @@ public class resurgence extends script.base_script
             case 5:
                 notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The assassin, Aurra Sing, has been reported to have been seen on an island on Naboo. The Czerka Corporation is paying a high price for it's remains.");
                 break;
-
+            case 6:
+                notifyGalacticFeed("ATTENTION GALACTIC BOUNTY HUNTERS:\n The Hand of his Royal Majesty, The Emperor himself, has been located near the Emperor's Retreat on Naboo. The Czerka Corporation is paying a high price for her dissected remains, and any Jedi that she has captured.");
         }
     }
     public static void doWorldBossDeathMsg(obj_id target) throws InterruptedException
@@ -606,7 +606,7 @@ public class resurgence extends script.base_script
         String[] attackerList = getAttackerList(target);
         if (attackerList.length > 0)
         {
-            String msg = "The world boss " + getName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
+            String msg = "The world boss " + getEncodedName(target) + " has been defeated by the following adventurers: " + toUpper(attackerList[0], 0);
             for (int i = 1; i < attackerList.length; i++)
             {
                 msg += ", " + toUpper(attackerList[i], 0);

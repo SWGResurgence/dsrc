@@ -67,7 +67,7 @@ public class trick_or_treater extends script.base_script
             {
                 if (text.equals("setDailyLimitTwoMinutes"))
                 {
-                    sendSystemMessageTestingOnly(self, "The daily limit will get reset 2 minutes from now");
+                    broadcast(self, "The daily limit will get reset 2 minutes from now");
                     int now = getCalendarTime();
                     int secondsUntil = 120;
                     int then = now + secondsUntil;

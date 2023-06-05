@@ -720,7 +720,7 @@ public class collection extends script.base_script
             modifyCollectionSlotValue(player, s, collectionSlotNegativeValue);
             modifyCollectionSlotValue(player, s, collectionSlotPostiveValue);
         }
-        sendSystemMessageTestingOnly(player, "Collection Revoked and Regranted.");
+        broadcast(player, "Collection Revoked and Regranted.");
         return true;
     }
 
@@ -974,7 +974,7 @@ public class collection extends script.base_script
         }
         if (charactersAreSamePlayer(buffedPlayerId, bufferId))
         {
-            sendSystemMessageTestingOnly(bufferId, "You will not get a token from yourself.");
+            broadcast(bufferId, "You will not get a token from yourself.");
             return false;
         }
         String buffedPlayerTemplate = getSkillTemplate(buffedPlayerId);
@@ -1001,10 +1001,10 @@ public class collection extends script.base_script
         {
             buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_" + debuffTracker);
             //if(isGod(bufferId)){
-            //  sendSystemMessageTestingOnly(bufferId, "You have recieved buff version " + "tok_ent_invis_buff_tracker_"+debuffTracker);
+            //  broadcast(bufferId, "You have recieved buff version " + "tok_ent_invis_buff_tracker_"+debuffTracker);
             //}
             static_item.createNewItemFunction("item_entertainer_token_01_01", bufferId, 0);
-            sendSystemMessageTestingOnly(bufferId, "You have received a token in appreciation for your performance.");
+            broadcast(bufferId, "You have received a token in appreciation for your performance.");
             return true;
         }
         else
@@ -1124,7 +1124,7 @@ public class collection extends script.base_script
         if (utils.hasScriptVar(player, "qa.resource_roll_bypass"))
         {
             randomChoice = 1;
-            sendSystemMessageTestingOnly(player, "Collection Harvest Percentage bypassed for testing(100% success).");
+            broadcast(player, "Collection Harvest Percentage bypassed for testing(100% success).");
         }
         if (randomChoice > CONST_RESOURCE_ROLL)
         {

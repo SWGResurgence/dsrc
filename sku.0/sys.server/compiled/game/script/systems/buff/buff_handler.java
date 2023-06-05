@@ -2013,7 +2013,7 @@ public class buff_handler extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Malformed buildabuff data passed to buildabuffAddBuffHandler.");
+            broadcast(self, "Malformed buildabuff data passed to buildabuffAddBuffHandler.");
         }
         trial.bumpSession(self, "displayDefensiveMods");
         messageTo(self, "setDisplayOnlyDefensiveMods", trial.getSessionDict(self, "displayDefensiveMods"), 5, false);

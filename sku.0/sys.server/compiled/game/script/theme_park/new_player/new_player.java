@@ -423,7 +423,7 @@ public class new_player extends script.base_script
         {
             if (isGod(self))
             {
-                sendSystemMessageTestingOnly(self, "GODMODE MSG: theme_park.new_player.new_player : Player datapad is invalid.");
+                broadcast(self, "GODMODE MSG: theme_park.new_player.new_player : Player datapad is invalid.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -483,7 +483,7 @@ public class new_player extends script.base_script
             {
                 if (isGod(self))
                 {
-                    sendSystemMessageTestingOnly(self, "GODMODE MSG: theme_park.new_player.new_player : Tried to create droid but failed.");
+                    broadcast(self, "GODMODE MSG: theme_park.new_player.new_player : Tried to create droid but failed.");
                 }
                 return SCRIPT_CONTINUE;
             }

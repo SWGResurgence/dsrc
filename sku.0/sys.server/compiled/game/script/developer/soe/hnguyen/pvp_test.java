@@ -29,7 +29,7 @@ public class pvp_test extends script.base_script
                 obj_id dest = utils.stringToObjId(st.nextToken());
                 obj_id enemy = utils.stringToObjId(st.nextToken());
                 pvpSetPersonalEnemyFlag(dest, enemy);
-                sendSystemMessageTestingOnly(self, dest + " now has " + enemy + " as a personal enemy");
+                broadcast(self, dest + " now has " + enemy + " as a personal enemy");
             }
         }
         else if (strText.startsWith("haspe"))
@@ -42,11 +42,11 @@ public class pvp_test extends script.base_script
                 obj_id target = utils.stringToObjId(st.nextToken());
                 if (pvpHasPersonalEnemyFlag(actor, target))
                 {
-                    sendSystemMessageTestingOnly(self, actor + " has " + target + " as a personal enemy");
+                    broadcast(self, actor + " has " + target + " as a personal enemy");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, actor + " DOESN'T have " + target + " as a personal enemy");
+                    broadcast(self, actor + " DOESN'T have " + target + " as a personal enemy");
                 }
             }
         }
@@ -59,7 +59,7 @@ public class pvp_test extends script.base_script
                 obj_id target = utils.stringToObjId(st.nextToken());
                 obj_id enemyId = utils.stringToObjId(st.nextToken());
                 pvpRemovePersonalEnemyFlags(target, enemyId);
-                sendSystemMessageTestingOnly(self, target + " no longer has " + enemyId + " as a personal enemy");
+                broadcast(self, target + " no longer has " + enemyId + " as a personal enemy");
             }
         }
         return SCRIPT_CONTINUE;

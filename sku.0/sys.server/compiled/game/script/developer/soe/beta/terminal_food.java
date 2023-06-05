@@ -27,18 +27,18 @@ public class terminal_food extends script.terminal.base.terminal_add_use
                 obj_id food = createObject(TEMPLATES[idx], inv, "");
                 if ((food == null) || (food == obj_id.NULL_ID))
                 {
-                    sendSystemMessageTestingOnly(player, "Unable to create food. Make sure you have space in your inventory.");
+                    broadcast(player, "Unable to create food. Make sure you have space in your inventory.");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(player, "A random foodstuff has been created in your inventory.");
+                    broadcast(player, "A random foodstuff has been created in your inventory.");
                 }
             }
             return SCRIPT_CONTINUE;
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }

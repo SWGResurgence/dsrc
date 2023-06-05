@@ -104,14 +104,14 @@ public class book extends script.base_script
     {
         String bookText = params.getString("pageText.text.LocalText");
         obj_id player = sui.getPlayerId(params);
-        if (bookText.length() < 2000) //max length for objvars fyi
+        if (bookText.length() < 2000) //max length for objvars fyi per elour
         {
             setObjVar(self, "book.text", bookText);
             broadcast(player, "You have modified this text within this book.");
         }
         else
         {
-            broadcast(player, "The maximum word count for this book is 2000 words.");
+            broadcast(player, "The maximum word count for this book is 2000 characters.");
         }
         sui.closeSUI(player, getIntObjVar(self, "bookPage"));
         return SCRIPT_CONTINUE;

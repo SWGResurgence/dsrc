@@ -962,7 +962,7 @@ public class skill extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Unknown race, defaulting to human");
+                broadcast(player, "Unknown race, defaulting to human");
                 LOG("npe", "library.skill - getPlayerStatForLevel invalid race, using human defaults");
                 playerRace = 0;
             }

@@ -79,14 +79,14 @@ public class buff_builder_response extends script.base_script
             }
             if (getPlayerStationId(bufferId) == getPlayerStationId(recipientId))
             {
-                sendSystemMessageTestingOnly(bufferId, "Jabba the Hutt was impressed by your show, he thinks you should consider buffing other characters in a cantina to earn some tips!");
+                broadcast(bufferId, "Jabba the Hutt was impressed by your show, he thinks you should consider buffing other characters in a cantina to earn some tips!");
                 String soundFile = GRANT_BUFF_TO_PLAYER_ALTS_SOUND;
 
             }
             else
             {
                 money.systemPayout(money.ACCT_BETA_TEST, bufferId, intPay, money.DICT_PAY_HANDLER, null);
-                sendSystemMessageTestingOnly(bufferId, "Wow! It is your lucky day! Jabba the Hut enjoyed your performance and has given you an extra tip of " + intPay + " credits!");
+                broadcast(bufferId, "Wow! It is your lucky day! Jabba the Hut enjoyed your performance and has given you an extra tip of " + intPay + " credits!");
                 String soundFile = GRANT_BUFF_TO_PLAYER_SOUND;
             }
         }

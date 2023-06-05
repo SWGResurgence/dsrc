@@ -193,7 +193,7 @@ public class combat_ship extends script.base_script
             {
                 if (isMissile)
                 {
-                    sendSystemMessageTestingOnly(getPilotId(self), "MISSILED! for " + fltDamage + "from " + objAttacker + " missile type is " + missileType);
+                    broadcast(getPilotId(self), "MISSILED! for " + fltDamage + "from " + objAttacker + " missile type is " + missileType);
                 }
             }
         }

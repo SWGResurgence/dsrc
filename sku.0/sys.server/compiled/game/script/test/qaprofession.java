@@ -551,7 +551,7 @@ public class qaprofession extends script.base_script
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, "professionSkillCodeStrings not same lenght as HARD_CODED_LEVELS");
+                            broadcast(self, "professionSkillCodeStrings not same lenght as HARD_CODED_LEVELS");
                         }
                         String professionStringSelection = utils.getStringScriptVar(self, SCRIPTVAR + ".professionStringSelection");
                         String professionCodeSelection = utils.getStringScriptVar(self, SCRIPTVAR + ".professionCodeSelection");
@@ -737,7 +737,7 @@ public class qaprofession extends script.base_script
     }
     public void removePlayer(obj_id self, String err) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, err);
+        broadcast(self, err);
         qa.removeScriptVars(self, SCRIPTVAR);
         utils.removeScriptVarTree(self, SCRIPTVAR);
     }

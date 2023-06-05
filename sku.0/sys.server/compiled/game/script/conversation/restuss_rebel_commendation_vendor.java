@@ -23,7 +23,7 @@ public class restuss_rebel_commendation_vendor extends script.base_script {
     public int OnInitialize(obj_id self) throws InterruptedException {
         if (!isTangible(self) || isPlayer(self))
         {
-            detachScript(self, "conversation.restuss_rebel_comms_vendor");
+            detachScript(self, "conversation.restuss_rebel_commendation_vendor");
         }
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
@@ -44,7 +44,7 @@ public class restuss_rebel_commendation_vendor extends script.base_script {
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
         clearCondition(self, CONDITION_CONVERSABLE);
-        detachScript(self, "conversation.restuss_rebel_comms_vendor");
+        detachScript(self, "conversation.restuss_rebel_commendation_vendor");
         return SCRIPT_CONTINUE;
     }
 
@@ -91,7 +91,7 @@ public class restuss_rebel_commendation_vendor extends script.base_script {
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
-        utils.removeScriptVar(player, "conversation.restuss_rebel_comms_vendor.branchId");
+        utils.removeScriptVar(player, "conversation.restuss_rebel_commendation_vendor.branchId");
         return SCRIPT_CONTINUE;
     }
 }

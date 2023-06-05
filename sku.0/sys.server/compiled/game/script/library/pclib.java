@@ -294,7 +294,7 @@ public class pclib extends script.base_script
             if (pid < 0)
             {
                 CustomerServiceLog("Trade", "  Tip -- Player: " + player + " " + getName(player) + " Target: " + target + " -- Tip aborted: Unable to create bank tip SUI window.");
-                sendSystemMessageTestingOnly(player, "Tip aborted: Unable to create bank tip SUI window.");
+                broadcast(player, "Tip aborted: Unable to create bank tip SUI window.");
                 return false;
             }
         }
@@ -778,7 +778,7 @@ public class pclib extends script.base_script
         }
         if (!isDead(player))
         {
-            sendSystemMessageTestingOnly(killer, "apparently, " + getName(player) + " is still not dead");
+            broadcast(killer, "apparently, " + getName(player) + " is still not dead");
             return false;
         }
         if (killer == obj_id.NULL_ID || player == killer)
@@ -850,7 +850,7 @@ public class pclib extends script.base_script
                     if (commCount > 0) {
                         commCount *= RESTUS_COMM_BONUS;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
+                        broadcast(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
                     }
                 }
             }

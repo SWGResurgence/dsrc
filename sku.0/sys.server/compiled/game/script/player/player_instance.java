@@ -698,7 +698,7 @@ public class player_instance extends script.base_script
         }
         if (tokenIndex < 0 || tokenIndex >= trial.HEROIC_TOKENS.length)
         {
-            sendSystemMessageTestingOnly(self, "DEBUG: handleAwardtoken sent with out of range tokenIndex.");
+            broadcast(self, "DEBUG: handleAwardtoken sent with out of range tokenIndex.");
             return SCRIPT_CONTINUE;
         }
         obj_id inventory = utils.getInventoryContainer(self);
@@ -749,7 +749,7 @@ public class player_instance extends script.base_script
             sendSystemMessage(self, new string_id("instance", "fail_invalid_lockout"));
             break;
             case instance.FAIL_INSTANCE_CLOSED:
-            sendSystemMessageTestingOnly(self, "The instance you are attempting to enter is currently inactive");
+            broadcast(self, "The instance you are attempting to enter is currently inactive");
             break;
             case instance.FAIL_INSTANCE_FEW_PLAYERS:
             sendSystemMessage(self, new string_id("instance", "fail_under_player_limit"));
@@ -772,7 +772,7 @@ public class player_instance extends script.base_script
         obj_id enterObject = getFirstObjectWithObjVar(getLocation(trial.getTop(self)), 1000.0f, "instance_name");
         if (!isIdValid(enterObject))
         {
-            sendSystemMessageTestingOnly(self, "No object in range");
+            broadcast(self, "No object in range");
             return SCRIPT_CONTINUE;
         }
         String instance_name = getStringObjVar(enterObject, "instance_name");

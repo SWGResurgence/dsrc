@@ -145,7 +145,7 @@ public class etyyy_broodmaster_hsskas_spawner extends script.base_script
     {
         if (doLogging)
         {
-            sendSystemMessageTestingOnly(speaker, "My objId is " + self);
+            broadcast(speaker, "My objId is " + self);
             establishTriggerVolume(self);
         }
         return SCRIPT_CONTINUE;

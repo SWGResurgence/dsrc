@@ -130,7 +130,7 @@ public class load_test extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(clientCreature, "loadClientSetup: Bad option [" + options[i] + "] specified.");
+                        broadcast(clientCreature, "loadClientSetup: Bad option [" + options[i] + "] specified.");
                         return;
                     }
                 }

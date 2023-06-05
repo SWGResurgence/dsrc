@@ -233,7 +233,7 @@ public class qa extends script.base_script
         obj_id player = sui.getPlayerId(params);
         if ((params == null) || (params.isEmpty()))
         {
-            sendSystemMessageTestingOnly(player, "Failing, params were empty!");
+            broadcast(player, "Failing, params were empty!");
             removeScriptVars(player, scriptVar);
             return;
         }
@@ -250,7 +250,7 @@ public class qa extends script.base_script
         obj_id player = sui.getPlayerId(params);
         if ((params == null) || (params.isEmpty()))
         {
-            sendSystemMessageTestingOnly(player, "Failing, params were empty!");
+            broadcast(player, "Failing, params were empty!");
             utils.removeScriptVarTree(player, scriptVar);
             return;
         }
@@ -319,7 +319,7 @@ public class qa extends script.base_script
         String[] arrayList = dataTableGetStringColumn(datatableName, col);
         if (arrayList.length == 0)
         {
-            sendSystemMessageTestingOnly(player, "Tool Not Functioning because the Datatable Rows equal ZERO!");
+            broadcast(player, "Tool Not Functioning because the Datatable Rows equal ZERO!");
             return errorZeroLengthArray;
         }
         int listingLength = arrayList.length;
@@ -340,7 +340,7 @@ public class qa extends script.base_script
         String[] arrayList = dataTableGetStringColumn(datatableName, col);
         if (arrayList.length == 0)
         {
-            sendSystemMessageTestingOnly(player, "Tool Not Functioning because the Datatable Rows equal ZERO!");
+            broadcast(player, "Tool Not Functioning because the Datatable Rows equal ZERO!");
             return errorZeroLengthArray;
         }
         int listingLength = arrayList.length;
@@ -382,7 +382,7 @@ public class qa extends script.base_script
 
     public static void removePlayer(obj_id player, String SCRIPTVAR, String err) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(player, err);
+        broadcast(player, err);
         qa.removeScriptVars(player, SCRIPTVAR);
         utils.removeScriptVarTree(player, SCRIPTVAR);
     }
@@ -422,12 +422,12 @@ public class qa extends script.base_script
             obj_id[] objContents = utils.getContents(inv, true);
             if (objContents.length >= 80)
             {
-                sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
+                broadcast(self, "Empty your inventory before trying to spawn more items");
             }
             else
             {
                 static_item.createNewItemFunction(staticItemString, inv);
-                sendSystemMessageTestingOnly(self, messageString + " was placed in your inventory");
+                broadcast(self, messageString + " was placed in your inventory");
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has spawned (" + staticItemString + ") using a QA Tool or command.");
             }
         }
@@ -450,14 +450,14 @@ public class qa extends script.base_script
             obj_id[] objContents = utils.getContents(inv, true);
             if (objContents.length >= 80)
             {
-                sendSystemMessageTestingOnly(self, "Empty your inventory before trying to spawn more items");
+                broadcast(self, "Empty your inventory before trying to spawn more items");
             }
             else
             {
                 obj_id staticItemId = static_item.createNewItemFunction(staticItemString, inv);
                 if (!silent)
                 {
-                    sendSystemMessageTestingOnly(self, messageString + " was placed in your inventory");
+                    broadcast(self, messageString + " was placed in your inventory");
                 }
                 CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has spawned (" + staticItemString + ") using a QA Tool or command.");
                 return staticItemId;
@@ -734,7 +734,7 @@ public class qa extends script.base_script
             strTest += "LOCALVARS:\r\n";
             strTest += localVars;
             strTest += "\n\r";
-            sendSystemMessageTestingOnly(self, "LOCALVARS:" + localVars);
+            broadcast(self, "LOCALVARS:" + localVars);
         }
         if (isPlayer(objTarget))
         {
@@ -1142,7 +1142,7 @@ public class qa extends script.base_script
             }
             return returnedList;
         }
-        sendSystemMessageTestingOnly(tester, "No menu options received.  Tool Failed. ");
+        broadcast(tester, "No menu options received.  Tool Failed. ");
         return null;
     }
 
@@ -1161,7 +1161,7 @@ public class qa extends script.base_script
             }
             return waypointLocations;
         }
-        sendSystemMessageTestingOnly(tester, "No locations received.  Tool Failed. ");
+        broadcast(tester, "No locations received.  Tool Failed. ");
         return null;
     }
 
@@ -1170,12 +1170,12 @@ public class qa extends script.base_script
         obj_id inventoryContainer = utils.getInventoryContainer(player);
         if (getVolumeFree(inventoryContainer) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
         }
         else
         {
             createObject(templateData, inventoryContainer, "");
-            sendSystemMessageTestingOnly(player, "Item Issued.");
+            broadcast(player, "Item Issued.");
             CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has spawned (" + templateData + ") using a QA Tool or command.");
         }
     }
@@ -1185,14 +1185,14 @@ public class qa extends script.base_script
         obj_id inventoryContainer = utils.getInventoryContainer(player);
         if (getVolumeFree(inventoryContainer) <= 0)
         {
-            sendSystemMessageTestingOnly(player, "Your Inventory is Full, please make room and try again.");
+            broadcast(player, "Your Inventory is Full, please make room and try again.");
         }
         else
         {
             obj_id returnedId = createObject(templateData, inventoryContainer, "");
             if (!silent)
             {
-                sendSystemMessageTestingOnly(player, "Item Issued.");
+                broadcast(player, "Item Issued.");
             }
             CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has spawned (" + templateData + ") using a QA Tool or command.");
             return returnedId;
@@ -1225,7 +1225,7 @@ public class qa extends script.base_script
         setSkillTemplate(player, "");
         setWorkingSkill(player, "");
         CustomerServiceLog("qaTool", "User: (" + player + ") " + getName(player) + " has had their entire profession removed/revoked by using a QA Tool or command.");
-        sendSystemMessageTestingOnly(player, "All Professions removed from character.");
+        broadcast(player, "All Professions removed from character.");
     }
 
     public static void revokePilotingSkills(obj_id player) throws InterruptedException
@@ -1270,7 +1270,7 @@ public class qa extends script.base_script
         {
             revokePilotingSkills(self);
             grantPilotingSkills(self, "rebel_navy");
-            sendSystemMessageTestingOnly(self, "Rebel Pilot Granted.");
+            broadcast(self, "Rebel Pilot Granted.");
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained Master Rebel Pilot by using a QA Tool or command.");
             return true;
         }
@@ -1278,7 +1278,7 @@ public class qa extends script.base_script
         {
             revokePilotingSkills(self);
             grantPilotingSkills(self, "imperial_navy");
-            sendSystemMessageTestingOnly(self, "Imperial Pilot Granted.");
+            broadcast(self, "Imperial Pilot Granted.");
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained Master Imperial Pilot by using a QA Tool or command.");
             return true;
         }
@@ -1286,13 +1286,13 @@ public class qa extends script.base_script
         {
             revokePilotingSkills(self);
             grantPilotingSkills(self, "neutral");
-            sendSystemMessageTestingOnly(self, "Neutral Pilot Granted.");
+            broadcast(self, "Neutral Pilot Granted.");
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has attained Master Neutral Pilot by using a QA Tool or command.");
             return true;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "The revokeAndGrantPilot function was not used properly. Exiting.");
+            broadcast(self, "The revokeAndGrantPilot function was not used properly. Exiting.");
         }
         return false;
     }
@@ -1328,8 +1328,8 @@ public class qa extends script.base_script
         if (!buffName.equals(""))
         {
             buff.applyBuff(self, self, buffArg);
-            sendSystemMessageTestingOnly(self, "Applying Buff");
-            sendSystemMessageTestingOnly(self, buffName);
+            broadcast(self, "Applying Buff");
+            broadcast(self, buffName);
             CustomerServiceLog("qaTool", "User: (" + self + ") " + getName(self) + " has used the buff (" + buffName + ") attained from a QA Tool or command.");
         }
     }
@@ -1350,7 +1350,7 @@ public class qa extends script.base_script
         ai_lib.aiFollow(self, tester);
         setMovementRun(self);
         setBaseRunSpeed(self, (testerSpeed * 2));
-        sendSystemMessageTestingOnly(tester, "Follow command given to mobile.");
+        broadcast(tester, "Follow command given to mobile.");
     }
 
     public static void damageMobTool(obj_id self) throws InterruptedException
@@ -1360,7 +1360,7 @@ public class qa extends script.base_script
         {
             if (finalTarget == self)
             {
-                sendSystemMessageTestingOnly(self, "Damaging self.");
+                broadcast(self, "Damaging self.");
             }
             int targetCurrentHealth = getAttrib(finalTarget, HEALTH);
             utils.setScriptVar(self, DAMAGE_SCRIPTVAR + ".lookAtTarget", String.valueOf(finalTarget));
@@ -1370,7 +1370,7 @@ public class qa extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool damage while targeting the mob/player.");
+            broadcast(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool damage while targeting the mob/player.");
         }
     }
 
@@ -1381,7 +1381,7 @@ public class qa extends script.base_script
         {
             if (finalTarget == self)
             {
-                sendSystemMessageTestingOnly(self, "Healing self.");
+                broadcast(self, "Healing self.");
             }
             int targetCurrentHealth = getAttrib(finalTarget, HEALTH);
             int targetMaxHealth = getMaxHealth(finalTarget);
@@ -1395,12 +1395,12 @@ public class qa extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The target health pool is maximum and cannot be healed.");
+                broadcast(self, "The target health pool is maximum and cannot be healed.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool heal while targeting the mob/player.");
+            broadcast(self, "You must have a valid mob or player targeted.  If the mob is moving, you may want to type /qatool heal while targeting the mob/player.");
         }
     }
 
@@ -1550,7 +1550,7 @@ public class qa extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "The quest type was typed incorrectly");
+                broadcast(self, "The quest type was typed incorrectly");
             }
         }
         return "Error";
@@ -1610,7 +1610,7 @@ public class qa extends script.base_script
             if ((questid != 0) && questIsQuestActive(questid, self))
             {
                 int questCompleted = questCompleteQuest(questid, self);
-                sendSystemMessageTestingOnly(self, "Quest completion function completed.");
+                broadcast(self, "Quest completion function completed.");
                 return true;
             }
         }
@@ -1643,7 +1643,7 @@ public class qa extends script.base_script
                             {
                                 String spaceObjVar = "space_quest." + questType + "." + questName;
                                 blowOutObjVars(self, spaceObjVar);
-                                sendSystemMessageTestingOnly(self, "Space quest ObjVar removed.");
+                                broadcast(self, "Space quest ObjVar removed.");
                             }
                         }
                     }
@@ -1678,14 +1678,14 @@ public class qa extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "The was a problem granting: " + spaceString);
+                        broadcast(self, "The was a problem granting: " + spaceString);
                         return false;
                     }
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Unknown quest string: " + spaceString);
+                broadcast(self, "Unknown quest string: " + spaceString);
             }
         }
         return false;
@@ -1801,7 +1801,7 @@ public class qa extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Not recognized as a spawner.  Tool failed.");
+            broadcast(self, "Not recognized as a spawner.  Tool failed.");
         }
     }
 

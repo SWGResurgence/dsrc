@@ -63,7 +63,7 @@ public class vehicle_swoop_deed extends script.base_script
         obj_id petControlDevice = createObject(controlTemplate, datapad, "");
         if (!isIdValid(petControlDevice))
         {
-            sendSystemMessageTestingOnly(player, "Failed to create pet control device for vehicle");
+            broadcast(player, "Failed to create pet control device for vehicle");
             return null;
         }
         else

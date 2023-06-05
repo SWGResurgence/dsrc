@@ -66,11 +66,11 @@ public class cts_test2 extends script.base_script
                                 fos.close();
                                 fos = null;
                                 long fileSize = (new File(file)).length();
-                                sendSystemMessageTestingOnly(self, "dictionary written to " + file + " file size=" + fileSize);
+                                broadcast(self, "dictionary written to " + file + " file size=" + fileSize);
                             }
                             catch(IOException ioe)
                             {
-                                sendSystemMessageTestingOnly(self, "IO error: " + ioe);
+                                broadcast(self, "IO error: " + ioe);
                             }
                             try
                             {
@@ -81,7 +81,7 @@ public class cts_test2 extends script.base_script
                             }
                             catch(IOException ioe2)
                             {
-                                sendSystemMessageTestingOnly(self, "IO error on closing file: " + ioe2);
+                                broadcast(self, "IO error on closing file: " + ioe2);
                             }
                         }
                         if (onClient)
@@ -91,12 +91,12 @@ public class cts_test2 extends script.base_script
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "trigger OnUploadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
+                        broadcast(self, "trigger OnUploadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
                     }
                 }
                 catch(Throwable t)
                 {
-                    sendSystemMessageTestingOnly(self, "trigger OnUploadCharacter() resulted in exception: " + t);
+                    broadcast(self, "trigger OnUploadCharacter() resulted in exception: " + t);
                 }
             }
         }
@@ -114,7 +114,7 @@ public class cts_test2 extends script.base_script
                 try
                 {
                     long fileSize = (new File(file)).length();
-                    sendSystemMessageTestingOnly(self, "reading dictionary " + file + " file size=" + fileSize);
+                    broadcast(self, "reading dictionary " + file + " file size=" + fileSize);
                     fis = new FileInputStream(file);
                     dis = new DataInputStream(fis);
                     dictRead = new byte[(int)(fileSize)];
@@ -134,21 +134,21 @@ public class cts_test2 extends script.base_script
                         int err = script_entry.runScripts("OnDownloadCharacter", triggerParams);
                         if (err == SCRIPT_CONTINUE)
                         {
-                            sendSystemMessageTestingOnly(self, "trigger OnDownloadCharacter() return SCRIPT_CONTINUE");
+                            broadcast(self, "trigger OnDownloadCharacter() return SCRIPT_CONTINUE");
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, "trigger OnDownloadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
+                            broadcast(self, "trigger OnDownloadCharacter() *DIDN'T* return SCRIPT_CONTINUE");
                         }
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "couldn't read dictionary");
+                        broadcast(self, "couldn't read dictionary");
                     }
                 }
                 catch(IOException ioe)
                 {
-                    sendSystemMessageTestingOnly(self, "IO error: " + ioe);
+                    broadcast(self, "IO error: " + ioe);
                 }
                 try
                 {
@@ -159,7 +159,7 @@ public class cts_test2 extends script.base_script
                 }
                 catch(IOException ioe2)
                 {
-                    sendSystemMessageTestingOnly(self, "IO error on closing file: " + ioe2);
+                    broadcast(self, "IO error on closing file: " + ioe2);
                 }
             }
         }

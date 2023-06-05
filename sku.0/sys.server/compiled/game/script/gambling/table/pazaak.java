@@ -122,7 +122,7 @@ public class pazaak extends script.gambling.base.table
         int minBet = getIntObjVar(self, gambling.VAR_TABLE_BET_MIN);
         if (minBet > 0 && amt < minBet)
         {
-            sendSystemMessageTestingOnly(player, " The minimum bet for this station is " + minBet + " credits.");
+            broadcast(player, " The minimum bet for this station is " + minBet + " credits.");
             bet_success = false;
         }
         int playerIdx = gambling.getGamePlayerIndex(self, player);
@@ -534,7 +534,7 @@ public class pazaak extends script.gambling.base.table
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {
-            sendSystemMessageTestingOnly(player, "The table was unable to create an interface for you.");
+            broadcast(player, "The table was unable to create an interface for you.");
             return;
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);

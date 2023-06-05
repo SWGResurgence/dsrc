@@ -585,7 +585,7 @@ public class spawner extends script.base_script
     }
     public void writeSpawner(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Writing spawner");
+        broadcast(self, "Writing spawner");
         obj_id objSpawner = createObject("object/tangible/space/content_infrastructure/basic_iff", getTransform_o2w(self), null);
         String strSpawnerType = utils.getStringScriptVar(self, "strSpawnerType");
         if (strSpawnerType.equals("generic"))

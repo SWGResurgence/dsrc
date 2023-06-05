@@ -1045,7 +1045,7 @@ public class player_structure extends script.base_script
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(player, "God-Mode Placement Override: Structure is not native to this planet!");
+                        broadcast(player, "God-Mode Placement Override: Structure is not native to this planet!");
                     }
                 }
             }
@@ -2217,7 +2217,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to player(you) Obj_ID being invalid");
+                broadcast(player, "Packup Failed to confirm due to player(you) Obj_ID being invalid");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack a structure(" + structure + "), but the Player ID is invalid");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack a structure(" + structure + "), but the Player ID is invalid");
@@ -2227,7 +2227,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to structure Obj_ID being invalid");
+                broadcast(player, "Packup Failed to confirm due to structure Obj_ID being invalid");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack a structure(" + structure + "), but the house ID is invalid");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack a structure(" + structure + "), but the house ID is invalid");
@@ -2239,7 +2239,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to owner Obj_ID not existing - he has likely been deleted.");
+                broadcast(player, "Packup Failed to confirm due to owner Obj_ID not existing - he has likely been deleted.");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") but the owner(" + getOwner(structure) + ") Obj ID is not a player - Character has been deleted.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") but the owner(" + getOwner(structure) + ") Obj ID is not a player - Character has been deleted.");
@@ -2250,7 +2250,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to invalid owner Obj_ID");
+                broadcast(player, "Packup Failed to confirm due to invalid owner Obj_ID");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner ID of the structure is invalid.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner ID of the structure is invalid.");
@@ -2261,7 +2261,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to the owner not being in violation (has not been logged out long enough)");
+                broadcast(player, "Packup Failed to confirm due to the owner not being in violation (has not been logged out long enough)");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner has not been offline for 90 days - Removing City Abandoned Flag.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner has not been offline for 90 days - Removing City Abandoned Flag.");
@@ -2274,7 +2274,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to the offending structure no longer residing inside of a player city.");
+                broadcast(player, "Packup Failed to confirm due to the offending structure no longer residing inside of a player city.");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") but the structure is no longer in a valid Player City.  Removing City Abandoned Tag.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") but the structure is no longer in a valid Player City.  Removing City Abandoned Tag.");
@@ -2286,7 +2286,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to the Mayor protecting this Player's House.");
+                broadcast(player, "Packup Failed to confirm due to the Mayor protecting this Player's House.");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner is protected by the Mayor(" + cityGetLeader(city_id) + ") of City(" + city_id + ")");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure(" + structure + ") owned by Player(" + getOwner(structure) + ") - but owner is protected by the Mayor(" + cityGetLeader(city_id) + ") of City(" + city_id + ")");
@@ -2297,7 +2297,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to YOU being the OWNER! (God Mode makes you the owner of everything - '/setGod 0' please)");
+                broadcast(player, "Packup Failed to confirm due to YOU being the OWNER! (God Mode makes you the owner of everything - '/setGod 0' please)");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack his own structure - Removing City Abandoned Tag.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack his own structure - Removing City Abandoned Tag.");
@@ -2308,7 +2308,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to Structure no longer being CityAbandoned");
+                broadcast(player, "Packup Failed to confirm due to Structure no longer being CityAbandoned");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack this structure(" + structure + ") - but it is not abandoned - bail");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack this structure(" + structure + ") - but it is not abandoned - bail");
@@ -2319,7 +2319,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to Player and House being on different game servers.");
+                broadcast(player, "Packup Failed to confirm due to Player and House being on different game servers.");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack this structure - but the structure(" + structure + ") is on a different server than the player.");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack this structure - but the structure(" + structure + ") is on a different server than the player.");
@@ -2330,7 +2330,7 @@ public class player_structure extends script.base_script
         {
             if (hasObjVar(player, "qa.city_packup"))
             {
-                sendSystemMessageTestingOnly(player, "Packup Failed to confirm due to Server Vendor Config preventing Vendor Packups.");
+                broadcast(player, "Packup Failed to confirm due to Server Vendor Config preventing Vendor Packups.");
             }
             LOG("sissynoid", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure - but the structure(" + structure + ") can't be packed due to Vendors Config");
             CustomerServiceLog("city_house_packup", "City Pack Up System - Player (" + player + ")" + getPlayerFullName(player) + " attempted to pack structure - but the structure(" + structure + ") can't be packed due to Vendors Config");
@@ -3510,7 +3510,7 @@ public class player_structure extends script.base_script
                     {
                         if (verbose && isIdValid(admin))
                         {
-                            sendSystemMessageTestingOnly(admin, "The City Name you entered is not valid.");
+                            broadcast(admin, "The City Name you entered is not valid.");
                         }
                         return false;
                     }
@@ -3524,7 +3524,7 @@ public class player_structure extends script.base_script
                     {
                         if (verbose && isIdValid(admin))
                         {
-                            sendSystemMessageTestingOnly(admin, "Invalid entry. You must enter either \"faction:imperial\" or \"faction:rebel\"");
+                            broadcast(admin, "Invalid entry. You must enter either \"faction:imperial\" or \"faction:rebel\"");
                         }
                         return false;
                     }
@@ -7385,7 +7385,7 @@ public class player_structure extends script.base_script
 
     public static void sendListChangeMessage(obj_id to, String type, boolean isAdd)
     {
-        sendSystemMessageTestingOnly(to, type + (isAdd ? " was added to " : " was removed from ") + "the list successfully");
+        broadcast(to, type + (isAdd ? " was added to " : " was removed from ") + "the list successfully");
     }
 
     public static boolean isSpecialAccessPermissionGroup(String toCheck)
@@ -7407,7 +7407,7 @@ public class player_structure extends script.base_script
         }
         setObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT, getPlayerStationId(player));
         permissionsAddAllowed(structure, "account:" + getPlayerStationId(player));
-        sendSystemMessageTestingOnly(player, "All characters on your account will now have entry and admin access to this structure. You can remove this access any time from the Structure Permissions menu.");
+        broadcast(player, "All characters on your account will now have entry and admin access to this structure. You can remove this access any time from the Structure Permissions menu.");
     }
 
     public static void removeAccountFromAdminList(obj_id structure, obj_id player) throws InterruptedException
@@ -7418,6 +7418,6 @@ public class player_structure extends script.base_script
         }
         removeObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT);
         permissionsRemoveAllowed(structure, "account:" + getPlayerStationId(player));
-        sendSystemMessageTestingOnly(player, "All characters on your account will no longer have entry or admin access to this structure. You will need to separately add your characters to the list if you wish for them to gain access.");
+        broadcast(player, "All characters on your account will no longer have entry or admin access to this structure. You will need to separately add your characters to the list if you wish for them to gain access.");
     }
 }

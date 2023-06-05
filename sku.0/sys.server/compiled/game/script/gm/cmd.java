@@ -18,7 +18,7 @@ public class cmd extends script.base_script
 
     private static void showAdminCmdSyntax(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Outputting nested commands and syntax of /admin to console");
+        broadcast(self, "Outputting nested commands and syntax of /admin to console");
         sendConsoleMessage(self, "\\#ffff00 ============ Syntax: /admin commands ============ \\#.");
         sendConsoleMessage(self, "\\#00ffff dumpPermsForCell \\#bfff00 <oid> \\#.");
         sendConsoleMessage(self, "returns the public status and permissions list for the provided cell");
@@ -37,7 +37,7 @@ public class cmd extends script.base_script
     {
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /getPlayerId <player FIRST name>");
+            broadcast(self, "[Syntax] /getPlayerId <player FIRST name>");
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
@@ -45,11 +45,11 @@ public class cmd extends script.base_script
         obj_id playerId = getPlayerIdFromFirstName(toLower(name));
         if (isIdValid(playerId))
         {
-            sendSystemMessageTestingOnly(self, "getPlayerId: player '" + name + "' has object id: " + playerId);
+            broadcast(self, "getPlayerId: player '" + name + "' has object id: " + playerId);
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "getPlayerId: The system was unable to find a player named '" + name + "'");
+            broadcast(self, "getPlayerId: The system was unable to find a player named '" + name + "'");
         }
         return SCRIPT_CONTINUE;
     }
@@ -65,7 +65,7 @@ public class cmd extends script.base_script
                 ship_ai.unitSetAutoAggroImmune(ship, false);
                 ship_ai.unitSetDamageAggroImmune(ship, false);
             }
-            sendSystemMessageTestingOnly(self, "aiIgnore[OFF]: AI will now aggro you as normal and fight back.");
+            broadcast(self, "aiIgnore[OFF]: AI will now aggro you as normal and fight back.");
         }
         else
         {
@@ -76,7 +76,7 @@ public class cmd extends script.base_script
                 ship_ai.unitSetAutoAggroImmune(ship, true);
                 ship_ai.unitSetDamageAggroImmune(ship, true);
             }
-            sendSystemMessageTestingOnly(self, "aiIgnore[ON]: AI will no longer aggro you or fight back.");
+            broadcast(self, "aiIgnore[ON]: AI will no longer aggro you or fight back.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -88,8 +88,8 @@ public class cmd extends script.base_script
         }
         StringTokenizer st = new StringTokenizer(params);
         if(!st.hasMoreTokens()) {
-            sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR <oid>> </command with params>");
-            sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 /tell bubba-joe hi");
+            broadcast(self, "Syntax: /forceCommand <-target OR <oid>> </command with params>");
+            broadcast(self, "Example: /forceCommand 9248492842 /tell bubba-joe hi");
         } else {
             String focus = st.nextToken();
             if(focus.contains("target")) {
@@ -98,22 +98,22 @@ public class cmd extends script.base_script
                 if (focus.matches(".*\\d.*")) {
                     target = obj_id.getObjId(Long.parseLong(focus));
                 } else {
-                    sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
-                    sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 tell bubba-joe hii");
+                    broadcast(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
+                    broadcast(self, "Example: /forceCommand 9248492842 tell bubba-joe hii");
                     return SCRIPT_CONTINUE;
                 }
             }
             if(!isIdValid(target) || !isPlayer(target)) {
-                sendSystemMessageTestingOnly(self, "forceCommand: Error: Target was not valid. Target must be a player.");
+                broadcast(self, "forceCommand: Error: Target was not valid. Target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if(!st.hasMoreTokens()) {
-                sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
-                sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 tell bubba-joe hi");
+                broadcast(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
+                broadcast(self, "Example: /forceCommand 9248492842 tell bubba-joe hi");
             } else {
                 String cmd = st.nextToken("").replaceFirst(" ", "/");
                 sendConsoleCommand(cmd, target);
-                sendSystemMessageTestingOnly(self, "forceCommand: Successfully sent forceful command "+cmd+" request to "+getPlayerName(target)+ "("+target+").");
+                broadcast(self, "forceCommand: Successfully sent forceful command "+cmd+" request to "+getPlayerName(target)+ "("+target+").");
             }
             return SCRIPT_CONTINUE;
         }
@@ -168,11 +168,11 @@ public class cmd extends script.base_script
             {
                 if (gm.setBalance(target, money.MT_CASH, sAmt))
                 {
-                    sendSystemMessageTestingOnly(self, "[CREDITS] Processing CASH update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
+                    broadcast(self, "[CREDITS] Processing CASH update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "[CREDITS] System rejected the CASH update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
+                    broadcast(self, "[CREDITS] System rejected the CASH update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
                 }
                 return SCRIPT_CONTINUE;
             }
@@ -180,11 +180,11 @@ public class cmd extends script.base_script
             {
                 if (gm.setBalance(target, money.MT_BANK, sAmt))
                 {
-                    sendSystemMessageTestingOnly(self, "[CREDITS] Processing BANK update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
+                    broadcast(self, "[CREDITS] Processing BANK update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "[CREDITS] System rejected the BANK update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
+                    broadcast(self, "[CREDITS] System rejected the BANK update: (" + target + ")" + utils.getStringName(target) + " amt = " + sAmt);
                 }
                 return SCRIPT_CONTINUE;
             }
@@ -195,8 +195,8 @@ public class cmd extends script.base_script
 
     public void showMoneySyntax(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "[Syntax] /credits [-target]|[-id:<oid>] cash|bank (+|-)<amt>");
-        sendSystemMessageTestingOnly(self, "[Syntax] /credits [-target]|[-id:<oid>] balance");
+        broadcast(self, "[Syntax] /credits [-target]|[-id:<oid>] cash|bank (+|-)<amt>");
+        broadcast(self, "[Syntax] /credits [-target]|[-id:<oid>] balance");
     }
 
     public int cmdBroadcast(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -213,7 +213,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /broadcastPlanet <message>");
+            broadcast(self, "[Syntax] /broadcastPlanet <message>");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -227,7 +227,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /broadcastGalaxy <message>");
+            broadcast(self, "[Syntax] /broadcastGalaxy <message>");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -246,39 +246,39 @@ public class cmd extends script.base_script
             message = d.getString("params");
             if (range <= 0)
             {
-                sendSystemMessageTestingOnly(self, "[Error] /broadcastArea: Invalid broadcast range specified");
-                sendSystemMessageTestingOnly(self, "[Syntax] /broadcastArea -range:<radius> <message>");
+                broadcast(self, "[Error] /broadcastArea: Invalid broadcast range specified");
+                broadcast(self, "[Syntax] /broadcastArea -range:<radius> <message>");
                 return SCRIPT_CONTINUE;
             }
             if (message == null || message.equalsIgnoreCase(""))
             {
-                sendSystemMessageTestingOnly(self, "[Error] /broadcastArea: Invalid or no broadcast message specified");
-                sendSystemMessageTestingOnly(self, "[Syntax] /broadcastArea -range:<radius> <message>");
+                broadcast(self, "[Error] /broadcastArea: Invalid or no broadcast message specified");
+                broadcast(self, "[Syntax] /broadcastArea -range:<radius> <message>");
                 return SCRIPT_CONTINUE;
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /broadcastArea -range:<radius> <message>");
-            sendSystemMessageTestingOnly(self, "[Example] /broadcastArea -range:100 Hello world!");
+            broadcast(self, "[Syntax] /broadcastArea -range:<radius> <message>");
+            broadcast(self, "[Example] /broadcastArea -range:100 Hello world!");
             return SCRIPT_CONTINUE;
         }
         if (range > MAX_RANGE)
         {
             range = MAX_RANGE;
-            sendSystemMessageTestingOnly(self, "[Warning] /broadcastArea: Maximum range is " + MAX_RANGE + " meters. Your broadcast has been limited to that area.");
+            broadcast(self, "[Warning] /broadcastArea: Maximum range is " + MAX_RANGE + " meters. Your broadcast has been limited to that area.");
         }
         obj_id[] players = getAllPlayers(getLocation(self), range);
         if (players == null || players.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "[Error] /broadcastArea: No players within range");
+            broadcast(self, "[Error] /broadcastArea: No players within range");
             return SCRIPT_CONTINUE;
         }
         for (obj_id player : players)
         {
             if (isIdValid(player) && isPlayer(player))
             {
-                sendSystemMessageTestingOnly(player, message);
+                broadcast(player, message);
             }
         }
         return SCRIPT_CONTINUE;
@@ -329,12 +329,12 @@ public class cmd extends script.base_script
             target = getLookAtTarget(self);
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "/kill: Your target for /kill was not valid.");
+                broadcast(self, "/kill: Your target for /kill was not valid.");
                 return SCRIPT_CONTINUE;
             }
             if (isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "/kill: You cannot use /kill on a player controlled ship. Use /killPlayer.");
+                broadcast(self, "/kill: You cannot use /kill on a player controlled ship. Use /killPlayer.");
                 return SCRIPT_CONTINUE;
             }
             messageTo(target, "megaDamage", null, 0f, false);
@@ -344,7 +344,7 @@ public class cmd extends script.base_script
         // If you're on the ground, do damage to the target to kill it (creature or static like a barricade or turret)
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "/kill: The target specified was invalid.");
+            broadcast(self, "/kill: The target specified was invalid.");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(gm.KEYWORD_TARGET))
@@ -353,12 +353,12 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /kill -target");
+            broadcast(self, "[Syntax] /kill -target");
             return SCRIPT_CONTINUE;
         }
         if (isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/kill: you must use /killPlayer to kill a player!");
+            broadcast(self, "/kill: you must use /killPlayer to kill a player!");
         }
         else
         {
@@ -374,7 +374,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || isDead(target))
         {
-            sendSystemMessageTestingOnly(self, "/killPlayer: you must have a valid, alive player target to use this command");
+            broadcast(self, "/killPlayer: you must have a valid, alive player target to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(gm.KEYWORD_TARGET))
@@ -383,7 +383,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /killPlayer -target");
+            broadcast(self, "[Syntax] /killPlayer -target");
             return SCRIPT_CONTINUE;
         }
         setPosture(target, POSTURE_INCAPACITATED);
@@ -408,7 +408,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /freezePlayer [-target]|[-id:<oid>]");
+            broadcast(self, "[Syntax] /freezePlayer [-target]|[-id:<oid>]");
         }
         return SCRIPT_CONTINUE;
     }
@@ -430,7 +430,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /unfreezePlayer [-target]|[-id:<oid>]");
+            broadcast(self, "[Syntax] /unfreezePlayer [-target]|[-id:<oid>]");
         }
         return SCRIPT_CONTINUE;
     }
@@ -463,7 +463,7 @@ public class cmd extends script.base_script
             {
                 name = getString(sid_name);
             }
-            sendSystemMessageTestingOnly(self, "/showFactionInformation: (" + target + ")" + name + " is not a valid target");
+            broadcast(self, "/showFactionInformation: (" + target + ")" + name + " is not a valid target");
             return SCRIPT_CONTINUE;
         }
         gm.showFactionInformation(self, target);
@@ -492,7 +492,7 @@ public class cmd extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "/setFaction: Unable to parse a valid object id!");
+                    broadcast(self, "/setFaction: Unable to parse a valid object id!");
                     return SCRIPT_CONTINUE;
                 }
                 params = d.getString("params");
@@ -510,9 +510,9 @@ public class cmd extends script.base_script
         }
         if (params == null || params.equalsIgnoreCase("") || (isPlayer(target) && isAdHoc))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFaction [-target] (declared|covert|onleave) <faction name>");
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFaction [-target] clear");
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFaction [-target] [-adhoc] (declared|covert) <faction name> (AI ONLY)");
+            broadcast(self, "[Syntax] /setFaction [-target] (declared|covert|onleave) <faction name>");
+            broadcast(self, "[Syntax] /setFaction [-target] clear");
+            broadcast(self, "[Syntax] /setFaction [-target] [-adhoc] (declared|covert) <faction name> (AI ONLY)");
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(toLower(params));
@@ -571,31 +571,31 @@ public class cmd extends script.base_script
                 {
                     if (!isAdHoc)
                     {
-                        sendSystemMessageTestingOnly(self, "/setFaction: you must use '-adhoc' to set AIs to non-standard factions");
+                        broadcast(self, "/setFaction: you must use '-adhoc' to set AIs to non-standard factions");
                         return SCRIPT_CONTINUE;
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "/setFaction: attempting to update " + utils.getStringName(target) + "'s faction!");
+                        broadcast(self, "/setFaction: attempting to update " + utils.getStringName(target) + "'s faction!");
                         factions.setFaction(target, faction);
                         return SCRIPT_CONTINUE;
                     }
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "/setFaction: you may not set players to adhoc factions!");
+                    broadcast(self, "/setFaction: you may not set players to adhoc factions!");
                     return SCRIPT_CONTINUE;
                 }
             }
         }
         if (clearFlags)
         {
-            sendSystemMessageTestingOnly(self, "/setFaction: clearing all temp enemy flags...");
+            broadcast(self, "/setFaction: clearing all temp enemy flags...");
             pvpRemoveAllTempEnemyFlags(target);
         }
         if (makeNeutral)
         {
-            sendSystemMessageTestingOnly(self, "/setFaction: assigning neutral status...");
+            broadcast(self, "/setFaction: assigning neutral status...");
             pvpMakeNeutral(target);
         }
         else
@@ -609,7 +609,7 @@ public class cmd extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "/setFaction: unable to update " + utils.getStringName(target) + "'s faction to '" + faction + "'!");
+                    broadcast(self, "/setFaction: unable to update " + utils.getStringName(target) + "'s faction to '" + faction + "'!");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -628,7 +628,7 @@ public class cmd extends script.base_script
         }
         if (isMob(target) || hasObjVar(target, "pvpCanAttack"))
         {
-            sendSystemMessageTestingOnly(self, "/setFaction: displaying " + utils.getStringName(target) + "'s updated faction information!");
+            broadcast(self, "/setFaction: displaying " + utils.getStringName(target) + "'s updated faction information!");
             queueCommand(self, (-532090019), target, "", COMMAND_PRIORITY_DEFAULT);
         }
         return SCRIPT_CONTINUE;
@@ -650,18 +650,18 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFactionStanding: use /setFaction to set AI factions");
+            broadcast(self, "[Syntax] /setFactionStanding: use /setFaction to set AI factions");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
+            broadcast(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(toLower(params));
         if (st.countTokens() != 2)
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
+            broadcast(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
             return SCRIPT_CONTINUE;
         }
         String faction = st.nextToken();
@@ -687,7 +687,7 @@ public class cmd extends script.base_script
         float amt = utils.stringToFloat(sAmt);
         if (amt == Float.NEGATIVE_INFINITY)
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
+            broadcast(self, "[Syntax] /setFactionStanding [-target] <faction name> (+|-)<value>");
             return SCRIPT_CONTINUE;
         }
         int facNum = factions.AD_HOC_FACTION;
@@ -696,24 +696,24 @@ public class cmd extends script.base_script
             facNum = factions.getFactionNumber(faction);
             if (facNum == factions.AD_HOC_FACTION)
             {
-                sendSystemMessageTestingOnly(self, "/setFactionStanding: you may not set standing to non-standard factions");
+                broadcast(self, "/setFactionStanding: you may not set standing to non-standard factions");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 if (mod != 0)
                 {
-                    sendSystemMessageTestingOnly(self, "/setFactionStanding: modifying '" + faction + "' by " + amt);
+                    broadcast(self, "/setFactionStanding: modifying '" + faction + "' by " + amt);
                     factions.addFactionStanding(target, faction, amt);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "/setFactionStanding: setting '" + faction + "' to " + amt);
+                    broadcast(self, "/setFactionStanding: setting '" + faction + "' to " + amt);
                     factions.setFactionStanding(target, faction, amt);
                 }
             }
         }
-        sendSystemMessageTestingOnly(self, "/setFactionStanding: displaying " + utils.getStringName(target) + "'s updated faction information!");
+        broadcast(self, "/setFactionStanding: displaying " + utils.getStringName(target) + "'s updated faction information!");
         queueCommand(self, (-532090019), target, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
@@ -726,7 +726,7 @@ public class cmd extends script.base_script
         }
         int rank = pvpGetCurrentGcwRank(target);
         String faction = factions.getFaction(target);
-        sendSystemMessageTestingOnly(self, "(" + target + ") " + getName(target) + "'s rank = (" + rank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(rank, faction))));
+        broadcast(self, "(" + target + ") " + getName(target) + "'s rank = (" + rank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(rank, faction))));
         return SCRIPT_CONTINUE;
     }
 
@@ -741,7 +741,7 @@ public class cmd extends script.base_script
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "Syntax: /setRank -target <1 to 12> (e.g. 1 is Private, 12 is General)");
+            broadcast(self, "Syntax: /setRank -target <1 to 12> (e.g. 1 is Private, 12 is General)");
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
@@ -750,17 +750,17 @@ public class cmd extends script.base_script
 
         if (goalRank < 1 || goalRank > 12)
         {
-            sendSystemMessageTestingOnly(self, "Rank must be an integer between 1 (Private) and 12 (General).");
+            broadcast(self, "Rank must be an integer between 1 (Private) and 12 (General).");
             return SCRIPT_CONTINUE;
         }
         if (currentRank == goalRank)
         {
-            sendSystemMessageTestingOnly(self, "The desired rank you specified is already the current rank of " + getPlayerName(target));
+            broadcast(self, "The desired rank you specified is already the current rank of " + getPlayerName(target));
             return SCRIPT_CONTINUE;
         }
         if (faction == 0)
         {
-            sendSystemMessageTestingOnly(self, getPlayerName(target) + " is currently neutral and not aligned with a faction so you cannot set their rank.");
+            broadcast(self, getPlayerName(target) + " is currently neutral and not aligned with a faction so you cannot set their rank.");
             return SCRIPT_CONTINUE;
         }
 
@@ -781,7 +781,7 @@ public class cmd extends script.base_script
                 currentRank = pvpGetCurrentGcwRank(target);
             } while (currentRank != goalRank);
         }
-        sendSystemMessageTestingOnly(self, "Successfully changed the rank of " + getPlayerName(target) + "(" + target + ").");
+        broadcast(self, "Successfully changed the rank of " + getPlayerName(target) + "(" + target + ").");
         return SCRIPT_CONTINUE;
     }
 
@@ -801,7 +801,7 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/grantSkill: you must be targetting a player to use this command");
+            broadcast(self, "/grantSkill: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         String prompt = "You are attempting to modify the skills for \\#pcontrast3 " + getName(target) + "\\#..\n\n";
@@ -827,19 +827,19 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/revokeSkill: you must be targetting a player to use this command");
+            broadcast(self, "/revokeSkill: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /revokeSkill [-target] <skillName>");
+            broadcast(self, "[Syntax] /revokeSkill [-target] <skillName>");
             return SCRIPT_CONTINUE;
         }
         params = toLower(params);
         String[] skills = dataTableGetStringColumnNoDefaults(skill.TBL_SKILL, "NAME");
         if (skills == null || skills.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "/grantSkill: unable to retrieve canonical skill listing!");
+            broadcast(self, "/grantSkill: unable to retrieve canonical skill listing!");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(params)).equalsIgnoreCase("list"))
@@ -848,7 +848,7 @@ public class cmd extends script.base_script
             return SCRIPT_CONTINUE;
         }
         revokeSkill(target, params);
-        sendSystemMessageTestingOnly(self, "You revoke " + params + " from (" + target + ") " + utils.getStringName(target));
+        broadcast(self, "You revoke " + params + " from (" + target + ") " + utils.getStringName(target));
         CustomerServiceLog("Skill", "CSR: (" + self + ") " + getName(self) + " has revoked skill '" + params + "' from (" + target + ") " + utils.getStringName(target));
         return SCRIPT_CONTINUE;
     }
@@ -886,12 +886,12 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: you can only review player corpse history");
+            broadcast(self, "/searchCorpse: you can only review player corpse history");
             return SCRIPT_CONTINUE;
         }
         if (!hasObjVar(target, pclib.VAR_CORPSE_BASE))
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
+            broadcast(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
             return SCRIPT_CONTINUE;
         }
         boolean showStamp = true;
@@ -900,19 +900,19 @@ public class cmd extends script.base_script
         if (corpses == null || corpses.length == 0)
         {
             removeObjVar(target, pclib.VAR_CORPSE_BASE);
-            sendSystemMessageTestingOnly(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
+            broadcast(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
             return SCRIPT_CONTINUE;
         }
         int[] stamps = utils.getIntBatchObjVar(target, pclib.VAR_CORPSE_STAMP);
         if (stamps == null || stamps.length == 0 || stamps.length != corpses.length)
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has a bad corpse stamp history!");
+            broadcast(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has a bad corpse stamp history!");
             showStamp = false;
         }
         obj_id[] killers = utils.getObjIdBatchObjVar(target, pclib.VAR_CORPSE_KILLER);
         if (killers == null || killers.length == 0 || killers.length != corpses.length)
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has a bad killer history!");
+            broadcast(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has a bad killer history!");
             showKiller = false;
         }
         Vector entries = new Vector();
@@ -944,7 +944,7 @@ public class cmd extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        sendSystemMessageTestingOnly(self, "/searchCorpse: was unable to construct a valid interface!");
+        broadcast(self, "/searchCorpse: was unable to construct a valid interface!");
         return SCRIPT_CONTINUE;
     }
 
@@ -978,12 +978,12 @@ public class cmd extends script.base_script
         }
         if (!valid)
         {
-            sendSystemMessageTestingOnly(self, "/setSpeed: you must be targeting a player or ship to use this command");
+            broadcast(self, "/setSpeed: you must be targeting a player or ship to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setSpeed [-target] <speed multiplier>");
+            broadcast(self, "[Syntax] /setSpeed [-target] <speed multiplier>");
             return SCRIPT_CONTINUE;
         }
         float multiplier = 1.0f;
@@ -1001,7 +1001,7 @@ public class cmd extends script.base_script
             setMovementPercent(target, multiplier);
         }
         float newSpeed = getMovementPercent(target);
-        sendSystemMessageTestingOnly(self, "(" + target + ") " + utils.getStringName(target) + "'s new speed multiplier = " + newSpeed);
+        broadcast(self, "(" + target + ") " + utils.getStringName(target) + "'s new speed multiplier = " + newSpeed);
         return SCRIPT_CONTINUE;
     }
 
@@ -1021,7 +1021,7 @@ public class cmd extends script.base_script
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setName [-target] <name>");
+            broadcast(self, "[Syntax] /setName [-target] <name>");
             return SCRIPT_CONTINUE;
         }
         setName(target, params);
@@ -1044,17 +1044,17 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/setFirstName: you must be targetting a player to use this command");
+            broadcast(self, "/setFirstName: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setFirstName [-target] <new first name>");
+            broadcast(self, "[Syntax] /setFirstName [-target] <new first name>");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(" "))
         {
-            sendSystemMessageTestingOnly(self, "/setFirstName: spaces are not allowed in a first name");
+            broadcast(self, "/setFirstName: spaces are not allowed in a first name");
             return SCRIPT_CONTINUE;
         }
         String name = utils.getStringName(target);
@@ -1068,17 +1068,17 @@ public class cmd extends script.base_script
         }
         if (newname.equalsIgnoreCase(name))
         {
-            sendSystemMessageTestingOnly(self, "/setFirstName: name NOT updated...");
+            broadcast(self, "/setFirstName: name NOT updated...");
         }
         else
         {
             if (setName(target, newname))
             {
-                sendSystemMessageTestingOnly(self, "/setFirstName: " + name + " will now be known as " + newname);
+                broadcast(self, "/setFirstName: " + name + " will now be known as " + newname);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "/setFirstName: system disallowed name change...");
+                broadcast(self, "/setFirstName: system disallowed name change...");
             }
         }
         return SCRIPT_CONTINUE;
@@ -1100,12 +1100,12 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/setLastName: you must be targetting a player to use this command");
+            broadcast(self, "/setLastName: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setLastName [-target] <new last name>");
+            broadcast(self, "[Syntax] /setLastName [-target] <new last name>");
             return SCRIPT_CONTINUE;
         }
         String name = utils.getStringName(target);
@@ -1118,17 +1118,17 @@ public class cmd extends script.base_script
         }
         if (newname.equalsIgnoreCase(name))
         {
-            sendSystemMessageTestingOnly(self, "/setLastName: name NOT updated...");
+            broadcast(self, "/setLastName: name NOT updated...");
         }
         else
         {
             if (setName(target, newname))
             {
-                sendSystemMessageTestingOnly(self, "/setLastName: " + name + " will now be known as " + newname);
+                broadcast(self, "/setLastName: " + name + " will now be known as " + newname);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "/setLastName: system disallowed name change...");
+                broadcast(self, "/setLastName: system disallowed name change...");
             }
         }
         return SCRIPT_CONTINUE;
@@ -1150,12 +1150,12 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/grantBadge: you must be targetting a player to use this command");
+            broadcast(self, "/grantBadge: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /grantBadge [-target] <badgeName> or <index>");
+            broadcast(self, "[Syntax] /grantBadge [-target] <badgeName> or <index>");
             return SCRIPT_CONTINUE;
         }
         int idx = utils.stringToInt(params);
@@ -1170,16 +1170,16 @@ public class cmd extends script.base_script
         }
         if ((badgeName == null) || (badgeName.length() == 0))
         {
-            sendSystemMessageTestingOnly(self, "Error: badge name " + badgeName + " is not a valid badge.");
+            broadcast(self, "Error: badge name " + badgeName + " is not a valid badge.");
             return SCRIPT_CONTINUE;
         }
         if (badge.grantBadge(target, badgeName))
         {
-            sendSystemMessageTestingOnly(self, "/grantBadge: you grant badge " + badgeName + " to (" + target + ")" + utils.getStringName(target));
+            broadcast(self, "/grantBadge: you grant badge " + badgeName + " to (" + target + ")" + utils.getStringName(target));
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "/grantBadge: you are UNABLE to grant badge " + badgeName + " to (" + target + ")" + utils.getStringName(target));
+            broadcast(self, "/grantBadge: you are UNABLE to grant badge " + badgeName + " to (" + target + ")" + utils.getStringName(target));
         }
         return SCRIPT_CONTINUE;
     }
@@ -1200,33 +1200,33 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/revokeBadge: you must be targetting a player to use this command");
+            broadcast(self, "/revokeBadge: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /revokeBadge [-target] <index>");
+            broadcast(self, "[Syntax] /revokeBadge [-target] <index>");
             return SCRIPT_CONTINUE;
         }
         int idx = utils.stringToInt(params);
         if (idx < 0)
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /revokeBadge [-target] <index>");
+            broadcast(self, "[Syntax] /revokeBadge [-target] <index>");
             return SCRIPT_CONTINUE;
         }
         String badgeName = getCollectionSlotName(idx);
         if ((badgeName == null) || (badgeName.length() == 0))
         {
-            sendSystemMessageTestingOnly(self, "Error: badge number " + idx + " is not a valid badge.");
+            broadcast(self, "Error: badge number " + idx + " is not a valid badge.");
             return SCRIPT_CONTINUE;
         }
         if (badge.revokeBadge(target, badgeName, true))
         {
-            sendSystemMessageTestingOnly(self, "/revokeBadge: you revoke badge #" + idx + " from (" + target + ")" + utils.getStringName(target));
+            broadcast(self, "/revokeBadge: you revoke badge #" + idx + " from (" + target + ")" + utils.getStringName(target));
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "/revokeBadge: you are UNABLE to revoke badge #" + idx + " from (" + target + ")" + utils.getStringName(target));
+            broadcast(self, "/revokeBadge: you are UNABLE to revoke badge #" + idx + " from (" + target + ")" + utils.getStringName(target));
         }
         return SCRIPT_CONTINUE;
     }
@@ -1239,7 +1239,7 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "/showFactionInformation: you must be targetting a player to use this command");
+            broadcast(self, "/showFactionInformation: you must be targetting a player to use this command");
             return SCRIPT_CONTINUE;
         }
         if (utils.hasScriptVar(self, gm.SCRIPTVAR_SHOWEXPERIENCE_PID))
@@ -1277,7 +1277,7 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setExperience: this command may only be used on players");
+            broadcast(self, "[Syntax] /setExperience: this command may only be used on players");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.equalsIgnoreCase(""))
@@ -1288,7 +1288,7 @@ public class cmd extends script.base_script
         String[] xpTypes = xp.getXpTypes(self);
         if (xpTypes == null || xpTypes.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "/setExperience: unable to retrieve canonical xp listing!");
+            broadcast(self, "/setExperience: unable to retrieve canonical xp listing!");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(params)).equalsIgnoreCase("list"))
@@ -1318,8 +1318,8 @@ public class cmd extends script.base_script
         String xp_type = st.nextToken();
         if (utils.getElementPositionInArray(xpTypes, xp_type) == -1)
         {
-            sendSystemMessageTestingOnly(self, "/setExperience: '" + xp_type + "' is not a valid xp type.");
-            sendSystemMessageTestingOnly(self, "/setExperience: use '/setExperience list' for a valid listing");
+            broadcast(self, "/setExperience: '" + xp_type + "' is not a valid xp type.");
+            broadcast(self, "/setExperience: use '/setExperience list' for a valid listing");
             return SCRIPT_CONTINUE;
         }
         int xp_amt = getExperiencePoints(target, xp_type);
@@ -1332,7 +1332,7 @@ public class cmd extends script.base_script
                 amt = utils.stringToInt(sAmt.substring(1));
                 if (amt == -1)
                 {
-                    sendSystemMessageTestingOnly(self, "/setExperience: invalid xp delta parameter...");
+                    broadcast(self, "/setExperience: invalid xp delta parameter...");
                 }
                 if (sAmt.startsWith("-"))
                 {
@@ -1344,7 +1344,7 @@ public class cmd extends script.base_script
                 amt = utils.stringToInt(sAmt);
                 if (amt == -1)
                 {
-                    sendSystemMessageTestingOnly(self, "/setExperience: invalid xp amount: '" + sAmt + "'");
+                    broadcast(self, "/setExperience: invalid xp amount: '" + sAmt + "'");
                 }
                 amt = amt - xp_amt;
             }
@@ -1361,8 +1361,8 @@ public class cmd extends script.base_script
 
     public void showSetExperienceSyntax(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "[Syntax] /setExperience [-target] <xp type> (+|-)<value>");
-        sendSystemMessageTestingOnly(self, "[Syntax] /setExperience list");
+        broadcast(self, "[Syntax] /setExperience [-target] <xp type> (+|-)<value>");
+        broadcast(self, "[Syntax] /setExperience list");
     }
 
     public int cmdFindObject(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -1370,11 +1370,11 @@ public class cmd extends script.base_script
         obj_id objToFind = utils.stringToObjId(params);
         if (!isIdValid(objToFind))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /findObject objid");
+            broadcast(self, "[Syntax] /findObject objid");
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Searching for object: " + objToFind);
+            broadcast(self, "Searching for object: " + objToFind);
             gm.attachHandlerScript(self);
             findObjectAnywhere(objToFind, self);
         }
@@ -1386,7 +1386,7 @@ public class cmd extends script.base_script
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() != 1)
         {
-            sendSystemMessageTestingOnly(self, "Format: findObjectByTemplate <template name>, like \"findObjectByTemplate object/mobile/meatlump_brother_lempi.iff\"");
+            broadcast(self, "Format: findObjectByTemplate <template name>, like \"findObjectByTemplate object/mobile/meatlump_brother_lempi.iff\"");
         }
         else
         {
@@ -1403,7 +1403,7 @@ public class cmd extends script.base_script
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() != 1)
         {
-            sendSystemMessageTestingOnly(self, "Format: findPlayer <player name|*>, where * will find all players");
+            broadcast(self, "Format: findPlayer <player name|*>, where * will find all players");
         }
         else
         {
@@ -1428,7 +1428,7 @@ public class cmd extends script.base_script
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() != 1)
         {
-            sendSystemMessageTestingOnly(self, "Format: findCreature <creature name>, like \"findCreature gnort\"");
+            broadcast(self, "Format: findCreature <creature name>, like \"findCreature gnort\"");
         }
         else
         {
@@ -1474,19 +1474,19 @@ public class cmd extends script.base_script
             target = getLookAtTarget(self);
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must specify a target.");
+                broadcast(self, "You must specify a target.");
                 return SCRIPT_CONTINUE;
             }
         }
         if (!isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "The target must be a player.");
+            broadcast(self, "The target must be a player.");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() == 0)
         {
-            sendSystemMessageTestingOnly(self, "Format: adjustLotCount <amount>");
+            broadcast(self, "Format: adjustLotCount <amount>");
         }
         else
         {
@@ -1494,7 +1494,7 @@ public class cmd extends script.base_script
             int amount = utils.stringToInt(amount_str);
             adjustLotCount(getPlayerObject(target), amount);
             int lots = getAccountNumLots(getPlayerObject(target));
-            sendSystemMessageTestingOnly(self, "Lot count adjusted on " + target + " by " + amount + ". New lot count is " + lots);
+            broadcast(self, "Lot count adjusted on " + target + " by " + amount + ". New lot count is " + lots);
         }
         return SCRIPT_CONTINUE;
     }
@@ -1505,7 +1505,7 @@ public class cmd extends script.base_script
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() != 2)
         {
-            sendSystemMessageTestingOnly(self, "Format: editMoney <player name> <amount>");
+            broadcast(self, "Format: editMoney <player name> <amount>");
         }
         else
         {
@@ -1514,7 +1514,7 @@ public class cmd extends script.base_script
             int amount = utils.stringToInt(amount_str);
             if (amount == -1 || amount == 0)
             {
-                sendSystemMessageTestingOnly(self, "Format: editMoney <player name> <amount>");
+                broadcast(self, "Format: editMoney <player name> <amount>");
             }
             else
             {
@@ -1523,7 +1523,7 @@ public class cmd extends script.base_script
                 obj_id playerId = getPlayerIdFromFirstName(firstName);
                 if (!isIdValid(playerId))
                 {
-                    sendSystemMessageTestingOnly(self, "Could not find an obj_id for the specified player.");
+                    broadcast(self, "Could not find an obj_id for the specified player.");
                     return SCRIPT_CONTINUE;
                 }
                 LOG("LOG_CHANNEL", "target ->" + playerId + " firstName ->" + firstName + " amount ->" + amount);
@@ -1531,12 +1531,12 @@ public class cmd extends script.base_script
                 {
                     if (money.bankTo(money.ACCT_CUSTOMER_SERVICE, playerId, amount))
                     {
-                        sendSystemMessageTestingOnly(self, "Requesting credit transfer of " + amount + " to " + firstName + " (" + playerId + ")");
+                        broadcast(self, "Requesting credit transfer of " + amount + " to " + firstName + " (" + playerId + ")");
                         CustomerServiceLog("money", getFirstName(self) + " (" + self + ") requested a transfer of " + amount + " credits to " + firstName + "(" + playerId + ")");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Transfer failed.");
+                        broadcast(self, "Transfer failed.");
                     }
                 }
                 else
@@ -1544,7 +1544,7 @@ public class cmd extends script.base_script
                     amount = amount * -1;
                     if (money.bankTo(playerId, money.ACCT_CUSTOMER_SERVICE, amount))
                     {
-                        sendSystemMessageTestingOnly(self, "Requesting credit transfer of " + amount + " from " + firstName + " (" + playerId + ")");
+                        broadcast(self, "Requesting credit transfer of " + amount + " from " + firstName + " (" + playerId + ")");
                         CustomerServiceLog("money", getFirstName(self) + " (" + self + ") requested a transfer of " + amount + " credits to " + firstName + "(" + playerId + ")");
                     }
                 }
@@ -1584,7 +1584,7 @@ public class cmd extends script.base_script
         }
         if (!isIdValid(target) || !exists(target) || !target.isLoaded())
         {
-            sendSystemMessageTestingOnly(self, "/setHue: the designated target (" + target + ") is not valid for this command");
+            broadcast(self, "/setHue: the designated target (" + target + ") is not valid for this command");
             return SCRIPT_CONTINUE;
         }
         int varIdx = Integer.MIN_VALUE;
@@ -1595,7 +1595,7 @@ public class cmd extends script.base_script
         dictionary palColData = hue.getPalcolorData(target);
         if (palColData == null || palColData.isEmpty())
         {
-            sendSystemMessageTestingOnly(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " has no palcolor data!");
+            broadcast(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " has no palcolor data!");
             return SCRIPT_CONTINUE;
         }
         if (st.hasMoreTokens())
@@ -1625,7 +1625,7 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " does not have var index #" + varIdx);
+                broadcast(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " does not have var index #" + varIdx);
             }
         }
         if (showVarIdxUI)
@@ -1636,12 +1636,12 @@ public class cmd extends script.base_script
         custom_var cv = getCustomVarByName(target, varIdxPath);
         if (cv == null)
         {
-            sendSystemMessageTestingOnly(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " does not have var path " + varIdxPath);
+            broadcast(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " does not have var path " + varIdxPath);
             return SCRIPT_CONTINUE;
         }
         if (c != null && cv.isPalColor())
         {
-            sendSystemMessageTestingOnly(self, "/setHue: attempting to hue " + target + "'s " + varIdxPath + " color " + colorname);
+            broadcast(self, "/setHue: attempting to hue " + target + "'s " + varIdxPath + " color " + colorname);
             palcolor_custom_var pcv = (palcolor_custom_var) cv;
             pcv.setToClosestColor(c);
             return SCRIPT_CONTINUE;
@@ -1658,7 +1658,7 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " pal range is " + min + " to " + max);
+                broadcast(self, "/setHue: (" + target + ")" + utils.getStringName(target) + " pal range is " + min + " to " + max);
             }
         }
         if (showPalIdxUI)
@@ -1668,7 +1668,7 @@ public class cmd extends script.base_script
         }
         if (ri != null)
         {
-            sendSystemMessageTestingOnly(self, "/setHue: attempting to hue " + target + "'s " + varIdxPath + " to " + palIdx);
+            broadcast(self, "/setHue: attempting to hue " + target + "'s " + varIdxPath + " to " + palIdx);
             ri.setValue(palIdx);
         }
         return SCRIPT_CONTINUE;
@@ -1676,8 +1676,8 @@ public class cmd extends script.base_script
 
     public void showSetHueSyntax(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (palette index)");
-        sendSystemMessageTestingOnly(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (color name)");
+        broadcast(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (palette index)");
+        broadcast(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (color name)");
     }
 
     public int cmdGoto(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -1685,7 +1685,7 @@ public class cmd extends script.base_script
         dictionary d = new dictionary();
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /goto <target>");
+            broadcast(self, "[Syntax] /goto <target>");
         }
         else
         {
@@ -1723,7 +1723,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setPlayerState -target (with lookat target)");
+            broadcast(self, "[Syntax] /setPlayerState -target (with lookat target)");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(gm.KEYWORD_TARGET))
@@ -1732,7 +1732,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setPlayerState -target (with lookat target)");
+            broadcast(self, "[Syntax] /setPlayerState -target (with lookat target)");
             return SCRIPT_CONTINUE;
         }
         gm.attachHandlerScript(self);
@@ -1774,30 +1774,30 @@ public class cmd extends script.base_script
         }
         if (!isPlayer(target) || !isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /unCityBan: You must specify a valid player to use this command");
-            sendSystemMessageTestingOnly(self, "[Syntax] /unCityBan [-target]|[-id:<oid>]");
+            broadcast(self, "[Error] /unCityBan: You must specify a valid player to use this command");
+            broadcast(self, "[Syntax] /unCityBan [-target]|[-id:<oid>]");
             return SCRIPT_CONTINUE;
         }
         int cityID = city.checkCity(self, false);
         if (cityID == 0)
         {
-            sendSystemMessageTestingOnly(self, "[Error] /unCityBan: You must be inside the area of the city from which you wish to unban " + getFirstName(target));
+            broadcast(self, "[Error] /unCityBan: You must be inside the area of the city from which you wish to unban " + getFirstName(target));
             return SCRIPT_CONTINUE;
         }
         if (!city.isCityBanned(target, cityID))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /unCityBan: " + getFirstName(target) + " has not been banned from " + cityGetName(cityID));
+            broadcast(self, "[Error] /unCityBan: " + getFirstName(target) + " has not been banned from " + cityGetName(cityID));
             return SCRIPT_CONTINUE;
         }
         if (city.removeBan(target, cityID))
         {
-            sendSystemMessageTestingOnly(self, "You have unbanned " + getFirstName(target) + " from " + cityGetName(cityID));
+            broadcast(self, "You have unbanned " + getFirstName(target) + " from " + cityGetName(cityID));
             CustomerServiceLog("player_city", "CSR: %TU has unbanned %TT from " + cityGetName(cityID) + "(" + cityID + "/" + cityGetCityHall(cityID) + ")", self, target);
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Error] /unCityBan: You were not able to unban " + getFirstName(target) + " from " + cityGetName(cityID));
+            broadcast(self, "[Error] /unCityBan: You were not able to unban " + getFirstName(target) + " from " + cityGetName(cityID));
             return SCRIPT_CONTINUE;
         }
     }
@@ -1813,7 +1813,7 @@ public class cmd extends script.base_script
             {
                 removeObjVar(ship, "intInvincible");
             }
-            sendSystemMessageTestingOnly(self, "Invulnerability[OFF]: You are no longer invulnerable.");
+            broadcast(self, "Invulnerability[OFF]: You are no longer invulnerable.");
         }
         else
         {
@@ -1823,7 +1823,7 @@ public class cmd extends script.base_script
             {
                 setObjVar(ship, "intInvincible", 1);
             }
-            sendSystemMessageTestingOnly(self, "Invulnerability[ON]: You are now invulnerable.");
+            broadcast(self, "Invulnerability[ON]: You are now invulnerable.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -1832,7 +1832,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /setTEF: You must target a declared member of a PVP faction to use this command");
+            broadcast(self, "[Error] /setTEF: You must target a declared member of a PVP faction to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params != null && !params.equalsIgnoreCase("") && (params.contains(gm.KEYWORD_TARGET)))
@@ -1841,33 +1841,33 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /setTEF -target");
+            broadcast(self, "[Syntax] /setTEF -target");
             return SCRIPT_CONTINUE;
         }
         String csrFaction = factions.getFaction(self);
         String targetFaction = factions.getFaction(target);
         if (csrFaction == null || csrFaction.equalsIgnoreCase("") || (factions.pvpGetType(self) == factions.PVPTYPE_DECLARED))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /setTEF: You must be a covert member of a PVP faction to use this command");
+            broadcast(self, "[Error] /setTEF: You must be a covert member of a PVP faction to use this command");
             return SCRIPT_CONTINUE;
         }
         if (targetFaction == null || targetFaction.equalsIgnoreCase("") || (!targetFaction.equalsIgnoreCase(factions.FACTION_IMPERIAL) && !targetFaction.equalsIgnoreCase(factions.FACTION_REBEL)))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /setTEF: Your target must be a member of a PVP faction to use this command");
+            broadcast(self, "[Error] /setTEF: Your target must be a member of a PVP faction to use this command");
             return SCRIPT_CONTINUE;
         }
         if (isPlayer(target) && (factions.pvpGetType(target) != factions.PVPTYPE_DECLARED))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /setTEF: Your target must be a declared member of a PVP faction to use this command");
+            broadcast(self, "[Error] /setTEF: Your target must be a declared member of a PVP faction to use this command");
             return SCRIPT_CONTINUE;
         }
         if (!factions.areFactionsOpposed(csrFaction, targetFaction))
         {
-            sendSystemMessageTestingOnly(self, "[Error] /setTEF: You must be factionally opposed to your target to use this command");
+            broadcast(self, "[Error] /setTEF: You must be factionally opposed to your target to use this command");
             return SCRIPT_CONTINUE;
         }
         pvpSetPersonalEnemyFlag(self, target);
-        sendSystemMessageTestingOnly(self, "A temporary enemy flag has been set against your current target (OID: " + target + ")");
+        broadcast(self, "A temporary enemy flag has been set against your current target (OID: " + target + ")");
         return SCRIPT_CONTINUE;
     }
 
@@ -1876,12 +1876,12 @@ public class cmd extends script.base_script
         LOG("LOG_CHANNEL", "cmdInitializeComponent -- " + params);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "You must have the component item targetted");
+            broadcast(self, "You must have the component item targetted");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /initializeComponent <level> <bonus> <serial number>    /initializeComponent ? for help");
+            broadcast(self, "format: /initializeComponent <level> <bonus> <serial number>    /initializeComponent ? for help");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -1891,58 +1891,58 @@ public class cmd extends script.base_script
             {
                 if ((st.nextToken()).equalsIgnoreCase("?"))
                 {
-                    sendSystemMessageTestingOnly(self, "format: /initializeComponent <level> <bonus> <serial number>");
-                    sendSystemMessageTestingOnly(self, "   Create your component and target it.");
-                    sendSystemMessageTestingOnly(self, "   level -- The level of the creature at which to generate the loot. Cannot exceed 100.");
-                    sendSystemMessageTestingOnly(self, "   bonus -- rare item factor. A bonus of 2 or higher is 'exceptional'. A bonus of 10 is 'lengendary'. Cannot exceed 10");
-                    sendSystemMessageTestingOnly(self, "   serial number -- unique number to use for the item. It is recommended that you use the obj_id of the item created.");
+                    broadcast(self, "format: /initializeComponent <level> <bonus> <serial number>");
+                    broadcast(self, "   Create your component and target it.");
+                    broadcast(self, "   level -- The level of the creature at which to generate the loot. Cannot exceed 100.");
+                    broadcast(self, "   bonus -- rare item factor. A bonus of 2 or higher is 'exceptional'. A bonus of 10 is 'lengendary'. Cannot exceed 10");
+                    broadcast(self, "   serial number -- unique number to use for the item. It is recommended that you use the obj_id of the item created.");
                     return SCRIPT_CONTINUE;
                 }
             }
-            sendSystemMessageTestingOnly(self, "format: /initializeComponent <level> <multiplier> <serial number>    /initializeComponent ? for help");
+            broadcast(self, "format: /initializeComponent <level> <multiplier> <serial number>    /initializeComponent ? for help");
             return SCRIPT_CONTINUE;
         }
         String first_param = st.nextToken();
         int level = utils.stringToInt(first_param);
         if (level < 1)
         {
-            sendSystemMessageTestingOnly(self, "Level must be greater than 0.");
+            broadcast(self, "Level must be greater than 0.");
             return SCRIPT_CONTINUE;
         }
         if (level > 300)
         {
-            sendSystemMessageTestingOnly(self, "Level cannot exceed 100.");
+            broadcast(self, "Level cannot exceed 100.");
             return SCRIPT_CONTINUE;
         }
         String second_param = st.nextToken();
         int bonus = utils.stringToInt(second_param);
         if (bonus < 1)
         {
-            sendSystemMessageTestingOnly(self, "Bonus must be level 1 or higher.");
+            broadcast(self, "Bonus must be level 1 or higher.");
             return SCRIPT_CONTINUE;
         }
         if (bonus > 25)
         {
-            sendSystemMessageTestingOnly(self, "Bonus cannot exceed 10.");
+            broadcast(self, "Bonus cannot exceed 10.");
             return SCRIPT_CONTINUE;
         }
         String third_param = st.nextToken();
         obj_id source = utils.stringToObjId(third_param);
         if (!isIdValid(source))
         {
-            sendSystemMessageTestingOnly(self, "You must provide a valid obj_id serial number");
+            broadcast(self, "You must provide a valid obj_id serial number");
             return SCRIPT_CONTINUE;
         }
         String template = getTemplateName(target);
         int idx = dataTableSearchColumnForString(template, "template", loot.TBL_COMPONENT_DATA);
         if (idx == -1)
         {
-            sendSystemMessageTestingOnly(self, "No loot component data found for " + template + ".");
+            broadcast(self, "No loot component data found for " + template + ".");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(target, "csr.loot.creator") || hasObjVar(target, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME))
         {
-            sendSystemMessageTestingOnly(self, "That item already has been initialized.");
+            broadcast(self, "That item already has been initialized.");
             return SCRIPT_CONTINUE;
         }
         loot.randomizeComponent(target, level, target);
@@ -1967,7 +1967,7 @@ public class cmd extends script.base_script
         }
         //this isn't logging? wrong formatting? unsure.
         // CustomerServiceLog("loot", "CSR: %TU has created %TT at level " + level + " and at rarity bonus " + bonus, self, target);
-        sendSystemMessageTestingOnly(self, "Component initialization complete.");
+        broadcast(self, "Component initialization complete.");
         return SCRIPT_CONTINUE;
     }
 
@@ -1976,7 +1976,7 @@ public class cmd extends script.base_script
         trace.log("Weapons", "gm.cmdGmWeapon -->> " + params, self, trace.TL_WARNING);
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+            broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -1988,7 +1988,7 @@ public class cmd extends script.base_script
         }
         if (command == null)
         {
-            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+            broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(command)).equalsIgnoreCase("list"))
@@ -2000,23 +2000,23 @@ public class cmd extends script.base_script
             }
             if (kind == null)
             {
-                sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-                sendSystemMessageTestingOnly(self, "	list <unarmed|melee|pistols|rifles|heavy|pistol|polearm|etc|etc> -- Lists all identifiers for the given weapon type");
+                broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+                broadcast(self, "	list <unarmed|melee|pistols|rifles|heavy|pistol|polearm|etc|etc> -- Lists all identifiers for the given weapon type");
                 return SCRIPT_CONTINUE;
             }
             kind = toLower(kind);
             Vector names = weapons.getWeaponIdsForType(kind);
             if (names.size() < 1)
             {
-                sendSystemMessageTestingOnly(self, "0 matches to your ID query for '" + kind + "'.");
+                broadcast(self, "0 matches to your ID query for '" + kind + "'.");
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Weapon type IDs matching your query (" + kind + ") are:");
+            broadcast(self, "Weapon type IDs matching your query (" + kind + ") are:");
             for (Object name : names)
             {
-                sendSystemMessageTestingOnly(self, (String) name);
+                broadcast(self, (String) name);
             }
-            sendSystemMessageTestingOnly(self, "Done listing " + names.size() + " matches.");
+            broadcast(self, "Done listing " + names.size() + " matches.");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equalsIgnoreCase("create"))
@@ -2028,8 +2028,8 @@ public class cmd extends script.base_script
             }
             if (schematicId == null)
             {
-                sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-                sendSystemMessageTestingOnly(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
+                broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+                broadcast(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
                 return SCRIPT_CONTINUE;
             }
             float intensity = 0.50f;
@@ -2038,8 +2038,8 @@ public class cmd extends script.base_script
                 int tempIntensity = utils.stringToInt(st.nextToken());
                 if (tempIntensity < 1)
                 {
-                    sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-                    sendSystemMessageTestingOnly(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
+                    broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+                    broadcast(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
                     return SCRIPT_CONTINUE;
                 }
                 intensity = (tempIntensity / 100.0f);
@@ -2050,11 +2050,11 @@ public class cmd extends script.base_script
             }
             if (weapons.createWeapon(schematicId, self, weapons.VIA_SCHEMATIC, intensity) == null)
             {
-                sendSystemMessageTestingOnly(self, "Error creating weapon with supplied ID (" + schematicId + ").");
+                broadcast(self, "Error creating weapon with supplied ID (" + schematicId + ").");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Weapon " + schematicId + " created.");
+                broadcast(self, "Weapon " + schematicId + " created.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2067,8 +2067,8 @@ public class cmd extends script.base_script
             }
             if (schematicId == null)
             {
-                sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-                sendSystemMessageTestingOnly(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
+                broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+                broadcast(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
                 return SCRIPT_CONTINUE;
             }
             int numUses = -1;
@@ -2078,8 +2078,8 @@ public class cmd extends script.base_script
             }
             if (numUses < 1)
             {
-                sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-                sendSystemMessageTestingOnly(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
+                broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+                broadcast(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
                 return SCRIPT_CONTINUE;
             }
             String requiredSkill = "class_munitions_phase4_master";
@@ -2089,25 +2089,25 @@ public class cmd extends script.base_script
             }
             if (weapons.createLimitedUseSchematic(schematicId, weapons.VIA_SCHEMATIC, numUses, self, schematicId, requiredSkill) != null)
             {
-                sendSystemMessageTestingOnly(self, "Successfully created " + numUses + " use draft schematic for item " + schematicId + " for skill " + requiredSkill + ".");
+                broadcast(self, "Successfully created " + numUses + " use draft schematic for item " + schematicId + " for skill " + requiredSkill + ".");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Error creating limited use draft schematic for " + schematicId + ".");
+                broadcast(self, "Error creating limited use draft schematic for " + schematicId + ".");
             }
             return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("?"))
         {
-            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
-            sendSystemMessageTestingOnly(self, "	list <unarmed|melee|pistols|rifles|heavy|all> -- Lists all identifiers for the given weapon type");
-            sendSystemMessageTestingOnly(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
-            sendSystemMessageTestingOnly(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
+            broadcast(self, "format: /GmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+            broadcast(self, "	list <unarmed|melee|pistols|rifles|heavy|all> -- Lists all identifiers for the given weapon type");
+            broadcast(self, "	create <weapon_id> <percent 1-100> -- Creates the indicated weapon with all values at the given percent intensity");
+            broadcast(self, "	limUseSchematic <weapon_id> <numUses> <optional: skillRequired> -- Creates a limited use draft schematic.");
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /GmWeapon ? for help");
+            broadcast(self, "format: /GmWeapon <command> (params)   OR   /GmWeapon ? for help");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2117,7 +2117,7 @@ public class cmd extends script.base_script
         trace.log(fs_dyn_village.LOG_CHAN, "gm.cmdGMFsVillage -->> " + params, self, trace.TL_WARNING);
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /gmFsVillage <command>    /gmFsVillage ? for help");
+            broadcast(self, "format: /gmFsVillage <command>    /gmFsVillage ? for help");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -2129,65 +2129,65 @@ public class cmd extends script.base_script
         }
         if (command == null)
         {
-            sendSystemMessageTestingOnly(self, "Format: /gmFsVillage <command> (params)    /gmFsVillage ? for help");
+            broadcast(self, "Format: /gmFsVillage <command> (params)    /gmFsVillage ? for help");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(command)).equalsIgnoreCase("registermasterid"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must target the village master object to do that.");
+                broadcast(self, "You must target the village master object to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!hasScript(target, fs_dyn_village.SCRIPT_FS_VILLAGE_MASTER))
             {
-                sendSystemMessageTestingOnly(self, "You must target the village master object to do that.");
+                broadcast(self, "You must target the village master object to do that.");
                 return SCRIPT_CONTINUE;
             }
             fs_dyn_village.registerObjIdInClusterWideData(target, fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgIdRegistered", self);
-            sendSystemMessageTestingOnly(self, "Object ID sent to cluster wide data for storage...");
+            broadcast(self, "Object ID sent to cluster wide data for storage...");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equalsIgnoreCase("getmasterid"))
         {
-            sendSystemMessageTestingOnly(self, "Fetching village master object id...");
+            broadcast(self, "Fetching village master object id...");
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgGotIdResponse", self);
         }
         else if ((toLower(command)).equalsIgnoreCase("getcurrentphase"))
         {
-            sendSystemMessageTestingOnly(self, "Fetching current phase number...");
+            broadcast(self, "Fetching current phase number...");
             fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_CUR_PHASE, "msgGotIntResponse", self);
         }
         else if ((toLower(command)).equalsIgnoreCase("getcurrentuid"))
         {
-            sendSystemMessageTestingOnly(self, "Fetching current phase uid...");
+            broadcast(self, "Fetching current phase uid...");
             fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID, "msgGotIntResponse", self);
         }
         else if ((toLower(command)).equalsIgnoreCase("destroyphaseobjects"))
         {
             if (getGodLevel(self) < 50)
             {
-                sendSystemMessageTestingOnly(self, "You do not have sufficient privileges (god level 50) to destroy the village content.");
+                broadcast(self, "You do not have sufficient privileges (god level 50) to destroy the village content.");
                 return SCRIPT_CONTINUE;
             }
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must target the village master object to do that.");
+                broadcast(self, "You must target the village master object to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!hasScript(target, fs_dyn_village.SCRIPT_FS_VILLAGE_MASTER))
             {
-                sendSystemMessageTestingOnly(self, "You must target the village master object to do that.");
+                broadcast(self, "You must target the village master object to do that.");
                 return SCRIPT_CONTINUE;
             }
             fs_dyn_village.destroyDynamicVillage(target);
-            sendSystemMessageTestingOnly(self, "Phase objects destroyed.");
+            broadcast(self, "Phase objects destroyed.");
         }
         else if ((toLower(command)).equalsIgnoreCase("activatephase"))
         {
             if (getGodLevel(self) < 50)
             {
-                sendSystemMessageTestingOnly(self, "You do not have sufficient privileges (god level 50) to activate village phases.");
+                broadcast(self, "You do not have sufficient privileges (god level 50) to activate village phases.");
                 return SCRIPT_CONTINUE;
             }
             int phase = -1;
@@ -2197,37 +2197,37 @@ public class cmd extends script.base_script
             }
             if (phase < 1 || phase > fs_dyn_village.MAX_PHASE_NUMBER)
             {
-                sendSystemMessageTestingOnly(self, "format: /gmFsVillage activatephase #	(#=1-" + fs_dyn_village.MAX_PHASE_NUMBER);
+                broadcast(self, "format: /gmFsVillage activatephase #	(#=1-" + fs_dyn_village.MAX_PHASE_NUMBER);
                 return SCRIPT_CONTINUE;
             }
             utils.setScriptVar(self, "gm.cmd.fs_village.wantPhase", phase);
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgActivatePhase", self);
-            sendSystemMessageTestingOnly(self, "Phase change to " + phase + " initiated.");
+            broadcast(self, "Phase change to " + phase + " initiated.");
         }
         else if ((toLower(command)).equalsIgnoreCase("getwaypointdisk"))
         {
-            sendSystemMessageTestingOnly(self, "Creating a waypoint datapad...");
+            broadcast(self, "Creating a waypoint datapad...");
             obj_id fdp = create.object("object/tangible/loot/quest/force_sensitive/camp_waypoint_datapad.iff", getObjectInSlot(self, "inventory"), false, false);
             if (!isIdNull(fdp))
             {
-                sendSystemMessageTestingOnly(self, "Waypoint datapad created.");
+                broadcast(self, "Waypoint datapad created.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Datapad creation failed.  Overloaded inventory, maybe?.");
+                broadcast(self, "Datapad creation failed.  Overloaded inventory, maybe?.");
             }
         }
         else if ((toLower(command)).equalsIgnoreCase("getfrequencydisk"))
         {
-            sendSystemMessageTestingOnly(self, "Creating a frequency datapad...");
+            broadcast(self, "Creating a frequency datapad...");
             obj_id fdp = create.object("object/tangible/loot/quest/force_sensitive/camp_frequency_datapad.iff", getObjectInSlot(self, "inventory"), false, false);
             if (!isIdNull(fdp))
             {
-                sendSystemMessageTestingOnly(self, "Frequency datapad created.");
+                broadcast(self, "Frequency datapad created.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Datapad creation failed.  Overloaded inventory, maybe?.");
+                broadcast(self, "Datapad creation failed.  Overloaded inventory, maybe?.");
             }
         }
         else if ((toLower(command)).equalsIgnoreCase("getcampremote"))
@@ -2245,25 +2245,25 @@ public class cmd extends script.base_script
                 Vector names = (Vector) campsDat.get(1);
                 if (names.indexOf(key) < 0)
                 {
-                    sendSystemMessageTestingOnly(self, "'" + key + "' is not a valid camp name.  Valid camp names are:");
+                    broadcast(self, "'" + key + "' is not a valid camp name.  Valid camp names are:");
                     for (Object name : names)
                     {
-                        sendSystemMessageTestingOnly(self, (String) name);
+                        broadcast(self, (String) name);
                     }
                     return SCRIPT_CONTINUE;
                 }
-                sendSystemMessageTestingOnly(self, "Creating a remote for camp" + key + "...");
+                broadcast(self, "Creating a remote for camp" + key + "...");
                 obj_id remote = create.object("object/tangible/loot/quest/force_sensitive/camp_remote.iff", getObjectInSlot(self, "inventory"), false, false);
                 if (!isIdNull(remote))
                 {
-                    sendSystemMessageTestingOnly(self, "Remote created.");
+                    broadcast(self, "Remote created.");
                     setName(remote, new string_id("fs_quest_village", "name_rem_" + key));
                     setObjVar(remote, fs_counterstrike.OBJVAR_CAMP_NAME, key);
                     utils.putInPlayerInventory(self, remote);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Remote creation failed.  Overloaded inventory, maybe?.");
+                    broadcast(self, "Remote creation failed.  Overloaded inventory, maybe?.");
                 }
             }
         }
@@ -2271,12 +2271,12 @@ public class cmd extends script.base_script
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             String usage = "Usage:	resetPlayerQuest <3combat|all>";
@@ -2291,60 +2291,60 @@ public class cmd extends script.base_script
                 {
                     if (fs_quests.clearFSData(target))
                     {
-                        sendSystemMessageTestingOnly(self, "All FS quest data cleared from " + target);
+                        broadcast(self, "All FS quest data cleared from " + target);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Data clear failed.");
+                        broadcast(self, "Data clear failed.");
                     }
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, usage);
+                    broadcast(self, usage);
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, usage);
+                broadcast(self, usage);
             }
         }
         else if ((toLower(command)).equalsIgnoreCase("resetplayertask"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!fs_quests.resetFSTask(target, self))
             {
-                sendSystemMessageTestingOnly(self, "Unable to remove task due to error or player has no tasks to remove.");
+                broadcast(self, "Unable to remove task due to error or player has no tasks to remove.");
             }
         }
         else if ((toLower(command)).equalsIgnoreCase("getenemycampinfo"))
         {
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgGetCampInfo", self);
-            sendSystemMessageTestingOnly(self, "Fetching enemy camp info...");
+            broadcast(self, "Fetching enemy camp info...");
         }
         else if ((toLower(command)).equalsIgnoreCase("phasedurationinfo"))
         {
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgGetDurationInfo", self);
-            sendSystemMessageTestingOnly(self, "Fetching phase duration info...");
+            broadcast(self, "Fetching phase duration info...");
         }
         else if ((toLower(command)).equalsIgnoreCase("startvillage"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             fs_quests.makeVillageEligible(target);
@@ -2355,36 +2355,36 @@ public class cmd extends script.base_script
                 attachScript(target, "quest.force_sensitive.fs_kickoff");
             }
             setObjVar(target, "fs_kickoff_stage", 8);
-            sendSystemMessageTestingOnly(self, target + " set to be village eligible.");
+            broadcast(self, target + " set to be village eligible.");
         }
         else if ((toLower(command)).equalsIgnoreCase("clearquestmarker"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (hasScript(target, "systems.fs_quest.fs_quest_player"))
             {
                 detachScript(target, "systems.fs_quest.fs_quest_player");
             }
-            sendSystemMessageTestingOnly(self, target + " quest acceptance for this phase has been cleared.");
+            broadcast(self, target + " quest acceptance for this phase has been cleared.");
         }
         else if ((toLower(command)).equalsIgnoreCase("unlockbranch"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Must target a valid player for that command.");
+                broadcast(self, "Must target a valid player for that command.");
                 return SCRIPT_CONTINUE;
             }
             fs_quests.unlockBranchSUI(target, self);
@@ -2445,35 +2445,35 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Error creating resource template crc " + template);
+                broadcast(self, "Error creating resource template crc " + template);
             }
         }
         else if (command.equalsIgnoreCase("?"))
         {
-            sendSystemMessageTestingOnly(self, "Format: /gmFsVillage <command> (params)");
-            sendSystemMessageTestingOnly(self, "	registerMasterId -- re-registers the master object id - disaster recovery only!");
-            sendSystemMessageTestingOnly(self, "	getMasterId -- display the FS village master object id");
-            sendSystemMessageTestingOnly(self, "	destroyPhaseObjects -- destroys all phase objects. (god level 50 - dangerous!)");
-            sendSystemMessageTestingOnly(self, "	activatePhase # -- shifts the village into a different phase (god level 50 - dangerous!)");
-            sendSystemMessageTestingOnly(self, "	getCurrentPhase  -- returns the currently active phase of the FS village");
-            sendSystemMessageTestingOnly(self, "	getCurrentUid  -- returns the UID of the currently active phase of the FS village");
-            sendSystemMessageTestingOnly(self, "	getEnemyCampInfo -- returns information on all spawned enemy camps (Phase 3 only)");
-            sendSystemMessageTestingOnly(self, "	getCampRemote  <name> -- creates a remote in your pack to powerdown the named enemy camp");
-            sendSystemMessageTestingOnly(self, "	getWaypointDisk <name> -- creates a datapad  with a random waypoint near one of phase 3 enemy camps");
-            sendSystemMessageTestingOnly(self, "	getFrequencyDisk <name> -- creates a datapad good for one random remote near one of phase 3 enemy camps");
-            sendSystemMessageTestingOnly(self, "	resetPlayerQuest <name> -- resets a player back to the first step of the quest");
-            sendSystemMessageTestingOnly(self, "	startvillage -- Sets the target player to be eligible to take village quests.");
-            sendSystemMessageTestingOnly(self, "	clearquestmarker -- Removes the marker that denotes the player as having completed a quest this phase.");
-            sendSystemMessageTestingOnly(self, "	makeresource <name> -- Creates a pseudo-resource in your inventory.");
-            sendSystemMessageTestingOnly(self, "	resource name = rudic, ardanium, ostrine, wind, or endrine");
-            sendSystemMessageTestingOnly(self, "	phaseDurationInfo -- get info about current phase and expiriation info");
-            sendSystemMessageTestingOnly(self, "    resetplayertask -- removes a completed or active task from the player.");
-            sendSystemMessageTestingOnly(self, "    unlockbranch -- unlocks a branch on the specified player.");
+            broadcast(self, "Format: /gmFsVillage <command> (params)");
+            broadcast(self, "	registerMasterId -- re-registers the master object id - disaster recovery only!");
+            broadcast(self, "	getMasterId -- display the FS village master object id");
+            broadcast(self, "	destroyPhaseObjects -- destroys all phase objects. (god level 50 - dangerous!)");
+            broadcast(self, "	activatePhase # -- shifts the village into a different phase (god level 50 - dangerous!)");
+            broadcast(self, "	getCurrentPhase  -- returns the currently active phase of the FS village");
+            broadcast(self, "	getCurrentUid  -- returns the UID of the currently active phase of the FS village");
+            broadcast(self, "	getEnemyCampInfo -- returns information on all spawned enemy camps (Phase 3 only)");
+            broadcast(self, "	getCampRemote  <name> -- creates a remote in your pack to powerdown the named enemy camp");
+            broadcast(self, "	getWaypointDisk <name> -- creates a datapad  with a random waypoint near one of phase 3 enemy camps");
+            broadcast(self, "	getFrequencyDisk <name> -- creates a datapad good for one random remote near one of phase 3 enemy camps");
+            broadcast(self, "	resetPlayerQuest <name> -- resets a player back to the first step of the quest");
+            broadcast(self, "	startvillage -- Sets the target player to be eligible to take village quests.");
+            broadcast(self, "	clearquestmarker -- Removes the marker that denotes the player as having completed a quest this phase.");
+            broadcast(self, "	makeresource <name> -- Creates a pseudo-resource in your inventory.");
+            broadcast(self, "	resource name = rudic, ardanium, ostrine, wind, or endrine");
+            broadcast(self, "	phaseDurationInfo -- get info about current phase and expiriation info");
+            broadcast(self, "    resetplayertask -- removes a completed or active task from the player.");
+            broadcast(self, "    unlockbranch -- unlocks a branch on the specified player.");
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Format: /gmFsVillage <command> (params)    /gmFsVillage ? for help");
+            broadcast(self, "Format: /gmFsVillage <command> (params)    /gmFsVillage ? for help");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2483,7 +2483,7 @@ public class cmd extends script.base_script
         LOG("force_rank", "gm.cmdGMForceRank -- " + params);
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /gmForceRank <command>    /gmForceRank ? for help");
+            broadcast(self, "format: /gmForceRank <command>    /gmForceRank ? for help");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -2493,17 +2493,17 @@ public class cmd extends script.base_script
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must have a target to do that.");
+                broadcast(self, "You must have a target to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (!force_rank.isForceRanked(target))
             {
-                sendSystemMessageTestingOnly(self, "Target is not force ranked.");
+                broadcast(self, "Target is not force ranked.");
                 return SCRIPT_CONTINUE;
             }
             int curRank = force_rank.getForceRank(target);
@@ -2522,11 +2522,11 @@ public class cmd extends script.base_script
                     newXP = (int) Math.floor(force_rank.getForceRankMinXp(curRank + 2) * 1.5f);
                 }
                 force_rank.adjustForceRankXP(target, newXP - curXP);
-                sendSystemMessageTestingOnly(self, "Promotion initiated.  This may take a minute or so.");
+                broadcast(self, "Promotion initiated.  This may take a minute or so.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Promotion failed.");
+                broadcast(self, "Promotion failed.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2536,7 +2536,7 @@ public class cmd extends script.base_script
             {
                 if (tokens < 2)
                 {
-                    sendSystemMessageTestingOnly(self, "You must have a target or specify a player name.");
+                    broadcast(self, "You must have a target or specify a player name.");
                     return SCRIPT_CONTINUE;
                 }
                 else
@@ -2544,35 +2544,35 @@ public class cmd extends script.base_script
                     String player_name = st.nextToken();
                     if (player_name == null || player_name.length() < 1)
                     {
-                        sendSystemMessageTestingOnly(self, "You must have a target or specify a player name.");
+                        broadcast(self, "You must have a target or specify a player name.");
                         return SCRIPT_CONTINUE;
                     }
                     obj_id enclave = getTopMostContainer(self);
                     if (!isIdValid(enclave))
                     {
-                        sendSystemMessageTestingOnly(self, "You must be in the enclave to demote a player by name.");
+                        broadcast(self, "You must be in the enclave to demote a player by name.");
                         return SCRIPT_CONTINUE;
                     }
                     if (!hasScript(enclave, force_rank.SCRIPT_ENCLAVE_CONTROLLER))
                     {
-                        sendSystemMessageTestingOnly(self, "You must be in the enclave to demote a player by name.");
+                        broadcast(self, "You must be in the enclave to demote a player by name.");
                         return SCRIPT_CONTINUE;
                     }
                     int player_rank = force_rank.getForceRank(enclave, player_name);
                     if (player_rank < 1)
                     {
-                        sendSystemMessageTestingOnly(self, "You cannot demote a player that is not of at least Rank 1.");
+                        broadcast(self, "You cannot demote a player that is not of at least Rank 1.");
                         return SCRIPT_CONTINUE;
                     }
                     else
                     {
                         if (force_rank.demoteForceRank(enclave, player_name, player_rank - 1))
                         {
-                            sendSystemMessageTestingOnly(self, "Demotion initiated.  This may take a minute or so.");
+                            broadcast(self, "Demotion initiated.  This may take a minute or so.");
                         }
                         else
                         {
-                            sendSystemMessageTestingOnly(self, "Demotion failed.");
+                            broadcast(self, "Demotion failed.");
                         }
                     }
                 }
@@ -2580,26 +2580,26 @@ public class cmd extends script.base_script
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (!force_rank.isForceRanked(target))
             {
-                sendSystemMessageTestingOnly(self, "Target is not force ranked.");
+                broadcast(self, "Target is not force ranked.");
                 return SCRIPT_CONTINUE;
             }
             if (force_rank.getForceRank(target) == 0)
             {
-                sendSystemMessageTestingOnly(self, "You can't demote a player that is already rank 0.  Use 'remove' to remove the player from the FRS.");
+                broadcast(self, "You can't demote a player that is already rank 0.  Use 'remove' to remove the player from the FRS.");
                 return SCRIPT_CONTINUE;
             }
             if (force_rank.demoteForceRank(target, force_rank.getForceRank(target) - 1))
             {
-                sendSystemMessageTestingOnly(self, "Demotion initiated.  This may take a minute or so.");
+                broadcast(self, "Demotion initiated.  This may take a minute or so.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Demotion failed.");
+                broadcast(self, "Demotion failed.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2608,7 +2608,7 @@ public class cmd extends script.base_script
             int council;
             if (tokens < 2)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank pulseMaint <council>    1 for DARK, 2 for LIGHT");
+                broadcast(self, "Format: /gmForceRank pulseMaint <council>    1 for DARK, 2 for LIGHT");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -2616,11 +2616,11 @@ public class cmd extends script.base_script
                 council = utils.stringToInt(st.nextToken());
                 if (council != 1 && council != 2)
                 {
-                    sendSystemMessageTestingOnly(self, "Format: /gmForceRank pulseMaint <council>    1 for DARK, 2 for LIGHT");
+                    broadcast(self, "Format: /gmForceRank pulseMaint <council>    1 for DARK, 2 for LIGHT");
                     return SCRIPT_CONTINUE;
                 }
                 boolean rslt = force_rank.getEnclaveObjId(self, council, "cmdEnclaveIdForPulse");
-                sendSystemMessageTestingOnly(self, "Maintenance pulse for council " + council + " initiated. This may take a moment...");
+                broadcast(self, "Maintenance pulse for council " + council + " initiated. This may take a moment...");
             }
         }
         else if ((toLower(command)).equalsIgnoreCase("add"))
@@ -2628,7 +2628,7 @@ public class cmd extends script.base_script
             int council;
             if (tokens < 2)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank add <council>    1 for DARK, 2 for LIGHT");
+                broadcast(self, "Format: /gmForceRank add <council>    1 for DARK, 2 for LIGHT");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -2636,32 +2636,32 @@ public class cmd extends script.base_script
                 council = utils.stringToInt(st.nextToken());
                 if (council != 1 && council != 2)
                 {
-                    sendSystemMessageTestingOnly(self, "Format: /gmForceRank add <council>    1 for DARK, 2 for LIGHT");
+                    broadcast(self, "Format: /gmForceRank add <council>    1 for DARK, 2 for LIGHT");
                     return SCRIPT_CONTINUE;
                 }
             }
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must have a target to do that.");
+                broadcast(self, "You must have a target to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (force_rank.isForceRanked(target))
             {
-                sendSystemMessageTestingOnly(self, "Target is already force ranked.");
+                broadcast(self, "Target is already force ranked.");
                 return SCRIPT_CONTINUE;
             }
             if (force_rank.addToForceRankSystem(target, council))
             {
-                sendSystemMessageTestingOnly(self, "Add to FRS complete.");
+                broadcast(self, "Add to FRS complete.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Add to FRS failed.");
+                broadcast(self, "Add to FRS failed.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2669,26 +2669,26 @@ public class cmd extends script.base_script
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must have a target to do that.");
+                broadcast(self, "You must have a target to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (!force_rank.isForceRanked(target))
             {
-                sendSystemMessageTestingOnly(self, "Target must be rank 0 in order to remove.");
+                broadcast(self, "Target must be rank 0 in order to remove.");
                 return SCRIPT_CONTINUE;
             }
             if (force_rank.removeFromForceRankSystem(target, false))
             {
-                sendSystemMessageTestingOnly(self, "Removal complete.");
+                broadcast(self, "Removal complete.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Removal failed.");
+                broadcast(self, "Removal failed.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -2696,28 +2696,28 @@ public class cmd extends script.base_script
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must have a target to do that.");
+                broadcast(self, "You must have a target to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (!force_rank.isForceRanked(target))
             {
-                sendSystemMessageTestingOnly(self, "Target must already be in the force ranks for this command.");
+                broadcast(self, "Target must already be in the force ranks for this command.");
                 return SCRIPT_CONTINUE;
             }
             if (tokens < 2)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
+                broadcast(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
                 return SCRIPT_CONTINUE;
             }
             String amount = st.nextToken();
             if (amount == null || amount.equalsIgnoreCase(""))
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
+                broadcast(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
                 return SCRIPT_CONTINUE;
             }
             int amt;
@@ -2726,29 +2726,29 @@ public class cmd extends script.base_script
                 amt = Integer.parseInt(amount);
             } catch (NumberFormatException err)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
+                broadcast(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
                 return SCRIPT_CONTINUE;
             }
             int newXP = force_rank.adjustForceRankXP(target, amt);
-            sendSystemMessageTestingOnly(self, "Done. " + utils.getRealPlayerFirstName(target) + " now has " + newXP + " Council XP.");
+            broadcast(self, "Done. " + utils.getRealPlayerFirstName(target) + " now has " + newXP + " Council XP.");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equalsIgnoreCase("resetenclave"))
         {
             if (getGodLevel(self) < 10)
             {
-                sendSystemMessageTestingOnly(self, "You do not have sufficient privileges to reset an enclave.");
+                broadcast(self, "You do not have sufficient privileges to reset an enclave.");
                 return SCRIPT_CONTINUE;
             }
             obj_id enclave = getTopMostContainer(self);
             if (!isIdValid(enclave))
             {
-                sendSystemMessageTestingOnly(self, "You must be in the enclave to reset it.");
+                broadcast(self, "You must be in the enclave to reset it.");
                 return SCRIPT_CONTINUE;
             }
             if (!hasScript(enclave, force_rank.SCRIPT_ENCLAVE_CONTROLLER))
             {
-                sendSystemMessageTestingOnly(self, "You must be in the enclave to reset it.");
+                broadcast(self, "You must be in the enclave to reset it.");
                 return SCRIPT_CONTINUE;
             }
             removeObjVar(enclave, "force_rank.roster");
@@ -2756,36 +2756,36 @@ public class cmd extends script.base_script
             removeObjVar(enclave, "force_rank.voting");
             force_rank.resetEnclaveData(enclave);
             force_rank.resetClusterData(enclave);
-            sendSystemMessageTestingOnly(self, "Enclave reset complete.");
+            broadcast(self, "Enclave reset complete.");
             return SCRIPT_CONTINUE;
         }
         else if ((toLower(command)).equalsIgnoreCase("setchallengescore"))
         {
             if (getGodLevel(self) < 10)
             {
-                sendSystemMessageTestingOnly(self, "You do not have sufficient privileges to change the challenge score.");
+                broadcast(self, "You do not have sufficient privileges to change the challenge score.");
                 return SCRIPT_CONTINUE;
             }
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must target the challenge terminal to do that.");
+                broadcast(self, "You must target the challenge terminal to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (!hasScript(target, "systems.gcw.terminal_frs_challenge"))
             {
-                sendSystemMessageTestingOnly(self, "You must target the challenge terminal to do that.");
+                broadcast(self, "You must target the challenge terminal to do that.");
                 return SCRIPT_CONTINUE;
             }
             if (tokens < 3)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
+                broadcast(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
                 return SCRIPT_CONTINUE;
             }
             String strRank = st.nextToken();
             String strScore = st.nextToken();
             if (strRank == null || strScore == null || strRank.equalsIgnoreCase("") || strScore.equalsIgnoreCase(""))
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
+                broadcast(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
                 return SCRIPT_CONTINUE;
             }
             int rank;
@@ -2796,7 +2796,7 @@ public class cmd extends script.base_script
                 score = Integer.parseInt(strScore);
             } catch (NumberFormatException err)
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
+                broadcast(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
                 return SCRIPT_CONTINUE;
             }
             int[] ranks = getIntArrayObjVar(target, arena.VAR_ALL_RANKS);
@@ -2809,28 +2809,28 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
+                broadcast(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
                 return SCRIPT_CONTINUE;
             }
             trace.log("force_rank", "Challenge score for rank " + rank + " manually set to " + score + " by god client " + self, self, trace.TL_CS_LOG);
-            sendSystemMessageTestingOnly(self, "Score adjusted. Done.");
+            broadcast(self, "Score adjusted. Done.");
         }
         else if (command.equalsIgnoreCase("?"))
         {
-            sendSystemMessageTestingOnly(self, "Format: /gmForceRank <command> (params)");
-            sendSystemMessageTestingOnly(self, "	add -- adds a player to the FRS");
-            sendSystemMessageTestingOnly(self, "	remove -- removes a player to the FRS");
-            sendSystemMessageTestingOnly(self, "	promote -- promotes a player one rank");
-            sendSystemMessageTestingOnly(self, "	demote -- demotes a player one rank");
-            sendSystemMessageTestingOnly(self, "	deltaXp -- grants/revokes council XP");
-            sendSystemMessageTestingOnly(self, "    resetenclave -- reinitializes enclave. (God level 10)");
-            sendSystemMessageTestingOnly(self, "    pulseMaint -- forces an enclave maintenance pulse. (EXPENSIVE!)");
-            sendSystemMessageTestingOnly(self, "	setChallengeScore -- sets the challenge score for a given rank. (God level 10)");
+            broadcast(self, "Format: /gmForceRank <command> (params)");
+            broadcast(self, "	add -- adds a player to the FRS");
+            broadcast(self, "	remove -- removes a player to the FRS");
+            broadcast(self, "	promote -- promotes a player one rank");
+            broadcast(self, "	demote -- demotes a player one rank");
+            broadcast(self, "	deltaXp -- grants/revokes council XP");
+            broadcast(self, "    resetenclave -- reinitializes enclave. (God level 10)");
+            broadcast(self, "    pulseMaint -- forces an enclave maintenance pulse. (EXPENSIVE!)");
+            broadcast(self, "	setChallengeScore -- sets the challenge score for a given rank. (God level 10)");
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "format: /gmForceRank <command>    /gmForceRank ? for help");
+            broadcast(self, "format: /gmForceRank <command>    /gmForceRank ? for help");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2853,13 +2853,13 @@ public class cmd extends script.base_script
             if (params.containsKey(key))
             {
                 val = params.getInt(key);
-                sendSystemMessageTestingOnly(self, "Object key '" + key + "' was registered as " + val);
+                broadcast(self, "Object key '" + key + "' was registered as " + val);
             }
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Failed to find integer '" + key + "' cluster wide data.  Value might not have been registered yet.");
+            broadcast(self, "Failed to find integer '" + key + "' cluster wide data.  Value might not have been registered yet.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -2868,28 +2868,28 @@ public class cmd extends script.base_script
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "Couldn't find the master objid in the cluster data.");
+            broadcast(self, "Couldn't find the master objid in the cluster data.");
             return SCRIPT_CONTINUE;
         }
         obj_id target = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Village master object is not valid.");
+            broadcast(self, "Village master object is not valid.");
             return SCRIPT_CONTINUE;
         }
         if (!exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Must be on the same server as the village master object.  Phase not changed");
+            broadcast(self, "Must be on the same server as the village master object.  Phase not changed");
             return SCRIPT_CONTINUE;
         }
         if (!hasScript(target, fs_dyn_village.SCRIPT_FS_VILLAGE_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "Objid returned by cluster data (" + target + ") is not a village master object.");
+            broadcast(self, "Objid returned by cluster data (" + target + ") is not a village master object.");
             return SCRIPT_CONTINUE;
         }
         if (!hasObjVar(target, fs_dyn_village.OBJVAR_PHASE_START_TIME))
         {
-            sendSystemMessageTestingOnly(self, "Master object does not have a start time for this phase.");
+            broadcast(self, "Master object does not have a start time for this phase.");
             return SCRIPT_CONTINUE;
         }
         int curPhase = fs_dyn_village.getCurrentPhaseAuth(target);
@@ -2898,7 +2898,7 @@ public class cmd extends script.base_script
         int startTime = getIntObjVar(target, fs_dyn_village.OBJVAR_PHASE_START_TIME);
         String startedWhen = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(getGameTime() - startTime));
         String timeLeft = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(duration - (getGameTime() - startTime)));
-        sendSystemMessageTestingOnly(self, "The current phase (" + curPhase + ") began " + startedWhen + " ago, is " + durationTime + " long, and thus is set to expire naturally in " + timeLeft);
+        broadcast(self, "The current phase (" + curPhase + ") began " + startedWhen + " ago, is " + durationTime + " long, and thus is set to expire naturally in " + timeLeft);
         return SCRIPT_CONTINUE;
     }
 
@@ -2906,29 +2906,29 @@ public class cmd extends script.base_script
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "Couldn't find the master objid in the cluster data.");
+            broadcast(self, "Couldn't find the master objid in the cluster data.");
             return SCRIPT_CONTINUE;
         }
         obj_id target = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Village master object is not valid.");
+            broadcast(self, "Village master object is not valid.");
             return SCRIPT_CONTINUE;
         }
         if (!exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Must be on the same server as the village master object.  Phase not changed");
+            broadcast(self, "Must be on the same server as the village master object.  Phase not changed");
             return SCRIPT_CONTINUE;
         }
         if (!hasScript(target, fs_dyn_village.SCRIPT_FS_VILLAGE_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "Objid returned by cluster data (" + target + ") is not a village master object.");
+            broadcast(self, "Objid returned by cluster data (" + target + ") is not a village master object.");
             return SCRIPT_CONTINUE;
         }
         int curPhase = fs_dyn_village.getCurrentPhaseAuth(target);
         if (curPhase != 3)
         {
-            sendSystemMessageTestingOnly(self, "Enemy camp information only available during phase 3. Current phase is " + curPhase + ".");
+            broadcast(self, "Enemy camp information only available during phase 3. Current phase is " + curPhase + ".");
             return SCRIPT_CONTINUE;
         }
         Vector campNames = new Vector();
@@ -2957,8 +2957,8 @@ public class cmd extends script.base_script
         String name = "";
         location loc = new location(0.0f, 0.0f, 0.0f);
         obj_id id = null;
-        sendSystemMessageTestingOnly(self, "Enemy Camp Data:");
-        sendSystemMessageTestingOnly(self, "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        broadcast(self, "Enemy Camp Data:");
+        broadcast(self, "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         for (int i = 0; i < campNames.size(); i++)
         {
             name = (String) campNames.get(i);
@@ -2982,7 +2982,7 @@ public class cmd extends script.base_script
             {
                 id = null;
             }
-            sendSystemMessageTestingOnly(self, name + "	" + loc + "ID=" + id);
+            broadcast(self, name + "	" + loc + "ID=" + id);
         }
         return SCRIPT_CONTINUE;
     }
@@ -2995,23 +2995,23 @@ public class cmd extends script.base_script
         }
         if (!params.containsKey(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "Couldn't find the master objid in the cluster data.");
+            broadcast(self, "Couldn't find the master objid in the cluster data.");
             return SCRIPT_CONTINUE;
         }
         obj_id target = params.getObjId(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "Village master object is not valid.");
+            broadcast(self, "Village master object is not valid.");
             return SCRIPT_CONTINUE;
         }
         if (!exists(target))
         {
-            sendSystemMessageTestingOnly(self, "Must be on the same server as the village master object.  Phase not changed");
+            broadcast(self, "Must be on the same server as the village master object.  Phase not changed");
             return SCRIPT_CONTINUE;
         }
         if (!hasScript(target, fs_dyn_village.SCRIPT_FS_VILLAGE_MASTER))
         {
-            sendSystemMessageTestingOnly(self, "You must target the village master object to do that.");
+            broadcast(self, "You must target the village master object to do that.");
             return SCRIPT_CONTINUE;
         }
         int phase = utils.getIntScriptVar(self, "gm.cmd.fs_village.wantPhase");
@@ -3039,13 +3039,13 @@ public class cmd extends script.base_script
             if (params.containsKey(key))
             {
                 id = params.getObjId(key);
-                sendSystemMessageTestingOnly(self, "Object key '" + key + "' was registered as " + id);
+                broadcast(self, "Object key '" + key + "' was registered as " + id);
             }
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Failed to find obj id '" + key + "' cluster wide data.  Id might not have been registered yet.");
+            broadcast(self, "Failed to find obj id '" + key + "' cluster wide data.  Id might not have been registered yet.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -3054,7 +3054,7 @@ public class cmd extends script.base_script
     {
         if (!params.containsKey("success"))
         {
-            sendSystemMessageTestingOnly(self, "Error registering id.");
+            broadcast(self, "Error registering id.");
             return SCRIPT_CONTINUE;
         }
         boolean rslt = params.getBoolean("success");
@@ -3062,11 +3062,11 @@ public class cmd extends script.base_script
         String key = params.getString("key");
         if (rslt)
         {
-            sendSystemMessageTestingOnly(self, "Successfully registered " + id + " under key " + key);
+            broadcast(self, "Successfully registered " + id + " under key " + key);
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "FAILED to register " + id + " under key " + key);
+            broadcast(self, "FAILED to register " + id + " under key " + key);
         }
         return SCRIPT_CONTINUE;
     }
@@ -3109,7 +3109,7 @@ public class cmd extends script.base_script
         }
         clearCompletedQuest(player, task_selected);
         unassignTheaterFromPlayer(player);
-        sendSystemMessageTestingOnly(self, "Task " + task_name + " reset on " + getName(player));
+        broadcast(self, "Task " + task_name + " reset on " + getName(player));
         CustomerServiceLog("fs_quests", "GM %TU resetting task " + task_name + " on %TT.", self, player);
         return SCRIPT_CONTINUE;
     }
@@ -3136,11 +3136,11 @@ public class cmd extends script.base_script
         String branch = fs_quests.getBranchFromId(row_selected);
         if (branch == null)
         {
-            sendSystemMessageTestingOnly(self, "Can find the selected branch");
+            broadcast(self, "Can find the selected branch");
             return SCRIPT_CONTINUE;
         }
         fs_quests.unlockBranch(player, branch);
-        sendSystemMessageTestingOnly(self, "You unlock branch " + branch + " on " + getName(player));
+        broadcast(self, "You unlock branch " + branch + " on " + getName(player));
         return SCRIPT_CONTINUE;
     }
 
@@ -3148,16 +3148,16 @@ public class cmd extends script.base_script
     {
         if (!params.containsKey("enclave"))
         {
-            sendSystemMessageTestingOnly(self, "Error retrieving enclave id.  Pulse not fired.");
+            broadcast(self, "Error retrieving enclave id.  Pulse not fired.");
             return SCRIPT_CONTINUE;
         }
         obj_id enclave = params.getObjId("enclave");
         if (isIdNull(enclave))
         {
-            sendSystemMessageTestingOnly(self, "Error retrieving enclave id.  Pulse not fired.");
+            broadcast(self, "Error retrieving enclave id.  Pulse not fired.");
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Pulsing " + enclave + ". . .");
+        broadcast(self, "Pulsing " + enclave + ". . .");
         force_rank.performEnclaveMaintenance(enclave);
         return SCRIPT_CONTINUE;
     }
@@ -3174,14 +3174,14 @@ public class cmd extends script.base_script
         }
         if (!VETERAN_REWARDS_ENABLED)
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
+            broadcast(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
         if (veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
-                sendSystemMessageTestingOnly(self, "format: /hasVeteranReward <target> <milestone>");
+                broadcast(self, "format: /hasVeteranReward <target> <milestone>");
                 return SCRIPT_CONTINUE;
             }
             int milestone = parseMilestone(params);
@@ -3216,14 +3216,14 @@ public class cmd extends script.base_script
         }
         if (!VETERAN_REWARDS_ENABLED)
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
+            broadcast(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
         if (veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
-                sendSystemMessageTestingOnly(self, "format: /setVeteranReward <target> <milestone>");
+                broadcast(self, "format: /setVeteranReward <target> <milestone>");
                 return SCRIPT_CONTINUE;
             }
             int milestone = parseMilestone(params);
@@ -3253,14 +3253,14 @@ public class cmd extends script.base_script
         }
         if (!VETERAN_REWARDS_ENABLED)
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
+            broadcast(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
         if (veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
-                sendSystemMessageTestingOnly(self, "format: /clearVeteranReward <target> <milestone>");
+                broadcast(self, "format: /clearVeteranReward <target> <milestone>");
                 return SCRIPT_CONTINUE;
             }
             int milestone = parseMilestone(params);
@@ -3290,12 +3290,12 @@ public class cmd extends script.base_script
         }
         if (!VETERAN_REWARDS_ENABLED)
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
+            broadcast(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
         if (params == null || params.length() == 0)
         {
-            sendSystemMessageTestingOnly(self, "format: /overrideActiveMonths <months>");
+            broadcast(self, "format: /overrideActiveMonths <months>");
             return SCRIPT_CONTINUE;
         }
         int months = parseMilestone(params);
@@ -3341,7 +3341,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /resetJedi -target (with lookat target)");
+            broadcast(self, "[Syntax] /resetJedi -target (with lookat target)");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(gm.KEYWORD_TARGET))
@@ -3350,7 +3350,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /resetJedi -target (with lookat target)");
+            broadcast(self, "[Syntax] /resetJedi -target (with lookat target)");
             return SCRIPT_CONTINUE;
         }
         gm.cmdResetJedi(target);
@@ -3361,7 +3361,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /deactivateQuest <questName>");
+            broadcast(self, "[syntax] /deactivateQuest <questName>");
         }
         else
         {
@@ -3370,11 +3370,11 @@ public class cmd extends script.base_script
             if (id > -1)
             {
                 quests.deactivate(params, target);
-                sendSystemMessageTestingOnly(self, "deactivated quest " + params);
+                broadcast(self, "deactivated quest " + params);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "failed to find quest " + params);
+                broadcast(self, "failed to find quest " + params);
             }
         }
         return SCRIPT_CONTINUE;
@@ -3384,7 +3384,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /activateQuest <questName>");
+            broadcast(self, "[syntax] /activateQuest <questName>");
         }
         else
         {
@@ -3393,11 +3393,11 @@ public class cmd extends script.base_script
             if (id > -1)
             {
                 quests.activate(params, target, null);
-                sendSystemMessageTestingOnly(self, "activated quest " + params);
+                broadcast(self, "activated quest " + params);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "failed to find quest " + params);
+                broadcast(self, "failed to find quest " + params);
             }
         }
         return SCRIPT_CONTINUE;
@@ -3407,7 +3407,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /listActiveQuests");
+            broadcast(self, "[syntax] /listActiveQuests");
         }
         else
         {
@@ -3442,17 +3442,17 @@ public class cmd extends script.base_script
                         {
                             msg += "missing summary string";
                         }
-                        sendSystemMessageTestingOnly(self, msg);
+                        broadcast(self, msg);
                     }
                 }
                 if (active < 1)
                 {
-                    sendSystemMessageTestingOnly(self, "no active quests");
+                    broadcast(self, "no active quests");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "no active quests");
+                broadcast(self, "no active quests");
             }
         }
         return SCRIPT_CONTINUE;
@@ -3463,7 +3463,7 @@ public class cmd extends script.base_script
         LOG("newquests", "received /clearCompletedQuest");
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /clearCompletedQuest <questName>");
+            broadcast(self, "[syntax] /clearCompletedQuest <questName>");
         }
         else
         {
@@ -3472,12 +3472,12 @@ public class cmd extends script.base_script
             if (id > -1)
             {
                 clearCompletedQuest(target, id);
-                sendSystemMessageTestingOnly(self, "cleared quest " + params);
+                broadcast(self, "cleared quest " + params);
                 LOG("newquests", "cleared quest " + params + " for player " + target);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "failed to find quest " + params);
+                broadcast(self, "failed to find quest " + params);
                 LOG("newquests", "failed to clear quest " + params + " for player " + target);
             }
         }
@@ -3488,7 +3488,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /deactivateQuest <questName>");
+            broadcast(self, "[syntax] /deactivateQuest <questName>");
         }
         else
         {
@@ -3497,11 +3497,11 @@ public class cmd extends script.base_script
             if (id > -1)
             {
                 quests.complete(params, target, true);
-                sendSystemMessageTestingOnly(self, "completed quest " + params);
+                broadcast(self, "completed quest " + params);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "failed to find quest " + params);
+                broadcast(self, "failed to find quest " + params);
             }
         }
         return SCRIPT_CONTINUE;
@@ -3511,7 +3511,7 @@ public class cmd extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /listActiveQuests");
+            broadcast(self, "[syntax] /listActiveQuests");
         }
         else
         {
@@ -3546,17 +3546,17 @@ public class cmd extends script.base_script
                         {
                             msg += "missing summary string";
                         }
-                        sendSystemMessageTestingOnly(self, msg);
+                        broadcast(self, msg);
                     }
                 }
                 if (completed < 1)
                 {
-                    sendSystemMessageTestingOnly(self, "no complete quests");
+                    broadcast(self, "no complete quests");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "no complete quests");
+                broadcast(self, "no complete quests");
             }
         }
         return SCRIPT_CONTINUE;
@@ -3596,7 +3596,7 @@ public class cmd extends script.base_script
     {
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /gmJediState <command>    /gmJediState ? for help");
+            broadcast(self, "format: /gmJediState <command>    /gmJediState ? for help");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3606,65 +3606,65 @@ public class cmd extends script.base_script
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must specify a target.");
+                broadcast(self, "You must specify a target.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             int jedi_state = getJediState(target);
             switch (jedi_state)
             {
                 case JEDI_STATE_FORCE_SENSITIVE:
-                    sendSystemMessageTestingOnly(self, getFirstName(target) + " is Force-sensitive.");
+                    broadcast(self, getFirstName(target) + " is Force-sensitive.");
                     break;
                 case JEDI_STATE_JEDI:
-                    sendSystemMessageTestingOnly(self, getFirstName(target) + " is a Jedi.");
+                    broadcast(self, getFirstName(target) + " is a Jedi.");
                     break;
                 case JEDI_STATE_FORCE_RANKED_LIGHT:
-                    sendSystemMessageTestingOnly(self, getFirstName(target) + " is a Light Jedi Knight.");
+                    broadcast(self, getFirstName(target) + " is a Light Jedi Knight.");
                     break;
                 case JEDI_STATE_FORCE_RANKED_DARK:
-                    sendSystemMessageTestingOnly(self, getFirstName(target) + " is a Dark Jedi Knight.");
+                    broadcast(self, getFirstName(target) + " is a Dark Jedi Knight.");
                     break;
                 default:
-                    sendSystemMessageTestingOnly(self, getFirstName(target) + " is not a Jedi.");
+                    broadcast(self, getFirstName(target) + " is not a Jedi.");
                     break;
             }
-            sendSystemMessageTestingOnly(self, "(isJedi returns " + isJedi(target) + ")");
+            broadcast(self, "(isJedi returns " + isJedi(target) + ")");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(command)).equalsIgnoreCase("setjedi"))
         {
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "You must specify a target.");
+                broadcast(self, "You must specify a target.");
                 return SCRIPT_CONTINUE;
             }
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "Your target must be a player.");
+                broadcast(self, "Your target must be a player.");
                 return SCRIPT_CONTINUE;
             }
             if (getJediState(target) != JEDI_STATE_FORCE_SENSITIVE)
             {
-                sendSystemMessageTestingOnly(self, "Your target must be Force-sensitive to use this command.");
+                broadcast(self, "Your target must be Force-sensitive to use this command.");
                 return SCRIPT_CONTINUE;
             }
             setJediState(target, JEDI_STATE_JEDI);
-            sendSystemMessageTestingOnly(target, getFirstName(target) + "'s state has be set to Jedi.");
+            broadcast(target, getFirstName(target) + "'s state has be set to Jedi.");
             return SCRIPT_CONTINUE;
         }
         if ((toLower(command)).equalsIgnoreCase("?"))
         {
-            sendSystemMessageTestingOnly(self, "format: /gmJediState <command>    /gmJediState ? for help");
-            sendSystemMessageTestingOnly(self, "   getState  -- returns the Jedi state of the player");
-            sendSystemMessageTestingOnly(self, "   setJedi  -- sets the Jedi state of a Force-sensitive player.  Note that this should only be used to fix a Jedi who can't tune a crystal.");
+            broadcast(self, "format: /gmJediState <command>    /gmJediState ? for help");
+            broadcast(self, "   getState  -- returns the Jedi state of the player");
+            broadcast(self, "   setJedi  -- sets the Jedi state of a Force-sensitive player.  Note that this should only be used to fix a Jedi who can't tune a crystal.");
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "format: /gmJediState <command>    /gmJediState ? for help");
+        broadcast(self, "format: /gmJediState <command>    /gmJediState ? for help");
         return SCRIPT_CONTINUE;
     }
 
@@ -3679,24 +3679,24 @@ public class cmd extends script.base_script
         float bonus = Float.valueOf(st.nextToken());
         if (bonus <= 0)
         {
-            sendSystemMessageTestingOnly(self, "You must specify an argument that is a positive xp bonus. (i.e.: 0.033)");
+            broadcast(self, "You must specify an argument that is a positive xp bonus. (i.e.: 0.033)");
             return SCRIPT_CONTINUE;
         }
         if (bonus >= 0.3)
         {
-            sendSystemMessageTestingOnly(self, "That bonus is too large. It can't be more than 0.3.");
+            broadcast(self, "That bonus is too large. It can't be more than 0.3.");
             return SCRIPT_CONTINUE;
         }
         obj_id objGroup = getGroupObject(self);
         if (!isIdValid(objGroup))
         {
-            sendSystemMessageTestingOnly(self, "You have to be in a group with other players to set a test group xp bonus.");
+            broadcast(self, "You have to be in a group with other players to set a test group xp bonus.");
             return SCRIPT_CONTINUE;
         }
         obj_id[] members = getGroupMemberIds(objGroup);
         if (members == null || members.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "You have to be in a group with other players to set a test group xp bonus.");
+            broadcast(self, "You have to be in a group with other players to set a test group xp bonus.");
             return SCRIPT_CONTINUE;
         }
         for (obj_id member : members)
@@ -3706,7 +3706,7 @@ public class cmd extends script.base_script
                 utils.setScriptVar(member, "__groupXPBonus", bonus);
             }
         }
-        sendSystemMessageTestingOnly(self, "Test group XP bonus set to " + bonus);
+        broadcast(self, "Test group XP bonus set to " + bonus);
         return SCRIPT_CONTINUE;
     }
 
@@ -3714,8 +3714,8 @@ public class cmd extends script.base_script
     {
         if (params == null || params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "format: /CreateStaticItem <NAME> <COUNT>");
-            sendSystemMessageTestingOnly(self, "<COUNT> will only be applied on static items that auto stack.");
+            broadcast(self, "format: /CreateStaticItem <NAME> <COUNT>");
+            broadcast(self, "<COUNT> will only be applied on static items that auto stack.");
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3732,15 +3732,15 @@ public class cmd extends script.base_script
         }
         if (itemName == null)
         {
-            sendSystemMessageTestingOnly(self, "format: /CreateStaticItem <NAME> <COUNT>");
-            sendSystemMessageTestingOnly(self, "<COUNT> will only be applied on static items that auto stack.");
+            broadcast(self, "format: /CreateStaticItem <NAME> <COUNT>");
+            broadcast(self, "<COUNT> will only be applied on static items that auto stack.");
             return SCRIPT_CONTINUE;
         }
         obj_id staticItemId = obj_id.NULL_ID;
         dictionary staticItemData = static_item.getMasterItemDictionary(itemName);
         if (staticItemData == null || staticItemData.isEmpty())
         {
-            sendSystemMessageTestingOnly(self, "Error creating static item with supplied NAME (" + itemName + ").");
+            broadcast(self, "Error creating static item with supplied NAME (" + itemName + ").");
             CustomerServiceLog("loot", "CSR: (" + getFirstName(self) + ")(" + self + ") tried to create  a static item but the Item Name was bad (" + itemName + ")");
         }
         else
@@ -3771,18 +3771,18 @@ public class cmd extends script.base_script
             {
                 if (canAutoStack && count > 0)
                 {
-                    sendSystemMessageTestingOnly(self, "Static Item " + itemName + " (x" + count + ") created in your inventory.");
+                    broadcast(self, "Static Item " + itemName + " (x" + count + ") created in your inventory.");
                     CustomerServiceLog("loot", "CSR: (" + getFirstName(self) + ")(" + self + ") has created (" + itemName + " [x" + count + "])");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Static Item " + itemName + " created in your inventory.");
+                    broadcast(self, "Static Item " + itemName + " created in your inventory.");
                     CustomerServiceLog("loot", "CSR: (" + getFirstName(self) + ")(" + self + ") has created (" + itemName + ")");
                 }
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Error creating static item with supplied NAME (" + itemName + ").");
+                broadcast(self, "Error creating static item with supplied NAME (" + itemName + ").");
                 CustomerServiceLog("loot", "CSR: (" + getFirstName(self) + ")(" + self + ") tried to create  a static item but the Item Name was bad (" + itemName + ")");
             }
         }
@@ -3791,14 +3791,14 @@ public class cmd extends script.base_script
 
     public int cmdDumpTargetInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "targetis " + params);
+        broadcast(self, "targetis " + params);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "params is " + params);
+            broadcast(self, "params is " + params);
             if ((params != null) && (!params.equals("")))
             {
                 target = utils.stringToObjId(params);
-                sendSystemMessageTestingOnly(self, "target is " + target);
+                broadcast(self, "target is " + target);
             }
         }
         if (!isIdValid(target))
@@ -3806,7 +3806,7 @@ public class cmd extends script.base_script
             target = getLookAtTarget(self);
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Target something before using this command");
+                broadcast(self, "Target something before using this command");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -3863,13 +3863,13 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "/dumpObjectInformation: oid " + oid + " does not exist on this server");
+                broadcast(self, "/dumpObjectInformation: oid " + oid + " does not exist on this server");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /dumpObjectInformation <oid> [filename]");
-            sendSystemMessageTestingOnly(self, "If you're trying to dump a macro, use /dumpp");
+            broadcast(self, "[Syntax] /dumpObjectInformation <oid> [filename]");
+            broadcast(self, "If you're trying to dump a macro, use /dumpp");
         }
         return SCRIPT_CONTINUE;
     }
@@ -3880,7 +3880,7 @@ public class cmd extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Sending you to a medical bay instance");
+        broadcast(self, "Sending you to a medical bay instance");
         sendPlayerToTutorial(self);
         return SCRIPT_CONTINUE;
     }
@@ -3891,7 +3891,7 @@ public class cmd extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Sending you to a millenium falcon instance");
+        broadcast(self, "Sending you to a millenium falcon instance");
         npe.movePlayerFromHangarToFalcon(self);
         return SCRIPT_CONTINUE;
     }
@@ -3907,11 +3907,11 @@ public class cmd extends script.base_script
         if (st.hasMoreTokens())
         {
             instanceId = utils.stringToInt(st.nextToken());
-            sendSystemMessageTestingOnly(self, "Sending you to Tansarii station instance number " + instanceId);
+            broadcast(self, "Sending you to Tansarii station instance number " + instanceId);
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Sending you to Tansarii station instance number 0. Pass in the index to a specific instance if you are looking for a specific one.");
+            broadcast(self, "Sending you to Tansarii station instance number 0. Pass in the index to a specific instance if you are looking for a specific one.");
         }
         utils.setScriptVar(self, npe.SCRIPT_VAR_INSTANCE_OVERRIDE, instanceId);
         npe.movePlayerFromFalconToSharedStation(self);
@@ -3929,11 +3929,11 @@ public class cmd extends script.base_script
         if (st.hasMoreTokens())
         {
             instanceId = utils.stringToInt(st.nextToken());
-            sendSystemMessageTestingOnly(self, "Sending you to station Gamma instance number " + instanceId);
+            broadcast(self, "Sending you to station Gamma instance number " + instanceId);
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Sending you to station Gamma instance number 0. Pass in the index to a specific instance if you are looking for a specific one.");
+            broadcast(self, "Sending you to station Gamma instance number 0. Pass in the index to a specific instance if you are looking for a specific one.");
         }
         utils.setScriptVar(self, npe.SCRIPT_VAR_INSTANCE_OVERRIDE, instanceId);
         npe.movePlayerFromOrdMantellSpaceToOrdMantellDungeon(self);
@@ -4048,12 +4048,12 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Please check the OID and try again");
+                broadcast(self, "Please check the OID and try again");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /gmshowquest <player OID>");
+            broadcast(self, "[Syntax] /gmshowquest <player OID>");
         }
         return SCRIPT_CONTINUE;
     }
@@ -4081,12 +4081,12 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Please check the OID and try again");
+                broadcast(self, "Please check the OID and try again");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /gmclearquest <player OID> <quest/code_string>");
+            broadcast(self, "[Syntax] /gmclearquest <player OID> <quest/code_string>");
         }
         return SCRIPT_CONTINUE;
     }
@@ -4114,12 +4114,12 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Please check the OID and try again");
+                broadcast(self, "Please check the OID and try again");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "[Syntax] /gmregrantquest <player OID> <quest/code_string>");
+            broadcast(self, "[Syntax] /gmregrantquest <player OID> <quest/code_string>");
         }
         return SCRIPT_CONTINUE;
     }
@@ -4152,10 +4152,10 @@ public class cmd extends script.base_script
                     }
                 }
                 removeObjVar(target, "mand.acknowledge");
-                sendSystemMessageTestingOnly(target, "You are no longer flagged for or overriding instance authorization.");
+                broadcast(target, "You are no longer flagged for or overriding instance authorization.");
                 if (target != self)
                 {
-                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have removed flags and instance authorization for " + getPlayerName(target) + " (" + target + "). Use this command again to re-grant instance overrides.");
+                    broadcast(self, "setInstanceAuthorized: You have removed flags and instance authorization for " + getPlayerName(target) + " (" + target + "). Use this command again to re-grant instance overrides.");
                 }
                 return SCRIPT_CONTINUE;
             }
@@ -4170,10 +4170,10 @@ public class cmd extends script.base_script
                     }
                 }
                 setObjVar(target, "mand.acknowledge", 1);
-                sendSystemMessageTestingOnly(target, "You are now flagged for all instances and overriding instance authorization.");
+                broadcast(target, "You are now flagged for all instances and overriding instance authorization.");
                 if (target != self)
                 {
-                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have flagged " + getPlayerName(target) + " (" + target + ") to access all instances and overrode their instance authorization. Use this command again to revert this override.");
+                    broadcast(self, "setInstanceAuthorized: You have flagged " + getPlayerName(target) + " (" + target + ") to access all instances and overrode their instance authorization. Use this command again to revert this override.");
                 }
             }
         }
@@ -4263,7 +4263,7 @@ public class cmd extends script.base_script
             obj_id objectOid = utils.stringToObjId(strObjectOid);
             if (!isIdValid(objectOid))
             {
-                sendSystemMessageTestingOnly(self, "The OID you specified is invalid.");
+                broadcast(self, "The OID you specified is invalid.");
             }
             else
             {
@@ -4275,7 +4275,7 @@ public class cmd extends script.base_script
             obj_id lookAtTarget = dump.findDumpTarget(self);
             if (!isIdValid(lookAtTarget))
             {
-                sendSystemMessageTestingOnly(self, "You need to have something targeted or specify an OID to use this command.");
+                broadcast(self, "You need to have something targeted or specify an OID to use this command.");
             }
             else if (isIdValid(lookAtTarget))
             {
@@ -4283,7 +4283,7 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "you must have a valid target to use this command.");
+                broadcast(self, "you must have a valid target to use this command.");
             }
         }
         return SCRIPT_CONTINUE;
@@ -4356,7 +4356,7 @@ public class cmd extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "The tool failed to find the proper planet object. Notify the tool team.");
+                    broadcast(self, "The tool failed to find the proper planet object. Notify the tool team.");
                 }
             }
             else
@@ -4413,7 +4413,7 @@ public class cmd extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "The tool failed to find the proper planet object. Notify the tool team.");
+                    broadcast(self, "The tool failed to find the proper planet object. Notify the tool team.");
                 }
             }
             else
@@ -4432,14 +4432,14 @@ public class cmd extends script.base_script
     {
         if ((params == null) || (params.equals("")))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         obj_id rtype = pickRandomNonDepeletedResource(params);
         if (!isIdValid(rtype))
         {
-            sendSystemMessageTestingOnly(self, "No id found");
-            sendSystemMessageTestingOnly(self, "Type was " + params);
+            broadcast(self, "No id found");
+            broadcast(self, "Type was " + params);
             return SCRIPT_CONTINUE;
         }
         String crateTemplate = getResourceContainerForType(rtype);
@@ -4451,7 +4451,7 @@ public class cmd extends script.base_script
                 obj_id crate = createObject(crateTemplate, pInv, "");
                 if (addResourceToContainer(crate, rtype, 100000, self))
                 {
-                    sendSystemMessageTestingOnly(self, "Resource of class " + params + " added");
+                    broadcast(self, "Resource of class " + params + " added");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -4463,13 +4463,13 @@ public class cmd extends script.base_script
     {
         if ((params == null) || (params.equals("")))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         obj_id rtype = pickRandomNonDepeletedResource(params);
         if (!isIdValid(rtype))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         String crateTemplate = getResourceContainerForType(rtype);
@@ -4481,7 +4481,7 @@ public class cmd extends script.base_script
                 obj_id crate = createObject(crateTemplate, pInv, "");
                 if (addResourceToContainer(crate, rtype, 100000, self))
                 {
-                    sendSystemMessageTestingOnly(self, "Resource of class " + params + " added");
+                    broadcast(self, "Resource of class " + params + " added");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -4514,11 +4514,11 @@ public class cmd extends script.base_script
             final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
             if(result.contains("BUILD SUCCESSFUL"))
             {
-                sendSystemMessageTestingOnly(self, "compileScripts: ant compile_java BUILD SUCCESSFUL.");
+                broadcast(self, "compileScripts: ant compile_java BUILD SUCCESSFUL.");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "compileScripts: ERROR or BUILD FAILED. Sending output to console.");
+                broadcast(self, "compileScripts: ERROR or BUILD FAILED. Sending output to console.");
                 sendConsoleMessage(self, result);
             }
             return SCRIPT_CONTINUE;
@@ -4528,7 +4528,7 @@ public class cmd extends script.base_script
         {
             if(!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin crs <script>");
+                broadcast(self, "Syntax: /admin crs <script>");
             }
             else
             {
@@ -4536,12 +4536,12 @@ public class cmd extends script.base_script
                 final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
                 if(result.contains("BUILD SUCCESSFUL"))
                 {
-                    sendSystemMessageTestingOnly(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading "+script+"...");
+                    broadcast(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading "+script+"...");
                     sendConsoleCommand("/script reload " + script, self);
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "compileAndReloadScript: ERROR or BUILD FAILED. Sending output to console.");
+                    broadcast(self, "compileAndReloadScript: ERROR or BUILD FAILED. Sending output to console.");
                     sendConsoleMessage(self, result);
                 }
             }
@@ -4553,7 +4553,7 @@ public class cmd extends script.base_script
             obj_id oid;
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin dumpPermsForCell <oid>");
+                broadcast(self, "Syntax: /admin dumpPermsForCell <oid>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4562,7 +4562,7 @@ public class cmd extends script.base_script
             }
             if (!isValidId(oid))
             {
-                sendSystemMessageTestingOnly(self, "The object specified for dumpPermsForCell was not valid.");
+                broadcast(self, "The object specified for dumpPermsForCell was not valid.");
                 return SCRIPT_CONTINUE;
             }
 
@@ -4578,7 +4578,7 @@ public class cmd extends script.base_script
             obj_id oid;
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin getRotation <oid>");
+                broadcast(self, "Syntax: /admin getRotation <oid>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4587,7 +4587,7 @@ public class cmd extends script.base_script
             }
             if (!isValidId(oid))
             {
-                sendSystemMessageTestingOnly(self, "The object specified for getRotation was not valid.");
+                broadcast(self, "The object specified for getRotation was not valid.");
                 return SCRIPT_CONTINUE;
             }
             float[] q = getQuaternion(oid);
@@ -4602,7 +4602,7 @@ public class cmd extends script.base_script
 
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
+                broadcast(self, "Syntax: /admin getUsername <player first name OR object ID>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4619,12 +4619,12 @@ public class cmd extends script.base_script
                 }
                 if (isIdValid(player) && isPlayer(player))
                 {
-                    sendSystemMessageTestingOnly(self, "The username for " + getPlayerName(player) + " (" + player + ") is: " + getPlayerAccountUsername(player));
+                    broadcast(self, "The username for " + getPlayerName(player) + " (" + player + ") is: " + getPlayerAccountUsername(player));
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "getUsername: Error: The name or OID you provided is not valid or is not a player.");
-                    sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
+                    broadcast(self, "getUsername: Error: The name or OID you provided is not valid or is not a player.");
+                    broadcast(self, "Syntax: /admin getUsername <player first name OR object ID>");
                 }
                 return SCRIPT_CONTINUE;
             }
@@ -4639,29 +4639,29 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
+                broadcast(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
                 return SCRIPT_CONTINUE;
             }
             switch (weather)
             {
                 case "clear":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Clear... It will take a minute to appear...");
+                    broadcast(self, "setWeather: Setting Weather to Clear... It will take a minute to appear...");
                     setWeatherData(0, 0.01f, 0.01f);
                     break;
                 case "mild":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Mild... It will take a minute to appear...");
+                    broadcast(self, "setWeather: Setting Weather to Mild... It will take a minute to appear...");
                     setWeatherData(1, 0.02f, 0.02f);
                     break;
                 case "heavy":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Heavy... It will take a minute to appear...");
+                    broadcast(self, "setWeather: Setting Weather to Heavy... It will take a minute to appear...");
                     setWeatherData(2, 0.52f, 0.52f);
                     break;
                 case "severe":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Severe... It will take a minute to appear...");
+                    broadcast(self, "setWeather: Setting Weather to Severe... It will take a minute to appear...");
                     setWeatherData(3, 0.95f, 0.95f);
                     break;
                 default:
-                    sendSystemMessageTestingOnly(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
+                    broadcast(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
                     break;
             }
             return SCRIPT_CONTINUE;
@@ -4671,7 +4671,7 @@ public class cmd extends script.base_script
 
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
+                broadcast(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4680,26 +4680,26 @@ public class cmd extends script.base_script
                 String[] allowedScenes = {"tatooine", "dantooine", "lok", "naboo", "corellia"};
                 if (!Arrays.asList(allowedScenes).contains(scene))
                 {
-                    sendSystemMessageTestingOnly(self, "Error: The scene you specified was not valid. Valid scenes are: " + Arrays.toString(allowedScenes));
+                    broadcast(self, "Error: The scene you specified was not valid. Valid scenes are: " + Arrays.toString(allowedScenes));
                     return SCRIPT_CONTINUE;
                 }
                 else
                 {
                     if (!st.hasMoreTokens())
                     {
-                        sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
+                        broadcast(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
                         return SCRIPT_CONTINUE;
                     }
                     String type = st.nextToken();
                     if (!type.equalsIgnoreCase("pvp") && !type.equalsIgnoreCase("pve"))
                     {
-                        sendSystemMessageTestingOnly(self, "Error: Battle type must be pvp or pve.");
+                        broadcast(self, "Error: Battle type must be pvp or pve.");
                         return SCRIPT_CONTINUE;
                     }
                     obj_id masterObject = getPlanetByName("tatooine");
                     if (!hasObjVar(masterObject, "space_gcw.space_" + scene + ".spawner"))
                     {
-                        sendSystemMessageTestingOnly(self, "Error: Couldn't find the spawner for that scene. Have you started the space scene and visited it before so it can initialize?");
+                        broadcast(self, "Error: Couldn't find the spawner for that scene. Have you started the space scene and visited it before so it can initialize?");
                         return SCRIPT_CONTINUE;
                     }
                     else
@@ -4709,7 +4709,7 @@ public class cmd extends script.base_script
                         d.put("battle_type", type);
                         d.put("controller", masterObject);
                         messageTo(spawner, "startSpaceGCWBattle", d, 0f, false);
-                        sendSystemMessageTestingOnly(self, "Successfully requested start for battle in the space zone of " + scene + " of type " + type);
+                        broadcast(self, "Successfully requested start for battle in the space zone of " + scene + " of type " + type);
                         sendConsoleMessage(self, "\\#00FFFF ***startSpaceGcwBattle REMINDER: The battle will start after the configured prep time and will not begin if the space zone isn't currently active with at least 1 player in it so you may need to re-send the command when the zone is active.\\#.");
                         return SCRIPT_CONTINUE;
                     }
@@ -4720,7 +4720,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin openlink url");
+                broadcast(self, "Syntax: /admin openlink url");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4734,7 +4734,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffect <effect name>");
+                broadcast(self, "Syntax: /admin playeffect <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4747,7 +4747,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffecttarget <effect name>");
+                broadcast(self, "Syntax: /admin playeffecttarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4760,7 +4760,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloc <effect name>");
+                broadcast(self, "Syntax: /admin playeffectloc <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4773,7 +4773,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloctarget <effect name>");
+                broadcast(self, "Syntax: /admin playeffectloctarget <effect name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4786,7 +4786,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectlocatloc <effect name> <x> <y> <z>");
+                broadcast(self, "Syntax: /admin playeffectlocatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4803,7 +4803,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsound <sound name>");
+                broadcast(self, "Syntax: /admin playsound <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4816,7 +4816,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundtarget <sound name>");
+                broadcast(self, "Syntax: /admin playsoundtarget <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4829,7 +4829,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                broadcast(self, "Syntax: /admin playsoundloc <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4842,7 +4842,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                broadcast(self, "Syntax: /admin playsoundloc <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4858,7 +4858,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playcefeveryone <sound name>");
+                broadcast(self, "Syntax: /admin playcefeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4874,7 +4874,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin grantItemArea <item> <count>");
+                broadcast(self, "Syntax: /admin grantItemArea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4886,7 +4886,7 @@ public class cmd extends script.base_script
                     obj_id pInv = utils.getInventoryContainer(player);
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
                     if (isIdValid(pItem)) {
-                        sendSystemMessageTestingOnly(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
+                        broadcast(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
                     }
                 }
             }
@@ -4935,13 +4935,13 @@ public class cmd extends script.base_script
             String table = st.nextToken();
             if (table == null || table.equals(""))
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setloottable <loot table name>");
+                broadcast(self, "Syntax: /admin setloottable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.lootTable", table);
-                sendSystemMessageTestingOnly(self, "Loot table set to " + table);
+                broadcast(self, "Loot table set to " + table);
             }
         }
         else if (command.equalsIgnoreCase("setnumitems"))
@@ -4950,13 +4950,13 @@ public class cmd extends script.base_script
             int level = Integer.parseInt(st.nextToken());
             if (level == 0)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot level>");
+                broadcast(self, "Syntax: /admin setnumitems <loot level>");
                 return SCRIPT_CONTINUE;
             }
             else
             {
                 setObjVar(self, "loot.numItems", level);
-                sendSystemMessageTestingOnly(self, "Number of loot items set to " + level);
+                broadcast(self, "Number of loot items set to " + level);
             }
         }
         else if (command.equalsIgnoreCase("setcount"))
@@ -5031,7 +5031,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloctarget <sound name>");
+                broadcast(self, "Syntax: /admin playsoundloctarget <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -5045,7 +5045,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
+                broadcast(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -5063,7 +5063,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusic <music name>");
+                broadcast(self, "Syntax: /admin playmusic <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -5077,7 +5077,7 @@ public class cmd extends script.base_script
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusictarget <music name>");
+                broadcast(self, "Syntax: /admin playmusictarget <music name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -5121,7 +5121,7 @@ public class cmd extends script.base_script
         {
             if (st.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod index> <mod value>");
+                broadcast(self, "Syntax: /admin modvehicle <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(self))
@@ -5134,12 +5134,12 @@ public class cmd extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self,"You are not riding a vehicle.");
+                broadcast(self,"You are not riding a vehicle.");
             }
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Unknown command: " + command);
+            broadcast(self, "Unknown command: " + command);
             showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
@@ -5216,9 +5216,9 @@ public class cmd extends script.base_script
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         if (st.countTokens() != 2)
         {
-            sendSystemMessageTestingOnly(self, "Did not find the correct parameters needed to create an item.");
-            sendSystemMessageTestingOnly(self, "/generateCraftedItem command must at least have schematic template name and attribute percentage paramaters to function.");
-            sendSystemMessageTestingOnly(self, "Correct usage is /generateCraftedItem <schematic name> <quality-percentage(integer)>");
+            broadcast(self, "Did not find the correct parameters needed to create an item.");
+            broadcast(self, "/generateCraftedItem command must at least have schematic template name and attribute percentage paramaters to function.");
+            broadcast(self, "Correct usage is /generateCraftedItem <schematic name> <quality-percentage(integer)>");
             debugServerConsoleMsg(self, "************ Did not decode any string tokens from params passed into command handler. Unable to proceed with out at least schematic template name and attribute percentage.");
             return SCRIPT_CONTINUE;
         }
@@ -5229,7 +5229,7 @@ public class cmd extends script.base_script
         if (attributePercentage == -1)
         {
             LOG("LOG_CHANNEL", "You must specify a valid item attribute percentage.");
-            sendSystemMessageTestingOnly(self, "You must specify a valid item attribute percentage.");
+            broadcast(self, "You must specify a valid item attribute percentage.");
             return SCRIPT_CONTINUE;
         }
         obj_id creationTarget = null;
@@ -5249,7 +5249,7 @@ public class cmd extends script.base_script
         if (inventory != null)
         {
             obj_id item = makeCraftedItem(schematic, attributePercentage, inventory);
-            sendSystemMessageTestingOnly(self, "Item created and placed into the inventory of " + getName(creationTarget));
+            broadcast(self, "Item created and placed into the inventory of " + getName(creationTarget));
             CustomerServiceLog("generateCraftedItem", "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
             debugServerConsoleMsg(self, "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
         }

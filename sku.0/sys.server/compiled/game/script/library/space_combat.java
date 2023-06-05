@@ -1022,7 +1022,7 @@ public class space_combat extends script.base_script
             {
                 if (isGod(objPilot) && hasObjVar(objPilot, "qa_tcg"))
                 {
-                    sendSystemMessageTestingOnly(objPilot, "QA TCG SPACE NOT DROPPED.  Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
+                    broadcast(objPilot, "QA TCG SPACE NOT DROPPED.  Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
                 }
             }
             utils.setScriptVar(objPilot, scheduled_drop.PLAYER_SCRIPTVAR_DROP_TIME, getGameTime());
@@ -1737,7 +1737,7 @@ public class space_combat extends script.base_script
             {
                 if (isIdValid(objPilot))
                 {
-                    sendSystemMessageTestingOnly(getPilotId(objShip), "Respawn failure. You don't have any space stations defined, or no quest manager for them to register with. Sorry :(");
+                    broadcast(getPilotId(objShip), "Respawn failure. You don't have any space stations defined, or no quest manager for them to register with. Sorry :(");
                 }
                 location locTest = getLocation(objShip);
                 locTest.x = 0;
@@ -4161,7 +4161,7 @@ public class space_combat extends script.base_script
             if (fltDamage > 0)
             {
                 String strSide = getSideName(intSide);
-                sendSystemMessageTestingOnly(objAttackerPilot, "Succesful Shield Hit! Side: " + strSide + " Damage:" + fltDamage + " Remaining Shield Points:" + fltRemainingHitPoints);
+                broadcast(objAttackerPilot, "Succesful Shield Hit! Side: " + strSide + " Damage:" + fltDamage + " Remaining Shield Points:" + fltRemainingHitPoints);
             }
         }
     }
@@ -4188,20 +4188,20 @@ public class space_combat extends script.base_script
                 float fltArmor = getShipComponentArmorHitpointsCurrent(objDefender, intComponent);
                 if (isIdValid(objAttackerPilot))
                 {
-                    sendSystemMessageTestingOnly(objAttackerPilot, "Succesful Component Hit! Component Name:" + space_crafting.getComponentSlotNameString(intComponent) + " Damage:" + fltDamage);
+                    broadcast(objAttackerPilot, "Succesful Component Hit! Component Name:" + space_crafting.getComponentSlotNameString(intComponent) + " Damage:" + fltDamage);
                 }
                 if (fltHp <= 0)
                 {
                     if (isIdValid(objAttackerPilot))
                     {
-                        sendSystemMessageTestingOnly(objAttackerPilot, "Component Destroyed!");
+                        broadcast(objAttackerPilot, "Component Destroyed!");
                     }
                 }
                 else
                 {
                     if (isIdValid(objAttackerPilot))
                     {
-                        sendSystemMessageTestingOnly(objAttackerPilot, "Component Armor Integrity:" + fltArmor + " Component Energy Efficacy:" + fltEnergyEfficiency + "%" + " General Efficiency: " + fltGeneralEfficiency);
+                        broadcast(objAttackerPilot, "Component Armor Integrity:" + fltArmor + " Component Energy Efficacy:" + fltEnergyEfficiency + "%" + " General Efficiency: " + fltGeneralEfficiency);
                     }
                 }
             }
@@ -4225,7 +4225,7 @@ public class space_combat extends script.base_script
             {
                 if (isIdValid(objAttackerPilot))
                 {
-                    sendSystemMessageTestingOnly(objAttackerPilot, "Succesful Chasis Hit! Damage:" + fltDamage + " Reamining Chassis Integrity:" + fltRemainingHitPoints);
+                    broadcast(objAttackerPilot, "Succesful Chasis Hit! Damage:" + fltDamage + " Reamining Chassis Integrity:" + fltRemainingHitPoints);
                 }
             }
         }

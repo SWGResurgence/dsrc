@@ -90,7 +90,7 @@ public class combat_ship_player extends script.base_script
                     {
                         if (isGod(self))
                         {
-                            sendSystemMessageTestingOnly(self, "** Passing certification test due to god mode. **");
+                            broadcast(self, "** Passing certification test due to god mode. **");
                         }
                     }
                     else 
@@ -104,11 +104,11 @@ public class combat_ship_player extends script.base_script
                 {
                     if ((result) && (isGod(self)))
                     {
-                        sendSystemMessageTestingOnly(self, "Now piloting ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
+                        broadcast(self, "Now piloting ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "pilotShip failed for ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
+                        broadcast(self, "pilotShip failed for ship [" + ship + "], pilot slot object [" + pilotSlotObject + "]");
                     }
                 }
             }
@@ -282,12 +282,12 @@ public class combat_ship_player extends script.base_script
             if (utils.hasScriptVar(self, "cmd.commandTimeStamp"))
             {
                 utils.removeScriptVar(self, "cmd.commandTimeStamp");
-                sendSystemMessageTestingOnly(self, "Yoinking the cmd.commandTimeStamp SctiptVar off of the pilot. ");
+                broadcast(self, "Yoinking the cmd.commandTimeStamp SctiptVar off of the pilot. ");
             }
             if (utils.hasLocalVar(self, "cmd.iffScramble"))
             {
                 utils.removeLocalVar(self, "cmd.iffScramble");
-                sendSystemMessageTestingOnly(self, "Yoinking the cmd.iffScramble LocalVar off of the pilot. ");
+                broadcast(self, "Yoinking the cmd.iffScramble LocalVar off of the pilot. ");
             }
             obj_id ship = space_transition.getContainingShip(self);
             if (isIdValid(ship))
@@ -295,7 +295,7 @@ public class combat_ship_player extends script.base_script
                 if (utils.hasLocalVar(ship, "cmd.pirate.goRaid"))
                 {
                     utils.removeLocalVar(ship, "cmd.pirate.goRaid");
-                    sendSystemMessageTestingOnly(self, "Yoinking the cmd.pirate.goRaid LocalVar off of the pilot. ");
+                    broadcast(self, "Yoinking the cmd.pirate.goRaid LocalVar off of the pilot. ");
                 }
             }
         }
@@ -331,11 +331,11 @@ public class combat_ship_player extends script.base_script
         }
         if (command.equalsIgnoreCase("whoAmI"))
         {
-            sendSystemMessageTestingOnly(self, "You are " + self);
+            broadcast(self, "You are " + self);
         }
         if (command.equalsIgnoreCase("authenticateShip"))
         {
-            sendSystemMessageTestingOnly(self, "Entered AUTHENTICATESHIP portion of onSpeaking");
+            broadcast(self, "Entered AUTHENTICATESHIP portion of onSpeaking");
             obj_id[] shipControlDevices = space_transition.findShipControlDevicesForPlayer(self);
             if (shipControlDevices != null && shipControlDevices.length > 0)
             {
@@ -343,18 +343,18 @@ public class combat_ship_player extends script.base_script
                     obj_id ship = space_transition.getShipFromShipControlDevice(shipControlDevice);
                     if (isIdValid(ship)) {
                         if (!hasCertificationsForItem(self, ship)) {
-                            sendSystemMessageTestingOnly(self, "Warning: You do NOT have the appropriate certification for ship " + ship + "! BAH.");
+                            broadcast(self, "Warning: You do NOT have the appropriate certification for ship " + ship + "! BAH.");
                         } else {
-                            sendSystemMessageTestingOnly(self, "Warning: You DO have the appropriate certification for ship " + ship + ". YEAH!");
+                            broadcast(self, "Warning: You DO have the appropriate certification for ship " + ship + ". YEAH!");
                         }
                     } else {
-                        sendSystemMessageTestingOnly(self, "Error: Ship control device " + shipControlDevice + " has no ship, so cannot check certifications.");
+                        broadcast(self, "Error: Ship control device " + shipControlDevice + " has no ship, so cannot check certifications.");
                     }
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "You do not have any ships, so cannot check certifications.");
+                broadcast(self, "You do not have any ships, so cannot check certifications.");
             }
         }
         if (command.equalsIgnoreCase("repairReset"))
@@ -363,11 +363,11 @@ public class combat_ship_player extends script.base_script
             {
                 utils.removeLocalVar(self, "cmd.repair.otw");
                 utils.removeLocalVar(self, "cmd.repair.shipId");
-                sendSystemMessageTestingOnly(self, "Yoinking the cmd.repair AND cmd.repair.shipId LocalVar off of the pilot. ");
+                broadcast(self, "Yoinking the cmd.repair AND cmd.repair.shipId LocalVar off of the pilot. ");
                 if (utils.hasScriptVar(self, "cmd.commandTimeStamp"))
                 {
                     utils.removeScriptVar(self, "cmd.commandTimeStamp");
-                    sendSystemMessageTestingOnly(self, "Yoinking the cmd.commandTimeStamp SctiptVar off of the pilot. ");
+                    broadcast(self, "Yoinking the cmd.commandTimeStamp SctiptVar off of the pilot. ");
                 }
             }
         }
@@ -375,21 +375,21 @@ public class combat_ship_player extends script.base_script
         {
             obj_id objShip = space_transition.getContainingShip(self);
             utils.removeLocalVar(objShip, "intDroidTimestamp");
-            sendSystemMessageTestingOnly(self, "Droid timer reset.");
+            broadcast(self, "Droid timer reset.");
             return SCRIPT_CONTINUE;
         }
         if (command.equalsIgnoreCase("disableDroid"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
             space_utils.setComponentDisabled(objShip, ship_chassis_slot_type.SCST_droid_interface, true);
-            sendSystemMessageTestingOnly(self, "Droid inteface disabled: " + isShipComponentDisabled(objShip, ship_chassis_slot_type.SCST_droid_interface));
+            broadcast(self, "Droid inteface disabled: " + isShipComponentDisabled(objShip, ship_chassis_slot_type.SCST_droid_interface));
             return SCRIPT_CONTINUE;
         }
         if (command.equalsIgnoreCase("enableDroid"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
             space_utils.setComponentDisabled(objShip, ship_chassis_slot_type.SCST_droid_interface, false);
-            sendSystemMessageTestingOnly(self, "Droid inteface enabled.");
+            broadcast(self, "Droid inteface enabled.");
             return SCRIPT_CONTINUE;
         }
         if (command.equalsIgnoreCase("scramMe"))
@@ -402,8 +402,8 @@ public class combat_ship_player extends script.base_script
             obj_id target = getLookAtTarget(self);
             float recipientFrontShieldCurrent = getShipShieldHitpointsFrontCurrent(target);
             float recipientBackShieldCurrent = getShipShieldHitpointsBackCurrent(target);
-            sendSystemMessageTestingOnly(self, "CURRENT front shield value on target was: " + recipientFrontShieldCurrent);
-            sendSystemMessageTestingOnly(self, "CURRENT rear shield value on target was: " + recipientBackShieldCurrent);
+            broadcast(self, "CURRENT front shield value on target was: " + recipientFrontShieldCurrent);
+            broadcast(self, "CURRENT rear shield value on target was: " + recipientBackShieldCurrent);
         }
         if (command.equalsIgnoreCase("drainTargetShield"))
         {
@@ -415,8 +415,8 @@ public class combat_ship_player extends script.base_script
             float recipientFrontShieldCurrentNew = getShipShieldHitpointsFrontCurrent(target);
             float recipientBackShieldCurrentNew = getShipShieldHitpointsBackCurrent(target);
             float capacitorNew = getShipCapacitorEnergyCurrent(target);
-            sendSystemMessageTestingOnly(self, "Starting front shield value on target was: " + recipientFrontShieldCurrent + " and ending value was: " + recipientFrontShieldCurrentNew);
-            sendSystemMessageTestingOnly(self, "Starting rear shield value on target was: " + recipientBackShieldCurrent + " and ending value was: " + recipientBackShieldCurrentNew);
+            broadcast(self, "Starting front shield value on target was: " + recipientFrontShieldCurrent + " and ending value was: " + recipientFrontShieldCurrentNew);
+            broadcast(self, "Starting rear shield value on target was: " + recipientBackShieldCurrent + " and ending value was: " + recipientBackShieldCurrentNew);
         }
         if (command.equalsIgnoreCase("spawnsquad"))
         {
@@ -434,7 +434,7 @@ public class combat_ship_player extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "NO squad ID LOCALVAR ON YOUR PERSON ");
+                broadcast(self, "NO squad ID LOCALVAR ON YOUR PERSON ");
                 return SCRIPT_CONTINUE;
             }
             space_combat.strikePackageEvac(self, bomberSquadId, -1);
@@ -443,7 +443,7 @@ public class combat_ship_player extends script.base_script
         {
             obj_id objShip = space_transition.getContainingShip(self);
             float fltCurrentHitPoints = getShipComponentHitpointsCurrent(objShip, ship_chassis_slot_type.SCST_engine);
-            sendSystemMessageTestingOnly(self, "changing hp from " + fltCurrentHitPoints + " to " + fltCurrentHitPoints / 2);
+            broadcast(self, "changing hp from " + fltCurrentHitPoints + " to " + fltCurrentHitPoints / 2);
             fltCurrentHitPoints = fltCurrentHitPoints / 2;
             setShipComponentHitpointsCurrent(objShip, ship_chassis_slot_type.SCST_engine, fltCurrentHitPoints);
             space_combat.recalculateEfficiency(ship_chassis_slot_type.SCST_engine, objShip);
@@ -459,7 +459,7 @@ public class combat_ship_player extends script.base_script
             playClientEffectObj(self, "clienteffect/space_scram_spark.cef", ship, "wing1");
             playClientEffectObj(self, "clienteffect/space_scram_spark.cef", ship, "torpedo1");
             playClientEffectObj(self, "clienteffect/space_scram_spark.cef", ship, "torpedo2");
-            sendSystemMessageTestingOnly(self, "spark ON!!!");
+            broadcast(self, "spark ON!!!");
         }
         if (command.equalsIgnoreCase("toggleInvincibility") || command.equalsIgnoreCase("invulnerable"))
         {
@@ -473,12 +473,12 @@ public class combat_ship_player extends script.base_script
                 if (hasObjVar(objShip, "intInvincible"))
                 {
                     removeObjVar(objShip, "intInvincible");
-                    sendSystemMessageTestingOnly(self, "You're ship is no longer invincible");
+                    broadcast(self, "You're ship is no longer invincible");
                 }
                 else 
                 {
                     setObjVar(objShip, "intInvincible", 1);
-                    sendSystemMessageTestingOnly(self, "You're ship is now invincible");
+                    broadcast(self, "You're ship is now invincible");
                 }
             }
         }
@@ -509,12 +509,12 @@ public class combat_ship_player extends script.base_script
             if (hasObjVar(self, "intCombatDebug"))
             {
                 removeObjVar(self, "intCombatDebug");
-                sendSystemMessageTestingOnly(self, "Debug Spam Disabled!");
+                broadcast(self, "Debug Spam Disabled!");
             }
             else 
             {
                 setObjVar(self, "intCombatDebug", 1);
-                sendSystemMessageTestingOnly(self, "Debug Spam Enabled!");
+                broadcast(self, "Debug Spam Enabled!");
             }
             return SCRIPT_CONTINUE;
         }
@@ -639,7 +639,7 @@ public class combat_ship_player extends script.base_script
         {
             if (isGod(self))
             {
-                sendSystemMessageTestingOnly(self, "Allowing hyperspace to overpopulated zone because you are in god mode.");
+                broadcast(self, "Allowing hyperspace to overpopulated zone because you are in god mode.");
             }
             else 
             {
@@ -804,14 +804,14 @@ public class combat_ship_player extends script.base_script
         obj_id objLookAtTarget = getLookAtTarget(self);
         if (!isIdValid(objLookAtTarget))
         {
-            sendSystemMessageTestingOnly(self, "You must target a ship to destroy it");
+            broadcast(self, "You must target a ship to destroy it");
             return SCRIPT_CONTINUE;
         }
         if (objLookAtTarget == self)
         {
             if (!params.equals("yes"))
             {
-                sendSystemMessageTestingOnly(self, "DO NOT DESTROY YOURSELF, params is " + params);
+                broadcast(self, "DO NOT DESTROY YOURSELF, params is " + params);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -821,23 +821,23 @@ public class combat_ship_player extends script.base_script
         {
             if (!params.equals("yes"))
             {
-                sendSystemMessageTestingOnly(self, "DO NOT DESTROY YOURSELF, params is " + params);
+                broadcast(self, "DO NOT DESTROY YOURSELF, params is " + params);
                 return SCRIPT_CONTINUE;
             }
         }
         if (params.equals("yes"))
         {
-            sendSystemMessageTestingOnly(self, "killing " + objShip + " on command from " + self);
+            broadcast(self, "killing " + objShip + " on command from " + self);
             dctParams.put("objShip", objShip);
             messageTo(objShip, "megaDamage", dctParams, 0, false);
             return SCRIPT_CONTINUE;
         }
         if (!isIdValid(objShip))
         {
-            sendSystemMessageTestingOnly(self, "This is a ship only command. Get a ship");
+            broadcast(self, "This is a ship only command. Get a ship");
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "killing " + objLookAtTarget + " on command from " + self);
+        broadcast(self, "killing " + objLookAtTarget + " on command from " + self);
         dctParams.put("objShip", objShip);
         messageTo(objLookAtTarget, "megaDamage", dctParams, 0, false);
         return SCRIPT_CONTINUE;
@@ -847,26 +847,26 @@ public class combat_ship_player extends script.base_script
         obj_id objLookAtTarget = getLookAtTarget(self);
         if (!isIdValid(objLookAtTarget))
         {
-            sendSystemMessageTestingOnly(self, "You must target a ship to disable it");
+            broadcast(self, "You must target a ship to disable it");
             return SCRIPT_CONTINUE;
         }
         if (objLookAtTarget == self)
         {
-            sendSystemMessageTestingOnly(self, "DO NOT DISABLE YOURSELF");
+            broadcast(self, "DO NOT DISABLE YOURSELF");
             return SCRIPT_CONTINUE;
         }
         dictionary dctParams = new dictionary();
         obj_id objShip = space_transition.getContainingShip(self);
         if (objLookAtTarget == objShip)
         {
-            sendSystemMessageTestingOnly(self, "DO NOT DISABLE YOURSELF");
+            broadcast(self, "DO NOT DISABLE YOURSELF");
         }
         if (!isIdValid(objShip))
         {
-            sendSystemMessageTestingOnly(self, "This is a ship only command. Get a ship");
+            broadcast(self, "This is a ship only command. Get a ship");
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Disabling " + objLookAtTarget + " on command from " + self);
+        broadcast(self, "Disabling " + objLookAtTarget + " on command from " + self);
         dctParams.put("objShip", objShip);
         messageTo(objLookAtTarget, "disableSelf", dctParams, 0, false);
         return SCRIPT_CONTINUE;
@@ -1747,7 +1747,7 @@ public class combat_ship_player extends script.base_script
         }
         else if (successLevel == 5)
         {
-            sendSystemMessageTestingOnly(self, "Failure in system canibalization sub-routines! Aborting Process!");
+            broadcast(self, "Failure in system canibalization sub-routines! Aborting Process!");
         }
         else 
         {
@@ -1792,7 +1792,7 @@ public class combat_ship_player extends script.base_script
         }
         else if (successLevel == 5)
         {
-            sendSystemMessageTestingOnly(self, "Failure in system canibalization sub-routines! Aborting Process!");
+            broadcast(self, "Failure in system canibalization sub-routines! Aborting Process!");
         }
         else 
         {
@@ -2250,7 +2250,7 @@ public class combat_ship_player extends script.base_script
         playClientEffectObj(self, "clienteffect/space_command/sys_manipulation.cef", ship, "");
         if (!space_pilot_command.executeJstart(self, ship, target, cmdlevel))
         {
-            sendSystemMessageTestingOnly(self, "This script has created a FATAL ERROR!");
+            broadcast(self, "This script has created a FATAL ERROR!");
         }
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_ONE_DELAY);
         return SCRIPT_CONTINUE;
@@ -2284,7 +2284,7 @@ public class combat_ship_player extends script.base_script
         playClientEffectObj(self, "clienteffect/space_command/sys_manipulation.cef", ship, "");
         if (!space_pilot_command.executeJstart(self, ship, target, cmdlevel))
         {
-            sendSystemMessageTestingOnly(self, "This script has created a FATAL ERROR!");
+            broadcast(self, "This script has created a FATAL ERROR!");
         }
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_TWO_DELAY);
         return SCRIPT_CONTINUE;
@@ -2318,7 +2318,7 @@ public class combat_ship_player extends script.base_script
         playClientEffectObj(self, "clienteffect/space_command/sys_manipulation.cef", ship, "");
         if (!space_pilot_command.executeJstart(self, ship, target, cmdlevel))
         {
-            sendSystemMessageTestingOnly(self, "This script has created a FATAL ERROR!");
+            broadcast(self, "This script has created a FATAL ERROR!");
         }
         space_combat.initializeCommandTimer(self, CMD_JUMP_START_THREE_DELAY);
         return SCRIPT_CONTINUE;
@@ -2939,7 +2939,7 @@ public class combat_ship_player extends script.base_script
                     strOutputToFile.append(strTest).append("\r\n");
                 }
                 debugConsoleMsg(self, strTest);
-                sendSystemMessageTestingOnly(self, strTest);
+                broadcast(self, strTest);
             }
         }
         objObjects = getAllObjectsWithScript(locTest, 320000, "space.combat.combat_ship_capital");
@@ -2953,16 +2953,16 @@ public class combat_ship_player extends script.base_script
                     strOutputToFile.append(strTest).append("\r\n");
                 }
                 debugConsoleMsg(self, strTest);
-                sendSystemMessageTestingOnly(self, strTest);
+                broadcast(self, strTest);
             }
         }
         debugConsoleMsg(self, strOutputToFile.toString());
         if (!strFileName.equals(""))
         {
             saveTextOnClient(self, strFileName, strOutputToFile.toString());
-            sendSystemMessageTestingOnly(self, "Saved information to " + strFileName);
+            broadcast(self, "Saved information to " + strFileName);
         }
-        sendSystemMessageTestingOnly(self, "Dumped");
+        broadcast(self, "Dumped");
         return SCRIPT_CONTINUE;
     }
     public int OnImmediateLogout(obj_id self) throws InterruptedException

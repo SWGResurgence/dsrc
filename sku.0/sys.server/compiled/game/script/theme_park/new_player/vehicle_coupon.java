@@ -83,7 +83,7 @@ public class vehicle_coupon extends script.base_script
         obj_id petControlDevice = createObject(pcdTemplate, datapad, "");
         if (!isIdValid(petControlDevice))
         {
-            sendSystemMessageTestingOnly(player, "Failed to create pet control device for vehicle");
+            broadcast(player, "Failed to create pet control device for vehicle");
             return null;
         }
         else 

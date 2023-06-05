@@ -39,7 +39,7 @@ public class debugger extends script.base_script
                 {
                     if (setInsured(target, true))
                     {
-                        sendSystemMessageTestingOnly(self, target + " insured: " + isInsured(target));
+                        broadcast(self, target + " insured: " + isInsured(target));
                     }
                 }
                 foundTrigger = true;
@@ -54,7 +54,7 @@ public class debugger extends script.base_script
                 {
                     if (setInsured(target, false))
                     {
-                        sendSystemMessageTestingOnly(self, target + " uninsured: " + !isInsured(target));
+                        broadcast(self, target + " uninsured: " + !isInsured(target));
                     }
                 }
                 foundTrigger = true;
@@ -69,7 +69,7 @@ public class debugger extends script.base_script
                 {
                     if (setAutoInsured(target))
                     {
-                        sendSystemMessageTestingOnly(self, target + " autoinsured: " + isAutoInsured(target));
+                        broadcast(self, target + " autoinsured: " + isAutoInsured(target));
                     }
                 }
                 foundTrigger = true;
@@ -84,7 +84,7 @@ public class debugger extends script.base_script
                 {
                     if (setUninsurable(target, true))
                     {
-                        sendSystemMessageTestingOnly(self, target + " uninsurable: " + isUninsurable(target));
+                        broadcast(self, target + " uninsurable: " + isUninsurable(target));
                     }
                 }
                 foundTrigger = true;
@@ -99,7 +99,7 @@ public class debugger extends script.base_script
                 {
                     if (setUninsurable(target, false))
                     {
-                        sendSystemMessageTestingOnly(self, target + " is insurable: " + !isUninsurable(target));
+                        broadcast(self, target + " is insurable: " + !isUninsurable(target));
                     }
                 }
                 foundTrigger = true;
@@ -115,7 +115,7 @@ public class debugger extends script.base_script
                     target = tmp;
                 }
             }
-            sendSystemMessageTestingOnly(self, target + " name: " + getName(target));
+            broadcast(self, target + " name: " + getName(target));
             foundTrigger = true;
         }
         else if (arg.equals("setFactionStanding"))
@@ -126,34 +126,34 @@ public class debugger extends script.base_script
                 int value = utils.stringToInt(st.nextToken());
                 if (value < 1)
                 {
-                    sendSystemMessageTestingOnly(self, "[DEBUGGER] syntax: setFactionStanding <faction> <value>");
+                    broadcast(self, "[DEBUGGER] syntax: setFactionStanding <faction> <value>");
                 }
                 else 
                 {
                     factions.setFactionStanding(target, factionName, value);
-                    sendSystemMessageTestingOnly(self, "[DEBUGGER] attempting to setfaction: faction = " + factionName + " val = " + value);
+                    broadcast(self, "[DEBUGGER] attempting to setfaction: faction = " + factionName + " val = " + value);
                 }
             }
             foundTrigger = true;
         }
         else if (arg.equals("getGameTime"))
         {
-            sendSystemMessageTestingOnly(self, "Current game time = " + getGameTime());
+            broadcast(self, "Current game time = " + getGameTime());
             foundTrigger = true;
         }
         else if (arg.equals("pvpCanAttack"))
         {
-            sendSystemMessageTestingOnly(self, "pvpCanAttack(self, " + target + ") = " + pvpCanAttack(self, target));
+            broadcast(self, "pvpCanAttack(self, " + target + ") = " + pvpCanAttack(self, target));
             foundTrigger = true;
         }
         else if (arg.equals("pvpCanBeAttacked"))
         {
-            sendSystemMessageTestingOnly(self, "pvpCanBeAttacked(" + target + ", self) = " + pvpCanAttack(target, self));
+            broadcast(self, "pvpCanBeAttacked(" + target + ", self) = " + pvpCanAttack(target, self));
             foundTrigger = true;
         }
         else if (arg.equals("clearLots"))
         {
-            sendSystemMessageTestingOnly(self, "Clearing your lots...");
+            broadcast(self, "Clearing your lots...");
             int current_lots = getAccountNumLots(getPlayerObject(self));
             adjustLotCount(getPlayerObject(self), -current_lots);
             foundTrigger = true;
@@ -161,7 +161,7 @@ public class debugger extends script.base_script
         else if (arg.equals("getLots"))
         {
             int current_lots = getAccountNumLots(getPlayerObject(self));
-            sendSystemMessageTestingOnly(self, "current account lots = " + current_lots);
+            broadcast(self, "current account lots = " + current_lots);
             foundTrigger = true;
         }
         else if (arg.equals("getWeaponType"))
@@ -172,7 +172,7 @@ public class debugger extends script.base_script
             }
             if (isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "target weapon type = " + getWeaponType(target));
+                broadcast(self, "target weapon type = " + getWeaponType(target));
             }
             foundTrigger = true;
         }
@@ -204,7 +204,7 @@ public class debugger extends script.base_script
                         setObjVar(show, firework.VAR_SHOW_FX, fxs);
                         setObjVar(show, firework.VAR_SHOW_DELAY, delays);
                         setCount(show, firework.SHOW_EVENT_MAX);
-                        sendSystemMessageTestingOnly(self, "Fireworks show created in your inventory!");
+                        broadcast(self, "Fireworks show created in your inventory!");
                     }
                 }
                 else 
@@ -231,7 +231,7 @@ public class debugger extends script.base_script
             }
             if (entries == null || entries.size() == 0)
             {
-                sendSystemMessageTestingOnly(self, "No palcolor data for target: " + target);
+                broadcast(self, "No palcolor data for target: " + target);
             }
             else 
             {
@@ -241,21 +241,21 @@ public class debugger extends script.base_script
         }
         else if (arg.equals("getOwner"))
         {
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") owner = " + getOwner(target));
+            broadcast(self, "Target(" + target + ") owner = " + getOwner(target));
             foundTrigger = true;
         }
         else if (arg.equals("setOwner"))
         {
-            sendSystemMessageTestingOnly(self, "Attempting to set owner... of Target(" + target + ") to owner = " + self);
+            broadcast(self, "Attempting to set owner... of Target(" + target + ") to owner = " + self);
             if (setOwner(target, self))
             {
-                sendSystemMessageTestingOnly(self, " Set Owner succeeded");
+                broadcast(self, " Set Owner succeeded");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, " Set Owner failed");
+                broadcast(self, " Set Owner failed");
             }
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") owner = " + getOwner(target));
+            broadcast(self, "Target(" + target + ") owner = " + getOwner(target));
             foundTrigger = true;
         }
         else if (arg.equals("getContainerType"))
@@ -268,7 +268,7 @@ public class debugger extends script.base_script
                     target = tmpTarget;
                 }
             }
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") container type = " + getContainerType(target));
+            broadcast(self, "Target(" + target + ") container type = " + getContainerType(target));
             foundTrigger = true;
         }
         else if (arg.equals("playAnim"))
@@ -276,14 +276,14 @@ public class debugger extends script.base_script
             if (st.hasMoreTokens())
             {
                 String anim = st.nextToken();
-                sendSystemMessageTestingOnly(self, "Target(" + target + ") attempting to play anim: " + anim);
+                broadcast(self, "Target(" + target + ") attempting to play anim: " + anim);
                 ai_lib.doAction(target, anim);
             }
             foundTrigger = true;
         }
         else if (arg.equals("spawnSignedStructures"))
         {
-            sendSystemMessageTestingOnly(self, "attempting to spawn all signed structures...");
+            broadcast(self, "attempting to spawn all signed structures...");
             String[] tpf = dataTableGetStringColumnNoDefaults("datatables/structure/player_structure_sign.iff", "STRUCTURE_APPEARANCE");
             if (tpf != null && tpf.length > 0)
             {
@@ -297,19 +297,19 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "unable to locate structure templates");
+                broadcast(self, "unable to locate structure templates");
             }
             foundTrigger = true;
         }
         else if (arg.equals("setMagicCondition"))
         {
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") attempting to set condition magic");
+            broadcast(self, "Target(" + target + ") attempting to set condition magic");
             setCondition(target, CONDITION_MAGIC_ITEM);
             foundTrigger = true;
         }
         else if (arg.equals("clearMagicCondition"))
         {
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") attempting to set condition magic");
+            broadcast(self, "Target(" + target + ") attempting to set condition magic");
             clearCondition(target, CONDITION_MAGIC_ITEM);
             foundTrigger = true;
         }
@@ -321,7 +321,7 @@ public class debugger extends script.base_script
                 if (isIdValid(target))
                 {
                     int cnt = getCount(target);
-                    sendSystemMessageTestingOnly(self, "Target(" + target + ") get count = " + cnt);
+                    broadcast(self, "Target(" + target + ") get count = " + cnt);
                 }
             }
             foundTrigger = true;
@@ -335,7 +335,7 @@ public class debugger extends script.base_script
                 if (isIdValid(target) && cnt > 0)
                 {
                     setCount(target, cnt);
-                    sendSystemMessageTestingOnly(self, "Target(" + target + ") set count = " + cnt);
+                    broadcast(self, "Target(" + target + ") set count = " + cnt);
                 }
             }
             foundTrigger = true;
@@ -349,7 +349,7 @@ public class debugger extends script.base_script
                 if (isIdValid(target) && cnt > 0)
                 {
                     incrementCount(target, cnt);
-                    sendSystemMessageTestingOnly(self, "Target(" + target + ") increment count = " + cnt + " total cnt = " + getCount(target));
+                    broadcast(self, "Target(" + target + ") increment count = " + cnt + " total cnt = " + getCount(target));
                 }
             }
             foundTrigger = true;
@@ -359,24 +359,24 @@ public class debugger extends script.base_script
             obj_id held = getObjectInSlot(self, "hold_r");
             if (!isIdValid(held))
             {
-                sendSystemMessageTestingOnly(self, "Invalid obj_id reference in slot HELD_R");
+                broadcast(self, "Invalid obj_id reference in slot HELD_R");
             }
             else 
             {
                 if (!minigame.isFishingPole(held))
                 {
-                    sendSystemMessageTestingOnly(self, "HELD_R object is not a fishing pole");
+                    broadcast(self, "HELD_R object is not a fishing pole");
                 }
                 else 
                 {
                     obj_id bait = createObject("object/tangible/fishing/bait/bait_grub.iff", held, "");
                     if (isIdValid(bait))
                     {
-                        sendSystemMessageTestingOnly(self, "Bait(" + bait + ") created in HELD_R(" + held + ")");
+                        broadcast(self, "Bait(" + bait + ") created in HELD_R(" + held + ")");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "Unable to create bait(" + bait + ") in HELD_R(" + held + ")");
+                        broadcast(self, "Unable to create bait(" + bait + ") in HELD_R(" + held + ")");
                     }
                 }
             }
@@ -386,7 +386,7 @@ public class debugger extends script.base_script
         {
             if (minigame.isFishing(self))
             {
-                sendSystemMessageTestingOnly(self, "Setting caught fish scriptvars...");
+                broadcast(self, "Setting caught fish scriptvars...");
                 utils.setScriptVar(self, minigame.SCRIPTVAR_STATUS, minigame.FS_CAUGHT);
             }
             foundTrigger = true;
@@ -395,7 +395,7 @@ public class debugger extends script.base_script
         {
             if (minigame.isFishing(self))
             {
-                sendSystemMessageTestingOnly(self, "Setting caught fishing loot scriptvars...");
+                broadcast(self, "Setting caught fishing loot scriptvars...");
                 utils.setScriptVar(self, minigame.SCRIPTVAR_STATUS, minigame.FS_LOOT);
             }
             foundTrigger = true;
@@ -405,11 +405,11 @@ public class debugger extends script.base_script
             obj_id fish = minigame.spawnFishingFish(self, getLocation(self));
             if (isIdValid(fish))
             {
-                sendSystemMessageTestingOnly(self, "creating fish: obj_id = " + fish);
+                broadcast(self, "creating fish: obj_id = " + fish);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "unable to make fish!");
+                broadcast(self, "unable to make fish!");
             }
             foundTrigger = true;
         }
@@ -419,11 +419,11 @@ public class debugger extends script.base_script
             obj_id fw = createObject("object/tangible/firework/default.iff", inv, "");
             if (isIdValid(fw))
             {
-                sendSystemMessageTestingOnly(self, "creating firework: obj_id = " + fw);
+                broadcast(self, "creating firework: obj_id = " + fw);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "unable to make firework!");
+                broadcast(self, "unable to make firework!");
             }
             foundTrigger = true;
         }
@@ -435,14 +435,14 @@ public class debugger extends script.base_script
                 location there = getLocation(target);
                 float range = getDistance(here, there);
                 float heading = utils.getHeadingToLocation(here, there);
-                sendSystemMessageTestingOnly(self, "range = " + range + " heading = " + heading);
-                sendSystemMessageTestingOnly(self, "If it was successful, an explosion should have lit under your feet!");
+                broadcast(self, "range = " + range + " heading = " + heading);
+                broadcast(self, "If it was successful, an explosion should have lit under your feet!");
                 location testLoc = utils.rotatePointXZ(there, range, heading);
                 createObject("object/static/particle/particle_sm_explosion.iff", testLoc);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Self is an invalid target for this test trigger");
+                broadcast(self, "Self is an invalid target for this test trigger");
             }
             foundTrigger = true;
         }
@@ -450,7 +450,7 @@ public class debugger extends script.base_script
         {
             if (isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "Attempting to open target container...");
+                broadcast(self, "Attempting to open target container...");
                 utils.requestContainerOpen(self, target);
             }
             foundTrigger = true;
@@ -460,7 +460,7 @@ public class debugger extends script.base_script
             obj_id inv = utils.getInventoryContainer(target);
             if (isIdValid(inv))
             {
-                sendSystemMessageTestingOnly(self, "Attempting to open target's inventory...");
+                broadcast(self, "Attempting to open target's inventory...");
                 utils.requestContainerOpen(self, inv);
             }
             foundTrigger = true;
@@ -471,7 +471,7 @@ public class debugger extends script.base_script
             obj_id grenade = createObject("object/weapon/ranged/grenade/grenade_fragmentation_light.iff", inv, "");
             if (isIdValid(grenade))
             {
-                sendSystemMessageTestingOnly(self, "Grenade(" + grenade + ") created in your inventory");
+                broadcast(self, "Grenade(" + grenade + ") created in your inventory");
             }
             foundTrigger = true;
         }
@@ -481,7 +481,7 @@ public class debugger extends script.base_script
             obj_id grenade = createObject("object/weapon/ranged/grenade/grenade_fragmentation_light.iff", inv, "");
             if (isIdValid(grenade))
             {
-                sendSystemMessageTestingOnly(self, "Grenade(" + grenade + ") created AS A MINE in target inventory");
+                broadcast(self, "Grenade(" + grenade + ") created AS A MINE in target inventory");
                 setObjVar(grenade, "isMine", 1);
             }
             foundTrigger = true;
@@ -491,7 +491,7 @@ public class debugger extends script.base_script
             obj_id grenade = createObject("object/weapon/mine/wp_mine_drx55.iff", target, "");
             if (isIdValid(grenade))
             {
-                sendSystemMessageTestingOnly(self, "DRX55 MINE(" + grenade + ") created AS A MINE in minefield");
+                broadcast(self, "DRX55 MINE(" + grenade + ") created AS A MINE in minefield");
                 setObjVar(grenade, "isMine", 1);
             }
             foundTrigger = true;
@@ -503,11 +503,11 @@ public class debugger extends script.base_script
             if (isIdValid(deed))
             {
                 setObjVar(deed, "player_structure.deed.buildtime", 15);
-                sendSystemMessageTestingOnly(self, "deed set in inventory...");
+                broadcast(self, "deed set in inventory...");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "unable to create deed...");
+                broadcast(self, "unable to create deed...");
             }
             foundTrigger = true;
         }
@@ -518,15 +518,15 @@ public class debugger extends script.base_script
                 target = utils.stringToObjId(st.nextToken());
                 if (isIdValid(target))
                 {
-                    sendSystemMessageTestingOnly(self, "attempting to createStructureSign on " + target);
+                    broadcast(self, "attempting to createStructureSign on " + target);
                     obj_id sign = player_structure.createStructureSign(target);
                     if (isIdValid(sign))
                     {
-                        sendSystemMessageTestingOnly(self, "sign(" + sign + ") created...");
+                        broadcast(self, "sign(" + sign + ") created...");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "unable to create structure sign...");
+                        broadcast(self, "unable to create structure sign...");
                     }
                 }
                 foundTrigger = true;
@@ -541,7 +541,7 @@ public class debugger extends script.base_script
                 {
                     createObject("object/tangible/wearables/ring/ring_s0" + i + ".iff", inv, "");
                 }
-                sendSystemMessageTestingOnly(self, "Rings created in your inventory...");
+                broadcast(self, "Rings created in your inventory...");
             }
             foundTrigger = true;
         }
@@ -549,7 +549,7 @@ public class debugger extends script.base_script
         {
             int max = getMaxHitpoints(target);
             setHitpoints(target, max);
-            sendSystemMessageTestingOnly(self, "Target(" + target + ") set to max hp!");
+            broadcast(self, "Target(" + target + ") set to max hp!");
             foundTrigger = true;
         }
         else if (arg.equals("makeSocketed"))
@@ -569,7 +569,7 @@ public class debugger extends script.base_script
                 if (isGameObjectTypeOf(got, GOT_clothing) || isGameObjectTypeOf(got, GOT_misc_container_wearable) || isGameObjectTypeOf(got, GOT_armor))
                 {
                     setSkillModSockets(target, cnt);
-                    sendSystemMessageTestingOnly(self, "makeSocketed: setting socket count -> " + cnt);
+                    broadcast(self, "makeSocketed: setting socket count -> " + cnt);
                 }
             }
             foundTrigger = true;
@@ -583,7 +583,7 @@ public class debugger extends script.base_script
                 obj_id gem = magic_item.makeGem(inv, lvl);
                 if (isIdValid(gem))
                 {
-                    sendSystemMessageTestingOnly(self, "Gem succuessfully created: obj_id = " + gem + " lvl = " + lvl);
+                    broadcast(self, "Gem succuessfully created: obj_id = " + gem + " lvl = " + lvl);
                 }
             }
             foundTrigger = true;
@@ -624,7 +624,7 @@ public class debugger extends script.base_script
             target = createObject(template, utils.getInventoryContainer(self), "");
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "unable to create template: " + template);
+                broadcast(self, "unable to create template: " + template);
             }
             else 
             {
@@ -642,7 +642,7 @@ public class debugger extends script.base_script
                         int lvl = rand(1, 60);
                         String itemArg = "datatables/loot/generic.iff:clothing";
                     }
-                    sendSystemMessageTestingOnly(self, "created " + n + " loot items in target = " + target);
+                    broadcast(self, "created " + n + " loot items in target = " + target);
                 }
             }
             foundTrigger = true;
@@ -669,11 +669,11 @@ public class debugger extends script.base_script
                 obj_id item = createObject(template, getLocation(self));
                 if (isIdValid(item))
                 {
-                    sendSystemMessageTestingOnly(self, "createObject: object created! id = " + item);
+                    broadcast(self, "createObject: object created! id = " + item);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "createObject: unable to create object!!");
+                    broadcast(self, "createObject: unable to create object!!");
                 }
                 foundTrigger = true;
             }
@@ -687,18 +687,18 @@ public class debugger extends script.base_script
             }
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "convertToMagicItem: invalid target!");
+                broadcast(self, "convertToMagicItem: invalid target!");
             }
             else 
             {
                 int lvl = rand(5, 250);
                 if (magic_item.convertToMagicItem(target, lvl))
                 {
-                    sendSystemMessageTestingOnly(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
+                    broadcast(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
+                    broadcast(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
                 }
             }
             foundTrigger = true;
@@ -719,17 +719,17 @@ public class debugger extends script.base_script
             target = createObject(template, utils.getInventoryContainer(self), "");
             if (!isIdValid(target))
             {
-                sendSystemMessageTestingOnly(self, "unable to create template: " + template);
+                broadcast(self, "unable to create template: " + template);
             }
             else 
             {
                 if (magic_item.convertToMagicItem(target, lvl))
                 {
-                    sendSystemMessageTestingOnly(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
+                    broadcast(self, "Target(" + target + "): converted to magic item where lvl = " + lvl);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
+                    broadcast(self, "Target(" + target + "): convert failed @ lvl = " + lvl);
                 }
             }
             foundTrigger = true;
@@ -739,11 +739,11 @@ public class debugger extends script.base_script
             obj_id inv = utils.getInventoryContainer(target);
             if (isIdValid(inv))
             {
-                sendSystemMessageTestingOnly(self, "Target = " + target + " Inventory = " + inv);
+                broadcast(self, "Target = " + target + " Inventory = " + inv);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Unable to locate an inventory for target = " + target);
+                broadcast(self, "Unable to locate an inventory for target = " + target);
             }
             foundTrigger = true;
         }
@@ -753,18 +753,18 @@ public class debugger extends script.base_script
             region[] r = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
             if ((r == null) || (r.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "No city regions located here!");
+                broadcast(self, "No city regions located here!");
             }
             if (r.length > 1)
             {
-                sendSystemMessageTestingOnly(self, "Multiple city regions located here!");
+                broadcast(self, "Multiple city regions located here!");
                 for (int i = 0; i < r.length; i++)
                 {
-                    sendSystemMessageTestingOnly(self, "region[" + i + "] = " + r[i].getName());
+                    broadcast(self, "region[" + i + "] = " + r[i].getName());
                 }
             }
             region city = r[0];
-            sendSystemMessageTestingOnly(self, "Primary city region (region[0]) = " + city.getName());
+            broadcast(self, "Primary city region (region[0]) = " + city.getName());
             foundTrigger = true;
         }
         else if (arg.equals("addFaction"))
@@ -778,12 +778,12 @@ public class debugger extends script.base_script
                 {
                     if (factions.addFactionStanding(target, faction, val))
                     {
-                        sendSystemMessageTestingOnly(self, "Granted " + val + "pts of " + faction + " faction to target: " + target);
+                        broadcast(self, "Granted " + val + "pts of " + faction + " faction to target: " + target);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "Unable to grant faction pts to target. target = " + target);
-                        sendSystemMessageTestingOnly(self, "faction = " + faction + " val = " + val);
+                        broadcast(self, "Unable to grant faction pts to target. target = " + target);
+                        broadcast(self, "faction = " + faction + " val = " + val);
                     }
                 }
             }
@@ -795,14 +795,14 @@ public class debugger extends script.base_script
             {
                 String faction = st.nextToken();
                 float val = factions.getFactionStanding(self, faction);
-                sendSystemMessageTestingOnly(self, faction + " faction standing for " + target + " = " + val);
+                broadcast(self, faction + " faction standing for " + target + " = " + val);
             }
             foundTrigger = true;
         }
         else if (arg.equals("clearAttribMods"))
         {
             removeAllAttribModifiers(target);
-            sendSystemMessageTestingOnly(self, "Attrib mods cleared for target = " + target);
+            broadcast(self, "Attrib mods cleared for target = " + target);
             foundTrigger = true;
         }
         else if (arg.equals("getAttrib"))
@@ -810,9 +810,9 @@ public class debugger extends script.base_script
             if (st.hasMoreTokens())
             {
                 int attrib = utils.stringToInt(st.nextToken());
-                sendSystemMessageTestingOnly(self, "target (" + target + ") attrib (" + attrib + ") value = " + getAttrib(target, attrib));
-                sendSystemMessageTestingOnly(self, "max = " + getMaxAttrib(target, attrib) + " wounded max = " + getWoundedMaxAttrib(target, attrib));
-                sendSystemMessageTestingOnly(self, "unmod max = " + getUnmodifiedMaxAttrib(target, attrib));
+                broadcast(self, "target (" + target + ") attrib (" + attrib + ") value = " + getAttrib(target, attrib));
+                broadcast(self, "max = " + getMaxAttrib(target, attrib) + " wounded max = " + getWoundedMaxAttrib(target, attrib));
+                broadcast(self, "unmod max = " + getUnmodifiedMaxAttrib(target, attrib));
             }
             foundTrigger = true;
         }
@@ -826,7 +826,7 @@ public class debugger extends script.base_script
                     target = self;
                 }
             }
-            sendSystemMessageTestingOnly(self, "(" + target + ") target name = " + getName(target));
+            broadcast(self, "(" + target + ") target name = " + getName(target));
             foundTrigger = true;
         }
         else if (arg.equals("setName"))
@@ -844,7 +844,7 @@ public class debugger extends script.base_script
                 name = st.nextToken();
                 if (isIdValid(target) && (name != null) && (!name.equals("")))
                 {
-                    sendSystemMessageTestingOnly(self, "renaming (" + target + ")" + getName(target) + " -> " + name);
+                    broadcast(self, "renaming (" + target + ")" + getName(target) + " -> " + name);
                     setName(target, name);
                 }
             }
@@ -858,11 +858,11 @@ public class debugger extends script.base_script
                 obj_id item = getObjectInSlot(target, slot);
                 if ((item == null) || (item == obj_id.NULL_ID))
                 {
-                    sendSystemMessageTestingOnly(self, "(" + target + ") no object in slot(" + slot + ")");
+                    broadcast(self, "(" + target + ") no object in slot(" + slot + ")");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "(" + target + ") object in slot(" + slot + ") is (" + item + ")" + getName(item));
+                    broadcast(self, "(" + target + ") object in slot(" + slot + ") is (" + item + ")" + getName(item));
                 }
                 foundTrigger = true;
             }
@@ -870,7 +870,7 @@ public class debugger extends script.base_script
         else if (arg.startsWith("getCombatDiff"))
         {
             int diff = getLevel(target);
-            sendSystemMessageTestingOnly(self, "Target (" + target + ") combat difficulty = " + diff);
+            broadcast(self, "Target (" + target + ") combat difficulty = " + diff);
             foundTrigger = true;
         }
         else if (arg.equals("getGOT"))
@@ -882,11 +882,11 @@ public class debugger extends script.base_script
                 if (isIdValid(item))
                 {
                     int gotType = getGameObjectType(item);
-                    sendSystemMessageTestingOnly(self, "(" + item + ")" + getName(item) + " is of object type " + gotType);
+                    broadcast(self, "(" + item + ")" + getName(item) + " is of object type " + gotType);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "unable to parse valid obj_id");
+                    broadcast(self, "unable to parse valid obj_id");
                 }
                 foundTrigger = true;
             }
@@ -913,16 +913,16 @@ public class debugger extends script.base_script
                     obj_id itemInSlot = getObjectInSlot(target, slotName);
                     if (isIdValid(itemInSlot))
                     {
-                        sendSystemMessageTestingOnly(self, "(" + target + ") object in slot " + slotName + " = (" + itemInSlot + ") " + getName(itemInSlot));
+                        broadcast(self, "(" + target + ") object in slot " + slotName + " = (" + itemInSlot + ") " + getName(itemInSlot));
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "no valid item in slot " + slotName);
+                        broadcast(self, "no valid item in slot " + slotName);
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "unable to parse valid obj_id");
+                    broadcast(self, "unable to parse valid obj_id");
                 }
             }
             foundTrigger = true;
@@ -940,7 +940,7 @@ public class debugger extends script.base_script
                     obj_id pup = utils.stringToObjId(sPup);
                     if ((!isIdValid(item)) || (!isIdValid(pup)))
                     {
-                        sendSystemMessageTestingOnly(self, "unable to parse valid obj_ids");
+                        broadcast(self, "unable to parse valid obj_ids");
                     }
                     else 
                     {
@@ -960,7 +960,7 @@ public class debugger extends script.base_script
                     String val = st.nextToken();
                     if (utils.setScriptVar(target, path, val))
                     {
-                        sendSystemMessageTestingOnly(self, "scriptvar " + path + " set to " + val + "!");
+                        broadcast(self, "scriptvar " + path + " set to " + val + "!");
                     }
                 }
                 foundTrigger = true;
@@ -974,11 +974,11 @@ public class debugger extends script.base_script
                 String path = st.nextToken();
                 if (utils.hasScriptVar(target, path))
                 {
-                    sendSystemMessageTestingOnly(self, "hasScriptVar = TRUE");
+                    broadcast(self, "hasScriptVar = TRUE");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "hasScriptVar = FALSE");
+                    broadcast(self, "hasScriptVar = FALSE");
                 }
                 foundTrigger = true;
             }
@@ -990,7 +990,7 @@ public class debugger extends script.base_script
                 int cnt = st.countTokens();
                 String path = st.nextToken();
                 utils.removeScriptVar(target, path);
-                sendSystemMessageTestingOnly(self, "scriptvar " + path + " removed!");
+                broadcast(self, "scriptvar " + path + " removed!");
                 foundTrigger = true;
             }
         }
@@ -1003,11 +1003,11 @@ public class debugger extends script.base_script
                 String val = utils.getStringScriptVar(target, path);
                 if (val == null)
                 {
-                    sendSystemMessageTestingOnly(self, "target does not have scriptvar " + path);
+                    broadcast(self, "target does not have scriptvar " + path);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "scriptvar(" + path + ") = " + val);
+                    broadcast(self, "scriptvar(" + path + ") = " + val);
                 }
                 foundTrigger = true;
             }
@@ -1039,7 +1039,7 @@ public class debugger extends script.base_script
             {
                 debugConsoleMsg(self, "dd = " + delta.toString());
             }
-            sendSystemMessageTestingOnly(self, "Check console for showScriptVars output");
+            broadcast(self, "Check console for showScriptVars output");
             foundTrigger = true;
         }
         else if (arg.equals("clearScriptVars"))
@@ -1094,7 +1094,7 @@ public class debugger extends script.base_script
                     int amt = utils.stringToInt(sAmt);
                     if (amt < 1)
                     {
-                        sendSystemMessageTestingOnly(self, "[debugger] SYNTAX: pay <acct name>|<obj_id> <amt>");
+                        broadcast(self, "[debugger] SYNTAX: pay <acct name>|<obj_id> <amt>");
                         return SCRIPT_CONTINUE;
                     }
                     dictionary d = new dictionary();
@@ -1111,7 +1111,7 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "[debugger] SYNTAX: pay <acct name>|<obj_id> <amt>");
+                broadcast(self, "[debugger] SYNTAX: pay <acct name>|<obj_id> <amt>");
                 return SCRIPT_CONTINUE;
             }
             foundTrigger = true;
@@ -1119,13 +1119,13 @@ public class debugger extends script.base_script
         else if (arg.equals("lightsaber"))
         {
             createObject("object/weapon/melee/sword/sword_lightsaber_luke.iff", utils.getInventoryContainer(target), "");
-            sendSystemMessageTestingOnly(target, "check inv for new lightsaber");
+            broadcast(target, "check inv for new lightsaber");
             foundTrigger = true;
         }
         else if (arg.equals("lightsaber2h"))
         {
             createObject("object/weapon/melee/sword/sword_lightsaber_luke_2h_test.iff", utils.getInventoryContainer(target), "");
-            sendSystemMessageTestingOnly(target, "check inv for new lightsaber");
+            broadcast(target, "check inv for new lightsaber");
             foundTrigger = true;
         }
         else if (arg.equals("spawn"))
@@ -1138,7 +1138,7 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "[debugger] SYNTAX: spawn <mob type>");
+                broadcast(self, "[debugger] SYNTAX: spawn <mob type>");
                 return SCRIPT_OVERRIDE;
             }
         }
@@ -1162,7 +1162,7 @@ public class debugger extends script.base_script
                 }
             }
             obj_id di = createObject("object/intangible/data_item/" + tpf, utils.getPlayerDatapad(target), "");
-            sendSystemMessageTestingOnly(target, "check datapad for new data item(" + di + ") " + tpf);
+            broadcast(target, "check datapad for new data item(" + di + ") " + tpf);
             foundTrigger = true;
         }
         else if (arg.equals("makePet"))
@@ -1182,7 +1182,7 @@ public class debugger extends script.base_script
             if (st.hasMoreTokens())
             {
                 String handler = st.nextToken();
-                sendSystemMessageTestingOnly(self, "messaging " + target + " with handler " + handler);
+                broadcast(self, "messaging " + target + " with handler " + handler);
                 messageTo(target, handler, null, 0, false);
             }
             foundTrigger = true;
@@ -1197,7 +1197,7 @@ public class debugger extends script.base_script
                 }
                 if ((target == null) || (target == obj_id.NULL_ID) || (target == self))
                 {
-                    sendSystemMessageTestingOnly(self, "syntax: setYaw <target id> <yaw>");
+                    broadcast(self, "syntax: setYaw <target id> <yaw>");
                 }
                 else 
                 {
@@ -1207,7 +1207,7 @@ public class debugger extends script.base_script
                     {
                         yaw = 0;
                     }
-                    sendSystemMessageTestingOnly(self, "(" + target + ")" + getName(target) + " rotating to " + yaw);
+                    broadcast(self, "(" + target + ")" + getName(target) + " rotating to " + yaw);
                     setYaw(target, yaw);
                 }
             }
@@ -1221,18 +1221,18 @@ public class debugger extends script.base_script
             }
             if ((target == null) || (target == obj_id.NULL_ID) || (target == self))
             {
-                sendSystemMessageTestingOnly(self, "syntax: getYaw (<target id>)");
+                broadcast(self, "syntax: getYaw (<target id>)");
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "(" + target + ")" + getName(target) + " yaw = " + getYaw(target));
+                broadcast(self, "(" + target + ")" + getName(target) + " yaw = " + getYaw(target));
             }
             foundTrigger = true;
         }
         else if (arg.equals("spin"))
         {
             float yaw = rand(-180, 180);
-            sendSystemMessageTestingOnly(self, "(" + target + ")" + getName(target) + " rotating to " + yaw);
+            broadcast(self, "(" + target + ")" + getName(target) + " rotating to " + yaw);
             setYaw(target, yaw);
             foundTrigger = true;
         }
@@ -1241,12 +1241,12 @@ public class debugger extends script.base_script
             if (isMob(target) && !isPlayer(target))
             {
                 location myLoc = getLocation(self);
-                sendSystemMessageTestingOnly(self, "pathing (" + target + ")" + getName(target) + " to " + myLoc.toString());
+                broadcast(self, "pathing (" + target + ")" + getName(target) + " to " + myLoc.toString());
                 pathTo(target, myLoc);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "pathTo trigger may only be used on AI-driven mobs");
+                broadcast(self, "pathTo trigger may only be used on AI-driven mobs");
             }
             foundTrigger = true;
         }
@@ -1255,12 +1255,12 @@ public class debugger extends script.base_script
             if (isMob(target) && !isPlayer(target))
             {
                 location myLoc = getLocation(self);
-                sendSystemMessageTestingOnly(self, "pathing (" + target + ")" + getName(target) + " away from self: " + myLoc.toString());
+                broadcast(self, "pathing (" + target + ")" + getName(target) + " away from self: " + myLoc.toString());
                 ai_lib.pathAwayFrom(target, self);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "pathFrom trigger may only be used on AI-driven mobs");
+                broadcast(self, "pathFrom trigger may only be used on AI-driven mobs");
             }
             foundTrigger = true;
         }
@@ -1333,7 +1333,7 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "forceSuicide requires a non-self target!");
+                broadcast(self, "forceSuicide requires a non-self target!");
             }
             foundTrigger = true;
         }
@@ -1388,7 +1388,7 @@ public class debugger extends script.base_script
             String[] skills = skill.getAllRequiredSkills(skill_name);
             if ((skills == null) || (skills.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "error getting required skills for : " + skill_name);
+                broadcast(self, "error getting required skills for : " + skill_name);
                 foundTrigger = true;
             }
             else 
@@ -1399,7 +1399,7 @@ public class debugger extends script.base_script
                     debugConsoleMsg(self, " * " + s);
                 }
             }
-            sendSystemMessageTestingOnly(self, "Check console for output...");
+            broadcast(self, "Check console for output...");
             foundTrigger = true;
         }
         else if (arg.equals("grantSkill"))
@@ -1407,11 +1407,11 @@ public class debugger extends script.base_script
             String skill_name = st.nextToken();
             if (grantSkill(self, skill_name))
             {
-                sendSystemMessageTestingOnly(self, "grantSkill::skill granted: " + skill_name);
+                broadcast(self, "grantSkill::skill granted: " + skill_name);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "grantSkill::unable to grant skill: " + skill_name);
+                broadcast(self, "grantSkill::unable to grant skill: " + skill_name);
                 return SCRIPT_OVERRIDE;
             }
             foundTrigger = true;
@@ -1420,7 +1420,7 @@ public class debugger extends script.base_script
         {
             String skill_name = st.nextToken();
             revokeSkill(self, skill_name);
-            sendSystemMessageTestingOnly(self, "revokeSkill::skill revoked: " + skill_name);
+            broadcast(self, "revokeSkill::skill revoked: " + skill_name);
             foundTrigger = true;
         }
         else if (arg.equals("grantSkillToPlayer"))
@@ -1428,11 +1428,11 @@ public class debugger extends script.base_script
             String skill_name = st.nextToken();
             if (skill.grantSkillToPlayer(self, skill_name))
             {
-                sendSystemMessageTestingOnly(self, "grantSkillToPlayer::skill granted: " + skill_name);
+                broadcast(self, "grantSkillToPlayer::skill granted: " + skill_name);
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "grantSkillToPlayer::unable to grant skill: " + skill_name);
+                broadcast(self, "grantSkillToPlayer::unable to grant skill: " + skill_name);
                 return SCRIPT_OVERRIDE;
             }
             foundTrigger = true;
@@ -1488,7 +1488,7 @@ public class debugger extends script.base_script
             obj_id[] contents = utils.getContents(target, true);
             if ((contents == null) || (contents.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "Unable to retrieve contents of object #" + target);
+                broadcast(self, "Unable to retrieve contents of object #" + target);
             }
             else 
             {
@@ -1530,7 +1530,7 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Follow commands are only usable on non-pc mobs!");
+                broadcast(self, "Follow commands are only usable on non-pc mobs!");
             }
             foundTrigger = true;
         }
@@ -1542,7 +1542,7 @@ public class debugger extends script.base_script
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "Follow commands are only usable on non-pc mobs!");
+                broadcast(self, "Follow commands are only usable on non-pc mobs!");
             }
             foundTrigger = true;
         }
@@ -1571,16 +1571,16 @@ public class debugger extends script.base_script
                     if (isMob(target) && !isPlayer(target))
                     {
                         ai_lib.setDefaultCalmBehavior(target, behavior);
-                        sendSystemMessageTestingOnly(self, getName(target) + "'s behavior set to " + behavior);
+                        broadcast(self, getName(target) + "'s behavior set to " + behavior);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "set behavior commands are only usable on non-pc mobs!");
+                        broadcast(self, "set behavior commands are only usable on non-pc mobs!");
                     }
                     foundTrigger = true;
                 }
             }
-            sendSystemMessageTestingOnly(self, "SYNTAX: setBehavior <int behavior>");
+            broadcast(self, "SYNTAX: setBehavior <int behavior>");
             foundTrigger = true;
         }
         else if (arg.equals("mood"))
@@ -1593,28 +1593,28 @@ public class debugger extends script.base_script
                     if (!isPlayer(target))
                     {
                         ai_lib.setMood(target, mood);
-                        sendSystemMessageTestingOnly(self, "Attempting to set " + getName(target) + "'s mood to " + mood);
+                        broadcast(self, "Attempting to set " + getName(target) + "'s mood to " + mood);
                     }
                     else 
                     {
                         if (queueCommand(target, (1000440469), null, mood, COMMAND_PRIORITY_DEFAULT))
                         {
-                            sendSystemMessageTestingOnly(self, getName(target) + "'s mood set to " + mood);
+                            broadcast(self, getName(target) + "'s mood set to " + mood);
                         }
                         else 
                         {
-                            sendSystemMessageTestingOnly(self, "Unable to set " + getName(target) + "'s mood to " + mood);
+                            broadcast(self, "Unable to set " + getName(target) + "'s mood to " + mood);
                         }
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "moods commands are only valid for creature objects!");
+                    broadcast(self, "moods commands are only valid for creature objects!");
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX: mood <mood name>");
+                broadcast(self, "SYNTAX: mood <mood name>");
             }
             foundTrigger = true;
         }
@@ -1622,7 +1622,7 @@ public class debugger extends script.base_script
         {
             if (!isMob(target))
             {
-                sendSystemMessageTestingOnly(self, "speak is only usable on mobs!");
+                broadcast(self, "speak is only usable on mobs!");
                 foundTrigger = true;
             }
             String chat = "none";
@@ -1695,7 +1695,7 @@ public class debugger extends script.base_script
                             if ((tId != null) && (tId != obj_id.NULL_ID) && (exists(tId)) && (isInWorld(tId)) && (tId.isLoaded())) {
                                 queueCommand(target, (1780871594), tId, social, COMMAND_PRIORITY_DEFAULT);
                             } else {
-                                sendSystemMessageTestingOnly(self, "invalid DEBUG_EMOTE_TARGET! set it using 'emote target <oid>'");
+                                broadcast(self, "invalid DEBUG_EMOTE_TARGET! set it using 'emote target <oid>'");
                             }
                             break;
                         default:
@@ -1705,12 +1705,12 @@ public class debugger extends script.base_script
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "emote commands are only valid for creature objects!");
+                    broadcast(self, "emote commands are only valid for creature objects!");
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX: emote <mood name>");
+                broadcast(self, "SYNTAX: emote <mood name>");
             }
             foundTrigger = true;
         }
@@ -1718,7 +1718,7 @@ public class debugger extends script.base_script
         {
             if (!isPlayer(target))
             {
-                sendSystemMessageTestingOnly(self, "debugger::xp: target must be a player!");
+                broadcast(self, "debugger::xp: target must be a player!");
                 foundTrigger = true;
             }
             if (st.hasMoreTokens())
@@ -1734,7 +1734,7 @@ public class debugger extends script.base_script
                         amt = utils.stringToInt(sAmt.substring(1));
                         if (amt == -1)
                         {
-                            sendSystemMessageTestingOnly(self, "debugger::xp: invalid xp delta parameter...");
+                            broadcast(self, "debugger::xp: invalid xp delta parameter...");
                             foundTrigger = true;
                         }
                         if (sAmt.startsWith("-"))
@@ -1747,7 +1747,7 @@ public class debugger extends script.base_script
                         amt = utils.stringToInt(sAmt);
                         if (amt == -1)
                         {
-                            sendSystemMessageTestingOnly(self, "debugger::xp: invalid xp amount...");
+                            broadcast(self, "debugger::xp: invalid xp amount...");
                             foundTrigger = true;
                         }
                         amt = amt - xp_amt;
@@ -1760,19 +1760,19 @@ public class debugger extends script.base_script
                 else 
                 {
                     String msg = "(" + target + ") " + getName(target) + " has " + xp_amt + "pts of " + xp_type + " experience";
-                    sendSystemMessageTestingOnly(self, msg);
+                    broadcast(self, msg);
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX: xp <type> (+|-)<amt>");
+                broadcast(self, "SYNTAX: xp <type> (+|-)<amt>");
             }
             foundTrigger = true;
         }
         else if (arg.equals("repelValue"))
         {
             int val = camping.getCampRepelValue(target);
-            sendSystemMessageTestingOnly(self, "camp repel value = " + val);
+            broadcast(self, "camp repel value = " + val);
             foundTrigger = true;
         }
         else if (arg.equals("fillInv"))
@@ -1797,11 +1797,11 @@ public class debugger extends script.base_script
                 String vol_name = st.nextToken();
                 if (hasTriggerVolume(target, vol_name))
                 {
-                    sendSystemMessageTestingOnly(self, "(" + target + ") " + getName(target) + " has a trigger volume named " + vol_name);
+                    broadcast(self, "(" + target + ") " + getName(target) + " has a trigger volume named " + vol_name);
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "(" + target + ") " + getName(target) + " does NOT have a trigger volume named " + vol_name);
+                    broadcast(self, "(" + target + ") " + getName(target) + " does NOT have a trigger volume named " + vol_name);
                 }
             }
             foundTrigger = true;
@@ -1824,7 +1824,7 @@ public class debugger extends script.base_script
                     {
                         case 1:
                         dist = utils.getDistance2D(here, there);
-                        sendSystemMessageTestingOnly(self, "distance between " + target + " and " + other + " = " + dist);
+                        broadcast(self, "distance between " + target + " and " + other + " = " + dist);
                         break;
                         case 2:
                         target = utils.stringToObjId(st.nextToken());
@@ -1835,7 +1835,7 @@ public class debugger extends script.base_script
                         {
                             here = getLocation(target);
                             dist = utils.getDistance2D(here, there);
-                            sendSystemMessageTestingOnly(self, "distance between " + target + " and " + other + " = " + dist);
+                            broadcast(self, "distance between " + target + " and " + other + " = " + dist);
                         }
                     }
                 }
@@ -1843,7 +1843,7 @@ public class debugger extends script.base_script
             else 
             {
                 float range = utils.getDistance2D(getLocation(self), getLocation(target));
-                sendSystemMessageTestingOnly(self, "distance between " + target + " and self = " + range);
+                broadcast(self, "distance between " + target + " and self = " + range);
             }
             foundTrigger = true;
         }
@@ -1858,7 +1858,7 @@ public class debugger extends script.base_script
                 }
             }
             location here = getLocation(target);
-            sendSystemMessageTestingOnly(self, "target = " + target + " loc = " + here.toString());
+            broadcast(self, "target = " + target + " loc = " + here.toString());
             foundTrigger = true;
         }
         else if (arg.equals("color") || arg.equals("hue"))
@@ -1873,7 +1873,7 @@ public class debugger extends script.base_script
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "[beta.debugger] hue passed invalid color -> randomizing");
+                    broadcast(self, "[beta.debugger] hue passed invalid color -> randomizing");
                     hue.hueObject(target);
                 }
             }
@@ -1883,7 +1883,7 @@ public class debugger extends script.base_script
             }
             if (ss)
             {
-                sendSystemMessageTestingOnly(self, "[beta.debugger] syntax: hue <int index>");
+                broadcast(self, "[beta.debugger] syntax: hue <int index>");
             }
             foundTrigger = true;
         }
@@ -1892,7 +1892,7 @@ public class debugger extends script.base_script
         }
         if (foundTrigger)
         {
-            sendSystemMessageTestingOnly(self, "[beta.debugger] " + text);
+            broadcast(self, "[beta.debugger] " + text);
             return SCRIPT_OVERRIDE;
         }
         else 
@@ -1923,14 +1923,14 @@ public class debugger extends script.base_script
         obj_id it = createObject(template, there);
         if (!isIdValid(it))
         {
-            sendSystemMessageTestingOnly(self, "unable create structure from template: " + template);
+            broadcast(self, "unable create structure from template: " + template);
         }
         else 
         {
             obj_id sign = player_structure.createStructureSign(it);
             if (!isIdValid(sign))
             {
-                sendSystemMessageTestingOnly(self, "unable create structure sign for template: " + template);
+                broadcast(self, "unable create structure sign for template: " + template);
             }
         }
         tpf = utils.removeElementAt(tpf, 0);
@@ -1955,7 +1955,7 @@ public class debugger extends script.base_script
     }
     public int handleGrantAllSkills(obj_id self, dictionary params) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "handleGrantAllSkills entered...");
+        broadcast(self, "handleGrantAllSkills entered...");
         if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
@@ -1966,7 +1966,7 @@ public class debugger extends script.base_script
         {
             if (i < skillList.length)
             {
-                sendSystemMessageTestingOnly(self, "attempting to grant: " + skillList[i]);
+                broadcast(self, "attempting to grant: " + skillList[i]);
                 grantSkill(self, skillList[i]);
             }
             else 

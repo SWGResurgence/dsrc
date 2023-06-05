@@ -367,18 +367,18 @@ public class talisa_test extends script.base_script
                 else if (priCommand.equalsIgnoreCase("get_tat") && secCommand.equals(""))
                 {
                     obj_id planetId = getPlanetByName("tatooine");
-                    sendSystemMessageTestingOnly(self, "" + planetId);
+                    broadcast(self, "" + planetId);
                 }
                 else if (priCommand.equalsIgnoreCase("force_init") && secCommand.equals(""))
                 {
                     obj_id lookAtTarget = findTarget(self);
                     if (!isIdValid(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "You need to target a deprecated collection reactor.");
+                        broadcast(self, "You need to target a deprecated collection reactor.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Forcing initialization on object.");
+                        broadcast(self, "Forcing initialization on object.");
                         messageTo(lookAtTarget, "forceCollectionReactorInit", null, 1, false);
                     }
                 }
@@ -387,58 +387,58 @@ public class talisa_test extends script.base_script
                     obj_id lookAtTarget = utils.stringToObjId(secCommand);
                     if (!isValidId(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "You need to specify a valid OID of a collection reactor.");
+                        broadcast(self, "You need to specify a valid OID of a collection reactor.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Forcing initialization on object.");
+                        broadcast(self, "Forcing initialization on object.");
                         messageTo(lookAtTarget, "forceCollectionReactorInit", null, 1, false);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_forage_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.main_forage_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "main_forage_roll_bypass is 100%");
+                    broadcast(self, "main_forage_roll_bypass is 100%");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_worm_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.bypass_worm_roll", "testing");
-                    sendSystemMessageTestingOnly(self, "bypass_worm_roll is 100%");
+                    broadcast(self, "bypass_worm_roll is 100%");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_component_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.component_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "bypass_component_roll is 100%");
+                    broadcast(self, "bypass_component_roll is 100%");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_treasure_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.treasure_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "bypass_treasure_roll is 100%");
+                    broadcast(self, "bypass_treasure_roll is 100%");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_enzyme_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.enzyme_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "bypass_enzyme_roll is 100%");
+                    broadcast(self, "bypass_enzyme_roll is 100%");
                 }
                 else if (priCommand.equalsIgnoreCase("remove_bypass") && secCommand.equals(""))
                 {
                     utils.removeScriptVarTree(self, "qa");
-                    sendSystemMessageTestingOnly(self, "Bypass scriptvars removed");
+                    broadcast(self, "Bypass scriptvars removed");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_searchlair_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.egg_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "egg_roll_bypass is setting roll to 89 so you only receive eggs.");
+                    broadcast(self, "egg_roll_bypass is setting roll to 89 so you only receive eggs.");
                 }
                 else if (priCommand.equalsIgnoreCase("bypass_milk_roll") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.milk_roll_bypass", "testing");
-                    sendSystemMessageTestingOnly(self, "milk_roll_bypass is setting roll to receive milk repeatedly...as if magic.");
+                    broadcast(self, "milk_roll_bypass is setting roll to receive milk repeatedly...as if magic.");
                 }
                 else if (priCommand.equalsIgnoreCase("give_forage_data") && secCommand.equals(""))
                 {
                     utils.setScriptVar(self, "qa.give_forage_data", "testing");
-                    sendSystemMessageTestingOnly(self, "Forage data will be displayed in console.");
+                    broadcast(self, "Forage data will be displayed in console.");
                 }
                 else if (priCommand.equalsIgnoreCase("rare_forage_loot_logger"))
                 {
@@ -446,7 +446,7 @@ public class talisa_test extends script.base_script
                     utils.setScriptVar(self, "qa.main_forage_roll_bypass", "testing");
                     utils.setScriptVar(self, "qa.give_forage_data", "testing");
                     int iteration = 25;
-                    sendSystemMessageTestingOnly(self, "Foraging Rares " + iteration + " times. You must keep Godmode on for this to work");
+                    broadcast(self, "Foraging Rares " + iteration + " times. You must keep Godmode on for this to work");
                     for (int i = 0; i < iteration; i++)
                     {
                         messageTo(self, "handlerForPlayerForaging", null, (5 + i), false);
@@ -457,7 +457,7 @@ public class talisa_test extends script.base_script
                     utils.removeScriptVarTree(self, "qa");
                     utils.setScriptVar(self, "qa.give_forage_data", "testing");
                     int iteration = 25;
-                    sendSystemMessageTestingOnly(self, "Foraging Normally for " + iteration + " times. You must keep Godmode on for this to work");
+                    broadcast(self, "Foraging Normally for " + iteration + " times. You must keep Godmode on for this to work");
                     for (int i = 0; i < iteration; i++)
                     {
                         messageTo(self, "handlerForPlayerForaging", null, (5 + i), false);
@@ -468,12 +468,12 @@ public class talisa_test extends script.base_script
                     int[] buffs = buff.getAllBuffs(self);
                     if (buffs == null || buffs.length == 0)
                     {
-                        sendSystemMessageTestingOnly(self, "No Buffs found");
+                        broadcast(self, "No Buffs found");
                         return SCRIPT_CONTINUE;
                     }
                     for (int i = 0; i < buffs.length; i++)
                     {
-                        sendSystemMessageTestingOnly(self, "Buff " + i + " is " + buff.getBuffNameFromCrc(buffs[i]));
+                        broadcast(self, "Buff " + i + " is " + buff.getBuffNameFromCrc(buffs[i]));
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("fs_crystal") && secCommand.equals(""))
@@ -502,17 +502,17 @@ public class talisa_test extends script.base_script
                 }
                 else if (priCommand.equalsIgnoreCase("meatlump_container") && secCommand.equals("both"))
                 {
-                    sendSystemMessageTestingOnly(self, "both received");
+                    broadcast(self, "both received");
                     loot.giveMeatlumpPuzzleLoot(self, true, true);
                 }
                 else if (priCommand.equalsIgnoreCase("meatlump_trigger") && secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "removing all trigger scriptvars");
+                    broadcast(self, "removing all trigger scriptvars");
                     utils.removeScriptVar(self, "meatlump_trigger");
                 }
                 else if (priCommand.equalsIgnoreCase("remove_safe") && secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "removing all trigger scriptvars");
+                    broadcast(self, "removing all trigger scriptvars");
                     utils.removeScriptVarTree(self, "meatlump_safe");
                     utils.removeScriptVarTree(self, "meatlump_safe_nonimperative");
                 }
@@ -520,7 +520,7 @@ public class talisa_test extends script.base_script
                 {
                     if (secCommand.equals("") || thirdCommand.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "num_combos number1 number2");
+                        broadcast(self, "num_combos number1 number2");
                         return SCRIPT_CONTINUE;
                     }
                     int number1 = utils.stringToInt(secCommand);
@@ -530,58 +530,58 @@ public class talisa_test extends script.base_script
                     {
                         for (int j = 70; j < 88; j++)
                         {
-                            sendSystemMessageTestingOnly(self, " " + i + "*" + j + "= " + (i * j));
+                            broadcast(self, " " + i + "*" + j + "= " + (i * j));
                             if ((i * j) >= number1 && (i * j) <= number2)
                             {
                                 numCombos++;
-                                sendSystemMessageTestingOnly(self, "Valid hit " + i + "*" + j + "= " + (i * j));
+                                broadcast(self, "Valid hit " + i + "*" + j + "= " + (i * j));
                             }
                         }
                     }
-                    sendSystemMessageTestingOnly(self, "numbCombos =" + numCombos);
+                    broadcast(self, "numbCombos =" + numCombos);
                 }
                 else if (priCommand.equalsIgnoreCase("set_scriptvar"))
                 {
                     if (secCommand.equals("") || thirdCommand.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "set_scriptvar <scriptvar name> value");
+                        broadcast(self, "set_scriptvar <scriptvar name> value");
                         return SCRIPT_CONTINUE;
                     }
                     utils.setScriptVar(self, secCommand, thirdCommand);
-                    sendSystemMessageTestingOnly(self, "Set " + secCommand + " to " + thirdCommand);
+                    broadcast(self, "Set " + secCommand + " to " + thirdCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("removescriptvar") && !secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "removing scriptvar: " + secCommand);
+                    broadcast(self, "removing scriptvar: " + secCommand);
                     utils.removeScriptVar(self, secCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("removescriptvartree") && !secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "removing scriptvartree: " + secCommand);
+                    broadcast(self, "removing scriptvartree: " + secCommand);
                     utils.removeScriptVarTree(self, secCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("addscriptvar") && !secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "adding scriptvar: " + secCommand);
+                    broadcast(self, "adding scriptvar: " + secCommand);
                     utils.removeScriptVar(self, secCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("add_skill_mod") && !secCommand.equals("") && !thirdCommand.equals(""))
                 {
                     int amount = utils.stringToInt(thirdCommand);
                     applySkillStatisticModifier(self, secCommand, amount);
-                    sendSystemMessageTestingOnly(self, "Attempting to apply Skill Mod: " + secCommand + " to : " + amount);
+                    broadcast(self, "Attempting to apply Skill Mod: " + secCommand + " to : " + amount);
                 }
                 else if (priCommand.equalsIgnoreCase("has_skill_mod") && !secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "Attempting to find Skill Mod: " + secCommand);
+                    broadcast(self, "Attempting to find Skill Mod: " + secCommand);
                     int hasMod = getSkillStatMod(self, secCommand);
                     if (hasMod > 0)
                     {
-                        sendSystemMessageTestingOnly(self, "You have Skill Mod: " + secCommand + " and the value is: " + getSkillStatisticModifier(self, secCommand));
+                        broadcast(self, "You have Skill Mod: " + secCommand + " and the value is: " + getSkillStatisticModifier(self, secCommand));
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "CANNOT FIND SKILL MOD: " + secCommand);
+                        broadcast(self, "CANNOT FIND SKILL MOD: " + secCommand);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("get_skill_mod") && !secCommand.equals(""))
@@ -589,20 +589,20 @@ public class talisa_test extends script.base_script
                     String skillMod = secCommand;
                     if (skillMod == null || skillMod.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "skill mod example: vendor.special_vendor_skillmod");
+                        broadcast(self, "skill mod example: vendor.special_vendor_skillmod");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Getting: " + secCommand + ": " + getSkillStatMod(self, skillMod));
+                    broadcast(self, "Getting: " + secCommand + ": " + getSkillStatMod(self, skillMod));
                 }
                 else if (priCommand.equalsIgnoreCase("set_skill_mod") && !secCommand.equals(""))
                 {
                     String skillMod = secCommand;
                     if (skillMod == null || skillMod.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "skill mod example: vendor.special_vendor_skillmod");
+                        broadcast(self, "skill mod example: vendor.special_vendor_skillmod");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Setting: " + secCommand + " to +1");
+                    broadcast(self, "Setting: " + secCommand + " to +1");
                     applySkillStatisticModifier(self, skillMod, 1);
                 }
                 else if (priCommand.equalsIgnoreCase("test_greeter_anim") && !secCommand.equals("") && !thirdCommand.equals(""))
@@ -610,10 +610,10 @@ public class talisa_test extends script.base_script
                     obj_id greeter = utils.stringToObjId(secCommand);
                     if (!isValidId(greeter) || !exists(greeter))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find Greeter with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find Greeter with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Attempting to player animation: " + thirdCommand + " on greeter: " + greeter);
+                    broadcast(self, "Attempting to player animation: " + thirdCommand + " on greeter: " + greeter);
                     doAnimationAction(greeter, thirdCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("test_greeter_sound") && !secCommand.equals("") && !thirdCommand.equals(""))
@@ -621,50 +621,50 @@ public class talisa_test extends script.base_script
                     obj_id greeter = utils.stringToObjId(secCommand);
                     if (!isValidId(greeter) || !exists(greeter))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find Greeter with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find Greeter with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     String sound = thirdCommand;
                     if (sound == null || sound.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find sound argument");
+                        broadcast(self, "Couldn't find sound argument");
                         return SCRIPT_CONTINUE;
                     }
                     location loc = getLocation(greeter);
                     if (loc == null)
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find greeter location");
+                        broadcast(self, "Couldn't find greeter location");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Attempting to player sound: " + sound + " on greeter: " + greeter);
+                    broadcast(self, "Attempting to player sound: " + sound + " on greeter: " + greeter);
                     if (!playClientEffectLoc(greeter, sound, loc, 0.0f))
                     {
-                        sendSystemMessageTestingOnly(self, "The sound could not be played per the game system.");
+                        broadcast(self, "The sound could not be played per the game system.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "The sound should have played.");
+                    broadcast(self, "The sound should have played.");
                 }
                 else if (priCommand.equalsIgnoreCase("test_greeter_voice") && !secCommand.equals("") && !thirdCommand.equals(""))
                 {
                     obj_id greeter = utils.stringToObjId(secCommand);
                     if (!isValidId(greeter) || !exists(greeter))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find Greeter with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find Greeter with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     String voice = thirdCommand;
                     if (voice == null && voice.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find voice argument");
+                        broadcast(self, "Couldn't find voice argument");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Attempting to player sound: " + voice + " on greeter: " + greeter);
+                    broadcast(self, "Attempting to player sound: " + voice + " on greeter: " + greeter);
                     if (!play2dNonLoopingSound(self, voice))
                     {
-                        sendSystemMessageTestingOnly(self, "The sound could not be played per the game system.");
+                        broadcast(self, "The sound could not be played per the game system.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "The sound should have played.");
+                    broadcast(self, "The sound should have played.");
                 }
                 else if (priCommand.equalsIgnoreCase("get_tcg_expansion_templates"))
                 {
@@ -728,48 +728,48 @@ public class talisa_test extends script.base_script
                 {
                     if (secCommand == null || secCommand.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Invalid. Valid sound: sound/utinni.snd");
+                        broadcast(self, "Sound Invalid. Valid sound: sound/utinni.snd");
                         return SCRIPT_CONTINUE;
                     }
                     if (!playClientEffectObj(self, secCommand, self, ""))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Failed.");
+                        broadcast(self, "Sound Failed.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Sound should have played.");
+                        broadcast(self, "Sound should have played.");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("play_2d") && !secCommand.equals(""))
                 {
                     if (secCommand == null || secCommand.equals("") || !secCommand.startsWith("sound/") || !secCommand.contains(".snd"))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Invalid. Valid sound: sound/utinni.snd");
+                        broadcast(self, "Sound Invalid. Valid sound: sound/utinni.snd");
                         return SCRIPT_CONTINUE;
                     }
                     if (!play2dNonLoopingSound(self, secCommand))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Failed.");
+                        broadcast(self, "Sound Failed.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Sound should have played.");
+                        broadcast(self, "Sound should have played.");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("play_music") && !secCommand.equals(""))
                 {
                     if (secCommand == null || secCommand.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Invalid. Valid sound: sound/utinni.snd");
+                        broadcast(self, "Sound Invalid. Valid sound: sound/utinni.snd");
                         return SCRIPT_CONTINUE;
                     }
                     if (!playMusic(self, "sound/" + secCommand + ".snd"))
                     {
-                        sendSystemMessageTestingOnly(self, "Sound Failed.");
+                        broadcast(self, "Sound Failed.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Sound should have played.");
+                        broadcast(self, "Sound should have played.");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("tcg_booster_msg"))
@@ -782,13 +782,13 @@ public class talisa_test extends script.base_script
                     housePacking[0] = 100;
                     housePacking[1] = 100;
                     setObjVar(self, "housePackup", housePacking);
-                    sendSystemMessageTestingOnly(self, "You now have points equal to a player that has destroyed 100 houses.");
+                    broadcast(self, "You now have points equal to a player that has destroyed 100 houses.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_points") && !secCommand.equals(""))
                 {
                     if (secCommand == null || secCommand.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Define how many abandoned houses you want to pack up");
+                        broadcast(self, "Define how many abandoned houses you want to pack up");
                         return SCRIPT_CONTINUE;
                     }
                     int number1 = utils.stringToInt(secCommand);
@@ -796,72 +796,72 @@ public class talisa_test extends script.base_script
                     housePacking[0] = number1;
                     housePacking[1] = number1;
                     setObjVar(self, "housePackup", housePacking);
-                    sendSystemMessageTestingOnly(self, "You now have points equal to a player that has destroyed " + number1 + " houses.");
+                    broadcast(self, "You now have points equal to a player that has destroyed " + number1 + " houses.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_daily_max"))
                 {
                     if (!hasObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR))
                     {
-                        sendSystemMessageTestingOnly(self, "No houses destroyed today.");
+                        broadcast(self, "No houses destroyed today.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "You currently have destroyed " + getIntObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR) + " houses today.");
+                    broadcast(self, "You currently have destroyed " + getIntObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR) + " houses today.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_remove_daily"))
                 {
                     if (!hasObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR))
                     {
-                        sendSystemMessageTestingOnly(self, "No objvar found.");
+                        broadcast(self, "No objvar found.");
                         return SCRIPT_CONTINUE;
                     }
                     removeObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR);
-                    sendSystemMessageTestingOnly(self, "You currently have destroyed " + getIntObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR) + " houses today.");
+                    broadcast(self, "You currently have destroyed " + getIntObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR) + " houses today.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_remove_all"))
                 {
                     messageTo(self, "handlePlayerStructurePackupLockoutRemoval", null, 0, false);
                     if (!hasObjVar(self, player_structure.HOUSE_PACKUP_ARRAY_OBJVAR))
                     {
-                        sendSystemMessageTestingOnly(self, "No houses destroyed ever.");
+                        broadcast(self, "No houses destroyed ever.");
                         return SCRIPT_CONTINUE;
                     }
                     removeObjVar(self, player_structure.HOUSE_PACKUP_ARRAY_OBJVAR);
                     if (!hasObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR))
                     {
-                        sendSystemMessageTestingOnly(self, "No House Pack up tracking objvar found, removal skipped.");
+                        broadcast(self, "No House Pack up tracking objvar found, removal skipped.");
                         return SCRIPT_CONTINUE;
                     }
                     removeObjVar(self, player_structure.HOUSE_PACKUP_DAILY_TALLY_OBJVAR);
                     messageTo(self, "handlePlayerStructurePackupLockoutRemoval", null, 0, false);
-                    sendSystemMessageTestingOnly(self, "All House Pack Up tracking and Lock Outs  removed.");
+                    broadcast(self, "All House Pack Up tracking and Lock Outs  removed.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_houses"))
                 {
                     if (!hasObjVar(self, player_structure.HOUSE_PACKUP_ARRAY_OBJVAR))
                     {
-                        sendSystemMessageTestingOnly(self, "No houses destroyed ever.");
+                        broadcast(self, "No houses destroyed ever.");
                         return SCRIPT_CONTINUE;
                     }
                     int[] array = getIntArrayObjVar(self, player_structure.HOUSE_PACKUP_ARRAY_OBJVAR);
-                    sendSystemMessageTestingOnly(self, "You have destroyed " + array[1] + " houses total.");
+                    broadcast(self, "You have destroyed " + array[1] + " houses total.");
                 }
                 else if (priCommand.equalsIgnoreCase("packup_remove_lockout"))
                 {
                     messageTo(self, "handleFailedStructurePackup", null, 0, false);
-                    sendSystemMessageTestingOnly(self, "If you had a house pack up lockout it no longer exists.");
+                    broadcast(self, "If you had a house pack up lockout it no longer exists.");
                 }
                 else if (priCommand.equalsIgnoreCase("check_abandonable"))
                 {
                     obj_id lookAtTarget = findTarget(self);
-                    sendSystemMessageTestingOnly(self, "Can be abandoned: " + player_structure.doesUnmarkedStructureQualifyForHousePackup(lookAtTarget));
+                    broadcast(self, "Can be abandoned: " + player_structure.doesUnmarkedStructureQualifyForHousePackup(lookAtTarget));
                 }
                 else if (priCommand.equalsIgnoreCase("isowner"))
                 {
                     obj_id lookAtTarget = findTarget(self);
-                    sendSystemMessageTestingOnly(self, "Are you owner? " + player_structure.isOwner(lookAtTarget, self));
+                    broadcast(self, "Are you owner? " + player_structure.isOwner(lookAtTarget, self));
                     if (isGod(self))
                     {
-                        sendSystemMessageTestingOnly(self, "You are in godmode and the isowner check may not work");
+                        broadcast(self, "You are in godmode and the isowner check may not work");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("set_abandoned"))
@@ -869,21 +869,21 @@ public class talisa_test extends script.base_script
                     obj_id lookAtTarget = findTarget(self);
                     if (!player_structure.doesUnmarkedStructureQualifyForHousePackup(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "Please target a valid player house or factory. This object cannot be packed up.");
+                        broadcast(self, "Please target a valid player house or factory. This object cannot be packed up.");
                         return SCRIPT_CONTINUE;
                     }
                     if (hasObjVar(lookAtTarget, "player_structure.abandoned") && getIntObjVar(lookAtTarget, "player_structure.abandoned") == 1)
                     {
-                        sendSystemMessageTestingOnly(self, "This structure is already abandoned.");
+                        broadcast(self, "This structure is already abandoned.");
                         return SCRIPT_CONTINUE;
                     }
                     setObjVar(lookAtTarget, "player_structure.abandoned", 1);
-                    sendSystemMessageTestingOnly(self, "Structure set abandoned.");
+                    broadcast(self, "Structure set abandoned.");
                 }
                 else if (priCommand.equalsIgnoreCase("setlots"))
                 {
                     adjustLotCount(getPlayerObject(self), -10);
-                    sendSystemMessageTestingOnly(self, "Lots set to 10");
+                    broadcast(self, "Lots set to 10");
                 }
                 else if (priCommand.equalsIgnoreCase("set_sarlacc"))
                 {
@@ -902,7 +902,7 @@ public class talisa_test extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     setObjVar(lookAtTarget, house_pet.SARLACC_FAST_UPDATE_RATE, true);
-                    sendSystemMessageTestingOnly(self, "Sarlacc God Hack Applied.");
+                    broadcast(self, "Sarlacc God Hack Applied.");
                 }
                 else if (priCommand.equalsIgnoreCase("get_player_housing_lots"))
                 {
@@ -987,11 +987,11 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     persistObject(object);
-                    sendSystemMessageTestingOnly(self, "Object: " + secCommand + " persisted.");
+                    broadcast(self, "Object: " + secCommand + " persisted.");
                 }
                 else if (priCommand.equalsIgnoreCase("persist_area") && !secCommand.equals(""))
                 {
@@ -1000,7 +1000,7 @@ public class talisa_test extends script.base_script
                     for (obj_id object : objects)
                     {
                         persistObject(object);
-                        sendSystemMessageTestingOnly(self, "Persisted: " + object.toString());
+                        broadcast(self, "Persisted: " + object.toString());
                     }
                     debugConsoleMsg(self, "Persisted area. Total Range: " + range);
                 }
@@ -1009,27 +1009,27 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     if (isObjectPersisted(self))
                     {
-                        sendSystemMessageTestingOnly(self, "Object: " + secCommand + " IS INDEED persisted.");
+                        broadcast(self, "Object: " + secCommand + " IS INDEED persisted.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Object: " + secCommand + " IS NOT persisted.");
+                    broadcast(self, "Object: " + secCommand + " IS NOT persisted.");
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("get_sign_skillmod"))
                 {
                     int special_sign_tcg_series3 = getSkillStatMod(self, "special_sign_tcg_series3");
-                    sendSystemMessageTestingOnly(self, "special_sign_tcg_series3: " + special_sign_tcg_series3);
+                    broadcast(self, "special_sign_tcg_series3: " + special_sign_tcg_series3);
                     int special_sign_halloween_hanging_sign = getSkillStatMod(self, "special_sign_halloween_hanging_sign");
-                    sendSystemMessageTestingOnly(self, "special_sign_halloween_hanging_sign: " + special_sign_halloween_hanging_sign);
+                    broadcast(self, "special_sign_halloween_hanging_sign: " + special_sign_halloween_hanging_sign);
                     int special_sign_halloween_standing_sign = getSkillStatMod(self, "special_sign_halloween_standing_sign");
-                    sendSystemMessageTestingOnly(self, "special_sign_halloween_standing_sign: " + special_sign_halloween_standing_sign);
+                    broadcast(self, "special_sign_halloween_standing_sign: " + special_sign_halloween_standing_sign);
                     int shop_sign = getSkillStatMod(self, "shop_sign");
-                    sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
+                    broadcast(self, "shop_sign: " + shop_sign);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("clone_object"))
@@ -1051,20 +1051,20 @@ public class talisa_test extends script.base_script
                 {
                     applySkillStatisticModifier(self, "shop_sign", 1);
                     int shop_sign = getSkillStatMod(self, "shop_sign");
-                    sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
+                    broadcast(self, "shop_sign: " + shop_sign);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("remove_shop_sign"))
                 {
                     applySkillStatisticModifier(self, "shop_sign", -1);
                     int shop_sign = getSkillStatMod(self, "shop_sign");
-                    sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
+                    broadcast(self, "shop_sign: " + shop_sign);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("decrease_sign_skillmod") && !secCommand.equals(""))
                 {
                     int skillModAmount = getSkillStatMod(self, "special_sign_tcg_series3");
-                    sendSystemMessageTestingOnly(self, "Before: " + skillModAmount);
+                    broadcast(self, "Before: " + skillModAmount);
                     int number1 = utils.stringToInt(secCommand);
                     if (number1 <= 0)
                     {
@@ -1075,13 +1075,13 @@ public class talisa_test extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     skillModAmount = getSkillStatMod(self, "special_sign_tcg_series3");
-                    sendSystemMessageTestingOnly(self, "Now: " + skillModAmount);
+                    broadcast(self, "Now: " + skillModAmount);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("increase_sign_skillmod") && !secCommand.equals(""))
                 {
                     int skillModAmount = getSkillStatMod(self, "special_sign_tcg_series3");
-                    sendSystemMessageTestingOnly(self, "Before: " + skillModAmount);
+                    broadcast(self, "Before: " + skillModAmount);
                     int number1 = utils.stringToInt(secCommand);
                     if (number1 <= 0)
                     {
@@ -1092,13 +1092,13 @@ public class talisa_test extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     skillModAmount = getSkillStatMod(self, "special_sign_tcg_series3");
-                    sendSystemMessageTestingOnly(self, "Now: " + skillModAmount);
+                    broadcast(self, "Now: " + skillModAmount);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("play_particle") && !secCommand.equals(""))
                 {
                     playClientEffectObj(self, secCommand, self, "");
-                    sendSystemMessageTestingOnly(self, "Particle should have played");
+                    broadcast(self, "Particle should have played");
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("sarlacc_day") && !secCommand.equals(""))
@@ -1106,7 +1106,7 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     if (isDeluxSarlacc(object))
@@ -1119,11 +1119,11 @@ public class talisa_test extends script.base_script
                         }
                         int newFed = lastFed - totalSubtractedTime;
                         setObjVar(object, house_pet.SARLACC_LAST_FED, newFed);
-                        sendSystemMessageTestingOnly(self, "Deluxe Sarlacc: " + secCommand + " Last Feeding Time has had " + totalSubtractedTime + " subtracted from it.");
+                        broadcast(self, "Deluxe Sarlacc: " + secCommand + " Last Feeding Time has had " + totalSubtractedTime + " subtracted from it.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Object: " + secCommand + " IS NOT a Deluxe Sarlacc or has never been fed.");
+                        broadcast(self, "Object: " + secCommand + " IS NOT a Deluxe Sarlacc or has never been fed.");
                     }
                     utils.removeScriptVar(object, house_pet.SARLACC_AVOID_REPEATED_UPDATES);
                     return SCRIPT_CONTINUE;
@@ -1133,17 +1133,17 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     if (isDeluxSarlacc(object))
                     {
                         setObjVar(object, house_pet.SARLACC_CURRENT_PHASE, 2);
-                        sendSystemMessageTestingOnly(self, "Deluxe Sarlacc: " + secCommand + " has been set to very hungry.");
+                        broadcast(self, "Deluxe Sarlacc: " + secCommand + " has been set to very hungry.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Object: " + secCommand + " IS NOT a Deluxe Sarlacc or has never been fed.");
+                        broadcast(self, "Object: " + secCommand + " IS NOT a Deluxe Sarlacc or has never been fed.");
                     }
                     utils.removeScriptVar(object, house_pet.SARLACC_AVOID_REPEATED_UPDATES);
                     return SCRIPT_CONTINUE;
@@ -1153,27 +1153,27 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "Is in World Cell: " + isInWorldCell(object));
+                    broadcast(self, "Is in World Cell: " + isInWorldCell(object));
                 }
                 else if (priCommand.equalsIgnoreCase("get_feed_list") && !secCommand.equals(""))
                 {
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     String list = getListOfFoodItems(object);
                     if (list == null || list.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "Nothing returned");
+                        broadcast(self, "Nothing returned");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "List of Items Fed: " + list);
+                        broadcast(self, "List of Items Fed: " + list);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("massiff_day") && !secCommand.equals(""))
@@ -1181,7 +1181,7 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     if (isMassiffBowl(object))
@@ -1190,11 +1190,11 @@ public class talisa_test extends script.base_script
                         int lastFed = getIntObjVar(object, house_pet.MASSIFF_LAST_FED);
                         int newFed = lastFed - totalSubtractedTime;
                         setObjVar(object, house_pet.MASSIFF_LAST_FED, newFed);
-                        sendSystemMessageTestingOnly(self, "Massif Bowl: " + secCommand + " Last Feeding Time has had " + totalSubtractedTime + " subtracted from it.");
+                        broadcast(self, "Massif Bowl: " + secCommand + " Last Feeding Time has had " + totalSubtractedTime + " subtracted from it.");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Object: " + secCommand + " IS NOT a Massif Bowl or has no spawned and fed Massif.");
+                        broadcast(self, "Object: " + secCommand + " IS NOT a Massif Bowl or has no spawned and fed Massif.");
                     }
                     return SCRIPT_CONTINUE;
                 }
@@ -1203,7 +1203,7 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
                     playClientEffectObj(object, house_pet.MASSIFF_HUNGRY_EMOTE, object, "");
@@ -1213,14 +1213,14 @@ public class talisa_test extends script.base_script
                     obj_id object = utils.stringToObjId(secCommand);
                     if (!isValidId(object) || !exists(object))
                     {
-                        sendSystemMessageTestingOnly(self, "Couldn't find object with OID of: " + secCommand);
+                        broadcast(self, "Couldn't find object with OID of: " + secCommand);
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "The yaw of that object is: " + getYaw(object));
+                    broadcast(self, "The yaw of that object is: " + getYaw(object));
                 }
                 else if (priCommand.equalsIgnoreCase("test_player_anim") && !secCommand.equals(""))
                 {
-                    sendSystemMessageTestingOnly(self, "Animating using: " + secCommand);
+                    broadcast(self, "Animating using: " + secCommand);
                     doAnimationAction(self, secCommand);
                 }
                 else if (priCommand.equalsIgnoreCase("remove_lockout"))
@@ -1234,7 +1234,7 @@ public class talisa_test extends script.base_script
                     removeObjVar(self, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
                     removeObjVar(self, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
                     removeObjVar(self, "empire_day_events.locked_out");
-                    sendSystemMessageTestingOnly(self, "Lockouts removed.");
+                    broadcast(self, "Lockouts removed.");
                 }
                 else if (priCommand.equalsIgnoreCase("collections_removed"))
                 {
@@ -1320,26 +1320,26 @@ public class talisa_test extends script.base_script
                         if (groundquests.isQuestActive(self, holiday.ALL_IMPERIAL_QUESTS[i]))
                         {
                             quest = holiday.ALL_IMPERIAL_QUESTS[i];
-                            sendSystemMessageTestingOnly(self, "FOUND QUEST: " + holiday.ALL_IMPERIAL_QUESTS[i]);
+                            broadcast(self, "FOUND QUEST: " + holiday.ALL_IMPERIAL_QUESTS[i]);
                             break;
                         }
                         else
                         {
-                            sendSystemMessageTestingOnly(self, "is not quest: " + holiday.ALL_IMPERIAL_QUESTS[i]);
+                            broadcast(self, "is not quest: " + holiday.ALL_IMPERIAL_QUESTS[i]);
                         }
                     }
                     if (quest == null || quest.equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "no quest, exiting");
+                        broadcast(self, "no quest, exiting");
                         return SCRIPT_CONTINUE;
                     }
                     if (groundquests.isTaskActive(self, quest, quest))
                     {
-                        sendSystemMessageTestingOnly(self, "TASK QUEST: " + quest);
+                        broadcast(self, "TASK QUEST: " + quest);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "Task not found: " + quest);
+                        broadcast(self, "Task not found: " + quest);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("showBuildoutArea"))
@@ -1351,109 +1351,109 @@ public class talisa_test extends script.base_script
                         here = getLocation(containingBuilding);
                     }
                     String buildoutAreaName = getBuildoutAreaName(here.x, here.z);
-                    sendSystemMessageTestingOnly(self, "You are in buildout area: " + buildoutAreaName);
+                    broadcast(self, "You are in buildout area: " + buildoutAreaName);
                 }
                 else if (priCommand.equalsIgnoreCase("detach_spawner"))
                 {
                     obj_id lookAtTarget = findTarget(self);
                     if (!isValidId(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "failed");
+                        broadcast(self, "failed");
                         return SCRIPT_CONTINUE;
                     }
                     detachScript(lookAtTarget, "theme_park.dungeon.empire_day_interior_npc_spawner");
-                    sendSystemMessageTestingOnly(self, "removed");
+                    broadcast(self, "removed");
                 }
                 else if (priCommand.equalsIgnoreCase("attach_spawner"))
                 {
                     obj_id lookAtTarget = findTarget(self);
                     if (!isValidId(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "failed");
+                        broadcast(self, "failed");
                         return SCRIPT_CONTINUE;
                     }
                     attachScript(lookAtTarget, "theme_park.dungeon.empire_day_interior_npc_spawner");
-                    sendSystemMessageTestingOnly(self, "removed");
+                    broadcast(self, "removed");
                 }
                 else if (priCommand.equalsIgnoreCase("make_dead"))
                 {
                     obj_id lookAtTarget = findTarget(self);
                     if (!isValidId(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "failed");
+                        broadcast(self, "failed");
                         return SCRIPT_CONTINUE;
                     }
                     ai_lib.aiSetPosture(lookAtTarget, POSTURE_KNOCKED_DOWN);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("has_lock_out_timer"))
                 {
                     if (hasObjVar(self, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("has_lock_out_flag"))
                 {
                     if (hasObjVar(self, holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_VANDAL_LOCKED_OUT);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RESISTANCE_LOCKED_OUT);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_PROPAGANDA_LOCKED_OUT);
                     }
                     if (hasObjVar(self, holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT))
                     {
-                        sendSystemMessageTestingOnly(self, "HAS: " + holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
+                        broadcast(self, "HAS: " + holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
+                        broadcast(self, "DOES NOT HAVE: " + holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("tatooine_vars"))
@@ -1461,33 +1461,33 @@ public class talisa_test extends script.base_script
                     obj_id tatooine = getPlanetByName("tatooine");
                     if (!isValidId(tatooine))
                     {
-                        sendSystemMessageTestingOnly(self, "No Tatooine Found.");
+                        broadcast(self, "No Tatooine Found.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "has script: " + hasScript(tatooine, "event.planet_event_handler"));
-                    sendSystemMessageTestingOnly(self, "OID: " + tatooine);
+                    broadcast(self, "has script: " + hasScript(tatooine, "event.planet_event_handler"));
+                    broadcast(self, "OID: " + tatooine);
                     String data = holiday.getEventHighScores(tatooine, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, true);
                     if (data == null || data.length() <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, "High Score Data Invalid.");
+                        broadcast(self, "High Score Data Invalid.");
                         return SCRIPT_CONTINUE;
                     }
                     if (!holiday.createEventLeaderBoardUI(self, holiday.LEADER_BOARD_TITLE, data))
                     {
-                        sendSystemMessageTestingOnly(self, "createEventLeaderBoardUI failed.");
+                        broadcast(self, "createEventLeaderBoardUI failed.");
                         return SCRIPT_CONTINUE;
                     }
-                    sendSystemMessageTestingOnly(self, "High Score Data should have worked.");
+                    broadcast(self, "High Score Data should have worked.");
                 }
                 else if (priCommand.equalsIgnoreCase("score_vars"))
                 {
                     if (hasObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE))
                     {
-                        sendSystemMessageTestingOnly(self, "Score var: " + getIntObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE));
+                        broadcast(self, "Score var: " + getIntObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE));
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "You don't have var");
+                        broadcast(self, "You don't have var");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("score_var_removed"))
@@ -1495,13 +1495,13 @@ public class talisa_test extends script.base_script
                     if (hasObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE))
                     {
                         removeObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE);
-                        sendSystemMessageTestingOnly(self, "Score var removed.");
+                        broadcast(self, "Score var removed.");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("set_score_var"))
                 {
                     setObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE, 33);
-                    sendSystemMessageTestingOnly(self, "Set to 33");
+                    broadcast(self, "Set to 33");
                     buff.removeBuff(self, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_COMBATANT);
                     buff.removeBuff(self, holiday.BUFF_REB_EMPIREDAY_RESISTANCE_COMBATANT);
                     buff.removeBuff(self, holiday.BUFF_IMP_EMPIREDAY_RECRUITMENT_SF);
@@ -1520,7 +1520,7 @@ public class talisa_test extends script.base_script
                     if (hasObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE))
                     {
                         removeObjVar(self, holiday.PLAYER_EMPIRE_DAY_SCORE);
-                        sendSystemMessageTestingOnly(self, "Score var removed.");
+                        broadcast(self, "Score var removed.");
                     }
                     removeObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER);
                     removeObjVar(self, holiday.EMPIRE_DAY_RECRUITMENT_LOCKED_OUT);
@@ -1532,7 +1532,7 @@ public class talisa_test extends script.base_script
                     removeObjVar(self, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
                     removeObjVar(self, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
                     removeObjVar(self, "empire_day_events.locked_out");
-                    sendSystemMessageTestingOnly(self, "Lockouts removed.");
+                    broadcast(self, "Lockouts removed.");
                     collection.removeCollectionForRealsies(self, holiday.REBEL_RESISTANCE_COLLECTION);
                     collection.removeCollectionForRealsies(self, holiday.REBEL_VANDAL_COLLECTION);
                     collection.removeCollectionForRealsies(self, holiday.REBEL_ENGINEERING_COLLECTION);
@@ -1700,51 +1700,51 @@ public class talisa_test extends script.base_script
                     obj_id tatooine = getPlanetByName("tatooine");
                     if (isValidId(tatooine))
                     {
-                        sendSystemMessageTestingOnly(self, "Resetting Leaderboard");
+                        broadcast(self, "Resetting Leaderboard");
                         messageTo(tatooine, "resetEventDataAfterDelay", params, 1, false);
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("remove_console_vars"))
                 {
                     utils.removeScriptVarTree(self, "consoleMiniGame");
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("giveSignal1"))
                 {
                     if (groundquests.isQuestActive(self, "outbreak_quest_facility_02_imperial"))
                     {
-                        sendSystemMessageTestingOnly(self, "has outbreak_quest_facility_02_imperial");
+                        broadcast(self, "has outbreak_quest_facility_02_imperial");
                     }
                     if (groundquests.isTaskActive(self, "outbreak_quest_facility_02_imperial", "body1Searched"))
                     {
-                        sendSystemMessageTestingOnly(self, "has tsk");
+                        broadcast(self, "has tsk");
                     }
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("goAlpha"))
                 {
                     warpPlayer(self, "dathomir", -5925, 559, -6667, null, -5925, 559, -6667, null, true);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("goBeta"))
                 {
                     warpPlayer(self, "dathomir", -6283, 561, -7521, null, -6283, 561, -7521, null, true);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("goGamma"))
                 {
                     warpPlayer(self, "dathomir", -6824, 553, -6456, null, -6824, 553, -6456, null, true);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("goDelta"))
                 {
                     warpPlayer(self, "dathomir", -7145, 562, -6922, null, -7145, 562, -6922, null, true);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("goEpsilon"))
                 {
                     warpPlayer(self, "dathomir", -7448, 570, -7342, null, -7448, 570, -7342, null, true);
-                    sendSystemMessageTestingOnly(self, "done");
+                    broadcast(self, "done");
                 }
                 else if (priCommand.equalsIgnoreCase("giveSignal") && !secCommand.equals(""))
                 {
@@ -1766,15 +1766,15 @@ public class talisa_test extends script.base_script
                     obj_id[] myList = getAllObjectsWithScript(getLocation(self), 100, "theme_park.outbreak.camp_arrival_trigger_volume");
                     if (myList == null || myList.length <= 0)
                     {
-                        sendSystemMessageTestingOnly(self, "failed");
+                        broadcast(self, "failed");
                     }
                     else
                     {
                         for (obj_id obj_id : myList)
                         {
-                            sendSystemMessageTestingOnly(self, "found: " + obj_id);
+                            broadcast(self, "found: " + obj_id);
                         }
-                        sendSystemMessageTestingOnly(self, "done");
+                        broadcast(self, "done");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("finishSignal"))
@@ -1793,36 +1793,36 @@ public class talisa_test extends script.base_script
                     obj_id camp = getCurrentAdvancedCamp(self);
                     if (isIdValid(camp))
                     {
-                        sendSystemMessageTestingOnly(self, "camp: " + camp);
+                        broadcast(self, "camp: " + camp);
                         if (camping.isInEntertainmentCamp(self, camp))
                         {
-                            sendSystemMessageTestingOnly(self, "You are in entertainer camp");
+                            broadcast(self, "You are in entertainer camp");
                         }
                         else
                         {
-                            sendSystemMessageTestingOnly(self, "You are NOT in entertainer camp");
+                            broadcast(self, "You are NOT in entertainer camp");
                         }
-                        sendSystemMessageTestingOnly(self, "can performance heal: " + performance.canPerformanceHeal(self));
-                        sendSystemMessageTestingOnly(self, "Max Duration: " + performance.inspireGetMaxDuration(self));
+                        broadcast(self, "can performance heal: " + performance.canPerformanceHeal(self));
+                        broadcast(self, "Max Duration: " + performance.inspireGetMaxDuration(self));
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "not a valid camp");
+                        broadcast(self, "not a valid camp");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("gethp") && !secCommand.equals(""))
                 {
                     obj_id secCmd = utils.stringToObjId(secCommand);
-                    sendSystemMessageTestingOnly(self, "CUR HP: " + getHitpoints(secCmd));
-                    sendSystemMessageTestingOnly(self, "MAX HP: " + getMaxHitpoints(secCmd));
+                    broadcast(self, "CUR HP: " + getHitpoints(secCmd));
+                    broadcast(self, "MAX HP: " + getMaxHitpoints(secCmd));
                 }
                 else if (priCommand.equalsIgnoreCase("sethp") && !secCommand.equals("") && !thirdCommand.equals(""))
                 {
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     int thrdCmd = utils.stringToInt(thirdCommand);
                     setHitpoints(secCmd, thrdCmd);
-                    sendSystemMessageTestingOnly(self, "CUR HP: " + getHitpoints(secCmd));
-                    sendSystemMessageTestingOnly(self, "MAX HP: " + getMaxHitpoints(secCmd));
+                    broadcast(self, "CUR HP: " + getHitpoints(secCmd));
+                    broadcast(self, "MAX HP: " + getMaxHitpoints(secCmd));
                 }
                 else if (priCommand.equalsIgnoreCase("incrementstack"))
                 {
@@ -1862,7 +1862,7 @@ public class talisa_test extends script.base_script
                 {
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     String template = utils.getTemplateFilenameNoPath(secCmd);
-                    sendSystemMessageTestingOnly(self, "template: " + template);
+                    broadcast(self, "template: " + template);
                 }
                 else if (priCommand.equalsIgnoreCase("getAttackerList") && !secCommand.equals(""))
                 {
@@ -1886,15 +1886,15 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     else
                     {
                         for (int i = 0; i < armor.DATATABLE_SPECIAL_PROTECTIONS.length; i++)
                         {
-                            sendSystemMessageTestingOnly(self, "resist: " + armor.DATATABLE_SPECIAL_PROTECTIONS[i] + ": " + getSkillStatisticModifier(secCmd, "expertise_innate_protection_" + armor.DATATABLE_SPECIAL_PROTECTIONS[i]));
+                            broadcast(self, "resist: " + armor.DATATABLE_SPECIAL_PROTECTIONS[i] + ": " + getSkillStatisticModifier(secCmd, "expertise_innate_protection_" + armor.DATATABLE_SPECIAL_PROTECTIONS[i]));
                         }
-                        sendSystemMessageTestingOnly(self, "resist: all: " + getSkillStatisticModifier(secCmd, "expertise_innate_protection_all"));
+                        broadcast(self, "resist: all: " + getSkillStatisticModifier(secCmd, "expertise_innate_protection_all"));
                     }
                     return SCRIPT_CONTINUE;
                 }
@@ -1915,21 +1915,21 @@ public class talisa_test extends script.base_script
                     obj_id lookAtTarget = findTarget(self);
                     if (!isValidId(lookAtTarget))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     if (!utils.hasScriptVar(lookAtTarget, "defense_camp"))
                     {
-                        sendSystemMessageTestingOnly(self, "failed hasScriptVar check");
+                        broadcast(self, "failed hasScriptVar check");
                         return SCRIPT_CONTINUE;
                     }
                     obj_id defendingGeneral = utils.getObjIdScriptVar(lookAtTarget, "defense_camp");
                     if (!isValidId(defendingGeneral) || !exists(defendingGeneral))
                     {
-                        sendSystemMessageTestingOnly(self, "no object defense_camp");
+                        broadcast(self, "no object defense_camp");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "defense_camp found");
+                        broadcast(self, "defense_camp found");
                     }
                     return SCRIPT_CONTINUE;
                 }
@@ -1938,26 +1938,26 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     else
                     {
                         int factionFlag = factions.getFactionFlag(secCmd);
                         if (factionFlag == 0)
                         {
-                            sendSystemMessageTestingOnly(self, "UNKNOWN FACTION");
+                            broadcast(self, "UNKNOWN FACTION");
                         }
                         else if (factionFlag == 1)
                         {
-                            sendSystemMessageTestingOnly(self, "REBEL FACTION");
+                            broadcast(self, "REBEL FACTION");
                         }
                         else if (factionFlag == 2)
                         {
-                            sendSystemMessageTestingOnly(self, "IMPERIAL FACTION");
+                            broadcast(self, "IMPERIAL FACTION");
                         }
                         else if (factionFlag == 3)
                         {
-                            sendSystemMessageTestingOnly(self, "NEUTRAL FACTION");
+                            broadcast(self, "NEUTRAL FACTION");
                         }
                     }
                 }
@@ -1966,7 +1966,7 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     int currentHp = getHitpoints(secCmd);
                     setHitpoints(secCmd, currentHp - 5000);
@@ -1976,9 +1976,9 @@ public class talisa_test extends script.base_script
                     int secCmd = utils.stringToInt(secCommand);
                     if (secCmd < 0)
                     {
-                        sendSystemMessageTestingOnly(self, "invalid amt");
+                        broadcast(self, "invalid amt");
                     }
-                    sendSystemMessageTestingOnly(self, "amt: " + secCmd);
+                    broadcast(self, "amt: " + secCmd);
                     buff.applyBuffWithStackCount(self, gcw.BUFF_PLAYER_FATIGUE, secCmd);
                 }
                 else if (priCommand.equalsIgnoreCase("isonlist") && !secCommand.equals(""))
@@ -1986,15 +1986,15 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     if (trial.isNonInstanceFactionParticipant(self, secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "You are on list");
+                        broadcast(self, "You are on list");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "You are NOT on list");
+                        broadcast(self, "You are NOT on list");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("removemefromlist") && !secCommand.equals(""))
@@ -2002,15 +2002,15 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     if (trial.removeNonInstanceFactionParticipant(self, secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "You are removed");
+                        broadcast(self, "You are removed");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(self, "You werent on it");
+                        broadcast(self, "You werent on it");
                     }
                 }
                 else if (priCommand.equalsIgnoreCase("getgcwtools"))
@@ -2050,7 +2050,7 @@ public class talisa_test extends script.base_script
                 else if (priCommand.equalsIgnoreCase("remove_tutorial_flag"))
                 {
                     removeObjVar(self, gcw.GCW_TUTORIAL_FLAG);
-                    sendSystemMessageTestingOnly(self, "Tutorial Flag Removed");
+                    broadcast(self, "Tutorial Flag Removed");
                 }
                 else if (priCommand.equalsIgnoreCase("nym_warp_choster"))
                 {
@@ -2169,11 +2169,11 @@ public class talisa_test extends script.base_script
                     obj_id secCmd = utils.stringToObjId(secCommand);
                     if (!isValidId(secCmd))
                     {
-                        sendSystemMessageTestingOnly(self, "invalid object");
+                        broadcast(self, "invalid object");
                     }
                     utils.removeScriptVar(secCmd, "soldAsJunk");
                     removeObjVar(secCmd, "soldAsJunk");
-                    sendSystemMessageTestingOnly(self, "Done");
+                    broadcast(self, "Done");
                 }
             }
         }
@@ -2443,14 +2443,14 @@ public class talisa_test extends script.base_script
         {
             if (hasScript(object, "item.camp.camp_advanced"))
             {
-                sendSystemMessageTestingOnly(player, "found script.");
+                broadcast(player, "found script.");
                 if (isInTriggerVolume(object, "campsite", player))
                 {
                     return object;
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(player, "no objects found.");
+                    broadcast(player, "no objects found.");
                 }
             }
         }

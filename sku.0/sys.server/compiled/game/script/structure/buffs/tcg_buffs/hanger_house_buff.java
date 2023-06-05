@@ -14,7 +14,6 @@ public class hanger_house_buff extends base_script
         {
             buff.applyBuff(item, "tcg_hanger_1_buff");
             buff.applyBuff(item, "tcg_hanger_2_buff");
-            buff.applyBuff(item, "tcg_hanger_3_buff");
         }
         return SCRIPT_CONTINUE;
     }
@@ -28,10 +27,6 @@ public class hanger_house_buff extends base_script
         if (isPlayer(item) && buff.hasBuff(item, "tcg_hanger_2_buff"))
         {
             buff.removeBuff(item, "tcg_hanger_2_buff");
-        }
-        if (isPlayer(item) && buff.hasBuff(item, "tcg_hanger_3_buff"))
-        {
-            buff.removeBuff(item, "tcg_hanger_3_buff");
         }
         return SCRIPT_CONTINUE;
     }

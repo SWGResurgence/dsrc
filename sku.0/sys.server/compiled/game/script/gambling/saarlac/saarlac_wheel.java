@@ -898,8 +898,8 @@ public class saarlac_wheel extends script.gambling.base.wheel
             if (maxBet > 0 && amt > maxBet)
             {
                 int refund = amt - maxBet;
-                sendSystemMessageTestingOnly(player, "The maximum bet for this station is " + maxBet + " credits.");
-                sendSystemMessageTestingOnly(player, "Bet Refund (over-bet): " + refund + " credits");
+                broadcast(player, "The maximum bet for this station is " + maxBet + " credits.");
+                broadcast(player, "Bet Refund (over-bet): " + refund + " credits");
                 transferBankCreditsTo(table, player, refund, "noHandler", "noHandler", new dictionary());
                 amt = maxBet;
             }
@@ -1588,7 +1588,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {
-            sendSystemMessageTestingOnly(player, "The wheel was unable to create an interface for you.");
+            broadcast(player, "The wheel was unable to create an interface for you.");
             return;
         }
         utils.setScriptVar(self, gambling.VAR_GAME_PLAYERS + "." + player + ".pid", pid);

@@ -210,7 +210,7 @@ public class npe extends script.base_script
             utils.removeScriptVar(player, SCRIPT_VAR_INSTANCE_OVERRIDE);
             if (index < -1 || index >= stations.length)
             {
-                sendSystemMessageTestingOnly(player, "You have specified an invalid Tansarii station index override (max of " + (stations.length - 1) + "). Sending to default station");
+                broadcast(player, "You have specified an invalid Tansarii station index override (max of " + (stations.length - 1) + "). Sending to default station");
                 if (stations[0] != null)
                 {
                     return 0;
@@ -220,7 +220,7 @@ public class npe extends script.base_script
             {
                 return index;
             }
-            sendSystemMessageTestingOnly(player, "The Tansarii station index override you specified is null! Defaulting to normal behavior");
+            broadcast(player, "The Tansarii station index override you specified is null! Defaulting to normal behavior");
         }
         int return_index = -1;
         int population = -1;
@@ -263,7 +263,7 @@ public class npe extends script.base_script
             utils.removeScriptVar(player, SCRIPT_VAR_INSTANCE_OVERRIDE);
             if (index < -1 || index >= dungeons.length)
             {
-                sendSystemMessageTestingOnly(player, "You have specified an invalid station Gamma index override (max of " + (dungeons.length - 1) + "). Sending to default station");
+                broadcast(player, "You have specified an invalid station Gamma index override (max of " + (dungeons.length - 1) + "). Sending to default station");
                 if (dungeons[0] != null)
                 {
                     return 0;
@@ -273,7 +273,7 @@ public class npe extends script.base_script
             {
                 return index;
             }
-            sendSystemMessageTestingOnly(player, "The station Gamma index override you specified is null! Defaulting to normal behavior");
+            broadcast(player, "The station Gamma index override you specified is null! Defaulting to normal behavior");
         }
         int return_index = -1;
         int population = -1;
@@ -340,7 +340,7 @@ public class npe extends script.base_script
             utils.removeScriptVar(player, SCRIPT_VAR_INSTANCE_OVERRIDE);
             if (index < -1 || index >= stations.length)
             {
-                sendSystemMessageTestingOnly(player, "You have specified an invalid station Gamma index override (max of " + (stations.length - 1) + "). Sending to default station");
+                broadcast(player, "You have specified an invalid station Gamma index override (max of " + (stations.length - 1) + "). Sending to default station");
                 if (stations[0] != null)
                 {
                     return stations[0];
@@ -350,7 +350,7 @@ public class npe extends script.base_script
             {
                 return stations[index];
             }
-            sendSystemMessageTestingOnly(player, "The station Gamma index override you specified is null! Defaulting to normal behavior");
+            broadcast(player, "The station Gamma index override you specified is null! Defaulting to normal behavior");
         }
         int ord_num_ind = utils.stringToInt(ord_scene.substring(ord_scene.length() - 1));
         --ord_num_ind;

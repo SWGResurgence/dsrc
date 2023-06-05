@@ -158,7 +158,7 @@ public class harvest_module extends script.base_script
         }
         if (false)
         {
-            sendSystemMessageTestingOnly(player, "Cannot access corpse " + getName(target));
+            broadcast(player, "Cannot access corpse " + getName(target));
             sendSystemMessage(player, SID_CANNOT_ACCESS_CORPSE);
             return SCRIPT_CONTINUE;
         }

@@ -133,10 +133,10 @@ public class player_pvp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             int bfState = utils.getIntScriptVar(controller, "battlefield.state");
-            sendSystemMessageTestingOnly(self, "bfState: " + bfState);
+            broadcast(self, "bfState: " + bfState);
             if (bfState == pvp.PVP_STATE_INVITE_QUEUE)
             {
-                sendSystemMessageTestingOnly(self, "Attempting to end invitations...");
+                broadcast(self, "Attempting to end invitations...");
                 utils.setScriptVar(controller, "battlefield.state", pvp.PVP_STATE_INVITE_OVER);
             }
         }
@@ -150,7 +150,7 @@ public class player_pvp extends script.base_script
             int bfState = utils.getIntScriptVar(controller, "battlefield.state");
             if (bfState == pvp.PVP_STATE_BATTLE_SETUP)
             {
-                sendSystemMessageTestingOnly(self, "Attempting to end setup...");
+                broadcast(self, "Attempting to end setup...");
                 utils.setScriptVar(controller, "battlefield.state", pvp.PVP_STATE_BATTLE_START);
             }
         }
@@ -162,7 +162,7 @@ public class player_pvp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             utils.removeScriptVar(controller, "battlefield.battleTime");
-            sendSystemMessageTestingOnly(self, "Attempting to end battlefield...");
+            broadcast(self, "Attempting to end battlefield...");
         }
         return SCRIPT_CONTINUE;
     }

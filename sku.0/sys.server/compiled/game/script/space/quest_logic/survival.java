@@ -25,7 +25,7 @@ public class survival extends script.base_script
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         setObjVar(self, "transPoint", questInfo.getString("transmissionPoint"));

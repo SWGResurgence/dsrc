@@ -207,7 +207,7 @@ public class permanent_structure extends script.base_script
                         else
                         {
                             LOG("LOG_CHANNEL", transferer + "-> You must be an admin to pick up an item here.");
-                            sendSystemMessageTestingOnly(transferer, "You must be an admin to pick up an item here.");
+                            broadcast(transferer, "You must be an admin to pick up an item here.");
                             return SCRIPT_OVERRIDE;
                         }
                     }
@@ -314,7 +314,7 @@ public class permanent_structure extends script.base_script
         }
         if (boolSender)
         {
-            sendSystemMessageTestingOnly(objSender, "Received loop");
+            broadcast(objSender, "Received loop");
         }
         int time_stamp = getIntObjVar(self, player_structure.VAR_LAST_MAINTANENCE);
         int current_time = getGameTime();
@@ -322,9 +322,9 @@ public class permanent_structure extends script.base_script
         {
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(objSender, "structure is Not condemned");
-                sendSystemMessageTestingOnly(objSender, "Timestamp is " + time_stamp);
-                sendSystemMessageTestingOnly(objSender, "Current Time is " + current_time);
+                broadcast(objSender, "structure is Not condemned");
+                broadcast(objSender, "Timestamp is " + time_stamp);
+                broadcast(objSender, "Current Time is " + current_time);
             }
             if (time_stamp < 1)
             {
@@ -338,13 +338,13 @@ public class permanent_structure extends script.base_script
             }
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(objSender, "delta time is " + delta_time);
+                broadcast(objSender, "delta time is " + delta_time);
             }
             LOG("LOG", "delta_time is " + delta_time + " and heartbeat is " + player_structure.getMaintenanceHeartbeat());
             int loops = delta_time / player_structure.getMaintenanceHeartbeat();
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(objSender, "Loops 1 is " + loops);
+                broadcast(objSender, "Loops 1 is " + loops);
             }
             if (loops < 0)
             {
@@ -358,31 +358,31 @@ public class permanent_structure extends script.base_script
             }
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(objSender, "Loops 2 is " + loops);
+                broadcast(objSender, "Loops 2 is " + loops);
             }
             int cost = player_structure.getMaintenanceRate(self) * loops;
             LOG("LOG_CHANNEL", current_time + "/" + time_stamp + "/" + player_structure.getMaintenanceHeartbeat() + " loops ->" + loops + " cost ->" + cost);
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(objSender, "Raw per loop cost is " + player_structure.getMaintenanceRate(self));
-                sendSystemMessageTestingOnly(objSender, "Cost is " + cost);
+                broadcast(objSender, "Raw per loop cost is " + player_structure.getMaintenanceRate(self));
+                broadcast(objSender, "Cost is " + cost);
             }
             if ((cost > 0) && !player_structure.isCivic(self))
             {
                 boolResetTimeStamp = true;
                 if (boolSender)
                 {
-                    sendSystemMessageTestingOnly(objSender, "Checkign pools ");
+                    broadcast(objSender, "Checkign pools ");
                 }
                 int pool_remaining = player_structure.decrementMaintenancePool(self, cost);
                 if (boolSender)
                 {
-                    sendSystemMessageTestingOnly(objSender, "Pool remaing is " + pool_remaining);
+                    broadcast(objSender, "Pool remaing is " + pool_remaining);
                 }
                 obj_id objOwner = player_structure.getStructureOwnerObjId(self);
                 if (boolSender)
                 {
-                    sendSystemMessageTestingOnly(objSender, "Owner is " + objOwner);
+                    broadcast(objSender, "Owner is " + objOwner);
                 }
                 if (player_structure.isBuilding(self))
                 {
@@ -441,7 +441,7 @@ public class permanent_structure extends script.base_script
         {
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(self, "Resetting timestamp");
+                broadcast(self, "Resetting timestamp");
             }
             setObjVar(self, player_structure.VAR_LAST_MAINTANENCE, current_time);
         }
@@ -449,7 +449,7 @@ public class permanent_structure extends script.base_script
         {
             if (boolSender)
             {
-                sendSystemMessageTestingOnly(self, "No loops, so not resetting timestamp.");
+                broadcast(self, "No loops, so not resetting timestamp.");
             }
         }
         doHouseMaintenanceHousekeeping(self);
@@ -789,23 +789,23 @@ public class permanent_structure extends script.base_script
         int current_time = getGameTime();
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(self, "FAILED BANK TRANSFER!");
-            sendSystemMessageTestingOnly(self, "loops " + loops);
-            sendSystemMessageTestingOnly(self, "Cost " + cost);
-            sendSystemMessageTestingOnly(self, "current_time " + current_time);
+            broadcast(self, "FAILED BANK TRANSFER!");
+            broadcast(self, "loops " + loops);
+            broadcast(self, "Cost " + cost);
+            broadcast(self, "current_time " + current_time);
         }
         int damage = player_structure.getDecayRate(self) * loops;
         int condition = player_structure.damageStructure(self, damage, true);
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(self, "Damaging Structure to " + damage);
+            broadcast(self, "Damaging Structure to " + damage);
         }
         LOG("LOG_CHANNEL", "damage ->" + damage + " condition ->" + condition);
         if (condition == 0)
         {
             if (isIdValid(objSender))
             {
-                sendSystemMessageTestingOnly(self, "COndemning " + self);
+                broadcast(self, "COndemning " + self);
             }
             CustomerServiceLog("playerStructure", "Condemning (" + self + ") owned by " + player_structure.getStructureOwner(self));
             if (!hasObjVar(self, "player_structurestructure.condemned"))
@@ -817,7 +817,7 @@ public class permanent_structure extends script.base_script
         setObjVar(self, player_structure.VAR_LAST_MAINTANENCE, current_time);
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(self, "Doing housekeeping");
+            broadcast(self, "Doing housekeeping");
         }
         doHouseMaintenanceHousekeeping(self);
         return SCRIPT_CONTINUE;
@@ -836,7 +836,7 @@ public class permanent_structure extends script.base_script
         }
         if (isIdValid(objSender))
         {
-            sendSystemMessageTestingOnly(objSender, "Succesfully took maintenance, resetting timestamp");
+            broadcast(objSender, "Succesfully took maintenance, resetting timestamp");
         }
         int loops = params.getInt("intLoops");
         int cost = params.getInt("intCost");

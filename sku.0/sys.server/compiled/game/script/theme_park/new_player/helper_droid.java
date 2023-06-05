@@ -276,13 +276,13 @@ public class helper_droid extends script.base_script
             {
                 if (isGod(master))
                 {
-                    sendSystemMessageTestingOnly(master, "GODMODE MSG: New player quests disabled - destroying helper droid pcd.");
+                    broadcast(master, "GODMODE MSG: New player quests disabled - destroying helper droid pcd.");
                 }
                 destroyObject(pcd);
             }
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: New player quests disabled - destroying helper droid.");
+                broadcast(master, "GODMODE MSG: New player quests disabled - destroying helper droid.");
             }
             destroyObject(self);
             return SCRIPT_CONTINUE;
@@ -291,7 +291,7 @@ public class helper_droid extends script.base_script
         {
             if (isGod(master))
             {
-                sendSystemMessageTestingOnly(master, "GODMODE MSG: Cannot call helper droid in space - destroying helper droid.");
+                broadcast(master, "GODMODE MSG: Cannot call helper droid in space - destroying helper droid.");
             }
             sendSystemMessage(master, SID_CANNOT_CALL_IN_SPACE);
             destroyObject(self);

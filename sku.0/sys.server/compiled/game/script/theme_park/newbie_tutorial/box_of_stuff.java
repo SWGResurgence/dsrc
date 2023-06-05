@@ -104,7 +104,7 @@ public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_bas
         debugSpeakMsg(self, "There's no possible explanation for this.");
         if (isPlayer(transferer))
         {
-            sendSystemMessageTestingOnly(transferer, "You cannot pick that up.");
+            broadcast(transferer, "You cannot pick that up.");
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;

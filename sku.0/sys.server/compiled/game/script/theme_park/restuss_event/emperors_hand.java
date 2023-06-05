@@ -55,7 +55,7 @@ public class emperors_hand extends script.base_script
     public int setLoiter(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
-        ai_lib.setLoiterRanges(self, 0.0f, 80.0f);
+        ai_lib.setLoiterRanges(self, 0.0f, 0.0f);
         return SCRIPT_CONTINUE;
     }
     /*public int cleanupCorpse(obj_id self, dictionary params) throws InterruptedException

@@ -13,7 +13,7 @@ layer9	"heat,cold"	"acid,energy,electricity"	0	0	0	100	0	50	0	0	0
 layer10	"acid,electricity"	"heat,cold,kinetic"	0	0	0	100	0	50	0	0	0	
 layer11			0	0	0	100	0	100	0	0	0	"dead layer, feel free to place new layer here"
 layer12			0	0	0	100	0	100	0	0	0	"dead layer, feel free to place new layer here"
-layer13	energy	kinetic	0	0	0	0	100	2500	0	0	0	this row is used to flag the protections given by psgs
+layer13	energy		0	0	0	0	100	2500	0	0	0	this row is used to flag the protections given by psgs
 layer14	energy	kinetic	0	0	0	100	0	1000	0	0	0	this row is the armor layer given to recon segments
 layer15	kinetic	energy	0	0	0	100	0	1000	0	0	0	this row is the armor layer given to assault segments
 layer_reference			0	0	0	100	0	2500	0	0	0	all the min/max limits for this row MUST encompass the data for the individual armor rows

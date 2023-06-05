@@ -17,7 +17,7 @@ public class fs_intro_starter extends script.base_script
             }
             setObjVar(self, "fs_kickoff_stage", 2);
             messageTo(self, "meetOldMan", null, 10.0f, false);
-            sendSystemMessageTestingOnly(self, "FS Intro Initiated.");
+            broadcast(self, "FS Intro Initiated.");
         }
         return SCRIPT_CONTINUE;
     }

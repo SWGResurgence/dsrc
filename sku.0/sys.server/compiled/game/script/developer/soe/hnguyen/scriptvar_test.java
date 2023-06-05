@@ -35,16 +35,16 @@ public class scriptvar_test extends script.base_script
                     if (exists(target))
                     {
                         dictionary d = target.getScriptDictionary();
-                        sendSystemMessageTestingOnly(self, "scriptDictionary for " + target + " are: " + d.toString());
+                        broadcast(self, "scriptDictionary for " + target + " are: " + d.toString());
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "ahh " + target + " - no object");
+                        broadcast(self, "ahh " + target + " - no object");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "ahh " + target + " - bad id");
+                    broadcast(self, "ahh " + target + " - bad id");
                 }
             }
         }
@@ -64,16 +64,16 @@ public class scriptvar_test extends script.base_script
                     {
                         dictionary d = target.getScriptDictionary();
                         d.put(var, val);
-                        sendSystemMessageTestingOnly(self, "Setting scriptDictionary for " + target + " " + var + "=" + val);
+                        broadcast(self, "Setting scriptDictionary for " + target + " " + var + "=" + val);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "ohh " + target + " - no object");
+                        broadcast(self, "ohh " + target + " - no object");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "ohh " + target + " - bad id");
+                    broadcast(self, "ohh " + target + " - bad id");
                 }
             }
         }
@@ -90,16 +90,16 @@ public class scriptvar_test extends script.base_script
                     if (exists(target))
                     {
                         deltadictionary dctScriptVars = target.getScriptVars();
-                        sendSystemMessageTestingOnly(self, "Scriptvars for " + target + " are: " + dctScriptVars.toString());
+                        broadcast(self, "Scriptvars for " + target + " are: " + dctScriptVars.toString());
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "ah " + target + " - no object");
+                        broadcast(self, "ah " + target + " - no object");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "ah " + target + " - bad id");
+                    broadcast(self, "ah " + target + " - bad id");
                 }
             }
         }
@@ -118,27 +118,27 @@ public class scriptvar_test extends script.base_script
                     if (exists(target))
                     {
                         utils.setScriptVar(target, var, val);
-                        sendSystemMessageTestingOnly(self, "Setting scriptvar for " + target + " " + var + "=" + val);
+                        broadcast(self, "Setting scriptvar for " + target + " " + var + "=" + val);
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(self, "oh " + target + " - no object");
+                        broadcast(self, "oh " + target + " - no object");
                     }
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "oh " + target + " - bad id");
+                    broadcast(self, "oh " + target + " - bad id");
                 }
             }
         }
         else if (strText.equals("gc"))
         {
-            sendSystemMessageTestingOnly(self, "telling Java to do garbage collection");
+            broadcast(self, "telling Java to do garbage collection");
             System.gc();
         }
         else if (strText.equals("getGameTime"))
         {
-            sendSystemMessageTestingOnly(self, "getGameTime() returns " + getGameTime());
+            broadcast(self, "getGameTime() returns " + getGameTime());
         }
         return SCRIPT_CONTINUE;
     }

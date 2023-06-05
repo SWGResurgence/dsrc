@@ -16,7 +16,7 @@ public class player_warp extends script.base_script
             java.util.StringTokenizer st = new java.util.StringTokenizer(text);
             if (st.countTokens() < 5)
             {
-                sendSystemMessageTestingOnly(self, "format: warp <planet> <x> <y> <z>");
+                broadcast(self, "format: warp <planet> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             LOG("LOG_CHANNEL", "tokens -> " + st.countTokens() + " nextToken ->" + st.nextToken());
@@ -34,20 +34,20 @@ public class player_warp extends script.base_script
             java.util.StringTokenizer st = new java.util.StringTokenizer(text);
             if (st.countTokens() < 2)
             {
-                sendSystemMessageTestingOnly(self, "format: create <template>");
+                broadcast(self, "format: create <template>");
                 return SCRIPT_CONTINUE;
             }
             obj_id inv = getObjectInSlot(self, "inventory");
             if (inv == null)
             {
                 LOG("LOG_CHANNEL", "player_warp: create -- Unable to get an inventory slot for " + self);
-                sendSystemMessageTestingOnly(self, "Your inventory object is null!");
+                broadcast(self, "Your inventory object is null!");
             }
             String command = st.nextToken();
             String template = st.nextToken();
             if (template == null || template.length() < 1)
             {
-                sendSystemMessageTestingOnly(self, "That is an invalid object.");
+                broadcast(self, "That is an invalid object.");
                 return SCRIPT_CONTINUE;
             }
             LOG("LOG_CHANNEL", "template ->" + template);
@@ -55,7 +55,7 @@ public class player_warp extends script.base_script
             LOG("LOG_CHANNEL", "template_idx ->" + template_idx);
             if (template_idx != -1)
             {
-                sendSystemMessageTestingOnly(self, "You cannot create that object.");
+                broadcast(self, "You cannot create that object.");
                 return SCRIPT_CONTINUE;
             }
             int num_rows = dataTableGetNumRows("datatables/beta/restricted_template.iff");
@@ -69,7 +69,7 @@ public class player_warp extends script.base_script
                     {
                         if (template.contains(directory))
                         {
-                            sendSystemMessageTestingOnly(self, "You cannot create that object.");
+                            broadcast(self, "You cannot create that object.");
                             return SCRIPT_CONTINUE;
                         }
                     }
@@ -81,18 +81,18 @@ public class player_warp extends script.base_script
             }
             if (template.length() < 1)
             {
-                sendSystemMessageTestingOnly(self, "That is an invalid object.");
+                broadcast(self, "That is an invalid object.");
             }
             else 
             {
                 obj_id object = createObjectOverloaded(template, inv);
                 if (!isIdValid(object))
                 {
-                    sendSystemMessageTestingOnly(self, "That is an invalid object.");
+                    broadcast(self, "That is an invalid object.");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, object + " created.");
+                    broadcast(self, object + " created.");
                 }
             }
         }

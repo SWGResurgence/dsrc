@@ -41,7 +41,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
         {
             if (boolDebug)
             {
-                sendSystemMessageTestingOnly(speaker, "Error 1, Mission list is null");
+                broadcast(speaker, "Error 1, Mission list is null");
             }
             doIncorrectPlayerBlurb(self, speaker);
             return SCRIPT_CONTINUE;
@@ -49,14 +49,14 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
         int numMissions = missionList.length;
         if (boolDebug)
         {
-            sendSystemMessageTestingOnly(speaker, "NumMission is " + numMissions);
+            broadcast(speaker, "NumMission is " + numMissions);
         }
         if (numMissions == 1)
         {
             obj_id onlyMission = missionList[0];
             if (boolDebug)
             {
-                sendSystemMessageTestingOnly(speaker, "Since we're one, onlyMission is " + onlyMission);
+                broadcast(speaker, "Since we're one, onlyMission is " + onlyMission);
             }
             int missionState = getIntObjVar(onlyMission, "intState");
             if (missionState == missions.STATE_DYNAMIC_PICKUP)
@@ -64,7 +64,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 missionLoc = getMissionStartLocation(onlyMission);
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "State is pickup, using start location of value " + missionLoc);
+                    broadcast(speaker, "State is pickup, using start location of value " + missionLoc);
                 }
             }
             else if (missionState == missions.STATE_DYNAMIC_DROPOFF)
@@ -72,14 +72,14 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 missionLoc = getMissionEndLocation(onlyMission);
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "State is dropoff, using end location of value " + missionLoc);
+                    broadcast(speaker, "State is dropoff, using end location of value " + missionLoc);
                 }
             }
             else
             {
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "Fucked up missions, no nothing");
+                    broadcast(speaker, "Fucked up missions, no nothing");
                 }
                 debugServerConsoleMsg(speaker, "IT's all messed up, the mission State was totally wrong");
                 return SCRIPT_CONTINUE;
@@ -87,13 +87,13 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
             float dist = utils.getDistance2D(here, missionLoc);
             if (boolDebug)
             {
-                sendSystemMessageTestingOnly(speaker, "using here as test value. Here is " + here);
+                broadcast(speaker, "using here as test value. Here is " + here);
             }
             if ((dist > 15.0f) || (dist < 0))
             {
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "Distance is " + dist + " and erroring out");
+                    broadcast(speaker, "Distance is " + dist + " and erroring out");
                 }
                 doIncorrectPlayerBlurb(self, speaker);
                 return SCRIPT_CONTINUE;
@@ -104,7 +104,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
         {
             if (boolDebug)
             {
-                sendSystemMessageTestingOnly(speaker, "numMissions is 2, doing a loop");
+                broadcast(speaker, "numMissions is 2, doing a loop");
             }
             boolean rightSpot = false;
             for (int x = 0; x < numMissions; x++)
@@ -112,7 +112,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 obj_id thisMission = missionList[x];
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "Iterating, x is " + x + " and misison si " + thisMission);
+                    broadcast(speaker, "Iterating, x is " + x + " and misison si " + thisMission);
                 }
                 int currentState = getIntObjVar(thisMission, "intState");
                 if (currentState == missions.STATE_DYNAMIC_PICKUP)
@@ -120,7 +120,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                     missionLoc = getMissionStartLocation(thisMission);
                     if (boolDebug)
                     {
-                        sendSystemMessageTestingOnly(speaker, "State is pickup, using start location of value " + missionLoc);
+                        broadcast(speaker, "State is pickup, using start location of value " + missionLoc);
                     }
                 }
                 else if (currentState == missions.STATE_DYNAMIC_DROPOFF)
@@ -128,21 +128,21 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                     missionLoc = getMissionEndLocation(thisMission);
                     if (boolDebug)
                     {
-                        sendSystemMessageTestingOnly(speaker, "State is dropoff, using end location of value " + missionLoc);
+                        broadcast(speaker, "State is dropoff, using end location of value " + missionLoc);
                     }
                 }
                 float dist2 = utils.getDistance2D(here, missionLoc);
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "dist2 is " + dist2);
-                    sendSystemMessageTestingOnly(speaker, "Location 1(here) is " + here);
-                    sendSystemMessageTestingOnly(speaker, "Location 2(missionLoc) is " + missionLoc);
+                    broadcast(speaker, "dist2 is " + dist2);
+                    broadcast(speaker, "Location 1(here) is " + here);
+                    broadcast(speaker, "Location 2(missionLoc) is " + missionLoc);
                 }
                 if ((dist2 < 15.0f) && (dist2 >= 0))
                 {
                     if (boolDebug)
                     {
-                        sendSystemMessageTestingOnly(speaker, "Distance 2 is " + dist2 + " and setting rightspot to true");
+                        broadcast(speaker, "Distance 2 is " + dist2 + " and setting rightspot to true");
                     }
                     rightSpot = true;
                     setObjVar(self, "startLoc" + x, missionLoc);
@@ -153,7 +153,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
             {
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "rightSpot is false after our loop, erroring out");
+                    broadcast(speaker, "rightSpot is false after our loop, erroring out");
                 }
                 doIncorrectPlayerBlurb(self, speaker);
                 return SCRIPT_CONTINUE;
@@ -162,7 +162,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
             {
                 if (boolDebug)
                 {
-                    sendSystemMessageTestingOnly(speaker, "sameSpot check");
+                    broadcast(speaker, "sameSpot check");
                 }
                 location one = getLocationObjVar(self, "startLoc1");
                 location two = getLocationObjVar(self, "startLoc2");
@@ -170,7 +170,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 {
                     if (boolDebug)
                     {
-                        sendSystemMessageTestingOnly(speaker, "sameSpot is true");
+                        broadcast(speaker, "sameSpot is true");
                     }
                     boolean sameSpot = true;
                 }
@@ -235,7 +235,7 @@ public class mission_deliver_npc extends script.systems.missions.base.mission_dy
                 String strMissionTitle = getString(strMissionTitleId);
                 String strSystemMessage = getString(strTitleId);
                 strSystemMessage = strSystemMessage + " " + strMissionTitle;
-                sendSystemMessageTestingOnly(speaker, strSystemMessage);
+                broadcast(speaker, strSystemMessage);
                 dictionary dctParams = new dictionary();
                 messageTo(missionInfo, "pickup_event", dctParams, 0, true);
                 setObjVar(missionInfo, "intState", missions.STATE_DYNAMIC_DROPOFF);

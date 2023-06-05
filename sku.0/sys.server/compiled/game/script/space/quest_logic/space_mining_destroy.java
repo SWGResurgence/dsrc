@@ -26,7 +26,7 @@ public class space_mining_destroy extends script.base_script
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         String asteroids = questInfo.getString("asteroidType");

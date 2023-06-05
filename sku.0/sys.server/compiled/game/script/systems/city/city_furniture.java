@@ -316,7 +316,7 @@ public class city_furniture extends script.base_script
             return SCRIPT_CONTINUE;
         }
         setObjVar(player, "city.movementRate", amount);
-        sendSystemMessageTestingOnly(player, "Movement rate set: " + amount);
+        broadcast(player, "Movement rate set: " + amount);
         return SCRIPT_CONTINUE;
     }
 

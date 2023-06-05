@@ -46,7 +46,7 @@ public class som_kenobi_fragments extends script.base_script
                     if (isGod(player))
                     {
                         String errorMsg = "GODMODE MSG: questName provided for " + getTemplateName(self) + " in " + DATATABLE + " is invalid.";
-                        sendSystemMessageTestingOnly(player, errorMsg);
+                        broadcast(player, errorMsg);
                     }
                 }
             }

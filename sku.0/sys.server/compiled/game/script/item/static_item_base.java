@@ -126,7 +126,7 @@ public class static_item_base extends script.base_script
         {
             if (isGod(transferer))
             {
-                sendSystemMessageTestingOnly(transferer, "GOD MODE:You can Equip This due to being in GOD MODE");
+                broadcast(transferer, "GOD MODE:You can Equip This due to being in GOD MODE");
                 return SCRIPT_CONTINUE;
             }
             return SCRIPT_OVERRIDE;

@@ -1,4 +1,4 @@
-item	cash	token28	limit	class	script
+item	cash	resourceAmount	limit	class	script
 s[none]	i[0]	i[0]	i[0]	s	c
 item_meatlump_camp_light_schematic_02_01		55			
 item_meatlump_camp_light_schematic_02_02		55			

@@ -62,12 +62,12 @@ public class dantest extends script.base_script
     public int checkDifficulty(obj_id self, dictionary params) throws InterruptedException
     {
         int intRawDifficulty = getLevel(self);
-        sendSystemMessageTestingOnly(self, "getLevel returned " + intRawDifficulty);
+        broadcast(self, "getLevel returned " + intRawDifficulty);
         if (intRawDifficulty == 0)
         {
-            sendSystemMessageTestingOnly(self, "you lost your difficulty!");
+            broadcast(self, "you lost your difficulty!");
             deltadictionary dctScriptVars = self.getScriptVars();
-            sendSystemMessageTestingOnly(self, "Scriptvars are " + dctScriptVars.toString());
+            broadcast(self, "Scriptvars are " + dctScriptVars.toString());
         }
         messageTo(self, "checkDifficulty", null, 3, false);
         return SCRIPT_CONTINUE;
@@ -135,55 +135,55 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("validateCharacter"))
         {
             String strObject = strCommands[1];
-            sendSystemMessageTestingOnly(self, "strCommands[1] is " + strObject);
+            broadcast(self, "strCommands[1] is " + strObject);
             obj_id objTarget = utils.stringToObjId(strObject);
             obj_id objWeapon = getDefaultWeapon(objTarget);
-            sendSystemMessageTestingOnly(self, "Weapon Speed is " + getWeaponAttackSpeed(objWeapon));
-            sendSystemMessageTestingOnly(self, "template is " + getTemplateName(objWeapon));
-            sendSystemMessageTestingOnly(self, "Run Speed of target is " + getRunSpeed(objTarget));
+            broadcast(self, "Weapon Speed is " + getWeaponAttackSpeed(objWeapon));
+            broadcast(self, "template is " + getTemplateName(objWeapon));
+            broadcast(self, "Run Speed of target is " + getRunSpeed(objTarget));
         }
         if (strCommands[0].equals("moveTestOn"))
         {
             applySkillStatisticModifier(self, "slope_move", 30);
-            sendSystemMessageTestingOnly(self, "on");
+            broadcast(self, "on");
         }
         if (strCommands[0].equals("moveTestOff"))
         {
             applySkillStatisticModifier(self, "slope_move", -10);
-            sendSystemMessageTestingOnly(self, "off");
+            broadcast(self, "off");
         }
         if (strCommands[0].equals("gcwCrap"))
         {
             gcw.incrementGCWStanding(self, self);
-            sendSystemMessageTestingOnly(self, "YEAH");
+            broadcast(self, "YEAH");
         }
         if (strCommands[0].equals("unarmedSpeed"))
         {
             obj_id objWeapon = getDefaultWeapon(self);
-            sendSystemMessageTestingOnly(self, "Weapon Speed s " + getWeaponAttackSpeed(objWeapon));
-            sendSystemMessageTestingOnly(self, "template is " + getTemplateName(objWeapon));
+            broadcast(self, "Weapon Speed s " + getWeaponAttackSpeed(objWeapon));
+            broadcast(self, "template is " + getTemplateName(objWeapon));
         }
         if (strCommands[0].equals("setVehicleSpeed"))
         {
             obj_id objVehicle = getMountId(self);
             vehicle.initializeVehicle(objVehicle, self);
-            sendSystemMessageTestingOnly(self, "= " + getTemplateName(objVehicle));
+            broadcast(self, "= " + getTemplateName(objVehicle));
         }
         if (strCommands[0].equals("testTarget"))
         {
             setCombatTarget(self, getLookAtTarget(self));
-            sendSystemMessageTestingOnly(self, "asdsa");
+            broadcast(self, "asdsa");
         }
         if (strCommands[0].equals("show3po"))
         {
             string_id strSpam = new string_id("beta", "blank_line");
             npe.commTutorialPlayer(self, self, 20, strSpam, "", "object/mobile/c_3po.iff");
-            sendSystemMessageTestingOnly(self, "asdadasd");
+            broadcast(self, "asdadasd");
         }
         if (strCommands[0].equals("testStatup"))
         {
             skill.recalcPlayerPools(self, true);
-            sendSystemMessageTestingOnly(self, "asdsa");
+            broadcast(self, "asdsa");
         }
         if (strCommands[0].equals("checkReimburse"))
         {
@@ -191,17 +191,17 @@ public class dantest extends script.base_script
             strArray[0] = "object/weapon/ranged/rifle/rifle_dlt20.iff";
             strArray[1] = "object/weapon/ranged/rifle/rifle_t21.iff";
             setObjVar(self, "item_reimbursement_list", strArray);
-            sendSystemMessageTestingOnly(self, "Set");
+            broadcast(self, "Set");
         }
         if (strCommands[0].equals("checkStringId"))
         {
             string_id strSpam = new string_id("faction/faction_hq/faction_hq_response", "terminal_response23");
             sendSystemMessage(self, strSpam);
             String strTest = getString(strSpam);
-            sendSystemMessageTestingOnly(self, "strTest is " + strTest);
+            broadcast(self, "strTest is " + strTest);
             strSpam = new string_id("gcw", "newsnet_extra");
             strTest = getString(strSpam);
-            sendSystemMessageTestingOnly(self, "strTest is " + strTest);
+            broadcast(self, "strTest is " + strTest);
         }
         if (strCommands[0].equals("countMobs"))
         {
@@ -222,20 +222,20 @@ public class dantest extends script.base_script
                         {
                             if (isMob(objContent))
                             {
-                                sendSystemMessageTestingOnly(self, "Found  mob in " + objContents[intI]);
+                                broadcast(self, "Found  mob in " + objContents[intI]);
                                 intMobs++;
                             }
                         }
                     }
                 }
             }
-            sendSystemMessageTestingOnly(self, "Found " + intMobs);
+            broadcast(self, "Found " + intMobs);
         }
         if (strCommands[0].equals("findMobs"))
         {
             obj_id[] objMobs = getAllObjectsWithObjVar(getLocation(self), 32000.0f, "ai");
             int intRoll = rand(0, objMobs.length - 1);
-            sendSystemMessageTestingOnly(self, "Try ");
+            broadcast(self, "Try ");
             int intTest = 0;
             String strTest = "";
             Vector objDungeons = new Vector();
@@ -265,10 +265,10 @@ public class dantest extends script.base_script
             for (int intI = 0; intI < objDungeons.size(); intI++)
             {
                 strTest += "For " + getTemplateName(((obj_id) objDungeons.get(intI))) + " NPC Count is " + intCounts.get(intI) + "\r\n";
-                sendSystemMessageTestingOnly(self, "For " + getTemplateName(((obj_id) objDungeons.get(intI))) + " NPC Count is " + intCounts.get(intI));
+                broadcast(self, "For " + getTemplateName(((obj_id) objDungeons.get(intI))) + " NPC Count is " + intCounts.get(intI));
                 LOG("npe", "For " + getTemplateName(((obj_id) objDungeons.get(intI))) + " NPC Count is " + intCounts.get(intI));
             }
-            sendSystemMessageTestingOnly(self, "Total Hibernating Mob Count is " + intTest + " from " + objMobs.length);
+            broadcast(self, "Total Hibernating Mob Count is " + intTest + " from " + objMobs.length);
             strTest += "Total Hibernating Mob Count is " + intTest + " from " + objMobs.length;
             saveTextOnClient(self, "dungeon1.txt", strTest);
         }
@@ -303,63 +303,63 @@ public class dantest extends script.base_script
                 }
             }
             saveTextOnClient(self, "everything.txt", strTest);
-            sendSystemMessageTestingOnly(self, "length was " + objContents.length);
+            broadcast(self, "length was " + objContents.length);
         }
         if (strCommands[0].equals("checkForceRegen"))
         {
             int baseRegenRate = getSkillStatisticModifier(self, "jedi_force_power_regen");
             float regenRate = baseRegenRate;
-            sendSystemMessageTestingOnly(self, "regen Rate base is " + regenRate);
+            broadcast(self, "regen Rate base is " + regenRate);
             float fltActualRegen = getForcePowerRegenRate(self);
-            sendSystemMessageTestingOnly(self, "Actual Modified Regen is " + fltActualRegen);
+            broadcast(self, "Actual Modified Regen is " + fltActualRegen);
         }
         if (strCommands[0].equals("checkRate"))
         {
             obj_id objTarget = getLookAtTarget(self);
             int intRate = player_structure.getMaintenanceRate(objTarget);
-            sendSystemMessageTestingOnly(self, "rate is " + intRate);
+            broadcast(self, "rate is " + intRate);
         }
         if (strCommands[0].equals("goOnLeave"))
         {
             factions.goOnLeaveWithDelay(self, 1.0f);
-            sendSystemMessageTestingOnly(self, "GOING");
+            broadcast(self, "GOING");
         }
         if (strCommands[0].equals("startFlash"))
         {
             newbieTutorialHighlightUIElement(self, "/GroundHUD.Toolbar.volume.0", true);
-            sendSystemMessageTestingOnly(self, "ON");
+            broadcast(self, "ON");
         }
         if (strCommands[0].equals("stopFlash"))
         {
             newbieTutorialHighlightUIElement(self, "/GroundHUD.Toolbar.volume.0", false);
-            sendSystemMessageTestingOnly(self, "OFF");
+            broadcast(self, "OFF");
         }
         if (strCommands[0].equals("fixLots"))
         {
             adjustLotCount(self, 10);
-            sendSystemMessageTestingOnly(self, "fixed");
+            broadcast(self, "fixed");
         }
         if (strCommands[0].equals("startLoop"))
         {
             messageTo(getLookAtTarget(self), "updateGCWInfo", null, 30, false);
-            sendSystemMessageTestingOnly(self, "Looping");
+            broadcast(self, "Looping");
         }
         if (strCommands[0].equals("setHyperspaceLoc"))
         {
             setObjVar(self, "trHyperspace", getTransform_o2p(space_transition.getContainingShip(self)));
-            sendSystemMessageTestingOnly(self, "Set Transform");
+            broadcast(self, "Set Transform");
         }
         if (strCommands[0].equals("fakeHyperspace"))
         {
             transform trTest = getTransformObjVar(self, "trHyperspace");
             obj_id objTest = space_create.createShipHyperspace("imp_tie_bomber_tier1", trTest, null);
             setLookAtTarget(self, objTest);
-            sendSystemMessageTestingOnly(self, "Made " + objTest + " at " + getLocation(objTest) + " and you are at " + getLocation(space_transition.getContainingShip(self)));
+            broadcast(self, "Made " + objTest + " at " + getLocation(objTest) + " and you are at " + getLocation(space_transition.getContainingShip(self)));
         }
         if (strCommands[0].equals("hitMe"))
         {
             startCombat(getLookAtTarget(self), self);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("welcomeAboard"))
         {
@@ -423,13 +423,13 @@ public class dantest extends script.base_script
                 locTest.x = locTest.x + 3;
                 obj_id objTest = createObject(strItem, locTest);
             }
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("decrementScore"))
         {
             setObjVar(self, "faction", strCommands[1]);
             gcw.decrementGCWScore(self);
-            sendSystemMessageTestingOnly(self, "Decrementing");
+            broadcast(self, "Decrementing");
         }
         if (strCommands[0].equals("steal"))
         {
@@ -440,12 +440,12 @@ public class dantest extends script.base_script
         {
             setObjVar(self, "faction", strCommands[1]);
             gcw.incrementGCWScore(self);
-            sendSystemMessageTestingOnly(self, "Incrementing");
+            broadcast(self, "Incrementing");
         }
         if (strCommands[0].equals("forceSpawn"))
         {
             messageTo(getLookAtTarget(self), "doSpawnEvent", null, 1, false);
-            sendSystemMessageTestingOnly(self, "Doing spawny thing");
+            broadcast(self, "Doing spawny thing");
         }
         if (strCommands[0].equals("forceMaintenance"))
         {
@@ -458,14 +458,14 @@ public class dantest extends script.base_script
             dictionary dctParams = new dictionary();
             dctParams.put("objSender", self);
             messageTo(objTarget, "OnMaintenanceLoop", dctParams, 0, false);
-            sendSystemMessageTestingOnly(self, "Sent maintenance loop request to " + objTarget);
+            broadcast(self, "Sent maintenance loop request to " + objTarget);
         }
         if (strCommands[0].equals("shootTest"))
         {
             setState(self, STATE_COMBAT, true);
             setCombatTarget(self, getLookAtTarget(self));
             sequencer.doCombatAnimation(self, getLookAtTarget(self), "fire_1_single_light");
-            sendSystemMessageTestingOnly(self, "s");
+            broadcast(self, "s");
         }
         if (strCommands[0].equals("twiddle"))
         {
@@ -474,7 +474,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("validateSequencer"))
         {
             obj_id master = sequencer.getSequenceObject(strCommands[1]);
-            sendSystemMessageTestingOnly(self, "" + master);
+            broadcast(self, "" + master);
             return SCRIPT_CONTINUE;
         }
         if (strCommands[0].equals("forceMaintenanceLong"))
@@ -486,7 +486,7 @@ public class dantest extends script.base_script
             intTime = intTime - intTimeStamp;
             setObjVar(objTarget, player_structure.VAR_LAST_MAINTANENCE, intTimeStamp);
             messageTo(objTarget, "OnMaintenanceLoop", null, 0, false);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("sellItemTest"))
         {
@@ -497,7 +497,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("verboseDebug"))
         {
             setObjVar(self, "verboseDebug", 1);
-            sendSystemMessageTestingOnly(self, "Debug on");
+            broadcast(self, "Debug on");
         }
         if (strCommands[0].equals("makeGuy"))
         {
@@ -511,19 +511,19 @@ public class dantest extends script.base_script
             for (obj_id objMission : objMissions)
             {
                 location locTest = getMissionStartLocation(objMission);
-                sendSystemMessageTestingOnly(self, "Start: " + locTest);
+                broadcast(self, "Start: " + locTest);
                 float dist = utils.getDistance2D(getLocation(self), locTest);
-                sendSystemMessageTestingOnly(self, "dist is " + dist);
+                broadcast(self, "dist is " + dist);
                 locTest = getMissionEndLocation(objMission);
-                sendSystemMessageTestingOnly(self, "End: " + locTest);
+                broadcast(self, "End: " + locTest);
                 dist = utils.getDistance2D(getLocation(self), locTest);
-                sendSystemMessageTestingOnly(self, "dist is " + dist);
+                broadcast(self, "dist is " + dist);
             }
         }
         if (strCommands[0].equals("verboseDebug"))
         {
             setObjVar(self, "verboseDebug", 1);
-            sendSystemMessageTestingOnly(self, "Debug on");
+            broadcast(self, "Debug on");
         }
         if (strCommands[0].equals("makeGuy"))
         {
@@ -537,62 +537,62 @@ public class dantest extends script.base_script
             for (obj_id objMission : objMissions)
             {
                 location locTest = getMissionStartLocation(objMission);
-                sendSystemMessageTestingOnly(self, "Start: " + locTest);
+                broadcast(self, "Start: " + locTest);
                 float dist = utils.getDistance2D(getLocation(self), locTest);
-                sendSystemMessageTestingOnly(self, "dist is " + dist);
+                broadcast(self, "dist is " + dist);
                 locTest = getMissionEndLocation(objMission);
-                sendSystemMessageTestingOnly(self, "End: " + locTest);
+                broadcast(self, "End: " + locTest);
                 dist = utils.getDistance2D(getLocation(self), locTest);
-                sendSystemMessageTestingOnly(self, "dist is " + dist);
+                broadcast(self, "dist is " + dist);
             }
         }
         if (strCommands[0].equals("testFaction"))
         {
             int intFaction = pvpGetAlignedFaction(self);
-            sendSystemMessageTestingOnly(self, "I am " + intFaction);
+            broadcast(self, "I am " + intFaction);
             obj_id objTarget = getLookAtTarget(self);
             intFaction = pvpGetAlignedFaction(objTarget);
-            sendSystemMessageTestingOnly(self, "They are " + intFaction);
+            broadcast(self, "They are " + intFaction);
         }
         if (strCommands[0].equals("setupRebelFaction"))
         {
             factions.addFactionStanding(self, factions.FACTION_REBEL, 30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("setupImperialFaction"))
         {
             factions.addFactionStanding(self, factions.FACTION_IMPERIAL, 30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("negativeImperial"))
         {
             factions.addFactionStanding(self, factions.FACTION_IMPERIAL, -30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("negativeRebel"))
         {
             factions.addFactionStanding(self, factions.FACTION_REBEL, -30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("negativeImperial"))
         {
             factions.addFactionStanding(self, factions.FACTION_IMPERIAL, -30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("negativeRebel"))
         {
             factions.addFactionStanding(self, factions.FACTION_REBEL, -30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("setupImperialFaction"))
         {
             factions.addFactionStanding(self, factions.FACTION_IMPERIAL, 30000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("logTest"))
         {
             LOG("space", "WOBBLE");
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("testReload"))
         {
@@ -600,18 +600,18 @@ public class dantest extends script.base_script
             int[] slots = space_crafting.getShipInstalledSlots(ship);
             for (int slot : slots)
             {
-                sendSystemMessageTestingOnly(self, "checking slot " + slot);
+                broadcast(self, "checking slot " + slot);
                 if (space_crafting.isMissileSlot(ship, slot))
                 {
                     space_pilot_command.weaponLauncherSpaceReload(ship, self, slot);
                 }
                 else if (space_crafting.isCounterMeasureSlot(ship, slot))
                 {
-                    sendSystemMessageTestingOnly(self, "aweads");
+                    broadcast(self, "aweads");
                     space_pilot_command.countermeasureLauncherSpaceReload(ship, self, slot);
                 }
             }
-            sendSystemMessageTestingOnly(self, "WACHSD");
+            broadcast(self, "WACHSD");
         }
         if (strCommands[0].equals("registerRecruiter"))
         {
@@ -627,17 +627,17 @@ public class dantest extends script.base_script
                 locTest = getLocation(objContainer);
             }
             addPlanetaryMapLocation(objTarget, utils.packStringId(strMapNameId), (int) locTest.x, (int) locTest.z, strPrimaryCategory, strSecondaryCategory, MLT_STATIC, planetary_map.NO_FLAG);
-            sendSystemMessageTestingOnly(self, "Registered the whozit");
+            broadcast(self, "Registered the whozit");
         }
         if (strCommands[0].equals("countShips"))
         {
             obj_id[] objStuff = getAllObjectsWithScript(getLocation(space_transition.getContainingShip(self)), 32000, "space.combat.combat_ship");
-            sendSystemMessageTestingOnly(self, "objStuff length is " + objStuff.length);
+            broadcast(self, "objStuff length is " + objStuff.length);
         }
         if (strCommands[0].equals("countLair"))
         {
             obj_id[] objStuff = getAllObjectsWithTemplate(getLocation(self), 32000, "object/creature/player/bothan_male.iff");
-            sendSystemMessageTestingOnly(self, "objStuff length is " + objStuff.length);
+            broadcast(self, "objStuff length is " + objStuff.length);
             int intCount = 0;
             objStuff = getAllObjectsWithTemplate(getLocation(self), 32000, "object/tangible/location/location_32.iff");
             intCount = intCount + objStuff.length;
@@ -649,20 +649,20 @@ public class dantest extends script.base_script
             intCount = intCount + objStuff.length;
             objStuff = getAllObjectsWithTemplate(getLocation(self), 32000, "object/tangible/location/location_96.iff");
             intCount = intCount + objStuff.length;
-            sendSystemMessageTestingOnly(self, "intCount is " + intCount);
+            broadcast(self, "intCount is " + intCount);
         }
         if (strCommands[0].equals("clearImperialFaction"))
         {
             factions.addFactionStanding(self, factions.FACTION_IMPERIAL, -1000);
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("zoneStatus"))
         {
             obj_id objShip = getPilotedShip(self);
             obj_id[] objSpawnedShips = getAllObjectsWithObjVar(getLocation(objShip), 32000, "objParent");
             obj_id[] objAllShips = getAllObjectsWithScript(getLocation(objShip), 32000, "space.combat.combat_ship");
-            sendSystemMessageTestingOnly(self, "Ships From Spawners: " + objSpawnedShips.length);
-            sendSystemMessageTestingOnly(self, "Ships From Spawners and Missions: " + objAllShips.length);
+            broadcast(self, "Ships From Spawners: " + objSpawnedShips.length);
+            broadcast(self, "Ships From Spawners and Missions: " + objAllShips.length);
             obj_id[] objSpawners = getAllObjectsWithTemplate(getLocation(objShip), 32000, "object/tangible/space/content_infrastructure/basic_spawner.iff");
             for (obj_id objParent : objSpawners)
             {
@@ -678,10 +678,10 @@ public class dantest extends script.base_script
                         intActualCount = intActualCount + 1;
                     }
                 }
-                sendSystemMessageTestingOnly(self, objParent + " Set count is :" + intSpawnCount + " and spawned count is: " + intActualCount);
+                broadcast(self, objParent + " Set count is :" + intSpawnCount + " and spawned count is: " + intActualCount);
                 if (intActualCount > intSpawnCount)
                 {
-                    sendSystemMessageTestingOnly(self, "WARNING! WARNING! WARNING! SPAWN COUNT IS OVER SET COUNT!@!@");
+                    broadcast(self, "WARNING! WARNING! WARNING! SPAWN COUNT IS OVER SET COUNT!@!@");
                 }
             }
         }
@@ -693,7 +693,7 @@ public class dantest extends script.base_script
         {
             obj_id objTest = getTopMostContainer(self);
             setOwner(objTest, self);
-            sendSystemMessageTestingOnly(self, "Owned");
+            broadcast(self, "Owned");
         }
         if (strCommands[0].equals("makeShip"))
         {
@@ -711,12 +711,12 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("whereAmI"))
         {
             obj_id objTest = space_transition.getContainingShip(self);
-            sendSystemMessageTestingOnly(self, "I am at " + getLocation(objTest));
+            broadcast(self, "I am at " + getLocation(objTest));
         }
         if (strCommands[0].equals("trainerTest"))
         {
             space_utils.openCommChannelAfterLoad(getPilotedShip(self), getPilotedShip(self));
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("fixChassis"))
         {
@@ -727,7 +727,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("addBooster"))
         {
             boolean boolTest = shipPseudoInstallComponent(space_transition.getContainingShip(self), space_crafting.BOOSTER, (1521210513));
-            sendSystemMessageTestingOnly(self, "Added booster, " + boolTest);
+            broadcast(self, "Added booster, " + boolTest);
         }
         if (strCommands[0].equals("radialCrash"))
         {
@@ -748,10 +748,10 @@ public class dantest extends script.base_script
                 space_utils.callTrigger("OnObjectMenuSelect", newParams);
                 queueCommand(self, (1283441724), getLookAtTarget(self), "", COMMAND_PRIORITY_IMMEDIATE);
             }
-            sendSystemMessageTestingOnly(self, "DONE DONE DONE");
-            sendSystemMessageTestingOnly(self, "DONE DONE DONE");
-            sendSystemMessageTestingOnly(self, "DONE DONE DONE");
-            sendSystemMessageTestingOnly(self, "DONE DONE DONE");
+            broadcast(self, "DONE DONE DONE");
+            broadcast(self, "DONE DONE DONE");
+            broadcast(self, "DONE DONE DONE");
+            broadcast(self, "DONE DONE DONE");
         }
         if (strText.equals("shotTest"))
         {
@@ -779,7 +779,7 @@ public class dantest extends script.base_script
         if (strText.equals("healClone"))
         {
             healing.healClone(self, true);
-            sendSystemMessageTestingOnly(self, "f");
+            broadcast(self, "f");
             return SCRIPT_CONTINUE;
         }
         if (strText.equals("mapTest"))
@@ -787,17 +787,17 @@ public class dantest extends script.base_script
             String[] strTest = planetary_map.getUniquePlanetaryMapCategories(null);
             for (int intI = 0; intI < strTest.length; intI++)
             {
-                sendSystemMessageTestingOnly(self, "strTest " + intI + " is " + strTest[intI]);
+                broadcast(self, "strTest " + intI + " is " + strTest[intI]);
             }
             strTest = planetary_map.getUniquePlanetaryMapCategories("space");
             for (int intI = 0; intI < strTest.length; intI++)
             {
-                sendSystemMessageTestingOnly(self, "strTest " + intI + " is " + strTest[intI]);
+                broadcast(self, "strTest " + intI + " is " + strTest[intI]);
             }
         }
         if (strText.equals("testRegen"))
         {
-            sendSystemMessageTestingOnly(self, "regen is " + getHealthRegenRate(self));
+            broadcast(self, "regen is " + getHealthRegenRate(self));
             setAttrib(self, HEALTH, 1);
             setAttrib(self, ACTION, 1);
             setAttrib(self, MIND, 1);
@@ -807,7 +807,7 @@ public class dantest extends script.base_script
             obj_id objInventory = utils.getInventoryContainer(self);
             String strTable = "npc/generic_1_10";
             loot.makeLootInContainer(objInventory, strTable, 10, 10);
-            sendSystemMessageTestingOnly(self, "Loot");
+            broadcast(self, "Loot");
         }
         if (strText.equals("asd"))
         {
@@ -821,7 +821,7 @@ public class dantest extends script.base_script
                 {
                     if (!strLootTables[intI].equals(""))
                     {
-                        sendSystemMessageTestingOnly(self, "loot table is " + strLootTables[intI]);
+                        broadcast(self, "loot table is " + strLootTables[intI]);
                     }
                 }
             }
@@ -879,19 +879,19 @@ public class dantest extends script.base_script
         if (strText.equals("makeDynamicWeapon"))
         {
             static_item.makeDynamicObject("dynamic_weapon_basic_all", utils.getInventoryContainer(self), rand(5, 60));
-            sendSystemMessageTestingOnly(self, "woof");
+            broadcast(self, "woof");
         }
         if (strText.equals("makeStaticWeapon"))
         {
             obj_id objInventory = utils.getInventoryContainer(self);
             obj_id lootItem = static_item.createNewItemFunction("weapon_tow_pistol_02_01", objInventory);
-            sendSystemMessageTestingOnly(self, "made " + lootItem);
+            broadcast(self, "made " + lootItem);
         }
         if (strText.equals("checkStats"))
         {
             skill.recalcPlayerPools(self, false);
-            sendSystemMessageTestingOnly(self, "Action Max is " + getMaxAttrib(self, ACTION));
-            sendSystemMessageTestingOnly(self, "Health Max is " + getMaxAttrib(self, HEALTH));
+            broadcast(self, "Action Max is " + getMaxAttrib(self, ACTION));
+            broadcast(self, "Health Max is " + getMaxAttrib(self, HEALTH));
         }
         if (strText.equals("weaponUpdates"))
         {
@@ -906,7 +906,7 @@ public class dantest extends script.base_script
                     setWeaponMaxDamage(objContent, 10);
                 }
             }
-            sendSystemMessageTestingOnly(self, "Done length was " + objContents.length);
+            broadcast(self, "Done length was " + objContents.length);
         }
         if (strCommands[0].equals("setupMonster"))
         {
@@ -917,7 +917,7 @@ public class dantest extends script.base_script
                 setAttrib(objMonster, HEALTH, 50);
                 debugSpeakMsg(objMonster, "SET HEALTH AND STUFF");
             }
-            sendSystemMessageTestingOnly(self, "as");
+            broadcast(self, "as");
         }
         if (strCommands[0].equals("engineTesting"))
         {
@@ -932,7 +932,7 @@ public class dantest extends script.base_script
             setName(objItem, "Tier 4");
             objItem = createObject("object/tangible/ship/components/engine/eng_kse_advanced.iff", objInventory, "");
             setName(objItem, "Tier 5");
-            sendSystemMessageTestingOnly(self, "Made stuff");
+            broadcast(self, "Made stuff");
         }
         if (strCommands[0].equals("chassisRepairTest"))
         {
@@ -952,13 +952,13 @@ public class dantest extends script.base_script
             for (obj_id objControlDevice : objControlDevices)
             {
                 obj_id objTestShip = space_transition.getShipFromShipControlDevice(objControlDevice);
-                sendSystemMessageTestingOnly(self, "Ship from PCD " + objControlDevice + " is " + objTestShip);
+                broadcast(self, "Ship from PCD " + objControlDevice + " is " + objTestShip);
             }
         }
         if (strCommands[0].equals("woozle"))
         {
             space_quest.grantNewbieShip(self, "neutral");
-            sendSystemMessageTestingOnly(self, "asd");
+            broadcast(self, "asd");
         }
         if (strCommands[0].equals("zeroShip"))
         {
@@ -973,33 +973,33 @@ public class dantest extends script.base_script
                 }
             }
             setShipCurrentChassisHitPoints(objDefender, 0);
-            sendSystemMessageTestingOnly(self, "Zeroed");
+            broadcast(self, "Zeroed");
         }
         if (strCommands[0].equals("weaponRepairKits"))
         {
             obj_id objInventory = utils.getInventoryContainer(self);
             obj_id objKit = createObject("object/tangible/ship/crafted/repair/repair_kit_weapon.iff", objInventory, "");
             setCount(objKit, 10000);
-            sendSystemMessageTestingOnly(self, "Kitted");
+            broadcast(self, "Kitted");
         }
         if (strCommands[0].equals("engineRepairKits"))
         {
             obj_id objInventory = utils.getInventoryContainer(self);
             obj_id objKit = createObject("object/tangible/ship/crafted/repair/repair_kit_engine.iff", objInventory, "");
             setCount(objKit, 10000);
-            sendSystemMessageTestingOnly(self, "Kitted");
+            broadcast(self, "Kitted");
         }
         if (strCommands[0].equals("checkEngineValue"))
         {
             dictionary dctParams = new dictionary();
             dctParams.put("intLoops", 90);
             messageTo(self, "checkEngineValue", dctParams, 0.25f, false);
-            sendSystemMessageTestingOnly(self, "checking");
+            broadcast(self, "checking");
         }
         if (strCommands[0].equals("checkImmune"))
         {
             space_transition.doAIImmunityCheck(space_transition.getContainingShip(self));
-            sendSystemMessageTestingOnly(self, "Chassis is " + getShipChassisType(space_transition.getContainingShip(self)));
+            broadcast(self, "Chassis is " + getShipChassisType(space_transition.getContainingShip(self)));
             playMusic(self, "sound/ship_hyperspace_countdown.snd");
         }
         if (strCommands[0].equals("raiseMass"))
@@ -1010,7 +1010,7 @@ public class dantest extends script.base_script
             {
                 obj_id objTestShip = space_transition.getShipFromShipControlDevice(objControlDevice);
                 setChassisComponentMassMaximum(objTestShip, 500000.0f);
-                sendSystemMessageTestingOnly(self, "massed ");
+                broadcast(self, "massed ");
             }
         }
         if (strCommands[0].equals("forceMaintenance"))
@@ -1024,19 +1024,19 @@ public class dantest extends script.base_script
             dictionary dctParams = new dictionary();
             dctParams.put("objSender", self);
             messageTo(objTarget, "OnMaintenanceLoop", dctParams, 0, false);
-            sendSystemMessageTestingOnly(self, "Sent maintenance loop request to " + objTarget);
+            broadcast(self, "Sent maintenance loop request to " + objTarget);
         }
         if (strCommands[0].equals("setHitpoints"))
         {
             obj_id objTarget = getLookAtTarget(self);
             setHitpoints(objTarget, 1000);
-            sendSystemMessageTestingOnly(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
+            broadcast(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
             setInvulnerableHitpoints(objTarget, 2000);
-            sendSystemMessageTestingOnly(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
+            broadcast(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
             setInvulnerableHitpoints(objTarget, 0);
-            sendSystemMessageTestingOnly(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
+            broadcast(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
             setInvulnerableHitpoints(objTarget, 3500);
-            sendSystemMessageTestingOnly(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
+            broadcast(self, "for " + objTarget + " hitpoints are " + getHitpoints(objTarget));
         }
         if (strCommands[0].equals("forceMaintenanceRaw"))
         {
@@ -1044,7 +1044,7 @@ public class dantest extends script.base_script
             dictionary dctParams = new dictionary();
             dctParams.put("objSender", self);
             messageTo(objTarget, "OnMaintenanceLoop", dctParams, 0, false);
-            sendSystemMessageTestingOnly(self, "Sent maintenance loop request to " + objTarget);
+            broadcast(self, "Sent maintenance loop request to " + objTarget);
         }
         if (strCommands[0].equals("powerDebug"))
         {
@@ -1057,7 +1057,7 @@ public class dantest extends script.base_script
             setShipComponentEnergyMaintenanceRequirement(objShip, space_crafting.WEAPON_0, 100);
             setShipComponentEnergyMaintenanceRequirement(objShip, space_crafting.WEAPON_1, 100);
             setShipComponentEnergyMaintenanceRequirement(objShip, space_crafting.CAPACITOR, 100);
-            sendSystemMessageTestingOnly(self, "whacked ");
+            broadcast(self, "whacked ");
         }
         if (strCommands[0].equals("emptyInventory"))
         {
@@ -1067,7 +1067,7 @@ public class dantest extends script.base_script
             {
                 destroyObject(objContent);
             }
-            sendSystemMessageTestingOnly(self, "WHOOM");
+            broadcast(self, "WHOOM");
         }
         if (strCommands[0].equals("validateConduits"))
         {
@@ -1085,11 +1085,11 @@ public class dantest extends script.base_script
                         int intIndex = utils.getElementPositionInArray(locBrokenComponents, locTest);
                         if (intIndex > -1)
                         {
-                            sendSystemMessageTestingOnly(self, objPlasmaConduit + " is in the list");
+                            broadcast(self, objPlasmaConduit + " is in the list");
                         }
                         else
                         {
-                            sendSystemMessageTestingOnly(self, objPlasmaConduit + " is NOT IN THE LIST");
+                            broadcast(self, objPlasmaConduit + " is NOT IN THE LIST");
                         }
                     }
                 }
@@ -1099,7 +1099,7 @@ public class dantest extends script.base_script
         {
             obj_id objShip = space_transition.getContainingShip(self);
             space_crafting.fixAllPlasmaConduits(objShip);
-            sendSystemMessageTestingOnly(self, "Fixed");
+            broadcast(self, "Fixed");
         }
         if (strCommands[0].equals("fillInventory"))
         {
@@ -1108,12 +1108,12 @@ public class dantest extends script.base_script
             {
                 obj_id objItem = createObject("object/tangible/ship/components/engine/eng_kse_a5x.iff", objInventory, "");
             }
-            sendSystemMessageTestingOnly(self, "Filled");
+            broadcast(self, "Filled");
         }
         if (strCommands[0].equals("bridge1"))
         {
             attachScript(getLookAtTarget(self), "e3demo.e3_bridge_worker_1");
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("setLaunchLocation"))
         {
@@ -1122,7 +1122,7 @@ public class dantest extends script.base_script
             obj_id objMe = space_transition.getContainingShip(self);
             setObjVar(objShip, "trLaunchLocation", getTransform_o2p(objMe));
             setObjVar(objShip, "locLaunchLocation", getLocation(objMe));
-            sendSystemMessageTestingOnly(self, "Done");
+            broadcast(self, "Done");
         }
         if (strCommands[0].equals("testExit"))
         {
@@ -1173,7 +1173,7 @@ public class dantest extends script.base_script
             setShipComponentHitpointsCurrent(objShip, intSlot, 0);
             setShipComponentArmorHitpointsCurrent(objShip, intSlot, 0);
             space_combat.recalculateEfficiency(intSlot, objShip);
-            sendSystemMessageTestingOnly(self, "whacked " + getShipComponentName(objShip, intSlot));
+            broadcast(self, "whacked " + getShipComponentName(objShip, intSlot));
         }
         if (strCommands[0].equals("setBackShields"))
         {
@@ -1206,7 +1206,7 @@ public class dantest extends script.base_script
                 locTest = getLocation(objContainer);
             }
             addPlanetaryMapLocation(objTarget, utils.packStringId(strMapNameId), (int) locTest.x, (int) locTest.z, strPrimaryCategory, strSecondaryCategory, MLT_STATIC, planetary_map.NO_FLAG);
-            sendSystemMessageTestingOnly(self, "Registered the whozit");
+            broadcast(self, "Registered the whozit");
         }
         if (strCommands[0].equals("fixChassis"))
         {
@@ -1221,7 +1221,7 @@ public class dantest extends script.base_script
         {
             obj_id objShip = getPilotedShip(self);
             float fltCurrentHitPoints = getShipComponentHitpointsCurrent(objShip, ship_chassis_slot_type.SCST_reactor);
-            sendSystemMessageTestingOnly(self, "changing hp from " + fltCurrentHitPoints + " to " + fltCurrentHitPoints / 2);
+            broadcast(self, "changing hp from " + fltCurrentHitPoints + " to " + fltCurrentHitPoints / 2);
             fltCurrentHitPoints = fltCurrentHitPoints / 2;
             setShipComponentHitpointsCurrent(objShip, ship_chassis_slot_type.SCST_reactor, fltCurrentHitPoints);
             space_combat.recalculateEfficiency(ship_chassis_slot_type.SCST_reactor, objShip);
@@ -1235,7 +1235,7 @@ public class dantest extends script.base_script
         {
             obj_id objKesselObject = getPlanetByName("space_light1");
             obj_id objKesselManager = utils.getObjIdScriptVar(objKesselObject, "objKesselManager");
-            sendSystemMessageTestingOnly(self, "on planet " + objKesselObject + " got " + objKesselManager);
+            broadcast(self, "on planet " + objKesselObject + " got " + objKesselManager);
         }
         if (strCommands[0].equals("damageUp"))
         {
@@ -1247,21 +1247,21 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("hasReactor"))
         {
             boolean boolTest = isShipSlotInstalled(getLookAtTarget(self), 2);
-            sendSystemMessageTestingOnly(self, "boolTest is " + boolTest);
+            broadcast(self, "boolTest is " + boolTest);
             int intChassisSlot = space_crafting.getComponentSlotInt("reactor");
-            sendSystemMessageTestingOnly(self, "slot is " + intChassisSlot);
+            broadcast(self, "slot is " + intChassisSlot);
         }
         if (strCommands[0].equals("resetSpaceFaction"))
         {
             int spaceFaction = space_transition.getPlayerSpaceFaction(self);
             shipSetSpaceFaction(space_transition.getContainingShip(self), spaceFaction);
-            sendSystemMessageTestingOnly(self, "Reset faction");
+            broadcast(self, "Reset faction");
         }
         if (strCommands[0].equals("checkTargetFaction"))
         {
             obj_id objTarget = getLookAtTarget(self);
             String strFaction = "rebel";
-            sendSystemMessageTestingOnly(self, "set " + objTarget + " to Faction " + strFaction);
+            broadcast(self, "set " + objTarget + " to Faction " + strFaction);
         }
         if (strCommands[0].equals("getShip"))
         {
@@ -1269,11 +1269,11 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("updateShipFaction"))
         {
             space_transition.updateShipFaction(space_transition.getContainingShip(self), self);
-            sendSystemMessageTestingOnly(self, "updated faction ");
+            broadcast(self, "updated faction ");
             int intTest = (-615855020);
-            sendSystemMessageTestingOnly(self, "Imperial : " + intTest);
+            broadcast(self, "Imperial : " + intTest);
             intTest = (370444368);
-            sendSystemMessageTestingOnly(self, "Rebel : " + intTest);
+            broadcast(self, "Rebel : " + intTest);
         }
         if (strCommands[0].equals("testSM"))
         {
@@ -1282,21 +1282,21 @@ public class dantest extends script.base_script
             space_utils.sendSystemMessageShip(objShip, strSpam, true, false, true, true);
             space_utils.sendSystemMessageToOperations(objShip, strSpam);
             obj_id objOfficer = space_utils.getOperationsOfficer(objShip);
-            sendSystemMessageTestingOnly(self, "objOfficer is " + objOfficer);
+            broadcast(self, "objOfficer is " + objOfficer);
         }
         if (strCommands[0].equals("makeShipImperial"))
         {
             int intTest = (-615855020);
             obj_id objShip = space_transition.getContainingShip(self);
             shipSetSpaceFaction(objShip, intTest);
-            sendSystemMessageTestingOnly(self, "Set Ship Faction to Imperial");
+            broadcast(self, "Set Ship Faction to Imperial");
         }
         if (strCommands[0].equals("makeShipRebel"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
             int intTest = (370444368);
             shipSetSpaceFaction(objShip, intTest);
-            sendSystemMessageTestingOnly(self, "Set Ship Faction to Rebel");
+            broadcast(self, "Set Ship Faction to Rebel");
         }
         if (strCommands[0].equals("clearOvert"))
         {
@@ -1308,11 +1308,11 @@ public class dantest extends script.base_script
         {
             if (pvpGetType(self) == PVPTYPE_DECLARED)
             {
-                sendSystemMessageTestingOnly(self, "Overt");
+                broadcast(self, "Overt");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "covert");
+                broadcast(self, "covert");
             }
         }
         if (strCommands[0].equals("asd"))
@@ -1321,18 +1321,18 @@ public class dantest extends script.base_script
         }
         if (strCommands[0].equals("checkMe"))
         {
-            sendSystemMessageTestingOnly(self, "Faction " + space_transition.getPlayerSpaceFaction(self));
+            broadcast(self, "Faction " + space_transition.getPlayerSpaceFaction(self));
             obj_id objShip = space_transition.getContainingShip(self);
-            sendSystemMessageTestingOnly(self, "ship Faction " + shipGetSpaceFaction(objShip));
+            broadcast(self, "ship Faction " + shipGetSpaceFaction(objShip));
             int intTest = (-615855020);
-            sendSystemMessageTestingOnly(self, "Imperial : " + intTest);
+            broadcast(self, "Imperial : " + intTest);
             intTest = (370444368);
-            sendSystemMessageTestingOnly(self, "Rebel : " + intTest);
+            broadcast(self, "Rebel : " + intTest);
         }
         if (strCommands[0].equals("deckOut"))
         {
             space_combat.setupCapitalShipFromTurretDefinition(getLookAtTarget(self), "star_destroyer");
-            sendSystemMessageTestingOnly(self, "DECKED");
+            broadcast(self, "DECKED");
         }
         if (strCommands[0].equals("testFoo"))
         {
@@ -1342,19 +1342,19 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("lookAtTarget"))
         {
             obj_id objTarget = getLookAtTarget(self);
-            sendSystemMessageTestingOnly(self, "lookAtTarget is " + objTarget);
+            broadcast(self, "lookAtTarget is " + objTarget);
         }
         if (strCommands[0].equals("myScriptVars"))
         {
             deltadictionary dctScriptVars = self.getScriptVars();
-            sendSystemMessageTestingOnly(self, "Script Vars are :" + dctScriptVars.toString());
+            broadcast(self, "Script Vars are :" + dctScriptVars.toString());
         }
         if (strCommands[0].equals("nameShip"))
         {
             obj_id shipControlDevice = space_transition.findEmptyShipControlDeviceForPlayer(self);
             obj_id objShip = getPilotedShip(self);
             space_transition.setShipName(objShip, self, shipControlDevice);
-            sendSystemMessageTestingOnly(self, "asd");
+            broadcast(self, "asd");
         }
         if (strCommands[0].equals("dumpShip"))
         {
@@ -1370,23 +1370,23 @@ public class dantest extends script.base_script
         {
             obj_id objTest = getLookAtTarget(self);
             deltadictionary dctScriptVars = objTest.getScriptVars();
-            sendSystemMessageTestingOnly(self, "Script Vars are :" + dctScriptVars.toString());
+            broadcast(self, "Script Vars are :" + dctScriptVars.toString());
         }
         if (strCommands[0].equals("checkLocation"))
         {
-            sendSystemMessageTestingOnly(self, "i am at " + getLocation(self));
+            broadcast(self, "i am at " + getLocation(self));
         }
         if (strCommands[0].equals("resendMail"))
         {
             obj_id objTarget = getLookAtTarget(self);
             removeObjVar(objTarget, player_structure.VAR_LAST_MESSAGE);
             player_structure.sendMaintenanceMail(objTarget);
-            sendSystemMessageTestingOnly(self, "Resetn");
+            broadcast(self, "Resetn");
         }
         if (strCommands[0].equals("checkMail"))
         {
             player_structure.sendCondemnedMail(getLookAtTarget(self));
-            sendSystemMessageTestingOnly(self, "sentMial");
+            broadcast(self, "sentMial");
         }
         if (strCommands[0].equals("sendNewbieMail"))
         {
@@ -1394,7 +1394,7 @@ public class dantest extends script.base_script
             string_id strBody = new string_id("space/space_interaction", "email_body_" + strCommands[1]);
             string_id strSender = new string_id("space/space_interaction", "email_sender_" + strCommands[1]);
             String strSenderName = utils.packStringId(strSender);
-            sendSystemMessageTestingOnly(self, "sending mail " + strCommands[1]);
+            broadcast(self, "sending mail " + strCommands[1]);
             utils.sendMail(strSubject, strBody, self, strSenderName);
         }
         if (strCommands[0].equals("sendNewbieMailMessage"))
@@ -1404,33 +1404,33 @@ public class dantest extends script.base_script
                 dictionary dctParams = new dictionary();
                 dctParams.put("intMail", 1);
                 messageTo(self, "sendNewbieMails", dctParams, rand(10, 11), true);
-                sendSystemMessageTestingOnly(self, "Email 1");
+                broadcast(self, "Email 1");
             }
             if (strCommands[1].equals("2"))
             {
                 dictionary dctParams = new dictionary();
                 dctParams.put("intMail", 2);
                 messageTo(self, "sendNewbieMails", dctParams, rand(10, 11), true);
-                sendSystemMessageTestingOnly(self, "Email 2");
+                broadcast(self, "Email 2");
             }
             if (strCommands[1].equals("3"))
             {
                 dictionary dctParams = new dictionary();
                 dctParams.put("intMail", 3);
                 messageTo(self, "sendNewbieMails", dctParams, rand(10, 11), true);
-                sendSystemMessageTestingOnly(self, "Email 2");
+                broadcast(self, "Email 2");
             }
         }
         if (strCommands[0].equals("testItem1"))
         {
             obj_id objInventory = utils.getInventoryContainer(self);
             obj_id objItem = createObjectOverloaded("object/tangible/ship/components/shield_generator/shd_seinar_experimental_a1.iff", objInventory);
-            sendSystemMessageTestingOnly(self, "made item " + objItem + " in " + objInventory);
+            broadcast(self, "made item " + objItem + " in " + objInventory);
         }
         if (strCommands[0].equals("testItem2"))
         {
             obj_id objItem = createObject("object/tangible/ship/components/weapon/wpn_armek_sw4.iff", getLocation(self));
-            sendSystemMessageTestingOnly(self, "made item " + objItem);
+            broadcast(self, "made item " + objItem);
         }
         if (strCommands[0].equals("hitMe"))
         {
@@ -1439,56 +1439,56 @@ public class dantest extends script.base_script
             dictionary dctParams = new dictionary();
             dctParams.put("objShip", objTarget);
             space_utils.notifyObject(objShip, "megaDamage", dctParams);
-            sendSystemMessageTestingOnly(self, "objTarget of " + objTarget + " is attacking " + objShip);
+            broadcast(self, "objTarget of " + objTarget + " is attacking " + objShip);
         }
         if (strCommands[0].equals("findStationEggs"))
         {
             obj_id[] objStationEggs = getAllObjectsWithObjVar(getLocation(self), 320000, "intStationRespawner");
             for (obj_id objStationEgg : objStationEggs)
             {
-                sendSystemMessageTestingOnly(self, "Egg is " + objStationEgg);
+                broadcast(self, "Egg is " + objStationEgg);
             }
         }
         if (strCommands[0].equals("destroyerPhase"))
         {
             obj_id objManager = space_battlefield.getManagerObject();
             space_battlefield.doDestroyerPhase(objManager);
-            sendSystemMessageTestingOnly(self, "DESTROYER");
+            broadcast(self, "DESTROYER");
         }
         if (strCommands[0].equals("makeSquad"))
         {
             space_create.createSquad(self, "squad_test", getTransform_o2p(self), 10, null);
-            sendSystemMessageTestingOnly(self, "spawned");
+            broadcast(self, "spawned");
         }
         if (strCommands[0].equals("breakThing1"))
         {
             obj_id objTest = getLookAtTarget(self);
             setInvulnerableHitpoints(objTest, 1);
-            sendSystemMessageTestingOnly(self, "Hitpoints are " + getHitpoints(objTest));
+            broadcast(self, "Hitpoints are " + getHitpoints(objTest));
         }
         if (strCommands[0].equals("breakThing50"))
         {
             obj_id objTest = getLookAtTarget(self);
             setInvulnerableHitpoints(objTest, 50);
-            sendSystemMessageTestingOnly(self, "Hitpoints are " + getHitpoints(objTest));
+            broadcast(self, "Hitpoints are " + getHitpoints(objTest));
         }
         if (strCommands[0].equals("breakThing100"))
         {
             obj_id objTest = getLookAtTarget(self);
             setInvulnerableHitpoints(objTest, 100);
-            sendSystemMessageTestingOnly(self, "Hitpoints are " + getHitpoints(objTest));
+            broadcast(self, "Hitpoints are " + getHitpoints(objTest));
         }
         if (strCommands[0].equals("breakThing500"))
         {
             obj_id objTest = getLookAtTarget(self);
             setInvulnerableHitpoints(objTest, 500);
-            sendSystemMessageTestingOnly(self, "Hitpoints are " + getHitpoints(objTest));
+            broadcast(self, "Hitpoints are " + getHitpoints(objTest));
         }
         if (strCommands[0].equals("fixThing"))
         {
             obj_id objTest = getLookAtTarget(self);
             setInvulnerableHitpoints(objTest, 1000);
-            sendSystemMessageTestingOnly(self, "Hitpoints are " + getHitpoints(objTest));
+            broadcast(self, "Hitpoints are " + getHitpoints(objTest));
         }
         if (strCommands[0].equals("setDifficulty"))
         {
@@ -1507,7 +1507,7 @@ public class dantest extends script.base_script
             dctParams.put("fltMaximumHitpoints", 1000.0f);
             LOG("space", "DctParams is " + dctParams);
             space_utils.notifyObject(space_transition.getContainingShip(self), "componentEfficiencyChanged", dctParams);
-            sendSystemMessageTestingOnly(self, "set " + intSlot + " to " + fltPercent);
+            broadcast(self, "set " + intSlot + " to " + fltPercent);
         }
         if (strCommands[0].equals("bustEngine"))
         {
@@ -1515,26 +1515,26 @@ public class dantest extends script.base_script
             setShipComponentHitpointsCurrent(getTopMostContainer(self), intSlot, 0);
             setShipComponentArmorHitpointsCurrent(getTopMostContainer(self), intSlot, 0);
             space_combat.recalculateEfficiency(intSlot, getTopMostContainer(self));
-            sendSystemMessageTestingOnly(self, "WHACk!@");
+            broadcast(self, "WHACk!@");
         }
         if (strCommands[0].equals("breakHull"))
         {
             obj_id objTest = getLookAtTarget(self);
             obj_id objShip = space_transition.getContainingShip(self);
             space_crafting.breakHullPanel(objTest, objShip, getLocation(objTest), true);
-            sendSystemMessageTestingOnly(self, "broke");
+            broadcast(self, "broke");
         }
         if (strCommands[0].equals("fixHull"))
         {
             obj_id objTest = getLookAtTarget(self);
             obj_id objShip = space_transition.getContainingShip(self);
             space_crafting.fixHullPanel(objTest, objShip, getLocation(objTest));
-            sendSystemMessageTestingOnly(self, "fix ");
+            broadcast(self, "fix ");
         }
         if (strCommands[0].equals("checkItemCount"))
         {
             int intCount = player_structure.getStructureNumItems(space_transition.getContainingShip(self));
-            sendSystemMessageTestingOnly(self, "intCount is " + intCount);
+            broadcast(self, "intCount is " + intCount);
         }
         if (strCommands[0].equals("checkTrainer"))
         {
@@ -1543,16 +1543,16 @@ public class dantest extends script.base_script
             map_location[] map_locs = getPlanetaryMapLocations(strPrimary, strSub);
             if (map_locs.length == 0)
             {
-                sendSystemMessageTestingOnly(self, "000000000");
+                broadcast(self, "000000000");
             }
-            sendSystemMessageTestingOnly(self, "map_locs x is " + map_locs[0].getX() + " y is " + map_locs[0].getY());
+            broadcast(self, "map_locs x is " + map_locs[0].getX() + " y is " + map_locs[0].getY());
         }
         if (strCommands[0].equals("fixEngine"))
         {
             int intSlot = space_crafting.ENGINE;
             setShipComponentHitpointsCurrent(getTopMostContainer(self), intSlot, 100);
             space_combat.recalculateEfficiency(intSlot, getTopMostContainer(self));
-            sendSystemMessageTestingOnly(self, "WHACk!@");
+            broadcast(self, "WHACk!@");
         }
         if (strCommands[0].equals("testCells"))
         {
@@ -1562,13 +1562,13 @@ public class dantest extends script.base_script
             String[] strCells = getCellNames(objBuilding);
             if (strCells == null)
             {
-                sendSystemMessageTestingOnly(self, "objCell is " + objCell + " building i s" + objBuilding);
+                broadcast(self, "objCell is " + objCell + " building i s" + objBuilding);
             }
         }
         if (strCommands[0].equals("testItemCreation"))
         {
             obj_id objFoo = createObject("object/weapon/ranged/rifle/rifle_dlt20.iff", getTransform_o2p(self), null);
-            sendSystemMessageTestingOnly(self, "Made object type " + objFoo);
+            broadcast(self, "Made object type " + objFoo);
         }
         if (strCommands[0].equals("setupShip"))
         {
@@ -1595,7 +1595,7 @@ public class dantest extends script.base_script
                 }
             }
             utils.setScriptVar(objObject, "objSparkers", objSparkers);
-            sendSystemMessageTestingOnly(self, "set sparkers of length " + objSparkers + " on " + objObject);
+            broadcast(self, "set sparkers of length " + objSparkers + " on " + objObject);
         }
         if (strCommands[0].equals("locationTesting"))
         {
@@ -1613,46 +1613,46 @@ public class dantest extends script.base_script
             Vector locTests = getResizeableLocationArrayObjVar(self, "locTest");
             for (int intI = 0; intI < locTests.size(); intI++)
             {
-                sendSystemMessageTestingOnly(self, "locTest is " + locTest);
-                sendSystemMessageTestingOnly(self, "locTests[" + intI + "] is " + locTests.get(intI));
+                broadcast(self, "locTest is " + locTest);
+                broadcast(self, "locTests[" + intI + "] is " + locTests.get(intI));
                 if (locTest.equals(locTests.get(intI)))
                 {
-                    sendSystemMessageTestingOnly(self, "Equality comparison is true");
+                    broadcast(self, "Equality comparison is true");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "Equality comparison is false");
+                    broadcast(self, "Equality comparison is false");
                 }
             }
         }
         if (strCommands[0].equals("fixConduit"))
         {
             space_crafting.fixPlasmaConduit(getLookAtTarget(self), space_transition.getContainingShip(self), getLocation(getLookAtTarget(self)));
-            sendSystemMessageTestingOnly(self, "Fixing " + getLookAtTarget(self));
+            broadcast(self, "Fixing " + getLookAtTarget(self));
         }
         if (strCommands[0].equals("fixCombat"))
         {
             setState(self, STATE_COMBAT, false);
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("breakConduit"))
         {
             space_crafting.breakPlasmaConduit(getLookAtTarget(self), space_transition.getContainingShip(self), getLocation(getLookAtTarget(self)), true);
-            sendSystemMessageTestingOnly(self, "BROKE");
+            broadcast(self, "BROKE");
         }
         if (strCommands[0].equals("checkCondition"))
         {
-            sendSystemMessageTestingOnly(self, "Condition is " + hasCondition(getLookAtTarget(self), CONDITION_ON));
+            broadcast(self, "Condition is " + hasCondition(getLookAtTarget(self), CONDITION_ON));
         }
         if (strCommands[0].equals("closestStation"))
         {
             obj_id objClosestStation = space_combat.getClosestSpaceStation(self);
-            sendSystemMessageTestingOnly(self, "Found " + objClosestStation);
+            broadcast(self, "Found " + objClosestStation);
         }
         if (strCommands[0].equals("getSpawnerData"))
         {
             space_utils.notifyObject(getLookAtTarget(self), "getSpawnerData", null);
-            sendSystemMessageTestingOnly(self, "weh");
+            broadcast(self, "weh");
         }
         if (strCommands[0].equals("checkStations"))
         {
@@ -1673,22 +1673,22 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("getShipId"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
-            sendSystemMessageTestingOnly(self, "I am in " + objShip);
+            broadcast(self, "I am in " + objShip);
         }
         if (strCommands[0].equals("pingObject"))
         {
             String strObject = strCommands[1];
-            sendSystemMessageTestingOnly(self, "strCommands[1] is " + strObject);
+            broadcast(self, "strCommands[1] is " + strObject);
             obj_id objTarget = utils.stringToObjId(strObject);
             dictionary dctParams = new dictionary();
             dctParams.put("objSender", self);
             messageTo(objTarget, "pingObject", dctParams, 0, false);
-            sendSystemMessageTestingOnly(self, "Sent message to " + objTarget + " with ping message");
+            broadcast(self, "Sent message to " + objTarget + " with ping message");
         }
         if (strCommands[0].equals("doSpawns"))
         {
             messageTo(space_transition.getContainingShip(self), "delayedSpawn", null, 1, false);
-            sendSystemMessageTestingOnly(self, "going");
+            broadcast(self, "going");
         }
         if (strCommands[0].equals("damageParticleTest"))
         {
@@ -1724,7 +1724,7 @@ public class dantest extends script.base_script
             obj_id objCell = locTest.cell;
             obj_id objShip = getContainedBy(objCell);
             space_utils.notifyObject(objShip, "interiorDamageNotification", dctParams);
-            sendSystemMessageTestingOnly(self, "text : " + strText + " sent to " + objShip + "type is " + intDamageType + " and intensity is " + intDamageIntensity);
+            broadcast(self, "text : " + strText + " sent to " + objShip + "type is " + intDamageType + " and intensity is " + intDamageIntensity);
         }
         if (strCommands[0].equals("checkDroid"))
         {
@@ -1733,18 +1733,18 @@ public class dantest extends script.base_script
             {
                 for (obj_id shipControlDevice : shipControlDevices)
                 {
-                    sendSystemMessageTestingOnly(self, "objPcd is " + shipControlDevice);
+                    broadcast(self, "objPcd is " + shipControlDevice);
                     obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
-                    sendSystemMessageTestingOnly(self, "objShip is " + objShip);
+                    broadcast(self, "objShip is " + objShip);
                     obj_id objDroid = getDroidControlDeviceForShip(objShip);
-                    sendSystemMessageTestingOnly(self, "objDroid is " + objDroid);
+                    broadcast(self, "objDroid is " + objDroid);
                 }
             }
         }
         if (strCommands[0].equals("reset world sure"))
         {
             obj_id[] objObjects = getObjectsInRange(self, 32000);
-            sendSystemMessageTestingOnly(self, "Destroying world");
+            broadcast(self, "Destroying world");
             for (obj_id objObject : objObjects)
             {
                 if (!isPlayer(objObject))
@@ -1759,7 +1759,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("destroyObject"))
         {
             destroyObject(getLookAtTarget(self));
-            sendSystemMessageTestingOnly(self, "KABOOM");
+            broadcast(self, "KABOOM");
         }
         if (strCommands[0].equals("nukeworld"))
         {
@@ -1768,7 +1768,7 @@ public class dantest extends script.base_script
                 if (strCommands[1].equals("sure"))
                 {
                     obj_id[] objObjects = getObjectsInRange(self, 32000);
-                    sendSystemMessageTestingOnly(self, "Destroying world");
+                    broadcast(self, "Destroying world");
                     for (obj_id objObject : objObjects)
                     {
                         if (isIdValid(objObject) && !isPlayer(objObject))
@@ -1783,7 +1783,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("stationTest"))
         {
             obj_id objStation = space_combat.getClosestSpaceStation(getPilotedShip(self));
-            sendSystemMessageTestingOnly(self, "found " + objStation);
+            broadcast(self, "found " + objStation);
         }
         if (strCommands[0].equals("pilotShip"))
         {
@@ -1791,11 +1791,11 @@ public class dantest extends script.base_script
             if (isIdValid(objShip))
             {
                 boolean boolTest = pilotShip(self, objShip);
-                sendSystemMessageTestingOnly(self, "You are FLYING " + objShip + " and boolTest is " + boolTest);
+                broadcast(self, "You are FLYING " + objShip + " and boolTest is " + boolTest);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "You have no ship targeted");
+                broadcast(self, "You have no ship targeted");
             }
         }
         if (strCommands[0].equals("checkShields"))
@@ -1803,29 +1803,29 @@ public class dantest extends script.base_script
             obj_id objShip = getPilotedShip(self);
             if (isShipSlotInstalled(objShip, ship_chassis_slot_type.SCST_shield_0))
             {
-                sendSystemMessageTestingOnly(self, "shield generator");
+                broadcast(self, "shield generator");
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "No shield generator");
+                broadcast(self, "No shield generator");
             }
         }
         if (strCommands[0].equals("unpilotShip"))
         {
             unpilotShip(self);
-            sendSystemMessageTestingOnly(self, "NO MORE FLYING!");
+            broadcast(self, "NO MORE FLYING!");
         }
         if (strCommands[0].equals("checkOwner"))
         {
             obj_id objShip = getLookAtTarget(self);
             obj_id objOwner = getOwner(objShip);
-            sendSystemMessageTestingOnly(self, "objOwner is " + objOwner);
+            broadcast(self, "objOwner is " + objOwner);
         }
         if (strCommands[0].equals("setOwner"))
         {
             obj_id objShip = space_transition.getContainingShip(self);
             setOwner(objShip, self);
-            sendSystemMessageTestingOnly(self, "setOwner to " + getOwner(objShip));
+            broadcast(self, "setOwner to " + getOwner(objShip));
         }
         if (strCommands[0].equals("getWeaponEnergy"))
         {
@@ -1843,24 +1843,24 @@ public class dantest extends script.base_script
                 strHeaderTypes[intI] = "i";
             }
             boolean boolTest = datatable.createDataTable("test.tab", strHeaders, strHeaderTypes);
-            sendSystemMessageTestingOnly(self, "return value is " + boolTest);
+            broadcast(self, "return value is " + boolTest);
         }
         if (strCommands[0].equals("checkTargets"))
         {
             obj_id[] objTargets = pvpGetTargetsInRange(self, self, 32.0f);
-            sendSystemMessageTestingOnly(self, "Found " + objTargets.length + " pvp targets in range");
+            broadcast(self, "Found " + objTargets.length + " pvp targets in range");
         }
         if (strCommands[0].equals("jediTrainer"))
         {
             setupJediTrainer(self);
-            sendSystemMessageTestingOnly(self, "setup jedi trainer");
+            broadcast(self, "setup jedi trainer");
         }
         if (strCommands[0].equals("changeLocation"))
         {
             location locTest = getLocationObjVar(self, "jedi.locTrainerLocation");
             locTest.area = "naboo";
             setObjVar(self, "jedi.locTrainerLocation", locTest);
-            sendSystemMessageTestingOnly(self, "updated");
+            broadcast(self, "updated");
         }
         if (strCommands[0].equals("checkDifficultyLoop"))
         {
@@ -1869,7 +1869,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("jackVisibility"))
         {
             setJediVisibility(self, 4000);
-            sendSystemMessageTestingOnly(self, "set");
+            broadcast(self, "set");
         }
         if (strCommands[0].equals("damageHealth"))
         {
@@ -1888,7 +1888,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("checkVisibility"))
         {
             int intVisibility = getJediVisibility(self);
-            sendSystemMessageTestingOnly(self, "visibility is " + intVisibility);
+            broadcast(self, "visibility is " + intVisibility);
         }
         if (strCommands[0].equals("clearGallop"))
         {
@@ -1896,24 +1896,24 @@ public class dantest extends script.base_script
             obj_id objControlDevice = callable.getCallableCD(objMount);
             utils.removeScriptVar(objControlDevice, "mount.intGalloping");
             utils.removeScriptVar(objControlDevice, "mount.intTired");
-            sendSystemMessageTestingOnly(self, "cleared");
+            broadcast(self, "cleared");
         }
         if (strCommands[0].equals("goFast"))
         {
             obj_id objMount = getMountId(self);
             setBaseRunSpeed(objMount, 20.0f);
-            sendSystemMessageTestingOnly(self, "Running");
+            broadcast(self, "Running");
         }
         if (strCommands[0].equals("goSlow"))
         {
             obj_id objMount = getMountId(self);
             setBaseRunSpeed(objMount, 6.0f);
-            sendSystemMessageTestingOnly(self, "Jogging");
+            broadcast(self, "Jogging");
         }
         if (strCommands[0].equals("jediRevive"))
         {
             setForcePower(self, 9000);
-            sendSystemMessageTestingOnly(self, "force power maxed");
+            broadcast(self, "force power maxed");
         }
         if (strCommands[0].equals("bleedMe"))
         {
@@ -1943,9 +1943,9 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("forcePower"))
         {
             setMaxForcePower(self, 100);
-            sendSystemMessageTestingOnly(self, "Force power set to 100");
+            broadcast(self, "Force power set to 100");
             int intTest = getMaxForcePower(self);
-            sendSystemMessageTestingOnly(self, "Force power regotten is " + intTest);
+            broadcast(self, "Force power regotten is " + intTest);
         }
         if (strCommands[0].equals("reloadForcePower"))
         {
@@ -1960,24 +1960,24 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("getScriptVars"))
         {
             deltadictionary dctScriptVars = self.getScriptVars();
-            sendSystemMessageTestingOnly(self, "Scriptvars are " + dctScriptVars.toString());
+            broadcast(self, "Scriptvars are " + dctScriptVars.toString());
         }
         if (strCommands[0].equals("rawDifficulty"))
         {
             int intRawDifficulty = getLevel(self);
-            sendSystemMessageTestingOnly(self, "getLevel returned " + intRawDifficulty);
+            broadcast(self, "getLevel returned " + intRawDifficulty);
         }
         if (strCommands[0].equals("skillDifficulty"))
         {
             int intCombatDifficulty = getLevel(self);
-            sendSystemMessageTestingOnly(self, "combat difficulty is " + intCombatDifficulty);
+            broadcast(self, "combat difficulty is " + intCombatDifficulty);
         }
         if (strCommands[0].equals("getMissions"))
         {
             obj_id[] objMissions = getMissionObjects(self);
             for (obj_id objMission : objMissions)
             {
-                sendSystemMessageTestingOnly(self, "Mission is " + objMission);
+                broadcast(self, "Mission is " + objMission);
             }
         }
         if (strCommands[0].equals("getNewbieSpawnerScriptVars"))
@@ -1988,7 +1988,7 @@ public class dantest extends script.base_script
                 for (obj_id obj_id : objFoo)
                 {
                     deltadictionary dctScriptVars = obj_id.getScriptVars();
-                    sendSystemMessageTestingOnly(self, "scriptvars for " + obj_id + " are " + dctScriptVars.toString());
+                    broadcast(self, "scriptvars for " + obj_id + " are " + dctScriptVars.toString());
                 }
             }
         }
@@ -1997,15 +1997,15 @@ public class dantest extends script.base_script
             obj_id[] objMissions = getMissionObjects(self);
             for (obj_id objMission : objMissions)
             {
-                sendSystemMessageTestingOnly(self, "Mission is " + objMission);
+                broadcast(self, "Mission is " + objMission);
                 obj_id objMissionData = objMission;
                 if (objMissionData == null)
                 {
-                    sendSystemMessageTestingOnly(self, " missionData is null");
+                    broadcast(self, " missionData is null");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "missionData is " + objMissionData);
+                    broadcast(self, "missionData is " + objMissionData);
                 }
             }
         }
@@ -2014,17 +2014,17 @@ public class dantest extends script.base_script
             region[] rgnRegions = getRegionsWithGeographicalAtPoint(getLocation(self), 600);
             if (rgnRegions == null)
             {
-                sendSystemMessageTestingOnly(self, "NULL, No regions of type 600 found");
+                broadcast(self, "NULL, No regions of type 600 found");
             }
             else if (rgnRegions.length == 0)
             {
-                sendSystemMessageTestingOnly(self, "0 LENGTH, No regions of type 600 found");
+                broadcast(self, "0 LENGTH, No regions of type 600 found");
             }
             else
             {
                 for (region rgnRegion : rgnRegions)
                 {
-                    sendSystemMessageTestingOnly(self, "region name is " + rgnRegion.getName());
+                    broadcast(self, "region name is " + rgnRegion.getName());
                 }
             }
         }
@@ -2035,11 +2035,11 @@ public class dantest extends script.base_script
                 location locTest = locations.getGoodLocationAroundLocation(getLocation(self), 1, 1, 3, 3, false, true);
                 if (locTest == null)
                 {
-                    sendSystemMessageTestingOnly(self, "good location is null");
+                    broadcast(self, "good location is null");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "good location is " + locTest);
+                    broadcast(self, "good location is " + locTest);
                 }
                 break;
             }
@@ -2048,11 +2048,11 @@ public class dantest extends script.base_script
                 location locTest = locations.getGoodLocationAroundLocation(getLocation(self), 5, 5, 10, 10, false, true);
                 if (locTest == null)
                 {
-                    sendSystemMessageTestingOnly(self, "good location is null");
+                    broadcast(self, "good location is null");
                 }
                 else
                 {
-                    sendSystemMessageTestingOnly(self, "good location is " + locTest);
+                    broadcast(self, "good location is " + locTest);
                 }
                 break;
             }
@@ -2064,7 +2064,7 @@ public class dantest extends script.base_script
                 locTest.z = locTest.z + 10;
                 objTest = createObject("object/weapon/ranged/pistol/pistol_dl44.iff", locTest);
                 obj_id[] objFoo = getObjectsInRange(locTest, 10);
-                sendSystemMessageTestingOnly(self, "objFoo length is " + objFoo.length);
+                broadcast(self, "objFoo length is " + objFoo.length);
                 for (obj_id obj_id : objFoo)
                 {
                     destroyObject(obj_id);
@@ -2081,7 +2081,7 @@ public class dantest extends script.base_script
                 locTest.z = locTest.z + 10;
                 objTest = createObject("object/weapon/ranged/pistol/pistol_dl44.iff", locTest);
                 obj_id[] objFoo = getAllObjectsWithTemplate(locTest, 10, "object/weapon/ranged/pistol/pistol_dl44.iff");
-                sendSystemMessageTestingOnly(self, "objFoo length is " + objFoo.length);
+                broadcast(self, "objFoo length is " + objFoo.length);
                 for (obj_id obj_id : objFoo)
                 {
                     destroyObject(obj_id);
@@ -2093,7 +2093,7 @@ public class dantest extends script.base_script
                 float fltDistance = rand(120, 150);
                 location locHome = getLocation(self);
                 obj_id[] objLairs = getAllObjectsWithTemplate(locHome, fltDistance, "object/tangible/lair/npc_lair.iff");
-                sendSystemMessageTestingOnly(self, "length of lairs is " + objLairs.length + " at distance " + fltDistance);
+                broadcast(self, "length of lairs is " + objLairs.length + " at distance " + fltDistance);
                 break;
             }
             case "theaters":
@@ -2101,7 +2101,7 @@ public class dantest extends script.base_script
                 location locHome = getLocation(self);
                 obj_id[] objLairs = getAllObjectsWithTemplate(locHome, 200, "object/tangible/lair/npc_lair.iff");
                 int intCount = utils.countSubStringObjVars(objLairs, "spawing.lairType", "theater");
-                sendSystemMessageTestingOnly(self, "intCount is " + intCount);
+                broadcast(self, "intCount is " + intCount);
                 break;
             }
         }
@@ -2120,13 +2120,13 @@ public class dantest extends script.base_script
             {
                 int intConstitution = getConst(objTarget);
                 int intHealth = getHealth(objTarget);
-                sendSystemMessageTestingOnly(self, "Const=" + intConstitution + " Health=" + intHealth);
+                broadcast(self, "Const=" + intConstitution + " Health=" + intHealth);
                 int intStamina = getStam(objTarget);
                 int intAction = getAction(objTarget);
-                sendSystemMessageTestingOnly(self, "Stamina=" + intStamina + " Action=" + intAction);
+                broadcast(self, "Stamina=" + intStamina + " Action=" + intAction);
                 int intWillPower = getWill(objTarget);
                 int intMind = getMind(objTarget);
-                sendSystemMessageTestingOnly(self, "WillPower=" + intWillPower + " Mind=" + intMind);
+                broadcast(self, "WillPower=" + intWillPower + " Mind=" + intMind);
             }
         }
         if (strCommands[0].equals("jediFull"))
@@ -2144,20 +2144,20 @@ public class dantest extends script.base_script
         {
             obj_id objTarget = getLookAtTarget(self);
             obj_id objPilot = getPilotId(objTarget);
-            sendSystemMessageTestingOnly(self, "objPilot is " + objPilot);
+            broadcast(self, "objPilot is " + objPilot);
         }
         if (strCommands[0].equals("getInCellTest"))
         {
             obj_id objShip = getLookAtTarget(self);
             if (!isIdValid(objShip))
             {
-                sendSystemMessageTestingOnly(self, "No look at target");
+                broadcast(self, "No look at target");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] objCells = getContents(objShip);
             if ((objCells == null) || (objCells.length == 0))
             {
-                sendSystemMessageTestingOnly(self, "ship  doesn't have an interior");
+                broadcast(self, "ship  doesn't have an interior");
                 return SCRIPT_CONTINUE;
             }
             obj_id objCell = objCells[0];
@@ -2171,7 +2171,7 @@ public class dantest extends script.base_script
         {
             obj_id objTarget = getLookAtTarget(self);
             messageTo(objTarget, "doSpawnEvent", null, 0, false);
-            sendSystemMessageTestingOnly(self, "done");
+            broadcast(self, "done");
         }
         if (strCommands[0].equals("jedi5"))
         {
@@ -2187,7 +2187,7 @@ public class dantest extends script.base_script
         if (strCommands[0].equals("setJediTime"))
         {
             int intTime = getGameTime();
-            sendSystemMessageTestingOnly(self, "set time stamp");
+            broadcast(self, "set time stamp");
             setObjVar(self, "jedi.timeStamp", intTime);
         }
         if (strCommands[0].equals("damage"))
@@ -2205,7 +2205,7 @@ public class dantest extends script.base_script
                 cbtHitData.damage = 200;
                 cbtHitData.bleedingChance = 1;
                 doDamage(self, objTarget, objWeapon, cbtHitData);
-                sendSystemMessageTestingOnly(self, "200 damage done to target");
+                broadcast(self, "200 damage done to target");
                 debugSpeakMsg(objTarget, "ow!");
             }
         }
@@ -2236,41 +2236,41 @@ public class dantest extends script.base_script
             obj_id objTarget = getLookAtTarget(self);
             if (isIdValid(objTarget))
             {
-                sendSystemMessageTestingOnly(self, "NPC is: " + objTarget);
-                sendSystemMessageTestingOnly(self, "InvulnerableFlag is: " + isInvulnerable(objTarget));
-                sendSystemMessageTestingOnly(self, "pvpCanAttack is: " + pvpCanAttack(self, objTarget));
-                sendSystemMessageTestingOnly(self, "pvpCanHelp is " + pvpCanHelp(self, objTarget));
-                sendSystemMessageTestingOnly(self, "Your PVPType is " + pvpGetType(self));
-                sendSystemMessageTestingOnly(self, "Target PVPType is " + pvpGetType(objTarget));
-                sendSystemMessageTestingOnly(self, "Your Faction is " + pvpGetAlignedFaction(self));
-                sendSystemMessageTestingOnly(self, "Target Faction is " + pvpGetAlignedFaction(objTarget));
+                broadcast(self, "NPC is: " + objTarget);
+                broadcast(self, "InvulnerableFlag is: " + isInvulnerable(objTarget));
+                broadcast(self, "pvpCanAttack is: " + pvpCanAttack(self, objTarget));
+                broadcast(self, "pvpCanHelp is " + pvpCanHelp(self, objTarget));
+                broadcast(self, "Your PVPType is " + pvpGetType(self));
+                broadcast(self, "Target PVPType is " + pvpGetType(objTarget));
+                broadcast(self, "Your Faction is " + pvpGetAlignedFaction(self));
+                broadcast(self, "Target Faction is " + pvpGetAlignedFaction(objTarget));
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "No target");
+                broadcast(self, "No target");
             }
         }
         if (strCommands[0].equals("checkAreaFlags"))
         {
             obj_id[] objStuff = getObjectsInRange(getLocation(self), 40);
-            sendSystemMessageTestingOnly(self, "length is " + objStuff.length);
+            broadcast(self, "length is " + objStuff.length);
             for (obj_id obj_id : objStuff)
             {
-                sendSystemMessageTestingOnly(self, "NPC is: " + obj_id);
-                sendSystemMessageTestingOnly(self, "InvulnerableFlag is: " + isInvulnerable(obj_id));
-                sendSystemMessageTestingOnly(self, "pvpCanAttack is: " + pvpCanAttack(self, obj_id));
+                broadcast(self, "NPC is: " + obj_id);
+                broadcast(self, "InvulnerableFlag is: " + isInvulnerable(obj_id));
+                broadcast(self, "pvpCanAttack is: " + pvpCanAttack(self, obj_id));
             }
         }
         if (strCommands[0].equals("burySomeHouses"))
         {
-            sendSystemMessageTestingOnly(self, "burying");
+            broadcast(self, "burying");
             location locSpawnLocation = getLocation(self);
             locSpawnLocation.x = 1988;
             locSpawnLocation.z = -1996;
             location locGoodLocation = locations.getGoodLocationAroundLocation(locSpawnLocation, 72, 72, 75, 75, false, true);
             if (locGoodLocation != null)
             {
-                sendSystemMessageTestingOnly(self, "location is " + locGoodLocation);
+                broadcast(self, "location is " + locGoodLocation);
                 String strLairType = "tatooine_dim_u_church_neutral_large_theater";
                 int intMinDifficulty = 10;
                 int intMaxDifficulty = 20;
@@ -2296,7 +2296,7 @@ public class dantest extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "null");
+                broadcast(self, "null");
             }
         }
         if (strCommands[0].equals("commTest"))
@@ -2311,38 +2311,38 @@ public class dantest extends script.base_script
             locSpawnLocation.x = 1988;
             locSpawnLocation.z = -1996;
             location locTest = utils.getRandomLocationInRing(locSpawnLocation, 100, 110);
-            sendSystemMessageTestingOnly(self, "location is " + locTest);
+            broadcast(self, "location is " + locTest);
         }
         if (strCommands[0].equals("missionLocation"))
         {
             location locTest = getGoodMissionLocation(getLocation(self), self);
-            sendSystemMessageTestingOnly(self, "location found is " + locTest);
+            broadcast(self, "location found is " + locTest);
         }
         if (strCommands[0].equals("isInMissionCity"))
         {
             location locTest = getLocation(self);
             boolean boolTest = locations.isInMissionCity(locTest);
-            sendSystemMessageTestingOnly(self, "at location " + locTest + " isInMissionCity is " + boolTest);
+            broadcast(self, "at location " + locTest + " isInMissionCity is " + boolTest);
         }
         if (strCommands[0].equals("whatCity"))
         {
             region[] rgnCities = getRegionsWithMunicipalAtPoint(getLocation(self), regions.MUNI_TRUE);
             if (rgnCities != null)
             {
-                sendSystemMessageTestingOnly(self, "name is " + rgnCities[0].getName());
+                broadcast(self, "name is " + rgnCities[0].getName());
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "nul");
+                broadcast(self, "nul");
             }
             rgnCities = getRegionsWithGeographicalAtPoint(getLocation(self), regions.GEO_CITY);
             if (rgnCities != null)
             {
-                sendSystemMessageTestingOnly(self, "name is " + rgnCities[0].getName());
+                broadcast(self, "name is " + rgnCities[0].getName());
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "nul");
+                broadcast(self, "nul");
             }
         }
         if (strCommands[0].equals("spawnCheckWithoutCreation"))
@@ -2379,7 +2379,7 @@ public class dantest extends script.base_script
                     location goodLocation = locations.getGoodLocationAroundLocation(locSpawnLocation, intSize, intSize, 75, 75, false, true);
                     if (goodLocation == null)
                     {
-                        sendSystemMessageTestingOnly(self, "Null location");
+                        broadcast(self, "Null location");
                     }
                     else
                     {
@@ -2398,7 +2398,7 @@ public class dantest extends script.base_script
                     String strLairType = "tatooine_dim_u_church_neutral_large_theater";
                     if (canSpawn(self, locSpawnLocation, true, strLairType))
                     {
-                        sendSystemMessageTestingOnly(self, "spawnLocation is " + locSpawnLocation);
+                        broadcast(self, "spawnLocation is " + locSpawnLocation);
                     }
                     intI = intI + 1;
                 }
@@ -2410,7 +2410,7 @@ public class dantest extends script.base_script
             for (int intI = 0; intI < 10; intI++)
             {
                 obj_id objManager = utils.getObjIdLocalVar(objShip, "objInteriorManager" + intI);
-                sendSystemMessageTestingOnly(self, "manager slot " + intI + " is " + objManager);
+                broadcast(self, "manager slot " + intI + " is " + objManager);
             }
         }
         return SCRIPT_CONTINUE;
@@ -2469,7 +2469,7 @@ public class dantest extends script.base_script
                 obj_id[] objLairs = getAllObjectsWithTemplate(locHome, fltDistance, "object/tangible/lair/npc_lair.iff");
                 if (objLairs != null)
                 {
-                    sendSystemMessageTestingOnly(objPlayer, "Non null objLairs.. length is " + objLairs.length);
+                    broadcast(objPlayer, "Non null objLairs.. length is " + objLairs.length);
                     if (objLairs.length > 0)
                     {
                         String strSpam = objPlayer + " Too many lairs in the area, kicking out, area was " + locHome + " number of lairs is " + objLairs.length;
@@ -2627,7 +2627,7 @@ public class dantest extends script.base_script
 
     public void sendSpawnSpam(obj_id self, boolean boolLogFailures, boolean boolVerboseMode, String strSpam) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, strSpam);
+        broadcast(self, strSpam);
         return;
     }
 
@@ -2641,14 +2641,14 @@ public class dantest extends script.base_script
         String strClass = params;
         if ((strClass == null) || (strClass.equals("")))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         obj_id rtype = pickRandomNonDepeletedResource(strClass);
         if (!isIdValid(rtype))
         {
-            sendSystemMessageTestingOnly(self, "No id found");
-            sendSystemMessageTestingOnly(self, "Type was " + strClass);
+            broadcast(self, "No id found");
+            broadcast(self, "Type was " + strClass);
             return SCRIPT_CONTINUE;
         }
         String crateTemplate = getResourceContainerForType(rtype);
@@ -2660,7 +2660,7 @@ public class dantest extends script.base_script
                 obj_id crate = createObject(crateTemplate, pInv, "");
                 if (addResourceToContainer(crate, rtype, 100000, self))
                 {
-                    sendSystemMessageTestingOnly(self, "Resource of class " + params + " added");
+                    broadcast(self, "Resource of class " + params + " added");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -2673,13 +2673,13 @@ public class dantest extends script.base_script
         String strClass = params;
         if ((strClass == null) || (strClass.equals("")))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         obj_id rtype = pickRandomNonDepeletedResource(strClass);
         if (!isIdValid(rtype))
         {
-            sendSystemMessageTestingOnly(self, "Bad class passed in, syntax is /gmCreateClassResource class");
+            broadcast(self, "Bad class passed in, syntax is /gmCreateClassResource class");
             return SCRIPT_CONTINUE;
         }
         String crateTemplate = getResourceContainerForType(rtype);
@@ -2691,7 +2691,7 @@ public class dantest extends script.base_script
                 obj_id crate = createObject(crateTemplate, pInv, "");
                 if (addResourceToContainer(crate, rtype, 100000, self))
                 {
-                    sendSystemMessageTestingOnly(self, "Resource of class " + params + " added");
+                    broadcast(self, "Resource of class " + params + " added");
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -2711,7 +2711,7 @@ public class dantest extends script.base_script
                 {
                     if (isPlayer(objContent))
                     {
-                        sendSystemMessageTestingOnly(objContent, "playing effect");
+                        broadcast(objContent, "playing effect");
                         playClientEffectLoc(objContent, "clienteffect/int_camshake_light.cef", getLocation(objContent), 0);
                     }
                 }
@@ -2752,11 +2752,11 @@ public class dantest extends script.base_script
         if (intLoops < 1)
         {
             LOG("space", "DONE CHECKING");
-            sendSystemMessageTestingOnly(self, "DONE CHECKING");
+            broadcast(self, "DONE CHECKING");
             return SCRIPT_CONTINUE;
         }
         obj_id objShip = space_transition.getContainingShip(self);
-        sendSystemMessageTestingOnly(self, "Current Ship Speed: " + getShipCurrentSpeed(objShip) + " Actual Pitch: " + getShipActualPitchRateMaximumDegrees(objShip));
+        broadcast(self, "Current Ship Speed: " + getShipCurrentSpeed(objShip) + " Actual Pitch: " + getShipActualPitchRateMaximumDegrees(objShip));
         LOG("space", "===============================================================");
         LOG("space", "Loops left: " + intLoops);
         LOG("space", "Current Ship Speed: " + getShipCurrentSpeed(objShip));
@@ -2782,16 +2782,16 @@ public class dantest extends script.base_script
     {
         location locTest = params.getLocation("locTest");
         obj_id objSender = params.getObjId("objSender");
-        sendSystemMessageTestingOnly(self, "Response from " + objSender + " they are at location " + locTest);
+        broadcast(self, "Response from " + objSender + " they are at location " + locTest);
         obj_id objTopMost = params.getObjId("objTopMost");
         if (isIdValid(objTopMost))
         {
             location locTopMost = params.getLocation("locTopMost");
-            sendSystemMessageTestingOnly(self, "Top Most Container is " + objTopMost + " at " + locTopMost);
+            broadcast(self, "Top Most Container is " + objTopMost + " at " + locTopMost);
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "Target is in the world, not top most");
+            broadcast(self, "Target is in the world, not top most");
         }
         return SCRIPT_CONTINUE;
     }

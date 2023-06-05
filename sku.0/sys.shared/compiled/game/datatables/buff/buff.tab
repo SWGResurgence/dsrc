@@ -2032,9 +2032,9 @@ tcg_meditation_rooms_buff	tcg_structure_buff			1	buffs.tcg_diner	-1	jedi_saber_a
 tcg_spires_buff	tcg_structure_buff			1	buffs.tcg_diner	7200	tcg_gcw_bonus	25	faction_bonus	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_guild_hall_buff	tcg_structure_buff			1	command.armorBreak	7200	expertise_innate_protection_all	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_yoda_hut_buff	tcg_structure_buff			1	command.inspire	7200	xp_bonus_general	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tcg_hanger_1_buff	tcg_hanger_1_buff			1	buffs.tcg_diner	-1	advanced_assembly	10	advanced_ship_experimentation	20	booster_assembly	10	booster_experimentation	20	chassis_assembly	10	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tcg_hanger_2_buff	tcg_hanger_2_buff			1	buffs.tcg_diner	-1	chassis_experimentation	20	engine_assembly	10	engine_experimentation	20	power_systems	10	power_systems_experimentation	20	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tcg_hanger_3_buff	tcg_hanger_3_buff			1	buffs.tcg_diner	-1	shields_assembly	10	shields_experimentation	20	weapon_systems	10	weapon_systems_experimentation	20	luck_modified	150	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+tcg_hanger_1_buff	tcg_hanger_1_buff			1	buffs.tcg_diner	-1	advanced_ship_experimentation	20	booster_experimentation	20	chassis_experimentation	20	engine_experimentation	20		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+tcg_hanger_2_buff	tcg_hanger_2_buff			1	buffs.tcg_diner	-1	power_systems_experimentation	20	shields_experimentation	20	weapon_systems_experimentation	20	luck_modified	150		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+tcg_hanger_3_buff	tcg_hanger_3_buff			1	buffs.tcg_diner	-1		0		0		0		20		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_merchant_tent_buff	tcg_structure_buff			1	buffs.tcg_diner	7200	surveying	25	creature_harvesting	25	stamina_modified	75		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_at_at_house_buff	tcg_at_at_house_buff			1	buffs.tcg_diner	-1	cybernetic_assembly	20	cybernetic_experimentation	10	general_assembly	20	general_experimentation	10	luck_modified	150	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tow_ring_architect_01	tow_ring_architect_01			1	command.aurilian_crystal_buff_lrg	-1	structure_assembly	20	structure_experimentation	10	luck_modified	150		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1

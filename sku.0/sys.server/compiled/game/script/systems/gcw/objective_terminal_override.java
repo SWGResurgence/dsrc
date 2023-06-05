@@ -46,7 +46,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
         {
-            sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+            broadcast(player, "Only declared factional personnel may access this terminal!");
             return SCRIPT_CONTINUE;
         }
         obj_id structure = getObjIdObjVar(self, "objParent");
@@ -58,12 +58,12 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         int pFac = pvpGetAlignedFaction(player);
         if (!pvpAreFactionsOpposed(sFac, pFac))
         {
-            sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
+            broadcast(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "The fail-safe sequence has already been overridden.");
+            broadcast(player, "The fail-safe sequence has already been overridden.");
             return SCRIPT_CONTINUE;
         }
         obj_id nextObjective = hq.getNextObjective(structure);
@@ -77,7 +77,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
+                broadcast(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -119,7 +119,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
             }
             utils.setScriptVar(self, scriptvar_locks, locks);
         }
-        sendSystemMessageTestingOnly(player, "Retrieving new DNA sample...");
+        broadcast(player, "Retrieving new DNA sample...");
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(self, "handleSequenceDelay", d, 3.0f, false);
@@ -129,7 +129,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
     {
         if (ai_lib.isInCombat(player))
         {
-            sendSystemMessageTestingOnly(player, "You cannot DNA sequence while you are in combat!");
+            broadcast(player, "You cannot DNA sequence while you are in combat!");
             return;
         }
         String scriptvar = "dna." + player;
@@ -140,12 +140,12 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         location there = getLocation(player);
         if (here.cell != there.cell)
         {
-            sendSystemMessageTestingOnly(player, "You cannot sequences DNA from the terminal if you are not even in the same room!");
+            broadcast(player, "You cannot sequences DNA from the terminal if you are not even in the same room!");
             return;
         }
         if (getDistance(here, there) > 15.0f)
         {
-            sendSystemMessageTestingOnly(player, "You are too far away from the override terminal to continue sequencing!");
+            broadcast(player, "You are too far away from the override terminal to continue sequencing!");
             return;
         }
         String[] dna = getStringArrayObjVar(self, VAR_DNA);
@@ -228,7 +228,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         utils.removeScriptVar(self, scriptvar_pid);
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "You stop sequencing as the fail-safe sequence has already been overridden.");
+            broadcast(player, "You stop sequencing as the fail-safe sequence has already been overridden.");
             return SCRIPT_CONTINUE;
         }
         int bp = sui.getIntButtonPressed(params);
@@ -276,7 +276,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
             }
             utils.setScriptVar(self, scriptvar_locks, locks);
         }
-        sendSystemMessageTestingOnly(player, "You match " + newLocks + " new sets of nucleotides.");
+        broadcast(player, "You match " + newLocks + " new sets of nucleotides.");
         int totalLocks = 0;
         for (int lock : locks)
         {
@@ -287,13 +287,13 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         }
         if (totalLocks == locks.length)
         {
-            sendSystemMessageTestingOnly(player, "Sequencing complete! You disable the security override for the facility...");
+            broadcast(player, "Sequencing complete! You disable the security override for the facility...");
             hq.disableObjective(self);
             xp.grant(player, xp.CRAFTING_BIO_ENGINEER_CREATURE, 1000);
             return SCRIPT_CONTINUE;
         }
         utils.removeScriptVar(self, scriptvar_chain);
-        sendSystemMessageTestingOnly(player, "Retrieving new DNA sample...");
+        broadcast(player, "Retrieving new DNA sample...");
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(self, "handleSequenceDelay", d, 3.0f, false);

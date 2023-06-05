@@ -18,7 +18,7 @@ public class cell extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnAboutToRecieveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
+    public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
         {

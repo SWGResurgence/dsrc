@@ -90,7 +90,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
@@ -130,7 +130,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         if (loc == null)
         {
-            sendSystemMessageTestingOnly(player, "Error retrieving planet data");
+            broadcast(player, "Error retrieving planet data");
             cleanScriptVars();
             return SCRIPT_CONTINUE;
         }
@@ -198,7 +198,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         }
         String planet = RESOURCE_PLANETS[idx];
         setObjVar(self, "planet", planet);
-        sendSystemMessageTestingOnly(player, "Planet set to " + planet);
+        broadcast(player, "Planet set to " + planet);
         return SCRIPT_CONTINUE;
     }
     public int handleResourceSelection(obj_id self, dictionary params) throws InterruptedException
@@ -236,7 +236,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         obj_id resourceCrate = createResourceCrate(resourceId, AMT, inv);
         if (resourceCrate == null)
         {
-            sendSystemMessageTestingOnly(player, "Resource grant failed. It is likely your inventory is full.");
+            broadcast(player, "Resource grant failed. It is likely your inventory is full.");
         }
         else 
         {

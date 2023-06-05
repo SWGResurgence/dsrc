@@ -46,12 +46,12 @@ public class intellect_spawn_control extends script.base_script
         }
         if ((toLower(text)).equals("force_intellect_spawn"))
         {
-            sendSystemMessageTestingOnly(speaker, "Beginning spawn sequence. It could take a few minutes...");
+            broadcast(speaker, "Beginning spawn sequence. It could take a few minutes...");
             startSpawnSequence(self, 0.0f, true);
         }
         else if ((toLower(text)).equals("find_intellect_spawn"))
         {
-            sendSystemMessageTestingOnly(speaker, "Requesting spawn location information...");
+            broadcast(speaker, "Requesting spawn location information...");
             findSpawned(self, speaker);
         }
         return SCRIPT_CONTINUE;
@@ -123,7 +123,7 @@ public class intellect_spawn_control extends script.base_script
     {
         obj_id seeker = params.getObjId("seeker");
         location loc = params.getLocation("loc");
-        sendSystemMessageTestingOnly(seeker, "Intellect Spawn: " + loc.toString());
+        broadcast(seeker, "Intellect Spawn: " + loc.toString());
         return SCRIPT_CONTINUE;
     }
     public int handleForcedValidation(obj_id self, dictionary params) throws InterruptedException
@@ -241,7 +241,7 @@ public class intellect_spawn_control extends script.base_script
         }
         if (!found)
         {
-            sendSystemMessageTestingOnly(speaker, "No active spawns found");
+            broadcast(speaker, "No active spawns found");
         }
     }
     public int countActiveSpawns(obj_id self) throws InterruptedException
