@@ -8,9 +8,9 @@ species = SP_human
 @class tangible_object_template 3
 @class object_template 3
 
-objectName = "npc_name" "araneya_bendix"
+objectName = "npc_name" "ana_fox"
 detailedDescription = "" ""
-lookAtText = "npc_lookat" "araneya_bendix"
+lookAtText = "npc_lookat" "ana_fox"
 
 appearanceFilename = "appearance/hum_f.sat"
 
