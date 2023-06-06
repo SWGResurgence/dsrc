@@ -19,18 +19,6 @@ public class master_controller_emperors_hand extends script.base_script
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_EMPERORS_HAND);
         return SCRIPT_CONTINUE;
     }
-    public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
-    {
-        obj_id[] allPlayersNearby = getAllPlayers(getLocation(self), 128.0f);
-        if (allPlayersNearby != null)
-        {
-            for (obj_id nearby : allPlayersNearby)
-            {
-                groundquests.sendSignal(nearby, "completedWorldBossNabooEmperorsHand");
-            }
-        }
-        return SCRIPT_CONTINUE;
-    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isGod(killer))
@@ -175,7 +163,6 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperor's Hand goes into her Last Stand, triggering her last defenses!");
                 }
-                chat.chat(self, "This Is The Way.");
                 buff.applyBuff(self, "crystal_buff", 30, 20);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
