@@ -74,7 +74,8 @@ public class master_controller_emperors_hand extends script.base_script
             if (!utils.hasScriptVar(self, "handHasSpawned"))
             {
                 chat.chat(self, "I am Aralina Silk, The Hand of his Royal Majesty, The Emperor!");
-                utils.setScriptVar(self,"handHasSpawned", 1)
+                utils.setScriptVar(self,"handHasSpawned", 1);
+                return SCRIPT_CONTINUE;
             }
         }
         if (percentHealth <= 90)
@@ -87,13 +88,13 @@ public class master_controller_emperors_hand extends script.base_script
                     broadcast(who, "Aralina Silk has summoned the use of Medical Buffs through the Darkside of the Force!");
                 }
                 chat.chat(self, "You will fail!");
-                buff.applyBuff((self), "me_buff_health_2", 300);
-                buff.applyBuff((self), "me_buff_action_3", 300);
-                buff.applyBuff((self), "me_buff_strength_3", 300);
-                buff.applyBuff((self), "me_buff_agility_3", 300);
-                buff.applyBuff((self), "me_buff_precision_3", 300);
-                buff.applyBuff((self), "me_buff_melee_gb_1", 300);
-                buff.applyBuff((self), "me_buff_ranged_gb_1", 300);
+                buff.applyBuff((self), "me_buff_health_2", 60);
+                buff.applyBuff((self), "me_buff_action_3", 60);
+                buff.applyBuff((self), "me_buff_strength_3", 60);
+                buff.applyBuff((self), "me_buff_agility_3", 60);
+                buff.applyBuff((self), "me_buff_precision_3", 60);
+                buff.applyBuff((self), "me_buff_melee_gb_1", 60);
+                buff.applyBuff((self), "me_buff_ranged_gb_1", 60);
                 utils.setScriptVar(self, "handMedBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -135,6 +136,21 @@ public class master_controller_emperors_hand extends script.base_script
                 }
                 resurgence.createCircleSpawn(self, self,"emperors_hand_inquisitors", 2, 5);
                 utils.setScriptVar(self, "inquisitorsHasSpawned", 1);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (percentHealth <= 20)
+        {
+            if (!utils.hasScriptVar(self, "officerBuffs"))
+            {
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The Emperors Hand has summoned Officer Buffs from the Darkside of the Force!");
+                }
+                buff.applyBuff(self, "of_buff_def_9", 300, 100);
+                buff.applyBuff(self, "of_focus_fire_6", 300, 100);
+                buff.applyBuff(self, "of_drillmaster_1", 300, 100);
+                utils.setScriptVar(self, "officerBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
         }
