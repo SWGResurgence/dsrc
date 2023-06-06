@@ -1,42 +1,44 @@
 package script.theme_park.world_boss;
 
-import script.dictionary;
 import script.library.*;
+
+import script.location;
 import script.obj_id;
-import script.prose_package;
-import script.string_id;
 
 public class master_controller_emperors_hand extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
-    /**
-     * public String[] = {
-     * };
-     **/
-    public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
-
-    public master_controller_emperors_hand()
-    {
-    }
-
+    public String[] EMPERORS_HAND_MSGS = {
+            "I am Aralina Silk, The Hand of his Royal Majesty, The Emperor!",
+            "You do not know the Power of the Darkside!",
+            "I must obey my Master - and he want's your Head!",
+            "The Emperor has decreed your destruction!",
+            "The Sith will rule the Galaxy!",
+            "Long live the Empire!",
+    };
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
+        }
         setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Active");
-        createTriggerVolume(VOLUME_NAME, 15.0f, true);
-        messageTo(self, "setLoiter", null, 10.0f, false);
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_EMPERORS_HAND);
         return SCRIPT_CONTINUE;
     }
-
-    public int OnInitialize(obj_id self) throws InterruptedException
+    public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
-        createTriggerVolume(VOLUME_NAME, 15.0f, true);
-        messageTo(self, "setLoiter", null, 10.0f, false);
+        obj_id[] allPlayersNearby = getAllPlayers(getLocation(self), 128.0f);
+        if (allPlayersNearby != null)
+        {
+            for (obj_id nearby : allPlayersNearby)
+            {
+                groundquests.sendSignal(nearby, "completedWorldBossNabooEmperorsHand");
+            }
+        }
         return SCRIPT_CONTINUE;
     }
-
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (isGod(killer))
@@ -45,45 +47,26 @@ public class master_controller_emperors_hand extends script.base_script
         }
         if (pet_lib.isPet(killer))
         {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION IMPERIAL CITIZENS: The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
+        }
+        if (beast_lib.isBeast(killer))
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
+        }
+        if (!isPlayer(killer))
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         }
         obj_id tatooine = getPlanetByName("tatooine");
-        removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
-        setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Inactive");
-        sendSystemMessageGalaxyTestingOnly("ATTENTION IMPERIAL CITIZENS: The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
-        resurgence.doWorldBossDeathMsg(self);
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
-    {
-        prose_package pp = prose.getPackage(FOUND_JEDI);
-        pp.target.set(breacher);
-        if (utils.isProfession(breacher, utils.FORCE_SENSITIVE))
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand"))
         {
-            if (!ai_lib.isInCombat(self))
-            {
-                chat.chat(self, breacher, pp);
-                addHate(self, breacher, 1000.0f);
-                startCombat(self, breacher);
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                addHate(self, breacher, 500.0f);
-                return SCRIPT_CONTINUE;
-            }
+            removeObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand");
         }
+        setObjVar(tatooine, "dungeon_finder.world_boss.emperors_hand", "Inactive");
+        resurgence.doWorldBossDeathMsg(self);
+        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Aralina Silk, The Hand of his Royal Majesty, The Emperor has been slain, a bounty is now being offered for the capture or murder of " + getName(killer));
         return SCRIPT_CONTINUE;
     }
-
-    public int setLoiter(obj_id self, dictionary params) throws InterruptedException
-    {
-        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
-        ai_lib.setLoiterRanges(self, 0.0f, 80.0f);
-        return SCRIPT_CONTINUE;
-    }
-
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
@@ -94,97 +77,125 @@ public class master_controller_emperors_hand extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (percentHealth <= 95)
+        if (!utils.hasScriptVar(self, "chirp"))
         {
-            chat.chat(self, "I am Aralina Silk, The Hand of His Royal Majesty, The Emperor!");
+            chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
+            utils.setScriptVar(self, "chrip", 1);
+        }
+        if (percentHealth <= 100)
+        {
+            if (!utils.hasScriptVar(self, "handHasSpawned"))
+            {
+                chat.chat(self, "I am Aralina Silk, The Hand of his Royal Majesty, The Emperor!");
+            }
+        }
+        if (percentHealth <= 90)
+        {
+            if (!utils.hasScriptVar(self, "handMedBuffs"))
+            {
+                buff.removeAllBuffs(self);
+                for (obj_id who : players)
+                {
+                    broadcast(who, "Aralina Silk has summoned the use of Medical Buffs through the Darkside of the Force!");
+                }
+                chat.chat(self, "You will fail!");
+                buff.applyBuff((self), "me_buff_health_2", 900);
+                buff.applyBuff((self), "me_buff_action_3", 900);
+                buff.applyBuff((self), "me_buff_strength_3", 900);
+                buff.applyBuff((self), "me_buff_agility_3", 900);
+                buff.applyBuff((self), "me_buff_precision_3", 900);
+                buff.applyBuff((self), "me_buff_melee_gb_1", 900);
+                buff.applyBuff((self), "me_buff_ranged_gb_1", 900);
+                utils.setScriptVar(self, "handMedBuffs", 1);
+                return SCRIPT_CONTINUE;
+            }
         }
         if (percentHealth <= 75)
         {
-            chat.chat(self, "You Don't Know The Extent Of My Power!");
-            for (obj_id who : players)
+            if (!utils.hasScriptVar(self, "stormtroopersHasSpawned"))
             {
-                broadcast(who, "The Hand has summoned Medical Buffs.");
+                chat.chat(self, "You will suffer for your lack of vision!");
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The Emperors Hand has summoned reinforcements from the 501st Stormtrooper Detachment!");
+                }
+                resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 8, 5);
+                utils.setScriptVar(self, "StormtroopersHasSpawned", 1);
+                return SCRIPT_CONTINUE;
             }
-            buff.applyBuff((self), "me_buff_health_2", 900);
-            buff.applyBuff((self), "me_buff_action_3", 900);
-            buff.applyBuff((self), "me_buff_strength_3", 900);
-            buff.applyBuff((self), "me_buff_agility_3", 900);
-            buff.applyBuff((self), "me_buff_precision_3", 900);
-            buff.applyBuff((self), "me_buff_melee_gb_1", 900);
-            buff.applyBuff((self), "me_buff_ranged_gb_1", 900);
-            return SCRIPT_CONTINUE;
         }
         if (percentHealth <= 50)
         {
-            chat.chat(self, "You Will Suffer For Your Cowardace!");
-        }
-        if (percentHealth <= 20)
-        {
-            if (!utils.hasScriptVar(self, "hasDisarmed"))
+            if (!utils.hasScriptVar(self, "agentsHasSpawned"))
             {
-                chat.chat(self, "The Sith Will Not Be Denied!");
+                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged, causing her to increase her focus. She has summoned additional strength from her personal Sith Holocron.");
+                    broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Security Bureau!");
                 }
-            }
-            buff.applyBuff((self), "forceCrystalHealth", 300);
-            buff.applyBuff((self), "forceCrystalForce", 300);
-            return SCRIPT_CONTINUE;
-        }
-        if (percentHealth <= 10) {
-            if (!utils.hasScriptVar(self, "feelsDarkSideForce")) {
-                for (obj_id who : players) {
-                    broadcast(who, "Aralina Silk has summoned the Full Power of the Dark Side of the Force. Her attacks are now amplified.");
-                    chat.chat(self, "The Emperor Has Decreed It... It Shall Be Done!");
-                    buff.applyBuff(self, "crystal_buff", 60, 20);
-                }
+                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 4, 5);
+                utils.setScriptVar(self, "agentsHasSpawned", 1);
+                return SCRIPT_CONTINUE;
             }
         }
-        if (percentHealth <= 5)
+        if (percentHealth <= 25)
         {
-            if (!utils.hasScriptVar(self, "releasesHerPower"))
+            if (!utils.hasScriptVar(self, "inquisitorsHasSpawned"))
+            {
+                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Inquisitors!");
+                }
+                resurgence.createCircleSpawn(self, self,"emperors_hand_inquisitors", 2, 5);
+                utils.setScriptVar(self, "inquisitorsHasSpawned", 1);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (percentHealth <= 15)
+        {
+            if (!utils.hasScriptVar(self, "ig88Buff"))
+            {
+                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The Emperors Hand has summoned additional defenses through the Darkside of the Force!");
+                }
+                buff.applyBuff(self, "ig88_shield", 1800, 100);
+                utils.setScriptVar(self, "ig88Buff", 1);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (percentHealth <= 8)
+        {
+            if (!utils.hasScriptVar(self, "hasLastStand"))
             {
                 for (obj_id who : players)
                 {
-                    broadcast(who, "Aralina Silk has summoned her defenses.");
-                    chat.chat(self, "You Will Suffer For Your Lack Of Vision.");
-                    buff.applyBuff(self, "ig88_shield", 1800, 100);
+                    broadcast(who, "The Emperor's Hand goes into her Last Stand, triggering her last defenses!");
                 }
+                chat.chat(self, "This Is The Way.");
+                buff.applyBuff(self, "crystal_buff", 60, 20);
+                utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
-        if (percentHealth <= 1)
+        if (percentHealth <= 2)
         {
-            if (!utils.hasScriptVar(self, "lastHandMsg"))
+            if (!utils.hasScriptVar(self, "hasBeenBombed"))
             {
-                chat.chat(self, "Long Live The Empire!");
+                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The most recent attack from \" + getFirstName(attacker) + \" has enraged The Emperor's Hand, causing her to increase and call down an Imperial Bombing Run on her own position!");
+                }
+                bombard(self, players);
+                utils.setScriptVar(self, "hasBeenBombed", 1);
             }
-        }
-        else
-        {
-            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
-
-    public void stunPlayers(obj_id self, obj_id[] targets) throws InterruptedException
-    {
-        playClientEffectObj(targets, "clienteffect/cr_bodyfall_huge.cef", self, "");
-        if (targets == null)
-        {
-            return;
-        }
-        for (obj_id iTarget : targets)
-        {
-            broadcast(iTarget, "The Emperor's Hand attempts to bring you to your knees!");
-            chat.chat(self, "Now, Witness The Power of the Dark Side!");
-            faceTo(iTarget, self);
-        }
-    }
-
     public void bombard(obj_id self, obj_id[] targets) throws InterruptedException
     {
-        chat.chat(self, "If you think that your going to defeat me, you won't live to boast about it.");
         if (targets == null)
         {
             return;
@@ -192,24 +203,16 @@ public class master_controller_emperors_hand extends script.base_script
         for (obj_id iTarget : targets)
         {
             playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
-            reduceHealth(iTarget, rand(2500, 5000));
-            reduceAction(iTarget, rand(5000, 7500));
+            reduceHealth(iTarget, rand(5000, 7500));
+            reduceAction(iTarget, rand(2500, 5000));
         }
     }
-
     public boolean reduceHealth(obj_id player, int amt)
     {
         return setHealth(player, (getHealth(player) - amt));
     }
-
     public boolean reduceAction(obj_id player, int amt)
     {
         return setAction(player, (getAction(player) - amt));
     }
-    /**public int cleanupCorps(obj_id self, dictionary params) throws InterruptedException
-     * {
-     *     trial.cleanupNpc(self);
-     *     return SCRIPT_CONTINUE;
-     * }
-     **/
 }
