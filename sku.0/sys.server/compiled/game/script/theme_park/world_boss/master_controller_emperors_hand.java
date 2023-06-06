@@ -128,7 +128,6 @@ public class master_controller_emperors_hand extends script.base_script
         {
             if (!utils.hasScriptVar(self, "agentsHasSpawned"))
             {
-                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Security Bureau!");
@@ -142,7 +141,6 @@ public class master_controller_emperors_hand extends script.base_script
         {
             if (!utils.hasScriptVar(self, "inquisitorsHasSpawned"))
             {
-                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Inquisitors!");
@@ -156,12 +154,11 @@ public class master_controller_emperors_hand extends script.base_script
         {
             if (!utils.hasScriptVar(self, "ig88Buff"))
             {
-                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
                     broadcast(who, "The Emperors Hand has summoned additional defenses through the Darkside of the Force!");
                 }
-                buff.applyBuff(self, "ig88_shield", 1800, 100);
+                buff.applyBuff(self, "ig88_shield", 60, 100);
                 utils.setScriptVar(self, "ig88Buff", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -183,7 +180,6 @@ public class master_controller_emperors_hand extends script.base_script
         {
             if (!utils.hasScriptVar(self, "hasBeenBombed"))
             {
-                chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
                     broadcast(who, "The most recent attack from \" + getFirstName(attacker) + \" has enraged The Emperor's Hand, causing her to increase and call down an Imperial Bombing Run on her own position!");
