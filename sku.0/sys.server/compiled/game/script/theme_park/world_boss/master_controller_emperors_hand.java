@@ -8,14 +8,6 @@ import script.obj_id;
 public class master_controller_emperors_hand extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
-    public String[] EMPERORS_HAND_MSGS = {
-            "I am Aralina Silk, The Hand of his Royal Majesty, The Emperor!",
-            "You do not know the Power of the Darkside!",
-            "I must obey my Master - and he want's your Head!",
-            "The Emperor has decreed your destruction!",
-            "The Sith will rule the Galaxy!",
-            "Long live the Empire!",
-    };
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
@@ -77,11 +69,6 @@ public class master_controller_emperors_hand extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (!utils.hasScriptVar(self, "chirp"))
-        {
-            chat.chat(self, EMPERORS_HAND_MSGS[rand(0, EMPERORS_HAND_MSGS.length - 1)]);
-            utils.setScriptVar(self, "chrip", 1);
-        }
         if (percentHealth <= 100)
         {
             if (!utils.hasScriptVar(self, "handHasSpawned"))
@@ -99,13 +86,13 @@ public class master_controller_emperors_hand extends script.base_script
                     broadcast(who, "Aralina Silk has summoned the use of Medical Buffs through the Darkside of the Force!");
                 }
                 chat.chat(self, "You will fail!");
-                buff.applyBuff((self), "me_buff_health_2", 900);
-                buff.applyBuff((self), "me_buff_action_3", 900);
-                buff.applyBuff((self), "me_buff_strength_3", 900);
-                buff.applyBuff((self), "me_buff_agility_3", 900);
-                buff.applyBuff((self), "me_buff_precision_3", 900);
-                buff.applyBuff((self), "me_buff_melee_gb_1", 900);
-                buff.applyBuff((self), "me_buff_ranged_gb_1", 900);
+                buff.applyBuff((self), "me_buff_health_2", 300);
+                buff.applyBuff((self), "me_buff_action_3", 300);
+                buff.applyBuff((self), "me_buff_strength_3", 300);
+                buff.applyBuff((self), "me_buff_agility_3", 300);
+                buff.applyBuff((self), "me_buff_precision_3", 300);
+                buff.applyBuff((self), "me_buff_melee_gb_1", 300);
+                buff.applyBuff((self), "me_buff_ranged_gb_1", 300);
                 utils.setScriptVar(self, "handMedBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -158,7 +145,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned additional defenses through the Darkside of the Force!");
                 }
-                buff.applyBuff(self, "ig88_shield", 60, 100);
+                buff.applyBuff(self, "ig88_shield", 30, 100);
                 utils.setScriptVar(self, "ig88Buff", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -172,7 +159,7 @@ public class master_controller_emperors_hand extends script.base_script
                     broadcast(who, "The Emperor's Hand goes into her Last Stand, triggering her last defenses!");
                 }
                 chat.chat(self, "This Is The Way.");
-                buff.applyBuff(self, "crystal_buff", 60, 20);
+                buff.applyBuff(self, "crystal_buff", 30, 20);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
@@ -182,7 +169,7 @@ public class master_controller_emperors_hand extends script.base_script
             {
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from \" + getFirstName(attacker) + \" has enraged The Emperor's Hand, causing her to increase and call down an Imperial Bombing Run on her own position!");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) + " has enraged The Emperor's Hand, causing her to increase and call down an Imperial Bombing Run on her own position!");
                 }
                 bombard(self, players);
                 utils.setScriptVar(self, "hasBeenBombed", 1);
