@@ -120,7 +120,7 @@ public class master_controller_emperors_hand extends script.base_script
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the 501st Stormtrooper Detachment!");
                 }
                 resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 8, 5);
-                utils.setScriptVar(self, "StormtroopersHasSpawned", 1);
+                utils.setScriptVar(self, "stormtroopersHasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
         }
