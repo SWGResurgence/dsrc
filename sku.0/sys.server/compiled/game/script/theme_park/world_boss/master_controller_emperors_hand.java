@@ -74,6 +74,7 @@ public class master_controller_emperors_hand extends script.base_script
             if (!utils.hasScriptVar(self, "handHasSpawned"))
             {
                 chat.chat(self, "I am Aralina Silk, The Hand of his Royal Majesty, The Emperor!");
+                utils.setScriptVar(self,"handHasSpawned", 1)
             }
         }
         if (percentHealth <= 90)
