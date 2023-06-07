@@ -379,7 +379,7 @@ world_boss_paxvizla	Dxun NPC World Boss	ig88_droideka_shield	6	50		bh_dm_2	9	75	
 world_boss_darth_gizmo	Endor NPC World Boss	fs_sh_2	1	10		fs_saber_reflect	10	50		fs_buff_3	10	75		fs_dm_3	25	100		fs_maelstrom_2	15	5		axkva_forcestorm	10	100	once
 world_boss_emperors_hand	Naboo NPC World Boss	fs_sh_2	5	75		suin_rampage	5	100		sp_fld_debuff_ca	15	85		fs_maelstrom_3	15	75		fs_dm_6	25	100		kenkirk_droid_blast	12	100
 emperors_hand_stormtroopers	Emperor's Hand Stormtroopers	sd_obliterate	16	50		kenkirk_droid_blast	12	50		of_ae_dm_cc_3	8	25		co_del_ae_dm_3	8	25
-emperors_hand_isb_guards	Emperor's Hand ISB	of_firepower_1	1	50		of_dm_4	16	50		of_ae_dm_cc_3	16	50		sd_obliterate	24	50	once	of_deb_def_3	16	50
+emperors_hand_isb_guards	Emperor's Hand ISB	of_firepower_1	1	50		of_dm_4	16	50		of_ae_dm_cc_3	16	50		sd_obliterate	24	50	once	of_deb_def_3	16	50		kenkirk_droid_blast	12	75
 emperors_hand_inquisitors	Emperor's Hand Inquisitors	fs_dm_5	12	100		saberBlock	42	100	once	forceThrow	2	50	once	fs_dm_cc_3	16	100
 clan_vizla_mandalorian	Clan Vizla Mandalorian	bh_dm_2	9	100		bh_dm_crit_2	2	100		me_hot_1	20	100
 dxun_boma	Boma																																																									
