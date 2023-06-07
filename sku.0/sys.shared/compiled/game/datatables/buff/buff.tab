@@ -375,7 +375,7 @@ boss_root_immunity	root			10	command.stoppingShot	-1	movement	0		0		0		0		0	STAT
 boss_mez_immunity	stasis	mez		11	state.rage	-1	delay_attack	0	movement	0		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
 boss_slow_immunity	cmSlow	warcry		10	command.warcry	-1	combat_slow	1		0		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
 biological_suppression	healthDebuff	actionDebuff	mindDebuff	10	command.vitalize	180	healthPercent	-50	staminaPercent	-50	willpowerPercent	-50		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-crystal_buff	som_crystal_buff			6	command.centerOfBeing	500	expertise_healing_all	250	constitution_modified	90000	expertise_damage_all	500	combat_divide_damage_taken	85	expertise_glancing_blow_all	100	STATE_NONE	none			1	0		1	1	0	0	1	1	0	1	1	1
+crystal_buff	som_crystal_buff			6	command.centerOfBeing	500	expertise_healing_all	100	health	90000	expertise_damage_all	350	combat_divide_damage_taken	85	expertise_glancing_blow_all	100	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 crystal_buff_drained	som_drained_crystal			6	command.centerOfBeing	1800	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_glancing_blow_all	5	constitution_modified	75	luck_modified	50	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 hunted	defenseDebuff			6	buffs.spiceAction	60	ranged_defense	-200	melee_defense	-200		0		0		0	STATE_NONE	none			1	1		1	0	1	0	1	1	0	1	1	1
 guardian_taint	mobSlow			6	command.thyroidRupture	60	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -1134,7 +1134,7 @@ pvp_aura_buff_self	pvpAuraBuff			100	command.pvp_aura_buff_self	180	agility_modi
 pvp_aura_buff_target	pvpAuraBuff			99	command.pvp_aura_buff_self	10	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0	STATE_NONE	none	appearance/pt_aurabuff_imperial.prt		1	0		1	1	1	0	1	1	0	1	1	1
 pvp_aura_buff_rebel_self	pvpAuraBuff			100	command.pvp_aura_buff_rebel_self	180	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750	pvp_aura_buff_self	0	STATE_NONE	none	appearance/pt_aurabuff_rebel_caster.prt		1	0		1	1	1	0	1	1	0	1	1	1
 pvp_aura_buff_rebel_target	pvpAuraBuff			99	command.pvp_aura_buff_rebel_self	10	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0	STATE_NONE	none	appearance/pt_aurabuff_rebel.prt		1	0		1	1	1	0	1	1	0	1	1	1
-of_firepower	of_firepower			90	command.of_firepower	120	expertise_damage_line_of_aoe	125	expertise_critical_line_of_aoe	50		0		0		0	STATE_NONE	none	clienteffect/off_superior_firepower.cef		1	0		1	1	0	0	1	1	0	1	1	1
+of_firepower	of_firepower			90	command.of_firepower	120	expertise_damage_line_of_aoe	125	expertise_critical_line_of_aoe	50		0		0		0	STATE_NONE	none	clienteffect/off_superior_firepower.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_tactical_drop_1	genBuff_3			26	command.powerBoost	3600	constitution_modified	150		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
 of_tactical_drop_2	genBuff_3			34	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
 of_tactical_drop_3	genBuff_3			48	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10	expertise_dodge	3		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
@@ -2044,6 +2044,3 @@ tow_ring_domestics_01	tow_ring_domestics_01			1	command.aurilian_crystal_buff_lr
 tow_ring_engineering_01	tow_ring_engineering_01			1	command.aurilian_crystal_buff_lrg	-1	cybernetic_assembly	20	cybernetic_experimentation	10	droid_assembly	20	droid_experimentation	10	luck_modified	150	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tow_ring_inspiration_01	tow_ring_inspiration_01			1	command.aurilian_crystal_buff_lrg	-1	expertise_en_inspire_pulse_duration_increase	2	expertise_en_inspire_buff_duration_increase	30	luck_modified	150		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tow_ring_munitions_01	tow_ring_munitions_01			1	command.aurilian_crystal_buff_lrg	-1	armor_assembly	20	armor_experimentation	10	weapon_experimentation	10	luck_modified	150		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-emperors_hand_focus_fire_6	focusFire	of_aura_2		90	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	25	combat_strikethrough_value	64	expertise_critical_niche_all	25		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	0	0	1	1	0	1	1	1
-emperors_hand_of_buff_def_9	entrench	of_aura_1		9	command.of_buff_def	270	group	0	expertise_dodge	25	constitution_modified	140	combat_critical_hit_reduction	50		0	STATE_NONE	none	clienteffect/off_tactics.cef		1	0		1	1	0	0	1	1	0	1	1	1
-emperors_hand_of_drillmaster_1	drillmaster	of_aura_3		34	command.of_drillmaster	40	group	0	expertise_damage_all	25	expertise_action_all	25	expertise_damage_weapon_2	25		0	STATE_NONE	none			1	0		1	1	0	0	1	1	0	1	1	1
