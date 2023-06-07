@@ -29,7 +29,7 @@ public class wear extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        System.out.print("Trying to  attach  clothing to : " + getEncodedName(self) + " with item : " + getEncodedName(item));
+        LOG("bubbajoe", "Trying to  attach  clothing to : " + getEncodedName(self) + " with item : " + getEncodedName(item));
         return SCRIPT_CONTINUE;
     }
 }

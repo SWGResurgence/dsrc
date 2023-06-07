@@ -12,7 +12,9 @@ import script.library.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import static script.library.utils.getDistance2D;
 import static script.library.utils.setScriptVar;
@@ -528,7 +530,7 @@ public class player_developer extends base_script
                 }
                 if (pointName == null || pointName.equals(""))
                 {
-                    broadcast(self, "You must specify a point name.");
+                    broadcast(self, "You must specify a point name. It must be exact.");
                     return SCRIPT_CONTINUE;
                 }
                 removePlanetTravelPoint(getCurrentSceneName(), pointName);
@@ -1600,20 +1602,21 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("gotoName"))
+        if (cmd.equalsIgnoreCase("findPlayers"))
         {
-            String parse = tok.nextToken();
-            obj_id[] targetPool = getCreaturesInRange(getLocation(self), 1000.0f);
-            for (obj_id aTargetPool : targetPool)
+            location origin = new location();
+            origin.x = 0.0f;
+            origin.y = 0.0f;
+            origin.z = 0.0f;
+            origin.cell = null;
+            origin.area = getCurrentSceneName();
+            float range = 7900f;
+            obj_id[] playerObjects = getAllPlayers(origin, range);
+            if (playerObjects.length == 0)
             {
-                if (getFirstName(aTargetPool).equalsIgnoreCase(parse))
-                {
-                    setLocation(self, getLocation(aTargetPool));
-                    broadcast(self, "Teleported to " + getEncodedName(aTargetPool));
-                    return SCRIPT_CONTINUE;
-                }
+                broadcast(self, "No players found.");
             }
-            return SCRIPT_CONTINUE;
+            //listbox with handler here.
         }
         if (cmd.equalsIgnoreCase("makeEnt"))
         {
@@ -1719,7 +1722,7 @@ public class player_developer extends base_script
                 else if (subCommand.equals("paste"))
                 {
                     location loc = getLocation(iTarget);
-                    loc.z = getFloatObjVar(self, "developer_clipboard.x");
+                    loc.x = getFloatObjVar(self, "developer_clipboard.x");
                     setLocation(iTarget, loc);
                 }
             }
@@ -1766,14 +1769,20 @@ public class player_developer extends base_script
                     setObjVar(self, "developer_clipboard.template", template);
                     broadcast(self, "Template " + template + " copied.");
                 }
-                else if (flag.equals("copy"))
+                if (flag.equals("paste"))
                 {
                     String template = getStringObjVar(self, "developer_clipboard.template");
                     sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+                    broadcast(self, "Template " + template + " pasted.");
+                }
+                else if (flag.equals("clear"))
+                {
+                    removeObjVar(self, "developer_clipboard.template");
+                    broadcast(self, "Template cleared.");
                 }
                 else
                 {
-                    broadcast(self, "Usage: /developer copy -template [copy|paste]");
+                    broadcast(self, "Usage: /developer copy -template [copy|paste|clear]");
                 }
                 return SCRIPT_CONTINUE;
             }

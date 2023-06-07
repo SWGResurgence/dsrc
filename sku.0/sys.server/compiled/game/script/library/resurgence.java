@@ -549,7 +549,7 @@ public class resurgence extends script.base_script
             }
             else
             {
-                System.out.println("stripPlayer() - possession is invalid. ID: " + possession);
+                LOG("bubbajoe", "stripPlayer() - possession is invalid. ID: " + possession);
             }
         }
     }

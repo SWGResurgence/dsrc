@@ -783,8 +783,11 @@ public class player_building extends script.base_script
                 }
                 if (distance < 1 || distance > 500)
                 {
-                    sendSystemMessage(self, new string_id(STF, "movefurniture_params"));
-                    return SCRIPT_CONTINUE;
+                    if (!isGod(self))
+                    {
+                        sendSystemMessage(self, new string_id(STF, "movefurniture_distance"));
+                        return SCRIPT_CONTINUE;
+                    }
                 }
             }
         }
@@ -816,8 +819,11 @@ public class player_building extends script.base_script
                 }
                 if (distance < 1 || distance > 500)
                 {
-                    sendSystemMessage(self, new string_id(STF, "movefurniture_params"));
-                    return SCRIPT_CONTINUE;
+                    if (!isGod(self))
+                    {
+                        sendSystemMessage(self, new string_id(STF, "movefurniture_distance"));
+                        return SCRIPT_CONTINUE;
+                    }
                 }
             }
         }

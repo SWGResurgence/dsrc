@@ -211,7 +211,7 @@ public class player_resurgence extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!hasObjVar(tatooine, "avatarCount"))
         {
-            setObjVar(tatooine, "avatarCount", 1);
+            setObjVar(tatooine, "avatarCount", count);
         }
         else
         {
@@ -226,7 +226,7 @@ public class player_resurgence extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!hasObjVar(tatooine, "avatarCount"))
         {
-            setObjVar(tatooine, "avatarCount", 1);
+            setObjVar(tatooine, "avatarCount", count);
         }
         else
         {
@@ -282,7 +282,7 @@ public class player_resurgence extends script.base_script
         prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus("world_boss.peko") + "\n";
         prompt += "\t\tDarth Gizmo: " + getDungeonStatus("world_boss.gizmo") + "\n";
         prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
-        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n\n";
+        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("world_boss.emperors_hand") + "\n\n";
         //prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n"; @TODO: replace when Donk-Donk is added
         //prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n"; @TODO: replace when Aurra Sing is added
         prompt += "\tDungeons\n";
@@ -347,17 +347,40 @@ public class player_resurgence extends script.base_script
         {
             StringTokenizer st = new StringTokenizer(params);
             String command = st.nextToken();
-            if (command.equals("aggroName"))
+            if (command.equals("aggroPlayer"))
             {
                 obj_id whom = getPlayerIdFromFirstName(st.nextToken());
                 if (isIdValid(whom))
                 {
                     startCombat(target, whom);
+                    broadcast(self, "Aggroing " + getPlayerFullName(whom) + " on " + (isMob(target) ? getTemplateName(target) : getCreatureName(target)));
+                }
+            }
+            if (command.equals("aggroMob"))
+            {
+                obj_id whom = getTarget(self);
+                obj_id assaulter = getIntendedTarget(self);
+                if (isIdValid(assaulter) && isIdValid(whom))
+                {
+                    startCombat(assaulter, whom);
+                    broadcast(self, "Aggroing " + assaulter + " on " + target);
+                }
+                else
+                {
+                    broadcast(self, "Invalid target(s) for aggroMob");
                 }
             }
             if (command.equals("flee"))
             {
-                ai_lib.flee(target, self, 5f, 28f);
+                float  minDistance = utils.stringToFloat(st.nextToken());
+                float maxDistance = utils.stringToFloat(st.nextToken());
+                if (st.countTokens() != 2)
+                {
+                    broadcast(self, "Invalid number of parameters for flee");
+                    broadcast(self, "[syntax] /aiManipulate flee [minDistance] [maxDistance]");
+                    return SCRIPT_CONTINUE;
+                }
+                ai_lib.flee(target, self, minDistance, maxDistance);
             }
             if (command.equals("movement"))
             {
@@ -365,18 +388,25 @@ public class player_resurgence extends script.base_script
                 if (movement.equals("wander"))
                 {
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_WANDER);
+                    broadcast(self, "Setting " + target + " to wander");
                 }
                 else if (movement.equals("sentinel"))
                 {
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_SENTINEL);
+                    broadcast(self, "Setting " + target + " to sentinel");
                 }
                 else if (movement.equals("loiter"))
                 {
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_LOITER);
+                    broadcast(self, "Setting " + target + " to loiter");
                 }
                 else if (movement.equals("stop"))
                 {
                     ai_lib.setDefaultCalmBehavior(target, ai_lib.BEHAVIOR_STOP);
+                    broadcast(self, "Setting " + target + " to stop");
+                }
+                else {
+                    broadcast(self, "Invalid movement type specified. Valid types are: wander, sentinel, loiter, stop");
                 }
             }
             if (command.equals("follow"))
@@ -388,31 +418,53 @@ public class player_resurgence extends script.base_script
                     if (isIdValid(whom))
                     {
                         ai_lib.aiFollow(whom, target);
+                        broadcast(self, "Making " + (isMob(whom) ? getTemplateName(whom) : getCreatureName(whom)) + " follow " + getPlayerFullName(whom));
                     }
                 }
                 else if (flag.equals("-self"))
                 {
                     ai_lib.aiFollow(target, self);
+                    broadcast(self, "Making " + (isMob(target) ? getTemplateName(target) : getCreatureName(target)) + " follow " + getPlayerFullName(self));
                 }
-                else if (flag.equals("stop"))
+                else if (flag.equals("-stop"))
                 {
                     ai_lib.aiStopFollowing(target);
+                    broadcast(self, "Stopping " + (isMob(target) ? getTemplateName(target) : getCreatureName(target)) + " from following.");
+                }
+                else
+                {
+                    broadcast(self, "Invalid flag specified. Valid flags are: -name, -self, -stop");
                 }
             }
             if(command.equals("level"))
             {
                 int level = utils.stringToInt(st.nextToken());
+                if (level < 1 || level > 90)
+                {
+                    broadcast(self, "Invalid level specified. Valid levels are 1-90");
+                    return SCRIPT_CONTINUE;
+                }
                 setLevel(target, level);
             }
             if(command.equals("health"))
             {
                 int health = utils.stringToInt(st.nextToken());
+                if (health < 1)
+                {
+                    broadcast(self, "Invalid health specified. Valid health is 1 or greater");
+                    return SCRIPT_CONTINUE;
+                }
                 setMaxAttrib(target, HEALTH, health);
                 setAttrib(target, HEALTH, health);
             }
             if(command.equals("action"))
             {
                 int action = utils.stringToInt(st.nextToken());
+                if (action < 1)
+                {
+                    broadcast(self, "Invalid action specified. Valid action is 1 or greater");
+                    return SCRIPT_CONTINUE;
+                }
                 setMaxAttrib(target, ACTION, action);
                 setAttrib(target, ACTION, action);
             }
@@ -439,20 +491,24 @@ public class player_resurgence extends script.base_script
                         }
                     }
                 }
+                broadcast(self, "Dressing " + target + " with " + getPlayerName(self) + "'s gear");
             }
             if (command.equals("mood"))
             {
                 ai_lib.setMood(self, st.nextToken());
+                broadcast(self, "Attempting to set mood for " + target + " to " + st.nextToken());
             }
             if (command.equals("name"))
             {
                 String name = st.nextToken();
                 setName(target, name);
+                broadcast(self, "Attempting to set name for " + target + " to " + name);
             }
             if (command.equals("faction"))
             {
                 String faction = st.nextToken();
                 setFaction(target, faction);
+                broadcast(self, "Attempting to set faction for " + target + " to " + faction);
             }
             if (command.equals("noClap"))
             {
@@ -460,10 +516,12 @@ public class player_resurgence extends script.base_script
                 if (flag.equals("on"))
                 {
                     setObjVar(target, "ai.noClap", true);
+                    broadcast(self, "This creature will no longer clap near an entertainer.");
                 }
                 else if (flag.equals("off"))
                 {
                     removeObjVar(target, "ai.noClap");
+                    broadcast(self, "This creature will now clap near an entertainer.");
                 }
             }
             if (command.equals("expel"))
@@ -477,6 +535,31 @@ public class player_resurgence extends script.base_script
                 {
                     removeObjVar(target, "ai.expel");
                 }
+            }
+            if (command.equals("queueCommandSelf"))
+            {
+                String commandName = st.nextToken();
+                String commandArgs = "";
+                int hashValue = getStringCrc(commandName);
+                while (st.hasMoreTokens())
+                {
+                    //add the rest of the tokens to the commandArgs
+                    commandArgs = commandArgs + " " + st.nextToken();
+                }
+                queueCommand(target, hashValue, self, commandArgs, COMMAND_PRIORITY_IMMEDIATE);
+            }
+            if (command.equals("queueCommandTarget"))
+            {
+                String targetName = st.nextToken();
+                String commandName = st.nextToken();
+                String commandArgs = "";
+                int hashValue = getStringCrc(commandName);
+                while (st.hasMoreTokens())
+                {
+                    //add the rest of the tokens to the commandArgs
+                    commandArgs = commandArgs + " " + st.nextToken();
+                }
+                queueCommand(target, hashValue, utils.getPlayerIdFromFirstName(targetName), commandArgs, COMMAND_PRIORITY_IMMEDIATE);
             }
         }
         return SCRIPT_CONTINUE;
