@@ -94,13 +94,13 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "Aralina Silk has summoned the use of Medical Buffs through the Darkside of the Force!");
                 }
-                buff.applyBuff((self), "me_buff_health_2", 120);
-                buff.applyBuff((self), "me_buff_action_3", 120);
-                buff.applyBuff((self), "me_buff_strength_3", 120);
-                buff.applyBuff((self), "me_buff_agility_3", 120);
-                buff.applyBuff((self), "me_buff_precision_3", 120);
-                buff.applyBuff((self), "me_buff_melee_gb_1", 120);
-                buff.applyBuff((self), "me_buff_ranged_gb_1", 120);
+                buff.applyBuff((self), "me_buff_health_2", 3600);
+                buff.applyBuff((self), "me_buff_action_3", 3600);
+                buff.applyBuff((self), "me_buff_strength_3", 3600);
+                buff.applyBuff((self), "me_buff_agility_3", 3600);
+                buff.applyBuff((self), "me_buff_precision_3", 3600);
+                buff.applyBuff((self), "me_buff_melee_gb_1", 3600);
+                buff.applyBuff((self), "me_buff_ranged_gb_1", 3600);
                 utils.setScriptVar(self, "handMedBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -156,9 +156,9 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned Officer Buffs from the Darkside of the Force!");
                 }
-                buff.applyBuff(self, "of_buff_def_9", 120, 100);
-                buff.applyBuff(self, "of_focus_fire_6", 120, 100);
-                buff.applyBuff(self, "of_drillmaster_1", 120, 100);
+                buff.applyBuff(self, "of_buff_def_9", 3600, 100);
+                buff.applyBuff(self, "of_focus_fire_6", 3600, 100);
+                buff.applyBuff(self, "of_drillmaster_1", 3600, 100);
                 utils.setScriptVar(self, "officerBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
