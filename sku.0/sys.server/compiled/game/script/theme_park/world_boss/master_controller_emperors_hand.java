@@ -114,7 +114,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the 501st Stormtrooper Detachment!");
                 }
-                resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 12, 2);
+                resurgence.createCircleSpawn(self, self, "emperors_hand_stormtroopers", 12, 1);
                 utils.setScriptVar(self, "stormtroopersHasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -128,7 +128,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Security Bureau!");
                 }
-                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 6, 2);
+                resurgence.createCircleSpawn(self, self, "emperors_hand_isb_guards", 8, 1);
                 utils.setScriptVar(self, "agentsHasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -142,7 +142,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned reinforcements from the Imperial Inquisitors!");
                 }
-                resurgence.createCircleSpawn(self, self,"emperors_hand_inquisitors", 3, 2);
+                resurgence.createCircleSpawn(self, self,"emperors_hand_inquisitors", 4, 1);
                 utils.setScriptVar(self, "inquisitorsHasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -186,7 +186,7 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperor's Hand goes into her Last Stand, triggering her last defenses!");
                 }
-                buff.applyBuff(self, "crystal_buff", 75, 40);
+                buff.applyBuff(self, "crystal_buff", 250, 80);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
@@ -223,8 +223,8 @@ public class master_controller_emperors_hand extends script.base_script
         for (obj_id iTarget : targets)
         {
             playClientEffectObj(iTarget, "clienteffect/avatar_explosion_02.cef", iTarget, "");
-            reduceHealth(iTarget, rand(5000, 7500));
-            reduceAction(iTarget, rand(2500, 5000));
+            reduceHealth(iTarget, rand(10000, 15000));
+            reduceAction(iTarget, rand(5000, 10000));
         }
     }
     public boolean reduceHealth(obj_id player, int amt)
