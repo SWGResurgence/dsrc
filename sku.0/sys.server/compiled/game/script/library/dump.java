@@ -900,7 +900,7 @@ public class dump extends script.base_script
             strTest += "LOCALVARS:\r\n";
             strTest += localVars;
             strTest += "\n\r";
-            sendSystemMessageTestingOnly(self, "LOCALVARS:" + localVars);
+            broadcast(self, "LOCALVARS:" + localVars);
         }
         if (isPlayer(objTarget))
         {

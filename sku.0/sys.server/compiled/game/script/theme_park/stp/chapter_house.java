@@ -40,12 +40,12 @@ public class chapter_house extends script.base_script
         }
         if (!hasSkill(item, "class_forcesensitive_phase1_novice"))
         {
-            sendSystemMessageTestingOnly(item, "The Force has blocked your entry.");
+            broadcast(item, "The Force has blocked your entry.");
             return SCRIPT_OVERRIDE;
         }
         else
         {
-            sendSystemMessageTestingOnly(item, "The Force has guided you in.");
+            broadcast(item, "The Force has guided you in.");
             return SCRIPT_CONTINUE;
         }
     }

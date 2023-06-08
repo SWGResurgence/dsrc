@@ -83,7 +83,7 @@ public class quest_giver_object extends script.base_script
                     if (isGod(player))
                     {
                         String errorMsg = "GODMODE MSG: questName provided for " + getTemplateName(self) + " in " + DATATABLE + " is invalid.";
-                        sendSystemMessageTestingOnly(player, errorMsg);
+                        broadcast(player, errorMsg);
                     }
                 }
             }

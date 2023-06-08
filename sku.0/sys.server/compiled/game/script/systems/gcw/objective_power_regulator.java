@@ -34,7 +34,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
         {
-            sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+            broadcast(player, "Only declared factional personnel may access this terminal!");
             return SCRIPT_CONTINUE;
         }
         obj_id structure = getObjIdObjVar(self, "objParent");
@@ -46,12 +46,12 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         int pFac = pvpGetAlignedFaction(player);
         if (!pvpAreFactionsOpposed(sFac, pFac))
         {
-            sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
+            broadcast(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "The power regulator has already been set to overload.");
+            broadcast(player, "The power regulator has already been set to overload.");
             return SCRIPT_CONTINUE;
         }
         obj_id nextObjective = hq.getNextObjective(structure);
@@ -65,7 +65,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
+                broadcast(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -80,19 +80,19 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
     {
         if (ai_lib.isInCombat(player))
         {
-            sendSystemMessageTestingOnly(player, "You cannot align the power flow to overload if you are in combat!");
+            broadcast(player, "You cannot align the power flow to overload if you are in combat!");
             return;
         }
         location here = getLocation(self);
         location there = getLocation(player);
         if (here.cell != there.cell)
         {
-            sendSystemMessageTestingOnly(player, "You cannot align the power flow if you are not even in the same room!");
+            broadcast(player, "You cannot align the power flow if you are not even in the same room!");
             return;
         }
         if (getDistance(here, there) > 15.0f)
         {
-            sendSystemMessageTestingOnly(player, "You are too far away from the power regulator to continue the setup!");
+            broadcast(player, "You are too far away from the power regulator to continue the setup!");
             return;
         }
         String scriptvar = "switches." + player;
@@ -187,7 +187,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
         }
         if (litmus)
         {
-            sendSystemMessageTestingOnly(player, "Alignment complete! The facility may now be set to overload from the primary terminal!");
+            broadcast(player, "Alignment complete! The facility may now be set to overload from the primary terminal!");
             hq.disableObjective(self);
             xp.grant(player, "combat_rangedspecialize_heavy", 1000);
             return SCRIPT_CONTINUE;

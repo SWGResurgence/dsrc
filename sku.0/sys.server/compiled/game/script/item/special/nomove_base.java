@@ -103,7 +103,7 @@ public class nomove_base extends script.base_script
         }
         if (isGod(transferer))
         {
-            sendSystemMessageTestingOnly(transferer, "[GOD MODE] You have been allowed to move a No Trade item.  This item may now be tradable by players if it is in a container!");
+            broadcast(transferer, "[GOD MODE] You have been allowed to move a No Trade item.  This item may now be tradable by players if it is in a container!");
             return SCRIPT_CONTINUE;
         }
         String name = getString(getNameStringId(self));

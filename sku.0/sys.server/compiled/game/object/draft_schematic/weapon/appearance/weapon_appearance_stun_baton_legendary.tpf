@@ -38,7 +38,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "weapon_core",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "weapon_core", ingredient="object/tangible/component/weapon/core/weapon_core_melee_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -46,7 +46,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "vibration_generator",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "vibration_generator", ingredient="object/tangible/component/weapon/vibro_unit_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],

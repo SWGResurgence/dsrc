@@ -148,7 +148,7 @@ public class online_jedi_test extends script.base_script
         {
             jediName = getPlayerName(jediId);
         }
-        sendSystemMessageTestingOnly(self, "SUCCESS - bounty created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
+        broadcast(self, "SUCCESS - bounty created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
         return SCRIPT_CONTINUE;
     }
     public int hnguyencrbtFailed(obj_id self, dictionary params) throws InterruptedException
@@ -166,7 +166,7 @@ public class online_jedi_test extends script.base_script
         {
             jediName = getPlayerName(jediId);
         }
-        sendSystemMessageTestingOnly(self, "FAILED - bounty not created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
+        broadcast(self, "FAILED - bounty not created bh=(" + bhId + "," + bhName + ") jedi=(" + jediId + "," + jediName + "," + bounties + ")");
         return SCRIPT_CONTINUE;
     }
     public String getFactionString(int iTefFac) throws InterruptedException

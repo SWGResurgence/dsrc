@@ -247,7 +247,7 @@ public class control_performance extends script.base_script
             utils.setScriptVar(self, RATING_OBJVAR + "." + performanceName, rating);
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "[GOD MODE] Audience satisfaction: " + satisfaction);
+                broadcast(player, "[GOD MODE] Audience satisfaction: " + satisfaction);
             }
             performAudienceReaction(self, player, satisfaction);
         }

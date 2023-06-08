@@ -41,7 +41,7 @@ public class instant_travel_terminal_deed extends script.base_script
                 {
                     if (hasCommand(player, dataTableGetString(ITV_COMMAND_TABLE, i, 1)))
                     {
-                        sendSystemMessageTestingOnly(player, "You have already used this item.");
+                        broadcast(player, "You have already used this item.");
                         return SCRIPT_CONTINUE;
                     }
                     grantCommand(player, dataTableGetString(ITV_COMMAND_TABLE, i, 1));

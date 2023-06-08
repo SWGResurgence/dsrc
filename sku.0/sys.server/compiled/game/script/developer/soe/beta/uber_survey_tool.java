@@ -61,11 +61,11 @@ public class uber_survey_tool extends script.base_script
             {
                 if (!resource.setToolClass(self, selRow))
                 {
-                    sendSystemMessageTestingOnly(player, "Uber Survey Tool: class set FAILED");
+                    broadcast(player, "Uber Survey Tool: class set FAILED");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(player, "Uber Survey Tool: class set -> " + resource.CLASS_NAME[selRow]);
+                    broadcast(player, "Uber Survey Tool: class set -> " + resource.CLASS_NAME[selRow]);
                 }
             }
             break;

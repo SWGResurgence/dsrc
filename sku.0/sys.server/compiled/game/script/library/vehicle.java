@@ -560,7 +560,7 @@ public class vehicle extends script.base_script
                 {
                     if (isGod(master))
                     {
-                        sendSystemMessageTestingOnly(master, "GODMODE MSG:  You are in a vehicle restricted scene.");
+                        broadcast(master, "GODMODE MSG:  You are in a vehicle restricted scene.");
                     }
                     return true;
                 }

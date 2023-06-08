@@ -24,13 +24,11 @@ FORM "FOOT"
 		}
 		
 		CHUNK "PRNT"
-		{
-			cstring "HHHHH"
-			cstring "HFFFH"
-			cstring "HFFFH"
-			cstring "HFFFH"
-			cstring "HHHHH"
-		}
+        {
+            cstring "HHH"
+            cstring "HFH"
+            cstring "HHH"
+        }
 	}
 }
 

@@ -919,7 +919,7 @@ public class space_transition extends script.base_script
         }
         if (worldLaunchLoc == null)
         {
-            sendSystemMessageTestingOnly(player, "You do not have a launch location. This usually means that you didn't use the launch terminal. Please do so.");
+            broadcast(player, "You do not have a launch location. This usually means that you didn't use the launch terminal. Please do so.");
             worldLaunchLoc = new location(5.0f, 195.0f, 5.0f, "tatooine");
         }
         float theta = rand() * (2.0f * (float) Math.PI);
@@ -1185,7 +1185,7 @@ public class space_transition extends script.base_script
             ship_ai.unitRemoveFromAllAttackTargetLists(objShip);
             ship_ai.unitSetAutoAggroImmune(objShip, true);
             ship_ai.unitSetDamageAggroImmune(objShip, true);
-            sendSystemMessageTestingOnly(getOwner(objShip), "aiIgnore[ON]: AI will no longer aggro you or fight back.");
+            broadcast(getOwner(objShip), "aiIgnore[ON]: AI will no longer aggro you or fight back.");
         }*/
     }
 

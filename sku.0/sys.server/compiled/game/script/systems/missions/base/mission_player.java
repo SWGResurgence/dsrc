@@ -69,7 +69,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         location locTest = getMissionLocation(self);
         if (!areMissionsAllowed(locTest))
         {
-            sendSystemMessageTestingOnly(self, "missions only work on naboo and tatooine, you are on " + locTest.area);
+            broadcast(self, "missions only work on naboo and tatooine, you are on " + locTest.area);
         }
         int city_id = getCityAtLocation(getLocation(objMissionTerminal), 0);
         if (cityExists(city_id) && city.isCityBanned(objPlayer, city_id))

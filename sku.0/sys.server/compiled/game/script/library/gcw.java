@@ -1172,7 +1172,7 @@ public class gcw extends script.base_script
                     {
                         commCount /= splitSize + 1;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You have recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
+                        broadcast(killer, "You have recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
                     }
                     return;
                 }

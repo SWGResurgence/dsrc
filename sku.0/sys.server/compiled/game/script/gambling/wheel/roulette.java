@@ -90,8 +90,8 @@ public class roulette extends script.gambling.base.wheel
                     if (maxBet > 0 && amt > maxBet)
                     {
                         int refund = amt - maxBet;
-                        sendSystemMessageTestingOnly(player, "The maximum bet for this station is " + maxBet + " credits.");
-                        sendSystemMessageTestingOnly(player, "Bet Refund (over-bet): " + refund + " credits");
+                        broadcast(player, "The maximum bet for this station is " + maxBet + " credits.");
+                        broadcast(player, "Bet Refund (over-bet): " + refund + " credits");
                         transferBankCreditsTo(self, player, refund, "noHandler", "noHandler", new dictionary());
                         CustomerServiceLog("gambling", getGameTime() + ": (" + player + ") " + getName(player) + " overbet -> processing refund!");
                         CustomerServiceLog("gambling", getGameTime() + ": (" + player + ") " + getName(player) + " refund results: total=" + amt + " refund=" + refund + " updated bet=" + maxBet);
@@ -105,8 +105,8 @@ public class roulette extends script.gambling.base.wheel
                 return SCRIPT_CONTINUE;
             }
         }
-        sendSystemMessageTestingOnly(player, "Roulette: /bet <amount> <1-36,0,00,red,black,odd,even,high,low>");
-        sendSystemMessageTestingOnly(player, "Bet Refund: " + amt + " credits");
+        broadcast(player, "Roulette: /bet <amount> <1-36,0,00,red,black,odd,even,high,low>");
+        broadcast(player, "Bet Refund: " + amt + " credits");
         transferBankCreditsTo(self, player, amt, "noHandler", "noHandler", new dictionary());
         return SCRIPT_CONTINUE;
     }
@@ -242,7 +242,7 @@ public class roulette extends script.gambling.base.wheel
                 d.put("payout", total);
                 transferBankCreditsFromNamedAccount(money.ACCT_ROULETTE, player, total, "handleGamblingPayout", "noHandler", d);
             } else {
-                sendSystemMessageTestingOnly(player, "Sorry, you did not win this round. Please try again.");
+                broadcast(player, "Sorry, you did not win this round. Please try again.");
             }
         }
         cleanupWheelGame(self);

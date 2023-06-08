@@ -28,10 +28,10 @@ public class handler extends script.base_script
         utils.removeScriptVar(self, gm.SCRIPTVAR_WIPEITEMS_TARGET);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "/wipeItems: unable to confirm a valid target!");
+            broadcast(self, "/wipeItems: unable to confirm a valid target!");
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "/wipeItems: wiping items from (" + target + ")" + utils.getStringName(target));
+        broadcast(self, "/wipeItems: wiping items from (" + target + ")" + utils.getStringName(target));
         pclib.destroyPlayerEquipment(target);
         pclib.destroyPlayerInventory(target);
         pclib.destroyPlayerBank(target);
@@ -55,12 +55,12 @@ public class handler extends script.base_script
         }
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "/setHue: unable to confirm a valid target!");
+            broadcast(self, "/setHue: unable to confirm a valid target!");
             return SCRIPT_CONTINUE;
         }
         if (dta == null || dta.length == 0)
         {
-            sendSystemMessageTestingOnly(self, "/setHue: unable to confirm valid data!");
+            broadcast(self, "/setHue: unable to confirm valid data!");
             return SCRIPT_CONTINUE;
         }
         String toPass = "-target " + dta[selrow].substring(dta[selrow].length() - 1);
@@ -108,7 +108,7 @@ public class handler extends script.base_script
         int nextAction = params.getInt("nextAction");
         if (nextAction == gm.MA_NONE)
         {
-            sendSystemMessageTestingOnly(self, "[CREDITS] Transaction request for (" + player + ")" + utils.getStringName(player) + " completed.");
+            broadcast(self, "[CREDITS] Transaction request for (" + player + ")" + utils.getStringName(player) + " completed.");
             queueCommand(self, (2070221263), player, "-target balance", COMMAND_PRIORITY_DEFAULT);
             gm.decrementMessageCount(self);
             return SCRIPT_CONTINUE;
@@ -137,7 +137,7 @@ public class handler extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "[CREDITS] Transaction request for (" + player + ") " + utils.getStringName(player) + " FAILED!");
+        broadcast(self, "[CREDITS] Transaction request for (" + player + ") " + utils.getStringName(player) + " FAILED!");
         return SCRIPT_CONTINUE;
     }
     public int handleSearchCorpseSui(obj_id self, dictionary params) throws InterruptedException
@@ -148,7 +148,7 @@ public class handler extends script.base_script
         utils.removeScriptVar(self, gm.SCRIPTVAR_SEARCHCORPSE_PID);
         if (!isIdValid(target))
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: your target(" + target + ") is not invalid!");
+            broadcast(self, "/searchCorpse: your target(" + target + ") is not invalid!");
             return SCRIPT_CONTINUE;
         }
         int bp = sui.getIntButtonPressed(params);
@@ -165,29 +165,29 @@ public class handler extends script.base_script
         if (corpses == null || corpses.length == 0)
         {
             removeObjVar(target, pclib.VAR_CORPSE_BASE);
-            sendSystemMessageTestingOnly(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
+            broadcast(self, "/searchCorpse: (" + target + ") " + utils.getStringName(target) + " has no corpse history!");
             return SCRIPT_CONTINUE;
         }
         obj_id corpseId = corpses[idx];
         if (!isIdValid(corpseId))
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: the selected index does not contain a valid corpse!");
+            broadcast(self, "/searchCorpse: the selected index does not contain a valid corpse!");
             return SCRIPT_CONTINUE;
         }
         if (!exists(corpseId) || !corpseId.isLoaded())
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: the selected corpse either doesn't exist or is not loaded");
+            broadcast(self, "/searchCorpse: the selected corpse either doesn't exist or is not loaded");
             return SCRIPT_CONTINUE;
         }
         obj_id wp = createWaypointInDatapad(self, corpseId);
         if (isIdValid(wp))
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: a waypoint to the selected corpse is now in your datapad!");
+            broadcast(self, "/searchCorpse: a waypoint to the selected corpse is now in your datapad!");
             setName(wp, "searchCorpse=" + corpseId);
         }
         else 
         {
-            sendSystemMessageTestingOnly(self, "/searchCorpse: the system was unable to create a waypoint for you to the selected corpse!");
+            broadcast(self, "/searchCorpse: the system was unable to create a waypoint for you to the selected corpse!");
         }
         return SCRIPT_CONTINUE;
     }
@@ -216,7 +216,7 @@ public class handler extends script.base_script
                         newState = "*** OFF ***";
                     }
                     String setStateMsg = "Set " + stateName + " state " + newState;
-                    sendSystemMessageTestingOnly(self, setStateMsg);
+                    broadcast(self, setStateMsg);
                     CustomerServiceLog("player_state", getFirstName(self) + " (" + self + ") set the '" + stateName + "' state to " + newState + " for player " + getFirstName(player) + " (" + player + ")");
                     gm.showSetPlayerStateUI(player);
                 }
@@ -291,7 +291,7 @@ public class handler extends script.base_script
                 text = text + " " + container;
             }
         }
-        sendSystemMessageTestingOnly(self, text);
+        broadcast(self, text);
         return SCRIPT_CONTINUE;
     }
 }

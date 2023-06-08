@@ -83,7 +83,7 @@ public class scheduled_drop extends script.base_script
     {
         if (isIdValid(self) && isGod(self) && hasObjVar(self, "qa_tcg"))
         {
-            sendSystemMessageTestingOnly(self, str);
+            broadcast(self, str);
         }
     }
 
@@ -515,7 +515,7 @@ public class scheduled_drop extends script.base_script
         {
             if (isIdValid(self) && isGod(self) && hasObjVar(self, "qa_tcg"))
             {
-                sendSystemMessageTestingOnly(self, "TCG: Static item creation failed: " + staticItemName);
+                broadcast(self, "TCG: Static item creation failed: " + staticItemName);
             }
             CustomerServiceLog("tcg", "ERROR dropCard() could not create a " + typeName + " (" + staticItemName + ") with target container " + container);
             return null;

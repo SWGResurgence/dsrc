@@ -143,7 +143,7 @@ public class heroic_biolink_set extends base_script
         }
         if (num > 23)
         {
-            sendSystemMessageTestingOnly(player, "Index Selected: " + num + ", Is out of bounds. Error. Try again.");
+            broadcast(player, "Index Selected: " + num + ", Is out of bounds. Error. Try again.");
             return null;
         }
         theSet.add(static_item.createNewItemFunction("item_ring_" + root, pInv));
@@ -217,7 +217,7 @@ public class heroic_biolink_set extends base_script
             cleanScriptVars(player);
             return SCRIPT_CONTINUE;
         }
-        // sendSystemMessageTestingOnly(player, "Index Selected: "+idx);
+        // broadcast(player, "Index Selected: "+idx);
         grantBioSet(player, idx, self);
         closeOldWindow(player);
         return SCRIPT_CONTINUE;

@@ -758,32 +758,32 @@ public class base_incubator extends script.base_script
         int expertiseBonuse = getEnhancedSkillStatisticModifierUncapped(player, "expertise_bm_incubation_quality");
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your expertiseBonuse is " + expertiseBonuse);
+            broadcast(player, "Your expertiseBonuse is " + expertiseBonuse);
         }
         float stationBonus = incubator.getIncubatorQuality(station);
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your stationBonus is " + stationBonus);
+            broadcast(player, "Your stationBonus is " + stationBonus);
         }
         int stationPowerQuality = incubator.getStationPowerQuality(station);
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your stationPowerQuality is " + stationPowerQuality);
+            broadcast(player, "Your stationPowerQuality is " + stationPowerQuality);
         }
         float powerPercentToMax = (float) stationPowerQuality / incubator.MAX_POWER_QUALITY;
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your powerPercentToMax is " + powerPercentToMax);
+            broadcast(player, "Your powerPercentToMax is " + powerPercentToMax);
         }
         float powerBonus = powerPercentToMax * incubator.MAX_BONUS_FOR_POWER_QUALITY;
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your powerBonus is " + powerBonus);
+            broadcast(player, "Your powerBonus is " + powerBonus);
         }
         int unmodifiedExoticDpsArmorBonus = getEnhancedSkillStatisticModifierUncapped(player, "bm_incubator_dps_armor");
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your unmodifiedExoticDpsArmorBonus is " + unmodifiedExoticDpsArmorBonus);
+            broadcast(player, "Your unmodifiedExoticDpsArmorBonus is " + unmodifiedExoticDpsArmorBonus);
         }
         if (unmodifiedExoticDpsArmorBonus > incubator.MAX_RE_EXOTIC_DPS_ARMOR_SKILLMOD)
         {
@@ -792,7 +792,7 @@ public class base_incubator extends script.base_script
         float exoticDpsArmorBonus = unmodifiedExoticDpsArmorBonus * 2.0f;
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your modified exoticDpsArmorBonus is " + exoticDpsArmorBonus);
+            broadcast(player, "Your modified exoticDpsArmorBonus is " + exoticDpsArmorBonus);
         }
         float expertiseAndStationQualityBonus = expertiseBonuse + stationBonus + powerBonus + exoticDpsArmorBonus;
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") expertiseAndStationQualityBonus = " + expertiseAndStationQualityBonus);
@@ -804,23 +804,23 @@ public class base_incubator extends script.base_script
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") expertiseQualityBonusPercent = " + expertiseQualityBonusPercent);
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your expertiseQualityBonusPercent is " + expertiseQualityBonusPercent);
+            broadcast(player, "Your expertiseQualityBonusPercent is " + expertiseQualityBonusPercent);
         }
         float slotOneQualityWithBonuses = slotOneQuality * expertiseQualityBonusPercent;
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") slotOneQualityWithBonuses = " + slotOneQualityWithBonuses);
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your slotOneQuality is " + slotOneQuality);
+            broadcast(player, "Your slotOneQuality is " + slotOneQuality);
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your slotOneQualityWithBonuses is " + slotOneQualityWithBonuses);
+            broadcast(player, "Your slotOneQualityWithBonuses is " + slotOneQualityWithBonuses);
         }
         float pointsToArmorOrDps = (slotOneQualityWithBonuses * 0.01f) * incubator.MAX_POINTS_PER_SESSION_DPS_ARMOR;
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") pointsToArmorOrDps = " + pointsToArmorOrDps);
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your pointsToArmorOrDps is " + pointsToArmorOrDps);
+            broadcast(player, "Your pointsToArmorOrDps is " + pointsToArmorOrDps);
         }
         float percentTowardsDps = tempGaugeSliderPos * incubator.TEMP_SCALE_CONVERSION_TO_PERCENT;
         float pointsTowardDps = pointsToArmorOrDps * percentTowardsDps;
@@ -832,7 +832,7 @@ public class base_incubator extends script.base_script
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your pointsTowardDps is " + pointsTowardDps);
+            broadcast(player, "Your pointsTowardDps is " + pointsTowardDps);
         }
         float percentTowardsArmor = (incubator.TEMP_SCALE_MAX_RANGE - tempGaugeSliderPos) * incubator.TEMP_SCALE_CONVERSION_TO_PERCENT;
         float pointsTowardArmor = pointsToArmorOrDps * percentTowardsArmor;
@@ -844,7 +844,7 @@ public class base_incubator extends script.base_script
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your pointsTowardArmor is " + pointsTowardArmor);
+            broadcast(player, "Your pointsTowardArmor is " + pointsTowardArmor);
         }
         dpsBonus += pointsTowardDps;
         incubator.blog("INCUBATOR", "session(" + sessionNumber + ") dpsBonus = " + dpsBonus);
@@ -1064,7 +1064,7 @@ public class base_incubator extends script.base_script
             CustomerServiceLog("BeastIncubator: ", "This is calculated by enzymePercent(" + enzymePercent + ") * incubator.MUTATION_BONUS_ENZYME(" + incubator.MUTATION_BONUS_ENZYME + ").");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "enzymeBonus is " + enzymeBonus);
+                broadcast(player, "enzymeBonus is " + enzymeBonus);
             }
             float dnaPercent = dnaQuality / incubator.MAX_QUALITY_RANGE;
             CustomerServiceLog("BeastIncubator: ", "player " + getFirstName(player) + "(" + player + ") dna percent of max was " + dnaPercent);
@@ -1074,7 +1074,7 @@ public class base_incubator extends script.base_script
             CustomerServiceLog("BeastIncubator: ", "This is calculated by dnaPercent(" + dnaPercent + ") * incubator.MUTATION_BONUS_DNA(" + incubator.MUTATION_BONUS_DNA + ").");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "dnaBonus is " + dnaBonus);
+                broadcast(player, "dnaBonus is " + dnaBonus);
             }
             float percentToMutagenCap = slotFourMutagen / incubator.MAX_MUTAGEN_POINTS;
             CustomerServiceLog("BeastIncubator: ", "player " + getFirstName(player) + "(" + player + ") percent to mutagen cap " + percentToMutagenCap);
@@ -1084,7 +1084,7 @@ public class base_incubator extends script.base_script
             CustomerServiceLog("BeastIncubator: ", "This is calculated by percentToMutagenCap(" + percentToMutagenCap + ") * incubator.MUTATION_BONUS_MUTAGEN(" + incubator.MUTATION_BONUS_MUTAGEN + ").");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "mutagenBonus is " + mutagenBonus);
+                broadcast(player, "mutagenBonus is " + mutagenBonus);
             }
             float incubatorPercent = incubatorQuality / incubator.STATION_QUALITY_MAX;
             CustomerServiceLog("BeastIncubator: ", "player " + getFirstName(player) + "(" + player + ") incubator percent of max was " + incubatorPercent);
@@ -1094,12 +1094,12 @@ public class base_incubator extends script.base_script
             CustomerServiceLog("BeastIncubator: ", "This is calculated by incubatorPercent(" + incubatorPercent + ") * incubator.MUTATION_BONUS_INCUBATOR(" + incubator.MUTATION_BONUS_INCUBATOR + ").");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "incubatorBonus is " + incubatorBonus);
+                broadcast(player, "incubatorBonus is " + incubatorBonus);
             }
             int unmodifiedExoticMutationBonus = getEnhancedSkillStatisticModifierUncapped(player, "bm_mutation_chance_increase");
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "Your unmodifiedExoticMutationBonus is " + unmodifiedExoticMutationBonus);
+                broadcast(player, "Your unmodifiedExoticMutationBonus is " + unmodifiedExoticMutationBonus);
             }
             if (unmodifiedExoticMutationBonus > incubator.MAX_RE_EXOTIC_MUTATION_SKILLMOD)
             {
@@ -1108,7 +1108,7 @@ public class base_incubator extends script.base_script
             float exoticMutationBonus = unmodifiedExoticMutationBonus * 0.075f;
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "Your modified exoticMutationBonus is " + exoticMutationBonus);
+                broadcast(player, "Your modified exoticMutationBonus is " + exoticMutationBonus);
             }
             int mutationChance = Math.round(incubator.BASE_MUTATION_CHANCE + enzymeBonus + dnaBonus + mutagenBonus + incubatorBonus + exoticMutationBonus);
             CustomerServiceLog("BeastIncubator: ", "player " + getFirstName(player) + "(" + player + ") mutation chance was " + mutationChance);
@@ -1122,9 +1122,9 @@ public class base_incubator extends script.base_script
             int chance = rand(1, 100);
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(player, "To get a mutation you need to roll less than or equal to your mutation chance.");
-                sendSystemMessageTestingOnly(player, "mutationChance is " + mutationChance);
-                sendSystemMessageTestingOnly(player, "and you rolled an " + chance);
+                broadcast(player, "To get a mutation you need to roll less than or equal to your mutation chance.");
+                broadcast(player, "mutationChance is " + mutationChance);
+                broadcast(player, "and you rolled an " + chance);
             }
             if (hasObjVar(station, "qa.forceMutate") && isGod(player))
             {
@@ -1210,9 +1210,9 @@ public class base_incubator extends script.base_script
         }
         if (isGod(player))
         {
-            sendSystemMessageTestingOnly(player, "Your total dps Bonus = " + dpsBonus);
-            sendSystemMessageTestingOnly(player, "Your total armor Bonus = " + armorBonus);
-            sendSystemMessageTestingOnly(player, "Your total dps+Armor Bonus = " + (dpsBonus + armorBonus));
+            broadcast(player, "Your total dps Bonus = " + dpsBonus);
+            broadcast(player, "Your total armor Bonus = " + armorBonus);
+            broadcast(player, "Your total dps+Armor Bonus = " + (dpsBonus + armorBonus));
         }
         dictionary dict = new dictionary();
         dict.put("dpsBonus", dpsBonus);

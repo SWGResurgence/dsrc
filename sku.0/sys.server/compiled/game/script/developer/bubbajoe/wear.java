@@ -18,7 +18,7 @@ public class wear extends script.base_script
         equipOverride(item, self);
         if (isGod(giver))
         {
-            sendSystemMessageTestingOnly(giver, "Attempting to give NPC : " + getEncodedName(self) + " item : " + getEncodedName(item));
+            broadcast(giver, "Attempting to give NPC : " + getEncodedName(self) + " item : " + getEncodedName(item));
         }
         String template = getTemplateName(item);
         if (template.contains("object/weapon/"))

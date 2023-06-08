@@ -108,7 +108,7 @@ public class patrol extends script.base_script
                         loc.area = planetName;
                         if (DEBUGGING)
                         {
-                            sendSystemMessageTestingOnly(self, "waypoint " + i + " x is: " + loc.x + " and z is: " + loc.z);
+                            broadcast(self, "waypoint " + i + " x is: " + loc.x + " and z is: " + loc.z);
                         }
                         location tempLoc = null;
                         int attempts = 0;
@@ -289,7 +289,7 @@ public class patrol extends script.base_script
     {
         if (DEBUGGING)
         {
-            sendSystemMessageTestingOnly(self, "triggering On Arrived At Location");
+            broadcast(self, "triggering On Arrived At Location");
         }
         String[] tokens = split(locationName, '.');
         String questName = "";
@@ -298,7 +298,7 @@ public class patrol extends script.base_script
         {
             if (DEBUGGING)
             {
-                sendSystemMessageTestingOnly(self, "On Arrived At Location tokes >0 ->" + tokens.length);
+                broadcast(self, "On Arrived At Location tokes >0 ->" + tokens.length);
             }
             LOG("newquests", "parsing arrive at location " + tokens.length + " tokens");
             String s = tokens[0];
@@ -307,14 +307,14 @@ public class patrol extends script.base_script
                 questName = tokens[0];
                 if (DEBUGGING)
                 {
-                    sendSystemMessageTestingOnly(self, "On Arrived At Location questName= " + questName);
+                    broadcast(self, "On Arrived At Location questName= " + questName);
                 }
                 LOG("newquests", "arrive at location parsed " + tokens[0] + " as the quest name");
                 if (tokens.length > 2)
                 {
                     if (DEBUGGING)
                     {
-                        sendSystemMessageTestingOnly(self, "Tokens > 2");
+                        broadcast(self, "Tokens > 2");
                     }
                     String wpNum = tokens[2];
                     if (Character.isDigit(wpNum.charAt(0)))
@@ -323,7 +323,7 @@ public class patrol extends script.base_script
                         LOG("newquests", "arrive at location parsed " + tokens[2] + " is waypoint Number");
                         if (DEBUGGING)
                         {
-                            sendSystemMessageTestingOnly(self, "On Arrived At Location waypointNumber= " + waypointNumber);
+                            broadcast(self, "On Arrived At Location waypointNumber= " + waypointNumber);
                         }
                     }
                     else 
@@ -331,7 +331,7 @@ public class patrol extends script.base_script
                         LOG("newquests", "Error parsing waypoint number, " + tokens[2] + " is not a Number");
                         if (DEBUGGING)
                         {
-                            sendSystemMessageTestingOnly(self, "number not found= " + tokens[2]);
+                            broadcast(self, "number not found= " + tokens[2]);
                         }
                     }
                 }
@@ -341,7 +341,7 @@ public class patrol extends script.base_script
                 LOG("newquests", "Not enough Tokens to parse for good location number");
                 if (DEBUGGING)
                 {
-                    sendSystemMessageTestingOnly(self, "On Arrived At Location Not Enough Tokens");
+                    broadcast(self, "On Arrived At Location Not Enough Tokens");
                 }
             }
         }
@@ -349,7 +349,7 @@ public class patrol extends script.base_script
         {
             if (DEBUGGING)
             {
-                sendSystemMessageTestingOnly(self, "Quest is Actives WP != -1");
+                broadcast(self, "Quest is Actives WP != -1");
             }
             LOG("newquests", "patrol arrived at waypoint " + waypointNumber);
             if (hasObjVar(self, "quest." + questName + ".waypoint" + waypointNumber))

@@ -114,7 +114,7 @@ public class interplanetary_survey extends script.base_script
         String planet = PLANET_INTERNAL[idx];
         if (planet == null || planet.equals(""))
         {
-            sendSystemMessageTestingOnly(player, "Error retrieving planet data");
+            broadcast(player, "Error retrieving planet data");
             cleanScriptVars();
             return SCRIPT_CONTINUE;
         }

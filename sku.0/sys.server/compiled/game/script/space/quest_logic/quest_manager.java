@@ -92,11 +92,11 @@ public class quest_manager extends script.base_script
         }
         if (navs != null)
         {
-            sendSystemMessageTestingOnly(player, "Error: Failed to find spawner '" + spawner + "'.  " + navs.length + " spawners were searched.  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
+            broadcast(player, "Error: Failed to find spawner '" + spawner + "'.  " + navs.length + " spawners were searched.  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Error: Failed to find spawner '" + spawner + "'.  No spawners were registered!  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
+            broadcast(player, "Error: Failed to find spawner '" + spawner + "'.  No spawners were registered!  The nav point object may not exist or your server may need to specify 'createZoneObjects=1'");
         }
         return SCRIPT_CONTINUE;
     }

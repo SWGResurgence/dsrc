@@ -1528,7 +1528,7 @@ slot																																						resource	0	receiver_assembly	steel_dur
 slot																																						resource	0	grip_assembly	steel_ditanium	10			
 slot																																						template	0	feed_unit_advanced	object/tangible/component/weapon/projectile_feed_mechanism_advanced.iff	3			
 slot																																						template	0	barrel_rifle_projectile_advanced	object/tangible/component/weapon/projectile_rifle_barrel_advanced.iff	1			
-weapon	lightsaber_one_handed_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_one_handed_gen5	0	lightsaber	5		1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	8	0	800	1100	345	690	1035	1380	345	690	1035	1380	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_one_handed_gen5.iff
+weapon	lightsaber_one_handed_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_one_handed_gen5	0	lightsaber	5		1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	8	0	800	1100	355	700	1045	1390	355	700	1045	1390	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_one_handed_gen5.iff
 slot																																						resource	0	emitter_shroud	steel_duralloy	75			
 slot																																						resource	0	activator	aluminum_titanium	45			
 slot																																						resource	0	handgrip	petrochem_inert_polymer	60			
@@ -1540,13 +1540,13 @@ slot																																						resource	0	activator	aluminum_titanium
 slot																																						resource	0	handgrip	petrochem_inert_polymer	90			
 slot																																						resource	0	power_field_insulator	gas_inert_culsion	120			
 slot																																						resource	0	energizers	copper_polysteel	120			
-weapon	lightsaber_polearm_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_polearm_gen5	0	lightsaber	5		1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	8	0	800	1100	345	690	1035	1380	345	690	1035	1380	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_polearm_gen5.iff
+weapon	lightsaber_polearm_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_polearm_gen5	0	lightsaber	5		1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	8	0	800	1100	355	700	1045	1390	355	700	1045	1390	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_polearm_gen5.iff
 slot																																						resource	0	emitter_shroud	steel_duralloy	75			
 slot																																						resource	0	activator	aluminum_titanium	60			
 slot																																						resource	0	handgrip	petrochem_inert_polymer	90			
 slot																																						resource	0	power_field_insulator	gas_inert_culsion	120			
 slot																																						resource	0	energizers	copper_polysteel	120			
-weapon	lightsaber_two_handed_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_two_handed_gen5	0	lightsaber	5		1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	8	0	800	1100	345	690	1035	1380	345	690	1035	1380	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_two_handed_gen5.iff
+weapon	lightsaber_two_handed_gen5		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_two_handed_gen5	0	lightsaber	5		1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	8	0	800	1100	355	700	1045	1390	355	700	1045	1390	0	0	energy				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/lightsaber_two_handed_gen5.iff
 slot																																						resource	0	emitter_shroud	steel_duralloy	75			
 slot																																						resource	0	activator	aluminum_titanium	45			
 slot																																						resource	0	handgrip	petrochem_inert_polymer	60			

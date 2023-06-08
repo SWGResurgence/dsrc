@@ -22,12 +22,12 @@ public class tester extends script.base_script
             if (intPhase == 0)
             {
                 space_battlefield.battlefieldCompleted(objManager, 1);
-                sendSystemMessageTestingOnly(self, "setting to 1");
+                broadcast(self, "setting to 1");
             }
             else if (intPhase == 1)
             {
                 space_battlefield.battlefieldCompleted(objManager, 0);
-                sendSystemMessageTestingOnly(self, "setting to 0");
+                broadcast(self, "setting to 0");
             }
         }
         if (strCommands[0].equals("createAt"))
@@ -46,18 +46,18 @@ public class tester extends script.base_script
                 }
                 if (objShip == null)
                 {
-                    sendSystemMessageTestingOnly(self, "You passed in a bad shipType. Type is " + strCommands[1]);
+                    broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
+                    broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "You need to pass in a ship type for me to spawn.");
+                broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -70,42 +70,42 @@ public class tester extends script.base_script
                 obj_id objShip = space_create.createShip(strCommands[1], nearby);
                 if (objShip == null)
                 {
-                    sendSystemMessageTestingOnly(self, "You passed in a bad shipType. Type is " + strCommands[1]);
+                    broadcast(self, "You passed in a bad shipType. Type is " + strCommands[1]);
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
+                    broadcast(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                     debugConsoleMsg(self, "Made ship of type " + strCommands[1] + " object id is: " + objShip);
                 }
             }
             else 
             {
-                sendSystemMessageTestingOnly(self, "You need to pass in a ship type for me to spawn.");
+                broadcast(self, "You need to pass in a ship type for me to spawn.");
                 return SCRIPT_CONTINUE;
             }
         }
         if (strCommands[0].equals("fixMe"))
         {
             space_crafting.repairDamage(self, getPilotedShip(self), 100.0f);
-            sendSystemMessageTestingOnly(self, "Fixed ship");
+            broadcast(self, "Fixed ship");
         }
         if (strCommands[0].equals("checkPhase"))
         {
             obj_id objManager = space_battlefield.getManagerObject();
-            sendSystemMessageTestingOnly(self, "Manager is " + objManager + " phase is " + getIntObjVar(objManager, "intPhase"));
+            broadcast(self, "Manager is " + objManager + " phase is " + getIntObjVar(objManager, "intPhase"));
         }
         if (strCommands[0].equals("resetBattlefield"))
         {
             obj_id objManager = space_battlefield.getManagerObject();
-            sendSystemMessageTestingOnly(self, "Manager is " + objManager + " RESETTING");
+            broadcast(self, "Manager is " + objManager + " RESETTING");
             space_battlefield.resetSpaceBattlefield(objManager);
         }
         if (strCommands[0].equals("nextPhase"))
         {
             obj_id objManager = space_battlefield.getManagerObject();
             int intPhase = getIntObjVar(objManager, "intPhase");
-            sendSystemMessageTestingOnly(self, "Manager is " + objManager);
+            broadcast(self, "Manager is " + objManager);
             int intDuration = space_battlefield.PHASE_DURATIONS[intPhase];
             setObjVar(objManager, "intPhaseStart", 100);
             space_battlefield.sendNextPhaseNotification(objManager);

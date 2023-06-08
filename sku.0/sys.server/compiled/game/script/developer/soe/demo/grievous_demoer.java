@@ -47,7 +47,7 @@ public class grievous_demoer extends script.base_script
         }
         if (strCommands[0].equalsIgnoreCase("startDemo1"))
         {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
+            broadcast(self, "Demo is starting now!  Proceed into the palace!");
             obj_id palace1 = getObjIdObjVar(self, "palace1");
             obj_id cell = getCellId(palace1, "foyer");
             location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
@@ -58,7 +58,7 @@ public class grievous_demoer extends script.base_script
         }
         if (strCommands[0].equalsIgnoreCase("startDemo2"))
         {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
+            broadcast(self, "Demo is starting now!  Proceed into the palace!");
             obj_id palace2 = getObjIdObjVar(self, "palace2");
             obj_id cell = getCellId(palace2, "foyer");
             location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);

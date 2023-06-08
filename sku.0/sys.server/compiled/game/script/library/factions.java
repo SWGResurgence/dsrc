@@ -1942,7 +1942,7 @@ public class factions extends script.base_script
                         return;
                     }
                     default:
-                        sendSystemMessageTestingOnly(objPlayer, "Error # 4 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
+                        broadcast(objPlayer, "Error # 4 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
                         break;
                 }
                 break;
@@ -1950,7 +1950,7 @@ public class factions extends script.base_script
                 switch (intYourPVPType)
                 {
                     case PVPTYPE_COVERT:
-                        sendSystemMessageTestingOnly(objPlayer, "Error # 1 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
+                        broadcast(objPlayer, "Error # 1 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
                         break;
                     case PVPTYPE_DECLARED:
                         string_id strSpam = new string_id("gcw", "gcw_status_change_overt");
@@ -1958,12 +1958,12 @@ public class factions extends script.base_script
                         int pid = sui.inputbox(objPlayer, objPlayer, strPrompt, strTitle, "handleGoOvert", "");
                         return;
                     default:
-                        sendSystemMessageTestingOnly(objPlayer, "Error # 3 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
+                        broadcast(objPlayer, "Error # 3 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
                         break;
                 }
                 break;
             default:
-                sendSystemMessageTestingOnly(objPlayer, "Error # 2 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
+                broadcast(objPlayer, "Error # 2 : You got a PVP error message. Your PVP Type is " + intMyPVPType + ". Your faction is" + pvpGetAlignedFaction(objPlayer) + ". Your target is " + objTarget + " their pvp type is " + pvpGetType(objTarget) + " and their faction is " + pvpGetAlignedFaction(objTarget));
                 break;
         }
     }

@@ -73,7 +73,7 @@ public class qainventory extends script.base_script
                     String mainPrompt = utils.getStringScriptVar(player, "qatool.prompt");
                     if (options == null)
                     {
-                        sendSystemMessageTestingOnly(player, "You didn't start from the main tool menu");
+                        broadcast(player, "You didn't start from the main tool menu");
                         qa.refreshMenu(player, PROMPT, TITLE, MAIN_MENU, "mainMenuOptions", true, SCRIPT_VAR + ".pid");
                         return SCRIPT_CONTINUE;
                     }
@@ -91,9 +91,9 @@ public class qainventory extends script.base_script
                         for (obj_id item : items) {
                             String templateName = getTemplateName(item);
                             if (templateName.equals(FROG_STRING)) {
-                                sendSystemMessageTestingOnly(player, "The Frog will not be destroyed");
+                                broadcast(player, "The Frog will not be destroyed");
                             } else if (templateName.equals(KASHYYYK_FROG_STRING)) {
-                                sendSystemMessageTestingOnly(player, "The Kashyyyk Frog will not be destroyed");
+                                broadcast(player, "The Kashyyyk Frog will not be destroyed");
                             } else {
                                 destroyObject(item);
                             }

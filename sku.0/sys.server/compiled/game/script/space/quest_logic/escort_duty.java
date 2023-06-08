@@ -34,7 +34,7 @@ public class escort_duty extends script.base_script
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "Debug: Failed to open quest table " + qTable);
+            broadcast(player, "Debug: Failed to open quest table " + qTable);
             return SCRIPT_CONTINUE;
         }
         String[] rawEscortShipTypes = dataTableGetStringColumn(qTable, "escortShipTypes");
@@ -44,7 +44,7 @@ public class escort_duty extends script.base_script
             rawEscortShipTypes[0] = questInfo.getString("escortShipType");
             if (rawEscortShipTypes == null)
             {
-                sendSystemMessageTestingOnly(player, "Debug: escortShipTypes are missing from " + qTable);
+                broadcast(player, "Debug: escortShipTypes are missing from " + qTable);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -55,7 +55,7 @@ public class escort_duty extends script.base_script
             rawEscortPoints = dataTableGetStringColumn(qTable, "escortPath");
             if (rawEscortPoints == null)
             {
-                sendSystemMessageTestingOnly(player, "Debug: escortPoints are missing from " + qTable);
+                broadcast(player, "Debug: escortPoints are missing from " + qTable);
                 return SCRIPT_CONTINUE;
             }
         }

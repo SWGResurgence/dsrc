@@ -102,12 +102,11 @@ dark_jedi_kenobi	0	1	0
 underworld	1	0	0				
 azure_cabal	1	0	0				
 heroic_tusken	0	1	0		"espa,expa_guard"		
-espa	0	0	0			espa_guard	
+espa	0	0	0		heroic_tusken	espa_guard
 espa_guard	0	1	0		heroic_tusken	espa	
 survivor	0	0	0				
 afflicted	0	1	0		"survivor,survivor_guard"		
 survivor_guard	0	0	0		afflicted		
 sulfur_lake_pirate	0	1	0		nym		
-tusken_isolationist	1	1	0			"jawa,alkhara"
+tusken_isolationist	1	1	0			"jawa,alkhara"	
 czerka_corporation	1	0	0		"Hutt,jabba"	Imperial	0
-solonar_ranger	1	1	0		nightsister

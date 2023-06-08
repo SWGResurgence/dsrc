@@ -41,12 +41,12 @@ public class player_hub extends script.base_script
         {
             if (!getConfigSetting("Hub", "dueling").equals("true"))
             {
-                sendSystemMessageTestingOnly(actor, "You currently may not duel.");
+                broadcast(actor, "You currently may not duel.");
                 return SCRIPT_CONTINUE;
             }
             else
             {
-                sendSystemMessageTestingOnly(actor, "An unknown error has occured.");
+                broadcast(actor, "An unknown error has occured.");
             }
         }
 
@@ -103,7 +103,7 @@ public class player_hub extends script.base_script
         location getYoAssOuttaHere = getBuildingEjectLocation(building);
         warpPlayer(self, getYoAssOuttaHere.area, getYoAssOuttaHere.x, getYoAssOuttaHere.y, getYoAssOuttaHere.z,
                 getYoAssOuttaHere.cell, 0, 0, 0);
-        sendSystemMessageTestingOnly(self, "You best leave before the authorities arrive!");
+        broadcast(self, "You best leave before the authorities arrive!");
         return SCRIPT_CONTINUE;
     }
 
@@ -133,7 +133,7 @@ public class player_hub extends script.base_script
         int idx = sui.getListboxSelectedRow(param);
         if (btn == sui.BP_REVERT)
         {
-            sendSystemMessageTestingOnly(self, "Exiting..");
+            broadcast(self, "Exiting..");
             return SCRIPT_CONTINUE;
         }
         if (btn == sui.BP_CANCEL)
@@ -142,7 +142,7 @@ public class player_hub extends script.base_script
         }
         if (!isIdValid(player))
         {
-            sendSystemMessageTestingOnly(player, "What a piece of junk!");
+            broadcast(player, "What a piece of junk!");
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;

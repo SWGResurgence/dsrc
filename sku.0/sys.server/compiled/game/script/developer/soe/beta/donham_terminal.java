@@ -31,7 +31,7 @@ public class donham_terminal extends script.base_script
                 String[] colName = dataTableGetStringColumn(DATATABLE_ITEMS_TO_TEST, "column_names");
                 if ((colName == null) || (colName.length == 0))
                 {
-                    sendSystemMessageTestingOnly(player, "Unable to load test item information. Exiting.");
+                    broadcast(player, "Unable to load test item information. Exiting.");
                     return SCRIPT_CONTINUE;
                 }
                 else 

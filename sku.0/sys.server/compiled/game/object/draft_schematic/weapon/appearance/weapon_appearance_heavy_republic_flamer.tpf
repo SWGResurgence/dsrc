@@ -47,7 +47,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "advanced_core",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "advanced_core", ingredient="object/tangible/component/weapon/mustafar/flamer_coil.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -55,7 +55,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "barrel_rifle_blaster",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "barrel_rifle_blaster", ingredient="object/tangible/component/weapon/blaster_rifle_barrel_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -63,7 +63,7 @@ slots = [
 	complexity = 0,
 	appearance = "muzzle" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_weapon_ingredients_n" "weapon_core",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_weapon_ingredients_n" "weapon_core", ingredient="object/tangible/component/weapon/core/weapon_core_heavy_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],

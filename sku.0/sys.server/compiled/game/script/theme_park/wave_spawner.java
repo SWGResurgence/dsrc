@@ -363,7 +363,7 @@ public class wave_spawner extends script.base_script
         if (triggerType.equals("triggerId"))
         {
             spawnActors(self, 0, triggerName);
-            sendSystemMessageTestingOnly(player, "Trigger recieved, player(" + player + ") tripped trigger(" + triggerName + ") of type (" + triggerType + ")");
+            broadcast(player, "Trigger recieved, player(" + player + ") tripped trigger(" + triggerName + ") of type (" + triggerType + ")");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;

@@ -48,7 +48,7 @@ public class intellect_bounty_hunter extends script.base_script
         {
             if (isGod(player))
             {
-                sendSystemMessageTestingOnly(self, "[TESTING] You don't have a script var identifying the correct liar. This is a bug. You automatically win!");
+                broadcast(self, "[TESTING] You don't have a script var identifying the correct liar. This is a bug. You automatically win!");
             }
             chat.publicChat(self, player, BH_WIN);
             puzzleSuccess(self, player);

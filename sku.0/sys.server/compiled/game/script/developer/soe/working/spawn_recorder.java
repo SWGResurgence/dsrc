@@ -17,15 +17,15 @@ public class spawn_recorder extends script.base_script
     {
         if (!hasObjVar(self, "record_table"))
         {
-            sendSystemMessageTestingOnly(self, "Attach the objvar 'record_table' to yourself with the name of the table to which you want to record");
+            broadcast(self, "Attach the objvar 'record_table' to yourself with the name of the table to which you want to record");
         }
         else
         {
             String table = getStringObjVar(self, "record_table");
-            sendSystemMessageTestingOnly(self, "Recording to table: " + table);
-            sendSystemMessageTestingOnly(self, "If this is not correct, change the value of the objvar 'record_table'");
+            broadcast(self, "Recording to table: " + table);
+            broadcast(self, "If this is not correct, change the value of the objvar 'record_table'");
         }
-        sendSystemMessageTestingOnly(self, "Say 'mark <creature name>' to place a creature or npc at your current location and heading");
+        broadcast(self, "Say 'mark <creature name>' to place a creature or npc at your current location and heading");
         return SCRIPT_CONTINUE;
     }
 
@@ -37,13 +37,13 @@ public class spawn_recorder extends script.base_script
         }
         if (!hasObjVar(self, "record_table"))
         {
-            sendSystemMessageTestingOnly(self, "[ERROR] No datatable specified for recording");
+            broadcast(self, "[ERROR] No datatable specified for recording");
             return SCRIPT_CONTINUE;
         }
         String table = getStringObjVar(self, "record_table");
         if (!(toLower(table)).startsWith("datatables") || !(toLower(table)).endsWith(".tab"))
         {
-            sendSystemMessageTestingOnly(self, "[ERROR] Invalid datatable specified for recording");
+            broadcast(self, "[ERROR] Invalid datatable specified for recording");
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(text);
@@ -64,7 +64,7 @@ public class spawn_recorder extends script.base_script
         obj_id room = here.cell;
         obj_id top = getTopMostContainer(obj);
         String roomName = getRoomName(top, room);
-        sendSystemMessageTestingOnly(self, "Spawning: " + creature + "  Location: " + here + "  Heading: " + yaw);
+        broadcast(self, "Spawning: " + creature + "  Location: " + here + "  Heading: " + yaw);
         dictionary dctRow = new dictionary();
         dctRow.put("spawns", creature);
         dctRow.put("loc_x", here.x);

@@ -38,11 +38,11 @@ public class heroic_grant extends script.base_script
                         instance.flagPlayerForInstance(player, flag);
                     }
                 }
-                sendSystemMessageTestingOnly(player, "All Heroic Instances Flagged");
+                broadcast(player, "All Heroic Instances Flagged");
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "No Instance Flags Found.");
+                broadcast(player, "No Instance Flags Found.");
             }
         }
         return SCRIPT_CONTINUE;
@@ -61,11 +61,11 @@ public class heroic_grant extends script.base_script
                 {
                     if (!resource.setToolClass(self, selRow))
                     {
-                        sendSystemMessageTestingOnly(player, "Heroics Failed?");
+                        broadcast(player, "Heroics Failed?");
                     }
                     else
                     {
-                        sendSystemMessageTestingOnly(player, "Heroics!");
+                        broadcast(player, "Heroics!");
                     }
                 }
                 break;

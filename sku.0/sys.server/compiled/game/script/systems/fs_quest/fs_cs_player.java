@@ -145,7 +145,7 @@ public class fs_cs_player extends script.base_script
         {
             if (hasObjVar(self, "fs_cs_debug"))
             {
-                sendSystemMessageTestingOnly(self, "QA Warning: Commander reporting death to us had ID of" + sender + ", but I think I'm escorting commander with ID of " + myCommander + ", so I'm ignoring the message.");
+                broadcast(self, "QA Warning: Commander reporting death to us had ID of" + sender + ", but I think I'm escorting commander with ID of " + myCommander + ", so I'm ignoring the message.");
             }
             return SCRIPT_CONTINUE;
         }

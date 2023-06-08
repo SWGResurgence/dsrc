@@ -17,7 +17,7 @@ public class npc_vendor extends script.base_script
         int price = 1000;
         if ((params == null) || (params.isEmpty()))
         {
-            sendSystemMessageTestingOnly(player, "Failing, params were empty!");
+            broadcast(player, "Failing, params were empty!");
             return SCRIPT_CONTINUE;
         }
         int btn = sui.getIntButtonPressed(params);

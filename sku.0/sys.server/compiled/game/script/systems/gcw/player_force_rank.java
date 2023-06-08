@@ -538,7 +538,7 @@ public class player_force_rank extends script.base_script
                 {
                     if (hasObjVar(self, "force_rank.qa.overrideArenaOpenSlots"))
                     {
-                        sendSystemMessageTestingOnly(self, "QA open slot Vote-Force override.");
+                        broadcast(self, "QA open slot Vote-Force override.");
                     }
                     else
                     {

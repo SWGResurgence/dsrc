@@ -969,34 +969,21 @@ public class player_building extends script.base_script
         {
             location sourceLoc = getLocation(intendedTarget);
             move_loc = getLocation(target);
-            if ((sourceLoc != null) && (move_loc != null) && (isIdValid(sourceLoc.cell)) && (isIdValid(move_loc.cell)))
+            if ((sourceLoc != null) && (move_loc != null))// && (isIdValid(sourceLoc.cell)) && (isIdValid(move_loc.cell))) @open world copy height/rotation/location
             {
-                if (sourceLoc.cell == move_loc.cell)
+                if (copyLocation)
                 {
-                    if (copyLocation)
-                    {
-                        move_loc.x = sourceLoc.x;
-                        move_loc.z = sourceLoc.z;
-                    }
-                    else if (copyHeight)
-                    {
-                        move_loc.y = sourceLoc.y;
-                    }
-                    else 
-                    {
-                        return SCRIPT_CONTINUE;
-                    }
+                    move_loc.x = sourceLoc.x;
+                    move_loc.z = sourceLoc.z;
                 }
-                else 
+                else if (copyHeight)
                 {
-                    sendSystemMessage(self, new string_id(STF, "move_copy_objects_not_in_same_cell"));
+                    move_loc.y = sourceLoc.y;
+                }
+                else
+                {
                     return SCRIPT_CONTINUE;
                 }
-            }
-            else 
-            {
-                sendSystemMessage(self, new string_id(STF, "move_copy_objects_not_in_same_cell"));
-                return SCRIPT_CONTINUE;
             }
         }
         if (move_loc != null)
@@ -1732,7 +1719,7 @@ public class player_building extends script.base_script
         }
         if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
         {
-            sendSystemMessageTestingOnly(self, "You cannot use this command on a Harvester or Generator.");
+            broadcast(self, "You cannot use this command on a Harvester or Generator.");
             return SCRIPT_CONTINUE;
         }
         if (!player_structure.isAdmin(structure, self))

@@ -21,7 +21,7 @@ public class quest_test extends script.base_script
     };
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "Ground quest test script attached");
+        broadcast(self, "Ground quest test script attached");
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
@@ -40,33 +40,33 @@ public class quest_test extends script.base_script
                 here = getLocation(containingBuilding);
             }
             String buildoutAreaName = getBuildoutAreaName(here.x, here.z);
-            sendSystemMessageTestingOnly(self, "You are in buildout area: " + buildoutAreaName);
+            broadcast(self, "You are in buildout area: " + buildoutAreaName);
         }
         else if (parse[0].equalsIgnoreCase("activatequest"))
         {
             if (parse.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX ACTIVATEQUEST QUESTNAME " + text);
+                broadcast(self, "SYNTAX ACTIVATEQUEST QUESTNAME " + text);
                 return SCRIPT_CONTINUE;
             }
             boolean result = groundquests.isValidQuestName(parse[1]);
             LOG("debug_test", "boolean result returned " + result);
             if (result == false)
             {
-                sendSystemMessageTestingOnly(self, "FAILED TO ACTIVATE QUEST ");
+                broadcast(self, "FAILED TO ACTIVATE QUEST ");
             }
             else 
             {
                 groundquests.clearQuest(self, parse[1]);
                 groundquests.requestGrantQuest(self, parse[1]);
-                sendSystemMessageTestingOnly(self, "Granted Quest: " + parse[1]);
+                broadcast(self, "Granted Quest: " + parse[1]);
             }
         }
         else if (parse[0].equalsIgnoreCase("completequest"))
         {
             if (parse.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX COMPLETEQUEST QUESTNAME: " + text);
+                broadcast(self, "SYNTAX COMPLETEQUEST QUESTNAME: " + text);
                 return SCRIPT_CONTINUE;
             }
             groundquests.completeQuest(self, parse[1]);
@@ -76,17 +76,17 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 2)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX CLEARQUESTFLAG QUESTNAME " + text);
+                broadcast(self, "SYNTAX CLEARQUESTFLAG QUESTNAME " + text);
                 return SCRIPT_CONTINUE;
             }
             if (!groundquests.isQuestActive(self, parse[1]) && !groundquests.hasCompletedQuest(self, parse[1]))
             {
-                sendSystemMessageTestingOnly(self, "Unable to verify quest" + text);
+                broadcast(self, "Unable to verify quest" + text);
             }
             else 
             {
                 groundquests.clearQuest(self, parse[1]);
-                sendSystemMessageTestingOnly(self, "Quest data for " + parse[1] + " cleared");
+                broadcast(self, "Quest data for " + parse[1] + " cleared");
             }
             return SCRIPT_CONTINUE;
         }
@@ -94,14 +94,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX ACTIVATETASKNAME QUESTNAME TASKNAME " + text);
+                broadcast(self, "SYNTAX ACTIVATETASKNAME QUESTNAME TASKNAME " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -109,7 +109,7 @@ public class quest_test extends script.base_script
                 int taskId = groundquests.getTaskId(questCrc, taskName);
                 if (taskId == -1)
                 {
-                    sendSystemMessageTestingOnly(self, "BAD TASK NAME");
+                    broadcast(self, "BAD TASK NAME");
                 }
                 else 
                 {
@@ -121,14 +121,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX COMPLETETASKNAME QUESTNAME TASKNAME " + text);
+                broadcast(self, "SYNTAX COMPLETETASKNAME QUESTNAME TASKNAME " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -136,7 +136,7 @@ public class quest_test extends script.base_script
                 int taskId = groundquests.getTaskId(questCrc, taskName);
                 if (taskId == -1)
                 {
-                    sendSystemMessageTestingOnly(self, "BAD TASK NAME");
+                    broadcast(self, "BAD TASK NAME");
                 }
                 else 
                 {
@@ -148,14 +148,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX FAILTASKNAME QUESTNAME TASKNAME " + text);
+                broadcast(self, "SYNTAX FAILTASKNAME QUESTNAME TASKNAME " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -163,7 +163,7 @@ public class quest_test extends script.base_script
                 int taskId = groundquests.getTaskId(questCrc, taskName);
                 if (taskId == -1)
                 {
-                    sendSystemMessageTestingOnly(self, "BAD TASK NAME");
+                    broadcast(self, "BAD TASK NAME");
                 }
                 else 
                 {
@@ -175,14 +175,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX ACTIVATETASKID QUESTNAME TASKID " + text);
+                broadcast(self, "SYNTAX ACTIVATETASKID QUESTNAME TASKID " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -194,14 +194,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX COMPLETETASKID QUESTNAME TASKID " + text);
+                broadcast(self, "SYNTAX COMPLETETASKID QUESTNAME TASKID " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -213,14 +213,14 @@ public class quest_test extends script.base_script
         {
             if (parse.length < 3)
             {
-                sendSystemMessageTestingOnly(self, "SYNTAX FAILTASKID QUESTNAME TASKID " + text);
+                broadcast(self, "SYNTAX FAILTASKID QUESTNAME TASKID " + text);
                 return SCRIPT_CONTINUE;
             }
             String questName = parse[1];
             int questCrc = questGetQuestId(questName);
             if (questCrc == 0)
             {
-                sendSystemMessageTestingOnly(self, "BAD QUEST NAME");
+                broadcast(self, "BAD QUEST NAME");
             }
             else 
             {
@@ -241,7 +241,7 @@ public class quest_test extends script.base_script
     public void showHelp() throws InterruptedException
     {
         for (String option : OPTIONS) {
-            sendSystemMessageTestingOnly(getSelf(), option);
+            broadcast(getSelf(), option);
         }
         return;
     }

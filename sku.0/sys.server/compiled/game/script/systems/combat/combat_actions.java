@@ -1693,11 +1693,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_saber_reflect_buff(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_saber_reflect_buff", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1769,11 +1764,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_1", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1795,11 +1785,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1821,11 +1806,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_3", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1847,11 +1827,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_4", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1873,11 +1848,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_5(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_5", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1899,11 +1869,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_ae_dm_cc_6(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_ae_dm_cc_6", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1925,11 +1890,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_maelstrom_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_maelstrom_1", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1943,11 +1903,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_maelstrom_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_maelstrom_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1961,11 +1916,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_maelstrom_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_maelstrom_3", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1979,11 +1929,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_maelstrom_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_maelstrom_4", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -1997,11 +1942,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_maelstrom_5(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_maelstrom_5", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2041,11 +1981,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_1", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2061,11 +1996,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2081,11 +2011,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_3", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2101,11 +2026,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_4", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2121,11 +2041,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_5(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_5", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2141,11 +2056,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_6(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_6", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2161,11 +2071,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_flurry_7(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInStance(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_stance"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_flurry_7", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2432,11 +2337,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_1", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2446,11 +2346,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2460,11 +2355,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_3", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2474,11 +2364,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_4", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2488,11 +2373,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_5(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_5", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -2502,11 +2382,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_dm_cc_6(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_dm_cc_6", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -4396,19 +4271,19 @@ public class combat_actions extends script.systems.combat.combat_base
                 utils.setScriptVar(defender, "me_doom.doom_owner", attacker);
                 utils.setScriptVar(defender, "me_doom.doom_stage", 1);
                 buff.applyBuff(defender, attacker, "me_doom", 18.0f, 1.0f);
-                if (hasCommand(attacker, "me_bacta_resistance_1"))
+                if (hasCommand(attacker, "me_dm_dot_1"))
                 {
                     buff.applyBuff(defender, attacker, "me_bacta_resistance_1");
                 }
-                if (hasCommand(attacker, "me_electrolyte_drain_1"))
+                if (hasCommand(attacker, "me_dm_dot_1"))
                 {
                     buff.applyBuff(defender, attacker, "me_electrolyte_drain_1");
                 }
-                if (hasCommand(attacker, "me_induce_insanity_1"))
+                if (hasCommand(attacker, "me_dm_dot_1"))
                 {
                     buff.applyBuff(defender, attacker, "me_rheumatic_calamity_1");
                 }
-                if (hasCommand(attacker, "me_thyroid_rupture_1"))
+                if (hasCommand(attacker, "me_dm_dot_1"))
                 {
                     buff.applyBuff(defender, attacker, "me_thyroid_rupture_1");
                 }
@@ -4587,13 +4462,20 @@ public class combat_actions extends script.systems.combat.combat_base
         return SCRIPT_CONTINUE;
     }
 
+
+
+
+
+
+
+
     public int of_del_ae_dm_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!combatStandardAction("of_del_ae_dm_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
@@ -4607,7 +4489,7 @@ public class combat_actions extends script.systems.combat.combat_base
         {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe"))
         {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
@@ -14251,11 +14133,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_drain_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_drain_1", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -14265,11 +14142,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_drain_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_drain_2", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -14279,11 +14151,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_drain_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_drain_3", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -14293,11 +14160,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_drain_4(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_drain_4", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -14307,11 +14169,6 @@ public class combat_actions extends script.systems.combat.combat_base
 
     public int fs_drain_5(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!buff.isInFocus(self))
-        {
-            sendSystemMessage(self, new string_id("spam", "fs_command_no_focus"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("fs_drain_5", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
@@ -15074,6 +14931,16 @@ public class combat_actions extends script.systems.combat.combat_base
     public int fireCr2BlastCannon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!combatStandardAction("fireCr2BlastCannon", self, target, params, "", ""))
+        {
+            return SCRIPT_OVERRIDE;
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+
+    public int fireBlastCannonLegendary(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!combatStandardAction("fireBlastCannonLegendary", self, target, params, "", ""))
         {
             return SCRIPT_OVERRIDE;
         }

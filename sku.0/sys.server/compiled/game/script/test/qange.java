@@ -71,7 +71,7 @@ public class qange extends script.base_script
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(player, "Invalid entry");
+                    broadcast(player, "Invalid entry");
                     qa.createInputBox(player, RESPEC_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", SCRIPTVAR + ".pid");
                 }
             }
@@ -128,7 +128,7 @@ public class qange extends script.base_script
     }
     public void removePlayer(obj_id player, String err) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(player, err);
+        broadcast(player, err);
         qa.removeScriptVars(player, SCRIPTVAR);
         utils.removeScriptVarTree(player, SCRIPTVAR);
     }

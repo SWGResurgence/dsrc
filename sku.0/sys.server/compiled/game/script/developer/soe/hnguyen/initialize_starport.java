@@ -28,14 +28,14 @@ public class initialize_starport extends script.base_script
                 obj_id starportOid = utils.stringToObjId(st.nextToken());
                 if (!hasScript(starportOid, "structure.municipal.starport"))
                 {
-                    sendSystemMessageTestingOnly(self, "object " + starportOid + " doesn't have script structure.municipal.starport");
+                    broadcast(self, "object " + starportOid + " doesn't have script structure.municipal.starport");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(self, "inializing starport " + starportOid);
+                    broadcast(self, "inializing starport " + starportOid);
                     if (player_structure.isCivic(starportOid))
                     {
-                        sendSystemMessageTestingOnly(self, "starport " + starportOid + " is civic");
+                        broadcast(self, "starport " + starportOid + " is civic");
                     }
                     else 
                     {
@@ -44,14 +44,14 @@ public class initialize_starport extends script.base_script
                         int travel_cost = travel.getTravelCost(starportOid);
                         if (travel_point == null || travel_cost == -1)
                         {
-                            sendSystemMessageTestingOnly(self, "starport " + starportOid + " has null travel point or travel cost of -1");
+                            broadcast(self, "starport " + starportOid + " has null travel point or travel cost of -1");
                         }
                         else 
                         {
                             location loc = getPlanetTravelPointLocation(planet, travel_point);
                             if (loc != null)
                             {
-                                sendSystemMessageTestingOnly(self, "starport " + starportOid + " is already registered with the travel system");
+                                broadcast(self, "starport " + starportOid + " is already registered with the travel system");
                             }
                             else 
                             {

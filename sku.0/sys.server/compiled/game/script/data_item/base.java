@@ -22,7 +22,7 @@ public class base extends script.base_script
     {
         if (item == menu_info_types.EXAMINE)
         {
-            sendSystemMessageTestingOnly(player, "You would be seeing a ficticious data report here..");
+            broadcast(player, "You would be seeing a ficticious data report here..");
         }
         return SCRIPT_CONTINUE;
     }

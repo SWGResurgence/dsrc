@@ -52,7 +52,7 @@ public class instance_test extends script.base_script
         int rows = dataTableGetNumRows(dataTable);
         if (idx < 0 || idx > rows - 1)
         {
-            sendSystemMessageTestingOnly(player, "Invalid dungeon selected");
+            broadcast(player, "Invalid dungeon selected");
             return SCRIPT_CONTINUE;
         }
         dictionary dungeonDict = dataTableGetRow(dataTable, idx);
@@ -85,7 +85,7 @@ public class instance_test extends script.base_script
         dictionary dungeonDict = dataTableGetRow(dataTable, dungeonIdx);
         if (idx < 0 || idx > parse.length - 1)
         {
-            sendSystemMessageTestingOnly(player, "Invalid Selection");
+            broadcast(player, "Invalid Selection");
             return SCRIPT_CONTINUE;
         }
         else 

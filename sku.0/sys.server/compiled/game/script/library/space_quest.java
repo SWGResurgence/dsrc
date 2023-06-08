@@ -203,7 +203,7 @@ public class space_quest extends script.base_script
         dictionary questInfo = dataTableGetRow(qTable, 0);
         if (questInfo == null)
         {
-            sendSystemMessageTestingOnly(player, "grantQuest: Unable to find quest table " + qTable);
+            broadcast(player, "grantQuest: Unable to find quest table " + qTable);
             return false;
         }
         if (!duty)
@@ -251,7 +251,7 @@ public class space_quest extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Failed to grantQuest '" + questType + ":" + questName + "'.");
+            broadcast(player, "Failed to grantQuest '" + questType + ":" + questName + "'.");
             return false;
         }
     }
@@ -864,13 +864,13 @@ public class space_quest extends script.base_script
         obj_id datapad = utils.getPlayerDatapad(player);
         if (!isIdValid(datapad))
         {
-            sendSystemMessageTestingOnly(player, "_setupQuest: Unable to get datapad for player " + player);
+            broadcast(player, "_setupQuest: Unable to get datapad for player " + player);
             return false;
         }
         obj_id missionObj = createObject(QUEST_OBJECT_TEMPLATE, datapad, "");
         if (!isIdValid(missionObj))
         {
-            sendSystemMessageTestingOnly(player, "_setupQuest: Unable to create a mission object for quest.");
+            broadcast(player, "_setupQuest: Unable to create a mission object for quest.");
             return false;
         }
         dictionary questInfo = dataTableGetRow(qTable, 0);
@@ -1241,7 +1241,7 @@ public class space_quest extends script.base_script
         obj_id opcd = createObject(pcd, datapad, "");
         if (!isIdValid(opcd))
         {
-            sendSystemMessageTestingOnly(player, "Critical failure: Could not create a pcd for the player!");
+            broadcast(player, "Critical failure: Could not create a pcd for the player!");
         }
         else
         {
@@ -1282,7 +1282,7 @@ public class space_quest extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Critical failure: Could not create a ship for the player's pcd!");
+                broadcast(player, "Critical failure: Could not create a ship for the player's pcd!");
             }
         }
     }

@@ -280,7 +280,7 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
         }
         else if (isIdValid(objPilot))
         {
-            sendSystemMessageTestingOnly(objPilot, "Earth Shattering Kaboom goes here!");
+            broadcast(objPilot, "Earth Shattering Kaboom goes here!");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -299,7 +299,7 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
         }
         else 
         {
-            sendSystemMessageTestingOnly(objPilot, "Earth Shattering Kaboom goes here!");
+            broadcast(objPilot, "Earth Shattering Kaboom goes here!");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -316,7 +316,7 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
         float fltKills = getFloatObjVar(self, "fltKills");
         float fltPercentage = params.getFloat("fltPercentage");
         fltKills = fltKills + fltPercentage;
-        sendSystemMessageTestingOnly(objPilot, "TARGET KILLED :Percentage of kill was " + fltPercentage + " total kills this session is " + fltKills);
+        broadcast(objPilot, "TARGET KILLED :Percentage of kill was " + fltPercentage + " total kills this session is " + fltKills);
         setObjVar(self, "fltKills", fltKills);
         return SCRIPT_CONTINUE;
     }
@@ -372,21 +372,21 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
                 {
                     if (!isShipComponentDisabled(self, ship_chassis_slot_type.SCST_droid_interface))
                     {
-                        sendSystemMessageTestingOnly(self, "Equipping " + objControlDevice + " to " + self);
+                        broadcast(self, "Equipping " + objControlDevice + " to " + self);
                         associateDroidControlDeviceWithShip(self, objControlDevice);
                     }
                     else 
                     {
                         string_id strSpam = new string_id("space/space_interaction", "droid_interface_disabled");
                         sendSystemMessage(objPlayer, strSpam);
-                        sendSystemMessageTestingOnly(objPlayer, "Equipping " + objControlDevice + " to " + self);
+                        broadcast(objPlayer, "Equipping " + objControlDevice + " to " + self);
                         associateDroidControlDeviceWithShip(self, objControlDevice);
                     }
                     return SCRIPT_CONTINUE;
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(objPlayer, "Equipping " + objControlDevice + " to " + self + ", No interface");
+                    broadcast(objPlayer, "Equipping " + objControlDevice + " to " + self + ", No interface");
                     associateDroidControlDeviceWithShip(self, objControlDevice);
                     string_id strSpam = new string_id("space/space_interaction", "no_droid_command_module");
                     sendSystemMessage(objPlayer, strSpam);

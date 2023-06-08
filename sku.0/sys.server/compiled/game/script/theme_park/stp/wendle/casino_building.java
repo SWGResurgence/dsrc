@@ -20,7 +20,7 @@ public class casino_building extends script.base_script
         int gating = getIntObjVar(item, "stp.can_gamble");
         if (gating != 1)
         {
-            sendSystemMessageTestingOnly(item, "You must be a gambler to enter the casino.");
+            broadcast(item, "You must be a gambler to enter the casino.");
             return SCRIPT_OVERRIDE;
         }
         else

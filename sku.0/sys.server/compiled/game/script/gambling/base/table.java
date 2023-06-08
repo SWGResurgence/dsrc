@@ -75,17 +75,17 @@ public class table extends script.gambling.base.default_interface
                 int players_needed = getIntObjVar(self, gambling.VAR_TABLE_PLAYER_LIMIT_MIN) - players.length;
                 if (players_needed == 1)
                 {
-                    sendSystemMessageTestingOnly(player, "The game needs 1 more player before it can begin.");
+                    broadcast(player, "The game needs 1 more player before it can begin.");
                 }
                 else 
                 {
-                    sendSystemMessageTestingOnly(player, "The game needs " + players_needed + " more players before it can begin.");
+                    broadcast(player, "The game needs " + players_needed + " more players before it can begin.");
                 }
             }
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "A game is currently in progress. You must wait until it has ended.");
+            broadcast(player, "A game is currently in progress. You must wait until it has ended.");
         }
         showBetUi(self, player);
         return SCRIPT_CONTINUE;
@@ -136,11 +136,11 @@ public class table extends script.gambling.base.default_interface
                     int players_needed = getIntObjVar(self, gambling.VAR_TABLE_PLAYER_LIMIT_MIN) - players.length;
                     if (players_needed == 1)
                     {
-                        sendSystemMessageTestingOnly(player, "The game needs 1 more player before it can begin.");
+                        broadcast(player, "The game needs 1 more player before it can begin.");
                     }
                     else 
                     {
-                        sendSystemMessageTestingOnly(player, "The game needs " + players_needed + " more players before it can begin.");
+                        broadcast(player, "The game needs " + players_needed + " more players before it can begin.");
                     }
                 }
             }

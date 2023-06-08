@@ -18,7 +18,7 @@ public class master_controller_gizmo extends script.base_script
             "Meechoo aem ta troo Pubbza doh ta Tyrzok!",
     };
 
-    public int OnInitialize(obj_id self) throws InterruptedException
+    public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))
@@ -26,22 +26,6 @@ public class master_controller_gizmo extends script.base_script
             removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
         }
         setObjVar(tatooine, "dungeon_finder.world_boss.gizmo", "Active");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnDestroy(obj_id self) throws InterruptedException
-    {
-        obj_id tatooine = getPlanetByName("tatooine");
-        if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))
-        {
-            removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
-        }
-        setObjVar(tatooine, "dungeon_finder.world_boss.gizmo", "Inactive");
-        return SCRIPT_CONTINUE;
-    }
-
-    public int OnAttach(obj_id self) throws InterruptedException
-    {
         resurgence.doWorldBossAnnounce(self, resurgence.WORLD_BOSS_GIZMO);
         return SCRIPT_CONTINUE;
     }
@@ -56,6 +40,12 @@ public class master_controller_gizmo extends script.base_script
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: Gizmo, the Wretched and Accursed Ewok has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerFullName(killer));
         }
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "dungeon_finder.world_boss.gizmo"))
+        {
+            removeObjVar(tatooine, "dungeon_finder.world_boss.gizmo");
+        }
+        setObjVar(tatooine, "dungeon_finder.world_boss.gizmo", "Inactive");
         resurgence.doWorldBossDeathMsg(self);
         return SCRIPT_CONTINUE;
     }

@@ -122,7 +122,7 @@ public class clone extends script.base_script
             buff.applyBuff(self, "banner_buff_spy", 7200);
             buff.applyBuff(self, "banner_buff_bounty_hunter", 7200);
             buff.applyBuff(self, "banner_buff_force_sensitive", 7200);
-            sendSystemMessageTestingOnly(self, "GOD Buffs Granted");
+            broadcast(self, "GOD Buffs Granted");
         }
         else if(text.equals("revive"))
         {
@@ -462,7 +462,7 @@ public class clone extends script.base_script
         catch(Exception e)
         {
             if(speaker != null) {
-                sendSystemMessageTestingOnly(speaker, "Exception: " + e.toString());
+                broadcast(speaker, "Exception: " + e.toString());
             }
         }
         return SCRIPT_CONTINUE;

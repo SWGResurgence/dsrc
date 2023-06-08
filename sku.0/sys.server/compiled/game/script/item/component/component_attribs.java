@@ -54,7 +54,12 @@ public class component_attribs extends script.base_script
                 {
                         "object/tangible/component/armor/armor_layer_nightsister.iff",
                         "object/tangible/component/armor/feather_peko_albatross.iff",
-                        "object/tangible/component/armor/armor_layer_ris.iff"
+                        "object/tangible/component/armor/armor_layer_ris.iff",
+                        "object/tangible/component/armor/armor_appearance_enhancement_feather.iff",
+                        "object/tangible/component/armor/scale_giant_dune_kimogila.iff",
+                        "object/tangible/component/armor/hide_gurk_king.iff",
+                        "object/tangible/component/armor/bone_fragment_woolamander_harrower.iff"
+
                 };
         if (utils.getElementPositionInArray(needToBeFixed, template) > -1)
         {
@@ -64,6 +69,16 @@ public class component_attribs extends script.base_script
                 int intVal = (int) val;
                 removeObjVar(self, "attribute.bonus.0");
                 setObjVar(self, "attribute.bonus.0", intVal);
+            }
+        }
+        if (utils.getElementPositionInArray(needToBeFixed, template) > -1)
+        {
+            float val = getFloatObjVar(self, "attribute.bonus.2");
+            if (val != 0)
+            {
+                int intVal = (int) val;
+                removeObjVar(self, "attribute.bonus.2");
+                setObjVar(self, "attribute.bonus.2", intVal);
             }
         }
         return SCRIPT_CONTINUE;

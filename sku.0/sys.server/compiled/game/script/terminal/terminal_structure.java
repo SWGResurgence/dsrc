@@ -597,7 +597,7 @@ public class terminal_structure extends script.base_script
             obj_id top = player_structure.getStructure(self);
             if (isIdValid(top))
             {
-                sendSystemMessageTestingOnly(player, "Resetting placement of Structure Management Terminal...");
+                broadcast(player, "Resetting placement of Structure Management Terminal...");
                 float yaw = getYaw(top);
                 if (yaw < 0.0f)
                 {
@@ -608,7 +608,7 @@ public class terminal_structure extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Fix attempt failed - Is the terminal inside a valid player structure?");
+                broadcast(player, "Fix attempt failed - Is the terminal inside a valid player structure?");
             }
         }
         // GM Tool: fix a structure's sign that has been accidentally moved/destroyed
@@ -617,12 +617,12 @@ public class terminal_structure extends script.base_script
             obj_id top = player_structure.getStructure(self);
             if (isIdValid(top))
             {
-                sendSystemMessageTestingOnly(player, "Requesting the generation of a new sign for this structure...");
+                broadcast(player, "Requesting the generation of a new sign for this structure...");
                 player_structure.createStructureSign(top);
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Fix attempt failed - Could not determine structure object.");
+                broadcast(player, "Fix attempt failed - Could not determine structure object.");
             }
         }
         // player owner can add their entire account to the admin list with this toggle (does not show up on admin list, separate button)

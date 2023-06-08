@@ -16,7 +16,7 @@ public class npe_test extends script.base_script
     {
         if (isGod(self))
         {
-            sendSystemMessageTestingOnly(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
+            broadcast(self, "Please turn off god mode when moving between npe locations. God mode and instances do not get along");
             return true;
         }
         return false;
@@ -28,10 +28,10 @@ public class npe_test extends script.base_script
         String arg = st.nextToken();
         if (arg.equals("npeHelp"))
         {
-            sendSystemMessageTestingOnly(self, "Commands:");
-            sendSystemMessageTestingOnly(self, "setupNpe, gotoHangar, gotoTurret, gotoSpaceStation, gotoOrdSpaceFromSharedStation, gotoOrdStationFromOrdSpace, gotoOrdSpaceFromOrdStation, gotoSharedStationFromOrdSpace, gotoStaging, finishNpe");
-            sendSystemMessageTestingOnly(self, "These commands must be run in order, and finished before starting again!");
-            sendSystemMessageTestingOnly(self, "There is a lot of cleanup that gets done in the between steps");
+            broadcast(self, "Commands:");
+            broadcast(self, "setupNpe, gotoHangar, gotoTurret, gotoSpaceStation, gotoOrdSpaceFromSharedStation, gotoOrdStationFromOrdSpace, gotoOrdSpaceFromOrdStation, gotoSharedStationFromOrdSpace, gotoStaging, finishNpe");
+            broadcast(self, "These commands must be run in order, and finished before starting again!");
+            broadcast(self, "There is a lot of cleanup that gets done in the between steps");
         }
         else if (arg.equals("gotoTurret"))
         {
@@ -39,7 +39,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to turret...");
+            broadcast(self, "Going to turret...");
             npe.movePlayerFromHangarToFalcon(self);
         }
         else if (arg.equals("gotoSpaceStation"))
@@ -48,7 +48,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to space station...");
+            broadcast(self, "Going to space station...");
             npe.movePlayerFromFalconToSharedStation(self);
         }
         else if (arg.equals("gotoOrdSpaceFromSharedStation"))
@@ -57,7 +57,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to ord space...");
+            broadcast(self, "Going to ord space...");
             npe.movePlayerFromSharedStationToOrdMantellSpace(self, new location(0, 0, 0));
         }
         else if (arg.equals("gotoOrdStationFromOrdSpace"))
@@ -66,7 +66,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to space station...");
+            broadcast(self, "Going to space station...");
             npe.movePlayerFromOrdMantellSpaceToOrdMantellDungeon(self);
         }
         else if (arg.equals("gotoOrdSpaceFromOrdStation"))
@@ -75,7 +75,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to ord space...");
+            broadcast(self, "Going to ord space...");
             npe.movePlayerFromOrdMantellDungeonToOrdMantellSpace(self, new location(0, 0, 0));
         }
         else if (arg.equals("gotoSharedStationFromOrdSpace"))
@@ -84,7 +84,7 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to space station...");
+            broadcast(self, "Going to space station...");
             npe.movePlayerFromOrdMantellSpaceToSharedStation(self);
         }
         else if (arg.equals("finishNpe"))
@@ -93,22 +93,22 @@ public class npe_test extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Going to post staging area...");
+            broadcast(self, "Going to post staging area...");
             npe.movePlayerFromSharedStationToFinishLocation(self);
         }
         else if (arg.equals("count"))
         {
             obj_id[] tempArray;
             tempArray = getObjectsInRange(self, 20000);
-            sendSystemMessageTestingOnly(self, "Found " + tempArray.length + " objects");
+            broadcast(self, "Found " + tempArray.length + " objects");
             tempArray = getCreaturesInRange(self, 20000);
-            sendSystemMessageTestingOnly(self, "Found " + tempArray.length + " creatures");
+            broadcast(self, "Found " + tempArray.length + " creatures");
             tempArray = getNonCreaturesInRange(self, 20000);
-            sendSystemMessageTestingOnly(self, "Found " + tempArray.length + " non creatures");
+            broadcast(self, "Found " + tempArray.length + " non creatures");
             tempArray = getNPCsInRange(self, 10000);
-            sendSystemMessageTestingOnly(self, "Found " + tempArray.length + " NPCs");
+            broadcast(self, "Found " + tempArray.length + " NPCs");
             tempArray = getPlayerCreaturesInRange(self, 20000);
-            sendSystemMessageTestingOnly(self, "Found " + tempArray.length + " player creatures");
+            broadcast(self, "Found " + tempArray.length + " player creatures");
         }
         else if (arg.equals("countType"))
         {
@@ -125,10 +125,10 @@ public class npe_test extends script.base_script
                 if (type.equals(getTemplateName(obj_id)))
                 {
                     ++counter;
-                    sendSystemMessageTestingOnly(self, "" + counter + ": " + obj_id);
+                    broadcast(self, "" + counter + ": " + obj_id);
                 }
             }
-            sendSystemMessageTestingOnly(self, "Found " + counter + " objects");
+            broadcast(self, "Found " + counter + " objects");
         }
         else if (arg.equals("getAllWorldObjects"))
         {
@@ -145,17 +145,17 @@ public class npe_test extends script.base_script
                     ++counter;
                 }
             }
-            sendSystemMessageTestingOnly(self, "Found " + counter + " objects");
+            broadcast(self, "Found " + counter + " objects");
         }
         else if (arg.equals("makeNpeDungeons"))
         {
             String currentScene = getCurrentSceneName();
             if (!currentScene.equals("dungeon1"))
             {
-                sendSystemMessageTestingOnly(self, "You should be on dungeon1 to run this command, you're on: " + currentScene);
+                broadcast(self, "You should be on dungeon1 to run this command, you're on: " + currentScene);
                 return SCRIPT_CONTINUE;
             }
-            sendSystemMessageTestingOnly(self, "Creating dungeon objects...");
+            broadcast(self, "Creating dungeon objects...");
             createObject("object/building/general/npe_space_station.iff", new location(-5000, 0, -1000));
             createObject("object/building/general/npe_space_station.iff", new location(0, 0, -1000));
             createObject("object/building/general/npe_space_station.iff", new location(5000, 0, -1000));
@@ -198,30 +198,30 @@ public class npe_test extends script.base_script
         {
             String val = st.nextToken();
             boolean tutVal = val.equals("true");
-            sendSystemMessageTestingOnly(self, "Setting tutorial bit to " + tutVal);
+            broadcast(self, "Setting tutorial bit to " + tutVal);
             setCompletedTutorial(self, tutVal);
         }
         else if (arg.equals("getWorkingSkill"))
         {
-            sendSystemMessageTestingOnly(self, "Your current working skill is " + getWorkingSkill(self));
+            broadcast(self, "Your current working skill is " + getWorkingSkill(self));
         }
         else if (arg.equals("getClusterLock") && st.countTokens() == 2)
         {
             String manager = st.nextToken();
             String regex = st.nextToken();
-            sendSystemMessageTestingOnly(self, "Acquiring cluster lock");
+            broadcast(self, "Acquiring cluster lock");
             getClusterWideData(manager, regex, true, self);
         }
         else if (arg.equals("releaseClusterLock") && st.countTokens() == 2)
         {
             String manager = st.nextToken();
             int lock = utils.stringToInt(st.nextToken());
-            sendSystemMessageTestingOnly(self, "Releasing cluster lock");
+            broadcast(self, "Releasing cluster lock");
             releaseClusterWideDataLock(manager, lock);
         }
         else if (arg.equals("enableUI"))
         {
-            sendSystemMessageTestingOnly(self, "Enabling NPE UI");
+            broadcast(self, "Enabling NPE UI");
             newbieTutorialEnableHudElement(self, "radar", true, 0);
             newbieTutorialEnableHudElement(self, "chatbox", true, 0);
         }
@@ -232,11 +232,11 @@ public class npe_test extends script.base_script
             String value = getConfigSetting(section, key);
             if (value != null)
             {
-                sendSystemMessageTestingOnly(self, "Config setting for " + section + ":" + key + " is " + value);
+                broadcast(self, "Config setting for " + section + ":" + key + " is " + value);
             }
             else
             {
-                sendSystemMessageTestingOnly(self, "Didn't find a config setting for " + section + ":" + key);
+                broadcast(self, "Didn't find a config setting for " + section + ":" + key);
             }
         }
         else if (arg.equals("getPlayers") && st.countTokens() == 5)
@@ -252,22 +252,22 @@ public class npe_test extends script.base_script
             {
                 if (isIdValid(obj_id))
                 {
-                    sendSystemMessageTestingOnly(self, "Got player " + obj_id + " " + getPlayerFullName(obj_id));
+                    broadcast(self, "Got player " + obj_id + " " + getPlayerFullName(obj_id));
                 }
             }
-            sendSystemMessageTestingOnly(self, "Found " + players_range.length + " players");
+            broadcast(self, "Found " + players_range.length + " players");
         }
         else if (arg.equals("getSceneName"))
         {
             String scene = getCurrentSceneName();
             if (scene != null)
             {
-                sendSystemMessageTestingOnly(self, "Current scene name is " + scene);
+                broadcast(self, "Current scene name is " + scene);
             }
         }
         else if (arg.equals("gotoTutorial"))
         {
-            sendSystemMessageTestingOnly(self, "Back to tutorial with ya!");
+            broadcast(self, "Back to tutorial with ya!");
             sendPlayerToTutorial(self);
         }
         return SCRIPT_CONTINUE;
@@ -275,7 +275,7 @@ public class npe_test extends script.base_script
 
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
-        sendSystemMessageTestingOnly(self, "OnClusterWideDataResponse: " + manage_name + ", name: " + name + ", lock key: " + lock_key);
+        broadcast(self, "OnClusterWideDataResponse: " + manage_name + ", name: " + name + ", lock key: " + lock_key);
         return SCRIPT_CONTINUE;
     }
 

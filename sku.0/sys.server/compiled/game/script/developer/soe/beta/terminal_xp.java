@@ -48,7 +48,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
         }
         else 
         {
-            sendSystemMessageTestingOnly(player, "Only authorized users may access this terminal.");
+            broadcast(player, "Only authorized users may access this terminal.");
             return SCRIPT_CONTINUE;
         }
     }
@@ -95,7 +95,7 @@ public class terminal_xp extends script.terminal.base.terminal_add_use
         String[] xpTypes = utils.getStringBatchScriptVar(self, VAR_XP_TYPES_LIST);
         if (xpTypes == null || xpTypes.length == 0 || idx >= xpTypes.length)
         {
-            sendSystemMessageTestingOnly(player, "There has been an error in determining the xp type selected.");
+            broadcast(player, "There has been an error in determining the xp type selected.");
             return SCRIPT_CONTINUE;
         }
         String xpType = xpTypes[idx];

@@ -81,11 +81,11 @@ public class recycler extends script.base_script
                 }
                 if (stamps > 50)
                 {
-                    sendSystemMessageTestingOnly(player, "Thank you!");
+                    broadcast(player, "Thank you!");
                 }
                 else if (stamps < 50)
                 {
-                    sendSystemMessageTestingOnly(player, "You have successfully recycled an item and have earned one (1) point toward a reward. You now have a total of " + stamps + " points.");
+                    broadcast(player, "You have successfully recycled an item and have earned one (1) point toward a reward. You now have a total of " + stamps + " points.");
                 }
                 if (!hasObjVar(player, "item_turn_in.stamps"))
                 {
@@ -110,7 +110,7 @@ public class recycler extends script.base_script
             }
             else if (!utils.playerHasItemByTemplate(player, getStringObjVar(self, "item_to_use")))
             {
-                sendSystemMessageTestingOnly(player, "You do not have anything to recycle at this time.");
+                broadcast(player, "You do not have anything to recycle at this time.");
             }
         }
         if (item == menu_info_types.SERVER_MENU1)
@@ -121,7 +121,7 @@ public class recycler extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU2)
         {
-            sendSystemMessageTestingOnly(player, "This menu will reset rewards, or clear points. choose wisely my dudes");
+            broadcast(player, "This menu will reset rewards, or clear points. choose wisely my dudes");
         }
         if (item == menu_info_types.SERVER_MENU3)
         {
@@ -130,12 +130,12 @@ public class recycler extends script.base_script
             removeObjVar(player, "stamps.t3_reward_given");
             removeObjVar(player, "stamps.t4_reward_given");
             removeObjVar(player, "stamps.t5_reward_given");
-            sendSystemMessageTestingOnly(player, "Rewards reset!");
+            broadcast(player, "Rewards reset!");
         }
         if (item == menu_info_types.SERVER_MENU4)
         {
             setObjVar(player, "item_turn_in.stamps", 0);
-            sendSystemMessageTestingOnly(player, "Recycle Points reset to zero!");
+            broadcast(player, "Recycle Points reset to zero!");
         }
         if (item == menu_info_types.SERVER_MENU5)
         {
@@ -312,7 +312,7 @@ public class recycler extends script.base_script
         obj_id[] items = new obj_id[1];
         items[0] = rewardedItem;
         loot.showLootBox(player, items);
-        sendSystemMessageTestingOnly(player, "You have recieved the GJPUD Tier I reward!");
+        broadcast(player, "You have recieved the GJPUD Tier I reward!");
         return SCRIPT_CONTINUE;
     }
     public int grantT2Reward(obj_id player) throws InterruptedException
@@ -323,7 +323,7 @@ public class recycler extends script.base_script
         obj_id[] items = new obj_id[1];
         items[0] = rewardedItem;
         loot.showLootBox(player, items);
-        sendSystemMessageTestingOnly(player, "You have recieved the GJPUD Tier II reward!");
+        broadcast(player, "You have recieved the GJPUD Tier II reward!");
         return SCRIPT_CONTINUE;
     }
     public int grantT3Reward(obj_id player) throws InterruptedException
@@ -334,7 +334,7 @@ public class recycler extends script.base_script
         obj_id[] items = new obj_id[1];
         items[0] = rewardedItem;
         loot.showLootBox(player, items);
-        sendSystemMessageTestingOnly(player, "You have recieved the GJPUD Tier III reward!");
+        broadcast(player, "You have recieved the GJPUD Tier III reward!");
         return SCRIPT_CONTINUE;
     }
     public int grantT4Reward(obj_id player) throws InterruptedException
@@ -345,7 +345,7 @@ public class recycler extends script.base_script
         obj_id[] items = new obj_id[1];
         items[0] = rewardedItem;
         loot.showLootBox(player, items);
-        sendSystemMessageTestingOnly(player, "You have recieved the GJPUD Tier IV reward!");
+        broadcast(player, "You have recieved the GJPUD Tier IV reward!");
         return SCRIPT_CONTINUE;
     }
     public int grantT5Reward(obj_id player) throws InterruptedException
@@ -356,7 +356,7 @@ public class recycler extends script.base_script
         obj_id[] items = new obj_id[1];
         items[0] = rewardedItem;
         loot.showLootBox(player, items);
-        sendSystemMessageTestingOnly(player, "You have recieved the GJPUD Tier V reward!");// and the Galactic Recycling Association badge and title!
+        broadcast(player, "You have recieved the GJPUD Tier V reward!");// and the Galactic Recycling Association badge and title!
         return SCRIPT_CONTINUE;
     }
     public void payCredits(obj_id player) throws InterruptedException
@@ -371,7 +371,7 @@ public class recycler extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "The Galactic Junk Pickup Day coordinators thank you for all your work, but you currently exceed the maximum amount we can give you. Have you considered donating to a charity?");
+            broadcast(player, "The Galactic Junk Pickup Day coordinators thank you for all your work, but you currently exceed the maximum amount we can give you. Have you considered donating to a charity?");
         }
     }
     public int handlePayoutToPlayer(obj_id self, dictionary params) throws InterruptedException
@@ -385,11 +385,11 @@ public class recycler extends script.base_script
         if (retCode == money.RET_SUCCESS)
         {
             String terminal = "Galactic Junk Pickup Day Workstation";
-            sendSystemMessageTestingOnly(player, "You receive " + CASH_AMOUNT + " credits from the " + terminal + " for your hard work keeping the galaxy clean.");
+            broadcast(player, "You receive " + CASH_AMOUNT + " credits from the " + terminal + " for your hard work keeping the galaxy clean.");
         }
         else if (retCode == money.RET_FAIL)
         {
-            sendSystemMessageTestingOnly(player, "The system is unable to complete the transaction.");
+            broadcast(player, "The system is unable to complete the transaction.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -413,7 +413,7 @@ public class recycler extends script.base_script
         }
         if (!objectToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "You cannot use static items for this. It must be single tangible items to avoid duplication and exploits");
+            broadcast(player, "You cannot use static items for this. It must be single tangible items to avoid duplication and exploits");
         }
         setObjVar(self, "item_to_use", objectToCheck);
         return SCRIPT_CONTINUE;
@@ -438,7 +438,7 @@ public class recycler extends script.base_script
         }
         if (t1ToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "Not allowed.");
+            broadcast(player, "Not allowed.");
         }
         setObjVar(self, "event.earth_day_t1_reward", t1ToCheck);
         return SCRIPT_CONTINUE;
@@ -463,7 +463,7 @@ public class recycler extends script.base_script
         }
         if (t2ToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "Not allowed.");
+            broadcast(player, "Not allowed.");
         }
         setObjVar(self, "event.earth_day_t2_reward", t2ToCheck);
         return SCRIPT_CONTINUE;
@@ -488,7 +488,7 @@ public class recycler extends script.base_script
         }
         if (t3ToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "Not allowed.");
+            broadcast(player, "Not allowed.");
         }
         setObjVar(self, "event.earth_day_t3_reward", t3ToCheck);
         return SCRIPT_CONTINUE;
@@ -513,7 +513,7 @@ public class recycler extends script.base_script
         }
         if (t4ToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "Not allowed.");
+            broadcast(player, "Not allowed.");
         }
         setObjVar(self, "event.earth_day_t4_reward", t4ToCheck);
         return SCRIPT_CONTINUE;
@@ -538,7 +538,7 @@ public class recycler extends script.base_script
         }
         if (t5ToCheck.endsWith(".iff"))
         {
-            sendSystemMessageTestingOnly(player, "Not allowed.");
+            broadcast(player, "Not allowed.");
         }
         setObjVar(self, "event.earth_day_t5_reward", t5ToCheck);
         return SCRIPT_CONTINUE;

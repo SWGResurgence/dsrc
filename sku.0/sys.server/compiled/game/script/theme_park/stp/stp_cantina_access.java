@@ -20,7 +20,7 @@ public class stp_cantina_access extends script.base_script
         int gating = getIntObjVar(item, "stp_cantina_access");
         if (gating != 1)
         {
-            sendSystemMessageTestingOnly(item, "You don't have permission to go back here. It is probably best if you turn around.");
+            broadcast(item, "You don't have permission to go back here. It is probably best if you turn around.");
             return SCRIPT_OVERRIDE;
         }
         else

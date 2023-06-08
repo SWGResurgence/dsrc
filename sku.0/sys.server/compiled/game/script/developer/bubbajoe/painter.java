@@ -52,7 +52,7 @@ public class painter extends script.base_script
             obj_id[] targets = getAllPlayers(origin, PLANET_WIDE);
             if (targets == null)
             {
-                sendSystemMessageTestingOnly(self, "No targets selected.");
+                broadcast(self, "No targets selected.");
                 return SCRIPT_CONTINUE;
             }
             try

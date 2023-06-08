@@ -223,12 +223,15 @@ public class terminal_character_builder extends script.base_script
             "Instances: Heroic Unlocks",
             "Instances: Mustafar Unlocks",
             "Objects: Ace Pilot Necklaces",
+            "Objects: Superior Crafting Unit Buff",
             "Objects: Gift Boxes",
             "Objects: Heroic Box of Achievements",
             "Objects: Mustafar Relic Rings",
+            "Objects: New Schematics",
             "Objects: Others",
             "Objects: Rare Loot Boxes",
             "Objects: Veteran Rewards",
+            "Objects: Weapons",
             "Structures: Chronicle Buffs",
             "Structures: City Buffs",
             "Structures: Regular Buffs",
@@ -1171,7 +1174,8 @@ public class terminal_character_builder extends script.base_script
                     "Attach Event Tool",
                     "Attach Developer Tool",
                     "Detach Tools",
-                    "Build Terminal",
+                    "Reload Character Terminal Builder",
+                    "Sanitize Avatar",
             };
     public static final String[] SMUGGLER_TOOLS_OPTIONS =
             {
@@ -5084,18 +5088,22 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_quest_reward_neutral_pilot_medal_01_01", pInv);
                 broadcast(player, "Ace Pilot Necklaces Issued.");
                 break;
-            case 4:  // Objects: Gift Boxes
+            case 4:  // Objects: Advanced Superior Crafting Unit Buff
+                static_item.createNewItemFunction("item_trader_advanced_buff_01_01", pInv);
+                broadcast(player, "Advanced Superior Crafting Unit Issued.");
+                break;
+            case 5:  // Objects: Gift Boxes
                 static_item.createNewItemFunction("item_first_anniversary_gift_01_01", pInv);
                 static_item.createNewItemFunction("game_update_4_gift", pInv);
                 static_item.createNewItemFunction("game_update_5_gift", pInv);
                 static_item.createNewItemFunction("game_update_6_gift", pInv);
                 broadcast(player, "Gift Boxes Issued.");
                 break;
-            case 5:  // Objects: Heroic Box of Achievements
+            case 6:  // Objects: Heroic Box of Achievements
                 static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
                 broadcast(player, "Heroic Box of Achievements Issued.");
                 break;
-            case 6:  // Objects: Mustafar Relic Rings
+            case 7:  // Objects: Mustafar Relic Rings
                 static_item.createNewItemFunction("item_tow_ring_architect_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_beast_master_04_01", pInv);
                 static_item.createNewItemFunction("item_tow_ring_domestics_04_01", pInv);
@@ -5104,32 +5112,50 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tow_ring_munitions_04_01", pInv);
                 broadcast(player, "Mustafar Relic Rings Issued.");
                 break;
-            case 7:  // Objects: Others
+            case 8:  // Objects: New Schematics
+                static_item.createNewItemFunction("item_schematic_ex_scope", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_stock", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_heavy", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_melee", pInv);
+                static_item.createNewItemFunction("item_schematic_ex_core_ranged", pInv);
+                createObject("object/tangible/wearables/bandolier/bandolier_s02_quest.iff", pInv, "");
+                createObject("object/tangible/wearables/bandolier/bandolier_s04_quest.iff", pInv, "");
+                broadcast(player, "New Schematics Issued.");
+                break;
+            case 9:  // Objects: Others
                 static_item.createNewItemFunction("item_gas_recycler_01_01", pInv);
                 static_item.createNewItemFunction("item_krayt_dragon_skull_itv", pInv);
                 static_item.createNewItemFunction("item_resurgence_stark_banner_01_01", pInv);
                 static_item.createNewItemFunction("item_resurgence_targaryen_banner_01_01", pInv);
+                static_item.createNewItemFunction("item_reward_modify_pistol_01_01", pInv, 25);
                 broadcast(player, "Other Objects Issued.");
                 break;
-            case 8:  // Objects: Rare Loot Boxes
+            case 10: // Objects: Rare Loot Boxes
                 static_item.createNewItemFunction("rare_loot_chest_quality_1", pInv);
                 static_item.createNewItemFunction("rare_loot_chest_quality_2", pInv);
                 static_item.createNewItemFunction("rare_loot_chest_quality_3", pInv);
                 broadcast(player, "Rare Loot Box Set Issued.");
                 break;
-            case 9:  // Objects: Veteran Rewards
+            case 11: // Objects: Veteran Rewards
                 static_item.createNewItemFunction("trader_care_package", pInv);
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
                 broadcast(player, "Veteran Rewards Issued.");
                 break;
-            case 10: // Structures: Chronicle Buffs
+            case 12: // Objects: Weapons
+                static_item.createNewItemFunction("weapon_appearance_polearm_magnaguard_legendary", pInv);
+                static_item.createNewItemFunction("weapon_rifle_legendary_t21", pInv);
+                static_item.createNewItemFunction("weapon_energy_lance_legendary", pInv);
+                static_item.createNewItemFunction("weapon_heavy_blast_cannon_legendary", pInv);
+                broadcast(player, "Weapons Issued.");
+                break;
+            case 13: // Structures: Chronicle Buffs
                 static_item.createNewItemFunction("item_pgc_chronicler_tent_deed", pInv);
                 static_item.createNewItemFunction("item_pgc_sandcrawler_house_deed", pInv);
                 broadcast(player, "Set of Chronicle Structures Issued.");
                 break;
-            case 11: // Structures: City Buffs
+            case 14: // Structures: City Buffs
                 createObject("object/tangible/deed/city_deed/cantina_corellia_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/cantina_naboo_deed.iff", pInv, "");
                 createObject("object/tangible/deed/city_deed/cantina_tatooine_deed.iff", pInv, "");
@@ -5138,7 +5164,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/city_deed/hospital_tatooine_deed.iff", pInv, "");
                 broadcast(player, "Set of City Structures Issued.");
                 break;
-            case 12: // Structures: Regular Buffs
+            case 15: // Structures: Regular Buffs
                 createObject("object/tangible/deed/guild_deed/generic_guild_deed.iff", pInv, "");
                 createObject("object/tangible/deed/guild_deed/tatooine_guild_deed.iff", pInv, "");
                 createObject("object/tangible/deed/guild_deed/naboo_guild_deed.iff", pInv, "");
@@ -5148,7 +5174,7 @@ public class terminal_character_builder extends script.base_script
                 createObject("object/tangible/deed/player_house_deed/merchant_tent_style03_deed.iff", pInv, "");
                 broadcast(player, "Set of Guild Halls and Merchant Tents Issued.");
                 break;
-            case 13: // Structures: TCG Buffs
+            case 16: // Structures: TCG Buffs
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series2_diner", pInv);
                 static_item.createNewItemFunction("item_tcg_loot_reward_series3_jedi_meditation_room_deed", pInv);
@@ -5162,18 +5188,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_tcg_loot_reward_series8_yoda_house_deed", pInv);
                 broadcast(player, "Set of TCG Structures Issued.");
                 break;
-            case 14: // Structures: Witches of Dathomir
+            case 17: // Structures: Witches of Dathomir
                 createObject("object/tangible/deed/player_house_deed/wod_ns_hut_deed.iff", pInv, "");
                 createObject("object/tangible/deed/player_house_deed/wod_sm_hut_deed.iff", pInv, "");
                 broadcast(player, "Set of Witches of Dathomir Structures Issued.");
                 break;
-            case 15: // Tokens: Chronicles
+            case 18: // Tokens: Chronicles
                 static_item.createNewItemFunction("item_pgc_token_01", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_02", pInv, 500);
                 static_item.createNewItemFunction("item_pgc_token_03", pInv, 500);
                 broadcast(player, "Set of Chronicle Tokens Issued.");
                 break;
-            case 16: // Tokens: Deprecated Battlefields
+            case 19: // Tokens: Deprecated Battlefields
                 static_item.createNewItemFunction("item_battlefield_rebel_token_massassi_isle", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield2", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_rebel_token_battlefield3", pInv, 500);
@@ -5184,7 +5210,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_battlefield_imperial_token_battlefield4", pInv, 500);
                 broadcast(player, "Set of Deprecated Battlefield Tokens Issued.");
                 break;
-            case 17: // Tokens: Events
+            case 20: // Tokens: Events
                 static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 500);
@@ -5195,7 +5221,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_gjpud_crap_heap", pInv, 500);
                 broadcast(player, "Set of Event Tokens Issued.");
                 break;
-            case 18: // Tokens: GCW
+            case 21: // Tokens: GCW
                 static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 500);
                 static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 500);
                 static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 500);
@@ -5204,7 +5230,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 500);
                 broadcast(player, "Set of GCW Tokens Issued.");
                 break;
-            case 19: // Tokens: Heroics
+            case 22: // Tokens: Heroics
                 static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 500);
@@ -5215,18 +5241,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 500);
                 broadcast(player, "Set of Heroic Tokens Issued.");
                 break;
-            case 20: // Tokens: Others
+            case 23: // Tokens: Others
                 static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 500);
                 broadcast(player, "Set of Other Tokens Issued.");
                 break;
-            case 21: // Tokens: Space
+            case 24: // Tokens: Space
                 static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 500);
                 broadcast(player, "Set of Space Tokens Issued.");
                 break;
-            case 22: // Tokens: Special Rewards
+            case 25: // Tokens: Special Rewards
                 static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 500);
                 static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 500);
@@ -5235,7 +5261,7 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("item_world_boss_token_01_01", pInv, 500);
                 broadcast(player, "Set of Special Reward Tokens Issued.");
                 break;
-            case 23: // Tokens: Witches of Dathomir
+            case 26: // Tokens: Witches of Dathomir
                 static_item.createNewItemFunction("item_wod_token_1", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_2", pInv, 500);
                 static_item.createNewItemFunction("item_wod_token_3", pInv, 500);
@@ -8925,7 +8951,7 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Lord Nyax's Cult, Corellia", "corellia", 1414, 0, -316),
                 new warp_location("Tactical Training Facility, Corellia", "corellia", 4722, 0, -5233),
                 new warp_location("Mountain Top, Corellia", "corellia", -669, 473, 3189),
-                new warp_location("Small farm?, Corellia", "corellia", 4500, 21, 3600),
+                new warp_location("Small farm, Corellia", "corellia", 4500, 21, 3600),
                 new warp_location("Agrilat Swamps edge, Corellia", "corellia", 123, 31, 4246),
                 new warp_location("Broken White Bridge, Corellia", "corellia", -4250, 1, 3630),
                 new warp_location("Unknown Statue, Corellia", "corellia", -1905, 223, 3988),
@@ -8980,23 +9006,23 @@ public class terminal_character_builder extends script.base_script
                 new warp_location("Volcano, Lok", "lok", 2865, 314, -4753),
                 new warp_location("Twin Craters, Lok", "lok", -1928, 0, 1697),
                 new warp_location("Large Mesa, Lok", "lok", -2128, 103, 1164),
-                new warp_location("Imperial Fortress, Yavin IV", "Yavin IV", 4049, 0, -6217),
-                new warp_location("Labor Outpost, Yavin IV", "Yavin IV", -6922, 0, -5723),
-                new warp_location("Mining Outpost, Yavin IV", "Yavin IV", -270, 0, 4895),
-                new warp_location("Geonosian Bio Lab, Yavin IV", "Yavin IV", -6488, 0, -417),
-                new warp_location("Great Massassi Temple, Yavin IV", "Yavin IV", -3187, 0, -3123),
-                new warp_location("Blueleaf Temple, Yavin IV", "Yavin IV", -875, 0, -2048),
-                new warp_location("Exar Kun Temple, Yavin IV", "Yavin IV", 5076, 0, 5537),
-                new warp_location("Woolamander Palace, Yavin IV", "Yavin IV", 517, 0, -650),
-                new warp_location("Dark Jedi Enclave, Yavin IV", "Yavin IV", 5080, 0, 306),
-                new warp_location("Light Jedi Enclave, Yavin IV", "Yavin IV", -5574, 0, 4901),
-                new warp_location("Massassi Sacrificial Stone, Yavin IV", "Yavin IV", -7555, 155, -433),
-                new warp_location("Massassi Pyramid, Yavin IV", "Yavin IV", -6350, 65, -670),
-                new warp_location("Death Star Turret, Yavin IV", "Yavin IV", -4156, 65, 5328),
-                new warp_location("Burning Tree, Yavin IV", "Yavin IV", 317, 190, -5302),
-                new warp_location("Large Crater, Yavin IV", "Yavin IV", 5900, 695, -4320),
-                new warp_location("Gazebo, Yavin IV", "Yavin IV", 943, 86, -1438),
-                new warp_location("Long Beach Front, Yavin IV", "Yavin IV", 6495, 10, 4490),
+                new warp_location("Imperial Fortress, Yavin IV", "yavin4", 4049, 0, -6217),
+                new warp_location("Labor Outpost, Yavin IV", "yavin4", -6922, 0, -5723),
+                new warp_location("Mining Outpost, Yavin IV", "yavin4", -270, 0, 4895),
+                new warp_location("Geonosian Bio Lab, Yavin IV", "yavin4", -6488, 0, -417),
+                new warp_location("Great Massassi Temple, Yavin IV", "yavin4", -3187, 0, -3123),
+                new warp_location("Blueleaf Temple, Yavin IV", "yavin4", -875, 0, -2048),
+                new warp_location("Exar Kun Temple, Yavin IV", "yavin4", 5076, 0, 5537),
+                new warp_location("Woolamander Palace, Yavin IV", "yavin4", 517, 0, -650),
+                new warp_location("Dark Jedi Enclave, Yavin IV", "yavin4", 5080, 0, 306),
+                new warp_location("Light Jedi Enclave, Yavin IV", "yavin4", -5574, 0, 4901),
+                new warp_location("Massassi Sacrificial Stone, Yavin IV", "yavin4", -7555, 155, -433),
+                new warp_location("Massassi Pyramid, Yavin IV", "yavin4", -6350, 65, -670),
+                new warp_location("Death Star Turret, Yavin IV", "yavin4", -4156, 65, 5328),
+                new warp_location("Burning Tree, Yavin IV", "yavin4", 317, 190, -5302),
+                new warp_location("Large Crater, Yavin IV", "yavin4", 5900, 695, -4320),
+                new warp_location("Gazebo, Yavin IV", "yavin4", 943, 86, -1438),
+                new warp_location("Long Beach Front, Yavin IV", "yavin4", 6495, 10, 4490),
                 new warp_location("Research Outpost, Endor", "endor", 3222, 0, -3467),
                 new warp_location("Smugglers Outpost, Endor", "endor", -970, 0, 1557),
                 new warp_location("Death Watch Bunker, Endor", "endor", -4676, 0, 4331),
@@ -9237,19 +9263,19 @@ public class terminal_character_builder extends script.base_script
         switch (idx)
         {
             case 0:
-                broadcast(player, "Use the 'Duplicate' submenu to obtain a tracked terminal..");
+                broadcast(player, "Use the 'Duplicate' radial submenu to obtain a tracked terminal.");
                 break;
             case 1:
                 setObjVar(player, "character_builder", 1);
                 broadcast(player, "This is deprecated.");
                 break;
             case 2:
-                detachScript(player, "test.qatool"); // prevent it from trying to reattach while attached
+                detachScript(player, "test.qatool");
                 attachScript(player, "test.qatool");
                 broadcast(player, "QA Tool Attached");
                 break;
             case 3:
-                detachScript(player, "event.event_tool");// prevent it from trying to reattach while attached
+                detachScript(player, "event.event_tool");
                 attachScript(player, "event.event_tool");
                 broadcast(player, "Event Tool Attached");
                 break;
@@ -9261,12 +9287,29 @@ public class terminal_character_builder extends script.base_script
             case 5:
                 detachScript(player, "test.qatool");
                 detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
                 break;
             case 6:
-                String outputString = system_process.runAndGetOutput("/home/swg/swg-main/utils/build_java.sh");
-                String outputTitle = "Build Terminal";
-                String okbutton = "Exit";
-                sui.msgbox(self, player, outputString, sui.OK_CANCEL, outputTitle, "noHandler");
+                if (reloadScript("terminal.terminal_character_builder"))
+                {
+                    broadcast(player, "Character Builder Terminal Script Reloaded");
+                }
+                else
+                {
+                    broadcast(player, "Character Builder Terminal Script Failed to Reload");
+                }
+                break;
+            case 7:
+                detachScript(player, "test.qatool");
+                detachScript(player, "event.event_tool");
+                detachScript(player, "developer.bubbajoe.player_developer");
+                sendConsoleCommand("/hideMe 0", player);
+                if (isInvulnerable(self))
+                {
+                    setInvulnerable(self, false);
+                }
+                sendConsoleCommand("/setGodMode off", player);
+                broadcast(player, "You have sanitized yourself.");
                 break;
             default:
                 cleanScriptVars(player);

@@ -56,7 +56,7 @@ public class shuttle extends script.base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Shuttle script fell through. M@LW@R3 ALERT");
+                broadcast(player, "Shuttle script fell through. M@LW@R3 ALERT");
             }
         }
         return SCRIPT_CONTINUE;

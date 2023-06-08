@@ -11,7 +11,9 @@ import script.menu_info_types;
 import script.menu_info_data;
 import script.dictionary;
 
+import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import static script.library.factions.setFaction;
 
@@ -36,10 +38,51 @@ public class player_resurgence extends script.base_script
             //restoreEntertainerBuffs(self);
         }
         arrivalSound(self);
-        //messageTo(self, "arrivalSound", null, 60, true);
+        addToAdminList(self);
         showServerInfo(self);
         incrementPlayerCount(self);
         return SCRIPT_CONTINUE;
+    }
+    public int OnLogout(obj_id self)
+    {
+        removeFromAdminList(self);
+        decrementPlayerCount(self);
+        return SCRIPT_CONTINUE;
+    }
+
+    public void removeFromAdminList(obj_id self)
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "skynet.admin_list"))
+        {
+            String[] adminList = getStringArrayObjVar(tatooine, "skynet.admin_list");
+            Vector adminListFinal = new Vector(Arrays.asList(adminList));
+            if (adminListFinal.contains(self.toString()))
+            {
+                adminListFinal.remove(self.toString());
+                setObjVar(tatooine, "skynet.admin_list", adminListFinal);
+            }
+        }
+    }
+
+    public void addToAdminList(obj_id self)
+    {
+        obj_id tatooine = getPlanetByName("tatooine");
+        if (hasObjVar(tatooine, "skynet.admin_list"))
+        {
+            String[] adminList = getStringArrayObjVar(tatooine, "skynet.admin_list");
+            Vector adminListFinal = new Vector(Arrays.asList(adminList));
+            if (!adminListFinal.contains(self.toString()))
+            {
+                adminListFinal.add(self.toString());
+            }
+        }
+        else
+        {
+            String[] adminList = new String[1];
+            adminList[0] = self.toString();
+            setObjVar(tatooine, "skynet.admin_list", adminList);
+        }
     }
 
     public void arrivalSound(obj_id self)
@@ -162,12 +205,6 @@ public class player_resurgence extends script.base_script
         }
     }
 
-    public int OnLogout(obj_id self)
-    {
-        decrementPlayerCount(self);
-        return SCRIPT_CONTINUE;
-    }
-
     public void incrementPlayerCount(obj_id self)
     {
         int count = 1;
@@ -201,7 +238,38 @@ public class player_resurgence extends script.base_script
     public int cmdContentFinder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         listAllContentStatuses(self);
+        if (isGod(self))
+        {
+            broadcast(self, "Showing current Game Masters online since you are in God Mode.");
+            listAllGodModePlayers(self);
+        }
         return SCRIPT_CONTINUE;
+    }
+
+    public void listAllGodModePlayers(obj_id self) throws InterruptedException
+    {
+        String prompt = "";
+        String root_objvar = "skynet.admin_list";
+        String[] admin_list = getStringArrayObjVar(getPlanetByName("tatooine"), root_objvar);
+        if (admin_list == null || admin_list.length == 0)
+        {
+            prompt = "No Game Masters are currently online.";
+        }
+        else
+        {
+            prompt += "Current Game Masters Online\n";
+            prompt += "\n";
+            for (int i = 0; i < admin_list.length; i++)
+            {
+                obj_id admin = utils.stringToObjId(admin_list[i]);
+                if (isIdValid(admin))
+                {
+                    prompt += "\t" + getPlayerFullName(admin) + "\n";
+                    prompt += "\t\t" + "Location: " + getLocation(admin).toReadableFormat(true) + "\n";
+                }
+            }
+        }
+        sui.msgbox(self, self, prompt, sui.OK_ONLY, "Game Masters: " + getClusterName(), "noHandler");
     }
 
     public int listAllContentStatuses(obj_id self) throws InterruptedException
@@ -209,15 +277,14 @@ public class player_resurgence extends script.base_script
         String prompt = "";
         prompt += "Current Status of Content\n";
         prompt += "\n";
-        prompt += "\tCollections\n";
-        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n\n";
         prompt += "\tWorld Bosses\n";
         prompt += "\t\tElder Ancient Krayt Dragon: " + getDungeonStatus("world_boss.krayt") + "\n";
         prompt += "\t\tEmpress Peko-Peko: " + getDungeonStatus("world_boss.peko") + "\n";
         prompt += "\t\tDarth Gizmo: " + getDungeonStatus("world_boss.gizmo") + "\n";
         prompt += "\t\tPax Vizla: " + getDungeonStatus("world_boss.pax") + "\n";
-        prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n";
-        prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n";
+        prompt += "\t\tEmperor's Hand: " + getDungeonStatus("legacy.hand") + "\n\n";
+        //prompt += "\t\tDonk-Donk Binks: " + getDungeonStatus("world_boss.donkdonk_binks") + "\n"; @TODO: replace when Donk-Donk is added
+        //prompt += "\t\tAurra Sing: " + getDungeonStatus("world_boss.aurra_sing") + "\n\n"; @TODO: replace when Aurra Sing is added
         prompt += "\tDungeons\n";
         prompt += "\t\tGeonosian Biolab\n";
         prompt += "\t\t\tAcklay: " + getDungeonStatus("dungeon.geo_madbio.acklay") + "\n";
@@ -274,7 +341,7 @@ public class player_resurgence extends script.base_script
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "[syntax] /aiManipulate [command] ([subcommand])");
+            broadcast(self, "[syntax] /aiManipulate [command] ([subcommand])");
         }
         else
         {
@@ -349,8 +416,16 @@ public class player_resurgence extends script.base_script
                 setMaxAttrib(target, ACTION, action);
                 setAttrib(target, ACTION, action);
             }
-            if (command.equals("wearMe"))
+            if (command.equalsIgnoreCase("dressNPC"))
             {
+                obj_id[] currentGear = getAllWornItems(target, false);
+                for (obj_id deleteMe : currentGear)
+                {
+                    if (isIdValid(deleteMe))
+                    {
+                        destroyObject(deleteMe);
+                    }
+                }
                 obj_id[] equipments = getAllWornItems(self, true);
                 for (obj_id equipment : equipments)
                 {

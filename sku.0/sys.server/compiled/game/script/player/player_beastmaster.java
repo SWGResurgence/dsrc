@@ -785,7 +785,7 @@ public class player_beastmaster extends script.base_script
             sendSystemMessage(self, new string_id("spam", "pet_beyond_healing"));
             return SCRIPT_OVERRIDE;
         }
-        sendSystemMessageTestingOnly(self, "Beast Command: Trick 3 (not hooked up yet)");
+        broadcast(self, "Beast Command: Trick 3 (not hooked up yet)");
         return SCRIPT_CONTINUE;
     }
     public int performCreatureAbility(obj_id self, dictionary params) throws InterruptedException
@@ -795,27 +795,27 @@ public class player_beastmaster extends script.base_script
         int toExecute = utils.stringToInt(ability);
         if (toExecute < 1 || toExecute > 4)
         {
-            sendSystemMessageTestingOnly(self, "SYNTAX: doability 1-4");
+            broadcast(self, "SYNTAX: doability 1-4");
             return SCRIPT_CONTINUE;
         }
         toExecute = toExecute - 1;
         if (!beast_lib.isBeastMaster(self))
         {
-            sendSystemMessageTestingOnly(self, "Only beastmasters may use this command");
+            broadcast(self, "Only beastmasters may use this command");
             return SCRIPT_CONTINUE;
         }
         if (!isIdValid(pet) || !exists(pet))
         {
-            sendSystemMessageTestingOnly(self, "You do not have a valid pet");
+            broadcast(self, "You do not have a valid pet");
             return SCRIPT_CONTINUE;
         }
         String[] skillList = beast_lib.getTrainedSkills(pet);
         if (skillList[toExecute].equals(""))
         {
-            sendSystemMessageTestingOnly(self, "No ability for slot " + toExecute);
+            broadcast(self, "No ability for slot " + toExecute);
             return SCRIPT_CONTINUE;
         }
-        sendSystemMessageTestingOnly(self, "Queue'd pet command: " + skillList[toExecute]);
+        broadcast(self, "Queue'd pet command: " + skillList[toExecute]);
         obj_id target = isIdValid(getTarget(pet)) ? getTarget(pet) : getTarget(self);
         queueCommand(pet, getStringCrc(skillList[toExecute].toLowerCase()), target, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;

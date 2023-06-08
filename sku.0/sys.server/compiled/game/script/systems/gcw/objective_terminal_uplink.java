@@ -34,7 +34,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
         {
-            sendSystemMessageTestingOnly(player, "Only declared factional personnel may access this terminal!");
+            broadcast(player, "Only declared factional personnel may access this terminal!");
             return SCRIPT_CONTINUE;
         }
         obj_id structure = getObjIdObjVar(self, "objParent");
@@ -46,12 +46,12 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         int pFac = pvpGetAlignedFaction(player);
         if (!pvpAreFactionsOpposed(sFac, pFac))
         {
-            sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
+            broadcast(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "It's no use! The uplink has been jammed.");
+            broadcast(player, "It's no use! The uplink has been jammed.");
             return SCRIPT_CONTINUE;
         }
         obj_id nextObjective = hq.getNextObjective(structure);
@@ -65,7 +65,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
+                broadcast(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
             return SCRIPT_CONTINUE;
         }
@@ -74,12 +74,12 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             String scriptvar_stage = "jamming." + player + ".stage";
             if (utils.hasScriptVar(self, scriptvar_stage))
             {
-                sendSystemMessageTestingOnly(player, "You resume scanning for baseline carrier signals...");
+                broadcast(player, "You resume scanning for baseline carrier signals...");
                 playJammingGame(self, player);
             }
             else
             {
-                sendSystemMessageTestingOnly(player, "You begin scanning for baseline carrier signals...");
+                broadcast(player, "You begin scanning for baseline carrier signals...");
                 dictionary d = new dictionary();
                 d.put("player", player);
                 messageTo(self, "handleStartDelay", d, 3.0f, false);
@@ -93,19 +93,19 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         obj_id objParent = getObjIdObjVar(self, "objParent");
         if (ai_lib.isInCombat(player))
         {
-            sendSystemMessageTestingOnly(player, "You cannot jam this uplink while you are in combat!");
+            broadcast(player, "You cannot jam this uplink while you are in combat!");
             return;
         }
         location here = getLocation(self);
         location there = getLocation(player);
         if (here.cell != there.cell)
         {
-            sendSystemMessageTestingOnly(player, "You cannot jam the uplink if you are not even in the same room!");
+            broadcast(player, "You cannot jam the uplink if you are not even in the same room!");
             return;
         }
         if (getDistance(here, there) > 15.0f)
         {
-            sendSystemMessageTestingOnly(player, "You are too far away from the uplink to continue jamming!");
+            broadcast(player, "You are too far away from the uplink to continue jamming!");
             return;
         }
         String scriptvar = "jamming." + player;
@@ -224,8 +224,8 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             switch (stage)
             {
                 case STAGE_FREQ:
-                    sendSystemMessageTestingOnly(player, "You isolate the carrier signal to Channel #" + (correct + 1));
-                    sendSystemMessageTestingOnly(player, "Initializing jamming sequence...");
+                    broadcast(player, "You isolate the carrier signal to Channel #" + (correct + 1));
+                    broadcast(player, "Initializing jamming sequence...");
                     dictionary d = new dictionary();
                     d.put("player", player);
                     int cyclemod = getSkillStatMod(player, "droid_find_chance");
@@ -243,7 +243,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 default:
                     opt = utils.concatArrays(null, getFreshArray());
                     stage = STAGE_FREQ;
-                    sendSystemMessageTestingOnly(player, "You narrow the carrier signal down to Band #" + (correct + 1));
+                    broadcast(player, "You narrow the carrier signal down to Band #" + (correct + 1));
                     break;
             }
         }
@@ -309,7 +309,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             String text = params.getString("text");
             if (text != null && !text.equals(""))
             {
-                sendSystemMessageTestingOnly(player, text);
+                broadcast(player, text);
             }
             playJammingGame(self, player);
         }
@@ -341,21 +341,21 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         }
         if (hasObjVar(self, hq.VAR_IS_DISABLED))
         {
-            sendSystemMessageTestingOnly(player, "Jamming complete! Someone else has disable the uplink...");
+            broadcast(player, "Jamming complete! Someone else has disable the uplink...");
             return SCRIPT_CONTINUE;
         }
         int cnt = params.getInt("cnt");
         cnt--;
         if (cnt < 0)
         {
-            sendSystemMessageTestingOnly(player, "Jamming complete! You disable the uplink...");
+            broadcast(player, "Jamming complete! You disable the uplink...");
             hq.disableObjective(self);
             xp.grant(player, xp.BOUNTYHUNTER, 1000);
             return SCRIPT_CONTINUE;
         }
         else
         {
-            sendSystemMessageTestingOnly(player, "Jamming in progress...");
+            broadcast(player, "Jamming in progress...");
             params.put("cnt", cnt);
             float delay = 3.0f * rand(-2.0f, 2.0f);
             messageTo(self, "handleJammingInProgress", params, delay, false);

@@ -1056,7 +1056,7 @@ public class static_item extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(getContainedBy(item), "getSetBonusIndex called on object missing set bonus index objvar.");
+            broadcast(getContainedBy(item), "getSetBonusIndex called on object missing set bonus index objvar.");
         }
         return setBonusIndex;
     }

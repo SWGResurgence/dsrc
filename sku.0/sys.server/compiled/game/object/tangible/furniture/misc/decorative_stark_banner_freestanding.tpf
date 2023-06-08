@@ -1,6 +1,0 @@
-@base object/tangible/furniture/base/furniture_base.iff
-
-@class tangible_object_template 1
-@class object_template 2
-
-sharedTemplate = "object/tangible/furniture/misc/shared_decorative_stark_banner_freestanding_01.iff"

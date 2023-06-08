@@ -44,13 +44,13 @@ public class entertainer_rancor extends script.base_script
         {
             if (debug)
             {
-                sendSystemMessageTestingOnly(self, "No creatures in range");
+                broadcast(self, "No creatures in range");
             }
             return SCRIPT_CONTINUE;
         }
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "Number of creatures in range: " + creaturesNearMe.length);
+            broadcast(self, "Number of creatures in range: " + creaturesNearMe.length);
         }
         if (utils.hasScriptVar(self, "wod_entertainer_rancor_following"))
         {
@@ -69,11 +69,11 @@ public class entertainer_rancor extends script.base_script
                 String creatureType = getStringObjVar(creaturesNearMe[i], "creature_type");
                 if (debug)
                 {
-                    sendSystemMessageTestingOnly(self, "Creatures " + i + " type: " + creatureType);
+                    broadcast(self, "Creatures " + i + " type: " + creatureType);
                 }
                 if (debug)
                 {
-                    sendSystemMessageTestingOnly(self, "Creatures " + i + " creatureTypesToLookFor contains creatureType: " + (creatureTypesToLookFor.indexOf(creatureType) != -1));
+                    broadcast(self, "Creatures " + i + " creatureTypesToLookFor contains creatureType: " + (creatureTypesToLookFor.indexOf(creatureType) != -1));
                 }
                 if (creatureTypesToLookFor.indexOf(creatureType) != -1)
                 {
@@ -103,7 +103,7 @@ public class entertainer_rancor extends script.base_script
     {
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "wod entertainer script: rancorUpdate");
+            broadcast(self, "wod entertainer script: rancorUpdate");
         }
         messageTo(self, "rancorUpdate", null, 60.0f, false);
         int messageToSend = rand(1, 4);
@@ -113,7 +113,7 @@ public class entertainer_rancor extends script.base_script
         {
             if (debug)
             {
-                sendSystemMessageTestingOnly(self, "wod entertainer script: removing script, quest not active");
+                broadcast(self, "wod entertainer script: removing script, quest not active");
             }
             detachScript(self, "theme_park.wod.entertainer_rancor");
         }
@@ -121,7 +121,7 @@ public class entertainer_rancor extends script.base_script
         {
             if (debug)
             {
-                sendSystemMessageTestingOnly(self, "wod entertainer script: removing scriptvar, rancor does not exist");
+                broadcast(self, "wod entertainer script: removing scriptvar, rancor does not exist");
             }
             utils.removeScriptVar(self, "wod_entertainer_rancor_following");
         }
@@ -131,7 +131,7 @@ public class entertainer_rancor extends script.base_script
     {
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "wod entertainer script: rancorControlUpdate");
+            broadcast(self, "wod entertainer script: rancorControlUpdate");
         }
         messageTo(self, "rancorControlUpdate", null, 150.0f, false);
         obj_id targetRancor = utils.getObjIdScriptVar(self, "wod_entertainer_rancor_following");
@@ -148,7 +148,7 @@ public class entertainer_rancor extends script.base_script
     {
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "wod entertainer script: angryRancorAngery");
+            broadcast(self, "wod entertainer script: angryRancorAngery");
         }
         obj_id targetRancor = utils.getObjIdScriptVar(self, "wod_entertainer_rancor_following");
         if (utils.hasScriptVar(targetRancor, "wod_angery"))
@@ -162,7 +162,7 @@ public class entertainer_rancor extends script.base_script
     {
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "wod entertainer script: nsRancorFinished");
+            broadcast(self, "wod entertainer script: nsRancorFinished");
         }
         sendSystemMessage(self, new string_id(SYSTEM_MESSAGES, "rancor_returned_ns"));
         groundquests.sendSignal(self, "returnedNsRancor");
@@ -174,7 +174,7 @@ public class entertainer_rancor extends script.base_script
     {
         if (debug)
         {
-            sendSystemMessageTestingOnly(self, "wod entertainer script: nsRancorFinished");
+            broadcast(self, "wod entertainer script: nsRancorFinished");
         }
         sendSystemMessage(self, new string_id(SYSTEM_MESSAGES, "rancor_returned_sm"));
         groundquests.sendSignal(self, "returnedSmRancor");
