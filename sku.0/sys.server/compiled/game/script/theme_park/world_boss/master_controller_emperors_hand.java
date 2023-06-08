@@ -156,9 +156,9 @@ public class master_controller_emperors_hand extends script.base_script
                 {
                     broadcast(who, "The Emperors Hand has summoned Officer Buffs from the Darkside of the Force!");
                 }
-                buff.applyBuff(self, "emperors_hand_of_buff_def_9", 3600, 100);
-                buff.applyBuff(self, "emperors_hand_focus_fire_6", 3600, 100);
-                buff.applyBuff(self, "emperors_hand_of_drillmaster_1", 3600, 100);
+                buff.applyBuff(self, "of_buff_def_9", 3600, 100);
+                buff.applyBuff(self, "of_focus_fire_6", 3600, 100);
+                buff.applyBuff(self, "of_drillmaster_1", 3600, 100);
                 utils.setScriptVar(self, "officerBuffs", 1);
                 return SCRIPT_CONTINUE;
             }
