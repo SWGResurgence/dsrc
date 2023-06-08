@@ -2,7 +2,7 @@
 @class draft_schematic_object_template 2
 
 attributes = [
-	[name = "crafting" "coreLevel", experiment = "" "", value = 148..180],
+	[name = "crafting" "coreLevel", experiment = "" "", value = 74..90],
 	[name = "crafting" "coreQualityLow", experiment = "crafting" "expCoreQualityLow", value = 8..20],
 	[name = "crafting" "coreQualityHigh", experiment = "crafting" "expCoreQualityHigh", value = 1..20],
 	[name = "crafting" "maxDamage", experiment = "" "", value = 0..0],
