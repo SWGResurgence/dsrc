@@ -6,5 +6,5 @@
 objectName = "static_item_n"  "item_resurgence_targaryen_banner_hanging_01_01"
 detailedDescription = "static_item_d"  "item_resurgence_targaryen_banner_hanging_01_01"
 
-appearanceFilename = "appearance/item_resurgence_targaryen_banner_hanging_01.lod"
+appearanceFilename = "appearance/item_resurgence_targaryen_banner_hanging_01.apt"
 portalLayoutFilename = ""
