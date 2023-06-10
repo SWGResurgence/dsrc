@@ -11,7 +11,6 @@ attributes = [
 slots = [
 	[name = "craft_armor_ingredients_n" "appearance_fragments", hardpoint = ""],
 	[name = "craft_armor_ingredients_n" "armor_core_frame", hardpoint = ""],
-	[name = "craft_armor_ingredients_n" "armor_core", hardpoint = ""],
 	[name = "craft_armor_ingredients_n" "load_bearing_harness", hardpoint = ""],
 	[name = "craft_armor_ingredients_n" "reinforcement", hardpoint = ""],
 	[name = "craft_armor_ingredients_n" "enhancement_cartridge", hardpoint = ""],
