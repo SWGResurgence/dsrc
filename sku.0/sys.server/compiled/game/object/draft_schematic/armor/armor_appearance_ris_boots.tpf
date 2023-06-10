@@ -22,6 +22,13 @@ slots = [
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
+	optional=true,
+    	name = "craft_armor_ingredients_n" "armor_core",
+        options = [
+        	[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "armor_core", ingredient="object/tangible/component/armor/armor_core_battle.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+        optionalSkillCommand = "",
+        complexity = 0,
+        appearance = "" ],
 	[
 	optional=false,
 	name = "craft_armor_ingredients_n" "load_bearing_harness",
@@ -32,17 +39,42 @@ slots = [
 	appearance = "" ],
 	[
 	optional=false,
-	name = "craft_armor_ingredients_n" "reinforcement",
-	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "reinforcement", ingredient="object/tangible/component/armor/armor_segment_ris.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
-	optionalSkillCommand = "",
-	complexity = 0,
-	appearance = "" ]]
+    name = "craft_armor_ingredients_n" "reinforcement",
+    options = [
+    	[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "reinforcement", ingredient="object/tangible/component/armor/armor_segment_ris.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=true,
+    name = "craft_armor_ingredients_n" "enhancement_cartridge",
+    options = [
+    	[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "enhancement_cartridge", ingredient="object/tangible/component/armor/bio_cartridge.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=true,
+    name = "craft_armor_ingredients_n" "appearance_enhancement_one",
+    options = [
+    	[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "appearance_enhancement_one", ingredient="object/tangible/component/armor/armor_appearance_enhancement_base.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=true,
+    name = "craft_armor_ingredients_n" "appearance_enhancement_two",
+    options = [
+    	[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "appearance_enhancement_two", ingredient="object/tangible/component/armor/armor_appearance_enhancement_base_two.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ]]
+
+
 skillCommands = ["unskilled"]
 manufactureScripts = ["systems.crafting.armor.crafting_armor_nostats"]
 
 @class intangible_object_template 1
-
 @class object_template 8
 
 complexity = 20
