@@ -21,6 +21,7 @@ slots = [
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
+	[
 	optional=true,
 	name = "craft_armor_ingredients_n" "armor_core",
     	options = [
