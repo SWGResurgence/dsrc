@@ -13365,12 +13365,12 @@ public class base_player extends script.base_script
         }
         else
         {
-            sendSystemMessage(player, "You have failed to create " + getEncodedName(itemObj) + " for " + getPlayerFullName(self) + ".", null);
+            sendSystemMessage(self, "You have failed to create " + getEncodedName(itemObj) + " for " + getPlayerFullName(self) + ".", null);
         }
         return SCRIPT_CONTINUE;
     }
 
-    public int cmdReadyCheck(obj_id self, obj_id target, String param, dictionary params, float defaultTime) throws InterruptedException
+    public int cmdReadyCheck(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         chat.chat(self, "Are we ready?");
         if (combat.isInCombat(self))
