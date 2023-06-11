@@ -725,7 +725,7 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("grantAllSkills"))
         {
-            ArrayList<String> badSkills = new ArrayList<String>();
+            ArrayList<String> badSkills = new ArrayList<>();
             badSkills.add("combat_melee_basic");
             badSkills.add("combat_ranged_weapons_basic");
             badSkills.add("demo_combat");
@@ -1076,6 +1076,18 @@ public class player_developer extends base_script
                 damage(target, DAMAGE_ELEMENTAL_ELECTRICAL, HIT_LOCATION_BODY, 1000000);
             }
         }
+        if (cmd.equalsIgnoreCase("mortar"))
+        {
+            String EFFECT = "clienteffect/restuss_event_big_explosion.cef";
+            String SOUNDEFFECT = "clienteffect/ion_fire.cef";
+            obj_id[] players = getAllPlayers(getLocation(target), 2000.0f);
+            playClientEffectLoc(players, EFFECT, getLocation(target), 0.0f);
+            playClientEffectLoc(players, SOUNDEFFECT, getLocation(target), 0.0f);
+            if (!isPlayer(target) && isMob(target))
+            {
+                damage(target, DAMAGE_KINETIC, HIT_LOCATION_BODY, 1000000);
+            }
+        }
         if (cmd.equalsIgnoreCase("playsoundloc"))
         {
             if (!tok.hasMoreTokens())
@@ -1160,11 +1172,8 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("editlootarea"))
         {
-            float radius = 250.0f;
-            if (tok.hasMoreTokens())
-            {
-                radius = Float.parseFloat(tok.nextToken());
-            }
+            Float radius = Float.parseFloat(tok.nextToken());
+            int count = Integer.parseInt(tok.nextToken());
             obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
             for (obj_id creature : creatures)
             {
@@ -1172,12 +1181,10 @@ public class player_developer extends base_script
                 {
                     if (hasObjVar(self, "loot.numItems"))
                     {
-                        setObjVar(creature, "loot.numItems", tok.nextToken());
+                        setObjVar(creature, "loot.numItems", count);
                     }
                 }
             }
-
-
         }
         if (cmd.equalsIgnoreCase("say"))
         {
@@ -1197,7 +1204,7 @@ public class player_developer extends base_script
             String table = tok.nextToken();
             if (table == null || table.equals(""))
             {
-                broadcast(self, "Syntax: /developer setloottable <loot table name>");
+                broadcast(self, "Syntax: /developer setLootTable <loot table name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1211,7 +1218,7 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                broadcast(self, "Syntax: /developer setnumitems <loot count>");
+                broadcast(self, "Syntax: /developer setNumItems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1303,6 +1310,8 @@ public class player_developer extends base_script
             if (getGameObjectType(item) == GOT_building)
             {
                 broadcast(self, "Cannot spawn this game object type.");
+                destroyObject(item);
+                return SCRIPT_CONTINUE;
             }
             attachScript(item, script);
             setYaw(item, getYaw(self));

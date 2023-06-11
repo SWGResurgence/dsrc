@@ -1618,11 +1618,7 @@ public class ai extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        boolean wontEnter = false;
-        if (ai_lib.aiGetNiche(self) == NICHE_VEHICLE)
-        {
-            wontEnter = true;
-        }
+        boolean wontEnter = ai_lib.aiGetNiche(self) == NICHE_VEHICLE;
         if (!permissionsIsAllowed(destContainer, self))
         {
             wontEnter = true;
@@ -2798,13 +2794,21 @@ public class ai extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    private boolean isHeroicMob(obj_id self)
+    private boolean isHeroicMob(obj_id self) throws InterruptedException
     {
         if (getCreatureName(self).startsWith("heroic_"))
         {
             return true;
         }
-        return false;
+        else if (getCreatureName(self).contains("world_boss_"))
+        {
+            return true;
+        }
+        else if (ai_lib.getDifficultyClass(self) == ai_lib.DIFFICULTY_ELITE)
+        {
+            return true;
+        }
+        else return ai_lib.getDifficultyClass(self) == ai_lib.DIFFICULTY_BOSS;
     }
 
     public int removeMeatlumpRecruitmentScriptVar(obj_id self, dictionary params) throws InterruptedException
