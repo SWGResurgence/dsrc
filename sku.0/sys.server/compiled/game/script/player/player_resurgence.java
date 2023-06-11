@@ -16,6 +16,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import static script.library.factions.setFaction;
+import static script.library.utils.getDistance2D;
 
 public class player_resurgence extends script.base_script
 {
@@ -336,7 +337,21 @@ public class player_resurgence extends script.base_script
         }
         return dungeonStatus;
     }
-
+    public int cmdTapeMeasure(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        obj_id objectOne = getIntendedTarget(self);
+        obj_id objectTwo = getLookAtTarget(self);
+        if (isIdValid(objectOne) && (isIdValid(objectTwo)))
+        {
+            float distance = getDistance2D(objectOne, objectTwo);
+            broadcast(self, "The distance between these two targets is " + distance + " or " + Math.round(distance) + " rounded.");
+        }
+        else
+        {
+            broadcast(self, "You must have two targets selected (mouse-over and target) to use this command.");
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int cmdAiManipulate(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
