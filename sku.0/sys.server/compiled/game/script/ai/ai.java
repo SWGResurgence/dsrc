@@ -2642,9 +2642,17 @@ public class ai extends script.base_script
                 {
                     int currentCharges = getIntObjVar(self, "loot.numItems");
                     int totalCharges = currentCharges + getIntObjVar(item, "loot_roll.charges");
-                    setObjVar(self, "loot.numItems", totalCharges);
-                    broadcast(giver, "You have added " + getIntObjVar(item, "loot_roll.charges") + " to the loot roll.");
-                    destroyObject(item);
+                    if (getIntObjVar(self, "loot.numItems") > 12)
+                    {
+                        broadcast(giver, "This creature already has the maximum number of allowed loot rolls.");
+                        return SCRIPT_CONTINUE;
+                    }
+                    else
+                    {
+                        setObjVar(self, "loot.numItems", totalCharges);
+                        broadcast(giver, "You have added " + getIntObjVar(item, "loot_roll.charges") + " to the loot roll.");
+                        destroyObject(item);
+                    }
                 }
                 else
                 {
